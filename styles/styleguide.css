@@ -1,0 +1,489 @@
+:root {
+    --alto: #dcddde;
+    --atlantis: #a0bf35;
+    --atlantis-2: #a2c035;
+    --azure: #3b59a2;
+    --azure-2: #3a57a1;
+    --baby-powder: #fcfcfc;
+    --east-bay: #3b5982;
+    --gravel: #464749;
+    --regent-st-blue: #abc8e3;
+    --scarpa-flow: #505a5e;
+    --shiraz: #b7002b;
+    --silver: #babcbf;
+    --silver-2: #babcbf08;
+    --silver-breadcrum:#222330;
+    --tundora: #444444;
+    --white: #ffffff;
+    --white-2: #ffffff2b;
+    --black: #000000;
+    /* --font-size-l: 26px;
+    --font-size-m: 24px;
+    --font-size-s: 22px;
+    --font-size-xl: 28px;
+    --font-size-xs: 20px;
+    --font-size-xxl: 30px;
+    --font-size-xxs: 16px; */
+    /* --font-size-l: 1rem; */
+    --font-size-l: 1.125rem;
+    /* --font-size-m: 0.875rem; */
+    --font-size-m: 1rem;
+    /* --font-size-s: 0.75rem; */
+    /* --font-size-s: 0.875rem; */
+    --font-size-s: 0.75em;
+    --font-size-xl: 1.125rem;
+    --font-size-xs: 0.625rem;
+    --font-size-xxl: 1.25rem;
+    --font-size-xxs: 0.5rem;
+    --font-family-arial-narrowbold: "Arial-NarrowBold", Helvetica;
+    --font-family-tahoma: "Tahoma", Helvetica;
+    --font-family-tahoma-bold: "Tahoma-Bold", Helvetica;
+    --font-family-tahoma-regular: "Tahoma-Regular", Helvetica;
+    --bs-gutter-y: 10px !important;
+}
+
+.tahoma-regular-normal-gravel-24px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-gravel-22px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-scarpa-flow-20px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-white-22px {
+    color: var(--white);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-azure-24px {
+    color: var(--azure);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-tundora-20px {
+    color: var(--tundora);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-bold-gravel-24px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-bold-gravel-22px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-regular-normal-scarpa-flow-22px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-azure-22px {
+    color: var(--azure);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-gravel-26px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-silver-24px {
+    color: var(--silver-breadcrum);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+.tahoma-regular-normal-silver-24px-breadcrum {
+    color: var(--silver-breadcrum);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+.tahoma-regular-normal-white-24px {
+    color: var(--white);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-bold-gravel-30px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-xxl);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-normal-gravel-24px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma);
+    font-size: var(--font-size-m);
+}
+.tahoma-normal-gravel-22px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma);
+    font-size: var(--font-size-s);
+}
+
+.tahoma-regular-normal-azure-20px {
+    color: var(--azure);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-gravel-20px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-bold-gravel-26px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-regular-normal-scarpa-flow-24px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-white-18px {
+    color: var(--white);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--font-size-l);
+}
+
+.tahoma-bold-scarpa-flow-20px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-regular-normal-white-26px {
+    color: var(--white);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-gravel-16px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xxs);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.arial-narrow-bold-scarpa-flow-24px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-arial-narrowbold);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-bold-gravel-28px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-xl);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.arial-narrow-bold-gravel-24px {
+    color: var(--gravel);
+    font-family: var(--font-family-arial-narrowbold);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-bold-gravel-16px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-xxs);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-regular-normal-scarpa-flow-16px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xxs);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-bold-scarpa-flow-24px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-regular-normal-gravel-28px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xl);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-azure-28px {
+    color: var(--azure);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xl);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-azure-28px-2 {
+    color: var(--azure-2);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xl);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-bold-scarpa-flow-28px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-xl);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-regular-normal-azure-24px-2 {
+    color: var(--azure-2);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-scarpa-flow-32px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xxl);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-baby-powder-24px {
+    color: var(--baby-powder);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-gravel-18px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-bold-scarpa-flow-16px {
+    color: var(--scarpa-flow);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-xxs);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-regular-normal-atlantis-22px {
+    color: var(--atlantis);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-bold-gravel-20px {
+    color: var(--gravel);
+    font-family: var(--font-family-tahoma-bold);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tahoma-normal-white-24px {
+    color: var(--white);
+    font-family: var(--font-family-tahoma);
+    font-size: var(--font-size-m);
+}
+
+.tahoma-regular-normal-white-20px {
+    color: var(--white);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-shiraz-28px {
+    color: var(--shiraz);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-xl);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.tahoma-regular-normal-shiraz-24px {
+    color: var(--shiraz);
+    font-family: var(--font-family-tahoma-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.border-1px-azure {
+    border: 1px solid var(--azure);
+}
+
+.border-2px-silver {
+    border: 2px solid var(--silver);
+}
+
+.border-1px-silver {
+    border: 1px solid var(--silver);
+}
+
+.border-1px-east-bay {
+    border: 1px solid var(--east-bay);
+}
+
+.border-1px-scarpa-flow {
+    border: 1px solid var(--scarpa-flow);
+}
+
+.border-4-2px-white {
+    border: 4.2px solid var(--white);
+}
+
+.border-1px-atlantis {
+    border: 1px solid var(--atlantis);
+}
+
+.border-3px-east-bay {
+    border: 3px solid var(--east-bay);
+}
+
+.border-2px-alto {
+    border: 2px solid var(--alto);
+}
+
+.border-2px-scarpa-flow {
+    border: 2px solid var(--scarpa-flow);
+}
+
+.border-3px-scarpa-flow {
+    border: 3px solid var(--scarpa-flow);
+}
+
+.border-3px-azure {
+    border: 3px solid var(--azure);
+}
+
+.btn-custom {
+    align-items: center;
+    background-color: var(--atlantis-2);
+    border-radius: 8px;
+    display: flex;
+    height: 42px;
+    min-width: 130px;
+    justify-content: center;
+}
+
+.btn-custom-white {
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 8px;
+    display: flex;
+    height: 42px;
+    min-width: 130px;
+    justify-content: center;
+}
+.btn-custom-white:hover {
+    background: var(--azure) 0% 0% no-repeat padding-box;
+    border: 1px solid var(--azure);
+    letter-spacing: 0px;
+    color: var(--white);
+    opacity: 1;
+    font-size: var(--font-size-m);
+}
+.insights-gray-scale-container {
+    filter: grayscale(100%) !important;
+    /* color: var(--black); */
+}
+.largefont {
+    font-size: calc(var(--font-size-s)*1.25);
+}
+.insights-gray-scale-container .btn-custom {
+    background-color: var(--black);
+}
