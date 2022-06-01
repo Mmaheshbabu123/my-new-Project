@@ -1,4 +1,4 @@
-import getConfig from 'next/config'
+
 /**
  * Below is the usage of service function
  * import APICALL from {../give-proper-path-whearver you are importing it}
@@ -12,7 +12,7 @@ import getConfig from 'next/config'
  */
 // const proxy_url = "https://cors-anywhere.herokuapp.com/";
 const proxy_url = "https://api.allorigins.win/raw?url=";
-const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
+
 export const APICALL = {
     service,
     serviceForSitesJSON,
@@ -56,25 +56,25 @@ function serviceForSitesJSON(urlendpoint = '', httpmethod = '', data = '') {
 *@param data=data to the API
 *@returns response from the API
 */
-async function service(urlendpoint = '', httpmethod = '', data = '', file = 0, loading = 1) {
+function service(urlendpoint = '', httpmethod = '', data = '', file = 0, loading = 1) {
   //  console.log(urlendpoint, " : ApiService : ", httpmethod);
-    // if (loading === 1 && document.getElementById("loading-icon") !== null) {
-    //     document.getElementById("loading-icon").setAttribute("style", "display:block;");
-    // }
-    return await fetch(urlendpoint, headers(data, httpmethod))
+    if (loading === 1 && document.getElementById("loading-icon") !== null) {
+        document.getElementById("loading-icon").setAttribute("style", "display:block;");
+    }
+    return fetch(urlendpoint, headers(data, httpmethod))
         .then(
             result => {
               // console.log("service  : ", result);
-                // if (loading === 1 && document.getElementById("loading-icon") !== null) {
-                //     document.getElementById("loading-icon").setAttribute("style", "display:none;");
-                // }
+                if (loading === 1 && document.getElementById("loading-icon") !== null) {
+                    document.getElementById("loading-icon").setAttribute("style", "display:none;");
+                }
               return file ? result.blob() : result.json();
             }
         ).catch((error) => {
             console.log("Error service : ", error);
-            // if (loading === 1 && document.getElementById("loading-icon") !== null) {
-            //     document.getElementById("loading-icon").setAttribute("style", "display:none;");
-            // }
+            if (loading === 1 && document.getElementById("loading-icon") !== null) {
+                document.getElementById("loading-icon").setAttribute("style", "display:none;");
+            }
             return null;
         })
 }
@@ -99,7 +99,7 @@ function headers(data, httpmethod) {
        // credentials: "same-origin",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + serverRuntimeConfig.secretToken,
+            // "Authorization": "Bearer " + process.env.REACT_APP_AUTHENTICATION_TOKEN,
             // 'Access-Control-Allow-Origin': '*',
             //"Authorization-id": Authorization_id,
             // "Language-id" : reduxState.active_language,
