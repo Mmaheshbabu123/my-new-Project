@@ -13,3 +13,4 @@ export const getCategory = BASE_URL + "getCategory";
 export const getFunctions = BASE_URL + "getFunctions";
 export const updateFunction = BASE_URL + "updateFunction";
 export const updateCategory = BASE_URL + "updateCategory";
+export const getPc = BASE_URL + "getParitaireCommitteFunctionCategory";

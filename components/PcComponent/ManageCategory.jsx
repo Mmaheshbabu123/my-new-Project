@@ -221,7 +221,7 @@ const ManageCategoryComponent = () => {
 											<td>€ {result.min_salary}</td>
 											<td className="d-flex ">
 												<a className="" href="/addpc">
-													<MdEdit className="mt-2 ms-3" href={'/addpc' + id} />
+													<MdEdit className="mt-2 ms-3" href="/addpc" />
 												</a>
 												<span onClick={() => showPopup(result.cat_id)} type="button">
 													<MdDelete className="mt-2 ms-3" />
