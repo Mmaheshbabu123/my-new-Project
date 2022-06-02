@@ -1,18 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
-// import axios from 'axios';
 import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare, FaMinusSquare } from 'react-icons/fa';
-// import Collapsible from 'react-collapsible';
-// import { render } from '@testing-library/react';
-// import ReactNbsp from 'react-nbsp';
-// import { Link } from 'react-bootstrap-icons';
-// import { useNavigate } from 'react-router-dom';
-// import { Button } from 'semantic-ui-react';
 import PcOverview from './PcOverview';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { APICALL } from '../../Services/ApiServices';
 import { getPc } from '../../Services/ApiEndPoints';
 import Link from 'next/link';
+import styles from '../../styles/Pc.module.css'
+
 
 /**
  * this will project all the partire committee's data.
@@ -89,9 +84,7 @@ const ManagePc = (props) => {
 				<div className="col-md-9" />
 				<div className="col-md-3">
 					<Link href="/addpc">
-					<a
-						className="mt-5 ml-2 mb-4 btn btn-secondary btn-lg btn-block float-sm-right  add-proj-btn"
-					>
+					<a	className={"mt-5 ml-2 mb-4 btn float-sm-right" + styles.addprojbtn + styles.btncolor}>
 						Add Paritaire Comitee
 					</a>
 					</Link>
@@ -109,7 +102,7 @@ const ManagePc = (props) => {
 						/>
 					</div>
 					<div className="col-md-2">
-						<h5 className="pt-2 pb-3 px-2 managep-actions section-color">
+						<h5 className={`pt-2 pb-3 px-2 ${styles.managepactions} ${styles.sectioncolor}`}>
 							<Link href={`/pc/${data[val][0]['id']}`}>
 							<a className="me-2 text-dark" >
 								<MdEdit />

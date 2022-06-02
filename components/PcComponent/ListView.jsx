@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Table from './Table';
+import styles from '../../styles/Pc.module.css'
 import {
 	FaEdit,
 	FaRegPlusSquare,
@@ -41,17 +42,17 @@ const ListView = (props) => {
 		props.secInfoFromLst(sectype, secid);
 	};
 	return (
-		<li key={props.index} className="section-color list-inline-item section-li ms-2 my-2 w-75">
+		<li key={props.index} className= {`${styles.sectioncolor} list-inline-item ${styles.sectionli} ms-2 my-2`}>
 			{header && (
 				<div
-					className="accordion accordion-flush section-color px-4"
+					className={`accordion accordion-flush ${styles.sectioncolor} px-4`}
 					id={`accordionFlush${props.pc_number}pc${props.index}`}
 				>
-					<div className="accordion-item section-color">
+					<div className={`accordion-item ${styles.sectioncolor}`}>
 						<h4 className="accordion-header" 
 						id={`flush-heading${props.pc_number}pc${props.index}`}>
 							<button
-								className="accordion-button collapsed list-title section-color fw-bold"
+								className={`accordion-button collapsed ${styles.listtitle} ${styles.sectioncolor} fw-bold`}
 								type="button"
 								data-bs-toggle="collapse"
 								data-bs-target={`#flush-collapse${props.pc_number}pc${props.index}`}

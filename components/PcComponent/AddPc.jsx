@@ -1,4 +1,4 @@
-// import React, { useState }  from "react";
+import React, { useState }  from "react";
 // import axios from "axios";
 // import ValidationService from "../ValidationService";
 // // import { AppContext } from "./context";
@@ -12,7 +12,7 @@
 //  * @param {*} props 
 //  * @returns the added category data to the common.js component.
 //  */
-// function AddPc(props){
+function AddPc(props){
 
 //   var url = process.env.REACT_APP_BACKEND_URL;
 //   const navigate = useNavigate();
@@ -22,11 +22,11 @@
 //   // const myContext = useContext(AppContext);
 
 //   const [cat, setcat] = useState(false);
-//   const [number, setnmber] = useState("");
-//   const [name, setname] = useState("");
+  const [number, setnmber] = useState("");
+  const [name, setname] = useState("");
 
-//   const [field,setfield]=useState();
-//   const [field1,setfield1]=useState();
+  const [field,setfield]=useState();
+  const [field1,setfield1]=useState();
 //   const [data,setdata]=useState();
 //   const [duperror,setduperror]=useState('');
 // const dt=[];
@@ -89,31 +89,32 @@
 
 
 
-//   return(
-//     <div className="container">
-//   <form onSubmit={(e)=>submit(e)}>
-//     <div className="row pt-5">
-//       <div className="col-md-9"></div>
-//       <div className="col-md-3">
-//         <h4>Add Paritair comite</h4>
-//             <div className="form-group mt-3 mb-4">
-//             <label  className="">Paritair comite number</label>
-//             <input type="text" value={number} className=" form-control mt-2" onChange={(e) => {setnmber(e.target.value);}}  />
-//             <p style={{color:'red'}}>{field1}</p>
-//         </div>
-//     <div className="form-group mt-3 mb-4">
-//     <label>Paritair comite name</label> 
-//       <input type="text" value={name}  className="form-control" onChange={(e) => {setname(e.target.value);}}/>
-//       <p style={{color:'red'}}>{field}</p>
-//       </div>
-//       <div>
-//         <button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"onClick={()=>{ setdata({'pc_number':number,'pc_name':name});}}>Save</button>
-//       </div>
-//     </div>
-//     </div>
-//   </form>
-//   </div>
-//   );
-//   }
+  return(
+    <div className="container">
+  <form onSubmit={(e)=>submit(e)}>
+    <div className="row pt-5">
+      <div className="col-md-3">
+        <h2>Add Paritair comite</h2>
+            <div className="form-group mt-3 mb-4">
+            <label  className="">Paritair comite number</label>
+            <input type="text" value={number} className=" form-control mt-2" onChange={(e) => {setnmber(e.target.value);}}  />
+            <p style={{color:'red'}}>{field1}</p>
+        </div>
+    <div className="form-group mt-3 mb-4">
+    <label>Paritair comite name</label> 
+      <input type="text" value={name}  className="form-control" onChange={(e) => {setname(e.target.value);}}/>
+      <p style={{color:'red'}}>{field}</p>
+      </div>
+      <div>
+        <button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"onClick={()=>{ setdata({'pc_number':number,'pc_name':name});}}>Save</button>
+      </div>
+    </div>
+    <div className="col-md-9"></div>
 
-//   export default AddPc;
+    </div>
+  </form>
+  </div>
+  );
+  }
+
+  export default AddPc;

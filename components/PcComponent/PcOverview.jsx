@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { getPcByPcnumber } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import ListView from './ListView';
+import AddCategory from './AddCategory';
+import styles from '../../styles/Pc.module.css'
+
 // import { useParams } from 'react-router-dom';
 // import AddCategory from './AddCategory';
 // import AddFunction from './AddFunction';
@@ -19,9 +22,6 @@ import { useRouter } from "next/router";
 
 const PcOverview = (params) => {
 	const router = useRouter();
-
-	// const urlParam = useParams();
-	// console.log(pc_num);
 	const [ pc, setPc ] = useState([]);
 	const [ enableEdit, setEnableEdit ] = useState(false);
 	const [ leftSec, setLeftSec ] = useState('col-md-12');
@@ -34,7 +34,7 @@ const PcOverview = (params) => {
 	const [ editpc, setEditpc ] = useState(false);
 
 	const [ secid, setSecid ] = useState('');
-	const [ pc_num, setPc_num ] = useState('');
+	const [ pcid, setPcid ] = useState('');
 	const [ pc_number, setPc_number ] = useState('');
 
 	const [ page_type, setPage_type ] = useState('add');
@@ -45,14 +45,12 @@ const PcOverview = (params) => {
    */
 	useEffect(
 		() => {
-			console.log(router.query)
 			if (router.query.pcid || params.pcid) {
 				var id =  router.query.pcid?router.query.pcid:params.pcid?params.pcid:"";
-				setPc_num(id);
+				setPcid(id);
 				// var pc_number = params.pc_number != undefined ? params.pc_number : '';
 				var type = params.page_type ? params.page_type : 'add';
 				setPage_type(type);
-				console.log(params.pcid)
 				APICALL.service(getPcByPcnumber + id, 'GET')
 					.then((result) => {
 						console.log(result);
@@ -126,7 +124,8 @@ const PcOverview = (params) => {
 									<button
 										type="button"
 										to="category"
-										className="btn btn-secondary btn-color me-3"
+										pcid={pcid}
+										className={"btn me-3"+ styles.btncolor}
 										onClick={() => {
 											setCategory(true);
 											setEnableEdit(true);
@@ -137,7 +136,8 @@ const PcOverview = (params) => {
 									<button
 										type="button"
 										to="function"
-										className="btn btn-secondary btn-color me-2"
+										pcid={pcid}
+										className={"btn me-2" + styles.btncolor}
 										onClick={() => {
 											setAddfunction(true);
 											setEnableEdit(true);
@@ -147,21 +147,21 @@ const PcOverview = (params) => {
 									</button>
 								</div>
 							)}
-							<ul className={`list-inline list-unstyled`}>
-								<ul className={`list-inline list-unstyled  pc`}>
-									<li className="list-inline-item section-plus-icon fs-4 align-top">
+							<ul className={`list-inline list-unstyled ${styles.tree}`}>
+								<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
+									<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
 										<a
 											data-bs-toggle="collapse"
-											href={'#collapsepc' + pc_num}
+											href={'#collapsepc' + pcid}
 											role="button"
-											// aria-expanded="false"
-											aria-controls={'collapsepc' + pc_num}
+											aria-expanded="false"
+											aria-controls={'collapsepc' + pcid}
 										>
 											<FaRegPlusSquare />
 										</a>
 									</li>
 									<ListView
-										pc_num={pc_num}
+										pcid={pcid}
 										pc_number={pc_number}
 										index={count + 1}
 										title={pc['pc_name']}
@@ -176,16 +176,16 @@ const PcOverview = (params) => {
 								{pc['childObj'] &&
 									Object.keys(pc['childObj']).map((val, key) => (
 										<ul
-											id={'collapsepc' + pc_num}
-											className=" collapse list-inline list-unstyled ms-5 my-0 py-1 lev1"
+											id={'collapsepc' + pcid}
+											className={`collapse list-inline list-unstyled ms-5 my-0 py-1 ${styles.lev1} ${styles.tree}`}
 											key={val}
 										>
-											<li className="list-inline-item section-plus-icon fs-4 align-top">
+											<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
 												<FaRegPlusSquare />
 											</li>
 											{pc['childObj'][val]['type'] === 2 ? (
 												<ListView
-													pc_num={pc_num}
+													pcid={pcid}
 													pc_number={pc_number}
 													index={'cat1-' + val}
 													title={pc['childObj'][val]['category_name']}
@@ -201,7 +201,7 @@ const PcOverview = (params) => {
 												/>
 											) : (
 												<ListView
-													pc_num={pc_num}
+													pcid={pcid}
 													pc_number={pc_number}
 													index={'fun2-' + val}
 													title={pc['childObj'][val]['function_name']}
@@ -255,7 +255,8 @@ const PcOverview = (params) => {
 							<button
 								type="button"
 								to="category"
-								className="btn btn-secondary btn-color me-3"
+								pcid={pcid}
+								className={"btn me-3"+ styles.btncolor}
 								onClick={() => {
 									setCategory(true);
 									setSecid('');
@@ -266,7 +267,8 @@ const PcOverview = (params) => {
 							<button
 								type="button"
 								to="function"
-								className="btn btn-secondary btn-color me-2"
+								pcid={pcid}
+								className={"btn me-2"+ styles.btncolor}
 								onClick={() => setAddfunction(true)}
 							>
 								Add function

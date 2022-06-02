@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 // import { useParams, useNavigate } from "react-router-dom";
 import { APICALL } from '../../Services/ApiServices';
 import { storeCategoryDetails, getCat, catUpdate } from '../../Services/ApiEndPoints';
+import styles from '../../styles/Pc.module.css'
+
 
 function AddCategory({ childToParent, id }) {
 	// const [id, setId] = useState(props.secid);
@@ -15,7 +17,6 @@ function AddCategory({ childToParent, id }) {
 	const [ field, setfield ] = useState();
 	const [ field1, setfield1 ] = useState();
 
-	console.log(id);
 	let postdata = async (e) => {
 		if (id == '') {
 			APICALL.service(storeCategoryDetails, 'POST', data)
@@ -141,7 +142,7 @@ function AddCategory({ childToParent, id }) {
 								id: id,
 								category_name: name,
 								min_salary: salary,
-								ref_id: urlParam.id,
+								// ref_id: props.pcid,
 								weight: 1
 							});
 						}}
