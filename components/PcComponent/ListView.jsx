@@ -41,14 +41,15 @@ const ListView = (props) => {
 		props.secInfoFromLst(sectype, secid);
 	};
 	return (
-		<li key={props.index} className="section-color list-inline-item section-li ms-2 my-2">
+		<li key={props.index} className="section-color list-inline-item section-li ms-2 my-2 w-75">
 			{header && (
 				<div
 					className="accordion accordion-flush section-color px-4"
 					id={`accordionFlush${props.pc_number}pc${props.index}`}
 				>
 					<div className="accordion-item section-color">
-						<h4 className="accordion-header" id={`flush-heading${props.pc_number}pc${props.index}`}>
+						<h4 className="accordion-header" 
+						id={`flush-heading${props.pc_number}pc${props.index}`}>
 							<button
 								className="accordion-button collapsed list-title section-color fw-bold"
 								type="button"
@@ -57,7 +58,7 @@ const ListView = (props) => {
 								aria-expanded="false"
 								aria-controls={`flush-collapse${props.pc_number}pc${props.index}`}
 							>
-								<span className="me-4">{props.pc_number}</span>
+								<span className="w-25 ">{props.pc_number}</span>
 								<span className="ms-4">{props.title}</span>
 							</button>
 						</h4>

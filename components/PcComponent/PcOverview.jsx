@@ -15,8 +15,11 @@ import {
 	FaArrowCircleRight,
 	FaRedo
 } from 'react-icons/fa';
+import { useRouter } from "next/router";
 
 const PcOverview = (params) => {
+	const router = useRouter();
+
 	// const urlParam = useParams();
 	// console.log(pc_num);
 	const [ pc, setPc ] = useState([]);
@@ -36,21 +39,26 @@ const PcOverview = (params) => {
 
 	const [ page_type, setPage_type ] = useState('add');
 
+
 	/**
    * Fetch data from backend on page load
    */
 	useEffect(
 		() => {
-			if (pc_num || params.pcid) {
-				var id = pc_num != undefined ? pc_num : params.pcid != undefined ? params.pcid : '';
+			console.log(router.query)
+			if (router.query.pcid || params.pcid) {
+				var id =  router.query.pcid?router.query.pcid:params.pcid?params.pcid:"";
 				setPc_num(id);
-				var pc_number = params.pc_number != undefined ? params.pc_number : '';
-				setPc_number(pc_number);
+				// var pc_number = params.pc_number != undefined ? params.pc_number : '';
 				var type = params.page_type ? params.page_type : 'add';
 				setPage_type(type);
+				console.log(params.pcid)
 				APICALL.service(getPcByPcnumber + id, 'GET')
 					.then((result) => {
+						console.log(result);
 						setPc(result.data);
+						setPc_number(result.data['pc_number']);
+
 					})
 					.catch((error) => {
 						console.error(error);
@@ -146,7 +154,7 @@ const PcOverview = (params) => {
 											data-bs-toggle="collapse"
 											href={'#collapsepc' + pc_num}
 											role="button"
-											aria-expanded="false"
+											// aria-expanded="false"
 											aria-controls={'collapsepc' + pc_num}
 										>
 											<FaRegPlusSquare />

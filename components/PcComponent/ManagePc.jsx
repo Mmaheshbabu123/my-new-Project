@@ -12,6 +12,7 @@ import PcOverview from './PcOverview';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { APICALL } from '../../Services/ApiServices';
 import { getPc } from '../../Services/ApiEndPoints';
+import Link from 'next/link';
 
 /**
  * this will project all the partire committee's data.
@@ -26,7 +27,7 @@ const ManagePc = (props) => {
 	const [ cls1, setcls1 ] = useState('col-md-2');
 
 	useEffect(() => {
-		getData();
+		 getData();
 	});
 
 	/**
@@ -50,10 +51,10 @@ const ManagePc = (props) => {
 	/**
    * used to get the data when we loads the page.
    */
-	const getData = async () => {
+	const getData = () => {
 		var url = process.env.REACT_APP_BACKEND_URL;
 		if (lenght == 0 || lenght == undefined) {
-			APICALL.service(getPc, 'GET')
+			 APICALL.service(getPc, 'GET')
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
@@ -87,12 +88,14 @@ const ManagePc = (props) => {
 				<h3 className="row mt-3 ms-5 text-bold">Manage Paritaire Comitee</h3>
 				<div className="col-md-9" />
 				<div className="col-md-3">
-					<button
+					<Link href="/addpc">
+					<a
 						className="mt-5 ml-2 mb-4 btn btn-secondary btn-lg btn-block float-sm-right  add-proj-btn"
-						onClick={() => navigate('/addpc')}
 					>
 						Add Paritaire Comitee
-					</button>
+					</a>
+					</Link>
+					
 				</div>
 			</div>
 
@@ -107,9 +110,12 @@ const ManagePc = (props) => {
 					</div>
 					<div className="col-md-2">
 						<h5 className="pt-2 pb-3 px-2 managep-actions section-color">
-							<a className="me-2 text-dark" href={`/pc/${data[val][0]['id']}`}>
+							<Link href={`/pc/${data[val][0]['id']}`}>
+							<a className="me-2 text-dark" >
 								<MdEdit />
 							</a>
+							</Link>
+							
 							<a className="me-2 text-dark">
 								<MdDelete />
 							</a>
