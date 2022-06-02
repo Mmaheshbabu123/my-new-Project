@@ -12,14 +12,14 @@ import React, { Component } from 'react';
 // import moment from 'moment';
 
 const Addtiming = () => {
-	const [ showhideage, setShowhideage ] = useState(' ');
+	// const [ showhideage, setShowhideage ] = useState(' ');
 
-	const handleshowhide = (event) => {
-		const getage = event.target.value;
-		// console.log(getage);
-		setShowhideage(getage);
-		console.log(showhideage);
-	};
+	// const handleshowhide = (event) => {
+	// 	const getage = event.target.value;
+	// 	// console.log(getage);
+	// 	setShowhideage(getage);
+	// 	console.log(showhideage);
+	// };
 	return (
 		<div className="container">
 			<form>
