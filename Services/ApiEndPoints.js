@@ -14,3 +14,10 @@ export const getFunctions = BASE_URL + "getFunctions";
 export const updateFunction = BASE_URL + "updateFunction";
 export const updateCategory = BASE_URL + "updateCategory";
 export const getPc = BASE_URL + "getParitaireCommitteFunctionCategory";
+
+//----- EMPLOYEE TYPE and COEFFICIENT API ROUTES -----//
+export const fetchEmployeeTypes  =  BASE_URL + "get-employee-types";
+export const createEmployeeTypes =  BASE_URL + "create-employee-types";
+export const editEmployeeType    =  BASE_URL + "edit-employee-type";
+export const deleteEmployeeType    =  BASE_URL + "delete-employee-type";
+//-----
