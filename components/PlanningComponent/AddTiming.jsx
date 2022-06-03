@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 // import { components } from 'react-select';
 // import { Divider } from 'semantic-ui-react';
 // import data from './data.json';
@@ -12,13 +12,10 @@ import React, { Component } from 'react';
 // import moment from 'moment';
 
 const Addtiming = () => {
-	// const [ showhideage, setShowhideage ] = useState(' ');
+	const [ visible, setVisible ] = useState(false);
 
-	// const handleshowhide = (event) => {
-	// 	const getage = event.target.value;
-	// 	// console.log(getage);
-	// 	setShowhideage(getage);
-	// 	console.log(showhideage);
+	// const handleCheckbox = (event) => {
+	// console.log(event.target.value);
 	// };
 	return (
 		<div className="container">
@@ -26,10 +23,16 @@ const Addtiming = () => {
 				<div className="row">
 					<h4 className="mt-4 mb-2">Add timing</h4>
 					<div className="form-check mt-2 ">
-						<input className="form-check-input " type="checkbox" value="" id="flexCheckDefault" />
-						<label className="form-check-label " for="flexCheckDefault">
-							Same timing for all employees
-						</label>
+						<input
+							className="form-check-input "
+							type="checkbox"
+							// id="flexCheckDefault"
+							value="1"
+							// onChange={(e) => this.handleCheckbox()}
+							onClick={(e) => setVisible(!visible)}
+						/>
+						<label className="form-check-label ">Same timing for all employees</label>
+						<div>Visible</div>
 					</div>
 
 					<div className="form-check mt-2 ">
