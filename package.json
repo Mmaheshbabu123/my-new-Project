@@ -30,6 +30,7 @@
     "react-datepicker": "^4.5.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
+    "react-tabs": "^5.1.0",
     "tailwindcss": "^2.2.19"
   },
   "devDependencies": {
