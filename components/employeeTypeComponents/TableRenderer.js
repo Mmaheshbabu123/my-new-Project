@@ -65,10 +65,10 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
       <div className="table-render-parent-div">
         <table className="table table-hover manage-types-table">
           <thead className="table-render-thead">
-            <tr>{headers.map(eachHeader => <th scope="col"> {eachHeader} </th>)} </tr>
+            <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
           </thead>
           <tbody>
-            {state.filterRows.map(eachRow => <tr id={eachRow.id}>{headers.map(colName => <>
+            {state.filterRows.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>{headers.map(colName => <>
               <td> {colName === 'actions' ? getNeededActions(eachRow) : eachRow[colName]}</td>
             </>)}</tr>)}
           </tbody>
