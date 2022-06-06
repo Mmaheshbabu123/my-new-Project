@@ -10,7 +10,7 @@ import { PcContext } from '../../Contexts/PcContext';
  * @returns the added category data to the common.js component.
  */
 function AddPc(props) {
-	const { test, setTest, pcid, setPcid } = useContext(PcContext);
+	const { pcid, setPcid, sec_cat_fun, setSec_cat_fun } = useContext(PcContext);
 	const [ field, setfield ] = useState();
 	const [ field1, setfield1 ] = useState();
 	const [ data, setData ] = useState({
@@ -30,7 +30,8 @@ function AddPc(props) {
 				console.log(result);
 				if (result.status === 200) {
 					var pid = result.pcid;
-					setPcid(pcid);
+					setPcid(pid);
+					setSec_cat_fun(!sec_cat_fun);
 					// navigate("/pc/"+pid);
 				} else if (result.status == 205) {
 					setfield1('Paritair comite number already exists.');
@@ -42,6 +43,7 @@ function AddPc(props) {
 				console.error(error);
 			});
 	};
+
 
 	let submit = async (event) => {
 		event.preventDefault();
@@ -70,6 +72,8 @@ function AddPc(props) {
 
 	return (
 		<div className="container">
+			test
+			{pcid}
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row pt-5">
 					<div className="col-md-6">

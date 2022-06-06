@@ -117,3 +117,21 @@ a {
 .error {
   color:red;
 }
+.nav-link {
+  color: black;
+  height: 100%;
+  border-radius: 10px;
+}
+.nav-pills .nav-link.active {
+  background-color: black;
+}
+
+.nav-link:hover {
+  color:black;
+  font-weight: 500;
+}
+.nav-item {
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 0px 3px;
+}

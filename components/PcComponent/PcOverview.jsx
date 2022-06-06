@@ -23,7 +23,7 @@ import {
 import { useRouter } from 'next/router';
 
 const PcOverview = (params) => {
-	const { test, setTest, pcid, setPcid } = useContext(PcContext);
+	const {pcid, setPcid,sec_cat_fun } = useContext(PcContext);
 
 	const router = useRouter();
 	const [ pc, setPc ] = useState([]);
@@ -47,6 +47,8 @@ const PcOverview = (params) => {
    */
 	useEffect(
 		() => {
+			console.log("test")
+			console.log(pcid);
 			if (pcid || params.pcid) {
 				var id = pcid ? pcid : params.pcid ? params.pcid : '';
 				// var pc_number = params.pc_number != undefined ? params.pc_number : '';
@@ -63,13 +65,12 @@ const PcOverview = (params) => {
 					});
 			}
 		},
-		[ pclistUpdated ]
+		[sec_cat_fun]
 	);
 
 	const childToParent = (childdata) => {
 		setPclistUpdated(false);
 
-		console.log('baggu');
 		setPclistUpdated(true);
 		setLeftSec('col-md-12');
 		setAddfunction(false);
