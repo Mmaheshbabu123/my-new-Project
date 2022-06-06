@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { useSearchParams } from 'react-router-dom';
 
-const Editemployee = () => {
+const EmployeeType = () => {
 	const [ visible, setVisible ] = useState(false);
 
 	const [ worker, setWorker ] = useState();
@@ -38,7 +38,7 @@ const Editemployee = () => {
 
 				<div className="col-sm-5 form-group bg-light mt-4 ms-4">
 					<input type="checkbox" className="" value="4" onClick={(e) => setVisible(!visible)} />
-					<label className="p-3 ms-2 md-4 ">Working student worker (we don't use)</label>
+					<label className="p-3 ms-2 md-4 ">Working student worker (we dont use)</label>
 					{visible && (
 						<input
 							type="text"
@@ -75,4 +75,4 @@ const Editemployee = () => {
 		</div>
 	);
 };
-export default Editemployee;
+export default EmployeeType;

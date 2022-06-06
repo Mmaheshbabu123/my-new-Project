@@ -5,6 +5,7 @@ import { getCategory, getFunctions, updateFunction } from '../../Services/ApiEnd
 import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare, FaMinusSquare } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Popup from './Popupfunction';
+import Link from 'next/link';
 
 const ManageFunction = () => {
 	const [ functions, setFunctions ] = useState([]);
@@ -314,9 +315,11 @@ const ManageFunction = () => {
 											<td>€ {result.min_salary}</td>
 											<td>{result.cat_name}</td>
 											<td className="d-flex ">
-												<a className="" href="/addpc">
+												<Link href="/addpc">
+												<a className="" >
 													<MdEdit className="mt-2 ms-3" href="/addpc" />
 												</a>
+												</Link>
 												<span onClick={() => showPopup(result.funcn_id)} type="button">
 													<MdDelete className="mt-2 ms-3" />
 												</span>
@@ -334,9 +337,11 @@ const ManageFunction = () => {
 						</table>
 					</div>
 				</div>
-				<a href="/addpc" className="btn btn-secondary btn-lg btn-block float-right mt-5">
+				<Link href="/addpc">
+				<a className="btn btn-secondary btn-lg btn-block float-right mt-5">
 					Add Function
 				</a>
+				</Link>
 			</form>
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletefuncn} />

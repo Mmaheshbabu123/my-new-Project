@@ -72,8 +72,6 @@ function AddPc(props) {
 
 	return (
 		<div className="container">
-			test
-			{pcid}
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row pt-5">
 					<div className="col-md-6">
