@@ -5,9 +5,9 @@ const SalaryBenifits = () => {
 
 	return (
 		<div className="container">
-			<div class="form-check mt-4">
+			<div className="form-check mt-4">
 				<input
-					class="form-check-input"
+					className="form-check-input"
 					type="checkbox"
 					value=""
 					id="flexCheckDefault"

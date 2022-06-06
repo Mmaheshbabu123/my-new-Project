@@ -3,19 +3,17 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { PcContext } from '../../Contexts/PcContext';
 import { useState } from 'react';
 import PcOverview from './PcOverview';
-
+import { FaCheck } from 'react-icons/fa';
 const PcCommon = () => {
 	const [ pcid, setPcid ] = useState('');
-    const [sec_pc, setSec_pc] = useState(true);
-    const [sec_cat_fun, setSec_cat_fun] = useState(false);
-    const [sec_age, setSec_age] = useState(false);
-    const [sec_emptype, setSec_emptype] = useState(false);
-
-
+	const [ sec_pc, setSec_pc ] = useState(true);
+	const [ sec_cat_fun, setSec_cat_fun ] = useState(false);
+	const [ sec_age, setSec_age ] = useState(false);
+	const [ sec_emptype, setSec_emptype ] = useState(false);
 
 	return (
 		<div className="container mt-5">
-			<PcContext.Provider value={{ pcid, setPcid, sec_cat_fun,setSec_cat_fun}}>
+			<PcContext.Provider value={{ pcid, setPcid, sec_cat_fun, setSec_cat_fun }}>
 				<p className="h4">Add Paritair comitte</p>
 				<div className="row mt-4 pt-2">
 					<ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
@@ -30,6 +28,7 @@ const PcCommon = () => {
 								aria-controls="pills-home"
 								aria-selected="true"
 							>
+								<FaCheck className="d-inline" />
 								<p className="mb-3">Step 1:</p> <p>Paritair comitte details</p>
 							</button>
 						</li>
@@ -43,7 +42,7 @@ const PcCommon = () => {
 								role="tab"
 								aria-controls="pills-profile"
 								aria-selected="false"
-                                onClick={()=>setSec_cat_fun(true)}
+								onClick={() => setSec_cat_fun(true)}
 							>
 								<p className="mb-3">Step 2:</p> <p>Category and Function</p>
 							</button>
