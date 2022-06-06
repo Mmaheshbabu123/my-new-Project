@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { getPcByPcnumber } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import ListView from './ListView';
 import AddCategory from './AddCategory';
-import styles from '../../styles/Pc.module.css'
+import styles from '../../styles/Pc.module.css';
+import { PcContext } from '../../Contexts/PcContext';
+
 
 // import { useParams } from 'react-router-dom';
 // import AddCategory from './AddCategory';
@@ -18,9 +20,11 @@ import {
 	FaArrowCircleRight,
 	FaRedo
 } from 'react-icons/fa';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 const PcOverview = (params) => {
+	const { test, setTest, pcid, setPcid } = useContext(PcContext);
+
 	const router = useRouter();
 	const [ pc, setPc ] = useState([]);
 	const [ enableEdit, setEnableEdit ] = useState(false);
@@ -34,20 +38,17 @@ const PcOverview = (params) => {
 	const [ editpc, setEditpc ] = useState(false);
 
 	const [ secid, setSecid ] = useState('');
-	const [ pcid, setPcid ] = useState('');
 	const [ pc_number, setPc_number ] = useState('');
 
 	const [ page_type, setPage_type ] = useState('add');
-
 
 	/**
    * Fetch data from backend on page load
    */
 	useEffect(
 		() => {
-			if (router.query.pcid || params.pcid) {
-				var id =  router.query.pcid?router.query.pcid:params.pcid?params.pcid:"";
-				setPcid(id);
+			if (pcid || params.pcid) {
+				var id = pcid ? pcid : params.pcid ? params.pcid : '';
 				// var pc_number = params.pc_number != undefined ? params.pc_number : '';
 				var type = params.page_type ? params.page_type : 'add';
 				setPage_type(type);
@@ -56,7 +57,6 @@ const PcOverview = (params) => {
 						console.log(result);
 						setPc(result.data);
 						setPc_number(result.data['pc_number']);
-
 					})
 					.catch((error) => {
 						console.error(error);
@@ -125,7 +125,7 @@ const PcOverview = (params) => {
 										type="button"
 										to="category"
 										pcid={pcid}
-										className={"btn me-3"+ styles.btncolor}
+										className={'btn me-3' + styles.btncolor}
 										onClick={() => {
 											setCategory(true);
 											setEnableEdit(true);
@@ -137,7 +137,7 @@ const PcOverview = (params) => {
 										type="button"
 										to="function"
 										pcid={pcid}
-										className={"btn me-2" + styles.btncolor}
+										className={'btn me-2' + styles.btncolor}
 										onClick={() => {
 											setAddfunction(true);
 											setEnableEdit(true);
@@ -256,7 +256,7 @@ const PcOverview = (params) => {
 								type="button"
 								to="category"
 								pcid={pcid}
-								className={"btn me-3"+ styles.btncolor}
+								className={'btn me-3' + styles.btncolor}
 								onClick={() => {
 									setCategory(true);
 									setSecid('');
@@ -268,7 +268,7 @@ const PcOverview = (params) => {
 								type="button"
 								to="function"
 								pcid={pcid}
-								className={"btn me-2"+ styles.btncolor}
+								className={'btn me-2' + styles.btncolor}
 								onClick={() => setAddfunction(true)}
 							>
 								Add function
