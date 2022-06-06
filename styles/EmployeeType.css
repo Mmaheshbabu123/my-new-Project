@@ -1,0 +1,81 @@
+.actions-span{
+ cursor: pointer;
+ margin: 0 5px
+}
+.actions-span:hover{
+ border-bottom: 1px solid black;
+}
+#pcp_name{
+  width: 70% !important;  /* not needed */
+  margin: 0 10px;
+}
+.pcp_btn {
+  background-color: #707070 !important;
+}
+.pcp_btn:hover {
+  background-color: black !important;
+}
+
+.manage-types-table {
+  /* border-collapse: collapse;
+  border: 1px solid black; */
+}
+
+.manage-types-table tr {
+  border-bottom: 1pt solid cadetblue;
+  height: 45px;
+}
+
+.add-edit-types {
+  border: 1px solid black;
+}
+
+.managetype-save-btn {
+  margin: 15px;
+  text-align: right;
+}
+
+#pcp_name_warning {
+  color: red !important;
+}
+
+.add-item-div{
+  border: 1px solid lightsteelblue;
+  width: 70%;
+  margin-left: 30px;
+}
+.add-item-table tr{
+  height: 30px;
+}
+.table-render-parent-div{
+  height: 375px;
+  overflow-y: auto;
+  border: 1px solid cadetblue;
+}
+
+.table-render-thead{
+  background-color: lightgray;
+  height: 50px;
+  position: sticky;
+  top: 0;
+  textAlign: center;
+}
+
+.show-box-link:hover {
+  color: black !important;
+  text-decoration: underline;
+}
+
+.show-box-link{
+  color: black;
+  padding-top: 30px;
+  text-align: center;
+  margin: 30px 50px !important;
+  height: 100px;
+  width: 200px !important;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-box-shadow: 4px 3px 6px 0px rgba(0,0,0,0.54);
+  -moz-box-shadow: 4px 3px 6px 0px rgba(0,0,0,0.54);
+  box-shadow: 4px 3px 6px 0px rgba(0,0,0,0.54);
+}
