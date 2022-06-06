@@ -5,7 +5,7 @@ import TableRenderer from '../../components/employeeTypeComponents/TableRenderer
 import AddEmployeeType from '../../components/employeeTypeComponents/AddEmployeeType'
 
 const ManageType = (props) => {
-  return props.noreder ? <> Not developed yet :)</> :
+  return props.norender ? <> Not developed yet :)</> :
     <>
       <div className='container'>
         <div className='mt-3 md-3'>
@@ -23,8 +23,8 @@ export async function getServerSideProps(context) {
   const { params, query, resolvedUrl } = context;
   const id = parseInt(query?.id ?? 0);
   const manageType = params.managetype[0];
-  if(manageType !== 'employee_types')
-    return { props: { noreder: true }}
+  if (manageType !== 'employee_types')
+    return { props: { norender: true } }
 
   const edit = resolvedUrl.includes('edit') || resolvedUrl.includes('add');
   let response = {};

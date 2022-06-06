@@ -50,7 +50,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
       <div className='row' style={{ margin: '10px 0' }}>
         <input
           type="text"
-          class="form-control col-7"
+          className="form-control col-7"
           id="pcp_name"
           onChange={(e) => handleSearch(e)}
           placeholder={'Search'}
@@ -58,7 +58,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
         <button
           onClick={() => router.push(`${manageType}/add?id=0`)}
           type="button"
-          class="btn btn-dark pcp_btn col-3">
+          className="btn btn-dark pcp_btn col-3">
           {`Add employee type`}
         </button>
       </div>

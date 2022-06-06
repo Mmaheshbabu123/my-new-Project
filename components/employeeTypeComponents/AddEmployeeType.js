@@ -106,12 +106,12 @@ const AddEmployeeType = (props) => {
   return <>
     <div className='add-edit-types'>
       <div className="row m-3">
-        <label for="name"> Name </label>
+        <label htmlFor="name"> Name </label>
         <div className='row'>
           <input
             ref={inputRef}
             type="text"
-            class="form-control col-7"
+            className="form-control col-7"
             id="pcp_name"
             value={state.name}
             onChange={(e) => handleInputChange(e)}
@@ -122,7 +122,7 @@ const AddEmployeeType = (props) => {
             <button
               onClick={() => addItemAndUpdateIndex({ ...state }, state.name)}
               type="button"
-              class="btn btn-dark pcp_btn col-3">
+              className="btn btn-dark pcp_btn col-3">
               Add another
             </button>
           }
@@ -130,7 +130,7 @@ const AddEmployeeType = (props) => {
         {state.nameWarning &&
           <small
             id="pcp_name_warning"
-            class="form-text text-muted col-md-5">
+            className="form-text text-muted col-md-5">
             Please add type
           </small>}
       </div>
@@ -138,7 +138,7 @@ const AddEmployeeType = (props) => {
         <div className='add-item-div'>
           <table className='table-hover m-3 add-item-table'>
             {state.newItems.map((item, index) =>
-              <tr>
+              <tr id={index}>
                 <td style={{ width: '80%' }}> {item.name} </td>
                 <td style={{ width: '20%' }}> {getNeededActions(item, index)} </td>
               </tr>
@@ -148,7 +148,7 @@ const AddEmployeeType = (props) => {
       <div className='managetype-save-btn'>
         <button
           type="button"
-          class="btn btn-dark pcp_btn col-3"
+          className="btn btn-dark pcp_btn col-3"
           onClick={handleSubmit} >
           Save
         </button>
