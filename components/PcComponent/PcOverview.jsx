@@ -5,6 +5,8 @@ import ListView from './ListView';
 import AddCategory from './AddCategory';
 import styles from '../../styles/Pc.module.css';
 import { PcContext } from '../../Contexts/PcContext';
+import AddFunction from '../../components/PcComponent/AddFunction';
+// import EditPc from '../../components/PcComponent/'
 
 
 // import { useParams } from 'react-router-dom';
@@ -23,7 +25,7 @@ import {
 import { useRouter } from 'next/router';
 
 const PcOverview = (params) => {
-	const {pcid, setPcid,sec_cat_fun } = useContext(PcContext);
+	const {pcid, setPcid, sec_cat_fun } = useContext(PcContext);
 
 	const router = useRouter();
 	const [ pc, setPc ] = useState([]);
@@ -49,11 +51,11 @@ const PcOverview = (params) => {
 		() => {
 			console.log("test")
 			console.log(pcid);
-			if (pcid || params.pcid) {
-				var id = pcid ? pcid : params.pcid ? params.pcid : '';
+			if (pcid) {
+				var id = pcid ? pcid : '';
 				// var pc_number = params.pc_number != undefined ? params.pc_number : '';
-				var type = params.page_type ? params.page_type : 'add';
-				setPage_type(type);
+				// var type = params.page_type ? params.page_type : 'add';
+				// setPage_type(type);
 				APICALL.service(getPcByPcnumber + id, 'GET')
 					.then((result) => {
 						console.log(result);
@@ -65,7 +67,7 @@ const PcOverview = (params) => {
 					});
 			}
 		},
-		[sec_cat_fun]
+		[sec_cat_fun, pcid]
 	);
 
 	const childToParent = (childdata) => {
@@ -86,7 +88,7 @@ const PcOverview = (params) => {
 				setLeftSec('col-md-9');
 			}
 		},
-		[ category ]
+		[ category, enableEdit ]
 	);
 
 	useEffect(
@@ -96,7 +98,7 @@ const PcOverview = (params) => {
 				setLeftSec('col-md-9');
 			}
 		},
-		[ addfunction ]
+		[ addfunction, enableEdit]
 	);
 	const SecInfo = (sectype, secid) => {
 		setSecid(secid);
@@ -277,7 +279,7 @@ const PcOverview = (params) => {
 						</div>
 						{category && <AddCategory childToParent={childToParent} id={secid} />}
 						{addfunction && <AddFunction childToParent={childToParent} id={secid} />}
-						{editpc && <EditPc childToParent={childToParent} id={secid} />}
+						{/* {editpc && <EditPc childToParent={childToParent} id={secid} />} */}
 					</div>
 				)}
 			</div>

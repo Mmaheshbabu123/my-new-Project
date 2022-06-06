@@ -16,7 +16,7 @@ function Header() {
        <div style={{paddingLeft: "15px"}} className='col-1 p-0'>
        <Link href='/myoverview'>
           <a href="#" title="Logo">
-            <img 
+            <Image 
               src='/img/dwg-logo.svg'
               alt="DeWatergroep"
               title="Logo"
@@ -60,20 +60,20 @@ function Header() {
                 <div className="language tahoma-regular-normal-azure-28px">NL</div>
                   <div className="left-direction-row-svgrepo-com">
                     <div className="">
-                      <img alt="Arrow for language" className="path-54538 pt-3" src="/img/path-54538-12@1x.png" />
+                      <Image alt="Arrow for language" className="path-54538 pt-3" src="/img/path-54538-12@1x.png" />
                     </div>
                   </div>
               </div>
             </li>
             <li className="nav-item px-3">
               <div className="group-notification">
-                <img alt="Notification icon" className="notification-img" src="/img/notification@1l.svg" />
+                <Image alt="Notification icon" className="notification-img" src="/img/notification@1l.svg" />
                 <a href="#" className="faq tahoma-regular-normal-gravel-24px">Notificaties</a>
               </div>
             </li>
             <li className="nav-item pl-3 pr-0">
               <div className="group-account">
-                <img alt="My Account link" className="account-img" src="/img/account.svg" />
+                <Image alt="My Account link" className="account-img" src="/img/account.svg" />
                 <a href="#" className="faq tahoma-regular-normal-gravel-24px">Mijn account</a>
               </div>
             </li>

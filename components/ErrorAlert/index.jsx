@@ -1,4 +1,5 @@
 
+import Image from "next/image"
 export default function ErrorAlert(props){
 
     return(
@@ -6,7 +7,7 @@ export default function ErrorAlert(props){
             { (props.activeError) ? <div
             className="my-3 alert alert-danger alert-dismissible"
             role="alert"
-          > <img  alt="" style={{width: "30px", marginRight: "15px"}} src="../../path.svg"></img>{props.errorText}
+          > <Image  alt="" style={{width: "30px", marginRight: "15px"}} src="../../path.svg"></Image>{props.errorText}
             <button
               type="button"
               className="close"

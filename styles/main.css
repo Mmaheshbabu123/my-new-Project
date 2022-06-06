@@ -364,7 +364,7 @@ html {
 
 /**
  * Inherit font-family and line-height from `html` so users can set them as
- * a class directly on the `html` element.
+ * a calssName directly on the `html` element.
  */
 
 body {

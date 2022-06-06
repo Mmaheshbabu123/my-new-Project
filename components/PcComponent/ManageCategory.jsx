@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-
-// import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { getCategory, updateCategory } from '../../Services/ApiEndPoints';
 import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare, FaMinusSquare } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
@@ -220,9 +219,12 @@ const ManageCategoryComponent = () => {
 											<td>{result.category_name}</td>
 											<td>€ {result.min_salary}</td>
 											<td className="d-flex ">
-												<a className="" href="/addpc">
-													<MdEdit className="mt-2 ms-3" href="/addpc" />
-												</a>
+											<Link href="/addpc">
+												<a>
+													<MdEdit className="mt-2 ms-3" />
+													</a>
+												</Link>
+
 												<span onClick={() => showPopup(result.cat_id)} type="button">
 													<MdDelete className="mt-2 ms-3" />
 												</span>
@@ -240,9 +242,12 @@ const ManageCategoryComponent = () => {
 						</table>
 					</div>
 				</div>
-				<a href="/addpc" className="btn btn-secondary btn-lg btn-block float-right mt-5">
+				<Link href="/addpc">
+				<a  className="btn btn-secondary btn-lg btn-block float-right mt-5">
 					Add Category
 				</a>
+				</Link>
+				
 			</form>
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletecat} />

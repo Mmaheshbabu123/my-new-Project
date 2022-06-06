@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 const FileUploader = props => {
   // Create a reference to the hidden file input element
@@ -18,11 +19,11 @@ const FileUploader = props => {
     <>
       {/* <button onClick={handleClick}> */}
       <div className="path-container-46">
-            {/* <img className="path" src="/img/path-27-1@1x.png" />
-            <img className="path-28" src="/img/path-28-1@1x.png" />
-            <img className="path-29" src={props.path29} />
-            <img className="path" src="/img/path-27-1@1x.png" /> */}
-            <img  alt="upload-image" style={{width: "30px"}} src="../../upload.svg"></img>
+            {/* <Image className="path" src="/img/path-27-1@1x.png" />
+            <Image className="path-28" src="/img/path-28-1@1x.png" />
+            <Image className="path-29" src={props.path29} />
+            <Image className="path" src="/img/path-27-1@1x.png" /> */}
+            <Image  alt="upload-image" style={{width: "30px"}} src="../../upload.svg"></Image>
           </div>
       {/* </button> */}
       {/* <input

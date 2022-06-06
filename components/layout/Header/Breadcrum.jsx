@@ -1,4 +1,6 @@
 
+import Image from "next/image";
+
 function Breadcrum(props) {
 
     const contrast = () => {
@@ -45,7 +47,7 @@ function Breadcrum(props) {
                     </li> */}
                 <li className="nav-item px-3">
                 <div className="group-contrast">
-                    <img 
+                    <Image 
                         className="contrast-img"
                         alt="Contrast icon" 
                         src="/img/contrast.svg"
@@ -64,7 +66,7 @@ function Breadcrum(props) {
                 </li>
                 <li className="nav-item px-3">
                 <div className="group-font">
-                    <img 
+                    <Image 
                         className="font-img" 
                         alt="Font increase icon" 
                         src="/img/font.svg"
@@ -83,7 +85,7 @@ function Breadcrum(props) {
                 </li>
                 <li className="nav-item pl-3 pr-0">
                 <div className="group-voice">
-                    <img 
+                    <Image 
                         className="voice-img" 
                         alt="Voice icon" 
                         src="/img/voice.svg"
