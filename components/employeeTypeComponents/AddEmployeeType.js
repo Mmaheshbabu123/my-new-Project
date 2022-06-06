@@ -138,7 +138,7 @@ const AddEmployeeType = (props) => {
         <div className='add-item-div'>
           <table className='table-hover m-3 add-item-table'>
             {state.newItems.map((item, index) =>
-              <tr key={index} id={index}>
+              <tr Key={index} id={index}>
                 <td style={{ width: '80%' }}> {item.name} </td>
                 <td style={{ width: '20%' }}> {getNeededActions(item, index)} </td>
               </tr>

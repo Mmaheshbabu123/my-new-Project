@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import PcOverview from '../../components/PcComponent/PcOverview';
+import PcOverview from '../../../components/PcComponent/PcOverview';
 
 const Edit = () => {
 	const router = useRouter();
