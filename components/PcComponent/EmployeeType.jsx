@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { useSearchParams } from 'react-router-dom';
 
-const Editemployee = () => {
+const EmployeeType = () => {
 	const [ visible, setVisible ] = useState(false);
 
 	const [ worker, setWorker ] = useState();
@@ -75,4 +75,4 @@ const Editemployee = () => {
 		</div>
 	);
 };
-export default Editemployee;
+export default EmployeeType;

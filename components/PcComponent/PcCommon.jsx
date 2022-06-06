@@ -1,8 +1,9 @@
-import AddPc from './AddPc';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { PcContext } from '../../Contexts/PcContext';
 import { useState } from 'react';
+import { PcContext } from '../../Contexts/PcContext';
 import PcOverview from './PcOverview';
+import AddPc from './AddPc';
+import AddAge from './AddAge';
+
 
 const PcCommon = () => {
 	const [ pcid, setPcid ] = useState('');
@@ -53,7 +54,7 @@ const PcCommon = () => {
 								className="nav-link"
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
-								data-bs-target="#pills-contact"
+								data-bs-target="#pills-age"
 								type="button"
 								role="tab"
 								aria-controls="pills-contact"
@@ -114,7 +115,7 @@ const PcCommon = () => {
 							role="tabpanel"
 							aria-labelledby="pills-contact-tab"
 						>
-							...
+							<AddAge/>
 						</div>
 						<div
 							className="tab-pane fade"
