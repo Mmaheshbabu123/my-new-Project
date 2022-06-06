@@ -1,5 +1,7 @@
 import '../styles/main.css';
 import '../styles/Announcement.css';
+import '../styles/EmployeeType.css'
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import Head from 'next/head';
 
 
@@ -26,7 +28,7 @@ function MyApp({ Component, pageProps }) {
 
 <Component {...pageProps} />
 </>
-  ) 
+  )
 }
 
 export default MyApp

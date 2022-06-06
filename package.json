@@ -28,6 +28,7 @@
     "react-bootstrap": "^2.0.2",
     "react-bootstrap-icons": "^1.8.2",
     "react-calendar": "^3.5.0",
+    "react-confirm-alert": "^3.0.2",
     "react-datepicker": "^4.5.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
