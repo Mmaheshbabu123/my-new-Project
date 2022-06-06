@@ -16,10 +16,9 @@ function AddPc(props) {
 	const [ data, setData ] = useState({
 		pc_number: '',
 		pc_name: ''
-
 	});
 
-	 /**
+	/**
 	 * it will post the committee data to the backend by using api's
 	 * @param {*} e
 	 */
@@ -43,7 +42,6 @@ function AddPc(props) {
 				console.error(error);
 			});
 	};
-
 
 	let submit = async (event) => {
 		event.preventDefault();
@@ -72,6 +70,7 @@ function AddPc(props) {
 
 	return (
 		<div className="container">
+			{pcid}
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row pt-5">
 					<div className="col-md-6">
@@ -88,7 +87,7 @@ function AddPc(props) {
 							<p className="error mt-2">{field1}</p>
 						</div>
 						<div className="form-group mt-3 mb-4">
-							<label>Paritair comite 	</label>
+							<label>Paritair comite name </label>
 							<input
 								type="text"
 								value={data.pc_name}
@@ -96,6 +95,18 @@ function AddPc(props) {
 								onChange={(e) => {
 									setData({ pc_number: data.pc_number, pc_name: e.target.value });
 								}}
+							/>
+							<p className="error mt-2">{field}</p>
+						</div>
+						<div className="form-group mt-3 mb-4">
+							<label>Paritair comite alias name </label>
+							<input
+								type="text"
+								// value={data.pc_name}
+								className="form-control mt-2"
+								// onChange={(e) => {
+								// setData({ pc_number: data.pc_number, pc_name: e.target.value });
+								// }}
 							/>
 							<p className="error mt-2">{field}</p>
 						</div>
