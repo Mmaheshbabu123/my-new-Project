@@ -5,7 +5,8 @@ import AddPc from './AddPc';
 import AddAge from './AddAge';
 import EmployeeType from './EmployeeType';
 
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
+import { BsCircle } from 'react-icons/bs';
 const PcCommon = () => {
 	const [ pcid, setPcid ] = useState('');
 	const [ sec_pc, setSec_pc ] = useState(true);
@@ -30,7 +31,7 @@ const PcCommon = () => {
 								aria-controls="pills-home"
 								aria-selected="true"
 							>
-								<FaCheck className="d-inline" />
+								<FaRegCheckCircle className="d-inline" />
 								<p className="mb-3">Step 1:</p> <p>Paritair comitte details</p>
 							</button>
 						</li>
@@ -46,6 +47,7 @@ const PcCommon = () => {
 								aria-selected="false"
 								onClick={() => setSec_cat_fun(true)}
 							>
+								<BsCircle className="d-inline" />
 								<p className="mb-3">Step 2:</p> <p>Category and Function</p>
 							</button>
 						</li>
@@ -60,6 +62,8 @@ const PcCommon = () => {
 								aria-controls="pills-contact"
 								aria-selected="false"
 							>
+								{' '}
+								<FaRegCheckCircle className="d-inline" />
 								<p className="mb-3">Step 3:</p> <p>Age</p>
 							</button>
 						</li>
@@ -74,6 +78,7 @@ const PcCommon = () => {
 								aria-controls="pills-contact"
 								aria-selected="false"
 							>
+								<BsCircle className="d-inline" />
 								<p className="mb-3">Step 4:</p> <p>Employee type</p>
 							</button>
 						</li>
@@ -88,6 +93,7 @@ const PcCommon = () => {
 								aria-controls="pills-contact"
 								aria-selected="false"
 							>
+								<FaRegCheckCircle className="d-inline" />
 								<p className="mb-3">Step 5:</p> <p>Salary benefits</p>
 							</button>
 						</li>
