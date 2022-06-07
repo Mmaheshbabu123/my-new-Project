@@ -5,7 +5,8 @@ import AddPc from './AddPc';
 import AddAge from './AddAge';
 import EmployeeType from './EmployeeType';
 
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
+import { BsCircle } from 'react-icons/bs';
 const PcCommon = () => {
 	const [ pcid, setPcid ] = useState('');
 	const [ current_sec, setCurrent_sec ] = useState(1);
@@ -44,7 +45,7 @@ const PcCommon = () => {
 									setCurrent_sec(1);
 								}}
 							>
-								<FaCheck className="d-inline" />
+								<FaRegCheckCircle className="d-inline" />
 								<p className="mb-3">Step 1:</p> <p>Paritair comitte details</p>
 							</button>
 						</li>
@@ -62,6 +63,7 @@ const PcCommon = () => {
 									setCurrent_sec(2);
 								}}
 							>
+								<BsCircle className="d-inline" />
 								<p className="mb-3">Step 2:</p> <p>Category and Function</p>
 							</button>
 						</li>
@@ -79,6 +81,8 @@ const PcCommon = () => {
 									setCurrent_sec(3);
 								}}
 							>
+								{' '}
+								<FaRegCheckCircle className="d-inline" />
 								<p className="mb-3">Step 3:</p> <p>Age</p>
 							</button>
 						</li>
@@ -96,6 +100,7 @@ const PcCommon = () => {
 									setCurrent_sec(4);
 								}}
 							>
+								<BsCircle className="d-inline" />
 								<p className="mb-3">Step 4:</p> <p>Employee type</p>
 							</button>
 						</li>
@@ -113,6 +118,7 @@ const PcCommon = () => {
 									setCurrent_sec(5);
 								}}
 							>
+								<FaRegCheckCircle className="d-inline" />
 								<p className="mb-3">Step 5:</p> <p>Salary benefits</p>
 							</button>
 						</li>
