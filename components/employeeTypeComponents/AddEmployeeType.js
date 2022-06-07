@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { createEmployeeTypes } from '../../Services/ApiEndPoints'
-import { editEmployeeType } from '../../Services/ApiEndPoints'
+import { createEmployeeTypes, createCofficientType} from '../../Services/ApiEndPoints'
+import { editEmployeeType ,editCofficientType} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
 
 
 const AddEmployeeType = (props) => {
   const router = useRouter();
   const inputRef = useRef(null);
+  console.log(props)
   const [state, setState] = useState({
       name: props.id ? props.rows[0]['name'] : ''
-    , editFlow: props.id
+    , editFlow: props.id,
+     editUrl:props.manageType == 'employee_types' ? editEmployeeType : editCofficientType,
+     createUrl:props.manageType == 'employee_types' ? createEmployeeTypes:createCofficientType
     , newItems: []
     , nameWarning: false
     , editIndex: 0
@@ -41,7 +44,7 @@ const AddEmployeeType = (props) => {
         setState({ ...state, nameWarning: true });
         return;
       }
-      let url = state.editFlow ? `${editEmployeeType}/${props.id}` : `${createEmployeeTypes}`;
+      let url = state.editFlow ? `${state.editUrl}/${props.id}` : `${state.createUrl}`;
       await APICALL.service(url, 'POST', getPostData())
         .then((result) => { window.alert('Done'); router.push(`${props.manageType}`); })
         .catch((error) => window.alert('Error occurred'));
