@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { confirmAlert } from 'react-confirm-alert';
-import { deleteEmployeeType } from '../../Services/ApiEndPoints'
+import { deleteEmployeeType ,deleteCoefficientType} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
-  const [state, setState] = useState({ searchTerm: '', filterRows: rows, searchKey: 'name' })
+console.log(manageType)
+  const [state, setState] = useState({ searchTerm: '', deleteUrl : (manageType == 'employee_types') ? deleteEmployeeType :deleteCoefficientType, filterRows: rows, searchKey: 'name' })
   const getNeededActions = (eachRow) => {
     return (
       <>
@@ -31,8 +32,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   }
 
   const handleDelete = async (id) => {
-    await APICALL.service(`${deleteEmployeeType}/${id}`, 'DELETE')
-      .then((result) => router.reload() )
+    await APICALL.service(`${state.deleteUrl}/${id}`, 'DELETE')
+      .then((result) => router.reload())
       .catch((error) => window.alert('Error occurred'));
   }
 
@@ -44,7 +45,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
     })
     setState({ ...state, searchTerm: e.target.value, filterRows: filterRows });
   }
-
+const button_title = manageType == 'employee_types'? `Add employee type`:`Add coefficient type`;
   return (
     <>
       <div className='row' style={{ margin: '10px 0' }}>
@@ -59,7 +60,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
           onClick={() => router.push(`${manageType}/add?id=0`)}
           type="button"
           className="btn btn-dark pcp_btn col-3">
-          {`Add employee type`}
+          {button_title}
         </button>
       </div>
       <div className="table-render-parent-div">

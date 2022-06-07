@@ -1,10 +1,12 @@
 import React from 'react';
 import { APICALL } from '../../Services/ApiServices';
-import { fetchEmployeeTypes } from '../../Services/ApiEndPoints';
+import { fetchEmployeeTypes ,fecthCoefficientTypes} from '../../Services/ApiEndPoints';
 import TableRenderer from '../../components/employeeTypeComponents/TableRenderer'
 import AddEmployeeType from '../../components/employeeTypeComponents/AddEmployeeType'
 
 const ManageType = (props) => {
+  console.log(props)
+  console.log(fecthCoefficientTypes)
   return props.norender ? <> Not developed yet :)</> :
     <>
       <div className='container'>
@@ -20,15 +22,17 @@ const ManageType = (props) => {
 export default React.memo(ManageType);
 
 export async function getServerSideProps(context) {
-  const { params, query, resolvedUrl } = context;
+
+  const { params, query,resolvedUrl } = context;
   const id = parseInt(query?.id ?? 0);
   const manageType = params.managetype[0];
-  if (manageType !== 'employee_types')
-    return { props: { norender: true } }
+  // if (manageType !== 'employee_types')
+  //   return { props: { norender: true } }
 
   const edit = resolvedUrl.includes('edit') || resolvedUrl.includes('add');
   let response = {};
-  await fetch(fetchEmployeeTypes + `${id ? '/' + id : ''}`)
+  const api_url = (manageType !== 'employee_types') ? fecthCoefficientTypes :fetchEmployeeTypes;
+  await fetch(api_url + `${id ? '/' + id : ''}`)
     .then(re => re.json())
     .then((result) => response = result)
     .catch((error) => window.alert('Error occurred'));

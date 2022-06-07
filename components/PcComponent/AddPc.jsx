@@ -88,7 +88,7 @@ function AddPc(props) {
 				<div className="row pt-5">
 					<div className="col-md-6">
 						<div className="form-group mt-3 mb-4">
-							<label className="">Paritair comitte number</label>
+							<label className="custom_astrick">Paritair comitte number</label>
 							<input
 								type="text"
 								value={data.pc_number}
@@ -100,7 +100,7 @@ function AddPc(props) {
 							<p className="error mt-2">{field1}</p>
 						</div>
 						<div className="form-group mt-3 mb-4">
-							<label>Paritair comitte name </label>
+							<label className="custom_astrick">Paritair comitte name </label>
 							<input
 								type="text"
 								value={data.pc_name}
@@ -121,7 +121,7 @@ function AddPc(props) {
 									setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
 								}}
 							/>
-							<p className="error mt-2"></p>
+							<p className="error mt-2" />
 						</div>
 					</div>
 					<div className="col-md-6" />
