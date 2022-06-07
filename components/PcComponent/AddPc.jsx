@@ -1,8 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ValidationService from '../../Services/ValidationService';
 import { addPc } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
+import { useRouter } from 'next/router';
+
 
 /**
  *
@@ -10,11 +12,13 @@ import { PcContext } from '../../Contexts/PcContext';
  * @returns the added category data to the common.js component.
  */
 function AddPc(props) {
-	const { pcid, setPcid } = useContext(PcContext);
+	const router = useRouter();
+	const { pcid, setPcid,setCurrent_sec } = useContext(PcContext);
 	const [ field, setfield ] = useState();
 	const [ field1, setfield1 ] = useState();
+	var unique_key = router.query.uid? router.query.uid:'';
 	const [ data, setData ] = useState({
-		pc_unique_key:'',
+		pc_unique_key: router.query.uid,
 		pc_number: '',
 		pc_name: '',
 		pc_alias_name: ''
@@ -25,6 +29,10 @@ function AddPc(props) {
 		error_pc_alias_name: ''
 	});
 
+	useEffect(
+		() => {
+
+		},[]);
 
 	/**
 	 * it will post the committee data to the backend by using api's
@@ -32,14 +40,11 @@ function AddPc(props) {
 	 */
 
 	let postdata = async (e) => {
-		console.log(data);
 		APICALL.service(addPc, 'POST', data)
 			.then((result) => {
 				console.log(result);
 				if (result.status === 200) {
-					// var pid = result.pcid;
-					// setPcid(pid);
-					// setSec_cat_fun(!sec_cat_fun);
+					setCurrent_sec(2)
 				} else if (result.status == 205) {
 					setfield1('Paritair comite number already exists.');
 				} else {

@@ -13,7 +13,7 @@ const PcCommon = () => {
 
 	return (
 		<div className="container mt-5">
-			<PcContext.Provider value={{ pcid, setPcid, current_sec}}>
+			<PcContext.Provider value={{ pcid, setPcid, current_sec, setCurrent_sec }}>
 				<p className="h5">
 					{current_sec == 1 ? (
 						'Add paritair comitte'
@@ -33,7 +33,7 @@ const PcCommon = () => {
 					<ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
 						<li className="nav-item" role="presentation">
 							<button
-								className="nav-link active py-3"
+								className={`nav-link py-3 ${current_sec == 1 ? 'active' : ''}`}
 								id="pills-pc-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-pc"
@@ -45,13 +45,13 @@ const PcCommon = () => {
 									setCurrent_sec(1);
 								}}
 							>
-								<FaRegCheckCircle className="d-inline" />
-								<p className="mb-3">Step 1:</p> <p>Paritair comitte details</p>
+								<FaRegCheckCircle className="d-inline mb-2" />
+								<p className="mb-2">Step 1:</p> <p>Paritair comitte details</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className="nav-link"
+								className={`nav-link py-3 ${current_sec == 2 ? 'active' : ''}`}
 								id="pills-profile-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-profile"
@@ -63,13 +63,13 @@ const PcCommon = () => {
 									setCurrent_sec(2);
 								}}
 							>
-								<BsCircle className="d-inline" />
-								<p className="mb-3">Step 2:</p> <p>Category and Function</p>
+								<BsCircle className="d-inline mb-2" />
+								<p className="mb-2">Step 2:</p> <p>Category and Function</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className="nav-link"
+								className={`nav-link py-3 ${current_sec == 3 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-age"
@@ -82,13 +82,13 @@ const PcCommon = () => {
 								}}
 							>
 								{' '}
-								<FaRegCheckCircle className="d-inline" />
-								<p className="mb-3">Step 3:</p> <p>Age</p>
+								<FaRegCheckCircle className="d-inline mb-2" />
+								<p className="mb-2">Step 3:</p> <p>Age</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className="nav-link"
+								className={`nav-link py-3 ${current_sec == 4 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-emp-type"
@@ -100,13 +100,13 @@ const PcCommon = () => {
 									setCurrent_sec(4);
 								}}
 							>
-								<BsCircle className="d-inline" />
-								<p className="mb-3">Step 4:</p> <p>Employee type</p>
+								<BsCircle className="d-inline mb-2" />
+								<p className="mb-2">Step 4:</p> <p>Employee type</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className="nav-link"
+								className={`nav-link py-3 ${current_sec == 5 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-contact"
@@ -118,14 +118,14 @@ const PcCommon = () => {
 									setCurrent_sec(5);
 								}}
 							>
-								<FaRegCheckCircle className="d-inline" />
-								<p className="mb-3">Step 5:</p> <p>Salary benefits</p>
+								<FaRegCheckCircle className="d-inline mb-2" />
+								<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
 							</button>
 						</li>
 					</ul>
 					<div className="tab-content" id="pills-tabContent">
 						<div
-							className="tab-pane fade show active"
+							className={`tab-pane fade ${current_sec == 1 ? 'show active' : ''}`}
 							id="pills-pc"
 							role="tabpanel"
 							aria-labelledby="pills-pc-tab"
@@ -133,7 +133,7 @@ const PcCommon = () => {
 							<AddPc />
 						</div>
 						<div
-							className="tab-pane fade"
+							className={`tab-pane fade disable ${current_sec == 2 ? 'show active' : ''}`}
 							id="pills-profile"
 							role="tabpanel"
 							aria-labelledby="pills-profile-tab"
@@ -141,7 +141,7 @@ const PcCommon = () => {
 							<PcOverview />
 						</div>
 						<div
-							className="tab-pane fade"
+							className={`tab-pane fade ${current_sec == 3 ? 'show active' : ''}`}
 							id="pills-age"
 							role="tabpanel"
 							aria-labelledby="pills-contact-tab"
@@ -149,7 +149,7 @@ const PcCommon = () => {
 							<AddAge />
 						</div>
 						<div
-							className="tab-pane fade"
+							className={`tab-pane fade ${current_sec == 4 ? 'show active' : ''}`}
 							id="pills-emp-type"
 							role="tabpanel"
 							aria-labelledby="pills-contact-tab"
@@ -157,7 +157,7 @@ const PcCommon = () => {
 							<EmployeeType />
 						</div>
 						<div
-							className="tab-pane fade"
+							className={`tab-pane fade ${current_sec == 5 ? 'show active' : ''}`}
 							id="pills-salary"
 							role="tabpanel"
 							aria-labelledby="pills-contact-tab"
