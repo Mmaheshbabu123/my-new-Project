@@ -1,137 +1,142 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 
 @font-face {
-  font-family: "Tahoma-Bold";
-  font-style: normal;
-  font-weight: 700;
-  src: url("fonts/Tahoma Bold.ttf") format("truetype");
+	font-family: "Tahoma-Bold";
+	font-style: normal;
+	font-weight: 700;
+	src: url("fonts/Tahoma Bold.ttf") format("truetype");
 }
 @font-face {
-  font-family: "Tahoma-Regular";
-  font-style: normal;
-  font-weight: 400;
-  src: url("fonts/Tahoma.ttf") format("truetype");
+	font-family: "Tahoma-Regular";
+	font-style: normal;
+	font-weight: 400;
+	src: url("fonts/Tahoma.ttf") format("truetype");
 }
 @font-face {
-  font-family: "Arial-NarrowBold";
-  font-style: normal;
-  font-weight: 700;
-  src: url("fonts/OpenSans-Bold.ttf") format("truetype");
+	font-family: "Arial-NarrowBold";
+	font-style: normal;
+	font-weight: 700;
+	src: url("fonts/OpenSans-Bold.ttf") format("truetype");
 }
 
 .screen a {
-  display: contents;
-  text-decoration: none;
+	display: contents;
+	text-decoration: none;
 }
 
 .container-center-horizontal {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  pointer-events: none;
-  width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	pointer-events: none;
+	width: 100%;
 }
 
 .container-center-horizontal > * {
-  flex-shrink: 0;
-  pointer-events: auto;
+	flex-shrink: 0;
+	pointer-events: auto;
 }
 
 .align-self-flex-end {
-  align-self: flex-end;
+	align-self: flex-end;
 }
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+		Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .react-tabs {
-  -webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .react-tabs__tab-list {
-  border-bottom: 1px solid #aaa;
-  margin: 0 0 10px;
-  padding: 0;
+	border-bottom: 1px solid #aaa;
+	margin: 0 0 10px;
+	padding: 0;
 }
 
 .react-tabs__tab {
-  display: inline-block;
-  border: 1px solid transparent;
-  border-bottom: none;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  padding: 6px 12px;
-  cursor: pointer;
+	display: inline-block;
+	border: 1px solid transparent;
+	border-bottom: none;
+	bottom: -1px;
+	position: relative;
+	list-style: none;
+	padding: 6px 12px;
+	cursor: pointer;
 }
 
 .react-tabs__tab--selected {
-  color: #fff;
-  background-color: #0d6efd;
-  /* background: #fff; */
-  border-color: #aaa;
-  /* color: black; */
-  border-radius: 5px 5px 0 0;
+	color: #fff;
+	background-color: #0d6efd;
+	/* background: #fff; */
+	border-color: #aaa;
+	/* color: black; */
+	border-radius: 5px 5px 0 0;
 }
 
 .react-tabs__tab--disabled {
-  color: GrayText;
-  cursor: default;
+	color: GrayText;
+	cursor: default;
 }
 
 .react-tabs__tab:focus {
-  outline: none;
+	outline: none;
 }
 
 .react-tabs__tab:focus:after {
-  content: '';
-  position: absolute;
-  height: 5px;
-  left: -4px;
-  right: -4px;
-  bottom: -5px;
-  background: #fff;
+	content: '';
+	position: absolute;
+	height: 5px;
+	left: -4px;
+	right: -4px;
+	bottom: -5px;
+	background: #fff;
 }
 
 .react-tabs__tab-panel {
-  display: none;
+	display: none;
 }
 
 .react-tabs__tab-panel--selected {
-  display: block;
+	display: block;
 }
 .error {
-  color:red;
+	color: red;
 }
 .nav-link {
-  color: black;
-  height: 100%;
-  border-radius: 10px;
+	color: black;
+	height: 100%;
+	border-radius: 10px;
 }
 .nav-pills .nav-link.active {
-  background-color: black;
+	background-color: black;
 }
 
 .nav-link:hover {
-  color:black;
-  font-weight: 500;
+	color: black;
+	font-weight: 500;
 }
 .nav-item {
-  border: 2px solid black;
-  border-radius: 10px;
-  margin: 0px 3px;
+	border: 2px solid black;
+	border-radius: 10px;
+	margin: 0px 3px;
+}
+.custom_astrick::after {
+	content: "*";
+	padding-left: 3px;
+	color: red;
 }
