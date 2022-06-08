@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import ValidationService from '../../Services/ValidationService';
-import { addPc,updatePc } from '../../Services/ApiEndPoints';
+import { addPc, updatePc } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
 import { useRouter } from 'next/router';
@@ -82,14 +82,7 @@ function AddPc(props) {
 					if (result.status === 200) {
 						setCurrent_sec(2);
 					} else if (result.status == 205) {
-						result.data.forEach(element => {
-							if(element.pc_name == data.pc_name){
-								setError_pc_name('Paritair comite name already exists.');
-							}
-							if(element.pc_number == data.pc_number){
-								setError_pc_number('Paritair comite number already exists.');
-							}
-						});
+						checkduplicates(result.data);
 					} else {
 						console.log(result);
 					}
@@ -98,7 +91,7 @@ function AddPc(props) {
 					console.error(error);
 				});
 		} else {
-			APICALL.service(updatePc+data.id, 'POST', data)
+			APICALL.service(updatePc + data.id, 'POST', data)
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
@@ -107,47 +100,60 @@ function AddPc(props) {
 						res1['pc'] = true;
 						setSec_completed(res1);
 					} else if (result.status == 205) {
-						result.data.forEach(element => {
-							if(element.pc_name == data.pc_name){
-								setError_pc_name('Paritair comite name already exists.');
-							}
-							if(element.pc_number == data.pc_number){
-								setError_pc_number('Paritair comite number already exists.');
-							}
-						});
+						checkduplicates(result.data);
 					} else {
 						console.log(result);
 					}
 				})
 				.catch((error) => {
 					console.error(error);
-				});			
+				});
 		}
+	};
+
+	let checkduplicates = (res) => {
+		res.forEach((element) => {
+			if (element.pc_number == data.pc_number) {
+				setError_pc_number('Paritair comite number already exists.');
+			}
+			if (element.pc_alias_name == data.pc_alias_name) {
+				setError_pc_alias_name('Paritair comite alias name already exists.');
+			} else if (element.pc_alias_name == data.pc_name) {
+				setError_pc_name('Paritair comite name already exists.');
+			}
+			if (element.pc_name == data.pc_alias_name) {
+				setError_pc_alias_name('Paritair comite alias name already exists.');
+			} else if (element.pc_name == data.pc_name) {
+				setError_pc_name('Paritair comite name already exists.');
+			}
+		});
 	};
 
 	let submit = async (event) => {
 		event.preventDefault();
 		var valid_res = validate(data);
-		if(valid_res){
+		if (valid_res) {
 			postdata();
 		}
 	};
 
 	let validate = (res) => {
 		var error1 = [];
+		//check if required fields are empty
 		error1['pc_name'] = ValidationService.emptyValidationMethod(res.pc_name);
 		error1['pc_number'] = ValidationService.emptyValidationMethod(res.pc_number);
-
+		//check if fields are valid
 		error1['pc_number'] =
 			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number) : error1['pc_number'];
 		error1['pc_name'] =
 			error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
 		error1['pc_alias_name'] =
 			error1['pc_alias_name'] == '' ? ValidationService.nameValidationMethod(res.pc_alias_name) : '';
+		//seterror messages
 		setError_pc_number(error1['pc_number']);
 		setError_pc_name(error1['pc_name']);
 		setError_pc_alias_name(error1['pc_alias_name']);
-		console.log(error1);
+		//return false if there is an error else return true
 		if (error1['pc_number'] == '' && error1['pc_name'] == '' && error1['pc_alias_name'] == '') {
 			return true;
 		} else {
@@ -198,8 +204,13 @@ function AddPc(props) {
 						</div>
 					</div>
 					<div className="col-md-6" />
-					<div className="text-end">
-						<button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
+					<div className="text-start col-md-6">
+						<button type="button" className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
+							Back
+						</button>
+					</div>
+					<div className="text-end col-md-6">
+						<button type="sumit" className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
 							Next
 						</button>
 					</div>

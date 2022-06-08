@@ -151,3 +151,6 @@ a {
 .custom-active {
 	color: #fff !important;
 }
+.disabled {
+	color:#999 !important;
+}
