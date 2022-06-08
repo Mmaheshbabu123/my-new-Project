@@ -23,7 +23,7 @@ const ManageType = (props) => {
       .then((response) => {
         setState({...state,
           rows: response.status === 200 ? response.data : [],
-          headers: ['name', 'actions'],
+          headers: [manageType === 'employee-types' ? 'Employee-types' : 'Coefficient types', 'Actions'],
           id: editId,
           manageType,
           edit,
