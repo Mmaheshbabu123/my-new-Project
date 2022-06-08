@@ -52,15 +52,11 @@ function Planning(props) {
 	return (
 		<div className="container calc-height ">
 			<form onSubmit={(e) => submit(e)}>
-				<div className="row justify-content-center align-items-center planning-container">
-					<h3 className="md-3 mt-3 font-weight-bold">Add Planning</h3>
+				<div className="row   planning-container">
+					<p className="md-3 mt-3 font-weight-bold h3">Add Planning</p>
 					<div>
-						<button
-							className="btn btn-secondary btn-lg btn-block  mt-5 md-5 add-proj-btn"
-							type="button"
-							value=""
-						>
-							+ Add project
+						<button type="button" className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2">
+							+Add project
 						</button>
 					</div>
 					<div className="form-group">
@@ -124,12 +120,12 @@ function Planning(props) {
 						/> */}
 					</div>
 
-					<div className="col-md-12 mt-4">
-						<button type="submit" className="btn  btn-lg btn-block float-right planning-next">
-							Next
-						</button>
-						<button type="button" className="btn  btn-lg btn-block planning-back">
+					<div className="col-md-12 mt-4 d-flex">
+						<button type="button" className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2">
 							Back
+						</button>
+						<button type="submit" className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2">
+							Next
 						</button>
 					</div>
 				</div>

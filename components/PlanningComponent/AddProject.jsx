@@ -1,34 +1,58 @@
 import React, { Component, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { addProject } from '../../Services/ApiEndPoints';
+import { APICALL } from '../../Services/ApiServices';
+
 // import './addproject.css';
 
 const Addproject = () => {
-	const [ project, setProject ] = useState();
-	const [ projectErr, setProjectErr ] = useState(false);
+	const [ data, setData ] = useState({
+		project_name: '',
+		project_location: '',
+		hno: '',
+		city: '',
+		extra: '',
+		comp_id: '',
+		street: '',
+		postal_code: '',
+		country: ''
+	});
+	let submit = async (event) => {
+		event.preventDefault();
+		console.log(data);
+		APICALL.service(addProject, 'POST', data).then((result) => {
+			console.log(result);
+			// if (result.status === 200) {
 
-	// const [ location, setLocation ] = useState();
-	// const [ locationErr, setLocationErr ] = useState(false);
-
-	// const [ houseNum, setHouseNum ] = useState();
-	// const [ houseNumErr, setHouseNumErr ] = useState();
-
-	const projectHandler = (e) => {
-		if (project.length == 0) {
-			setProjectErr(true);
-		} else if (location.length == 0) {
-			setLocationErr(true);
-		}
-		if (project) {
-			console.log(project);
-			console.log(location);
-		}
-		e.preventDefault();
+			// }
+			// else {
+			// 	console.log(result);
+			// }
+		});
 	};
+	const companyname = [
+		{
+			value: '10',
+			label: 'Infanion1'
+		},
+		{
+			value: '11',
+			label: 'Infanion2'
+		},
+		{
+			value: '12',
+			label: 'Infanion3'
+		},
+		{
+			value: '13',
+			label: 'Infanion4'
+		}
+	];
 	return (
 		<div className="container">
-			<form onSubmit={projectHandler}>
+			<form onSubmit={(e) => submit(e)}>
 				<div className="row">
-					<h4 className="mt-4 mb-2">Add project</h4>
+					<p className="mt-4 mb-2 h3">Add project</p>
 
 					<div className="col-sm-6  ">
 						{/* PROJECT NAME */}
@@ -36,63 +60,88 @@ const Addproject = () => {
 						<input
 							type="text"
 							className="form-control mt-2 mb-2 "
-							onChange={(e) => setProject(e.target.value)}
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, project_name: e.target.value }));
+							}}
 						/>
-						<div>
-							{projectErr && project.length <= 0 ? (
-								<label className="text-danger">This field is required</label>
-							) : (
-								' '
-							)}
-						</div>
+						<div />
 
 						{/* LOCATION */}
 						<label className="mt-2">Location</label>
 						<input
 							type="text"
 							className="form-control mt-2 mb-2"
-							// onChange={(e) => setLocation(e.target.value)}
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, project_location: e.target.value }));
+							}}
 						/>
-						<div>
-							{/* {locationErr && location.length <= 0 ? (
-								<label className="text-danger">This field is required</label>
-							) : (
-								' '
-							)} */}
-						</div>
+						<div />
 						{/* HOUSE NUMBER */}
 						<label>House number</label>
-						<input type="text" className="form-control mt-2 mb-2" />
+						<input
+							type="text"
+							className="form-control mt-2 mb-2"
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, hno: e.target.value }));
+							}}
+						/>
 
 						<label>City</label>
-						<input type="text" className="form-control mt-2 mb-2" />
+						<input
+							type="text"
+							className="form-control mt-2 mb-2"
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, city: e.target.value }));
+							}}
+						/>
 
 						<label>Extra</label>
-						<input type="text" className="form-control mt-2 mb-2" />
+						<input
+							type="text"
+							className="form-control mt-2 mb-2"
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, extra: e.target.value }));
+							}}
+						/>
 					</div>
 
 					<div className="col-sm-6">
 						<label>Company</label>
-						<select className="form-select mt-2 mb-2">
+						<select
+							className="form-select mt-2 mb-2"
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, comp_id: e.target.value }));
+							}}
+						>
 							<option value="1">Select company</option>
-							<option value="Infanion">Infanion</option>
-							<option value="Wipro">Wipro</option>
+							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
 						</select>
 						<label>Street</label>
-						<input type="text" className="form-control mt-2 mb-2" />
+						<input
+							type="text"
+							className="form-control mt-2 mb-2"
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, street: e.target.value }));
+							}}
+						/>
 
 						<label>Postalcode</label>
-						<input type="text" className="form-control mt-2 mb-2" />
+						<input
+							type="text"
+							className="form-control mt-2 mb-2"
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, postal_code: e.target.value }));
+							}}
+						/>
 
 						<label>Country</label>
 						<select className="form-select mt-2 mb-2 custom-select">
 							<option>Select country</option>
-							<option>Belgium</option>
-							<option value="Wipro">India</option>
+							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
 						</select>
 					</div>
 				</div>
-				<button className="btn btn-secondary btn-lg btn-block float-right" type="submit">
+				<button type="submit" className="btn btn-secondary btn-lg btn-block float-right">
 					Save
 				</button>
 			</form>
