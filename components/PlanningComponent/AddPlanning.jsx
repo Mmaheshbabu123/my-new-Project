@@ -2,107 +2,110 @@ import React, { Component, useState } from 'react';
 // import ReactDOM from 'react-dom';
 // import './planning.css';
 import Multiselect from 'multiselect-react-dropdown';
+import { addPlanning } from '../../Services/ApiEndPoints';
 
-const Planning = () => {
-	// const [ company, setCompany ] = useState('');
-	// const [ companyErr, setCompanyErr ] = useState(false);
+import { APICALL } from '../../Services/ApiServices';
 
-	// const [ location, setLocation ] = useState('');
-	// const [ locationErr, setLocationErr ] = useState(false);
+function Planning(props) {
+	const [ data, setData ] = useState({
+		comp_id: '',
+		location_id: '',
+		cost_center_id: ''
+	});
+	let submit = async (event) => {
+		event.preventDefault();
+		console.log(data);
+		APICALL.service(addPlanning, 'POST', data).then((result) => {
+			console.log(result);
+			// if (result.status === 200) {
 
-	// const [ employee, setEmployee ] = useState('');
-	// const [ employeeErr, setEmployeeErr ] = useState(false);
-
-	// // COMPANY VALIDATION //
-	// function companyHandler(e) {
-	// 	let item = e.target.value;
-	// 	if (company) {
-	// 		setCompanyErr(true);
-	// 	} else {
-	// 		setCompanyErr(false);
-	// 	}
-	// 	setCompany(item);
-	// }
-	// //LOCATION VALIDATION //
-	// function locationHandler(e) {
-	// 	let item = e.target.value;
-	// 	if (location) {
-	// 		setLocationErr(true);
-	// 	} else {
-	// 		setLocationErr(false);
-	// 	}
-	// 	setLocation(item);
-	// }
-	// //EMPLOYEE VALIDATION //
-	// function employeeHandler(e) {
-	// 	let item = e.target.value;
-	// 	if (!employee) {
-	// 		setEmployeeErr(true);
-	// 	} else {
-	// 		setEmployeeErr(false);
-	// 	}
-	// 	setEmployee(item);
-	// }
-	// function planningHandler(e) {
-	// 	if (company || location || employee) {
-	// 		alert('invalid');
-	// 	} else {
-	// 		alert('ok');
-	// 	}
-	// 	e.preventDefault();
-	// }
-
+			// }
+			// else {
+			// 	console.log(result);
+			// }
+		});
+	};
+	// var company_name = {
+	// 	12: 'infanion1',
+	// 	13: 'infanion2',
+	// 	14: 'infanion3',
+	// 	15: 'infanion4'
+	// };
+	const companyname = [
+		{
+			value: '10',
+			label: 'Infanion1'
+		},
+		{
+			value: '11',
+			label: 'Infanion2'
+		},
+		{
+			value: '12',
+			label: 'Infanion3'
+		},
+		{
+			value: '13',
+			label: 'Infanion4'
+		}
+	];
 	return (
 		<div className="container calc-height ">
-			<form
-			// onSubmit={planningHandler}
-			>
-				<div className="row justify-content-center align-items-center planning-container">
-					<h3 className="md-3 mt-3 font-weight-bold">Add Planning</h3>
+			<form onSubmit={(e) => submit(e)}>
+				<div className="row   planning-container">
+					<p className="md-3 mt-3 font-weight-bold h3">Add Planning</p>
 					<div>
-						<input
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-							type="button"
-							value="+ Add project"
-						/>
+						<button type="button" className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2">
+							+Add project
+						</button>
 					</div>
 					<div className="form-group">
-						<label className="form-label mb-2">Company</label>
+						<label className="form-label mb-2 custom_astrick">Company</label>
 						<select
 							className="form-select mb-2 mt-2"
 							placeholder="select company"
-							// onChange={companyHandler}
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, comp_id: e.target.value }));
+							}}
 						>
-							<option value="Infanion">Infanion</option>
-							<option value="Wipro">Wipro</option>
+							<option>Select</option>
+							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
 						</select>
-						{/* {companyErr ? <span>This field is required.</span> : null} */}
 					</div>
 
 					<div className="form-group">
-						<label className="form-label mb-2">Location</label>
+						<label className="form-label mb-2 custom_astrick">Location</label>
 						<select
 							className="form-select mb-2 mt-2"
 							defaultValue="Select Location"
-							// onChange={locationHandler}
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, location_id: e.target.value }));
+							}}
 						>
-							<option defaultValue>Select Location</option>
-							<option value="Bangalore">Bangalore</option>
-							<option value="Mysore">Mysore</option>
+							<option>Select</option>
+							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
 						</select>
-						{/* {locationErr ? <span>This field is required.</span> : null} */}
 					</div>
 
 					<div className="form-group ">
-						<label className="form-label mb-2  ">Employee</label>
-						<Multiselect
+						<label className="form-label mb-2">Cost center</label>
+						<select
+							className="form-select mb-2 mt-2"
+							defaultValue="Select cost center"
+							onChange={(e) => {
+								setData((prev) => ({ ...prev, cost_center_id: e.target.value }));
+							}}
+						>
+							<option>Select</option>
+							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
+						</select>
+						{/* <Multiselect
 							className="mb-2"
 							displayValue="key"
 							onKeyPressFn={function noRefCheck() {}}
 							onRemove={function noRefCheck() {}}
 							onSearch={function noRefCheck() {}}
 							onSelect={function noRefCheck() {}}
-							// onChange={employeeHandler}
 							options={[
 								{
 									planning: 'Group 1',
@@ -114,25 +117,20 @@ const Planning = () => {
 								}
 							]}
 							placeholder="Select Employee"
-						/>
-						{/* {employeeErr ? <span>This field is required.</span> : null} */}
+						/> */}
 					</div>
 
-					<div className="col-md-12 mt-4">
-						<a
-							href="#"
-							className="btn  btn-lg btn-block float-right planning-next"
-							// onClick={planningHandler}
-						>
-							Next
-						</a>
-						<a href="#" className="btn  btn-lg btn-block planning-back">
+					<div className="col-md-12 mt-4 d-flex">
+						<button type="button" className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2">
 							Back
-						</a>
+						</button>
+						<button type="submit" className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2">
+							Next
+						</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	);
-};
+}
 export default Planning;

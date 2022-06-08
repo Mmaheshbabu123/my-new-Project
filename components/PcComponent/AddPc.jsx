@@ -1,8 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ValidationService from '../../Services/ValidationService';
 import { addPc } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
+import { useRouter } from 'next/router';
+import { getPcByUniquekey } from '../../Services/ApiEndPoints';
 
 /**
  *
@@ -10,40 +12,85 @@ import { PcContext } from '../../Contexts/PcContext';
  * @returns the added category data to the common.js component.
  */
 function AddPc(props) {
-	const { pcid, setPcid, sec_cat_fun, setSec_cat_fun } = useContext(PcContext);
+	const router = useRouter();
+	const {setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
+	// const [ pc_unique_key, setPc_unique_key ] = useState();
 	const [ field, setfield ] = useState();
 	const [ field1, setfield1 ] = useState();
+	var unique_key = router.query.uid ? router.query.uid : '';
+	;
 	const [ data, setData ] = useState({
+		id: '',
+		pc_unique_key: router.query.uid,
 		pc_number: '',
-		pc_name: ''
-
+		pc_name: '',
+		pc_alias_name: ''
 	});
 
-	 /**
+	const [ error, setError ] = useState({
+		error_pc_number: '',
+		error_pc_name: '',
+		error_pc_alias_name: ''
+	});
+
+	useEffect(
+		() => {
+			if (!router.isReady) return;
+			if (router.query.uid) {
+				setPc_unique_key(router.query.uid);
+				APICALL.service(getPcByUniquekey + unique_key, 'GET')
+					.then((result) => {
+						console.log(result);
+						if (result.status === 200 && result.data.length > 0) {
+							var res1 = sec_completed;
+							res1['pc'] = true;
+							setSec_completed(res1);
+							var data1 = {};
+							data1['id'] = result.data[0].id;
+							data1['pc_unique_key'] = result.data[0].pc_unique_key;
+							data1['pc_number'] = result.data[0].pc_number;
+							data1['pc_name'] = result.data[0].pc_name;
+							data1['pc_alias_name'] = result.data[0].pc_alias_name;
+							setData(data1);
+							
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
+		},
+		[ router.isReady ]
+	);
+
+	/**
 	 * it will post the committee data to the backend by using api's
 	 * @param {*} e
 	 */
 
 	let postdata = async (e) => {
-		APICALL.service(addPc, 'POST', data)
-			.then((result) => {
-				console.log(result);
-				if (result.status === 200) {
-					var pid = result.pcid;
-					setPcid(pid);
-					setSec_cat_fun(!sec_cat_fun);
-					// navigate("/pc/"+pid);
-				} else if (result.status == 205) {
-					setfield1('Paritair comite number already exists.');
-				} else {
+		if (data.id == '') {
+			APICALL.service(addPc, 'POST', data)
+				.then((result) => {
 					console.log(result);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+					if (result.status === 200) {
+						setCurrent_sec(2);
+					} else if (result.status == 205) {
+						setfield1('Paritair comite number already exists.');
+					} else {
+						console.log(result);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		} else {
+			setCurrent_sec(2);
+			var res1 = sec_completed;
+			res1['pc'] = true;
+			setSec_completed(res1);
+		}
 	};
-
 
 	let submit = async (event) => {
 		event.preventDefault();
@@ -76,38 +123,45 @@ function AddPc(props) {
 				<div className="row pt-5">
 					<div className="col-md-6">
 						<div className="form-group mt-3 mb-4">
-							<label className="">Paritair comite number</label>
+							<label className="custom_astrick">Paritair comitte number</label>
 							<input
 								type="text"
 								value={data.pc_number}
 								className=" form-control mt-2"
 								onChange={(e) => {
-									setData({ pc_number: e.target.value, pc_name: data.pc_name });
+									setData((prev) => ({ ...prev, pc_number: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{field1}</p>
 						</div>
 						<div className="form-group mt-3 mb-4">
-							<label>Paritair comite 	</label>
+							<label className="custom_astrick">Paritair comitte name </label>
 							<input
 								type="text"
 								value={data.pc_name}
 								className="form-control mt-2"
 								onChange={(e) => {
-									setData({ pc_number: data.pc_number, pc_name: e.target.value });
+									setData((prev) => ({ ...prev, pc_name: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{field}</p>
 						</div>
+						<div className="form-group mt-3 mb-4">
+							<label>Paritair comitte alias name </label>
+							<input
+								type="text"
+								value={data.pc_alias_name}
+								className="form-control mt-2"
+								onChange={(e) => {
+									setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
+								}}
+							/>
+							<p className="error mt-2" />
+						</div>
 					</div>
 					<div className="col-md-6" />
 					<div>
-						<button
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-							onClick={() => {
-								setData({ pc_number: data.pc_number, pc_name: data.pc_name });
-							}}
-						>
+						<button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
 							Save
 						</button>
 					</div>
