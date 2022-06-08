@@ -148,3 +148,6 @@ a {
 .custom-active:hover {
 	color: #fff !important;
 }
+.custom-active {
+	color: #fff !important;
+}
