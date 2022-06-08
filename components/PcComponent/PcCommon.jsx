@@ -54,7 +54,7 @@ const PcCommon = (props) => {
 									setCurrent_sec(1);
 								}}
 							>
-								{sec_completed.pc ? (
+								{sec_completed.pc|| current_sec == 1 ? (
 									<FaRegCheckCircle className="d-inline mb-2" />
 								) : (
 									<BsCircle className="d-inline mb-2" />
@@ -64,7 +64,7 @@ const PcCommon = (props) => {
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 2 ? 'active' : ''}`}
+								className={`nav-link py-3 ${(current_sec != 2 && sec_completed.pc== false)? 'disabled' : ''} ${current_sec == 2 ? 'active' : ''}`}
 								id="pills-profile-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-profile"
@@ -76,8 +76,7 @@ const PcCommon = (props) => {
 									setCurrent_sec(2);
 								}}
 							>
-								{' '}
-								{sec_completed.cat ? (
+								{sec_completed.cat || current_sec == 2? (
 									<FaRegCheckCircle className="d-inline mb-2" />
 								) : (
 									<BsCircle className="d-inline mb-2" />
@@ -87,7 +86,7 @@ const PcCommon = (props) => {
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 3 ? 'active' : ''}`}
+								className={`nav-link py-3 ${(current_sec != 3 && sec_completed.cat== false)? 'disabled' : ''} ${current_sec == 3 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-age"
@@ -99,7 +98,7 @@ const PcCommon = (props) => {
 									setCurrent_sec(3);
 								}}
 							>
-								{sec_completed.age ? (
+								{sec_completed.age|| current_sec == 3 ? (
 									<FaRegCheckCircle className="d-inline mb-2" />
 								) : (
 									<BsCircle className="d-inline mb-2" />
@@ -109,7 +108,7 @@ const PcCommon = (props) => {
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 4 ? 'active' : ''}`}
+								className={`nav-link py-3 ${(current_sec != 4 && sec_completed.age == false)? 'disabled' : ''}${current_sec == 4 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-emp-type"
@@ -121,7 +120,7 @@ const PcCommon = (props) => {
 									setCurrent_sec(4);
 								}}
 							>
-								{sec_completed.emp_type ? (
+								{sec_completed.emp_type || current_sec == 4 ? (
 									<FaRegCheckCircle className="d-inline mb-2" />
 								) : (
 									<BsCircle className="d-inline mb-2" />
@@ -131,7 +130,7 @@ const PcCommon = (props) => {
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 5 ? 'active' : ''}`}
+								className={`nav-link py-3 ${(current_sec != 5 && sec_completed.emp_type == false)? 'disabled' : ''} ${current_sec == 5 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-contact"
@@ -143,7 +142,7 @@ const PcCommon = (props) => {
 									setCurrent_sec(5);
 								}}
 							>
-								{sec_completed.sal_benefit ? (
+								{sec_completed.sal_benefit || current_sec == 5? (
 									<FaRegCheckCircle className="d-inline mb-2" />
 								) : (
 									<BsCircle className="d-inline mb-2" />
@@ -167,7 +166,8 @@ const PcCommon = (props) => {
 							role="tabpanel"
 							aria-labelledby="pills-profile-tab"
 						>
-							<PcOverview />
+							{/* <PcOverview /> */}
+							{current_sec == 2 && <PcOverview />}
 						</div>
 						<div
 							className={`tab-pane fade ${current_sec == 3 ? 'show active' : ''}`}
@@ -175,7 +175,7 @@ const PcCommon = (props) => {
 							role="tabpanel"
 							aria-labelledby="pills-contact-tab"
 						>
-							<AddAge />
+							{current_sec == 3 && <AddAge />}
 						</div>
 						<div
 							className={`tab-pane fade ${current_sec == 4 ? 'show active' : ''}`}
@@ -183,7 +183,7 @@ const PcCommon = (props) => {
 							role="tabpanel"
 							aria-labelledby="pills-contact-tab"
 						>
-							<EmployeeType />
+							{current_sec == 4 && <EmployeeType />}
 						</div>
 						<div
 							className={`tab-pane fade ${current_sec == 5 ? 'show active' : ''}`}

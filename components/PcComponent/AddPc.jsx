@@ -160,7 +160,7 @@ function AddPc(props) {
 						</div>
 					</div>
 					<div className="col-md-6" />
-					<div>
+					<div className='text-end'>
 						<button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
 							Save
 						</button>
