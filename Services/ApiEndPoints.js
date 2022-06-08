@@ -6,6 +6,7 @@ export const BASE_URL = ENV_URL + REGEX_URL;
 // EXAMPLE : export const getUserDetails = BASE_URL + 'account/get-user-details';
 export const WithoutAppUrl = BASE_URL + "getParitairecommittes";
 export const getPcByPcnumber = BASE_URL + "getpc/"
+export const getPcByUniquekey = BASE_URL + "getpc-by-uniquekey/"
 export const storeCategoryDetails = BASE_URL + "addcategory";
 export const getCat = BASE_URL + "getcat/";
 export const catUpdate = BASE_URL + "categoryupdate"
@@ -31,3 +32,4 @@ export const createCofficientType = BASE_URL + "create-cofficent-types";
 
 //--------------PLANNING API ROUTES ----------------//
 export const addPlanning = BASE_URL + "addplanning";
+export const addProject = BASE_URL + "addproject";

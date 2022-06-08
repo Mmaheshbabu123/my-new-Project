@@ -7,13 +7,30 @@ import EmployeeType from './EmployeeType';
 
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
-const PcCommon = () => {
+const PcCommon = (props) => {
 	const [ pcid, setPcid ] = useState('');
 	const [ current_sec, setCurrent_sec ] = useState(1);
+	const [ sec_completed, setSec_completed ] = useState({
+		pc: false,
+		cat: false,
+		age: false,
+		emp_type: false,
+		sal_benefit: false
+	});
+	const [ pc_unique_key, setPc_unique_key ] = useState('');
 
 	return (
 		<div className="container mt-5">
-			<PcContext.Provider value={{ pcid, setPcid, current_sec, setCurrent_sec }}>
+			<PcContext.Provider
+				value={{
+					pc_unique_key,
+					setPc_unique_key,
+					current_sec,
+					setCurrent_sec,
+					sec_completed,
+					setSec_completed
+				}}
+			>
 				<p className="h5">
 					{current_sec == 1 ? (
 						'Add paritair comitte'
@@ -33,7 +50,7 @@ const PcCommon = () => {
 					<ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 1 ? 'active' : ''}`}
+								className={`nav-link py-3 ${current_sec == 1 ? 'active custom-active' : 'custom-inactive'}`}
 								id="pills-pc-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-pc"
@@ -45,13 +62,20 @@ const PcCommon = () => {
 									setCurrent_sec(1);
 								}}
 							>
-								<FaRegCheckCircle className="d-inline mb-2" />
-								<p className="mb-2">Step 1:</p> <p>Paritair comitte details</p>
+								{sec_completed.pc || current_sec == 1 ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
+								<p className="mb-2">Step 1:</p>{' '}
+								<p>Paritair comitte details{console.log(sec_completed.pc)}</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 2 ? 'active' : ''}`}
+								className={`nav-link py-3 ${sec_completed.pc == false
+									? 'disabled'
+									: ''} ${current_sec == 2 ? 'active custom-active' : 'custom-inactive'}`}
 								id="pills-profile-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-profile"
@@ -63,13 +87,21 @@ const PcCommon = () => {
 									setCurrent_sec(2);
 								}}
 							>
-								<BsCircle className="d-inline mb-2" />
+								{sec_completed.cat || current_sec == 2 ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
 								<p className="mb-2">Step 2:</p> <p>Category and Function</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 3 ? 'active' : ''}`}
+								className={`nav-link py-3 ${current_sec != 3 && sec_completed.cat == false
+									? 'disabled'
+									: ''} ${current_sec == 3
+									? 'active custom-active'
+									: 'custom-inactive'}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-age"
@@ -81,14 +113,19 @@ const PcCommon = () => {
 									setCurrent_sec(3);
 								}}
 							>
-								{' '}
-								<FaRegCheckCircle className="d-inline mb-2" />
+								{sec_completed.age || current_sec == 3 ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
 								<p className="mb-2">Step 3:</p> <p>Age</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 4 ? 'active' : ''}`}
+								className={`nav-link py-3 ${current_sec != 4 && sec_completed.age == false
+									? 'disabled'
+									: ''}${current_sec == 4 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-emp-type"
@@ -100,13 +137,19 @@ const PcCommon = () => {
 									setCurrent_sec(4);
 								}}
 							>
-								<BsCircle className="d-inline mb-2" />
+								{sec_completed.emp_type || current_sec == 4 ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
 								<p className="mb-2">Step 4:</p> <p>Employee type</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 5 ? 'active' : ''}`}
+								className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
+									? 'disabled'
+									: ''} ${current_sec == 5 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-contact"
@@ -118,7 +161,11 @@ const PcCommon = () => {
 									setCurrent_sec(5);
 								}}
 							>
-								<FaRegCheckCircle className="d-inline mb-2" />
+								{sec_completed.sal_benefit || current_sec == 5 ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
 								<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
 							</button>
 						</li>
@@ -138,7 +185,8 @@ const PcCommon = () => {
 							role="tabpanel"
 							aria-labelledby="pills-profile-tab"
 						>
-							<PcOverview />
+							{/* <PcOverview /> */}
+							{current_sec == 2 && <PcOverview />}
 						</div>
 						<div
 							className={`tab-pane fade ${current_sec == 3 ? 'show active' : ''}`}
@@ -146,7 +194,7 @@ const PcCommon = () => {
 							role="tabpanel"
 							aria-labelledby="pills-contact-tab"
 						>
-							<AddAge />
+							{current_sec == 3 && <AddAge />}
 						</div>
 						<div
 							className={`tab-pane fade ${current_sec == 4 ? 'show active' : ''}`}
@@ -154,7 +202,7 @@ const PcCommon = () => {
 							role="tabpanel"
 							aria-labelledby="pills-contact-tab"
 						>
-							<EmployeeType />
+							{current_sec == 4 && <EmployeeType />}
 						</div>
 						<div
 							className={`tab-pane fade ${current_sec == 5 ? 'show active' : ''}`}
