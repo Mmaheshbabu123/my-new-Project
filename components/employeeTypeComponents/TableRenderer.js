@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { confirmAlert } from 'react-confirm-alert';
 import { deleteEmployeeType ,deleteCoefficientType} from '../../Services/ApiEndPoints'
@@ -6,8 +6,16 @@ import { APICALL } from '../../Services/ApiServices';
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
-console.log(manageType)
-  const [state, setState] = useState({ searchTerm: '', deleteUrl : (manageType == 'employee_types') ? deleteEmployeeType :deleteCoefficientType, filterRows: rows, searchKey: 'name' })
+  const [state, setState] = useState({
+    searchTerm: '',
+    deleteUrl : (manageType == 'employee-types') ? deleteEmployeeType :deleteCoefficientType,
+    filterRows: rows,
+    searchKey: 'name'
+  })
+  useEffect(() => {
+    setState({...state, filterRows: rows, deleteUrl: (manageType == 'employee-types') ? deleteEmployeeType :deleteCoefficientType})
+  }, [rows.length])
+
   const getNeededActions = (eachRow) => {
     return (
       <>
@@ -45,7 +53,8 @@ console.log(manageType)
     })
     setState({ ...state, searchTerm: e.target.value, filterRows: filterRows });
   }
-const button_title = manageType == 'employee_types'? `Add employee type`:`Add coefficient type`;
+
+const button_title = manageType == 'employee-types'? `Add employee type`:`Add coefficient type`;
   return (
     <>
       <div className='row' style={{ margin: '10px 0' }}>

@@ -8,12 +8,11 @@ import { APICALL } from '../../Services/ApiServices';
 const AddEmployeeType = (props) => {
   const router = useRouter();
   const inputRef = useRef(null);
-  console.log(props)
   const [state, setState] = useState({
       name: props.id ? props.rows[0]['name'] : ''
-    , editFlow: props.id,
-     editUrl:props.manageType == 'employee_types' ? editEmployeeType : editCofficientType,
-     createUrl:props.manageType == 'employee_types' ? createEmployeeTypes:createCofficientType
+    , editFlow: props.id
+    , editUrl:props.manageType == 'employee-types' ? editEmployeeType : editCofficientType
+    , createUrl:props.manageType == 'employee-types' ? createEmployeeTypes:createCofficientType
     , newItems: []
     , nameWarning: false
     , editIndex: 0
