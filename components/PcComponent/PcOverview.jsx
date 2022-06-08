@@ -35,7 +35,7 @@ const PcOverview = (params) => {
 	const [ data, setData ] = useState('');
 	const [ pclistUpdated, setPclistUpdated ] = useState(false);
 	const [ category, setCategory ] = useState(false);
-	const [ addfunction, setAddfunction ] = useState(false);
+	// const [ addfunction, setAddfunction ] = useState(false);
 	const [ editpc, setEditpc ] = useState(false);
 
 	const [ secid, setSecid ] = useState('');
@@ -51,15 +51,10 @@ const PcOverview = (params) => {
    */
 	useEffect(
 		() => {
+			console.log("test");
 			if (current_sec == 2) {
-				console.log('test');
-				console.log(router.query);
 				if (pc_unique_key) {
-					var unique_key = router.query.uid ? router.query.uid : '';
-					// var pc_number = params.pc_number != undefined ? params.pc_number : '';
-					// var type = params.page_type ? params.page_type : 'add';
-					// setPage_type(type);
-					APICALL.service(getPcByPcnumber + unique_key, 'GET')
+					APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
 						.then((result) => {
 							console.log(result);
 							setPc(result.data);
@@ -71,7 +66,7 @@ const PcOverview = (params) => {
 				}
 			}
 		},
-		[ current_sec ]
+		[current_sec]
 	);
 
 	const childToParent = (childdata) => {
@@ -79,44 +74,10 @@ const PcOverview = (params) => {
 
 		setPclistUpdated(true);
 		setLeftSec('col-md-12');
-		setAddfunction(false);
+		// setAddfunction(false);
 		setCategory(false);
 
 		setEnableEdit(false);
-	};
-
-	useEffect(
-		() => {
-			if (category == true && enableEdit == true) {
-				setAddfunction(false);
-				setLeftSec('col-md-9');
-			}
-		},
-		[ category, enableEdit ]
-	);
-
-	useEffect(
-		() => {
-			if (addfunction == true && enableEdit == true) {
-				setCategory(false);
-				setLeftSec('col-md-9');
-			}
-		},
-		[ addfunction, enableEdit ]
-	);
-	const SecInfo = (sectype, secid) => {
-		setSecid(secid);
-		switch (sectype) {
-			case 'pc':
-				break;
-			case 'cat':
-				setCategory(true);
-				break;
-			case 'funct':
-				setAddfunction(true);
-				break;
-		}
-		setEnableEdit(true);
 	};
 
 	return (
@@ -126,8 +87,6 @@ const PcOverview = (params) => {
 					{pc && (
 						<div>
 							{pc_unique_key}
-							{!enableEdit &&
-							page_type == 'add' && (
 								<div className="text-end me-4">
 									<button
 										type="button"
@@ -147,14 +106,13 @@ const PcOverview = (params) => {
 										pcid={pc_unique_key}
 										className={'btn me-2' + styles.btncolor}
 										onClick={() => {
-											setAddfunction(true);
+											// setAddfunction(true);
 											setEnableEdit(true);
 										}}
 									>
 										Add function
 									</button>
 								</div>
-							)}
 							<ul className={`list-inline list-unstyled ${styles.tree}`}>
 								<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
 									<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
@@ -178,7 +136,6 @@ const PcOverview = (params) => {
 										actiontype={[ 'edit' ]}
 										sectype="pc"
 										secId={pc['id']}
-										secInfoFromLst={SecInfo}
 									/>
 								</ul>
 								{pc['childObj'] &&
@@ -205,7 +162,6 @@ const PcOverview = (params) => {
 													className="ms-2"
 													sectype="cat"
 													secId={pc['childObj'][val]['id']}
-													secInfoFromLst={SecInfo}
 												/>
 											) : (
 												<ListView
@@ -220,7 +176,6 @@ const PcOverview = (params) => {
 													]}
 													secId={pc['childObj'][val]['id']}
 													sectype="funct"
-													secInfoFromLst={SecInfo}
 												/>
 											)}
 											{/*{pc['childObj'][val]['type'] === 3 &&
@@ -257,7 +212,6 @@ const PcOverview = (params) => {
 						</div>
 					)}
 				</div>
-				{enableEdit && (
 					<div className="col-md-3 px-4 pt-5 border-start border-2">
 						<div className="text-center">
 							<button
@@ -265,10 +219,6 @@ const PcOverview = (params) => {
 								to="category"
 								pcid={pc_unique_key}
 								className={'btn me-3' + styles.btncolor}
-								onClick={() => {
-									setCategory(true);
-									setSecid('');
-								}}
 							>
 								Add category
 							</button>
@@ -277,16 +227,14 @@ const PcOverview = (params) => {
 								to="function"
 								pcid={pc_unique_key}
 								className={'btn me-2' + styles.btncolor}
-								onClick={() => setAddfunction(true)}
 							>
 								Add function
 							</button>
 						</div>
-						{category && <AddCategory childToParent={childToParent} id={secid} />}
-						{addfunction && <AddFunction childToParent={childToParent} id={secid} />}
-						{/* {editpc && <EditPc childToParent={childToParent} id={secid} />} */}
+						<AddCategory id={secid} />
+						<AddFunction id={secid} />
 					</div>
-				)}
+
 			</div>
 		</div>
 	);
