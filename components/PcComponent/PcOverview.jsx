@@ -50,13 +50,13 @@ const PcOverview = (params) => {
 	useEffect(
 		() => {
 			console.log("test")
-			console.log(pcid);
+			console.log(router.query);
 			if (pcid) {
-				var id = pcid ? pcid : '';
+				var unique_key = router.query.uid ? router.query.uid : '';
 				// var pc_number = params.pc_number != undefined ? params.pc_number : '';
 				// var type = params.page_type ? params.page_type : 'add';
 				// setPage_type(type);
-				APICALL.service(getPcByPcnumber + id, 'GET')
+				APICALL.service(getPcByPcnumber + unique_key, 'GET')
 					.then((result) => {
 						console.log(result);
 						setPc(result.data);
@@ -67,7 +67,7 @@ const PcOverview = (params) => {
 					});
 			}
 		},
-		[sec_cat_fun, pcid]
+		[sec_cat_fun]
 	);
 
 	const childToParent = (childdata) => {

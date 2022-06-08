@@ -1,4 +1,7 @@
 import PcCommon from "../../components/PcComponent/PcCommon";
+import { useRouter } from 'next/router';
+
+
 
 /**
  * 
@@ -6,10 +9,12 @@ import PcCommon from "../../components/PcComponent/PcCommon";
  * @returns the added category data to the common.js component.
  */
 const Addpc = () => {
+	const router = useRouter();
+
 	
 	return (
 		<>
-		<PcCommon/>
+		<PcCommon unique_id={router.query.uid}/>
 		</>
 	);
 };

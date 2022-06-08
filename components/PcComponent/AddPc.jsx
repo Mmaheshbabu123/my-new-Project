@@ -4,7 +4,7 @@ import { addPc } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
 import { useRouter } from 'next/router';
-
+import { getPcByUniquekey } from '../../Services/ApiEndPoints';
 
 /**
  *
@@ -13,16 +13,19 @@ import { useRouter } from 'next/router';
  */
 function AddPc(props) {
 	const router = useRouter();
-	const { pcid, setPcid,setCurrent_sec } = useContext(PcContext);
+	const { pcid, setPcid, setCurrent_sec, setSec_completed, sec_completed } = useContext(PcContext);
+	// const [ pc_unique_key, setPc_unique_key ] = useState();
 	const [ field, setfield ] = useState();
 	const [ field1, setfield1 ] = useState();
-	var unique_key = router.query.uid? router.query.uid:'';
+	var unique_key = router.query.uid ? router.query.uid : '';
 	const [ data, setData ] = useState({
+		id: '',
 		pc_unique_key: router.query.uid,
 		pc_number: '',
 		pc_name: '',
 		pc_alias_name: ''
 	});
+
 	const [ error, setError ] = useState({
 		error_pc_number: '',
 		error_pc_name: '',
@@ -31,8 +34,32 @@ function AddPc(props) {
 
 	useEffect(
 		() => {
-
-		},[]);
+			if (!router.isReady) return;
+			if (router.query.uid) {
+				APICALL.service(getPcByUniquekey + unique_key, 'GET')
+					.then((result) => {
+						console.log(result);
+						if (result.status === 200 && result.data.length > 0) {
+							var res1 = sec_completed;
+							res1['pc'] = true;
+							setSec_completed(res1);
+							var data1 = {};
+							data1['id'] = result.data[0].id;
+							data1['pc_unique_key'] = result.data[0].pc_unique_key;
+							data1['pc_number'] = result.data[0].pc_number;
+							data1['pc_name'] = result.data[0].pc_name;
+							data1['pc_alias_name'] = result.data[0].pc_alias_name;
+							setData(data1);
+							
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
+		},
+		[ router.isReady ]
+	);
 
 	/**
 	 * it will post the committee data to the backend by using api's
@@ -40,20 +67,27 @@ function AddPc(props) {
 	 */
 
 	let postdata = async (e) => {
-		APICALL.service(addPc, 'POST', data)
-			.then((result) => {
-				console.log(result);
-				if (result.status === 200) {
-					setCurrent_sec(2)
-				} else if (result.status == 205) {
-					setfield1('Paritair comite number already exists.');
-				} else {
+		if (data.id == '') {
+			APICALL.service(addPc, 'POST', data)
+				.then((result) => {
 					console.log(result);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+					if (result.status === 200) {
+						setCurrent_sec(2);
+					} else if (result.status == 205) {
+						setfield1('Paritair comite number already exists.');
+					} else {
+						console.log(result);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		} else {
+			setCurrent_sec(2);
+			var res1 = sec_completed;
+			res1['pc'] = true;
+			setSec_completed(res1);
+		}
 	};
 
 	let submit = async (event) => {
@@ -83,7 +117,6 @@ function AddPc(props) {
 
 	return (
 		<div className="container">
-			{pcid}
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row pt-5">
 					<div className="col-md-6">

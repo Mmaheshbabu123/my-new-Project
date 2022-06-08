@@ -7,13 +7,21 @@ import EmployeeType from './EmployeeType';
 
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
-const PcCommon = () => {
+const PcCommon = (props) => {
+	console.log(props.unique_key)
 	const [ pcid, setPcid ] = useState('');
 	const [ current_sec, setCurrent_sec ] = useState(1);
+	const [ sec_completed, setSec_completed ] = useState({
+		pc: false,
+		cat: false,
+		age: false,
+		emp_type: false,
+		sal_benefit: false
+	});
 
 	return (
 		<div className="container mt-5">
-			<PcContext.Provider value={{ pcid, setPcid, current_sec, setCurrent_sec }}>
+			<PcContext.Provider value={{ pcid, setPcid, current_sec, setCurrent_sec, sec_completed, setSec_completed }}>
 				<p className="h5">
 					{current_sec == 1 ? (
 						'Add paritair comitte'
@@ -45,7 +53,11 @@ const PcCommon = () => {
 									setCurrent_sec(1);
 								}}
 							>
-								<FaRegCheckCircle className="d-inline mb-2" />
+								{sec_completed.pc ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
 								<p className="mb-2">Step 1:</p> <p>Paritair comitte details</p>
 							</button>
 						</li>
@@ -63,7 +75,12 @@ const PcCommon = () => {
 									setCurrent_sec(2);
 								}}
 							>
-								<BsCircle className="d-inline mb-2" />
+								{' '}
+								{sec_completed.cat ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
 								<p className="mb-2">Step 2:</p> <p>Category and Function</p>
 							</button>
 						</li>
@@ -81,8 +98,11 @@ const PcCommon = () => {
 									setCurrent_sec(3);
 								}}
 							>
-								{' '}
-								<FaRegCheckCircle className="d-inline mb-2" />
+								{sec_completed.age ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
 								<p className="mb-2">Step 3:</p> <p>Age</p>
 							</button>
 						</li>
@@ -100,7 +120,11 @@ const PcCommon = () => {
 									setCurrent_sec(4);
 								}}
 							>
-								<BsCircle className="d-inline mb-2" />
+								{sec_completed.emp_type ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
 								<p className="mb-2">Step 4:</p> <p>Employee type</p>
 							</button>
 						</li>
@@ -118,7 +142,11 @@ const PcCommon = () => {
 									setCurrent_sec(5);
 								}}
 							>
-								<FaRegCheckCircle className="d-inline mb-2" />
+								{sec_completed.sal_benefit ? (
+									<FaRegCheckCircle className="d-inline mb-2" />
+								) : (
+									<BsCircle className="d-inline mb-2" />
+								)}
 								<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
 							</button>
 						</li>
