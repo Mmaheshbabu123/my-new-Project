@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ValidationService from './../../Services/ValidationService';
 // import { useParams, useNavigate } from "react-router-dom";
 import { APICALL } from '../../Services/ApiServices';
 import { storeCategoryDetails, getCat, catUpdate } from '../../Services/ApiEndPoints';
 import styles from '../../styles/Pc.module.css';
+import { PcContext } from '../../Contexts/PcContext';
 
-function AddCategory({ childToParent, id }) {
+
+function AddCategory(props) {
 	// const [id, setId] = useState(props.secid);
 	// const urlParam = useParams();
 	// const navigate = useNavigate();
@@ -13,15 +15,18 @@ function AddCategory({ childToParent, id }) {
 	const [ data, setData ] = useState({
 		id: '',
 		category_name: '',
-		min_salary: ''
+		min_salary: '',
+		pc_unique_key: ''
 	});
 	// const [ salary, setsalary ] = useState('');
 	// const [ name, setfrnch ] = useState('');
 	// const [ field, setfield ] = useState();
 	const [ field1, setfield1 ] = useState();
+	const {setCurrent_sec, setSec_completed, sec_completed,pc_unique_key, setPc_unique_key } = useContext(PcContext);
+
 
 	let postdata = async (e) => {
-		// if (id == '') {
+		if (data.id == '') {
 		APICALL.service(storeCategoryDetails, 'POST', data)
 			.then((result) => {
 				console.log(result);
@@ -33,7 +38,7 @@ function AddCategory({ childToParent, id }) {
 			.catch((error) => {
 				console.error(error);
 			});
-		// } else {
+		} else {
 		// 	console.log('test');
 		// 	APICALL.service(catUpdate, 'POST', data)
 		// 		.then((result) => {
@@ -46,7 +51,7 @@ function AddCategory({ childToParent, id }) {
 		// 		.catch((error) => {
 		// 			console.error(error);
 		// 		});
-		// }
+		}
 	};
 	/**
    * 
@@ -55,23 +60,23 @@ function AddCategory({ childToParent, id }) {
 
 	useEffect(
 		() => {
-			// console.log(getCat);
-			// if (id != '') {
-			// 	APICALL.service(getCat + id, 'GET')
-			// 		.then((result) => {
-			// 			// setsalary()
-			// 			// console.log(result.data);
-			// 			// if (result.data.length > 0) {
-			// 			// 	setsalary(result.data[0]['min_salary']);
-			// 			// 	setfrnch(result.data[0]['category_name']);
-			// 			// }
-			// 		})
-			// 		.catch((error) => {
-			// 			console.error(error);
-			// 		});
-			// }
+			console.log(getCat);
+			if (data.id != '') {
+				APICALL.service(getCat + id, 'GET')
+					.then((result) => {
+						// setsalary()
+						// console.log(result.data);
+						// if (result.data.length > 0) {
+						// 	setsalary(result.data[0]['min_salary']);
+						// 	setfrnch(result.data[0]['category_name']);
+						// }
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
 		},
-		[ id ]
+		[ data.id ]
 	);
 	/**
    * 
@@ -107,7 +112,7 @@ function AddCategory({ childToParent, id }) {
 	return (
 		<div className="mt-4">
 			<form onSubmit={submit}>
-				{id != '' ? <h4>Edit category</h4> : <h4>Add category</h4>}
+				{data.id != '' ? <h4>Edit category</h4> : <h4>Add category</h4>}
 				<label className="mt-3 mb-2 custom_astrick">Category name </label>
 				<div className="form-group">
 					<input
@@ -139,7 +144,9 @@ function AddCategory({ childToParent, id }) {
 				</div>
 
 				<div>
-					<button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
+					<button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn" onClick={()=>{
+						setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
+					}}>
 						Save
 					</button>
 				</div>

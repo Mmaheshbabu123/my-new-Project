@@ -17,10 +17,12 @@ const PcCommon = (props) => {
 		emp_type: false,
 		sal_benefit: false
 	});
+		const [pc_unique_key, setPc_unique_key] = useState('');
+
 
 	return (
 		<div className="container mt-5">
-			<PcContext.Provider value={{ pcid, setPcid, current_sec, setCurrent_sec, sec_completed, setSec_completed }}>
+			<PcContext.Provider value={{ pc_unique_key, setPc_unique_key, current_sec, setCurrent_sec, sec_completed, setSec_completed }}>
 				<p className="h5">
 					{current_sec == 1 ? (
 						'Add paritair comitte'

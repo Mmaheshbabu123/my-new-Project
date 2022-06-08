@@ -13,11 +13,12 @@ import { getPcByUniquekey } from '../../Services/ApiEndPoints';
  */
 function AddPc(props) {
 	const router = useRouter();
-	const { pcid, setPcid, setCurrent_sec, setSec_completed, sec_completed } = useContext(PcContext);
+	const {setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
 	// const [ pc_unique_key, setPc_unique_key ] = useState();
 	const [ field, setfield ] = useState();
 	const [ field1, setfield1 ] = useState();
 	var unique_key = router.query.uid ? router.query.uid : '';
+	;
 	const [ data, setData ] = useState({
 		id: '',
 		pc_unique_key: router.query.uid,
@@ -36,6 +37,7 @@ function AddPc(props) {
 		() => {
 			if (!router.isReady) return;
 			if (router.query.uid) {
+				setPc_unique_key(router.query.uid);
 				APICALL.service(getPcByUniquekey + unique_key, 'GET')
 					.then((result) => {
 						console.log(result);
