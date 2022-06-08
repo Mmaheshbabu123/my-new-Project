@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import ValidationService from '../../Services/ValidationService';
-import { addPc } from '../../Services/ApiEndPoints';
+import { addPc,updatePc } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
 import { useRouter } from 'next/router';
@@ -15,7 +15,10 @@ function AddPc(props) {
 	const router = useRouter();
 	const { setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
 	// const [ pc_unique_key, setPc_unique_key ] = useState();
-	const [ field, setfield ] = useState();
+	const [ error_pc_number, setError_pc_number ] = useState('');
+	const [ error_pc_name, setError_pc_name ] = useState('');
+	const [ error_pc_alias_name, setError_pc_alias_name ] = useState('');
+
 	const [ field1, setfield1 ] = useState();
 	var unique_key = router.query.uid ? router.query.uid : '';
 	const [ data, setData ] = useState({
@@ -27,9 +30,9 @@ function AddPc(props) {
 	});
 
 	const [ error, setError ] = useState({
-		error_pc_number: '',
-		error_pc_name: '',
-		error_pc_alias_name: ''
+		pc_number: '',
+		pc_name: '',
+		pc_alias_name: ''
 	});
 
 	useEffect(
@@ -79,7 +82,14 @@ function AddPc(props) {
 					if (result.status === 200) {
 						setCurrent_sec(2);
 					} else if (result.status == 205) {
-						setfield1('Paritair comite number already exists.');
+						result.data.forEach(element => {
+							if(element.pc_name == data.pc_name){
+								setError_pc_name('Paritair comite name already exists.');
+							}
+							if(element.pc_number == data.pc_number){
+								setError_pc_number('Paritair comite number already exists.');
+							}
+						});
 					} else {
 						console.log(result);
 					}
@@ -88,35 +98,60 @@ function AddPc(props) {
 					console.error(error);
 				});
 		} else {
-			setCurrent_sec(2);
-			var res1 = sec_completed;
-			res1['pc'] = true;
-			setSec_completed(res1);
+			APICALL.service(updatePc+data.id, 'POST', data)
+				.then((result) => {
+					console.log(result);
+					if (result.status === 200) {
+						setCurrent_sec(2);
+						var res1 = sec_completed;
+						res1['pc'] = true;
+						setSec_completed(res1);
+					} else if (result.status == 205) {
+						result.data.forEach(element => {
+							if(element.pc_name == data.pc_name){
+								setError_pc_name('Paritair comite name already exists.');
+							}
+							if(element.pc_number == data.pc_number){
+								setError_pc_number('Paritair comite number already exists.');
+							}
+						});
+					} else {
+						console.log(result);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});			
 		}
 	};
 
 	let submit = async (event) => {
 		event.preventDefault();
-
-		var emptyValue = await ValidationService.emptyValidationMethod(data.pc_name);
-		var emptyValue1 = await ValidationService.emptyValidationMethod(data.pc_number);
-		var validName = await ValidationService.nameValidationMethod(data.pc_name);
-		var validSalary = await ValidationService.pcnumberValidationMethod(data.pc_number);
-
-		if (emptyValue != '0') {
-			setfield(emptyValue);
-		} else {
-			await setfield(validName);
-		}
-
-		if (emptyValue1 != '0') {
-			setfield1(emptyValue1);
-		} else {
-			await setfield1(validSalary);
-		}
-
-		if (validSalary == true && validName == true) {
+		var valid_res = validate(data);
+		if(valid_res){
 			postdata();
+		}
+	};
+
+	let validate = (res) => {
+		var error1 = [];
+		error1['pc_name'] = ValidationService.emptyValidationMethod(res.pc_name);
+		error1['pc_number'] = ValidationService.emptyValidationMethod(res.pc_number);
+
+		error1['pc_number'] =
+			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number) : error1['pc_number'];
+		error1['pc_name'] =
+			error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
+		error1['pc_alias_name'] =
+			error1['pc_alias_name'] == '' ? ValidationService.nameValidationMethod(res.pc_alias_name) : '';
+		setError_pc_number(error1['pc_number']);
+		setError_pc_name(error1['pc_name']);
+		setError_pc_alias_name(error1['pc_alias_name']);
+		console.log(error1);
+		if (error1['pc_number'] == '' && error1['pc_name'] == '' && error1['pc_alias_name'] == '') {
+			return true;
+		} else {
+			return false;
 		}
 	};
 
@@ -135,7 +170,7 @@ function AddPc(props) {
 									setData((prev) => ({ ...prev, pc_number: e.target.value }));
 								}}
 							/>
-							<p className="error mt-2">{field1}</p>
+							<p className="error mt-2">{error_pc_number}</p>
 						</div>
 						<div className="form-group mt-3 mb-4">
 							<label className="custom_astrick">Paritair comitte name </label>
@@ -147,7 +182,7 @@ function AddPc(props) {
 									setData((prev) => ({ ...prev, pc_name: e.target.value }));
 								}}
 							/>
-							<p className="error mt-2">{field}</p>
+							<p className="error mt-2">{error_pc_name}</p>
 						</div>
 						<div className="form-group mt-3 mb-4">
 							<label>Paritair comitte alias name </label>
@@ -159,7 +194,7 @@ function AddPc(props) {
 									setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
 								}}
 							/>
-							<p className="error mt-2" />
+							<p className="error mt-2">{error_pc_alias_name}</p>
 						</div>
 					</div>
 					<div className="col-md-6" />

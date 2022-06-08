@@ -16,6 +16,9 @@ export const updateFunction = BASE_URL + "updateFunction";
 export const updateCategory = BASE_URL + "updateCategory";
 export const getPc = BASE_URL + "getParitaireCommitteFunctionCategory";
 export const addPc = BASE_URL + "addpc"
+export const updatePc = BASE_URL + "pc-update/"
+
+
 
 //----- EMPLOYEE TYPE and COEFFICIENT API ROUTES -----//
 export const fetchEmployeeTypes = BASE_URL + "get-employee-types";

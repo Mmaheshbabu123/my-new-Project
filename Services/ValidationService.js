@@ -14,7 +14,7 @@ const ValidationService = {
       if(value.length==0){
         return 'This field is required.';
       }
-      return '0';
+      return '';
   },
   /**
    * validating a number field.
@@ -36,7 +36,7 @@ const ValidationService = {
     if(!value.match(/^[a-zA-Z\u0080-\uFFFF0-9 ]+$/)){
      return 'This field is invalid.';
     }
-    return true;
+    return '';
   },
   /**
    * validating a salry field.
@@ -55,10 +55,10 @@ const ValidationService = {
    * @returns 
    */
   pcnumberValidationMethod: function(value) {
-    if(!value.match(/^[a-zA-Z\u0080-\uFFFF0-9-\., ]+$/)){
+    if(!value.match(/^([0-9]{3})+$/) && !value.match(/^([0-9]{3}[.][0-9]{2})+$/)){
      return 'This field is invalid.';
     }
-    return true;
+    return '';
   },
 
 };
