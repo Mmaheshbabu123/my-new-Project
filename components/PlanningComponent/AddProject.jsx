@@ -114,7 +114,7 @@ const Addproject = () => {
 							}}
 						>
 							<option value="1">Select company</option>
-							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
+							{companyname.map((options) => <option key={options.value} value={options.value}>{options.label}</option>)}
 						</select>
 						<label>Street</label>
 						<input
@@ -137,7 +137,7 @@ const Addproject = () => {
 						<label>Country</label>
 						<select className="form-select mt-2 mb-2 custom-select">
 							<option>Select country</option>
-							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
+							{companyname.map((options) => <option key={options.value} value={options.value}>{options.label}</option>)}
 						</select>
 					</div>
 				</div>
