@@ -120,13 +120,17 @@ function Planning(props) {
 						/> */}
 					</div>
 
-					<div className="col-md-12 mt-4 d-flex">
-						<button type="button" className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2">
-							Back
-						</button>
-						<button type="submit" className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2">
-							Next
-						</button>
+					<div className="col-md-12 mt-4 ">
+						<div className="d-inline">
+							<button type="button" className="btn btn-secondary   btn-block ">
+								Back
+							</button>
+						</div>
+						<div className="float-right ">
+							<button type="submit" className="btn btn-secondary   btn-block ">
+								Next
+							</button>
+						</div>
 					</div>
 				</div>
 			</form>
