@@ -17,7 +17,7 @@ const Addage = () => {
 						<h4 className="mt-4 mb-2">Edit age</h4>
 
 						<div className="form-group">
-							<label>Project name</label>
+							<label className="custom_astrick">Project name</label>
 							<select type="text" className="form-select mt-2 mb-2" onChange={(e) => handleshowhide(e)}>
 								At which age full salary is paid?
 								<option value="">Select age</option>
@@ -30,56 +30,56 @@ const Addage = () => {
 						{/* IF AGE = 18 */}
 						{showhideage === '1' && (
 							<div className="form-group">
-								<label>Minimum salary for 17 years?</label>
+								<label className="custom_astrick">Minimum salary for 17 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 16 years?</label>
+								<label className="custom_astrick">Minimum salary for 16 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 15 years?</label>
+								<label className="custom_astrick">Minimum salary for 15 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
 							</div>
 						)}
 						{/* IF AGE = 19 */}
 						{showhideage === '2' && (
 							<div className="form-group">
-								<label>Minimum salary for 18 years?</label>
+								<label className="custom_astrick">Minimum salary for 18 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 17 years?</label>
+								<label className="custom_astrick">Minimum salary for 17 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 16 years?</label>
+								<label className="custom_astrick">Minimum salary for 16 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 15 years?</label>
+								<label className="custom_astrick">Minimum salary for 15 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
 							</div>
 						)}
 						{/* IF AGE = 20 */}
 						{showhideage === '3' && (
 							<div className="form-group">
-								<label>Minimum salary for 19 years?</label>
+								<label className="custom_astrick">Minimum salary for 19 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 18 years?</label>
+								<label className="custom_astrick">Minimum salary for 18 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 17 years?</label>
+								<label className="custom_astrick">Minimum salary for 17 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 16 years?</label>
+								<label className="custom_astrick">Minimum salary for 16 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 15 years?</label>
+								<label className="custom_astrick">Minimum salary for 15 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
 							</div>
 						)}
 						{/* IF AGE = 21 */}
 						{showhideage === '4' && (
 							<div className="form-group">
-								<label>Minimum salary for 20 years?</label>
+								<label className="custom_astrick">Minimum salary for 20 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 19 years?</label>
+								<label className="custom_astrick">Minimum salary for 19 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 18 years?</label>
+								<label className="custom_astrick">Minimum salary for 18 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 17 years?</label>
+								<label className="custom_astrick">Minimum salary for 17 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 16 years?</label>
+								<label className="custom_astrick">Minimum salary for 16 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
-								<label>Minimum salary for 15 years?</label>
+								<label className="custom_astrick">Minimum salary for 15 years?</label>
 								<input type="text" className="form-control mt-2 mb-2" />
 							</div>
 						)}

@@ -31,3 +31,4 @@ export const createCofficientType = BASE_URL + "create-cofficent-types";
 
 //--------------PLANNING API ROUTES ----------------//
 export const addPlanning = BASE_URL + "addplanning";
+export const addProject = BASE_URL + "addproject";
