@@ -118,7 +118,7 @@ a {
 	color: red;
 }
 .nav-link {
-	color: black;
+	color: black !important;
 	height: 100%;
 	border-radius: 10px;
 }
@@ -140,6 +140,9 @@ a {
 	color: red;
 }
 .custom-inactive:hover {
+	color: black !important;
+}
+.custom-inactive {
 	color: black !important;
 }
 .custom-active:hover {
