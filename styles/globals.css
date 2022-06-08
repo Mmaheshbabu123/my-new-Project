@@ -127,7 +127,6 @@ a {
 }
 
 .nav-link:hover {
-	/* color: black; */
 	font-weight: 500 !important;
 }
 .nav-item {
@@ -139,4 +138,10 @@ a {
 	content: "*";
 	padding-left: 3px;
 	color: red;
+}
+.custom-inactive:hover {
+	color: black !important;
+}
+.custom-active:hover {
+	color: #fff !important;
 }

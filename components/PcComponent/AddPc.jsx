@@ -13,12 +13,11 @@ import { getPcByUniquekey } from '../../Services/ApiEndPoints';
  */
 function AddPc(props) {
 	const router = useRouter();
-	const {setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
+	const { setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
 	// const [ pc_unique_key, setPc_unique_key ] = useState();
 	const [ field, setfield ] = useState();
 	const [ field1, setfield1 ] = useState();
 	var unique_key = router.query.uid ? router.query.uid : '';
-	;
 	const [ data, setData ] = useState({
 		id: '',
 		pc_unique_key: router.query.uid,
@@ -35,6 +34,11 @@ function AddPc(props) {
 
 	useEffect(
 		() => {
+			if (unique_key) {
+				var res1 = sec_completed;
+				res1['pc'] = true;
+				setSec_completed(res1);
+			}
 			if (!router.isReady) return;
 			if (router.query.uid) {
 				setPc_unique_key(router.query.uid);
@@ -52,7 +56,6 @@ function AddPc(props) {
 							data1['pc_name'] = result.data[0].pc_name;
 							data1['pc_alias_name'] = result.data[0].pc_alias_name;
 							setData(data1);
-							
 						}
 					})
 					.catch((error) => {
@@ -160,7 +163,7 @@ function AddPc(props) {
 						</div>
 					</div>
 					<div className="col-md-6" />
-					<div className='text-end'>
+					<div className="text-end">
 						<button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
 							Save
 						</button>
