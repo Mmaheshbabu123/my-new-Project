@@ -8,7 +8,6 @@ import EmployeeType from './EmployeeType';
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
 const PcCommon = (props) => {
-	console.log(props.unique_key)
 	const [ pcid, setPcid ] = useState('');
 	const [ current_sec, setCurrent_sec ] = useState(1);
 	const [ sec_completed, setSec_completed ] = useState({

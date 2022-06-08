@@ -108,37 +108,34 @@ function AddCategory({ childToParent, id }) {
 		<div className="mt-4">
 			<form onSubmit={submit}>
 				{id != '' ? <h4>Edit category</h4> : <h4>Add category</h4>}
+				<label className="mt-3 mb-2 custom_astrick">Category name </label>
 				<div className="form-group">
-					<label className="mt-3 mb-4">
-						Category name
-						<input
-							type="text"
-							className=" form-control my-2"
-							value={data.category_name}
-							name="name"
-							id="name"
-							onChange={(e) => {
-								setData((prev) => ({ ...prev, category_name: e.target.value }));
-							}}
-						/>
-						<p style={{ color: 'red' }}>{field1}</p>
-					</label>
+					<input
+						type="text"
+						className=" form-control my-2 "
+						value={data.category_name}
+						name="name"
+						id="name"
+						onChange={(e) => {
+							setData((prev) => ({ ...prev, category_name: e.target.value }));
+						}}
+					/>
+
+					<p style={{ color: 'red' }}>{field1}</p>
 				</div>
+				<label className="custom_astrick">Minimum salary</label>
 				<div className="form-group">
-					<label>
-						Minimum salary
-						<input
-							type="text"
-							className="form-control my-2"
-							value={data.min_salary}
-							name="salary"
-							id="salary"
-							onChange={(e) => {
-								setData((prev) => ({ ...prev, min_salary: e.target.value }));
-							}}
-						/>
-						<p style={{ color: 'red' }}>{field1}</p>
-					</label>
+					<input
+						type="text"
+						className="form-control my-2"
+						value={data.min_salary}
+						name="salary"
+						id="salary"
+						onChange={(e) => {
+							setData((prev) => ({ ...prev, min_salary: e.target.value }));
+						}}
+					/>
+					<p style={{ color: 'red' }}>{field1}</p>
 				</div>
 
 				<div>
