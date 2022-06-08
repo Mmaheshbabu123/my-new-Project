@@ -17,12 +17,20 @@ const PcCommon = (props) => {
 		emp_type: false,
 		sal_benefit: false
 	});
-		const [pc_unique_key, setPc_unique_key] = useState('');
-
+	const [ pc_unique_key, setPc_unique_key ] = useState('');
 
 	return (
 		<div className="container mt-5">
-			<PcContext.Provider value={{ pc_unique_key, setPc_unique_key, current_sec, setCurrent_sec, sec_completed, setSec_completed }}>
+			<PcContext.Provider
+				value={{
+					pc_unique_key,
+					setPc_unique_key,
+					current_sec,
+					setCurrent_sec,
+					sec_completed,
+					setSec_completed
+				}}
+			>
 				<p className="h5">
 					{current_sec == 1 ? (
 						'Add paritair comitte'
@@ -42,7 +50,7 @@ const PcCommon = (props) => {
 					<ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 1 ? 'active' : ''}`}
+								className={`nav-link py-3 ${current_sec == 1 ? 'active custom-active' : 'custom-inactive'}`}
 								id="pills-pc-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-pc"
@@ -54,17 +62,20 @@ const PcCommon = (props) => {
 									setCurrent_sec(1);
 								}}
 							>
-								{sec_completed.pc|| current_sec == 1 ? (
+								{sec_completed.pc || current_sec == 1 ? (
 									<FaRegCheckCircle className="d-inline mb-2" />
 								) : (
 									<BsCircle className="d-inline mb-2" />
 								)}
-								<p className="mb-2">Step 1:</p> <p>Paritair comitte details</p>
+								<p className="mb-2">Step 1:</p>{' '}
+								<p>Paritair comitte details{console.log(sec_completed.pc)}</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${(current_sec != 2 && sec_completed.pc== false)? 'disabled' : ''} ${current_sec == 2 ? 'active' : ''}`}
+								className={`nav-link py-3 ${sec_completed.pc == false
+									? 'disabled'
+									: ''} ${current_sec == 2 ? 'active custom-active' : 'custom-inactive'}`}
 								id="pills-profile-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-profile"
@@ -76,7 +87,7 @@ const PcCommon = (props) => {
 									setCurrent_sec(2);
 								}}
 							>
-								{sec_completed.cat || current_sec == 2? (
+								{sec_completed.cat || current_sec == 2 ? (
 									<FaRegCheckCircle className="d-inline mb-2" />
 								) : (
 									<BsCircle className="d-inline mb-2" />
@@ -86,7 +97,11 @@ const PcCommon = (props) => {
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${(current_sec != 3 && sec_completed.cat== false)? 'disabled' : ''} ${current_sec == 3 ? 'active' : ''}`}
+								className={`nav-link py-3 ${current_sec != 3 && sec_completed.cat == false
+									? 'disabled'
+									: ''} ${current_sec == 3
+									? 'active custom-active'
+									: 'custom-inactive'}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-age"
@@ -98,7 +113,7 @@ const PcCommon = (props) => {
 									setCurrent_sec(3);
 								}}
 							>
-								{sec_completed.age|| current_sec == 3 ? (
+								{sec_completed.age || current_sec == 3 ? (
 									<FaRegCheckCircle className="d-inline mb-2" />
 								) : (
 									<BsCircle className="d-inline mb-2" />
@@ -108,7 +123,9 @@ const PcCommon = (props) => {
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${(current_sec != 4 && sec_completed.age == false)? 'disabled' : ''}${current_sec == 4 ? 'active' : ''}`}
+								className={`nav-link py-3 ${current_sec != 4 && sec_completed.age == false
+									? 'disabled'
+									: ''}${current_sec == 4 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-emp-type"
@@ -130,7 +147,9 @@ const PcCommon = (props) => {
 						</li>
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${(current_sec != 5 && sec_completed.emp_type == false)? 'disabled' : ''} ${current_sec == 5 ? 'active' : ''}`}
+								className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
+									? 'disabled'
+									: ''} ${current_sec == 5 ? 'active' : ''}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-contact"
@@ -142,7 +161,7 @@ const PcCommon = (props) => {
 									setCurrent_sec(5);
 								}}
 							>
-								{sec_completed.sal_benefit || current_sec == 5? (
+								{sec_completed.sal_benefit || current_sec == 5 ? (
 									<FaRegCheckCircle className="d-inline mb-2" />
 								) : (
 									<BsCircle className="d-inline mb-2" />
