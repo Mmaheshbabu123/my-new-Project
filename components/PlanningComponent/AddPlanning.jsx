@@ -73,7 +73,7 @@ function Planning(props) {
 							}}
 						>
 							<option>Select</option>
-							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
+							{companyname.map((options) => <option key={options.value} value={options.value}>{options.label}</option>)}
 						</select>
 					</div>
 
@@ -87,7 +87,7 @@ function Planning(props) {
 							}}
 						>
 							<option>Select</option>
-							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
+							{companyname.map((options) => <option key={options.value} value={options.value}>{options.label}</option>)}
 						</select>
 					</div>
 
@@ -101,7 +101,7 @@ function Planning(props) {
 							}}
 						>
 							<option>Select</option>
-							{companyname.map((options) => <option value={options.value}>{options.label}</option>)}
+							{companyname.map((options) => <option key={options.value} value={options.value}>{options.label}</option>)}
 						</select>
 						{/* <Multiselect
 							className="mb-2"
