@@ -123,17 +123,17 @@ a {
 	border-radius: 10px;
 }
 .nav-pills .nav-link.active {
-	background-color: black;
+	background-color: black !important;
 }
 
 .nav-link:hover {
-	color: black;
-	font-weight: 500;
+	color: black !important;
+	font-weight: 500 !important;
 }
 .nav-item {
-	border: 2px solid black;
-	border-radius: 10px;
-	margin: 0px 3px;
+	border: 2px solid black !important;
+	border-radius: 10px !important;
+	margin: 0px 3px !important;
 }
 .custom_astrick::after {
 	content: "*";
