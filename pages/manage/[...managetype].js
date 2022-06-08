@@ -1,46 +1,47 @@
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, {useState, useEffect} from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import { fetchEmployeeTypes ,fecthCoefficientTypes} from '../../Services/ApiEndPoints';
 import TableRenderer from '../../components/employeeTypeComponents/TableRenderer'
 import AddEmployeeType from '../../components/employeeTypeComponents/AddEmployeeType'
 
 const ManageType = (props) => {
-  console.log(props)
-  console.log(fecthCoefficientTypes)
-  return props.norender ? <> Not developed yet :)</> :
+  const router  = useRouter();
+  const [ state, setState ] = useState({rows: [], headers: []})
+  const { id, managetype } = router.query;
+  const resolvedUrl = router.asPath;
+
+  useEffect(() => { loadData() }, [managetype])
+  const loadData = async () => {
+    let editId = id ? parseInt(id) : 0;
+    if(!managetype) return;
+    const manageType = managetype[0];
+    const edit = resolvedUrl.includes('edit') || resolvedUrl.includes('add');
+    const api_url = manageType ? (manageType !== 'employee-types') ? fecthCoefficientTypes :fetchEmployeeTypes : null;
+    if(!manageType) return;
+    await APICALL.service(api_url + `${editId ? '/' + editId : ''}`, 'GET')
+      .then((response) => {
+        setState({...state,
+          rows: response.status === 200 ? response.data : [],
+          headers: [manageType === 'employee-types' ? 'Employee-types' : 'Coefficient types', 'Actions'],
+          id: editId,
+          manageType,
+          edit,
+       })
+     }).catch((error) => console.error('Error occurred'));
+  }
+
+  return (
     <>
       <div className='container'>
         <div className='mt-3 md-3'>
-          {props.edit === true ?
-            <AddEmployeeType {...props} />
-            : <TableRenderer {...props} />
+          {state.edit === true ?
+            <AddEmployeeType {...state} />
+            : <TableRenderer {...state} />
           }
         </div>
       </div>
     </>
+  )
 }
 export default React.memo(ManageType);
-
-export async function getServerSideProps(context) {
-
-  const { params, query,resolvedUrl } = context;
-  const id = parseInt(query?.id ?? 0);
-  const manageType = params.managetype[0];
-  // if (manageType !== 'employee_types')
-  //   return { props: { norender: true } }
-
-  const edit = resolvedUrl.includes('edit') || resolvedUrl.includes('add');
-  let response = {};
-  const api_url = (manageType !== 'employee_types') ? fecthCoefficientTypes :fetchEmployeeTypes;
-  await fetch(api_url + `${id ? '/' + id : ''}`)
-    .then(re => re.json())
-    .then((result) => response = result)
-    .catch((error) => window.alert('Error occurred'));
-
-  return {
-    props: {
-      rows: response.status === 200 ? response.data : [],
-      headers: ['name', 'actions'], id, manageType, edit
-    }
-  }
-}

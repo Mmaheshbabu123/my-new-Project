@@ -1,18 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { confirmAlert } from 'react-confirm-alert';
 import { deleteEmployeeType ,deleteCoefficientType} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
+import {MdEdit, MdDelete} from 'react-icons/md';
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
-console.log(manageType)
-  const [state, setState] = useState({ searchTerm: '', deleteUrl : (manageType == 'employee_types') ? deleteEmployeeType :deleteCoefficientType, filterRows: rows, searchKey: 'name' })
+  const [state, setState] = useState({
+    searchTerm: '',
+    deleteUrl : (manageType == 'employee-types') ? deleteEmployeeType :deleteCoefficientType,
+    filterRows: rows,
+    searchKey: 'name'
+  })
+  useEffect(() => {
+    setState({...state, filterRows: rows, deleteUrl: (manageType == 'employee-types') ? deleteEmployeeType :deleteCoefficientType})
+  }, [rows.length])
+
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className='actions-span' onClick={() => handleActionClick('edit', eachRow)}> Edit </span>
-        <span className='actions-span' onClick={() => handleActionClick('delete', eachRow)}> Delete </span>
+        <span className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
+        <span className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
       </>
     )
   }
@@ -20,7 +29,7 @@ console.log(manageType)
   const handleActionClick = (action, eachRow) => {
     if (action === 'delete') {
       confirmAlert({
-        message: 'Do you want to delete the type',
+        message: 'Do you want to delete the type?',
         buttons: [
           { label: 'No' },
           { label: 'Yes', onClick: () => handleDelete(eachRow.id) }
@@ -45,9 +54,11 @@ console.log(manageType)
     })
     setState({ ...state, searchTerm: e.target.value, filterRows: filterRows });
   }
-const button_title = manageType == 'employee_types'? `Add employee type`:`Add coefficient type`;
+
+const button_title = manageType == 'employee-types'? `Add employee type`:`Add coefficient type`;
   return (
     <>
+      <h4> {`Manage ${button_title.includes('employee') ? 'Employee' : 'Coefficient'} types`} </h4>
       <div className='row' style={{ margin: '10px 0' }}>
         <input
           type="text"
@@ -60,7 +71,7 @@ const button_title = manageType == 'employee_types'? `Add employee type`:`Add co
           onClick={() => router.push(`${manageType}/add?id=0`)}
           type="button"
           className="btn btn-dark pcp_btn col-3">
-          {button_title}
+          {`+ ${button_title}`}
         </button>
       </div>
       <div className="table-render-parent-div">
@@ -69,9 +80,10 @@ const button_title = manageType == 'employee_types'? `Add employee type`:`Add co
             <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
           </thead>
           <tbody>
-            {state.filterRows.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>{headers.map(colName => <>
-              <td> {colName === 'actions' ? getNeededActions(eachRow) : eachRow[colName]}</td>
-            </>)}</tr>)}
+            {state.filterRows.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
+              <td> {eachRow.name} </td>
+              <td>{ getNeededActions(eachRow) } </td>
+            </tr>)}
           </tbody>
         </table>
       </div>

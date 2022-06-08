@@ -8,12 +8,11 @@ import { APICALL } from '../../Services/ApiServices';
 const AddEmployeeType = (props) => {
   const router = useRouter();
   const inputRef = useRef(null);
-  console.log(props)
   const [state, setState] = useState({
       name: props.id ? props.rows[0]['name'] : ''
-    , editFlow: props.id,
-     editUrl:props.manageType == 'employee_types' ? editEmployeeType : editCofficientType,
-     createUrl:props.manageType == 'employee_types' ? createEmployeeTypes:createCofficientType
+    , editFlow: props.id
+    , editUrl:props.manageType == 'employee-types' ? editEmployeeType : editCofficientType
+    , createUrl:props.manageType == 'employee-types' ? createEmployeeTypes:createCofficientType
     , newItems: []
     , nameWarning: false
     , editIndex: 0
@@ -40,16 +39,24 @@ const AddEmployeeType = (props) => {
      * @return {[void]} [it wont return anything]
      */
     const handleSubmit = async () => {
-      if ((state.editFlow && !state.name.length) || (!state.editFlow && !state.newItems.length)) {
+      let newItemsList = inertNewItem();
+      if ((state.editFlow && !state.name.length) || (!state.editFlow && !newItemsList.length)) {
         setState({ ...state, nameWarning: true });
         return;
       }
       let url = state.editFlow ? `${state.editUrl}/${props.id}` : `${state.createUrl}`;
-      await APICALL.service(url, 'POST', getPostData())
-        .then((result) => { window.alert('Done'); router.push(`${props.manageType}`); })
-        .catch((error) => window.alert('Error occurred'));
+      await APICALL.service(url, 'POST', getPostData(newItemsList))
+        .then((result) => { console.log('Done'); router.push(`${props.manageType}`); })
+        .catch((error) => console.error('Error occurred'));
     }
 
+  const inertNewItem = () => {
+    let newItemsList = [...state.newItems];
+    if(state.name.length) {
+      newItemsList[state.editIndex] = {name: state.name};
+    }
+    return newItemsList;
+  }
 
   useEffect(() => {
     setState({ ...state, initialRenderDone: true })
@@ -73,11 +80,11 @@ const AddEmployeeType = (props) => {
     }
   }
 
-  const getPostData = () => {
+  const getPostData = (newItemsList = []) => {
     return {
         id: props.id,
         name: state.name,
-        newItems: state.newItems,
+        newItems: newItemsList,
     };
   }
 
@@ -109,7 +116,7 @@ const AddEmployeeType = (props) => {
   return <>
     <div className='add-edit-types'>
       <div className="row m-3">
-        <label htmlFor="name"> Name </label>
+        <label className = "mb-3" htmlFor="name"> {`Add ${props.manageType === 'employee-types' ? 'employee' : 'coefficient'} type`} </label>
         <div className='row'>
           <input
             ref={inputRef}
@@ -126,7 +133,7 @@ const AddEmployeeType = (props) => {
               onClick={() => addItemAndUpdateIndex({ ...state }, state.name)}
               type="button"
               className="btn btn-dark pcp_btn col-3">
-              Add another
+              {`+ Add another`}
             </button>
           }
         </div>
@@ -137,7 +144,7 @@ const AddEmployeeType = (props) => {
             Please add type
           </small>}
       </div>
-      {state.newItems.length > 0 &&
+      {state.newItems.length > 0 && !state.editFlow &&
         <div className='add-item-div'>
           <table className='table-hover m-3 add-item-table'>
             {state.newItems.map((item, index) =>
