@@ -14,13 +14,11 @@ import { getPcByUniquekey } from '../../Services/ApiEndPoints';
 function AddPc(props) {
 	const router = useRouter();
 	const { pc_unique_key, setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
-	// const [ pc_unique_key, setPc_unique_key ] = useState();
 	const [ error_pc_number, setError_pc_number ] = useState('');
 	const [ error_pc_name, setError_pc_name ] = useState('');
 	const [ error_pc_alias_name, setError_pc_alias_name ] = useState('');
 
 	const [ field1, setfield1 ] = useState();
-	// var unique_key = router.query.uid ? router.query.uid : '';
 	const [ data, setData ] = useState({
 		id: '',
 		pc_unique_key: '',
@@ -35,27 +33,21 @@ function AddPc(props) {
 		pc_alias_name: ''
 	});
 
+	/**
+	 * Prefill data if pc already exist
+	 */
 	useEffect(
 		() => {
 			console.log(router.query.uid);
-			// if (unique_key) {
-			// 	var res1 = sec_completed;
-			// 	res1['pc'] = true;
-			// 	setSec_completed(res1);
-			// }
-			if (pc_unique_key == '') {
 				if (!router.isReady) return;
-				else{
-					setPc_unique_key(router.query.uid);	
-				}
-			}else{
+				if(router.query.uid && data.id ==''){
 				APICALL.service(getPcByUniquekey + router.query.uid, 'GET')
 						.then((result) => {
 							console.log(result);
 							if (result.status === 200 && result.data.length > 0) {
 								var res1 = sec_completed;
 								res1['pc'] = true;
-								setSec_completed(res1);
+								setSec_completed(res1);	//updating that add pc data is filled so that next section can be enable
 								var data1 = {};
 								data1['id'] = result.data[0].id;
 								data1['pc_unique_key'] = result.data[0].pc_unique_key;
@@ -67,12 +59,9 @@ function AddPc(props) {
 						})
 						.catch((error) => {
 							console.error(error);
-						});
+						});				
+					setPc_unique_key(router.query.uid);		 //updating pc_unique_key with the value from url			
 			}
-				if (router.query.uid) {
-					setPc_unique_key(router.query.uid);
-					
-				}
 		},
 		[ router.isReady ]
 	);
@@ -84,6 +73,7 @@ function AddPc(props) {
 
 	let postdata = async (e) => {
 		if (data.id == '') {
+			console.log("test")
 			APICALL.service(addPc, 'POST', data)
 				.then((result) => {
 					console.log(result);
