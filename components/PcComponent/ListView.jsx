@@ -65,7 +65,7 @@ const ListView = (props) => {
 								aria-controls={`flush-collapse${props.pc_number}pc${props.index}`}
 							>
 								<span className="w-25 ">{props.pc_number}</span>
-								<span className="ms-4">{props.tvalue[1]}</span>
+								<span className="ms-4">{props.title}</span>
 							</button>
 						</h4>
 						<div

@@ -133,7 +133,7 @@ const PcOverview = (params) => {
 										title={pc['pc_name']}
 										theader={pc['header']}
 										tvalue={
-											pc['pc_alias_name'] != '' ? (
+											pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined ? (
 												[ pc['pc_number'], pc['pc_alias_name'] ]
 											) : (
 												[ pc['pc_number'], pc['pc_name'] ]
