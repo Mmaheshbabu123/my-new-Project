@@ -8,8 +8,7 @@ import EmployeeType from './EmployeeType';
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
 const PcCommon = (props) => {
-	const [ pcid, setPcid ] = useState('');
-	const [ current_sec, setCurrent_sec ] = useState(1);
+	const [ current_sec, setCurrent_sec ] = useState(1); //holds value for active tab [1=addPc  2=Add caterory and function 3=Add age 4=Employee Type 5=Salary benefits]
 	const [ sec_completed, setSec_completed ] = useState({
 		pc: false,
 		cat: false,
@@ -18,6 +17,9 @@ const PcCommon = (props) => {
 		sal_benefit: false
 	});
 	const [ pc_unique_key, setPc_unique_key ] = useState('');
+	const [ pc_overview_type, setPc_overview_type ] = useState('');
+
+	
 
 	return (
 		<div className="container mt-5">
@@ -25,10 +27,12 @@ const PcCommon = (props) => {
 				value={{
 					pc_unique_key,
 					setPc_unique_key,
-					current_sec,
+					current_sec,   //holds value for active tab [1=addPc  2=Add caterory and function 3=Add age 4=Employee Type 5=Salary benefits]
 					setCurrent_sec,
 					sec_completed,
-					setSec_completed
+					setSec_completed,
+					pc_overview_type,
+					setPc_overview_type
 				}}
 			>
 				<p className="h5">
@@ -186,7 +190,7 @@ const PcCommon = (props) => {
 							aria-labelledby="pills-profile-tab"
 						>
 							{/* <PcOverview /> */}
-							{current_sec == 2 && <PcOverview />}
+							{current_sec == 2 ? <PcOverview type="addpc"/>:''}
 						</div>
 						<div
 							className={`tab-pane fade ${current_sec == 3 ? 'show active' : ''}`}

@@ -28,24 +28,13 @@ const PcOverview = (params) => {
 
 	const router = useRouter();
 	const [ pc, setPc ] = useState([]);
-	const [ enableEdit, setEnableEdit ] = useState(false);
-	const [ leftSec, setLeftSec ] = useState('col-md-12');
-	const [ rightSec, setRightSec ] = useState('');
 	const [ count, setCount ] = useState(1);
-	const [ data, setData ] = useState('');
-	const [ pclistUpdated, setPclistUpdated ] = useState(false);
-	const [ category, setCategory ] = useState(false);
-	// const [ addfunction, setAddfunction ] = useState(false);
-	const [ editpc, setEditpc ] = useState(false);
-
 	const [ secid, setSecid ] = useState('');
 	const [ pc_number, setPc_number ] = useState('');
+	const [type, setType] = useState('');
 	if (pc_unique_key == '' && router.query.uid) {
 		setPc_unique_key(router.query.uid);
 	}
-
-	const [ page_type, setPage_type ] = useState('add');
-
 	/**
    * Fetch data from backend on page load
    */
@@ -59,6 +48,7 @@ const PcOverview = (params) => {
 							console.log(result);
 							setPc(result.data);
 							setPc_number(result.data['pc_number']);
+							setType(params.type);
 						})
 						.catch((error) => {
 							console.error(error);
@@ -66,49 +56,29 @@ const PcOverview = (params) => {
 				}
 			}
 		},
-		[current_sec]
+		[current_sec,pc_unique_key]
 	);
-
-	const childToParent = (childdata) => {
-		setPclistUpdated(false);
-
-		setPclistUpdated(true);
-		setLeftSec('col-md-12');
-		// setAddfunction(false);
-		setCategory(false);
-
-		setEnableEdit(false);
-	};
 
 	return (
 		<div className="container">
 			<div className="row pt-4">
-				<div className={`px-5 ${leftSec}`}>
+				<div className={`px-5`}>
 					{pc && (
 						<div>
-							{pc_unique_key}
 								<div className="text-end me-4">
 									<button
 										type="button"
 										to="category"
 										pcid={pc_unique_key}
 										className={'btn me-3' + styles.btncolor}
-										onClick={() => {
-											setCategory(true);
-											setEnableEdit(true);
-										}}
 									>
-										Add category
+										Add category{type}
 									</button>
 									<button
 										type="button"
 										to="function"
 										pcid={pc_unique_key}
 										className={'btn me-2' + styles.btncolor}
-										onClick={() => {
-											// setAddfunction(true);
-											setEnableEdit(true);
-										}}
 									>
 										Add function
 									</button>
@@ -132,10 +102,12 @@ const PcOverview = (params) => {
 										index={count + 1}
 										title={pc['pc_name']}
 										theader={pc['header']}
-										tvalue={[ pc['pc_number'], pc['pc_name'] ]}
+										tvalue={pc['pc_alias_name']!=''?[ pc['pc_number'], pc['pc_alias_name'] ]:[ pc['pc_number'], pc['pc_name'] ]}
 										actiontype={[ 'edit' ]}
 										sectype="pc"
 										secId={pc['id']}
+										type={type}
+
 									/>
 								</ul>
 								{pc['childObj'] &&
@@ -162,6 +134,7 @@ const PcOverview = (params) => {
 													className="ms-2"
 													sectype="cat"
 													secId={pc['childObj'][val]['id']}
+													type={type}
 												/>
 											) : (
 												<ListView
