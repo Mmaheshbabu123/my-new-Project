@@ -130,7 +130,7 @@ const PcOverview = (params) => {
 										pcid={pc_unique_key}
 										pc_number={pc_number}
 										index={count + 1}
-										title={pc['pc_name']}
+										title={pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined?pc['pc_alias_name']:pc['pc_name']}
 										theader={pc['header']}
 										tvalue={
 											pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined ? (
