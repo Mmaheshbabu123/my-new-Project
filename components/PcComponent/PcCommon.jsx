@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
 import PcOverview from './PcOverview';
 import AddPc from './AddPc';
 import AddAge from './AddAge';
 import EmployeeType from './EmployeeType';
+import { useRouter } from 'next/router';
+
 
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
 const PcCommon = (props) => {
+	const router = useRouter();
 	const [ current_sec, setCurrent_sec ] = useState(1); //holds value for active tab [1=addPc  2=Add caterory and function 3=Add age 4=Employee Type 5=Salary benefits]
 	const [ sec_completed, setSec_completed ] = useState({
 		pc: false,
@@ -18,12 +21,21 @@ const PcCommon = (props) => {
 	});
 	const [ pc_unique_key, setPc_unique_key ] = useState('');
 	const [ pc_overview_type, setPc_overview_type ] = useState('');
-	const [cat_rightsec,setCat_rightsec] = useState('d-none');
-	const [cat_leftsec, setCat_leftsec] = useState('col-md-12');
-	const [cat_subsec_type,setCat_subsec_type] = useState(0)
+	const [ cat_rightsec, setCat_rightsec ] = useState('d-none');
+	const [ cat_leftsec, setCat_leftsec ] = useState('col-md-12');
+	const [ cat_subsec_type, setCat_subsec_type ] = useState(0);
+	const [ cat_fun_updated, setCat_fun_updated ] = useState('');
 
 
-	
+
+	useEffect(
+		() => {
+			if (!router.isReady) return;
+			if (router.query.uid) {
+				setPc_unique_key(router.query.uid);
+			}
+		},
+		[ router.isReady ]);
 
 	return (
 		<div className="container mt-5">
@@ -31,7 +43,7 @@ const PcCommon = (props) => {
 				value={{
 					pc_unique_key,
 					setPc_unique_key,
-					current_sec,   //holds value for active tab [1=addPc  2=Add caterory and function 3=Add age 4=Employee Type 5=Salary benefits]
+					current_sec, //holds value for active tab [1=addPc  2=Add caterory and function 3=Add age 4=Employee Type 5=Salary benefits]
 					setCurrent_sec,
 					sec_completed,
 					setSec_completed,
@@ -42,7 +54,9 @@ const PcCommon = (props) => {
 					cat_leftsec,
 					setCat_leftsec,
 					cat_subsec_type,
-					setCat_subsec_type
+					setCat_subsec_type,
+					cat_fun_updated,
+					setCat_fun_updated
 				}}
 			>
 				<p className="h5">
@@ -64,7 +78,9 @@ const PcCommon = (props) => {
 					<ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
 						<li className="nav-item" role="presentation">
 							<button
-								className={`nav-link py-3 ${current_sec == 1 ? 'active custom-active' : 'custom-inactive'}`}
+								className={`nav-link py-3 ${current_sec == 1
+									? 'active custom-active'
+									: 'custom-inactive'}`}
 								id="pills-pc-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-pc"
@@ -113,9 +129,7 @@ const PcCommon = (props) => {
 							<button
 								className={`nav-link py-3 ${current_sec != 3 && sec_completed.cat == false
 									? 'disabled'
-									: ''} ${current_sec == 3
-									? 'active custom-active'
-									: 'custom-inactive'}`}
+									: ''} ${current_sec == 3 ? 'active custom-active' : 'custom-inactive'}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-age"
@@ -194,13 +208,13 @@ const PcCommon = (props) => {
 							<AddPc />
 						</div>
 						<div
-							className={`tab-pane fade disable ${current_sec == 2 ? 'show active' : ''}`}
+							className={`tab-pane fade ${current_sec == 2 ? 'show active' : ''}`}
 							id="pills-profile"
 							role="tabpanel"
 							aria-labelledby="pills-profile-tab"
 						>
 							{/* <PcOverview /> */}
-							{current_sec == 2 ? <PcOverview type="addpc"/>:''}
+							{current_sec == 2 ? <PcOverview type="addpc" /> : ''}
 						</div>
 						<div
 							className={`tab-pane fade ${current_sec == 3 ? 'show active' : ''}`}
