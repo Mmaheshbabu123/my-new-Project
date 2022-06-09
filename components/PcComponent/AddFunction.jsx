@@ -2,7 +2,9 @@ import React from 'react';
 
 function AddFunction() {
 	return (
+		<div className="mt-4">
 		<form className="Search__form">
+			<h4 className='h5 mb-3'>Add function</h4>
 			<label className="custom_astrick">Function name</label>
 			<div className="mt-2 form-group  ">
 				<input type="text" className=" form-control mt-2 col-md-4" />
@@ -23,12 +25,13 @@ function AddFunction() {
 				<p style={{ color: 'red' }}>Required</p>
 			</div>
 
-			<div>
+			<div className='text-end'>
 				<button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
 					Save
 				</button>
 			</div>
 		</form>
+		</div>
 	);
 }
 

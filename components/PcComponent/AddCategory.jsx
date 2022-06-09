@@ -112,8 +112,8 @@ function AddCategory(props) {
 	return (
 		<div className="mt-4">
 			<form onSubmit={submit}>
-				{data.id != '' ? <h4>Edit category</h4> : <h4>Add category</h4>}
-				<label className="mt-3 mb-2 custom_astrick">Category name </label>
+				{data.id != '' ? <h4 className='h5 mb-3'>Edit category</h4> : <h4 className='h5 mb-3'>Add category</h4>}
+				<label className="mb-2 custom_astrick">Category name </label>
 				<div className="form-group">
 					<input
 						type="text"
@@ -143,7 +143,7 @@ function AddCategory(props) {
 					<p style={{ color: 'red' }}>{field1}</p>
 				</div>
 
-				<div>
+				<div className='text-end'>
 					<button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn" onClick={()=>{
 						setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
 					}}>

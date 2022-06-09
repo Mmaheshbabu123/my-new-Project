@@ -18,6 +18,10 @@ const PcCommon = (props) => {
 	});
 	const [ pc_unique_key, setPc_unique_key ] = useState('');
 	const [ pc_overview_type, setPc_overview_type ] = useState('');
+	const [cat_rightsec,setCat_rightsec] = useState('d-none');
+	const [cat_leftsec, setCat_leftsec] = useState('col-md-12');
+	const [cat_subsec_type,setCat_subsec_type] = useState(0)
+
 
 	
 
@@ -32,7 +36,13 @@ const PcCommon = (props) => {
 					sec_completed,
 					setSec_completed,
 					pc_overview_type,
-					setPc_overview_type
+					setPc_overview_type,
+					cat_rightsec,
+					setCat_rightsec,
+					cat_leftsec,
+					setCat_leftsec,
+					cat_subsec_type,
+					setCat_subsec_type
 				}}
 			>
 				<p className="h5">
