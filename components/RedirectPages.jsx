@@ -11,7 +11,7 @@ const RedirectPages = (props) => {
 			console.log('props');
 			console.log(props);
 			if (props.hasOwnProperty('src')) {
-				localStorage.setItem("src", JSON.stringify(props.src));
+				localStorage.setItem("src", JSON.stringify(props.src+"&check_logged_in=1"));
 			}
 			if (props.hasOwnProperty('dest')) {
 				switch (props.dest) {
@@ -23,7 +23,7 @@ const RedirectPages = (props) => {
 						break;
 				}
 			}else{
-			router.push('/');
+				window.location.assign(process.env.NEXT_PUBLIC_APP_BACKEND_URL)
             }
 		},
 		[ props ]
