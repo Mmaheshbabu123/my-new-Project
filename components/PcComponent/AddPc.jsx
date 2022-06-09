@@ -146,7 +146,7 @@ function AddPc(props) {
 		error1['pc_name'] =
 			error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
 		error1['pc_alias_name'] =
-			error1['pc_alias_name'] == '' ? ValidationService.nameValidationMethod(res.pc_alias_name) : '';
+		res.pc_alias_name != '' && res.pc_alias_name != undefined ? ValidationService.nameValidationMethod(res.pc_alias_name) : '';
 		//seterror messages
 		setError_pc_number(error1['pc_number']);
 		setError_pc_name(error1['pc_name']);
