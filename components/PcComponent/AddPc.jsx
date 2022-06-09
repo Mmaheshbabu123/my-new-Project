@@ -147,6 +147,7 @@ function AddPc(props) {
 			error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
 		error1['pc_alias_name'] =
 		res.pc_alias_name != '' && res.pc_alias_name != undefined ? ValidationService.nameValidationMethod(res.pc_alias_name) : '';
+		error1['pc_alias_name'] = error1['pc_alias_name'] == '' && res.pc_name == res.pc_alias_name ? "Alias name cannot be same as paritair committe name.":'';
 		//seterror messages
 		setError_pc_number(error1['pc_number']);
 		setError_pc_name(error1['pc_name']);
@@ -160,12 +161,7 @@ function AddPc(props) {
 	};
 	let backToDashboard = () =>{
 		if (JSON.parse(localStorage.getItem("src"))) { 
-   
 			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+JSON.parse(localStorage.getItem("src"))+"&check_logged_in=1")
-			// dispatch({ 
-			//    type: "init_stored", 
-			//    value: JSON.parse(localStorage.getItem("state")),
-			// });
 		}
 	  
 	}
