@@ -161,7 +161,7 @@ function AddPc(props) {
 	let backToDashboard = () =>{
 		if (JSON.parse(localStorage.getItem("src"))) { 
    
-			window.location.assign(JSON.parse(localStorage.getItem("src")))
+			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+JSON.parse(localStorage.getItem("src"))+"&check_logged_in=1")
 			// dispatch({ 
 			//    type: "init_stored", 
 			//    value: JSON.parse(localStorage.getItem("state")),
