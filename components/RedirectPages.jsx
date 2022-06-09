@@ -10,6 +10,9 @@ const RedirectPages = (props) => {
 		() => {
 			console.log('props');
 			console.log(props);
+			if (props.hasOwnProperty('src')) {
+				localStorage.setItem("src", JSON.stringify(props.src));
+			}
 			if (props.hasOwnProperty('dest')) {
 				switch (props.dest) {
 					case 'addpc':

@@ -158,6 +158,17 @@ function AddPc(props) {
 			return false;
 		}
 	};
+	let backToDashboard = () =>{
+		if (JSON.parse(localStorage.getItem("src"))) { 
+   
+			window.location.assign(JSON.parse(localStorage.getItem("src")))
+			// dispatch({ 
+			//    type: "init_stored", 
+			//    value: JSON.parse(localStorage.getItem("state")),
+			// });
+		}
+	  
+	}
 
 	return (
 		<div className="container">
@@ -206,6 +217,7 @@ function AddPc(props) {
 						<button
 							type="button"
 							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							onClick={()=>backToDashboard()}
 						>
 							Back
 						</button>
