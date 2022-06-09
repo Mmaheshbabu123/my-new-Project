@@ -30,8 +30,8 @@ const Table = (props) => {
 								</td>
 							))}
 							<td className="text-end">
-								<span onClick={() => props.secInfoFromTable(props.sectype, props.secId)}>
-									<FaEdit />
+								<span>
+									{props.type!='addpc'&&<FaEdit />}
 								</span>
 							</td>
 						</tr>

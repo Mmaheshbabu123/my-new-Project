@@ -24,34 +24,33 @@ import {
 import { useRouter } from 'next/router';
 
 const PcOverview = (params) => {
-	const { pc_unique_key, setPc_unique_key, current_sec } = useContext(PcContext);
+	const {
+		pc_unique_key,
+		setPc_unique_key,
+		current_sec,
+		cat_rightsec,
+		setCat_rightsec,
+		cat_leftsec,
+		setCat_leftsec,
+		cat_subsec_type,
+		setCat_subsec_type
+	} = useContext(PcContext);
 
 	const router = useRouter();
 	const [ pc, setPc ] = useState([]);
-	const [ enableEdit, setEnableEdit ] = useState(false);
-	const [ leftSec, setLeftSec ] = useState('col-md-12');
-	const [ rightSec, setRightSec ] = useState('');
 	const [ count, setCount ] = useState(1);
-	const [ data, setData ] = useState('');
-	const [ pclistUpdated, setPclistUpdated ] = useState(false);
-	const [ category, setCategory ] = useState(false);
-	// const [ addfunction, setAddfunction ] = useState(false);
-	const [ editpc, setEditpc ] = useState(false);
-
 	const [ secid, setSecid ] = useState('');
 	const [ pc_number, setPc_number ] = useState('');
+	const [ type, setType ] = useState('');
 	if (pc_unique_key == '' && router.query.uid) {
 		setPc_unique_key(router.query.uid);
 	}
-
-	const [ page_type, setPage_type ] = useState('add');
-
 	/**
    * Fetch data from backend on page load
    */
 	useEffect(
 		() => {
-			console.log("test");
+			console.log('test');
 			if (current_sec == 2) {
 				if (pc_unique_key) {
 					APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
@@ -59,6 +58,7 @@ const PcOverview = (params) => {
 							console.log(result);
 							setPc(result.data);
 							setPc_number(result.data['pc_number']);
+							setType(params.type);
 						})
 						.catch((error) => {
 							console.error(error);
@@ -66,27 +66,16 @@ const PcOverview = (params) => {
 				}
 			}
 		},
-		[current_sec]
+		[ current_sec, pc_unique_key ]
 	);
-
-	const childToParent = (childdata) => {
-		setPclistUpdated(false);
-
-		setPclistUpdated(true);
-		setLeftSec('col-md-12');
-		// setAddfunction(false);
-		setCategory(false);
-
-		setEnableEdit(false);
-	};
 
 	return (
 		<div className="container">
 			<div className="row pt-4">
-				<div className={`px-5 ${leftSec}`}>
+				<div className={`px-5 ${cat_leftsec}`}>
 					{pc && (
 						<div>
-							{pc_unique_key}
+							{cat_subsec_type == 0 && (
 								<div className="text-end me-4">
 									<button
 										type="button"
@@ -94,8 +83,9 @@ const PcOverview = (params) => {
 										pcid={pc_unique_key}
 										className={'btn me-3' + styles.btncolor}
 										onClick={() => {
-											setCategory(true);
-											setEnableEdit(true);
+											setCat_leftsec('col-md-9');
+											setCat_rightsec('d-block col-md-3');
+											setCat_subsec_type(1);
 										}}
 									>
 										Add category
@@ -106,13 +96,15 @@ const PcOverview = (params) => {
 										pcid={pc_unique_key}
 										className={'btn me-2' + styles.btncolor}
 										onClick={() => {
-											// setAddfunction(true);
-											setEnableEdit(true);
+											setCat_leftsec('col-md-9');
+											setCat_rightsec('d-block col-md-3');
+											setCat_subsec_type(2);
 										}}
 									>
 										Add function
 									</button>
 								</div>
+							)}
 							<ul className={`list-inline list-unstyled ${styles.tree}`}>
 								<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
 									<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
@@ -132,10 +124,17 @@ const PcOverview = (params) => {
 										index={count + 1}
 										title={pc['pc_name']}
 										theader={pc['header']}
-										tvalue={[ pc['pc_number'], pc['pc_name'] ]}
+										tvalue={
+											pc['pc_alias_name'] != '' ? (
+												[ pc['pc_number'], pc['pc_alias_name'] ]
+											) : (
+												[ pc['pc_number'], pc['pc_name'] ]
+											)
+										}
 										actiontype={[ 'edit' ]}
 										sectype="pc"
 										secId={pc['id']}
+										type={type}
 									/>
 								</ul>
 								{pc['childObj'] &&
@@ -162,6 +161,7 @@ const PcOverview = (params) => {
 													className="ms-2"
 													sectype="cat"
 													secId={pc['childObj'][val]['id']}
+													type={type}
 												/>
 											) : (
 												<ListView
@@ -212,29 +212,34 @@ const PcOverview = (params) => {
 						</div>
 					)}
 				</div>
-					<div className="col-md-3 px-4 pt-5 border-start border-2">
-						<div className="text-center">
-							<button
-								type="button"
-								to="category"
-								pcid={pc_unique_key}
-								className={'btn me-3' + styles.btncolor}
-							>
-								Add category
-							</button>
-							<button
-								type="button"
-								to="function"
-								pcid={pc_unique_key}
-								className={'btn me-2' + styles.btncolor}
-							>
-								Add function
-							</button>
-						</div>
-						<AddCategory id={secid} />
-						<AddFunction id={secid} />
+				<div className={`px-4 pt-2 border-start border-2 ${cat_rightsec}`}>
+					<div className="text-center">
+						<button
+							type="button"
+							to="category"
+							pcid={pc_unique_key}
+							className={'btn me-3' + styles.btncolor}
+							onClick={() => {
+								setCat_subsec_type(1);
+							}}
+						>
+							Add category
+						</button>
+						<button
+							type="button"
+							to="function"
+							pcid={pc_unique_key}
+							className={'btn me-2' + styles.btncolor}
+							onClick={() => {
+								setCat_subsec_type(2);
+							}}
+						>
+							Add function
+						</button>
 					</div>
-
+					{cat_subsec_type == 1 && <AddCategory id={secid} />}
+					{cat_subsec_type == 2 && <AddFunction id={secid} />}
+				</div>
 			</div>
 		</div>
 	);

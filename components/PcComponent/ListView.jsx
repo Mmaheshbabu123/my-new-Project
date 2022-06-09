@@ -18,6 +18,8 @@ const ListView = (props) => {
 	const [ count, setCount ] = useState(props.index);
 	const [ sectype, setSectype ] = useState();
 	const [ secId, setSecId ] = useState();
+	const [type, setType] = useState('');
+
 
 	useEffect(
 		() => {
@@ -32,6 +34,9 @@ const ListView = (props) => {
 			}
 			if (props.secId) {
 				setSecId(props.secId);
+			}
+			if (props.type) {
+				setType(props.type);
 			}
 		},
 		[ props ]
@@ -60,7 +65,7 @@ const ListView = (props) => {
 								aria-controls={`flush-collapse${props.pc_number}pc${props.index}`}
 							>
 								<span className="w-25 ">{props.pc_number}</span>
-								<span className="ms-4">{props.title}</span>
+								<span className="ms-4">{props.tvalue[1]}</span>
 							</button>
 						</h4>
 						<div
@@ -71,11 +76,11 @@ const ListView = (props) => {
 						>
 							<div className="accordion-body">
 								<Table
-									secInfoFromTable={SecInfo}
 									header={header}
 									tvalue={tval}
 									sectype={sectype}
 									secId={secId}
+									type={type}
 								/>
 							</div>
 						</div>
