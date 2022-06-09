@@ -33,7 +33,11 @@ const PcOverview = (params) => {
 		cat_leftsec,
 		setCat_leftsec,
 		cat_subsec_type,
-		setCat_subsec_type
+		setCat_subsec_type,
+		cat_fun_updated,
+		setCat_fun_updated,
+		sec_completed,
+		setSec_completed
 	} = useContext(PcContext);
 
 	const router = useRouter();
@@ -50,13 +54,17 @@ const PcOverview = (params) => {
    */
 	useEffect(
 		() => {
-			console.log('test');
 			if (current_sec == 2) {
+				var res1 = sec_completed;
+				res1['pc'] = true;
+				setSec_completed(res1);
 				if (pc_unique_key) {
-					APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
+					
+					 APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
 						.then((result) => {
 							console.log(result);
 							setPc(result.data);
+							console.log(pc)
 							setPc_number(result.data['pc_number']);
 							setType(params.type);
 						})
@@ -66,7 +74,7 @@ const PcOverview = (params) => {
 				}
 			}
 		},
-		[ current_sec, pc_unique_key ]
+		[ current_sec, pc_unique_key]
 	);
 
 	return (

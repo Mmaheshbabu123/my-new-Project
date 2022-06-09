@@ -6,7 +6,6 @@ import { storeCategoryDetails, getCat, catUpdate } from '../../Services/ApiEndPo
 import styles from '../../styles/Pc.module.css';
 import { PcContext } from '../../Contexts/PcContext';
 
-
 function AddCategory(props) {
 	// const [id, setId] = useState(props.secid);
 	// const urlParam = useParams();
@@ -22,35 +21,42 @@ function AddCategory(props) {
 	// const [ name, setfrnch ] = useState('');
 	// const [ field, setfield ] = useState();
 	const [ field1, setfield1 ] = useState();
-	const {setCurrent_sec, setSec_completed, sec_completed,pc_unique_key, setPc_unique_key } = useContext(PcContext);
-
+	const {
+		setCurrent_sec,
+		setSec_completed,
+		sec_completed,
+		pc_unique_key,
+		setPc_unique_key,
+		setCat_fun_updated
+	} = useContext(PcContext);
 
 	let postdata = async (e) => {
 		if (data.id == '') {
-		APICALL.service(storeCategoryDetails, 'POST', data)
-			.then((result) => {
-				console.log(result);
-				if (result.status === 200) {
-					// navigate("/pc/"+urlParam.id);
-					// childToParent(data);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+			APICALL.service(storeCategoryDetails, 'POST', data)
+				.then((result) => {
+					console.log(result);
+					if (result.status === 200) {
+						setCat_fun_updated("cat"+result.ctid)
+						// navigate("/pc/"+urlParam.id);
+						// childToParent(data);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 		} else {
-		// 	console.log('test');
-		// 	APICALL.service(catUpdate, 'POST', data)
-		// 		.then((result) => {
-		// 			console.log(result);
-		// 			if (result.status === 200) {
-		// 				// navigate("/pc/"+urlParam.id);
-		// 				childToParent(data);
-		// 			}
-		// 		})
-		// 		.catch((error) => {
-		// 			console.error(error);
-		// 		});
+			// 	console.log('test');
+			// 	APICALL.service(catUpdate, 'POST', data)
+			// 		.then((result) => {
+			// 			console.log(result);
+			// 			if (result.status === 200) {
+			// 				// navigate("/pc/"+urlParam.id);
+			// 				childToParent(data);
+			// 			}
+			// 		})
+			// 		.catch((error) => {
+			// 			console.error(error);
+			// 		});
 		}
 	};
 	/**
@@ -112,7 +118,7 @@ function AddCategory(props) {
 	return (
 		<div className="mt-4">
 			<form onSubmit={submit}>
-				{data.id != '' ? <h4 className='h5 mb-3'>Edit category</h4> : <h4 className='h5 mb-3'>Add category</h4>}
+				{data.id != '' ? <h4 className="h5 mb-3">Edit category</h4> : <h4 className="h5 mb-3">Add category</h4>}
 				<label className="mb-2 custom_astrick">Category name </label>
 				<div className="form-group">
 					<input
@@ -143,10 +149,13 @@ function AddCategory(props) {
 					<p style={{ color: 'red' }}>{field1}</p>
 				</div>
 
-				<div className='text-end'>
-					<button className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn" onClick={()=>{
-						setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
-					}}>
+				<div className="text-end">
+					<button
+						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+						onClick={() => {
+							setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
+						}}
+					>
 						Save
 					</button>
 				</div>

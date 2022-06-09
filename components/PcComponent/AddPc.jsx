@@ -13,17 +13,17 @@ import { getPcByUniquekey } from '../../Services/ApiEndPoints';
  */
 function AddPc(props) {
 	const router = useRouter();
-	const { setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
+	const { pc_unique_key, setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
 	// const [ pc_unique_key, setPc_unique_key ] = useState();
 	const [ error_pc_number, setError_pc_number ] = useState('');
 	const [ error_pc_name, setError_pc_name ] = useState('');
 	const [ error_pc_alias_name, setError_pc_alias_name ] = useState('');
 
 	const [ field1, setfield1 ] = useState();
-	var unique_key = router.query.uid ? router.query.uid : '';
+	// var unique_key = router.query.uid ? router.query.uid : '';
 	const [ data, setData ] = useState({
 		id: '',
-		pc_unique_key: router.query.uid,
+		pc_unique_key: '',
 		pc_number: '',
 		pc_name: '',
 		pc_alias_name: ''
@@ -37,34 +37,42 @@ function AddPc(props) {
 
 	useEffect(
 		() => {
-			if (unique_key) {
-				var res1 = sec_completed;
-				res1['pc'] = true;
-				setSec_completed(res1);
+			console.log(router.query.uid);
+			// if (unique_key) {
+			// 	var res1 = sec_completed;
+			// 	res1['pc'] = true;
+			// 	setSec_completed(res1);
+			// }
+			if (pc_unique_key == '') {
+				if (!router.isReady) return;
+				else{
+					setPc_unique_key(router.query.uid);	
+				}
+			}else{
+				APICALL.service(getPcByUniquekey + router.query.uid, 'GET')
+						.then((result) => {
+							console.log(result);
+							if (result.status === 200 && result.data.length > 0) {
+								var res1 = sec_completed;
+								res1['pc'] = true;
+								setSec_completed(res1);
+								var data1 = {};
+								data1['id'] = result.data[0].id;
+								data1['pc_unique_key'] = result.data[0].pc_unique_key;
+								data1['pc_number'] = result.data[0].pc_number;
+								data1['pc_name'] = result.data[0].pc_name;
+								data1['pc_alias_name'] = result.data[0].pc_alias_name;
+								setData(data1);
+							}
+						})
+						.catch((error) => {
+							console.error(error);
+						});
 			}
-			if (!router.isReady) return;
-			if (router.query.uid) {
-				setPc_unique_key(router.query.uid);
-				APICALL.service(getPcByUniquekey + unique_key, 'GET')
-					.then((result) => {
-						console.log(result);
-						if (result.status === 200 && result.data.length > 0) {
-							var res1 = sec_completed;
-							res1['pc'] = true;
-							setSec_completed(res1);
-							var data1 = {};
-							data1['id'] = result.data[0].id;
-							data1['pc_unique_key'] = result.data[0].pc_unique_key;
-							data1['pc_number'] = result.data[0].pc_number;
-							data1['pc_name'] = result.data[0].pc_name;
-							data1['pc_alias_name'] = result.data[0].pc_alias_name;
-							setData(data1);
-						}
-					})
-					.catch((error) => {
-						console.error(error);
-					});
-			}
+				if (router.query.uid) {
+					setPc_unique_key(router.query.uid);
+					
+				}
 		},
 		[ router.isReady ]
 	);
@@ -205,12 +213,21 @@ function AddPc(props) {
 					</div>
 					<div className="col-md-6" />
 					<div className="text-start col-md-6">
-						<button type="button" className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
+						<button
+							type="button"
+							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+						>
 							Back
 						</button>
 					</div>
 					<div className="text-end col-md-6">
-						<button type="sumit" className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
+						<button
+							type="sumit"
+							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							onClick={() => {
+								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
+							}}
+						>
 							Next
 						</button>
 					</div>
