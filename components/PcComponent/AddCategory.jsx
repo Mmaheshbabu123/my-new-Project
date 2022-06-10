@@ -17,9 +17,7 @@ function AddCategory(props) {
 		min_salary: '',
 		pc_unique_key: ''
 	});
-	// const [ salary, setsalary ] = useState('');
-	// const [ name, setfrnch ] = useState('');
-	// const [ field, setfield ] = useState();
+
 	const [ field1, setfield1 ] = useState();
 	const {
 		setCurrent_sec,
@@ -27,7 +25,10 @@ function AddCategory(props) {
 		sec_completed,
 		pc_unique_key,
 		setPc_unique_key,
-		setCat_fun_updated
+		setCat_rightsec,
+		setCat_leftsec,
+		setCat_fun_updated,
+		setCat_subsec_type
 	} = useContext(PcContext);
 
 	let postdata = async (e) => {
@@ -37,8 +38,9 @@ function AddCategory(props) {
 					console.log(result);
 					if (result.status === 200) {
 						setCat_fun_updated("cat"+result.ctid)
-						// navigate("/pc/"+urlParam.id);
-						// childToParent(data);
+						setCat_rightsec('d-none');
+						setCat_leftsec('col-md-12');
+						setCat_subsec_type(0);
 					}
 				})
 				.catch((error) => {

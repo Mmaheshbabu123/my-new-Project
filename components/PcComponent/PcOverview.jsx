@@ -19,7 +19,8 @@ import {
 	FaAngleUp,
 	FaAngleDown,
 	FaArrowCircleRight,
-	FaRedo
+	FaRedo,
+	FaRegMinusSquare
 } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 
@@ -74,7 +75,7 @@ const PcOverview = (params) => {
 				}
 			}
 		},
-		[ current_sec, pc_unique_key]
+		[ current_sec, pc_unique_key, cat_fun_updated]
 	);
 
 	return (
@@ -123,7 +124,7 @@ const PcOverview = (params) => {
 											aria-expanded="false"
 											aria-controls={'collapsepc' + pc_unique_key}
 										>
-											<FaRegPlusSquare />
+											<span><FaRegMinusSquare/></span>
 										</a>
 									</li>
 									<ListView
@@ -149,7 +150,7 @@ const PcOverview = (params) => {
 									Object.keys(pc['childObj']).map((val, key) => (
 										<ul
 											id={'collapsepc' + pc_unique_key}
-											className={`collapse list-inline list-unstyled ms-5 my-0 py-1 ${styles.lev1} ${styles.tree}`}
+											className={`collapse show list-inline list-unstyled ms-5 my-0 py-1 ${styles.lev1} ${styles.tree}`}
 											key={val}
 										>
 											<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
