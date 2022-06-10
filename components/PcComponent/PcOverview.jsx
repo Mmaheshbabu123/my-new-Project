@@ -38,7 +38,9 @@ const PcOverview = (params) => {
 		cat_fun_updated,
 		setCat_fun_updated,
 		sec_completed,
-		setSec_completed
+		setSec_completed,
+		cat_subsec_id,
+		setCat_subsec_id
 	} = useContext(PcContext);
 
 	const router = useRouter();
@@ -76,7 +78,7 @@ const PcOverview = (params) => {
 			}
 		},
 		[ current_sec, pc_unique_key, cat_fun_updated]
-	);
+	);setCat_subsec_id
 
 	return (
 		<div className="container">
@@ -230,6 +232,7 @@ const PcOverview = (params) => {
 							className={'btn me-3' + styles.btncolor}
 							onClick={() => {
 								setCat_subsec_type(1);
+								setCat_subsec_id('');
 							}}
 						>
 							Add category
@@ -241,6 +244,7 @@ const PcOverview = (params) => {
 							className={'btn me-2' + styles.btncolor}
 							onClick={() => {
 								setCat_subsec_type(2);
+								setCat_subsec_id('');
 							}}
 						>
 							Add function
