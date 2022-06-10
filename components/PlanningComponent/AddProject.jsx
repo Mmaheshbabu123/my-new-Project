@@ -60,8 +60,26 @@ function Addproject(props) {
 		//check if project location is valid (varchar?)
 		error1['project_location'] =
 			error1['project_location'] == ''
-				? ValidationService.nameValidationMethod(res.project_name)
+				? ValidationService.nameValidationMethod(res.project_location)
 				: error1['project_location'];
+		//check if hno is valid
+		error1['hno'] = error1['hno'] == '' ? ValidationService.nameValidationMethod(res.hno) : error1['hno'];
+
+		//check if city is valid
+		error1['city'] = error1['city'] == '' ? ValidationService.nameValidationMethod(res.city) : error1['city'];
+
+		//check if extra field is valid
+		error1['extra'] = error1['extra'] == '' ? ValidationService.nameValidationMethod(res.extra) : error1['extra'];
+
+		// check if street field is valid
+		error1['street'] =
+			error1['street'] == '' ? ValidationService.nameValidationMethod(res.street) : error1['street'];
+
+		// check if postalcode is valid
+		error1['postal_code'] =
+			error1['postal_code'] == ''
+				? ValidationService.nameValidationMethod(res.postal_code)
+				: error1['postal_code'];
 
 		//seterror messages
 		setError_project_name(error1['project_name']);
@@ -74,6 +92,7 @@ function Addproject(props) {
 		setError_postal_code(error1['postal_code']);
 		setError_country(error1['country']);
 	};
+
 	const companyname = [
 		{
 			value: '10',
