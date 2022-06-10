@@ -20,7 +20,7 @@ const ManageCategoryComponent = () => {
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ catid, setCatid ] = useState('');
 
-	const [ popup, setPopUp ] = useState('false');
+	// const [ popup, setPopUp ] = useState('false');
 
 	useEffect(
 		() => {
@@ -149,7 +149,7 @@ const ManageCategoryComponent = () => {
 		<div className="container">
 			<form>
 				<div className="row">
-					<h4 className="mt-4 mb-2">MANAGE CATEGORIES</h4>
+					<p className="mt-4 mb-2 h4">MANAGE CATEGORIES</p>
 
 					<div className="col-sm-2">
 						<input
@@ -201,32 +201,32 @@ const ManageCategoryComponent = () => {
 						</button>
 					</div>
 
-					<div className="form-check mt-2 ">
-						<table className="table table-bordered mt-3">
+					<div className="form-check mt-2 text-center ">
+						<table className="table border border-secondary mt-3">
 							<thead>
 								<tr className="table-secondary">
-									<th>Paritair Comite Number</th>
-									<th>Category name</th>
-									<th>Minimum Salary</th>
-									<th>Action</th>
+									<th className="border-end border-secondary">Paritair Comite Number</th>
+									<th className="border-end border-secondary">Category name</th>
+									<th className="border-end border-secondary">Minimum Salary</th>
+									<th className="border-end border-secondary">Action</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody className="">
 								{categories.length > 0 &&
 									categories.map((result) => (
-										<tr key={result.cat_id}>
-											<td>{result.pc_number}</td>
-											<td>{result.category_name}</td>
-											<td>€ {result.min_salary}</td>
-											<td className="d-flex ">
-											<Link href="/addpc">
-												<a>
-													<MdEdit className="mt-2 ms-3" />
+										<tr className="border-bottom border-secondary" key={result.cat_id}>
+											<td className="border-end border-secondary">{result.pc_number}</td>
+											<td className="border-end border-secondary">{result.category_name}</td>
+											<td className="border-end border-secondary">€ {result.min_salary}</td>
+											<td className="d-flex justify-content-center">
+												<Link href="/addpc" className="">
+													<a>
+														<MdEdit className="mt-2 ms-3 " />
 													</a>
 												</Link>
 
 												<span onClick={() => showPopup(result.cat_id)} type="button">
-													<MdDelete className="mt-2 ms-3" />
+													<MdDelete className="mt-2 ms-3 " />
 												</span>
 											</td>
 										</tr>
@@ -243,11 +243,8 @@ const ManageCategoryComponent = () => {
 					</div>
 				</div>
 				<Link href="/addpc">
-				<a  className="btn btn-secondary btn-lg btn-block float-right mt-5">
-					Add Category
-				</a>
+					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
 				</Link>
-				
 			</form>
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletecat} />
