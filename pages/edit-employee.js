@@ -1,7 +1,7 @@
 import { Layout } from "../components/layout/Layout";
-import EmployeeType from "../components/PcComponent/EmployeeType";
+import EditEmployee from "../components/PlanningComponent/EditEmployee";
 
-const editemployee = () => (
-    <div><EmployeeType /></div>
+const Editemployee = () => (
+    <div><EditEmployee /></div>
 )
-export default editemployee;
+export default Editemployee;

@@ -12,6 +12,7 @@ const EmployeeType = () => {
 	return (
 		<div className="container">
 			<div className="row d-flex justify-content-center">
+				<p className="h3 text-center mt-2">Edit employee type</p>
 				<div className="col-sm-5 d-flex form-group bg-light mt-4">
 					<input type="checkbox" className="" value="1" />
 					<label className="p-3 ms-2 md-4"> Worker</label>
