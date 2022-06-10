@@ -1,9 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { FaEdit } from 'react-icons/fa';
+import { PcContext } from '../../Contexts/PcContext';
 
 const Table = (props) => {
 	const [ thvalues, setThvalues ] = useState([]);
 	const [ tvalues, setTvalues ] = useState([]);
+	const {
+		pc_unique_key,
+		setPc_unique_key,
+		current_sec,
+		cat_rightsec,
+		setCat_rightsec,
+		cat_leftsec,
+		setCat_leftsec,
+		cat_subsec_type,
+		setCat_subsec_type,
+		cat_fun_updated,
+		setCat_fun_updated,
+		sec_completed,
+		setSec_completed,
+		cat_subsec_id, 
+		setCat_subsec_id
+	} = useContext(PcContext);
 
 	useEffect(
 		() => {
@@ -16,6 +34,14 @@ const Table = (props) => {
 		},
 		[ props ]
 	);
+	let editCatOrFun = () =>{
+		if(props.sectype =='cat'){
+			setCat_subsec_type(1);
+			setCat_leftsec('col-md-9');
+			setCat_rightsec('d-block col-md-3');
+			setCat_subsec_id(props.secId);
+		}
+	}
 
 	return (
 		<div>
@@ -30,8 +56,8 @@ const Table = (props) => {
 								</td>
 							))}
 							<td className="text-end">
-								<span>
-									{props.type!='addpc'&&<FaEdit />}
+								<span onClick={() => {editCatOrFun()}}>
+									{props.sectype != 'pc' && <FaEdit />}
 								</span>
 							</td>
 						</tr>

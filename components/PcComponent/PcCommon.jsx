@@ -6,7 +6,6 @@ import AddAge from './AddAge';
 import EmployeeType from './EmployeeType';
 import { useRouter } from 'next/router';
 
-
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
 const PcCommon = (props) => {
@@ -25,8 +24,7 @@ const PcCommon = (props) => {
 	const [ cat_leftsec, setCat_leftsec ] = useState('col-md-12');
 	const [ cat_subsec_type, setCat_subsec_type ] = useState(0);
 	const [ cat_fun_updated, setCat_fun_updated ] = useState('');
-
-
+	const [ cat_subsec_id, setCat_subsec_id ] = useState(0);
 
 	useEffect(
 		() => {
@@ -35,7 +33,8 @@ const PcCommon = (props) => {
 				setPc_unique_key(router.query.uid);
 			}
 		},
-		[ router.isReady ]);
+		[ router.isReady ]
+	);
 
 	return (
 		<div className="container mt-5">
@@ -56,7 +55,9 @@ const PcCommon = (props) => {
 					cat_subsec_type,
 					setCat_subsec_type,
 					cat_fun_updated,
-					setCat_fun_updated
+					setCat_fun_updated,
+					cat_subsec_id,
+					setCat_subsec_id
 				}}
 			>
 				<p className="h5">
@@ -97,8 +98,8 @@ const PcCommon = (props) => {
 								) : (
 									<BsCircle className="d-inline mb-2" />
 								)}
-								<p className="mb-2">Step 1:</p>{' '}
-								<p>Paritair comitte details{console.log(sec_completed.pc)}</p>
+								<p className="mb-2">Step 1:</p>
+								<p>Paritair comitte details</p>
 							</button>
 						</li>
 						<li className="nav-item" role="presentation">

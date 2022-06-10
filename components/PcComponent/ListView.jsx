@@ -51,28 +51,28 @@ const ListView = (props) => {
 			{header && (
 				<div
 					className={`accordion accordion-flush ${styles.sectioncolor} px-4`}
-					id={`accordionFlush${props.pc_number}pc${props.index}`}
+					id={`accordionFlush${props.pc_number.replace(".", "")}pc${props.index}`}
 				>
 					<div className={`accordion-item ${styles.sectioncolor}`}>
 						<h4 className="accordion-header" 
-						id={`flush-heading${props.pc_number}pc${props.index}`}>
+						id={`flush-heading${props.pc_number.replace(".", "")}pc${props.index}`}>
 							<button
 								className={`accordion-button collapsed ${styles.listtitle} ${styles.sectioncolor} fw-bold`}
 								type="button"
 								data-bs-toggle="collapse"
-								data-bs-target={`#flush-collapse${props.pc_number}pc${props.index}`}
+								data-bs-target={`#flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
 								aria-expanded="false"
-								aria-controls={`flush-collapse${props.pc_number}pc${props.index}`}
+								aria-controls={`flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
 							>
-								<span className="w-25 ">{props.pc_number}</span>
-								<span className="ms-4">{props.title}</span>
+								{props.sectype=='pc' &&<span className="w-25 "> {props.pc_number}</span>}
+								<span className={props.sectype=='pc'?'ms-4':''}>{props.title}</span>
 							</button>
 						</h4>
 						<div
-							id={`flush-collapse${props.pc_number}pc${props.index}`}
+							id={`flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
 							className="accordion-collapse collapse border-top border-1 border-secondary"
-							aria-labelledby={`flush-collapse${props.pc_number}pc${props.index}`}
-							data-bs-parent={`#accordionFlush${props.pc_number}pc${props.index}`}
+							aria-labelledby={`flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
+							data-bs-parent={`#accordionFlush${props.pc_number.replace(".", "")}pc${props.index}`}
 						>
 							<div className="accordion-body">
 								<Table
