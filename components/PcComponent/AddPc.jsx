@@ -27,12 +27,6 @@ function AddPc(props) {
 		pc_alias_name: ''
 	});
 
-	const [ error, setError ] = useState({
-		pc_number: '',
-		pc_name: '',
-		pc_alias_name: ''
-	});
-
 	/**
 	 * Prefill data if pc already exist
 	 */
