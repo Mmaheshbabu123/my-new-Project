@@ -2,7 +2,7 @@ import React from 'react';
 
 function Popup(props) {
 	return (
-		<div className="modal" id="myModal" style={{ display: 'block' }}>
+		<div className="modal" id="myModal" style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}>
 			<div className="modal-dialog">
 				<div className="modal-content">
 					<div className="modal-header">

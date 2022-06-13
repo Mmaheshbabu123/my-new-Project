@@ -18,16 +18,9 @@ function AddPc(props) {
 	const [ error_pc_name, setError_pc_name ] = useState('');
 	const [ error_pc_alias_name, setError_pc_alias_name ] = useState('');
 
-	const [ field1, setfield1 ] = useState();
 	const [ data, setData ] = useState({
 		id: '',
 		pc_unique_key: '',
-		pc_number: '',
-		pc_name: '',
-		pc_alias_name: ''
-	});
-
-	const [ error, setError ] = useState({
 		pc_number: '',
 		pc_name: '',
 		pc_alias_name: ''
@@ -79,6 +72,9 @@ function AddPc(props) {
 					console.log(result);
 					if (result.status === 200) {
 						setCurrent_sec(2);
+						var res1 = sec_completed;
+						res1['pc'] = true;
+						setSec_completed(res1);
 					} else if (result.status == 205) {
 						checkduplicates(result.data);
 					} else {
@@ -169,9 +165,9 @@ function AddPc(props) {
 	return (
 		<div className="container">
 			<form onSubmit={(e) => submit(e)}>
-				<div className="row pt-5">
+				<div className="row pt-4">
 					<div className="col-md-6">
-						<div className="form-group mt-3 mb-4">
+						<div className="form-group py-2">
 							<label className="custom_astrick">Paritair comitte number</label>
 							<input
 								type="text"
@@ -183,7 +179,7 @@ function AddPc(props) {
 							/>
 							<p className="error mt-2">{error_pc_number}</p>
 						</div>
-						<div className="form-group mt-3 mb-4">
+						<div className="form-group py-2">
 							<label className="custom_astrick">Paritair comitte name </label>
 							<input
 								type="text"
@@ -195,7 +191,7 @@ function AddPc(props) {
 							/>
 							<p className="error mt-2">{error_pc_name}</p>
 						</div>
-						<div className="form-group mt-3 mb-4">
+						<div className="form-group py-2">
 							<label>Paritair comitte alias name </label>
 							<input
 								type="text"
@@ -209,6 +205,8 @@ function AddPc(props) {
 						</div>
 					</div>
 					<div className="col-md-6" />
+					</div>
+					<div className='row'>
 					<div className="text-start col-md-6">
 						<button
 							type="button"

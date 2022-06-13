@@ -7,9 +7,6 @@ import styles from '../../styles/Pc.module.css';
 import { PcContext } from '../../Contexts/PcContext';
 
 function AddCategory(props) {
-	// const [id, setId] = useState(props.secid);
-	// const urlParam = useParams();
-	// const navigate = useNavigate();
 	const [id, setId] = useState('');
 	const [ data, setData ] = useState({
 		id: '',
@@ -35,7 +32,7 @@ function AddCategory(props) {
 	} = useContext(PcContext);
 
 	let postdata = async (e) => {
-		if (data.id == '') {
+		if (id == '') {
 			APICALL.service(storeCategoryDetails, 'POST', data)
 				.then((result) => {
 					console.log(result);
@@ -86,9 +83,11 @@ function AddCategory(props) {
 					.catch((error) => {
 						console.error(error);
 					});
+			}else{
+				
 			}
 		},
-		[id ]
+		[id]
 	);
 
 
@@ -96,6 +95,13 @@ function AddCategory(props) {
 		if(cat_subsec_type == 1){
 			setId(cat_subsec_id);
 
+		}
+		if(cat_subsec_id == ''){  //create category data for add category flow
+			var data1 =	data;
+			data1.id = ''
+			data1.category_name = ''
+			data1.min_salary = '',
+			setData(data1);
 		}
 	},[cat_subsec_id]
 	)
@@ -129,7 +135,7 @@ function AddCategory(props) {
 	return (
 		<div className="mt-4">
 			<form onSubmit={submit}>
-				{data.id != '' ? <h4 className="h5 mb-3">Edit category</h4> : <h4 className="h5 mb-3">Add category</h4>}
+				{id != '' ? <h4 className="h5 mb-3">Edit category</h4> : <h4 className="h5 mb-3">Add category</h4>}
 				<label className="mb-2 custom_astrick">Category name</label>
 				<div className="form-group mb-3">
 					<input

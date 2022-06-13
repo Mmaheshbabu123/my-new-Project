@@ -38,7 +38,10 @@ const PcOverview = (params) => {
 		cat_fun_updated,
 		setCat_fun_updated,
 		sec_completed,
-		setSec_completed
+		setSec_completed,
+		cat_subsec_id,
+		setCat_subsec_id,
+		setCurrent_sec
 	} = useContext(PcContext);
 
 	const router = useRouter();
@@ -60,12 +63,11 @@ const PcOverview = (params) => {
 				res1['pc'] = true;
 				setSec_completed(res1);
 				if (pc_unique_key) {
-					
-					 APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
+					APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
 						.then((result) => {
 							console.log(result);
 							setPc(result.data);
-							console.log(pc)
+							console.log(pc);
 							setPc_number(result.data['pc_number']);
 							setType(params.type);
 						})
@@ -75,12 +77,20 @@ const PcOverview = (params) => {
 				}
 			}
 		},
-		[ current_sec, pc_unique_key, cat_fun_updated]
+		[ current_sec, pc_unique_key, cat_fun_updated ]
 	);
+
+	let next_redirection = () =>{
+		setCurrent_sec(3);
+		var res1 = sec_completed;
+		res1['cat'] = true;
+		setSec_completed(res1);
+	} 
+
 
 	return (
 		<div className="container">
-			<div className="row pt-4">
+			<div className="row pt-4 min-vh-75">
 				<div className={`px-5 ${cat_leftsec}`}>
 					{pc && (
 						<div>
@@ -124,14 +134,22 @@ const PcOverview = (params) => {
 											aria-expanded="false"
 											aria-controls={'collapsepc' + pc_unique_key}
 										>
-											<span><FaRegMinusSquare/></span>
+											<span>
+												<FaRegMinusSquare />
+											</span>
 										</a>
 									</li>
 									<ListView
 										pcid={pc_unique_key}
 										pc_number={pc_number}
 										index={count + 1}
-										title={pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined?pc['pc_alias_name']:pc['pc_name']}
+										title={
+											pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined ? (
+												pc['pc_alias_name']
+											) : (
+												pc['pc_name']
+											)
+										}
 										theader={pc['header']}
 										tvalue={
 											pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined ? (
@@ -230,6 +248,7 @@ const PcOverview = (params) => {
 							className={'btn me-3' + styles.btncolor}
 							onClick={() => {
 								setCat_subsec_type(1);
+								setCat_subsec_id('');
 							}}
 						>
 							Add category
@@ -241,6 +260,7 @@ const PcOverview = (params) => {
 							className={'btn me-2' + styles.btncolor}
 							onClick={() => {
 								setCat_subsec_type(2);
+								setCat_subsec_id('');
 							}}
 						>
 							Add function
@@ -248,6 +268,29 @@ const PcOverview = (params) => {
 					</div>
 					{cat_subsec_type == 1 && <AddCategory id={secid} />}
 					{cat_subsec_type == 2 && <AddFunction id={secid} />}
+				</div>
+			</div>
+			<div className="row">
+				<div className="text-start col-md-6">
+					<button
+						type="button"
+						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+						onClick={()=>{setCurrent_sec(1)}}
+					>
+						Back
+					</button>
+				</div>
+				<div className="text-end col-md-6">
+					<button
+						type="sumit"
+						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+						onClick={() => {
+							next_redirection();
+							
+						}}
+					>
+						Next
+					</button>
 				</div>
 			</div>
 		</div>

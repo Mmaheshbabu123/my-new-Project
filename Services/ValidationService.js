@@ -60,6 +60,19 @@ const ValidationService = {
     }
     return '';
   },
+ /**
+   * percentage validation.
+   * @param {*} value 
+   * @returns 
+   */
+  percentageValidationMethod: function(value) {
+    if(!value.match(/(^100([.]0{1,2})?)$ |(^\d{1,2}([.]\d{1,2})?)$/))
+    {
+     return 'This field is invalid.';
+    }else{
+      return '';
+    }
+  },
 
 };
 
