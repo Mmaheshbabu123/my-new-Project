@@ -14,9 +14,11 @@ export const getCategory = BASE_URL + "getCategory";
 export const getFunctions = BASE_URL + "getFunctions";
 export const updateFunction = BASE_URL + "updateFunction";
 export const updateCategory = BASE_URL + "updateCategory";
-export const getPc = BASE_URL + "getParitaireCommitteFunctionCategory";
+export const getPcOverviewDetails = BASE_URL + "getParitaireCommitteFunctionCategory";
 export const addPc = BASE_URL + "addpc"
 export const updatePc = BASE_URL + "pc-update/"
+export const getAllPc = BASE_URL + "get-all-pcs";
+
 
 
 

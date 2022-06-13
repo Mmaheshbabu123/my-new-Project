@@ -1,5 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
+import ValidationService from '../../Services/ValidationService';
+import { fetchEmployeeTypes, getAllPc } from '../../Services/ApiEndPoints';
+import { APICALL } from '../../Services/ApiServices';
 
 // import { useSearchParams } from 'react-router-dom';
 
@@ -29,6 +32,55 @@ const EmployeeType = () => {
 		res1['emp_type'] = true;
 		setSec_completed(res1);
 	}
+	useEffect(
+		() => {
+			if (pc_unique_key != '') {
+				APICALL.service(getAllPc, 'GET')
+					.then((result) => {
+						console.log(result);
+				// 		if (result.data.length > 0) {
+				// 			var data1 = data;
+				// 			var count = result.data.length;
+
+				// 			data1.age = count == 3 ? '1' : count == 4 ? '2' : count == 5 ? '3' : count == 6 ? '4' : '';
+
+				// 			setShowhideage(data1.age);
+				// 			result.data.forEach(
+				// 				(val) => {
+				// 					if (val.type == '1') {
+				// 						data1.min_sal_15 = val.min_sal_percent;
+				// 					} else if (val.type == '2') {
+				// 						data1.min_sal_16 = val.min_sal_percent;
+				// 					} else if (val.type == '3') {
+				// 						data1.min_sal_17 = val.min_sal_percent;
+				// 					} else if (val.type == '4') {
+				// 						data1.min_sal_18 = val.min_sal_percent;
+				// 					} else if (val.type == '5') {
+				// 						data1.min_sal_19 = val.min_sal_percent;
+				// 					} else if (val.type == '6') {
+				// 						data1.min_sal_20 = val.min_sal_percent;
+				// 					}
+				// 					setId(val.pcid);
+				// 				}
+				// 				// foreach(data.result as ){
+				// 				// 	((val, key) => (
+				// 			);
+
+				// 			// 	// /console.log(val)
+
+				// 			// ));
+				// 			setData(data1);
+				// 			console.log(data);
+				// 			// setData(result.data[0])
+				// 		}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
+		},
+		[ pc_unique_key ]
+	);
 
 	return (
 		<div className="container">
