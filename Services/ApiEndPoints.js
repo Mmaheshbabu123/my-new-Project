@@ -42,3 +42,6 @@ export const Weeklyplanning = BASE_URL + "weeklyplanning";
 
 //--------------PC min age API ROUTES ----------------//
 export const addAge = BASE_URL + "add-age";
+export const getAge = BASE_URL + "get-pc-age/";
+export const updateAge = BASE_URL + "update-pc-age";
+

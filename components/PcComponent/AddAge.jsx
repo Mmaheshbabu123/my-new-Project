@@ -1,10 +1,11 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
 import ValidationService from '../../Services/ValidationService';
-import { addAge } from '../../Services/ApiEndPoints';
+import { addAge, getAge, updateAge } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 
 const Addage = () => {
+	const [ id, setId ] = useState('');
 	const [ showhideage, setShowhideage ] = useState('');
 	const { pc_unique_key, setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
 	const [ data, setData ] = useState({
@@ -26,6 +27,57 @@ const Addage = () => {
 	const [ error_min_sal_19, setError_min_sal_19 ] = useState('');
 	const [ error_min_sal_20, setError_min_sal_20 ] = useState('');
 
+	useEffect(
+		() => {
+			// console.log(getCat);
+			if (pc_unique_key != '') {
+				APICALL.service(getAge + pc_unique_key, 'GET')
+					.then((result) => {
+						console.log(result);
+						if (result.data.length > 0) {
+							var data1 = data;
+							var count = result.data.length;
+
+							data1.age = count == 3 ? '1' : count == 4 ? '2' : count == 5 ? '3' : count == 6 ? '4' : '';
+
+							setShowhideage(data1.age);
+							result.data.forEach(
+								(val) => {
+									if (val.type == '1') {
+										data1.min_sal_15 = val.min_sal_percent;
+									} else if (val.type == '2') {
+										data1.min_sal_16 = val.min_sal_percent;
+									} else if (val.type == '3') {
+										data1.min_sal_17 = val.min_sal_percent;
+									} else if (val.type == '4') {
+										data1.min_sal_18 = val.min_sal_percent;
+									} else if (val.type == '5') {
+										data1.min_sal_19 = val.min_sal_percent;
+									} else if (val.type == '6') {
+										data1.min_sal_20 = val.min_sal_percent;
+									}
+									setId(val.pcid);
+								}
+								// foreach(data.result as ){
+								// 	((val, key) => (
+							);
+
+							// 	// /console.log(val)
+
+							// ));
+							setData(data1);
+							console.log(data);
+							// setData(result.data[0])
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
+		},
+		[ pc_unique_key ]
+	);
+
 	const handleshowhide = (event) => {
 		const getage = event.target.value;
 		if (getage != '') {
@@ -41,80 +93,99 @@ const Addage = () => {
 		setSec_completed(res1);
 	};
 	let postdata = async (e) => {
-		if (data.id == '') {
-			console.log("test")
+		if (id == '') {
 			APICALL.service(addAge, 'POST', data)
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						// setCurrent_sec(2);
-						// var res1 = sec_completed;
-						// res1['pc'] = true;
-						// setSec_completed(res1);
+						setCurrent_sec(4);
+						var res1 = sec_completed;
+						res1['age'] = true;
+						setSec_completed(res1);
 					}
 				})
 				.catch((error) => {
 					console.error(error);
 				});
 		} else {
-			// APICALL.service(updatePc + data.id, 'POST', data)
-			// 	.then((result) => {
-			// 		console.log(result);
-			// 		if (result.status === 200) {
-			// 			setCurrent_sec(2);
-			// 			var res1 = sec_completed;
-			// 			res1['pc'] = true;
-			// 			setSec_completed(res1);
-			// 		} else if (result.status == 205) {
-			// 			checkduplicates(result.data);
-			// 		} else {
-			// 			console.log(result);
-			// 		}
-			// 	})
-			// 	.catch((error) => {
-			// 		console.error(error);
-			// 	});
+			console.log("update");
+			APICALL.service(updateAge, 'POST', data)
+				.then((result) => {
+					console.log(result);
+					if (result.status === 200) {
+						next_redirection();
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 		}
 	};
 	let submit = (e) => {
 		e.preventDefault();
-		if(validate(data)){
-		 console.log(data);
-		 postdata();
-
+		if (validate(data)) {
+			console.log(data);
+			postdata();
 		}
 	};
 	let validate = (res) => {
 		setError_age(ValidationService.emptyValidationMethod(res.age));
 		var error = [];
 		var valid = true;
-		error['min_sal_15']='';
-				error['min_sal_16']='';
-				error['min_sal_17']='';
-				error['min_sal_18']='';
-				error['min_sal_19']='';
-				error['min_sal_20']='';
+		error['min_sal_15'] = '';
+		error['min_sal_16'] = '';
+		error['min_sal_17'] = '';
+		error['min_sal_18'] = '';
+		error['min_sal_19'] = '';
+		error['min_sal_20'] = '';
 		switch (res.age) {
 			case '1': //< 16
 				error['min_sal_15'] = ValidationService.emptyValidationMethod(res.min_sal_15);
 				error['min_sal_16'] = ValidationService.emptyValidationMethod(res.min_sal_16);
 				error['min_sal_17'] = ValidationService.emptyValidationMethod(res.min_sal_17);
-				error['min_sal_15'] =	error['min_sal_15'] == ''?ValidationService.percentageValidationMethod(res.min_sal_15):error['min_sal_15'];
-				error['min_sal_16'] =	error['min_sal_16'] == ''?ValidationService.percentageValidationMethod(res.min_sal_16):error['min_sal_16'];
-				error['min_sal_17'] =	error['min_sal_17'] == ''?ValidationService.percentageValidationMethod(res.min_sal_17):error['min_sal_17'];
-				valid = error['min_sal_15'] == '' && error['min_sal_16'] == '' && error['min_sal_17'] == ''? true:false;
+				error['min_sal_15'] =
+					error['min_sal_15'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_15)
+						: error['min_sal_15'];
+				error['min_sal_16'] =
+					error['min_sal_16'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_16)
+						: error['min_sal_16'];
+				error['min_sal_17'] =
+					error['min_sal_17'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_17)
+						: error['min_sal_17'];
+				valid =
+					error['min_sal_15'] == '' && error['min_sal_16'] == '' && error['min_sal_17'] == '' ? true : false;
 				break;
 			case '2':
 				error['min_sal_15'] = ValidationService.emptyValidationMethod(res.min_sal_15);
 				error['min_sal_16'] = ValidationService.emptyValidationMethod(res.min_sal_16);
 				error['min_sal_17'] = ValidationService.emptyValidationMethod(res.min_sal_17);
 				error['min_sal_18'] = ValidationService.emptyValidationMethod(res.min_sal_18);
-				error['min_sal_15'] =	error['min_sal_15'] == ''?ValidationService.percentageValidationMethod(res.min_sal_15):error['min_sal_15'];
-				error['min_sal_16'] =	error['min_sal_16'] == ''?ValidationService.percentageValidationMethod(res.min_sal_16):error['min_sal_16'];
-				error['min_sal_17'] =	error['min_sal_17'] == ''?ValidationService.percentageValidationMethod(res.min_sal_17):error['min_sal_17'];
-				error['min_sal_18'] =	error['min_sal_18'] == ''?ValidationService.percentageValidationMethod(res.min_sal_18):error['min_sal_18'];
-				valid = error['min_sal_15'] == '' && error['min_sal_16'] == '' && error['min_sal_17'] == '' && error['min_sal_18'] == ''? true:false;
-
+				error['min_sal_15'] =
+					error['min_sal_15'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_15)
+						: error['min_sal_15'];
+				error['min_sal_16'] =
+					error['min_sal_16'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_16)
+						: error['min_sal_16'];
+				error['min_sal_17'] =
+					error['min_sal_17'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_17)
+						: error['min_sal_17'];
+				error['min_sal_18'] =
+					error['min_sal_18'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_18)
+						: error['min_sal_18'];
+				valid =
+					error['min_sal_15'] == '' &&
+					error['min_sal_16'] == '' &&
+					error['min_sal_17'] == '' &&
+					error['min_sal_18'] == ''
+						? true
+						: false;
 
 				break;
 			case '3':
@@ -123,34 +194,76 @@ const Addage = () => {
 				error['min_sal_17'] = ValidationService.emptyValidationMethod(res.min_sal_17);
 				error['min_sal_18'] = ValidationService.emptyValidationMethod(res.min_sal_18);
 				error['min_sal_19'] = ValidationService.emptyValidationMethod(res.min_sal_19);
-				error['min_sal_15'] =	error['min_sal_15'] == ''?ValidationService.percentageValidationMethod(res.min_sal_15):error['min_sal_15'];
-				error['min_sal_16'] =	error['min_sal_16'] == ''?ValidationService.percentageValidationMethod(res.min_sal_16):error['min_sal_16'];
-				error['min_sal_17'] =	error['min_sal_17'] == ''?ValidationService.percentageValidationMethod(res.min_sal_17):error['min_sal_17'];
-				error['min_sal_18'] =	error['min_sal_18'] == ''?ValidationService.percentageValidationMethod(res.min_sal_18):error['min_sal_18'];
-				error['min_sal_19'] =	error['min_sal_19'] == ''?ValidationService.percentageValidationMethod(res.min_sal_19):error['min_sal_19'];
-				valid = error['min_sal_15'] == '' && error['min_sal_16'] == '' && error['min_sal_17'] == '' && error['min_sal_18'] == '' && error['min_sal_19'] == ''? true:false;
-
-
-				
-
+				error['min_sal_15'] =
+					error['min_sal_15'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_15)
+						: error['min_sal_15'];
+				error['min_sal_16'] =
+					error['min_sal_16'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_16)
+						: error['min_sal_16'];
+				error['min_sal_17'] =
+					error['min_sal_17'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_17)
+						: error['min_sal_17'];
+				error['min_sal_18'] =
+					error['min_sal_18'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_18)
+						: error['min_sal_18'];
+				error['min_sal_19'] =
+					error['min_sal_19'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_19)
+						: error['min_sal_19'];
+				valid =
+					error['min_sal_15'] == '' &&
+					error['min_sal_16'] == '' &&
+					error['min_sal_17'] == '' &&
+					error['min_sal_18'] == '' &&
+					error['min_sal_19'] == ''
+						? true
+						: false;
 
 				break;
 			case '4':
-				error['min_sal_15']=ValidationService.emptyValidationMethod(res.min_sal_15);
-				error['min_sal_16']=ValidationService.emptyValidationMethod(res.min_sal_16);
-				error['min_sal_17']=ValidationService.emptyValidationMethod(res.min_sal_17);
-				error['min_sal_18']=ValidationService.emptyValidationMethod(res.min_sal_18);
-				error['min_sal_19']=ValidationService.emptyValidationMethod(res.min_sal_19);
-				error['min_sal_20']=ValidationService.emptyValidationMethod(res.min_sal_20);
-				error['min_sal_15'] =	error['min_sal_15'] == ''?ValidationService.percentageValidationMethod(res.min_sal_15):error['min_sal_15'];
-				error['min_sal_16'] =	error['min_sal_16'] == ''?ValidationService.percentageValidationMethod(res.min_sal_16):error['min_sal_16'];
-				error['min_sal_17'] =	error['min_sal_17'] == ''?ValidationService.percentageValidationMethod(res.min_sal_17):error['min_sal_17'];
-				error['min_sal_18'] =	error['min_sal_18'] == ''?ValidationService.percentageValidationMethod(res.min_sal_18):error['min_sal_18'];
-				error['min_sal_19'] =	error['min_sal_19'] == ''?ValidationService.percentageValidationMethod(res.min_sal_19):error['min_sal_19'];
-				error['min_sal_20'] =	error['min_sal_20'] == ''?ValidationService.percentageValidationMethod(res.min_sal_20):error['min_sal_20'];
-				valid = error['min_sal_15'] == '' && error['min_sal_16'] == '' && error['min_sal_17'] == '' && error['min_sal_18'] == '' && error['min_sal_19'] == '' && error['min_sal_20'] == ''? true:false;
-
-
+				error['min_sal_15'] = ValidationService.emptyValidationMethod(res.min_sal_15);
+				error['min_sal_16'] = ValidationService.emptyValidationMethod(res.min_sal_16);
+				error['min_sal_17'] = ValidationService.emptyValidationMethod(res.min_sal_17);
+				error['min_sal_18'] = ValidationService.emptyValidationMethod(res.min_sal_18);
+				error['min_sal_19'] = ValidationService.emptyValidationMethod(res.min_sal_19);
+				error['min_sal_20'] = ValidationService.emptyValidationMethod(res.min_sal_20);
+				error['min_sal_15'] =
+					error['min_sal_15'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_15)
+						: error['min_sal_15'];
+				error['min_sal_16'] =
+					error['min_sal_16'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_16)
+						: error['min_sal_16'];
+				error['min_sal_17'] =
+					error['min_sal_17'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_17)
+						: error['min_sal_17'];
+				error['min_sal_18'] =
+					error['min_sal_18'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_18)
+						: error['min_sal_18'];
+				error['min_sal_19'] =
+					error['min_sal_19'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_19)
+						: error['min_sal_19'];
+				error['min_sal_20'] =
+					error['min_sal_20'] == ''
+						? ValidationService.percentageValidationMethod(res.min_sal_20)
+						: error['min_sal_20'];
+				valid =
+					error['min_sal_15'] == '' &&
+					error['min_sal_16'] == '' &&
+					error['min_sal_17'] == '' &&
+					error['min_sal_18'] == '' &&
+					error['min_sal_19'] == '' &&
+					error['min_sal_20'] == ''
+						? true
+						: false;
 
 				break;
 		}
@@ -160,8 +273,8 @@ const Addage = () => {
 		setError_min_sal_18(error['min_sal_18']);
 		setError_min_sal_19(error['min_sal_19']);
 		setError_min_sal_20(error['min_sal_20']);
-return valid;
-	}
+		return valid;
+	};
 	return (
 		<div className="container">
 			<form onSubmit={(e) => submit(e)}>
@@ -320,7 +433,7 @@ return valid;
 							type="sumit"
 							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
 							onClick={() => {
-								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
+								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key,id:id }));
 							}}
 						>
 							Next

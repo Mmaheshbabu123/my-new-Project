@@ -18,7 +18,6 @@ function AddPc(props) {
 	const [ error_pc_name, setError_pc_name ] = useState('');
 	const [ error_pc_alias_name, setError_pc_alias_name ] = useState('');
 
-	const [ field1, setfield1 ] = useState();
 	const [ data, setData ] = useState({
 		id: '',
 		pc_unique_key: '',
