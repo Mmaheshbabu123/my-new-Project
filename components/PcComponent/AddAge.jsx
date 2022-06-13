@@ -129,7 +129,7 @@ const Addage = () => {
 		}
 	};
 	let validate = (res) => {
-		setError_age(ValidationService.emptyValidationMethod(res.age));
+		var error2 =ValidationService.emptyValidationMethod(res.age);
 		var error = [];
 		var valid = true;
 		error['min_sal_15'] = '';
@@ -138,6 +138,11 @@ const Addage = () => {
 		error['min_sal_18'] = '';
 		error['min_sal_19'] = '';
 		error['min_sal_20'] = '';
+		setError_age(error2);
+
+		if(error2 != ''){
+			return false;
+		}
 		switch (res.age) {
 			case '1': //< 16
 				error['min_sal_15'] = ValidationService.emptyValidationMethod(res.min_sal_15);
@@ -180,10 +185,10 @@ const Addage = () => {
 						? ValidationService.percentageValidationMethod(res.min_sal_18)
 						: error['min_sal_18'];
 				valid =
-					error['min_sal_15'] == '' &&
+					(error['min_sal_15'] == '' &&
 					error['min_sal_16'] == '' &&
 					error['min_sal_17'] == '' &&
-					error['min_sal_18'] == ''
+					error['min_sal_18'] == '')
 						? true
 						: false;
 
