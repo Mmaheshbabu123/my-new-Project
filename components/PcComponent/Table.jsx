@@ -40,6 +40,12 @@ const Table = (props) => {
 			setCat_leftsec('col-md-9');
 			setCat_rightsec('d-block col-md-3');
 			setCat_subsec_id(props.secId);
+		}else if(props.sectype =='funct'){
+			setCat_subsec_type(2);
+			setCat_leftsec('col-md-9');
+			setCat_rightsec('d-block col-md-3');
+			setCat_subsec_id(props.secId);
+
 		}
 	}
 

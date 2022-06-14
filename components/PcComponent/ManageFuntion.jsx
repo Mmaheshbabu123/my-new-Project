@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
-import { getCategory, getFunctions, updateFunction } from '../../Services/ApiEndPoints';
+import { getCategory, getFunctions, deleteFunction } from '../../Services/ApiEndPoints';
 import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare, FaMinusSquare } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Popup from './Popupfunction';
@@ -41,7 +41,7 @@ const ManageFunction = () => {
 			id: funcnid
 		};
 
-		APICALL.service(updateFunction, 'POST', data)
+		APICALL.service(deleteFunction, 'POST', data)
 			.then((result) => {
 				console.log(result.status);
 				setUpdated(updated + 1);

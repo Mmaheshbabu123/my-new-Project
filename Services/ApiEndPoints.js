@@ -7,13 +7,25 @@ export const BASE_URL = ENV_URL + REGEX_URL;
 export const WithoutAppUrl = BASE_URL + "getParitairecommittes";
 export const getPcByPcnumber = BASE_URL + "getpc/"
 export const getPcByUniquekey = BASE_URL + "getpc-by-uniquekey/"
-export const storeCategoryDetails = BASE_URL + "addcategory";
+
+//-------------Manage FUNCTION API ROUTES---------------------//
+export const addFunction = BASE_URL + "addfunction";
+export const getFunctions = BASE_URL + "getFunctions";
+export const deleteFunction = BASE_URL + "updateFunction";
+export const fetchFunction = BASE_URL + "get-function/";
+export const updateFunction = BASE_URL + "update-function";
+
+
+
+
+//--------------CATEGORY API ROUTES ----------------//
 export const getCat = BASE_URL + "getcat/";
+export const updateCategory = BASE_URL + "updateCategory";
 export const catUpdate = BASE_URL + "categoryupdate"
 export const getCategory = BASE_URL + "getCategory";
-export const getFunctions = BASE_URL + "getFunctions";
-export const updateFunction = BASE_URL + "updateFunction";
-export const updateCategory = BASE_URL + "updateCategory";
+export const storeCategoryDetails = BASE_URL + "addcategory";
+
+//--------------PC API ROUTES ----------------//
 export const getPcOverviewDetails = BASE_URL + "getParitaireCommitteFunctionCategory";
 export const addPc = BASE_URL + "addpc"
 export const updatePc = BASE_URL + "pc-update/"
