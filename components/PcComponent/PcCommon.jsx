@@ -60,7 +60,7 @@ const PcCommon = (props) => {
 					setCat_subsec_id
 				}}
 			>
-				<p className="h5">
+				<p className="h4">
 					{current_sec == 1 ? (
 						'Add paritair comitte'
 					) : current_sec == 2 ? (
@@ -154,7 +154,7 @@ const PcCommon = (props) => {
 							<button
 								className={`nav-link py-3 ${current_sec != 4 && sec_completed.age == false
 									? 'disabled'
-									: ''}${current_sec == 4 ? 'active' : ''}`}
+									: ''} ${current_sec == 4 ? 'active custom-active' : 'custom-inactive'}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-emp-type"
@@ -174,11 +174,11 @@ const PcCommon = (props) => {
 								<p className="mb-2">Step 4:</p> <p>Employee type</p>
 							</button>
 						</li>
-						<li className="nav-item" role="presentation">
+						{/* <li className="nav-item" role="presentation">
 							<button
 								className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
 									? 'disabled'
-									: ''} ${current_sec == 5 ? 'active' : ''}`}
+									: ''} ${current_sec == 5 ? 'active custom-active' : 'custom-inactive'}`}
 								id="pills-contact-tab"
 								data-bs-toggle="pill"
 								data-bs-target="#pills-contact"
@@ -197,7 +197,7 @@ const PcCommon = (props) => {
 								)}
 								<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
 							</button>
-						</li>
+						</li> */}
 					</ul>
 					<div className="tab-content" id="pills-tabContent">
 						<div

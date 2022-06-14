@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
-import { getCategory, getFunctions, updateFunction } from '../../Services/ApiEndPoints';
+import { getCategory, getFunctions, deleteFunction } from '../../Services/ApiEndPoints';
 import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare, FaMinusSquare } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Popup from './Popupfunction';
@@ -41,7 +41,7 @@ const ManageFunction = () => {
 			id: funcnid
 		};
 
-		APICALL.service(updateFunction, 'POST', data)
+		APICALL.service(deleteFunction, 'POST', data)
 			.then((result) => {
 				console.log(result.status);
 				setUpdated(updated + 1);
@@ -232,7 +232,7 @@ const ManageFunction = () => {
 		<div className="container">
 			<form>
 				<div className="row">
-					<h4 className="mt-4 mb-2">MANAGE FUNCTIONS</h4>
+					<p className="mt-4 mb-2 h4">MANAGE FUNCTIONS</p>
 					<div className="col-sm-2">
 						<input
 							type="search"
@@ -295,30 +295,30 @@ const ManageFunction = () => {
 						</button>
 					</div>
 
-					<div className="form-check mt-2 ">
-						<table className="table table-bordered mt-3">
+					<div className="form-check mt-2 text-center ">
+						<table className="table border border-secondary mt-3">
 							<thead>
 								<tr className="table-secondary">
-									<th>Paritair Comite Number</th>
-									<th>Function Name</th>
-									<th>Minimal Salary</th>
-									<th>Category</th>
-									<th>Action</th>
+									<th className="border-end border-secondary">Paritair Comite Number</th>
+									<th className="border-end border-secondary">Function Name</th>
+									<th className="border-end border-secondary">Minimal Salary</th>
+									<th className="border-end border-secondary">Category</th>
+									<th className="border-end border-secondary">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								{functions.length > 0 &&
 									functions.map((result) => (
-										<tr key={result.funcn_id}>
-											<td>{result.pc_number}</td>
-											<td>{result.function_name}</td>
-											<td>€ {result.min_salary}</td>
-											<td>{result.cat_name}</td>
-											<td className="d-flex ">
+										<tr className="border-bottom border-secondary" key={result.funcn_id}>
+											<td className="border-end border-secondary">{result.pc_number}</td>
+											<td className="border-end border-secondary">{result.function_name}</td>
+											<td className="border-end border-secondary">€ {result.min_salary}</td>
+											<td className="border-end border-secondary">{result.cat_name}</td>
+											<td className="d-flex justify-content-center ">
 												<Link href="/addpc">
-												<a className="" >
-													<MdEdit className="mt-2 ms-3" href="/addpc" />
-												</a>
+													<a className="">
+														<MdEdit className="mt-2 ms-3" href="/addpc" />
+													</a>
 												</Link>
 												<span onClick={() => showPopup(result.funcn_id)} type="button">
 													<MdDelete className="mt-2 ms-3" />
@@ -338,9 +338,7 @@ const ManageFunction = () => {
 					</div>
 				</div>
 				<Link href="/addpc">
-				<a className="btn btn-secondary btn-lg btn-block float-right mt-5">
-					Add Function
-				</a>
+					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Function</a>
 				</Link>
 			</form>
 			{showdeletepopup == true && (

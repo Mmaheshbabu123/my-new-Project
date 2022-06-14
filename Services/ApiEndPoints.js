@@ -7,16 +7,30 @@ export const BASE_URL = ENV_URL + REGEX_URL;
 export const WithoutAppUrl = BASE_URL + "getParitairecommittes";
 export const getPcByPcnumber = BASE_URL + "getpc/"
 export const getPcByUniquekey = BASE_URL + "getpc-by-uniquekey/"
-export const storeCategoryDetails = BASE_URL + "addcategory";
+
+//-------------Manage FUNCTION API ROUTES---------------------//
+export const addFunction = BASE_URL + "addfunction";
+export const getFunctions = BASE_URL + "getFunctions";
+export const deleteFunction = BASE_URL + "updateFunction";
+export const fetchFunction = BASE_URL + "get-function/";
+export const updateFunction = BASE_URL + "update-function";
+
+
+
+
+//--------------CATEGORY API ROUTES ----------------//
 export const getCat = BASE_URL + "getcat/";
+export const updateCategory = BASE_URL + "updateCategory";
 export const catUpdate = BASE_URL + "categoryupdate"
 export const getCategory = BASE_URL + "getCategory";
-export const getFunctions = BASE_URL + "getFunctions";
-export const updateFunction = BASE_URL + "updateFunction";
-export const updateCategory = BASE_URL + "updateCategory";
-export const getPc = BASE_URL + "getParitaireCommitteFunctionCategory";
+export const storeCategoryDetails = BASE_URL + "addcategory";
+
+//--------------PC API ROUTES ----------------//
+export const getPcOverviewDetails = BASE_URL + "getParitaireCommitteFunctionCategory";
 export const addPc = BASE_URL + "addpc"
 export const updatePc = BASE_URL + "pc-update/"
+export const getAllPc = BASE_URL + "get-all-pcs";
+
 
 
 
@@ -29,6 +43,9 @@ export const fecthCoefficientTypes = BASE_URL + "get-cofficent-types";
 export const editCofficientType = BASE_URL + "edit-cofficent-types";
 export const deleteCoefficientType = BASE_URL + "delete-cofficent-type";
 export const createCofficientType = BASE_URL + "create-cofficent-types";
+export const getAllEmpCoeffAndValueTypes = BASE_URL + "get-coeff-empl-valuetypes";
+export const savePcLinkingData = BASE_URL + "save-pclinking-data";
+
 
 //-----
 
@@ -38,3 +55,14 @@ export const addPlanning = BASE_URL + "addplanning";
 export const addProject = BASE_URL + "addproject";
 export const Selectemployee = BASE_URL + "selectemployee";
 export const Weeklyplanning = BASE_URL + "weeklyplanning";
+
+
+//--------------PC min age API ROUTES ----------------//
+export const addAge = BASE_URL + "add-age";
+export const getAge = BASE_URL + "get-pc-age/";
+export const updateAge = BASE_URL + "update-pc-age";
+
+//--------------PC employee type ROUTES --------------------//
+export const storePcEmployeeTypes = BASE_URL + 'add-pc-emptype';
+export const getPcEmployeeTypes = BASE_URL + "get-pc-emptype/";
+export const updatePcEmployeeTypes = BASE_URL + "update-pc-emptype";

@@ -4,7 +4,7 @@ import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare
 import PcOverview from './PcOverview';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { APICALL } from '../../Services/ApiServices';
-import { getPc } from '../../Services/ApiEndPoints';
+import { getPcOverviewDetails } from '../../Services/ApiEndPoints';
 import Link from 'next/link';
 import styles from '../../styles/Pc.module.css'
 
@@ -49,7 +49,7 @@ const ManagePc = (props) => {
 	const getData = () => {
 		var url = process.env.REACT_APP_BACKEND_URL;
 		if (lenght == 0 || lenght == undefined) {
-			 APICALL.service(getPc, 'GET')
+			 APICALL.service(getPcOverviewDetails, 'GET')
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {

@@ -6,12 +6,6 @@ import AddCategory from './AddCategory';
 import styles from '../../styles/Pc.module.css';
 import { PcContext } from '../../Contexts/PcContext';
 import AddFunction from '../../components/PcComponent/AddFunction';
-// import EditPc from '../../components/PcComponent/'
-
-// import { useParams } from 'react-router-dom';
-// import AddCategory from './AddCategory';
-// import AddFunction from './AddFunction';
-// import EditPc from './EditPc';
 import {
 	FaEdit,
 	FaRegPlusSquare,
@@ -38,7 +32,10 @@ const PcOverview = (params) => {
 		cat_fun_updated,
 		setCat_fun_updated,
 		sec_completed,
-		setSec_completed
+		setSec_completed,
+		cat_subsec_id,
+		setCat_subsec_id,
+		setCurrent_sec
 	} = useContext(PcContext);
 
 	const router = useRouter();
@@ -60,12 +57,11 @@ const PcOverview = (params) => {
 				res1['pc'] = true;
 				setSec_completed(res1);
 				if (pc_unique_key) {
-					
-					 APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
+					APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
 						.then((result) => {
 							console.log(result);
 							setPc(result.data);
-							console.log(pc)
+							console.log(pc);
 							setPc_number(result.data['pc_number']);
 							setType(params.type);
 						})
@@ -75,12 +71,19 @@ const PcOverview = (params) => {
 				}
 			}
 		},
-		[ current_sec, pc_unique_key, cat_fun_updated]
+		[ current_sec, pc_unique_key, cat_fun_updated ]
 	);
+
+	let next_redirection = () => {
+		setCurrent_sec(3);
+		var res1 = sec_completed;
+		res1['cat'] = true;
+		setSec_completed(res1);
+	};
 
 	return (
 		<div className="container">
-			<div className="row pt-4">
+			<div className="row pt-4 min-vh-75">
 				<div className={`px-5 ${cat_leftsec}`}>
 					{pc && (
 						<div>
@@ -114,109 +117,162 @@ const PcOverview = (params) => {
 									</button>
 								</div>
 							)}
-							<ul className={`list-inline list-unstyled ${styles.tree}`}>
-								<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
-									<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
-										<a
-											data-bs-toggle="collapse"
-											href={'#collapsepc' + pc_unique_key}
-											role="button"
-											aria-expanded="false"
-											aria-controls={'collapsepc' + pc_unique_key}
-										>
-											<span><FaRegMinusSquare/></span>
-										</a>
-									</li>
-									<ListView
-										pcid={pc_unique_key}
-										pc_number={pc_number}
-										index={count + 1}
-										title={pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined?pc['pc_alias_name']:pc['pc_name']}
-										theader={pc['header']}
-										tvalue={
-											pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined ? (
-												[ pc['pc_number'], pc['pc_alias_name'] ]
-											) : (
-												[ pc['pc_number'], pc['pc_name'] ]
-											)
-										}
-										actiontype={[ 'edit' ]}
-										sectype="pc"
-										secId={pc['id']}
-										type={type}
-									/>
-								</ul>
-								{pc['childObj'] &&
-									Object.keys(pc['childObj']).map((val, key) => (
-										<ul
-											id={'collapsepc' + pc_unique_key}
-											className={`collapse show list-inline list-unstyled ms-5 my-0 py-1 ${styles.lev1} ${styles.tree}`}
-											key={val}
-										>
-											<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
-												<FaRegPlusSquare />
-											</li>
-											{pc['childObj'][val]['type'] === 2 ? (
-												<ListView
-													pcid={pc_unique_key}
-													pc_number={pc_number}
-													index={'cat1-' + val}
-													title={pc['childObj'][val]['category_name']}
-													theader={pc['childObj'][val]['header']}
-													tvalue={[
-														pc['childObj'][val]['category_name'],
-														'€ ' + pc['childObj'][val]['min_salary']
-													]}
-													className="ms-2"
-													sectype="cat"
-													secId={pc['childObj'][val]['id']}
-													type={type}
-												/>
-											) : (
-												<ListView
-													pcid={pc_unique_key}
-													pc_number={pc_number}
-													index={'fun2-' + val}
-													title={pc['childObj'][val]['function_name']}
-													theader={pc['childObj'][val]['header']}
-													tvalue={[
-														pc['childObj'][val]['function_name'],
-														pc['childObj'][val]['min_salary']
-													]}
-													secId={pc['childObj'][val]['id']}
-													sectype="funct"
-												/>
-											)}
-											{/*{pc['childObj'][val]['type'] === 3 &&
-        <ListView  index={"fun2-"+val} title={pc['childObj'][val]['function_name']} theader={pc['childObj'][val]['header']} tvalue={[pc['childObj'][val]['function_name'],pc['childObj'][val]['min_salary']]} secId={pc['childObj'][val]['id']} sectype="funct" secInfoFromLst={SecInfo}/> 
-        }
-      <ul className={`list-inline list-unstyled ms-5`}>
-    {pc['childObj'][val]['childObj'] && Object.keys(pc['childObj'][val]['childObj']).map((val2,key2)=>
-        <ListView key={val2} index={"fun1-"+val} title={pc['childObj'][val]['childObj'][val2]['function_name']} theader={pc['childObj'][val]['childObj'][val2]['header']} tvalue={[pc['childObj'][val]['childObj'][val2]['function_name'],pc['childObj'][val]['childObj'][val2]['id']]} secId={pc['childObj'][val2]['min_salary']} sectype="funct" secInfoFromLst={SecInfo}/> 
-      )} */}
-										</ul>
-									))}
-
-								{/* <ListView index={count+1} title={pc['pc_name']} theader={pc['header']} tvalue={[pc['pc_number'],pc['pc_name']]} actiontype={['edit']} sectype="pc" secId={pc['id']} secInfoFromLst={SecInfo}/> 
-      <ul key={val} className={`list-inline list-unstyled ms-5 my-0 py-1`}>
-      {pc['childObj'] && Object.keys(pc['childObj']).map((val,key)=>
-      
-        {pc['childObj'][val]['type'] === 2 && 
-        <ListView  index={"cat1-"+val} title={pc['childObj'][val]['category_name']} theader={pc['childObj'][val]['header']} tvalue={[pc['childObj'][val]['category_name'],"€ "+pc['childObj'][val]['min_salary']]} className="ms-2" sectype="cat" secId={pc['childObj'][val]['id']} secInfoFromLst={SecInfo}/> 
-    }
-      <ul className={`list-inline list-unstyled ms-5 my-0 py-3`}>
-      {pc['childObj'][val]['childObj'] && Object.keys(pc['childObj'][val]['childObj']).map((val2,key2)=>
-        <ListView key={val2} index={"fun1-"+val} title={pc['childObj'][val]['childObj'][val2]['function_name']} theader={pc['childObj'][val]['childObj'][val2]['header']} tvalue={[pc['childObj'][val]['childObj'][val2]['function_name'],pc['childObj'][val]['childObj'][val2]['id']]} secId={pc['childObj'][val2]['min_salary']} sectype="funct" secInfoFromLst={SecInfo}/> 
-      )} 
-      </ul>
-        {pc['childObj'][val]['type'] === 3 &&
-        <ListView  index={"fun2-"+val} title={pc['childObj'][val]['function_name']} theader={pc['childObj'][val]['header']} tvalue={[pc['childObj'][val]['function_name'],pc['childObj'][val]['min_salary']]} secId={pc['childObj'][val]['id']} sectype="funct" secInfoFromLst={SecInfo}/> 
-        }
-  )
-  </ul>
-    </ul>
-
-    } */}
+							<ul className={`list-unstyled ${styles.tree}`}>
+								<li>
+									<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
+										<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+											<a
+												data-bs-toggle="collapse"
+												href={'#collapsepc' + pc_unique_key}
+												role="button"
+												aria-expanded="false"
+												aria-controls={'collapsepc' + pc_unique_key}
+											>
+												<span>
+													<FaRegMinusSquare />
+												</span>
+											</a>
+										</li>
+										<ListView
+											pcid={pc_unique_key}
+											pc_number={pc_number}
+											index={count + 1}
+											title={
+												pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined ? (
+													pc['pc_alias_name']
+												) : (
+													pc['pc_name']
+												)
+											}
+											theader={pc['header']}
+											tvalue={
+												pc['pc_alias_name'] != '' && pc['pc_alias_name'] != undefined ? (
+													[ pc['pc_number'], pc['pc_alias_name'] ]
+												) : (
+													[ pc['pc_number'], pc['pc_name'] ]
+												)
+											}
+											actiontype={[ 'edit' ]}
+											sectype="pc"
+											secId={pc['id']}
+											type={type}
+										/>
+									</ul>
+								</li>
+								<li>
+									{pc['childObj'] &&
+										Object.keys(pc['childObj']).map((val, key) => (
+											<ul
+												id={'collapsepc' + pc_unique_key}
+												className={`collapse show list-unstyled ms-5 my-0 py-1 ${styles.lev1} ${styles.tree}`}
+												key={val}
+											>
+												{pc['childObj'][val]['type'] === 2 ? (
+													<li>
+														<ul className="list-inline">
+															<li>
+																<ul>
+																	<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+																		<FaRegMinusSquare />
+																	</li>
+																	<ListView
+																		pcid={pc_unique_key}
+																		pc_number={pc_number}
+																		index={'cat1-' + val}
+																		title={pc['childObj'][val]['category_name']}
+																		theader={pc['childObj'][val]['header']}
+																		tvalue={[
+																			pc['childObj'][val]['category_name'],
+																			'€ ' + pc['childObj'][val]['min_salary']
+																		]}
+																		className="ms-2"
+																		sectype="cat"
+																		secId={pc['childObj'][val]['id']}
+																		type={type}
+																	/>
+																</ul>
+															</li>
+															<li>
+															<ul
+																			className={`list-unstyled ms-5 ${styles.tree}`}
+																		>
+																{/* <ul className={`list-inline list-unstyled ms-5`}> */}
+																{pc['childObj'][val]['childObj'] &&
+																	Object.keys(
+																		pc['childObj'][val]['childObj']
+																	).map((val2, key2) => (
+																		
+																			<li>
+																				<ul className='list-inline'>
+																					<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+																						<FaRegMinusSquare />
+																					</li>
+																					<ListView
+																						pcid={pc_unique_key}
+																						key={val2}
+																						pc_number={pc_number}
+																						index={'fun1-' + val2}
+																						title={
+																							pc['childObj'][val][
+																								'childObj'
+																							][val2]['function_name']
+																						}
+																						theader={
+																							pc['childObj'][val][
+																								'childObj'
+																							][val2]['header']
+																						}
+																						tvalue={[
+																							pc['childObj'][val][
+																								'childObj'
+																							][val2]['function_name'],
+																							'€ ' +
+																								pc['childObj'][val][
+																									'childObj'
+																								][val2]['id']
+																						]}
+																						className="ms-2"
+																						secId={
+																							pc['childObj'][val][
+																								'childObj'
+																							][val2]['id']
+																						}
+																						sectype="funct"
+																						type={type}
+																					/>
+																				</ul>
+																			</li>
+																		
+																	))}
+																	</ul>
+															</li>
+														</ul>
+													</li>
+												) : (
+													<li>
+														<ul>
+															<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+																<FaRegMinusSquare />
+															</li>
+															<ListView
+																pcid={pc_unique_key}
+																pc_number={pc_number}
+																index={'fun2-' + val}
+																title={pc['childObj'][val]['function_name']}
+																theader={pc['childObj'][val]['header']}
+																tvalue={[
+																	pc['childObj'][val]['function_name'],
+																	pc['childObj'][val]['min_salary']
+																]}
+																secId={pc['childObj'][val]['id']}
+																sectype="funct"
+															/>
+														</ul>
+													</li>
+												)}
+											</ul>
+										))}
+								</li>
 							</ul>
 						</div>
 					)}
@@ -230,6 +286,7 @@ const PcOverview = (params) => {
 							className={'btn me-3' + styles.btncolor}
 							onClick={() => {
 								setCat_subsec_type(1);
+								setCat_subsec_id('');
 							}}
 						>
 							Add category
@@ -241,13 +298,40 @@ const PcOverview = (params) => {
 							className={'btn me-2' + styles.btncolor}
 							onClick={() => {
 								setCat_subsec_type(2);
+								setCat_subsec_id('');
 							}}
 						>
 							Add function
 						</button>
 					</div>
 					{cat_subsec_type == 1 && <AddCategory id={secid} />}
-					{cat_subsec_type == 2 && <AddFunction id={secid} />}
+					{cat_subsec_type == 2 && (
+						<AddFunction id={secid} categorylist={pc['childObj'] ? pc['childObj'] : []} />
+					)}
+				</div>
+			</div>
+			<div className="row">
+				<div className="text-start col-md-6">
+					<button
+						type="button"
+						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+						onClick={() => {
+							setCurrent_sec(1);
+						}}
+					>
+						Back
+					</button>
+				</div>
+				<div className="text-end col-md-6">
+					<button
+						type="sumit"
+						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+						onClick={() => {
+							next_redirection();
+						}}
+					>
+						Next
+					</button>
 				</div>
 			</div>
 		</div>

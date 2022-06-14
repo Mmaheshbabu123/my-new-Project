@@ -17,6 +17,13 @@ function ManageEmployeeAndCoefficientTypes() {
           </div>
         </a>
       </Link>
+      <Link href="/link-coefficient-employeetype?pcid=0">
+        <a className='show-box-link'>
+          <div title="Link coefficients to pc">
+            Link coefficients to pc
+          </div>
+        </a>
+      </Link>
     </div>
   );
 }
