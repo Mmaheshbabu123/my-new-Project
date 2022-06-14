@@ -73,6 +73,19 @@ const ValidationService = {
       return '';
     }
   },
+/**
+ * Accepts salary values less than 1000 with decimal values up to 2 places 
+ * @param {*} value 
+ * @returns 
+ */
+  minSalaryValidationMethod: function(value){
+    if(value.match(/(^[1-9]{1,3}(([.]|[,])\d{1,2})?)$|(^[0]([.]|[,])\d{1,2})$/))
+    {
+     return '';
+    }else{
+      return 'This field is invalid.';
+    }
+  }
 
 };
 
