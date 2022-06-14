@@ -6,7 +6,7 @@ import MultiSelect from '../SelectComponent';
 import { getAllEmpCoeffAndValueTypes, savePcLinkingData } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 
-var SERVER_SIDE_RENDERING = 0;
+var SERVER_SIDE_RENDERING = 1;
 const LinkCoeffEmpComponent = (props) => {
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
   useEffect(() => {
