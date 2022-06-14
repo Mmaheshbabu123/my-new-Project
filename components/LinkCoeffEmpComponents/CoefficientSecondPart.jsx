@@ -55,7 +55,11 @@ const CoefficientSecondPart = () => {
     let matrixKey = `${_EmpId}-${_Coeffid}-${_ValId}`;
     return {
       matrixKey,
-      value: pclinkingValueobj?.[_EmpId]?.[_Coeffid] ? .[_ValId] ?? ''
+      value: pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] ?
+                  pclinkingValueobj[_EmpId][_Coeffid][_ValId] ?
+                    pclinkingValueobj[_EmpId][_Coeffid][_ValId] : ''
+                  : ''
+              : ''      
     }
   }
 
