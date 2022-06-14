@@ -79,6 +79,15 @@ const Addage = () => {
 	);
 
 	const handleshowhide = (event) => {
+		var data2 = data;
+		data2.min_sal_15 = '';
+		data2.min_sal_16 = '';
+		data2.min_sal_17 = '';
+		data2.min_sal_18 = '';
+		data2.min_sal_19 = '';
+		data2.min_sal_20 = '';
+		setData(data2);
+		console.log("aaaa")
 		const getage = event.target.value;
 		if (getage != '') {
 			setError_age('');

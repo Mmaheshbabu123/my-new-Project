@@ -156,8 +156,10 @@ function AddPc(props) {
 		}
 	};
 	let backToDashboard = () =>{
-		if (JSON.parse(localStorage.getItem("src"))) { 
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+JSON.parse(localStorage.getItem("src"))+"&check_logged_in=1")
+		var src =JSON.parse(localStorage.getItem("src"));
+		if (src) { 
+			window.localStorage.removeItem('src');
+			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+src+"&check_logged_in=1")
 		}
 	  
 	}

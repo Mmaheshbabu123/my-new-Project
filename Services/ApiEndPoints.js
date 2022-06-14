@@ -47,3 +47,7 @@ export const addAge = BASE_URL + "add-age";
 export const getAge = BASE_URL + "get-pc-age/";
 export const updateAge = BASE_URL + "update-pc-age";
 
+//--------------PC employee type ROUTES --------------------//
+export const storePcEmployeeTypes = BASE_URL + 'add-pc-emptype';
+export const getPcEmployeeTypes = BASE_URL + "get-pc-emptype/";
+export const updatePcEmployeeTypes = BASE_URL + "update-pc-emptype";
