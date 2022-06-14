@@ -202,7 +202,7 @@ const PcOverview = (params) => {
 																		pc['childObj'][val]['childObj']
 																	).map((val2, key2) => (
 																		
-																			<li>
+																			<li key={key2}>
 																				<ul className='list-inline'>
 																					<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
 																						<FaRegMinusSquare />
