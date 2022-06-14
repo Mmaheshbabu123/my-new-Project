@@ -43,6 +43,9 @@ export const fecthCoefficientTypes = BASE_URL + "get-cofficent-types";
 export const editCofficientType = BASE_URL + "edit-cofficent-types";
 export const deleteCoefficientType = BASE_URL + "delete-cofficent-type";
 export const createCofficientType = BASE_URL + "create-cofficent-types";
+export const getAllEmpCoeffAndValueTypes = BASE_URL + "get-coeff-empl-valuetypes";
+export const savePcLinkingData = BASE_URL + "save-pclinking-data";
+
 
 //-----
 

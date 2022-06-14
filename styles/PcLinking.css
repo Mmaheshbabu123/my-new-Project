@@ -1,0 +1,84 @@
+.link-emp-coeff-tableparent {
+  height: 500px;
+  overflow-y: scroll;
+  border: 1px solid;
+}
+
+.secondpart{
+overflow-x: scroll;
+}
+
+.table-first-part td {
+  border: 1px solid;
+}
+
+.pclinking-table-thead {
+  height: 48px;
+  position: sticky;
+  top: 0;
+  background-color: lightgray;
+}
+
+
+.pclinking-table-tbody td{  /* COMMON TO BOTH TABLES */
+  height: 37px;
+  width: 80px;
+}
+
+
+.three-row-span{
+  vertical-align: middle;
+  border-right: 1px solid black;
+}
+
+.firstpart-cell {
+  width: 100%;
+  display: grid;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><line x1='0' y1='0' x2='100' y2='100' stroke='black' vector-effect='non-scaling-stroke'/></svg>");
+  background-size: 100% 100%;
+  height: 47px;
+}
+
+.cell--topRight {
+  grid-column-start: 2;
+}
+
+.cell--bottomLeft {
+  grid-column-start: 1;
+}
+
+
+.value-input-cell {
+  height: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.table-second-part {
+  border-collapse: separate !important;  /*Don't collapse */
+}
+
+.table-second-part th {
+  border-right: 1px solid;
+}
+
+.table-second-part td {
+   /* For cells, apply the border to one of each side only (right but not left, bottom but not top) */
+   border-right: 1px solid;
+   border-bottom: 1px solid;
+}
+
+/* ============================================== */
+.css-319lph-ValueContainer {
+  height: 100%;
+}
+
+.css-lr9fot-singleValue {
+  height: 80%;
+}
+.css-14el2xx-placeholder{
+  height: 80%;
+}
+.css-qc6sy-singleValue{
+  height: 80%;
+}
