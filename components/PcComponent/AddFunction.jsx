@@ -89,7 +89,6 @@ function AddFunction(props) {
 			if (id != '') {
 				APICALL.service(fetchFunction + id, 'GET')
 					.then((result) => {
-						console.log(result.data[0]);
 						if (result.data.length > 0) {
 							var res = [];
 							res.function_name = result.data[0].function_name;
