@@ -52,16 +52,11 @@ function AddFunction(props) {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						setCat_fun_updated('fun' + result.fcid);
+						setCat_fun_updated('funupdate' + result.fcid);
 						setCat_rightsec('d-none');
 						setCat_leftsec('col-md-12');
 						setCat_subsec_type(0);
 						setCat_subsec_id('');
-						// setCat_fun_updated('catupdate' + result.ctid);
-						// setCat_rightsec('d-none');
-						// setCat_leftsec('col-md-12');
-						// setCat_subsec_type(0);
-						// setCat_subsec_id('');
 					}
 				})
 				.catch((error) => {
@@ -110,6 +105,7 @@ function AddFunction(props) {
 	let submit = (event) => {
 		console.log(data)
 		event.preventDefault();
+		// return;
 		console.log('test');
 		if (validate()) {
 			console.log(data);
@@ -122,14 +118,24 @@ function AddFunction(props) {
 			ValidationService.emptyValidationMethod(data.function_name) == ''
 				? ValidationService.nameValidationMethod(data.function_name) == ''
 					? ''
-					: ValidationService.nameValidationMethod(data.function_name)
-				: ValidationService.emptyValidationMethod(data.function_name);
+					: 'This field is invalid.'
+				: 'This field is required.';
 		error['error_min_salary'] =
 			ValidationService.emptyValidationMethod(data.min_salary) == ''
 				? ValidationService.minSalaryValidationMethod(data.min_salary) == ''
 					? ''
-					: ValidationService.minSalaryValidationMethod(data.min_salary)
-				: ValidationService.emptyValidationMethod(data.min_salary);
+					: 'This field is invalid.'
+				: 'This field is required.';
+
+				if(error['error_function_name'] == '' && id == ''){
+					props.categorylist.forEach(element => {
+						if(element.type == '3' && Object.values(element).includes(data.function_name)){
+							error['error_function_name'] ="Function name already exist."
+
+						}
+						
+					});
+				}
 		setError_function_name(error['error_function_name']);
 		setError_min_salary(error['error_min_salary']);
 
@@ -166,7 +172,6 @@ function AddFunction(props) {
 							className="form-select my-2 form-control"
 							value={data.category_id}
 							onChange={(e) => {
-								console.log(e.target.value);
 								setData((prev) => ({ ...prev, category_id: e.target.value }));
 							}}
 						>
@@ -201,7 +206,7 @@ function AddFunction(props) {
 						type="submit"
 						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
 						onClick={() => {
-							setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
+							setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key , id:id}));
 						}}
 					>
 						Save
