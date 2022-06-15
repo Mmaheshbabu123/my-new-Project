@@ -38,3 +38,4 @@ export const addPlanning = BASE_URL + "addplanning";
 export const addProject = BASE_URL + "addproject";
 export const Selectemployee = BASE_URL + "selectemployee";
 export const Weeklyplanning = BASE_URL + "weeklyplanning";
+export const Addfunction = BASE_URL + "addfunction";
