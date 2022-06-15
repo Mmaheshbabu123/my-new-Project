@@ -53,7 +53,7 @@ const PcOverview = (params) => {
 	useEffect(
 		() => {
 			setCat_fun_updated('');
-			if (current_sec == 2) {
+			if (current_sec == 2||params.pc_type == 'edit') {
 				var res1 = sec_completed;
 				res1['pc'] = true;
 				setSec_completed(res1);

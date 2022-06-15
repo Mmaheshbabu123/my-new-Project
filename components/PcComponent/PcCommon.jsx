@@ -60,6 +60,7 @@ const PcCommon = (props) => {
 					setCat_subsec_id
 				}}
 			>
+				{props.type == 'add'?<div>
 				<p className="h4">
 					{current_sec == 1 ? (
 						'Add paritair comitte'
@@ -215,7 +216,7 @@ const PcCommon = (props) => {
 							aria-labelledby="pills-profile-tab"
 						>
 							{/* <PcOverview /> */}
-							{current_sec == 2 ? <PcOverview type="addpc" /> : ''}
+							{current_sec == 2 ? <PcOverview type="addpc" pc_type="add"/> : ''}
 						</div>
 						<div
 							className={`tab-pane fade ${current_sec == 3 ? 'show active' : ''}`}
@@ -243,6 +244,7 @@ const PcCommon = (props) => {
 						</div>
 					</div>
 				</div>
+				</div>:<div> <PcOverview type="addpc" pc_type="edit"/></div>}
 			</PcContext.Provider>
 		</div>
 	);
