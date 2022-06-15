@@ -52,6 +52,7 @@ const PcOverview = (params) => {
    */
 	useEffect(
 		() => {
+			setCat_fun_updated('');
 			if (current_sec == 2) {
 				var res1 = sec_completed;
 				res1['pc'] = true;
@@ -304,7 +305,7 @@ const PcOverview = (params) => {
 							Add function
 						</button>
 					</div>
-					{cat_subsec_type == 1 && <AddCategory id={secid} />}
+					{cat_subsec_type == 1 && <AddCategory id={secid} categorylist={pc['childObj'] ? pc['childObj'] : []}/>}
 					{cat_subsec_type == 2 && (
 						<AddFunction id={secid} categorylist={pc['childObj'] ? pc['childObj'] : []} />
 					)}

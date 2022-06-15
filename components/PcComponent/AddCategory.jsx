@@ -121,9 +121,18 @@ function AddCategory(props) {
 	let validate =() => {
 		var error=[];
 		error['error_category_name'] = ValidationService.emptyValidationMethod(data.category_name) == '' ? ValidationService.nameValidationMethod(data.category_name) ==''?'':ValidationService.nameValidationMethod(data.category_name):ValidationService.emptyValidationMethod(data.category_name);
-		error['error_min_salary'] = ValidationService.emptyValidationMethod(data.min_salary) == '' ? ValidationService.minSalaryValidationMethod(data.min_salary) ==''?'':ValidationService.minSalaryValidationMethod(data.min_salary):ValidationService.emptyValidationMethod(data.min_salary);
+		error['error_min_salary'] = ValidationService.emptyValidationMethod(data.min_salary) == '' ? ValidationService.minSalaryValidationMethod(data.min_salary) ==''?'':"This field is invalid.":ValidationService.emptyValidationMethod(data.min_salary);
 		setError_category_name(error['error_category_name']);
 		setError_min_salary(error['error_min_salary']);
+		if(error['error_category_name'] == '' && id == ''){
+			props.categorylist.forEach(element => {
+				if(element.type == '1' && Object.values(element).includes(data.function_name)){
+					error['error_category_name'] ="Category name already exist."
+
+				}
+				
+			});
+		}
 
 		if(error['error_category_name'] == '' && error['error_min_salary'] == '' ){
 			return true;
