@@ -5,7 +5,7 @@ import { addFunction, fetchFunction, updateFunction } from '../../Services/ApiEn
 import { PcContext } from '../../Contexts/PcContext';
 
 function AddFunction(props) {
-	console.log(props);
+	console.log("test")
 	const [ id, setId ] = useState('');
 	const [ data, setData ] = useState({
 		id: '',
@@ -64,17 +64,24 @@ function AddFunction(props) {
 				});
 		}
 	};
+	let resetErrors = () => {
+		setError_function_name('');
+		setError_min_salary('');
+	}
 	useEffect(
 		() => {
 			if (cat_subsec_type == 2) {
 				setId(cat_subsec_id);
+				resetErrors();
 			}
 			if (cat_subsec_id == '') {
 				//create category data for add category flow
 				var data1 = data;
 				data1.id = '';
 				data1.function_name = '';
-				(data1.min_salary = ''), (data1.category_id = ''), setData(data1);
+				data1.min_salary = ''; 
+				data1.category_id = '';
+				setData(data1);
 			}
 		},
 		[ cat_subsec_id ]
@@ -91,7 +98,7 @@ function AddFunction(props) {
 							res.min_salary = result.data[0].min_salary;
 							res.category_id = result.data[0].category_id;
 							setData(res);
-							console.log(result.data[0].category_id);
+							console.log(result);
 						}
 					})
 					.catch((error) => {
@@ -99,7 +106,7 @@ function AddFunction(props) {
 					});
 			}
 		},
-		[ id ]
+		[ id, cat_subsec_type ]
 	);
 
 	let submit = (event) => {
@@ -136,6 +143,14 @@ function AddFunction(props) {
 						
 					});
 				}
+				if(error['error_min_salary'] == '' && data.category_id!= ''){
+					props.categorylist.forEach(element => {
+						if(element.type == '2' && element.id == data.category_id){
+							console.log(parseFloat(data.min_salary));
+					error['error_min_salary'] = parseFloat(data.min_salary.replace(',', '.')) > parseFloat(element.min_salary.replace(',', '.')) ? "Minimum salary cannot be greater that "+ element.min_salary+" €":'';
+						}
+				})
+			}
 		setError_function_name(error['error_function_name']);
 		setError_min_salary(error['error_min_salary']);
 
@@ -198,7 +213,7 @@ function AddFunction(props) {
 							setData((prev) => ({ ...prev, min_salary: e.target.value }));
 						}}
 					/>
-					<p style={{ color: 'red' }}>{error_min_salary}</p>
+					<p className="pb-1"style={{ color: 'red' }}>{error_min_salary}</p>
 				</div>
 
 				<div className="text-end">
