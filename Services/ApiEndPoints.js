@@ -66,3 +66,6 @@ export const updateAge = BASE_URL + "update-pc-age";
 export const storePcEmployeeTypes = BASE_URL + 'add-pc-emptype';
 export const getPcEmployeeTypes = BASE_URL + "get-pc-emptype/";
 export const updatePcEmployeeTypes = BASE_URL + "update-pc-emptype";
+export const getCofficientPerPc = BASE_URL + "get-linking-coff-pc-data";
+export const delteCofficientPerPc = BASE_URL + "delete-pc-linking-data";
+export const Addfunction = BASE_URL + "addfunction";
