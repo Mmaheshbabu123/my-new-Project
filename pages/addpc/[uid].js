@@ -14,7 +14,7 @@ const Addpc = () => {
 	
 	return (
 		<>
-		<PcCommon/>
+		<PcCommon type="add" pcid={router.query.pcid}/>
 		</>
 	);
 };
