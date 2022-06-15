@@ -26,7 +26,7 @@ function ManageEmployeeAndCoefficientTypes() {
       </Link>
       <Link href="/linkcofficientpc/manage">
         <a className='show-box-link'>
-          <div title="Coefficient types">
+          <div title="Link coefficients per pc">
             Link coefficients per pc
           </div>
         </a>
