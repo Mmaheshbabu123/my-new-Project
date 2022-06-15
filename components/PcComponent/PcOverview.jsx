@@ -230,7 +230,7 @@ const PcOverview = (params) => {
 																							'€ ' +
 																								pc['childObj'][val][
 																									'childObj'
-																								][val2]['id']
+																								][val2]['min_salary']
 																						]}
 																						className="ms-2"
 																						secId={

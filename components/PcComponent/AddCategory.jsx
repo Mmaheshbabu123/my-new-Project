@@ -7,6 +7,7 @@ import styles from '../../styles/Pc.module.css';
 import { PcContext } from '../../Contexts/PcContext';
 
 function AddCategory(props) {
+	console.log("qwerty")
 	const [id, setId] = useState('');
 	const [ data, setData ] = useState({
 		id: '',
@@ -30,6 +31,11 @@ function AddCategory(props) {
 		cat_subsec_id, 
 		setCat_subsec_id
 	} = useContext(PcContext);
+
+	let resetErrors = () => {
+		setError_category_name('');
+		setError_min_salary('');
+	}
 
 	let postdata = async (e) => {
 		if (id == '') {
@@ -94,6 +100,7 @@ function AddCategory(props) {
 	useEffect(() =>{
 		if(cat_subsec_type == 1){
 			setId(cat_subsec_id);
+			resetErrors();
 
 		}
 		if(cat_subsec_id == ''){  //create category data for add category flow
