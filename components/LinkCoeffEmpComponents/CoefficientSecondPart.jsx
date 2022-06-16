@@ -41,6 +41,7 @@ const CoefficientSecondPart = () => {
     if(highVal && lowVal) {
       return compareAndShowTootTip(lowVal, highVal, `${_EmpId}_${_Coeffid}`);
     }
+    return [];
   }
 
   const compareAndShowTootTip = (lowVal, highVal, refkey) => {
