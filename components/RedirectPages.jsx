@@ -15,7 +15,11 @@ const RedirectPages = (props) => {
 		if (props.hasOwnProperty('src')) {
 			localStorage.setItem('src', JSON.stringify(props.src));
 		}
+		if (props.hasOwnProperty('type')) {
+			localStorage.setItem('type', JSON.stringify(props.type));
+		}
 		if (props.hasOwnProperty('dest')) {
+			localStorage.setItem('dest', JSON.stringify(props.dest));
 			switch (props.dest) {
 				case 'addpc':
 					router.push('/addpc/' + unique_key);

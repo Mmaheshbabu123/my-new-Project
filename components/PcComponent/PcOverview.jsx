@@ -39,6 +39,7 @@ const PcOverview = (params) => {
 	} = useContext(PcContext);
 
 	const router = useRouter();
+	console.log(router.query);
 	const [ pc, setPc ] = useState([]);
 	const [ count, setCount ] = useState(1);
 	const [ secid, setSecid ] = useState('');
@@ -74,6 +75,18 @@ const PcOverview = (params) => {
 		},
 		[ current_sec, pc_unique_key, cat_fun_updated ]
 	);
+
+	useEffect(()=>{
+		console.log(router.pathname);
+		var id = router.query.id
+		if(id != null && id != undefined && id != ''){
+		setCat_subsec_type(1);
+		setCat_leftsec('col-md-9');
+		setCat_rightsec('d-block col-md-3');
+	    setCat_subsec_id(id);
+
+		}
+	},[router.query])
 
 	let next_redirection = () => {
 		setCurrent_sec(3);

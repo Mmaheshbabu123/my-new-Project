@@ -10,7 +10,7 @@ const Redirectpage = () => {
        
 		<div>
 			{console.log(query)}
-			{query.hasOwnProperty('dest') && query.hasOwnProperty('src') && <RedirectPages dest={query.dest} src={query.src} />}
+			{query.hasOwnProperty('dest') && query.hasOwnProperty('src') && <RedirectPages dest={query.dest} src={query.src} type={query.hasOwnProperty('type')?query.type:''} />}
 		</div>
 	);
 };
