@@ -1,7 +1,8 @@
 .link-emp-coeff-tableparent {
-  height: 500px;
+  height: 475px;
   overflow-y: scroll;
   border: 1px solid;
+  margin: 0 !important;
 }
 
 .secondpart{
@@ -13,7 +14,7 @@ overflow-x: scroll;
 }
 
 .pclinking-table-thead {
-  height: 48px;
+  height: 55px;
   position: sticky;
   top: 0;
   background-color: lightgray;
@@ -52,6 +53,21 @@ overflow-x: scroll;
   height: 20px;
   width: 100%;
   text-align: center;
+}
+
+@keyframes run_fade {
+  from {
+    border: 2px solid rgba(255, 0, 0, .3);
+  }
+}
+
+.warning {
+  border: 2px solid red;
+  animation: run_fade 0.7s infinite alternate;
+}
+
+.value-input-cell:focus {
+    outline: none !important;
 }
 
 .table-second-part {

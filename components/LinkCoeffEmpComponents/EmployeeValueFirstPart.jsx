@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
 
+const DEFAULT = 2;
 const EmployeeValueFirstPart = () => {
   const { state } = useContext(LinkCoeffEmpContext);
   const { employeeTypeArray, valueTypeArray } = state;
@@ -18,7 +19,7 @@ const EmployeeValueFirstPart = () => {
       tempValueTypeArray.map(valueType => {
         let key = `${employeeType.id}-${valueType.id}`;
         htmlContent.push(<tr className="" key={key} id={key}>
-          <td> {valueType.name} </td>
+          <td> {parseInt(valueType.id) === DEFAULT ? (<strong> {valueType.name} </strong>) : (valueType.name) } </td>
         </tr>
         )
         return 1;
