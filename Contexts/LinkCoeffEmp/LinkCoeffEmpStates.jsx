@@ -11,7 +11,8 @@ const LinkCoeffEmpStates = (props) => {
     , pclinkingValueobj: {}
     , selectedPc: null
     , pcArray: []
-    , pcWarning: false,
+    , pcWarning: false
+    , lowHighValidation: []
   };
   const [state, dispatch] = useReducer(LinkCoeffEmpReducer, initialState);
 

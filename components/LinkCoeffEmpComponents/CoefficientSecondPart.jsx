@@ -1,18 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
+
+const LOW     = 1;
+const DEFAULT = 2;
+const HIGH    = 3;
 
 const CoefficientSecondPart = () => {
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
+  const inputRef  = useRef({});
   const {
     employeeTypeArray
     , valueTypeArray
     , coefficientTypeArray
     , pclinkingValueobj
+    , lowHighValidation
   } = state;
 
   console.count('coeff secondpart');
 
-  const handleValueChange = (target, _EmpId, _ValId, _Coeffid) => {
+  const handleValueChange = (target, _EmpId, _Coeffid, _ValId) => {
     let valueDataObj = {
       ...pclinkingValueobj,
       [_EmpId]: {
@@ -23,7 +29,38 @@ const CoefficientSecondPart = () => {
         }
       }
     }
-    updateStateChanges({ pclinkingValueobj: valueDataObj });
+    updateStateChanges({ pclinkingValueobj: valueDataObj,
+      lowHighValidation: handleValidation(valueDataObj, _EmpId, _Coeffid, _ValId),
+    });
+  }
+
+  const handleValidation = (valueDataObj, _EmpId, _Coeffid, _ValId) => {
+    let valObj = valueDataObj[_EmpId][_Coeffid];
+    let lowVal = parseInt(valObj[LOW]);
+    let highVal = parseInt(valObj[HIGH]);
+    if(highVal && lowVal) {
+      return compareAndShowTootTip(lowVal, highVal, `${_EmpId}_${_Coeffid}`);
+    }
+  }
+
+  const compareAndShowTootTip = (lowVal, highVal, refkey) => {
+    let lowRef  = inputRef.current[`${refkey}_1`];
+    let highRef = inputRef.current[`${refkey}_3`];
+    let title = '';
+    if(lowVal > highVal) {
+      title = 'Low value should be less then high value (Low < High)';
+      if(lowHighValidation.includes(refkey)) return lowHighValidation;
+      lowRef.classList.add("warning");
+      highRef.classList.add("warning");
+      lowHighValidation.push(refkey)
+    } else {
+      lowRef.classList.remove("warning");
+      highRef.classList.remove("warning");
+      lowHighValidation.splice(lowHighValidation.indexOf(refkey), 1);
+    }
+      lowRef.title  = title;
+      highRef.title = title;
+      return lowHighValidation;
   }
 
   const getCoefficientTableContent = () => {
@@ -33,14 +70,15 @@ const CoefficientSecondPart = () => {
         htmlContent.push(<tr key={`${employeeType.id}-${valueType.id}`} className="table-second-part-tbody-tr">{
           coefficientTypeArray.map(coefficient => {
             let _EmpId = employeeType.id, _ValId = valueType.id, _Coeffid = coefficient.id;
-            let { matrixKey, value } = getPcLinkingValue(_EmpId, _ValId, _Coeffid);
+            let { matrixKey, value } = getPcLinkingValue(_EmpId, _Coeffid, _ValId);
             return (<td key={matrixKey} id={matrixKey} className="pc-linking-td">
               <input
                 type="text"
                 className="value-input-cell"
-                title={value}
                 value={value}
-                onChange={(e) => handleValueChange(e.target, _EmpId, _ValId, _Coeffid)}
+                id={`${_EmpId}_${_Coeffid}_${_ValId}`}
+                ref={ref => inputRef.current[`${_EmpId}_${_Coeffid}_${_ValId}`] = ref}
+                onChange={(e) => handleValueChange(e.target, _EmpId, _Coeffid, _ValId)}
              />
             </td>)
           })
@@ -51,7 +89,7 @@ const CoefficientSecondPart = () => {
     return htmlContent;
   }
 
-  const getPcLinkingValue = (_EmpId, _ValId, _Coeffid) => {
+  const getPcLinkingValue = (_EmpId, _Coeffid, _ValId) => {
     let matrixKey = `${_EmpId}-${_Coeffid}-${_ValId}`;
     return {
       matrixKey,
@@ -59,7 +97,7 @@ const CoefficientSecondPart = () => {
                   pclinkingValueobj[_EmpId][_Coeffid][_ValId] ?
                     pclinkingValueobj[_EmpId][_Coeffid][_ValId] : ''
                   : ''
-              : ''      
+              : ''
     }
   }
 

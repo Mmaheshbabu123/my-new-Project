@@ -133,6 +133,7 @@ function AddFunction(props) {
 										{inputlist.map((x, i) => {
 											return (
 												<select
+													key={i}
 													className="form-select"
 													placeholder=""
 													name="employeetype"
