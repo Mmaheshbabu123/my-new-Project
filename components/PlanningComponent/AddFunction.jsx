@@ -2,8 +2,8 @@ import React, { Component, useState, useEffect } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import { Addfunction } from '../../Services/ApiEndPoints';
 import { AiFillPlusSquare } from 'react-icons/ai';
-import TreeView from 'react-treeview';
-import 'react-treeview/react-treeview.css';
+// import TreeView from 'react-treeview';
+// import 'react-treeview/react-treeview.css';
 
 function AddFunction(props) {
 	const [ visible, setVisible ] = useState(false);
