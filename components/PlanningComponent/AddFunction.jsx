@@ -132,7 +132,7 @@ function AddFunction(props) {
 									<li className="mt-3 mb-3 ms-2 ">
 										{inputlist.map((x, i) => {
 											return (
-												<select 
+												<select
 													key={i}
 													className="form-select"
 													placeholder=""

@@ -37,7 +37,7 @@ const LinkCoeffEmpComponent = (props) => {
       , valueTypeArray: valueTypes
       , pclinkingValueobj: pcLinkedValueData || {}
       , pcArray: pcArray
-      , selectedPc: parseInt(props.pcid)
+      , selectedPc: parseInt(props.pcid),
     });
   }
 
@@ -47,6 +47,7 @@ const LinkCoeffEmpComponent = (props) => {
    */
   const handleSubmit = async () => {
     if (state.selectedPc) {
+      if(state.lowHighValidation.length) { return; }
       await APICALL.service(`${savePcLinkingData}`, 'POST', postdata())
         .then(response => {
           if (response.status === 200)
@@ -73,11 +74,12 @@ const LinkCoeffEmpComponent = (props) => {
   const onSelect = (e) => {
     updateStateChanges({ selectedPc: e.value, pcWarning: false, pclinkingValueobj: {} });
   }
-
+console.log(state, state.lowHighValidation);
   if (SERVER_SIDE_RENDERING)
     return <>
       <div className="m-4">
-        <div className="col-md-3 mt-2 mb-4 p-0">
+        <div className="col-md-12 row p-0 m-0">
+        <div className="col-md-3 mt-2 mb-3 p-0">
           <MultiSelect
             options={state.pcArray}
             standards={state.pcArray.filter(val => val.id === state.selectedPc)}
@@ -88,6 +90,9 @@ const LinkCoeffEmpComponent = (props) => {
             placeholder={'Select paritiar committe'}
           />
           {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritiar committe </small> : null}
+        </div>
+        {state.lowHighValidation.length > 0 && <small className="col-md-7 mt-3 mb-3" style={{ textAlign:'center', color: 'red' }}>
+          {`Change highlighted low and high values low value should be less than high value (Low < High)`}</small>}
         </div>
         <div className="col-md-12 row link-emp-coeff-tableparent">
           <div className="col-md-3 m-0 p-0 pc-linking-div firstpart">
