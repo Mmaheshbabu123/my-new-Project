@@ -74,7 +74,7 @@ const LinkCoeffEmpComponent = (props) => {
   const onSelect = (e) => {
     updateStateChanges({ selectedPc: e.value, pcWarning: false, pclinkingValueobj: {} });
   }
-console.log(state, state.lowHighValidation);
+
   if (SERVER_SIDE_RENDERING)
     return <>
       <div className="m-4">
@@ -87,7 +87,7 @@ console.log(state, state.lowHighValidation);
             handleChange={onSelect}
             isMulti={false}
             className="pc-single-select"
-            placeholder={'Select paritiar committe'}
+            placeholder={'Select paritair comite'}
           />
           {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritiar committe </small> : null}
         </div>
