@@ -40,15 +40,16 @@ const CoefficientSecondPart = () => {
     let highVal = parseInt(valObj[HIGH]);
     if(highVal && lowVal) {
       return compareAndShowTootTip(lowVal, highVal, `${_EmpId}_${_Coeffid}`);
+    } else {
+      return compareAndShowTootTip(lowVal, highVal, `${_EmpId}_${_Coeffid}`, 0);
     }
-    return [];
   }
 
-  const compareAndShowTootTip = (lowVal, highVal, refkey) => {
+  const compareAndShowTootTip = (lowVal, highVal, refkey, type = 1) => {
     let lowRef  = inputRef.current[`${refkey}_1`];
     let highRef = inputRef.current[`${refkey}_3`];
     let title = '';
-    if(lowVal > highVal) {
+    if(lowVal > highVal && type) {
       title = 'Low value should be less then high value (Low < High)';
       if(lowHighValidation.includes(refkey)) return lowHighValidation;
       lowRef.classList.add("warning");
@@ -57,7 +58,8 @@ const CoefficientSecondPart = () => {
     } else {
       lowRef.classList.remove("warning");
       highRef.classList.remove("warning");
-      lowHighValidation.splice(lowHighValidation.indexOf(refkey), 1);
+      lowHighValidation.indexOf(refkey) > -1 ?
+      lowHighValidation.splice(lowHighValidation.indexOf(refkey), 1) : null;
     }
       lowRef.title  = title;
       highRef.title = title;
