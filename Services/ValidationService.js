@@ -79,7 +79,7 @@ const ValidationService = {
  * @returns 
  */
   minSalaryValidationMethod: function(value){
-    if(value.match(/(^[1-9]{1,3}(([.]|[,])\d{1,2})?)$|(^[0]([.]|[,])\d{1,2})$/))
+    if(value.match(/(^[1-9][0-9]{0,2}(([.]|[,])\d{1,2})?)$/))
     {
      return '';
     }else{

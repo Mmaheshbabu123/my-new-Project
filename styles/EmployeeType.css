@@ -78,3 +78,12 @@
   -moz-box-shadow: 4px 3px 6px 0px rgba(0,0,0,0.54);
   box-shadow: 4px 3px 6px 0px rgba(0,0,0,0.54);
 }
+
+.searchIconCss {
+  text-align: right;
+  width: 5% !important;
+  top: 5px;
+  position: absolute;
+  cursor: pointer;
+  right: 30%;
+}

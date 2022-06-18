@@ -157,9 +157,15 @@ function AddPc(props) {
 	};
 	let backToDashboard = () =>{
 		var src =JSON.parse(localStorage.getItem("src"));
+		var type = JSON.parse(localStorage.getItem("type"));
 		if (src) { 
 			window.localStorage.removeItem('src');
+			if(type == "1"){
 			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+src+"&check_logged_in=1")
+			}
+			else{
+			router.push('/'+src)
+			}
 		}
 	  
 	}

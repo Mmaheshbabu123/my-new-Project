@@ -5,12 +5,12 @@ import { getCategory, updateCategory } from '../../Services/ApiEndPoints';
 import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare, FaMinusSquare } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
-// import { useParams } from "react-router-dom";
 import { APICALL } from '../../Services/ApiServices';
 import Popup from './Popupcategory';
+import { Uniquekey } from '../../Services/GenetateUniqueKey';
+
 
 const ManageCategoryComponent = () => {
-	// const urlParam = useParams();
 	const [ categories, setCategories ] = useState([]);
 	const [ categoriesTemp, setCategoriesTemp ] = useState([]);
 	const [ updated, setUpdated ] = useState(0);
@@ -24,8 +24,6 @@ const ManageCategoryComponent = () => {
 
 	useEffect(
 		() => {
-			console.log('test');
-			console.log(getCategory);
 			APICALL.service(getCategory, 'GET')
 				.then((result) => {
 					console.log(result.data);
@@ -219,7 +217,7 @@ const ManageCategoryComponent = () => {
 											<td className="border-end border-secondary">{result.category_name}</td>
 											<td className="border-end border-secondary">€ {result.min_salary}</td>
 											<td className="d-flex justify-content-center">
-												<Link href="/addpc" className="">
+												<Link href={"/editpc/"+result.pc_unique_key+"?id="+result.cat_id} className="">
 													<a>
 														<MdEdit className="mt-2 ms-3 " />
 													</a>
@@ -242,7 +240,7 @@ const ManageCategoryComponent = () => {
 						</table>
 					</div>
 				</div>
-				<Link href="/addpc">
+				<Link href={"/redirect-page?src="+process.env.NEXT_PUBLIC_APP_URL+"manage-category&dest=addpc"}>
 					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
 				</Link>
 			</form>

@@ -20,14 +20,14 @@ function ManageEmployeeAndCoefficientTypes() {
       <Link href="/link-coefficient-employeetype?pcid=0">
         <a className='show-box-link'>
           <div title="Link coefficients to pc">
-            Link coefficients to pc
+            Link coefficients to employee type
           </div>
         </a>
       </Link>
       <Link href="/linkcofficientpc/manage">
         <a className='show-box-link'>
           <div title="Link coefficients per pc">
-            Link coefficients per pc
+            Manage coefficients per pc
           </div>
         </a>
       </Link>
