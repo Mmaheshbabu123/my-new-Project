@@ -134,9 +134,9 @@ function AddFunction(props) {
 					: 'This field is invalid.'
 				: 'This field is required.';
 
-				if(error['error_function_name'] == '' && id == ''){
+				if(error['error_function_name'] == ''){
 					props.categorylist.forEach(element => {
-						if(element.type == '3' && Object.values(element).includes(data.function_name)){
+						if(element.type == '3' && element.id != id && Object.values(element).includes(data.function_name)){
 							error['error_function_name'] ="Function name already exist."
 
 						}
@@ -155,11 +155,8 @@ function AddFunction(props) {
 		setError_min_salary(error['error_min_salary']);
 
 		if (error['error_function_name'] == '' && error['error_min_salary'] == '') {
-			console.log('valid');
 			return true;
 		} else {
-			console.log('invalid');
-
 			return false;
 		}
 	};

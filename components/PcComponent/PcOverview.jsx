@@ -78,12 +78,12 @@ const PcOverview = (params) => {
 
 	useEffect(()=>{
 		console.log(router.pathname);
-		var id = router.query.id
-		if(id != null && id != undefined && id != ''){
+		var cid = router.query.cid
+		if(cid != null && cid != undefined && cid != ''){
 		setCat_subsec_type(1);
 		setCat_leftsec('col-md-9');
 		setCat_rightsec('d-block col-md-3');
-	    setCat_subsec_id(id);
+	    setCat_subsec_id(cid);
 
 		}
 	},[router.query])
@@ -99,6 +99,7 @@ const PcOverview = (params) => {
 		<div className="container">
 			<div className="row pt-4 min-vh-75">
 				<div className={`px-5 ${cat_leftsec}`}>
+					<p className='h4'>Edit paritair comitte</p>
 					{pc && (
 						<div>
 							{cat_subsec_type == 0 && (
@@ -324,7 +325,8 @@ const PcOverview = (params) => {
 					)}
 				</div>
 			</div>
-			<div className="row">
+			{console.log(router.query)}
+			{router.query.cid? '':<div className="row">
 				<div className="text-start col-md-6">
 					<button
 						type="button"
@@ -348,6 +350,7 @@ const PcOverview = (params) => {
 					</button>
 				</div>
 			</div>
+}
 		</div>
 	);
 };
