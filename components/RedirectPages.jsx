@@ -24,6 +24,9 @@ const RedirectPages = (props) => {
 				case 'addpc':
 					router.push('/addpc/' + unique_key);
 					break;
+					case 'manage-category':
+					router.push('/manage-category');
+					break;
 				default:
 					router.push('/');
 					break;
