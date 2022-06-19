@@ -5,6 +5,7 @@ import { APICALL } from '../../Services/ApiServices';
 import { storeCategoryDetails, getCat, catUpdate } from '../../Services/ApiEndPoints';
 import styles from '../../styles/Pc.module.css';
 import { PcContext } from '../../Contexts/PcContext';
+import { useRouter } from 'next/router';
 
 function AddCategory(props) {
 	console.log("qwerty")
@@ -15,6 +16,7 @@ function AddCategory(props) {
 		min_salary: '',
 		pc_unique_key: ''
 	});
+	const router = useRouter();
 	const [ error_category_name, setError_category_name ] = useState('');
 	const [ error_min_salary, setError_min_salary ] = useState('');
 	const {
@@ -58,11 +60,17 @@ function AddCategory(props) {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						setCat_fun_updated('catupdate' + result.ctid);
-						setCat_rightsec('d-none');
-						setCat_leftsec('col-md-12');
-						setCat_subsec_type(0);
-						setCat_subsec_id('');
+						var cid = router.query.cid
+						if(cid != null && cid != undefined && cid != ''){
+							router.push("/manage-category");
+						}else{
+							setCat_fun_updated('catupdate' + result.ctid);
+							setCat_rightsec('d-none');
+							setCat_leftsec('col-md-12');
+							setCat_subsec_type(0);
+							setCat_subsec_id('');
+						}
+						
 					}
 				})
 				.catch((error) => {
@@ -129,18 +137,19 @@ function AddCategory(props) {
 		var error=[];
 		error['error_category_name'] = ValidationService.emptyValidationMethod(data.category_name) == '' ? ValidationService.nameValidationMethod(data.category_name) ==''?'':ValidationService.nameValidationMethod(data.category_name):ValidationService.emptyValidationMethod(data.category_name);
 		error['error_min_salary'] = ValidationService.emptyValidationMethod(data.min_salary) == '' ? ValidationService.minSalaryValidationMethod(data.min_salary) ==''?'':"This field is invalid.":ValidationService.emptyValidationMethod(data.min_salary);
-		setError_category_name(error['error_category_name']);
-		setError_min_salary(error['error_min_salary']);
-		if(error['error_category_name'] == '' && id == ''){
+		
+		if(error['error_category_name'] == ''){
 			props.categorylist.forEach(element => {
-				if(element.type == '1' && Object.values(element).includes(data.function_name)){
+				console.log(element);
+				if(element.type == '2' && element.id != id && data.category_name == element.category_name){
 					error['error_category_name'] ="Category name already exist."
 
 				}
 				
 			});
 		}
-
+		setError_category_name(error['error_category_name']);
+		setError_min_salary(error['error_min_salary']);
 		if(error['error_category_name'] == '' && error['error_min_salary'] == '' ){
 			return true;
 		}else{

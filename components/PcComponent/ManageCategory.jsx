@@ -217,7 +217,7 @@ const ManageCategoryComponent = () => {
 											<td className="border-end border-secondary">{result.category_name}</td>
 											<td className="border-end border-secondary">€ {result.min_salary}</td>
 											<td className="d-flex justify-content-center">
-												<Link href={"/editpc/"+result.pc_unique_key+"?id="+result.cat_id} className="">
+												<Link href={"/editpc/"+result.pc_unique_key+"?cid="+result.cat_id} className="">
 													<a>
 														<MdEdit className="mt-2 ms-3 " />
 													</a>
@@ -240,7 +240,7 @@ const ManageCategoryComponent = () => {
 						</table>
 					</div>
 				</div>
-				<Link href={"/redirect-page?src="+process.env.NEXT_PUBLIC_APP_URL+"manage-category&dest=addpc"}>
+				<Link href={"/redirect-page?src=/manage-category&dest=addpc"}>
 					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
 				</Link>
 			</form>
