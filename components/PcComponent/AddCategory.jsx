@@ -6,6 +6,8 @@ import { storeCategoryDetails, getCat, catUpdate } from '../../Services/ApiEndPo
 import styles from '../../styles/Pc.module.css';
 import { PcContext } from '../../Contexts/PcContext';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+
 
 function AddCategory(props) {
 	console.log("qwerty")
@@ -45,11 +47,15 @@ function AddCategory(props) {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
+						if(cid != null && cid != undefined && cid != ''){
+							router.push("/manage-category");
+						}else{
 						setCat_fun_updated('cat' + result.ctid);
 						setCat_rightsec('d-none');
 						setCat_leftsec('col-md-12');
 						setCat_subsec_type(0);
 						setCat_subsec_id('');
+						}
 					}
 				})
 				.catch((error) => {
@@ -161,6 +167,7 @@ function AddCategory(props) {
 		<div className="mt-4">
 			<form onSubmit={submit}>
 				{id != '' ? <h4 className="h5 mb-3">Edit category</h4> : <h4 className="h5 mb-3">Add category</h4>}
+				<div className="row">
 				<label className="mb-2 custom_astrick">Category name</label>
 				<div className="form-group mb-3">
 					<input
@@ -190,8 +197,26 @@ function AddCategory(props) {
 					/>
 					<p style={{ color: 'red' }}>{error_min_salary}</p>
 				</div>
-
-				<div className="text-end">
+				</div>
+				<div className='row'>
+					
+				<div className="text-start col-md-6">
+					{router.query.cid && 
+					<Link href={"/manage-category"}>
+					<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">Back</a>
+				</Link> 
+					// <button
+					// 	className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+					// 	onClick={() => {
+					// 		router.push('/manage-category')
+					// 	}}
+					// >
+					// 	Back
+					// </button>
+					}
+					
+				</div>
+				<div className="text-end col-md-6">
 					<button
 						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
 						onClick={() => {
@@ -200,6 +225,7 @@ function AddCategory(props) {
 					>
 						Save
 					</button>
+				</div>
 				</div>
 			</form>
 		</div>
