@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { createEmployeeTypes, createCofficientType} from '../../Services/ApiEndPoints'
 import { editEmployeeType ,editCofficientType} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
+import {MdEdit, MdDelete} from 'react-icons/md';
 
 
 const AddEmployeeType = (props) => {
@@ -91,8 +92,8 @@ const AddEmployeeType = (props) => {
   const getNeededActions = (item, index) => {
     return (
       <>
-        <span className='actions-span' onClick={() => handleActionClick('edit', item, index)}> Edit </span>
-        <span className='actions-span' onClick={() => handleActionClick('delete', item, index)}> Delete </span>
+        <span className='actions-span' onClick={() => handleActionClick('edit', item, index)}> <MdEdit /> </span>
+        <span className='actions-span' onClick={() => handleActionClick('delete', item, index)}> <MdDelete /> </span>
       </>
     )
   }
@@ -116,7 +117,8 @@ const AddEmployeeType = (props) => {
   return <>
     <div className='add-edit-types'>
       <div className="row m-3">
-        <label className = "mb-3" htmlFor="name"> {`Add ${props.manageType === 'employee-types' ? 'employee' : 'coefficient'} type`} </label>
+        <h4 className="mb-4"> {`${props.manageType === 'employee-types' ? 'Add employee type' : 'Add coefficient'}`} </h4>
+        <label className = "mb-3" htmlFor="name"> {`${props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient name'}`} </label>
         <div className='row'>
           <input
             ref={inputRef}
@@ -146,7 +148,7 @@ const AddEmployeeType = (props) => {
       </div>
       {state.newItems.length > 0 && !state.editFlow &&
         <div className='add-item-div'>
-          <table className='table-hover m-3 add-item-table'>
+          <table className='table-hover col-md-10 m-3 add-item-table'>
             {state.newItems.map((item, index) =>
               <tr Key={index} id={index}>
                 <td style={{ width: '80%' }}> {item.name} </td>

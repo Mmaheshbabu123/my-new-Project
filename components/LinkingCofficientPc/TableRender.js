@@ -4,6 +4,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { delteCofficientPerPc} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
+import SearchIcon from '../SearchIcon';
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
@@ -43,23 +44,28 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
       .then((result) => router.reload())
       .catch((error) => window.alert('Error occurred'));
   }
-  const handleSearch = (e) => {
-    const { value } = e.target;
+  const handleSearch = (value) => {
     let filterRows = rows.filter((item) => {
       return (item[state.searchKey].toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
-    setState({ ...state, searchTerm: e.target.value, filterRows: filterRows });
+    setState({ ...state, searchTerm: value, filterRows: filterRows });
   }
+
+  const handleSearchClick = () => {
+    handleSearch(state.searchTerm);
+  }
+
     return (
       <>
-        <h4> {`Manage PC types`} </h4>
-        <div className='row' style={{ margin: '10px 0' }}>
+        <h4> {`Manage coefficients per pc`} </h4>
+        <div className='row' style={{ margin: '10px 0', position: 'relative' }}>
+          <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
           <input
             type="text"
             className="form-control col-7"
             id="pcp_name"
-            onChange={(e) => handleSearch(e)}
+            onChange={(e) => setState({...state, searchTerm: e.target.value})}
             placeholder={'Search'}
           />
           {/*<button
