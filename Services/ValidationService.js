@@ -66,11 +66,12 @@ const ValidationService = {
    * @returns 
    */
   percentageValidationMethod: function(value) {
-    if(!value.match(/(^100([.]0{1,2})?)$ |(^\d{1,2}([.]\d{1,2})?)$/) && !value.match(/(^100([,]0{1,2})?)$ |(^\d{1,2}([,]\d{1,2})?)$/))
+    // if(value.match(/^(100([.][0]{1,2})?)$/))
+    if(value.match(/(^(100([.][0]{1,2})?)$)|(^[1-9][0-9]{0,1}([.]\d{1,2})?)$/) ||value.match(/(^(100([,][0]{1,2})?)$)|(^[1-9][0-9]{0,1}([,]\d{1,2})?)$/))
     {
-     return 'This field is invalid.';
+      return ''
     }else{
-      return '';
+      return 'This field is invalid.';
     }
   },
 /**
