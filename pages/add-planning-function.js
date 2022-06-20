@@ -1,7 +1,7 @@
 import { Layout } from "../components/layout/Layout";
-import AddFunction from "../components/PlanningComponent/AddFunction";
+import AddPlanningFunction from "../components/PlanningComponent/AddPlanningFunction";
 
 const Addplanningfunction = () => (
-    <div><AddFunction /></div>
+    <div><AddPlanningFunction /></div>
 );
 export default Addplanningfunction;
