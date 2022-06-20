@@ -37,10 +37,11 @@ const PcCommon = (props) => {
 	);
 	useEffect(
 		() => {
-				setPc_unique_key(props.pc_unique_key);
-				console.log(pc_unique_key)
+			if (pc_unique_key == '' && props.pcid!='' && props.pcid != undefined) {
+				setPc_unique_key(props.pcid);
+			}
 		},
-		[ props]
+		[ props ]
 	);
 
 	return (
@@ -67,122 +68,123 @@ const PcCommon = (props) => {
 					setCat_subsec_id
 				}}
 			>
-				{props.type == 'add'?<div>
-				<p className="h4">
-					{current_sec == 1 ? (
-						'Add paritair comitte'
-					) : current_sec == 2 ? (
-						'Add category and function'
-					) : current_sec == 3 ? (
-						'Add age'
-					) : current_sec == 4 ? (
-						'Add employee type'
-					) : current_sec == 5 ? (
-						'Add salary benifits'
-					) : (
-						'Add paritair comitte'
-					)}
-				</p>
-				<div className="row mt-4 pt-2">
-					<ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-						<li className="nav-item" role="presentation">
-							<button
-								className={`nav-link py-3 ${current_sec == 1
-									? 'active custom-active'
-									: 'custom-inactive'}`}
-								id="pills-pc-tab"
-								data-bs-toggle="pill"
-								data-bs-target="#pills-pc"
-								type="button"
-								role="tab"
-								aria-controls="pills-pc"
-								aria-selected="true"
-								onClick={() => {
-									setCurrent_sec(1);
-								}}
-							>
-								{sec_completed.pc || current_sec == 1 ? (
-									<FaRegCheckCircle className="d-inline mb-2" />
-								) : (
-									<BsCircle className="d-inline mb-2" />
-								)}
-								<p className="mb-2">Step 1:</p>
-								<p>Paritair comitte details</p>
-							</button>
-						</li>
-						<li className="nav-item" role="presentation">
-							<button
-								className={`nav-link py-3 ${sec_completed.pc == false
-									? 'disabled'
-									: ''} ${current_sec == 2 ? 'active custom-active' : 'custom-inactive'}`}
-								id="pills-profile-tab"
-								data-bs-toggle="pill"
-								data-bs-target="#pills-profile"
-								type="button"
-								role="tab"
-								aria-controls="pills-profile"
-								aria-selected="false"
-								onClick={() => {
-									setCurrent_sec(2);
-								}}
-							>
-								{sec_completed.cat || current_sec == 2 ? (
-									<FaRegCheckCircle className="d-inline mb-2" />
-								) : (
-									<BsCircle className="d-inline mb-2" />
-								)}
-								<p className="mb-2">Step 2:</p> <p>Category and Function</p>
-							</button>
-						</li>
-						<li className="nav-item" role="presentation">
-							<button
-								className={`nav-link py-3 ${current_sec != 3 && sec_completed.cat == false
-									? 'disabled'
-									: ''} ${current_sec == 3 ? 'active custom-active' : 'custom-inactive'}`}
-								id="pills-contact-tab"
-								data-bs-toggle="pill"
-								data-bs-target="#pills-age"
-								type="button"
-								role="tab"
-								aria-controls="pills-contact"
-								aria-selected="false"
-								onClick={() => {
-									setCurrent_sec(3);
-								}}
-							>
-								{sec_completed.age || current_sec == 3 ? (
-									<FaRegCheckCircle className="d-inline mb-2" />
-								) : (
-									<BsCircle className="d-inline mb-2" />
-								)}
-								<p className="mb-2">Step 3:</p> <p>Age</p>
-							</button>
-						</li>
-						<li className="nav-item" role="presentation">
-							<button
-								className={`nav-link py-3 ${current_sec != 4 && sec_completed.age == false
-									? 'disabled'
-									: ''} ${current_sec == 4 ? 'active custom-active' : 'custom-inactive'}`}
-								id="pills-contact-tab"
-								data-bs-toggle="pill"
-								data-bs-target="#pills-emp-type"
-								type="button"
-								role="tab"
-								aria-controls="pills-contact"
-								aria-selected="false"
-								onClick={() => {
-									setCurrent_sec(4);
-								}}
-							>
-								{sec_completed.emp_type || current_sec == 4 ? (
-									<FaRegCheckCircle className="d-inline mb-2" />
-								) : (
-									<BsCircle className="d-inline mb-2" />
-								)}
-								<p className="mb-2">Step 4:</p> <p>Employee type</p>
-							</button>
-						</li>
-						{/* <li className="nav-item" role="presentation">
+				{props.type == 'add' ? (
+					<div>
+						<p className="h4">
+							{current_sec == 1 ? (
+								'Add paritair comitte'
+							) : current_sec == 2 ? (
+								'Add category and function'
+							) : current_sec == 3 ? (
+								'Add age'
+							) : current_sec == 4 ? (
+								'Add employee type'
+							) : current_sec == 5 ? (
+								'Add salary benifits'
+							) : (
+								'Add paritair comitte'
+							)}
+						</p>
+						<div className="row mt-4 pt-2">
+							<ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+								<li className="nav-item" role="presentation">
+									<button
+										className={`nav-link py-3 ${current_sec == 1
+											? 'active custom-active'
+											: 'custom-inactive'}`}
+										id="pills-pc-tab"
+										data-bs-toggle="pill"
+										data-bs-target="#pills-pc"
+										type="button"
+										role="tab"
+										aria-controls="pills-pc"
+										aria-selected="true"
+										onClick={() => {
+											setCurrent_sec(1);
+										}}
+									>
+										{sec_completed.pc || current_sec == 1 ? (
+											<FaRegCheckCircle className="d-inline mb-2" />
+										) : (
+											<BsCircle className="d-inline mb-2" />
+										)}
+										<p className="mb-2">Step 1:</p>
+										<p>Paritair comitte details</p>
+									</button>
+								</li>
+								<li className="nav-item" role="presentation">
+									<button
+										className={`nav-link py-3 ${sec_completed.pc == false
+											? 'disabled'
+											: ''} ${current_sec == 2 ? 'active custom-active' : 'custom-inactive'}`}
+										id="pills-profile-tab"
+										data-bs-toggle="pill"
+										data-bs-target="#pills-profile"
+										type="button"
+										role="tab"
+										aria-controls="pills-profile"
+										aria-selected="false"
+										onClick={() => {
+											setCurrent_sec(2);
+										}}
+									>
+										{sec_completed.cat || current_sec == 2 ? (
+											<FaRegCheckCircle className="d-inline mb-2" />
+										) : (
+											<BsCircle className="d-inline mb-2" />
+										)}
+										<p className="mb-2">Step 2:</p> <p>Category and Function</p>
+									</button>
+								</li>
+								<li className="nav-item" role="presentation">
+									<button
+										className={`nav-link py-3 ${current_sec != 3 && sec_completed.cat == false
+											? 'disabled'
+											: ''} ${current_sec == 3 ? 'active custom-active' : 'custom-inactive'}`}
+										id="pills-contact-tab"
+										data-bs-toggle="pill"
+										data-bs-target="#pills-age"
+										type="button"
+										role="tab"
+										aria-controls="pills-contact"
+										aria-selected="false"
+										onClick={() => {
+											setCurrent_sec(3);
+										}}
+									>
+										{sec_completed.age || current_sec == 3 ? (
+											<FaRegCheckCircle className="d-inline mb-2" />
+										) : (
+											<BsCircle className="d-inline mb-2" />
+										)}
+										<p className="mb-2">Step 3:</p> <p>Age</p>
+									</button>
+								</li>
+								<li className="nav-item" role="presentation">
+									<button
+										className={`nav-link py-3 ${current_sec != 4 && sec_completed.age == false
+											? 'disabled'
+											: ''} ${current_sec == 4 ? 'active custom-active' : 'custom-inactive'}`}
+										id="pills-contact-tab"
+										data-bs-toggle="pill"
+										data-bs-target="#pills-emp-type"
+										type="button"
+										role="tab"
+										aria-controls="pills-contact"
+										aria-selected="false"
+										onClick={() => {
+											setCurrent_sec(4);
+										}}
+									>
+										{sec_completed.emp_type || current_sec == 4 ? (
+											<FaRegCheckCircle className="d-inline mb-2" />
+										) : (
+											<BsCircle className="d-inline mb-2" />
+										)}
+										<p className="mb-2">Step 4:</p> <p>Employee type</p>
+									</button>
+								</li>
+								{/* <li className="nav-item" role="presentation">
 							<button
 								className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
 									? 'disabled'
@@ -206,52 +208,63 @@ const PcCommon = (props) => {
 								<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
 							</button>
 						</li> */}
-					</ul>
-					<div className="tab-content" id="pills-tabContent">
-						<div
-							className={`tab-pane fade ${current_sec == 1 ? 'show active' : ''}`}
-							id="pills-pc"
-							role="tabpanel"
-							aria-labelledby="pills-pc-tab"
-						>
-							<AddPc />
-						</div>
-						<div
-							className={`tab-pane fade ${current_sec == 2 ? 'show active' : ''}`}
-							id="pills-profile"
-							role="tabpanel"
-							aria-labelledby="pills-profile-tab"
-						>
-							{/* <PcOverview /> */}
-							{current_sec == 2 ? <PcOverview type="addpc" pc_type="add"/> : ''}
-						</div>
-						<div
-							className={`tab-pane fade ${current_sec == 3 ? 'show active' : ''}`}
-							id="pills-age"
-							role="tabpanel"
-							aria-labelledby="pills-contact-tab"
-						>
-							{current_sec == 3 && <AddAge />}
-						</div>
-						<div
-							className={`tab-pane fade ${current_sec == 4 ? 'show active' : ''}`}
-							id="pills-emp-type"
-							role="tabpanel"
-							aria-labelledby="pills-contact-tab"
-						>
-							{current_sec == 4 && <EmployeeType />}
-						</div>
-						<div
-							className={`tab-pane fade ${current_sec == 5 ? 'show active' : ''}`}
-							id="pills-salary"
-							role="tabpanel"
-							aria-labelledby="pills-contact-tab"
-						>
-							...
+							</ul>
+							<div className="tab-content" id="pills-tabContent">
+								<div
+									className={`tab-pane fade ${current_sec == 1 ? 'show active' : ''}`}
+									id="pills-pc"
+									role="tabpanel"
+									aria-labelledby="pills-pc-tab"
+								>
+									<AddPc />
+								</div>
+								<div
+									className={`tab-pane fade ${current_sec == 2 ? 'show active' : ''}`}
+									id="pills-profile"
+									role="tabpanel"
+									aria-labelledby="pills-profile-tab"
+								>
+									{/* <PcOverview /> */}
+									{current_sec == 2 ? <PcOverview type="addpc" pc_type="add" /> : ''}
+								</div>
+								<div
+									className={`tab-pane fade ${current_sec == 3 ? 'show active' : ''}`}
+									id="pills-age"
+									role="tabpanel"
+									aria-labelledby="pills-contact-tab"
+								>
+									{current_sec == 3 && <AddAge />}
+								</div>
+								<div
+									className={`tab-pane fade ${current_sec == 4 ? 'show active' : ''}`}
+									id="pills-emp-type"
+									role="tabpanel"
+									aria-labelledby="pills-contact-tab"
+								>
+									{current_sec == 4 && <EmployeeType />}
+								</div>
+								<div
+									className={`tab-pane fade ${current_sec == 5 ? 'show active' : ''}`}
+									id="pills-salary"
+									role="tabpanel"
+									aria-labelledby="pills-contact-tab"
+								>
+									...
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				</div>:props.type == 'managepc'?<div> <PcOverview type="addpc" pc_type="managepc"/></div>:<div> <PcOverview type="addpc" pc_type="edit"/></div>}
+				) : props.type == 'managepc' ? (
+					<div>
+						{' '}
+						<PcOverview type="addpc" pc_type="managepc" />
+					</div>
+				) : (
+					<div>
+						{' '}
+						<PcOverview type="addpc" pc_type="edit" />
+					</div>
+				)}
 			</PcContext.Provider>
 		</div>
 	);
