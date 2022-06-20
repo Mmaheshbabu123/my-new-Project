@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useRef } from 'react';
 import LinkCoeffEmpContext from './LinkCoeffEmpContext';
 import LinkCoeffEmpReducer from './LinkCoeffEmpReducer';
 import { UPDATE_STATE } from './Actions';
@@ -13,6 +13,13 @@ const LinkCoeffEmpStates = (props) => {
     , pcArray: []
     , pcWarning: false
     , lowHighValidation: []
+    , inputRef: useRef({})
+    , lowKey: 1
+    , defaultKey: 2
+    , highKey: 3
+    , minValue: 0
+    , maxValue: 10
+    , regexp: /^[0-9,.]*$/
   };
   const [state, dispatch] = useReducer(LinkCoeffEmpReducer, initialState);
 

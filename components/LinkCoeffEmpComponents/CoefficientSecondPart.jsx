@@ -1,22 +1,18 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
-
-const LOW     = 1;
-const DEFAULT = 2;
-const HIGH    = 3;
 
 const CoefficientSecondPart = () => {
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
-  const inputRef  = useRef({});
   const {
     employeeTypeArray
     , valueTypeArray
     , coefficientTypeArray
     , pclinkingValueobj
     , lowHighValidation
+    , inputRef
+    , lowKey, highKey, defaultKey, minValue, maxValue
   } = state;
 
-  console.count('coeff secondpart');
 
   const handleValueChange = (target, _EmpId, _Coeffid, _ValId) => {
     let valueDataObj = {
@@ -29,15 +25,32 @@ const CoefficientSecondPart = () => {
         }
       }
     }
+    if(!proceed(Number(target.value), _EmpId, _Coeffid, _ValId, valueDataObj)) return;
     updateStateChanges({ pclinkingValueobj: valueDataObj,
       lowHighValidation: handleValidation(valueDataObj, _EmpId, _Coeffid, _ValId),
     });
   }
 
+  const proceed = (value, _EmpId, _Coeffid, _ValId, valueDataObj) => {
+    console.log(value, _EmpId, _Coeffid);
+    console.log(value, minValue, maxValue);
+    if((value < minValue) && (value > maxValue)) {
+      return 1;
+    }
+    if(_ValId === lowKey || _ValId === highKey) {
+      valueDataObj[_EmpId][_Coeffid][defaultKey] = '';
+    }
+    if(_ValId === defaultKey) {
+      valueDataObj[_EmpId][_Coeffid][lowKey] = '';
+      valueDataObj[_EmpId][_Coeffid][highKey] = '';
+    }
+    return true;
+  }
+
   const handleValidation = (valueDataObj, _EmpId, _Coeffid, _ValId) => {
     let valObj = valueDataObj[_EmpId][_Coeffid];
-    let lowVal = parseInt(valObj[LOW]);
-    let highVal = parseInt(valObj[HIGH]);
+    let lowVal = parseInt(valObj[lowKey]);
+    let highVal = parseInt(valObj[highKey]);
     if(highVal && lowVal) {
       return compareAndShowTootTip(lowVal, highVal, `${_EmpId}_${_Coeffid}`);
     } else {

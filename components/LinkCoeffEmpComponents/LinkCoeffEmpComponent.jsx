@@ -36,7 +36,7 @@ const LinkCoeffEmpComponent = (props) => {
       , coefficientTypeArray: coefficientTypes
       , valueTypeArray: valueTypes
       , pclinkingValueobj: pcLinkedValueData || {}
-      , pcArray: pcArray
+      , pcArray: [{id: 0, label: 'Select'}, ...pcArray]
       , selectedPc: parseInt(props.pcid),
     });
   }
@@ -48,6 +48,7 @@ const LinkCoeffEmpComponent = (props) => {
   const handleSubmit = async () => {
     if (state.selectedPc) {
       if(state.lowHighValidation.length) { return; }
+      if(state.pcLinkedValueData.length) { return; }
       await APICALL.service(`${savePcLinkingData}`, 'POST', postdata())
         .then(response => {
           if (response.status === 200)
@@ -72,7 +73,21 @@ const LinkCoeffEmpComponent = (props) => {
    * @return {[Void]}   [description]
    */
   const onSelect = (e) => {
-    updateStateChanges({ selectedPc: e.value, pcWarning: false, pclinkingValueobj: {} });
+    removeWarningClass()
+    updateStateChanges({ selectedPc: e.value, pcWarning: false, pclinkingValueobj: {}, lowHighValidation: [] });
+  }
+
+/**
+ * [removeWarningClass description]
+ * @return {[void]} [description]
+ */
+  const removeWarningClass = () => {
+    state.lowHighValidation.map(val => {
+      let lowRef  = state.inputRef.current[`${val}_1`];
+      let highRef = state.inputRef.current[`${val}_3`];
+      lowRef.classList.remove("warning");
+      highRef.classList.remove("warning");
+    })
   }
 
   if (SERVER_SIDE_RENDERING)
@@ -89,7 +104,7 @@ const LinkCoeffEmpComponent = (props) => {
             className="pc-single-select"
             placeholder={'Select paritair comite'}
           />
-          {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritiar committe </small> : null}
+          {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritair committe </small> : null}
         </div>
         {state.lowHighValidation.length > 0 && <small className="col-md-7 mt-3 mb-3" style={{ textAlign:'center', color: 'red' }}>
           {`Change highlighted low and high values low value should be less than high value (Low < High)`}</small>}
