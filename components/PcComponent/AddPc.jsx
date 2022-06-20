@@ -31,7 +31,6 @@ function AddPc(props) {
 	 */
 	useEffect(
 		() => {
-			console.log(router.query.uid);
 				if (!router.isReady) return;
 				if(router.query.uid && data.id ==''){
 				APICALL.service(getPcByUniquekey + router.query.uid, 'GET')
@@ -66,7 +65,6 @@ function AddPc(props) {
 
 	let postdata = async (e) => {
 		if (data.id == '') {
-			console.log("test")
 			APICALL.service(addPc, 'POST', data)
 				.then((result) => {
 					console.log(result);
