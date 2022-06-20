@@ -93,29 +93,30 @@ const ManagePc = (props) => {
 				</div>
 			</div>
 
-			{Object.keys(data).map((val, key) => (
-				<div className="row" key={val}>
+			{data.map((val, key) => (
+				<div className="row" key={val.id}>
 					<div className="col-md-10">
+						{console.log(val)}
 						{/* <PcOverview
 							pcid={data[val][0]['id']}
 							pc_number={data[val][0]['pc_number']}
 							page_type={'manage'}
 						/> */}
 						{/* {data[val][0]['pc_unique_key']} */}
-						<PcCommon pcid={data[val][0]['pc_unique_key']} type="managepc" />
+						<PcCommon pcid={val.pc_unique_key} type="managepc" />
 					</div>
 					<div className="col-md-2">
 						<div className="pt-4 my-2 w-50">
 							<div className={`d-flex pt-2 text-center ${styles.managepactions} ${styles.sectioncolor}`}>
 								<span className='px-2'>
-									<Link href={'/editpc/' + data[val][0]['pc_unique_key']}>
+									<Link href={'/editpc/' + val.pc_unique_key}>
 										<a className="me-2 text-dark h5">
 											<MdEdit />
 										</a>
 									</Link>
 								</span>
 								<span className='px-2'>
-									<Link href={`/pc/${data[val][0]['id']}`}>
+									<Link href={`/pc/${val.id}`}>
 										<a className="me-2 text-dark h5">
 											<MdDelete />
 										</a>
