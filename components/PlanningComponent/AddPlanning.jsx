@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 // import ReactDOM from 'react-dom';
 // import './planning.css';
-import { addPlanning } from '../../Services/ApiEndPoints';
+import { addPlanning, fetchPlanning } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import Addproject from './AddProject';
 import ValidationService from '../../Services/ValidationService';
@@ -20,22 +20,45 @@ function Planning(props) {
 		location_id: '',
 		cost_center_id: ''
 	});
-	let submit = async (event) => {
+
+	// FETCHING DATA FROM DRUPAL //
+	useEffect(() => {
+		APICALL.serviceForSitesJSON(fetchPlanning, 'GET')
+			.then((result) => {
+				console.log(result);
+				// if (result.status === 200) {
+				// }
+				// else {
+				// 	console.log(result);
+				// }
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
+
+	// ON SUBMIT //
+	let submit = (event) => {
 		event.preventDefault();
 		console.log(data);
-		// APICALL.service(addPlanning, 'POST', data).then((result) => {
-		// 	console.log(result);
-		// if (result.status === 200) {
-
-		// }
-		// else {
-		// 	console.log(result);
-		// }
-		// });
+		APICALL.service(addPlanning, 'POST', data)
+			.then((result) => {
+				console.log(result);
+				// if (result.status === 200) {
+				// }
+				// else {
+				// 	console.log(result);
+				// }
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 		var valid_res = validate(data);
 		if (valid_res) {
 		}
 	};
+
+	//VALIDATE FORM //
 	let validate = (res) => {
 		var error1 = [];
 		//check if required fields are empty
@@ -66,9 +89,13 @@ function Planning(props) {
 			label: 'Infanion4'
 		}
 	];
+
+	// CLOSE POPUP
 	const closePopup = () => {
 		setShow(false);
 	};
+
+	// SHOW POPUP //
 	const showPopup = (id) => {
 		setShow(true);
 	};
@@ -142,26 +169,6 @@ function Planning(props) {
 							))}
 						</select>
 						<p className="error mt-2">{error_cost_center_id}</p>
-
-						{/* <Multiselect
-							className="mb-2"
-							displayValue="key"
-							onKeyPressFn={function noRefCheck() {}}
-							onRemove={function noRefCheck() {}}
-							onSearch={function noRefCheck() {}}
-							onSelect={function noRefCheck() {}}
-							options={[
-								{
-									planning: 'Group 1',
-									key: 'Employee 1'
-								},
-								{
-									planning: 'Group 1',
-									key: 'Employee 2'
-								}
-							]}
-							placeholder="Select Employee"
-						/> */}
 					</div>
 
 					<div className="col-md-12 mt-4 ">

@@ -1,9 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import { APICALL } from '../../Services/ApiServices';
-import { Addfunction } from '../../Services/ApiEndPoints';
+import { Addplanningfunction } from '../../Services/ApiEndPoints';
 import { AiFillPlusSquare } from 'react-icons/ai';
-import TreeView from 'react-treeview';
-import 'react-treeview/react-treeview.css';
 
 function AddFunction(props) {
 	const [ visible, setVisible ] = useState(false);
@@ -130,7 +128,7 @@ function AddFunction(props) {
 							<div>
 								<ul className="list-group list-group-horizontal border-0 bg-light  mb-3">
 									<li className="mt-3 mb-3 ms-2 ">
-										{inputlist.map((x, i) => {
+										{/* {inputlist.map((x, i) => {
 											return (
 												<select
 													className="form-select"
@@ -146,7 +144,7 @@ function AddFunction(props) {
 													))}
 												</select>
 											);
-										})}
+										})} */}
 									</li>
 								</ul>
 								{/* {inputlist.length !== 1 && (
@@ -159,13 +157,13 @@ function AddFunction(props) {
 									</button>
 								)} */}
 								{/* {inputlist.length - 1 === 1 && ( */}
-								<button
+								{/* <button
 									type="button"
 									className="btn btn-danger btn-sm float-right"
 									onClick={handleonclick}
 								>
 									+
-								</button>
+								</button> */}
 								{/* )} */}
 							</div>
 						</div>
