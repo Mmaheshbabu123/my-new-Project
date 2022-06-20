@@ -161,7 +161,7 @@ function AddPc(props) {
 		if (src) { 
 			window.localStorage.removeItem('src');
 			if(type == "1"){
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+src+"&check_logged_in=1")
+			window.location.assign(src)
 			}
 			else{
 			router.push('/'+src)

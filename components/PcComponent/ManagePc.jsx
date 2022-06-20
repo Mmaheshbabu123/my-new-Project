@@ -6,8 +6,8 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { APICALL } from '../../Services/ApiServices';
 import { getPcOverviewDetails } from '../../Services/ApiEndPoints';
 import Link from 'next/link';
-import styles from '../../styles/Pc.module.css'
-
+import styles from '../../styles/Pc.module.css';
+import PcCommon from './PcCommon';
 
 /**
  * this will project all the partire committee's data.
@@ -22,8 +22,8 @@ const ManagePc = (props) => {
 	const [ cls1, setcls1 ] = useState('col-md-2');
 
 	useEffect(() => {
-		 getData();
-	});
+		getData();
+	},[]);
 
 	/**
    * used to delete complete paritaire committee data at the backend through the api's.
@@ -49,7 +49,7 @@ const ManagePc = (props) => {
 	const getData = () => {
 		var url = process.env.REACT_APP_BACKEND_URL;
 		if (lenght == 0 || lenght == undefined) {
-			 APICALL.service(getPcOverviewDetails, 'GET')
+			APICALL.service(getPcOverviewDetails, 'GET')
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
@@ -80,39 +80,50 @@ const ManagePc = (props) => {
 	return (
 		<div className="container">
 			<div className="row">
-				<h3 className="row mt-3 ms-5 text-bold">Manage Paritaire Comitee</h3>
+				<p className="row mt-3 ms-5 text-bold h4">Manage Paritaire Comitee</p>
 				<div className="col-md-9" />
 				<div className="col-md-3">
-					<Link href="/addpc">
-					<a	className={"mt-5 ml-2 mb-4 btn float-sm-right" + styles.addprojbtn + styles.btncolor}>
-						Add Paritaire Comitee
-					</a>
-					</Link>
-					
+					<span>
+						<Link href={"/redirect-page?src=/manage-pc&dest=addpc"} >
+							<a className={'mt-5 ml-2 mb-4 btn float-sm-right' + styles.addprojbtn + styles.btncolor}>
+								Add Paritaire Comitee
+							</a>
+						</Link>
+					</span>
 				</div>
 			</div>
 
-			{Object.keys(data).map((val, key) => (
-				<div className="row" key={val}>
+			{data.map((val, key) => (
+				<div className="row" key={val.id}>
 					<div className="col-md-10">
-						<PcOverview
+						{console.log(val)}
+						{/* <PcOverview
 							pcid={data[val][0]['id']}
 							pc_number={data[val][0]['pc_number']}
 							page_type={'manage'}
-						/>
+						/> */}
+						{/* {data[val][0]['pc_unique_key']} */}
+						<PcCommon pcid={val.pc_unique_key} type="managepc" />
 					</div>
 					<div className="col-md-2">
-						<h5 className={`pt-2 pb-3 px-2 ${styles.managepactions} ${styles.sectioncolor}`}>
-							<Link href={`/pc/${data[val][0]['id']}`}>
-							<a className="me-2 text-dark" >
-								<MdEdit />
-							</a>
-							</Link>
-							
-							<a className="me-2 text-dark">
-								<MdDelete />
-							</a>
-						</h5>
+						<div className="pt-4 my-2 w-50">
+							<div className={`d-flex pt-2 text-center ${styles.managepactions} ${styles.sectioncolor}`}>
+								<span className='px-2'>
+									<Link href={'/editpc/' + val.pc_unique_key}>
+										<a className="me-2 text-dark h5">
+											<MdEdit />
+										</a>
+									</Link>
+								</span>
+								<span className='px-2'>
+									<Link href={`/pc/${val.id}`}>
+										<a className="me-2 text-dark h5">
+											<MdDelete />
+										</a>
+									</Link>
+								</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			))}

@@ -1,4 +1,4 @@
-import PcCommon from "../components/PcComponent/PcCommon";
+import PcCommon from '../components/PcComponent/PcCommon';
 
 // import 'react-tabs/style/react-tabs.css';
 
@@ -8,11 +8,10 @@ import PcCommon from "../components/PcComponent/PcCommon";
  * @returns the added category data to the common.js component.
  */
 const Addpc = () => {
-	
 	return (
-		<>
-		<PcCommon/>
-		</>
+		<div className="container mt-5">
+			<PcCommon />
+		</div>
 	);
 };
 export default Addpc;

@@ -55,6 +55,12 @@ export const addPlanning = BASE_URL + "addplanning";
 export const addProject = BASE_URL + "addproject";
 export const Selectemployee = BASE_URL + "selectemployee";
 export const Weeklyplanning = BASE_URL + "weeklyplanning";
+export const Addplanningfunction = BASE_URL + "add-planningfunction";
+export const Timeregistration = BASE_URL + "time-registration";
+
+//--------------PLANNING FETCHING----------------------------------// 
+export const fetchPlanning = BASE_URL + "fetch-planning-details";
+
 
 
 //--------------PC min age API ROUTES ----------------//
@@ -69,3 +75,7 @@ export const updatePcEmployeeTypes = BASE_URL + "update-pc-emptype";
 export const getCofficientPerPc = BASE_URL + "get-linking-coff-pc-data";
 export const delteCofficientPerPc = BASE_URL + "delete-pc-linking-data";
 export const Addfunction = BASE_URL + "addfunction";
+
+//------------------HEADER AND FOOTER-------------------------//
+export const header = BASE_URL + "header";
+export const footer = BASE_URL + "footer";
