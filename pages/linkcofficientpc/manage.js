@@ -1,6 +1,6 @@
 import {useRouter} from 'next/router';
 import {useEffect,useState} from 'react';
-import { APICALL } from '../../Services/ApiServices';
+import { APICALL } from '@/Services/ApiServices';
 import { getCofficientPerPc} from '../../Services/ApiEndPoints';
 import TableRenderer from '@/components/LinkingCofficientPc/TableRender';
 const ManagePc = (props)=>{
