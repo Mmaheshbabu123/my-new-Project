@@ -23,6 +23,7 @@ const ManageFunction = () => {
 		() => {
 			APICALL.service(getFunctions, 'GET')
 				.then((result) => {
+					console.log(result);
 					setFunctions(result.data);
 					setFunctionsTemp(result.data);
 				})
@@ -67,7 +68,6 @@ const ManageFunction = () => {
 		// CONDITIONS WHEN ALL FOUR VALUES ARE GIVEN //
 
 		if (searchPc != '' && searchFunc != '' && searchCat != '' && searchSal != '') {
-			console.log('oooo');
 			functionsTemp.map((val) => {
 				if (
 					val['pc_number'].trim().includes(searchPc) &&
@@ -227,6 +227,9 @@ const ManageFunction = () => {
 		setSearchSal('');
 		setSearchFunc('');
 	}
+	let backToDashboard = () =>{
+		window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+"dashboard?access=administrator&check_logged_in=1")	  
+}
 
 	return (
 		<div className="container">
@@ -307,6 +310,7 @@ const ManageFunction = () => {
 								</tr>
 							</thead>
 							<tbody>
+								{console.log(functions)}
 								{functions.length > 0 &&
 									functions.map((result) => (
 										<tr className="border-bottom border-secondary" key={result.funcn_id}>
@@ -315,9 +319,9 @@ const ManageFunction = () => {
 											<td className="border-end border-secondary">€ {result.min_salary}</td>
 											<td className="border-end border-secondary">{result.cat_name}</td>
 											<td className="d-flex justify-content-center ">
-												<Link href="/addpc">
+												<Link href={"/editpc/"+result.pc_unique_key+"?fid="+result.funcn_id} className="">
 													<a className="">
-														<MdEdit className="mt-2 ms-3" href="/addpc" />
+														<MdEdit className="mt-2 ms-3"/>
 													</a>
 												</Link>
 												<span onClick={() => showPopup(result.funcn_id)} type="button">
@@ -337,9 +341,24 @@ const ManageFunction = () => {
 						</table>
 					</div>
 				</div>
-				<Link href="/addpc">
+				<div className='row'>
+				<div className="text-start col-md-6">
+						<button
+							type="button"
+							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							onClick={()=>backToDashboard()}
+						>
+							Back
+						</button>
+					</div>
+					<div className='col-md-6'>
+					<Link href={"/redirect-page?src=/manage-function&dest=addpc"}> 
 					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Function</a>
 				</Link>
+					</div>
+
+				</div>
+				
 			</form>
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletefuncn} />

@@ -43,6 +43,7 @@ function AddCategory(props) {
 
 	let postdata = async (e) => {
 		if (id == '') {
+			var cid = router.query.cid? router.query.cid:'';
 			APICALL.service(storeCategoryDetails, 'POST', data)
 				.then((result) => {
 					console.log(result);
@@ -66,7 +67,6 @@ function AddCategory(props) {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						var cid = router.query.cid
 						if(cid != null && cid != undefined && cid != ''){
 							router.push("/manage-category");
 						}else{
@@ -201,18 +201,10 @@ function AddCategory(props) {
 				<div className='row'>
 					
 				<div className="text-start col-md-6">
-					{router.query.cid && 
+					{(router.query.cid ||router.query.fid) && 
 					<Link href={"/manage-category"}>
 					<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">Back</a>
 				</Link> 
-					// <button
-					// 	className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-					// 	onClick={() => {
-					// 		router.push('/manage-category')
-					// 	}}
-					// >
-					// 	Back
-					// </button>
 					}
 					
 				</div>

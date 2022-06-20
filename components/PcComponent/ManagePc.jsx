@@ -7,6 +7,7 @@ import { APICALL } from '../../Services/ApiServices';
 import { getPcOverviewDetails } from '../../Services/ApiEndPoints';
 import Link from 'next/link';
 import styles from '../../styles/Pc.module.css'
+import PcCommon from './PcCommon';
 
 
 /**
@@ -80,7 +81,7 @@ const ManagePc = (props) => {
 	return (
 		<div className="container">
 			<div className="row">
-				<h3 className="row mt-3 ms-5 text-bold">Manage Paritaire Comitee</h3>
+				<p className="row mt-3 ms-5 text-bold h4">Manage Paritaire Comitee</p>
 				<div className="col-md-9" />
 				<div className="col-md-3">
 					<Link href="/addpc">
@@ -95,11 +96,13 @@ const ManagePc = (props) => {
 			{Object.keys(data).map((val, key) => (
 				<div className="row" key={val}>
 					<div className="col-md-10">
-						<PcOverview
+						{/* <PcOverview
 							pcid={data[val][0]['id']}
 							pc_number={data[val][0]['pc_number']}
 							page_type={'manage'}
-						/>
+						/> */}
+						{/* {data[val][0]['pc_unique_key']} */}
+						<PcCommon pc_unique_key={data[val][0]['pc_unique_key']}  type="managepc"/>
 					</div>
 					<div className="col-md-2">
 						<h5 className={`pt-2 pb-3 px-2 ${styles.managepactions} ${styles.sectioncolor}`}>

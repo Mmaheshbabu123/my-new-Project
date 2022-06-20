@@ -39,25 +39,28 @@ const PcOverview = (params) => {
 	} = useContext(PcContext);
 
 	const router = useRouter();
-	console.log(router.query);
 	const [ pc, setPc ] = useState([]);
 	const [ count, setCount ] = useState(1);
 	const [ secid, setSecid ] = useState('');
 	const [ pc_number, setPc_number ] = useState('');
 	const [ type, setType ] = useState('');
-	if (pc_unique_key == '' && router.query.uid) {
+	if (router.query.uid && router.query.uid != undefined ) {
 		setPc_unique_key(router.query.uid);
 	}
+	console.log(params)
 	/**
    * Fetch data from backend on page load
    */
 	useEffect(
 		() => {
 			setCat_fun_updated('');
-			if (current_sec == 2||params.pc_type == 'edit') {
+			if (current_sec == 2||params.pc_type == 'edit'||params.pc_type == 'managepc') {
 				var res1 = sec_completed;
 				res1['pc'] = true;
 				setSec_completed(res1);
+				console.log('*****************************888888')
+				console.log(pc_unique_key)
+
 				if (pc_unique_key) {
 					APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
 						.then((result) => {
@@ -73,18 +76,22 @@ const PcOverview = (params) => {
 				}
 			}
 		},
-		[ current_sec, pc_unique_key, cat_fun_updated ]
+		[ current_sec, pc_unique_key, cat_fun_updated, params ]
 	);
 
 	useEffect(()=>{
-		console.log(router.pathname);
 		var cid = router.query.cid
+		var fid = router.query.fid
 		if(cid != null && cid != undefined && cid != ''){
 		setCat_subsec_type(1);
 		setCat_leftsec('col-md-9');
 		setCat_rightsec('d-block col-md-3');
 	    setCat_subsec_id(cid);
-
+		}else if(fid != null && fid != undefined && fid != ''){
+			setCat_subsec_type(2);
+			setCat_leftsec('col-md-9');
+			setCat_rightsec('d-block col-md-3');
+			setCat_subsec_id(fid);
 		}
 	},[router.query])
 
@@ -99,10 +106,10 @@ const PcOverview = (params) => {
 		<div className="container">
 			<div className="row pt-4 min-vh-75">
 				<div className={`px-5 ${cat_leftsec}`}>
-					<p className='h4'>Edit paritair comitte</p>
+					{params.pc_type=='edit'?<p className='h4'>Edit paritair comitte</p>:''}
 					{pc && (
 						<div>
-							{cat_subsec_type == 0 && (
+							{cat_subsec_type == 0 && params.pc_type!='managepc'&& (
 								<div className="text-end me-4">
 									<button
 										type="button"
@@ -326,7 +333,7 @@ const PcOverview = (params) => {
 				</div>
 			</div>
 			{console.log(router.query)}
-			{router.query.cid? '':<div className="row">
+			{router.query.cid||router.query.fid||params.pc_type=='managepc'? '':<div className="row">
 				<div className="text-start col-md-6">
 					<button
 						type="button"

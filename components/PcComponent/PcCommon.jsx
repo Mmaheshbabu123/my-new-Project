@@ -35,6 +35,13 @@ const PcCommon = (props) => {
 		},
 		[ router.isReady ]
 	);
+	useEffect(
+		() => {
+				setPc_unique_key(props.pc_unique_key);
+				console.log(pc_unique_key)
+		},
+		[ props]
+	);
 
 	return (
 		<div className="container mt-5">
@@ -244,7 +251,7 @@ const PcCommon = (props) => {
 						</div>
 					</div>
 				</div>
-				</div>:<div> <PcOverview type="addpc" pc_type="edit"/></div>}
+				</div>:props.type == 'managepc'?<div> <PcOverview type="addpc" pc_type="managepc"/></div>:<div> <PcOverview type="addpc" pc_type="edit"/></div>}
 			</PcContext.Provider>
 		</div>
 	);
