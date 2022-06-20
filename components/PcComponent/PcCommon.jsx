@@ -45,7 +45,7 @@ const PcCommon = (props) => {
 	);
 
 	return (
-		<div className="container mt-5">
+		<div className="container">
 			<PcContext.Provider
 				value={{
 					pc_unique_key,
