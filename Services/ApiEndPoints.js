@@ -30,6 +30,7 @@ export const getPcOverviewDetails = BASE_URL + "getParitaireCommitteFunctionCate
 export const addPc = BASE_URL + "addpc"
 export const updatePc = BASE_URL + "pc-update/"
 export const getAllPc = BASE_URL + "get-all-pcs";
+export const deletePcdetails = BASE_URL + "delete-pc/";
 
 
 

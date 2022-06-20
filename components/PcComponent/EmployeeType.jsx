@@ -3,10 +3,14 @@ import { PcContext } from '../../Contexts/PcContext';
 import ValidationService from '../../Services/ValidationService';
 import { fetchEmployeeTypes, storePcEmployeeTypes } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
+import { useRouter } from 'next/router';
+
 
 // import { useSearchParams } from 'react-router-dom';
 
 const EmployeeType = () => {
+	const router = useRouter();
+
 	const {
 		pc_unique_key,
 		setPc_unique_key,
@@ -75,9 +79,7 @@ const EmployeeType = () => {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						alert("success");
 						setId(result.pcid);
-
 						backToDashboard();
 						// setCat_fun_updated('cat' + result.ctid);
 						// setCat_rightsec('d-none');
@@ -91,21 +93,6 @@ const EmployeeType = () => {
 				});
 		} else {
 			backToDashboard();
-
-			// APICALL.service(catUpdate, 'POST', data1)
-			// 	.then((result) => {
-			// 		console.log(result);
-			// 		if (result.status === 200) {
-			// 			setCat_fun_updated('catupdate' + result.ctid);
-			// 			setCat_rightsec('d-none');
-			// 			setCat_leftsec('col-md-12');
-			// 			setCat_subsec_type(0);
-			// 			setCat_subsec_id('');
-			// 		}
-			// 	})
-			// 	.catch((error) => {
-			// 		console.error(error);
-			// 	});
 		}
 	};
 	let submit = (event) => {

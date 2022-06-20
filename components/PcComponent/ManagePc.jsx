@@ -1,13 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare, FaMinusSquare } from 'react-icons/fa';
-import PcOverview from './PcOverview';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { APICALL } from '../../Services/ApiServices';
-import { getPcOverviewDetails } from '../../Services/ApiEndPoints';
+import { getPcOverviewDetails, deletePcdetails } from '../../Services/ApiEndPoints';
 import Link from 'next/link';
 import styles from '../../styles/Pc.module.css';
 import PcCommon from './PcCommon';
+import Popup from './Popup';
 
 /**
  * this will project all the partire committee's data.
@@ -15,30 +14,35 @@ import PcCommon from './PcCommon';
  */
 const ManagePc = (props) => {
 	console.log(props);
-	var url = process.env.REACT_APP_BACKEND_URL;
-	// const navigate = useNavigate();
-	const [ data, setData ] = useState([]);
-	const [ cls, setcls ] = useState('col-md-10');
-	const [ cls1, setcls1 ] = useState('col-md-2');
+	const [ data, setData ] = useState([]); // PC details
+	const [ showdeletePopup, setshowdeletePopup ] = useState(false); //To display popup on click on delete icon
+	const [ deleteId, setDeleteId ] = useState(''); // pcid to be deleted
+	const [ pcUpdated, setPcUpdated] = useState(false);
 
-	useEffect(() => {
-		getData();
-	},[]);
+	useEffect(
+		() => {
+			getData();
+		},
+		[props]
+	);
 
 	/**
    * used to delete complete paritaire committee data at the backend through the api's.
    * @param {*} $id 
    */
 
-	// const delet = async ($id) => {
-	//   console.log('gotcha');
-	//   var url = process.env.REACT_APP_BACKEND_URL;
-	//   const res = await axios.post(url + 'api/deletefullcommitte/' + $id);
-	//   if (res.data.status === 200) {
-	//     await getData();
-	//   }
-	//   window.location.reload();
-	// }
+	const deletePc = () => {
+		if(pcUpdated == true){
+		APICALL.service(deletePcdetails + deleteId, 'GET')
+			.then((result) => {
+				setshowdeletePopup(false);
+				setPcUpdated(true);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		}
+	};
 
 	var t = [];
 
@@ -64,18 +68,14 @@ const ManagePc = (props) => {
 		}
 	};
 
-	/**
-   * Goes to the add_pc page with respective pc id.
-   * @param {*} n 
-   * @returns 
-   */
-	const edt = async (n) => {
-		navigate('/add-pc');
+	const showPopup = (id) => {
+		setDeleteId(id);
+		setshowdeletePopup(true);
 	};
-	var D = [];
-	var pid = '';
-	D = data;
-	var result = [];
+
+	const closePopup = () => {
+		setshowdeletePopup(false);
+	};
 
 	return (
 		<div className="container">
@@ -84,7 +84,7 @@ const ManagePc = (props) => {
 				<div className="col-md-9" />
 				<div className="col-md-3">
 					<span>
-						<Link href={"/redirect-page?src=/manage-pc&dest=addpc"} >
+						<Link href={'/redirect-page?src=/manage-pc&dest=addpc'}>
 							<a className={'mt-5 ml-2 mb-4 btn float-sm-right' + styles.addprojbtn + styles.btncolor}>
 								Add Paritaire Comitee
 							</a>
@@ -108,25 +108,24 @@ const ManagePc = (props) => {
 					<div className="col-md-2">
 						<div className="pt-4 my-2 w-50">
 							<div className={`d-flex pt-2 text-center ${styles.managepactions} ${styles.sectioncolor}`}>
-								<span className='px-2'>
+								<span className="px-2">
 									<Link href={'/editpc/' + val.pc_unique_key}>
 										<a className="me-2 text-dark h5">
 											<MdEdit />
 										</a>
 									</Link>
 								</span>
-								<span className='px-2'>
-									<Link href={`/pc/${val.id}`}>
-										<a className="me-2 text-dark h5">
-											<MdDelete />
-										</a>
-									</Link>
+								<span className="me-2 text-dark h5" onClick={() => showPopup(val.id)} type="button">
+									<MdDelete />
 								</span>
 							</div>
 						</div>
 					</div>
 				</div>
 			))}
+			{showdeletePopup == true && (
+				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletePc} />
+			)}
 		</div>
 	);
 };
