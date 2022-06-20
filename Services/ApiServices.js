@@ -21,7 +21,7 @@ export const APICALL = {
     proxy_url,
 
 };
-function get_url_extension(url) {
+function get_url_extension( url ){
     return (url) ? url.split(/[#?]/)[0].split('.').pop().trim() : "";
 }
 
@@ -40,10 +40,10 @@ therefore writing a separate function for that.
 */
 function serviceForSitesJSON(urlendpoint = '', httpmethod = '', data = '') {
     // Default options are marked with *
-    return fetch(urlendpoint, headers(data, httpmethod))
+    return fetch(process.env.REACT_APP_serverURL + urlendpoint, headers(data, httpmethod))
         .then(
             // parses JSON response into native Javascript objects
-            result => { return result }
+            result => result.json()
         )
         .then(
             result => { return result }
@@ -57,18 +57,18 @@ function serviceForSitesJSON(urlendpoint = '', httpmethod = '', data = '') {
 *@returns response from the API
 */
 function service(urlendpoint = '', httpmethod = '', data = '', file = 0, loading = 1) {
-    //  console.log(urlendpoint, " : ApiService : ", httpmethod);
+  //  console.log(urlendpoint, " : ApiService : ", httpmethod);
     if (loading === 1 && document.getElementById("loading-icon") !== null) {
         document.getElementById("loading-icon").setAttribute("style", "display:block;");
     }
     return fetch(urlendpoint, headers(data, httpmethod))
         .then(
             result => {
-                // console.log("service  : ", result);
+              // console.log("service  : ", result);
                 if (loading === 1 && document.getElementById("loading-icon") !== null) {
                     document.getElementById("loading-icon").setAttribute("style", "display:none;");
                 }
-                return file ? result.blob() : result.json();
+              return file ? result.blob() : result.json();
             }
         ).catch((error) => {
             console.log("Error service : ", error);
@@ -91,12 +91,12 @@ function headers(data, httpmethod) {
         // *GET, POST, PUT, DELETE, etc.
         method: httpmethod,
         // no-cors, cors, *same-origin
-        mode: "no-cors",
-        // withCredentials: true,
+        // mode: "no-cors",
+       // withCredentials: true,
         // *default, no-cache, reload, force-cache, only-if-cached
         //cache: "no-cache",
         // include, *same-origin, omit
-        // credentials: "same-origin",
+       // credentials: "same-origin",
         headers: {
             "Content-Type": "application/json",
             // "Authorization": "Bearer " + process.env.REACT_APP_AUTHENTICATION_TOKEN,
@@ -110,9 +110,9 @@ function headers(data, httpmethod) {
             // 'Content-Type': 'multipart/form-data',
         },
         // manual, *follow, error
-        //        redirect: "follow",
+//        redirect: "follow",
         // no-referrer, *client
-        // referrer: "no-referrer",
+       // referrer: "no-referrer",
     }
     if (httpmethod !== 'GET') {
         // body data type must match "Content-Type" header
