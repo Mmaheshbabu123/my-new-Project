@@ -338,9 +338,7 @@ const PcOverview = (params) => {
 					<button
 						type="button"
 						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-						onClick={() => {
-							setCurrent_sec(1);
-						}}
+						onClick={() => {params.pc_type=='edit'?router.push('/manage-pc'):setCurrent_sec(1)}}
 					>
 						Back
 					</button>

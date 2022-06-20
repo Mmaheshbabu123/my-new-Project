@@ -90,20 +90,22 @@ const EmployeeType = () => {
 					console.error(error);
 				});
 		} else {
-			APICALL.service(catUpdate, 'POST', data1)
-				.then((result) => {
-					console.log(result);
-					if (result.status === 200) {
-						setCat_fun_updated('catupdate' + result.ctid);
-						setCat_rightsec('d-none');
-						setCat_leftsec('col-md-12');
-						setCat_subsec_type(0);
-						setCat_subsec_id('');
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+			backToDashboard();
+
+			// APICALL.service(catUpdate, 'POST', data1)
+			// 	.then((result) => {
+			// 		console.log(result);
+			// 		if (result.status === 200) {
+			// 			setCat_fun_updated('catupdate' + result.ctid);
+			// 			setCat_rightsec('d-none');
+			// 			setCat_leftsec('col-md-12');
+			// 			setCat_subsec_type(0);
+			// 			setCat_subsec_id('');
+			// 		}
+			// 	})
+			// 	.catch((error) => {
+			// 		console.error(error);
+			// 	});
 		}
 	};
 	let submit = (event) => {
@@ -124,7 +126,7 @@ const EmployeeType = () => {
 		if (src) { 
 			window.localStorage.removeItem('src');
 			if(type == "1"){
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+src+"&check_logged_in=1")
+			window.location.assign(src)
 			}
 			else{
 			router.push('/'+src)
