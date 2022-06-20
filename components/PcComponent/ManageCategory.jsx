@@ -8,6 +8,8 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { APICALL } from '../../Services/ApiServices';
 import Popup from './Popupcategory';
 import { Uniquekey } from '../../Services/GenetateUniqueKey';
+import { useRouter } from 'next/router';
+
 
 
 const ManageCategoryComponent = () => {
@@ -19,6 +21,8 @@ const ManageCategoryComponent = () => {
 	const [ searchSal, setSearchSal ] = useState('');
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ catid, setCatid ] = useState('');
+	const router = useRouter();
+
 
 	// const [ popup, setPopUp ] = useState('false');
 
@@ -142,6 +146,9 @@ const ManageCategoryComponent = () => {
 		setSearchcat('');
 		setSearchSal('');
 	}
+	let backToDashboard = () =>{
+			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+"dashboard?access=administrator&check_logged_in=1")	  
+	}
 
 	return (
 		<div className="container">
@@ -217,7 +224,7 @@ const ManageCategoryComponent = () => {
 											<td className="border-end border-secondary">{result.category_name}</td>
 											<td className="border-end border-secondary">€ {result.min_salary}</td>
 											<td className="d-flex justify-content-center">
-												<Link href={"/editpc/"+result.pc_unique_key+"?id="+result.cat_id} className="">
+												<Link href={"/editpc/"+result.pc_unique_key+"?cid="+result.cat_id} className="">
 													<a>
 														<MdEdit className="mt-2 ms-3 " />
 													</a>
@@ -240,9 +247,37 @@ const ManageCategoryComponent = () => {
 						</table>
 					</div>
 				</div>
-				<Link href={"/redirect-page?src="+process.env.NEXT_PUBLIC_APP_URL+"manage-category&dest=addpc"}>
+				<div className='row'>
+					<div className="text-start col-md-6">
+						<button
+							type="button"
+							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							onClick={()=>backToDashboard()}
+						>
+							Back
+						</button>
+					</div>
+					<div className="text-end col-md-6">
+					<Link href={"/redirect-page?src=/manage-category&dest=addpc"}>
+					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
+				</Link> 
+						{/* <button
+							type="sumit"
+							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							onClick={() => {
+								router.push('/redirect-page?src=/manage-category&dest=addpc')
+							}}
+						>
+							Add Category
+						</button> */}
+					</div>
+				</div>
+				{/* <Link href={"/redirect-page?src=/manage-category&dest=addpc"}>
 					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
 				</Link>
+				<Link href={"/redirect-page?src=/manage-category&dest=addpc"}>
+					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
+				</Link> */}
 			</form>
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletecat} />

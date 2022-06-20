@@ -13,9 +13,9 @@ const Addpc = () => {
 
 	
 	return (
-		<>
+		<div className="container mt-5">
 		<PcCommon type="add" pcid={router.query.pcid}/>
-		</>
+		</div>
 	);
 };
 export default Addpc;
