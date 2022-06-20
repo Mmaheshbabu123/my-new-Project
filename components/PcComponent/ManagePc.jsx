@@ -102,7 +102,7 @@ const ManagePc = (props) => {
 							page_type={'manage'}
 						/> */}
 						{/* {data[val][0]['pc_unique_key']} */}
-						<PcCommon pc_unique_key={data[val][0]['pc_unique_key']}  type="managepc"/>
+						<PcCommon pcid={data[val][0]['pc_unique_key']}  type="managepc"/>
 					</div>
 					<div className="col-md-2">
 						<h5 className={`pt-2 pb-3 px-2 ${styles.managepactions} ${styles.sectioncolor}`}>
