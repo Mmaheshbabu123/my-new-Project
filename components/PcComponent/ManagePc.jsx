@@ -123,6 +123,14 @@ const ManagePc = (props) => {
 					</div>
 				</div>
 			))}
+			<div className='row'>
+				<div className='col-md-6'>
+					<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL+"/dashboard?access=administrator&check_logged_in=1"}>
+					<a className='float-sm-left btn'>Back</a>
+					</Link>
+
+				</div>
+			</div>
 			{showdeletePopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletePc} />
 			)}

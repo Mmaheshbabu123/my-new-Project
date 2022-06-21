@@ -17,6 +17,7 @@ function AddPc(props) {
 	const [ error_pc_number, setError_pc_number ] = useState('');
 	const [ error_pc_name, setError_pc_name ] = useState('');
 	const [ error_pc_alias_name, setError_pc_alias_name ] = useState('');
+	const [disableSave, setDisableSave] = useState(false)
 
 	const [ data, setData ] = useState({
 		id: '',
@@ -25,6 +26,8 @@ function AddPc(props) {
 		pc_name: '',
 		pc_alias_name: ''
 	});
+	const [id, setId] = useState('');
+
 
 	/**
 	 * Prefill data if pc already exist
@@ -41,6 +44,7 @@ function AddPc(props) {
 								res1['pc'] = true;
 								setSec_completed(res1);	//updating that add pc data is filled so that next section can be enable
 								var data1 = {};
+								setId(result.data[0].id)
 								data1['id'] = result.data[0].id;
 								data1['pc_unique_key'] = result.data[0].pc_unique_key;
 								data1['pc_number'] = result.data[0].pc_number;
@@ -64,26 +68,27 @@ function AddPc(props) {
 	 */
 
 	let postdata = async (e) => {
-		if (data.id == '') {
+		setDisableSave(true)
+		if (id == '') {
 			APICALL.service(addPc, 'POST', data)
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
+						setId(result.pcid)
 						setCurrent_sec(2);
 						var res1 = sec_completed;
 						res1['pc'] = true;
 						setSec_completed(res1);
 					} else if (result.status == 205) {
 						checkduplicates(result.data);
-					} else {
-						console.log(result);
 					}
+					setDisableSave(false)
 				})
 				.catch((error) => {
 					console.error(error);
 				});
 		} else {
-			APICALL.service(updatePc + data.id, 'POST', data)
+			APICALL.service(updatePc + id, 'POST', data)
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
@@ -96,6 +101,8 @@ function AddPc(props) {
 					} else {
 						console.log(result);
 					}
+					setDisableSave(false)
+
 				})
 				.catch((error) => {
 					console.error(error);
@@ -226,8 +233,9 @@ function AddPc(props) {
 						<button
 							type="sumit"
 							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							disabled ={disableSave}
 							onClick={() => {
-								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
+								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 							}}
 						>
 							Next
