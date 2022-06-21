@@ -20,6 +20,8 @@ const LinkCoeffEmpStates = (props) => {
     , minValue: 0
     , maxValue: 10
     , regexp: /^[0-9,.]*$/
+    , valueErrorArray: []
+    , emptyDataWarning: false
   };
   const [state, dispatch] = useReducer(LinkCoeffEmpReducer, initialState);
 
