@@ -32,9 +32,12 @@ function AddFunction(props) {
 	} = useContext(PcContext);
 	const [ error_function_name, setError_function_name ] = useState('');
 	const [ error_min_salary, setError_min_salary ] = useState('');
+	const [ disableSave, setDisableSave ] = useState(false);
+
 	let postdata = () => {
+		setDisableSave(true);
 		if (id == '') {
-			var fid = router.query.fid? router.query.fid:'';
+			var fid = router.query.fid ? router.query.fid : '';
 			APICALL.service(addFunction, 'POST', data)
 				.then((result) => {
 					console.log(result);
@@ -49,6 +52,7 @@ function AddFunction(props) {
 							setCat_subsec_id('');
 							// setId(result.fcid);
 						}
+						setDisableSave(false);
 					}
 				})
 				.catch((error) => {
@@ -68,6 +72,7 @@ function AddFunction(props) {
 							setCat_subsec_type(0);
 							setCat_subsec_id('');
 						}
+						setDisableSave(false);
 					}
 				})
 				.catch((error) => {
@@ -121,12 +126,8 @@ function AddFunction(props) {
 	);
 
 	let submit = (event) => {
-		console.log(data);
 		event.preventDefault();
-		// return;
-		console.log('test');
 		if (validate()) {
-			console.log(data);
 			postdata();
 		}
 	};
@@ -137,27 +138,22 @@ function AddFunction(props) {
 				? ValidationService.nameValidationMethod(data.function_name) == '' ? '' : 'This field is invalid.'
 				: 'This field is required.';
 		error['error_min_salary'] =
-			ValidationService.emptyValidationMethod(data.min_salary) == ''
-				? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
-				: 'This field is required.';
+			data.min_salary != '' && data.min_salary != null? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
+				: '';
 
 		if (error['error_function_name'] == '') {
-			props.categorylist.forEach((val1,key) => {
-				console.log(val1)
+			props.categorylist.forEach((val1, key) => {
 				if (val1.type == '3' && val1.id != id && val1.function_name == data.function_name) {
 					error['error_function_name'] = 'Function name already exist.';
 				}
 			});
 		}
-		if (error['error_min_salary'] == '' && data.category_id != '') {
-			console.log(props.categorylist);
-			props.categorylist.forEach((val,key) => {
-				console.log(key)
+		if (error['error_min_salary'] == '' &&  data.min_salary != '' && data.min_salary != null && data.category_id != '') {
+			props.categorylist.forEach((val, key) => {
 				if (val.type == '2' && val.id == data.category_id) {
-					console.log(parseFloat(data.min_salary));
 					error['error_min_salary'] =
-						parseFloat(data.min_salary.replace(',', '.')) > parseFloat(val.min_salary.replace(',', '.'))
-							? 'Minimum salary cannot be greater that ' + val.min_salary + ' €'
+						parseFloat(data.min_salary.replace(',', '.')) < parseFloat(val.min_salary.replace(',', '.'))
+							? 'Minimum salary cannot be lesser that ' + val.min_salary + ' €'
 							: '';
 				}
 			});
@@ -213,7 +209,7 @@ function AddFunction(props) {
 					)}
 
 					<div className="form-group mb-3">
-						<label className="custom_astrick mb-2">Minimum salary</label>
+						<label className="mb-2">Minimum salary</label>
 						<input
 							className=" form-control my-2"
 							type="text"
@@ -229,7 +225,7 @@ function AddFunction(props) {
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
-						{(router.query.fid||router.query.cid) && (
+						{(router.query.fid || router.query.cid) && (
 							<Link href={'/manage-function'}>
 								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
 									Back
@@ -241,6 +237,7 @@ function AddFunction(props) {
 						<button
 							type="submit"
 							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							disabled={disableSave}
 							onClick={() => {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 							}}
