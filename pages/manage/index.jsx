@@ -13,7 +13,7 @@ function ManageEmployeeAndCoefficientTypes() {
       <Link href="/manage/coefficient-types">
         <a className='show-box-link'>
           <div title="Manage coefficient types">
-          Manage coefficient types
+          Manage coefficient
           </div>
         </a>
       </Link>

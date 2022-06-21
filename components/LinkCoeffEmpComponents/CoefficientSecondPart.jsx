@@ -1,50 +1,113 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
-
-const LOW     = 1;
-const DEFAULT = 2;
-const HIGH    = 3;
 
 const CoefficientSecondPart = () => {
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
-  const inputRef  = useRef({});
   const {
     employeeTypeArray
     , valueTypeArray
     , coefficientTypeArray
     , pclinkingValueobj
     , lowHighValidation
+    , inputRef
+    , valueErrorArray
+    , lowKey, highKey, defaultKey, minValue, maxValue
   } = state;
 
-  console.count('coeff secondpart');
 
+  /**
+   * [handleValueChange handling user input]
+   * @param  {[type]} target                 [description]
+   * @param  {[int]} _EmpId                 [description]
+   * @param  {[int]} _Coeffid               [description]
+   * @param  {[int]} _ValId                 [description]
+   * @return {[void]}          [description]
+   */
   const handleValueChange = (target, _EmpId, _Coeffid, _ValId) => {
+    if(!target.value.match(state.regexp)) return;
     let valueDataObj = {
       ...pclinkingValueobj,
-      [_EmpId]: {
-        ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId] : {}),
-        [_Coeffid]: {
-          ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] : {}),
+      [_EmpId]: { ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId] : {}),
+        [_Coeffid]: { ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] : {}),
           [_ValId]: target.value
         }
       }
     }
-    updateStateChanges({ pclinkingValueobj: valueDataObj,
+    lowHighDefaultChanges(_EmpId, _Coeffid, _ValId, valueDataObj)
+    updateStateChanges({
+      pclinkingValueobj: valueDataObj,
+      valueErrorArray: valueValidation(_EmpId, _Coeffid, _ValId, target.value),
       lowHighValidation: handleValidation(valueDataObj, _EmpId, _Coeffid, _ValId),
+      emptyDataWarning: false
     });
   }
 
+  /**
+   * [lowHighDefaultChanges force modifying low high and default values based on condition]
+   * @param  {[int]} _EmpId                     [description]
+   * @param  {[int]} _Coeffid                   [description]
+   * @param  {[int]} _ValId                     [description]
+   * @param  {[object]} valueDataObj               [description]
+   * @return {[void]}              [description]
+   */
+  const lowHighDefaultChanges = (_EmpId, _Coeffid, _ValId, valueDataObj) => {
+    if(_ValId === lowKey || _ValId === highKey) {
+      valueDataObj[_EmpId][_Coeffid][defaultKey] = '';
+    }
+    if(_ValId === defaultKey) {
+      valueDataObj[_EmpId][_Coeffid][lowKey] = '';
+      valueDataObj[_EmpId][_Coeffid][highKey] = '';
+    }
+  }
+
+/**
+ * [valueValidation min and max value validation]
+ * @param  {[int]} _EmpId                 [description]
+ * @param  {[int]} _Coeffid               [description]
+ * @param  {[int]} _ValId                 [description]
+ * @param  {[string]} inputVal               [description]
+ * @return {[object]}          [description]
+ */
+  const valueValidation = (_EmpId, _Coeffid, _ValId, inputVal) => {
+    let value = Number(inputVal.replace(',', '.'));
+    let refkey = `${_EmpId}_${_Coeffid}_${_ValId}`;
+    if((value < minValue) || (value > maxValue)) {
+      if(valueErrorArray.includes(refkey)) return valueErrorArray;
+      valueErrorArray.push(refkey);
+    }
+    else
+      valueErrorArray.indexOf(refkey) > -1 ?
+      valueErrorArray.splice(valueErrorArray.indexOf(refkey), 1) : null;
+    return valueErrorArray;
+  }
+
+  /**
+   * [handleValidation description]
+   * @param  {[type]} valueDataObj               [description]
+   * @param  {[int]} _EmpId                     [description]
+   * @param  {[int]} _Coeffid                   [description]
+   * @param  {[int]} _ValId                     [description]
+   * @return {[object]}              [description]
+   */
   const handleValidation = (valueDataObj, _EmpId, _Coeffid, _ValId) => {
     let valObj = valueDataObj[_EmpId][_Coeffid];
-    let lowVal = parseInt(valObj[LOW]);
-    let highVal = parseInt(valObj[HIGH]);
+    let lowVal = valObj[lowKey]
+    let highVal = valObj[highKey];
     if(highVal && lowVal) {
-      return compareAndShowTootTip(lowVal, highVal, `${_EmpId}_${_Coeffid}`);
+      return compareAndShowTootTip(Number(lowVal.replace(',', '.')), Number(highVal.replace(',', '.')), `${_EmpId}_${_Coeffid}`);
     } else {
       return compareAndShowTootTip(lowVal, highVal, `${_EmpId}_${_Coeffid}`, 0);
     }
   }
 
+  /**
+   * [compareAndShowTootTip adding css class and title toolyip based on conditions]
+   * @param  {[int/float]} lowVal                 [description]
+   * @param  {[int/float]} highVal                [description]
+   * @param  {[string]} refkey                 [description]
+   * @param  {Number} [type=1]               [description]
+   * @return {[object]}          [description]
+   */
   const compareAndShowTootTip = (lowVal, highVal, refkey, type = 1) => {
     let lowRef  = inputRef.current[`${refkey}_1`];
     let highRef = inputRef.current[`${refkey}_3`];

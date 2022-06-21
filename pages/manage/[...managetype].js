@@ -22,6 +22,7 @@ const ManageType = (props) => {
     await APICALL.service(api_url + `${editId ? '/' + editId : ''}`, 'GET')
       .then((response) => {
         setState({...state,
+          loaded: true,
           rows: response.status === 200 ? response.data : [],
           headers: [manageType === 'employee-types' ? 'Employee-types' : 'Coefficient types', 'Actions'],
           id: editId,
@@ -35,10 +36,11 @@ const ManageType = (props) => {
     <>
       <div className='container'>
         <div className='mt-3 md-3'>
-          {state.edit === true ?
-            <AddEmployeeType {...state} />
-            : <TableRenderer {...state} />
-          }
+          {state.loaded === true ?
+          <> {state.edit === true ?
+              <AddEmployeeType {...state} />
+              : <TableRenderer {...state} />}
+          </>: <div>Loading...</div>}
         </div>
       </div>
     </>
