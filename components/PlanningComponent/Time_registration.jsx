@@ -4,31 +4,96 @@ import { APICALL } from '../../Services/ApiServices';
 import { MdQrCode } from 'react-icons/md';
 import { FaLaptopCode } from 'react-icons/fa';
 import { BsPersonFill } from 'react-icons/bs';
+import QRCode from './QRcode_popup';
+import PincodePopup from './Pincode_popup';
+import EmployerPopup from './Employer_popup';
 
 function TimeRegistration(props) {
+	//POPUP FOR QR CODE.
+	const [ showQR, setShowQR ] = useState(false);
+	// CLOSE QRPOPUP
+	const closeQRPopup = () => {
+		setShowQR(false);
+	};
+	// SHOW QRPOPUP //
+	const showQRPopup = (id) => {
+		setShowQR(true);
+	};
+
+	//POPUP FOR PINCODE.
+	const [ showpincode, setShowPincode ] = useState(false);
+	// CLOSE pincodePOPUP
+	const closePincodePopup = () => {
+		setShowPincode(false);
+	};
+	// SHOW pincodePOPUP //
+	const showPincodePopup = (id) => {
+		setShowPincode(true);
+	};
+
+	//POPUP FOR EMPLOYER.
+	const [ showemployer, setShowEmployer ] = useState(false);
+	//CLOSE EMPLOYER POPUP
+	const closeEmployerPopup = () => {
+		setShowEmployer(false);
+	};
+	// SHOW EMPLOYER POPUP //
+	const showEmployerPopup = (id) => {
+		setShowEmployer(true);
+	};
+
+	let submit = (event) => {
+		event.preventDefault();
+	};
 	return (
 		<div className="container   ">
-			<form className="">
+			<form onSubmit={(e) => submit(e)}>
 				<div className="row d-flex text-center  align-items-center vh-100   ">
 					<div className="">
 						<p className="h2">Time Registration</p>
 					</div>
 					<div className=" col ">
 						<span className="text-center  ">
-							<MdQrCode className="w-25 h-20 m-auto  " />
+							<button className="btn btn-large">
+								<MdQrCode className="w-100 h-20 m-auto  " onClick={showQRPopup} />
+							</button>
 						</span>
 						<p className="h3 mt-3">QR code</p>
 					</div>
 					<div className="col ">
-						<FaLaptopCode className="w-25 h-20 m-auto " />
+						<button className="btn btn-large">
+							<FaLaptopCode className="w-100 h-20 m-auto " onClick={showPincodePopup} />
+						</button>
 						<p className="h3 mt-3">Pin code</p>
 					</div>
 					<div className="col">
-						<BsPersonFill className="w-25 h-20 m-auto" />
-						<p className="h3  mt-3">Pin code</p>
+						<button className="btn btn-large">
+							<BsPersonFill className="w-100 h-20 m-auto" onClick={showEmployerPopup} />
+						</button>
+						<p className="h3  mt-3">Employer</p>
 					</div>
 				</div>
 			</form>
+			{showQR == true && (
+				<div className="">
+					<QRCode display={'block'} popupActionNo={closeQRPopup} popupActionYes={showQRPopup} />
+					{/* <PinCode display={'block'} popupActionNo={closePincodePopup} popupActionYes={showPincodePopup} /> */}
+				</div>
+			)}
+			{showpincode == true && (
+				<PincodePopup
+					display={'block'}
+					pincodepopupActionNo={closePincodePopup}
+					pincodepopupActionYes={showPincodePopup}
+				/>
+			)}
+			{showemployer == true && (
+				<EmployerPopup
+					display={'block'}
+					employerpopupActionNo={closeEmployerPopup}
+					employerpopupActionYes={showEmployerPopup}
+				/>
+			)}
 		</div>
 	);
 }
