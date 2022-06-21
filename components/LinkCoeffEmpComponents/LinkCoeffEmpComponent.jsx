@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
-import EmployeeValueFirstPart from './EmployeeValueFirstPart';
-import CoefficientSecondPart from './CoefficientSecondPart';
+import CoeffcientValuesFirstPart from './CoeffcientValuesFirstPart';
+import EmployeeTypeSecondPart from './EmployeeTypeSecondPart';
 import MultiSelect from '../SelectComponent';
 import { getAllEmpCoeffAndValueTypes, savePcLinkingData } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
@@ -146,10 +146,10 @@ const LinkCoeffEmpComponent = (props) => {
         </div>
         <div className="col-md-12 row link-emp-coeff-tableparent">
           <div className="col-md-3 m-0 p-0 pc-linking-div firstpart">
-            <EmployeeValueFirstPart />
+            <CoeffcientValuesFirstPart />
           </div>
           <div className="col-md-9 m-0 p-0 pc-linking-div secondpart">
-            <CoefficientSecondPart />
+            <EmployeeTypeSecondPart />
           </div>
         </div>
         <div style={{ textAlign: 'end', marginTop: '10px' }}>

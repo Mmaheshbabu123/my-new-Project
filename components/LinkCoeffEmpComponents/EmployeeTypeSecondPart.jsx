@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
 
-const CoefficientSecondPart = () => {
+const EmployeeTypeSecondPart = () => {
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
   const {
     employeeTypeArray
@@ -129,12 +129,12 @@ const CoefficientSecondPart = () => {
       return lowHighValidation;
   }
 
-  const getCoefficientTableContent = () => {
+  const getEmployeeTypeTableContent = () => {
     let htmlContent = [];
-    employeeTypeArray.map(employeeType => {
+    coefficientTypeArray.map(coefficient => {
       valueTypeArray.map(valueType => {
-        htmlContent.push(<tr key={`${employeeType.id}-${valueType.id}`} className="table-second-part-tbody-tr">{
-          coefficientTypeArray.map(coefficient => {
+        htmlContent.push(<tr key={`${coefficient.id}-${valueType.id}`} className="table-second-part-tbody-tr">{
+          employeeTypeArray.map(employeeType => {
             let _EmpId = employeeType.id, _ValId = valueType.id, _Coeffid = coefficient.id;
             let { matrixKey, value } = getPcLinkingValue(_EmpId, _Coeffid, _ValId);
             return (<td key={matrixKey} id={matrixKey} className="pc-linking-td">
@@ -172,15 +172,16 @@ const CoefficientSecondPart = () => {
       <table className="table pclinking-table table-second-part">
         <thead className="pclinking-table-thead table-second-part-thead">
           <tr className="table-second-part-thead-tr-class">{
-            coefficientTypeArray.map(coeff => <th key={coeff.id} className="table-second-part-th-class"> {coeff.name} </th>)
+            employeeTypeArray.map(emp => <th key={emp.id} className="table-second-part-th-class">
+            <div> {emp.name} </div> </th>)
           }</tr>
         </thead>
         <tbody className="pclinking-table-tbody table-second-part-tbody">
-          {getCoefficientTableContent()}
+          {getEmployeeTypeTableContent()}
         </tbody>
       </table>
     </div>
   )
 }
 
-export default CoefficientSecondPart;
+export default EmployeeTypeSecondPart;
