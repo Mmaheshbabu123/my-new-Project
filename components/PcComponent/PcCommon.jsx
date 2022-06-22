@@ -72,7 +72,7 @@ const PcCommon = (props) => {
 					<div>
 						<p className="h4">
 							{current_sec == 1 ? (
-								'Add paritair comitte'
+								'Add paritair comite'
 							) : current_sec == 2 ? (
 								'Add category and function'
 							) : current_sec == 3 ? (
@@ -82,7 +82,7 @@ const PcCommon = (props) => {
 							) : current_sec == 5 ? (
 								'Add salary benifits'
 							) : (
-								'Add paritair comitte'
+								'Add paritair comite'
 							)}
 						</p>
 						<div className="row mt-4 pt-2">
@@ -109,7 +109,7 @@ const PcCommon = (props) => {
 											<BsCircle className="d-inline mb-2" />
 										)}
 										<p className="mb-2">Step 1:</p>
-										<p>Paritair comitte details</p>
+										<p>Paritair comite details</p>
 									</button>
 								</li>
 								<li className="nav-item" role="presentation">
