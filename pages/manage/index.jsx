@@ -31,6 +31,13 @@ function ManageEmployeeAndCoefficientTypes() {
           </div>
         </a>
       </Link>
+      <Link href="/manage-salary-benefits?action=view">
+        <a className='show-box-link'>
+          <div title="Manage coefficient per PC">
+            Manage salary benefits
+          </div>
+        </a>
+      </Link>
     </div>
   );
 }

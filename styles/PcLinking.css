@@ -102,3 +102,7 @@ overflow-x: scroll;
 .css-1wy0on6 {
   height: 100%;
 }
+input[id^="react-select"][id$="-input"] {
+  height: 100%;
+}
+/* ==================================================== */
