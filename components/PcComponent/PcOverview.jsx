@@ -302,6 +302,23 @@ const PcOverview = (params) => {
 							</ul>
 						</div>
 					)}
+					{router.query.cid || router.query.fid ?
+			<div className="row">
+			<div className="text-start col-md-6">
+				<button
+					type="button"
+					className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+					onClick={() => {
+						window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+"dashboard?access=administrator&check_logged_in=1");	
+					}}
+				>
+					Back
+				</button>
+			</div>
+			<div className="text-end col-md-6">
+			</div>
+		</div>
+			:''}
 				</div>
 				<div className={`px-4 pt-2 border-start border-2 ${cat_rightsec}`}>
 					<div className="text-center">
@@ -367,6 +384,7 @@ const PcOverview = (params) => {
 					</div>
 				</div>
 			)}
+			
 		</div>
 	);
 };
