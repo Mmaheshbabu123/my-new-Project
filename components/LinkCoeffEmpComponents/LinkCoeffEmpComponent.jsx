@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
-import EmployeeValueFirstPart from './EmployeeValueFirstPart';
-import CoefficientSecondPart from './CoefficientSecondPart';
+import CoeffcientValuesFirstPart from './CoeffcientValuesFirstPart';
+import EmployeeTypeSecondPart from './EmployeeTypeSecondPart';
 import MultiSelect from '../SelectComponent';
-import { getAllEmpCoeffAndValueTypes, savePcLinkingData } from '../../Services/ApiEndPoints';
-import { APICALL } from '../../Services/ApiServices';
+import { getAllEmpCoeffAndValueTypes, savePcLinkingData } from '@/Services/ApiEndPoints';
+import { APICALL } from '@/Services/ApiServices';
 
 var SERVER_SIDE_RENDERING = 1;
 const LinkCoeffEmpComponent = (props) => {
@@ -128,28 +128,29 @@ const LinkCoeffEmpComponent = (props) => {
     return <>
       <div className="m-4">
         <div className="col-md-12 row p-0 m-0">
+        <h4>{(Number(props.pcid) ? 'Edit': 'Add') + ' link coefficients to employee types'}</h4>
         <div className="col-md-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
           {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
         </div>
         {state.lowHighValidation.length > 0 &&
-            <small className="col-md-6 mt-3 mb-3" style={{ textAlign:'center', color: 'red' }}>
+            <small className="col-md-6 mt-3 mb-3 warning-message">
               {`Change highlighted low and high values low value should be less than high value (Low < High)`}
             </small>}
       {state.emptyDataWarning === true &&
-          <small className="col-md-6 mt-3 mb-3" style={{ textAlign:'center', color: 'red' }}>
+          <small className="col-md-6 mt-3 mb-3 warning-message">
             {`Please fill any fields to save`}
           </small>}
         {state.valueErrorArray.length > 0 &&
-            <small className="col-md-3 mt-3 mb-3" style={{ textAlign:'center', color: 'red' }}>
+            <small className="col-md-3 mt-3 mb-3 warning-message">
               {`Value should be inbetween 0 to 10`}
             </small>}
         </div>
         <div className="col-md-12 row link-emp-coeff-tableparent">
           <div className="col-md-3 m-0 p-0 pc-linking-div firstpart">
-            <EmployeeValueFirstPart />
+            <CoeffcientValuesFirstPart />
           </div>
           <div className="col-md-9 m-0 p-0 pc-linking-div secondpart">
-            <CoefficientSecondPart />
+            <EmployeeTypeSecondPart />
           </div>
         </div>
         <div style={{ textAlign: 'end', marginTop: '10px' }}>
