@@ -181,7 +181,7 @@ function AddPc(props) {
 				<div className="row pt-4">
 					<div className="col-md-6">
 						<div className="form-group py-2">
-							<label className="custom_astrick">Paritair comitte number</label>
+							<label className="custom_astrick">Paritair comite number</label>
 							<input
 								type="text"
 								value={data.pc_number}
@@ -193,7 +193,7 @@ function AddPc(props) {
 							<p className="error mt-2">{error_pc_number}</p>
 						</div>
 						<div className="form-group py-2">
-							<label className="custom_astrick">Paritair comitte name </label>
+							<label className="custom_astrick">Paritair comite name </label>
 							<input
 								type="text"
 								value={data.pc_name}
@@ -205,7 +205,7 @@ function AddPc(props) {
 							<p className="error mt-2">{error_pc_name}</p>
 						</div>
 						<div className="form-group py-2">
-							<label>Paritair comitte alias name </label>
+							<label>Paritair comite alias name </label>
 							<input
 								type="text"
 								value={data.pc_alias_name}

@@ -107,7 +107,7 @@ const PcOverview = (params) => {
 		<div className="container">
 			<div className="row pt-4 min-vh-75">
 				<div className={`px-5 ${cat_leftsec}`}>
-					{params.pc_type == 'edit' ? <p className="h4">Edit paritair comitte</p> : ''}
+					{params.pc_type == 'edit' ? <p className="h4">Edit paritair comite</p> : ''}
 					{pc && (
 						<div>
 							{cat_subsec_type == 0 &&

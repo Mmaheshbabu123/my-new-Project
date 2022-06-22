@@ -310,16 +310,15 @@ const ManageFunction = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{console.log(functions)}
 								{functions.length > 0 &&
 									functions.map((result) => (
 										<tr className="border-bottom border-secondary" key={result.funcn_id}>
-											<td className="border-end border-secondary">{result.pc_number}</td>
+											<td className="border-end border-secondary">{result.pc_number?result.pc_number:result.pc_num}</td>
 											<td className="border-end border-secondary">{result.function_name}</td>
 											<td className="border-end border-secondary">€ {result.min_salary}</td>
 											<td className="border-end border-secondary">{result.cat_name}</td>
 											<td className="d-flex justify-content-center ">
-												<Link href={"/editpc/"+result.pc_unique_key+"?fid="+result.funcn_id} className="">
+												<Link href={result.pc_unique_key?"/editpc/"+result.pc_unique_key+"?fid="+result.funcn_id:"/editpc/"+result.unique_key+"?fid="+result.funcn_id} className="">
 													<a className="">
 														<MdEdit className="mt-2 ms-3"/>
 													</a>
@@ -352,9 +351,9 @@ const ManageFunction = () => {
 						</button>
 					</div>
 					<div className='col-md-6'>
-					<Link href={"/redirect-page?src=/manage-function&dest=addpc"}> 
+					{/* <Link href={"/redirect-page?src=/manage-function&dest=addpc"}> 
 					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Function</a>
-				</Link>
+				</Link> */}
 					</div>
 
 				</div>
