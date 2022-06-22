@@ -13,13 +13,13 @@ const CoeffcientValuesFirstPart = () => {
       htmlContent.push(
         <tr className="" key={coefficient.id} id={coefficient.id}>
           <td className="three-row-span" rowSpan={valueTypeArray.length}> {coefficient.name} </td>
-          <td className="value-single-span"> {tempValueTypeArray.shift().name} </td>
+          <td className="value-single-span pc-linking-td"> {tempValueTypeArray.shift().name} </td>
         </tr>
       )
       tempValueTypeArray.map(valueType => {
         let key = `${coefficient.id}-${valueType.id}`;
         htmlContent.push(<tr className="" key={key} id={key}>
-          <td> {parseInt(valueType.id) === DEFAULT ? (<strong> {valueType.name} </strong>) : (valueType.name) } </td>
+          <td className="pc-linking-td"> {parseInt(valueType.id) === DEFAULT ? (<strong> {valueType.name} </strong>) : (valueType.name) } </td>
         </tr>
         )
         return 1;
@@ -28,13 +28,11 @@ const CoeffcientValuesFirstPart = () => {
     return htmlContent;
   }
 
-
   return (
-    <div>
       <table className="table pclinking-table table-first-part">
         <thead className="pclinking-table-thead table-first-part-thead">
           <tr>
-            <th colSpan="2" className="p-0">
+            <th height= "50" colSpan="2" className="p-0">
               <div className="firstpart-cell">
                 <span className="cell--topRight" key={`tablecolindex`} scope="col"> Employee type </span>
                 <span className="cell--bottomLeft" key={`tablecolindex2`} scope="col"> Coefficient </span>
@@ -46,7 +44,6 @@ const CoeffcientValuesFirstPart = () => {
           {getTableContent()}
         </tbody>
       </table>
-    </div>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
+import { helpers } from './LinkCoeffEmpHelper';
 
 const EmployeeTypeSecondPart = () => {
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
@@ -74,10 +75,13 @@ const EmployeeTypeSecondPart = () => {
     if((value < minValue) || (value > maxValue)) {
       if(valueErrorArray.includes(refkey)) return valueErrorArray;
       valueErrorArray.push(refkey);
+      helpers.toggleWarningClass(inputRef, refkey);
     }
-    else
+    else {
       valueErrorArray.indexOf(refkey) > -1 ?
       valueErrorArray.splice(valueErrorArray.indexOf(refkey), 1) : null;
+      helpers.toggleWarningClass(inputRef, refkey, 0);
+    }
     return valueErrorArray;
   }
 
@@ -160,10 +164,8 @@ const EmployeeTypeSecondPart = () => {
     return {
       matrixKey,
       value: pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] ?
-                  pclinkingValueobj[_EmpId][_Coeffid][_ValId] ?
-                    pclinkingValueobj[_EmpId][_Coeffid][_ValId] : ''
-                  : ''
-              : ''
+              pclinkingValueobj[_EmpId][_Coeffid][_ValId] ?
+               pclinkingValueobj[_EmpId][_Coeffid][_ValId] : '' : '' : ''
     }
   }
 
@@ -172,8 +174,8 @@ const EmployeeTypeSecondPart = () => {
       <table className="table pclinking-table table-second-part">
         <thead className="pclinking-table-thead table-second-part-thead">
           <tr className="table-second-part-thead-tr-class">{
-            employeeTypeArray.map(emp => <th key={emp.id} className="table-second-part-th-class">
-            <div> {emp.name} </div> </th>)
+            employeeTypeArray.map(emp => <th height= "50" key={emp.id} className="table-second-part-th-class">
+            <div className="header-div-tag"> {emp.name} </div> </th>)
           }</tr>
         </thead>
         <tbody className="pclinking-table-tbody table-second-part-tbody">
