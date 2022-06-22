@@ -100,6 +100,7 @@ export default ShowTable;
 
 
 function dateFormater(dateInput) {
+  if(!dateInput) return '';
   let date = new Date(dateInput);
   let month = date.getUTCMonth() + 1; //months from 1-12
   let day = date.getUTCDate();
