@@ -138,8 +138,8 @@ function AddFunction(props) {
 				? ValidationService.nameValidationMethod(data.function_name) == '' ? '' : 'This field is invalid.'
 				: 'This field is required.';
 		error['error_min_salary'] =
-			data.min_salary != '' && data.min_salary != null? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
-				: '';
+		ValidationService.emptyValidationMethod(data.min_salary) == ''? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
+				: 'This field is required.';
 
 		if (error['error_function_name'] == '') {
 			props.categorylist.forEach((val1, key) => {
@@ -199,7 +199,9 @@ function AddFunction(props) {
 								{Object.keys(props.categorylist).map(
 									(val, key) =>
 										props.categorylist[val]['type'] == '2' && (
-											<option value={props.categorylist[val]['id']} key={val}>
+											<option value={props.categorylist[val]['id']} key={val} onClick={()=>{
+												setData((prev) => ({ ...prev, min_salary: props.categorylist[val]['min_salary'] }));
+											}}>
 												{props.categorylist[val]['category_name']}
 											</option>
 										)
@@ -209,7 +211,7 @@ function AddFunction(props) {
 					)}
 
 					<div className="form-group mb-3">
-						<label className="mb-2">Minimum salary</label>
+						<label className="custom_astrick mb-2">Minimum salary</label>
 						<input
 							className=" form-control my-2"
 							type="text"

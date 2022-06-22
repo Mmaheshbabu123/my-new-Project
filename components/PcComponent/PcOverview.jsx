@@ -58,8 +58,6 @@ const PcOverview = (params) => {
 				var res1 = sec_completed;
 				res1['pc'] = true;
 				setSec_completed(res1);
-				console.log('*****************************888888');
-				console.log(pc_unique_key);
 
 				if (pc_unique_key) {
 					APICALL.service(getPcByPcnumber + pc_unique_key, 'GET')
@@ -245,15 +243,7 @@ const PcOverview = (params) => {
 																								'childObj'
 																							][val2]['header']
 																						}
-																						tvalue={
-																							pc['childObj'][val][
-																								'childObj'
-																							][val2]['min_salary'] !=
-																								'' &&
-																							pc['childObj'][val][
-																								'childObj'
-																							][val2]['min_salary'] !=
-																								null ? (
+																						tvalue={																							
 																								[
 																									pc['childObj'][val][
 																										'childObj'
@@ -267,16 +257,6 @@ const PcOverview = (params) => {
 																											val2
 																										]['min_salary']
 																								]
-																							) : (
-																								[
-																									pc['childObj'][val][
-																										'childObj'
-																									][val2][
-																										'function_name'
-																									],
-																									''
-																								]
-																							)
 																						}
 																						className="ms-2"
 																						secId={
@@ -308,7 +288,7 @@ const PcOverview = (params) => {
 																theader={pc['childObj'][val]['header']}
 																tvalue={[
 																	pc['childObj'][val]['function_name'],
-																	pc['childObj'][val]['min_salary']
+																	'€ ' +pc['childObj'][val]['min_salary']
 																]}
 																secId={pc['childObj'][val]['id']}
 																sectype="funct"
