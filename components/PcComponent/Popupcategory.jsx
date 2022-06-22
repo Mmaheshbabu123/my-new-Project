@@ -6,7 +6,7 @@ function Popup(props) {
 			<div className="modal-dialog">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h4 className="modal-title">Delete function</h4>
+						{/* <h4 className="modal-title">Delete function</h4> */}
 						<button
 							type="button"
 							className="btn-close"
@@ -16,7 +16,7 @@ function Popup(props) {
 					</div>
 
 					<div className="modal-body title">
-						<h4>Are you sure you want to delete this function</h4>
+						<h4>Are you sure you want to delete this category?</h4>
 					</div>
 
 					<div className="modal-footer">
