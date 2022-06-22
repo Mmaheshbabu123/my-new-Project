@@ -160,7 +160,13 @@ const AddEmployeeType = (props) => {
       <div className='managetype-save-btn'>
         <button
           type="button"
-          className="btn btn-dark pcp_btn col-3"
+          className="btn btn-dark pcp_btn col-2"
+          onClick={() => router.back()} >
+          Back
+        </button>
+        <button
+          type="button"
+          className="btn btn-dark pcp_btn col-2"
           onClick={handleSubmit} >
           Save
         </button>
