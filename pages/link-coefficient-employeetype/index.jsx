@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 const LinkCoeffEmpStates = dynamic(() => import('../../Contexts/LinkCoeffEmp/LinkCoeffEmpStates'), { ssr: false });
 const LinkCoeffEmpComponent = dynamic(() => import('../../components/LinkCoeffEmpComponents/LinkCoeffEmpComponent'), { ssr: false, suspense: true });
 
-
 const LinkCoefficientEmployeetype = () => {
   const router = useRouter();
   const { pcid } = router.query;
