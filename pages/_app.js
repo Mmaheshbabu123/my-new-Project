@@ -3,6 +3,7 @@ import '../styles/Announcement.css';
 import '../styles/EmployeeType.css'
 import '../styles/PcLinking.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import "react-datepicker/dist/react-datepicker.css";
 import Head from 'next/head';
 import Script from 'next/script'
 
