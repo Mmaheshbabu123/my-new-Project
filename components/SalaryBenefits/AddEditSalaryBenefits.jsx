@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { createSalaryBenefits, updateSalaryBenefits } from '@/Services/ApiEndPoints'
+import { formatDate } from './SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 let dateObj = new Date()
@@ -254,7 +255,7 @@ const AddEditSalaryBenefits = (props) => {
             {state.newItems.map((item, index) =>
               <tr Key={index} id={index}>
                 <td style={{ width: '30%' }}> {item.name} </td>
-                <td style={{ width: '30%' }}> {dateFormater(item.date)} </td>
+                <td style={{ width: '30%' }}> {formatDate(item.date)} </td>
                 <td style={{ width: '20%' }}> {item.value} </td>
                 <td style={{ width: '20%' }}> {getNeededActions(item, index)} </td>
               </tr>
@@ -280,13 +281,3 @@ const AddEditSalaryBenefits = (props) => {
   </>
 }
 export default React.memo(AddEditSalaryBenefits);
-
-
-function dateFormater(dateInput) {
-  if(!dateInput) return '';
-  let date = new Date(dateInput);
-  let month = date.getUTCMonth() + 1; //months from 1-12
-  let day = date.getUTCDate();
-  var year = date.getUTCFullYear();
-  return `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year}`
-}
