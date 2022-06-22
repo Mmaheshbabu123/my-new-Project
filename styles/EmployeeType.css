@@ -88,3 +88,15 @@
   cursor: pointer;
   right: 30%;
 }
+
+/* Salary benefits css  */
+.salary-input-fields{
+  margin: 30px 0;
+}
+.input-label-class {
+  margin-left: 12px
+}
+.salary-date{
+  cursor: pointer;
+}
+/* END */
