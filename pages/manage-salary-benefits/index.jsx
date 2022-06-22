@@ -17,7 +17,7 @@ const SalaryBenefits = (props) => {
     , loaded: false
     , id: undefined
     , rows: []
-    , headers: ['Salary benefits', 'Date of commencement', 'Value', 'Action'],
+    , headers: ['Salary benefits', 'Date of commencement', 'Value', 'Actions'],
   });
 
   useEffect(() => { loadData() }, [action])
@@ -39,7 +39,6 @@ const SalaryBenefits = (props) => {
       setState({...state, editPage: true, loaded: true})
     }
   }
-  console.log(state);
   if(!state.loaded) return <> Loading... </>
 
   return (

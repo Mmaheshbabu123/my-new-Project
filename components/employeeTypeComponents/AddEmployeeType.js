@@ -117,7 +117,7 @@ const AddEmployeeType = (props) => {
   return <>
     <div className='add-edit-types'>
       <div className="row m-3">
-        <h4 className="mb-4"> {`${props.manageType === 'employee-types' ? 'Add employee type' : 'Add coefficient'}`} </h4>
+        <h4 className="mb-4"> {`${props.id ? 'Edit ' : 'Add '} ${props.manageType === 'employee-types' ? 'employee type' : 'coefficient'}`} </h4>
         <label className = "mb-3" htmlFor="name"> {`${props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient name'}`} </label>
         <div className='row'>
           <input

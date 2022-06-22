@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { confirmAlert } from 'react-confirm-alert';
-import { deleteSalaryBenefits } from '@/Services/ApiEndPoints'
+import { deleteSalaryBenefits } from '@/Services/ApiEndPoints';
+import { formatDate } from './SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import SearchIcon from '../SearchIcon';
@@ -48,7 +49,8 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
 
   const handleSearch = (value) => {
     let filterRows = rows.filter((item) => {
-      return (item[state.searchKey].toLowerCase().toString())
+      let rowVal = `${item['name']}${item['date']}${item['value']}`
+      return (rowVal.toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
     setState({ ...state, searchTerm: value, filterRows: filterRows });
@@ -74,7 +76,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           onClick={() => router.push(`manage-salary-benefits?action=create&id=0`)}
           type="button"
           className="btn btn-dark pcp_btn col-3">
-          {`+ Add Salary benefit`}
+          {`+ Add salary benefit`}
         </button>
       </div>
       <div className="table-render-parent-div">
@@ -85,7 +87,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           <tbody>
             {state.filterRows.map(eachRow => <tr key={eachRow.sb_id} id={eachRow.sb_id}>
               <td> {eachRow.name} </td>
-              <td> {dateFormater(eachRow.date)} </td>
+              <td> {formatDate(eachRow.date)} </td>
               <td> {eachRow.value ? '€ ' + eachRow.value : '--'} </td>
               <td>{ getNeededActions(eachRow) } </td>
             </tr>)}
@@ -97,13 +99,3 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
 }
 
 export default ShowTable;
-
-
-function dateFormater(dateInput) {
-  if(!dateInput) return '';
-  let date = new Date(dateInput);
-  let month = date.getUTCMonth() + 1; //months from 1-12
-  let day = date.getUTCDate();
-  var year = date.getUTCFullYear();
-  return `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year}`
-}
