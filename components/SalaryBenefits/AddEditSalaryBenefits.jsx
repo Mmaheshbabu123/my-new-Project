@@ -193,7 +193,7 @@ const AddEditSalaryBenefits = (props) => {
             <small
               id="pcp_name_warning"
               className="form-text text-muted col-md-5">
-              It'll accept only numeric/decimal values
+              {`It'll accept only numeric/decimal values`}
             </small>}
         </div>
         <div className="salary-input-fields">
