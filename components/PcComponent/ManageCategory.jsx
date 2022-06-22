@@ -192,14 +192,14 @@ const ManageCategoryComponent = () => {
 					<div className="col-sm-2">
 						<button
 							type="button"
-							className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2"
+							className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
 							onClick={() => handleReset()}
 						>
 							Reset
 						</button>
 						<button
 							type="button"
-							className="btn btn-secondary   btn-block float-right mt-2 mb-2 "
+							className="btn btn-secondary btn-block float-right mt-2 mb-2 "
 							onClick={() => handleSearch()}
 						>
 							Search
@@ -258,9 +258,9 @@ const ManageCategoryComponent = () => {
 						</button>
 					</div>
 					<div className="text-end col-md-6">
-					<Link href={"/redirect-page?src=/manage-category&dest=addpc"}>
+					{/* <Link href={"/redirect-page?src=/manage-category&dest=addpc"}>
 					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
-				</Link> 
+				</Link>  */}
 						{/* <button
 							type="sumit"
 							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"

@@ -36,7 +36,7 @@ const LinkCoeffEmpComponent = (props) => {
       , coefficientTypeArray: coefficientTypes
       , valueTypeArray: valueTypes
       , pclinkingValueobj: pcLinkedValueData || {}
-      , pcArray: [{value: 0, label: 'Select'}, ...pcArray]
+      , pcArray: [{value: false, label: '--- Select ---'}, ...pcArray]
       , selectedPc: parseInt(props.pcid),
     });
   }
@@ -129,7 +129,7 @@ const LinkCoeffEmpComponent = (props) => {
       <div className="m-4">
         <div className="col-md-12 row p-0 m-0">
         <div className="col-md-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
-          {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritair committe </small> : null}
+          {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
         </div>
         {state.lowHighValidation.length > 0 &&
             <small className="col-md-6 mt-3 mb-3" style={{ textAlign:'center', color: 'red' }}>

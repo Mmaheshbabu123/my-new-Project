@@ -61,7 +61,7 @@ export const Timeregistration = BASE_URL + "time-registration";
 export const Resetpin = BASE_URL + "pincode-reset";
 export const Addcostcenter = BASE_URL + "addCostCenter";
 
-//--------------PLANNING FETCHING----------------------------------// 
+//--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details";
 
 
@@ -82,3 +82,12 @@ export const Addfunction = BASE_URL + "addfunction";
 //------------------HEADER AND FOOTER-------------------------//
 export const header = BASE_URL + "header";
 export const footer = BASE_URL + "footer";
+
+
+
+//----SALARY BENEFITS ROUTES-----//
+export const fetchSalaryBenefits = BASE_URL  + "get-salary-benefits";
+export const createSalaryBenefits = BASE_URL + "create-salary-benefits";
+export const updateSalaryBenefits = BASE_URL + "update-salary-benefits";
+export const deleteSalaryBenefits = BASE_URL + "delete-salary-benefits";
+//------------------- @
