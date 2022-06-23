@@ -52,6 +52,7 @@ export const savePcLinkingData = BASE_URL + "save-pclinking-data";
 
 
 //--------------PLANNING API ROUTES ----------------//
+export const add_manage_planning = BASE_URL + "/planning";
 export const addPlanning = BASE_URL + "addplanning";
 export const addProject = BASE_URL + "addproject";
 export const Selectemployee = BASE_URL + "selectemployee";
