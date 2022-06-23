@@ -134,12 +134,12 @@ const AddEditSalaryBenefits = (props) => {
         stateObj['nameWarning'] = true;
       }
     } else if (name === 'value') {
-      if(value.match(/^[0-9,.]*$/)) {
+      // if(value.match(/^[0-9,.]*$/)) {
         stateObj[name] = value;
-        stateObj['valueWarning'] = false;
-      } else {
-        stateObj['valueWarning'] = true;
-      }
+      // stateObj['valueWarning'] = false;
+      // } else {
+      // stateObj['valueWarning'] = true;
+      // }
     } else {
       if(new Date(value).getTime() > new Date(state.minDate).getTime()) {
         stateObj[name] = value;

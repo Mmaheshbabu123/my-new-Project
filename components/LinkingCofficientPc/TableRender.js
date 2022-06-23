@@ -46,7 +46,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   }
   const handleSearch = (value) => {
     let filterRows = rows.filter((item) => {
-      return (item[state.searchKey].toLowerCase().toString())
+      let rowVal = `${item['pc_number']}${item['name']}`
+      return (rowVal.toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
     setState({ ...state, searchTerm: value, filterRows: filterRows });
