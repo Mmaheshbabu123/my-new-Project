@@ -78,7 +78,7 @@ function Addproject(props) {
 		// check if postalcode is valid
 		error1['postal_code'] =
 			error1['postal_code'] == ''
-				? ValidationService.nameValidationMethod(res.postal_code)
+				? ValidationService.postalcodeValidationMethod(res.postal_code)
 				: error1['postal_code'];
 
 		//seterror messages
