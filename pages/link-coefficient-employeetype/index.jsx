@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic'
-const LinkCoeffEmpStates = dynamic(() => import('../../Contexts/LinkCoeffEmp/LinkCoeffEmpStates'), { ssr: false });
+import LinkCoeffEmpStates from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpStates';
 const LinkCoeffEmpComponent = dynamic(() => import('../../components/LinkCoeffEmpComponents/LinkCoeffEmpComponent'), { ssr: false, suspense: true });
 
 const LinkCoefficientEmployeetype = () => {
