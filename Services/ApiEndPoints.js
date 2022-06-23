@@ -60,6 +60,7 @@ export const Addplanningfunction = BASE_URL + "add-planningfunction";
 export const Timeregistration = BASE_URL + "time-registration";
 export const Resetpin = BASE_URL + "pincode-reset";
 export const Addcostcenter = BASE_URL + "addCostCenter";
+export const employeetyplanning = BASE_URL + "addemployeetoplanning";
 
 //--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details";
