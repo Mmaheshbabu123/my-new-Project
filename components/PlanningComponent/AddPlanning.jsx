@@ -1,14 +1,20 @@
 import React, { Component, useEffect, useState } from 'react';
-// import ReactDOM from 'react-dom';
-// import './planning.css';
+import ReactDOM from 'react-dom';
 import { addPlanning, fetchPlanning } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import Addproject from './AddProject';
 import ValidationService from '../../Services/ValidationService';
+import { useRouter } from 'next/router';
 
 function Planning(props) {
+	const router = useRouter();
+
 	// For popup
 	const [ show, setShow ] = useState(false);
+
+	//FOR ASSIGNING COMPANY LOCATION VALUES
+	const [ companyLocation, setCompanyLocation ] = useState([]);
+	const [ company_name, setCompany_name ] = useState([]);
 
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
@@ -16,6 +22,7 @@ function Planning(props) {
 	const [ error_cost_center_id, setError_cost_center_id ] = useState('');
 
 	const [ data, setData ] = useState({
+		p_unique_key: '',
 		comp_id: '',
 		location_id: '',
 		cost_center_id: ''
@@ -23,14 +30,15 @@ function Planning(props) {
 
 	// FETCHING DATA FROM DRUPAL //
 	useEffect(() => {
-		APICALL.serviceForSitesJSON(fetchPlanning, 'GET')
+		APICALL.service(fetchPlanning, 'GET')
 			.then((result) => {
-				console.log(result);
-				// if (result.status === 200) {
-				// }
-				// else {
-				// 	console.log(result);
-				// }
+				var data = JSON.parse(result.getcompanylocation);
+				console.log(data);
+				if (result.status === 200) {
+					setCompanyLocation(data);
+				} else {
+					console.log(result);
+				}
 			})
 			.catch((error) => {
 				console.error(error);
@@ -41,26 +49,27 @@ function Planning(props) {
 	let submit = (event) => {
 		event.preventDefault();
 		console.log(data);
-		APICALL.service(addPlanning, 'POST', data)
-			.then((result) => {
-				console.log(result);
-				// if (result.status === 200) {
-				// }
-				// else {
-				// 	console.log(result);
-				// }
-			})
-			.catch((error) => {
-				console.error(error);
-			});
 		var valid_res = validate(data);
 		if (valid_res) {
+			APICALL.service(addPlanning, 'POST', data)
+				.then((result) => {
+					console.log(result);
+					if (result.status === 200) {
+					} else {
+						console.log(result);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 		}
 	};
 
 	//VALIDATE FORM //
 	let validate = (res) => {
+		console.log(res);
 		var error1 = [];
+
 		//check if required fields are empty
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['location_id'] = ValidationService.emptyValidationMethod(res.location_id);
@@ -70,6 +79,12 @@ function Planning(props) {
 		setError_comp_id(error1['comp_id']);
 		setError_location_id(error1['location_id']);
 		setError_cost_center_id(error1['cost_center_id']);
+		//return false if there is an error else return true
+		if (error1['comp_id'] == '' && error1['location_id'] == '' && error1['cost_center_id'] == '') {
+			return true;
+		} else {
+			return false;
+		}
 	};
 	const companyname = [
 		{
@@ -123,12 +138,21 @@ function Planning(props) {
 								setData((prev) => ({ ...prev, comp_id: e.target.value }));
 							}}
 						>
-							<option>Select</option>
-							{companyname.map((options) => (
-								<option key={options.value} value={options.value}>
-									{options.label}
-								</option>
-							))}
+							<option value="">Select</option>
+							{companyLocation.map(
+								(options) =>
+									options.type == 'Company' && (
+										<option
+											onClick={(e) => {
+												setCompany_name(options.title);
+											}}
+											key={options.nid}
+											value={options.nid}
+										>
+											{options.title}
+										</option>
+									)
+							)}
 						</select>
 						<p className="error mt-2">{error_comp_id}</p>
 					</div>
@@ -142,12 +166,16 @@ function Planning(props) {
 								setData((prev) => ({ ...prev, location_id: e.target.value }));
 							}}
 						>
-							<option>Select</option>
-							{companyname.map((options) => (
-								<option key={options.value} value={options.value}>
-									{options.label}
-								</option>
-							))}
+							<option value="">Select</option>
+							{companyLocation.map(
+								(options) =>
+									options.type == 'Location' &&
+									options.field_compa == company_name && (
+										<option key={options.nid} value={options.nid}>
+											{options.field_lo}
+										</option>
+									)
+							)}
 						</select>
 						<p className="error mt-2">{error_location_id}</p>
 					</div>
@@ -161,7 +189,7 @@ function Planning(props) {
 								setData((prev) => ({ ...prev, cost_center_id: e.target.value }));
 							}}
 						>
-							<option>Select</option>
+							<option value="">Select</option>
 							{companyname.map((options) => (
 								<option key={options.value} value={options.value}>
 									{options.label}
@@ -178,7 +206,13 @@ function Planning(props) {
 							</button>
 						</div>
 						<div className="float-right ">
-							<button type="submit" className="btn btn-secondary   btn-block ">
+							<button
+								type="submit"
+								className="btn btn-secondary   btn-block "
+								onClick={() => {
+									setData((prev) => ({ ...prev, p_unique_key: router.query.pid }));
+								}}
+							>
 								Next
 							</button>
 						</div>
