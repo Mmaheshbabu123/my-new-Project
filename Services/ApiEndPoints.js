@@ -62,6 +62,7 @@ export const Timeregistration = BASE_URL + "time-registration";
 export const Resetpin = BASE_URL + "pincode-reset";
 export const Addcostcenter = BASE_URL + "addCostCenter";
 export const employeetyplanning = BASE_URL + "addemployeetoplanning";
+export const addplanningemployee = BASE_URL + "addplanningemployee";
 
 //--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details";
