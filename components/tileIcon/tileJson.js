@@ -5,26 +5,31 @@ import salary from '@/components/images/salary-benefits@2x.png';
 
 export const tileJson = [
   {
+    id: 1,
     name: 'Manage employee types',
     url: '/manage/employee-types',
     iconPath: employeetype,
   },
   {
+    id: 2,
     name: 'Manage coefficients',
     url: '/manage/coefficient-types',
     iconPath: coefficient,
   },
   {
+    id: 3,
     name: 'Link coefficients to employee types',
     url: '/link-coefficient-employeetype?pcid=0',
     iconPath: linkcofficientemp,
   },
   {
+    id: 4,
     name: 'Manage coefficient per PC',
     url: '/linkcofficientpc/manage',
     iconPath: coefficient,
   },
   {
+    id: 5,
     name: 'Manage salary benefits',
     url: '/manage-salary-benefits?action=view',
     iconPath: salary,
