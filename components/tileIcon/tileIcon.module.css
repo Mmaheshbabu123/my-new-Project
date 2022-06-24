@@ -10,6 +10,16 @@
   text-align: center;
 }
 
+.anchor-tag {
+  color: black;
+  text-decoration: none;
+}
+
+.anchor-tag:hover{
+  color: black;
+  text-decoration: underline;
+}
+
 .tile-title-text {
   font-size: 18px;
   font-weight: 500;
