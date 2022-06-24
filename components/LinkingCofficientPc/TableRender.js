@@ -91,7 +91,6 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
      };
   //------------------- Pagination code -------------------------//
   //-------------------
-
     return (
       <>
         <h4> {`Manage coefficients per pc`} </h4>

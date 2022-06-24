@@ -47,7 +47,13 @@ const AddEmployeeType = (props) => {
       }
       let url = state.editFlow ? `${state.editUrl}/${props.id}` : `${state.createUrl}`;
       await APICALL.service(url, 'POST', getPostData(newItemsList))
-        .then((result) => { console.log('Done'); router.push(`${props.manageType}`); })
+        .then((result) => {
+          if(result.status === 200) {
+            router.push(`${props.manageType}`);
+          } else if (result.status === 205) {
+            setState({...state, uniqueError: true, duplicates: result['data']['duplicates'] });
+          }
+        })
         .catch((error) => console.error('Error occurred'));
     }
 
@@ -144,6 +150,12 @@ const AddEmployeeType = (props) => {
             id="pcp_name_warning"
             className="form-text text-muted col-md-5">
             Please add type
+          </small>}
+        {state.uniqueError &&
+          <small
+            id="pcp_name_warning"
+            className="form-text text-muted col-md-5">
+            {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
           </small>}
       </div>
       {state.newItems.length > 0 && !state.editFlow &&
