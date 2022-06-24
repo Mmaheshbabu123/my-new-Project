@@ -13,6 +13,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const [state, setState] = useState({
     searchTerm: '',
     deleteUrl : (manageType == 'employee-types') ? deleteEmployeeType :deleteCoefficientType,
+    delete_title : (manageType == 'employee-types') ? 'employee type'  :'coefficient',
     filterRows: rows,
     searchKey: 'name',
     currentItems: [],
@@ -35,8 +36,9 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
 
   const handleActionClick = (action, eachRow) => {
     if (action === 'delete') {
+
       confirmAlert({
-        message: 'Do you want to delete the type?',
+        message: `Do you want to delete the ${state.delete_title}?`,
         buttons: [
           { label: 'No' },
           { label: 'Yes', onClick: () => handleDelete(eachRow.id) }
@@ -130,12 +132,12 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
       <div>
       {state.filterRows.length > itemsPerPage && <ReactPaginate
           breakLabel="..."
-          nextLabel="next >"
+          nextLabel="Next >"
           onPageChange={handlePageClick}
           pageRangeDisplayed={5}
           pageCount={state.pageCount}
           forcePage={state.currentPage}
-          previousLabel="< previous"
+          previousLabel="< Previous"
           renderOnZeroPageCount={null}
           containerClassName={"pagination"}
           itemClass="page-item"
