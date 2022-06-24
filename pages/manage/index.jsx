@@ -6,7 +6,7 @@ function ManageEmployeeAndCoefficientTypes() {
     <>
     <div className='container row'>
     <h4>Manage configurations and settings</h4>
-      {tileJson.map(tile => <TileIcon  props = {tile} /> )}
+      {tileJson.map(tile => <TileIcon key={tile.id} props = {tile} /> )}
     </div>
     </>
   );
