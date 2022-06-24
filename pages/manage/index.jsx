@@ -1,45 +1,12 @@
-import Link from 'next/link';
+import TileIcon from '@/components/tileIcon/tileIcon';
+import { tileJson } from '@/components/tileIcon/tileJson';
 
 function ManageEmployeeAndCoefficientTypes() {
   return (
     <>
     <div className='container row'>
     <h4>Manage configurations and settings</h4>
-      <Link href="/manage/employee-types">
-        <a className='show-box-link'>
-          <div title="Manage employee types">
-           Manage Employee types
-          </div>
-        </a>
-      </Link>
-      <Link href="/manage/coefficient-types">
-        <a className='show-box-link'>
-          <div title="Manage coefficient types">
-          Manage coefficients
-          </div>
-        </a>
-      </Link>
-      <Link href="/link-coefficient-employeetype?pcid=0">
-        <a className='show-box-link'>
-          <div title="Link coefficients to employee types">
-          Link coefficients to employee types
-          </div>
-        </a>
-      </Link>
-      <Link href="/linkcofficientpc/manage">
-        <a className='show-box-link'>
-          <div title="Manage coefficient per PC">
-            Manage coefficients per PC
-          </div>
-        </a>
-      </Link>
-      <Link href="/manage-salary-benefits?action=view">
-        <a className='show-box-link'>
-          <div title="Manage coefficient per PC">
-            Manage salary benefits
-          </div>
-        </a>
-      </Link>
+      {tileJson.map(tile => <TileIcon  props = {tile} /> )}
     </div>
     </>
   );

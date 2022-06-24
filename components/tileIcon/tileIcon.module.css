@@ -1,0 +1,16 @@
+.dashboard-tile-parent {
+  width: 180px !important;
+  height: 180px;
+  margin: 20px;
+  padding: 25px 10px;
+  border: 1px solid #000;
+}
+
+.dashboard-tile-field-content {
+  text-align: center;
+}
+
+.tile-title-text {
+  font-size: 18px;
+  font-weight: 500;
+}
