@@ -7,7 +7,6 @@ import { Layout } from "../components/layout/Layout";
 function Myoverview(props) {
     return (
         <div>
-          AbsoluteYou home
 
 {/* REMOVE THIS MANAGETYPE-INDEX COMPONENT TAG, AFTER ADDING DEVELOPMENT RELATED CODE  */}
          <ManageTypeIndex />

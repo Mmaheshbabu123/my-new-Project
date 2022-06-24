@@ -34,8 +34,8 @@ const CoeffcientValuesFirstPart = () => {
           <tr>
             <th height= "50" colSpan="2" className="p-0">
               <div className="firstpart-cell">
-                <span className="cell--topRight" key={`tablecolindex`} scope="col"> Employee type </span>
-                <span className="cell--bottomLeft" key={`tablecolindex2`} scope="col"> Coefficient </span>
+                <span className="cell--topRight" key={`tablecolindex`} scope="col"> Employee types </span>
+                <span className="cell--bottomLeft" key={`tablecolindex2`} scope="col"> Coefficients </span>
               </div>
             </th>
           </tr>

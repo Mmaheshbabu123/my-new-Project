@@ -52,6 +52,7 @@ export const savePcLinkingData = BASE_URL + "save-pclinking-data";
 
 
 //--------------PLANNING API ROUTES ----------------//
+export const add_manage_planning = BASE_URL + "/planning";
 export const addPlanning = BASE_URL + "addplanning";
 export const addProject = BASE_URL + "addproject";
 export const Selectemployee = BASE_URL + "selectemployee";
@@ -60,6 +61,7 @@ export const Addplanningfunction = BASE_URL + "add-planningfunction";
 export const Timeregistration = BASE_URL + "time-registration";
 export const Resetpin = BASE_URL + "pincode-reset";
 export const Addcostcenter = BASE_URL + "addCostCenter";
+export const employeetyplanning = BASE_URL + "addemployeetoplanning";
 
 //--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details";

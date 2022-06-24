@@ -2,7 +2,9 @@ import Link from 'next/link';
 
 function ManageEmployeeAndCoefficientTypes() {
   return (
+    <>
     <div className='container row'>
+    <h4>Configuration and settings</h4>
       <Link href="/manage/employee-types">
         <a className='show-box-link'>
           <div title="Manage employee types">
@@ -39,6 +41,7 @@ function ManageEmployeeAndCoefficientTypes() {
         </a>
       </Link>
     </div>
+    </>
   );
 }
 

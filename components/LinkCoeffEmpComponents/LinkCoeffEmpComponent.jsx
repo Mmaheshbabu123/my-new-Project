@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
 import CoeffcientValuesFirstPart from './CoeffcientValuesFirstPart';
 import EmployeeTypeSecondPart from './EmployeeTypeSecondPart';
+import { helpers } from './LinkCoeffEmpHelper';
 import MultiSelect from '../SelectComponent';
 import { getAllEmpCoeffAndValueTypes, savePcLinkingData } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
@@ -61,7 +62,7 @@ const LinkCoeffEmpComponent = (props) => {
       proceed = false;
       updateStateChanges({ pcWarning: true })
     }
-    if(state.selectedPc && !Object.keys(state.pclinkingValueobj).length) {
+    if(state.selectedPc && !helpers.checkCoefficientsFilledOrNot(state.coefficientTypeArray, state.employeeTypeArray, state.pclinkingValueobj)) {
       proceed = false;
       updateStateChanges({ emptyDataWarning: true })
     }
@@ -138,7 +139,7 @@ const LinkCoeffEmpComponent = (props) => {
             </small>}
       {state.emptyDataWarning === true &&
           <small className="col-md-6 mt-3 mb-3 warning-message">
-            {`Please fill any fields to save`}
+            {`Please fill all coefficient fields to save`}
           </small>}
         {state.valueErrorArray.length > 0 &&
             <small className="col-md-3 mt-3 mb-3 warning-message">

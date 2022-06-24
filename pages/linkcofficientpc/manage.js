@@ -1,13 +1,9 @@
-import {useRouter} from 'next/router';
 import {useEffect,useState} from 'react';
 import { APICALL } from '@/Services/ApiServices';
 import { getCofficientPerPc} from '../../Services/ApiEndPoints';
 import TableRenderer from '@/components/LinkingCofficientPc/TableRender';
 const ManagePc = (props)=>{
-  const router  = useRouter();
-  const [ state, setState ] = useState({rows: [], headers: []})
-
-  const resolvedUrl = router.asPath;
+  const [ state, setState ] = useState({rows: [], headers: [], loaded: false})
 
   useEffect(() => { loadData() }, [])
   const loadData = async () => {
@@ -16,6 +12,7 @@ const ManagePc = (props)=>{
       .then((response) => {
         setState({...state,
           rows: response.status === 200 ? response.data : [],
+          loaded: true,
           headers: ['PC number','PC name' , 'Actions'],
        })
      }).catch((error) => console.error('Error occurred'));
@@ -24,7 +21,9 @@ const ManagePc = (props)=>{
     <>
     <div className='container'>
       <div className='mt-3 md-3'>
+      {state.loaded === true ?
        <TableRenderer {...state} />
+       : <div>Loading...</div>}
       </div>
     </div>
     </>
