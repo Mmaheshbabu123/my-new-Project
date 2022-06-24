@@ -120,7 +120,7 @@ function Planning(props) {
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row   planning-container ">
 					<p className="md-3 mt-3 font-weight-bold h3">Add Planning</p>
-					<div>
+					{/* <div>
 						<button
 							type="button"
 							onClick={showPopup}
@@ -128,7 +128,7 @@ function Planning(props) {
 						>
 							+Add project
 						</button>
-					</div>
+					</div> */}
 					<div className="form-group">
 						<label className="form-label mb-2 custom_astrick">Company</label>
 						<select
