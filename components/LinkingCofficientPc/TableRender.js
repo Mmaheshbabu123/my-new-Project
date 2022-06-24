@@ -5,6 +5,8 @@ import { delteCofficientPerPc} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import SearchIcon from '../SearchIcon';
+import ReactPaginate from 'react-paginate';
+const itemsPerPage = 8;
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
@@ -12,7 +14,11 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
     searchTerm: '',
     deleteUrl :  delteCofficientPerPc,
     filterRows: rows,
-    searchKey: 'name'
+    searchKey: 'name',
+    currentItems: [],
+    pageCount: 0,
+    itemOffset: 0,
+    currentPage: 0,
   })
   useEffect(() => {
     setState({...state, filterRows: rows, deleteUrl:delteCofficientPerPc})
@@ -29,7 +35,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const handleActionClick = (action, eachRow) => {
     if (action === 'delete') {
       confirmAlert({
-        message: 'Do you want to delete the type?',
+        message: 'Do you want to delete the coefficients per PC?',
         buttons: [
           { label: 'No' },
           { label: 'Yes', onClick: () => handleDelete(eachRow.id) }
@@ -50,13 +56,41 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
       return (rowVal.toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
-    setState({ ...state, searchTerm: value, filterRows: filterRows });
+    setState({ ...state,
+      searchTerm: value,
+      filterRows: filterRows,
+      currentPage: 0,
+      itemOffset: 0,
+      ...updatePaginationData(filterRows, 0)
+    });
   }
 
   const handleSearchClick = () => {
     handleSearch(state.searchTerm);
   }
 
+  //------------------- Pagination code -------------------------//
+  //-------------------
+     useEffect(() => {
+       setState({...state, ...updatePaginationData(state.filterRows, state.itemOffset || 0)})
+     }, [state.itemOffset]);
+
+     const updatePaginationData = (filterRows, offset) => {
+       let items = [...filterRows];
+       const endOffset = offset + itemsPerPage;
+       return {
+         currentItems: items.slice(offset, endOffset),
+         pageCount: Math.ceil(items.length / itemsPerPage)
+       };
+     }
+
+     const handlePageClick = (event) => {
+       let items = [...state.filterRows];
+       const newOffset = (event.selected * itemsPerPage) % items.length;
+       setState({...state, itemOffset: newOffset, currentPage: event.selected});
+     };
+  //------------------- Pagination code -------------------------//
+  //-------------------
     return (
       <>
         <h4> {`Manage coefficients per pc`} </h4>
@@ -82,13 +116,33 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
               <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             <tbody>
-              {state.filterRows.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
+              {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
                 <td> {eachRow.pc_number} </td>
                 <td> {eachRow.name} </td>
                 <td>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
           </table>
+        </div>
+        <div>
+        {state.filterRows.length > itemsPerPage && <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={state.pageCount}
+            forcePage={state.currentPage}
+            previousLabel="< Previous"
+            renderOnZeroPageCount={null}
+            containerClassName={"pagination"}
+            itemClass="page-item"
+            linkClass="page-link"
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+        />}
+          <button onClick={() => router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
+            {`Back`}
+          </button>
         </div>
       </>
     );

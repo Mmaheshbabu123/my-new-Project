@@ -2,18 +2,20 @@ import Link from 'next/link';
 
 function ManageEmployeeAndCoefficientTypes() {
   return (
+    <>
     <div className='container row'>
+    <h4>Manage configurations and settings</h4>
       <Link href="/manage/employee-types">
         <a className='show-box-link'>
           <div title="Manage employee types">
-          Manage employee types
+           Manage Employee types
           </div>
         </a>
       </Link>
       <Link href="/manage/coefficient-types">
         <a className='show-box-link'>
           <div title="Manage coefficient types">
-          Manage coefficient
+          Manage coefficients
           </div>
         </a>
       </Link>
@@ -27,7 +29,7 @@ function ManageEmployeeAndCoefficientTypes() {
       <Link href="/linkcofficientpc/manage">
         <a className='show-box-link'>
           <div title="Manage coefficient per PC">
-            Manage coefficient per PC
+            Manage coefficients per PC
           </div>
         </a>
       </Link>
@@ -39,6 +41,7 @@ function ManageEmployeeAndCoefficientTypes() {
         </a>
       </Link>
     </div>
+    </>
   );
 }
 

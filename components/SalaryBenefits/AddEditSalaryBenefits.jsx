@@ -68,7 +68,13 @@ const AddEditSalaryBenefits = (props) => {
       }
       let url = state.editFlow ? `${updateSalaryBenefits}/${props.id}` : `${createSalaryBenefits}`;
       await APICALL.service(url, 'POST', getPostData(newItemsList))
-        .then((result) => { console.log('Done'); router.push(`/manage-salary-benefits?action=view`); })
+        .then((result) => {
+          if(result.status === 200) {
+            router.push(`/manage-salary-benefits?action=view`);
+          } else if (result.status === 205) {
+            setState({...state, uniqueError: true, duplicates: result['data']['duplicates'] });
+          }
+        })
         .catch((error) => console.error('Error occurred'));
     }
 
@@ -180,6 +186,12 @@ const AddEditSalaryBenefits = (props) => {
               className="form-text text-muted col-md-5">
               Enter only alpha-numeric values with less than 50 characters
             </small>}
+          {state.uniqueError &&
+            <small
+              id="pcp_name_warning"
+              className="form-text text-muted col-md-5">
+              {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
+            </small>}    
         </div>
         <div className="salary-input-fields">
           <label className = "mb-2 input-label-class" htmlFor="name"> {`Salary benefit value`} </label>

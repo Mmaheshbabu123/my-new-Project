@@ -6,14 +6,22 @@ import { formatDate } from './SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import SearchIcon from '../SearchIcon';
+import ReactPaginate from 'react-paginate';
+const itemsPerPage = 8;
 
 const ShowTable = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
   const [state, setState] = useState({
     searchTerm: '',
     filterRows: rows,
-    searchKey: 'name'
+    searchKey: 'name',
+    currentItems: [],
+    pageCount: 0,
+    itemOffset: 0,
+    currentPage: 0,
   })
+
+
   useEffect(() => {
     setState({...state, filterRows: rows})
   }, [rows.length])
@@ -53,12 +61,41 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
       return (rowVal.toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
-    setState({ ...state, searchTerm: value, filterRows: filterRows });
+    setState({ ...state,
+      searchTerm: value,
+      filterRows: filterRows,
+      currentPage: 0,
+      itemOffset: 0,
+      ...updatePaginationData(filterRows, 0)
+    });
   }
 
   const handleSearchClick = () => {
     handleSearch(state.searchTerm);
   }
+
+//------------------- Pagination code -------------------------//
+//-------------------
+   useEffect(() => {
+     setState({...state, ...updatePaginationData(state.filterRows, state.itemOffset || 0)})
+   }, [state.itemOffset]);
+
+   const updatePaginationData = (filterRows, offset) => {
+     let items = [...filterRows];
+     const endOffset = offset + itemsPerPage;
+     return {
+       currentItems: items.slice(offset, endOffset),
+       pageCount: Math.ceil(items.length / itemsPerPage)
+     };
+   }
+
+   const handlePageClick = (event) => {
+     let items = [...state.filterRows];
+     const newOffset = (event.selected * itemsPerPage) % items.length;
+     setState({...state, itemOffset: newOffset, currentPage: event.selected});
+   };
+//------------------- Pagination code -------------------------//
+//-------------------
 
   return (
     <>
@@ -85,14 +122,34 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
             <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
           </thead>
           <tbody>
-            {state.filterRows.map(eachRow => <tr key={eachRow.sb_id} id={eachRow.sb_id}>
+            {state.currentItems.map(eachRow => <tr key={eachRow.sb_id} id={eachRow.sb_id}>
               <td> {eachRow.name} </td>
               <td> {formatDate(eachRow.date)} </td>
-              <td> {eachRow.value ? '€ ' + eachRow.value : '--'} </td>
+              <td> {eachRow.value ? eachRow.value : '--'} </td>
               <td>{ getNeededActions(eachRow) } </td>
             </tr>)}
           </tbody>
         </table>
+      </div>
+      <div>
+        {state.filterRows.length > itemsPerPage && <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={state.pageCount}
+            forcePage={state.currentPage}
+            previousLabel="< Previous"
+            renderOnZeroPageCount={null}
+            containerClassName={"pagination"}
+            itemClass="page-item"
+            linkClass="page-link"
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+        />}
+        <button onClick={() => router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
+          {`Back`}
+        </button>
       </div>
     </>
   );
