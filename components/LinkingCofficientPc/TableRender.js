@@ -35,7 +35,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const handleActionClick = (action, eachRow) => {
     if (action === 'delete') {
       confirmAlert({
-        message: 'Do you want to delete the type?',
+        message: 'Do you want to delete the coefficients per PC?',
         buttons: [
           { label: 'No' },
           { label: 'Yes', onClick: () => handleDelete(eachRow.id) }
@@ -127,12 +127,12 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
         <div>
         {state.filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="next >"
+            nextLabel="Next >"
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={state.pageCount}
             forcePage={state.currentPage}
-            previousLabel="< previous"
+            previousLabel="< Previous"
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"

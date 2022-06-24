@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import Select from 'react-select';
-import { data } from 'autoprefixer';
+import { addplanningemployee } from '../../Services/ApiEndPoints';
+import ValidationService from '../../Services/ValidationService';
+import { useRouter } from 'next/router';
+import { Printer } from 'react-bootstrap-icons';
+
 
 const AddEmployee = () => {
+	const router = useRouter();
 	var companyid = 106;
 	const [ Data, setData ] = useState([]);
-	const [ LastName, setLastName ] = useState([]);
-	const [selectedOption, setSelectedOption] = useState(null);
+	const [Error,setError]  = useState();
+	const [selectedOption, setSelectedOption] = useState([]);
 
 	useEffect(() => {
-		APICALL.service('http://absoluteyou.com/getemployeebycompany?_format=json&nid=' + companyid, 'GET')
+		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+'getemployeebycompany?_format=json&nid='+companyid, 'GET')
 			.then((result) => {
 				if (result.length > 0) {
 					getOptions(result);
@@ -37,14 +42,32 @@ const AddEmployee = () => {
 	};
 
 	const submit=(e)=>{
+
 		e.preventDefault();
+		console.log(router.query.p_unique_key)
 
-       console.log(selectedOption);
+		var err = ValidationService.emptyValidationMethod(selectedOption);
 
-	}
-
-	const valid=(e)=>{
-       console.log()
+		if(err!=''){
+			setError(err);
+		}else{
+			setError(err);
+		const unique_key =4567 ;
+		//Router.query.P_unique_key
+        let data=[selectedOption,unique_key];
+		APICALL.service(addplanningemployee, 'POST',data)
+			.then((result) => {
+				console.log(result);
+				if (result.status === 200) {
+				   console.log(result.status);
+				} else {
+					console.log(result);
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		}
 	}
 
 	return (
@@ -60,6 +83,7 @@ const AddEmployee = () => {
 						Employee
 					</label>
 					<Select options={Data} name='employees' onChange={setSelectedOption} isMulti  />
+					<span style={{color:'red'}}>{Error}</span>
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
@@ -75,6 +99,7 @@ const AddEmployee = () => {
 						<button
 							type="sumit"
 							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+						    onClick={()=>submit} 
 						>
 							Next
 						</button>
