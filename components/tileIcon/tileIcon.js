@@ -13,7 +13,7 @@ export default function tileIcon({ props }) {
          <div className={styles["dashboard-tile-field-content"]}>
            <Link href={`${url}`}>
              <a className={styles["anchor-tag"]}>
-               <Image src={iconPath} alt="" loading="lazy"  width="75%" height="75%"  />
+               <Image src={iconPath} alt={name} loading="lazy"  width="85%" height="75%"  />
                <div title={name} className = {styles["tile-title-text"]}> {name} </div>
              </a>
            </Link>
