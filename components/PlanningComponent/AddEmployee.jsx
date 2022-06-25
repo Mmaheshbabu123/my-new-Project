@@ -10,6 +10,7 @@ import { Printer } from 'react-bootstrap-icons';
 const AddEmployee = () => {
 	const router = useRouter();
 	var companyid = 106;
+	var routerid=112277;
 	const [ Data, setData ] = useState([]);
 	const [Error,setError]  = useState();
 	const [selectedOption, setSelectedOption] = useState([]);
@@ -60,9 +61,11 @@ const AddEmployee = () => {
 				console.log(result);
 				if (result.status === 200) {
 				   console.log(result.status);
+				   router.push('/planning/functions/'+routerid);
 				} else {
 					console.log(result);
 				}
+
 			})
 			.catch((error) => {
 				console.error(error);
