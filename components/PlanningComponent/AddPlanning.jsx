@@ -13,7 +13,9 @@ function Planning(props) {
 	const [ show, setShow ] = useState(false);
 
 	//FOR ASSIGNING COMPANY LOCATION VALUES
-	const [ companyLocation, setCompanyLocation ] = useState([]);
+	const [ company, setCompany ] = useState([]);
+	const [ location, setLocation ] = useState([]);
+	const [ costcenter, setCostcenter ] = useState([]);
 	const [ company_name, setCompany_name ] = useState([]);
 
 	// Errormessage
@@ -30,12 +32,12 @@ function Planning(props) {
 
 	// FETCHING DATA FROM DRUPAL //
 	useEffect(() => {
-		APICALL.service(fetchPlanning, 'GET')
+		APICALL.service('https://test.absolute-you.infanion.com/managecompanies?_format=json', 'GET')
 			.then((result) => {
-				var data = JSON.parse(result.getcompanylocation);
-				console.log(data);
-				if (result.status === 200) {
-					setCompanyLocation(data);
+				console.log(result);
+
+				if (result.length > 0) {
+					setCompany(result);
 				} else {
 					console.log(result);
 				}
@@ -44,6 +46,58 @@ function Planning(props) {
 				console.error(error);
 			});
 	}, []);
+	//LOCATION FETCHING FROM DRUPAL
+	useEffect(
+		() => {
+			console.log(data.comp_id);
+			APICALL.service(
+				'https://test.absolute-you.infanion.com/managelocations?_format=json&comp_id=' + data.comp_id,
+				'GET'
+			)
+				.then((result) => {
+					console.log(result);
+
+					if (result.length > 0) {
+						setLocation(result);
+					} else {
+						console.log(result);
+						setLocation([]);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		},
+		[ data.comp_id ]
+	);
+
+	//COST CENTER FETCHING FROM DRUPAL
+	useEffect(
+		() => {
+			// console.log(data.comp_id);
+			APICALL.service(
+				'https://test.absolute-you.infanion.com/manage-costcenter?_format=json&comp_id=' +
+					data.comp_id +
+					'&location_id=' +
+					data.location_id,
+				'GET'
+			)
+				.then((result) => {
+					console.log(result);
+
+					if (result.length > 0) {
+						setCostcenter(result);
+					} else {
+						console.log(result);
+						setCostcenter([]);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		},
+		[ data.comp_id, data.location_id ]
+	);
 
 	// ON SUBMIT //
 	let submit = (event) => {
@@ -73,37 +127,19 @@ function Planning(props) {
 		//check if required fields are empty
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['location_id'] = ValidationService.emptyValidationMethod(res.location_id);
-		error1['cost_center_id'] = ValidationService.emptyValidationMethod(res.cost_center_id);
+		// error1['cost_center_id'] = ValidationService.emptyValidationMethod(res.cost_center_id);
 
 		//seterror messages
 		setError_comp_id(error1['comp_id']);
 		setError_location_id(error1['location_id']);
-		setError_cost_center_id(error1['cost_center_id']);
+		// setError_cost_center_id(error1['cost_center_id']);
 		//return false if there is an error else return true
-		if (error1['comp_id'] == '' && error1['location_id'] == '' && error1['cost_center_id'] == '') {
+		if (error1['comp_id'] == '' && error1['location_id'] == '') {
 			return true;
 		} else {
 			return false;
 		}
 	};
-	const companyname = [
-		{
-			value: '10',
-			label: 'Infanion1'
-		},
-		{
-			value: '11',
-			label: 'Infanion2'
-		},
-		{
-			value: '12',
-			label: 'Infanion3'
-		},
-		{
-			value: '13',
-			label: 'Infanion4'
-		}
-	];
 
 	// CLOSE POPUP
 	const closePopup = () => {
@@ -139,20 +175,18 @@ function Planning(props) {
 							}}
 						>
 							<option value="">Select</option>
-							{companyLocation.map(
-								(options) =>
-									options.type == 'Company' && (
-										<option
-											onClick={(e) => {
-												setCompany_name(options.title);
-											}}
-											key={options.nid}
-											value={options.nid}
-										>
-											{options.title}
-										</option>
-									)
-							)}
+							{console.log(company)}
+							{company.map((options) => (
+								<option
+									onClick={(e) => {
+										setCompany_name(options.comp_name);
+									}}
+									key={options.comp_id}
+									value={options.comp_id}
+								>
+									{options.comp_name}
+								</option>
+							))}
 						</select>
 						<p className="error mt-2">{error_comp_id}</p>
 					</div>
@@ -167,14 +201,14 @@ function Planning(props) {
 							}}
 						>
 							<option value="">Select</option>
-							{companyLocation.map(
-								(options) =>
-									options.type == 'Location' &&
-									options.field_compa == company_name && (
-										<option key={options.nid} value={options.nid}>
-											{options.field_lo}
-										</option>
-									)
+							{location.map(
+								(options) => (
+									// options.comp_name == company_name && (
+									<option key={options.location_id} value={options.location_id}>
+										{options.location_name}
+									</option>
+								)
+								// )
 							)}
 						</select>
 						<p className="error mt-2">{error_location_id}</p>
@@ -190,13 +224,13 @@ function Planning(props) {
 							}}
 						>
 							<option value="">Select</option>
-							{companyname.map((options) => (
-								<option key={options.value} value={options.value}>
-									{options.label}
+							{costcenter.map((options) => (
+								<option key={options.cost_center_id} value={options.cost_center_id}>
+									{options.cost_center_name}
 								</option>
 							))}
 						</select>
-						<p className="error mt-2">{error_cost_center_id}</p>
+						{/* <p className="error mt-2">{error_cost_center_id}</p> */}
 					</div>
 
 					<div className="col-md-12 mt-4 ">
