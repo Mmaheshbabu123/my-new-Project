@@ -155,10 +155,10 @@ const LinkCoeffEmpComponent = (props) => {
             </small>}
         </div>
         <div className="col-md-12 m-0 p-0 relative-div">
-          {scrollLeft && <button onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
-              <Image src={backwardScroll} alt="backward" title="backward scroll"/> </button>}
-          {scrollRight && <button onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
-              <Image src={forwardScroll} alt="forward" title="forward scroll"/> </button>}
+          {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
+              <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
+          {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
+              <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>}
           <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: `${tableWidth}` }}>
             <div className="col-md-3 m-0 p-0 pc-linking-div firstpart">
               <CoeffcientValuesFirstPart />

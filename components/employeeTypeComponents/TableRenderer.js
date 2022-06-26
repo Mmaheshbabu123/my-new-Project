@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { confirmAlert } from 'react-confirm-alert';
-import { deleteEmployeeType ,deleteCoefficientType} from '../../Services/ApiEndPoints'
-import { APICALL } from '../../Services/ApiServices';
+import { deleteEmployeeType ,deleteCoefficientType} from '@/Services/ApiEndPoints'
+import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import SearchIcon from '../SearchIcon';
 import ReactPaginate from 'react-paginate';
@@ -28,7 +28,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
+        <span className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
         <span className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
       </>
     )

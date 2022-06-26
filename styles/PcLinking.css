@@ -144,11 +144,12 @@ th {
   position: relative;
 }
 
-.relative-div>button {
+.relative-div>span {
   position: absolute;
   opacity: 0.4;
+  cursor: pointer;
 }
 
-.relative-div>button:hover {
+.relative-div>span:hover {
   opacity: 0.9;
 }
