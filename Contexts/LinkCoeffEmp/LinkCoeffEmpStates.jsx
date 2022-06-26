@@ -22,6 +22,8 @@ const LinkCoeffEmpStates = (props) => {
     , regexp: /^[0-9,.]*$/
     , valueErrorArray: []
     , emptyDataWarning: false
+    , isOverflow: false
+    , tableWidth: '100%'
   };
   const [state, dispatch] = useReducer(LinkCoeffEmpReducer, initialState);
 
