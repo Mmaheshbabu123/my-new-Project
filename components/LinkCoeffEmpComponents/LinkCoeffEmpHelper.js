@@ -1,8 +1,8 @@
 export const helpers = {
     toggleWarningClass
   , checkCoefficientsFilledOrNot
+  , scrollContent
 }
-
 
 function toggleWarningClass(inputRef, refkey, add = 1) {
   add ? inputRef.current[refkey].classList.add("v-warning")
@@ -54,4 +54,34 @@ function checkEachCoefficientValue(filledCoeffObj) {
 
 function checkLength(obj, data) {
   return Object.keys(obj).length !== data.length;
+}
+
+
+function scrollContent(forward = 1) {
+  let divElement = document.getElementById('linkempCoeffDivId');
+  forward ? divElement.scrollLeft += 100 : divElement.scrollLeft -= 100;
+  let setObj = {};
+  let scrollLeftMax = divElement.scrollWidth - divElement.clientWidth;
+  let scrollLeft = divElement.scrollLeft;
+  setObj['tableWidth'] = '97%';
+  if(scrollLeft >= scrollLeftMax) {
+    setObj['scrollRight'] = false;
+    setObj['scrollLeft'] = true;
+  }
+  if(scrollLeft === 0) {
+    setObj['scrollRight'] = true;
+    setObj['scrollLeft'] = false;
+  }
+  if(scrollLeft > 0 && scrollLeft < scrollLeftMax) {
+    setObj['scrollRight'] = true;
+    setObj['scrollLeft'] = true
+  }
+  if(setObj['scrollLeft'] === false && setObj['scrollRight'] === false)
+      setObj['tableWidth'] = '100%';
+  if(setObj['scrollLeft'] === true && setObj['scrollRight'] === false)
+      setObj['tableWidth'] = '97%';
+  if(setObj['scrollLeft'] === true && setObj['scrollRight'] === true)
+      setObj['tableWidth'] = '95%';
+  return setObj;
+
 }
