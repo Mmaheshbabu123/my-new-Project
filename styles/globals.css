@@ -154,3 +154,6 @@ a {
 .disabled {
 	color:#999 !important;
 }
+.container-height {
+	height: 800px;
+}

@@ -7,7 +7,7 @@ import { FaFacebookSquare, FaLinkedin } from 'react-icons/fa';
 function Footer() {
 	return (
 		<div className="app-container">
-			<div className="row mt-2 border-top border-bottom  border-secondary ">
+			<div className="row mt-2 border-top border-secondary ">
 				<div className="col mt-2 p-3">
 					<span className="mt-2">copyright © 2021 Absolute YOU</span>
 				</div>
