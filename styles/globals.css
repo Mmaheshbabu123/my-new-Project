@@ -155,5 +155,5 @@ a {
 	color:#999 !important;
 }
 .container-height {
-	height: 800px;
+	min-height: 720px;
 }
