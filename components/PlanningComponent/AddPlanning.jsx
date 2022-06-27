@@ -32,7 +32,7 @@ function Planning(props) {
 
 	// FETCHING DATA FROM DRUPAL //
 	useEffect(() => {
-		APICALL.service('https://test.absolute-you.infanion.com/managecompanies?_format=json', 'GET')
+		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
 			.then((result) => {
 				console.log(result);
 
@@ -51,7 +51,7 @@ function Planning(props) {
 		() => {
 			console.log(data.comp_id);
 			APICALL.service(
-				'https://test.absolute-you.infanion.com/managelocations?_format=json&comp_id=' + data.comp_id,
+				process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managelocations?_format=json&comp_id=' + data.comp_id,
 				'GET'
 			)
 				.then((result) => {
@@ -76,7 +76,8 @@ function Planning(props) {
 		() => {
 			// console.log(data.comp_id);
 			APICALL.service(
-				'https://test.absolute-you.infanion.com/manage-costcenter?_format=json&comp_id=' +
+				process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
+					'/manage-costcenter?_format=json&comp_id=' +
 					data.comp_id +
 					'&location_id=' +
 					data.location_id,
