@@ -91,7 +91,7 @@ const AddFunction = () => {
 				<div className="row">
 					<ol type="1">
 						{Data.map((key, value) => (
-							<div className="row" style={{ marginBottom: '1%', backgroundColor: 'gray' }}>
+							<div key={key} className="row" style={{ marginBottom: '1%', backgroundColor: 'gray' }}>
 								<div className="col-md-3">
 									{value + 1}. {key[1]}
 								</div>
@@ -105,7 +105,7 @@ const AddFunction = () => {
 				<div className='row'>
                       <ul>
 					  {functions.map((key, value) => (
-						  <div className='row'>
+						  <div key={key} className='row'>
 						  <div className='col-md-2'></div>
 						  <div className='col-md-4'>
 						  <div>
