@@ -10,9 +10,8 @@ import { useRouter } from 'next/router';
 
 const AddFunction = () => {
 	const companyid = 82;
-	const pc = 100;
 	const router = useRouter();
-
+    var pc=100;
 	const [ Data, setData ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
 	const [ functions, setFunctions ] = useState([]);
@@ -22,9 +21,7 @@ const AddFunction = () => {
 
 	useEffect(() => {
 		var p_unique_key=router.query.p_unique_key;
-		 p_unique_key = router.query.p_unique_key;
 		loadIt(p_unique_key);
-		
 	}, [router.query]);
 
 	const loadIt=(p_unique_key)=>{
@@ -89,6 +86,10 @@ const AddFunction = () => {
 		await setSalaries(e.target.value);
 	};
 
+	const backToDashboard=()=>{
+		var p_unique_key=router.query.p_unique_key;
+		router.push(process.env.NEXT_PUBLIC_APP_URL+'planning/employees/'+p_unique_key);
+	}
 	const saveSalary = async () => {};
 	return (
 		<div className="container" style={{ marginTop: '5%', marginBottom: '2%' }}>
@@ -119,7 +120,7 @@ const AddFunction = () => {
 											setSelectedOption;
 										}}
 									/>
-									{selectedOption == ''}?<span>this field is required</span>:{''};
+							    {/* {selectedOption == ''?<span>this field is required</span>:''} */}
 								</div>
 								<div className="col-md-2">
 									<span style={{ backgroundColor: 'white' }}>€{salaries}</span>

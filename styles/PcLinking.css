@@ -58,6 +58,7 @@
   height: 20px;
   width: 100%;
   text-align: center;
+  border-color: transparent;
 }
 
 @keyframes run_fade {
@@ -152,4 +153,8 @@ th {
 
 .relative-div>span:hover {
   opacity: 0.9;
+}
+
+strong{
+  font-weight: bold !important;
 }
