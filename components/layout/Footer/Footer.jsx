@@ -19,9 +19,9 @@ function Footer() {
 						Contact us
 					</a>
 					<button className=" btn btn-link">
-						<Link href={'/privacy-policy'}>
-							<p className="p-2">Privacy policy</p>
-						</Link>
+						{/* <Link href={'/privacy-policy'}> */}
+						<p className="p-2">Privacy policy</p>
+						{/* </Link> */}
 					</button>
 					<a href="" className="p-2 ">
 						Disclaimer
