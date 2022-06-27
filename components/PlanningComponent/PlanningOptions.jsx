@@ -7,7 +7,7 @@ function Add_manage_planning(props) {
 	const unique_key = Uniquekey.generate_unique_key();
 	let backToDashboard = () => {
 		window.location.assign(
-			process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'dashboard?access=administrator&check_logged_in=1'
+			process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'dashboard?access=employeer&check_logged_in=1'
 		);
 	};
 	return (

@@ -1,11 +1,17 @@
 import React, { Component, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
-import { Weeklyplanning, getweekly_planning } from '../../Services/ApiEndPoints';
+import { planningoverview, getweekly_planning } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import { useRouter } from 'next/router';
 
-function WeeklyPlanning(props) {
-	const weeklyplanning = [
+
+const PlanningFinalize = () => {
+    const router = useRouter();
+    console.log(router.query)
+    const p_unique_key = router.query.p_unique_key;
+
+    const weeklyplanning = [
 		{
 			id: 1,
 			fullName: 'Steve Jobs',
@@ -36,14 +42,14 @@ function WeeklyPlanning(props) {
 	];
 
 	useEffect(() => {
-		APICALL.service(getweekly_planning + "82", 'GET')
+		APICALL.service(planningoverview + router.query.p_unique_key, 'GET')
 			.then((result) => {
 				console.log(result);
 			})
 			.catch((error) => {
 				console.error(error);
 			});
-	}, []);
+	}, [router.query]);
 	return (
 		<div className="container">
 			<div className="row">
@@ -164,5 +170,11 @@ function WeeklyPlanning(props) {
 			</div>
 		</div>
 	);
+
+
+
+
+    
 }
-export default WeeklyPlanning;
+
+export default PlanningFinalize;
