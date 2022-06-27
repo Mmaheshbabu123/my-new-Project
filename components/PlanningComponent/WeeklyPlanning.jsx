@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
-import { Weeklyplanning } from '../../Services/ApiEndPoints';
+import { Weeklyplanning, getweekly_planning } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
 function WeeklyPlanning(props) {
@@ -34,11 +34,21 @@ function WeeklyPlanning(props) {
 			totalhours: '6h'
 		}
 	];
+
+	useEffect(() => {
+		APICALL.service(getweekly_planning + "82", 'GET')
+			.then((result) => {
+				console.log(result);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
 	return (
 		<div className="container">
 			<div className="row">
 				<p className="mt-2 mb-2 h3">Weekly Planning</p>
-				<p className="h6">For the Week of monday from 24-04-2022 to sunday 30-04-2022</p>
+				<p className="h6">For the week of Monday from 27/06/2022 to sunday 03/07/2022</p>
 
 				<div className=" mt-4 d-flex justify-content-end">
 					<div className="d-inline ">
@@ -63,33 +73,33 @@ function WeeklyPlanning(props) {
 						<option value="">Bangalore</option>
 						<option value="">Mangalore</option>
 					</select>
-					<select className="form-select w-25 me-2">
+					{/* <select className="form-select w-25 me-2">
 						<option>Select Project</option>
 						<option value="">Project-1</option>
 						<option value="">Project-2</option>
-					</select>
+					</select> */}
 				</div>
 				<div className="mt-2 ">
 					<table className="table border border-secondary ">
 						<thead className="">
 							<tr className="">
 								<th className="border-end border-secondary">
-									Monday<br />07-03-2022
+									Monday<br />27-06-2022
 								</th>
 								<th className="border-end border-secondary">
-									Tuesday <br />08-03-2022
+									Tuesday <br />28-06-2022
 								</th>
 								<th className="border-end border-secondary">
-									Wednesday <br />09-03-2022
+									Wednesday <br />29-06-2022
 								</th>
 								<th className="border-end border-secondary">
-									Thursday <br />10-03-2022
+									Thursday <br />30-06-2022
 								</th>
 								<th className="border-end border-secondary">
-									Friday<br />11-03-2022
+									Friday<br />01-07-2022
 								</th>
 								<th className="border-end border-secondary">
-									Saturday<br />12-03-2022
+									Saturday<br />02-07-2022
 								</th>
 								<th>
 									Sunday<br />13-03-2022
