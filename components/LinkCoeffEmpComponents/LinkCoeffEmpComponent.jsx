@@ -137,21 +137,21 @@ const LinkCoeffEmpComponent = (props) => {
     return <>
       <div className="m-4">
         <div className="col-md-12 row p-0 m-0">
-          <h4>{(Number(props.pcid) ? 'Edit' : 'Add') + ' link coefficients to employee types'}</h4>
+          <h4>{(Number(props.pcid) ? 'Edit' : 'Add') + ' link coefficients to employee types.'}</h4>
           <div className="col-md-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
             {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
           </div>
           {state.lowHighValidation.length > 0 &&
             <small className="col-md-6 mt-3 mb-3 warning-message">
-              {`Change highlighted low and high values low value should be less than high value (Low < High)`}
+              {`Change highlighted low and high values low value should be less than high value (Low < High).`}
             </small>}
           {state.emptyDataWarning === true &&
             <small className="col-md-6 mt-3 mb-3 warning-message">
-              {`Please fill all coefficient fields to save`}
+              {`Please fill all coefficient fields.`}
             </small>}
           {state.valueErrorArray.length > 0 &&
             <small className="col-md-3 mt-3 mb-3 warning-message">
-              {`Value should be in between 0 to 10`}
+              {`Value should be in between 0 to 10.`}
             </small>}
         </div>
         <div className="col-md-12 m-0 p-0 relative-div">

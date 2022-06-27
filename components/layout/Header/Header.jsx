@@ -26,6 +26,11 @@ function Header() {
 						<button type="button" className="btn  position-relative mt-2 p-2 ">
 							<FaUserAlt className="" />
 						</button>
+						<select type="">
+							<option>EN</option>
+							<option>NL</option>
+							<option>FR</option>
+						</select>
 					</div>
 				</div>
 			</div>
