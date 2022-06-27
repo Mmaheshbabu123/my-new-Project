@@ -11,7 +11,7 @@ import DatePicker from 'react-multi-date-picker';
 import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 
-import TimeRange from 'react-time-range';
+//import TimeRange from 'react-time-range';
 import moment from 'moment';
 
 const Addtiming = () => {
@@ -58,12 +58,12 @@ const p_unique_key = router.query.p_unique_key;
 						<DatePicker
 							format="MM/DD/YYYY HH:mm:ss"
 							range
-							plugins={[ <TimePicker position="right" />, <DatePanel markFocused /> ]}
+							plugins={[ <TimePicker position="right" key={'timepicker_unique1'} />, <DatePanel markFocused key={'timepicker_unique2'}/> ]}
 						/>
-						<TimeRange className="text-center" position="right"
+		{/*<TimeRange className="text-center" position="right"
                 startMoment={this.state.startTime}
                 endMoment={this.state.endTime}
-                onChange={this.returnFunction}/>
+                onChange={this.returnFunction}/>*/}
 					</div>
 				</div>
 				<div className="row">
