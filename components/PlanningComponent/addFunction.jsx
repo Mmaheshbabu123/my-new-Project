@@ -16,19 +16,23 @@ const AddFunction = () => {
 	const [ Data, setData ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
 	const [ functions, setFunctions ] = useState([]);
-	const [ salaries, setSalaries ] =useState();
-	const [selectedOption, setSelectedOption] = useState([]);
+	const [ salaries, setSalaries ] = useState();
+	const [ selectedOption, setSelectedOption ] = useState([]);
 
+	useEffect(
+		() => {
+			var p_unique_key = router.query.p_unique_key;
+			p_unique_key = router.query.p_unique_key;
+			loadIt(p_unique_key);
+		},
+		[ router.query ]
+	);
 
-	useEffect(() => {
-		var p_unique_key=router.query.p_unique_key;
-		 p_unique_key = router.query.p_unique_key;
-		loadIt(p_unique_key);
-		
-	}, [router.query]);
-
-	const loadIt=(p_unique_key)=>{
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/'+p_unique_key+',112233', 'GET')
+	const loadIt = (p_unique_key) => {
+		APICALL.service(
+			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/' + p_unique_key + ',112233',
+			'GET'
+		)
 			.then(async (respons) => {
 				respons = respons.data;
 				await setFunctions(respons);
@@ -78,7 +82,7 @@ const AddFunction = () => {
 			.catch((error) => {
 				console.error(error);
 			});
-	}
+	};
 
 	const submit = (e) => {
 		e.preventDefault();
@@ -111,7 +115,7 @@ const AddFunction = () => {
 								<div className="col-md-3 p-1">
 									{value + 1}. {key[1]}
 								</div>
-								<div className="col-md-4 bg-secondary">
+								<div className="col-md-4 bg-light">
 									<Select
 										options={emptypes}
 										name="employees"
@@ -119,17 +123,17 @@ const AddFunction = () => {
 											setSelectedOption;
 										}}
 									/>
-									{selectedOption == ''}?<span>this field is required</span>:{''};
+									{/* {selectedOption == ''}?<span>this field is required</span>:{''}; */}
+								</div>
+								<div className="col-md-2 bg-light mb-2">
+									<span className="p-1">€{salaries}</span>
 								</div>
 								<div className="col-md-2">
-									<span style={{ backgroundColor: 'white' }}>€{salaries}</span>
-								</div>
-								<div className="col-md-1">
 									<input
 										type="textfield"
 										name="salary"
+										className="form-control"
 										onChange={{ saveSalary }}
-										style={{ width: '35px' }}
 									/>
 								</div>
 							</div>
