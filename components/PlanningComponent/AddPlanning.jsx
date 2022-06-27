@@ -22,7 +22,6 @@ function Planning(props) {
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
 	const [ error_location_id, setError_location_id ] = useState('');
-	const [ error_cost_center_id, setError_cost_center_id ] = useState('');
 
 	const [ data, setData ] = useState({
 		p_unique_key: '',
@@ -157,7 +156,7 @@ function Planning(props) {
 		<div className="container calc-height ">
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row   planning-container ">
-					<p className="md-3 mt-3 font-weight-bold h3">Add Planning</p>
+					<p className="mb-4 mt-3 font-weight-bold h3">Add Planning</p>
 					{/* <div>
 						<button
 							type="button"
@@ -203,15 +202,11 @@ function Planning(props) {
 							}}
 						>
 							<option value="">Select</option>
-							{location.map(
-								(options) => (
-									// options.comp_name == company_name && (
-									<option key={options.location_id} value={options.location_id}>
-										{options.location_name}
-									</option>
-								)
-								// )
-							)}
+							{location.map((options) => (
+								<option key={options.location_id} value={options.location_id}>
+									{options.location_name}
+								</option>
+							))}
 						</select>
 						<p className="error mt-2">{error_location_id}</p>
 					</div>
@@ -232,28 +227,26 @@ function Planning(props) {
 								</option>
 							))}
 						</select>
-						{/* <p className="error mt-2">{error_cost_center_id}</p> */}
 					</div>
-
-					<div className="col-md-12 mt-4 ">
-						<div className="d-inline">
-							<button type="button" className="btn btn-secondary   btn-block ">
-								<Link href={'/planning/options'}>
-									<p className="">Back</p>
-								</Link>
-							</button>
-						</div>
-						<div className="float-right ">
-							<button
-								type="submit"
-								className="btn btn-secondary   btn-block "
-								onClick={() => {
-									setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
-								}}
-							>
-								Next
-							</button>
-						</div>
+				</div>
+				<div className="row mt-4">
+					<div className="col-md-6">
+						<button type="button" className="btn btn-secondary   btn-block ">
+							<Link href={'/planning/options'}>
+								<p className="">Back</p>
+							</Link>
+						</button>
+					</div>
+					<div className="col-md-6">
+						<button
+							type="submit"
+							className="btn btn-secondary   btn-block float-end"
+							onClick={() => {
+								setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
+							}}
+						>
+							Next
+						</button>
 					</div>
 				</div>
 			</form>

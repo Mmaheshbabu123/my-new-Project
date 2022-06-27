@@ -9,8 +9,8 @@ import { Printer } from 'react-bootstrap-icons';
 
 const AddEmployee = () => {
 	const router = useRouter();
-	var companyid = 106;
-	var routerid=112277;
+	const p_unique_key = router.query.p_unique_key;
+	var companyid = 82;
 	const [ Data, setData ] = useState([]);
 	const [Error,setError]  = useState();
 	const [selectedOption, setSelectedOption] = useState([]);
@@ -61,7 +61,7 @@ const AddEmployee = () => {
 				console.log(result);
 				if (result.status === 200) {
 				   console.log(result.status);
-				   router.push('/planning/functions/'+routerid);
+				   router.push('/planning/functions/'+p_unique_key);
 				} else {
 					console.log(result);
 				}
