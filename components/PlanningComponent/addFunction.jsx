@@ -4,6 +4,8 @@ import Select from 'react-select';
 import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
+import { FormControl } from 'react-bootstrap';
+import { FormLabel } from 'react-bootstrap';
 import { Printer } from 'react-bootstrap-icons';
 
 const AddFunction = () => {
@@ -12,18 +14,19 @@ const AddFunction = () => {
 	const router = useRouter();
 	const [ Data, setData ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
+	const [functions,setFunctions] = useState([]);
 
 	useEffect(() => {
-		APICALL.service(
-			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getemployeetypebypcnumber/4567,112233',
-			'GET'
-		).then(async(respons) => {	
-				console.log(respons);
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/4567,112233','GET')
+		.then(async(respons) => {
+			    respons=respons.data;	
+                  await setFunctions(respons);
+				  console.log(functions);
+				
 			})
 			.catch((error) => {
 				console.error(error);
 			});
-
 		APICALL.service( process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/get-planningemployee/' + companyid, 'GET')
 			.then(async (result) => {
 				var data = result.data;
@@ -103,6 +106,30 @@ const AddFunction = () => {
 							
 						))}
 					</ol>
+				</div>
+				<div className='row'>
+                      <ul>
+					  {functions.map((key, value) => (
+						  <div className='row'>
+						  <div className='col-md-2'></div>
+						  <div className='col-md-4'>
+						  <FormControl>
+  							<FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+  <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    defaultValue="female"
+    name="radio-buttons-group"
+  >
+    <FormControlLabel value="female" control={<Radio />} label="Female" />
+    <FormControlLabel value="male" control={<Radio />} label="Male" />
+    <FormControlLabel value="other" control={<Radio />} label="Other" />
+  </RadioGroup>
+</FormControl>
+							<li>{key[1]}</li>
+							</div>
+							</div>
+						))}
+					  </ul>
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">

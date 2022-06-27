@@ -1,4 +1,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("react-confirm-alert/src/react-confirm-alert.css");
+@import url("@/styles/EmployeeType.css");
+@import url("@/styles/PcLinking.css");
 
 @font-face {
 	font-family: "Tahoma-Bold";
@@ -153,4 +156,7 @@ a {
 }
 .disabled {
 	color:#999 !important;
+}
+.container-height {
+	min-height: 720px;
 }

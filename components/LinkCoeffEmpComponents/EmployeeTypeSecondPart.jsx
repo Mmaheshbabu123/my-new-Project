@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import LinkCoeffEmpContext from '../../Contexts/LinkCoeffEmp/LinkCoeffEmpContext';
 import { helpers } from './LinkCoeffEmpHelper';
 
@@ -17,6 +17,27 @@ const EmployeeTypeSecondPart = () => {
 
 
   /**
+   * [useEffect to check scroll button is needed or not]
+   * @param  {function} const               [description]
+   * @return {void}       [description]
+   */
+  useEffect(() => {
+    const current = state.inputRef.current['secondpart'];
+    const trigger = () => {
+      const hasOverflow = current.scrollWidth > current.clientWidth;
+      if (hasOverflow) {
+        updateStateChanges({
+          isOverflow: hasOverflow,
+          scrollRight: true, scrollLeft: false, tableWidth: '97%'
+        });
+      }
+    };
+    if (current) {
+      trigger();
+    }
+  }, [Object.keys(state.inputRef.current).length])
+
+  /**
    * [handleValueChange handling user input]
    * @param  {[type]} target                 [description]
    * @param  {[int]} _EmpId                 [description]
@@ -25,11 +46,13 @@ const EmployeeTypeSecondPart = () => {
    * @return {[void]}          [description]
    */
   const handleValueChange = (target, _EmpId, _Coeffid, _ValId) => {
-    if(!target.value.match(state.regexp)) return;
+    if (!target.value.match(state.regexp)) return;
     let valueDataObj = {
       ...pclinkingValueobj,
-      [_EmpId]: { ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId] : {}),
-        [_Coeffid]: { ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] : {}),
+      [_EmpId]: {
+        ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId] : {}),
+        [_Coeffid]: {
+          ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] : {}),
           [_ValId]: target.value
         }
       }
@@ -52,34 +75,34 @@ const EmployeeTypeSecondPart = () => {
    * @return {[void]}              [description]
    */
   const lowHighDefaultChanges = (_EmpId, _Coeffid, _ValId, valueDataObj) => {
-    if(_ValId === lowKey || _ValId === highKey) {
+    if (_ValId === lowKey || _ValId === highKey) {
       valueDataObj[_EmpId][_Coeffid][defaultKey] = '';
     }
-    if(_ValId === defaultKey) {
+    if (_ValId === defaultKey) {
       valueDataObj[_EmpId][_Coeffid][lowKey] = '';
       valueDataObj[_EmpId][_Coeffid][highKey] = '';
     }
   }
 
-/**
- * [valueValidation min and max value validation]
- * @param  {[int]} _EmpId                 [description]
- * @param  {[int]} _Coeffid               [description]
- * @param  {[int]} _ValId                 [description]
- * @param  {[string]} inputVal               [description]
- * @return {[object]}          [description]
- */
+  /**
+   * [valueValidation min and max value validation]
+   * @param  {[int]} _EmpId                 [description]
+   * @param  {[int]} _Coeffid               [description]
+   * @param  {[int]} _ValId                 [description]
+   * @param  {[string]} inputVal               [description]
+   * @return {[object]}          [description]
+   */
   const valueValidation = (_EmpId, _Coeffid, _ValId, inputVal) => {
     let value = Number(inputVal.replace(',', '.'));
     let refkey = `${_EmpId}_${_Coeffid}_${_ValId}`;
-    if((value < minValue) || (value > maxValue)) {
-      if(valueErrorArray.includes(refkey)) return valueErrorArray;
+    if ((value < minValue) || (value > maxValue)) {
+      if (valueErrorArray.includes(refkey)) return valueErrorArray;
       valueErrorArray.push(refkey);
       helpers.toggleWarningClass(inputRef, refkey);
     }
     else {
       valueErrorArray.indexOf(refkey) > -1 ?
-      valueErrorArray.splice(valueErrorArray.indexOf(refkey), 1) : null;
+        valueErrorArray.splice(valueErrorArray.indexOf(refkey), 1) : null;
       helpers.toggleWarningClass(inputRef, refkey, 0);
     }
     return valueErrorArray;
@@ -97,7 +120,7 @@ const EmployeeTypeSecondPart = () => {
     let valObj = valueDataObj[_EmpId][_Coeffid];
     let lowVal = valObj[lowKey]
     let highVal = valObj[highKey];
-    if(highVal && lowVal) {
+    if (highVal && lowVal) {
       return compareAndShowTootTip(Number(lowVal.replace(',', '.')), Number(highVal.replace(',', '.')), `${_EmpId}_${_Coeffid}`);
     } else {
       return compareAndShowTootTip(lowVal, highVal, `${_EmpId}_${_Coeffid}`, 0);
@@ -113,12 +136,12 @@ const EmployeeTypeSecondPart = () => {
    * @return {[object]}          [description]
    */
   const compareAndShowTootTip = (lowVal, highVal, refkey, type = 1) => {
-    let lowRef  = inputRef.current[`${refkey}_1`];
+    let lowRef = inputRef.current[`${refkey}_1`];
     let highRef = inputRef.current[`${refkey}_3`];
     let title = '';
-    if(lowVal > highVal && type) {
+    if (lowVal > highVal && type) {
       title = 'Low value should be less then high value (Low < High)';
-      if(lowHighValidation.includes(refkey)) return lowHighValidation;
+      if (lowHighValidation.includes(refkey)) return lowHighValidation;
       lowRef.classList.add("warning");
       highRef.classList.add("warning");
       lowHighValidation.push(refkey)
@@ -126,11 +149,11 @@ const EmployeeTypeSecondPart = () => {
       lowRef.classList.remove("warning");
       highRef.classList.remove("warning");
       lowHighValidation.indexOf(refkey) > -1 ?
-      lowHighValidation.splice(lowHighValidation.indexOf(refkey), 1) : null;
+        lowHighValidation.splice(lowHighValidation.indexOf(refkey), 1) : null;
     }
-      lowRef.title  = title;
-      highRef.title = title;
-      return lowHighValidation;
+    lowRef.title = title;
+    highRef.title = title;
+    return lowHighValidation;
   }
 
   const getEmployeeTypeTableContent = () => {
@@ -149,7 +172,7 @@ const EmployeeTypeSecondPart = () => {
                 id={`${_EmpId}_${_Coeffid}_${_ValId}`}
                 ref={ref => inputRef.current[`${_EmpId}_${_Coeffid}_${_ValId}`] = ref}
                 onChange={(e) => handleValueChange(e.target, _EmpId, _Coeffid, _ValId)}
-             />
+              />
             </td>)
           })
         }</tr>
@@ -164,18 +187,18 @@ const EmployeeTypeSecondPart = () => {
     return {
       matrixKey,
       value: pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] ?
-              pclinkingValueobj[_EmpId][_Coeffid][_ValId] ?
-               pclinkingValueobj[_EmpId][_Coeffid][_ValId] : '' : '' : ''
+        pclinkingValueobj[_EmpId][_Coeffid][_ValId] ?
+          pclinkingValueobj[_EmpId][_Coeffid][_ValId] : '' : '' : ''
     }
   }
 
   return (
-    <div className="second-part-parent-div">
+    <div className="second-part-parent-div" ref={ref => inputRef.current['secondpart'] = ref}>
       <table className="table pclinking-table table-second-part">
         <thead className="pclinking-table-thead table-second-part-thead">
           <tr className="table-second-part-thead-tr-class">{
-            employeeTypeArray.map(emp => <th height= "50" key={emp.id} className="table-second-part-th-class">
-            <div className="header-div-tag"> {emp.name} </div> </th>)
+            employeeTypeArray.map(emp => <th height="50" key={emp.id} className="table-second-part-th-class" title = {emp.name}>
+              <div className="header-div-tag"> {emp.name} </div> </th>)
           }</tr>
         </thead>
         <tbody className="pclinking-table-tbody table-second-part-tbody">

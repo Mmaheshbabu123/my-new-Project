@@ -102,7 +102,7 @@ function WeeklyPlanning(props) {
 									<td className="border-end border-secondary" key={value.id}>
 										<a>
 											<MdEdit className="float-right" />
-											{/* <i class="bi bi-pencil float-right" /> */}
+											{/* <i className="bi bi-pencil float-right" /> */}
 										</a>
 										{value.fullName}
 										<br />

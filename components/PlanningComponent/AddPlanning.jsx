@@ -5,6 +5,7 @@ import { APICALL } from '../../Services/ApiServices';
 import Addproject from './AddProject';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 function Planning(props) {
 	const router = useRouter();
@@ -109,6 +110,7 @@ function Planning(props) {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
+						router.push('/planning/employees/' + router.query.p_unique_key);
 					} else {
 						console.log(result);
 					}
@@ -236,7 +238,9 @@ function Planning(props) {
 					<div className="col-md-12 mt-4 ">
 						<div className="d-inline">
 							<button type="button" className="btn btn-secondary   btn-block ">
-								Back
+								<Link href={'/planning/options'}>
+									<p className="">Back</p>
+								</Link>
 							</button>
 						</div>
 						<div className="float-right ">
@@ -244,7 +248,7 @@ function Planning(props) {
 								type="submit"
 								className="btn btn-secondary   btn-block "
 								onClick={() => {
-									setData((prev) => ({ ...prev, p_unique_key: router.query.pid }));
+									setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
 								}}
 							>
 								Next

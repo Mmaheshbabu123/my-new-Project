@@ -1,12 +1,12 @@
-import React,{useEffect} from "react";
-import AddEmployee from "../../../components/PlanningComponent/AddEmployee";
+import { useRouter } from 'next/router';
+import AddPlanning from '../../../components/PlanningComponent/AddPlanning';
+// import { useRouter } from 'next/router';
 
-const employeetyplanning = () => {
-
-return(<div>
-    <AddEmployee/>
-</div>);
-
+const Planning = () => {
+    const router = useRouter();
+    return (
+        <div><AddPlanning /></div>
+    );
 }
 
-export default employeetyplanning;
+export default Planning;

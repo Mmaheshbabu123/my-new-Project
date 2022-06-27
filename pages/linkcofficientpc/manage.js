@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react';
 import { APICALL } from '@/Services/ApiServices';
-import { getCofficientPerPc} from '../../Services/ApiEndPoints';
+import { getCofficientPerPc} from '@/Services/ApiEndPoints';
 import TableRenderer from '@/components/LinkingCofficientPc/TableRender';
 const ManagePc = (props)=>{
   const [ state, setState ] = useState({rows: [], headers: [], loaded: false})

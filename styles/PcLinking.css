@@ -1,13 +1,12 @@
 .link-emp-coeff-tableparent {
   height: 475px;
-  overflow-y: scroll;
+  overflow-x: scroll;
   border: 1px solid;
   margin: 0 !important;
+  scroll-behavior: smooth;
+
 }
 
-.secondpart{
-  /* overflow-x: scroll; */
-}
 .firstpart {
   position: sticky;
   left: 0;
@@ -27,11 +26,12 @@
 }
 
 
-.pclinking-table-tbody td{  /* COMMON TO BOTH TABLES */
+.pclinking-table-tbody td {
+  /* COMMON TO BOTH TABLES */
 }
 
 
-.three-row-span{
+.three-row-span {
   vertical-align: middle;
   border-right: 1px solid black;
 }
@@ -42,6 +42,7 @@
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><line x1='0' y1='0' x2='100' y2='100' stroke='black' vector-effect='non-scaling-stroke'/></svg>");
   background-size: 100% 100%;
   height: 100%;
+  border-right: 1px solid;
 }
 
 .cell--topRight {
@@ -65,17 +66,19 @@
   }
 }
 
-.warning, .v-warning {
+.warning,
+.v-warning {
   border: 2px solid red;
   animation: run_fade 0.7s infinite alternate;
 }
 
 .value-input-cell:focus {
-    outline: none !important;
+  outline: none !important;
 }
 
 .table-second-part {
-  border-collapse: separate !important;  /*Don't collapse */
+  border-collapse: separate !important;
+  /*Don't collapse */
 }
 
 .table-second-part th {
@@ -83,8 +86,8 @@
 }
 
 .table-second-part td {
-   border-right: 1px solid;
-   border-bottom: 1px solid;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
 }
 
 .header-div-tag {
@@ -106,22 +109,27 @@
 .css-lr9fot-singleValue {
   height: 80%;
 }
-.css-14el2xx-placeholder{
+
+.css-14el2xx-placeholder {
   height: 80%;
 }
-.css-qc6sy-singleValue{
+
+.css-qc6sy-singleValue {
   height: 80%;
 }
 
 .css-1wy0on6 {
   height: 100%;
 }
+
 input[id^="react-select"][id$="-input"] {
   height: 100%;
 }
+
 div[id^="react-select"][id$="-listbox"] {
   z-index: 100;
 }
+
 /* ==================================================== */
 
 th {
@@ -130,4 +138,18 @@ th {
 
 .pc-linking-td {
   height: 40px;
+}
+
+.relative-div {
+  position: relative;
+}
+
+.relative-div>span {
+  position: absolute;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.relative-div>span:hover {
+  opacity: 0.9;
 }
