@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import Select from 'react-select';
+import { NextResponse, NextRequest } from 'next/server'
 import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
@@ -10,12 +11,21 @@ import { Printer } from 'react-bootstrap-icons';
 const AddEmployee = () => {
 	const router = useRouter();
 	const p_unique_key = router.query.p_unique_key;
-	var companyid = 82;
+	//var companyid = 82;
 	const [ Data, setData ] = useState([]);
 	const [Error,setError]  = useState();
+	//const [companyid,setCompanyid]=useState();
 	const [selectedOption, setSelectedOption] = useState([]);
 
 	useEffect(() => {
+        var companyid='';
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/getcompanyidbyuniqkey/'+p_unique_key, 'GET')
+			.then(async(result) => {
+				 companyid=result;
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+'getemployeebycompany?_format=json&nid='+companyid, 'GET')
 			.then((result) => {
 				if (result.length > 0) {
@@ -73,6 +83,9 @@ const AddEmployee = () => {
 		}
 	}
 
+  const backToDashboard=()=>{
+	window.location.replace(process.env.NEXT_PUBLIC_APP_URL+"planning/add/11");
+  }
 	return (
 		<div className="container" style={{ marginTop: '15%', marginBottom: '2%', fontWeight: 'bold' }}>
 			<form onSubmit={(e) => submit(e)}>
