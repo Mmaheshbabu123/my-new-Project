@@ -9,10 +9,10 @@ import { useRouter } from 'next/router';
 // import { Printer } from 'react-bootstrap-icons';
 
 const AddFunction = () => {
-	const companyid = 4567;
-	const pc = 112233;
-	//const p_unique_key = router.query.p_unique_key;
+	const companyid = 82;
+	const pc = 100;
 	const router = useRouter();
+
 	const [ Data, setData ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
 	const [ functions, setFunctions ] = useState([]);
@@ -82,63 +82,70 @@ const AddFunction = () => {
 
 	const submit = (e) => {
 		e.preventDefault();
-         console.log(selectedOption);
+		console.log(selectedOption);
 	};
 
-	const addsalary=async(e)=>{
-     await setSalaries(e.target.value);
-	}
+	const addsalary = async (e) => {
+		await setSalaries(e.target.value);
+	};
 
-	const saveSalary=async()=>{
-    
-	}
+	const saveSalary = async () => {};
 	return (
 		<div className="container" style={{ marginTop: '5%', marginBottom: '2%' }}>
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row">
-				
-						<p className='h1'>Add function</p>
+					<div className="row">
+						<p className="h1">Add function</p>
 					</div>
-					<div className="form-check mt-2 ">
+					<div className="form-check">
 						<input className="form-check-input " type="checkbox" value="" id="flexCheckChecked" checked />
-						<label className="form-check-label " for="flexCheckChecked">
+						<label className="form-check-label p-1 " htmlFor="flexCheckChecked">
 							Same functions for all employees
 						</label>
-				
-				</div>		
-				
-				
+					</div>
+				</div>
+				<div className="row ">
 					<ol type="1">
 						{Data.map((key, value) => (
-							<div className="row  ">
-								<div className="col-md-3 bg-light">
+							<div key={key} className="row bg-light mb-2 p-3">
+								<div className="col-md-3 p-1">
 									{value + 1}. {key[1]}
 								</div>
 								<div className="col-md-4 bg-secondary">
-									<Select options={emptypes}  name="employees" onChange={()=>{setSelectedOption}} />
-									{selectedOption==''}?<span>this field is required</span>:{''};
+									<Select
+										options={emptypes}
+										name="employees"
+										onChange={() => {
+											setSelectedOption;
+										}}
+									/>
+									{selectedOption == ''}?<span>this field is required</span>:{''};
 								</div>
-								<div className='col-md-2' >
-								 <span style={{ backgroundColor :'white' } }>€{salaries}</span>
-								</div >
-								<div className='col-md-1'>
-						        <input type="textfield" name='salary' onChange={{ saveSalary }}  style={{ width:"35px"}}/>
-							</div>
+								<div className="col-md-2">
+									<span style={{ backgroundColor: 'white' }}>€{salaries}</span>
+								</div>
+								<div className="col-md-1">
+									<input
+										type="textfield"
+										name="salary"
+										onChange={{ saveSalary }}
+										style={{ width: '35px' }}
+									/>
+								</div>
 							</div>
 						))}
 					</ol>
-				
-				<div className='row'>
-                      <ul>
-					  {functions.map((key, value) => (
-						  <div key={key} className='row'>
-						  <div className='col-md-2'></div>
-						  <div className='col-md-4'>
-						  <div onChange={ addsalary  }>
-						        <input type="radio" value={key[2]} name="functions" /> {key[1]}
-							</div>
-							</div>
-							
+				</div>
+				<div className="row">
+					<ul>
+						{functions.map((key, value) => (
+							<div key={key} className="row">
+								<div className="col-md-2" />
+								<div className="col-md-4">
+									<div>
+										<input type="radio" value={key[0]} name="functions" /> {key[1]}
+									</div>
+								</div>
 							</div>
 						))}
 					</ul>
