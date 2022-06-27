@@ -128,7 +128,7 @@ const AddFunction = () => {
 				<div className='row'>
                       <ul>
 					  {functions.map((key, value) => (
-						  <div className='row'>
+						  <div key={key} className='row'>
 						  <div className='col-md-2'></div>
 						  <div className='col-md-4'>
 						  <div onChange={ addsalary  }>
