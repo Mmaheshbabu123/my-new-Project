@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { createEmployeeTypes, createCofficientType} from '../../Services/ApiEndPoints'
-import { editEmployeeType ,editCofficientType} from '../../Services/ApiEndPoints'
-import { APICALL } from '../../Services/ApiServices';
+import { createEmployeeTypes, createCofficientType} from '@/Services/ApiEndPoints'
+import { editEmployeeType ,editCofficientType} from '@/Services/ApiEndPoints'
+import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 
 

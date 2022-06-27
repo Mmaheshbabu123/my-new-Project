@@ -12,7 +12,7 @@ const CoeffcientValuesFirstPart = () => {
       let tempValueTypeArray = [...valueTypeArray];
       htmlContent.push(
         <tr className="" key={coefficient.id} id={coefficient.id}>
-          <td className="three-row-span" rowSpan={valueTypeArray.length}> {coefficient.name} </td>
+          <td className="three-row-span" rowSpan={valueTypeArray.length} title={coefficient.name}> {coefficient.name} </td>
           <td className="value-single-span pc-linking-td"> {tempValueTypeArray.shift().name} </td>
         </tr>
       )
@@ -34,8 +34,8 @@ const CoeffcientValuesFirstPart = () => {
           <tr>
             <th height= "50" colSpan="2" className="p-0">
               <div className="firstpart-cell">
-                <span className="cell--topRight" key={`tablecolindex`} scope="col"> Employee types </span>
-                <span className="cell--bottomLeft" key={`tablecolindex2`} scope="col"> Coefficients </span>
+                <span title="Employee types" className="cell--topRight" key={`tablecolindex`} scope="col"> Employee types </span>
+                <span title="Coefficients" className="cell--bottomLeft" key={`tablecolindex2`} scope="col"> Coefficients </span>
               </div>
             </th>
           </tr>

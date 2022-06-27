@@ -93,7 +93,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   //-------------------
     return (
       <>
-        <h4> {`Manage coefficients per pc`} </h4>
+        <h4> {`Manage coefficients per PC`} </h4>
         <div className='row' style={{ margin: '10px 0', position: 'relative' }}>
           <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
           <input

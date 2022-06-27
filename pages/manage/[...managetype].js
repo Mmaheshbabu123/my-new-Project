@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import React, {useState, useEffect} from 'react';
-import { APICALL } from '../../Services/ApiServices';
-import { fetchEmployeeTypes ,fecthCoefficientTypes} from '../../Services/ApiEndPoints';
-import TableRenderer from '../../components/employeeTypeComponents/TableRenderer'
-import AddEmployeeType from '../../components/employeeTypeComponents/AddEmployeeType'
+import { APICALL } from '@/Services/ApiServices';
+import { fetchEmployeeTypes ,fecthCoefficientTypes} from '@/Services/ApiEndPoints';
+import TableRenderer from '@/components/employeeTypeComponents/TableRenderer'
+import AddEmployeeType from '@/components/employeeTypeComponents/AddEmployeeType'
 
 const ManageType = (props) => {
   const router  = useRouter();

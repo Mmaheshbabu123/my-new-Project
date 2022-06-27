@@ -25,7 +25,7 @@ export const tileJson = [
   },
   {
     id: 4,
-    name: 'Manage coefficient per PC',
+    name: 'Manage coefficients per PC',
     url: '/linkcofficientpc/manage',
     iconPath: coefficientperPC,
   },
