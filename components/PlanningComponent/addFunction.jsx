@@ -18,17 +18,20 @@ const AddFunction = () => {
 	const [ functions, setFunctions ] = useState([]);
 	const [ salaries, setSalaries ] =useState();
 	const [selectedOption, setSelectedOption] = useState([]);
+
+
 	useEffect(() => {
 		var p_unique_key=router.query.p_unique_key;
-		async()=>{
-		 p_unique_key =  await router.query.p_unique_key;
-		}
-        console.log(p_unique_key);
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/4567,112233', 'GET')
+		 p_unique_key = router.query.p_unique_key;
+		loadIt(p_unique_key);
+		
+	}, [router.query]);
+
+	const loadIt=(p_unique_key)=>{
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/'+p_unique_key+',112233', 'GET')
 			.then(async (respons) => {
 				respons = respons.data;
 				await setFunctions(respons);
-				//console.log(functions);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -75,7 +78,7 @@ const AddFunction = () => {
 			.catch((error) => {
 				console.error(error);
 			});
-	}, []);
+	}
 
 	const submit = (e) => {
 		e.preventDefault();
