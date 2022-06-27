@@ -84,7 +84,7 @@ const AddEmployee = () => {
 	}
 
   const backToDashboard=()=>{
-	window.location.replace(process.env.NEXT_PUBLIC_APP_URL+"planning/add/11");
+	router.push(process.env.NEXT_PUBLIC_APP_URL+"planning/add/11");
   }
 	return (
 		<div className="container" style={{ marginTop: '15%', marginBottom: '2%', fontWeight: 'bold' }}>

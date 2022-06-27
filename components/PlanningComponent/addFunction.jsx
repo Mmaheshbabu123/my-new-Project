@@ -9,24 +9,34 @@ import { useRouter } from 'next/router';
 // import { Printer } from 'react-bootstrap-icons';
 
 const AddFunction = () => {
-	const companyid = 4567;
-	const pc = 112233;
+	const companyid = 82;
+	const pc = 100;
 	const router = useRouter();
+
 	const [ Data, setData ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
 	const [ functions, setFunctions ] = useState([]);
+	const [ salaries, setSalaries ] =useState();
+	const [selectedOption, setSelectedOption] = useState([]);
+
 
 	useEffect(() => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/4567,112233', 'GET')
+		var p_unique_key=router.query.p_unique_key;
+		 p_unique_key = router.query.p_unique_key;
+		loadIt(p_unique_key);
+		
+	}, [router.query]);
+
+	const loadIt=(p_unique_key)=>{
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/'+p_unique_key+',112233', 'GET')
 			.then(async (respons) => {
 				respons = respons.data;
 				await setFunctions(respons);
-				console.log(functions);
 			})
 			.catch((error) => {
 				console.error(error);
 			});
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + companyid, 'GET')
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + p_unique_key, 'GET')
 			.then(async (result) => {
 				var data = result.data;
 				var employees = [];
@@ -68,50 +78,74 @@ const AddFunction = () => {
 			.catch((error) => {
 				console.error(error);
 			});
-	}, []);
+	}
 
 	const submit = (e) => {
 		e.preventDefault();
+		console.log(selectedOption);
 	};
 
+	const addsalary = async (e) => {
+		await setSalaries(e.target.value);
+	};
+
+	const saveSalary = async () => {};
 	return (
 		<div className="container" style={{ marginTop: '5%', marginBottom: '2%' }}>
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row">
 					<div className="row">
-						<h1 style={{ display: 'inherit', fontSize: '30px', fontWeight: 'bold' }}>Add function</h1>
+						<p className="h1">Add function</p>
 					</div>
-					<div className="row" style={{ marginBottom: '1%' }}>
-						<div>
-							<input type="checkbox" id="sameforall" name="sameforall" value="sameforall" />
-							<label style={{ paddingLeft: '10px' }}>Same function for all employees</label>
-						</div>
+					<div className="form-check">
+						<input className="form-check-input " type="checkbox" value="" id="flexCheckChecked" checked />
+						<label className="form-check-label p-1 " htmlFor="flexCheckChecked">
+							Same functions for all employees
+						</label>
 					</div>
 				</div>
-				<div className="row">
+				<div className="row ">
 					<ol type="1">
 						{Data.map((key, value) => (
-							<div key={key} className="row" style={{ marginBottom: '1%', backgroundColor: 'gray' }}>
-								<div className="col-md-3">
+							<div key={key} className="row bg-light mb-2 p-3">
+								<div className="col-md-3 p-1">
 									{value + 1}. {key[1]}
 								</div>
-								<div className="col-md-4">
-									<Select options={emptypes} name="employees" />
+								<div className="col-md-4 bg-secondary">
+									<Select
+										options={emptypes}
+										name="employees"
+										onChange={() => {
+											setSelectedOption;
+										}}
+									/>
+									{selectedOption == ''}?<span>this field is required</span>:{''};
+								</div>
+								<div className="col-md-2">
+									<span style={{ backgroundColor: 'white' }}>€{salaries}</span>
+								</div>
+								<div className="col-md-1">
+									<input
+										type="textfield"
+										name="salary"
+										onChange={{ saveSalary }}
+										style={{ width: '35px' }}
+									/>
 								</div>
 							</div>
 						))}
 					</ol>
 				</div>
-				<div className='row'>
-                      <ul>
-					  {functions.map((key, value) => (
-						  <div key={key} className='row'>
-						  <div className='col-md-2'></div>
-						  <div className='col-md-4'>
-						  <div>
-						        <input type="radio" value={key[0]} name="functions" /> {key[1]}
-							</div>
-							</div>
+				<div className="row">
+					<ul>
+						{functions.map((key, value) => (
+							<div key={key} className="row">
+								<div className="col-md-2" />
+								<div className="col-md-4">
+									<div>
+										<input type="radio" value={key[0]} name="functions" /> {key[1]}
+									</div>
+								</div>
 							</div>
 						))}
 					</ul>
