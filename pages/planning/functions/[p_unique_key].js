@@ -1,11 +1,11 @@
-import React,{useEffect} from "react";
+import React from "react";
 import AddFunction from "../../../components/PlanningComponent/addFunction";
 
 const functioninplanning = () => {
 
-return(<div>
-    <AddFunction/>
-</div>);
+    return (<div>
+        <AddFunction />
+    </div>);
 
 }
 
