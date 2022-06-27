@@ -22,7 +22,7 @@ function Add_manage_planning(props) {
 				</div>
 				<div className="col">
 					<button type="button" className="btn-lg btn-outline-dark border w-50 ">
-						<Link href={'manage-planning/select'}>
+						<Link href={'/manage-planning/select'}>
 							<p className="h3">Manage planning</p>
 						</Link>
 					</button>

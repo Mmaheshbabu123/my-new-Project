@@ -32,7 +32,7 @@ function SelectCompany(props) {
 	let submit = (event) => {
 		event.preventDefault();
 		if (company_id != '') {
-			router.push('/manage-planning/weekly/' + company_id);
+			router.push('/manage-planning/weekly/');
 		} else {
 			setError_comp_id('This field is required');
 		}

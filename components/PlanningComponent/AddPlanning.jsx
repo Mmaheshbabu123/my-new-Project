@@ -49,24 +49,26 @@ function Planning(props) {
 	//LOCATION FETCHING FROM DRUPAL
 	useEffect(
 		() => {
-			console.log(data.comp_id);
-			APICALL.service(
-				process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managelocations?_format=json&comp_id=' + data.comp_id,
-				'GET'
-			)
-				.then((result) => {
-					console.log(result);
-
-					if (result.length > 0) {
-						setLocation(result);
-					} else {
+			setLocation([]);
+			if (data.comp_id != '') {
+				APICALL.service(
+					process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managelocations?_format=json&comp_id=' + data.comp_id,
+					'GET'
+				)
+					.then((result) => {
 						console.log(result);
-						setLocation([]);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+
+						if (result.length > 0) {
+							setLocation(result);
+						} else {
+							console.log(result);
+							setLocation([]);
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
 		},
 		[ data.comp_id ]
 	);
