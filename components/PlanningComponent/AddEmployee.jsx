@@ -55,7 +55,7 @@ const AddEmployee = () => {
 			setError(err);
 		const unique_key =4567 ;
 		//Router.query.P_unique_key
-        let data=[selectedOption,unique_key];
+        let data=[selectedOption,p_unique_key];
 		APICALL.service(addplanningemployee, 'POST',data)
 			.then((result) => {
 				console.log(result);
