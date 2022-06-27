@@ -99,7 +99,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
 const button_title = manageType == 'employee-types'? `Add employee type`:`Add coefficient`;
   return (
     <>
-      <h4> {`Manage ${button_title.includes('employee') ? 'Employee type' : 'Coefficient'}`} </h4>
+      <h4> {`Manage ${button_title.includes('employee') ? 'employee types' : 'coefficients'}`} </h4>
       <div className='row searchbox' style={{ margin: '10px 0', position: 'relative' }}>
         <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
         <input
