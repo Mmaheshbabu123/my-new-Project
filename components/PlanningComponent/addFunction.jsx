@@ -29,7 +29,7 @@ const AddFunction = () => {
 
 	const loadIt = (p_unique_key) => {
 		APICALL.service(
-			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/' + p_unique_key + ',112233',
+			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/' + p_unique_key + ',100',
 			'GET'
 		)
 			.then(async (respons) => {
@@ -84,8 +84,9 @@ const AddFunction = () => {
 	};
 
 	const submit = (e) => {
-		e.preventDefault();
-		console.log(selectedOption);
+		router.push('/planning/timings/' + router.query.p_unique_key);
+		// e.preventDefault();
+		// console.log(selectedOption);
 	};
 
 	const addsalary = async (e) => {
