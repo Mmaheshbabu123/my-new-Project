@@ -169,7 +169,7 @@ const LinkCoeffEmpComponent = (props) => {
           </div>
         </div>
         <div style={{ textAlign: 'end', marginTop: '10px' }}>
-          <button onClick={() => props.router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
+          <button onClick={() => parseInt(props.pcid) ? props.router.back() : props.router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
             {`Back`}
           </button>
           <button onClick={() => handleSubmit()} type="button" className="btn btn-dark pcp_btn col-1">
