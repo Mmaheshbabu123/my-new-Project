@@ -4,6 +4,8 @@ import Select from 'react-select';
 import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
+import { FormControl } from 'react-bootstrap';
+import { FormLabel } from 'react-bootstrap';
 import { Printer } from 'react-bootstrap-icons';
 
 const AddFunction = () => {
@@ -11,13 +13,24 @@ const AddFunction = () => {
 	const pc = 112233;
 	const router = useRouter();
 	const [ Data, setData ] = useState([]);
+	const [ emptypes, setEmptypes ] = useState([]);
+	const [functions,setFunctions] = useState([]);
 
 	useEffect(() => {
-		APICALL.service('http://absoluteyou-backend.local/api/get-planningemployee/' + companyid, 'GET')
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/4567,112233','GET')
+		.then(async(respons) => {
+			    respons=respons.data;	
+                  await setFunctions(respons);
+				  console.log(functions);
+				
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		APICALL.service( process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/get-planningemployee/' + companyid, 'GET')
 			.then(async (result) => {
 				var data = result.data;
 				var employees = [];
-
 				for (var i = 0; i < data.length; i++) {
 					await APICALL.service(
 						process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
@@ -26,7 +39,6 @@ const AddFunction = () => {
 						'GET'
 					)
 						.then((res) => {
-							console.log(res);
 							employees.push([ res[0]['Employee_id'], res[0]['Employee_name'] ]);
 						})
 						.catch((error) => {
@@ -34,7 +46,28 @@ const AddFunction = () => {
 						});
 				}
 				await setData(employees);
-				console.log(Data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		//fetching employee types name,id
+		var employeetypes=[];
+		APICALL.service(
+			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getemployeetypebypcnumber/' + pc,
+			'POST'
+		)
+			.then(async(res) => {	
+				var result=res.employeetypes;
+				for(let i=0;i<result.length;i++){
+					var opt = {
+						value: '',
+						label: ''
+					};
+					opt.value = result[i]['id'];
+					opt.label = result[i]['name'];
+					employeetypes[i] = opt;
+				}
+				await setEmptypes(employeetypes);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -46,28 +79,57 @@ const AddFunction = () => {
 	};
 
 	return (
-		<div className="container" style={{ marginTop: '15%', marginBottom: '2%' }}>
+		<div className="container" style={{ marginTop: '5%', marginBottom: '2%' }}>
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row">
 					<div className="row">
 						<h1 style={{ display: 'inherit', fontSize: '30px', fontWeight: 'bold' }}>Add function</h1>
 					</div>
-					<div className="row">
+					<div className="row" style={{marginBottom:'1%'}}>
 						<div>
 							<input type="checkbox" id="sameforall" name="sameforall" value="sameforall" />
-							<label>Same function for all employees</label>
+							<label style={{paddingLeft:'10px'}}>Same function for all employees</label>
 						</div>
 					</div>
 				</div>
-				<div className="row">
+				<div className="row" >
 					<ol type="1">
 						{Data.map((key, value) => (
-							<div key={key}>
+							<div className='row' style={{marginBottom: "1%",backgroundColor:'gray'}}>
+							<div className='col-md-3'>
 								{value + 1}. {key[1]}
-								<Select options={Data} name="employees" />{' '}
 							</div>
+                            <div className='col-md-4'>
+								<Select options={emptypes} name="employees" />
+							</div>
+							</div>
+							
 						))}
 					</ol>
+				</div>
+				<div className='row'>
+                      <ul>
+					  {functions.map((key, value) => (
+						  <div className='row'>
+						  <div className='col-md-2'></div>
+						  <div className='col-md-4'>
+						  <FormControl>
+  							<FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+  <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    defaultValue="female"
+    name="radio-buttons-group"
+  >
+    <FormControlLabel value="female" control={<Radio />} label="Female" />
+    <FormControlLabel value="male" control={<Radio />} label="Male" />
+    <FormControlLabel value="other" control={<Radio />} label="Other" />
+  </RadioGroup>
+</FormControl>
+							<li>{key[1]}</li>
+							</div>
+							</div>
+						))}
+					  </ul>
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">

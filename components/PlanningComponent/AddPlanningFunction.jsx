@@ -84,14 +84,14 @@ function AddFunction(props) {
 											))}
 										</select>
 									</div>
-									{employeetype.map((options) => (
+									{/* {employeetype.map((options) => (
 										<ul className="list-group  border-0  mb-3 " key={options.value}>
 											<li className=" mt-3 mb-3 ms-2 d-flex  ">
 												<input type="radio" className="me-2 " />
 												{options.function}
 											</li>
 										</ul>
-									))}
+									))} */}
 									<li>
 										<select
 											className="form-select"
@@ -116,7 +116,7 @@ function AddFunction(props) {
 						))}
 
 						<div className="col-md-6">
-							{employeetype.map((options) => (
+							{/* {employeetype.map((options) => (
 								<ul
 									className="list-group list-group-horizontal bg-light border-0 mb-3 "
 									key={options.value}
@@ -126,7 +126,7 @@ function AddFunction(props) {
 										{options.function}
 									</li>
 								</ul>
-							))}
+							))} */}
 							<div>
 								<ul className="list-group list-group-horizontal border-0 bg-light  mb-3">
 									<li className="mt-3 mb-3 ms-2 ">
