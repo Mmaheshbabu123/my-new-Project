@@ -9,15 +9,26 @@ import { useRouter } from 'next/router';
 // import { Printer } from 'react-bootstrap-icons';
 
 const AddFunction = () => {
-	const companyid = 4567;
-	const pc = 112233;
+	const companyid = 82;
+	const pc = 100;
 	const router = useRouter();
+
 	const [ Data, setData ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
 	const [ functions, setFunctions ] = useState([]);
+	console.log(router.query);
+	var p_unique_key = router.query.p_unique_key;
 
+	let backToDashboard = () => {
+		window.location.assign(
+			process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'dashboard?access=administrator&check_logged_in=1'
+		);
+	};
 	useEffect(() => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/4567,112233', 'GET')
+		APICALL.service(
+			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/' + p_unique_key + ',' + pc,
+			'GET'
+		)
 			.then(async (respons) => {
 				respons = respons.data;
 				await setFunctions(respons);
@@ -26,7 +37,7 @@ const AddFunction = () => {
 			.catch((error) => {
 				console.error(error);
 			});
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + companyid, 'GET')
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + p_unique_key, 'GET')
 			.then(async (result) => {
 				var data = result.data;
 				var employees = [];
@@ -79,20 +90,20 @@ const AddFunction = () => {
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row">
 					<div className="row">
-						<h1 style={{ display: 'inherit', fontSize: '30px', fontWeight: 'bold' }}>Add function</h1>
+						<p className="h1">Add function</p>
 					</div>
-					<div className="row" style={{ marginBottom: '1%' }}>
-						<div>
-							<input type="checkbox" id="sameforall" name="sameforall" value="sameforall" />
-							<label style={{ paddingLeft: '10px' }}>Same function for all employees</label>
-						</div>
+					<div className="form-check">
+						<input className="form-check-input " type="checkbox" value="" id="flexCheckChecked" checked />
+						<label className="form-check-label p-1 " htmlFor="flexCheckChecked">
+							Same functions for all employees
+						</label>
 					</div>
 				</div>
-				<div className="row">
+				<div className="row ">
 					<ol type="1">
 						{Data.map((key, value) => (
-							<div key={key} className="row" style={{ marginBottom: '1%', backgroundColor: 'gray' }}>
-								<div className="col-md-3">
+							<div key={key} className="row bg-light mb-2 p-3">
+								<div className="col-md-3 p-1">
 									{value + 1}. {key[1]}
 								</div>
 								<div className="col-md-4">
@@ -102,16 +113,16 @@ const AddFunction = () => {
 						))}
 					</ol>
 				</div>
-				<div className='row'>
-                      <ul>
-					  {functions.map((key, value) => (
-						  <div key={key} className='row'>
-						  <div className='col-md-2'></div>
-						  <div className='col-md-4'>
-						  <div>
-						        <input type="radio" value={key[0]} name="functions" /> {key[1]}
-							</div>
-							</div>
+				<div className="row">
+					<ul>
+						{functions.map((key, value) => (
+							<div key={key} className="row">
+								<div className="col-md-2" />
+								<div className="col-md-4">
+									<div>
+										<input type="radio" value={key[0]} name="functions" /> {key[1]}
+									</div>
+								</div>
 							</div>
 						))}
 					</ul>
