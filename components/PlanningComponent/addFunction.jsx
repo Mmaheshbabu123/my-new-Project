@@ -119,8 +119,9 @@ const AddFunction = () => {
 	};
 
 	const submit = (e) => {
-		e.preventDefault();
-		console.log(selectedOption);
+		router.push('/planning/timings/' + router.query.p_unique_key);
+		// e.preventDefault();
+		// console.log(selectedOption);
 	};
 
 	const addsalary = async (e) => {
