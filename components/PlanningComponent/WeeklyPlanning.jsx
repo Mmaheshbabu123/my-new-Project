@@ -36,7 +36,7 @@ function WeeklyPlanning(props) {
 	];
 
 	useEffect(() => {
-		APICALL.service(getweekly_planning + "82", 'GET')
+		APICALL.service(getweekly_planning + '82', 'GET')
 			.then((result) => {
 				console.log(result);
 			})
@@ -160,6 +160,31 @@ function WeeklyPlanning(props) {
 					<button type="submit" className="btn btn-secondary   btn-block ">
 						Dashboard
 					</button>
+				</div>
+				<div>
+					<p className="h5">Is the planning final?</p>
+					<div>
+						<input
+							className="form-check-input"
+							type="radio"
+							name="radioNoLabel"
+							id="radioNoLabel1"
+							value=""
+							aria-label="..."
+						/>
+						<labe className="ms-2">Yes</labe>
+					</div>
+					<div className="">
+						<input
+							className="form-check-input "
+							type="radio"
+							name="radioNoLabel"
+							id="radioNoLabel1"
+							value=""
+							aria-label="..."
+						/>
+						<labe className="ms-2">No</labe>
+					</div>
 				</div>
 			</div>
 		</div>

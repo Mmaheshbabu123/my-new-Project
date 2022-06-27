@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 const AddFunction = () => {
 	const companyid = 82;
 	const router = useRouter();
-	var pc = 100;
+	var pc = 180;
 	const [ Data, setData ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
 	const [ functions, setFunctions ] = useState([]);
@@ -21,25 +21,21 @@ const AddFunction = () => {
 	useEffect(
 		() => {
 			var p_unique_key = router.query.p_unique_key;
-			p_unique_key = router.query.p_unique_key;
 			loadIt(p_unique_key);
 		},
 		[ router.query ]
 	);
 
-	const loadIt = (p_unique_key) => {
-		APICALL.service(
-			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/' + p_unique_key + ',112233',
-			'GET'
-		)
-			.then(async (respons) => {
-				respons = respons.data;
-				await setFunctions(respons);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + p_unique_key, 'GET')
+	useEffect(
+		() => {
+			var p_unique_key = router.query.p_unique_key;
+			loadIt(p_unique_key);
+		},
+		[ router.query ]
+	);
+
+	useEffect(() => {
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + router.query.p_unique_key, 'GET')
 			.then(async (result) => {
 				var data = result.data;
 				var employees = [];
@@ -62,6 +58,44 @@ const AddFunction = () => {
 			.catch((error) => {
 				console.error(error);
 			});
+	},[router.query])
+
+	const loadIt = (p_unique_key) => {
+		if(p_unique_key != undefined){
+		APICALL.service(
+			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/' + p_unique_key + ','+pc,
+			'GET'
+		)
+			.then(async (respons) => {
+				respons = respons.data;
+				await setFunctions(respons);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		// APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + p_unique_key, 'GET')
+		// 	.then(async (result) => {
+		// 		var data = result.data;
+		// 		var employees = [];
+		// 		for (var i = 0; i < data.length; i++) {
+		// 			await APICALL.service(
+		// 				process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
+		// 					'getemployeebycompany/?_format=json&emp_id=' +
+		// 					data[i][3],
+		// 				'GET'
+		// 			)
+		// 				.then((res) => {
+		// 					employees.push([ res[0]['Employee_id'], res[0]['Employee_name'] ]);
+		// 				})
+		// 				.catch((error) => {
+		// 					console.error(error);
+		// 				});
+		// 		}
+		// 		await setData(employees);
+		// 	})
+		// 	.catch((error) => {
+		// 		console.error(error);
+		// 	});
 		//fetching employee types name,id
 		var employeetypes = [];
 		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getemployeetypebypcnumber/' + pc, 'POST')
@@ -81,11 +115,13 @@ const AddFunction = () => {
 			.catch((error) => {
 				console.error(error);
 			});
+		}
 	};
 
 	const submit = (e) => {
-		e.preventDefault();
-		console.log(selectedOption);
+		router.push('/planning/timings/' + router.query.p_unique_key);
+		// e.preventDefault();
+		// console.log(selectedOption);
 	};
 
 	const addsalary = async (e) => {
@@ -143,14 +179,14 @@ const AddFunction = () => {
 						))}
 					</ol>
 				</div>
-				<div className="row">
+				<div className="row ms-5">
 					<ul>
 						{functions.map((key, value) => (
-							<div key={key} className="row">
-								<div className="col-md-2" />
-								<div className="col-md-4">
-									<div>
-										<input type="radio" value={key[0]} name="functions" /> {key[1]}
+							<div key={key} className="row ms-5">
+								
+								<div className="col-md-6">
+									<div className='mt-2 mb-2 bg-light h-75 p-3'>
+										<input type="radio" value={key[0]} name="functions"  className='p-3 '/> {key[1]}
 									</div>
 								</div>
 							</div>

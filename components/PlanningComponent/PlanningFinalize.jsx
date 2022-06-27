@@ -5,13 +5,12 @@ import { planningoverview, getweekly_planning } from '../../Services/ApiEndPoint
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { useRouter } from 'next/router';
 
-
 const PlanningFinalize = () => {
-    const router = useRouter();
-    console.log(router.query)
-    const p_unique_key = router.query.p_unique_key;
+	const router = useRouter();
+	console.log(router.query);
+	const p_unique_key = router.query.p_unique_key;
 
-    const weeklyplanning = [
+	const weeklyplanning = [
 		{
 			id: 1,
 			fullName: 'Steve Jobs',
@@ -41,15 +40,18 @@ const PlanningFinalize = () => {
 		}
 	];
 
-	useEffect(() => {
-		APICALL.service(planningoverview + router.query.p_unique_key, 'GET')
-			.then((result) => {
-				console.log(result);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, [router.query]);
+	useEffect(
+		() => {
+			APICALL.service(planningoverview + router.query.p_unique_key, 'GET')
+				.then((result) => {
+					console.log(result);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		},
+		[ router.query ]
+	);
 	return (
 		<div className="container">
 			<div className="row">
@@ -167,14 +169,34 @@ const PlanningFinalize = () => {
 						Dashboard
 					</button>
 				</div>
+				<div>
+					<p className="h5">Is the planning final?</p>
+					<div>
+						<input
+							className="form-check-input"
+							type="radio"
+							name="radioNoLabel"
+							id="radioNoLabel1"
+							value=""
+							aria-label="..."
+						/>
+						<labe className="ms-2">Yes</labe>
+					</div>
+					<div className="">
+						<input
+							className="form-check-input "
+							type="radio"
+							name="radioNoLabel"
+							id="radioNoLabel1"
+							value=""
+							aria-label="..."
+						/>
+						<labe className="ms-2">No</labe>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
-
-
-
-
-    
-}
+};
 
 export default PlanningFinalize;
