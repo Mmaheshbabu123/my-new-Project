@@ -10,6 +10,9 @@
       ],
       "@/styles/*": [
         "styles/*"
+      ],
+      "@/Contexts/*": [
+        "Contexts/*"
       ]
     },
     "target": "es5",
@@ -30,11 +33,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
   "exclude": [
     "node_modules"
   ]

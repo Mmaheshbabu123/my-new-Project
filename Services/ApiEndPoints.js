@@ -99,3 +99,9 @@ export const createSalaryBenefits = BASE_URL + "create-salary-benefits";
 export const updateSalaryBenefits = BASE_URL + "update-salary-benefits";
 export const deleteSalaryBenefits = BASE_URL + "delete-salary-benefits";
 //------------------- @
+
+
+//---- COOPERATION AGREEMENTS ROUTES -----//
+export const getCooperationAgreementsTabs = BASE_URL  + "get-coprtn-ags-tabs";
+
+//------------------- @
