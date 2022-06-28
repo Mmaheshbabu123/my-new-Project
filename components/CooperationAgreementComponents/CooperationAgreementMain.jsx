@@ -1,14 +1,23 @@
 import { useContext } from 'react';
+import dynamic from 'next/dynamic';
 import CooperationAgreementTabs from './CooperationAgreementTabs';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
-import TabComponent from './Tabs/TabIndex';
+const TabComponent = dynamic(
+  () =>
+  import('@/components/CooperationAgreementComponents/CooperationAgreementMain'),
+  { suspense: true }
+);
 
 const CooperationAgreementMain = (props) => {
   const { state: { selectedTabId } } = useContext(CooperationAgreementContext);
   return(
     <div className="">
         <CooperationAgreementTabs {...props}/>
-        {selectedTabId ?  <TabComponent /> : <> Loading... </>}
+        {selectedTabId ?
+              <Suspense fallback={`Loading...`}>
+                <TabComponent />
+              </Suspense>
+          : <> Loading... </>}
     </div>
   );
 }
