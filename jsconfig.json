@@ -13,7 +13,10 @@
       ],
       "@/Contexts/*": [
         "Contexts/*"
-      ]
+      ],
+      "@/CATabs/*":[
+        "components/CooperationAgreementComponents/Tabs/*"
+      ],
     },
     "target": "es5",
     "lib": [
