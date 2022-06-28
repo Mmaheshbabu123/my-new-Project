@@ -67,7 +67,7 @@ export const planningoverview = BASE_URL + "planningdetails-by-uniquekey/";
 
 
 //--------------PLANNING FETCHING----------------------------------//
-export const fetchPlanning = BASE_URL + "fetch-planning-details";
+export const fetchPlanning = BASE_URL + "fetch-planning-details/";
 
 //--------------Manage Planning-----------------------------------//
 export const getweekly_planning = BASE_URL + "getweekly_planning/";
@@ -94,7 +94,7 @@ export const footer = BASE_URL + "footer";
 
 
 //----SALARY BENEFITS ROUTES-----//
-export const fetchSalaryBenefits = BASE_URL  + "get-salary-benefits";
+export const fetchSalaryBenefits = BASE_URL + "get-salary-benefits";
 export const createSalaryBenefits = BASE_URL + "create-salary-benefits";
 export const updateSalaryBenefits = BASE_URL + "update-salary-benefits";
 export const deleteSalaryBenefits = BASE_URL + "delete-salary-benefits";
