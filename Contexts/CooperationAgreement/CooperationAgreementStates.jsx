@@ -6,8 +6,13 @@ import { UPDATE_STATE } from './Actions';
 const CooperationAgreementStates = (props) => {
   const initialState = {
       selectedTabId: 1
-    ,
+    , tab_1 : {}
+    , tab_2 : {}
+    , tab_3 : {}
+    , tab_4 : {}
+    , tab_5 : {}
   };
+
   const [state, dispatch] = useReducer(CooperationAgreementReducer, initialState);
 
   const updateStateChanges = (obj) => {
