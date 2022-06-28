@@ -84,4 +84,4 @@ const Sampleinput = () => {
        </div></>
   );
 }
-export default sampleinput;
+export default Sampleinput;
