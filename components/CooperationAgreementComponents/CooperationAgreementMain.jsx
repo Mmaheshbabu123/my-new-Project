@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { Suspense, useContext } from 'react';
 import dynamic from 'next/dynamic';
 import CooperationAgreementTabs from './CooperationAgreementTabs';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
