@@ -4,7 +4,7 @@ import CooperationAgreementTabs from './CooperationAgreementTabs';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 const TabComponent = dynamic(
   () =>
-  import('@/components/CooperationAgreementComponents/CooperationAgreementMain'),
+  import('./Tabs/TabIndex'),
   { suspense: true }
 );
 
@@ -13,11 +13,7 @@ const CooperationAgreementMain = (props) => {
   return(
     <div className="">
         <CooperationAgreementTabs {...props}/>
-        {selectedTabId ?
-              <Suspense fallback={`Loading...`}>
-                <TabComponent />
-              </Suspense>
-          : <> Loading... </>}
+        <Suspense fallback={`Loading...`}> {selectedTabId ?   <TabComponent /> : <> Loading... </>} </Suspense>
     </div>
   );
 }
