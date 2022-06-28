@@ -5,7 +5,7 @@ import Script from 'next/script';
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<div>
+		<div className="container-fluid">
 			<Head>
 				{/* Responsive meta tag */}
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
