@@ -9,7 +9,7 @@ const AbsoluteYouAgent = (props) => {
   return(
     <div className="">
       <BasicDetails />
-      <PcForWorkersServants />
+      {/*<PcForWorkersServants />*/}
     </div>
   );
 }

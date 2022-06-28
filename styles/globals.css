@@ -160,3 +160,25 @@ a {
 .container-height {
 	min-height: 720px;
 }
+
+.atom-input-field-default {
+	display: block;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	appearance: none;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+.atom-input-field-default:focus{
+	outline: 0;
+	box-shadow: 0 0 0 .25rem rgba(13,110,253,.25)
+}
