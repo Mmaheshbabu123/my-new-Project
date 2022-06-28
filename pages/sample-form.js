@@ -1,11 +1,11 @@
 import {useState} from 'react';
-import InputTextfield from '@/components/Cooperation_agreement/core-module/atoms/InputTextfield';
-import LabelwithTextfield  from '@/components/Cooperation_agreement/core-module/molecule/LabelwithTextfield';
-import CheckBox  from '@/components/Cooperation_agreement/core-module/atoms/RadioField';
-import CheckBoxSample from '@/components/Cooperation_agreement/core-module/atoms/CheckBoxField';
-import DateField from '@/components/Cooperation_agreement/core-module/atoms/DateField';
-import  Button from '@/components/Cooperation_agreement/core-module/atoms/Button';
-import MultiSelect from '@/components/Cooperation_agreement/core-module/atoms/MultiSelectField';
+import InputTextfield from '@/components/core-module/atoms/InputTextfield';
+import LabelwithTextfield  from '@/components/core-module/molecule/LabelwithTextfield';
+import CheckBox  from '@/components/core-module/atoms/RadioField';
+import CheckBoxSample from '@/components/core-module/atoms/CheckBoxField';
+import DateField from '@/components/core-module/atoms/DateField';
+import  Button from '@/components/core-module/atoms/Button';
+import MultiSelect from '@/components/core-module/atoms/MultiSelectField';
 const Sampleinput = () => {
   const [state, setState] = useState({
    isRadio : true,
@@ -56,7 +56,7 @@ const Sampleinput = () => {
      label= 'gagagaa'
         />
         <CheckBoxSample
-        keyvalue = {'kk'} 
+        keyvalue = {'kk'}
         name = {'nsnsn'}
         value = {'true'}
         keyname = {'age'}

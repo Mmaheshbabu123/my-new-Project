@@ -22,7 +22,7 @@ export default function MultiSelect({ handleChange, standards, options, disabled
         return false;
     }
     return (
-      <div className="col-md-3 mt-2 mb-3 p-0">
+      <div className= {className || "col-md-3 mt-2 mb-3 p-0"}>
         <Select
             placeholder={placeholder}
             value={standards}
