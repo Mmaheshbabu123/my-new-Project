@@ -6,7 +6,7 @@ import CheckBoxSample from '@/components/Cooperation_agreement/core-module/atoms
 import DateField from '@/components/Cooperation_agreement/core-module/atoms/DateField';
 import  Button from '@/components/Cooperation_agreement/core-module/atoms/Button';
 import MultiSelect from '@/components/Cooperation_agreement/core-module/atoms/MultiSelectField';
-const sampleinput = () => {
+const Sampleinput = () => {
   const [state, setState] = useState({
    isRadio : true,
    })
