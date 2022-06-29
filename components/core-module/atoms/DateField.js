@@ -6,7 +6,7 @@ export default function DateField({
     name,
     value,
     handleChange,
-    minDate='2022-06-26',
+    minDate='1947-08-15',
     id,
     customStyle = {},
     className = 'col-md-5'

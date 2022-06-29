@@ -162,6 +162,7 @@ a {
 }
 
 .atom-input-field-default {
+	cursor: pointer;
 	display: block;
 	padding: .375rem .75rem;
 	font-size: 1rem;
