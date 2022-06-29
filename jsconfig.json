@@ -14,8 +14,8 @@
       "@/Contexts/*": [
         "Contexts/*"
       ],
-      "@/CATabs/*":[
-        "components/CooperationAgreementComponents/Tabs/*"
+      "@/atoms/*": [
+        "components/core-module/atoms/*"
       ],
     },
     "target": "es5",

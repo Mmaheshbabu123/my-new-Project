@@ -1,15 +1,25 @@
 import React from 'react';
 
-export default function DateField( {name,value,handleChange,minDate='2022-06-26',id = 'pcp_name',customStyle = { width: '30%' } }) {
+const style =  { /* ADD IF ANY STYLES NEEDED*/  }
+
+export default function DateField({
+    name,
+    value,
+    handleChange,
+    minDate='1947-08-15',
+    id,
+    customStyle = {},
+    className = 'col-md-5'
+  }) {
   return (
     <>
      <input
-     style={customStyle}
+     style={{...style, ...customStyle}}
        type="date"
        name={name}
        min={minDate}
        value={value}
-       className="form-control col-md-10 salary-date"
+       className={'atom-input-field-default ' + className}
        id={id}
        onChange={handleChange}
      />

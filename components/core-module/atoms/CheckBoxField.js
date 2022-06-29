@@ -18,12 +18,9 @@ export default function CheckBox({keyvalue, name, value, keyname ,tick,onCheck, 
                   key={keyvalue}
                   disabled = {disabled }
                   id = {id}
-                  style={{marginRight: '10px',opacity: '0'}}
+                  style={{marginRight: '10px', width: '15px', height:'15px'}}
               />
-              <div className="check-approval mt-1">
-                 <div className="inside"></div>
-              </div>
-              {name}
+              <span> {name} </span>
               </label>
           </>
 

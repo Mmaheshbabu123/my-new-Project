@@ -1,17 +1,18 @@
 import React from 'react';
 
-export default function InputTextfield({ type = 'text',className = 'form-control' ,value='sample',isDisabled= false,placeholder='this is first',handleChange,name='jsjs',customStyle = { width: '30%' } }) {
+const style = { /* ADD IF ANY STYLES NEEDED*/  }
+
+export default function InputTextfield({ type = 'text',className = '' ,value='sample',isDisabled= false,placeholder='this is first',handleChange,name='input_name',customStyle = {} }) {
   return (
     <input
-      style = {customStyle}
+      style = {{...style, ...customStyle}}
       type={type}
-      className={className}
-      //id="inputDate4"
+      className={'atom-input-field-default ' + className}
       disabled={isDisabled}
       placeholder={placeholder}
       name={name}
       value={value}
-     onChange={handleChange}
+      onChange={handleChange}
       />
   );
-};
+}

@@ -103,5 +103,6 @@ export const deleteSalaryBenefits = BASE_URL + "delete-salary-benefits";
 
 //---- COOPERATION AGREEMENTS ROUTES -----//
 export const getCooperationAgreementsTabs = BASE_URL  + "get-coprtn-ags-tabs";
-
+export const fetchAbsoluteYouAgentData = BASE_URL  + "fetch-absolute-agent-data";
+export const fetchPcLinkedEmployeeTypes = BASE_URL + "fetch-pclinked-employee-types";
 //------------------- @
