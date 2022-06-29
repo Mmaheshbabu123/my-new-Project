@@ -10,6 +10,7 @@ import {
 
 //----Impport each tab dynamically using next/dynamic
 import AbsoluteYouAgent from './AbsoluteYouAgent/organisms/AbsoluteYouAgent';
+import CompanyInformation from './CompanyInformation/organisms/CompanyInformation';
 
 //----
 
@@ -32,7 +33,7 @@ const TabIndex = (props) => {
         component = <AbsoluteYouAgent />
         break;
       case COMPANY_INFORMATION_TAB:
-        //.
+        component = <CompanyInformation />
         break;
       case CONTACT_PERSONS_TAB:
         //.
