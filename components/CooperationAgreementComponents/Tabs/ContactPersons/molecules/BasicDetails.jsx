@@ -11,6 +11,7 @@ const BasicDetails= ({props,personId}) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
 console.log(personId);
+console.log(tab_3);
   const handleChange = (event) => {
     const { value, name } = event.target;
     tab_3[personId][name] = value;

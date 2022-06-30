@@ -30,11 +30,13 @@ const TabIndex = (props) => {
 
 
   const loadData = async () => {
-    let stateKey = `tab_${selectedTabId}`;
-    var data = await fetchDataAccordingToTabSelection(selectedTabId);
-    data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
-    data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
+    // let stateKey = `tab_${selectedTabId}`;
+    // var data = await fetchDataAccordingToTabSelection(selectedTabId);
+    // data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
+    // data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
+    let data = {};
     data['renderTabComponents'] = true;
+    // console.log('tabIndex => ',data);
     updateStateChanges(data)
   }
 
@@ -65,7 +67,7 @@ const TabIndex = (props) => {
     }
     return component || <> {`Selected tab id: ${selectedTabId}`} </>;
   }
-
+  console.log(state);
 	return (
 		<div className="">
       {state.renderTabComponents ? showComponentBasedOnTabSelection() : <> Loading... </>}

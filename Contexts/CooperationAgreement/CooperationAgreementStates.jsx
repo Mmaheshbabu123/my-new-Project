@@ -7,7 +7,7 @@ const CooperationAgreementStates = (props) => {
   const initialState = {
       tab_1 : { worksServantsData: {1: [], 2: []}, cooperationCoeffData: {} }
     , tab_2 : {'22':1,'23':1,'24':1}
-    , tab_3 : {}
+    , tab_3 : {loaded:false}
     , tab_4 : {}
     , tab_5 : {}
     , selectedTabId: 1

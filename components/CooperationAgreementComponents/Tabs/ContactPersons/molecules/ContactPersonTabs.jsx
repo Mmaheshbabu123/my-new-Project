@@ -8,16 +8,23 @@ const ContactPersonTabs = (props) => {
   var { tab_3 } = state;
   const [contactstate,setState] = useState({
     id:1,
+      loaded:false,
   })
   const handleSelect  = (selectId)=> {
     setState({
       ...contactstate,
        id:selectId,
     })
+    console.log(tab_3)
   }
 useEffect(()=>{
-  tab_3 = {1:{},2:{}}
+  tab_3 = {1:{},2:{},loaded:true}
+  console.log(tab_3);
   updateStateChanges({tab_3});
+  setState({
+    ...contactstate,
+    loaded:true,
+  })
 },[])
 const LoadTabs = () => {
   let tabsData = [];
@@ -37,10 +44,11 @@ const LoadTabs = () => {
 })
 return tabsData;
 }
+console.log(tab_3)
   return (
     <div className =''>
     {LoadTabs()}
-       <BasicDetails  personId = {contactstate.id} />
+       {(tab_3.loaded === true) && <BasicDetails  personId = {contactstate.id} />}
     </div>
   )
 }
