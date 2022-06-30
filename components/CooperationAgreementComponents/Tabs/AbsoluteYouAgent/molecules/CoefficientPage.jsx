@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import { getPcLinkedCoeffData } from '@/Services/ApiEndPoints';
 import Image from 'next/image';
@@ -10,7 +10,6 @@ import LeftPart from './LeftPart';
 import RightPart from './RightPart';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { APICALL } from '@/Services/ApiServices';
-
 
 const CoefficientPage = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
@@ -37,13 +36,15 @@ const CoefficientPage = (props) => {
     , tableWidth: '100%'
     , scrollLeft: undefined
     , scrollRight: undefined
-    , tableWidth: '100%'
   });
-  const { inputRef, scrollLeft, scrollRight, tableWidth } = compState;
+  const { scrollLeft, scrollRight, tableWidth } = compState;
   const onSelect = async ({ value }) => {
     await APICALL.service(`${getPcLinkedCoeffData}/${value}`, 'GET').then(response => {
-      if (response.status === 200)
-        setCompState(assignDataToStateVariables(value, response.data));
+      if (response.status === 200) {
+        let data = assignDataToStateVariables(value, response.data);
+        setCompState(data);
+        updateStateChanges({coeffPageData: data})
+      }
     })
   }
 
@@ -63,6 +64,10 @@ const CoefficientPage = (props) => {
     };
   }
 
+  useEffect(() => {
+    const { coeffPageData = {} } = state;
+    setCompState(coeffPageData);
+  }, [])
 
   const addMultiSelectTag = () => {
     return (
@@ -85,7 +90,7 @@ const CoefficientPage = (props) => {
             {`Wrong value range.`}
           </small>}
       </div>
-      <div className="col-md-12 m-0 p-0 relative-div">
+      {compState.selectedPc ? <div className="col-md-12 m-0 p-0 relative-div">
         {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
             <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
         {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
@@ -98,7 +103,7 @@ const CoefficientPage = (props) => {
             <RightPart compState={compState} setCompState = {setCompState}/>
           </div>
         </div>
-      </div>
+      </div>:null}
     </div>
   );
 }

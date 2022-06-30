@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function Radio ({name,checked =1,handleChange,label,customStyle = {  } }) {
-  console.log(checked)
   return (
     <>
    <input
