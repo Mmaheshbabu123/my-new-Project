@@ -16,6 +16,7 @@ import {
 import AbsoluteYouAgent from './AbsoluteYouAgent/organisms/AbsoluteYouAgent';
 import CompanyInformation from './CompanyInformation/organisms/CompanyInformation';
 import OnlineDetails  from './OnlineDetails/organisms/OnlineDetails';
+import ContactPersons from './ContactPersons/organisms/ContactPersons';
 //----
 
 
@@ -51,7 +52,7 @@ const TabIndex = (props) => {
         component = <CompanyInformation />
         break;
       case CONTACT_PERSONS_TAB:
-        //.
+      component = <ContactPersons />
         break;
       case ONLINE_DETAILS_TAB:
         component = <OnlineDetails />
