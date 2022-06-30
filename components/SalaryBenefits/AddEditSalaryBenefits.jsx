@@ -113,7 +113,7 @@ const AddEditSalaryBenefits = (props) => {
     )
   }
 
-  const handleActionClick = (type, item, index,) => {
+  const handleActionClick = (type, item, index) => {
     let stateObj = { ...state };
     if (type === 'edit') {
       stateObj['name']  = item.name;
@@ -265,7 +265,7 @@ const AddEditSalaryBenefits = (props) => {
           </thead>
           <tbody>
             {state.newItems.map((item, index) =>
-              <tr Key={index} id={index}>
+              <tr key={index} id={index}>
                 <td style={{ width: '30%' }}> {item.name} </td>
                 <td style={{ width: '30%' }}> {formatDate(item.date)} </td>
                 <td style={{ width: '20%' }}> {item.value} </td>

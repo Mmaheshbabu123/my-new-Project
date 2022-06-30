@@ -4,7 +4,7 @@ import CoeffcientValuesFirstPart from './CoeffcientValuesFirstPart';
 import EmployeeTypeSecondPart from './EmployeeTypeSecondPart';
 import { helpers } from './LinkCoeffEmpHelper';
 import MultiSelect from '../SelectComponent';
-import Image from 'next/image'
+import Image from 'next/image';
 import forwardScroll from '@/components/images/right-arrow.png';
 import backwardScroll from '@/components/images/left-arrow.png';
 import { getAllEmpCoeffAndValueTypes, savePcLinkingData } from '@/Services/ApiEndPoints';

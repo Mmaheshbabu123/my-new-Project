@@ -7,7 +7,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 const CooperationAgreementTabs = ({ cooperTabs = [], selectedTabParam }) => {
   const { state: { selectedTabId }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
-
+  console.log(state);
   const handleTabClick = (selectedTabId) => {
     router.query.selectedTabId = selectedTabId
     router.push(router, undefined, { shallow: true })
