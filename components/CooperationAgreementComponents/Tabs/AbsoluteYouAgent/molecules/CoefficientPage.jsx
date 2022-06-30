@@ -37,6 +37,7 @@ const CoefficientPage = (props) => {
     , scrollLeft: undefined
     , scrollRight: undefined
   });
+
   const { scrollLeft, scrollRight, tableWidth } = compState;
   const onSelect = async ({ value }) => {
     await APICALL.service(`${getPcLinkedCoeffData}/${value}`, 'GET').then(response => {
@@ -66,7 +67,7 @@ const CoefficientPage = (props) => {
 
   useEffect(() => {
     const { coeffPageData = {} } = state;
-    setCompState(coeffPageData);
+    setCompState({...compState, ...coeffPageData});
   }, [])
 
   const addMultiSelectTag = () => {

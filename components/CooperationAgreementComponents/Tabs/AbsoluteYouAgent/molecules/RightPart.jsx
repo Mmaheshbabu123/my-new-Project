@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { helpers } from '@/components/LinkCoeffEmpComponents/LinkCoeffEmpHelper';
+import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 
+const TABKEY = 'tab_1';
 const RightPart = ( { compState, setCompState } ) => {
+  const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   const {
     employeeTypeArray
     , coefficientTypeArray
@@ -51,11 +54,15 @@ const RightPart = ( { compState, setCompState } ) => {
         }
       }
     }
-    setCompState({...compState,
+    let stateData = state[TABKEY];
+    stateData['cooperationCoeffData'] = valueDataObj;
+    let dataObj = {...compState,
       pclinkingValueobj: valueDataObj,
       valueErrorArray: valueValidation(_EmpId, _Coeffid, target.value, lowVal, highVal),
       emptyDataWarning: false
-    });
+     };
+    updateStateChanges({ [TABKEY]: stateData,  coeffPageData: dataObj });
+    setCompState(dataObj);
   }
 
 
