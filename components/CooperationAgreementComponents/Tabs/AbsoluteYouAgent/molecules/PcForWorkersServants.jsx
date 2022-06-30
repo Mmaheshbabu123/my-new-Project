@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
@@ -12,7 +12,7 @@ const workersType  = 1;
 const servantsType = 2;
 const PcForWorkersServants = () => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  const { pcArray = [], pcLinkedEmployeeTypes = {} } = state;
+  const { tab_1, pcArray = [], pcLinkedEmployeeTypes = {} } = state;
   const [ compState, setCompState ] = useState({
       newItems: {  [workersType]: [], [servantsType]: [] }
     , selectedPc: {
@@ -29,6 +29,15 @@ const PcForWorkersServants = () => {
     }
     , alreadyLinked: []
   });
+
+  useEffect(() => {
+    const { worksServantsData } = tab_1;
+    let newItems = {
+      [workersType]: worksServantsData[workersType],
+      [servantsType]: worksServantsData[servantsType]
+    }
+    setCompState({...compState, newItems: newItems, alreadyLinked: state['alreadyLinked']});
+  }, [])
 
   const onSelect = (target, type, pcOrEmp = 1) => {
     let dataObj = {...compState};
@@ -49,6 +58,7 @@ const PcForWorkersServants = () => {
    */
   const addItemAndUpdateIndex = (stateObj, type) => {
     let tab_1 = {...state[tabStateKey] }
+    if(!stateObj['selectedPc'][type]) return;
     stateObj['newItems'][type][stateObj['editIndex'][type]] = {
       pc_id: stateObj['selectedPc'][type],
       employee_type_id: stateObj['selectedEmpId'][type],

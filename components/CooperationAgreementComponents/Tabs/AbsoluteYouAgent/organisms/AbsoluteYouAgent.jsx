@@ -8,7 +8,7 @@ const AbsoluteYouAgent = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   useEffect(() => {
   }, [])
-  console.log(state);
+  // console.log(state);
   return(
     <div className="">
       <BasicDetails />

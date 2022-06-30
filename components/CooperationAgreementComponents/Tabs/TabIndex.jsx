@@ -34,7 +34,7 @@ const TabIndex = (props) => {
     data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
     data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
     data['renderTabComponents'] = true;
-    updateStateChanges({data})
+    updateStateChanges(data)
   }
 
 	/**

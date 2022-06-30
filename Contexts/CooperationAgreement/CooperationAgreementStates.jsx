@@ -13,6 +13,7 @@ const CooperationAgreementStates = (props) => {
     , selectedTabId: 1
     , loadedTabs: []
     , renderTabComponents: false
+    , alreadyLinked: []
   };
   const [state, dispatch] = useReducer(CooperationAgreementReducer, initialState);
   const updateStateChanges = (obj) => {
