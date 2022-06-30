@@ -5,12 +5,11 @@ export default function Radio ({name,checked =1,handleChange,label,customStyle =
   return (
     <>
    <input
-   style = {customStyle}
-    type = 'radio'
-    name = {name}
-      style={{margin: '0 10px '}}
-    checked = {checked}
-    onChange = {handleChange}
+     style = {{...customStyle, ...{margin: '0 10px '}}}
+     type = 'radio'
+     name = {name}
+     checked = {checked}
+     onChange = {handleChange}
    />
    {label}
    </>

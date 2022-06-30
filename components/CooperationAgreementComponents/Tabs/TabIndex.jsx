@@ -45,7 +45,7 @@ const TabIndex = (props) => {
     let component;
     switch (selectedTabId) {
       case ABSOLUTEYOU_AGENT_TAB:
-        component = <> </>
+        component = <AbsoluteYouAgent />
         break;
       case COMPANY_INFORMATION_TAB:
         component = <CompanyInformation />
@@ -100,7 +100,6 @@ async function fetchAbsoluteYouAgentTabData() {
   let data = {};
   await APICALL.service(`${fetchAbsoluteYouAgentData}`, 'GET').then(response => {
     if (response.status === 200) {
-      // data['tab_1'] = response.data['tab_data'];
       data['pcArray'] = response.data['pc_array'];
       data['pcLinkedEmployeeTypes'] = response.data['pcLinkedEmployeeTypes'];
     }
