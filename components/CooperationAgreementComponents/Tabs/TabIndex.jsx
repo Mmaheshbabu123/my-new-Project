@@ -15,7 +15,7 @@ import {
 //----Impport each tab dynamically using next/dynamic
 import AbsoluteYouAgent from './AbsoluteYouAgent/organisms/AbsoluteYouAgent';
 import CompanyInformation from './CompanyInformation/organisms/CompanyInformation';
-
+import OnlineDetails  from './OnlineDetails/organisms/OnlineDetails';
 //----
 
 
@@ -34,7 +34,7 @@ const TabIndex = (props) => {
     data[stateKey] = data[stateKey] ? data[stateKey] : {};
     data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
     data['renderTabComponents'] = true;
-    updateStateChanges(data)
+    updateStateChanges({data})
   }
 
 	/**
@@ -45,7 +45,7 @@ const TabIndex = (props) => {
     let component;
     switch (selectedTabId) {
       case ABSOLUTEYOU_AGENT_TAB:
-        component = <AbsoluteYouAgent />
+        component = <> </>
         break;
       case COMPANY_INFORMATION_TAB:
         component = <CompanyInformation />
@@ -54,7 +54,7 @@ const TabIndex = (props) => {
         //.
         break;
       case ONLINE_DETAILS_TAB:
-        //.
+        component = <OnlineDetails />
         break;
       case SALARY_BENEFITS_TAB:
         //.

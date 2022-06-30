@@ -16,7 +16,7 @@ const CooperationAgreementTabs = ({ cooperTabs = [], selectedTabParam }) => {
 
   useEffect(() => {
     let tabId = Number(selectedTabParam) || selectedTabId;
-    updateStateChanges({selectedTabId: tabId, renderTabComponents: state['loadedTabs'].includes(tabId) });
+    updateStateChanges({selectedTabId: tabId, renderTabComponents: true});
   }, [selectedTabParam])
 
   return (
