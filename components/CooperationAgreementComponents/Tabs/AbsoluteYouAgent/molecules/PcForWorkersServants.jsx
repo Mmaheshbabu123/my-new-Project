@@ -2,58 +2,87 @@ import React, { useContext, useState } from 'react';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
-import { APICALL } from '@/Services/ApiServices';
-import {
-  fetchPcLinkedEmployeeTypes,
-} from '@/Services/ApiEndPoints';
+import {MdEdit, MdDelete} from 'react-icons/md';
+// import { APICALL } from '@/Services/ApiServices';
+// import { fetchPcLinkedEmployeeTypes } from '@/Services/ApiEndPoints';
 import styles from '../absoluteAgent.module.css';
 
+const tabStateKey = 'tab_1';
+const workersType  = 1;
+const servantsType = 2;
 const PcForWorkersServants = () => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  const { pcArray } = state;
+  const { pcArray = [], pcLinkedEmployeeTypes = {} } = state;
   const [ compState, setCompState ] = useState({
-      newItems: []
-    , selectedPc: {1: 0, 2: 0}
-    , selectedEmpId: {1: [], 2: []}
-    , pcLinkedEmployeeTypes: {1: [], 2: []}
-    , editIndex: 0
+      newItems: {  [workersType]: [], [servantsType]: [] }
+    , selectedPc: {
+      [workersType]: 0,
+      [servantsType]: 0
+    }
+    , selectedEmpId: {
+      [workersType]: [],
+      [servantsType]: []
+    }
+    , editIndex: {
+      [workersType]: 0,
+      [servantsType]: 0
+    }
+    , alreadyLinked: []
   });
 
-  const onSelect = async (target, type, pcOrEmp = 1) => {
-    console.log(target);
+  const onSelect = (target, type, pcOrEmp = 1) => {
     let dataObj = {...compState};
     if(pcOrEmp) {
      const value = target.value;
-     let employeeTypes = await getPcLinkedEmployeetypes(value);
      dataObj['selectedPc'][type] = value;
-     dataObj['pcLinkedEmployeeTypes'][type] = employeeTypes;
    } else {
      const value = target.map(val => val.value);
      dataObj['selectedEmpId'][type] = value;
    }
-   console.log(dataObj);
    setCompState(dataObj)
   }
 
-  const getPcLinkedEmployeetypes = async (pcId) => {
-    let employeeTypes = [];
-    if(!pcId) {
-      return employeeTypes;
+  /**
+   * [addItemAndUpdateIndex: used to create multiple index of emp/coeff types]
+   * @param {Object} stateObj   [description]
+   * @param {String} nameValue  [description]
+   */
+  const addItemAndUpdateIndex = (stateObj, type) => {
+    let tab_1 = {...state[tabStateKey] }
+    stateObj['newItems'][type][stateObj['editIndex'][type]] = {
+      pc_id: stateObj['selectedPc'][type],
+      employee_type_id: stateObj['selectedEmpId'][type],
+      tab_id: type,
+      type,
     }
-    await APICALL.service(`${fetchPcLinkedEmployeeTypes}/${pcId}`, 'GET').then(response => {
-      if (response.status === 200) {
-        employeeTypes = response.data;
-      }
-    })
-    return employeeTypes;
+    stateObj['selectedPc'][type] = 0;
+    stateObj['selectedEmpId'][type] = [];
+    stateObj['editIndex'][type] = stateObj['newItems'][type].length;
+    tab_1['worksServantsData'][type] = stateObj['newItems'][type];
+    stateObj['alreadyLinked'] = updateAlreadyLinkedPcIds(stateObj['newItems']);
+    setCompState(stateObj);
+    updateStateChanges({tab_1, alreadyLinked: stateObj['alreadyLinked']});
   }
-  console.log(compState['pcLinkedEmployeeTypes'][1].filter(val => compState['selectedEmpId'][1].includes(val.value)));
+
+  const updateAlreadyLinkedPcIds = (addedData) => {
+    let pcIds = [];
+    Object.values(addedData).map(array => {
+      pcIds = [...pcIds, ...array.map(val => val.pc_id)];
+      return 1;
+    })
+    return pcIds;
+  }
+
+
   const employeeTypeParitairDropDown = (type = 1) => {
-    return <div className={`${type === 1 ? 'col-md-7' : 'col-md-9 ' + styles['margin-auto-class']}`}>
+    const { alreadyLinked } = compState;
+    let selectedPc = compState['selectedPc'][type];
+    let emplOptions = pcLinkedEmployeeTypes[selectedPc] ? pcLinkedEmployeeTypes[selectedPc] : [];
+    return <div className={`${type === 1 ? 'col-md-9' : 'col-md-9 ' + styles['margin-auto-class']}`}>
         <div className={`${styles['add-div-margings']}`}>
-            <LabelField title="AbsoluteYou consultant" />
+            <LabelField title={`Paritair comité (PC) ${type}`} />
             <MultiSelectField
-                options={pcArray}
+                options={pcArray.filter(val => !alreadyLinked.includes(val.value))}
                 standards={pcArray.filter(val => val.value === compState['selectedPc'][type])}
                 disabled={false}
                 handleChange={(obj) => onSelect(obj, type)}
@@ -62,15 +91,25 @@ const PcForWorkersServants = () => {
               />
         </div>
         <div className={`${styles['add-div-margings']}`}>
-            <LabelField title="AbsoluteYou office number" />
+            <LabelField title="Selection of employee types (statuut) that can be used" />
             <MultiSelectField
-                options={compState['pcLinkedEmployeeTypes'][type]}
-                standards={compState['pcLinkedEmployeeTypes'][type].filter(val => compState['selectedEmpId'][type].includes(val.value))}
+                options={emplOptions}
+                standards={emplOptions.filter(val => compState['selectedEmpId'][type].includes(val.value))}
                 disabled={false}
                 handleChange={(obj) => onSelect(obj, type, 0)}
                 isMulti={true}
                 className="col-md-12"
               />
+        </div>
+        <div className={`managetype-save-btn ${styles['pc-worker-servant-add-btn']}`}>
+          <button
+            onClick={() => addItemAndUpdateIndex({...compState}, type)}
+            type="button"
+            style={{marginTop: '20px'}}
+            className="btn btn-dark pcp_btn">
+            <pre>{`Extra Paritair comité
+              ${type ===workersType ? 'workers (arbeiders)' : 'servants (bedienden)'}`}</pre>
+          </button>
         </div>
     </div>
   }
@@ -78,7 +117,8 @@ const PcForWorkersServants = () => {
   const workersPart = () => {
     return(
       <div className = {''}>
-        {employeeTypeParitairDropDown(1)}
+        {employeeTypeParitairDropDown(workersType)}
+        {showtable(compState['newItems'][workersType], workersType)}
       </div>
     );
   }
@@ -86,10 +126,67 @@ const PcForWorkersServants = () => {
   const servantsPart = () => {
     return(
       <div className = {``}>
-        {employeeTypeParitairDropDown(2)}
+        {employeeTypeParitairDropDown(servantsType)}
+        {showtable(compState['newItems'][servantsType], servantsType)}
       </div>
     );
   }
+
+  const showtable = (dataObj, type) => {
+    if(!dataObj.length) return;
+    return(
+      <>
+      {dataObj.length > 0 &&
+        <div className={`add-item-div ${styles['workers-servants-table']}`} style={{ margin: type === servantsType ? '0 auto':''}}>
+          <table className='table-hover col-md-10 m-3 add-item-table'>
+          <thead style={{borderBottom: '1px solid', margin: '15px 0'}}>
+            <tr key={'header-row-tr'}>
+              {['Paritair comité', 'Employee types', 'Actions'].map((eachHeader, index) =>
+                <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {dataObj.map((item, index) =>
+              <tr key={index} id={index}>
+                <td style={{ width: '40%' }}> {getCommaSeparatedlabels([item.pc_id], pcArray)} </td>
+                <td style={{ width: '40%' }}> {getCommaSeparatedlabels(item.employee_type_id, pcLinkedEmployeeTypes[item.pc_id])} </td>
+                <td style={{ width: '20%' }}> {getNeededActions(item, index, type)} </td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+        </div>}
+      </>
+    );
+  }
+
+  const getCommaSeparatedlabels = (selectedIds, optionArray = []) => {
+    let labelString = optionArray.filter(val => selectedIds.includes(val.value)).map(val => val.label);
+    return labelString.join(', ');
+  }
+
+  const getNeededActions = (item, index, type) => {
+    return (
+      <>
+        <span className='actions-span' onClick={() => handleActionClick('edit', item, index, type)}> <MdEdit /> </span>
+        <span className='actions-span' onClick={() => handleActionClick('delete', item, index, type)}> <MdDelete /> </span>
+      </>
+    )
+  }
+
+  const handleActionClick = (type, item, index, workSerType) => {
+    let stateObj = { ...compState };
+    if (type === 'edit') {
+      stateObj['selectedPc'][workSerType] = item.pc_id;
+      stateObj['selectedEmpId'][workSerType] = item.employee_type_id;
+      stateObj['editIndex'][workSerType] = index;
+    } else {
+      stateObj['newItems'][workSerType].splice(index, 1)
+      stateObj['editIndex'][workSerType] = stateObj['newItems'][workSerType].length;
+    }
+    setCompState(stateObj);
+  }
+
 
   return(
     <div className ={`${styles['worker-servant-parent']}`}>

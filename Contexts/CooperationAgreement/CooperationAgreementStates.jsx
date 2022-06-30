@@ -5,7 +5,10 @@ import { UPDATE_STATE } from './Actions';
 
 const CooperationAgreementStates = (props) => {
   const initialState = {
-      tab_1 : {}
+      tab_1 : {
+          worksServantsData: {1: [], 2: []}
+        , cooperationCoeffData: {}
+      }
     , tab_2 : {}
     , tab_3 : {}
     , tab_4 : {}
