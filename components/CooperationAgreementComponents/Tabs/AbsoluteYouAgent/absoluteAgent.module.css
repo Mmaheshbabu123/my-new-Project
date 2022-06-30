@@ -6,10 +6,23 @@
   margin: 30px 0;
 }
 
+.coeffcient-table-parent{
+  margin: 50px 0;
+}
+
 .workers-border {
   border-right: 1px solid red;
 }
 
 .margin-auto-class {
-  margin: 0 auto;
+  margin: 0 auto !important;
+}
+
+.pc-worker-servant-add-btn {
+  margin: 0;
+}
+
+.workers-servants-table {
+  margin: 0;
+  width: 75%;
 }

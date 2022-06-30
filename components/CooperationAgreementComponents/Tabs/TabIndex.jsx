@@ -15,7 +15,7 @@ import {
 //----Impport each tab dynamically using next/dynamic
 import AbsoluteYouAgent from './AbsoluteYouAgent/organisms/AbsoluteYouAgent';
 import CompanyInformation from './CompanyInformation/organisms/CompanyInformation';
-
+import OnlineDetails  from './OnlineDetails/organisms/OnlineDetails';
 //----
 
 
@@ -31,7 +31,7 @@ const TabIndex = (props) => {
   const loadData = async () => {
     let stateKey = `tab_${selectedTabId}`;
     var data = await fetchDataAccordingToTabSelection(selectedTabId);
-    data[stateKey] = data[stateKey] ? data[stateKey] : {};
+    data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
     data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
     data['renderTabComponents'] = true;
     updateStateChanges(data)
@@ -54,7 +54,7 @@ const TabIndex = (props) => {
         //.
         break;
       case ONLINE_DETAILS_TAB:
-        //.
+        component = <OnlineDetails />
         break;
       case SALARY_BENEFITS_TAB:
         //.
@@ -100,8 +100,8 @@ async function fetchAbsoluteYouAgentTabData() {
   let data = {};
   await APICALL.service(`${fetchAbsoluteYouAgentData}`, 'GET').then(response => {
     if (response.status === 200) {
-      data['tab_1'] = response.data['tab_data'];
       data['pcArray'] = response.data['pc_array'];
+      data['pcLinkedEmployeeTypes'] = response.data['pcLinkedEmployeeTypes'];
     }
   })
   return data;
