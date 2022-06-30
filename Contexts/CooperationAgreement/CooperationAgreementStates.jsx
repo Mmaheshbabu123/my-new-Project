@@ -6,7 +6,7 @@ import { UPDATE_STATE } from './Actions';
 const CooperationAgreementStates = (props) => {
   const initialState = {
       tab_1 : {}
-    , tab_2 : {}
+    , tab_2 : {'22':1,'23':1,'24':1}
     , tab_3 : {}
     , tab_4 : {}
     , tab_5 : {}
@@ -14,9 +14,7 @@ const CooperationAgreementStates = (props) => {
     , loadedTabs: []
     , renderTabComponents: false
   };
-
   const [state, dispatch] = useReducer(CooperationAgreementReducer, initialState);
-
   const updateStateChanges = (obj) => {
     dispatch({ type: UPDATE_STATE, payload: obj })
   }
