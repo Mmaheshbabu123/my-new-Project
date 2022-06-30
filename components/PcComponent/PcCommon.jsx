@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
+import SalaryBenefits from './SalaryBenifits';
 const PcCommon = (props) => {
 	const router = useRouter();
 	const [ current_sec, setCurrent_sec ] = useState(1); //holds value for active tab [1=addPc  2=Add caterory and function 3=Add age 4=Employee Type 5=Salary benefits]
@@ -184,7 +185,7 @@ const PcCommon = (props) => {
 										<p className="mb-2">Step 4:</p> <p>Employee type</p>
 									</button>
 								</li>
-								{/* <li className="nav-item" role="presentation">
+								<li className="nav-item" role="presentation">
 							<button
 								className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
 									? 'disabled'
@@ -207,7 +208,7 @@ const PcCommon = (props) => {
 								)}
 								<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
 							</button>
-						</li> */}
+						</li>
 							</ul>
 							<div className="tab-content" id="pills-tabContent">
 								<div
@@ -249,7 +250,7 @@ const PcCommon = (props) => {
 									role="tabpanel"
 									aria-labelledby="pills-contact-tab"
 								>
-									...
+									{current_sec == 5 && <SalaryBenefits />}
 								</div>
 							</div>
 						</div>

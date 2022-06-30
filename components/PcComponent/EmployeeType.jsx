@@ -54,7 +54,7 @@ const EmployeeType = () => {
 					console.error(error);
 				});
 		}
-	}, [id]);
+	}, [pc_unique_key]);
 	let updateRes = (event) => {
 		var res1 = res;
 		if (event.target.checked) {
@@ -80,20 +80,20 @@ const EmployeeType = () => {
 					console.log(result);
 					if (result.status === 200) {
 						setId(result.pcid);
-						backToDashboard();
-						// setCat_fun_updated('cat' + result.ctid);
-						// setCat_rightsec('d-none');
-						// setCat_leftsec('col-md-12');
-						// setCat_subsec_type(0);
-						// setCat_subsec_id('');
+						setCurrent_sec(5);
+						var res1 = sec_completed;
+						res1['emp_type'] = true;
+						setSec_completed(res1);
 					}
 				})
 				.catch((error) => {
 					console.error(error);
 				});
 		} else {
-			backToDashboard();
-		}
+			setCurrent_sec(5);
+			var res1 = sec_completed;
+			res1['emp_type'] = true;
+			setSec_completed(res1);		}
 	};
 	let submit = (event) => {
 		event.preventDefault();
