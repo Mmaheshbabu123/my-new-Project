@@ -32,11 +32,14 @@ const PcForWorkersServants = () => {
 
   useEffect(() => {
     const { worksServantsData } = tab_1;
+    let editIndex = {};
     let newItems = {
-      [workersType]: worksServantsData[workersType],
-      [servantsType]: worksServantsData[servantsType]
+      [workersType]: worksServantsData[workersType] || [],
+      [servantsType]: worksServantsData[servantsType] || []
     }
-    setCompState({...compState, newItems: newItems, alreadyLinked: state['alreadyLinked']});
+    editIndex[workersType] = newItems[workersType].length;
+    editIndex[servantsType] = newItems[servantsType].length;
+    setCompState({...compState, editIndex: editIndex, newItems: newItems, alreadyLinked: state['alreadyLinked'] });
   }, [])
 
   const onSelect = (target, type, pcOrEmp = 1) => {
