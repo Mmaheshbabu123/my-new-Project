@@ -57,24 +57,13 @@ function serviceForSitesJSON(urlendpoint = '', httpmethod = '', data = '') {
 *@returns response from the API
 */
 function service(urlendpoint = '', httpmethod = '', data = '', file = 0, loading = 1) {
-  //  console.log(urlendpoint, " : ApiService : ", httpmethod);
-    if (loading === 1 && document.getElementById("loading-icon") !== null) {
-        document.getElementById("loading-icon").setAttribute("style", "display:block;");
-    }
     return fetch(urlendpoint, headers(data, httpmethod))
         .then(
             result => {
-              // console.log("service  : ", result);
-                if (loading === 1 && document.getElementById("loading-icon") !== null) {
-                    document.getElementById("loading-icon").setAttribute("style", "display:none;");
-                }
               return file ? result.blob() : result.json();
             }
         ).catch((error) => {
             console.log("Error service : ", error);
-            if (loading === 1 && document.getElementById("loading-icon") !== null) {
-                document.getElementById("loading-icon").setAttribute("style", "display:none;");
-            }
             return null;
         })
 }
