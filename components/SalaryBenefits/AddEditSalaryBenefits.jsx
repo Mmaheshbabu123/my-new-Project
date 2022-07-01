@@ -113,7 +113,7 @@ const AddEditSalaryBenefits = (props) => {
     )
   }
 
-  const handleActionClick = (type, item, index,) => {
+  const handleActionClick = (type, item, index) => {
     let stateObj = { ...state };
     if (type === 'edit') {
       stateObj['name']  = item.name;
@@ -133,12 +133,12 @@ const AddEditSalaryBenefits = (props) => {
     const { value, name } = target;
     let stateObj = {...state};
     if(name === 'name') {
-      if(value.match(/^[a-zA-Z0-9 ]*$/) && value.length <= 50) {
+      // if(value.match(/^[a-zA-Z0-9 ]*$/) && value.length <= 50) {
         stateObj[name] = value;
         stateObj['nameWarning'] = false;
-      } else {
-        stateObj['nameWarning'] = true;
-      }
+      // } else {
+        // stateObj['nameWarning'] = true;
+     // }
     } else if (name === 'value') {
       // if(value.match(/^[0-9,.]*$/)) {
         stateObj[name] = value;
@@ -191,7 +191,7 @@ const AddEditSalaryBenefits = (props) => {
               id="pcp_name_warning"
               className="form-text text-muted col-md-5">
               {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
-            </small>}    
+            </small>}
         </div>
         <div className="salary-input-fields">
           <label className = "mb-2 input-label-class" htmlFor="name"> {`Salary benefit value`} </label>
@@ -265,7 +265,7 @@ const AddEditSalaryBenefits = (props) => {
           </thead>
           <tbody>
             {state.newItems.map((item, index) =>
-              <tr Key={index} id={index}>
+              <tr key={index} id={index}>
                 <td style={{ width: '30%' }}> {item.name} </td>
                 <td style={{ width: '30%' }}> {formatDate(item.date)} </td>
                 <td style={{ width: '20%' }}> {item.value} </td>
