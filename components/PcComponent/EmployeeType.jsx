@@ -1,12 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
-import ValidationService from '../../Services/ValidationService';
-import { fetchEmployeeTypes, storePcEmployeeTypes } from '../../Services/ApiEndPoints';
+import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-
-
-// import { useSearchParams } from 'react-router-dom';
 
 const EmployeeType = () => {
 	const router = useRouter();
@@ -32,6 +28,7 @@ const EmployeeType = () => {
 	const [ id, setId ] = useState('');
 
 	const [ data, setData ] = useState([]);
+	const [ temp, setTemp ] = useState([]);
 	const [ res, setRes ] = useState([]);
 	const [ error_emp_type, setError_emp_type ] = useState('');
 
@@ -41,22 +38,41 @@ const EmployeeType = () => {
 		res1['emp_type'] = true;
 		setSec_completed(res1);
 	};
-	useEffect(() => {
-		if (pc_unique_key != '') {
-			APICALL.service(fetchEmployeeTypes, 'GET')
-				.then((result) => {
-					console.log(result);
-					if (result.data.length > 0) {
-						setData(result.data);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-		}
-	}, [id]);
+	useEffect(
+		() => {
+			if (pc_unique_key != '') {
+				APICALL.service(fetchEmployeeTypes, 'GET')
+					.then((result) => {
+						console.log(result);
+						if (result.data.length > 0) {
+							setData(result.data);
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
+		},
+		[ pc_unique_key ]
+	);
+
+
+	useEffect(()=>{
+		APICALL.service(getPcEmployeeTypes+pc_unique_key, 'GET')
+					.then((result) => {
+						console.log(result);
+						if (result.data.length > 0) {
+							setRes(result.data);
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+	},[pc_unique_key])
+
 	let updateRes = (event) => {
 		var res1 = res;
+		var temp1 = temp;
 		if (event.target.checked) {
 			if (!res1.includes(event.target.value)) {
 				res1.push(event.target.value);
@@ -67,9 +83,14 @@ const EmployeeType = () => {
 			if (index > -1) {
 				res1.splice(index, 1); // 2nd parameter means remove one item only
 			}
+			
 			console.log('⛔️ Checkbox is NOT checked');
 		}
+		if(temp1.indexOf(event.target.value) > -1){
+			temp1.splice(index, 1);
+		}
 		setRes(res1);
+		setTemp(temp1);
 		console.log(console.log(res1));
 	};
 	let postdata = (data1) => {
@@ -79,20 +100,16 @@ const EmployeeType = () => {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						setId(result.pcid);
-						backToDashboard();
-						// setCat_fun_updated('cat' + result.ctid);
-						// setCat_rightsec('d-none');
-						// setCat_leftsec('col-md-12');
-						// setCat_subsec_type(0);
-						// setCat_subsec_id('');
+						// setId(result.pcid);
+						// setCurrent_sec(5);
+						// var res1 = sec_completed;
+						// res1['emp_type'] = true;
+						// setSec_completed(res1);
 					}
 				})
 				.catch((error) => {
 					console.error(error);
 				});
-		} else {
-			backToDashboard();
 		}
 	};
 	let submit = (event) => {
@@ -100,6 +117,7 @@ const EmployeeType = () => {
 		var data1 = [];
 		data1.push(pc_unique_key);
 		data1.push(res);
+		data1.push(temp);
 		if (res.length != 0) {
 			postdata(data1);
 		} else {
@@ -107,20 +125,20 @@ const EmployeeType = () => {
 		}
 		console.log(data1);
 	};
-	let backToDashboard = () =>{
-		var src =JSON.parse(localStorage.getItem("src"));
-		var type = JSON.parse(localStorage.getItem("type"));
-		if (src) { 
-			window.localStorage.removeItem('src');
-			if(type == "1"){
-			window.location.assign(src)
-			}
-			else{
-			router.push('/'+src)
-			}
-		}
-	  
-	}
+	// let backToDashboard = () =>{
+	// 	var src =JSON.parse(localStorage.getItem("src"));
+	// 	var type = JSON.parse(localStorage.getItem("type"));
+	// 	if (src) {
+	// 		window.localStorage.removeItem('src');
+	// 		if(type == "1"){
+	// 		window.location.assign(src)
+	// 		}
+	// 		else{
+	// 		router.push('/'+src)
+	// 		}
+	// 	}
+
+	// }
 
 	return (
 		<div className="container">
@@ -133,11 +151,11 @@ const EmployeeType = () => {
 								type="checkbox"
 								className=""
 								value={val.id}
+								checked = {res.includes(val.id)?true:false} 
 								onClick={(e) => {
 									updateRes(e);
 								}}
-								// defaultChecked={true}
-							/>
+							/>{console.log(res)}
 							<label className="p-3 ms-2 md-4"> {val.name}</label>
 						</div>
 					))}
@@ -162,7 +180,7 @@ const EmployeeType = () => {
 							type="sumit"
 							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
 						>
-							Save
+							Next
 						</button>
 					</div>
 				</div>
