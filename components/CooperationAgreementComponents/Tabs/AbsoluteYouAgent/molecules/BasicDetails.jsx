@@ -3,6 +3,7 @@ import LabelField from '@/atoms/LabelField';
 import DateField from '@/atoms/DateField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import CheckBoxField from '@/atoms/CheckBoxField';
+import RequiredField from '@/atoms/RequiredSpanField';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import styles from '../absoluteAgent.module.css';
 import { consultantArray, consultantNumArray } from '../../../Definations';
@@ -53,7 +54,7 @@ const BasicDetails = (props) => {
   return(
     <div className="">
       <div className={`${styles['add-div-margings']}`}>
-          <LabelField title="Start date of agreement" />
+          <LabelField title="Start date of agreement" customStyle = {{display:''}}/> <RequiredField />
           <DateField
              id={startDateAgreement}
              isDisabled= {false}
@@ -64,7 +65,7 @@ const BasicDetails = (props) => {
             />
       </div>
       <div className={`${styles['add-div-margings']}`}>
-          <LabelField title="AbsoluteYou consultant" />
+          <LabelField title="AbsoluteYou consultant" customStyle = {{display:''}}/> <RequiredField />
           <MultiSelectField
               id={absoluteConsultant}
               options={consultantArray}
@@ -76,7 +77,7 @@ const BasicDetails = (props) => {
             />
       </div>
       <div className={`${styles['add-div-margings']}`}>
-          <LabelField title="AbsoluteYou office number" />
+          <LabelField title="AbsoluteYou office number" customStyle = {{display:''}}/> <RequiredField />
           <MultiSelectField
               id={absoluteConsultantNum}
               options={consultNumber}

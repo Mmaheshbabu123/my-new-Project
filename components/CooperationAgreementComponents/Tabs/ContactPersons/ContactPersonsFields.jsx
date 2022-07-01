@@ -14,11 +14,11 @@ export const contactPersonsRow2 = [
  {id :35,key_name:'Email address',type:1},
  {id:36,key_name:'Location',type:8, options:[
    {value: 1, label: 'Location1'},
-   {value: 1, label: 'Location2'},
+   {value: 2, label: 'Location2'},
  ]},
  {id:37,key_name:'Contact',type:8,options:  [
    {value: 1, label: 'Contact1'},
-   {value: 1, label: 'Contact2'},
+   {value: 2, label: 'Contact2'},
  ]},
  {id:38,key_name:'Influencer',type:6,option1:'Yes',option2:'No'},
  {id:39,key_name:'Contact person can be mailed',type:6,option1:'Yes',option2:'No'},
