@@ -5,6 +5,8 @@ import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
 import RadioField from '@/atoms/RadioField';
 import styles from '../companyInformation.module.css';
+import { requiredFields} from '../../../RequiredFields';
+import RequiredField from '@/atoms/RequiredSpanField';
 const LegalAddress = (props) => {
   var Language = 22;
   var Labour_regulations_share = 23;
@@ -25,7 +27,7 @@ const LegalAddress = (props) => {
    Rowdata.map(data => {
      fieldsArray.push(
        <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-       <LabelField title={data.key_name} />
+       <LabelField title={data.key_name} customStyle = {{display:''}} /> {requiredFields['tab_2'][data.id] && <RequiredField />}
        <InputField
          id = {data.id}
          type = {'text'}
@@ -46,22 +48,28 @@ const LegalAddress = (props) => {
       <div className = 'col-md-6'>
         {LegalaAddressFieldData(legalAdressRow1)}
         <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-            <LabelField title="Language" />
+            <LabelField title="Language"  customStyle = {{display:''}}/>{requiredFields['tab_2'][Language] && <RequiredField />}
+            <div>
             <RadioField   name = {Language} checked = {tab_2[Language] === 1} handleChange = {(e)=>handleRadioSelect(Language,1)} label= 'Dutch' />
             <RadioField  name = {Language} checked = {tab_2[Language] === 2} handleChange = {(e)=>handleRadioSelect(Language,2)} label= 'French' />
+           </div>
         </div>
          <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-            <LabelField title="Labour regulations (arbeidsreglement)" />
+            <LabelField title="Labour regulations (arbeidsreglement)" customStyle = {{display:''}}/>{requiredFields['tab_2'][Labour_regulations_share] && <RequiredField />}
+             <div>
             <RadioField name = {Labour_regulations_share} checked = {tab_2[Labour_regulations_share] === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,1)} label= 'Yes' />
             <RadioField name = {Labour_regulations_share} checked = {tab_2[Labour_regulations_share] === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,2)} label= 'No' />
+             </div>
         </div>
       </div>
      <div className = "col-md-6">
        <div className = {`col-md-12 ${styles['add-div-margings']}`}>
          {LegalaAddressFieldData(legalAdressRow2)}
-         <LabelField title="Labour regulations (arbeidsreglement) - sharing" />
+         <LabelField title="Labour regulations (arbeidsreglement) - sharing" customStyle = {{display:''}}/>{requiredFields['tab_2'][Labour_regulations] && <RequiredField />}
+         <div>
          <RadioField name = {Labour_regulations} checked = {tab_2[Labour_regulations] === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations,1)} label= 'Yes' />
          <RadioField name = {Labour_regulations} checked = {tab_2[Labour_regulations] === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations,2)} label= 'No' />
+         </div>
       </div>
      </div>
     </div>

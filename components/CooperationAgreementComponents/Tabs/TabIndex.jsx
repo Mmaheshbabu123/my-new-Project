@@ -10,6 +10,7 @@ import {
   , CONTACT_PERSONS_TAB
   , ONLINE_DETAILS_TAB
   , SALARY_BENEFITS_TAB
+  , INVOIING_TAB
 } from '../Definations'
 
 //----Impport each tab dynamically using next/dynamic
@@ -17,6 +18,7 @@ import AbsoluteYouAgent from './AbsoluteYouAgent/organisms/AbsoluteYouAgent';
 import CompanyInformation from './CompanyInformation/organisms/CompanyInformation';
 import OnlineDetails  from './OnlineDetails/organisms/OnlineDetails';
 import ContactPersons from './ContactPersons/organisms/ContactPersons';
+import Invoicing from './Invoicing/organisms/Invoicing';
 //----
 
 
@@ -62,6 +64,9 @@ const TabIndex = (props) => {
       case SALARY_BENEFITS_TAB:
         //.
         break;
+      case INVOIING_TAB:
+        component = <Invoicing />
+       break;
       default:
         component = <div> Nothing...! </div>
     }

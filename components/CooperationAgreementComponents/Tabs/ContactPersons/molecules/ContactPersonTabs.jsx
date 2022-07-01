@@ -3,6 +3,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import { personsData } from '../ContactPersonsFields';
 import styles from '../Contactperson.module.css';
 import BasicDetails from './BasicDetails';
+
 const ContactPersonTabs = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;

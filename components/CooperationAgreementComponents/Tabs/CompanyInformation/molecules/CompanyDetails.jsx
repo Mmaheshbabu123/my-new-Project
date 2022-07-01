@@ -5,6 +5,8 @@ import InputField from '@/atoms/InputTextfield';
 import styles from '../companyInformation.module.css';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { companyRow1,comapanyRow2,companyArray} from '../ComapanyInformationFields';
+import { requiredFields} from '../../../RequiredFields';
+import RequiredField from '@/atoms/RequiredSpanField';
 const CompanyDetails = (props) => {
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
 var { tab_2 } = state;
@@ -14,7 +16,7 @@ const CompanyFieldData = (companyRow1) => {
   companyRow1.map(data=>{
    fieldsArray.push(
      <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-     <LabelField title={data.key_name} />
+     <LabelField title={data.key_name}  customStyle = {{display:''}}/> {requiredFields['tab_2'][data.id] && <RequiredField />}
      <InputField
      id = {data.id}
        type = {'text'}
@@ -48,7 +50,7 @@ return(
      </div>
      <div className = 'col-md-6'>
      {CompanyFieldData(comapanyRow2)}
-     <LabelField title="Type of company" />
+     <LabelField title="Type of company" customStyle = {{display:''}}/> {requiredFields['tab_2'][TypeOfCompany] && <RequiredField />}
      <MultiSelectField
          id={TypeOfCompany}
          options={companyArray}
