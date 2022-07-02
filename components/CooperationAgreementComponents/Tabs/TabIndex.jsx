@@ -34,13 +34,11 @@ const TabIndex = (props) => {
 
 
   const loadData = async () => {
-    // let stateKey = `tab_${selectedTabId}`;
-    // var data = await fetchDataAccordingToTabSelection(selectedTabId);
-    // data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
-    // data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
-    let data = {};
+    let stateKey = `tab_${selectedTabId}`;
+    var data = await fetchDataAccordingToTabSelection(selectedTabId);
+    data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
+    data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
     data['renderTabComponents'] = true;
-    // console.log('tabIndex => ',data);
     updateStateChanges(data)
   }
 
@@ -94,7 +92,7 @@ async function fetchDataAccordingToTabSelection(selectedTabId) {
       //.
       break;
     case CONTACT_PERSONS_TAB:
-      //.
+      data['tab_3'] = {1:{},2:{},loaded:true};
       break;
     case ONLINE_DETAILS_TAB:
       //.

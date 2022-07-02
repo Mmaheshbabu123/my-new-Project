@@ -107,7 +107,7 @@ const SalaryDetails = () => {
             let fieldId = obj.type;
             let valueObj = cooperationBenefits[pcId][fieldId] || {};
             return(
-              <div className={`${styles['salary-coeff-fields-premies']}`}>
+              <div key={'salary_' + fieldId} className={`${styles['salary-coeff-fields-premies']}`}>
                 <LabelField title={obj.name} customStyle={{margin:'10px 0'}}/>
                 <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 1, 1)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
                 <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 0, 1)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>

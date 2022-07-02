@@ -16,11 +16,9 @@ const ContactPersonTabs = (props) => {
       ...contactstate,
        id:selectId,
     })
-    console.log(tab_3)
   }
 useEffect(()=>{
   tab_3 = {1:{},2:{},loaded:true}
-  console.log(tab_3);
   updateStateChanges({tab_3});
   setState({
     ...contactstate,
@@ -45,7 +43,7 @@ const LoadTabs = () => {
 })
 return tabsData;
 }
-console.log(tab_3)
+
   return (
     <div className =''>
     {LoadTabs()}
