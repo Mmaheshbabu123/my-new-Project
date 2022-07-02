@@ -3,8 +3,6 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import {MdEdit, MdDelete} from 'react-icons/md';
-// import { APICALL } from '@/Services/ApiServices';
-// import { fetchPcLinkedEmployeeTypes } from '@/Services/ApiEndPoints';
 import styles from '../absoluteAgent.module.css';
 
 const tabStateKey = 'tab_1';

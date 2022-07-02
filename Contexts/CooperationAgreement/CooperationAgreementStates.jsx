@@ -9,11 +9,17 @@ const CooperationAgreementStates = (props) => {
     , tab_2 : {'22':1,'23':1,'24':1}
     , tab_3 : {}
     , tab_4 : {}
-    , tab_5 : {}
+    , tab_5 : {
+      cooperationSalaryDetails: [],
+      cooperationSalaryLinked: {},
+      cooperationBenefits: {},
+    }
     , selectedTabId: 1
     , loadedTabs: []
     , renderTabComponents: false
     , alreadyLinked: []
+    , salaryBenefitPcArray: []
+    , salaryDataPerPc: {}
   };
   const [state, dispatch] = useReducer(CooperationAgreementReducer, initialState);
   const updateStateChanges = (obj) => {
