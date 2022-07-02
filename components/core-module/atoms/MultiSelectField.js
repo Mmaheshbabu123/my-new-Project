@@ -14,7 +14,7 @@ import Select from 'react-select';
     color:'black',
   }),
 }
-export default function MultiSelect({ handleChange, standards, options, disabled, isMulti = false, name = '' ,placeholder = 'Select', className="pc-single-select",customStyle = { }}) {
+export default function MultiSelect({ handleChange, standards, options, disabled, isMulti = false, name = '' ,placeholder = 'Select', className="pc-single-select",customStyle = { }, classNamePrefix = ''}) {
   const customFilter = (option, searchText) => {
       if (option.label !== undefined && option.label !== null && option.label.toLowerCase().includes(searchText.toLowerCase())){
         return true
@@ -33,6 +33,7 @@ export default function MultiSelect({ handleChange, standards, options, disabled
             isMulti = {isMulti}
             style={customStyles}
             name = {name}
+            classNamePrefix={classNamePrefix || ''}
             noOptionsMessage= {() => 'No option'}
         />
         </div>

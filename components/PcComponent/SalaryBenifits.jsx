@@ -5,7 +5,7 @@ import { PcContext } from '../../Contexts/PcContext';
 import styles from '../../styles/Pc.module.css';
 
 const SalaryBenifits = () => {
-	
+
 	const [ visible, setVisible ] = useState(false);
 	const [ data, setData ] = useState([]);
 	const {
@@ -26,7 +26,7 @@ const SalaryBenifits = () => {
 		setCat_subsec_id,
 		setCurrent_sec
 	} = useContext(PcContext);
-	
+
 
 	useEffect(() => {
 		APICALL.service(fetchSalaryBenefits, 'GET')
@@ -45,7 +45,7 @@ const SalaryBenifits = () => {
 		<div className="container">
 			<div className="row">
 				{data.map((val, key) => (
-					<div className={`form-check mt-4 col-md-5 bg-light me-3`}>
+					<div key = {key} className={`form-check mt-4 col-md-5 bg-light me-3`}>
 						<div className="form-check mt-4">
 							<input
 								className="form-check-input"

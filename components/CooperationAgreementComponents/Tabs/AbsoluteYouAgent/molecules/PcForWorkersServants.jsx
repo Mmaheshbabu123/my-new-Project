@@ -3,8 +3,6 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import {MdEdit, MdDelete} from 'react-icons/md';
-// import { APICALL } from '@/Services/ApiServices';
-// import { fetchPcLinkedEmployeeTypes } from '@/Services/ApiEndPoints';
 import styles from '../absoluteAgent.module.css';
 
 const tabStateKey = 'tab_1';
@@ -92,6 +90,7 @@ const PcForWorkersServants = () => {
     let selectedPc = compState['selectedPc'][type];
     let emplOptions = pcLinkedEmployeeTypes[selectedPc] ? pcLinkedEmployeeTypes[selectedPc] : [];
     return <div className={`${type === 1 ? 'col-md-9' : 'col-md-9 ' + styles['margin-auto-class']}`}>
+        <p className={styles['worker-servants-title']}> {type === 1 ? `PC for workers (arbeiders)` : `PC for servants (bedienden)` } </p>
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title={`Paritair comité (PC) ${type}`} />
             <MultiSelectField
