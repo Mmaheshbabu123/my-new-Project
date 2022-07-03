@@ -8,7 +8,6 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import styles from '../absoluteAgent.module.css';
 import { consultantArray, consultantNumArray } from '../../../Definations';
 
-
 var startDateAgreement    = 1;
 var absoluteConsultant    = 2;
 var absoluteConsultantNum = 3;
@@ -18,7 +17,6 @@ var consultNumber = [];
 const BasicDetails = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   var { tab_1 } = state;
-
 
   /**
    * [handleChange description]

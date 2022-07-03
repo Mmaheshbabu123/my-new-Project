@@ -2,6 +2,7 @@ export const helpers = {
     toggleWarningClass
   , checkCoefficientsFilledOrNot
   , scrollContent
+  , takeSelectedIds
 }
 
 function toggleWarningClass(inputRef, refkey, add = 1) {
@@ -83,5 +84,10 @@ function scrollContent(forward = 1) {
   if(setObj['scrollLeft'] === true && setObj['scrollRight'] === true)
       setObj['tableWidth'] = '95%';
   return setObj;
+}
 
+
+function takeSelectedIds(alreadyLinked, stateObj) {
+  if(!stateObj) return alreadyLinked;
+  return [...alreadyLinked, ...Object.values(stateObj['selectedPc'])]
 }
