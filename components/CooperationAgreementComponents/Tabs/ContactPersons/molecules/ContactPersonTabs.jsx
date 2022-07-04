@@ -7,6 +7,7 @@ import BasicDetails from './BasicDetails';
 const ContactPersonTabs = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
+  console.log(tab_3);
   const [contactstate,setState] = useState({
     id:1,
       loaded:false,
@@ -18,7 +19,7 @@ const ContactPersonTabs = (props) => {
     })
   }
 useEffect(()=>{
-  tab_3 = {1:{},2:{},loaded:true}
+  tab_3 = {...{1:{},2:{},loaded:true},...tab_3 }
   updateStateChanges({tab_3});
   setState({
     ...contactstate,
