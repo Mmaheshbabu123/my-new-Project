@@ -4,19 +4,19 @@ import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
 import RadioField from '@/atoms/RadioField';
 import MultiSelectField from '@/atoms/MultiSelectField';
+import RequiredField from '@/atoms/RequiredSpanField';
+import { requiredFields} from '../../../RequiredFields';
 import styles from '../Contactperson.module.css';
 import {locationArray,contactArray,contactPersonsRow1,contactPersonsRow2} from '../ContactPersonsFields';
 const BasicDetails= ({props,personId}) => {
 
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
-console.log(personId);
-console.log(tab_3);
+
   const handleChange = (event) => {
     const { value, name } = event.target;
     tab_3[personId][name] = value;
     //{...tab_3[personId],[name]:value};
-    console.log(tab_3)
     updateStateChanges({ tab_3 });
   }
   const handleSelect = (obj,key) => {
@@ -33,7 +33,7 @@ console.log(tab_3);
       if(data.type === 1) {
       fieldData.push(
         <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-        <LabelField title={data.key_name} />
+        <LabelField title={data.key_name} customStyle = {{display:''}}/> {requiredFields['tab_3'][data.id] && <RequiredField />}
         <InputField
         id = {data.id}
           type = {'text'}
@@ -51,15 +51,17 @@ console.log(tab_3);
     else if (data.type === 6) {
     fieldData.push(
       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-          <LabelField title={data.key_name} />
+          <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_3'][data.id] && <RequiredField />}
+          <div>
           <RadioField   name = {data.id} checked = {tab_3[personId][data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} />
           <RadioField  name = {data.id} checked = {tab_3[personId][data.id] === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} />
+          </div>
       </div>
     )
   } else if(data.type === 8) {
   fieldData.push(
     <div className=''>
-    <LabelField title={data.key_name} />
+    <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_3'][data.id] && <RequiredField />}
     <MultiSelectField
         id={data.id}
         options={data.options}

@@ -11,7 +11,7 @@
 }
 
 .workers-border {
-  border-right: 1px solid red;
+  border-right: 2px solid lightgray;
 }
 
 .margin-auto-class {
@@ -25,4 +25,9 @@
 .workers-servants-table {
   margin: 0;
   width: 75%;
+}
+
+.worker-servants-title {
+	margin-left: 20%;
+	font-size: large;
 }

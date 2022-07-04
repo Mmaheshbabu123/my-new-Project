@@ -70,10 +70,11 @@ const CoefficientPage = (props) => {
     setCompState({...compState, ...coeffPageData});
   }, [])
 
-  const addMultiSelectTag = () => {
+  const addPCSelectDropDown = () => {
+    let selectedIds = helpers.takeSelectedIds(alreadyLinked, state['workersServantsCompState']);
     return (
       <MultiSelectField
-        options={pcArray.filter(val => alreadyLinked.includes(val.value))}
+        options={pcArray.filter(val => selectedIds.includes(val.value))}
         standards={pcArray.filter(val => val.value === compState.selectedPc)}
         handleChange={onSelect}
         isMulti={false}
@@ -84,7 +85,7 @@ const CoefficientPage = (props) => {
   }
   return (
     <div className={`${styles['coeffcient-table-parent']}`}>
-      <div className="col-md-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
+      <div className="col-md-3 mt-2 mb-3 p-0"> {addPCSelectDropDown()}
         {compState.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
         {compState.valueErrorArray.length > 0 &&
           <small className="col-md-3 mt-3 mb-3 warning-message">

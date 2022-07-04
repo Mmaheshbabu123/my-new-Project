@@ -4,9 +4,10 @@
  display: inline-block;
 }
 
-#pcp_name{
+.pcp_name{
   width: 70% !important;  /* not needed */
-  margin: 0 10px;
+  margin: 10px;
+  height: 38px !important;
 }
 .pcp_btn {
   background-color: #707070 !important;
@@ -83,7 +84,7 @@
 .searchIconCss {
   text-align: right;
   width: 5% !important;
-  top: 5px;
+  top: 15px;
   position: absolute;
   cursor: pointer;
   right: 30%;

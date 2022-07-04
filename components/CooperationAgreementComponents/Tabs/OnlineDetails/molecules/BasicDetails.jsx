@@ -3,9 +3,10 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
 import RadioField from '@/atoms/RadioField';
+import RequiredField from '@/atoms/RequiredSpanField';
 import styles from '../OnlineDetails.module.css';
 import { onlineDetailsRow1,onlineDetailsRow2,onlineDetaillsRadioRow1,onlineDetaillsRadioRow2} from '../OnlineDetailsFields';
-
+import { requiredFields} from '../../../RequiredFields';
 const BasicDetails = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_4} = state;
@@ -15,7 +16,7 @@ const BasicDetails = (props) => {
     onlineRow.map(data=>{
      fieldsArray.push(
        <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-       <LabelField title={data.key_name} />
+       <LabelField title={data.key_name} customStyle = {{display:''}}/> {requiredFields['tab_4'][data.id] && <RequiredField />}
        <InputField
        id = {data.id}
          type = {'text'}
@@ -37,9 +38,11 @@ const BasicDetails = (props) => {
    onlineRadioRow.map(data=>{
     fieldsArray.push(
       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-          <LabelField title={data.key_name} />
+          <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_4'][data.id] && <RequiredField />}
+          <div>
           <RadioField   name = {data.id} checked = {tab_4[data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} />
           <RadioField  name = {data.id} checked = {tab_4[data.id] === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} />
+          </div>
       </div>
     )
   })

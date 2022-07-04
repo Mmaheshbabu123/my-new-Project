@@ -26,6 +26,7 @@ const SalaryBenifits = () => {
 		setCurrent_sec
 	} = useContext(PcContext);
 
+
 	useEffect(() => {
 		APICALL.service(fetchSalaryBenefits, 'GET')
 			.then((result) => {
@@ -70,7 +71,7 @@ const SalaryBenifits = () => {
 		<div className="container">
 			<div className="row">
 				{data.map((val, key) => (
-					<div className={`form-check mt-4 col-md-5 bg-light me-3`}>
+					<div key = {key} className={`form-check mt-4 col-md-5 bg-light me-3`}>
 						<div className="form-check mt-4">
 							<input
 								className="form-check-input"

@@ -98,8 +98,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
           <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
           <input
             type="text"
-            className="form-control col-7"
-            id="pcp_name"
+            className="form-control col-7 pcp_name"
             onChange={(e) => setState({...state, searchTerm: e.target.value})}
             placeholder={'Search'}
           />

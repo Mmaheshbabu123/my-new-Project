@@ -3,6 +3,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import { APICALL } from '@/Services/ApiServices';
 import {
   fetchAbsoluteYouAgentData,
+  fetchSalaryBenefitsPerPc
 } from '@/Services/ApiEndPoints';
 import {
     ABSOLUTEYOU_AGENT_TAB
@@ -10,6 +11,7 @@ import {
   , CONTACT_PERSONS_TAB
   , ONLINE_DETAILS_TAB
   , SALARY_BENEFITS_TAB
+  , INVOIING_TAB
 } from '../Definations'
 
 //----Impport each tab dynamically using next/dynamic
@@ -17,6 +19,8 @@ import AbsoluteYouAgent from './AbsoluteYouAgent/organisms/AbsoluteYouAgent';
 import CompanyInformation from './CompanyInformation/organisms/CompanyInformation';
 import OnlineDetails  from './OnlineDetails/organisms/OnlineDetails';
 import ContactPersons from './ContactPersons/organisms/ContactPersons';
+import Invoicing from './Invoicing/organisms/Invoicing';
+import SalaryBenefitsMain  from './SalaryBenefits/organisms/SalaryBenefitsMain';
 //----
 
 
@@ -30,13 +34,11 @@ const TabIndex = (props) => {
 
 
   const loadData = async () => {
-    // let stateKey = `tab_${selectedTabId}`;
-    // var data = await fetchDataAccordingToTabSelection(selectedTabId);
-    // data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
-    // data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
-    let data = {};
+    let stateKey = `tab_${selectedTabId}`;
+    var data = await fetchDataAccordingToTabSelection(selectedTabId);
+    data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
+    data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
     data['renderTabComponents'] = true;
-    // console.log('tabIndex => ',data);
     updateStateChanges(data)
   }
 
@@ -60,14 +62,16 @@ const TabIndex = (props) => {
         component = <OnlineDetails />
         break;
       case SALARY_BENEFITS_TAB:
-        //.
+        component = <SalaryBenefitsMain />
         break;
+      case INVOIING_TAB:
+        component = <Invoicing />
+       break;
       default:
         component = <div> Nothing...! </div>
     }
     return component || <> {`Selected tab id: ${selectedTabId}`} </>;
   }
-  console.log(state);
 	return (
 		<div className="">
       {state.renderTabComponents ? showComponentBasedOnTabSelection() : <> Loading... </>}
@@ -77,21 +81,26 @@ const TabIndex = (props) => {
 
 async function fetchDataAccordingToTabSelection(selectedTabId) {
   let data = {};
+  let response = {};
   switch (selectedTabId) {
     case ABSOLUTEYOU_AGENT_TAB:
-      data = await fetchAbsoluteYouAgentTabData();
+        response = await fetchDataFromBackend(fetchAbsoluteYouAgentData);
+        data['pcArray'] = response.pc_array || [];
+        data['pcLinkedEmployeeTypes'] = response.pcLinkedEmployeeTypes || {};
       break;
     case COMPANY_INFORMATION_TAB:
       //.
       break;
     case CONTACT_PERSONS_TAB:
-      //.
+      data['tab_3'] = {1:{},2:{},loaded:true};
       break;
     case ONLINE_DETAILS_TAB:
       //.
       break;
     case SALARY_BENEFITS_TAB:
-      //.
+      response = await fetchDataFromBackend(fetchSalaryBenefitsPerPc);
+      data['salaryBenefitPcArray'] = response.pc_array || [];
+      data['salaryDataPerPc'] = response.salaryData || {};
       break;
     default:
       data = {};
@@ -99,12 +108,11 @@ async function fetchDataAccordingToTabSelection(selectedTabId) {
   return data;
 }
 
-async function fetchAbsoluteYouAgentTabData() {
+async function fetchDataFromBackend(url) {
   let data = {};
-  await APICALL.service(`${fetchAbsoluteYouAgentData}`, 'GET').then(response => {
+  await APICALL.service(`${url}`, 'GET').then(response => {
     if (response.status === 200) {
-      data['pcArray'] = response.data['pc_array'];
-      data['pcLinkedEmployeeTypes'] = response.data['pcLinkedEmployeeTypes'];
+      data = response.data;
     }
   })
   return data;
