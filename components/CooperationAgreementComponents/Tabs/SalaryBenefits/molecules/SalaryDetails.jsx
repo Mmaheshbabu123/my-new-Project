@@ -2,13 +2,12 @@ import React, { useContext, useState } from 'react';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import { FaRegPlusSquare, FaRegMinusSquare } from 'react-icons/fa';
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
-import RadioField from '@/atoms/RadioField';
 import InputField from '@/atoms/InputTextfield';
 import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import styles from '../SalaryBenefits.module.css';
-import { helpers } from '../SalaryBenefitHelper';
 import { codeArray } from '../../../Definations';
+// import { helpers } from '../SalaryBenefitHelper';  //.
 
 
 const TAB_ID = 5;
@@ -175,7 +174,6 @@ const SalaryDetails = () => {
   }
 
   const handleChange = (name, pcId, fieldId, val, from = 0, target = 0) => {
-    console.log({name, pcId, fieldId, val, from , target});
     let key = from ? 'cooperationBenefits' : 'cooperationSalaryLinked';
     let salaryLinkedData = from ? {...cooperationBenefits} : {...cooperationSalaryLinked};
     salaryLinkedData[pcId][fieldId] = {...(salaryLinkedData[pcId][fieldId] ? salaryLinkedData[pcId][fieldId] : {}),
@@ -183,7 +181,6 @@ const SalaryDetails = () => {
     }
     let tab_5 = {...state[stateKey]};
     tab_5[[key]] = salaryLinkedData;
-    console.log(tab_5);
     updateStateChanges({tab_5});
   }
 

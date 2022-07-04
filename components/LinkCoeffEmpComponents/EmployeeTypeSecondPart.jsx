@@ -12,6 +12,7 @@ const EmployeeTypeSecondPart = () => {
     , lowHighValidation
     , inputRef
     , valueErrorArray
+    , defaultValueError
     , lowKey, highKey, defaultKey, minValue, maxValue
   } = state;
 
@@ -57,13 +58,41 @@ const EmployeeTypeSecondPart = () => {
         }
       }
     }
-    lowHighDefaultChanges(_EmpId, _Coeffid, _ValId, valueDataObj)
+    // lowHighDefaultChanges(_EmpId, _Coeffid, _ValId, valueDataObj) //not needed as of now
     updateStateChanges({
       pclinkingValueobj: valueDataObj,
       valueErrorArray: valueValidation(_EmpId, _Coeffid, _ValId, target.value),
+      defaultValueError: validationForDefaultValue(valueDataObj, _EmpId, _Coeffid),
       lowHighValidation: handleValidation(valueDataObj, _EmpId, _Coeffid, _ValId),
       emptyDataWarning: false
     });
+  }
+
+  const validationForDefaultValue = (valueDataObj, _EmpId, _Coeffid) => {
+    let lowHighDef = valueDataObj[_EmpId][_Coeffid] || {};
+    let refkey = `${_EmpId}_${_Coeffid}_${defaultKey}`;
+    let lowVal = lowHighDef[lowKey] || '';
+    let highVal = lowHighDef[highKey] || '';
+    let defaultVal = lowHighDef[defaultKey] || ''
+    let addWarning = false;
+    if(lowVal && highVal && defaultVal) {
+      lowVal = Number(lowVal.replace(',', '.'));
+      highVal = Number(highVal.replace(',', '.'));
+      defaultVal = Number(defaultVal.replace(',', '.'));
+      if((defaultVal < lowVal || defaultVal > highVal)) {
+        addWarning = true;
+      }
+    }
+    if(addWarning) {
+      if (defaultValueError.includes(refkey)) return defaultValueError;
+          defaultValueError.push(refkey);
+      helpers.toggleWarningClass(inputRef, refkey);
+    } else {
+      defaultValueError.indexOf(refkey) > -1 ?
+        defaultValueError.splice(defaultValueError.indexOf(refkey), 1) : null;
+      helpers.toggleWarningClass(inputRef, refkey, 0);
+    }
+    return defaultValueError;
   }
 
   /**
@@ -74,7 +103,7 @@ const EmployeeTypeSecondPart = () => {
    * @param  {[object]} valueDataObj               [description]
    * @return {[void]}              [description]
    */
-  const lowHighDefaultChanges = (_EmpId, _Coeffid, _ValId, valueDataObj) => {
+  const lowHighDefaultChanges = (_EmpId, _Coeffid, _ValId, valueDataObj) => { //might needed in future NOSONAR
     if (_ValId === lowKey || _ValId === highKey) {
       valueDataObj[_EmpId][_Coeffid][defaultKey] = '';
     }
@@ -184,11 +213,15 @@ const EmployeeTypeSecondPart = () => {
 
   const getPcLinkingValue = (_EmpId, _Coeffid, _ValId) => {
     let matrixKey = `${_EmpId}-${_Coeffid}-${_ValId}`;
+    let valueObj = pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] ?
+      pclinkingValueobj[_EmpId][_Coeffid] : {} : {};
+    let lowVal = valueObj[lowKey] || '';
+    let highVal = valueObj[highKey] || '';
     return {
       matrixKey,
-      value: pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] ?
-        pclinkingValueobj[_EmpId][_Coeffid][_ValId] ?
-          pclinkingValueobj[_EmpId][_Coeffid][_ValId] : '' : '' : ''
+      value: valueObj[_ValId] ? valueObj[_ValId] : '',
+      lowVal,
+      highVal
     }
   }
 

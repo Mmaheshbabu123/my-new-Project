@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
-import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
+import React from 'react';
 import SalaryDetailsPerPC from '../molecules/SalaryDetailsPerPC';
 
 const SalaryBenefitsMain = (props) => {
-  const { state } = useContext(CooperationAgreementContext);
   return (
     <div className="">
       <SalaryDetailsPerPC />

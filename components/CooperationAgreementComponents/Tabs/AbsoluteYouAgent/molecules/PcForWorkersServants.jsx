@@ -3,6 +3,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import {MdEdit, MdDelete} from 'react-icons/md';
+import { helpers } from '../AbsoluteAgentHelper';
 import styles from '../absoluteAgent.module.css';
 
 const tabStateKey = 'tab_1';
@@ -10,7 +11,7 @@ const workersType  = 1;
 const servantsType = 2;
 const PcForWorkersServants = () => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  const { tab_1, pcArray = [], pcLinkedEmployeeTypes = {} } = state;
+  const { pcArray = [], pcLinkedEmployeeTypes = {} } = state;
   const [ compState, setCompState ] = useState({
       newItems: {  [workersType]: [], [servantsType]: [] }
     , selectedPc: {
@@ -29,15 +30,22 @@ const PcForWorkersServants = () => {
   });
 
   useEffect(() => {
-    const { worksServantsData } = tab_1;
+    const { tab_1:{ worksServantsData }, workersServantsCompState = {} } = state;
     let editIndex = {};
     let newItems = {
       [workersType]: worksServantsData[workersType] || [],
       [servantsType]: worksServantsData[servantsType] || []
     }
-    editIndex[workersType] = newItems[workersType].length;
-    editIndex[servantsType] = newItems[servantsType].length;
-    setCompState({...compState, editIndex: editIndex, newItems: newItems, alreadyLinked: state['alreadyLinked'] });
+    let editIndexObj = workersServantsCompState['editIndex'] || {};
+    editIndex[workersType] =  editIndexObj[workersType] !== undefined  ? editIndexObj[workersType]  : newItems[workersType].length;
+    editIndex[servantsType] = editIndexObj[servantsType] !== undefined ? editIndexObj[servantsType] : newItems[servantsType].length;
+    let obj = {
+      selectedPc: workersServantsCompState['selectedPc'] || compState['selectedPc'],
+      selectedEmpId: workersServantsCompState['selectedEmpId'] || compState['selectedEmpId'],
+      newItems, editIndex,
+      alreadyLinked: state['alreadyLinked']
+    }
+    setCompState({...compState, ...obj});
   }, [])
 
   const onSelect = (target, type, pcOrEmp = 1) => {
@@ -49,6 +57,7 @@ const PcForWorkersServants = () => {
      const value = target.map(val => val.value);
      dataObj['selectedEmpId'][type] = value;
    }
+   updateStateChanges({ workersServantsCompState: dataObj });
    setCompState(dataObj)
   }
 
@@ -63,7 +72,7 @@ const PcForWorkersServants = () => {
     stateObj['newItems'][type][stateObj['editIndex'][type]] = {
       pc_id: stateObj['selectedPc'][type],
       employee_type_id: stateObj['selectedEmpId'][type],
-      tab_id: type,
+      tab_id: 1,
       type,
     }
     stateObj['selectedPc'][type] = 0;
@@ -72,7 +81,7 @@ const PcForWorkersServants = () => {
     tab_1['worksServantsData'][type] = stateObj['newItems'][type];
     stateObj['alreadyLinked'] = updateAlreadyLinkedPcIds(stateObj['newItems']);
     setCompState(stateObj);
-    updateStateChanges({tab_1, alreadyLinked: stateObj['alreadyLinked']});
+    updateStateChanges({tab_1,  workersServantsCompState: stateObj, alreadyLinked: stateObj['alreadyLinked']});
   }
 
   const updateAlreadyLinkedPcIds = (addedData) => {
@@ -89,12 +98,13 @@ const PcForWorkersServants = () => {
     const { alreadyLinked } = compState;
     let selectedPc = compState['selectedPc'][type];
     let emplOptions = pcLinkedEmployeeTypes[selectedPc] ? pcLinkedEmployeeTypes[selectedPc] : [];
+    let pcOptions = helpers.returnNotAddedPcOptions(pcArray, state['workersServantsCompState']);
     return <div className={`${type === 1 ? 'col-md-9' : 'col-md-9 ' + styles['margin-auto-class']}`}>
         <p className={styles['worker-servants-title']}> {type === 1 ? `PC for workers (arbeiders)` : `PC for servants (bedienden)` } </p>
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title={`Paritair comité (PC) ${type}`} />
             <MultiSelectField
-                options={pcArray.filter(val => !alreadyLinked.includes(val.value))}
+                options={pcOptions.filter(val => !alreadyLinked.includes(val.value))}
                 standards={pcArray.filter(val => val.value === compState['selectedPc'][type])}
                 disabled={false}
                 handleChange={(obj) => onSelect(obj, type)}
@@ -196,6 +206,7 @@ const PcForWorkersServants = () => {
       stateObj['newItems'][workSerType].splice(index, 1)
       stateObj['editIndex'][workSerType] = stateObj['newItems'][workSerType].length;
     }
+    updateStateChanges({ workersServantsCompState: stateObj })
     setCompState(stateObj);
   }
 

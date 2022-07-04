@@ -40,16 +40,22 @@ const AddEditSalaryBenefits = (props) => {
      */
     const addItemAndUpdateIndex = (stateObj) => {
       if (stateObj['name'].length) {
-        stateObj['newItems'][state.editIndex] = {
-          name: state.name,
-          date: state.date,
-          value: state.value
-        };
-        inputRef.current['date'].value = '';
-        stateObj['name'] = '';
-        stateObj['date'] = '';
-        stateObj['value'] = '';
-        stateObj['editIndex'] = stateObj['newItems'].length;
+        let duplicates = stateObj['newItems'].filter(val => val.name.toLowerCase() === state.name.toLowerCase())
+        if(duplicates.length) {
+            stateObj['uniqueError'] = true;
+            stateObj['duplicates'] = duplicates.map(obj => obj.name);
+        } else {
+          stateObj['newItems'][state.editIndex] = {
+            name: state.name,
+            date: state.date,
+            value: state.value
+          };
+          inputRef.current['date'].value = '';
+          stateObj['name'] = '';
+          stateObj['date'] = '';
+          stateObj['value'] = '';
+          stateObj['editIndex'] = stateObj['newItems'].length;
+       }
       } else {
         stateObj['nameWarning'] = true;
       }
@@ -136,6 +142,8 @@ const AddEditSalaryBenefits = (props) => {
       // if(value.match(/^[a-zA-Z0-9 ]*$/) && value.length <= 50) {
         stateObj[name] = value;
         stateObj['nameWarning'] = false;
+        stateObj['uniqueError'] = false;
+        stateObj['duplicates'] = [];
       // } else {
         // stateObj['nameWarning'] = true;
      // }
@@ -169,13 +177,12 @@ const AddEditSalaryBenefits = (props) => {
     return (
       <div className='col-md-9'>
         <div className="salary-input-fields">
-          <label className = "mb-2 input-label-class" htmlFor="name"> {`Salary benefit name`} </label>
+          <label className = "mb-2 input-label-class" htmlFor="name"> {`Salary benefit name`} <span style={{color:'red'}}> * </span></label>
           <input
             ref={ref => inputRef.current['name'] = ref}
             type="text"
             name="name"
-            className="form-control col-md-10"
-            id="pcp_name"
+            className="form-control col-md-10 pcp_name"
             value={state.name}
             onChange={(e) => handleChange(e.target)}
             placeholder='Enter name'
@@ -184,7 +191,7 @@ const AddEditSalaryBenefits = (props) => {
             <small
               id="pcp_name_warning"
               className="form-text text-muted col-md-5">
-              Enter only alpha-numeric values with less than 50 characters
+              Name field is required
             </small>}
           {state.uniqueError &&
             <small
@@ -199,8 +206,7 @@ const AddEditSalaryBenefits = (props) => {
             ref={ref => inputRef.current['value'] = ref}
             type="text"
             name='value'
-            className="form-control col-md-10"
-            id="pcp_name"
+            className="form-control col-md-10 pcp_name"
             value={state.value}
             onChange={(e) => handleChange(e.target)}
             placeholder= 'Enter value'
@@ -220,8 +226,7 @@ const AddEditSalaryBenefits = (props) => {
             name='date'
             min={state.minDate}
             value={state.date}
-            className="form-control col-md-10 salary-date"
-            id="pcp_name"
+            className="form-control col-md-10 salary-date pcp_name"
             onChange={(e) => handleChange(e.target)}
           />
           {state.dateWarning &&
