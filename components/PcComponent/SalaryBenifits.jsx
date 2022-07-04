@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { fetchSalaryBenefits } from '../../Services/ApiEndPoints';
+import { fetchSalaryBenefits, getPcSalaryBenefits } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
 import styles from '../../styles/Pc.module.css';
 
 const SalaryBenifits = () => {
-	
 	const [ visible, setVisible ] = useState(false);
 	const [ data, setData ] = useState([]);
 	const {
@@ -26,7 +25,6 @@ const SalaryBenifits = () => {
 		setCat_subsec_id,
 		setCurrent_sec
 	} = useContext(PcContext);
-	
 
 	useEffect(() => {
 		APICALL.service(fetchSalaryBenefits, 'GET')
@@ -41,6 +39,33 @@ const SalaryBenifits = () => {
 			});
 	}, []);
 
+	useEffect(() => {
+		APICALL.service(getPcSalaryBenefits + pc_unique_key, 'GET')
+			.then((result) => {
+				console.log(result);
+				if (result.data.length > 0) {
+				setData(result.data);
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
+
+	let updateRes = (event, key) => {
+		var res1 = [...data];
+		if (event.target.checked) {
+			res1[key]['checked'] = true;
+			console.log('✅ Checkbox is checked');
+		} else {
+			res1[key]['checked'] = false;
+
+			console.log('⛔️ Checkbox is NOT checked');
+		}
+		setData(res1);
+		console.log(data)
+	};
+
 	return (
 		<div className="container">
 			<div className="row">
@@ -50,58 +75,62 @@ const SalaryBenifits = () => {
 							<input
 								className="form-check-input"
 								type="checkbox"
-								value=""
-								id={"flexCheckDefault"+key}
-								// onClick={(e) => setVisible(!visible)}
+								value={val.sb_id}
+								id={'flexCheckDefault' + key}
+								checked={val.checked}
+								onChange={(e) => {
+									updateRes(e, key);
+								}}
 							/>
 							<label calssName="form-check-label" htmlFor="flexCheckDefault">
-								{val.name}
+								{val.name} {val.checked}
 							</label>
 						</div>
-						<div>
-								<div className="mt-3">
-									<p className='fw-bold'>Is this mandatory?</p>
-									<div className="d-flex mt-3">
-										<div className="form-check  ">
-											<input className="form-check-input d-flex" type="radio" value="option1" />
-											<label className="form-check-label ms-1" htmlFor="exampleRadios1">
-												Yes
-											</label>
-										</div>
+						{ val.checked && <div>
+							<div className="mt-3">
+								<p className="fw-bold">Is this mandatory?</p>
+								<div className="d-flex mt-3">
+									<div className="form-check  ">
+										<input className="form-check-input d-flex" type="radio" value="option1" />
+										<label className="form-check-label ms-1" htmlFor="exampleRadios1">
+											Yes
+										</label>
+									</div>
 
-										<div className="form-check">
-											<input className="form-check-input ms-2" type="radio" value="option2" />
-											<label className="form-check-label ms-1" htmlFor="exampleRadios2">
-												No
-											</label>
-										</div>
+									<div className="form-check">
+										<input className="form-check-input ms-2" type="radio" value="option2" />
+										<label className="form-check-label ms-1" htmlFor="exampleRadios2">
+											No
+										</label>
 									</div>
 								</div>
+							</div>
 						</div>
+}
 					</div>
 				))}
 			</div>
 			<div className="row">
-					<div className="text-start col-md-6">
-						<button
-							type="button"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-							onClick={() => {
-								setCurrent_sec(4);
-							}}
-						>
-							Back
-						</button>
-					</div>
-					<div className="text-end col-md-6">
-						<button
-							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-						>
-							Save
-						</button>
-					</div>
+				<div className="text-start col-md-6">
+					<button
+						type="button"
+						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+						onClick={() => {
+							setCurrent_sec(4);
+						}}
+					>
+						Back
+					</button>
 				</div>
+				<div className="text-end col-md-6">
+					<button
+						type="sumit"
+						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+					>
+						Save
+					</button>
+				</div>
+			</div>
 		</div>
 	);
 };

@@ -1,4 +1,6 @@
 import React, { Component, useState } from 'react';
+import { Calendar } from "react-multi-date-picker";
+import DatePicker from "react-multi-date-picker"
 // import DatePicker, { DateObject } from 'react-multi-date-picker';
 // import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 // import DatePanel from 'react-multi-date-picker/plugins/date_panel';
@@ -11,6 +13,9 @@ function Addtiming(props) {
 	// [ date, setDate ] = useState('');
 	//  const date: new Date();
 	const router = useRouter();
+	const [value, setValue] = useState(new Date())
+	const [selectedDate, setSelectedDate] = useState([])
+
 	// var t_unique_key = router.query.t_unique_key;
 	// const [ values, setValues ] = useState();
 	// [ 1, 2, 3 ].map((number) =>
@@ -42,18 +47,32 @@ function Addtiming(props) {
 			function: 'Productie'
 		}
 	];
+	let handleChange = (value) => {
+		var selected = [];
+		value.map((val)=>{
+			console.log(val.format())
+			selected.push(val.format());
+		})
+		setSelectedDate(selected)
+		console.log(value)
+		console.log(selectedDate)
+
+	}
+
 	return (
 		<div className="container">
 			<form>
 				<div className="row">
 					<p className="mt-4 mb-2 h4">Add timing</p>
 					<div className="form-check mt-2 ">
-						<input className="form-check-input " type="checkbox" value="" id="flexCheckChecked" checked />
+						<input className="form-check-input " type="checkbox" value="" id="flexCheckChecked"/>
 						<label className="form-check-label " htmlFor="flexCheckChecked">
 							Same timing for all employees
 						</label>
 					</div>
 					<div className=" mt-5 ">
+						
+						{console.log(value)}
 						<table className="table table-hover ">
 							<tbody className="">
 								{employees.map((result) => (
@@ -67,15 +86,23 @@ function Addtiming(props) {
 							</tbody>
 						</table>
 					</div>
-					<div className="form-check mt-2 ">
-						{/* <DatePicker
-							value={values}
-							onChange={setValues}
-							format="MM/DD/YYYY HH:mm:ss"
-							multiple
-							plugins={[ <TimePicker position="bottom" />, <DatePanel markFocused /> ]}
-						/> */}
+					
+					<div className="mt-2 ">
+					<Calendar
+						value={value}
+						multiple={true}
+						format="YYYY/MM/DD"
+						onChange={(date) => {handleChange(date)}}
+						minDate={new Date()}
+						/>
 					</div>
+					<div className=''>qqqqqqqqqqqqqqqqqqqqqqqqqq</div>
+					{selectedDate.map((value)=>(
+						<div className='row'>
+						<p className="bg-light">{value}</p>
+						</div>
+					))}
+					
 				</div>
 
 				<div className="col-md-12 mt-4 ">

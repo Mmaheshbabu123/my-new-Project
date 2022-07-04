@@ -87,6 +87,11 @@ export const getCofficientPerPc = BASE_URL + "get-linking-coff-pc-data";
 export const delteCofficientPerPc = BASE_URL + "delete-pc-linking-data";
 export const Addfunction = BASE_URL + "addfunction";
 
+//--------------PC salary benifits ROUTES --------------------//
+export const getPcSalaryBenefits = BASE_URL + "get-pc-sal-benifits/";
+
+
+
 //------------------HEADER AND FOOTER-------------------------//
 export const header = BASE_URL + "header";
 export const footer = BASE_URL + "footer";

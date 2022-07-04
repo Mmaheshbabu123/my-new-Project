@@ -32,12 +32,6 @@ const EmployeeType = () => {
 	const [ res, setRes ] = useState([]);
 	const [ error_emp_type, setError_emp_type ] = useState('');
 
-	let next_redirection = () => {
-		setCurrent_sec(5);
-		var res1 = sec_completed;
-		res1['emp_type'] = true;
-		setSec_completed(res1);
-	};
 	useEffect(
 		() => {
 			if (pc_unique_key != '') {
@@ -71,15 +65,15 @@ const EmployeeType = () => {
 	},[pc_unique_key])
 
 	let updateRes = (event) => {
-		var res1 = res;
-		var temp1 = temp;
+		var res1 = [...res];
+		var temp1 = [...temp];
 		if (event.target.checked) {
-			if (!res1.includes(event.target.value)) {
-				res1.push(event.target.value);
+			if (!res1.includes(parseInt(event.target.value))) {
+				res1.push(parseInt(event.target.value));
 			}
 			console.log('✅ Checkbox is checked');
 		} else {
-			const index = res1.indexOf(event.target.value);
+			const index = res1.indexOf(parseInt(event.target.value));
 			if (index > -1) {
 				res1.splice(index, 1); // 2nd parameter means remove one item only
 			}
@@ -100,11 +94,10 @@ const EmployeeType = () => {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						// setId(result.pcid);
-						// setCurrent_sec(5);
-						// var res1 = sec_completed;
-						// res1['emp_type'] = true;
-						// setSec_completed(res1);
+						setCurrent_sec(5);
+						var res1 = sec_completed;
+						res1['emp_type'] = true;
+						setSec_completed(res1);
 					}
 				})
 				.catch((error) => {
@@ -125,26 +118,11 @@ const EmployeeType = () => {
 		}
 		console.log(data1);
 	};
-	// let backToDashboard = () =>{
-	// 	var src =JSON.parse(localStorage.getItem("src"));
-	// 	var type = JSON.parse(localStorage.getItem("type"));
-	// 	if (src) {
-	// 		window.localStorage.removeItem('src');
-	// 		if(type == "1"){
-	// 		window.location.assign(src)
-	// 		}
-	// 		else{
-	// 		router.push('/'+src)
-	// 		}
-	// 	}
-
-	// }
 
 	return (
 		<div className="container">
 			<form onSubmit={submit}>
 				<div className="row pt-4">
-					{/* <p className="h3 text-center mt-2">Edit employee type</p> */}
 					{data.map((val) => (
 						<div className="col-sm-5 d-flex form-group bg-light mt-4" key={val.id}>
 							<input
