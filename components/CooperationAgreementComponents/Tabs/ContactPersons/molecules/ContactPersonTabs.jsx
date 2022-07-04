@@ -3,7 +3,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import { personsData } from '../ContactPersonsFields';
 import styles from '../Contactperson.module.css';
 import BasicDetails from './BasicDetails';
-
+import {defaultFileds} from '../ContactPersonsFields';
 const ContactPersonTabs = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
@@ -18,8 +18,19 @@ const ContactPersonTabs = (props) => {
        id:selectId,
     })
   }
+const addDefaultValuestoPersons = (personObj) => {
+  let tempObj ={};
+ Object.keys(personObj).map((key)=>{
+   tempObj[key] ={'25':1,'30':1,'31':2,'32':2,'38':2,'39':2};
+ })
+ return tempObj;
+}
 useEffect(()=>{
+const personObj = addDefaultValuestoPersons({1:{},2:{},loaded:true});
+personObj.loaded = true;
+
   tab_3 = {...{1:{},2:{},loaded:true},...tab_3 }
+  console.log(tab_3)
   updateStateChanges({tab_3});
   setState({
     ...contactstate,
