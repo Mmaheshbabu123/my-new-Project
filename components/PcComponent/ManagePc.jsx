@@ -22,6 +22,7 @@ const ManagePc = (props) => {
 	useEffect(()=>{
 		APICALL.service(getPcOverviewDetails, 'GET')
 		.then((result) => {
+			console.log(result)
 			if (result.status === 200) {
 				setData(result.paritairecomitee);
 			}

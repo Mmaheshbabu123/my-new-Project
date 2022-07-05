@@ -7,7 +7,19 @@ import { APICALL } from '../../Services/ApiServices';
 const Addage = () => {
 	const [ id, setId ] = useState('');
 	const [ showhideage, setShowhideage ] = useState('');
-	const { pc_unique_key, setCurrent_sec, setSec_completed, sec_completed, setPc_unique_key } = useContext(PcContext);
+	const {
+		pc_unique_key,
+		setCurrent_sec,
+		setSec_completed,
+		sec_completed,
+		setPc_unique_key,
+		cat_subsec_type,
+		setCat_subsec_type,
+		setCat_subsec_id,
+		setCat_fun_updated,
+		setCat_rightsec,
+		setCat_leftsec,
+	} = useContext(PcContext);
 	const [ data, setData ] = useState({
 		id: '',
 		pc_unique_key: '',
@@ -87,7 +99,7 @@ const Addage = () => {
 		data2.min_sal_19 = '';
 		data2.min_sal_20 = '';
 		setData(data2);
-		console.log("aaaa")
+		console.log('aaaa');
 		const getage = event.target.value;
 		if (getage != '') {
 			setError_age('');
@@ -107,22 +119,40 @@ const Addage = () => {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
+						if(cat_subsec_type == 4){
+							setCat_fun_updated('age' + result.pcid);
+							setCat_rightsec('d-none');
+							setCat_leftsec('col-md-12');
+							setCat_subsec_type(0);
+							setCat_subsec_id('');
+
+						}else{
 						setCurrent_sec(4);
 						var res1 = sec_completed;
 						res1['age'] = true;
 						setSec_completed(res1);
+						}
 					}
 				})
 				.catch((error) => {
 					console.error(error);
 				});
 		} else {
-			console.log("update");
+			console.log('update');
 			APICALL.service(updateAge, 'POST', data)
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
+						if(cat_subsec_type == 4){
+							setCat_fun_updated('age' + result.pcid);
+							setCat_rightsec('d-none');
+							setCat_leftsec('col-md-12');
+							setCat_subsec_type(0);
+							setCat_subsec_id('');
+
+						}else{
 						next_redirection();
+						}
 					}
 				})
 				.catch((error) => {
@@ -138,7 +168,7 @@ const Addage = () => {
 		}
 	};
 	let validate = (res) => {
-		var error2 =ValidationService.emptyValidationMethod(res.age);
+		var error2 = ValidationService.emptyValidationMethod(res.age);
 		var error = [];
 		var valid = true;
 		error['min_sal_15'] = '';
@@ -149,7 +179,7 @@ const Addage = () => {
 		error['min_sal_20'] = '';
 		setError_age(error2);
 
-		if(error2 != ''){
+		if (error2 != '') {
 			return false;
 		}
 		switch (res.age) {
@@ -194,10 +224,10 @@ const Addage = () => {
 						? ValidationService.percentageValidationMethod(res.min_sal_18)
 						: error['min_sal_18'];
 				valid =
-					(error['min_sal_15'] == '' &&
+					error['min_sal_15'] == '' &&
 					error['min_sal_16'] == '' &&
 					error['min_sal_17'] == '' &&
-					error['min_sal_18'] == '')
+					error['min_sal_18'] == ''
 						? true
 						: false;
 
@@ -290,10 +320,12 @@ const Addage = () => {
 		return valid;
 	};
 	return (
-		<div className="container">
+		<div className="">
 			<form onSubmit={(e) => submit(e)}>
+				{cat_subsec_type == 4 ? <h4 className="h5 mt-3">Edit age</h4> : ''}
+
 				<div className="row pt-4">
-					<div className="col-md-6">
+					<div className="">
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}
 
 						<div className="mb-3">
@@ -430,30 +462,47 @@ const Addage = () => {
 						</div> */}
 					</div>
 				</div>
-				<div className="row">
-					<div className="text-start col-md-6">
-						<button
-							type="button"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-							onClick={() => {
-								setCurrent_sec(2);
-							}}
-						>
-							Back
-						</button>
+				{cat_subsec_type == 4 ? (
+					<div className="row">
+						<div className="text-start col-md-6" />
+						<div className="text-end col-md-6">
+							<button
+								type="sumit"
+								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								onClick={() => {
+									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
+								}}
+							>
+								Save
+							</button>
+						</div>
 					</div>
-					<div className="text-end col-md-6">
-						<button
-							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-							onClick={() => {
-								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key,id:id }));
-							}}
-						>
-							Next
-						</button>
+				) : (
+					<div className="row">
+						<div className="text-start col-md-6">
+							<button
+								type="button"
+								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								onClick={() => {
+									setCurrent_sec(2);
+								}}
+							>
+								Back
+							</button>
+						</div>
+						<div className="text-end col-md-6">
+							<button
+								type="sumit"
+								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								onClick={() => {
+									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
+								}}
+							>
+								Next
+							</button>
+						</div>
 					</div>
-				</div>
+				)}
 			</form>
 		</div>
 	);

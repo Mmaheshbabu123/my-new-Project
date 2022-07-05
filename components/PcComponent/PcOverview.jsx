@@ -6,6 +6,14 @@ import AddCategory from './AddCategory';
 import styles from '../../styles/Pc.module.css';
 import { PcContext } from '../../Contexts/PcContext';
 import AddFunction from '../../components/PcComponent/AddFunction';
+import AddPc from './AddPc';
+import AddAge from './AddAge';
+import EmployeeType from './EmployeeType';
+import SalaryBenefits from './SalaryBenifits';
+
+
+
+
 import {
 	FaEdit,
 	FaRegPlusSquare,
@@ -292,6 +300,7 @@ const PcOverview = (params) => {
 																]}
 																secId={pc['childObj'][val]['id']}
 																sectype="funct"
+																type={type}
 															/>
 														</ul>
 													</li>
@@ -302,14 +311,14 @@ const PcOverview = (params) => {
 							</ul>
 						</div>
 					)}
-					{router.query.cid || router.query.fid ?
+					{router.query.cid &&
 			<div className="row">
 			<div className="text-start col-md-6">
 				<button
 					type="button"
 					className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
 					onClick={() => {
-						window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+"dashboard?access=administrator&check_logged_in=1");	
+						router.push('/manage-category');	
 					}}
 				>
 					Back
@@ -318,7 +327,24 @@ const PcOverview = (params) => {
 			<div className="text-end col-md-6">
 			</div>
 		</div>
-			:''}
+			}
+			{router.query.fid &&
+			<div className="row">
+			<div className="text-start col-md-6">
+				<button
+					type="button"
+					className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+					onClick={() => {
+						router.push('/manage-function');	
+					}}
+				>
+					Back
+				</button>
+			</div>
+			<div className="text-end col-md-6">
+			</div>
+		</div>
+			}
 				</div>
 				<div className={`px-4 pt-2 border-start border-2 ${cat_rightsec}`}>
 					<div className="text-center">
@@ -353,12 +379,22 @@ const PcOverview = (params) => {
 					{cat_subsec_type == 2 && (
 						<AddFunction id={secid} categorylist={pc['childObj'] ? pc['childObj'] : []} />
 					)}
+					{cat_subsec_type == 3 && (
+						<AddPc />
+					)}
+					{cat_subsec_type == 4 && (
+						<AddAge />
+					)}
+					{cat_subsec_type == 5 && (
+						<EmployeeType />
+					)}
+					{cat_subsec_type == 6 && (
+						<SalaryBenefits />
+					)}
 				</div>
 			</div>
 			{console.log(router.query)}
-			{router.query.cid || router.query.fid || params.pc_type == 'managepc' ? (
-				''
-			) : (
+			{router.query.cid || router.query.fid || params.pc_type == 'managepc' ? '' : (
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button

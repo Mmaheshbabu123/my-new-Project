@@ -106,10 +106,19 @@ const EmployeeType = () => {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
+						if(cat_subsec_type == 5){
+							setCat_fun_updated('employeetype' + result.pcid);
+							setCat_rightsec('d-none');
+							setCat_leftsec('col-md-12');
+							setCat_subsec_type(0);
+							setCat_subsec_id('');
+
+						}else{
 						setCurrent_sec(5);
 						var res1 = sec_completed;
 						res1['emp_type'] = true;
 						setSec_completed(res1);
+						}
 					}
 				})
 				.catch((error) => {
@@ -134,9 +143,11 @@ const EmployeeType = () => {
 	return (
 		<div className="container">
 			<form onSubmit={submit}>
+			{cat_subsec_type == 5 ? <h4 className="h5 mt-3">Edit employee type</h4> : ''}
+
 				<div className="row pt-4">
 					{data.map((val) => (
-						<div className="col-sm-5 d-flex form-group bg-light mt-4" key={val.id}>
+						<div className="d-flex form-group bg-light mt-4" key={val.id}>
 							<input
 								type="checkbox"
 								className=""
@@ -153,6 +164,19 @@ const EmployeeType = () => {
 						{error_emp_type}
 					</p>
 				</div>
+				{cat_subsec_type == 5 ? (
+					<div className="row">
+						<div className="text-start col-md-6" />
+						<div className="text-end col-md-6">
+							<button
+								type="sumit"
+								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							>
+								Save
+							</button>
+						</div>
+					</div>
+				) :
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
@@ -174,6 +198,7 @@ const EmployeeType = () => {
 						</button>
 					</div>
 				</div>
+}
 			</form>
 		</div>
 	);

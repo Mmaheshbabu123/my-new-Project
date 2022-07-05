@@ -65,9 +65,12 @@ const SalaryBenifits = () => {
 		if (event.target.checked) {
 			setCount(count + 1);
 			res1[key]['checked'] = true;
+			res1[key]['mandatory'] = '';
 			console.log('✅ Checkbox is checked');
 		} else {
 			res1[key]['checked'] = false;
+			res1[key]['mandatory'] = '';
+
 			setCount(count - 1);
 
 			console.log('⛔️ Checkbox is NOT checked');
@@ -97,11 +100,20 @@ const SalaryBenifits = () => {
 			.then((result) => {
 				console.log(result);
 				if (result.status === 200) {
-					// setCurrent_sec(5);
+					if(cat_subsec_type == 6){
+						setCat_fun_updated('salbenifits' + result.pcid);
+						setCat_rightsec('d-none');
+						setCat_leftsec('col-md-12');
+						setCat_subsec_type(0);
+						setCat_subsec_id('');
+
+					}else{
+					// setCurrent_sec(6);
 					var res1 = sec_completed;
 					res1['emp_type'] = true;
 					setSec_completed(res1);
 					router.push('/manage-pc');
+					}
 				}
 			})
 			.catch((error) => {
@@ -111,17 +123,19 @@ const SalaryBenifits = () => {
 
 	let handleRadio = (e, key) => {
 		var data1 = [ ...data ];
-		const isPublished = e.target.value === 'true' ? true : false;
+		var isPublished = e.target.value === 'true' ? true : false;
 		data1[key]['mandatory'] = isPublished;
 		setData(data1);
+		console.log(data)
 	};
 
 	return (
 		<div className="container">
 			<form onSubmit={submit}>
+			{cat_subsec_type == 6 ? <h4 className="h5 mt-3">Edit salary benifits</h4> : ''}
 				<div className="row">
 					{data.map((val, key) => (
-						<div key={key} className={`form-check mt-4 col-md-5 bg-light me-3`}>
+						<div key={key} className={`form-check mt-4 bg-light me-3`}>
 							<div className="form-check mt-4">
 								<input
 									className="form-check-input"
@@ -148,7 +162,7 @@ const SalaryBenifits = () => {
 													className="form-check-input d-flex"
 													type="radio"
 													value="true"
-													name="yes"
+													name={"yes"+val.sb_id}
 													checked={val.mandatory === true}
 													onChange={(e) => handleRadio(e, key)}
 												/>
@@ -161,7 +175,7 @@ const SalaryBenifits = () => {
 												<input
 													className="form-check-input ms-2"
 													type="radio"
-													name="no"
+													name={"yes"+val.sb_id}
 													checked={val.mandatory === false}
 													onChange={(e) => handleRadio(e, key)}
 												/>
@@ -179,6 +193,19 @@ const SalaryBenifits = () => {
 						{error_sal_benifits}
 					</p>
 				</div>
+				{cat_subsec_type == 6 ? (
+					<div className="row">
+						<div className="text-start col-md-6" />
+						<div className="text-end col-md-6">
+							<button
+								type="sumit"
+								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							>
+								Save
+							</button>
+						</div>
+					</div>
+				) :
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
@@ -200,6 +227,7 @@ const SalaryBenifits = () => {
 						</button>
 					</div>
 				</div>
+}
 			</form>
 		</div>
 	);

@@ -13,6 +13,7 @@ import {
 // import './/pc.css';
 
 const ListView = (props) => {
+	console.log(props)
 	const [ header, setHeader ] = useState([]);
 	const [ tval, setTval ] = useState([]);
 	const [ count, setCount ] = useState(props.index);
