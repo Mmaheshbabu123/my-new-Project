@@ -243,8 +243,15 @@ function AddFunction(props) {
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
-						{(router.query.fid || router.query.cid) && (
+						{(router.query.fid ) && (
 							<Link href={'/manage-function'}>
+								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
+									Back
+								</a>
+							</Link>
+						)}
+						{router.query.cid && (
+							<Link href={'/manage-category'}>
 								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
 									Back
 								</a>
