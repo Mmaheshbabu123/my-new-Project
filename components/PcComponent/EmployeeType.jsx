@@ -29,6 +29,8 @@ const EmployeeType = () => {
 
 	const [ data, setData ] = useState([]);
 	const [ temp, setTemp ] = useState([]);
+	const [ temp2, setTemp2 ] = useState([]);
+
 	const [ res, setRes ] = useState([]);
 	const [ error_emp_type, setError_emp_type ] = useState('');
 
@@ -57,6 +59,7 @@ const EmployeeType = () => {
 						console.log(result);
 						if (result.data.length > 0) {
 							setRes(result.data);
+							setTemp(result.data);
 						}
 					})
 					.catch((error) => {
@@ -66,29 +69,38 @@ const EmployeeType = () => {
 
 	let updateRes = (event) => {
 		var res1 = [...res];
-		var temp1 = [...temp];
+		var temp1 = [...temp2];
 		if (event.target.checked) {
 			if (!res1.includes(parseInt(event.target.value))) {
 				res1.push(parseInt(event.target.value));
 			}
 			console.log('✅ Checkbox is checked');
 		} else {
-			const index = res1.indexOf(parseInt(event.target.value));
+			var index = res1.indexOf(parseInt(event.target.value));
 			if (index > -1) {
-				res1.splice(index, 1); // 2nd parameter means remove one item only
+				res1.splice(index, 1);
+				
+				// 2nd parameter means remove one item only
 			}
+			var index2 = temp.indexOf(parseInt(event.target.value));
+
+			if( index2 > -1){
+				temp1.push(parseInt(event.target.value)); 
+				setTemp2(temp1);
+			}
+		// 	var index2 = temp.indexOf(parseInt(event.target.value));
+
+		// 	if( index2 > -1){
+		// 		temp1.push(parseInt(event.target.value));
+		// }
 			
 			console.log('⛔️ Checkbox is NOT checked');
 		}
-		if(temp1.indexOf(event.target.value) > -1){
-			temp1.splice(index, 1);
-		}
+		
 		setRes(res1);
-		setTemp(temp1);
-		console.log(console.log(res1));
+		
 	};
 	let postdata = (data1) => {
-		console.log(data1);
 		if (id == '') {
 			APICALL.service(storePcEmployeeTypes, 'POST', data1)
 				.then((result) => {
@@ -110,7 +122,7 @@ const EmployeeType = () => {
 		var data1 = [];
 		data1.push(pc_unique_key);
 		data1.push(res);
-		data1.push(temp);
+		data1.push(temp2);
 		if (res.length != 0) {
 			postdata(data1);
 		} else {
@@ -130,7 +142,7 @@ const EmployeeType = () => {
 								className=""
 								value={val.id}
 								checked = {res.includes(val.id)?true:false} 
-								onClick={(e) => {
+								onChange={(e) => {
 									updateRes(e);
 								}}
 							/>{console.log(res)}
