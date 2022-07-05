@@ -190,9 +190,10 @@ function AddCategory(props) {
 					</div>
 					<label className="custom_astrick">Minimum salary</label>
 					<div className="form-group mb-3">
+					<div className="input-group">
 						<input
 							type="text"
-							className="form-control my-2"
+							className="form-control"
 							value={data.min_salary}
 							name="salary"
 							id="salary"
@@ -200,6 +201,8 @@ function AddCategory(props) {
 								setData((prev) => ({ ...prev, min_salary: e.target.value }));
 							}}
 						/>
+						<span className="input-group-text">€</span>
+						</div>
 						<p style={{ color: 'red' }}>{error_min_salary}</p>
 					</div>
 				</div>
