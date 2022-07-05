@@ -1,6 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
+import { useRouter } from 'next/router';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
+import styles from './AbsoluteYouAgent/absoluteAgent.module.css';
 import { APICALL } from '@/Services/ApiServices';
+import { validationService } from './validationService';
 import {
   fetchAbsoluteYouAgentData,
   fetchSalaryBenefitsPerPc
@@ -26,6 +29,7 @@ import SalaryBenefitsMain  from './SalaryBenefits/organisms/SalaryBenefitsMain';
 
 const TabIndex = (props) => {
 	const { state: { selectedTabId }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+  const router = useRouter();
 
 	useEffect(() => {
     if(!state.loadedTabs.includes(selectedTabId)) // Once data loaded next time it wont call database
@@ -72,9 +76,37 @@ const TabIndex = (props) => {
     }
     return component || <> {`Selected tab id: ${selectedTabId}`} </>;
   }
+
+  const forWardToNextStepTab = () => {
+    let proceed = validationService.proceedToNextStepTab({state, selectedTabId});
+    if(proceed) {
+      let nextTab = selectedTabId + 1;
+      let obj = { selectedTabId: nextTab, proceedToNextTabWarning: false, filledTabs: [...state.filledTabs, nextTab] }
+      router.query.selectedTabId = nextTab;
+      router.push(router, undefined, { shallow: true })
+      updateStateChanges(obj);
+    } else {
+      updateStateChanges({proceedToNextTabWarning: true});
+    }
+  }
+
 	return (
 		<div className="">
+      {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields (fields with asterisk mark) </p> : null}
       {state.renderTabComponents ? showComponentBasedOnTabSelection() : <> Loading... </>}
+      {state.renderTabComponents ? <div className={`col-md-12 row`} >
+          <div className={`col-md-11 ${styles['tab-index-back-div']}`}>
+            <p className={`${styles['tab-index-back-btn']}`}> Back </p>
+          </div>
+          <div className={`col-md-1`}>
+            <button
+              onClick={forWardToNextStepTab}
+              type="button"
+              className="btn btn-dark pcp_btn">
+              Next
+            </button>
+          </div>
+      </div>:null}
     </div>
 	);
 }
