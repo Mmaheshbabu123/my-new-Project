@@ -1,14 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { fetchSalaryBenefits, getPcSalaryBenefits } from '../../Services/ApiEndPoints';
+import { fetchSalaryBenefits, getPcSalaryBenefits, storePcSalBenifits } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
 import styles from '../../styles/Pc.module.css';
+import { useRouter } from 'next/router';
+
 
 const SalaryBenifits = () => {
+	const router = useRouter();
+
 	const [ visible, setVisible ] = useState(false);
 	const [ data, setData ] = useState([]);
 	const [ res, setRes ] = useState([]);
 	const [ error_sal_benifits, setError_sal_benifits ] = useState([]);
+	const [count, setCount] = useState(0);
 
 	const {
 		pc_unique_key,
@@ -29,25 +34,26 @@ const SalaryBenifits = () => {
 		setCurrent_sec
 	} = useContext(PcContext);
 
-	useEffect(() => {
-		APICALL.service(fetchSalaryBenefits, 'GET')
-			.then((result) => {
-				console.log(result);
-				if (result.data.length > 0) {
-					setData(result.data);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, []);
+	// useEffect(() => {
+	// 	APICALL.service(fetchSalaryBenefits, 'GET')
+	// 		.then((result) => {
+	// 			console.log(result);
+	// 			if (result.data.length > 0) {
+	// 				setData(result.data);
+	// 			}
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error(error);
+	// 		});
+	// }, []);
 
 	useEffect(() => {
 		APICALL.service(getPcSalaryBenefits + pc_unique_key, 'GET')
 			.then((result) => {
 				console.log(result);
-				if (result.data.length > 0) {
-					setRes(result.data);
+				if (result.data[0].length > 0) {
+					setData(result.data[0]);
+					setCount(result.data[1]);
 				}
 			})
 			.catch((error) => {
@@ -58,10 +64,13 @@ const SalaryBenifits = () => {
 	let updateRes = (event, key) => {
 		var res1 = [ ...data ];
 		if (event.target.checked) {
+			setCount(count+1);
 			res1[key]['checked'] = true;
 			console.log('✅ Checkbox is checked');
 		} else {
 			res1[key]['checked'] = false;
+			setCount(count-1);
+
 
 			console.log('⛔️ Checkbox is NOT checked');
 		}
@@ -69,13 +78,15 @@ const SalaryBenifits = () => {
 		console.log(data);
 	};
 
-	let submit = (event) => {
+	let submit = (event) => {	
 		event.preventDefault();
 		var data1 = [];
+
 		data1.push(pc_unique_key);
-		data1.push(res);
+		data1.push(data);
 		// data1.push(temp2);
-		if (res.length != 0) {
+		if (count > 0) {
+			setError_sal_benifits('');
 			postdata(data1);
 		} else {
 			setError_sal_benifits('Select atleast one salary benifit.');
@@ -84,14 +95,15 @@ const SalaryBenifits = () => {
 	};
 
 	let postdata = (data1) => {
-			APICALL.service(storeSalBenifits, 'POST', data1)
+			APICALL.service(storePcSalBenifits, 'POST', data1)
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						setCurrent_sec(5);
+						// setCurrent_sec(5);
 						var res1 = sec_completed;
 						res1['emp_type'] = true;
 						setSec_completed(res1);
+						router.push('/manage-pc')
 					}
 				})
 				.catch((error) => {
@@ -111,22 +123,25 @@ const SalaryBenifits = () => {
 									type="checkbox"
 									value={val.sb_id}
 									id={'flexCheckDefault' + key}
-									checked={res.includes(val.sb_id) ? true : false}
+									checked={val.checked == true ? true : false}
 									onChange={(e) => {
 										updateRes(e, key);
 									}}
 								/>
 								<label calssName="form-check-label" htmlFor="flexCheckDefault">
-									{val.name} {val.checked}
+									{val.name}
 								</label>
 							</div>
-							{res.includes(val.sb_id) && (
+							{val.checked && (
 								<div>
 									<div className="mt-3">
 										<p className="fw-bold">Is this mandatory?</p>
+										
 										<div className="d-flex mt-3">
 											<div className="form-check  ">
-												<input
+											<input type="radio" value='yes' name="yes" /> Yes
+        								<input type="radio" value="no" name="no" /> No
+												{/* <input
 													className="form-check-input d-flex"
 													type="radio"
 													value="option1"
@@ -140,7 +155,7 @@ const SalaryBenifits = () => {
 												<input className="form-check-input ms-2" type="radio" value="option2" />
 												<label className="form-check-label ms-1" htmlFor="exampleRadios2">
 													No
-												</label>
+												</label> */}
 											</div>
 										</div>
 									</div>

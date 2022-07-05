@@ -89,6 +89,9 @@ export const Addfunction = BASE_URL + "addfunction";
 
 //--------------PC salary benifits ROUTES --------------------//
 export const getPcSalaryBenefits = BASE_URL + "get-pc-sal-benifits/";
+export const storePcSalBenifits = BASE_URL + "store-pc-sal-benifits";
+
+
 
 
 
