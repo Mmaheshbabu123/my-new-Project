@@ -263,7 +263,7 @@ const PcCommon = (props) => {
 				) : (
 					<div>
 						{' '}
-						<PcOverview type="addpc" pc_type="edit" />
+						<PcOverview type="editpc" pc_type="edit" />
 					</div>
 				)}
 			</PcContext.Provider>
