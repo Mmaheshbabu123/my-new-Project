@@ -119,7 +119,7 @@ function Addtiming(props) {
 							<div className=" mt-5 ">
 								<div className="">
 									{employees.map((result) => (
-										<div>
+										<div key={result.id}>
 										<div className='row d-flex justify-content-start bg-light py-2 my-2'>
 											<div className="col-md-1">{result.id}.</div>
 											<div className="col-md-3">{result.name}</div>
