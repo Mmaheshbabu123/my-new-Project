@@ -24,7 +24,8 @@ function AddPc(props) {
 		setCat_rightsec,
 		setCat_leftsec,
 		setCat_fun_updated,
-		setCat_subsec_id
+		setCat_subsec_id,
+		pc_view_type
 	} = useContext(PcContext);
 	const [ error_pc_number, setError_pc_number ] = useState('');
 	const [ error_pc_name, setError_pc_name ] = useState('');

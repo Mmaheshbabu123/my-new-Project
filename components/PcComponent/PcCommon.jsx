@@ -26,6 +26,8 @@ const PcCommon = (props) => {
 	const [ cat_subsec_type, setCat_subsec_type ] = useState(0);
 	const [ cat_fun_updated, setCat_fun_updated ] = useState('');
 	const [ cat_subsec_id, setCat_subsec_id ] = useState(0);
+	const [ pc_view_type, setPc_view_type ] = useState('addpc');
+
 
 	useEffect(
 		() => {
@@ -66,7 +68,9 @@ const PcCommon = (props) => {
 					cat_fun_updated,
 					setCat_fun_updated,
 					cat_subsec_id,
-					setCat_subsec_id
+					setCat_subsec_id,
+					pc_view_type, 
+					setPc_view_type
 				}}
 			>
 				{props.type == 'add' ? (
@@ -255,10 +259,9 @@ const PcCommon = (props) => {
 							</div>
 						</div>
 					</div>
-				) : props.type == 'managepc' ? (
+				) : props.type == 'view' ? (
 					<div>
-						{' '}
-						<PcOverview type="addpc" pc_type="managepc" />
+						<PcOverview type="viewpc" pc_type="view" />
 					</div>
 				) : (
 					<div>

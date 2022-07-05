@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 
 const SalaryBenifits = () => {
 	const router = useRouter();
+	const [ disableForm, setDisableForm ] = useState(false);
+
 
 	const [ visible, setVisible ] = useState(false);
 	const [ data, setData ] = useState([]);
@@ -30,7 +32,8 @@ const SalaryBenifits = () => {
 		setSec_completed,
 		cat_subsec_id,
 		setCat_subsec_id,
-		setCurrent_sec
+		setCurrent_sec,
+		pc_view_type
 	} = useContext(PcContext);
 
 	// useEffect(() => {
@@ -59,6 +62,12 @@ const SalaryBenifits = () => {
 				console.error(error);
 			});
 	}, []);
+	useEffect(()=>{
+		if(pc_view_type == 'viewpc'){
+			setDisableForm(true)
+		}
+
+	},[pc_view_type])
 
 	let updateRes = (event, key) => {
 		var res1 = [ ...data ];
@@ -132,12 +141,13 @@ const SalaryBenifits = () => {
 	return (
 		<div className="container">
 			<form onSubmit={submit}>
-			{cat_subsec_type == 6 ? <h4 className="h5 mt-3">Edit salary benifits</h4> : ''}
+			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit salary benifits</h4> : (pc_view_type == 'viewpc' ? <h4 className="h5 mt-3">Salary benifits</h4> : '')}
 				<div className="row">
 					{data.map((val, key) => (
 						<div key={key} className={`form-check mt-4 bg-light me-3`}>
 							<div className="form-check mt-4">
 								<input
+									disabled={disableForm}
 									className="form-check-input"
 									type="checkbox"
 									value={val.sb_id}
@@ -159,6 +169,7 @@ const SalaryBenifits = () => {
 										<div className="d-flex mt-3">
 											<div className="form-check  ">
 												<input
+												    disabled={disableForm}
 													className="form-check-input d-flex"
 													type="radio"
 													value="true"
@@ -173,6 +184,7 @@ const SalaryBenifits = () => {
 
 											<div className="form-check">
 												<input
+												    disabled={disableForm}
 													className="form-check-input ms-2"
 													type="radio"
 													name={"yes"+val.sb_id}
