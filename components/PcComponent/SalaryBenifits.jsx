@@ -68,7 +68,6 @@ const SalaryBenifits = () => {
 			console.log('✅ Checkbox is checked');
 		} else {
 			res1[key]['checked'] = false;
-			res1[key]['mandatory'] = false;
 			setCount(count - 1);
 
 			console.log('⛔️ Checkbox is NOT checked');
