@@ -37,13 +37,13 @@ const PcForWorkersServants = () => {
       [servantsType]: worksServantsData[servantsType] || []
     }
     let editIndexObj = workersServantsCompState['editIndex'] || {};
+    let alreadyLinked = updateAlreadyLinkedPcIds(newItems);
     editIndex[workersType] =  editIndexObj[workersType] !== undefined  ? editIndexObj[workersType]  : newItems[workersType].length;
     editIndex[servantsType] = editIndexObj[servantsType] !== undefined ? editIndexObj[servantsType] : newItems[servantsType].length;
     let obj = {
       selectedPc: workersServantsCompState['selectedPc'] || compState['selectedPc'],
       selectedEmpId: workersServantsCompState['selectedEmpId'] || compState['selectedEmpId'],
-      newItems, editIndex,
-      alreadyLinked: state['alreadyLinked']
+      newItems, editIndex, alreadyLinked
     }
     setCompState({...compState, ...obj});
   }, [])
@@ -68,7 +68,7 @@ const PcForWorkersServants = () => {
    */
   const addItemAndUpdateIndex = (stateObj, type) => {
     let tab_1 = {...state[tabStateKey] }
-    if(!stateObj['selectedPc'][type]) return;
+    if(!stateObj['selectedPc'][type] || !stateObj['selectedEmpId'][type].length) return;
     stateObj['newItems'][type][stateObj['editIndex'][type]] = {
       pc_id: stateObj['selectedPc'][type],
       employee_type_id: stateObj['selectedEmpId'][type],
@@ -100,9 +100,9 @@ const PcForWorkersServants = () => {
     let emplOptions = pcLinkedEmployeeTypes[selectedPc] ? pcLinkedEmployeeTypes[selectedPc] : [];
     let pcOptions = helpers.returnNotAddedPcOptions(pcArray, state['workersServantsCompState']);
     return <div className={`${type === 1 ? 'col-md-9' : 'col-md-9 ' + styles['margin-auto-class']}`}>
-        <p className={styles['worker-servants-title']}> {type === 1 ? `PC for workers (arbeiders)` : `PC for servants (bedienden)` } </p>
+        <p className={styles['worker-servants-title']}> {type === 1 ? `PC for workers (arbeiders)` : `PC for servants (bedienden)`} </p>
         <div className={`${styles['add-div-margings']}`}>
-            <LabelField title={`Paritair comité (PC) ${type}`} />
+            <LabelField title={`Paritair comité (PC) ${type}`} customStyle={{display: 'inline-block'}} /> <span style={{color:'red'}}>*</span>
             <MultiSelectField
                 options={pcOptions.filter(val => !alreadyLinked.includes(val.value))}
                 standards={pcArray.filter(val => val.value === compState['selectedPc'][type])}
@@ -113,7 +113,7 @@ const PcForWorkersServants = () => {
               />
         </div>
         <div className={`${styles['add-div-margings']}`}>
-            <LabelField title="Selection of employee types (statuut) that can be used" />
+            <LabelField title="Selection of employee types (statuut) that can be used" customStyle={{display: 'inline-block'}} /> <span style={{color:'red'}}>*</span>
             <MultiSelectField
                 options={emplOptions}
                 standards={emplOptions.filter(val => compState['selectedEmpId'][type].includes(val.value))}
@@ -170,9 +170,9 @@ const PcForWorkersServants = () => {
           <tbody>
             {dataObj.map((item, index) =>
               <tr key={index} id={index}>
-                <td style={{ width: '40%' }}> {getCommaSeparatedlabels([item.pc_id], pcArray)} </td>
-                <td style={{ width: '40%' }}> {getCommaSeparatedlabels(item.employee_type_id, pcLinkedEmployeeTypes[item.pc_id])} </td>
-                <td style={{ width: '20%' }}> {getNeededActions(item, index, type)} </td>
+                <td style={{ width: '40%' }}> <span className={`${styles['newitems-span']}`} >{getCommaSeparatedlabels([item.pc_id], pcArray)}</span> </td>
+                <td style={{ width: '40%' }}> <span className={`${styles['newitems-span']}`} >{getCommaSeparatedlabels(item.employee_type_id, pcLinkedEmployeeTypes[item.pc_id])}</span></td>
+                <td style={{ width: '20%' }}> <span className={`${styles['newitems-span']}`} >{getNeededActions(item, index, type)}</span></td>
               </tr>
             )}
             </tbody>
@@ -206,6 +206,7 @@ const PcForWorkersServants = () => {
       stateObj['newItems'][workSerType].splice(index, 1)
       stateObj['editIndex'][workSerType] = stateObj['newItems'][workSerType].length;
     }
+    stateObj['alreadyLinked'] = updateAlreadyLinkedPcIds(stateObj['newItems']);
     updateStateChanges({ workersServantsCompState: stateObj })
     setCompState(stateObj);
   }

@@ -31,3 +31,23 @@
 	margin-left: 20%;
 	font-size: large;
 }
+
+
+/*  Back button  */
+.tab-index-back-btn {
+  width: 4%;
+  cursor: pointer;
+
+}
+.tab-index-back-btn:hover{
+  text-decoration: underline;
+}
+
+.tab-index-back-div{
+  padding-top: 20px;
+}
+
+.newitems-span {
+  display: inline-block;
+  margin-top: 25px;
+}

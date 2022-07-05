@@ -3,7 +3,7 @@ export const companyArray = [
 ];
 
 export const companyRow1 = [
-  {id :8,key_name:'VAT-number'},
+  //{id :8,key_name:'VAT-number'},
   {id:5,key_name:'Official legal company name'},
   {id:6,key_name:'Company call name'},
 

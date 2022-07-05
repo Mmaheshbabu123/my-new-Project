@@ -19,6 +19,7 @@ const CooperationAgreementStates = (props) => {
     , alreadyLinked: []
     , salaryBenefitPcArray: []
     , salaryDataPerPc: {}
+    , filledTabs: [1]
   };
   const [state, dispatch] = useReducer(CooperationAgreementReducer, initialState);
   const updateStateChanges = (obj) => {
