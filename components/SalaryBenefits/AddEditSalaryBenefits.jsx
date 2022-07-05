@@ -40,7 +40,7 @@ const AddEditSalaryBenefits = (props) => {
      */
     const addItemAndUpdateIndex = (stateObj) => {
       if (stateObj['name'].length) {
-        let duplicates = stateObj['newItems'].filter(val => val.name.toLowerCase() === state.name.toLowerCase())
+        let duplicates = stateObj['newItems'].filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
         if(duplicates.length) {
             stateObj['uniqueError'] = true;
             stateObj['duplicates'] = duplicates.map(obj => obj.name);
@@ -68,6 +68,7 @@ const AddEditSalaryBenefits = (props) => {
      */
     const handleSubmit = async () => {
       let newItemsList = inertNewItem();
+      if(!newItemsList) return;
       if ((state.editFlow && !state.name.length) || (!state.editFlow && !newItemsList.length)) {
         setState({ ...state, nameWarning: true });
         return;
@@ -86,12 +87,21 @@ const AddEditSalaryBenefits = (props) => {
 
   const inertNewItem = () => {
     let newItemsList = [...state.newItems];
-    if(state.name.length) {
-      newItemsList[state.editIndex] = {
-          name: state.name
-        , date: state.date
-        , value: state.value
-      };
+    let duplicates = newItemsList.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
+    if(duplicates.length) {
+        let stateObj = {...state};
+        stateObj['uniqueError'] = true;
+        stateObj['duplicates'] = duplicates.map(obj => obj.name);
+        setState(stateObj);
+        return 0;
+    } else {
+      if(state.name.length) {
+        newItemsList[state.editIndex] = {
+            name: state.name
+          , date: state.date
+          , value: state.value
+        };
+      }
     }
     return newItemsList;
   }

@@ -97,8 +97,8 @@ function Addtiming(props) {
 						/>
 					</div>
 					<div className=''>qqqqqqqqqqqqqqqqqqqqqqqqqq</div>
-					{selectedDate.map((value)=>(
-						<div className='row'>
+					{selectedDate.map((value, index)=>(
+						<div className='row' key={index}>
 						<p className="bg-light">{value}</p>
 						</div>
 					))}
