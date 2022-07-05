@@ -1,5 +1,5 @@
 export const contactPersonsRow1 = [
-    {id :25,key_name:'Title',type:6,option1:'Yes',option2:'No'},
+  //  {id :25,key_name:'Title',type:6,option1:'Yes',option2:'No'},
     {id :26,key_name:'First name',type:1},
     {id :27,key_name:'Function title',type:1},
     {id :28,key_name:'Mobile',type:1},
@@ -37,4 +37,8 @@ export const locationArray = [
 export const contactArray = [
   {value: 1, label: 'Contact1'},
   {value: 1, label: 'Contact2'},
+];
+
+export const defaultFileds = [
+  {'25':1,'30':1,'31':2,'32':2,'38':2,'39':2}
 ];

@@ -7,9 +7,10 @@ import MultiSelectField from '@/atoms/MultiSelectField';
 import RequiredField from '@/atoms/RequiredSpanField';
 import { requiredFields} from '../../../RequiredFields';
 import styles from '../Contactperson.module.css';
-import {locationArray,contactArray,contactPersonsRow1,contactPersonsRow2} from '../ContactPersonsFields';
+import DateField from '@/atoms/DateField';
+import {locationArray,contactArray,contactPersonsRow1,contactPersonsRow2,defaultFileds} from '../ContactPersonsFields';
 const BasicDetails= ({props,personId}) => {
-
+var Title_key = 6;
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
 
@@ -74,13 +75,36 @@ const BasicDetails= ({props,personId}) => {
       </div>
     )
   }
+  else if(data.type === 5) {
+fieldData.push(
+    <div className="">
+          <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_3'][data.id] && <RequiredField />}
+          <DateField
+             id={data.id}
+             isDisabled= {false}
+             placeholder={'date'}
+             handleChange={handleChange}
+             className="col-md-6"
+             value={tab_3[personId][data.id]}
+            />
+      </div>
+    )
+  }
     })
     return fieldData;
   }
 
   return (
     <div className="col-md-12 row">
+    <div className = {`col-md-12 ${styles['add-div-margings']}`}>
+        <LabelField title={'Title'} customStyle = {{display:''}}/>{requiredFields['tab_3'][Title_key] && <RequiredField />}
+        <div>
+        <RadioField   name = {Title_key} checked = {tab_3[personId][Title_key] === 1} handleChange = {(e)=>handleRadioSelect(Title_key,1)} label= {'Mr'} />
+        <RadioField  name = {Title_key} checked = {tab_3[personId][Title_key] === 2} handleChange = {(e)=>handleRadioSelect(Title_key,2)} label= {'Mrs'} />
+        </div>
+    </div>
       <div className = 'col-md-6'>
+
        {ConstructHtmlData(contactPersonsRow1)}
        </div>
        <div className = 'col-md-6'>

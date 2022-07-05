@@ -62,6 +62,11 @@ const ManagePc = (props) => {
 					</div>
 				</div>
 			))}
+			{props.data.length == 0 &&
+			<div className="bg-light py-3 mt-3">
+			<div className='text-center'> No paritaire comitee </div>
+			</div>
+			}
 			<div className="row">
 				<div className="col-md-6">
 				<button

@@ -29,15 +29,11 @@ const EmployeeType = () => {
 
 	const [ data, setData ] = useState([]);
 	const [ temp, setTemp ] = useState([]);
+	const [ temp2, setTemp2 ] = useState([]);
+
 	const [ res, setRes ] = useState([]);
 	const [ error_emp_type, setError_emp_type ] = useState('');
 
-	let next_redirection = () => {
-		setCurrent_sec(5);
-		var res1 = sec_completed;
-		res1['emp_type'] = true;
-		setSec_completed(res1);
-	};
 	useEffect(
 		() => {
 			if (pc_unique_key != '') {
@@ -63,6 +59,7 @@ const EmployeeType = () => {
 						console.log(result);
 						if (result.data.length > 0) {
 							setRes(result.data);
+							setTemp(result.data);
 						}
 					})
 					.catch((error) => {
@@ -71,40 +68,48 @@ const EmployeeType = () => {
 	},[pc_unique_key])
 
 	let updateRes = (event) => {
-		var res1 = res;
-		var temp1 = temp;
+		var res1 = [...res];
+		var temp1 = [...temp2];
 		if (event.target.checked) {
-			if (!res1.includes(event.target.value)) {
-				res1.push(event.target.value);
+			if (!res1.includes(parseInt(event.target.value))) {
+				res1.push(parseInt(event.target.value));
 			}
 			console.log('✅ Checkbox is checked');
 		} else {
-			const index = res1.indexOf(event.target.value);
+			var index = res1.indexOf(parseInt(event.target.value));
 			if (index > -1) {
-				res1.splice(index, 1); // 2nd parameter means remove one item only
+				res1.splice(index, 1);
+				
+				// 2nd parameter means remove one item only
 			}
+			var index2 = temp.indexOf(parseInt(event.target.value));
+
+			if( index2 > -1){
+				temp1.push(parseInt(event.target.value)); 
+				setTemp2(temp1);
+			}
+		// 	var index2 = temp.indexOf(parseInt(event.target.value));
+
+		// 	if( index2 > -1){
+		// 		temp1.push(parseInt(event.target.value));
+		// }
 			
 			console.log('⛔️ Checkbox is NOT checked');
 		}
-		if(temp1.indexOf(event.target.value) > -1){
-			temp1.splice(index, 1);
-		}
+		
 		setRes(res1);
-		setTemp(temp1);
-		console.log(console.log(res1));
+		
 	};
 	let postdata = (data1) => {
-		console.log(data1);
 		if (id == '') {
 			APICALL.service(storePcEmployeeTypes, 'POST', data1)
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						// setId(result.pcid);
-						// setCurrent_sec(5);
-						// var res1 = sec_completed;
-						// res1['emp_type'] = true;
-						// setSec_completed(res1);
+						setCurrent_sec(5);
+						var res1 = sec_completed;
+						res1['emp_type'] = true;
+						setSec_completed(res1);
 					}
 				})
 				.catch((error) => {
@@ -117,7 +122,7 @@ const EmployeeType = () => {
 		var data1 = [];
 		data1.push(pc_unique_key);
 		data1.push(res);
-		data1.push(temp);
+		data1.push(temp2);
 		if (res.length != 0) {
 			postdata(data1);
 		} else {
@@ -125,26 +130,11 @@ const EmployeeType = () => {
 		}
 		console.log(data1);
 	};
-	// let backToDashboard = () =>{
-	// 	var src =JSON.parse(localStorage.getItem("src"));
-	// 	var type = JSON.parse(localStorage.getItem("type"));
-	// 	if (src) {
-	// 		window.localStorage.removeItem('src');
-	// 		if(type == "1"){
-	// 		window.location.assign(src)
-	// 		}
-	// 		else{
-	// 		router.push('/'+src)
-	// 		}
-	// 	}
-
-	// }
 
 	return (
 		<div className="container">
 			<form onSubmit={submit}>
 				<div className="row pt-4">
-					{/* <p className="h3 text-center mt-2">Edit employee type</p> */}
 					{data.map((val) => (
 						<div className="col-sm-5 d-flex form-group bg-light mt-4" key={val.id}>
 							<input
@@ -152,7 +142,7 @@ const EmployeeType = () => {
 								className=""
 								value={val.id}
 								checked = {res.includes(val.id)?true:false} 
-								onClick={(e) => {
+								onChange={(e) => {
 									updateRes(e);
 								}}
 							/>{console.log(res)}
