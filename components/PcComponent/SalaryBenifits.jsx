@@ -5,7 +5,6 @@ import { PcContext } from '../../Contexts/PcContext';
 import styles from '../../styles/Pc.module.css';
 import { useRouter } from 'next/router';
 
-
 const SalaryBenifits = () => {
 	const router = useRouter();
 
@@ -13,7 +12,7 @@ const SalaryBenifits = () => {
 	const [ data, setData ] = useState([]);
 	const [ res, setRes ] = useState([]);
 	const [ error_sal_benifits, setError_sal_benifits ] = useState([]);
-	const [count, setCount] = useState(0);
+	const [ count, setCount ] = useState(0);
 
 	const {
 		pc_unique_key,
@@ -64,13 +63,13 @@ const SalaryBenifits = () => {
 	let updateRes = (event, key) => {
 		var res1 = [ ...data ];
 		if (event.target.checked) {
-			setCount(count+1);
+			setCount(count + 1);
 			res1[key]['checked'] = true;
 			console.log('✅ Checkbox is checked');
 		} else {
 			res1[key]['checked'] = false;
-			setCount(count-1);
-
+			res1[key]['mandatory'] = false;
+			setCount(count - 1);
 
 			console.log('⛔️ Checkbox is NOT checked');
 		}
@@ -78,7 +77,7 @@ const SalaryBenifits = () => {
 		console.log(data);
 	};
 
-	let submit = (event) => {	
+	let submit = (event) => {
 		event.preventDefault();
 		var data1 = [];
 
@@ -95,20 +94,27 @@ const SalaryBenifits = () => {
 	};
 
 	let postdata = (data1) => {
-			APICALL.service(storePcSalBenifits, 'POST', data1)
-				.then((result) => {
-					console.log(result);
-					if (result.status === 200) {
-						// setCurrent_sec(5);
-						var res1 = sec_completed;
-						res1['emp_type'] = true;
-						setSec_completed(res1);
-						router.push('/manage-pc')
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+		APICALL.service(storePcSalBenifits, 'POST', data1)
+			.then((result) => {
+				console.log(result);
+				if (result.status === 200) {
+					// setCurrent_sec(5);
+					var res1 = sec_completed;
+					res1['emp_type'] = true;
+					setSec_completed(res1);
+					router.push('/manage-pc');
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};
+
+	let handleRadio = (e, key) => {
+		var data1 = [ ...data ];
+		const isPublished = e.target.value === 'true' ? true : false;
+		data1[key]['mandatory'] = isPublished;
+		setData(data1);
 	};
 
 	return (
@@ -136,15 +142,16 @@ const SalaryBenifits = () => {
 								<div>
 									<div className="mt-3">
 										<p className="fw-bold">Is this mandatory?</p>
-										
+
 										<div className="d-flex mt-3">
 											<div className="form-check  ">
-											<input type="radio" value='yes' name="yes" /> Yes
-        								<input type="radio" value="no" name="no" /> No
-												{/* <input
+												<input
 													className="form-check-input d-flex"
 													type="radio"
-													value="option1"
+													value="true"
+													name="yes"
+													checked={val.mandatory === true}
+													onChange={(e) => handleRadio(e, key)}
 												/>
 												<label className="form-check-label ms-1" htmlFor="exampleRadios1">
 													Yes
@@ -152,19 +159,24 @@ const SalaryBenifits = () => {
 											</div>
 
 											<div className="form-check">
-												<input className="form-check-input ms-2" type="radio" value="option2" />
+												<input
+													className="form-check-input ms-2"
+													type="radio"
+													name="no"
+													checked={val.mandatory === false}
+													onChange={(e) => handleRadio(e, key)}
+												/>
 												<label className="form-check-label ms-1" htmlFor="exampleRadios2">
 													No
-												</label> */}
+												</label>
 											</div>
 										</div>
 									</div>
 								</div>
 							)}
-						
 						</div>
 					))}
-						<p className="mt-2" style={{ color: 'red' }}>
+					<p className="mt-2" style={{ color: 'red' }}>
 						{error_sal_benifits}
 					</p>
 				</div>
