@@ -14,7 +14,23 @@ import { data } from 'node_modules/autoprefixer/lib/autoprefixer';
  * @returns 
  */
 
+
+ 
 const ManagePc = (props) => {
+	const [ data, setData ] = useState([]);
+
+	useEffect(()=>{
+		APICALL.service(getPcOverviewDetails, 'GET')
+		.then((result) => {
+			if (result.status === 200) {
+				setData(result.paritairecomitee);
+			}
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+	},[])
+
 	console.log(props);
 
 	return (
@@ -32,7 +48,7 @@ const ManagePc = (props) => {
 					</span>
 				</div>
 			</div>
-			{props.data.map((val, key) => (
+			{data.map((val, key) => (
 				<div className="row my-2 pt-2" key={key}>
 					<div className={`col-md-10 d-flex`}>
 						<span className={`py-2 ${styles.pcid} fw-bold`}>{key+1}.</span>
@@ -62,7 +78,7 @@ const ManagePc = (props) => {
 					</div>
 				</div>
 			))}
-			{props.data.length == 0 &&
+			{data.length == 0 &&
 			<div className="bg-light py-3 mt-3">
 			<div className='text-center'> No paritaire comitee </div>
 			</div>
