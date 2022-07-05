@@ -70,7 +70,7 @@ const ManageFunction = () => {
 		if (searchPc != '' && searchFunc != '' && searchCat != '' && searchSal != '') {
 			functionsTemp.map((val) => {
 				if (
-					val['pc_number'].trim().includes(searchPc) &&
+					(( val['pc_number'] != undefined && val['pc_number'].trim().includes(searchPc))||val['pc_num'].trim().includes(searchPc)) &&
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase()) &&
 					val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()) &&
 					val['min_salary'].toLowerCase().includes(searchSal)
@@ -84,7 +84,7 @@ const ManageFunction = () => {
 		} else if (searchPc != '' && searchFunc != '' && searchCat != '') {
 			functionsTemp.map((val) => {
 				if (
-					val['pc_number'].trim().includes(searchPc) &&
+					(( val['pc_number'] != undefined &&val['pc_number'].trim().includes(searchPc))||val['pc_num'].trim().includes(searchPc)) &&
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase()) &&
 					val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase())
 				) {
@@ -108,7 +108,7 @@ const ManageFunction = () => {
 				if (
 					val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()) &&
 					val['min_salary'].trim().toLowerCase().includes(searchSal.toLowerCase()) &&
-					val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase())
+					(( val['pc_number'] != undefined &&val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase()))||val['pc_num'].trim().includes(searchPc))
 				) {
 					res.push(val);
 				}
@@ -118,7 +118,7 @@ const ManageFunction = () => {
 			functionsTemp.map((val) => {
 				if (
 					val['min_salary'].trim().includes(searchSal) &&
-					val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase()) &&
+					(val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase())||val['pc_num'].trim().includes(searchPc)) &&
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase())
 				) {
 					res.push(val);
@@ -129,7 +129,7 @@ const ManageFunction = () => {
 			// CONDITIONS WHEN TWO VALUES ARE GIVEN //
 			functionsTemp.map((val) => {
 				if (
-					val['pc_number'].trim().includes(searchPc) &&
+					(( val['pc_number'] != undefined &&val['pc_number'].trim().includes(searchPc))||val['pc_num'].trim().includes(searchPc)) &&
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase())
 				) {
 					res.push(val);
@@ -158,7 +158,7 @@ const ManageFunction = () => {
 			setFunctions(res);
 		} else if (searchPc != '' && searchSal != '') {
 			functionsTemp.map((val) => {
-				if (val['pc_number'].trim().includes(searchPc) && val['min_salary'].trim().includes(searchSal)) {
+				if ((( val['pc_number'] != undefined && val['pc_number'].trim().includes(searchPc))||val['pc_num'].trim().includes(searchPc)) && val['min_salary'].trim().includes(searchSal)) {
 					res.push(val);
 				}
 			});
@@ -176,7 +176,7 @@ const ManageFunction = () => {
 		} else if (searchPc != '' && searchCat != '') {
 			functionsTemp.map((val) => {
 				if (
-					val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase()) &&
+					(( val['pc_number'] != undefined &&val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase()))||val['pc_num'].trim().includes(searchPc)) &&
 					val['cat_name'].trim().includes(searchCat)
 				) {
 					res.push(val);
@@ -187,7 +187,7 @@ const ManageFunction = () => {
 			// CONDITIONS WHEN ONLY ONE VALUE IS GIVEN //
 		} else if (searchPc != '') {
 			functionsTemp.map((val) => {
-				if (val['pc_number'].trim().includes(searchPc)) {
+				if (( val['pc_number'] != undefined && val['pc_number'].trim().includes(searchPc))||val['pc_num'].trim().includes(searchPc)) {
 					res.push(val);
 				}
 			});
