@@ -211,7 +211,7 @@ const SalaryBenifits = () => {
 						{error_sal_benifits}
 					</p>
 				</div>
-				{pc_view_type == 'viewpc' ? (
+				{pc_view_type == 'editpc' ? (
 					<div className="row">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
