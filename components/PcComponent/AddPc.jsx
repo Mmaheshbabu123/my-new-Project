@@ -27,7 +27,8 @@ function AddPc(props) {
 		setCat_leftsec,
 		setCat_fun_updated,
 		setCat_subsec_id,
-		pc_view_type
+		pc_view_type,
+		cat_subsec_id
 	} = useContext(PcContext);
 	const [ error_pc_number, setError_pc_number ] = useState('');
 	const [ error_pc_name, setError_pc_name ] = useState('');
@@ -86,6 +87,16 @@ function AddPc(props) {
 		}
 
 	},[pc_view_type])
+
+
+	useEffect(
+		() => {
+			if (cat_subsec_type == 3) {
+				setId(cat_subsec_id);
+			}
+		},
+		[ cat_subsec_id ]
+	);
 
 	/**
 	 * it will post the committee data to the backend by using api's

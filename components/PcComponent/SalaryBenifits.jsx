@@ -211,7 +211,7 @@ const SalaryBenifits = () => {
 						{error_sal_benifits}
 					</p>
 				</div>
-				{cat_subsec_type == 6 ? (
+				{pc_view_type == 'viewpc' ? (
 					<div className="row">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
@@ -223,7 +223,7 @@ const SalaryBenifits = () => {
 							</button>
 						</div>
 					</div>
-				) :
+				) :pc_view_type == 'addpc'?
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
@@ -244,7 +244,7 @@ const SalaryBenifits = () => {
 							Save
 						</button>
 					</div>
-				</div>
+				</div>:''
 }
 			</form>
 		</div>
