@@ -123,7 +123,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           <tbody>
             {state.currentItems.map(eachRow => <tr key={eachRow.sb_id} id={eachRow.sb_id}>
               <td> {eachRow.name} </td>
-              <td> {formatDate(eachRow.date)} </td>
+              <td> {formatDate(eachRow.date) ? formatDate(eachRow.date) : '--'} </td>
               <td> {eachRow.value ? eachRow.value : '--'} </td>
               <td>{ getNeededActions(eachRow) } </td>
             </tr>)}

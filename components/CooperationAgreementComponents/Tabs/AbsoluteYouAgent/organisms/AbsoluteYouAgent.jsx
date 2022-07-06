@@ -5,6 +5,7 @@ import PcForWorkersServants from '../molecules/PcForWorkersServants';
 import CoefficientPage from '../molecules/CoefficientPage';
 
 const AbsoluteYouAgent = (props) => {
+  
   return(
     <div className="_absolute-you-agend_">
         <BasicDetails />

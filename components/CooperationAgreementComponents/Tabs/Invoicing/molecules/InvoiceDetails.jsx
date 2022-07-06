@@ -5,6 +5,7 @@ import InputField from '@/atoms/InputTextfield';
 import RadioField from '@/atoms/RadioField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import RequiredField from '@/atoms/RequiredSpanField';
+import ValidateMessage from '@/atoms/validationError';
 import { invoiceRow1,invoiceRow2} from '../InvoiceFields';
 import styles from '../Invoicing.module.css';
 import { requiredFields} from '../../../RequiredFields';
@@ -44,6 +45,9 @@ const InvoiceDetails = (props) => {
            name={data.id}
            //{`tab_2_${data.id}`}
           />
+          {tab_6['validations'][data.id] && tab_6['validations'][data.id]['validate'] &&
+            <ValidateMessage text = {'This field is invalid'}/>
+          }
          </div>
        )
      }
