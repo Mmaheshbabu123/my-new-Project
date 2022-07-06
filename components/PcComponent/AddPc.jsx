@@ -267,12 +267,12 @@ function AddPc(props) {
 		//check if fields are valid
 		error1['pc_number'] =
 			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number) : error1['pc_number'];
-		error1['pc_name'] =
-			error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
-		error1['pc_alias_name'] =
-			res.pc_alias_name != '' && res.pc_alias_name != undefined
-				? ValidationService.nameValidationMethod(res.pc_alias_name)
-				: '';
+		// error1['pc_name'] =
+		// 	error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
+		// error1['pc_alias_name'] =
+		// 	res.pc_alias_name != '' && res.pc_alias_name != undefined
+		// 		? ValidationService.nameValidationMethod(res.pc_alias_name)
+		// 		: '';
 		error1['pc_alias_name'] =
 			error1['pc_alias_name'] == '' &&
 			res.pc_alias_name != '' &&
@@ -285,7 +285,7 @@ function AddPc(props) {
 		setError_pc_name(error1['pc_name']);
 		setError_pc_alias_name(error1['pc_alias_name']);
 		//return false if there is an error else return true
-		if (error1['pc_number'] == '' && error1['pc_name'] == '' && error1['pc_alias_name'] == '') {
+		if (error1['pc_number'] == '' && error1['pc_name'] == '') {
 			return true;
 		} else {
 			return false;
