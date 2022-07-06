@@ -101,7 +101,9 @@ function AddPc(props) {
 						setSec_completed(res1);
 						}
 					} else if (result.status == 205) {
+						setDisableSave(false);
 						checkduplicates(result.data);
+
 					}
 					setDisableSave(false);
 				})
@@ -140,18 +142,20 @@ function AddPc(props) {
 	};
 
 	let checkduplicates = (res) => {
-		res.forEach((element) => {
-			if (element.pc_number == data.pc_number) {
+		res.forEach((element,key) => {
+			if (element.pc_number.replaceAll(' ','').toLowerCase() == data.pc_number.replaceAll(' ','').toLowerCase()) {
 				setError_pc_number('Paritair comite number already exists.');
 			}
-			if (element.pc_alias_name == data.pc_alias_name) {
+			if (element.pc_alias_name!= null && data.pc_alias_name !=null && element.pc_alias_name.replaceAll(' ','').toLowerCase() == data.pc_alias_name.replaceAll(' ','').toLowerCase()) {
 				setError_pc_alias_name('Paritair comite alias name already exists.');
-			} else if (element.pc_alias_name == data.pc_name) {
+			}
+			if (element.pc_alias_name!= null && data.pc_name !=null && element.pc_alias_name.replaceAll(' ','').toLowerCase() == data.pc_name.replaceAll(' ','').toLowerCase()) {
 				setError_pc_name('Paritair comite name already exists.');
 			}
-			if (element.pc_name == data.pc_alias_name) {
+			if (element.pc_name!= null && data.pc_alias_name !=null && element.pc_name.replaceAll(' ','').toLowerCase() == data.pc_alias_name.replaceAll(' ','').toLowerCase()) {
 				setError_pc_alias_name('Paritair comite alias name already exists.');
-			} else if (element.pc_name == data.pc_name) {
+			}
+			if (element.pc_name!= null && data.pc_name !=null && element.pc_name.replaceAll(' ','').toLowerCase() == data.pc_name.replaceAll(' ','').toLowerCase()) {
 				setError_pc_name('Paritair comite name already exists.');
 			}
 		});
