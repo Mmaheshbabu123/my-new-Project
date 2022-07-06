@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 const SalaryBenifits = () => {
 	const router = useRouter();
 	const [ disableForm, setDisableForm ] = useState(false);
+	const [ sec_width, setSec_width ] = useState('col-md-5');
+
 
 
 	const [ visible, setVisible ] = useState(false);
@@ -65,6 +67,10 @@ const SalaryBenifits = () => {
 	useEffect(()=>{
 		if(pc_view_type == 'viewpc'){
 			setDisableForm(true)
+			setSec_width('col-md-12')
+		}
+		if(pc_view_type == 'editpc'){
+			setSec_width('col-md-12')
 		}
 
 	},[pc_view_type])
@@ -144,7 +150,7 @@ const SalaryBenifits = () => {
 			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit salary benifits</h4> : (pc_view_type == 'viewpc' ? <h4 className="h5 mt-3">Salary benifits</h4> : '')}
 				<div className="row">
 					{data.map((val, key) => (
-						<div key={key} className={`form-check mt-4 bg-light me-3`}>
+						<div key={key} className={`form-check mt-4 bg-light me-3 ${sec_width}`}>
 							<div className="form-check mt-4">
 								<input
 									disabled={disableForm}

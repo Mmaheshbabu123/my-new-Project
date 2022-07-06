@@ -7,6 +7,8 @@ import { APICALL } from '../../Services/ApiServices';
 const Addage = () => {
 	const [ id, setId ] = useState('');
 	const [ disableForm, setDisableForm ] = useState(false);
+	const [ sec_width, setSec_width ] = useState('col-md-6');
+
 
 	const [ showhideage, setShowhideage ] = useState('');
 	const {
@@ -96,6 +98,10 @@ const Addage = () => {
 	useEffect(()=>{
 		if(pc_view_type == 'viewpc'){
 			setDisableForm(true)
+			setSec_width('col-md-12')
+		}
+		if(pc_view_type == 'editpc'){
+			setSec_width('col-md-12')
 		}
 
 	},[pc_view_type])
@@ -335,7 +341,7 @@ const Addage = () => {
 				{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Age</h4>:'')}
 
 				<div className="row pt-4">
-					<div className="">
+					<div className={sec_width}>
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}
 
 						<div className="mb-3">

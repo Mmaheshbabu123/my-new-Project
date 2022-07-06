@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 const EmployeeType = () => {
 	const router = useRouter();
 	const [ disableForm, setDisableForm ] = useState(false);
+	const [ sec_width, setSec_width ] = useState('col-md-5');
 
 
 	const {
@@ -58,6 +59,10 @@ const EmployeeType = () => {
 	useEffect(()=>{
 		if(pc_view_type == 'viewpc'){
 			setDisableForm(true)
+			setSec_width('col-md-12')
+		}
+		if(pc_view_type == 'editpc'){
+			setSec_width('col-md-12')
 		}
 
 	},[pc_view_type])
@@ -157,7 +162,7 @@ const EmployeeType = () => {
 
 				<div className="row pt-4">
 					{data.map((val) => (
-						<div className="form-check mt-4" key={val.id}>
+						<div className={"form-check mt-4 "+sec_width} key={val.id}>
 							<input
 								disabled={disableForm}
 								type="checkbox"
