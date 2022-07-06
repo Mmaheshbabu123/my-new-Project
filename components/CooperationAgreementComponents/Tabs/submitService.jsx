@@ -161,6 +161,9 @@ function absoluteYouPostData(state) {
   if(selectedEmpId[servants] && selectedEmpId[servants].length) {
     data['worksServantsData'][workers].push(insertObj(selectedPc, selectedEmpId, servants))
   }
+  let coeffPageData = state['coeffPageData'] || {};
+  let selectedPcId = coeffPageData.selectedPc || 0;
+  data['coeffPageDataPc'] = selectedPcId;
   return data;
 }
 function validationsObjCheckStatus (validate_data) {
