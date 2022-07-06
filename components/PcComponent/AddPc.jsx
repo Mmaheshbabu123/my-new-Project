@@ -28,7 +28,8 @@ function AddPc(props) {
 		setCat_fun_updated,
 		setCat_subsec_id,
 		pc_view_type,
-		cat_subsec_id
+		cat_subsec_id,
+		setUpdate_sec_completed
 	} = useContext(PcContext);
 	const [ error_pc_number, setError_pc_number ] = useState('');
 	const [ error_pc_name, setError_pc_name ] = useState('');
@@ -50,21 +51,67 @@ function AddPc(props) {
 	useEffect(
 		() => {
 			if (!router.isReady) return;
-			if (router.query.uid && data.id == '') {
+			if (router.query.uid) {
 				APICALL.service(getPcByUniquekey + router.query.uid, 'GET')
 					.then((result) => {
 						console.log(result);
 						if (result.status === 200 && result.data.length > 0) {
-							var res1 = sec_completed;
-							res1['pc'] = true;
-							setSec_completed(res1); //updating that add pc data is filled so that next section can be enable
+							if (result.data[0].completed == 5) {
+								setSec_completed((oldState) => {
+									return {
+										...oldState,
+										cat: true,
+										age: true,
+										pc: true,
+										emp_type: true,
+										sal_benefit: true
+									};
+								});
+							} else if (result.data[0].completed == 4) {
+								setSec_completed((oldState) => {
+									return {
+										...oldState,
+										cat: true,
+										age: true,
+										pc: true,
+										emp_type: true,
+									};
+								});
+							} else if (result.data[0].completed == 3) {
+								setSec_completed((oldState) => {
+									return {
+										...oldState,
+										cat: true,
+										age: true,
+										pc: true,
+									};
+								});
+							} else if (result.data[0].completed == 2) {
+								setSec_completed((oldState) => {
+									return {
+										...oldState,
+										cat: true,
+										pc: true,
+									};
+								});
+
+							} else if (result.data[0].completed == 1) {
+								setSec_completed((oldState) => {
+									return {
+										...oldState,
+										pc: true,
+									};
+								});
+							} // setSec_completed(res1); //updating that add pc data is filled so that next section can be enable
 							var data1 = {};
 							setId(result.data[0].id);
 							data1['id'] = result.data[0].id;
 							data1['pc_unique_key'] = result.data[0].pc_unique_key;
 							data1['pc_number'] = result.data[0].pc_number;
 							data1['pc_name'] = result.data[0].pc_name;
-							data1['pc_alias_name'] = result.data[0].pc_alias_name;
+							data1['pc_alias_name'] =
+								result.data[0].pc_alias_name != null ? result.data[0].pc_alias_name : '';
+							// setUpdate_sec_completed(result.data[0].completed)
 							setData(data1);
 						}
 					})
@@ -77,17 +124,18 @@ function AddPc(props) {
 		[ router.isReady ]
 	);
 
-	useEffect(()=>{
-		if(pc_view_type == 'viewpc'){
-			setDisableForm(true)
-			setSec_width('col-md-12')
-		}
-		if(pc_view_type == 'editpc'){
-			setSec_width('col-md-12')
-		}
-
-	},[pc_view_type])
-
+	useEffect(
+		() => {
+			if (pc_view_type == 'viewpc') {
+				setDisableForm(true);
+				setSec_width('col-md-12');
+			}
+			if (pc_view_type == 'editpc') {
+				setSec_width('col-md-12');
+			}
+		},
+		[ pc_view_type ]
+	);
 
 	useEffect(
 		() => {
@@ -110,24 +158,22 @@ function AddPc(props) {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						if(cat_subsec_type == 3){
+						if (cat_subsec_type == 3) {
 							setCat_fun_updated('pc' + result.pcid);
 							setCat_rightsec('d-none');
 							setCat_leftsec('col-md-12');
 							setCat_subsec_type(0);
 							setCat_subsec_id('');
-
-						}else{
-						setId(result.pcid);
-						setCurrent_sec(2);
-						var res1 = sec_completed;
-						res1['pc'] = true;
-						setSec_completed(res1);
+						} else {
+							setId(result.pcid);
+							setCurrent_sec(2);
+							var res1 = sec_completed;
+							res1['pc'] = true;
+							setSec_completed(res1);
 						}
 					} else if (result.status == 205) {
 						setDisableSave(false);
 						checkduplicates(result.data);
-
 					}
 					setDisableSave(false);
 				})
@@ -139,18 +185,17 @@ function AddPc(props) {
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						if(cat_subsec_type == 3){
+						if (cat_subsec_type == 3) {
 							setCat_fun_updated('pc' + result.pcid);
 							setCat_rightsec('d-none');
 							setCat_leftsec('col-md-12');
 							setCat_subsec_type(0);
 							setCat_subsec_id('');
-
-						}else{
-						setCurrent_sec(2);
-						var res1 = sec_completed;
-						res1['pc'] = true;
-						setSec_completed(res1);
+						} else {
+							setCurrent_sec(2);
+							var res1 = sec_completed;
+							res1['pc'] = true;
+							setSec_completed(res1);
 						}
 					} else if (result.status == 205) {
 						checkduplicates(result.data);
@@ -166,20 +211,41 @@ function AddPc(props) {
 	};
 
 	let checkduplicates = (res) => {
-		res.forEach((element,key) => {
-			if (element.pc_number.replaceAll(' ','').toLowerCase() == data.pc_number.replaceAll(' ','').toLowerCase()) {
+		res.forEach((element, key) => {
+			if (
+				element.pc_number.replaceAll(' ', '').toLowerCase() == data.pc_number.replaceAll(' ', '').toLowerCase()
+			) {
 				setError_pc_number('Paritair comite number already exists.');
 			}
-			if (element.pc_alias_name!= null && data.pc_alias_name !=null && element.pc_alias_name.replaceAll(' ','').toLowerCase() == data.pc_alias_name.replaceAll(' ','').toLowerCase()) {
+			if (
+				element.pc_alias_name != null &&
+				data.pc_alias_name != null &&
+				element.pc_alias_name.replaceAll(' ', '').toLowerCase() ==
+					data.pc_alias_name.replaceAll(' ', '').toLowerCase()
+			) {
 				setError_pc_alias_name('Paritair comite alias name already exists.');
 			}
-			if (element.pc_alias_name!= null && data.pc_name !=null && element.pc_alias_name.replaceAll(' ','').toLowerCase() == data.pc_name.replaceAll(' ','').toLowerCase()) {
+			if (
+				element.pc_alias_name != null &&
+				data.pc_name != null &&
+				element.pc_alias_name.replaceAll(' ', '').toLowerCase() ==
+					data.pc_name.replaceAll(' ', '').toLowerCase()
+			) {
 				setError_pc_name('Paritair comite name already exists.');
 			}
-			if (element.pc_name!= null && data.pc_alias_name !=null && element.pc_name.replaceAll(' ','').toLowerCase() == data.pc_alias_name.replaceAll(' ','').toLowerCase()) {
+			if (
+				element.pc_name != null &&
+				data.pc_alias_name != null &&
+				element.pc_name.replaceAll(' ', '').toLowerCase() ==
+					data.pc_alias_name.replaceAll(' ', '').toLowerCase()
+			) {
 				setError_pc_alias_name('Paritair comite alias name already exists.');
 			}
-			if (element.pc_name!= null && data.pc_name !=null && element.pc_name.replaceAll(' ','').toLowerCase() == data.pc_name.replaceAll(' ','').toLowerCase()) {
+			if (
+				element.pc_name != null &&
+				data.pc_name != null &&
+				element.pc_name.replaceAll(' ', '').toLowerCase() == data.pc_name.replaceAll(' ', '').toLowerCase()
+			) {
 				setError_pc_name('Paritair comite name already exists.');
 			}
 		});
@@ -208,7 +274,10 @@ function AddPc(props) {
 				? ValidationService.nameValidationMethod(res.pc_alias_name)
 				: '';
 		error1['pc_alias_name'] =
-			error1['pc_alias_name'] == '' && res.pc_alias_name != '' && res.pc_alias_name != null && res.pc_name.replaceAll(' ','').toLowerCase() == res.pc_alias_name.replaceAll(' ','').toLowerCase()
+			error1['pc_alias_name'] == '' &&
+			res.pc_alias_name != '' &&
+			res.pc_alias_name != null &&
+			res.pc_name.replaceAll(' ', '').toLowerCase() == res.pc_alias_name.replaceAll(' ', '').toLowerCase()
 				? 'Alias name cannot be same as paritair committe name.'
 				: error1['pc_alias_name'];
 		//seterror messages
@@ -282,20 +351,20 @@ function AddPc(props) {
 				</div>
 				{cat_subsec_type == 3 ? (
 					<div className="row">
-					<div className="text-start col-md-6"/>
-					<div className="text-end col-md-6">
-						<button
-							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-							disabled={disableSave}
-							onClick={() => {
-								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
-							}}
-						>
-							Save
-						</button>
+						<div className="text-start col-md-6" />
+						<div className="text-end col-md-6">
+							<button
+								type="sumit"
+								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								disabled={disableSave}
+								onClick={() => {
+									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
+								}}
+							>
+								Save
+							</button>
+						</div>
 					</div>
-				</div>
 				) : (
 					<div className="row">
 						<div className="text-start col-md-6">

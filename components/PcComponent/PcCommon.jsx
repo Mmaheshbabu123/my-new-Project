@@ -27,7 +27,7 @@ const PcCommon = (props) => {
 	const [ cat_fun_updated, setCat_fun_updated ] = useState('');
 	const [ cat_subsec_id, setCat_subsec_id ] = useState(0);
 	const [ pc_view_type, setPc_view_type ] = useState('addpc');
-
+	const [ update_sec_completed, setUpdate_sec_completed ] = useState(0);
 
 	useEffect(
 		() => {
@@ -40,12 +40,34 @@ const PcCommon = (props) => {
 	);
 	useEffect(
 		() => {
-			if (pc_unique_key == '' && props.pcid!='' && props.pcid != undefined) {
+			if (pc_unique_key == '' && props.pcid != '' && props.pcid != undefined) {
 				setPc_unique_key(props.pcid);
 			}
 		},
 		[ props ]
 	);
+
+	// useEffect(
+	// 	() => {
+	// 		var completed = sec_completed;
+
+	// 		if (update_sec_completed > 0) {
+	// 			if(update_sec_completed == 5){
+	// 					completed['pc'] = true;
+	// 					completed['cat'] = true;
+	// 					completed['age'] = true;
+	// 					completed['emp_type'] = true;
+	// 					completed['sal_benefit'] = true;
+	// 					setSec_completed(completed);
+
+	// 			}
+	// 		}
+	// 		// if (pc_unique_key == '' && props.pcid!='' && props.pcid != undefined) {
+	// 		// 	setPc_unique_key(props.pcid);
+	// 		// }
+	// 	},
+	// 	[ update_sec_completed ]
+	// );
 
 	return (
 		<div className="container">
@@ -69,8 +91,9 @@ const PcCommon = (props) => {
 					setCat_fun_updated,
 					cat_subsec_id,
 					setCat_subsec_id,
-					pc_view_type, 
-					setPc_view_type
+					pc_view_type,
+					setPc_view_type,
+					setUpdate_sec_completed
 				}}
 			>
 				{props.type == 'add' ? (
@@ -190,29 +213,29 @@ const PcCommon = (props) => {
 									</button>
 								</li>
 								<li className="nav-item" role="presentation">
-							<button
-								className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
-									? 'disabled'
-									: ''} ${current_sec == 5 ? 'active custom-active' : 'custom-inactive'}`}
-								id="pills-contact-tab"
-								data-bs-toggle="pill"
-								data-bs-target="#pills-contact"
-								type="button"
-								role="tab"
-								aria-controls="pills-contact"
-								aria-selected="false"
-								onClick={() => {
-									setCurrent_sec(5);
-								}}
-							>
-								{sec_completed.sal_benefit || current_sec == 5 ? (
-									<FaRegCheckCircle className="d-inline mb-2" />
-								) : (
-									<BsCircle className="d-inline mb-2" />
-								)}
-								<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
-							</button>
-						</li>
+									<button
+										className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
+											? 'disabled'
+											: ''} ${current_sec == 5 ? 'active custom-active' : 'custom-inactive'}`}
+										id="pills-contact-tab"
+										data-bs-toggle="pill"
+										data-bs-target="#pills-contact"
+										type="button"
+										role="tab"
+										aria-controls="pills-contact"
+										aria-selected="false"
+										onClick={() => {
+											setCurrent_sec(5);
+										}}
+									>
+										{sec_completed.sal_benefit || current_sec == 5 ? (
+											<FaRegCheckCircle className="d-inline mb-2" />
+										) : (
+											<BsCircle className="d-inline mb-2" />
+										)}
+										<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
+									</button>
+								</li>
 							</ul>
 							<div className="tab-content" id="pills-tabContent">
 								<div
