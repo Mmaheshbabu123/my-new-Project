@@ -67,6 +67,7 @@ const Table = (props) => {
 		switch (type) {
 			case 'pc':
 				setCat_subsec_type(3);
+				setCat_subsec_id(props.secId);
 
 				break;
 
@@ -113,11 +114,12 @@ const Table = (props) => {
 									{props.sectype != 'pc' && props.type == "addpc" && <FaEdit />}
 								</div> */}
 								<div onClick={() => {editSec('pc')}} className="h5">
-									{props.type == "editpc" && (<FaEdit />
+									{props.type == "editpc" && props.sectype == 'pc'&& (<FaEdit />
 									)}
 								</div>
+
 								<div onClick={() => {editCatOrFun()}} className="h5">
-									{props.sectype != 'pc' && props.type == "addpc" && (<FaEdit />
+									{props.sectype != 'pc' && (props.type == "addpc"||props.type == "editpc") && (<FaEdit />
 									)}
 								</div>
 								<div onClick={() => {editSec('age')}} className="h5">
