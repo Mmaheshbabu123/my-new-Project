@@ -13,6 +13,8 @@ import { getPcByUniquekey } from '../../Services/ApiEndPoints';
  */
 function AddPc(props) {
 	const router = useRouter();
+	const [ sec_width, setSec_width ] = useState('col-md-6');
+
 	const {
 		pc_unique_key,
 		setCurrent_sec,
@@ -73,6 +75,17 @@ function AddPc(props) {
 		},
 		[ router.isReady ]
 	);
+
+	useEffect(()=>{
+		if(pc_view_type == 'viewpc'){
+			setDisableForm(true)
+			setSec_width('col-md-12')
+		}
+		if(pc_view_type == 'editpc'){
+			setSec_width('col-md-12')
+		}
+
+	},[pc_view_type])
 
 	/**
 	 * it will post the committee data to the backend by using api's
@@ -216,7 +229,7 @@ function AddPc(props) {
 			<form onSubmit={(e) => submit(e)}>
 				{cat_subsec_type == 3 ? <h4 className="h5 mt-3">Edit paritair comite</h4> : ''}
 				<div className="row pt-4">
-					<div className="col-md-12">
+					<div className={sec_width}>
 						<div className="form-group py-2">
 							<label className="custom_astrick">Paritair comite number</label>
 							<input
