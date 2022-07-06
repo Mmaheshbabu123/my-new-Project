@@ -115,4 +115,5 @@ export const fetchAbsoluteYouAgentData = BASE_URL  + "fetch-absolute-agent-data"
 export const fetchPcLinkedEmployeeTypes = BASE_URL + "fetch-pclinked-employee-types";
 export const getPcLinkedCoeffData = BASE_URL + "get-pclinked-coeff-data";
 export const fetchSalaryBenefitsPerPc = BASE_URL + "get-salary-benefits-per-pc";
+export const saveCooperationDataTabWise = BASE_URL + "save-cooperationdata-tab-wise";
 //------------------- @

@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import LabelField from '@/atoms/LabelField';
 import DateField from '@/atoms/DateField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import CheckBoxField from '@/atoms/CheckBoxField';
 import RequiredField from '@/atoms/RequiredSpanField';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
+import { helpers } from '../../../CooperationAgreementHelper';
 import styles from '../absoluteAgent.module.css';
+
 import { consultantArray, consultantNumArray } from '../../../Definations';
 
 var startDateAgreement    = 1;
@@ -18,6 +20,10 @@ const BasicDetails = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   var { tab_1 } = state;
 
+  useEffect(() => {
+    tab_1[startDateAgreement] = tab_1[startDateAgreement] || helpers.formatDate(new Date())
+    updateStateChanges({ tab_1 });
+  }, [])
   /**
    * [handleChange description]
    * @param  {[Object]} target                 [description]
