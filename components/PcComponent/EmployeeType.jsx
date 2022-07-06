@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 
 const EmployeeType = () => {
 	const router = useRouter();
+	const [ disableForm, setDisableForm ] = useState(false);
+
 
 	const {
 		pc_unique_key,
@@ -23,7 +25,8 @@ const EmployeeType = () => {
 		setSec_completed,
 		cat_subsec_id,
 		setCat_subsec_id,
-		setCurrent_sec
+		setCurrent_sec,
+		pc_view_type
 	} = useContext(PcContext);
 	const [ id, setId ] = useState('');
 
@@ -51,6 +54,13 @@ const EmployeeType = () => {
 		},
 		[ pc_unique_key ]
 	);
+
+	useEffect(()=>{
+		if(pc_view_type == 'viewpc'){
+			setDisableForm(true)
+		}
+
+	},[pc_view_type])
 
 
 	useEffect(()=>{
@@ -143,28 +153,45 @@ const EmployeeType = () => {
 	return (
 		<div className="container">
 			<form onSubmit={submit}>
-			{cat_subsec_type == 5 ? <h4 className="h5 mt-3">Edit employee type</h4> : ''}
+			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
 
 				<div className="row pt-4">
 					{data.map((val) => (
-						<div className="d-flex form-group bg-light mt-4" key={val.id}>
+						<div className="form-check mt-4" key={val.id}>
 							<input
+								disabled={disableForm}
 								type="checkbox"
-								className=""
+								className="form-check-input"
 								value={val.id}
 								checked = {res.includes(val.id)?true:false} 
 								onChange={(e) => {
 									updateRes(e);
 								}}
 							/>{console.log(res)}
-							<label className="p-3 ms-2 md-4"> {val.name}</label>
+							<label className="form-check-label"> {val.name}</label>
 						</div>
+					// 	<div className="form-check mt-4">
+					// 	<input
+					// 		disabled={disableForm}
+					// 		className="form-check-input"
+					// 		type="checkbox"
+					// 		value={val.sb_id}
+					// 		id={'flexCheckDefault' + key}
+					// 		checked={val.checked == true ? true : false}
+					// 		onChange={(e) => {
+					// 			updateRes(e, key);
+					// 		}}
+					// 	/>
+					// 	<label calssName="form-check-label" htmlFor="flexCheckDefault">
+					// 		{val.name}
+					// 	</label>
+					// </div>
 					))}
 					<p className="mt-2" style={{ color: 'red' }}>
 						{error_emp_type}
 					</p>
 				</div>
-				{cat_subsec_type == 5 ? (
+				{pc_view_type == 'editpc' ? (
 					<div className="row">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
@@ -176,7 +203,7 @@ const EmployeeType = () => {
 							</button>
 						</div>
 					</div>
-				) :
+				) : pc_view_type == 'addpc'?
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
@@ -197,7 +224,7 @@ const EmployeeType = () => {
 							Next
 						</button>
 					</div>
-				</div>
+				</div>:''
 }
 			</form>
 		</div>

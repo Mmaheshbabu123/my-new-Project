@@ -18,6 +18,12 @@ import { data } from 'node_modules/autoprefixer/lib/autoprefixer';
  
 const ManagePc = (props) => {
 	const [ data, setData ] = useState([]);
+	const [ temp, setTemp ] = useState([]);
+
+	const [ searchPcnum, setSearchPcnum ] = useState('');
+	const [ searchPcname, setSearchPcname ] = useState('');
+
+
 
 	useEffect(()=>{
 		APICALL.service(getPcOverviewDetails, 'GET')
@@ -25,6 +31,8 @@ const ManagePc = (props) => {
 			console.log(result)
 			if (result.status === 200) {
 				setData(result.paritairecomitee);
+				setTemp(result.paritairecomitee);
+
 			}
 		})
 		.catch((error) => {
@@ -32,13 +40,106 @@ const ManagePc = (props) => {
 		});
 	},[])
 
-	console.log(props);
+	function handleReset() {
+		setData(temp);
+		setSearchPcnum('');
+		setSearchPcname('');
+	}
+
+	let handleSearch = () =>{
+		var res =[];
+		if (searchPcnum != '' && searchPcname != '') {
+			temp.map((val) => {
+				if(val['pc_alias_name'] != null && val['pc_number'].trim().includes(searchPcnum) &&
+					val['pc_alias_name'].trim().toLowerCase().includes(searchPcname.toLowerCase())
+				) {
+					res.push(val);
+				}
+			else if(val['pc_alias_name'] == null && val['pc_name'] != null && val['pc_number'].trim().includes(searchPcnum) &&
+			val['pc_name'].trim().toLowerCase().includes(searchPcname.toLowerCase())
+		) {
+			res.push(val);
+		}
+			});
+			setData(res);
+
+		} else if (searchPcnum != '') {
+			temp.map((val) => {
+				if(val['pc_number'].trim().includes(searchPcnum))
+				{
+					res.push(val);
+				}
+			});
+			setData(res);
+
+		}
+		else if (searchPcname != '') {
+			temp.map((val) => {
+				if(val['pc_alias_name'] != null &&
+					val['pc_alias_name'].trim().toLowerCase().includes(searchPcname.toLowerCase())
+				) {
+					res.push(val);
+				}
+			else if(val['pc_alias_name'] == null && val['pc_name'] != null &&
+			val['pc_name'].trim().toLowerCase().includes(searchPcname.toLowerCase())
+		) {
+			res.push(val);
+		}
+			});
+			setData(res);
+
+		}
+
+	}
 
 	return (
 		<div className="container">
-			<div className="row">
+			<div className="row ps-3 ms-3">
 				<p className="row mt-3 ms-5 text-bold h4">Manage Paritaire Comitee</p>
-				<div className="col-md-9" />
+				<div className="col-md-9" >
+					<div className='row'>
+				<div className="col-sm-3">
+						<input
+							type="search"
+							id="form12"
+							className="form-control mt-2 mb-2"
+							placeholder="Paritair comite number"
+							value={searchPcnum}
+							onChange={(e) => setSearchPcnum(e.target.value)}
+						/>
+					</div>
+
+					<div className="col-sm-3">
+						<input
+							type="search"
+							id="form12"
+							className="form-control mt-2 mb-2 "
+							placeholder="Paritair comite name"
+							value={searchPcname}
+							onChange={(e) => setSearchPcname(e.target.value)}
+						/>
+					</div>
+
+					<div className="col-sm-1">
+						<button
+							type="button"
+							className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
+							onClick={() => handleReset()}
+						>
+							Reset
+						</button>
+						</div>
+						<div className="col-sm-2">
+						<button
+							type="button"
+							className="btn btn-secondary btn-block float-right mt-2 mb-2 "
+							onClick={() => handleSearch()}
+						>
+							Search
+						</button>
+					</div>
+					</div>
+					</div>
 				<div className="col-md-3">
 					<span>
 						<Link href={'/redirect-page?src=/manage-pc&dest=addpc'}>
@@ -69,7 +170,7 @@ const ManagePc = (props) => {
 									</Link>
 								</span>
 								<span className="py-2">
-								<Link href={'/editpc/' + val.pc_unique_key}>
+								<Link href={'/viewpc/' + val.pc_unique_key}>
 										<a className="text-dark h5">
 											<MdRemoveRedEye />
 										</a>

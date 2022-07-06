@@ -6,6 +6,8 @@ import { APICALL } from '../../Services/ApiServices';
 
 const Addage = () => {
 	const [ id, setId ] = useState('');
+	const [ disableForm, setDisableForm ] = useState(false);
+
 	const [ showhideage, setShowhideage ] = useState('');
 	const {
 		pc_unique_key,
@@ -19,6 +21,7 @@ const Addage = () => {
 		setCat_fun_updated,
 		setCat_rightsec,
 		setCat_leftsec,
+		pc_view_type
 	} = useContext(PcContext);
 	const [ data, setData ] = useState({
 		id: '',
@@ -89,6 +92,13 @@ const Addage = () => {
 		},
 		[ pc_unique_key ]
 	);
+
+	useEffect(()=>{
+		if(pc_view_type == 'viewpc'){
+			setDisableForm(true)
+		}
+
+	},[pc_view_type])
 
 	const handleshowhide = (event) => {
 		var data2 = data;
@@ -322,7 +332,7 @@ const Addage = () => {
 	return (
 		<div className="">
 			<form onSubmit={(e) => submit(e)}>
-				{cat_subsec_type == 4 ? <h4 className="h5 mt-3">Edit age</h4> : ''}
+				{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Age</h4>:'')}
 
 				<div className="row pt-4">
 					<div className="">
@@ -331,6 +341,7 @@ const Addage = () => {
 						<div className="mb-3">
 							<label className="custom_astrick mb-2">At which age full salary is paid?</label>
 							<select
+								disabled={disableForm}
 								type="text"
 								className="form-select mt-2 mb-2"
 								value={data.age}
@@ -354,6 +365,7 @@ const Addage = () => {
 								<label className="custom_astrick mb-2">Minimum salary for 20 years?</label>
 								<div className="input-group">
 									<input
+										disabled={disableForm}
 										type="text"
 										className="form-control"
 										value={data.min_sal_20}
@@ -372,6 +384,7 @@ const Addage = () => {
 								<label className="custom_astrick  mb-2">Minimum salary for 19 years?</label>
 								<div className="input-group">
 									<input
+									    disabled={disableForm}
 										type="text"
 										className="form-control"
 										value={data.min_sal_19}
@@ -390,6 +403,7 @@ const Addage = () => {
 								<label className="custom_astrick">Minimum salary for 18 years?</label>
 								<div className="input-group">
 									<input
+										disabled={disableForm}
 										type="text"
 										className="form-control"
 										value={data.min_sal_18}
@@ -409,6 +423,7 @@ const Addage = () => {
 								<label className="custom_astrick">Minimum salary for 17 years?</label>
 								<div className="input-group">
 									<input
+										disabled={disableForm}
 										type="text"
 										className="form-control"
 										value={data.min_sal_17}
@@ -426,6 +441,7 @@ const Addage = () => {
 								<label className="custom_astrick">Minimum salary for 16 years?</label>
 								<div className="input-group">
 									<input
+										disabled={disableForm}
 										type="text"
 										className="form-control"
 										value={data.min_sal_16}
@@ -443,6 +459,7 @@ const Addage = () => {
 								<label className="custom_astrick">Minimum salary for 15 years?</label>
 								<div className="input-group">
 									<input
+										disabled={disableForm}
 										type="text"
 										className="form-control"
 										value={data.min_sal_15}
@@ -462,7 +479,7 @@ const Addage = () => {
 						</div> */}
 					</div>
 				</div>
-				{cat_subsec_type == 4 ? (
+				{pc_view_type == "editpc" ? (
 					<div className="row">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
@@ -477,7 +494,7 @@ const Addage = () => {
 							</button>
 						</div>
 					</div>
-				) : (
+				) : pc_view_type == 'addpc'? (
 					<div className="row">
 						<div className="text-start col-md-6">
 							<button
@@ -501,8 +518,8 @@ const Addage = () => {
 								Next
 							</button>
 						</div>
-					</div>
-				)}
+					</div>):''
+				}
 			</form>
 		</div>
 	);

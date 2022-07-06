@@ -43,7 +43,9 @@ const PcOverview = (params) => {
 		setSec_completed,
 		cat_subsec_id,
 		setCat_subsec_id,
-		setCurrent_sec
+		setCurrent_sec,
+		pc_view_type, 
+		setPc_view_type
 	} = useContext(PcContext);
 
 	const router = useRouter();
@@ -52,6 +54,8 @@ const PcOverview = (params) => {
 	const [ secid, setSecid ] = useState('');
 	const [ pc_number, setPc_number ] = useState('');
 	const [ type, setType ] = useState('');
+
+
 	if (router.query.uid && router.query.uid != undefined) {
 		setPc_unique_key(router.query.uid);
 	}
@@ -62,7 +66,7 @@ const PcOverview = (params) => {
 	useEffect(
 		() => {
 			setCat_fun_updated('');
-			if (current_sec == 2 || params.pc_type == 'edit' || params.pc_type == 'managepc') {
+			if (current_sec == 2 || params.type == 'editpc' || params.type == 'viewpc') {
 				var res1 = sec_completed;
 				res1['pc'] = true;
 				setSec_completed(res1);
@@ -75,6 +79,7 @@ const PcOverview = (params) => {
 							console.log(pc);
 							setPc_number(result.data['pc_number']);
 							setType(params.type);
+							setPc_view_type(params.type);
 						})
 						.catch((error) => {
 							console.error(error);
@@ -115,11 +120,11 @@ const PcOverview = (params) => {
 		<div className="container">
 			<div className="row pt-4 min-vh-75">
 				<div className={`px-5 ${cat_leftsec}`}>
-					{params.pc_type == 'edit' ? <p className="h4">Edit paritair comite</p> : ''}
+					{params.type == 'editpc' ? <p className="h4">Edit paritair comite</p> : (params.type == 'viewpc'?<p className="h4">View paritair comite</p>:'')}
 					{pc && (
 						<div>
 							{cat_subsec_type == 0 &&
-							params.pc_type != 'managepc' && (
+							params.type != 'viewpc' && (
 								<div className="text-end me-4">
 									<button
 										type="button"
@@ -311,7 +316,7 @@ const PcOverview = (params) => {
 							</ul>
 						</div>
 					)}
-					{router.query.cid &&
+					{/* {router.query.cid &&
 			<div className="row">
 			<div className="text-start col-md-6">
 				<button
@@ -344,9 +349,33 @@ const PcOverview = (params) => {
 			<div className="text-end col-md-6">
 			</div>
 		</div>
+			} */}
+			{pc_view_type != 'addpc' &&
+			<div className="row">
+			<div className="text-start col-md-6">
+				<button
+					type="button"
+					className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+					onClick={() => {
+						if(router.query.fid){
+						router.push('/manage-function');
+						}else if(router.query.cid){
+							router.push('/manage-category');
+						}else{
+							router.push('/manage-pc');
+						}	
+					}}
+				>
+					Back
+				</button>
+			</div>
+			<div className="text-end col-md-6">
+			</div>
+		</div>
 			}
 				</div>
 				<div className={`px-4 pt-2 border-start border-2 ${cat_rightsec}`}>
+					{pc_view_type != 'viewpc' &&
 					<div className="text-center">
 						<button
 							type="button"
@@ -373,6 +402,7 @@ const PcOverview = (params) => {
 							Add function
 						</button>
 					</div>
+}
 					{cat_subsec_type == 1 && (
 						<AddCategory id={secid} categorylist={pc['childObj'] ? pc['childObj'] : []} />
 					)}
@@ -394,7 +424,7 @@ const PcOverview = (params) => {
 				</div>
 			</div>
 			{console.log(router.query)}
-			{router.query.cid || router.query.fid || params.pc_type == 'managepc' ? '' : (
+			{router.query.cid || router.query.fid || params.type != 'addpc' ? '' : (
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
