@@ -67,7 +67,7 @@ export const planningoverview = BASE_URL + "planningdetails-by-uniquekey/";
 
 
 //--------------PLANNING FETCHING----------------------------------//
-export const fetchPlanning = BASE_URL + "fetch-planning-details";
+export const fetchPlanning = BASE_URL + "fetch-planning-details/";
 
 //--------------Manage Planning-----------------------------------//
 export const getweekly_planning = BASE_URL + "getweekly_planning/";
@@ -81,11 +81,19 @@ export const updateAge = BASE_URL + "update-pc-age";
 
 //--------------PC employee type ROUTES --------------------//
 export const storePcEmployeeTypes = BASE_URL + 'add-pc-emptype';
-export const getPcEmployeeTypes = BASE_URL + "get-pc-emptype/";
+export const getPcEmployeeTypes = BASE_URL + "fetch-pc-employee_type/";
 export const updatePcEmployeeTypes = BASE_URL + "update-pc-emptype";
 export const getCofficientPerPc = BASE_URL + "get-linking-coff-pc-data";
 export const delteCofficientPerPc = BASE_URL + "delete-pc-linking-data";
 export const Addfunction = BASE_URL + "addfunction";
+
+//--------------PC salary benifits ROUTES --------------------//
+export const getPcSalaryBenefits = BASE_URL + "get-pc-sal-benifits/";
+export const storePcSalBenifits = BASE_URL + "store-pc-sal-benifits";
+
+
+
+
 
 //------------------HEADER AND FOOTER-------------------------//
 export const header = BASE_URL + "header";
@@ -94,8 +102,18 @@ export const footer = BASE_URL + "footer";
 
 
 //----SALARY BENEFITS ROUTES-----//
-export const fetchSalaryBenefits = BASE_URL  + "get-salary-benefits";
+export const fetchSalaryBenefits = BASE_URL + "get-salary-benefits";
 export const createSalaryBenefits = BASE_URL + "create-salary-benefits";
 export const updateSalaryBenefits = BASE_URL + "update-salary-benefits";
 export const deleteSalaryBenefits = BASE_URL + "delete-salary-benefits";
+//------------------- @
+
+
+//---- COOPERATION AGREEMENTS ROUTES -----//
+export const getCooperationAgreementsTabs = BASE_URL  + "get-coprtn-ags-tabs";
+export const fetchAbsoluteYouAgentData = BASE_URL  + "fetch-absolute-agent-data";
+export const fetchPcLinkedEmployeeTypes = BASE_URL + "fetch-pclinked-employee-types";
+export const getPcLinkedCoeffData = BASE_URL + "get-pclinked-coeff-data";
+export const fetchSalaryBenefitsPerPc = BASE_URL + "get-salary-benefits-per-pc";
+export const saveCooperationDataTabWise = BASE_URL + "save-cooperationdata-tab-wise";
 //------------------- @

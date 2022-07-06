@@ -1,0 +1,53 @@
+.add-div-margings {
+  margin: 10px 0;
+}
+
+.worker-servant-parent{
+  margin: 30px 0;
+}
+
+.coeffcient-table-parent{
+  margin: 50px 0;
+}
+
+.workers-border {
+  border-right: 2px solid lightgray;
+}
+
+.margin-auto-class {
+  margin: 0 auto !important;
+}
+
+.pc-worker-servant-add-btn {
+  margin: 0;
+}
+
+.workers-servants-table {
+  margin: 0;
+  width: 75%;
+}
+
+.worker-servants-title {
+	margin-left: 20%;
+	font-size: large;
+}
+
+
+/*  Back button  */
+.tab-index-back-btn {
+  width: 4%;
+  cursor: pointer;
+
+}
+.tab-index-back-btn:hover{
+  text-decoration: underline;
+}
+
+.tab-index-back-div{
+  padding-top: 20px;
+}
+
+.newitems-span {
+  display: inline-block;
+  margin-top: 25px;
+}

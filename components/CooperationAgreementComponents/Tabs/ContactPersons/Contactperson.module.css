@@ -1,0 +1,36 @@
+.contactperson-tab-parent {
+  width: 154px !important;
+  height: 130px;
+  margin: 20px;
+  padding: 25px 10px;
+  border: 1px solid #000;
+  display: inline-block;
+
+}
+
+.contactperson-tab-field-content {
+  text-align: center;
+}
+
+.anchor-tag {
+  color: black;
+  text-decoration: none;
+}
+
+.anchor-tag:hover{
+  color: black;
+  text-decoration: underline;
+}
+
+.tile-title-text {
+  font-size: 18px;
+  font-weight: 500;
+}
+.add-div-margings {
+  margin: 10px 0;
+}
+
+
+.margin-auto-class {
+  margin: 0 auto;
+}

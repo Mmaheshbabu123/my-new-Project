@@ -56,3 +56,10 @@ width: 94%
     background: lightgray !important;
     border: none !important;
   }
+
+.pcid {
+    width: 30px !important;
+}
+.salbenefitwidth {
+    width: 45% !important;
+}

@@ -1,7 +1,8 @@
-import { Layout } from "../components/layout/Layout";
-import ManagePc from "../components/PcComponent/ManagePc";
+import ManagePc from '../components/PcComponent/ManagePc';
 
 const Managepc = () => (
-    <div><ManagePc /></div>
-)
+	<div>
+		<ManagePc />
+	</div>
+);
 export default Managepc;

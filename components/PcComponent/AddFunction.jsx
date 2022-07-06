@@ -138,7 +138,8 @@ function AddFunction(props) {
 				? ValidationService.nameValidationMethod(data.function_name) == '' ? '' : 'This field is invalid.'
 				: 'This field is required.';
 		error['error_min_salary'] =
-		ValidationService.emptyValidationMethod(data.min_salary) == ''? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
+			ValidationService.emptyValidationMethod(data.min_salary) == ''
+				? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
 				: 'This field is required.';
 
 		if (error['error_function_name'] == '') {
@@ -148,7 +149,12 @@ function AddFunction(props) {
 				}
 			});
 		}
-		if (error['error_min_salary'] == '' &&  data.min_salary != '' && data.min_salary != null && data.category_id != '') {
+		if (
+			error['error_min_salary'] == '' &&
+			data.min_salary != '' &&
+			data.min_salary != null &&
+			data.category_id != ''
+		) {
 			props.categorylist.forEach((val, key) => {
 				if (val.type == '2' && val.id == data.category_id) {
 					error['error_min_salary'] =
@@ -199,9 +205,16 @@ function AddFunction(props) {
 								{Object.keys(props.categorylist).map(
 									(val, key) =>
 										props.categorylist[val]['type'] == '2' && (
-											<option value={props.categorylist[val]['id']} key={val} onClick={()=>{
-												setData((prev) => ({ ...prev, min_salary: props.categorylist[val]['min_salary'] }));
-											}}>
+											<option
+												value={props.categorylist[val]['id']}
+												key={val}
+												onClick={() => {
+													setData((prev) => ({
+														...prev,
+														min_salary: props.categorylist[val]['min_salary']
+													}));
+												}}
+											>
 												{props.categorylist[val]['category_name']}
 											</option>
 										)
@@ -212,14 +225,17 @@ function AddFunction(props) {
 
 					<div className="form-group mb-3">
 						<label className="custom_astrick mb-2">Minimum salary</label>
-						<input
-							className=" form-control my-2"
-							type="text"
-							value={data.min_salary}
-							onChange={(e) => {
-								setData((prev) => ({ ...prev, min_salary: e.target.value }));
-							}}
-						/>
+						<div className="input-group">
+							<input
+								className=" form-control"
+								type="text"
+								value={data.min_salary}
+								onChange={(e) => {
+									setData((prev) => ({ ...prev, min_salary: e.target.value }));
+								}}
+							/>
+							<span className="input-group-text">€</span>
+						</div>
 						<p className="pb-1" style={{ color: 'red' }}>
 							{error_min_salary}
 						</p>
@@ -227,8 +243,15 @@ function AddFunction(props) {
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
-						{(router.query.fid || router.query.cid) && (
+						{(router.query.fid ) && (
 							<Link href={'/manage-function'}>
+								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
+									Back
+								</a>
+							</Link>
+						)}
+						{router.query.cid && (
+							<Link href={'/manage-category'}>
 								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
 									Back
 								</a>

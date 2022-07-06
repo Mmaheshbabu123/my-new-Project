@@ -40,16 +40,22 @@ const AddEditSalaryBenefits = (props) => {
      */
     const addItemAndUpdateIndex = (stateObj) => {
       if (stateObj['name'].length) {
-        stateObj['newItems'][state.editIndex] = {
-          name: state.name,
-          date: state.date,
-          value: state.value
-        };
-        inputRef.current['date'].value = '';
-        stateObj['name'] = '';
-        stateObj['date'] = '';
-        stateObj['value'] = '';
-        stateObj['editIndex'] = stateObj['newItems'].length;
+        let duplicates = stateObj['newItems'].filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
+        if(duplicates.length) {
+            stateObj['uniqueError'] = true;
+            stateObj['duplicates'] = duplicates.map(obj => obj.name);
+        } else {
+          stateObj['newItems'][state.editIndex] = {
+            name: state.name,
+            date: state.date,
+            value: state.value
+          };
+          inputRef.current['date'].value = '';
+          stateObj['name'] = '';
+          stateObj['date'] = '';
+          stateObj['value'] = '';
+          stateObj['editIndex'] = stateObj['newItems'].length;
+       }
       } else {
         stateObj['nameWarning'] = true;
       }
@@ -62,6 +68,7 @@ const AddEditSalaryBenefits = (props) => {
      */
     const handleSubmit = async () => {
       let newItemsList = inertNewItem();
+      if(!newItemsList) return;
       if ((state.editFlow && !state.name.length) || (!state.editFlow && !newItemsList.length)) {
         setState({ ...state, nameWarning: true });
         return;
@@ -80,12 +87,21 @@ const AddEditSalaryBenefits = (props) => {
 
   const inertNewItem = () => {
     let newItemsList = [...state.newItems];
-    if(state.name.length) {
-      newItemsList[state.editIndex] = {
-          name: state.name
-        , date: state.date
-        , value: state.value
-      };
+    let duplicates = newItemsList.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
+    if(duplicates.length) {
+        let stateObj = {...state};
+        stateObj['uniqueError'] = true;
+        stateObj['duplicates'] = duplicates.map(obj => obj.name);
+        setState(stateObj);
+        return 0;
+    } else {
+      if(state.name.length) {
+        newItemsList[state.editIndex] = {
+            name: state.name
+          , date: state.date
+          , value: state.value
+        };
+      }
     }
     return newItemsList;
   }
@@ -113,7 +129,7 @@ const AddEditSalaryBenefits = (props) => {
     )
   }
 
-  const handleActionClick = (type, item, index,) => {
+  const handleActionClick = (type, item, index) => {
     let stateObj = { ...state };
     if (type === 'edit') {
       stateObj['name']  = item.name;
@@ -133,12 +149,14 @@ const AddEditSalaryBenefits = (props) => {
     const { value, name } = target;
     let stateObj = {...state};
     if(name === 'name') {
-      if(value.match(/^[a-zA-Z0-9 ]*$/) && value.length <= 50) {
+      // if(value.match(/^[a-zA-Z0-9 ]*$/) && value.length <= 50) {
         stateObj[name] = value;
         stateObj['nameWarning'] = false;
-      } else {
-        stateObj['nameWarning'] = true;
-      }
+        stateObj['uniqueError'] = false;
+        stateObj['duplicates'] = [];
+      // } else {
+        // stateObj['nameWarning'] = true;
+     // }
     } else if (name === 'value') {
       // if(value.match(/^[0-9,.]*$/)) {
         stateObj[name] = value;
@@ -169,13 +187,12 @@ const AddEditSalaryBenefits = (props) => {
     return (
       <div className='col-md-9'>
         <div className="salary-input-fields">
-          <label className = "mb-2 input-label-class" htmlFor="name"> {`Salary benefit name`} </label>
+          <label className = "mb-2 input-label-class" htmlFor="name"> {`Salary benefit name`} <span style={{color:'red'}}> * </span></label>
           <input
             ref={ref => inputRef.current['name'] = ref}
             type="text"
             name="name"
-            className="form-control col-md-10"
-            id="pcp_name"
+            className="form-control col-md-10 pcp_name"
             value={state.name}
             onChange={(e) => handleChange(e.target)}
             placeholder='Enter name'
@@ -184,14 +201,14 @@ const AddEditSalaryBenefits = (props) => {
             <small
               id="pcp_name_warning"
               className="form-text text-muted col-md-5">
-              Enter only alpha-numeric values with less than 50 characters
+              Name field is required
             </small>}
           {state.uniqueError &&
             <small
               id="pcp_name_warning"
               className="form-text text-muted col-md-5">
               {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
-            </small>}    
+            </small>}
         </div>
         <div className="salary-input-fields">
           <label className = "mb-2 input-label-class" htmlFor="name"> {`Salary benefit value`} </label>
@@ -199,8 +216,7 @@ const AddEditSalaryBenefits = (props) => {
             ref={ref => inputRef.current['value'] = ref}
             type="text"
             name='value'
-            className="form-control col-md-10"
-            id="pcp_name"
+            className="form-control col-md-10 pcp_name"
             value={state.value}
             onChange={(e) => handleChange(e.target)}
             placeholder= 'Enter value'
@@ -220,8 +236,7 @@ const AddEditSalaryBenefits = (props) => {
             name='date'
             min={state.minDate}
             value={state.date}
-            className="form-control col-md-10 salary-date"
-            id="pcp_name"
+            className="form-control col-md-10 salary-date pcp_name"
             onChange={(e) => handleChange(e.target)}
           />
           {state.dateWarning &&
@@ -265,7 +280,7 @@ const AddEditSalaryBenefits = (props) => {
           </thead>
           <tbody>
             {state.newItems.map((item, index) =>
-              <tr Key={index} id={index}>
+              <tr key={index} id={index}>
                 <td style={{ width: '30%' }}> {item.name} </td>
                 <td style={{ width: '30%' }}> {formatDate(item.date)} </td>
                 <td style={{ width: '20%' }}> {item.value} </td>

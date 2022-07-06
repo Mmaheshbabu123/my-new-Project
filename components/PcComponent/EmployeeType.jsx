@@ -1,15 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
-import ValidationService from '../../Services/ValidationService';
-import { fetchEmployeeTypes, storePcEmployeeTypes } from '../../Services/ApiEndPoints';
+import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 
-
-// import { useSearchParams } from 'react-router-dom';
-
 const EmployeeType = () => {
 	const router = useRouter();
+	const [ disableForm, setDisableForm ] = useState(false);
+	const [ sec_width, setSec_width ] = useState('col-md-5');
+
 
 	const {
 		pc_unique_key,
@@ -27,72 +26,119 @@ const EmployeeType = () => {
 		setSec_completed,
 		cat_subsec_id,
 		setCat_subsec_id,
-		setCurrent_sec
+		setCurrent_sec,
+		pc_view_type
 	} = useContext(PcContext);
 	const [ id, setId ] = useState('');
 
 	const [ data, setData ] = useState([]);
+	const [ temp, setTemp ] = useState([]);
+	const [ temp2, setTemp2 ] = useState([]);
+
 	const [ res, setRes ] = useState([]);
 	const [ error_emp_type, setError_emp_type ] = useState('');
 
-	let next_redirection = () => {
-		setCurrent_sec(5);
-		var res1 = sec_completed;
-		res1['emp_type'] = true;
-		setSec_completed(res1);
-	};
-	useEffect(() => {
-		if (pc_unique_key != '') {
-			APICALL.service(fetchEmployeeTypes, 'GET')
-				.then((result) => {
-					console.log(result);
-					if (result.data.length > 0) {
-						setData(result.data);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+	useEffect(
+		() => {
+			if (pc_unique_key != '') {
+				APICALL.service(fetchEmployeeTypes, 'GET')
+					.then((result) => {
+						console.log(result);
+						if (result.data.length > 0) {
+							setData(result.data);
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
+		},
+		[ pc_unique_key ]
+	);
+
+	useEffect(()=>{
+		if(pc_view_type == 'viewpc'){
+			setDisableForm(true)
+			setSec_width('col-md-12')
 		}
-	}, [id]);
+		if(pc_view_type == 'editpc'){
+			setSec_width('col-md-12')
+		}
+
+	},[pc_view_type])
+
+
+	useEffect(()=>{
+		APICALL.service(getPcEmployeeTypes+pc_unique_key, 'GET')
+					.then((result) => {
+						console.log(result);
+						if (result.data.length > 0) {
+							setRes(result.data);
+							setTemp(result.data);
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+	},[pc_unique_key])
+
 	let updateRes = (event) => {
-		var res1 = res;
+		var res1 = [...res];
+		var temp1 = [...temp2];
 		if (event.target.checked) {
-			if (!res1.includes(event.target.value)) {
-				res1.push(event.target.value);
+			if (!res1.includes(parseInt(event.target.value))) {
+				res1.push(parseInt(event.target.value));
 			}
 			console.log('✅ Checkbox is checked');
 		} else {
-			const index = res1.indexOf(event.target.value);
+			var index = res1.indexOf(parseInt(event.target.value));
 			if (index > -1) {
-				res1.splice(index, 1); // 2nd parameter means remove one item only
+				res1.splice(index, 1);
+				
+				// 2nd parameter means remove one item only
 			}
+			var index2 = temp.indexOf(parseInt(event.target.value));
+
+			if( index2 > -1){
+				temp1.push(parseInt(event.target.value)); 
+				setTemp2(temp1);
+			}
+		// 	var index2 = temp.indexOf(parseInt(event.target.value));
+
+		// 	if( index2 > -1){
+		// 		temp1.push(parseInt(event.target.value));
+		// }
+			
 			console.log('⛔️ Checkbox is NOT checked');
 		}
+		
 		setRes(res1);
-		console.log(console.log(res1));
+		
 	};
 	let postdata = (data1) => {
-		console.log(data1);
 		if (id == '') {
 			APICALL.service(storePcEmployeeTypes, 'POST', data1)
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
-						setId(result.pcid);
-						backToDashboard();
-						// setCat_fun_updated('cat' + result.ctid);
-						// setCat_rightsec('d-none');
-						// setCat_leftsec('col-md-12');
-						// setCat_subsec_type(0);
-						// setCat_subsec_id('');
+						if(cat_subsec_type == 5){
+							setCat_fun_updated('employeetype' + result.pcid);
+							setCat_rightsec('d-none');
+							setCat_leftsec('col-md-12');
+							setCat_subsec_type(0);
+							setCat_subsec_id('');
+
+						}else{
+						setCurrent_sec(5);
+						var res1 = sec_completed;
+						res1['emp_type'] = true;
+						setSec_completed(res1);
+						}
 					}
 				})
 				.catch((error) => {
 					console.error(error);
 				});
-		} else {
-			backToDashboard();
 		}
 	};
 	let submit = (event) => {
@@ -100,6 +146,7 @@ const EmployeeType = () => {
 		var data1 = [];
 		data1.push(pc_unique_key);
 		data1.push(res);
+		data1.push(temp2);
 		if (res.length != 0) {
 			postdata(data1);
 		} else {
@@ -107,44 +154,61 @@ const EmployeeType = () => {
 		}
 		console.log(data1);
 	};
-	let backToDashboard = () =>{
-		var src =JSON.parse(localStorage.getItem("src"));
-		var type = JSON.parse(localStorage.getItem("type"));
-		if (src) { 
-			window.localStorage.removeItem('src');
-			if(type == "1"){
-			window.location.assign(src)
-			}
-			else{
-			router.push('/'+src)
-			}
-		}
-	  
-	}
 
 	return (
 		<div className="container">
 			<form onSubmit={submit}>
+			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
+
 				<div className="row pt-4">
-					{/* <p className="h3 text-center mt-2">Edit employee type</p> */}
 					{data.map((val) => (
-						<div className="col-sm-5 d-flex form-group bg-light mt-4" key={val.id}>
+						<div className={"form-check mt-4 "+sec_width} key={val.id}>
 							<input
+								disabled={disableForm}
 								type="checkbox"
-								className=""
+								className="form-check-input"
 								value={val.id}
-								onClick={(e) => {
+								checked = {res.includes(val.id)?true:false} 
+								onChange={(e) => {
 									updateRes(e);
 								}}
-								// defaultChecked={true}
-							/>
-							<label className="p-3 ms-2 md-4"> {val.name}</label>
+							/>{console.log(res)}
+							<label className="form-check-label"> {val.name}</label>
 						</div>
+					// 	<div className="form-check mt-4">
+					// 	<input
+					// 		disabled={disableForm}
+					// 		className="form-check-input"
+					// 		type="checkbox"
+					// 		value={val.sb_id}
+					// 		id={'flexCheckDefault' + key}
+					// 		checked={val.checked == true ? true : false}
+					// 		onChange={(e) => {
+					// 			updateRes(e, key);
+					// 		}}
+					// 	/>
+					// 	<label calssName="form-check-label" htmlFor="flexCheckDefault">
+					// 		{val.name}
+					// 	</label>
+					// </div>
 					))}
 					<p className="mt-2" style={{ color: 'red' }}>
 						{error_emp_type}
 					</p>
 				</div>
+				{pc_view_type == 'editpc' ? (
+					<div className="row">
+						<div className="text-start col-md-6" />
+						<div className="text-end col-md-6">
+							<button
+								type="sumit"
+								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							>
+								Save
+							</button>
+						</div>
+					</div>
+				) : pc_view_type == 'addpc'?
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
@@ -162,10 +226,11 @@ const EmployeeType = () => {
 							type="sumit"
 							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
 						>
-							Save
+							Next
 						</button>
 					</div>
-				</div>
+				</div>:''
+}
 			</form>
 		</div>
 	);

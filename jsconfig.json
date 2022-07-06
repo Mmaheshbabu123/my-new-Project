@@ -10,7 +10,13 @@
       ],
       "@/styles/*": [
         "styles/*"
-      ]
+      ],
+      "@/Contexts/*": [
+        "Contexts/*"
+      ],
+      "@/atoms/*": [
+        "components/core-module/atoms/*"
+      ],
     },
     "target": "es5",
     "lib": [
@@ -30,11 +36,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
   "exclude": [
     "node_modules"
   ]

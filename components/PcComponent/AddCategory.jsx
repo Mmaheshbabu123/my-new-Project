@@ -190,9 +190,10 @@ function AddCategory(props) {
 					</div>
 					<label className="custom_astrick">Minimum salary</label>
 					<div className="form-group mb-3">
+					<div className="input-group">
 						<input
 							type="text"
-							className="form-control my-2"
+							className="form-control"
 							value={data.min_salary}
 							name="salary"
 							id="salary"
@@ -200,18 +201,29 @@ function AddCategory(props) {
 								setData((prev) => ({ ...prev, min_salary: e.target.value }));
 							}}
 						/>
+						<span className="input-group-text">€</span>
+						</div>
 						<p style={{ color: 'red' }}>{error_min_salary}</p>
 					</div>
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
-						{(router.query.cid || router.query.fid) && (
+						{(router.query.cid) && (
 							<Link href={'/manage-category'}>
 								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
 									Back
 								</a>
 							</Link>
 						)}
+
+						{router.query.fid && (
+							<Link href={'/manage-function'}>
+								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
+									Back
+								</a>
+							</Link>
+						)}
+
 					</div>
 					<div className="text-end col-md-6">
 						<button

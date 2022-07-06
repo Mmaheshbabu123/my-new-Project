@@ -1,0 +1,17 @@
+import React from 'react';
+
+const style = {
+  display: 'block',
+  padding: '0.5rem 0.2rem',
+  fontSize: '1rem',
+  fontWeight: '400',
+  color: '#212529',
+}
+
+export default function Label ( { title, customStyle }) {
+  return (
+    <>
+     <label style={{...style, ...customStyle}} >{title}</label>
+    </>
+  )
+}

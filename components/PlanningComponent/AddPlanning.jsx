@@ -9,6 +9,9 @@ import Link from 'next/link';
 
 function Planning(props) {
 	const router = useRouter();
+	const { p_unique_key } = router.query;
+
+	console.log(p_unique_key);
 
 	// For popup
 	const [ show, setShow ] = useState(false);
@@ -34,39 +37,36 @@ function Planning(props) {
 	useEffect(() => {
 		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
 			.then((result) => {
-				console.log(result);
-
 				if (result.length > 0) {
 					setCompany(result);
 				} else {
-					console.log(result);
 				}
 			})
 			.catch((error) => {
 				console.error(error);
 			});
 	}, []);
+
 	//LOCATION FETCHING FROM DRUPAL
 	useEffect(
 		() => {
-			console.log(data.comp_id);
-			APICALL.service(
-				process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managelocations?_format=json&comp_id=' + data.comp_id,
-				'GET'
-			)
-				.then((result) => {
-					console.log(result);
-
-					if (result.length > 0) {
-						setLocation(result);
-					} else {
-						console.log(result);
-						setLocation([]);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+			setLocation([]);
+			if (data.comp_id != '') {
+				APICALL.service(
+					process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managelocations?_format=json&comp_id=' + data.comp_id,
+					'GET'
+				)
+					.then((result) => {
+						if (result.length > 0) {
+							setLocation(result);
+						} else {
+							setLocation([]);
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
 		},
 		[ data.comp_id ]
 	);
@@ -74,7 +74,6 @@ function Planning(props) {
 	//COST CENTER FETCHING FROM DRUPAL
 	useEffect(
 		() => {
-			// console.log(data.comp_id);
 			APICALL.service(
 				process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
 					'/manage-costcenter?_format=json&comp_id=' +
@@ -84,12 +83,9 @@ function Planning(props) {
 				'GET'
 			)
 				.then((result) => {
-					console.log(result);
-
 					if (result.length > 0) {
 						setCostcenter(result);
 					} else {
-						console.log(result);
 						setCostcenter([]);
 					}
 				})
@@ -98,6 +94,24 @@ function Planning(props) {
 				});
 		},
 		[ data.comp_id, data.location_id ]
+	);
+
+	// FETCH PLANNING
+	useEffect(
+		() => {
+			APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
+				if (result.data.length > 0) {
+					var res = result.data[0];
+					res.p_unique_key = result.data[0].p_unique_key;
+					res.comp_id = result.data[0].comp_id;
+					res.location_id = result.data[0].location_id;
+					res.cost_center_id = result.data[0].cost_center_id == null ? '' : result.data[0].cost_center_id;
+					setData(res);
+					console.log(data);
+				}
+			});
+		},
+		[ p_unique_key ]
 	);
 
 	// ON SUBMIT //
@@ -129,12 +143,11 @@ function Planning(props) {
 		//check if required fields are empty
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['location_id'] = ValidationService.emptyValidationMethod(res.location_id);
-		// error1['cost_center_id'] = ValidationService.emptyValidationMethod(res.cost_center_id);
 
 		//seterror messages
 		setError_comp_id(error1['comp_id']);
 		setError_location_id(error1['location_id']);
-		// setError_cost_center_id(error1['cost_center_id']);
+
 		//return false if there is an error else return true
 		if (error1['comp_id'] == '' && error1['location_id'] == '') {
 			return true;
@@ -158,18 +171,19 @@ function Planning(props) {
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row   planning-container ">
 					<p className="mb-4 mt-3 font-weight-bold h3">Add Planning</p>
-					{/* <div>
+					<div>
 						<button
 							type="button"
 							onClick={showPopup}
-							className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2"
+							className="btn btn-secondary   btn-block float-end mt-2 mb-2 ms-2"
 						>
 							+Add project
 						</button>
-					</div> */}
+					</div>
 					<div className="form-group">
 						<label className="form-label mb-2 custom_astrick">Company</label>
 						<select
+							value={data.comp_id}
 							className="form-select mb-2 mt-2"
 							placeholder="select company"
 							onChange={(e) => {
@@ -177,7 +191,6 @@ function Planning(props) {
 							}}
 						>
 							<option value="">Select</option>
-							{console.log(company)}
 							{company.map((options) => (
 								<option
 									onClick={(e) => {
@@ -196,8 +209,8 @@ function Planning(props) {
 					<div className="form-group">
 						<label className="form-label mb-2 mt-2 custom_astrick">Location</label>
 						<select
+							value={data.location_id}
 							className="form-select mb-2 mt-2"
-							defaultValue="Select Location"
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, location_id: e.target.value }));
 							}}
@@ -216,7 +229,7 @@ function Planning(props) {
 						<label className="form-label mb-2 mt-2">Cost center</label>
 						<select
 							className="form-select mb-2 mt-2"
-							defaultValue="Select cost center"
+							value={data.cost_center_id}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, cost_center_id: e.target.value }));
 							}}
@@ -232,7 +245,7 @@ function Planning(props) {
 				</div>
 				<div className="row mt-4">
 					<div className="col-md-6">
-						<button type="button" className="btn btn-secondary   btn-block ">
+						<button type="button" className="btn btn-secondary btn-block ">
 							<Link href={'/planning/options'}>
 								<p className="">Back</p>
 							</Link>

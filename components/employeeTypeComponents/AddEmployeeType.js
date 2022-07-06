@@ -26,9 +26,15 @@ const AddEmployeeType = (props) => {
      */
     const addItemAndUpdateIndex = (stateObj, nameValue) => {
       if (nameValue.length) {
-        stateObj['newItems'][state.editIndex] = { name: nameValue };
-        stateObj['name'] = '';
-        stateObj['editIndex'] = stateObj['newItems'].length;
+        let duplicates = stateObj['newItems'].filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
+        if(duplicates.length) {
+            stateObj['uniqueError'] = true;
+            stateObj['duplicates'] = duplicates.map(obj => obj.name);
+        } else {
+          stateObj['newItems'][state.editIndex] = { name: nameValue };
+          stateObj['name'] = '';
+          stateObj['editIndex'] = stateObj['newItems'].length;
+        }
       } else {
         stateObj['nameWarning'] = true;
       }
@@ -41,6 +47,7 @@ const AddEmployeeType = (props) => {
      */
     const handleSubmit = async () => {
       let newItemsList = inertNewItem();
+      if(!newItemsList) return;
       if ((state.editFlow && !state.name.length) || (!state.editFlow && !newItemsList.length)) {
         setState({ ...state, nameWarning: true });
         return;
@@ -59,8 +66,17 @@ const AddEmployeeType = (props) => {
 
   const inertNewItem = () => {
     let newItemsList = [...state.newItems];
-    if(state.name.length) {
-      newItemsList[state.editIndex] = {name: state.name};
+    let duplicates = newItemsList.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
+    if(duplicates.length) {
+        let stateObj = {...state};
+        stateObj['uniqueError'] = true;
+        stateObj['duplicates'] = duplicates.map(obj => obj.name);
+        setState(stateObj);
+        return 0;
+    } else {
+      if(state.name.length) {
+        newItemsList[state.editIndex] = {name: state.name};
+      }
     }
     return newItemsList;
   }
@@ -73,7 +89,7 @@ const AddEmployeeType = (props) => {
 
   const handleInputChange = (e) => {
     const { value } = e.target;
-    setState({ ...state, name: value, nameWarning: false })
+    setState({ ...state, name: value, nameWarning: false, uniqueError: false, duplicates: [] })
   }
 
   const handleAdd = ({ key, target: { value } }) => {
@@ -124,13 +140,12 @@ const AddEmployeeType = (props) => {
     <div className='add-edit-types'>
       <div className="row m-3">
         <h4 className="mb-4"> {`${props.id ? 'Edit ' : 'Add '} ${props.manageType === 'employee-types' ? 'employee type' : 'coefficient'}`} </h4>
-        <label className = "mb-3" htmlFor="name"> {`${props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient name'}`} </label>
+        <label className = "mb-3" htmlFor="name"> {`${props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient name'}`} <span style={{color:'red'}}> * </span></label>
         <div className='row'>
           <input
             ref={inputRef}
             type="text"
-            className="form-control col-7"
-            id="pcp_name"
+            className="form-control col-7 pcp_name"
             value={state.name}
             onChange={(e) => handleInputChange(e)}
             onKeyUp={(e) => handleAdd(e)}

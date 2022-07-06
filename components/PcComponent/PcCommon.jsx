@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
+import SalaryBenefits from './SalaryBenifits';
 const PcCommon = (props) => {
 	const router = useRouter();
 	const [ current_sec, setCurrent_sec ] = useState(1); //holds value for active tab [1=addPc  2=Add caterory and function 3=Add age 4=Employee Type 5=Salary benefits]
@@ -25,6 +26,8 @@ const PcCommon = (props) => {
 	const [ cat_subsec_type, setCat_subsec_type ] = useState(0);
 	const [ cat_fun_updated, setCat_fun_updated ] = useState('');
 	const [ cat_subsec_id, setCat_subsec_id ] = useState(0);
+	const [ pc_view_type, setPc_view_type ] = useState('addpc');
+
 
 	useEffect(
 		() => {
@@ -65,7 +68,9 @@ const PcCommon = (props) => {
 					cat_fun_updated,
 					setCat_fun_updated,
 					cat_subsec_id,
-					setCat_subsec_id
+					setCat_subsec_id,
+					pc_view_type, 
+					setPc_view_type
 				}}
 			>
 				{props.type == 'add' ? (
@@ -184,7 +189,7 @@ const PcCommon = (props) => {
 										<p className="mb-2">Step 4:</p> <p>Employee type</p>
 									</button>
 								</li>
-								{/* <li className="nav-item" role="presentation">
+								<li className="nav-item" role="presentation">
 							<button
 								className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
 									? 'disabled'
@@ -207,7 +212,7 @@ const PcCommon = (props) => {
 								)}
 								<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
 							</button>
-						</li> */}
+						</li>
 							</ul>
 							<div className="tab-content" id="pills-tabContent">
 								<div
@@ -249,20 +254,19 @@ const PcCommon = (props) => {
 									role="tabpanel"
 									aria-labelledby="pills-contact-tab"
 								>
-									...
+									{current_sec == 5 && <SalaryBenefits />}
 								</div>
 							</div>
 						</div>
 					</div>
-				) : props.type == 'managepc' ? (
+				) : props.type == 'view' ? (
 					<div>
-						{' '}
-						<PcOverview type="addpc" pc_type="managepc" />
+						<PcOverview type="viewpc" pc_type="view" />
 					</div>
 				) : (
 					<div>
 						{' '}
-						<PcOverview type="addpc" pc_type="edit" />
+						<PcOverview type="editpc" pc_type="edit" />
 					</div>
 				)}
 			</PcContext.Provider>

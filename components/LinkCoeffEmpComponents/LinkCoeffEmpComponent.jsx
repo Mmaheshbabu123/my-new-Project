@@ -4,7 +4,7 @@ import CoeffcientValuesFirstPart from './CoeffcientValuesFirstPart';
 import EmployeeTypeSecondPart from './EmployeeTypeSecondPart';
 import { helpers } from './LinkCoeffEmpHelper';
 import MultiSelect from '../SelectComponent';
-import Image from 'next/image'
+import Image from 'next/image';
 import forwardScroll from '@/components/images/right-arrow.png';
 import backwardScroll from '@/components/images/left-arrow.png';
 import { getAllEmpCoeffAndValueTypes, savePcLinkingData } from '@/Services/ApiEndPoints';
@@ -78,6 +78,8 @@ const LinkCoeffEmpComponent = (props) => {
       proceed = false;
     if (state.valueErrorArray.length)
       proceed = false;
+    if (state.defaultValueError.length)
+      proceed = false;
     return proceed;
   }
 
@@ -103,6 +105,7 @@ const LinkCoeffEmpComponent = (props) => {
       pclinkingValueobj: {},
       lowHighValidation: [],
       valueErrorArray: [],
+      defaultValueError: [],
     });
   }
 
@@ -153,6 +156,10 @@ const LinkCoeffEmpComponent = (props) => {
             <small className="col-md-3 mt-3 mb-3 warning-message">
               {`Value should be in between 0 to 10.`}
             </small>}
+          {state.defaultValueError.length > 0 &&
+            <small className="col-md-3 mt-3 mb-3 warning-message">
+              {`Default value should be in between low and high values.`}
+            </small>}  
         </div>
         <div className="col-md-12 m-0 p-0 relative-div">
           {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>

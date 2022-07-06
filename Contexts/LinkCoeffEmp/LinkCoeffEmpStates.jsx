@@ -21,6 +21,7 @@ const LinkCoeffEmpStates = (props) => {
     , maxValue: 10
     , regexp: /^[0-9,.]*$/
     , valueErrorArray: []
+    , defaultValueError: []
     , emptyDataWarning: false
     , isOverflow: false
     , tableWidth: '100%'
