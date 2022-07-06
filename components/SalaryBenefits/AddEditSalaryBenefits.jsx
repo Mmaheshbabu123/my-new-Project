@@ -45,23 +45,33 @@ const AddEditSalaryBenefits = (props) => {
             stateObj['uniqueError'] = true;
             stateObj['duplicates'] = duplicates.map(obj => obj.name);
         } else {
-          stateObj['newItems'][state.editIndex] = {
-            name: state.name,
-            date: state.date,
-            value: state.value
-          };
-          inputRef.current['date'].value = '';
-          stateObj['name'] = '';
-          stateObj['date'] = '';
-          stateObj['value'] = '';
-          stateObj['editIndex'] = stateObj['newItems'].length;
+          if(!checkDateFieldValid(state.date)) {
+            stateObj['newItems'][state.editIndex] = {
+              name: state.name,
+              date: state.date,
+              value: state.value
+            };
+            inputRef.current['date'].value = '';
+            stateObj['name'] = '';
+            stateObj['date'] = '';
+            stateObj['value'] = '';
+            stateObj['editIndex'] = stateObj['newItems'].length;
+        }else {
+            stateObj['dateWarning'] = true;
+        }
        }
       } else {
         stateObj['nameWarning'] = true;
       }
       setState(stateObj);
     }
-
+   const checkDateFieldValid = (value) => {
+     if(new Date(value).getTime() > new Date(state.minDate).getTime() || value === '') {
+       return false;
+      } else {
+       return true;
+      }
+   }
     /**
      * [handleSubmit: function to save and edit employee/coefficient types]
      * @return {[void]} [it wont return anything]
@@ -69,8 +79,12 @@ const AddEditSalaryBenefits = (props) => {
     const handleSubmit = async () => {
       let newItemsList = inertNewItem();
       if(!newItemsList) return;
+
       if ((state.editFlow && !state.name.length) || (!state.editFlow && !newItemsList.length)) {
         setState({ ...state, nameWarning: true });
+        return;
+      }else if(checkDateFieldValid(state.date)) {
+        setState({ ...state, dateWarning: true });
         return;
       }
       let url = state.editFlow ? `${updateSalaryBenefits}/${props.id}` : `${createSalaryBenefits}`;
@@ -160,21 +174,15 @@ const AddEditSalaryBenefits = (props) => {
     } else if (name === 'value') {
       // if(value.match(/^[0-9,.]*$/)) {
         stateObj[name] = value;
+
+
       // stateObj['valueWarning'] = false;
       // } else {
       // stateObj['valueWarning'] = true;
       // }
     } else {
-      if(new Date(value).getTime() > new Date(state.minDate).getTime()) {
-        stateObj[name] = value;
         stateObj['dateWarning'] = false;
-      } else {
-        inputRef.current['date'].value = '';
-        stateObj['dateWarning'] = value === '' ? false : true;
-      }
-      if(value === '') {
         stateObj[name] = value;
-      }
     }
     setState(stateObj);
   }
@@ -263,7 +271,7 @@ const AddEditSalaryBenefits = (props) => {
               type="button"
               style={{marginTop: '60px'}}
               className="btn btn-dark pcp_btn">
-              {`+ Add another`}
+              {`+ Add`}
             </button>
           }
           </div>
@@ -282,8 +290,8 @@ const AddEditSalaryBenefits = (props) => {
             {state.newItems.map((item, index) =>
               <tr key={index} id={index}>
                 <td style={{ width: '30%' }}> {item.name} </td>
-                <td style={{ width: '30%' }}> {formatDate(item.date)} </td>
-                <td style={{ width: '20%' }}> {item.value} </td>
+                <td style={{ width: '30%' }}> {formatDate(item.date) ? formatDate(item.date) : '--'} </td>
+                <td style={{ width: '20%' }}> {item.value ? item.value : '--'} </td>
                 <td style={{ width: '20%' }}> {getNeededActions(item, index)} </td>
               </tr>
             )}

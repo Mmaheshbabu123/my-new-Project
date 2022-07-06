@@ -5,8 +5,6 @@ import styles from './AbsoluteYouAgent/absoluteAgent.module.css';
 import { APICALL } from '@/Services/ApiServices';
 import { submitService } from './submitService';
 import {
-  fetchAbsoluteYouAgentData,
-  fetchSalaryBenefitsPerPc,
   saveCooperationDataTabWise
 } from '@/Services/ApiEndPoints';
 import {
@@ -31,21 +29,6 @@ import SalaryBenefitsMain  from './SalaryBenefits/organisms/SalaryBenefitsMain';
 const TabIndex = (props) => {
 	const { state: { selectedTabId }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
-
-	useEffect(() => {
-    if(!state.loadedTabs.includes(selectedTabId)) // Once data loaded next time it wont call database
-    		loadData();
-	}, [selectedTabId])
-
-
-  const loadData = async () => {
-    let stateKey = `tab_${selectedTabId}`;
-    var data = await fetchDataAccordingToTabSelection(selectedTabId);
-    data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
-    data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
-    data['renderTabComponents'] = true;
-    updateStateChanges(data)
-  }
 
 	/**
    * [showComponentBasedOnTabSelection rendering component according to tab selection]
@@ -80,16 +63,25 @@ const TabIndex = (props) => {
 
   const forWardToNextStepTab = async () => {
     let proceed = submitService.proceedToNextStepTab({state, selectedTabId});
-    console.log(proceed);
     if(proceed) {
-      // saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then(response => {
-        // console.log(response);
-        let nextTab = selectedTabId + 1;
-        let obj = { selectedTabId: nextTab, proceedToNextTabWarning: false, filledTabs: [...state.filledTabs, nextTab] }
-        router.query.selectedTabId = nextTab;
-        router.push(router, undefined, { shallow: true })
-        updateStateChanges(obj);
-      // })
+      await saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then((response) => {
+        if(response.status === 200) {
+          let nextTab = selectedTabId + 1;
+          let obj = {
+            selectedTabId: nextTab,
+            proceedToNextTabWarning: false,
+            filledTabs: [...state.filledTabs, nextTab],
+          }
+          if(selectedTabId === 1) obj['root_parent_id']= response.data;
+          router.query.selectedTabId = nextTab;
+          router.push(router, undefined, { shallow: true })
+          updateStateChanges(obj);
+        } else {
+          console.error(response.msg);
+        }
+      }).catch(error => {
+        console.log(error);
+      })
     } else {
       updateStateChanges({proceedToNextTabWarning: true});
     }
@@ -98,7 +90,7 @@ const TabIndex = (props) => {
 	return (
 		<div className="">
       {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields (fields with asterisk mark) </p> : null}
-      {state.renderTabComponents ? showComponentBasedOnTabSelection() : <> Loading... </>}
+      {showComponentBasedOnTabSelection()}
       {state.renderTabComponents ? <div className={`col-md-12 row`} >
           <div className={`col-md-11 ${styles['tab-index-back-div']}`}>
             <p className={`${styles['tab-index-back-btn']}`}> Back </p>
@@ -116,45 +108,6 @@ const TabIndex = (props) => {
 	);
 }
 
-async function fetchDataAccordingToTabSelection(selectedTabId) {
-  let data = {};
-  let response = {};
-  switch (selectedTabId) {
-    case ABSOLUTEYOU_AGENT_TAB:
-        response = await fetchDataFromBackend(fetchAbsoluteYouAgentData);
-        data['pcArray'] = response.pc_array || [];
-        data['pcLinkedEmployeeTypes'] = response.pcLinkedEmployeeTypes || {};
-      break;
-    case COMPANY_INFORMATION_TAB:
-      //.
-      break;
-    case CONTACT_PERSONS_TAB:
-      data['tab_3'] = {1:{'25':1,'30':1,'31':2,'32':2,'38':2,'39':2},2:{'25':1,'30':1,'31':2,'32':2,'38':2,'39':2},loaded:true};
-      break;
-    case ONLINE_DETAILS_TAB:
-      //.
-      break;
-    case SALARY_BENEFITS_TAB:
-      response = await fetchDataFromBackend(fetchSalaryBenefitsPerPc);
-      data['salaryBenefitPcArray'] = response.pc_array || [];
-      data['salaryDataPerPc'] = response.salaryData || {};
-      break;
-    default:
-      data = {};
-  }
-  return data;
-}
-
-async function fetchDataFromBackend(url) {
-  let data = {};
-  await APICALL.service(`${url}`, 'GET').then(response => {
-    if (response.status === 200) {
-      data = response.data;
-    }
-  })
-  return data;
-}
-
 /**
  * [saveDataTabWise description]
  * @param  {int}    tabId               [description]
@@ -163,10 +116,12 @@ async function fetchDataFromBackend(url) {
  * @return {Object}       [description]
  */
 async function saveDataTabWise(state, tabId, url) {
-  APICALL.service(`${url}`, 'POST', getTabRelatedData(state, tabId))
-  .then((response) => {
-    console.log(response);
+  let apiResponse = '';
+  await APICALL.service(`${url}`, 'POST', getTabRelatedData(state, tabId))
+  .then(response => {
+    apiResponse = response;
   })
+  return apiResponse;
 }
 
 function getTabRelatedData(state, tabId) {

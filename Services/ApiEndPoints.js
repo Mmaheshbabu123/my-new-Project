@@ -116,4 +116,5 @@ export const fetchPcLinkedEmployeeTypes = BASE_URL + "fetch-pclinked-employee-ty
 export const getPcLinkedCoeffData = BASE_URL + "get-pclinked-coeff-data";
 export const fetchSalaryBenefitsPerPc = BASE_URL + "get-salary-benefits-per-pc";
 export const saveCooperationDataTabWise = BASE_URL + "save-cooperationdata-tab-wise";
+export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agreements";
 //------------------- @

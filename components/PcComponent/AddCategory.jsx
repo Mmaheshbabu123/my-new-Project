@@ -154,7 +154,7 @@ function AddCategory(props) {
 
 		if (error['error_category_name'] == '') {
 			props.categorylist.forEach((element) => {
-				if (element.type == '2' && element.id != id && data.category_name == element.category_name) {
+				if (element.type == '2' && element.id != id && data.category_name.replaceAll(' ','').toLowerCase() == element.category_name.replaceAll(' ','').toLowerCase()) {
 					error['error_category_name'] = 'Category name already exist.';
 				}
 			});

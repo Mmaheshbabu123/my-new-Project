@@ -163,7 +163,7 @@ const SalaryBenifits = () => {
 										updateRes(e, key);
 									}}
 								/>
-								<label calssName="form-check-label" htmlFor="flexCheckDefault">
+								<label className="form-check-label" htmlFor="flexCheckDefault">
 									{val.name}
 								</label>
 							</div>

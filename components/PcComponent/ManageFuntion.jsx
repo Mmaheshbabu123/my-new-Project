@@ -1,8 +1,6 @@
-import React, { Component, useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
 import { APICALL } from '../../Services/ApiServices';
-import { getCategory, getFunctions, deleteFunction } from '../../Services/ApiEndPoints';
-import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare, FaMinusSquare } from 'react-icons/fa';
+import { getFunctions, deleteFunction } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Popup from './Popupfunction';
 import Link from 'next/link';
@@ -235,7 +233,7 @@ const ManageFunction = () => {
 		<div className="container">
 			<form>
 				<div className="row">
-					<p className="mt-4 mb-2 h4">MANAGE FUNCTIONS</p>
+					<p className="mt-4 mb-2 h4">Manage functions</p>
 					<div className="col-sm-2">
 						<input
 							type="search"
@@ -302,9 +300,9 @@ const ManageFunction = () => {
 						<table className="table border border-secondary mt-3">
 							<thead>
 								<tr className="table-secondary">
-									<th className="border-end border-secondary">Paritair Comite Number</th>
-									<th className="border-end border-secondary">Function Name</th>
-									<th className="border-end border-secondary">Minimal Salary</th>
+									<th className="border-end border-secondary">Paritair comite number</th>
+									<th className="border-end border-secondary">Function name</th>
+									<th className="border-end border-secondary">Minimum salary</th>
 									<th className="border-end border-secondary">Category</th>
 									<th className="border-end border-secondary">Action</th>
 								</tr>

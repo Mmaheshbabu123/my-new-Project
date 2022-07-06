@@ -1,13 +1,9 @@
-import React, { Component, useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getCategory, updateCategory } from '../../Services/ApiEndPoints';
-import { FaTrash, FaPen, FaAngleDown, FaAngleUp, FaEdit, FaRecycle, FaPlusSquare, FaMinusSquare } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
-
 import { APICALL } from '../../Services/ApiServices';
 import Popup from './Popupcategory';
-import { Uniquekey } from '../../Services/GenetateUniqueKey';
 import { useRouter } from 'next/router';
 
 
@@ -154,7 +150,7 @@ const ManageCategoryComponent = () => {
 		<div className="container">
 			<form>
 				<div className="row">
-					<p className="mt-4 mb-2 h4">MANAGE CATEGORIES</p>
+					<p className="mt-4 mb-2 h4">Manage Categories</p>
 
 					<div className="col-sm-2">
 						<input
@@ -210,9 +206,9 @@ const ManageCategoryComponent = () => {
 						<table className="table border border-secondary mt-3">
 							<thead>
 								<tr className="table-secondary">
-									<th className="border-end border-secondary">Paritair Comite Number</th>
+									<th className="border-end border-secondary">Paritair comite number</th>
 									<th className="border-end border-secondary">Category name</th>
-									<th className="border-end border-secondary">Minimum Salary</th>
+									<th className="border-end border-secondary">Minimum salary</th>
 									<th className="border-end border-secondary">Action</th>
 								</tr>
 							</thead>
