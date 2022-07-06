@@ -181,7 +181,7 @@ function validationsObjCheckStatus (validate_data) {
 }
 
 function insertObj(selectedPc, selectedEmpId, type) {
-  return { pc_id: selectedPc[type], selectedEmpId: selectedEmpId[type], tab_id: 1, type: type }
+  return { pc_id: selectedPc[type], employee_type_id: selectedEmpId[type], tab_id: 1, type: type }
 }
 
 function companyInformationPostData(state,tab_key) {
