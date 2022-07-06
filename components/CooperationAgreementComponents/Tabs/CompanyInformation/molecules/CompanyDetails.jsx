@@ -1,4 +1,4 @@
-import React, {useContext,useCallback} from 'react';
+import React, {useContext,useCallback,useState} from 'react';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
@@ -11,7 +11,11 @@ import RequiredField from '@/atoms/RequiredSpanField';
 const CompanyDetails = (props) => {
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
 var { tab_2 } = state;
-console.log(tab_2);
+
+const [companyState,setCompanyState] = useState({
+  vat_number:0,
+  validations:{'17':{'type':1,validate:false },'19':{'type':2,validate:true},'14':{'type':1,validate:true},'18':{'type':1,validate:true}}
+})
 var TypeOfCompany = 10;
 var Vat_Number = 8;
 
@@ -19,7 +23,7 @@ const CompanyFieldData = (companyRow1) => {
   let  fieldsArray = [];
   companyRow1.map(data=>{
    fieldsArray.push(
-     <div className = {`col-md-12 ${styles['add-div-margings']}`}>
+     <div className = ''>
      <LabelField title={data.key_name}  customStyle = {{display:''}}/> {requiredFields['tab_2'][data.id] && <RequiredField />}
      <InputField
      id = {data.id}
@@ -41,16 +45,57 @@ const CompanyFieldData = (companyRow1) => {
 const handleChange = (event) => {
   const { value, name } = event.target;
   tab_2[name] = value;
-  updateStateChanges({ tab_2 });
+   
+   console.log(name);
+  if(companyState['validations'].hasOwnProperty(name)) {
+    validateFields(value);
+  }
+  else {
+    updateStateChanges({ tab_2 });
+  }
+}
 
+const validateFields = (text) => {
+  console.log('kkkk')
 }
 const handleVatChange = (event) => {
-  const { value, name } = event.target;
 
+  const { value, name } = event.target;
+  console.log(value);
   tab_2[name] = value;
+document.getElementById(Vat_Number).value = value;
+  setCompanyState({
+    ...companyState,
+    vat_number:value,
+  })
   updateStateChanges({ tab_2 });
 }
-const optimizedFn = debounceFun(handleVatChange);
+let filterTimeout
+
+const doCityFilter = event => {
+  const { value, name } = event.target;
+
+  clearTimeout(filterTimeout)
+  if (!event) return setFilteredCities([])
+
+  filterTimeout = setTimeout(() => {
+    setCompanyState({
+      ...companyState,
+      vat_number:value,
+    })
+    console.log('====>', event)
+
+  }, 500)
+}
+const optimizedFn = (event) => {
+    // const { value, name } = event.target;
+    //   tab_2[name] = value;
+    //   updateStateChanges({ tab_2 },()=>{
+         debounceFun(handleVatChange,100);
+    //  });
+
+}
+console.log(companyState)
 const handleSelect = (obj,key) => {
   tab_2[key]  = obj.value;
   updateStateChanges({ tab_2 });
@@ -65,8 +110,9 @@ return(
       type = 'text'
       placeholder="Enter something here..."
       className = {'atom-input-field-default ' + 'col-md-8'}
-     value={tab_2[Vat_Number]}
-      onChange={(e) => optimizedFn(e)}
+      value={tab_2[Vat_Number]}
+      onChange={(e) => doCityFilter (e) }
+        //optimizedFn(e)}
      name={Vat_Number}
       //{`tab_2_${data.id}`}
      />
