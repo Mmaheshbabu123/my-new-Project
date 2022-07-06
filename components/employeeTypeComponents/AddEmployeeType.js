@@ -156,7 +156,7 @@ const AddEmployeeType = (props) => {
               onClick={() => addItemAndUpdateIndex({ ...state }, state.name)}
               type="button"
               className="btn btn-dark pcp_btn col-3">
-              {`+ Add another`}
+              {`+ Add`}
             </button>
           }
         </div>

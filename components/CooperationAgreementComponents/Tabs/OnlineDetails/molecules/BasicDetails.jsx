@@ -7,6 +7,7 @@ import RequiredField from '@/atoms/RequiredSpanField';
 import styles from '../OnlineDetails.module.css';
 import { onlineDetailsRow1,onlineDetailsRow2,onlineDetaillsRadioRow1,onlineDetaillsRadioRow2} from '../OnlineDetailsFields';
 import { requiredFields} from '../../../RequiredFields';
+import ValidateMessage from '@/atoms/validationError';
 const BasicDetails = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_4} = state;
@@ -28,6 +29,9 @@ const BasicDetails = (props) => {
          name={data.id}
          //{`tab_2_${data.id}`}
         />
+        {tab_4['validations'][data.id] && tab_4['validations'][data.id]['validate'] &&
+          <ValidateMessage text = {'This field is invalid'}/>
+        }
        </div>
      )
     })

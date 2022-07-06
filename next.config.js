@@ -1,5 +1,5 @@
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   serverRuntimeConfig: {
     // Will only be available on the server side
     // secretToken: process.env.REACT_APP_AUTHENTICATION_TOKEN, // Pass through env variables
