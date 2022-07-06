@@ -17,8 +17,9 @@ const {
   tab_6
 } = requiredFields;
 
-export const validationService = {
+export const submitService = {
   proceedToNextStepTab,
+  absoluteYouPostData,
 }
 
 
@@ -35,19 +36,19 @@ function proceedToNextStepTab({ state, selectedTabId, ...props }) {
       validationStatus = checkAbsoluteAgentTabValidation();
       break;
     case COMPANY_INFORMATION_TAB:
-
+      validationStatus = checkCompanyInformationTabValidation(tab_2,'tab_2');
       break;
     case CONTACT_PERSONS_TAB:
 
       break;
     case ONLINE_DETAILS_TAB:
-
+      validationStatus = checkCompanyInformationTabValidation(tab_4,'tab_4');
       break;
     case SALARY_BENEFITS_TAB:
 
       break;
     case INVOIING_TAB:
-
+      validationStatus = checkCompanyInformationTabValidation(tab_6,'tab_6');
       break;
     default:
       validationStatus = true;
@@ -85,4 +86,53 @@ function loopAndCheckLength(obj) {
     return 1;
   })
   return tempStatus;
+}
+
+
+function checkCompanyInformationTabValidation(tab_data,tab_key) {
+
+  return  checkValidationKeyExistStateValue(tab_data,tab_key)
+
+}
+function checkOnlineDetailsValidation(tab_data,tab_key) {
+  return  checkValidationKeyExistStateValue(tab_data,tab_key)
+}
+function checkInvoiceValidation (tab_data,tab_key) {
+  return checkValidationKeyExistStateValue(tab_data,tab_key)
+}
+
+function checkValidationKeyExistStateValue(tab_data,tab_key) {
+  let tempSatatus = true;
+for(const key in tab_data) {
+ if(stateObj[tab_key].hasOwnProperty(key)
+ && stateObj[tab_key][key] != '') {
+   tempSatatus = true;
+ }
+ else{
+   tempSatatus = false;
+   break;
+ }
+}
+return tempSatatus;
+}
+
+
+function absoluteYouPostData(state) {
+  let workers = 1;
+  let servants = 2;
+  let data = {...state['tab_1']};
+  let workersServantsCompState = {...state['workersServantsCompState']}
+  let selectedPc    = workersServantsCompState['selectedPc'] || {};
+  let selectedEmpId = workersServantsCompState['selectedEmpId'] || {};
+  if(selectedEmpId[workers] && selectedEmpId[workers].length) {
+    data['worksServantsData'][workers].push(insertObj(selectedPc, selectedEmpId, workers));
+  }
+  if(selectedEmpId[servants] && selectedEmpId[servants].length) {
+    data['worksServantsData'][workers].push(insertObj(selectedPc, selectedEmpId, servants))
+  }
+  return data;
+}
+
+function insertObj(selectedPc, selectedEmpId, type) {
+  return { pc_id: selectedPc[type], selectedEmpId: selectedEmpId[type], tab_id: 1, type: type }
 }
