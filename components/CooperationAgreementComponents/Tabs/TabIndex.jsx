@@ -80,16 +80,16 @@ const TabIndex = (props) => {
 
   const forWardToNextStepTab = async () => {
     let proceed = submitService.proceedToNextStepTab({state, selectedTabId});
-  
+
     if(proceed) {
-      // saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then(response => {
-        // console.log(response);
+      saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then(response => {
+        console.log(response);return;
         let nextTab = selectedTabId + 1;
         let obj = { selectedTabId: nextTab, proceedToNextTabWarning: false, filledTabs: [...state.filledTabs, nextTab] }
         router.query.selectedTabId = nextTab;
         router.push(router, undefined, { shallow: true })
         updateStateChanges(obj);
-      // })
+       })
     } else {
       updateStateChanges({proceedToNextTabWarning: true});
     }
@@ -187,13 +187,13 @@ function getTabWisePostData(state, tabId) {
       data = submitService.absoluteYouPostData(state)
       break;
     case COMPANY_INFORMATION_TAB:
-      //.
+      data = submitService.companyInformationPostData(state,'tab_2');
       break;
     case CONTACT_PERSONS_TAB:
 
       break;
     case ONLINE_DETAILS_TAB:
-      //.
+      data = submitService.onlineDetailsPostData(state,'tab_4');
       break;
     case SALARY_BENEFITS_TAB:
 

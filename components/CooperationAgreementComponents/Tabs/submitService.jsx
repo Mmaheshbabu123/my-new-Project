@@ -21,6 +21,8 @@ const {
 export const submitService = {
   proceedToNextStepTab,
   absoluteYouPostData,
+  companyInformationPostData,
+  onlineDetailsPostData,
 }
 
 
@@ -177,4 +179,18 @@ function validationsObjCheckStatus (validate_data) {
 
 function insertObj(selectedPc, selectedEmpId, type) {
   return { pc_id: selectedPc[type], selectedEmpId: selectedEmpId[type], tab_id: 1, type: type }
+}
+
+function companyInformationPostData(state,tab_key) {
+  return   removeValidatioKeyState(state,tab_key)
+
+}
+ function onlineDetailsPostData(state,tab_key) {
+   return   removeValidatioKeyState(state,tab_key)
+ }
+
+function removeValidatioKeyState(state,tab_key) {
+  let data = structuredClone(state);
+  delete data[tab_key]['validations'];
+   return data[tab_key];
 }
