@@ -5,7 +5,7 @@ import { BsCircle } from 'react-icons/bs';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 
 const CooperationAgreementTabs = ({ cooperTabs = [], selectedTabParam }) => {
-  const { state: { selectedTabId, filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+  const { state: { selectedTabId, filledTabs }, updateStateChanges } = useContext(CooperationAgreementContext);
   const router = useRouter();
   const handleTabClick = (selectedTabId) => {
     router.query.selectedTabId = selectedTabId
@@ -15,7 +15,7 @@ const CooperationAgreementTabs = ({ cooperTabs = [], selectedTabParam }) => {
 
   useEffect(() => {
     let tabId = Number(selectedTabParam) || selectedTabId;
-    updateStateChanges({ selectedTabId: tabId, renderTabComponents: state['loadedTabs'].includes(tabId)});
+    updateStateChanges({ selectedTabId: tabId });
   }, [selectedTabParam])
 
   return (

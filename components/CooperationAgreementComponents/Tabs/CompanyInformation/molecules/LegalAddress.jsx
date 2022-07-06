@@ -20,8 +20,8 @@ const LegalAddress = (props) => {
 
     validations:{'17':{'type':1,validate:false,'text':'Only numbers will accept' },'14':{'type':1,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'}}
   })
-  var {tab_2} = structuredClone(state);
-  console.log(tab_2)
+  var tab_2 = structuredClone(state['tab_2']);
+
   const handleChange = (event) => {
     const {name,value} = event.target;
     tab_2[name] = value;

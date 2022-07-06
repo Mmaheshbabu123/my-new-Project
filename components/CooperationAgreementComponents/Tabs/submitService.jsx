@@ -161,6 +161,9 @@ function absoluteYouPostData(state) {
   if(selectedEmpId[servants] && selectedEmpId[servants].length) {
     data['worksServantsData'][workers].push(insertObj(selectedPc, selectedEmpId, servants))
   }
+  let coeffPageData = state['coeffPageData'] || {};
+  let selectedPcId = coeffPageData.selectedPc || 0;
+  data['coeffPageDataPc'] = selectedPcId;
   return data;
 }
 function validationsObjCheckStatus (validate_data) {
@@ -176,5 +179,5 @@ function validationsObjCheckStatus (validate_data) {
 }
 
 function insertObj(selectedPc, selectedEmpId, type) {
-  return { pc_id: selectedPc[type], selectedEmpId: selectedEmpId[type], tab_id: 1, type: type }
+  return { pc_id: selectedPc[type], employee_type_id: selectedEmpId[type], tab_id: 1, type: type }
 }

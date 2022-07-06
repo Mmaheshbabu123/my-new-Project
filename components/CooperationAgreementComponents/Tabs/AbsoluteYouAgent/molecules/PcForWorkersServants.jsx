@@ -183,6 +183,7 @@ const PcForWorkersServants = () => {
   }
 
   const getCommaSeparatedlabels = (selectedIds, optionArray = []) => {
+    if(!selectedIds) return ''
     let labelString = optionArray.filter(val => selectedIds.includes(val.value)).map(val => val.label);
     return labelString.join(', ');
   }
