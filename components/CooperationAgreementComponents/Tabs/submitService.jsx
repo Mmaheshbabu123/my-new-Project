@@ -42,13 +42,13 @@ function proceedToNextStepTab({ state, selectedTabId, ...props }) {
 
       break;
     case ONLINE_DETAILS_TAB:
-      validationStatus = checkCompanyInformationTabValidation(tab_4,'tab_4');
+      validationStatus = checkOnlineDetailsValidation(tab_4,'tab_4');
       break;
     case SALARY_BENEFITS_TAB:
 
       break;
     case INVOIING_TAB:
-      validationStatus = checkCompanyInformationTabValidation(tab_6,'tab_6');
+      validationStatus = checkInvoiceValidation(tab_6,'tab_6');
       break;
     default:
       validationStatus = true;
@@ -90,7 +90,8 @@ function loopAndCheckLength(obj) {
 
 
 function checkCompanyInformationTabValidation(tab_data,tab_key) {
-
+    // let validationObj = stateObj['tab_2']['validations'];
+    // console.log(validationObj);return;
   return  checkValidationKeyExistStateValue(tab_data,tab_key)
 
 }
@@ -116,6 +117,26 @@ for(const key in tab_data) {
 return tempSatatus;
 }
 
+function checkValidationFields(key,value,tab_key) {
+//  let type =  stateObj['tab_2'])['validations'][key]['type'];
+  console.log(type)
+  console.log(emailValidate(value))
+  const {validations} = legalState;
+  if(type === 1 && numericValidate(value)) {
+    tab_2[key] = value;
+    validations[key]['validate'] = false;
+ }
+ // else if(type === 2 && emailValidate(value)) {
+ //   console.log('email')
+ //   tab_2[key] = value;
+ //   validations[key]['validate'] = false;
+ //   updateStateChanges({ tab_2 });
+ //  }
+  else {
+     validations[key]['validate'] = true;
+
+  }
+}
 
 function absoluteYouPostData(state) {
   let workers = 1;
