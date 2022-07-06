@@ -28,6 +28,7 @@ export const legalAdressRow1 = [
 export const legalAdressRow2 = [
   {id:12,key_name:'Legal address: house number'},
   {id:13,key_name:'Legal address: box'},
+  {id:15,key_name:'Legal address: city'},
   {id:18,key_name:'Legal address: fax number'},
   {id:20,key_name:'Website'},
 ];

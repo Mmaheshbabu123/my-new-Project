@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import styles from './AbsoluteYouAgent/absoluteAgent.module.css';
 import { APICALL } from '@/Services/ApiServices';
-import { validationService } from './validationService';
+import { submitService } from './submitService';
 import {
   fetchAbsoluteYouAgentData,
-  fetchSalaryBenefitsPerPc
+  fetchSalaryBenefitsPerPc,
+  saveCooperationDataTabWise
 } from '@/Services/ApiEndPoints';
 import {
     ABSOLUTEYOU_AGENT_TAB
@@ -77,14 +78,18 @@ const TabIndex = (props) => {
     return component || <> {`Selected tab id: ${selectedTabId}`} </>;
   }
 
-  const forWardToNextStepTab = () => {
-    let proceed = validationService.proceedToNextStepTab({state, selectedTabId});
+  const forWardToNextStepTab = async () => {
+    let proceed = submitService.proceedToNextStepTab({state, selectedTabId});
+    console.log(proceed);
     if(proceed) {
-      let nextTab = selectedTabId + 1;
-      let obj = { selectedTabId: nextTab, proceedToNextTabWarning: false, filledTabs: [...state.filledTabs, nextTab] }
-      router.query.selectedTabId = nextTab;
-      router.push(router, undefined, { shallow: true })
-      updateStateChanges(obj);
+      // saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then(response => {
+        // console.log(response);
+        let nextTab = selectedTabId + 1;
+        let obj = { selectedTabId: nextTab, proceedToNextTabWarning: false, filledTabs: [...state.filledTabs, nextTab] }
+        router.query.selectedTabId = nextTab;
+        router.push(router, undefined, { shallow: true })
+        updateStateChanges(obj);
+      // })
     } else {
       updateStateChanges({proceedToNextTabWarning: true});
     }
@@ -124,7 +129,7 @@ async function fetchDataAccordingToTabSelection(selectedTabId) {
       //.
       break;
     case CONTACT_PERSONS_TAB:
-      data['tab_3'] = {1:{},2:{},loaded:true};
+      data['tab_3'] = {1:{'25':1,'30':1,'31':2,'32':2,'38':2,'39':2},2:{'25':1,'30':1,'31':2,'32':2,'38':2,'39':2},loaded:true};
       break;
     case ONLINE_DETAILS_TAB:
       //.
@@ -150,5 +155,53 @@ async function fetchDataFromBackend(url) {
   return data;
 }
 
+/**
+ * [saveDataTabWise description]
+ * @param  {int}    tabId               [description]
+ * @param  {Onject} state               [description]
+ * @param  {String} url                 [description]
+ * @return {Object}       [description]
+ */
+async function saveDataTabWise(state, tabId, url) {
+  APICALL.service(`${url}`, 'POST', getTabRelatedData(state, tabId))
+  .then((response) => {
+    console.log(response);
+  })
+}
+
+function getTabRelatedData(state, tabId) {
+  return {
+    root_parent_id: state.root_parent_id || 0,
+    tab_id: tabId,
+    data: getTabWisePostData(state, tabId),
+    element_status: state['element_status']['tab_1'],
+    depedency_data_status:state['dependecyDataStatus'],
+  }
+}
+
+
+function getTabWisePostData(state, tabId) {
+  let data = {}
+  switch (tabId) {
+    case ABSOLUTEYOU_AGENT_TAB:
+      data = submitService.absoluteYouPostData(state)
+      break;
+    case COMPANY_INFORMATION_TAB:
+      //.
+      break;
+    case CONTACT_PERSONS_TAB:
+
+      break;
+    case ONLINE_DETAILS_TAB:
+      //.
+      break;
+    case SALARY_BENEFITS_TAB:
+
+      break;
+    default:
+      data = {};
+  }
+  return data;
+}
 
 export default TabIndex;
