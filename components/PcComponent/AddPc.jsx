@@ -208,7 +208,7 @@ function AddPc(props) {
 				? ValidationService.nameValidationMethod(res.pc_alias_name)
 				: '';
 		error1['pc_alias_name'] =
-			error1['pc_alias_name'] == '' && res.pc_alias_name != '' && res.pc_name == res.pc_alias_name
+			error1['pc_alias_name'] == '' && res.pc_alias_name != '' && res.pc_name.replaceAll(' ','').toLowerCase() == res.pc_alias_name.replaceAll(' ','').toLowerCase()
 				? 'Alias name cannot be same as paritair committe name.'
 				: error1['pc_alias_name'];
 		//seterror messages
