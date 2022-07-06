@@ -108,45 +108,6 @@ const TabIndex = (props) => {
 	);
 }
 
-// async function fetchDataAccordingToTabSelection(selectedTabId) {
-//   let data = {};
-//   let response = {};
-//   switch (selectedTabId) {
-//     case ABSOLUTEYOU_AGENT_TAB:
-//         response = await fetchDataFromBackend(fetchAbsoluteYouAgentData);
-//         data['pcArray'] = response.pc_array || [];
-//         data['pcLinkedEmployeeTypes'] = response.pcLinkedEmployeeTypes || {};
-//       break;
-//     case COMPANY_INFORMATION_TAB:
-//       //.
-//       break;
-//     case CONTACT_PERSONS_TAB:
-//       data['tab_3'] = {1:{'25':1,'30':1,'31':2,'32':2,'38':2,'39':2},2:{'25':1,'30':1,'31':2,'32':2,'38':2,'39':2},loaded:true};
-//       break;
-//     case ONLINE_DETAILS_TAB:
-//       //.
-//       break;
-//     case SALARY_BENEFITS_TAB:
-//       response = await fetchDataFromBackend(fetchSalaryBenefitsPerPc);
-//       data['salaryBenefitPcArray'] = response.pc_array || [];
-//       data['salaryDataPerPc'] = response.salaryData || {};
-//       break;
-//     default:
-//       data = {};
-//   }
-//   return data;
-// }
-
-// async function fetchDataFromBackend(url) {
-//   let data = {};
-//   await APICALL.service(`${url}`, 'GET').then(response => {
-//     if (response.status === 200) {
-//       data = response.data;
-//     }
-//   })
-//   return data;
-// }
-
 /**
  * [saveDataTabWise description]
  * @param  {int}    tabId               [description]
