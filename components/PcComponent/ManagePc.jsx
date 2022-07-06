@@ -95,7 +95,7 @@ const ManagePc = (props) => {
 	return (
 		<div className="container">
 			<div className="row ps-3 ms-3">
-				<p className="row mt-3 ms-5 text-bold h4">Manage Paritaire Comitee</p>
+				<p className="row mt-3 ms-5 text-bold h4">Manage paritaire comite</p>
 				<div className="col-md-9" >
 					<div className='row'>
 				<div className="col-sm-3">
@@ -144,7 +144,7 @@ const ManagePc = (props) => {
 					<span>
 						<Link href={'/redirect-page?src=/manage-pc&dest=addpc'}>
 							<a className={'ml-2 btn float-sm-right' + styles.addprojbtn + styles.btncolor}>
-								Add Paritaire Comitee
+								Add paritaire comite
 							</a>
 						</Link>
 					</span>

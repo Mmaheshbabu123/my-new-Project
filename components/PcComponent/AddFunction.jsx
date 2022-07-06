@@ -132,6 +132,8 @@ function AddFunction(props) {
 		}
 	};
 	let validate = () => {
+		console.log(props.categorylist);
+		// alert("2");return;
 		var error = [];
 		error['error_function_name'] =
 			ValidationService.emptyValidationMethod(data.function_name) == ''
@@ -144,8 +146,20 @@ function AddFunction(props) {
 
 		if (error['error_function_name'] == '') {
 			props.categorylist.forEach((val1, key) => {
-				if (val1.type == '3' && val1.id != id && val1.function_name == data.function_name) {
+				if (val1.type == '3' && val1.id != id && val1.function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
 					error['error_function_name'] = 'Function name already exist.';
+				}
+				if(val1.type == '2'){
+					console.log(val1.childObj)
+					if(val1.childObj != undefined){
+					val1.childObj.forEach((v, k)=>{
+						if (v.type == '3' && v.id != id && v.function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
+							error['error_function_name'] = 'Function name already exist.';
+						}
+						console.log(v)
+
+					})
+					}
 				}
 			});
 		}
@@ -166,7 +180,6 @@ function AddFunction(props) {
 		}
 		setError_function_name(error['error_function_name']);
 		setError_min_salary(error['error_min_salary']);
-
 		if (error['error_function_name'] == '' && error['error_min_salary'] == '') {
 			return true;
 		} else {
@@ -198,7 +211,11 @@ function AddFunction(props) {
 								className="form-select my-2 form-control"
 								value={data.category_id}
 								onChange={(e) => {
-									setData((prev) => ({ ...prev, category_id: e.target.value }));
+									console.log(props.categorylist)
+									console.log(typeof e.target.value)
+									let obj = props.categorylist.find(o => o.id == parseInt(e.target.value))
+									console.log(obj)
+									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: obj['min_salary'] }));
 								}}
 							>
 								<option value="">select</option>
@@ -208,12 +225,6 @@ function AddFunction(props) {
 											<option
 												value={props.categorylist[val]['id']}
 												key={val}
-												onClick={() => {
-													setData((prev) => ({
-														...prev,
-														min_salary: props.categorylist[val]['min_salary']
-													}));
-												}}
 											>
 												{props.categorylist[val]['category_name']}
 											</option>
