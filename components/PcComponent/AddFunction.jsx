@@ -135,10 +135,10 @@ function AddFunction(props) {
 		console.log(props.categorylist);
 		// alert("2");return;
 		var error = [];
-		error['error_function_name'] =
-			ValidationService.emptyValidationMethod(data.function_name) == ''
-				? ValidationService.nameValidationMethod(data.function_name) == '' ? '' : 'This field is invalid.'
-				: 'This field is required.';
+		error['error_function_name'] = ValidationService.emptyValidationMethod(data.function_name);
+			// ValidationService.emptyValidationMethod(data.function_name) == ''
+			// 	? ValidationService.nameValidationMethod(data.function_name) == '' ? '' : 'This field is invalid.'
+			// 	: 'This field is required.';
 		error['error_min_salary'] =
 			ValidationService.emptyValidationMethod(data.min_salary) == ''
 				? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'

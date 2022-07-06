@@ -141,12 +141,12 @@ function AddCategory(props) {
 
 	let validate = () => {
 		var error = [];
-		error['error_category_name'] =
-			ValidationService.emptyValidationMethod(data.category_name) == ''
-				? ValidationService.nameValidationMethod(data.category_name) == ''
-					? ''
-					: ValidationService.nameValidationMethod(data.category_name)
-				: ValidationService.emptyValidationMethod(data.category_name);
+		error['error_category_name'] = ValidationService.emptyValidationMethod(data.category_name);
+			// ValidationService.emptyValidationMethod(data.category_name) == ''
+			// 	? ValidationService.nameValidationMethod(data.category_name) == ''
+			// 		? ''
+			// 		: ValidationService.nameValidationMethod(data.category_name)
+			// 	: ValidationService.emptyValidationMethod(data.category_name);
 		error['error_min_salary'] =
 			ValidationService.emptyValidationMethod(data.min_salary) == ''
 				? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
