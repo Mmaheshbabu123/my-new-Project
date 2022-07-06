@@ -80,7 +80,7 @@ const TabIndex = (props) => {
 
   const forWardToNextStepTab = async () => {
     let proceed = submitService.proceedToNextStepTab({state, selectedTabId});
-    console.log(proceed);
+  
     if(proceed) {
       // saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then(response => {
         // console.log(response);

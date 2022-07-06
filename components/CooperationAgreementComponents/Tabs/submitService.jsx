@@ -7,7 +7,8 @@ import {
   , INVOIING_TAB
 } from '../Definations';
 import { requiredFields } from '../RequiredFields';
-
+import numericValidate  from '@/atoms/phoneNumberValidate';
+import emailValidate from '@/atoms/emailValidate';
 const {
   tab_1,
   tab_2,
@@ -90,19 +91,27 @@ function loopAndCheckLength(obj) {
 
 
 function checkCompanyInformationTabValidation(tab_data,tab_key) {
-    // let validationObj = stateObj['tab_2']['validations'];
-    // console.log(validationObj);return;
-  return  checkValidationKeyExistStateValue(tab_data,tab_key)
+    let validationObj = stateObj[tab_key]['validations'];
+    var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key);
+    var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key);
+  return  requiredFields && validateFileds;
 
 }
 function checkOnlineDetailsValidation(tab_data,tab_key) {
-  return  checkValidationKeyExistStateValue(tab_data,tab_key)
+    let validationObj = stateObj[tab_key]['validations'];
+    var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key);
+    var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key);
+  return  requiredFields && validateFileds;
 }
 function checkInvoiceValidation (tab_data,tab_key) {
-  return checkValidationKeyExistStateValue(tab_data,tab_key)
+  let validationObj = stateObj[tab_key]['validations'];
+  var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key);
+  var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key);
+return  requiredFields && validateFileds;
+
 }
 
-function checkValidationKeyExistStateValue(tab_data,tab_key) {
+function checkRequiredKeyExistStateValue(tab_data,tab_key) {
   let tempSatatus = true;
 for(const key in tab_data) {
  if(stateObj[tab_key].hasOwnProperty(key)
@@ -117,27 +126,28 @@ for(const key in tab_data) {
 return tempSatatus;
 }
 
-function checkValidationFields(key,value,tab_key) {
-//  let type =  stateObj['tab_2'])['validations'][key]['type'];
-  console.log(type)
-  console.log(emailValidate(value))
-  const {validations} = legalState;
+function checkValidationFields(key,value,type,tab_key) {
   if(type === 1 && numericValidate(value)) {
-    tab_2[key] = value;
-    validations[key]['validate'] = false;
+  stateObj[tab_key]['validations'][key]['validate'] = false;
  }
- // else if(type === 2 && emailValidate(value)) {
- //   console.log('email')
- //   tab_2[key] = value;
- //   validations[key]['validate'] = false;
- //   updateStateChanges({ tab_2 });
- //  }
+  else if(type === 2 && emailValidate(value)) {
+    stateObj[tab_key]['validations'][key]['validate'] = false;
+  }
   else {
-     validations[key]['validate'] = true;
+     stateObj[tab_key]['validations'][key]['validate'] = true;
 
   }
 }
-
+function checkValidationFieldsEachTab(validationObj,tab_key) {
+  Object.keys(validationObj).map((key)=>{
+    var value = stateObj[tab_key][key] || '';
+    var type  = validationObj[key]['type'];
+     if(value) {
+       checkValidationFields(key,value,type,tab_key);
+     }
+  })
+  return validationsObjCheckStatus(stateObj[tab_key]['validations']);
+}
 function absoluteYouPostData(state) {
   let workers = 1;
   let servants = 2;
@@ -152,6 +162,17 @@ function absoluteYouPostData(state) {
     data['worksServantsData'][workers].push(insertObj(selectedPc, selectedEmpId, servants))
   }
   return data;
+}
+function validationsObjCheckStatus (validate_data) {
+
+  let tempSatatus = true;
+  for(const key in validate_data) {
+    if(validate_data[key]['validate']) {
+      tempSatatus = false;
+      break
+    }
+  }
+  return tempSatatus;
 }
 
 function insertObj(selectedPc, selectedEmpId, type) {

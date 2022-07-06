@@ -26,14 +26,14 @@ const LegalAddress = (props) => {
     const {name,value} = event.target;
     tab_2[name] = value;
 
-    if(legalState['validations'].hasOwnProperty(name) && value) {
-      console.log(value);
-      validateFields(name,value);
-    }
-    else {
+    // if(legalState['validations'].hasOwnProperty(name) && value) {
+    //   console.log(value);
+    //   validateFields(name,value);
+    // }
+    // else {
 
       updateStateChanges({ tab_2 });
-    }
+    //}
 
   }
 
@@ -85,7 +85,7 @@ const LegalAddress = (props) => {
          name={data.id}
 
         />
-        {legalState['validations'][data.id] && legalState['validations'][data.id]['validate'] &&
+        {tab_2['validations'][data.id] && tab_2['validations'][data.id]['validate'] &&
           <ValidateMessage text = {'This field is invalid'}/>
         }
        </div>
