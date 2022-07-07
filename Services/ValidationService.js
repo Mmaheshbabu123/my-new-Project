@@ -10,20 +10,20 @@ const ValidationService = {
    * @param {*} value 
    * @returns 
    */
-  emptyValidationMethod: function(value) {
-      if(value.length==0){
-        return 'This field is required.';
-      }
-      return '';
+  emptyValidationMethod: function (value) {
+    if (value.length == 0) {
+      return 'This field is required.';
+    }
+    return '';
   },
   /**
    * validating a number field.
    * @param {*} value 
    * @returns 
    */
-  numberValidationMethod: function(value) {
-    if(!value.match(/^[0-9]+$/)){
-     return 'This field is invalid.';
+  numberValidationMethod: function (value) {
+    if (!value.match(/^[0-9]+$/)) {
+      return 'This field is invalid.';
     }
     return true;
   },
@@ -32,9 +32,9 @@ const ValidationService = {
    * @param {*} value 
    * @returns 
    */
-  nameValidationMethod: function(value) {
-    if(!value.match(/^[a-zA-Z\u0080-\uFFFF0-9 ]+$/)){
-     return 'This field is invalid.';
+  nameValidationMethod: function (value) {
+    if (!value.match(/^[a-zA-Z\u0080-\uFFFF0-9 ]+$/)) {
+      return 'This field is invalid.';
     }
     return '';
   },
@@ -43,9 +43,9 @@ const ValidationService = {
    * @param {*} value 
    * @returns 
    */
-  salaryValidationMethod: function(value) {
-    if(!value.match(/^[0-9]+$/)){
-     return 'This field is invalid.';
+  salaryValidationMethod: function (value) {
+    if (!value.match(/^[0-9]+$/)) {
+      return 'This field is invalid.';
     }
     return true;
   },
@@ -54,39 +54,53 @@ const ValidationService = {
    * @param {*} value 
    * @returns 
    */
-  pcnumberValidationMethod: function(value) {
-    if(!value.match(/^([0-9]{3})+$/) && !value.match(/^([0-9]{3}[.][0-9]{2})+$/)){
-     return 'This field is invalid.';
+  pcnumberValidationMethod: function (value) {
+    if (!value.match(/^([0-9]{3})+$/) && !value.match(/^([0-9]{3}[.][0-9]{2})+$/)) {
+      return 'This field is invalid.';
     }
     return '';
   },
- /**
-   * percentage validation.
-   * @param {*} value 
-   * @returns 
-   */
-  percentageValidationMethod: function(value) {
+  /**
+    * percentage validation.
+    * @param {*} value 
+    * @returns 
+    */
+  percentageValidationMethod: function (value) {
     // if(value.match(/^(100([.][0]{1,2})?)$/))
-    if(value.match(/(^(100([.][0]{1,2})?)$)|(^[1-9][0-9]{0,1}([.]\d{1,2})?)$/) ||value.match(/(^(100([,][0]{1,2})?)$)|(^[1-9][0-9]{0,1}([,]\d{1,2})?)$/))
-    {
+    if (value.match(/(^(100([.][0]{1,2})?)$)|(^[1-9][0-9]{0,1}([.]\d{1,2})?)$/) || value.match(/(^(100([,][0]{1,2})?)$)|(^[1-9][0-9]{0,1}([,]\d{1,2})?)$/)) {
       return ''
-    }else{
+    } else {
       return 'This field is invalid.';
     }
   },
-/**
- * Accepts salary values less than 1000 with decimal values up to 2 places 
- * @param {*} value 
- * @returns 
- */
-  minSalaryValidationMethod: function(value){
-    if(value.match(/(^[1-9][0-9]{0,2}(([.]|[,])\d{1,2})?)$/))
-    {
-     return '';
-    }else{
+  /**
+   * Accepts salary values less than 1000 with decimal values up to 2 places 
+   * @param {*} value 
+   * @returns 
+   */
+  minSalaryValidationMethod: function (value) {
+    if (value.match(/(^[1-9][0-9]{0,2}(([.]|[,])\d{1,2})?)$/)) {
+      return '';
+    } else {
       return 'This field is invalid.';
     }
+  },
+  /**
+   * Postal code validation 
+   * @param {*} value 
+   * @returns 
+   */
+  postalCodeValidationMethod: function (value) {
+    if (strlen($postalcode) > 6 || strlen($postalcode) < 4) {
+      return 'This field is invalid'
+    }
+    else if (!value.match(/^[a-zA-Z\u0080-\uFFFF0-9 ]+$/)) {
+      return 'This field is invalid';
+    } else {
+      return '';
+    }
   }
+
 
 };
 
