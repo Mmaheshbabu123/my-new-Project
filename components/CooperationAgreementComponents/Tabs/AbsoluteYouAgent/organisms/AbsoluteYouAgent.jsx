@@ -4,7 +4,7 @@ import BasicDetails from '../molecules/BasicDetails';
 import PcForWorkersServants from '../molecules/PcForWorkersServants';
 import CoefficientPage from '../molecules/CoefficientPage';
 import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
-import { APICALL } from '@/Services/ApiServices';
+import { helpers } from '../../../CooperationAgreementHelper';
 
 
 const AbsoluteYouAgent = (props) => {
@@ -12,26 +12,18 @@ const AbsoluteYouAgent = (props) => {
   useEffect(() => {
     if(!state.loadedTabs.includes(selectedTabId))
     		loadData();
+    else updateStateChanges({renderTabComponents: true});
   }, [])
 
   const loadData = async () => {
     let stateKey = `tab_${selectedTabId}`;
-    var data = await fetchDataFromBackend(getCooperationAgreementsTabWise);
+    var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
     data[stateKey] = {...state[stateKey],  ...(data[stateKey] ? data[stateKey] : {})};
     data['pcArray'] = data.pc_array || [];
     data['pcLinkedEmployeeTypes'] = data.pcLinkedEmployeeTypes || {};
     data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
     data['renderTabComponents'] = true;
     updateStateChanges(data)
-  }
-
-  const fetchDataFromBackend = async (url) => {
-    let data = {};
-    await APICALL.service(`${url}/${root_parent_id}/${selectedTabId}`, 'GET').then(response => {
-      if (response.status === 200)
-            data = response.data;
-    }).catch((error) => console.log(error) )
-    return data;
   }
 
   return(
