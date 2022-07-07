@@ -28,8 +28,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-        <span className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+        <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
+        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
       </>
     )
   }
@@ -116,17 +116,19 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
         </button>
       </div>
       <div className="table-render-parent-div">
-        <table className="table table-hover manage-types-table">
-          <thead className="table-render-thead">
-            <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
-          </thead>
-          <tbody>
-            {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-              <td> {eachRow.name} </td>
-              <td>{ getNeededActions(eachRow) } </td>
-            </tr>)}
-          </tbody>
-        </table>
+        {state.currentItems && state.currentItems.length > 0 ?
+          <table className="table table-hover manage-types-table">
+            <thead className="table-render-thead">
+              <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+            </thead>
+            <tbody>
+              {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
+                <td> {eachRow.name} </td>
+                <td>{ getNeededActions(eachRow) } </td>
+              </tr>)}
+            </tbody>
+          </table>
+       : <p> No data found </p>}
       </div>
       <div>
       {state.filterRows.length > itemsPerPage && <ReactPaginate
