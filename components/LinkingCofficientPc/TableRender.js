@@ -27,8 +27,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-        <span className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
+        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
       </>
     )
   }
@@ -110,7 +110,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
           </button>*/}
         </div>
         <div className="table-render-parent-div">
-          <table className="table table-hover manage-types-table">
+          {state.currentItems && state.currentItems.length > 0 ? <table className="table table-hover manage-types-table">
             <thead className="table-render-thead">
               <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
@@ -122,6 +122,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
               </tr>)}
             </tbody>
           </table>
+        : <p> No data found </p>}
         </div>
         <div>
         {state.filterRows.length > itemsPerPage && <ReactPaginate
