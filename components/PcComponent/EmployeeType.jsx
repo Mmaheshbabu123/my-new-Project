@@ -85,9 +85,15 @@ const EmployeeType = () => {
 	let updateRes = (event) => {
 		var res1 = [...res];
 		var temp1 = [...temp2];
+		var index2 = temp.indexOf(parseInt(event.target.value));
+
 		if (event.target.checked) {
 			if (!res1.includes(parseInt(event.target.value))) {
 				res1.push(parseInt(event.target.value));
+			}
+			if( index2 > -1){
+				temp1.splice(index2, 1);
+				setTemp2(temp1);
 			}
 			console.log('✅ Checkbox is checked');
 		} else {
@@ -97,8 +103,6 @@ const EmployeeType = () => {
 				
 				// 2nd parameter means remove one item only
 			}
-			var index2 = temp.indexOf(parseInt(event.target.value));
-
 			if( index2 > -1){
 				temp1.push(parseInt(event.target.value)); 
 				setTemp2(temp1);
