@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { addProject } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
@@ -6,6 +6,9 @@ import ValidationService from '../../Services/ValidationService';
 
 // import './addproject.css';
 function Addproject(props) {
+	//FOR ASSIGNING COMPANY LOCATION VALUES
+	const [ company, setCompany ] = useState([]);
+
 	const [ error_project_name, setError_project_name ] = useState('');
 	const [ error_project_location, setError_project_location ] = useState('');
 	const [ error_hno, setError_hno ] = useState('');
@@ -28,6 +31,20 @@ function Addproject(props) {
 		country: ''
 	});
 
+	// FETCHING COMPANY FROM DRUPAL //
+	useEffect(() => {
+		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
+			.then((result) => {
+				if (result.length > 0) {
+					setCompany(result);
+				} else {
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
+
 	let submit = async (event) => {
 		event.preventDefault();
 
@@ -49,7 +66,7 @@ function Addproject(props) {
 		error1['extra'] = ValidationService.emptyValidationMethod(res.extra);
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['street'] = ValidationService.emptyValidationMethod(res.street);
-		error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
+		// error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
 		error1['country'] = ValidationService.emptyValidationMethod(res.country);
 
 		//check if project name is valid
@@ -75,10 +92,12 @@ function Addproject(props) {
 		error1['street'] =
 			error1['street'] == '' ? ValidationService.nameValidationMethod(res.street) : error1['street'];
 
-		// check if postalcode is valid
+		/**
+		 * POSTALCODE VALIDATION
+		 */
 		error1['postal_code'] =
 			error1['postal_code'] == ''
-				? ValidationService.postalcodeValidationMethod(res.postal_code)
+				? ValidationService.postalCodeValidationMethod(res.postal_code)
 				: error1['postal_code'];
 
 		//seterror messages
@@ -170,6 +189,7 @@ function Addproject(props) {
 											/>
 											<p className="error mt-2">{error_hno}</p>
 
+											{/* CITY */}
 											<label className="custom_astrick mt-2">City</label>
 											<input
 												type="text"
@@ -178,6 +198,7 @@ function Addproject(props) {
 													setData((prev) => ({ ...prev, city: e.target.value }));
 												}}
 											/>
+											{/* EXTRA */}
 											<p className="error mt-2">{error_city}</p>
 
 											<label className="custom_astrick mt-2">Extra</label>
@@ -190,7 +211,7 @@ function Addproject(props) {
 											/>
 											<p className="error mt-2">{error_extra}</p>
 										</div>
-
+										{/* COMPANY */}
 										<div className="col-sm-6">
 											<label className=" custom_astrick">Company</label>
 											<select
@@ -199,10 +220,16 @@ function Addproject(props) {
 													setData((prev) => ({ ...prev, comp_id: e.target.value }));
 												}}
 											>
-												<option value="1">Select company</option>
-												{companyname.map((options) => (
-													<option key={options.value} value={options.value}>
-														{options.label}
+												<option value="">Select</option>
+												{company.map((options) => (
+													<option
+														onClick={(e) => {
+															setCompany(options.comp_name);
+														}}
+														key={options.comp_id}
+														value={options.comp_id}
+													>
+														{options.comp_name}
 													</option>
 												))}
 											</select>
