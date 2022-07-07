@@ -63,6 +63,7 @@ const TabIndex = (props) => {
 
   const forWardToNextStepTab = async () => {
     let proceed = submitService.proceedToNextStepTab({state, selectedTabId});
+
     if(proceed) {
       await saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then((response) => {
         if(response.status === 200) {
@@ -192,9 +193,13 @@ function getTabWisePostData(state, tabId) {
     case SALARY_BENEFITS_TAB:
 
       break;
+    case INVOIING_TAB:
+      data = submitService.invoiceDetailsPostData(state,'tab_6');
+    break;
     default:
       data = {};
   }
+
   return data;
 }
 

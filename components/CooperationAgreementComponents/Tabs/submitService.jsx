@@ -23,6 +23,7 @@ export const submitService = {
   absoluteYouPostData,
   companyInformationPostData,
   onlineDetailsPostData,
+  invoiceDetailsPostData,
 }
 
 
@@ -191,7 +192,9 @@ function companyInformationPostData(state,tab_key) {
  function onlineDetailsPostData(state,tab_key) {
    return   removeValidatioKeyState(state,tab_key)
  }
-
+ function invoiceDetailsPostData(state,tab_key) {
+   return   removeValidatioKeyState(state,tab_key)
+ }
 function removeValidatioKeyState(state,tab_key) {
   let data = structuredClone(state);
   delete data[tab_key]['validations'];
