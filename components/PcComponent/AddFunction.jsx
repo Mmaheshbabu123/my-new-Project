@@ -213,9 +213,13 @@ function AddFunction(props) {
 								onChange={(e) => {
 									console.log(props.categorylist)
 									console.log(typeof e.target.value)
+									if(e.target.value != ''){
 									let obj = props.categorylist.find(o => o.id == parseInt(e.target.value))
 									console.log(obj)
 									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: obj['min_salary'] }));
+								}else{
+									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: ''}));
+								}
 								}}
 							>
 								<option value="">select</option>
