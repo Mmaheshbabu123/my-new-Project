@@ -71,6 +71,7 @@ const TabIndex = (props) => {
             selectedTabId: nextTab,
             proceedToNextTabWarning: false,
             filledTabs: [...state.filledTabs, nextTab],
+            renderTabComponents: false,
           }
           if(selectedTabId === 1) obj['root_parent_id']= response.data;
           router.query.selectedTabId = nextTab;
@@ -151,7 +152,7 @@ function getTabWisePostData(state, tabId) {
       //.
       break;
     case SALARY_BENEFITS_TAB:
-
+      data = state['tab_5'];
       break;
     default:
       data = {};
