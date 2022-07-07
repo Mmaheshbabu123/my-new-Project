@@ -10,12 +10,15 @@ import styles from '../Contactperson.module.css';
 import DateField from '@/atoms/DateField';
 import {locationArray,contactArray,contactPersonsRow1,contactPersonsRow2,defaultFileds} from '../ContactPersonsFields';
 const BasicDetails= ({props,personId}) => {
-var Title_key = 6;
+var Title_key = 25;
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
 
   const handleChange = (event) => {
     const { value, name } = event.target;
+    console.log(value)
+    console.log(name)
+    console.log(personId);
     tab_3[personId][name] = value;
     //{...tab_3[personId],[name]:value};
     updateStateChanges({ tab_3 });
@@ -85,6 +88,7 @@ fieldData.push(
              placeholder={'date'}
              handleChange={handleChange}
              className="col-md-6"
+             name = {data.id}
              value={tab_3[personId][data.id]}
             />
       </div>
