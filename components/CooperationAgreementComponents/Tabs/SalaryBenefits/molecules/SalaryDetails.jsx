@@ -26,11 +26,11 @@ const SalaryDetails = () => {
         {
           type: 1,
            name: 'Premies en vergoeding (Benefits)',
-           rows: ['Code', 'Bedrag', 'Percentage']},
+           rows: [{key: 'code', label: 'Code'}, {key: 'bedrag', label: 'Bedrag'}, {key: 'percentage', label: 'Percentage'}]},
         {
           type: 2,
           name: 'Automatisch looncodes (automatic salarycodes)',
-          rows: ['Code', 'Soort automatisering']}
+          rows: [{key: 'code', label: 'Code'}, {key: 'soort_automatisering', label:'Soort automatisering'}]}
       ],
   })
 
@@ -84,10 +84,11 @@ const SalaryDetails = () => {
     const showLinkedInputFields = (pcId, salaryObj) => {
       let fieldId = salaryObj.salary_id;
       let valueObj = cooperationSalaryLinked[pcId][fieldId] || {};
+      let resetObj = valueObj['checked'] !== 1 ? {value: salaryObj.salary_value } : {};
       return(
         <div className = {`${styles['salary-input-field-div']}`} >
-          <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 1)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
-          <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 0)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
+          <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 1, 0, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
+          <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 0, 0, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
           {valueObj.checked ? <InputField type = {'text'}
             className = {`${styles['salary-input-value']} col-md-4`}
             name={'value'}
@@ -105,11 +106,12 @@ const SalaryDetails = () => {
           {compState.premiesAutoArray.map(obj => {
             let fieldId = obj.type;
             let valueObj = cooperationBenefits[pcId][fieldId] || {};
+            let resetObj = valueObj['checked'] !== 1 ? {code: 0, bedrag: '', percentage: '', soort_automatisering: ''} : {};
             return(
               <div key={'salary_' + fieldId} className={`${styles['salary-coeff-fields-premies']}`}>
                 <LabelField title={obj.name} customStyle={{margin:'10px 0'}}/>
-                <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 1, 1)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
-                <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 0, 1)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
+                <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 1, 1, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
+                <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 0, 1, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
                 {showPremiseAutomatischTable(pcId, fieldId, obj.rows, valueObj)}
               </div>
             );
@@ -129,7 +131,7 @@ const SalaryDetails = () => {
             return (
               <tr key = {index} height="75">
                   <td width="40%" className={`${styles['pc-linked-premies-td']}`} style={{borderRight: '2px solid lightgray'}}>
-                    <span>{ label }</span>
+                    <span>{ label.label }</span>
                   </td>
                   <td width="60%" className={`${styles['pc-linked-premies-td']}`}>
                     {premiseAutomatischInputFields(pcId, fieldId, label, valueObj)}
@@ -143,16 +145,16 @@ const SalaryDetails = () => {
   }
 
   const premiseAutomatischInputFields = (pcId, fieldId, label, valueObj) => {
-    if(label === 'Code') {
+    if(label.label === 'Code') {
       return showDropDown(pcId, fieldId, 'code', valueObj);
     } else {
       return <InputField type = {'text'}
         className = {`${styles['salary-coeff-input-value']}`}
-        name={label}
-        value={valueObj[label]}
+        name={label.key}
+        value={valueObj[label.key]}
         isDisabled= {false}
         placeholder={''}
-        handleChange={(e)=>handleChange(label, pcId, fieldId, '', 1, e.target)}
+        handleChange={(e)=>handleChange(label.key, pcId, fieldId, '', 1, e.target)}
       />
     }
   }
@@ -173,11 +175,12 @@ const SalaryDetails = () => {
     );
   }
 
-  const handleChange = (name, pcId, fieldId, val, from = 0, target = 0) => {
+  const handleChange = (name, pcId, fieldId, val, from = 0, target = 0, mergeObj = {}) => {
     let key = from ? 'cooperationBenefits' : 'cooperationSalaryLinked';
     let salaryLinkedData = from ? {...cooperationBenefits} : {...cooperationSalaryLinked};
     salaryLinkedData[pcId][fieldId] = {...(salaryLinkedData[pcId][fieldId] ? salaryLinkedData[pcId][fieldId] : {}),
       [name]: target ? target.value : val,
+      ...mergeObj
     }
     let tab_5 = {...state[stateKey]};
     tab_5[[key]] = salaryLinkedData;
