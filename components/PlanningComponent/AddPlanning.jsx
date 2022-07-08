@@ -33,7 +33,7 @@ function Planning(props) {
 		cost_center_id: ''
 	});
 
-	// FETCHING DATA FROM DRUPAL //
+	// FETCHING COMPANY FROM DRUPAL //
 	useEffect(() => {
 		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
 			.then((result) => {
@@ -173,8 +173,8 @@ function Planning(props) {
 					<p className="mb-4 mt-3 font-weight-bold h3">Add Planning</p>
 					<div>
 						<button
-							type="button"
 							onClick={showPopup}
+							type="button"
 							className="btn btn-secondary   btn-block float-end mt-2 mb-2 ms-2"
 						>
 							+Add project

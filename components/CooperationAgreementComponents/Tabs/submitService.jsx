@@ -24,6 +24,7 @@ export const submitService = {
   companyInformationPostData,
   onlineDetailsPostData,
   invoiceDetailsPostData,
+  contractPersonsPostData,
 }
 
 
@@ -43,7 +44,7 @@ function proceedToNextStepTab({ state, selectedTabId, ...props }) {
       validationStatus = checkCompanyInformationTabValidation(tab_2,'tab_2');
       break;
     case CONTACT_PERSONS_TAB:
-
+      validationStatus = checkContactPersonsTabValidation(tab_3,'tab_3');
       break;
     case ONLINE_DETAILS_TAB:
       validationStatus = checkOnlineDetailsValidation(tab_4,'tab_4');
@@ -95,30 +96,39 @@ function loopAndCheckLength(obj) {
 
 function checkCompanyInformationTabValidation(tab_data,tab_key) {
     let validationObj = stateObj[tab_key]['validations'];
-    var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key);
-    var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key);
+      let stateData = stateObj[tab_key];
+    var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key,stateData);
+    var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key,stateData);
   return  requiredFields && validateFileds;
 
 }
+function checkContactPersonsTabValidation(tab_data,tab_key) {
+  let validationObj  = stateObj[tab_key]['validations'];
+  var validateFileds = checkValidationContractPersons(tab_key);
+  var requiredFields = checkRequiredContractPersons(tab_data,tab_key);
+  return  requiredFields && validateFileds;
+}
 function checkOnlineDetailsValidation(tab_data,tab_key) {
     let validationObj = stateObj[tab_key]['validations'];
-    var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key);
-    var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key);
+    let stateData = stateObj[tab_key];
+    var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key,stateData);
+    var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key,stateData);
   return  requiredFields && validateFileds;
 }
 function checkInvoiceValidation (tab_data,tab_key) {
   let validationObj = stateObj[tab_key]['validations'];
-  var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key);
-  var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key);
+    let stateData = stateObj[tab_key];
+  var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key,stateData);
+  var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key,stateData);
 return  requiredFields && validateFileds;
 
 }
 
-function checkRequiredKeyExistStateValue(tab_data,tab_key) {
+function checkRequiredKeyExistStateValue(tab_data,tab_key,stateData) {
   let tempSatatus = true;
 for(const key in tab_data) {
- if(stateObj[tab_key].hasOwnProperty(key)
- && stateObj[tab_key][key] != '') {
+ if(stateData.hasOwnProperty(key)
+ && stateData[key] != '') {
    tempSatatus = true;
  }
  else{
@@ -126,30 +136,33 @@ for(const key in tab_data) {
    break;
  }
 }
+console.log(tempSatatus);
 return tempSatatus;
 }
 
-function checkValidationFields(key,value,type,tab_key) {
+function checkValidationFields(key,value,type,tab_key,stateData) {
   if(type === 1 && numericValidate(value)) {
-  stateObj[tab_key]['validations'][key]['validate'] = false;
+  stateData['validations'][key]['validate'] = false;
  }
   else if(type === 2 && emailValidate(value)) {
-    stateObj[tab_key]['validations'][key]['validate'] = false;
+
+    stateData['validations'][key]['validate'] = false;
   }
   else {
-     stateObj[tab_key]['validations'][key]['validate'] = true;
+     stateData['validations'][key]['validate'] = true;
 
   }
 }
-function checkValidationFieldsEachTab(validationObj,tab_key) {
+function checkValidationFieldsEachTab(validationObj,tab_key,stateData) {
   Object.keys(validationObj).map((key)=>{
-    var value = stateObj[tab_key][key] || '';
+    var value = stateData[key] || '';
     var type  = validationObj[key]['type'];
      if(value) {
-       checkValidationFields(key,value,type,tab_key);
+       checkValidationFields(key,value,type,tab_key,stateData);
      }
   })
-  return validationsObjCheckStatus(stateObj[tab_key]['validations']);
+
+  return validationsObjCheckStatus(stateData['validations']);
 }
 function absoluteYouPostData(state) {
   let workers = 1;
@@ -178,6 +191,7 @@ function validationsObjCheckStatus (validate_data) {
       break
     }
   }
+  console.log(tempSatatus);
   return tempSatatus;
 }
 
@@ -186,17 +200,63 @@ function insertObj(selectedPc, selectedEmpId, type) {
 }
 
 function companyInformationPostData(state,tab_key) {
-  return   removeValidatioKeyState(state,tab_key)
+  let data = structuredClone(state);
+  return   removeValidatioKeyState(data[tab_key])
 
 }
  function onlineDetailsPostData(state,tab_key) {
-   return   removeValidatioKeyState(state,tab_key)
+   let data = structuredClone(state);
+   return   removeValidatioKeyState(data[tab_key])
  }
  function invoiceDetailsPostData(state,tab_key) {
-   return   removeValidatioKeyState(state,tab_key)
+    let data = structuredClone(state);
+   return   removeValidatioKeyState(data[tab_key])
  }
-function removeValidatioKeyState(state,tab_key) {
-  let data = structuredClone(state);
-  delete data[tab_key]['validations'];
-   return data[tab_key];
+ function contractPersonsPostData(state,tab_key) {
+   let data = structuredClone(state[tab_key]);
+  for(const key in data) {
+    delete data['loaded'];
+      removeValidatioKeyState(data[key]);
+  }
+return data;
+ }
+function removeValidatioKeyState(postData) {
+  delete postData['validations'];
+   return postData;
 }
+
+function checkValidationContractPersons(tab_key) {
+ let tempStatus = true;
+ let contractObj = stateObj[tab_key];
+let validationObj;
+ //delete contractObj['validations'];
+ for(const key in contractObj) {
+   validationObj = contractObj[key]['validations'] || {} ;
+
+   if(validationObj)
+   if(!checkValidationFieldsEachTab(validationObj,tab_key,contractObj[key])) {
+     tempStatus = false;
+     break;
+   };
+
+  }
+
+ return tempStatus;
+}
+
+function checkRequiredContractPersons(tab_data,tab_key) {
+  let tempStatus = true;
+  let contractObj = stateObj[tab_key];
+  let validationObj;
+  //console.log(contractObj);return;
+  for(const key in contractObj) {
+
+    if(!checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj[key]) && key !== 'loaded') {
+      tempStatus = false;
+      break;
+    };
+
+   }
+
+  return tempStatus;
+ }

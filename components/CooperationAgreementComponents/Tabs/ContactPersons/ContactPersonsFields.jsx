@@ -4,7 +4,7 @@ export const contactPersonsRow1 = [
     {id :27,key_name:'Function title',type:1},
     {id :28,key_name:'Mobile',type:1},
     {id:29,key_name:'Date of birth',type:5},
-    {id:30,key_name:'Language',type:6,option1:'Yes',option2:'No'},
+    {id:30,key_name:'Language',type:6,option1:'Dutch',option2:'French'},
     {id:31,key_name:'Decision maker',type:6,option1:'Yes',option2:'No'},
     {id:32,key_name:'Contact person can be called',type:6,option1:'Yes',option2:'No'},
 ];

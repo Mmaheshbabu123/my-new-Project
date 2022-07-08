@@ -63,7 +63,7 @@ const TabIndex = (props) => {
 
   const forWardToNextStepTab = async () => {
     let proceed = submitService.proceedToNextStepTab({state, selectedTabId});
-
+console.log(proceed);
     if(proceed) {
       await saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then((response) => {
         if(response.status === 200) {
@@ -147,7 +147,7 @@ function getTabWisePostData(state, tabId) {
       data = submitService.companyInformationPostData(state,'tab_2');
       break;
     case CONTACT_PERSONS_TAB:
-
+      data =  submitService.contractPersonsPostData(state,'tab_3');
       break;
     case ONLINE_DETAILS_TAB:
       data = submitService.onlineDetailsPostData(state,'tab_4');
