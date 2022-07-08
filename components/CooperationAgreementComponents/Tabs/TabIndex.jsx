@@ -93,7 +93,7 @@ console.log(proceed);
 		<div className="">
       {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields (fields with asterisk mark) </p> : null}
       {showComponentBasedOnTabSelection()}
-      {state.renderTabComponents ? <div className={`col-md-12 row`} >
+      <div className={`col-md-12 row`} >
           <div className={`col-md-11 ${styles['tab-index-back-div']}`}>
             <p className={`${styles['tab-index-back-btn']}`}> Back </p>
           </div>
@@ -105,7 +105,7 @@ console.log(proceed);
               Next
             </button>
           </div>
-      </div>:null}
+      </div>
     </div>
 	);
 }
@@ -131,7 +131,7 @@ function getTabRelatedData(state, tabId) {
     root_parent_id: state.root_parent_id || 0,
     tab_id: tabId,
     data: getTabWisePostData(state, tabId),
-    element_status: state['element_status']['tab_1'],
+    element_status: state['element_status'][`tab_${tabId}`],
     depedency_data_status:state['dependecyDataStatus'],
   }
 }
