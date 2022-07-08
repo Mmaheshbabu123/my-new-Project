@@ -91,7 +91,7 @@ const ValidationService = {
    * @returns 
    */
   postalCodeValidationMethod: function (value) {
-    if (strlen($postalcode) > 6 || strlen($postalcode) < 4) {
+    if ((value.length) > 6 || (value.length) < 4) {
       return 'This field is invalid'
     }
     else if (!value.match(/^[a-zA-Z\u0080-\uFFFF0-9 ]+$/)) {
@@ -99,7 +99,21 @@ const ValidationService = {
     } else {
       return '';
     }
+  },
+  /**
+   * Project name validation 
+   * @param {*} value 
+   * @returns 
+   */
+  projectNameValidationMethod: function (value) {
+    if (value.replace(' ', '').match(/^[a-zA-Z\u0080-\uFFFF0-9 .,'\- ]+$/)) {
+      return '';
+    } else {
+      return 'This field is invalid.';
+    }
   }
+
+
 
 
 };

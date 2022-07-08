@@ -63,34 +63,35 @@ function Addproject(props) {
 		error1['project_location'] = ValidationService.emptyValidationMethod(res.project_location);
 		error1['hno'] = ValidationService.emptyValidationMethod(res.hno);
 		error1['city'] = ValidationService.emptyValidationMethod(res.city);
-		error1['extra'] = ValidationService.emptyValidationMethod(res.extra);
+		// error1['extra'] = ValidationService.emptyValidationMethod(res.extra);
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['street'] = ValidationService.emptyValidationMethod(res.street);
-		// error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
+		error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
 		error1['country'] = ValidationService.emptyValidationMethod(res.country);
 
 		//check if project name is valid
 		error1['project_name'] =
 			error1['project_name'] == ''
-				? ValidationService.nameValidationMethod(res.project_name)
+				? ValidationService.projectNameValidationMethod(res.project_name)
 				: error1['project_name'];
 		//check if project location is valid (varchar?)
 		error1['project_location'] =
 			error1['project_location'] == ''
-				? ValidationService.nameValidationMethod(res.project_location)
+				? ValidationService.projectNameValidationMethod(res.project_location)
 				: error1['project_location'];
 		//check if hno is valid
-		error1['hno'] = error1['hno'] == '' ? ValidationService.nameValidationMethod(res.hno) : error1['hno'];
+		error1['hno'] = error1['hno'] == '' ? ValidationService.projectNameValidationMethod(res.hno) : error1['hno'];
 
 		//check if city is valid
-		error1['city'] = error1['city'] == '' ? ValidationService.nameValidationMethod(res.city) : error1['city'];
+		error1['city'] =
+			error1['city'] == '' ? ValidationService.projectNameValidationMethod(res.city) : error1['city'];
 
 		//check if extra field is valid
-		error1['extra'] = error1['extra'] == '' ? ValidationService.nameValidationMethod(res.extra) : error1['extra'];
+		// error1['extra'] = error1['extra'] == '' ? ValidationService.nameValidationMethod(res.extra) : error1['extra'];
 
 		// check if street field is valid
 		error1['street'] =
-			error1['street'] == '' ? ValidationService.nameValidationMethod(res.street) : error1['street'];
+			error1['street'] == '' ? ValidationService.projectNameValidationMethod(res.street) : error1['street'];
 
 		/**
 		 * POSTALCODE VALIDATION
@@ -201,7 +202,7 @@ function Addproject(props) {
 											{/* EXTRA */}
 											<p className="error mt-2">{error_city}</p>
 
-											<label className="custom_astrick mt-2">Extra</label>
+											<label className=" mt-2">Extra</label>
 											<input
 												type="text"
 												className="form-control mt-2 mb-2"
