@@ -156,7 +156,7 @@ function AddCategory(props) {
 			console.log(props.categorylist);
 			if(typeof props.categorylist == 'object'){
 			Object.keys(props.categorylist).map((element) => {
-				if (element.type == '2' && element.id != id && data.category_name.replaceAll(' ','').toLowerCase() == element.category_name.replaceAll(' ','').toLowerCase()) {
+				if (props.categorylist[element].type == '2' && props.categorylist[element].id != id && data.category_name.replaceAll(' ','').toLowerCase() == props.categorylist[element].category_name.replaceAll(' ','').toLowerCase()) {
 					error['error_category_name'] = 'Category name already exist.';
 				}
 			});
