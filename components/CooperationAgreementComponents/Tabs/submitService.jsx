@@ -9,6 +9,7 @@ import {
 import { requiredFields } from '../RequiredFields';
 import numericValidate  from '@/atoms/phoneNumberValidate';
 import emailValidate from '@/atoms/emailValidate';
+import postalCodeValidate from '@/atoms/postalCodeValidate';
 const {
   tab_1,
   tab_2,
@@ -146,6 +147,9 @@ function checkValidationFields(key,value,type,tab_key,stateData) {
  }
   else if(type === 2 && emailValidate(value)) {
 
+    stateData['validations'][key]['validate'] = false;
+  }
+  else if(type === 3 && postalCodeValidate(value)) {
     stateData['validations'][key]['validate'] = false;
   }
   else {
