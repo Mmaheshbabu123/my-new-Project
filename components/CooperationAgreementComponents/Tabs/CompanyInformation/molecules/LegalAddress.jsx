@@ -20,19 +20,19 @@ const LegalAddress = (props) => {
 
     validations:{'17':{'type':1,validate:false,'text':'Only numbers will accept' },'14':{'type':1,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'}}
   })
-  var tab_2 = structuredClone(state['tab_2']);
+  var { tab_2,element_status } = state;
 
   const handleChange = (event) => {
     const {name,value} = event.target;
     tab_2[name] = value;
-
+    element_status['tab_2'].push(name);
     // if(legalState['validations'].hasOwnProperty(name) && value) {
     //   console.log(value);
     //   validateFields(name,value);
     // }
     // else {
 
-      updateStateChanges({ tab_2 });
+      updateStateChanges({ tab_2 ,element_status});
     //}
 
   }
@@ -66,7 +66,8 @@ const LegalAddress = (props) => {
   }
   const handleRadioSelect = (id,type) => {
    tab_2[id] = type;
-  // updateStateChanges({tab_2});
+     element_status['tab_2'].push(id);
+   updateStateChanges({tab_2,element_status});
   }
  const LegalaAddressFieldData = (Rowdata) =>{
    let fieldsArray = [];

@@ -10,15 +10,15 @@ import { requiredFields} from '../../../RequiredFields';
 import RequiredField from '@/atoms/RequiredSpanField';
 const CompanyDetails = (props) => {
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
-var { tab_2 } = state;
-
+var { tab_2,element_status } = state;
+console.log(state);
 const [companyState,setCompanyState] = useState({
   vat_number:0,
   validations:{'17':{'type':1,validate:false },'19':{'type':2,validate:true},'14':{'type':1,validate:true},'18':{'type':1,validate:true}}
 })
 var TypeOfCompany = 10;
 var Vat_Number = 8;
-
+console.log(tab_2);
 const CompanyFieldData = (companyRow1) => {
   let  fieldsArray = [];
   companyRow1.map(data=>{
@@ -45,18 +45,14 @@ const CompanyFieldData = (companyRow1) => {
 const handleChange = (event) => {
   const { value, name } = event.target;
   tab_2[name] = value;
-   
+element_status['tab_2'].push(name);
    console.log(name);
-  if(companyState['validations'].hasOwnProperty(name)) {
-    validateFields(value);
-  }
-  else {
-    updateStateChanges({ tab_2 });
-  }
+
+    updateStateChanges({ tab_2,element_status });
+
 }
 
 const validateFields = (text) => {
-  console.log('kkkk')
 }
 const handleVatChange = (event) => {
 
@@ -74,18 +70,23 @@ let filterTimeout
 
 const doCityFilter = event => {
   const { value, name } = event.target;
-
-  clearTimeout(filterTimeout)
-  if (!event) return setFilteredCities([])
-
-  filterTimeout = setTimeout(() => {
-    setCompanyState({
-      ...companyState,
-      vat_number:value,
-    })
-    console.log('====>', event)
-
-  }, 500)
+tab_2[name] = value;
+element_status['tab_2'].push(name);
+updateStateChanges({ tab_2 ,element_status});
+  // clearTimeout(filterTimeout)
+  // if (!event) return setFilteredCities([])
+  //
+  // filterTimeout = setTimeout(() => {
+  //   setCompanyState({
+  //     ...companyState,
+  //     vat_number:value,
+  //   })
+  // //  tab_2[name] = value;
+  //
+  //   console.log('----event')
+  //
+  // }, 500)
+    //updateStateChanges({ tab_2 });
 }
 const optimizedFn = (event) => {
     // const { value, name } = event.target;
