@@ -6,6 +6,8 @@ import DatePicker from 'react-multi-date-picker';
 // import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import TimePicker from 'rc-time-picker';
+import 'rc-time-picker/assets/index.css';
 
 //import TimeRange from 'react-time-range';
 import moment from 'moment';
@@ -13,7 +15,7 @@ function Addtiming(props) {
 	// [ date, setDate ] = useState('');
 	//  const date: new Date();
 	const router = useRouter();
-	const [ value, setValue ] = useState(new Date());
+	const [ value, setValue ] = useState();
 	const [ selectedDate, setSelectedDate ] = useState([]);
 	const [ checked, setChecked ] = useState(true);
 
@@ -28,6 +30,8 @@ function Addtiming(props) {
 	// 	})
 	// );
 	const [ data, setData ] = useState({});
+	const [ time, setTime ] = useState('');
+
 	let employees = [
 		{
 			id: 1,
@@ -109,8 +113,31 @@ function Addtiming(props) {
 							</div>
 							<div className="" />
 							{selectedDate.map((value, index) => (
+									
 								<div className="row" key={index}>
-									<p className="bg-light">{value}</p>
+									<div className="col-md-3 py-2">{value}</div>
+									<div className="col-md-4 py-2">
+										<label>Start time</label>
+										<TimePicker
+											placeholder="Select Time"
+											use12Hours
+											showSecond={false}
+											focusOnOpen={true}
+											format="hh:mm A"
+											onChange={(e) => setTime(e.format('LT'))}
+										/>
+									</div>
+									<div className="col-md-4 py-2">
+										<label>End time</label>
+										<TimePicker
+											placeholder="Select Time"
+											use12Hours
+											showSecond={false}
+											focusOnOpen={true}
+											format="hh:mm A"
+											onChange={(e) => setTime(e.format('LT'))}
+										/>
+									</div>
 								</div>
 							))}
 						</div>
@@ -120,25 +147,24 @@ function Addtiming(props) {
 								<div className="">
 									{employees.map((result) => (
 										<div key={result.id}>
-										<div className='row d-flex justify-content-start bg-light py-2 my-2'>
-											<div className="col-md-1">{result.id}.</div>
-											<div className="col-md-3">{result.name}</div>
-											<div className="col-md-3">{result.employeetype}</div>
-											<div className="col-md-3">{result.function}</div>
+											<div className="row d-flex justify-content-start bg-light py-2 my-2">
+												<div className="col-md-1">{result.id}.</div>
+												<div className="col-md-3">{result.name}</div>
+												<div className="col-md-3">{result.employeetype}</div>
+												<div className="col-md-3">{result.function}</div>
+											</div>
+											<div className="mt-2 ">
+												<Calendar
+													value={value}
+													multiple={true}
+													format="YYYY/MM/DD"
+													onChange={(date) => {
+														handleChange(date);
+													}}
+													minDate={new Date()}
+												/>
+											</div>
 										</div>
-										<div className="mt-2 ">
-										<Calendar
-											value={value}
-											multiple={true}
-											format="YYYY/MM/DD"
-											onChange={(date) => {
-												handleChange(date);
-											}}
-											minDate={new Date()}
-										/>
-									</div>
-									</div>
-
 									))}
 								</div>
 							</div>
