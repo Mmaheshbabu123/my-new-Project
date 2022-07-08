@@ -132,6 +132,7 @@ function getTabRelatedData(state, tabId) {
   return {
     root_parent_id: state.root_parent_id || 0,
     tab_id: tabId,
+    action:state[`tab_${tabId}_action`] || 1,
     data: getTabWisePostData(state, tabId),
     element_status: state['element_status'][`tab_${tabId}`],
     depedency_data_status:state['dependecyDataStatus'],
