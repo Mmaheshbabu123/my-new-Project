@@ -63,7 +63,6 @@ const TabIndex = (props) => {
 
   const forWardToNextStepTab = async () => {
     let proceed = submitService.proceedToNextStepTab({state, selectedTabId});
-console.log(proceed);
     if(proceed) {
       await saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then((response) => {
         if(response.status === 200) {
@@ -74,7 +73,10 @@ console.log(proceed);
             filledTabs: [...state.filledTabs, nextTab],
             renderTabComponents: false,
           }
-          if(selectedTabId === 1) obj['root_parent_id']= response.data;
+          if(selectedTabId === 1) {
+            obj['root_parent_id']= response.data;
+            router.query.root_parent_id = obj['root_parent_id'];
+          }
           router.query.selectedTabId = nextTab;
           router.push(router, undefined, { shallow: true })
           updateStateChanges(obj);
