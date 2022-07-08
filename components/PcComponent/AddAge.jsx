@@ -285,35 +285,35 @@ const Addage = () => {
 
 				break;
 			case '4':
-				error['min_sal_15'] = ValidationService.emptyValidationMethod(res.min_sal_15);
-				error['min_sal_16'] = ValidationService.emptyValidationMethod(res.min_sal_16);
-				error['min_sal_17'] = ValidationService.emptyValidationMethod(res.min_sal_17);
-				error['min_sal_18'] = ValidationService.emptyValidationMethod(res.min_sal_18);
-				error['min_sal_19'] = ValidationService.emptyValidationMethod(res.min_sal_19);
-				error['min_sal_20'] = ValidationService.emptyValidationMethod(res.min_sal_20);
+				error['min_sal_15'] = ValidationService.emptyValidationMethod(res.min_sal_15.replaceAll(' ',''));
+				error['min_sal_16'] = ValidationService.emptyValidationMethod(res.min_sal_16.replaceAll(' ',''));
+				error['min_sal_17'] = ValidationService.emptyValidationMethod(res.min_sal_17.replaceAll(' ',''));
+				error['min_sal_18'] = ValidationService.emptyValidationMethod(res.min_sal_18.replaceAll(' ',''));
+				error['min_sal_19'] = ValidationService.emptyValidationMethod(res.min_sal_19.replaceAll(' ',''));
+				error['min_sal_20'] = ValidationService.emptyValidationMethod(res.min_sal_20.replaceAll(' ',''));
 				error['min_sal_15'] =
 					error['min_sal_15'] == ''
-						? ValidationService.percentageValidationMethod(res.min_sal_15)
+						? ValidationService.percentageValidationMethod(res.min_sal_15.replaceAll(' ',''))
 						: error['min_sal_15'];
 				error['min_sal_16'] =
 					error['min_sal_16'] == ''
-						? ValidationService.percentageValidationMethod(res.min_sal_16)
+						? ValidationService.percentageValidationMethod(res.min_sal_16.replaceAll(' ',''))
 						: error['min_sal_16'];
 				error['min_sal_17'] =
 					error['min_sal_17'] == ''
-						? ValidationService.percentageValidationMethod(res.min_sal_17)
+						? ValidationService.percentageValidationMethod(res.min_sal_17.replaceAll(' ',''))
 						: error['min_sal_17'];
 				error['min_sal_18'] =
 					error['min_sal_18'] == ''
-						? ValidationService.percentageValidationMethod(res.min_sal_18)
+						? ValidationService.percentageValidationMethod(res.min_sal_18.replaceAll(' ',''))
 						: error['min_sal_18'];
 				error['min_sal_19'] =
 					error['min_sal_19'] == ''
-						? ValidationService.percentageValidationMethod(res.min_sal_19)
+						? ValidationService.percentageValidationMethod(res.min_sal_19.replaceAll(' ',''))
 						: error['min_sal_19'];
 				error['min_sal_20'] =
 					error['min_sal_20'] == ''
-						? ValidationService.percentageValidationMethod(res.min_sal_20)
+						? ValidationService.percentageValidationMethod(res.min_sal_20.replaceAll(' ',''))
 						: error['min_sal_20'];
 				valid =
 					error['min_sal_15'] == '' &&
