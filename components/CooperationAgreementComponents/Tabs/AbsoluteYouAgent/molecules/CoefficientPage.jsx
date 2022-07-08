@@ -13,7 +13,7 @@ import { APICALL } from '@/Services/ApiServices';
 
 const CoefficientPage = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  const { pcArray = [], alreadyLinked = [] } = state;
+  const { pcArray = [], alreadyLinked = [], dependecyDataStatus } = state;
   const [ compState, setCompState ] = useState({
     employeeTypeArray: []
     , coefficientTypeArray: []
@@ -43,8 +43,9 @@ const CoefficientPage = (props) => {
     await APICALL.service(`${getPcLinkedCoeffData}/${value}`, 'GET').then(response => {
       if (response.status === 200) {
         let data = assignDataToStateVariables(value, response.data);
+        dependecyDataStatus['cooperationCoeffData'] = true;
         setCompState(data);
-        updateStateChanges({coeffPageData: data})
+        updateStateChanges({coeffPageData: data, dependecyDataStatus})
       }
     })
   }
@@ -55,12 +56,12 @@ const CoefficientPage = (props) => {
    * @return {void}      [no return]
    */
   const assignDataToStateVariables = (pcId, data) => {
-    const { employeeTypes, coefficientTypes, pcLinkedValueData } = data;
+    const { employeeTypeArray, coefficientTypeArray, pclinkingValueobj } = data;
     return {...compState,
-      employeeTypeArray: employeeTypes
-      , coefficientTypeArray: coefficientTypes
+      employeeTypeArray: employeeTypeArray
+      , coefficientTypeArray: coefficientTypeArray
       , valueTypeArray: [{ value: 2, label: 'Default' }]
-      , pclinkingValueobj: pcLinkedValueData || {}
+      , pclinkingValueobj: pclinkingValueobj || {}
       , selectedPc: parseInt(pcId),
     };
   }

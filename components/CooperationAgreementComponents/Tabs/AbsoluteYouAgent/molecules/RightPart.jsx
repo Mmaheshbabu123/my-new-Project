@@ -4,7 +4,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 
 const TABKEY = 'tab_1';
 const RightPart = ( { compState, setCompState } ) => {
-  const { state, updateStateChanges } = useContext(CooperationAgreementContext);
+  const { state, updateStateChanges, state: { dependecyDataStatus } } = useContext(CooperationAgreementContext);
   const {
     employeeTypeArray
     , coefficientTypeArray
@@ -61,7 +61,8 @@ const RightPart = ( { compState, setCompState } ) => {
       valueErrorArray: valueValidation(_EmpId, _Coeffid, target.value, lowVal, highVal),
       emptyDataWarning: false
      };
-    updateStateChanges({ [TABKEY]: stateData,  coeffPageData: dataObj });
+     dependecyDataStatus['cooperationCoeffData'] = true;
+    updateStateChanges({ [TABKEY]: stateData,  coeffPageData: dataObj, dependecyDataStatus });
     setCompState(dataObj);
   }
 

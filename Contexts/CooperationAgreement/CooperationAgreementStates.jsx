@@ -13,11 +13,11 @@ const takeElementStatus = (type = 1) => type === 1 ?
       tab_6: []
     }
   : {
-      worksServantsData:[],
-      cooperationCoeffData:[],
-      cooperationSalaryDetails: [],
-      cooperationSalaryLinked: [],
-      cooperationBenefits: []
+      worksServantsData:0,
+      cooperationCoeffData:0,
+      cooperationSalaryDetails: 0,
+      cooperationSalaryLinked: 0,
+      cooperationBenefits: 0
   };
 
 const CooperationAgreementStates = (props) => {
