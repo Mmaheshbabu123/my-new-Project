@@ -9,7 +9,7 @@ const TAB_ID = 5;
 const stateKey = 'tab_5';
 const SalaryDetailsPerPC = () => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  var { tab_5: {  cooperationSalaryDetails }, salaryBenefitPcArray } = state;
+  var { tab_5: {  cooperationSalaryDetails }, salaryBenefitPcArray, dependecyDataStatus } = state;
 
   const onSelect = (e) => {
     let salaryDetailsObj = [...cooperationSalaryDetails];
@@ -23,7 +23,8 @@ const SalaryDetailsPerPC = () => {
     tab_5['cooperationSalaryDetails'] = salaryDetailsObj;
     tab_5['cooperationSalaryLinked'][newObj.pc_id] = {};
     tab_5['cooperationBenefits'][newObj.pc_id] = {};
-    updateStateChanges({tab_5})
+    dependecyDataStatus['cooperationSalaryDetails'] = true;
+    updateStateChanges({tab_5, dependecyDataStatus})
   }
 
   return (

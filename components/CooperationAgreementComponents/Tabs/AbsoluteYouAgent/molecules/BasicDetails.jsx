@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import LabelField from '@/atoms/LabelField';
 import DateField from '@/atoms/DateField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import CheckBoxField from '@/atoms/CheckBoxField';
 import RequiredField from '@/atoms/RequiredSpanField';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
-import { helpers } from '../../../CooperationAgreementHelper';
+// import { helpers } from '../../../CooperationAgreementHelper'; //.
 import styles from '../absoluteAgent.module.css';
 
 import { consultantArray, consultantNumArray } from '../../../Definations';
@@ -18,12 +18,14 @@ var consultNumber = [];
 
 const BasicDetails = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  var { tab_1 } = state;
+  var { tab_1, element_status } = state;
+  const [ render, setRender ] = useState(false);
 
   useEffect(() => {
-    tab_1[startDateAgreement] = tab_1[startDateAgreement] || helpers.formatDate(new Date())
-    updateStateChanges({ tab_1 });
+    consultNumber = consultantNumArray[tab_1[absoluteConsultant]] || [];
+    setRender(!render);
   }, [])
+
   /**
    * [handleChange description]
    * @param  {[Object]} target                 [description]
@@ -34,10 +36,12 @@ const BasicDetails = (props) => {
   const handleChange = ({ target: { value, checked } }, type = 0) => {
     if(type) {
       tab_1[activateAddProject] = checked ? 1 : 0;
+      element_status['tab_1'].push(activateAddProject);
     } else {
       tab_1[startDateAgreement] = value;
+      element_status['tab_1'].push(startDateAgreement);
     }
-    updateStateChanges({ tab_1 })
+    updateStateChanges({ tab_1, element_status })
   }
 
   /**
@@ -51,8 +55,9 @@ const BasicDetails = (props) => {
       consultNumber = consultantNumArray[obj.value];
       tab_1[absoluteConsultantNum] = '';
     }
+    element_status['tab_1'].push(key);
     tab_1[key] = obj.value;
-    updateStateChanges({ tab_1 });
+    updateStateChanges({ tab_1, element_status });
   }
 
   return(

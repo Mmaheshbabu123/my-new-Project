@@ -11,7 +11,7 @@ const workersType  = 1;
 const servantsType = 2;
 const PcForWorkersServants = () => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  const { pcArray = [], pcLinkedEmployeeTypes = {} } = state;
+  const { pcArray = [], pcLinkedEmployeeTypes = {}, dependecyDataStatus } = state;
   const [ compState, setCompState ] = useState({
       newItems: {  [workersType]: [], [servantsType]: [] }
     , selectedPc: {
@@ -53,11 +53,13 @@ const PcForWorkersServants = () => {
     if(pcOrEmp) {
      const value = target.value;
      dataObj['selectedPc'][type] = value;
+     dataObj['selectedEmpId'][type] = [];
    } else {
      const value = target.map(val => val.value);
      dataObj['selectedEmpId'][type] = value;
    }
-   updateStateChanges({ workersServantsCompState: dataObj });
+   dependecyDataStatus['worksServantsData'] = true;
+   updateStateChanges({ workersServantsCompState: dataObj, dependecyDataStatus });
    setCompState(dataObj)
   }
 
@@ -80,8 +82,9 @@ const PcForWorkersServants = () => {
     stateObj['editIndex'][type] = stateObj['newItems'][type].length;
     tab_1['worksServantsData'][type] = stateObj['newItems'][type];
     stateObj['alreadyLinked'] = updateAlreadyLinkedPcIds(stateObj['newItems']);
+    dependecyDataStatus['worksServantsData'] = true;
     setCompState(stateObj);
-    updateStateChanges({tab_1,  workersServantsCompState: stateObj, alreadyLinked: stateObj['alreadyLinked']});
+    updateStateChanges({tab_1, dependecyDataStatus, workersServantsCompState: stateObj, alreadyLinked: stateObj['alreadyLinked']});
   }
 
   const updateAlreadyLinkedPcIds = (addedData) => {
