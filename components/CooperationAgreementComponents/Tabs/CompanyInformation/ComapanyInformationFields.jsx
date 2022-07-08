@@ -1,5 +1,5 @@
 export const companyArray = [
-  {value: 1, label: 'Klant'},
+  {value: '1', label: 'Klant'},
 ];
 
 export const companyRow1 = [
