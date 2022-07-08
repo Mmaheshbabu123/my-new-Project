@@ -4,9 +4,10 @@ import { FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 
-const CooperationAgreementTabs = ({ cooperTabs = [], selectedTabParam }) => {
+const CooperationAgreementTabs = ({corporateAgreementId = 0, cooperTabs = [], selectedTabParam }) => {
   const { state: { selectedTabId, filledTabs }, updateStateChanges } = useContext(CooperationAgreementContext);
   const router = useRouter();
+
   const handleTabClick = (selectedTabId) => {
     router.query.selectedTabId = selectedTabId
     router.push(router, undefined, { shallow: true })
@@ -15,7 +16,7 @@ const CooperationAgreementTabs = ({ cooperTabs = [], selectedTabParam }) => {
 
   useEffect(() => {
     let tabId = Number(selectedTabParam) || selectedTabId;
-    updateStateChanges({ selectedTabId: tabId });
+    updateStateChanges({ selectedTabId: tabId, root_parent_id: Number(corporateAgreementId) });
   }, [selectedTabParam])
 
   return (

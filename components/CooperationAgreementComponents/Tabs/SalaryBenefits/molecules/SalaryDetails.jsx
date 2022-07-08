@@ -18,7 +18,7 @@ const SalaryDetails = () => {
     cooperationSalaryDetails,
     cooperationSalaryLinked,
     cooperationBenefits
-  }, salaryDataPerPc } = state;
+  }, salaryDataPerPc, dependecyDataStatus } = state;
 
   const [ compState, setCompState ] = useState({
       expand: {},
@@ -177,11 +177,13 @@ const SalaryDetails = () => {
 
   const handleChange = (name, pcId, fieldId, val, from = 0, target = 0, mergeObj = {}) => {
     let key = from ? 'cooperationBenefits' : 'cooperationSalaryLinked';
+
     let salaryLinkedData = from ? {...cooperationBenefits} : {...cooperationSalaryLinked};
     salaryLinkedData[pcId][fieldId] = {...(salaryLinkedData[pcId][fieldId] ? salaryLinkedData[pcId][fieldId] : {}),
       [name]: target ? target.value : val,
       ...mergeObj
     }
+    dependecyDataStatus[from ? 'cooperationBenefits' : 'cooperationSalaryLinked'] = true;
     let tab_5 = {...state[stateKey]};
     tab_5[[key]] = salaryLinkedData;
     updateStateChanges({tab_5});
