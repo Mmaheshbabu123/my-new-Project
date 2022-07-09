@@ -1,57 +1,52 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Calendar } from 'react-multi-date-picker';
-import DatePicker from 'react-multi-date-picker';
-// import DatePicker, { DateObject } from 'react-multi-date-picker';
-// import TimePicker from 'react-multi-date-picker/plugins/time_picker';
-// import DatePanel from 'react-multi-date-picker/plugins/date_panel';
+import style from '../../styles/Planning.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
+import { FaRegPlusSquare, FaRegMinusSquare } from 'react-icons/fa';
+import { MdStarRate } from 'react-icons/md';
 
-//import TimeRange from 'react-time-range';
-import moment from 'moment';
 function Addtiming(props) {
-	// [ date, setDate ] = useState('');
-	//  const date: new Date();
 	const router = useRouter();
 	const [ value, setValue ] = useState();
 	const [ selectedDate, setSelectedDate ] = useState([]);
-	const [ checked, setChecked ] = useState(true);
-
-	// var t_unique_key = router.query.t_unique_key;
-	// const [ values, setValues ] = useState();
-	// [ 1, 2, 3 ].map((number) =>
-	// 	new DateObject().set({
-	// 		day: number,
-	// 		hour: number,
-	// 		minute: number,
-	// 		second: number
-	// 	})
-	// );
-	const [ data, setData ] = useState({});
+	const [ checked, setChecked ] = useState(false);
 	const [ time, setTime ] = useState('');
-
-	let employees = [
+	const [ employees, setEmployees ] = useState([
 		{
 			id: 1,
 			name: 'Steve Jobs',
 			employeetype: 'Flexworker',
-			function: 'Productie'
+			function: 'Productie',
+			collapseOpen: true
 		},
 		{
 			id: 2,
 			name: 'Smith Jones',
 			employeetype: 'Normal employee',
-			function: 'Productie'
+			function: 'Productie',
+			collapseOpen: false
 		},
 		{
 			id: 3,
 			name: 'Mark Henry',
 			employeetype: 'Freelancer',
-			function: 'Productie'
+			function: 'Productie',
+			collapseOpen: false
 		}
-	];
+	]);
+	const updateState = (id) => {
+		const newState = employees.map((obj) => {
+			if (obj.id === id) {
+				return { ...obj, collapseOpen: !obj.collapseOpen };
+			}
+			return obj;
+		});
+
+		setEmployees(newState);
+	};
 	let handleChange = (value) => {
 		var selected = [];
 		value.map((val) => {
@@ -62,10 +57,11 @@ function Addtiming(props) {
 		console.log(value);
 		console.log(selectedDate);
 	};
+	let submitPlanningTimings = (e) => {};
 
 	return (
 		<div className="container">
-			<form>
+			<form onSubmit={(e) => submitPlanningTimings(e)}>
 				<div className="row">
 					<p className="mt-4 mb-2 h4">Add timing</p>
 					<div className="form-check mt-2 ">
@@ -86,18 +82,17 @@ function Addtiming(props) {
 					{checked ? (
 						<div>
 							<div className=" mt-5 ">
-								<table className="table table-hover ">
-									<tbody className="">
-										{employees.map((result) => (
-											<tr key={result.id} className="">
-												<td className="">{result.id}.</td>
-												<td>{result.name}</td>
-												<td>{result.employeetype}</td>
-												<td>{result.function}</td>
-											</tr>
-										))}
-									</tbody>
-								</table>
+								{employees.map((result) => (
+									<div
+										key={result.id}
+										className={`row d-flex justify-content-start py-3 my-3 ${style.sec_background}`}
+									>
+										<div className="col-md-1 h5">{result.id}.</div>
+										<div className="col-md-3 h6">{result.name}</div>
+										<div className="col-md-3 h6">{result.employeetype}</div>
+										<div className="col-md-3 h6">{result.function}</div>
+									</div>
+								))}
 							</div>
 
 							<div className="mt-2 ">
@@ -113,11 +108,11 @@ function Addtiming(props) {
 							</div>
 							<div className="" />
 							{selectedDate.map((value, index) => (
-									
 								<div className="row" key={index}>
 									<div className="col-md-3 py-2">{value}</div>
-									<div className="col-md-4 py-2">
+									<div className="col-md-3 py-2">
 										<label>Start time</label>
+										<br />
 										<TimePicker
 											placeholder="Select Time"
 											use12Hours
@@ -127,8 +122,9 @@ function Addtiming(props) {
 											onChange={(e) => setTime(e.format('LT'))}
 										/>
 									</div>
-									<div className="col-md-4 py-2">
+									<div className="col-md-3 py-2">
 										<label>End time</label>
+										<br />
 										<TimePicker
 											placeholder="Select Time"
 											use12Hours
@@ -138,6 +134,10 @@ function Addtiming(props) {
 											onChange={(e) => setTime(e.format('LT'))}
 										/>
 									</div>
+									<div className="col-md-2">
+									<MdStarRate/>
+									</div>
+
 								</div>
 							))}
 						</div>
@@ -147,23 +147,36 @@ function Addtiming(props) {
 								<div className="">
 									{employees.map((result) => (
 										<div key={result.id}>
-											<div className="row d-flex justify-content-start bg-light py-2 my-2">
-												<div className="col-md-1">{result.id}.</div>
-												<div className="col-md-3">{result.name}</div>
-												<div className="col-md-3">{result.employeetype}</div>
-												<div className="col-md-3">{result.function}</div>
+											<div
+												className={`row d-flex justify-content-start py-3 my-3 ${style.sec_background}`}
+											>
+												<div className="col-md-1 h5">
+													{result.collapseOpen == true ? (
+														<FaRegMinusSquare onClick={() => updateState(result.id)} />
+													) : (
+														<FaRegPlusSquare onClick={() => updateState(result.id)} />
+													)}
+												</div>
+												<div className="col-md-3 h6">{result.name}</div>
+												<div className="col-md-3 h6">{result.employeetype}</div>
+												<div className="col-md-3 h6">{result.function}</div>
 											</div>
-											<div className="mt-2 ">
-												<Calendar
-													value={value}
-													multiple={true}
-													format="YYYY/MM/DD"
-													onChange={(date) => {
-														handleChange(date);
-													}}
-													minDate={new Date()}
-												/>
-											</div>
+											{result.collapseOpen == true && (
+												<div className="mt-2 row">
+													<div className="col-md-1" />
+													<div className="col-md-11">
+														<Calendar
+															value={value}
+															multiple={true}
+															format="YYYY/MM/DD"
+															onChange={(date) => {
+																handleChange(date);
+															}}
+															minDate={new Date()}
+														/>
+													</div>
+												</div>
+											)}
 										</div>
 									))}
 								</div>
@@ -177,9 +190,6 @@ function Addtiming(props) {
 						<button
 							type="button"
 							className="btn btn-link text-dark btn-block "
-							// onClick={() => {
-							// 	setData((prev) => ({ ...prev, t_unique_key: router.query.t_unique_key }));
-							// }}
 						>
 							<Link href={'/planning/functions/' + router.query.p_unique_key}>
 								<p>Back</p>
@@ -190,13 +200,8 @@ function Addtiming(props) {
 						<button
 							type="submit"
 							className="btn btn-secondary   btn-block "
-							// onClick={() => {
-							// 	setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
-							// }}
 						>
-							<Link href={'/planning/finalize/' + router.query.p_unique_key}>
-								<p>Next</p>
-							</Link>
+							Next
 						</button>
 					</div>
 				</div>
