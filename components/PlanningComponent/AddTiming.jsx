@@ -37,6 +37,10 @@ function Addtiming(props) {
 			collapseOpen: false
 		}
 	]);
+	/**
+	 * Method to open and close collapsible section when user click on '+' or '-' icon
+	 * @param {} id id of the collapsible element clicked
+	 */
 	const updateState = (id) => {
 		const newState = employees.map((obj) => {
 			if (obj.id === id) {
@@ -47,6 +51,10 @@ function Addtiming(props) {
 
 		setEmployees(newState);
 	};
+	/**
+	 * 
+	 * @param {*} value 
+	 */
 	let handleChange = (value) => {
 		var selected = [];
 		value.map((val) => {
@@ -57,18 +65,22 @@ function Addtiming(props) {
 		console.log(value);
 		console.log(selectedDate);
 	};
+
+	/**
+	 * Store data
+	 * @param {*} e 
+	 */
 	let submitPlanningTimings = (e) => {};
 
 	return (
 		<div className="container">
 			<form onSubmit={(e) => submitPlanningTimings(e)}>
 				<div className="row">
-					<p className="mt-4 mb-2 h4">Add timing</p>
+					<p className="my-4 h4">Add timing</p>
 					<div className="form-check mt-2 ">
 						<input
 							className="form-check-input "
 							type="checkbox"
-							value=""
 							checked={checked}
 							id="flexCheckChecked"
 							onChange={() => {
@@ -81,7 +93,7 @@ function Addtiming(props) {
 					</div>
 					{checked ? (
 						<div>
-							<div className=" mt-5 ">
+							<div className=" mt-3">
 								{employees.map((result) => (
 									<div
 										key={result.id}
@@ -95,7 +107,7 @@ function Addtiming(props) {
 								))}
 							</div>
 
-							<div className="mt-2 ">
+							<div className="mt-3 pt-2">
 								<Calendar
 									value={value}
 									multiple={true}
@@ -106,13 +118,14 @@ function Addtiming(props) {
 									minDate={new Date()}
 								/>
 							</div>
-							<div className="" />
+							<div className="mt-3 pt-2">
 							{selectedDate.map((value, index) => (
 								<div className="row" key={index}>
-									<div className="col-md-3 py-2">{value}</div>
-									<div className="col-md-3 py-2">
-										<label>Start time</label>
-										<br />
+									<div className="col-md-3 py-3">
+									<div className='pb-2'></div>
+										{value}</div>
+									<div className="col-md-2 py-3">
+										<div className='pb-2'>Start time</div>
 										<TimePicker
 											placeholder="Select Time"
 											use12Hours
@@ -122,9 +135,8 @@ function Addtiming(props) {
 											onChange={(e) => setTime(e.format('LT'))}
 										/>
 									</div>
-									<div className="col-md-3 py-2">
-										<label>End time</label>
-										<br />
+									<div className="col-md-2 py-3">
+									<div className='pb-2'>End time</div>
 										<TimePicker
 											placeholder="Select Time"
 											use12Hours
@@ -134,16 +146,17 @@ function Addtiming(props) {
 											onChange={(e) => setTime(e.format('LT'))}
 										/>
 									</div>
-									<div className="col-md-2">
+									<div className="col-md-2 py-3">
 									<MdStarRate/>
 									</div>
 
 								</div>
 							))}
+							</div>
 						</div>
 					) : (
 						<div>
-							<div className=" mt-5 ">
+							<div className=" mt-3">
 								<div className="">
 									{employees.map((result) => (
 										<div key={result.id}>
