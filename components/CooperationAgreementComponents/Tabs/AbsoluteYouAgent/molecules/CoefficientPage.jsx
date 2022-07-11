@@ -110,7 +110,7 @@ const CoefficientPage = (props) => {
             <RightPart compState={compState} setCompState = {setCompState}/>
           </div>
         </div>
-        </>:<p className={'text-align-center'}> This PC is not linked with coefficient to employee type. </p>}
+        </>:<p className={'text-align-center'}> This PC is not linked with coefficients to employee types. </p>}
       </div>:null}
     </div>
   );
