@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { APICALL } from '../../Services/ApiServices';
+import { fetchPlannedTimings } from '../../Services/ApiEndPoints';
 import { Calendar } from 'react-multi-date-picker';
 import style from '../../styles/Planning.module.css';
 import Link from 'next/link';
@@ -12,31 +14,52 @@ function Addtiming(props) {
 	const router = useRouter();
 	const [ value, setValue ] = useState();
 	const [ selectedDate, setSelectedDate ] = useState([]);
+	const [ commonDatetime, setCommonDatetime ] = useState([]);
+
 	const [ checked, setChecked ] = useState(false);
 	const [ time, setTime ] = useState('');
+	const [ error_selected_date, setError_selected_date ] = useState('');
 	const [ employees, setEmployees ] = useState([
 		{
 			id: 1,
 			name: 'Steve Jobs',
 			employeetype: 'Flexworker',
 			function: 'Productie',
-			collapseOpen: true
+			collapseOpen: true,
+			error: ''
 		},
 		{
 			id: 2,
 			name: 'Smith Jones',
 			employeetype: 'Normal employee',
 			function: 'Productie',
-			collapseOpen: false
+			collapseOpen: false,
+			error: ''
 		},
 		{
 			id: 3,
 			name: 'Mark Henry',
 			employeetype: 'Freelancer',
 			function: 'Productie',
-			collapseOpen: false
+			collapseOpen: false,
+			error: ''
 		}
 	]);
+
+	useEffect(
+		() => {
+			if(props.p_unique_key != undefined){
+				APICALL.service(fetchPlannedTimings + props.p_unique_key, 'GET')
+					.then((result) => {
+						console.log(result);
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+				}
+		},
+		[props]
+	);
 	/**
 	 * Method to open and close collapsible section when user click on '+' or '-' icon
 	 * @param {} id id of the collapsible element clicked
@@ -56,21 +79,39 @@ function Addtiming(props) {
 	 * @param {*} value 
 	 */
 	let handleChange = (value) => {
+		var dateobj = {
+			data: '',
+			starttime: '',
+			endtime: ''
+		};
+		alert(value)
+		setError_selected_date('');
 		var selected = [];
 		value.map((val) => {
-			console.log(val.format());
 			selected.push(val.format());
 		});
 		setSelectedDate(selected);
-		console.log(value);
-		console.log(selectedDate);
+
 	};
 
 	/**
 	 * Store data
 	 * @param {*} e 
 	 */
-	let submitPlanningTimings = (e) => {};
+	let submitPlanningTimings = (e) => {
+		e.preventDefault();
+		validateTimings(1);
+	};
+
+	let validateTimings = () => {
+		if (checked == true) {
+			if (selectedDate.length == 0) {
+				setError_selected_date('Select atleast one date.');
+			}else{
+				console.log(selectedDate);
+			}
+		}
+	};
 
 	return (
 		<div className="container">
@@ -106,52 +147,58 @@ function Addtiming(props) {
 									</div>
 								))}
 							</div>
-
-							<div className="mt-3 pt-2">
-								<Calendar
-									value={value}
-									multiple={true}
-									format="YYYY/MM/DD"
-									onChange={(date) => {
-										handleChange(date);
-									}}
-									minDate={new Date()}
-								/>
+							<div className="mt-2 row">
+								<div className="col-md-1" />
+								<div className="col-md-11">
+									<Calendar
+										value={value}
+										multiple={true}
+										format="DD/MM/YYYY"
+										onChange={(date) => {
+											handleChange(date);
+										}}
+										minDate={new Date()}
+									/>
+									<p className="error mt-2">{error_selected_date}</p>
+								</div>
 							</div>
 							<div className="mt-3 pt-2">
-							{selectedDate.map((value, index) => (
-								<div className="row" key={index}>
-									<div className="col-md-3 py-3">
-									<div className='pb-2'></div>
-										{value}</div>
-									<div className="col-md-2 py-3">
-										<div className='pb-2'>Start time</div>
-										<TimePicker
-											placeholder="Select Time"
-											use12Hours
-											showSecond={false}
-											focusOnOpen={true}
-											format="hh:mm A"
-											onChange={(e) => setTime(e.format('LT'))}
-										/>
+								{selectedDate.map((value, index) => (
+									<div className="row" key={index}>
+										<div className="col-md-1" />
+										<div className="col-md-3 py-3">
+											<div className="pb-2" />
+											{value}
+										</div>
+										<div className="col-md-2 py-3">
+											<div className="pb-2 custom_astrick">Start time</div>
+											<TimePicker
+												placeholder="Select Time"
+												use12Hours
+												showSecond={false}
+												focusOnOpen={true}
+												format="hh:mm A"
+												onChange={(e) => setTime(e.format('LT'))}
+											/>
+											<p className="error mt-2">This field is required.</p>
+										</div>
+										<div className="col-md-2 py-3">
+											<div className="pb-2">End time</div>
+											<TimePicker
+												placeholder="Select Time"
+												use12Hours
+												showSecond={false}
+												focusOnOpen={true}
+												format="hh:mm A"
+												onChange={(e) => setTime(e.format('LT'))}
+											/>
+											<p className="error mt-2">This field is required.</p>
+										</div>
+										<div className="col-md-2 py-3">
+											<MdStarRate />
+										</div>
 									</div>
-									<div className="col-md-2 py-3">
-									<div className='pb-2'>End time</div>
-										<TimePicker
-											placeholder="Select Time"
-											use12Hours
-											showSecond={false}
-											focusOnOpen={true}
-											format="hh:mm A"
-											onChange={(e) => setTime(e.format('LT'))}
-										/>
-									</div>
-									<div className="col-md-2 py-3">
-									<MdStarRate/>
-									</div>
-
-								</div>
-							))}
+								))}
 							</div>
 						</div>
 					) : (
@@ -175,19 +222,58 @@ function Addtiming(props) {
 												<div className="col-md-3 h6">{result.function}</div>
 											</div>
 											{result.collapseOpen == true && (
-												<div className="mt-2 row">
-													<div className="col-md-1" />
-													<div className="col-md-11">
-														<Calendar
-															value={value}
-															multiple={true}
-															format="YYYY/MM/DD"
-															onChange={(date) => {
-																handleChange(date);
-															}}
-															minDate={new Date()}
-														/>
+												<div>
+													<div className="mt-2 row">
+														<div className="col-md-1" />
+														<div className="col-md-11">
+															<Calendar
+																value={value}
+																multiple={true}
+																format="YYYY/MM/DD"
+																onChange={(date) => {
+																	handleChange(date);
+																}}
+																minDate={new Date()}
+															/>
+															<p className="error mt-2">Select atleast one date.</p>
+														</div>
 													</div>
+													{selectedDate.map((value, index) => (
+														<div className="row" key={index}>
+															<div className="col-md-1" />
+															<div className="col-md-3 py-3">
+																<div className="pb-2" />
+																{value}
+															</div>
+															<div className="col-md-2 py-3">
+																<div className="pb-2">Start time</div>
+																<TimePicker
+																	placeholder="Select Time"
+																	use12Hours
+																	showSecond={false}
+																	focusOnOpen={true}
+																	format="hh:mm A"
+																	onChange={(e) => setTime(e.format('LT'))}
+																/>
+																<p className="error mt-2">This field is required.</p>
+															</div>
+															<div className="col-md-2 py-3">
+																<div className="pb-2">End time</div>
+																<TimePicker
+																	placeholder="Select Time"
+																	use12Hours
+																	showSecond={false}
+																	focusOnOpen={true}
+																	format="hh:mm A"
+																	onChange={(e) => setTime(e.format('LT'))}
+																/>
+																<p className="error mt-2">This field is required.</p>
+															</div>
+															<div className="col-md-2 py-3">
+																<MdStarRate />
+															</div>
+														</div>
+													))}
 												</div>
 											)}
 										</div>
@@ -200,20 +286,14 @@ function Addtiming(props) {
 
 				<div className="col-md-12 mt-4 ">
 					<div className="d-inline">
-						<button
-							type="button"
-							className="btn btn-link text-dark btn-block "
-						>
+						<button type="button" className="btn btn-link text-dark btn-block ">
 							<Link href={'/planning/functions/' + router.query.p_unique_key}>
 								<p>Back</p>
 							</Link>
 						</button>
 					</div>
 					<div className="float-end ">
-						<button
-							type="submit"
-							className="btn btn-secondary   btn-block "
-						>
+						<button type="submit" className="btn btn-secondary   btn-block ">
 							Next
 						</button>
 					</div>

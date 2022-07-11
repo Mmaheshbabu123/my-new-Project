@@ -64,6 +64,7 @@ export const Addcostcenter = BASE_URL + "addCostCenter";
 export const employeetyplanning = BASE_URL + "addemployeetoplanning";
 export const addplanningemployee = BASE_URL + "addplanningemployee";
 export const planningoverview = BASE_URL + "planningdetails-by-uniquekey/";
+export const fetchPlannedTimings = BASE_URL + "fetch-planned-timings/"
 
 
 //--------------PLANNING FETCHING----------------------------------//
