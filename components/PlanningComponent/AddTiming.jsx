@@ -89,7 +89,7 @@ function Addtiming(props) {
 	 */
 	let handleChange = (value) => {
 		var dateobj = {
-			data: '',
+			date: '',
 			starttime: '',
 			endtime: ''
 		};
@@ -106,26 +106,37 @@ function Addtiming(props) {
 		var res = [...employee_planning];
 		if(res[key].timings.length > 0){
 		res[key].error_selected_date = '';
-		res[key].timings.map((obj,ky) => {
-			console.log(obj);
+		value.map((obj,ky) => {
+			const isFound = res[key].timings.some(element => {
+				if (element.date === obj.format()) {
+				  return true;
+				}
+			  
+				return false;
+			  });
+			if(!isFound){
+				res[key].timings.push({
+					date: obj.format(),
+					starttime: '',
+					endtime: '',
+					error_starttime: '',
+					error_endtime: '',
+				})
+			
+			}
 		});
+		
+
 	}else{
-		// var dateobj = {
-		// 			data: data,
-		// 			starttime: '',
-		// 			endtime: ''
-		// 		};
 		res[key].error_selected_date = '';
 			res[key].timings.push({
-			data: value[0].format(),
+			date: value[0].format(),
 			starttime: '',
 			endtime: '',
 			error_starttime: '',
 			error_endtime: '',
 
 		});
-		alert("test")
-		console.log(res)
 	}
 
 		setEmployee_planning(res);
@@ -276,7 +287,7 @@ function Addtiming(props) {
 											<p className="error mt-2">{error_start_time}</p>
 										</div>
 										<div className="col-md-2 py-3">
-											<div className="pb-2">End time</div>
+											<div className="pb-2 custom_astrick">End time</div>
 											<TimePicker
 												placeholder="Select Time"
 												use12Hours
@@ -336,10 +347,10 @@ function Addtiming(props) {
 															<div className="col-md-1" />
 															<div className="col-md-3 py-3">
 																<div className="pb-2" />
-																{value.data}
+																{value.date}
 															</div>
 															<div className="col-md-2 py-3">
-																<div className="pb-2">Start time</div>
+																<div className="pb-2 custom_astrick">Start time</div>
 																<TimePicker
 																	placeholder="Select Time"
 																	use12Hours
@@ -351,7 +362,7 @@ function Addtiming(props) {
 																<p className="error mt-2">{value.error_starttime}</p>
 															</div>
 															<div className="col-md-2 py-3">
-																<div className="pb-2">End time</div>
+																<div className="pb-2 custom_astrick">End time</div>
 																<TimePicker
 																	placeholder="Select Time"
 																	use12Hours
