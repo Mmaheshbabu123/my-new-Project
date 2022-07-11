@@ -18,8 +18,13 @@ function formatDate(dateInput, type = 0) {
 
 
 async function fetchDataFromBackend(url, root_parent_id, selectedTabId) {
+  let postSubmitId = root_parent_id;
+  if(!root_parent_id) {
+    const urlParams = new URLSearchParams(window.location.search);
+    postSubmitId = urlParams.get('root_parent_id');
+  }
   let data = {};
-  await APICALL.service(`${url}/${root_parent_id}/${selectedTabId}`, 'GET').then(response => {
+  await APICALL.service(`${url}/${postSubmitId}/${selectedTabId}`, 'GET').then(response => {
     if (response.status === 200)
           data = response.data || {};
   }).catch((error) => console.log(error) )

@@ -27,6 +27,10 @@ const PcForWorkersServants = () => {
       [servantsType]: 0
     }
     , alreadyLinked: []
+    , employeeTyperError: {
+      [workersType]: false,
+      [servantsType]: false
+    }
   });
 
   useEffect(() => {
@@ -45,8 +49,20 @@ const PcForWorkersServants = () => {
       selectedEmpId: workersServantsCompState['selectedEmpId'] || compState['selectedEmpId'],
       newItems, editIndex, alreadyLinked
     }
+    updateStateChanges({alreadyLinked: alreadyLinked, workersServantsCompState: {...compState, ...obj},
+      workerServentsCompLoaded: true,
+    })
     setCompState({...compState, ...obj});
   }, [])
+
+  useEffect(() => {
+    if(state.uniqueId) {
+      const {  workersServantsCompState = {} } = state;
+      setCompState({...compState, employeeTyperError: workersServantsCompState['employeeTyperError'] || { [workersType]: false,
+        [servantsType]: false }
+      })
+    }
+  }, [state.uniqueId])
 
   const onSelect = (target, type, pcOrEmp = 1) => {
     let dataObj = {...compState};
@@ -70,7 +86,10 @@ const PcForWorkersServants = () => {
    */
   const addItemAndUpdateIndex = (stateObj, type) => {
     let tab_1 = {...state[tabStateKey] }
-    if(!stateObj['selectedPc'][type] || !stateObj['selectedEmpId'][type].length) return;
+    if(!stateObj['selectedPc'][type] || !stateObj['selectedEmpId'][type].length) {
+      setCompState({...compState, employeeTyperError: {[type]: true} });
+      return;
+    }
     stateObj['newItems'][type][stateObj['editIndex'][type]] = {
       pc_id: stateObj['selectedPc'][type],
       employee_type_id: stateObj['selectedEmpId'][type],
@@ -80,6 +99,7 @@ const PcForWorkersServants = () => {
     stateObj['selectedPc'][type] = 0;
     stateObj['selectedEmpId'][type] = [];
     stateObj['editIndex'][type] = stateObj['newItems'][type].length;
+    stateObj['employeeTyperError'] = {[type]: false}
     tab_1['worksServantsData'][type] = stateObj['newItems'][type];
     stateObj['alreadyLinked'] = updateAlreadyLinkedPcIds(stateObj['newItems']);
     dependecyDataStatus['worksServantsData'] = true;
@@ -98,12 +118,12 @@ const PcForWorkersServants = () => {
 
 
   const employeeTypeParitairDropDown = (type = 1) => {
-    const { alreadyLinked } = compState;
+    const { alreadyLinked, employeeTyperError } = compState;
     let selectedPc = compState['selectedPc'][type];
     let emplOptions = pcLinkedEmployeeTypes[selectedPc] ? pcLinkedEmployeeTypes[selectedPc] : [];
     let pcOptions = helpers.returnNotAddedPcOptions(pcArray, state['workersServantsCompState']);
     return <div className={`${type === 1 ? 'col-md-9' : 'col-md-9 ' + styles['margin-auto-class']}`}>
-        <p className={styles['worker-servants-title']}> {type === 1 ? `PC for workers (arbeiders)` : `PC for servants (bedienden)`} </p>
+        <p className={styles['worker-servants-title']}> {type === 1 ? `Paritair comité for workers (arbeiders)` : `Paritair comité for servants (bedienden)`} </p>
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title={`Paritair comité (PC) ${type}`} customStyle={{display: 'inline-block'}} /> <span style={{color:'red'}}>*</span>
             <MultiSelectField
@@ -125,6 +145,7 @@ const PcForWorkersServants = () => {
                 isMulti={true}
                 className="col-md-12"
               />
+              {employeeTyperError[type] === true && <small style={{ color:'red', display: 'block', marginTop: '10px' }}> This field is required. </small>}
         </div>
         <div className={`managetype-save-btn ${styles['pc-worker-servant-add-btn']}`}>
           <button
@@ -133,7 +154,7 @@ const PcForWorkersServants = () => {
             style={{marginTop: '20px'}}
             className="btn btn-dark pcp_btn">
             <pre>{`Extra Paritair comité
-              ${type ===workersType ? 'workers (arbeiders)' : 'servants (bedienden)'}`}</pre>
+              ${type === workersType ? 'workers (arbeiders)' : 'servants (bedienden)'}`}</pre>
           </button>
         </div>
     </div>
@@ -211,7 +232,8 @@ const PcForWorkersServants = () => {
       stateObj['editIndex'][workSerType] = stateObj['newItems'][workSerType].length;
     }
     stateObj['alreadyLinked'] = updateAlreadyLinkedPcIds(stateObj['newItems']);
-    updateStateChanges({ workersServantsCompState: stateObj })
+    dependecyDataStatus['worksServantsData'] = true;
+    updateStateChanges({ workersServantsCompState: stateObj, dependecyDataStatus })
     setCompState(stateObj);
   }
 

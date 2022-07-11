@@ -8,10 +8,10 @@ const style = {
   color: '#212529',
 }
 
-export default function Label ( { title, customStyle }) {
+export default function Label ( { title, customStyle, mandotory, className }) {
   return (
     <>
-     <label style={{...style, ...customStyle}} >{title}</label>
+     <label style={{...style, ...customStyle}} className={`${mandotory ? 'custom_astrick ' + className : className}`} >{title}</label>
     </>
   )
 }

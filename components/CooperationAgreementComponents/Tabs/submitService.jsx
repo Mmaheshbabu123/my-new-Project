@@ -32,8 +32,10 @@ export const submitService = {
 let stateObj = {};
 let selectedTabKey;
 let validationStatus;
+let updateStateChanges;
 
 function proceedToNextStepTab({ state, selectedTabId, ...props }) {
+  updateStateChanges = props.updateStateChanges;
   stateObj = state || {};
   selectedTabKey = selectedTabId || 0;
   validationStatus = true;
@@ -74,6 +76,13 @@ function checkAbsoluteAgentTabValidation() {
     let compStateObj = stateObj['workersServantsCompState'] || {};
     let contextWS = tabStateObj['worksServantsData'] || {};
     let stateWS = {pc_id: compStateObj['selectedPc'] || 0, employee_type_id: compStateObj['selectedEmpId'] || 0};
+    let employeeTyperError = checkEachPcHasEmployeetypeOrNot(stateWS);
+    if(employeeTyperError[1] || employeeTyperError[2]) {
+      compStateObj['employeeTyperError'] = employeeTyperError;
+      updateStateChanges({workersServantsCompState: compStateObj, uniqueId: Math.random()});
+      validationStatus = false;
+      return validationStatus;
+    }
     validationStatus = loopAndCheckLength(contextWS);
     if(!validationStatus) {
       let { employee_type_id } = stateWS;
@@ -92,6 +101,22 @@ function loopAndCheckLength(obj) {
     return 1;
   })
   return tempStatus;
+}
+
+function checkEachPcHasEmployeetypeOrNot(stateWS) {
+  let errorObj = {1:false, 2: false};
+  if(stateWS['pc_id']) {
+    Object.keys(stateWS['pc_id']).map(type => {
+      if(stateWS['pc_id'][type]) {
+        if(stateWS['employee_type_id'] && stateWS['employee_type_id'][type] && stateWS['employee_type_id'][type].length)
+          errorObj[type] = false;
+        else
+          errorObj[type] = true;
+      }
+    return 1;
+    })
+  }
+  return errorObj;
 }
 
 
@@ -137,7 +162,6 @@ for(const key in tab_data) {
    break;
  }
 }
-console.log(tempSatatus);
 return tempSatatus;
 }
 
@@ -179,7 +203,7 @@ function absoluteYouPostData(state) {
     data['worksServantsData'][workers].push(insertObj(selectedPc, selectedEmpId, workers));
   }
   if(selectedEmpId[servants] && selectedEmpId[servants].length) {
-    data['worksServantsData'][workers].push(insertObj(selectedPc, selectedEmpId, servants))
+    data['worksServantsData'][servants].push(insertObj(selectedPc, selectedEmpId, servants))
   }
   let coeffPageData = state['coeffPageData'] || {};
   let selectedPcId = coeffPageData.selectedPc || 0;
@@ -195,7 +219,6 @@ function validationsObjCheckStatus (validate_data) {
       break
     }
   }
-  console.log(tempSatatus);
   return tempSatatus;
 }
 

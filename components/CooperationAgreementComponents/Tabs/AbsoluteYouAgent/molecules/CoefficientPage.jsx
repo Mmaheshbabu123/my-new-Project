@@ -36,6 +36,7 @@ const CoefficientPage = (props) => {
     , tableWidth: '100%'
     , scrollLeft: undefined
     , scrollRight: undefined
+    , emptyError: false
   });
 
   const { scrollLeft, scrollRight, tableWidth } = compState;
@@ -44,6 +45,7 @@ const CoefficientPage = (props) => {
       if (response.status === 200) {
         let data = assignDataToStateVariables(value, response.data);
         dependecyDataStatus['cooperationCoeffData'] = true;
+        data['emptyError'] = !response['data'].employeeTypeArray.length;
         setCompState(data);
         updateStateChanges({coeffPageData: data, dependecyDataStatus})
       }
@@ -62,7 +64,8 @@ const CoefficientPage = (props) => {
       , coefficientTypeArray: coefficientTypeArray
       , valueTypeArray: [{ value: 2, label: 'Default' }]
       , pclinkingValueobj: pclinkingValueobj || {}
-      , selectedPc: parseInt(pcId),
+      , selectedPc: parseInt(pcId)
+      , emptyError: false
     };
   }
 
@@ -90,10 +93,11 @@ const CoefficientPage = (props) => {
         {compState.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
         {compState.valueErrorArray.length > 0 &&
           <small className="col-md-3 mt-3 mb-3 warning-message">
-            {`Wrong value range.`}
+            {`Some values are not in between low and high value.`}
           </small>}
       </div>
       {compState.selectedPc ? <div className="col-md-12 m-0 p-0 relative-div">
+        {compState.emptyError !== true ? <>
         {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
             <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
         {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
@@ -106,6 +110,7 @@ const CoefficientPage = (props) => {
             <RightPart compState={compState} setCompState = {setCompState}/>
           </div>
         </div>
+        </>:<p className={'text-align-center'}> This PC is not linked with coefficients to employee types. </p>}
       </div>:null}
     </div>
   );
