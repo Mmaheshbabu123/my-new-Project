@@ -8,70 +8,75 @@ import { useRouter } from 'next/router';
 import { Printer } from 'react-bootstrap-icons';
 
 const AddEmployee = () => {
-	const router = useRouter();
-	const p_unique_key = router.query.p_unique_key;
-	//var companyid = 82;
 	const [ Data, setData ] = useState([]);
 	const [ Error, setError ] = useState();
-	//const [companyid,setCompanyid]=useState();
+	const router = useRouter();
+	const p_unique_key = router.query.p_unique_key;
+	const [ defaultvalue, setDefaultValue ] = useState(null);
 	const [ selectedOption, setSelectedOption ] = useState([]);
 
-	useEffect(() => {
-		var companyid = '';
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getcompanyidbyuniqkey/' + p_unique_key, 'GET')
-			.then(async (result) => {
-				companyid = result;
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-		APICALL.service(
-			process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'getemployeebycompany?_format=json&nid=' + companyid,
-			'GET'
-		)
-			.then((result) => {
-				if (result.length > 0) {
-					getOptions(result);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, []);
+	useEffect(
+		() => {
+			var p_unique_key = router.query.p_unique_key;
+			console.log(p_unique_key);
+			APICALL.service(
+				process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getEmployeeByUsingCompanyId/' + p_unique_key,
+				'GET'
+			)
+				.then((result) => {
+					 getOptions(result,1);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 
-	const getOptions = (res) => {
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/selectedEmployees/' + p_unique_key, 'GET')
+				.then((result) => {
+					getOptions(result,2);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		},
+		[ router.query ]
+	);
+
+	const getOptions = (res,c) => {
 		var options = [];
-		res.map((val, key) => {
-			var opt = {
-				value: '',
-				label: ''
-			};
-			opt.value = val.Employee_id;
-			opt.label = val.Employee_name;
+		if (res !== null) {
+			res.map((val, key) => {
+				var opt = {
+					value: '',
+					label: ''
+				};
+				opt.value = val.Employee_id;
+				opt.label = val.Employee_name;
 
-			options[key] = opt;
-		});
-		setData(options);
+				options[key] = opt;
+			});
+			if(c==1){
+			  setData(options);
+			}else{
+				setSelectedOption(options);
+			}
+		}
 	};
 
 	const submit = (e) => {
 		e.preventDefault();
-		console.log(router.query.p_unique_key);
-
+		
 		var err = ValidationService.emptyValidationMethod(selectedOption);
 
 		if (err != '') {
 			setError(err);
 		} else {
 			setError(err);
-			const unique_key = 4567;
-			//Router.query.P_unique_key
+			if(selectedOption.length!=0){
 			let data = [ selectedOption, p_unique_key ];
+
 			APICALL.service(addplanningemployee, 'POST', data)
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
-						console.log(result.status);
 						router.push('/planning/functions/' + p_unique_key);
 					} else {
 						console.log(result);
@@ -80,6 +85,9 @@ const AddEmployee = () => {
 				.catch((error) => {
 					console.error(error);
 				});
+			}else{
+				router.push('/planning/functions/' + p_unique_key);
+			}
 		}
 	};
 
@@ -98,7 +106,16 @@ const AddEmployee = () => {
 					<label className="custom_astrick" style={{ paddingBottom: '0.5%' }}>
 						Employee
 					</label>
-					<Select options={Data} name="employees" onChange={setSelectedOption} isMulti />
+					{console.log(Data)}
+					{console.log(selectedOption)}
+
+					<Select
+					    value={selectedOption}
+						isMulti
+						name="employees"
+						options={Data}
+						onChange={setSelectedOption}
+					/>
 					<span style={{ color: 'red' }}>{Error}</span>
 				</div>
 				<div className="row">
