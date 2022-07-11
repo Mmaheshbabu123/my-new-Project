@@ -116,19 +116,19 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
         </button>
       </div>
       <div className="table-render-parent-div">
-        {state.currentItems && state.currentItems.length > 0 ?
           <table className="table table-hover manage-types-table">
             <thead className="table-render-thead">
               <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
+            {state.currentItems && state.currentItems.length > 0 ?
             <tbody>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
                 <td> {eachRow.name} </td>
                 <td>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
+            : <p style={{paddingTop: '10px'}}> No data found... </p>}
           </table>
-       : <p> No data found </p>}
       </div>
       <div>
       {state.filterRows.length > itemsPerPage && <ReactPaginate

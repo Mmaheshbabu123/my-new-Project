@@ -11,7 +11,7 @@ var absoluteConsultant    = 2;
 var absoluteConsultantNum = 3;
 var activateAddProject    = 4;
 const AbsoluteYouAgent = (props) => {
-  const { state: { selectedTabId, renderTabComponents, root_parent_id }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+  const { state: { selectedTabId, renderTabComponents, root_parent_id, workerServentsCompLoaded }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   useEffect(() => {
     if(!state.loadedTabs.includes(selectedTabId))
     		loadData();
@@ -25,13 +25,14 @@ const AbsoluteYouAgent = (props) => {
     let apiData = Object.keys(data['tab_data']).length ? data['tab_data'] : 0;
     if(apiData) {
       let { basicDetails = {}, cooperationCoeffData = {}, worksServantsData = {} } = apiData;
-      tab_1[startDateAgreement]     = basicDetails['startdateagreement']             || helpers.formatDate(new Date());
-      tab_1[absoluteConsultant]     = Number(basicDetails['absoluteConsultant'])     || '';
-      tab_1[absoluteConsultantNum]  = Number(basicDetails['absoluteConsultantNum'])  || '';
-      tab_1[activateAddProject]     = Number(basicDetails['activateAddProject'])     || '';
-      tab_1['worksServantsData']    = worksServantsData;
-      data['coeffPageData']         = cooperationCoeffData;
-    }
+      tab_1[startDateAgreement]     = basicDetails && basicDetails['startdateagreement'] || helpers.formatDate(new Date());
+      tab_1[absoluteConsultant]     = basicDetails && Number(basicDetails['absoluteConsultant'])     || '';
+      tab_1[absoluteConsultantNum]  = basicDetails && Number(basicDetails['absoluteConsultantNum'])  || '';
+      tab_1[activateAddProject]     = basicDetails && Number(basicDetails['activateAddProject'])     || '';
+      tab_1['worksServantsData']    = worksServantsData || {};
+      data['coeffPageData']         = cooperationCoeffData || {};
+    } else
+        tab_1[startDateAgreement]= helpers.formatDate(new Date());
     data[stateKey] = tab_1;
     data['pcArray'] = data.pc_array || [];
     data['pcLinkedEmployeeTypes'] = data.pcLinkedEmployeeTypes || {};
@@ -45,7 +46,7 @@ const AbsoluteYouAgent = (props) => {
        <div className="_absolute-you-agend_">
            <BasicDetails />
            <PcForWorkersServants />
-           <CoefficientPage />
+           {workerServentsCompLoaded === true ? <CoefficientPage /> : null}
        </div>
      : <p>Loading...</p>}
     </>

@@ -36,7 +36,7 @@ const CooperationAgreementTabs = ({corporateAgreementId = 0, cooperTabs = [], se
               aria-controls="pills-pc"
               aria-selected="true"
               onClick={() => handleTabClick(Number(tab.id))}
-            > {selectedTabId === tab.id ? <FaRegCheckCircle className="d-inline mb-2"/> : <BsCircle className="d-inline mb-2" />}
+            > {!disabled ? <FaRegCheckCircle className="d-inline mb-2"/> : <BsCircle className="d-inline mb-2" />}
               <p className="mb-2">Step: {tab.id}</p>
               <p>{tab.name}</p>
             </button>

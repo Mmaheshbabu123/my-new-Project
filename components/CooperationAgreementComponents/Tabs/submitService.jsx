@@ -137,7 +137,6 @@ for(const key in tab_data) {
    break;
  }
 }
-console.log(tempSatatus);
 return tempSatatus;
 }
 
@@ -195,7 +194,6 @@ function validationsObjCheckStatus (validate_data) {
       break
     }
   }
-  console.log(tempSatatus);
   return tempSatatus;
 }
 
