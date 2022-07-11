@@ -16,9 +16,6 @@ var Title_key = 25;
 
   const handleChange = (event) => {
     const { value, name } = event.target;
-    console.log(value)
-    console.log(name)
-    console.log(personId);
     tab_3[personId][name] = value;
     //{...tab_3[personId],[name]:value};
     updateStateChanges({ tab_3 });

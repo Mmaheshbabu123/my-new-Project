@@ -27,7 +27,6 @@ const LegalAddress = (props) => {
     tab_2[name] = value;
 
     // if(legalState['validations'].hasOwnProperty(name) && value) {
-    //   console.log(value);
     //   validateFields(name,value);
     // }
     // else {
@@ -40,8 +39,6 @@ const LegalAddress = (props) => {
 
   const validateFields = (key,value) => {
      let type = legalState['validations'][key]['type'];
-     console.log(type)
-     console.log(emailValidate(value))
      const {validations} = legalState;
      if(type === 1 && numericValidate(value)) {
        tab_2[key] = value;
@@ -49,7 +46,6 @@ const LegalAddress = (props) => {
       updateStateChanges({ tab_2 });
     }
     // else if(type === 2 && emailValidate(value)) {
-    //   console.log('email')
     //   tab_2[key] = value;
     //   validations[key]['validate'] = false;
     //   updateStateChanges({ tab_2 });
@@ -93,7 +89,7 @@ const LegalAddress = (props) => {
    })
    return fieldsArray;
  }
- console.log(tab_2)
+
   return (
     <div className ="col-md-12 row">
       <div className = 'col-md-6'>

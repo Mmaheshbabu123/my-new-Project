@@ -45,8 +45,7 @@ const CompanyFieldData = (companyRow1) => {
 const handleChange = (event) => {
   const { value, name } = event.target;
   tab_2[name] = value;
-   
-   console.log(name);
+
   if(companyState['validations'].hasOwnProperty(name)) {
     validateFields(value);
   }
@@ -56,12 +55,10 @@ const handleChange = (event) => {
 }
 
 const validateFields = (text) => {
-  console.log('kkkk')
 }
 const handleVatChange = (event) => {
 
   const { value, name } = event.target;
-  console.log(value);
   tab_2[name] = value;
 document.getElementById(Vat_Number).value = value;
   setCompanyState({
@@ -83,7 +80,6 @@ const doCityFilter = event => {
       ...companyState,
       vat_number:value,
     })
-    console.log('====>', event)
 
   }, 500)
 }
@@ -95,7 +91,6 @@ const optimizedFn = (event) => {
     //  });
 
 }
-console.log(companyState)
 const handleSelect = (obj,key) => {
   tab_2[key]  = obj.value;
   updateStateChanges({ tab_2 });

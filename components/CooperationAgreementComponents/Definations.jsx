@@ -25,3 +25,11 @@ export const codeArray = [
   {value: 4, label: 'Code 4'}
 ];
 //-------
+
+export const soortOptions = [
+  {value: 0, label: 'Select'},
+  {value: 1, label: 'Hours'},
+  {value: 2, label: 'Day'},
+  {value: 3, label: 'Week'},
+];
+//-----

@@ -45,6 +45,9 @@ const PcForWorkersServants = () => {
       selectedEmpId: workersServantsCompState['selectedEmpId'] || compState['selectedEmpId'],
       newItems, editIndex, alreadyLinked
     }
+    updateStateChanges({alreadyLinked: alreadyLinked, workersServantsCompState: {...compState, ...obj},
+      workerServentsCompLoaded: true,
+    })
     setCompState({...compState, ...obj});
   }, [])
 
@@ -103,7 +106,7 @@ const PcForWorkersServants = () => {
     let emplOptions = pcLinkedEmployeeTypes[selectedPc] ? pcLinkedEmployeeTypes[selectedPc] : [];
     let pcOptions = helpers.returnNotAddedPcOptions(pcArray, state['workersServantsCompState']);
     return <div className={`${type === 1 ? 'col-md-9' : 'col-md-9 ' + styles['margin-auto-class']}`}>
-        <p className={styles['worker-servants-title']}> {type === 1 ? `PC for workers (arbeiders)` : `PC for servants (bedienden)`} </p>
+        <p className={styles['worker-servants-title']}> {type === 1 ? `Paritair comité for workers (arbeiders)` : `Paritair comité for servants (bedienden)`} </p>
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title={`Paritair comité (PC) ${type}`} customStyle={{display: 'inline-block'}} /> <span style={{color:'red'}}>*</span>
             <MultiSelectField
@@ -211,7 +214,8 @@ const PcForWorkersServants = () => {
       stateObj['editIndex'][workSerType] = stateObj['newItems'][workSerType].length;
     }
     stateObj['alreadyLinked'] = updateAlreadyLinkedPcIds(stateObj['newItems']);
-    updateStateChanges({ workersServantsCompState: stateObj })
+    dependecyDataStatus['worksServantsData'] = true;
+    updateStateChanges({ workersServantsCompState: stateObj, dependecyDataStatus })
     setCompState(stateObj);
   }
 
