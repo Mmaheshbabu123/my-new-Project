@@ -20,6 +20,8 @@ const AddFunction = () => {
 	const [functionid,setFunctionId]=useState();
 	//employee id,employee type id
 	const [emptypetoid,setEmptypeTOid]=useState();
+	const [fulllist,setFulllist]=useState();
+	const [listtype,setListtype]=useState();
 	const [ selectedOption, setSelectedOption ] = useState([]);
 
 	useEffect(
@@ -37,6 +39,7 @@ const AddFunction = () => {
 				.then((res) => {
 					console.log(res);
 					setEmptypes(res);
+					
 				})
 				.catch((error) => {
 					console.error(error);
@@ -47,6 +50,7 @@ const AddFunction = () => {
 			)
 				.then(async (respons) => {
 					setFunctions(respons);
+					getOptions(functions);
 				})
 				.catch((error) => {
 					console.error(error);
@@ -57,17 +61,21 @@ const AddFunction = () => {
 
 	const submit = (e) => {
 		e.preventDefault();
+		//return
+		var p_unique_key = router.query.p_unique_key;
 	            //functionid, salary,employeetypeid,employeeid
 		var data=[...functionid,...emptypetoid];
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/storeFunctionEmptypeSalary/'+ p_unique_key, 'POST',data)
+		console.log(data);
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/storeFunctionEmptypeSalary/'+p_unique_key,'POST',data)
 				.then((res) => {
-					console.log(res);
-					setEmptypes(res);
+					var rid=res.function_id;
+					if(rid!=null||rid!=undefined){
+						router.push('/planning/timings/' + router.query.p_unique_key);
+					}
 				})
 				.catch((error) => {
 					console.error(error);
 				});
-		//router.push('/planning/timings/' + router.query.p_unique_key);
 	};
 
 	// const EmpSalary=(id,key)=>{
@@ -79,10 +87,13 @@ const AddFunction = () => {
 	function addsalary(id,salary,level) {
 		if(level==1){
 			setFunctionId([id,salary]);
-		}else{
+			setSalaries(salary);
+		}else if(level==2){
 			setEmptypeTOid([id.value,salary]);
+		}else if(level==3){
+			setFunctionId([id.value,id.salary]);
+			setSalaries(id.salary);
 		}
-		setSalaries(salary);
 	}
     
 	function checkbox(){
@@ -98,12 +109,12 @@ const AddFunction = () => {
 	var func=<div className="row ms-5">
 	<ul>
 		{functions != null ? (
-			functions.map((key, value) => (
+			functions.slice(0, 3).map((key, value) => (
 				<div key={key['id']} className="row ms-5">
 					<div className="col-md-6">
 						<div
 							className="mt-2 mb-2 bg-light h-75 p-3"
-							onChange={()=>addsalary(key['id'],key['salary'],1)}
+							onChange={()=>addsalary(key['id'],Number(key['salary']),1)}
 						>
 							<input
 								type="radio"
@@ -115,13 +126,45 @@ const AddFunction = () => {
 						</div>
 					</div>
 				</div>
-			))
+			)
+			)	
 		) : (
 			''
-		)}
+		)
+		}
+
+		<Select
+				//value={selectedOption}
+				//isMulti
+				name="employefunctionsall"
+				options={fulllist}
+				onChange={setListtype}
+				onInputChange={()=>addsalary(listtype,3,3)}
+			/>
 	</ul>
 </div>;
+
+const getOptions = (res) => {
+	var options = [];
+	if (res !== null) {
+		res.map((value,key) => {
+			console.log(value);
+			var opt = {
+				value: '',
+				label: ''
+			};
+			opt.value = value.id;
+			opt.label = value.name;
+			opt.salary = value.salary;
+
+			options[key] = opt;
+		});
+	}
+	setFulllist(options);
+};
+console.log(listtype);
 var total='',individual='';
+//console.log(functions);
 if(ischecked){
   total=func;
 }else{individual=func;}
