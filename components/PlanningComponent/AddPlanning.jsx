@@ -76,7 +76,7 @@ function Planning(props) {
 		() => {
 			APICALL.service(
 				process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
-					'/manage-costcenter?_format=json&comp_id=' +
+					'manage-costcenter?_format=json&comp_id=' +
 					data.comp_id +
 					'&location_id=' +
 					data.location_id,
