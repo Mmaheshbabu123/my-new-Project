@@ -186,7 +186,7 @@ if(ischecked){
 				<div className="row ">
 					<ol type="1">
 						{Data.map((key, value) => (
-							<div>
+							<div key={value}>
 							<div key={key} className="row bg-light mb-2 p-3">
 								<div className="col-md-3 p-1">
 									{value + 1}. {key[1]}
