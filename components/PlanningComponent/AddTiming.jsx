@@ -20,6 +20,8 @@ function Addtiming(props) {
 	const [ checked, setChecked ] = useState(false);
 	const [ time, setTime ] = useState('');
 	const [ error_start_time, setError_start_time ] = useState('');
+	const [ error_end_time, setError_end_time ] = useState('');
+
 	const [ error_selected_date, setError_selected_date ] = useState('');
 
 	const [employee_planning,setEmployee_planning] = useState([]);
@@ -283,7 +285,7 @@ function Addtiming(props) {
 												format="hh:mm A"
 												onChange={(e) => setTime(e.format('LT'))}
 											/>
-											<p className="error mt-2">This field is required.</p>
+											<p className="error mt-2">{error_end_time}</p>
 										</div>
 										<div className="col-md-2 py-3">
 											<MdStarRate />
