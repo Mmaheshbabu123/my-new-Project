@@ -62,7 +62,7 @@ const TabIndex = (props) => {
   }
 
   const forWardToNextStepTab = async () => {
-    let proceed = submitService.proceedToNextStepTab({state, selectedTabId});
+    let proceed = submitService.proceedToNextStepTab({state, selectedTabId, updateStateChanges});
     if(proceed) {
       await saveDataTabWise(state, selectedTabId, saveCooperationDataTabWise).then((response) => {
         if(response.status === 200) {
