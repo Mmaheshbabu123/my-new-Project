@@ -2,17 +2,18 @@ import React, { useContext, useState } from 'react';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import { FaRegPlusSquare, FaRegMinusSquare } from 'react-icons/fa';
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
+import { TiDelete } from 'react-icons/ti';
 import InputField from '@/atoms/InputTextfield';
 import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import styles from '../SalaryBenefits.module.css';
-import { codeArray } from '../../../Definations';
+import { codeArray, soortOptions } from '../../../Definations';
 // import { helpers } from '../SalaryBenefitHelper';  //.
 
 
 const TAB_ID = 5;
 const stateKey = 'tab_5';
-const SalaryDetails = () => {
+const SalaryDetails = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   var { tab_5: {
     cooperationSalaryDetails,
@@ -40,13 +41,14 @@ const SalaryDetails = () => {
     setCompState({...compState, expand: expand})
   }
 
-  const showSalaryDetailsOfEachPc = (val) => {
+  const showSalaryDetailsOfEachPc = (val, index) => {
     const { expand } = compState;
     return(
       <div key = {val.pc_id} className={`${styles['expand-minimize-div']}`}>
-        <div onClick={() => expandMinimizeDiv(val.pc_id)}>
-          <span className={`${styles['expand-minimize-span']}`} > {expand[val.pc_id] === true ? <FaRegMinusSquare />: <FaRegPlusSquare />} </span>
-          <div className={`${styles['expand-minimize-box']}`}> <span> {val.pc_name} </span> </div>
+        <div>
+          <span onClick={() => expandMinimizeDiv(val.pc_id)} title={expand[val.pc_id] === true ? 'Close' : 'Open'} className={`${styles['expand-minimize-span']}`} > {expand[val.pc_id] === true ? <FaRegMinusSquare />: <FaRegPlusSquare />} </span>
+          <div  onClick={() => expandMinimizeDiv(val.pc_id)} className={`${styles['expand-minimize-box']}`}> <span> {val.pc_name} </span> </div>
+          <span onClick={() => props.onDelete(val.pc_id, index)} title={'Delete'} className={`${styles['expand-minimize-span']}`}> <TiDelete /> </span>
         </div>
         {expand[val.pc_id] === true ? <div className={`${styles['salay-content-div']}`}>
               {showSalaryContent(val.pc_id)}
@@ -65,7 +67,7 @@ const SalaryDetails = () => {
           return (
             <tr key = {salary.salary_id} height="75">
                 <td width="40%" className={`${styles['pc-linked-td']}`} style={{borderRight: '2px solid lightgray'}}>
-                  <span>{ salary.salary_name }</span>
+                  <span className="custom_astrick">{ salary.salary_name }</span>
                 </td>
                 <td width="60%" className={`${styles['pc-linked-td']}`}>
                   {showLinkedInputFields(pcId, salary)}
@@ -109,7 +111,7 @@ const SalaryDetails = () => {
             let resetObj = valueObj['checked'] !== 1 ? {code: 0, bedrag: '', percentage: '', soort_automatisering: ''} : {};
             return(
               <div key={'salary_' + fieldId} className={`${styles['salary-coeff-fields-premies']}`}>
-                <LabelField title={obj.name} customStyle={{margin:'10px 0'}}/>
+                <LabelField title={obj.name} mandotory={true} customStyle={{margin:'10px 0'}}/>
                 <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 1, 1, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
                 <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 0, 1, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
                 {showPremiseAutomatischTable(pcId, fieldId, obj.rows, valueObj)}
@@ -145,8 +147,8 @@ const SalaryDetails = () => {
   }
 
   const premiseAutomatischInputFields = (pcId, fieldId, label, valueObj) => {
-    if(label.label === 'Code') {
-      return showDropDown(pcId, fieldId, 'code', valueObj);
+    if(label.label === 'Code' || label.key === 'soort_automatisering') {
+      return showDropDown(pcId, fieldId, label.key, valueObj, label.key === 'soort_automatisering' ? soortOptions : codeArray);
     } else {
       return <InputField type = {'text'}
         className = {`${styles['salary-coeff-input-value']}`}
@@ -159,12 +161,12 @@ const SalaryDetails = () => {
     }
   }
 
-  const showDropDown = (pcId, fieldId, label, valueObj) => {
+  const showDropDown = (pcId, fieldId, label, valueObj, optionsArray) => {
     return(
       <div >
         <MultiSelectField
-            options={codeArray}
-            standards={codeArray.filter(val => val.value === valueObj[label])}
+            options={optionsArray}
+            standards={optionsArray.filter(val => val.value === valueObj[label])}
             handleChange={(e)=>handleChange(label, pcId, fieldId, e.value, 1)}
             isMulti={false}
             className={`${styles['salary-benefits-multiselect']}`}
@@ -191,7 +193,7 @@ const SalaryDetails = () => {
 
   return (
     <div className={''}>
-      {cooperationSalaryDetails.map(val => showSalaryDetailsOfEachPc(val))}
+      {cooperationSalaryDetails.map((val, index) => showSalaryDetailsOfEachPc(val, index))}
     </div>
   );
 }
