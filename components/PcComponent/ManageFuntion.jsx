@@ -32,9 +32,7 @@ const ManageFunction = () => {
 		[ updated ]
 	);
 
-	const deletefuncn = async ($id) => {
-		console.log($id);
-
+	const deletefuncn = async () => {
 		var url = process.env.REACT_APP_BACKEND_URL;
 		var data = {
 			id: funcnid

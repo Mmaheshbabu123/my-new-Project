@@ -16,14 +16,16 @@ function Popup(props) {
 					</div>
 
 					<div className="modal-body title">
-						<h4>Are you sure you want to delete this category?</h4>
+						<p className='my-1'>Are you sure you want to delete this category?</p> <p className='my-1'>Functions related to this category will also be deleted.</p>
 					</div>
 
 					<div className="modal-footer">
 						<button type="button" className="btn btn-danger" onClick={() => props.popupActionNo()}>
 							No
 						</button>
-						<button className="btn btn-danger m-2" onClick={() => props.popupActionYes()}>
+						<button className="btn btn-danger m-2" 
+						onClick={() => props.popupActionYes()}
+						>
 							Yes
 						</button>
 					</div>

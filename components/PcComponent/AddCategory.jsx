@@ -153,11 +153,20 @@ function AddCategory(props) {
 				: ValidationService.emptyValidationMethod(data.min_salary);
 
 		if (error['error_category_name'] == '') {
-			props.categorylist.forEach((element) => {
+			console.log(props.categorylist);
+			if(typeof props.categorylist == 'object'){
+			Object.keys(props.categorylist).map((element) => {
+				if (props.categorylist[element].type == '2' && props.categorylist[element].id != id && data.category_name.replaceAll(' ','').toLowerCase() == props.categorylist[element].category_name.replaceAll(' ','').toLowerCase()) {
+					error['error_category_name'] = 'Category name already exist.';
+				}
+			});
+		}else{
+			props.categorylist.map((element) => {
 				if (element.type == '2' && element.id != id && data.category_name.replaceAll(' ','').toLowerCase() == element.category_name.replaceAll(' ','').toLowerCase()) {
 					error['error_category_name'] = 'Category name already exist.';
 				}
 			});
+		}
 		}
 		setError_category_name(error['error_category_name']);
 		setError_min_salary(error['error_min_salary']);

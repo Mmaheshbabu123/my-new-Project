@@ -1,0 +1,29 @@
+[  {
+    "id": 1,
+    "fullName": "Steve Jobs",
+    "worktype": "Flex-worker",
+    "Productie": "productie",
+    "salary": "$9",
+    "time": "08 to 14.30",
+    "totalhours": "6h"
+
+  },
+  {
+    "id": 2,
+    "fullName": "Jessica warren",
+    "worktype": "Flex-worker",
+    "Productie": "productie",
+    "salary": "$9",
+    "time": "08 to 14.30",
+    "totalhours": "6h"
+  },
+  {
+    "id": 3,
+    "fullName": "Tony Frank",
+    "worktype": "Flex-worker",
+    "Productie": "productie",
+    "salary": "$9",
+    "time": "08 to 14.30",
+    "totalhours": "6h"
+  }
+]

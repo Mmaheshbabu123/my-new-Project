@@ -147,7 +147,7 @@ const SalaryBenifits = () => {
 	return (
 		<div className="container">
 			<form onSubmit={submit}>
-			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit salary benifits</h4> : (pc_view_type == 'viewpc' ? <h4 className="h5 mt-3">Salary benifits</h4> : '')}
+			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit salary benefits</h4> : (pc_view_type == 'viewpc' ? <h4 className="h5 mt-3">Salary benefits</h4> : '')}
 				<div className="row">
 					{data.map((val, key) => (
 						<div key={key} className={`form-check mt-4 bg-light me-3 ${sec_width}`}>

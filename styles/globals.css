@@ -183,3 +183,16 @@ a {
 	outline: 0;
 	box-shadow: 0 0 0 .25rem rgba(13,110,253,.25)
 }
+.rmdp-wrapper {
+	width: 100% !important;
+	background-color: #ececee !important;
+}
+.rmdp-calendar {
+	width: 100% !important;
+}
+.rmdp-day-picker div {
+	width: 100% !important;
+}
+.rmdp-day span {
+	border-radius: 0% !important;
+}

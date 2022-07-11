@@ -145,6 +145,24 @@ function AddFunction(props) {
 				: 'This field is required.';
 
 		if (error['error_function_name'] == '') {
+			if(typeof props.categorylist == 'object'){
+				Object.keys(props.categorylist).map((element) => {
+				if (props.categorylist[element].type == '3' && props.categorylist[element].id != id && props.categorylist[element].function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
+					error['error_function_name'] = 'Function name already exist.';
+				}
+				if(props.categorylist[element].type == '2'){
+					console.log(props.categorylist[element].childObj)
+					if(props.categorylist[element].childObj != undefined){
+						Object.keys(props.categorylist[element].childObj).map((val)=>{
+						if (props.categorylist[element].childObj[val].type == '3' && props.categorylist[element].childObj[val].id != id && props.categorylist[element].childObj[val].function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
+							error['error_function_name'] = 'Function name already exist.';
+						}
+
+					})
+					}
+				}
+			});
+		}else{
 			props.categorylist.forEach((val1, key) => {
 				if (val1.type == '3' && val1.id != id && val1.function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
 					error['error_function_name'] = 'Function name already exist.';
@@ -163,12 +181,23 @@ function AddFunction(props) {
 				}
 			});
 		}
+		}
 		if (
 			error['error_min_salary'] == '' &&
 			data.min_salary != '' &&
 			data.min_salary != null &&
 			data.category_id != ''
 		) {
+			if(typeof props.categorylist == 'object'){
+				Object.keys(props.categorylist).map((element) => {
+					if (props.categorylist[element].type == '2' && props.categorylist[element].id == data.category_id) {
+						error['error_min_salary'] =
+							parseFloat(data.min_salary.replace(',', '.')) < parseFloat(props.categorylist[element].min_salary.replace(',', '.'))
+								? 'Minimum salary cannot be lesser that ' + props.categorylist[element].min_salary + ' €'
+								: '';
+					}
+				});
+			}else
 			props.categorylist.forEach((val, key) => {
 				if (val.type == '2' && val.id == data.category_id) {
 					error['error_min_salary'] =
@@ -211,12 +240,20 @@ function AddFunction(props) {
 								className="form-select my-2 form-control"
 								value={data.category_id}
 								onChange={(e) => {
-									console.log(props.categorylist)
-									console.log(typeof e.target.value)
 									if(e.target.value != ''){
-									let obj = props.categorylist.find(o => o.id == parseInt(e.target.value))
-									console.log(obj)
-									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: obj['min_salary'] }));
+										let sal = '';
+										if(typeof props.categorylist == 'object'){
+
+											Object.keys(props.categorylist).map((element) => {
+												sal = props.categorylist[element].min_salary;
+											});
+											
+										}else{
+											let obj = props.categorylist.find(o => o.id == parseInt(e.target.value))
+											sal = obj['min_salary'];
+
+										}
+									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: sal }));
 								}else{
 									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: ''}));
 								}
