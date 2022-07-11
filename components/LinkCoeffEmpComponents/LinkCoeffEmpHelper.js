@@ -89,5 +89,5 @@ function scrollContent(forward = 1) {
 
 function takeSelectedIds(alreadyLinked, stateObj) {
   if(!stateObj) return alreadyLinked;
-  return [...alreadyLinked, ...Object.values(stateObj['selectedPc'])]
+  return [false, ...alreadyLinked, ...Object.values(stateObj['selectedPc'])]
 }
