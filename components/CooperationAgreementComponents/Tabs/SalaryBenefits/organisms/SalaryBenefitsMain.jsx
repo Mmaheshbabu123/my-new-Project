@@ -23,8 +23,8 @@ const SalaryBenefitsMain = (props) => {
     if(apiData) {
       let { cooperationSalaryDetails = [], cooperationSalaryLinked = {}, cooperationBenefits = {} } = apiData;
       tab_5['cooperationSalaryDetails'] = response.pc_array.filter(val => cooperationSalaryDetails.includes(val.value));
-      tab_5['cooperationSalaryLinked']  = cooperationSalaryLinked;
-      tab_5['cooperationBenefits']      = cooperationBenefits;
+      tab_5['cooperationSalaryLinked']  = cooperationSalaryLinked || {};
+      tab_5['cooperationBenefits']      = cooperationBenefits || {};
     }
     data[stateKey] = tab_5;
     data['loadedTabs'] = [...state.loadedTabs, selectedTabId];

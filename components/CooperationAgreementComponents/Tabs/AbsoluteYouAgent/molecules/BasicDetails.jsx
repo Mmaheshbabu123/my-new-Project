@@ -103,7 +103,7 @@ const BasicDetails = (props) => {
               tick={tab_1[activateAddProject]}
               disabled={false}
               onCheck={(obj) => handleChange(obj, 1)}
-              name={`Activate "Add project" for the employer in the planning`}
+              name={`Activate "Add project" for the employer in the planning.`}
               className="col-md-6"
             />
       </div>

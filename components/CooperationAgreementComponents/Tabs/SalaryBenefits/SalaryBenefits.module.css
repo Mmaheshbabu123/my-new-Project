@@ -1,5 +1,5 @@
 .salary-benefits-tab-parent {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .expand-minimize-box {
-  width: 96%;
+  width: 92%;
 	border: 1px solid lightgray;
 	height: 40px;
 }
@@ -55,7 +55,7 @@
 }
 
 .salay-content-div {
-  width: 96%;
+  width: 92%;
   margin-left: 4%;
   border: 1px solid lightgray;
 }

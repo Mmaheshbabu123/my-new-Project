@@ -57,7 +57,6 @@ const validateFields = (text) => {
 const handleVatChange = (event) => {
 
   const { value, name } = event.target;
-  console.log(value);
   tab_2[name] = value;
 document.getElementById(Vat_Number).value = value;
   setCompanyState({
@@ -96,7 +95,6 @@ const optimizedFn = (event) => {
     //  });
 
 }
-console.log(companyState)
 const handleSelect = (obj,key) => {
   tab_2[key]  = obj.value;
   updateStateChanges({ tab_2 });
