@@ -24,7 +24,7 @@ function Addtiming(props) {
 
 	const [ error_selected_date, setError_selected_date ] = useState('');
 
-	const [employee_planning,setEmployee_planning] = useState([]);
+	const [ employee_planning, setEmployee_planning ] = useState([]);
 	const [ employees, setEmployees ] = useState([
 		{
 			id: 1,
@@ -54,10 +54,10 @@ function Addtiming(props) {
 
 	useEffect(
 		() => {
-			if(props.p_unique_key != undefined){
+			if (props.p_unique_key != undefined) {
 				APICALL.service(fetchPlannedTimings + props.p_unique_key, 'GET')
 					.then((result) => {
-						if(result.status == 200){
+						if (result.status == 200) {
 							setEmployee_planning(result.data);
 						}
 						console.log(result);
@@ -65,9 +65,9 @@ function Addtiming(props) {
 					.catch((error) => {
 						console.error(error);
 					});
-				}
+			}
 		},
-		[props]
+		[ props ]
 	);
 	/**
 	 * Method to open and close collapsible section when user click on '+' or '-' icon
@@ -89,7 +89,7 @@ function Addtiming(props) {
 	 */
 	let handleChange = (value) => {
 		var dateobj = {
-			data: '',
+			date: '',
 			starttime: '',
 			endtime: ''
 		};
@@ -99,57 +99,52 @@ function Addtiming(props) {
 			selected.push(val.format());
 		});
 		setSelectedDate(selected);
-
 	};
 
-	let handleChange2 = (value,key) => {
-		var res = [...employee_planning];
-		if(res[key].timings.length > 0){
-		res[key].error_selected_date = '';
-		res[key].timings.map((obj,ky) => {
-			console.log(obj);
-		});
-	}else{
-		// var dateobj = {
-		// 			data: data,
-		// 			starttime: '',
-		// 			endtime: ''
-		// 		};
-		res[key].error_selected_date = '';
-			res[key].timings.push({
-			data: value[0].format(),
-			starttime: '',
-			endtime: '',
-			error_starttime: '',
-			error_endtime: '',
+	let handleChange2 = (value, key) => {
+		var res = [ ...employee_planning ];
+		if (res[key].timings.length > 0) {
+			res[key].error_selected_date = '';
+			value.map((obj, ky) => {
+				const isFound = res[key].timings.some((element) => {
+					if (element.date === obj.format()) {
+						return true;
+					}
 
-		});
-		alert("test")
-		console.log(res)
-	}
+					return false;
+				});
+				if (!isFound) {
+					res[key].timings.push({
+						date: obj.format(),
+						starttime: '',
+						endtime: '',
+						error_starttime: '',
+						error_endtime: ''
+					});
+				} else {
+					res[key].timings[ky].starttime = '';
+				}
+			});
+		} else {
+			res[key].error_selected_date = '';
+			res[key].timings.push({
+				date: value[0].format(),
+				starttime: '',
+				endtime: '',
+				error_starttime: '',
+				error_endtime: ''
+			});
+		}
 
 		setEmployee_planning(res);
-	// 	var timings = [];
-	// 	alert(key);
-	// 	
-	// 	console.log(employee_planning[key]);
-	// 	if(employee_planning[key].timings.length == 0){
-	// 		timings.push(dateobj)
-	// 	}else{
-	// 	employee_planning[key].timings.map((k,val)=>{
-	// 		alert(k)
-	// 	})
-	// }
-	// console.log()
-
 	};
 
-	let postdata = (data1) => {
-		APICALL.service(storePlannedTimings, 'POST', data1)
+	let postdata = () => {
+		APICALL.service(storePlannedTimings, 'POST', employee_planning)
 			.then((result) => {
 				console.log(result);
 				if (result.status === 200) {
-
+					router.push('/planning/finalize/'+props.p_unique_key)
 				}
 			})
 			.catch((error) => {
@@ -164,7 +159,7 @@ function Addtiming(props) {
 	let submitPlanningTimings = (e) => {
 		e.preventDefault();
 		var error = validateTimings();
-		if(error == 0){
+		if (error == 0) {
 			postdata();
 		}
 	};
@@ -175,35 +170,50 @@ function Addtiming(props) {
 			if (selectedDate.length == 0) {
 				count++;
 				setError_selected_date('Select atleast one date.');
-			}else{
+			} else {
 				console.log(selectedDate);
 			}
-		}else{
-			var res = [...employee_planning];
-				res.map((obj,ky) => {
-					if (res[ky].timings.length == 0) {
-						count++;
-						res[ky].error_selected_date = "Select atleast one date.";
-						res[ky].collapseOpen = true;
-
-					}else{
-					res[ky].timings.map((o1,k1)=>{
-						if(o1.starttime ==''){
+		} else {
+			var res = [ ...employee_planning ];
+			res.map((obj, ky) => {
+				if (res[ky].timings.length == 0) {
+					count++;
+					res[ky].error_selected_date = 'Select atleast one date.';
+					res[ky].collapseOpen = true;
+				} else {
+					res[ky].timings.map((o1, k1) => {
+						if (o1.starttime == '') {
 							count++;
-							res[ky].timings[k1].error_starttime = "This field is required.";
-
+							res[ky].timings[k1].error_starttime = 'This field is required.';
 						}
-						if(o1.endtime ==''){
+						if (o1.endtime == '') {
 							count++;
-							res[ky].timings[k1].error_endtime = "This field is required.";
-
+							res[ky].timings[k1].error_endtime = 'This field is required.';
 						}
-					})
+					});
 				}
-				})
-				setEmployee_planning(res);
+			});
+			setEmployee_planning(res);
 		}
 		return count;
+	};
+
+	let updatetime = (type, index, e, key) => {
+		var res = [ ...employee_planning ];
+		console.log(res[key]);
+
+		if (e != null && res[key].timings.length > 0) {
+			if (type == 'starttime') {
+				res[key].timings[index].error_starttime = '';
+				res[key].timings[index].starttime = e.format('LT');
+				setEmployee_planning(res);
+			} else {
+				res[key].timings[index].error_endtime = '';
+				res[key].timings[index].endtime = e.format('LT');
+				setEmployee_planning(res);
+			}
+		}
+		console.log(employee_planning);
 	};
 
 	return (
@@ -271,12 +281,12 @@ function Addtiming(props) {
 												showSecond={false}
 												focusOnOpen={true}
 												format="hh:mm A"
-												onChange={(e) => setTime(e.format('LT'))}
+												onChange={(e) => updatetime('starttime', index, e, '')}
 											/>
 											<p className="error mt-2">{error_start_time}</p>
 										</div>
 										<div className="col-md-2 py-3">
-											<div className="pb-2">End time</div>
+											<div className="pb-2 custom_astrick">End time</div>
 											<TimePicker
 												placeholder="Select Time"
 												use12Hours
@@ -298,7 +308,7 @@ function Addtiming(props) {
 						<div>
 							<div className=" mt-3">
 								<div className="">
-									{employee_planning.map((result,key) => (
+									{employee_planning.map((result, key) => (
 										<div key={result.id}>
 											<div
 												className={`row d-flex justify-content-start py-3 my-3 ${style.sec_background}`}
@@ -324,41 +334,43 @@ function Addtiming(props) {
 																multiple={true}
 																format="YYYY/MM/DD"
 																onChange={(date) => {
-																	handleChange2(date,key);
+																	handleChange2(date, key);
 																}}
 																minDate={new Date()}
 															/>
 															<p className="error mt-2">{result.error_selected_date}</p>
 														</div>
 													</div>
-													{result.timings.map((value, index) => (
+													{result.timings.length>0 && result.timings.map((value, index) => (
 														<div className="row" key={index}>
 															<div className="col-md-1" />
 															<div className="col-md-3 py-3">
 																<div className="pb-2" />
-																{value.data}
+																{value.date}
 															</div>
 															<div className="col-md-2 py-3">
-																<div className="pb-2">Start time</div>
+																<div className="pb-2 custom_astrick">Start time</div>
 																<TimePicker
 																	placeholder="Select Time"
-																	use12Hours
+																	use12Hours={false}
 																	showSecond={false}
 																	focusOnOpen={true}
 																	format="hh:mm A"
-																	onChange={(e) => setTime(e.format('LT'))}
+																	onChange={(e) =>
+																		updatetime('starttime', index, e, key)}
 																/>
 																<p className="error mt-2">{value.error_starttime}</p>
 															</div>
 															<div className="col-md-2 py-3">
-																<div className="pb-2">End time</div>
+																<div className="pb-2 custom_astrick">End time</div>
 																<TimePicker
 																	placeholder="Select Time"
-																	use12Hours
+																	use12Hours={false}
 																	showSecond={false}
 																	focusOnOpen={true}
 																	format="hh:mm A"
-																	onChange={(e) => setTime(e.format('LT'))}
+																	onChange={(e) =>
+																		updatetime('endtime', index, e, key)}
 																/>
 																<p className="error mt-2">{value.error_endtime}</p>
 															</div>

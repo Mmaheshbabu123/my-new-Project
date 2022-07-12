@@ -65,13 +65,16 @@ export const employeetyplanning = BASE_URL + "addemployeetoplanning";
 export const addplanningemployee = BASE_URL + "addplanningemployee";
 export const planningoverview = BASE_URL + "planningdetails-by-uniquekey/";
 export const fetchPlannedTimings = BASE_URL + "fetch-planned-timings/"
+export const storePlannedTimings = BASE_URL + "store-planned-timings"
+
+
 
 
 //--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details/";
 
 //--------------Manage Planning-----------------------------------//
-export const getweekly_planning = BASE_URL + "getweekly_planning/";
+export const getWeeklyPlanning = BASE_URL + "get-weekly-planning/";
 
 
 

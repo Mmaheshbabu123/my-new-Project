@@ -93,7 +93,7 @@ const TabIndex = (props) => {
 
 	return (
 		<div className="">
-      {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields (fields with asterisk mark) </p> : null}
+      {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields. </p> : null}
       {showComponentBasedOnTabSelection()}
       <div className={`col-md-12 row`} >
           <div className={`col-md-11 ${styles['tab-index-back-div']}`}>
