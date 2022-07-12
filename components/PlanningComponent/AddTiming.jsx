@@ -121,6 +121,8 @@ function Addtiming(props) {
 						error_starttime: '',
 						error_endtime: ''
 					});
+				} else {
+					res[key].timings[ky].starttime = '';
 				}
 			});
 		} else {
@@ -135,25 +137,14 @@ function Addtiming(props) {
 		}
 
 		setEmployee_planning(res);
-		// 	var timings = [];
-		// 	alert(key);
-		//
-		// 	console.log(employee_planning[key]);
-		// 	if(employee_planning[key].timings.length == 0){
-		// 		timings.push(dateobj)
-		// 	}else{
-		// 	employee_planning[key].timings.map((k,val)=>{
-		// 		alert(k)
-		// 	})
-		// }
-		// console.log()
 	};
 
-	let postdata = (data1) => {
-		APICALL.service(storePlannedTimings, 'POST', data1)
+	let postdata = () => {
+		APICALL.service(storePlannedTimings, 'POST', employee_planning)
 			.then((result) => {
 				console.log(result);
 				if (result.status === 200) {
+					router.push('/planning/finalize/'+props.p_unique_key)
 				}
 			})
 			.catch((error) => {
@@ -205,6 +196,24 @@ function Addtiming(props) {
 			setEmployee_planning(res);
 		}
 		return count;
+	};
+
+	let updatetime = (type, index, e, key) => {
+		var res = [ ...employee_planning ];
+		console.log(res[key]);
+
+		if (e != null && res[key].timings.length > 0) {
+			if (type == 'starttime') {
+				res[key].timings[index].error_starttime = '';
+				res[key].timings[index].starttime = e.format('LT');
+				setEmployee_planning(res);
+			} else {
+				res[key].timings[index].error_endtime = '';
+				res[key].timings[index].endtime = e.format('LT');
+				setEmployee_planning(res);
+			}
+		}
+		console.log(employee_planning);
 	};
 
 	return (
@@ -272,7 +281,7 @@ function Addtiming(props) {
 												showSecond={false}
 												focusOnOpen={true}
 												format="hh:mm A"
-												onChange={(e) => setTime(e.format('LT'))}
+												onChange={(e) => updatetime('starttime', index, e, '')}
 											/>
 											<p className="error mt-2">{error_start_time}</p>
 										</div>
@@ -332,7 +341,7 @@ function Addtiming(props) {
 															<p className="error mt-2">{result.error_selected_date}</p>
 														</div>
 													</div>
-													{result.timings.map((value, index) => (
+													{result.timings.length>0 && result.timings.map((value, index) => (
 														<div className="row" key={index}>
 															<div className="col-md-1" />
 															<div className="col-md-3 py-3">
@@ -343,11 +352,12 @@ function Addtiming(props) {
 																<div className="pb-2 custom_astrick">Start time</div>
 																<TimePicker
 																	placeholder="Select Time"
-																	use12Hours
+																	use12Hours={false}
 																	showSecond={false}
 																	focusOnOpen={true}
 																	format="hh:mm A"
-																	onChange={(e) => setTime(e.format('LT'),index)}
+																	onChange={(e) =>
+																		updatetime('starttime', index, e, key)}
 																/>
 																<p className="error mt-2">{value.error_starttime}</p>
 															</div>
@@ -355,11 +365,12 @@ function Addtiming(props) {
 																<div className="pb-2 custom_astrick">End time</div>
 																<TimePicker
 																	placeholder="Select Time"
-																	use12Hours
+																	use12Hours={false}
 																	showSecond={false}
 																	focusOnOpen={true}
 																	format="hh:mm A"
-																	onChange={(e) => setTime(e.format('LT'))}
+																	onChange={(e) =>
+																		updatetime('endtime', index, e, key)}
 																/>
 																<p className="error mt-2">{value.error_endtime}</p>
 															</div>

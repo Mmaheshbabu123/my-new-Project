@@ -74,7 +74,7 @@ export const storePlannedTimings = BASE_URL + "store-planned-timings"
 export const fetchPlanning = BASE_URL + "fetch-planning-details/";
 
 //--------------Manage Planning-----------------------------------//
-export const getweekly_planning = BASE_URL + "getweekly_planning/";
+export const getWeeklyPlanning = BASE_URL + "get-weekly-planning/";
 
 
 
