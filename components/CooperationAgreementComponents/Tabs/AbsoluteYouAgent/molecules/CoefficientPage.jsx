@@ -20,7 +20,6 @@ const CoefficientPage = (props) => {
     , valueTypeArray: []
     , pclinkingValueobj: {}
     , selectedPc: null
-    , pcArray: []
     , pcWarning: false
     , lowHighValidation: []
     , inputRef: useRef({})
@@ -41,6 +40,10 @@ const CoefficientPage = (props) => {
 
   const { scrollLeft, scrollRight, tableWidth } = compState;
   const onSelect = async ({ value }) => {
+    if(!value) {
+      setCompState({...compState, selectedPc: value});
+      return;
+    }
     await APICALL.service(`${getPcLinkedCoeffData}/${value}`, 'GET').then(response => {
       if (response.status === 200) {
         let data = assignDataToStateVariables(value, response.data);
@@ -76,10 +79,11 @@ const CoefficientPage = (props) => {
 
   const addPCSelectDropDown = () => {
     let selectedIds = helpers.takeSelectedIds(alreadyLinked, state['workersServantsCompState']);
+    let pcoptions = [{value: false, label: '--- Select ---'}, ...pcArray];
     return (
       <MultiSelectField
-        options={pcArray.filter(val => selectedIds.includes(val.value))}
-        standards={pcArray.filter(val => val.value === compState.selectedPc)}
+        options={pcoptions.filter(val => selectedIds.includes(val.value))}
+        standards={pcoptions.filter(val => val.value === compState.selectedPc)}
         handleChange={onSelect}
         isMulti={false}
         className="pc-single-select"

@@ -122,13 +122,15 @@ const PcForWorkersServants = () => {
     let selectedPc = compState['selectedPc'][type];
     let emplOptions = pcLinkedEmployeeTypes[selectedPc] ? pcLinkedEmployeeTypes[selectedPc] : [];
     let pcOptions = helpers.returnNotAddedPcOptions(pcArray, state['workersServantsCompState']);
+    let allPCs = [{value: false, label: '--- Select ---'}, ...pcArray];
+    pcOptions = [{value: false, label: '--- Select ---'}, ...pcOptions];
     return <div className={`${type === 1 ? 'col-md-9' : 'col-md-9 ' + styles['margin-auto-class']}`}>
         <p className={styles['worker-servants-title']}> {type === 1 ? `Paritair comité for workers (arbeiders)` : `Paritair comité for servants (bedienden)`} </p>
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title={`Paritair comité (PC) ${type}`} customStyle={{display: 'inline-block'}} /> <span style={{color:'red'}}>*</span>
             <MultiSelectField
-                options={pcOptions.filter(val => !alreadyLinked.includes(val.value))}
-                standards={pcArray.filter(val => val.value === compState['selectedPc'][type])}
+                options={pcOptions.filter(val => val.value === false || !alreadyLinked.includes(val.value))}
+                standards={allPCs.filter(val => val.value === compState['selectedPc'][type])}
                 disabled={false}
                 handleChange={(obj) => onSelect(obj, type)}
                 isMulti={false}
