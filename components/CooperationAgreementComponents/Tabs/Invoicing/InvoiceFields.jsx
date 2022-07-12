@@ -28,8 +28,8 @@ export const invoiceRow2 = [
  {'id':73,'key_name':'Payment via domiciliering','type':6 ,option1:'Yes',option2:'No'},
  {'id':74,'key_name':'Digital invoicing','type':6 ,option1:'Yes',option2:'No'},
  {'id':75,'key_name':'Payment condition (standaard betaalconditiie)','type':8,options:[
-   {value: 1, label: 'PhonePay'},
-   {value: 2, label: 'GooglePay'},
+   {value: '1', label: 'PhonePay'},
+   {value: '2', label: 'GooglePay'},
  ]},
  {'id':76,'key_name':'Separate invoice per location','type':6 ,option1:'Yes',option2:'No'},
  {'id':77,'key_name':'Subtotals per cost center','type':6 ,option1:'Yes',option2:'No'},

@@ -11,20 +11,22 @@ import styles from '../Invoicing.module.css';
 import { requiredFields} from '../../../RequiredFields';
 const InvoiceDetails = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
-  var { tab_6 } = state;
-
+  var { tab_6 ,element_status} = state;
   const handleChange = (event) => {
     const { value, name } = event.target;
     tab_6[name] = value;
-    updateStateChanges({ tab_6 });
+    element_status['tab_6'].push(name);
+    updateStateChanges({ tab_6,element_status });
   }
   const handleRadioSelect = (id,type) => {
    tab_6[id] = type;
-   updateStateChanges({tab_6});
+   element_status['tab_6'].push(id);
+   updateStateChanges({tab_6,element_status});
   }
   const handleSelect = (obj,key) => {
     tab_6[key]  = obj.value;
-    updateStateChanges({ tab_6 });
+    element_status['tab_6'].push(key);
+    updateStateChanges({ tab_6 ,element_status});
   }
 
   const ConstructHtmlData = (ContactInvoiceRow) => {

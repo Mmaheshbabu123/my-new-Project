@@ -43,6 +43,8 @@ const CooperationAgreementStates = (props) => {
     , filledTabs: [1]
     , root_parent_id: 0
     , tab_2_action : 1
+    , tab_4_action : 1
+    , tab_6_action : 1
     , element_status: takeElementStatus()
     , dependecyDataStatus: takeElementStatus(2)
   };
