@@ -266,7 +266,12 @@ function Planning(props) {
 			</form>
 			{show == true && (
 				<div className="">
-					<Addproject display={'block'} popupActionNo={closePopup} popupActionYes={showPopup} />
+					<Addproject
+						display={'block'}
+						company={company}
+						popupActionNo={closePopup}
+						popupActionYes={showPopup}
+					/>
 				</div>
 			)}
 		</div>
