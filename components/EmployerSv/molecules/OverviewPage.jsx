@@ -163,8 +163,8 @@ const OverviewPage = (props) => {
         </div>
         )
         :
-      <pre> We notice that you do not have any cooperation agreement for your company/companies,
-                please click on "Request agreement" button to request for an agreement </pre>}
+      <pre> {`We notice that you do not have any cooperation agreement for your company/companies,
+                please click on "Request agreement" button to request for an agreement`} </pre>}
 
      </div>
   );
