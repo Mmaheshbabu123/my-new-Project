@@ -122,3 +122,8 @@ export const fetchSalaryBenefitsPerPc = BASE_URL + "get-salary-benefits-per-pc";
 export const saveCooperationDataTabWise = BASE_URL + "save-cooperationdata-tab-wise";
 export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agreements";
 //------------------- @
+//-------------------
+//--------EMPLOYER COOPERATION AGREEMENTS------------//
+export const fetchCompaniesBasedOnEmployer = BASE_URL + "get-employeer-agreements-data";
+export const saveRequestedCompanies = BASE_URL + "save-requested-companies";
+export const fetchRequestOverview = BASE_URL + "get-all-agreement-requests";
