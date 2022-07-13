@@ -126,3 +126,4 @@ export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agree
 //--------EMPLOYER COOPERATION AGREEMENTS------------//
 export const fetchCompaniesBasedOnEmployer = BASE_URL + "get-employeer-agreements-data";
 export const saveRequestedCompanies = BASE_URL + "save-requested-companies";
+export const fetchRequestOverview = BASE_URL + "get-all-agreement-requests";
