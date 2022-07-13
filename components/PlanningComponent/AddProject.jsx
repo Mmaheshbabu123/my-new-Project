@@ -1,12 +1,18 @@
 import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { addProject } from '../../Services/ApiEndPoints';
+import { addProject, fetchproject } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import ValidationService from '../../Services/ValidationService';
+import { useRouter } from 'next/router';
 
 // import './addproject.css';
 function Addproject(props) {
-	//FOR ASSIGNING COMPANY LOCATION VALUES
+	const router = useRouter();
+	const { p_unique_key } = router.query;
+	// console.log(p_unique_key);
+	/**
+	 * FOR ASSIGNING COMPANY LOCATION VALUES
+	 */
 	const [ company, setCompany ] = useState([]);
 
 	const [ error_project_name, setError_project_name ] = useState('');
@@ -20,6 +26,7 @@ function Addproject(props) {
 	const [ error_country, setError_country ] = useState('');
 
 	const [ data, setData ] = useState({
+		id: '',
 		project_name: '',
 		project_location: '',
 		hno: '',
@@ -28,68 +35,117 @@ function Addproject(props) {
 		comp_id: '',
 		street: '',
 		postal_code: '',
-		country: ''
+		country: '',
+		address_id: ''
 	});
 
-	// FETCHING COMPANY FROM DRUPAL //
-	useEffect(() => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
-			.then((result) => {
-				if (result.length > 0) {
-					setCompany(result);
-				} else {
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, []);
+	/**
+	 * FETCHING COMPANY FROM DRUPAL
+	 */
+	// useEffect(() => {
+	// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
+	// 		.then((result) => {
+	// 			if (result.length > 0) {
+	// 				setCompany(result);
+	// 			} else {
+	// 			}
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error(error);
+	// 		});
+	// }, []);
 
+	/**
+	 * FETCHING PROJECT
+	 */
+	useEffect(
+		() => {
+			APICALL.service(fetchproject + p_unique_key, 'GET')
+				.then((result) => {
+					console.log(result.data);
+					if (result.data) {
+						// var res = data;
+						// res.project_name = result.data.project_name;
+						setData(result.data);
+						// alert('test');
+					}
+					console.log(data);
+					// console.log(data.country);
+					// if (result.status === 200) {
+					// 	console.log(result.data.project_name);
+					// 	setData(result.data);
+					// 	// setTemp(result.paritairecomitee);
+					// }
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+		[ p_unique_key ]
+	);
+
+	/**
+	 * 
+	 * @param {*} event 
+	 * Submit function
+	 */
 	let submit = async (event) => {
 		event.preventDefault();
-
-		console.log(data);
-		// APICALL.service(addProject, 'POST', data).then((result) => {
-		// 	console.log(result);
-		// });
 		var valid_res = validate(data);
 		if (valid_res) {
+			console.log(data);
+			APICALL.service(addProject, 'POST', data)
+				.then((result) => {
+					console.log(result);
+					props.popupActionNo();
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 		}
 	};
 	let validate = (res) => {
 		var error1 = [];
-		//check if required fields are empty
+		/**
+		 * check if required fields are empty
+		 */
 		error1['project_name'] = ValidationService.emptyValidationMethod(res.project_name);
 		error1['project_location'] = ValidationService.emptyValidationMethod(res.project_location);
 		error1['hno'] = ValidationService.emptyValidationMethod(res.hno);
 		error1['city'] = ValidationService.emptyValidationMethod(res.city);
-		// error1['extra'] = ValidationService.emptyValidationMethod(res.extra);
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['street'] = ValidationService.emptyValidationMethod(res.street);
 		error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
 		error1['country'] = ValidationService.emptyValidationMethod(res.country);
 
-		//check if project name is valid
+		/**
+		 * check if project name is valid
+		 */
 		error1['project_name'] =
 			error1['project_name'] == ''
 				? ValidationService.projectNameValidationMethod(res.project_name)
 				: error1['project_name'];
-		//check if project location is valid (varchar?)
+		/**
+		 * check if project location is valid 
+		 */
 		error1['project_location'] =
 			error1['project_location'] == ''
 				? ValidationService.projectNameValidationMethod(res.project_location)
 				: error1['project_location'];
-		//check if hno is valid
+		/**
+		 * check if hno is valid
+		 */
 		error1['hno'] = error1['hno'] == '' ? ValidationService.projectNameValidationMethod(res.hno) : error1['hno'];
 
-		//check if city is valid
+		/**
+		 * check if city is valid
+		 */
 		error1['city'] =
 			error1['city'] == '' ? ValidationService.projectNameValidationMethod(res.city) : error1['city'];
+		/**
+		 * check if street field is valid
+		 */
 
-		//check if extra field is valid
-		// error1['extra'] = error1['extra'] == '' ? ValidationService.nameValidationMethod(res.extra) : error1['extra'];
-
-		// check if street field is valid
 		error1['street'] =
 			error1['street'] == '' ? ValidationService.projectNameValidationMethod(res.street) : error1['street'];
 
@@ -101,7 +157,9 @@ function Addproject(props) {
 				? ValidationService.postalCodeValidationMethod(res.postal_code)
 				: error1['postal_code'];
 
-		//seterror messages
+		/**
+		 * seterror messages
+		 */
 		setError_project_name(error1['project_name']);
 		setError_project_location(error1['project_location']);
 		setError_hno(error1['hno']);
@@ -111,6 +169,27 @@ function Addproject(props) {
 		setError_street(error1['street']);
 		setError_postal_code(error1['postal_code']);
 		setError_country(error1['country']);
+
+		// alert(error1);
+
+		//return false if there is an error else return true
+		if (
+			error1['project_name'] == '' &&
+			error1['project_location'] == '' &&
+			error1['hno'] == '' &&
+			error1['city'] == '' &&
+			error1['comp_id'] == '' &&
+			error1['street'] == '' &&
+			error1['postal_code'] == '' &&
+			error1['country'] == ''
+		) {
+			// alert('true');
+			return true;
+		} else {
+			// alert('false');
+
+			return false;
+		}
 	};
 
 	const companyname = [
@@ -161,6 +240,7 @@ function Addproject(props) {
 											<input
 												type="text"
 												className="form-control mt-2 mb-2 "
+												value={data.project_name}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, project_name: e.target.value }));
 												}}
@@ -173,6 +253,7 @@ function Addproject(props) {
 											<input
 												type="text"
 												className="form-control mt-2 mb-2"
+												value={data.project_location}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, project_location: e.target.value }));
 												}}
@@ -184,6 +265,7 @@ function Addproject(props) {
 											<input
 												type="text"
 												className="form-control mt-2 mb-2"
+												value={data.hno}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, hno: e.target.value }));
 												}}
@@ -195,6 +277,7 @@ function Addproject(props) {
 											<input
 												type="text"
 												className="form-control mt-2 mb-2"
+												value={data.city}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, city: e.target.value }));
 												}}
@@ -206,6 +289,7 @@ function Addproject(props) {
 											<input
 												type="text"
 												className="form-control mt-2 mb-2"
+												value={data.extra}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, extra: e.target.value }));
 												}}
@@ -217,12 +301,13 @@ function Addproject(props) {
 											<label className=" custom_astrick">Company</label>
 											<select
 												className="form-select mt-2 mb-2"
+												value={data.comp_id}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, comp_id: e.target.value }));
 												}}
 											>
 												<option value="">Select</option>
-												{company.map((options) => (
+												{props.company.map((options) => (
 													<option
 														onClick={(e) => {
 															setCompany(options.comp_name);
@@ -239,6 +324,7 @@ function Addproject(props) {
 											<input
 												type="text"
 												className="form-control mt-2 mb-2"
+												value={data.street}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, street: e.target.value }));
 												}}
@@ -249,15 +335,17 @@ function Addproject(props) {
 											<input
 												type="text"
 												className="form-control mt-2 mb-2"
+												value={data.postal_code}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, postal_code: e.target.value }));
 												}}
 											/>
 											<p className="error mt-2">{error_postal_code}</p>
 
-											<label className="custom_astrick mt-2">Country</label>
+											<label className="custom_astrick mt-2">Country{data.country}</label>
 											<select
 												className="form-select mt-2 mb-2 custom-select"
+												value={data.country}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, country: e.target.value }));
 												}}
@@ -275,7 +363,13 @@ function Addproject(props) {
 									<div className="modal-footer">
 										<button
 											type="submit"
-											className="btn btn-secondary btn-lg btn-block float-right"
+											className="btn btn-secondary btn-lg btn-block float-right "
+											// data-bs-dismiss="modal"
+											// onClick={() => props.popupActionNo()}
+											onClick={(e) => {
+												setData((prev) => ({ ...prev, p_unique_key: p_unique_key }));
+												// ;
+											}}
 										>
 											Save
 										</button>

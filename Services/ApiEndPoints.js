@@ -68,6 +68,8 @@ export const planningoverview = BASE_URL + "planningdetails-by-uniquekey/";
 
 //--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details/";
+export const fetchproject = BASE_URL + "fetch-project/";
+export const fetchallproject = BASE_URL + "fetch-all-project";
 
 //--------------Manage Planning-----------------------------------//
 export const getweekly_planning = BASE_URL + "getweekly_planning/";
@@ -110,8 +112,8 @@ export const deleteSalaryBenefits = BASE_URL + "delete-salary-benefits";
 
 
 //---- COOPERATION AGREEMENTS ROUTES -----//
-export const getCooperationAgreementsTabs = BASE_URL  + "get-coprtn-ags-tabs";
-export const fetchAbsoluteYouAgentData = BASE_URL  + "fetch-absolute-agent-data";
+export const getCooperationAgreementsTabs = BASE_URL + "get-coprtn-ags-tabs";
+export const fetchAbsoluteYouAgentData = BASE_URL + "fetch-absolute-agent-data";
 export const fetchPcLinkedEmployeeTypes = BASE_URL + "fetch-pclinked-employee-types";
 export const getPcLinkedCoeffData = BASE_URL + "get-pclinked-coeff-data";
 export const fetchSalaryBenefitsPerPc = BASE_URL + "get-salary-benefits-per-pc";
