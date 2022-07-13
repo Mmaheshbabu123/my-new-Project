@@ -14,6 +14,7 @@ function Addproject(props) {
 	 * FOR ASSIGNING COMPANY LOCATION VALUES
 	 */
 	const [ company, setCompany ] = useState([]);
+	const [ countrylist, setCountrylist ] = useState([]);
 
 	const [ error_project_name, setError_project_name ] = useState('');
 	const [ error_project_location, setError_project_location ] = useState('');
@@ -23,7 +24,7 @@ function Addproject(props) {
 	const [ error_comp_id, setError_comp_id ] = useState('');
 	const [ error_street, setError_street ] = useState('');
 	const [ error_postal_code, setError_postal_code ] = useState('');
-	const [ error_country, setError_country ] = useState('');
+	const [ error_countrylist, setError_countrylist ] = useState('');
 
 	const [ data, setData ] = useState({
 		id: '',
@@ -55,34 +56,47 @@ function Addproject(props) {
 	// 		});
 	// }, []);
 
+	useEffect(
+		() => {
+			if (data.comp_id == '') {
+				var res = data;
+				res.comp_id = props.company_id;
+				setData(res);
+			}
+		},
+		[ props ]
+	);
+
 	/**
 	 * FETCHING PROJECT
 	 */
-	useEffect(
-		() => {
-			APICALL.service(fetchproject + p_unique_key, 'GET')
-				.then((result) => {
-					console.log(result.data);
-					if (result.data) {
-						// var res = data;
-						// res.project_name = result.data.project_name;
-						setData(result.data);
-						// alert('test');
-					}
+	useEffect(() => {
+		APICALL.service(fetchproject + p_unique_key, 'GET')
+			.then((result) => {
+				// console.log(result.data);
+				if (result.data.length > 0) {
+					var res = [];
+					res.project_name = result.data.project_name;
+					res.project_location = result.data.project_location;
+					res.hno = result.data.hno;
+					res.city = result.data.city;
+					res.extra = result.data.extra;
+					res.comp_id = result.data.comp_id;
+					res.street = result.data.street;
+					res.postal_code = result.data.postal_code;
+					res.country = result.data.country;
+					setData(res);
 					console.log(data);
-					// console.log(data.country);
-					// if (result.status === 200) {
-					// 	console.log(result.data.project_name);
-					// 	setData(result.data);
-					// 	// setTemp(result.paritairecomitee);
-					// }
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-		},
-		[ p_unique_key ]
-	);
+				}
+
+				setCountrylist(result.data.countrylist);
+
+				// setData(result.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
 
 	/**
 	 * 
@@ -104,6 +118,7 @@ function Addproject(props) {
 				});
 		}
 	};
+
 	let validate = (res) => {
 		var error1 = [];
 		/**
@@ -168,7 +183,7 @@ function Addproject(props) {
 		setError_comp_id(error1['comp_id']);
 		setError_street(error1['street']);
 		setError_postal_code(error1['postal_code']);
-		setError_country(error1['country']);
+		setError_countrylist(error1['country']);
 
 		// alert(error1);
 
@@ -192,24 +207,24 @@ function Addproject(props) {
 		}
 	};
 
-	const companyname = [
-		{
-			value: '10',
-			label: 'Infanion1'
-		},
-		{
-			value: '11',
-			label: 'Infanion2'
-		},
-		{
-			value: '12',
-			label: 'Infanion3'
-		},
-		{
-			value: '13',
-			label: 'Infanion4'
-		}
-	];
+	// const companyname = [
+	// 	{
+	// 		value: '10',
+	// 		label: 'Infanion1'
+	// 	},
+	// 	{
+	// 		value: '11',
+	// 		label: 'Infanion2'
+	// 	},
+	// 	{
+	// 		value: '12',
+	// 		label: 'Infanion3'
+	// 	},
+	// 	{
+	// 		value: '13',
+	// 		label: 'Infanion4'
+	// 	}
+	// ];
 	return (
 		<div>
 			<form onSubmit={(e) => submit(e)}>
@@ -304,6 +319,7 @@ function Addproject(props) {
 												value={data.comp_id}
 												onChange={(e) => {
 													setData((prev) => ({ ...prev, comp_id: e.target.value }));
+													props.updatecompany(e.target.value);
 												}}
 											>
 												<option value="">Select</option>
@@ -342,7 +358,7 @@ function Addproject(props) {
 											/>
 											<p className="error mt-2">{error_postal_code}</p>
 
-											<label className="custom_astrick mt-2">Country{data.country}</label>
+											<label className="custom_astrick mt-2">Country</label>
 											<select
 												className="form-select mt-2 mb-2 custom-select"
 												value={data.country}
@@ -351,13 +367,13 @@ function Addproject(props) {
 												}}
 											>
 												<option>Select country</option>
-												{companyname.map((options) => (
-													<option key={options.value} value={options.value}>
-														{options.label}
+												{countrylist.map((options) => (
+													<option key={options.iso} value={options.iso}>
+														{options.country}
 													</option>
 												))}
 											</select>
-											<p className="error mt-2">{error_country}</p>
+											<p className="error mt-2">{error_countrylist}</p>
 										</div>
 									</div>
 									<div className="modal-footer">
