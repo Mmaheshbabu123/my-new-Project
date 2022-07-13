@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
-import { Weeklyplanning, getweekly_planning } from '../../Services/ApiEndPoints';
+import { Weeklyplanning, getWeeklyPlanning } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
 function WeeklyPlanning(props) {
@@ -36,7 +36,7 @@ function WeeklyPlanning(props) {
 	];
 
 	useEffect(() => {
-		APICALL.service(getweekly_planning + '82', 'GET')
+		APICALL.service(getWeeklyPlanning + '82', 'GET')
 			.then((result) => {
 				console.log(result);
 			})
@@ -73,11 +73,17 @@ function WeeklyPlanning(props) {
 						<option value="">Bangalore</option>
 						<option value="">Mangalore</option>
 					</select>
-					{/* <select className="form-select w-25 me-2">
+					<select className="form-select w-25 me-2">
+						<option>Cost center</option>
+						<option value="">Cost center 1</option>
+						<option value="">Cost center 2</option>
+					</select>
+					<select className="form-select w-25 me-2">
 						<option>Select Project</option>
 						<option value="">Project-1</option>
 						<option value="">Project-2</option>
-					</select> */}
+					</select>
+					
 				</div>
 				<div className="mt-2 ">
 					<table className="table border border-secondary ">
@@ -161,7 +167,7 @@ function WeeklyPlanning(props) {
 						Dashboard
 					</button>
 				</div>
-				<div>
+				{/* <div>
 					<p className="h5">Is the planning final?</p>
 					<div>
 						<input
@@ -185,7 +191,7 @@ function WeeklyPlanning(props) {
 						/>
 						<labe className="ms-2">No</labe>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

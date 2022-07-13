@@ -10,7 +10,7 @@ import { requiredFields} from '../../../RequiredFields';
 import ValidateMessage from '@/atoms/validationError';
 const BasicDetails = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
-  var { tab_4} = state;
+  var { tab_4,element_status} = state;
 
   const OnlineFieldData = (onlineRow) => {
     let  fieldsArray = [];
@@ -55,11 +55,13 @@ const BasicDetails = (props) => {
   const handleChange = (event) => {
     const { value, name } = event.target;
     tab_4[name] = value;
-    updateStateChanges({ tab_4 });
+    element_status['tab_4'].push(name);
+    updateStateChanges({ tab_4,element_status });
   }
   const handleRadioSelect = (id,type) => {
    tab_4[id] = type;
-   updateStateChanges({tab_4});
+     element_status['tab_4'].push(id);
+   updateStateChanges({tab_4,element_status});
   }
   return (
     <div className="col-md-12 row">
