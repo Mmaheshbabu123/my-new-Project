@@ -2,7 +2,15 @@ import React from 'react';
 
 const style = { /* ADD IF ANY STYLES NEEDED*/  }
 
-export default function InputTextfield({ type = 'text',className = '' ,value='',isDisabled= false,placeholder='this is first',handleChange,name='input_name',customStyle = {} }) {
+export default function InputTextfield({
+  type = 'text',
+  className = '' ,
+  value='',
+  isDisabled= false,
+  placeholder='this is first',
+  handleChange,name='input_name',
+  customStyle = {}
+}) {
   return (
     <input
       style = {{...style, ...customStyle}}
