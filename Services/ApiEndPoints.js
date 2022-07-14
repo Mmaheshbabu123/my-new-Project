@@ -132,3 +132,4 @@ export const fetchRequestOverview = BASE_URL + "get-all-agreement-requests";
 
 //------SALES AGENT COOPERATION AGREEMENTS -------//
 export const fetchSalesAgenetAgreements =  BASE_URL + "get-all-sales-agent-agreement-requests";
+export const saveSalesAgentSvData = BASE_URL + "save-agent-assigned-data";

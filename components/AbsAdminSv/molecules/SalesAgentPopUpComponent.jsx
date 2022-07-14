@@ -2,21 +2,41 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import CheckBoxField from '@/atoms/CheckBoxField';
 import RadioField from '@/atoms/RadioField';
+import { saveSalesAgentSvData } from '@/Services/ApiEndPoints';
+import { APICALL } from '@/Services/ApiServices';
 import styles from './AbsAdminSv.module.css';
 
 const SalesAgentPopUpComponent = ( { state, setState } ) => {
-  const { showPopup, salesAgentArray, selectedSalesAgent, warning } = state;
+  const router = useRouter();
+  const { showPopup, salesAgentArray, warning,
+    selectedSalesAgent,
+    selectedCompanyId,
+    selectedEmployerId
+   } = state;
 
-  const handleRequest = () => {
+  const handleRequest = async () => {
     if(!selectedSalesAgent) {
       setState({...state, warning: true})
       return;
     }
+    await APICALL.service(`${saveSalesAgentSvData}`, 'POST', getPostData())
+    .then(response => {
+      if(response.status === 200) {
+        router.reload()
+      }
+    }).catch(error => console.error(error))
   }
 
-  const handleRadioSelect = (e) => {
+  const getPostData = () => {
+    return {
+      company_id: selectedCompanyId,
+      employer_id: selectedEmployerId,
+      sales_agent_id: selectedSalesAgent
+    };
+  }
+
+  const handleRadioSelect = (e, agent) => {
     setState({...state, selectedSalesAgent: Number(e.target.id), warning: false})
   }
 
@@ -25,12 +45,12 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
   return(
     <>
         <Modal size={'lg'} show={showPopup} onHide={handleClose}>
-          <Modal.Header closeButton style={{marginLeft: '30%'}}>
+          <Modal.Header closeButton style={{paddingLeft: '30%'}}>
             <Modal.Title> Assign to sales agent </Modal.Title>
           </Modal.Header>
         <Modal.Body>
             <div>
-                <p style={{textAlign: 'center', fontSize: 'larger'}}> Please select sales agent </p>
+                <p style={{fontSize: 'larger'}}> Please select sales agent </p>
                 <div style={{margin: '20px 0'}}>
                 {salesAgentArray.map(agent => {
                   return(
@@ -39,7 +59,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
                         key={agent.id}
                         checked={agent.id === selectedSalesAgent}
                         disabled={false}
-                        handleChange={handleRadioSelect}
+                        handleChange={(e) => handleRadioSelect(e, agent)}
                         label={agent.name}
                         className="col-md-6"
                       />
