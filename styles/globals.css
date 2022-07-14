@@ -196,3 +196,9 @@ a {
 .rmdp-day span {
 	border-radius: 0% !important;
 }
+.go_to_dashboard {
+	position: absolute;
+ top: 18px;
+ right: 16px;
+ font-size: 18px;
+}
