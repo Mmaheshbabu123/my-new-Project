@@ -26,29 +26,20 @@ const AddFunction = () => {
 	const [ selectedOption, setSelectedOption ] = useState([]);
 	const [ employeeobject, setEmployeeObject ] = useState([]);
 	const [ storeddata, setStoredData ] = useState([]);
-	const [funcChanged,setFuncChanged] = useState(false);
-	
+	const [ funcChanged, setFuncChanged ] = useState(false);
+
 	useEffect(
 		() => {
 			if (!router.isReady) return;
 			var p_unique_key = router.query.p_unique_key;
-			// APICALL.service(
-			// 	process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getPlanningEmployeeFunction/' + p_unique_key,
-			// 	'GET'
-			// )
-			// 	.then((result) => {
-					
-			// 	})
-			// 	.catch((error) => {
-			// 		console.error(error);
-			// 	});
+
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + p_unique_key, 'GET')
-				.then((result) => {					
+				.then((result) => {
 					var data = result.data[0];
-					var sdata= result.data[2];
-					var employeetypes=result.data[3];
-					var functionsdata=result.data[1];
-					//console.log(result);
+					var sdata = result.data[2];
+					var employeetypes = result.data[3];
+					var functionsdata = result.data[1];
+
 					if (Data.length == 0) {
 						setData(data);
 						createAllObjects(data);
@@ -56,67 +47,47 @@ const AddFunction = () => {
 					if (sdata.length != 0) {
 						storedDataAssigning(sdata);
 					}
-					
-					if(employeetypes.length!=0){
-					setEmptypes(employeetypes);
+
+					if (employeetypes.length != 0) {
+						setEmptypes(employeetypes);
 					}
-					
-					if(functionsdata.length!=0){
-					setFunctions(functionsdata);
-					getOptions(functionsdata);
+
+					if (functionsdata.length != 0) {
+						setFunctions(functionsdata);
+						getOptions(functionsdata);
 					}
 				})
 				.catch((error) => {
 					console.error(error);
 				});
-			// APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getallEmployeesTypes/' + p_unique_key, 'GET')
-			// 	.then((res) => {
-			// 		console.log(res);
-					
-			// 	})
-			// 	.catch((error) => {
-			// 		console.error(error);
-			// 	});
-			// APICALL.service(
-			// 	process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getfunctionsbypcnumbers/' + p_unique_key,
-			// 	'GET'
-			// )
-			// 	.then(async (respons) => {
-			// 		console.log(respons);
-			// 		setFunctions(respons);
-			// 		getOptions(functions);
-			// 	})
-			// 	.catch((error) => {
-			// 		console.error(error);
-			// 	});
 		},
 		[ router.query ]
 	);
 
-	function storedDataAssigning(sdata){
+	function storedDataAssigning(sdata) {
 		setStoredData(sdata);
 	}
 
-	// useEffect(
-	// 	() => {
-	// 		if(funcChanged == false){
-	// 		if(storeddata != null && storeddata != ''){
-	// 			if(functions!= null){
-	// 			var func = [...functions];
-	// 			func.map((val,key)=>{
-	// 				if(val.id == storeddata[0].function_id){
-	// 				func[key].funct_checked = parseInt(storeddata[0].function_id);
-	// 				}else{
-	// 				func[key].funct_checked = '';
-	// 				}
-	// 			})
-	// 			setFunctions(func);
-	// 		}
-
-	// 		}
-	// 	}
-
-	// 	},[functions,storeddata])
+	useEffect(
+		() => {
+			if (funcChanged == false) {
+				if (storeddata != null && storeddata != '') {
+					if (functions != null) {
+						var func = [ ...functions ];
+						func.map((val, key) => {
+							if (val.id == storeddata[0].function_id) {
+								func[key].funct_checked = parseInt(storeddata[0].function_id);
+							} else {
+								func[key].funct_checked = '';
+							}
+						});
+						setFunctions(func);
+					}
+				}
+			}
+		},
+		[ functions, storeddata ]
+	);
 
 	function createAllObjects(result) {
 		if (result.length != 0 && employeeobject.length == 0) {
@@ -158,14 +129,14 @@ const AddFunction = () => {
 			});
 	};
 
-	const EmpSalary=(id,key)=>{
-		if(id.value!=''&&key!=''){
-			setEmptypeTOid([id.value,key]);
+	const EmpSalary = (id, key) => {
+		if (id.value != '' && key != '') {
+			setEmptypeTOid([ id.value, key ]);
 		}
-	}
+	};
 
 	function updatingObjectTypeid(empid, emptype) {
-		var objects = [...employeeobject];
+		var objects = [ ...employeeobject ];
 		if (objects != undefined) {
 			const newState = objects.map((element) => {
 				if (element.employeeid == empid) {
@@ -195,16 +166,14 @@ const AddFunction = () => {
 	}
 
 	function addsalary(id, empid, salary, level) {
-		//console.log(level);
 		if (level == 1) {
 			setFunctionId([ id, salary ]);
 			setSalaries(salary);
 			updatingObjectFunction(id, empid, salary);
 		} else if (level == 2) {
-			if(id != undefined && id !='' && id != null){
-			setEmptypeTOid([ id.value, salary ]);
-			// to.forEach((element) => {});
-			updatingObjectTypeid(empid, id.value);
+			if (id != undefined && id != '' && id != null) {
+				setEmptypeTOid([ id.value, salary ]);
+				updatingObjectTypeid(empid, id.value);
 			}
 		} else if (level == 3) {
 			if (id != undefined) {
@@ -214,7 +183,6 @@ const AddFunction = () => {
 			}
 		} else {
 		}
-		//console.log(employeeobject);
 	}
 
 	function checkbox() {
@@ -230,17 +198,15 @@ const AddFunction = () => {
 	};
 
 	let updateRes = (event, key) => {
-		setFuncChanged(true)
+		setFuncChanged(true);
 		var res1 = [ ...functions ];
-		res1.map((val,k)=>{
+		res1.map((val, k) => {
 			if (k == key) {
 				res1[k]['funct_checked'] = parseInt(event.target.value);
 			} else {
 				res1[k]['funct_checked'] = '';
-	
 			}
-		})
-		
+		});
 		setFunctions(res1);
 	};
 
@@ -264,9 +230,16 @@ const AddFunction = () => {
 											addsalary(key['id'], parameter, value < 3 ? Number(key['salary']) : '', 1)}
 									>
 										{value < 3 ? (
-											<input type="radio" value={key['id']} name={"functions"+key['id']} className="p-3" checked={key['funct_checked'] == key['id'] ? true : false} onChange={(e) => {
-												updateRes(e, value);
-											}}/>
+											<input
+												type="radio"
+												value={key['id']}
+												name={'functions'}
+												className="p-3"
+												checked={key['funct_checked'] == key['id'] ? true : false}
+												onChange={(e) => {
+													updateRes(e, value);
+												}}
+											/>
 										) : (
 											''
 										)}
@@ -281,7 +254,6 @@ const AddFunction = () => {
 												/>
 												<Select
 													//value={selectedOption}
-													//isMulti
 													name="employefunctionsall"
 													options={fulllist}
 													onChange={setListtype}
@@ -300,7 +272,6 @@ const AddFunction = () => {
 												/>
 												<Select
 													//value={selectedOption}
-													//isMulti
 													name="employefunctionsall"
 													options={fulllist}
 													onChange={setListtype}
@@ -358,9 +329,8 @@ const AddFunction = () => {
 	};
 	let updatestoredata = (e) => {
 		// alert(e.target.value);
-	}
+	};
 
-	const saveSalary = async () => {};
 	return (
 		<div className="container" style={{ marginTop: '5%', marginBottom: '2%' }}>
 			<form onSubmit={(e) => submit(e)}>
@@ -391,8 +361,11 @@ const AddFunction = () => {
 												options={emptypes}
 												name="functionss"
 												onChange={setSelectedOption}
-                                                onInputChange={(e) => {addsalary(selectedOption, key[4], 2, 2);
-												updatestoredata(e)}}/>
+												onInputChange={(e) => {
+													addsalary(selectedOption, key[4], 2, 2);
+													updatestoredata(e);
+												}}
+											/>
 										) : (
 											''
 										)}
