@@ -131,6 +131,7 @@ export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agree
 export const fetchCompaniesBasedOnEmployer = BASE_URL + "get-employeer-agreements-data";
 export const saveRequestedCompanies = BASE_URL + "save-requested-companies";
 export const fetchRequestOverview = BASE_URL + "get-all-agreement-requests";
+export const deleteCooperationAgreement = BASE_URL + "delete-cooperation-agreement";
 
 //------SALES AGENT COOPERATION AGREEMENTS -------//
 export const fetchSalesAgenetAgreements =  BASE_URL + "get-all-sales-agent-agreement-requests";

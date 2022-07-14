@@ -9,10 +9,11 @@ import styles from './AbsAdminSv.module.css';
 
 const SalesAgentPopUpComponent = ( { state, setState } ) => {
   const router = useRouter();
-  const { showPopup, salesAgentArray, warning,
+  const { showPopup, salesAgentArray, warning, reassign,
     selectedSalesAgent,
     selectedCompanyId,
-    selectedEmployerId
+    selectedEmployerId,
+    savedAgentId
    } = state;
 
   const handleRequest = async () => {
@@ -37,7 +38,12 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
   }
 
   const handleRadioSelect = (e, agent) => {
-    setState({...state, selectedSalesAgent: Number(e.target.id), warning: false})
+    let radioVal = Number(e.target.id);
+    let reassign = savedAgentId!== 0 && (savedAgentId !== radioVal) ? true : false;
+    setState({...state, reassign,
+      selectedSalesAgent: radioVal,
+      warning: false,
+    })
   }
 
   const handleClose = () => setState({...state, showPopup: false})
@@ -67,12 +73,13 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
                 })}
                 </div>
                 {warning === true && <small style={{color:'red'}}> Select atleast one agent </small>}
+                {reassign === true && <small style={{color:'red'}}> Do you want change sales agent? </small>}
             </div>
         </Modal.Body>
         <Modal.Footer>
           <p className={`${styles['popup-back-btn']}`} onClick={handleClose}> Back </p>
           <Button variant="secondary" onClick={handleRequest}>
-            Request agreement
+            Assign
           </Button>
         </Modal.Footer>
       </Modal>
