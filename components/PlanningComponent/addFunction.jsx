@@ -27,8 +27,10 @@ const AddFunction = () => {
 	const [ employeeobject, setEmployeeObject ] = useState([]);
 	const [ storeddata, setStoredData ] = useState([]);
 	const [funcChanged,setFuncChanged] = useState(false);
+	
 	useEffect(
 		() => {
+			if (!router.isReady) return;
 			var p_unique_key = router.query.p_unique_key;
 			// APICALL.service(
 			// 	process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getPlanningEmployeeFunction/' + p_unique_key,
@@ -41,13 +43,12 @@ const AddFunction = () => {
 			// 		console.error(error);
 			// 	});
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + p_unique_key, 'GET')
-				.then((result) => {
-					console.log(result.data);
-					
+				.then((result) => {					
 					var data = result.data[0];
-					var sdata= result.data[1];
-					var employeetypes=result.data[2];
-					var functionsdata=result.data[3];
+					var sdata= result.data[2];
+					var employeetypes=result.data[3];
+					var functionsdata=result.data[1];
+					//console.log(result);
 					if (Data.length == 0) {
 						setData(data);
 						createAllObjects(data);
@@ -62,7 +63,7 @@ const AddFunction = () => {
 					
 					if(functionsdata.length!=0){
 					setFunctions(functionsdata);
-					getOptions(functions);
+					getOptions(functionsdata);
 					}
 				})
 				.catch((error) => {
@@ -96,27 +97,26 @@ const AddFunction = () => {
 		setStoredData(sdata);
 	}
 
-	useEffect(
-		() => {
-			if(funcChanged == false){
-			if(storeddata != null && storeddata != ''){
-				console.log(storeddata);
-				if(functions!= null){
-				var func = [...functions];
-				func.map((val,key)=>{
-					if(val.id == storeddata[0].function_id){
-					func[key].funct_checked = parseInt(storeddata[0].function_id);
-					}else{
-					func[key].funct_checked = '';
-					}
-				})
-				setFunctions(func);
-			}
+	// useEffect(
+	// 	() => {
+	// 		if(funcChanged == false){
+	// 		if(storeddata != null && storeddata != ''){
+	// 			if(functions!= null){
+	// 			var func = [...functions];
+	// 			func.map((val,key)=>{
+	// 				if(val.id == storeddata[0].function_id){
+	// 				func[key].funct_checked = parseInt(storeddata[0].function_id);
+	// 				}else{
+	// 				func[key].funct_checked = '';
+	// 				}
+	// 			})
+	// 			setFunctions(func);
+	// 		}
 
-			}
-		}
+	// 		}
+	// 	}
 
-		},[functions,storeddata])
+	// 	},[functions,storeddata])
 
 	function createAllObjects(result) {
 		if (result.length != 0 && employeeobject.length == 0) {
@@ -143,7 +143,7 @@ const AddFunction = () => {
 		//return
 		var p_unique_key = router.query.p_unique_key;
 		//functionid, salary,employeetypeid,employeeid
-		var data = [ ...functionid, ...emptypetoid ];
+		// var data = [ ...functionid, ...emptypetoid ];
 
 		APICALL.service(
 			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/storeFunctionEmptypeSalary/' + p_unique_key,
@@ -158,14 +158,14 @@ const AddFunction = () => {
 			});
 	};
 
-	// const EmpSalary=(id,key)=>{
-	// 	if(id.value!=''&&key!=''){
-	// 		setEmptypeTOid([id.value,key]);
-	// 	}
-	// }
+	const EmpSalary=(id,key)=>{
+		if(id.value!=''&&key!=''){
+			setEmptypeTOid([id.value,key]);
+		}
+	}
 
-	async function updatingObjectTypeid(empid, emptype) {
-		var objects = employeeobject;
+	function updatingObjectTypeid(empid, emptype) {
+		var objects = [...employeeobject];
 		if (objects != undefined) {
 			const newState = objects.map((element) => {
 				if (element.employeeid == empid) {
@@ -195,14 +195,17 @@ const AddFunction = () => {
 	}
 
 	function addsalary(id, empid, salary, level) {
+		//console.log(level);
 		if (level == 1) {
 			setFunctionId([ id, salary ]);
 			setSalaries(salary);
 			updatingObjectFunction(id, empid, salary);
 		} else if (level == 2) {
+			if(id != undefined && id !='' && id != null){
 			setEmptypeTOid([ id.value, salary ]);
 			// to.forEach((element) => {});
 			updatingObjectTypeid(empid, id.value);
+			}
 		} else if (level == 3) {
 			if (id != undefined) {
 				setFunctionId([ id.value, id.salary ]);
@@ -250,7 +253,6 @@ const AddFunction = () => {
 		var func = (
 			<div className="row ms-5">
 				<ul>
-					{console.log(functions)}
 					{functions != null ? (
 						functions.slice(0, 4).map((key, value) => (
 							<div key={key['id']} className="row ms-5">
@@ -354,11 +356,13 @@ const AddFunction = () => {
 		});
 		return op;
 	};
+	let updatestoredata = (e) => {
+		// alert(e.target.value);
+	}
 
 	const saveSalary = async () => {};
 	return (
 		<div className="container" style={{ marginTop: '5%', marginBottom: '2%' }}>
-			{console.log(employeeobject)}
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row">
 					<div className="row">
@@ -383,12 +387,12 @@ const AddFunction = () => {
 										{() => setSelected(storeddata[value])}
 										{emptypes != null ? (
 											<Select
-												value={employeTypeSelection(storeddata[value])}
+												// value={employeTypeSelection(storeddata[value])}
 												options={emptypes}
 												name="functionss"
 												onChange={setSelectedOption}
-												onInputChange={() => addsalary(selectedOption, key[4], 2, 2)}
-											/>
+                                                onInputChange={(e) => {addsalary(selectedOption, key[4], 2, 2);
+												updatestoredata(e)}}/>
 										) : (
 											''
 										)}
