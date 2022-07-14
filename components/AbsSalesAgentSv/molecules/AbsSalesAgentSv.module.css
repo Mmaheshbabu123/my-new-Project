@@ -1,0 +1,78 @@
+.employer-sv-page-title {
+  margin: 25px 0;
+}
+
+.request-agreeemnt-comp-btn {
+  margin-top: 25px;
+  text-align: end;
+}
+
+.request-agreeemnt-comp-btn > button {
+  width: 250px;
+}
+
+.emp-sv-overview-page-div {
+
+}
+
+.employer-overview-tabs {
+  display: inline-block;
+  width: 40%;
+  margin: 20px 0;
+}
+
+.employer-overview-tabs > li {
+  display: inline-block;
+  width: 30%;
+  font-weight: bold;
+  font-size: large;
+}
+
+.employer-overview-tabs > li > span {
+  cursor: pointer;
+}
+
+.employer-overview-tabs > li > span:hover {
+  opacity: 0.7;
+}
+
+.underline {
+  border-bottom: 3px solid black;
+}
+
+
+.table-parent-div{
+  border: 1px solid cadetblue;
+}
+
+.table-parent-div > table > thead > tr > th {
+  vertical-align: middle;
+}
+
+.table-parent-div > table > thead > tr > th {
+  height: 30px;
+}
+
+/*  Back button  */
+.popup-back-btn {
+  cursor: pointer;
+  margin-right: 15px;
+}
+.popup-back-btn:hover{
+  text-decoration: underline;
+}
+
+.signed-class {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 15px;
+}
+.signed-class.sv-signed {
+  background-color: green;
+}
+
+.signed-class.sv-pending {
+	background-color: orange;
+}
