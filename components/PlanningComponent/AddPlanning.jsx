@@ -188,13 +188,13 @@ function Planning(props) {
 				<div className="row   planning-container ">
 					<p className="mb-4 mt-3 font-weight-bold h3">Add Planning</p>
 					<div>
-						<button
+						{/* <button
 							onClick={showPopup}
 							type="button"
 							className="btn btn-secondary   btn-block float-end mt-2 mb-2 ms-2"
 						>
 							+Add project
-						</button>
+						</button> */}
 					</div>
 					<div className="form-group">
 						<label className="form-label mb-2 custom_astrick">Company</label>
