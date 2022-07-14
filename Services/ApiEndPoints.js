@@ -77,6 +77,8 @@ export const fetchallproject = BASE_URL + "fetch-all-project";
 
 //--------------Manage Planning-----------------------------------//
 export const getWeeklyPlanning = BASE_URL + "get-weekly-planning/";
+export const getEmployeerCompanylist = BASE_URL + "get-employer-comp-details/";
+
 
 
 

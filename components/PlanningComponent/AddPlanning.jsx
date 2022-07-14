@@ -21,6 +21,8 @@ function Planning(props) {
 	const [ location, setLocation ] = useState([]);
 	const [ costcenter, setCostcenter ] = useState([]);
 	const [ company_name, setCompany_name ] = useState([]);
+	const [ empr_id, setEmpr_id ] = useState('');
+
 
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
@@ -32,6 +34,13 @@ function Planning(props) {
 		location_id: '',
 		cost_center_id: ''
 	});
+
+
+	useEffect(() => {
+		if(localStorage.getItem("uid")!= null){
+			setEmpr_id(localStorage.getItem("uid"));
+		}
+	}, []);
 
 	// FETCHING COMPANY FROM DRUPAL //
 	useEffect(() => {
@@ -163,6 +172,7 @@ function Planning(props) {
 
 	// SHOW POPUP //
 	const showPopup = (id) => {
+		alert(empr_id);
 		setShow(true);
 	};
 
@@ -178,13 +188,13 @@ function Planning(props) {
 				<div className="row   planning-container ">
 					<p className="mb-4 mt-3 font-weight-bold h3">Add Planning</p>
 					<div>
-						<button
+						{/* <button
 							onClick={showPopup}
 							type="button"
 							className="btn btn-secondary   btn-block float-end mt-2 mb-2 ms-2"
 						>
 							+Add project
-						</button>
+						</button> */}
 					</div>
 					<div className="form-group">
 						<label className="form-label mb-2 custom_astrick">Company</label>
