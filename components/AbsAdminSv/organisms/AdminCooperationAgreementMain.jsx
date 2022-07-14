@@ -9,7 +9,8 @@ const AdminCooperationAgreementMain = (props) => {
   const [state, setState] = useState({
       overviewData: []
     , loaded: false
-    , salesAgentArray: [{id: 123, name: 'Agent 123'},{id: 321, name: 'Agent tina'}],
+    , salesAgentArray: []
+    , assignedData: {}
   })
 
   useEffect(() => {  fetchData() }, [])
@@ -20,7 +21,12 @@ const AdminCooperationAgreementMain = (props) => {
   const fetchData = async () => {
     await APICALL.service(`${fetchRequestOverview}`, 'GET').then(response => {
       if (response.status === 200)
-        setState({...state, overviewData: response.data.overviewData || [], salesAgentArray: response.data.salesAgentArray , loaded: true });
+        setState({...state,
+          overviewData: response.data.overviewData || [],
+          salesAgentArray: response.data.salesAgentArray,
+          assignedData: response.data.assignedData || {},
+          loaded: true
+        });
     }).catch(error => console.error(error))
   }
 
@@ -28,8 +34,8 @@ const AdminCooperationAgreementMain = (props) => {
     <div>
     {state.loaded === true ?
           <div className="col-md-12 row">
-          <h4 className={`${styles['employer-sv-page-title']}`}> Manage cooperation agreement requests</h4>
-              <RequestOverviewData overviewData={state.overviewData} salesAgentArray={state.salesAgentArray}/>
+          <h4 className={`${styles['employer-sv-page-title']} text-center page-title`}> Manage cooperation agreements</h4>
+              <RequestOverviewData assignedData={state.assignedData} overviewData={state.overviewData} salesAgentArray={state.salesAgentArray}/>
           </div>
         : <p>Loading...</p>}
     </div>

@@ -43,7 +43,7 @@ const AbsSalesAgenetCooperationAgreementMain = (props) => {
     <div>
     {state.loaded === true ?
           <div className="col-md-12 row">
-          <h4 className={`${styles['employer-sv-page-title']}`}> Manage sales-agent cooperation agreement </h4>
+          <h4 className={`${styles['employer-sv-page-title']} text-center page-title`}> Manage cooperation agreements </h4>
               <OverviewPage overviewData={state.overviewData} setState={setState}/>
           </div>
         : <p>Loading...</p>}

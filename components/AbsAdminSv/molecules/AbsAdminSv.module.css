@@ -1,5 +1,6 @@
 .employer-sv-page-title {
   margin: 25px 0;
+  font-size: 1.5rem;
 }
 
 .request-agreeemnt-comp-btn {
@@ -21,11 +22,14 @@
   margin: 20px 0 40px 0;
 }
 
+
 .employer-overview-tabs > li {
   display: inline-block;
   width: 30%;
-  font-weight: bold;
-  font-size: large;
+}
+
+.employer-overview-tabs > li:first-child {
+  width: 20%;
 }
 
 .employer-overview-tabs > li > span {

@@ -77,6 +77,8 @@ export const fetchallproject = BASE_URL + "fetch-all-project";
 
 //--------------Manage Planning-----------------------------------//
 export const getWeeklyPlanning = BASE_URL + "get-weekly-planning/";
+export const getEmployeerCompanylist = BASE_URL + "get-employer-comp-details/";
+
 
 
 
@@ -129,6 +131,7 @@ export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agree
 export const fetchCompaniesBasedOnEmployer = BASE_URL + "get-employeer-agreements-data";
 export const saveRequestedCompanies = BASE_URL + "save-requested-companies";
 export const fetchRequestOverview = BASE_URL + "get-all-agreement-requests";
+export const deleteCooperationAgreement = BASE_URL + "delete-cooperation-agreement";
 
 //------SALES AGENT COOPERATION AGREEMENTS -------//
 export const fetchSalesAgenetAgreements =  BASE_URL + "get-all-sales-agent-agreement-requests";
