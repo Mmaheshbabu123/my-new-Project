@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import OverviewPage  from '../molecules/OverviewPage';
-import RequestAgreement  from '../molecules/RequestAgreement';
-import styles from '../molecules/EmployerSv.module.css';
-import { fetchCompaniesBasedOnEmployer } from '@/Services/ApiEndPoints';
+import OverviewPage  from '../molecules/Overviewpage';
+import styles from '../molecules/AbsSalesAgentSv.module.css';
+import { fetchSalesAgenetAgreements } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 
-const EmployerCooperationAgreementMain = (props) => {
+const AbsSalesAgenetCooperationAgreementMain = (props) => {
 
   const [state, setState] = useState({
       companies: {}
@@ -21,7 +20,8 @@ const EmployerCooperationAgreementMain = (props) => {
    * @return {Promise} [description]
    */
   const fetchData = async () => {
-    await APICALL.service(`${fetchCompaniesBasedOnEmployer}/${props.employerid}`, 'GET').then(response => {
+
+    await APICALL.service(`${fetchSalesAgenetAgreements}`, 'GET').then(response => {
       if (response.status === 200)
         assignDataToStateVariables(response.data);
     })
@@ -34,24 +34,21 @@ const EmployerCooperationAgreementMain = (props) => {
    */
   const assignDataToStateVariables = (data) => {
     setState({...state,
-        companies: data.companies || {}
-      , overviewData: data.overviewData || []
+       overviewData: data || []
       , loaded: true
     })
   }
-
+  console.log(state)
   return (
     <div>
     {state.loaded === true ?
           <div className="col-md-12 row">
-          <h4 className={`${styles['employer-sv-page-title']}`}> Manage employer cooperation agreement </h4>
-              <OverviewPage state={state} setState={setState}/>
-              {state.companies && Object.keys(state.companies).length > 0 &&
-                <RequestAgreement state={state} setState={setState} employer_id = {props.employerid} />}
+          <h4 className={`${styles['employer-sv-page-title']}`}> Manage sales-agent cooperation agreement </h4>
+              <OverviewPage overviewData={state.overviewData} setState={setState}/>
           </div>
         : <p>Loading...</p>}
     </div>
   );
 }
 
-export default React.memo(EmployerCooperationAgreementMain);
+export default React.memo(AbsSalesAgenetCooperationAgreementMain);
