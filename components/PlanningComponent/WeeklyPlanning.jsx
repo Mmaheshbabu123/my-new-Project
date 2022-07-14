@@ -122,7 +122,7 @@ function WeeklyPlanning(props) {
 					</select>
 					
 				</div>
-				{showview && <div className="mt-2 ">
+				 <div className="mt-2 ">
 					<table className="table border border-secondary ">
 						<thead className="">
 							<tr className="">
@@ -199,7 +199,6 @@ function WeeklyPlanning(props) {
 						</tbody>
 					</table>
 				</div>
-}
 				<div className="text-end ">
 					<button type="submit" className="btn btn-secondary   btn-block ">
 						Dashboard
