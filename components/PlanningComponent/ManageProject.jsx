@@ -73,9 +73,9 @@ function ManageProject(props) {
 		// if (searchProjectname != '' && searchlocation != '' && searchaddress != '') {
 		// 	projectTemp.map((val) => {
 		// 		if (
-		// 			val['projectname'].trim().toLowerCase().includes(searchProjectname.toLowerCase()) &&
-		// 			val['location'].trim().toLowerCase().includes(searchlocation.toLowerCase()) &&
-		// 			val['address'].trim().toLowerCase().includes(searchaddress.toLowerCase())
+		// 			val['project_name'].trim().toLowerCase().includes(searchProjectname.toLowerCase()) &&
+		// 			val['project_location'].trim().toLowerCase().includes(searchlocation.toLowerCase()) &&
+		// 			val['address_id'].trim().toLowerCase().includes(searchaddress.toLowerCase())
 		// 		) {
 		// 			res.push(val);
 		// 		}

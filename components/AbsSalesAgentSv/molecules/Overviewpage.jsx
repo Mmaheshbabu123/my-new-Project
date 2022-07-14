@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import { confirmAlert } from 'react-confirm-alert';
 import SearchIcon from '../../SearchIcon';
+import styles from './AbsSalesAgentSv.module.css';
+//import SearchIcon from '../../SearchIcon';
 import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
-import { AiFillFilePdf, AiOutlineRedo } from 'react-icons/ai';
-import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
-import styles from './AbsAdminSv.module.css';
+import { AiFillFilePdf, AiOutlineRedo} from 'react-icons/ai';
+import { HiPlusCircle} from 'react-icons/hi';
+import { useRouter } from 'next/router';
+
 
 const itemsPerPage = 5;
-const RequestOverviewData = (props) => {
-  const { overviewData, salesAgentArray } = props;
-
+const Overviewpage = (props) => {
+  const { overviewData } = props;
+  const router = useRouter();
+  console.log(overviewData)
   /**
    * [getSelectedStatus description]
    * @param  {int}    selectedTabId               [description]
@@ -27,7 +30,6 @@ const RequestOverviewData = (props) => {
       currentItems: [],
       status: [1, 0],
       searchTerm: '',
-      salesAgentArray: salesAgentArray,
       showPopup: false,
       selectedSalesAgent: 0,
       warning: false,
@@ -84,6 +86,7 @@ const RequestOverviewData = (props) => {
      const updatePaginationData = (filterRows, offset) => {
        let items = [...filterRows];
        const endOffset = offset + itemsPerPage;
+       console.log({items, endOffset}, items.slice(offset, endOffset));
        return {
          currentItems: items.slice(offset, endOffset),
          pageCount: Math.ceil(items.length / itemsPerPage)
@@ -152,14 +155,15 @@ const RequestOverviewData = (props) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
         />}
-        {<SalesAgentPopUpComponent state={state} setState={setState}/>}
+
         </div>
       </>
     );
   }
 
   const getNeededActions = (eachRow) => {
-    if(Number(eachRow.signed)) {
+
+    if(Number(eachRow.root_parent_id) !== 0) {
       return(
         <div>
           <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
@@ -170,11 +174,7 @@ const RequestOverviewData = (props) => {
     } else {
       return (
         <div>
-          {!eachRow.assignedTo ?
-              <span title={'Assign'} className="actions-span text-dark" onClick={() => handleActionClick('assign', eachRow)}> <MdOutlineAddTask /> </span>
-            : <><span title={'Re-assign'} className="actions-span text-dark" onClick={() => handleActionClick('reassign', eachRow)}> <AiOutlineRedo /> </span>
-                <span> {`Assigned to: ${eachRow.assignedTo ? eachRow.assignedTo:''}`} </span> </>
-          }
+          <span title = {'Add'} className="actions-span text-dark" onClick={() => handleActionClick('add', eachRow)}> <HiPlusCircle /> </span>
           <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
@@ -182,14 +182,13 @@ const RequestOverviewData = (props) => {
   }
 
   const handleActionClick = (action, eachRow) => {
-    let stateObj = { ...state };
     switch (action) {
       case 'delete':
         confirmAlert({
           message: `Do you want to delete the cooperation agreement?`,
           buttons: [
             { label: 'No' },
-            { label: 'Yes', onClick: () => deleteCooperationAgreement(eachRow) }
+            { label: 'Yes', onClick: () => console.log(eachRow) }
           ]
         });
         break;
@@ -199,22 +198,12 @@ const RequestOverviewData = (props) => {
      case 'download':
           console.log('Download clicked');
         break;
-     case 'assign':
-           stateObj['showPopup'] = true;
-           stateObj['selectedCompanyId'] = eachRow.company_id;
-           stateObj['selectedEmployerId'] = eachRow.employer_id;
-           stateObj['selectedSalesAgent'] = 0;
-       break;
-     case 'reassign':
-          console.log('reassign clicked');
+      case 'add':
+      const ref_id = eachRow.ref_id;
+       router.push(`cooperation-agreement?root_parent_id=0&selectedTabId=0&ref_id=${ref_id}`);
        break;
       default:
     }
-    setState(stateObj);
-  }
-
-  const deleteCooperationAgreement = (eachRow) => {
-
   }
 
 
@@ -233,4 +222,4 @@ const RequestOverviewData = (props) => {
   );
 }
 
-export default React.memo(RequestOverviewData)
+export default React.memo(Overviewpage)
