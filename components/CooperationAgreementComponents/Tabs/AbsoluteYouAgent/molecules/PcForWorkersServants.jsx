@@ -44,11 +44,7 @@ const PcForWorkersServants = () => {
     let alreadyLinked = updateAlreadyLinkedPcIds(newItems);
     editIndex[workersType] =  editIndexObj[workersType] !== undefined  ? editIndexObj[workersType]  : newItems[workersType].length;
     editIndex[servantsType] = editIndexObj[servantsType] !== undefined ? editIndexObj[servantsType] : newItems[servantsType].length;
-    let obj = {
-      selectedPc: workersServantsCompState['selectedPc'] || compState['selectedPc'],
-      selectedEmpId: workersServantsCompState['selectedEmpId'] || compState['selectedEmpId'],
-      newItems, editIndex, alreadyLinked
-    }
+    let obj = { selectedPc: {}, selectedEmpId: {}, newItems, editIndex, alreadyLinked }
     updateStateChanges({alreadyLinked: alreadyLinked, workersServantsCompState: {...compState, ...obj},
       workerServentsCompLoaded: true,
     })
@@ -74,6 +70,7 @@ const PcForWorkersServants = () => {
      const value = target.map(val => val.value);
      dataObj['selectedEmpId'][type] = value;
    }
+   dataObj['employeeTyperError'][type] = false;
    dependecyDataStatus['worksServantsData'] = true;
    updateStateChanges({ workersServantsCompState: dataObj, dependecyDataStatus });
    setCompState(dataObj)
