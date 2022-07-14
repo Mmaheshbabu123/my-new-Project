@@ -84,7 +84,6 @@ const RequestOverviewData = (props) => {
      const updatePaginationData = (filterRows, offset) => {
        let items = [...filterRows];
        const endOffset = offset + itemsPerPage;
-       console.log({items, endOffset}, items.slice(offset, endOffset));
        return {
          currentItems: items.slice(offset, endOffset),
          pageCount: Math.ceil(items.length / itemsPerPage)
@@ -183,13 +182,14 @@ const RequestOverviewData = (props) => {
   }
 
   const handleActionClick = (action, eachRow) => {
+    let stateObj = { ...state };
     switch (action) {
       case 'delete':
         confirmAlert({
           message: `Do you want to delete the cooperation agreement?`,
           buttons: [
             { label: 'No' },
-            { label: 'Yes', onClick: () => console.log(eachRow) }
+            { label: 'Yes', onClick: () => deleteCooperationAgreement(eachRow) }
           ]
         });
         break;
@@ -200,13 +200,21 @@ const RequestOverviewData = (props) => {
           console.log('Download clicked');
         break;
      case 'assign':
-          setState({...state, showPopup: true});
+           stateObj['showPopup'] = true;
+           stateObj['selectedCompanyId'] = eachRow.company_id;
+           stateObj['selectedEmployerId'] = eachRow.employer_id;
+           stateObj['selectedSalesAgent'] = 0;
        break;
      case 'reassign':
           console.log('reassign clicked');
        break;
       default:
     }
+    setState(stateObj);
+  }
+
+  const deleteCooperationAgreement = (eachRow) => {
+
   }
 
 

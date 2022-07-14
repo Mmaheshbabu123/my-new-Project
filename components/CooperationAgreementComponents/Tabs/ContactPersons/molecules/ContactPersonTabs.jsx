@@ -17,6 +17,8 @@ const ContactPersonTabs = (props) => {
       ...contactstate,
        id:selectId,
     })
+    tab_3['selected_person_id'] = selectId;
+    updateStateChanges({tab_3});
   }
 const addDefaultValuestoPersons = (personObj) => {
   let tempObj ={};

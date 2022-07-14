@@ -12,14 +12,14 @@ const RedirectPages = (props) => {
 		// 	window.localStorage.removeItem('src');
 		// 	window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + src + '&check_logged_in=1');
 		// }
-		if (props.hasOwnProperty('src')) {
-			localStorage.setItem('src', JSON.stringify(props.src));
-		}
-		if (props.hasOwnProperty('type')) {
-			localStorage.setItem('type', JSON.stringify(props.type));
-		}
-		if (props.hasOwnProperty('dest')) {
-			localStorage.setItem('dest', JSON.stringify(props.dest));
+		// if (props.hasOwnProperty('src')) {
+		// 	localStorage.setItem('src', JSON.stringify(props.src));
+		// }
+		// if (props.hasOwnProperty('type')) {
+		// 	localStorage.setItem('type', JSON.stringify(props.type));
+		// }
+		if (JSON.parse(localStorage.getItem("dest")) == null) {
+			localStorage.setItem("dest", JSON.stringify(props.dest));
 			switch (props.dest) {
 				case 'addpc':
 					router.push('/addpc/' + unique_key);
@@ -27,14 +27,24 @@ const RedirectPages = (props) => {
 					case 'manage-category':
 					router.push('/manage-category');
 					break;
+					case "planning":
+					// localStorage.removeItem('dest');
+					router.push('/planning/options');
+					break;
 				default:
-					router.push('/');
+					window.location.assign(process.env.NEXT_PUBLIC_APP_BACKEND_URL);
 					break;
 			}
 		} else {
-			window.location.assign(process.env.NEXT_PUBLIC_APP_BACKEND_URL);
+			if(JSON.parse(localStorage.getItem("dest")) == "planning"){
+				localStorage.removeItem('dest');
+				window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+'dashboard?access=employeer&check_logged_in=1');
+
+			}else{
+			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+			}
 		}
-	}, []);
+	}, [props]);
 };
 
 export default RedirectPages;

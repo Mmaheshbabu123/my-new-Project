@@ -72,9 +72,13 @@ export const storePlannedTimings = BASE_URL + "store-planned-timings"
 
 //--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details/";
+export const fetchproject = BASE_URL + "fetch-project/";
+export const fetchallproject = BASE_URL + "fetch-all-project";
 
 //--------------Manage Planning-----------------------------------//
 export const getWeeklyPlanning = BASE_URL + "get-weekly-planning/";
+export const getEmployeerCompanylist = BASE_URL + "get-employer-comp-details/";
+
 
 
 
@@ -114,8 +118,8 @@ export const deleteSalaryBenefits = BASE_URL + "delete-salary-benefits";
 
 
 //---- COOPERATION AGREEMENTS ROUTES -----//
-export const getCooperationAgreementsTabs = BASE_URL  + "get-coprtn-ags-tabs";
-export const fetchAbsoluteYouAgentData = BASE_URL  + "fetch-absolute-agent-data";
+export const getCooperationAgreementsTabs = BASE_URL + "get-coprtn-ags-tabs";
+export const fetchAbsoluteYouAgentData = BASE_URL + "fetch-absolute-agent-data";
 export const fetchPcLinkedEmployeeTypes = BASE_URL + "fetch-pclinked-employee-types";
 export const getPcLinkedCoeffData = BASE_URL + "get-pclinked-coeff-data";
 export const fetchSalaryBenefitsPerPc = BASE_URL + "get-salary-benefits-per-pc";
@@ -127,3 +131,7 @@ export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agree
 export const fetchCompaniesBasedOnEmployer = BASE_URL + "get-employeer-agreements-data";
 export const saveRequestedCompanies = BASE_URL + "save-requested-companies";
 export const fetchRequestOverview = BASE_URL + "get-all-agreement-requests";
+
+//------SALES AGENT COOPERATION AGREEMENTS -------//
+export const fetchSalesAgenetAgreements =  BASE_URL + "get-all-sales-agent-agreement-requests";
+export const saveSalesAgentSvData = BASE_URL + "save-agent-assigned-data";
