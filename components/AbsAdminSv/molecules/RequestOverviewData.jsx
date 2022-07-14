@@ -78,13 +78,12 @@ const RequestOverviewData = (props) => {
   //------------------- Pagination code -------------------------//
   //-------------------
      useEffect(() => {
-       setState({...stnewOffsetate, ...updatePaginationData(state.filterRows, state.itemOffset || 0)})
+       setState({...state, ...updatePaginationData(state.filterRows, state.itemOffset || 0)})
      }, [state.itemOffset]);
 
      const updatePaginationData = (filterRows, offset) => {
        let items = [...filterRows];
        const endOffset = offset + itemsPerPage;
-       console.log({items, endOffset}, items.slice(offset, endOffset));
        return {
          currentItems: items.slice(offset, endOffset),
          pageCount: Math.ceil(items.length / itemsPerPage)
