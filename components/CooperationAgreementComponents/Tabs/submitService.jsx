@@ -130,8 +130,10 @@ function checkCompanyInformationTabValidation(tab_data,tab_key) {
 }
 function checkContactPersonsTabValidation(tab_data,tab_key) {
   let validationObj  = stateObj[tab_key]['validations'];
-  var validateFileds = checkValidationContractPersons(tab_key);
-  var requiredFields = checkRequiredContractPersons(tab_data,tab_key);
+  let contractObj = stateObj[tab_key];
+  const selectPersonId = contractObj['selected_person_id'] || 0;
+  var validateFileds = checkValidationContractPersons(tab_key,selectPersonId);
+  var requiredFields = checkRequiredContractPersons(tab_data,tab_key,selectPersonId);
   return  requiredFields && validateFileds;
 }
 function checkOnlineDetailsValidation(tab_data,tab_key) {
@@ -241,27 +243,33 @@ function companyInformationPostData(state,tab_key) {
  }
  function contractPersonsPostData(state,tab_key) {
    let data = structuredClone(state[tab_key]);
+   const selecedPersonId = data['selected_person_id'] || 0;
+   data = data[selecedPersonId] || {};
+   let obj = {};
   for(const key in data) {
     delete data['loaded'];
-      removeValidatioKeyState(data[key]);
+      removeValidatioKeyState(data);
   }
-return data;
+  obj['persons'] = data;
+  obj['selected_id'] = selecedPersonId;
+ return obj;
  }
 function removeValidatioKeyState(postData) {
   delete postData['validations'];
    return postData;
 }
 
-function checkValidationContractPersons(tab_key) {
+function checkValidationContractPersons(tab_key,selectPersonId) {
  let tempStatus = true;
  let contractObj = stateObj[tab_key];
 let validationObj;
+
  //delete contractObj['validations'];
- for(const key in contractObj) {
-   validationObj = contractObj[key]['validations'] || {} ;
+ for(const key in contractObj[selectPersonId]) {
+   validationObj = contractObj[selectPersonId]['validations'] || {} ;
 
    if(validationObj)
-   if(!checkValidationFieldsEachTab(validationObj,tab_key,contractObj[key])) {
+   if(!checkValidationFieldsEachTab(validationObj,tab_key,contractObj[selectPersonId])) {
      tempStatus = false;
      break;
    };
@@ -271,14 +279,14 @@ let validationObj;
  return tempStatus;
 }
 
-function checkRequiredContractPersons(tab_data,tab_key) {
+function checkRequiredContractPersons(tab_data,tab_key,selectPersonId) {
   let tempStatus = true;
   let contractObj = stateObj[tab_key];
   let validationObj;
   //console.log(contractObj);return;
-  for(const key in contractObj) {
+  for(const key in contractObj[selectPersonId]) {
 
-    if(!checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj[key]) && key !== 'loaded') {
+    if(!checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj[selectPersonId]) && key !== 'loaded') {
       tempStatus = false;
       break;
     };

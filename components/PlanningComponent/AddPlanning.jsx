@@ -176,6 +176,12 @@ function Planning(props) {
 		setShow(true);
 	};
 
+	let updatcomp = (comp_id) => {
+		var res = data;
+		res.comp_id = comp_id;
+		setData(res);
+	};
+
 	return (
 		<div className="container calc-height ">
 			<form onSubmit={(e) => submit(e)}>
@@ -276,7 +282,14 @@ function Planning(props) {
 			</form>
 			{show == true && (
 				<div className="">
-					<Addproject display={'block'} popupActionNo={closePopup} popupActionYes={showPopup} />
+					<Addproject
+						display={'block'}
+						company={company}
+						company_id={data.comp_id}
+						popupActionNo={closePopup}
+						popupActionYes={showPopup}
+						updatecompany={updatcomp}
+					/>
 				</div>
 			)}
 		</div>

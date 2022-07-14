@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CheckBox({keyvalue, name, value, keyname ,tick,onCheck, id = "", disabled = "", customStyle = {}}) {
+export default function CheckBox({keyvalue, name, value, keyname ,tick,onCheck, id = "", disabled = "", customStyle = {}, className}) {
 
 
       let styles_id = {};
@@ -8,7 +8,7 @@ export default function CheckBox({keyvalue, name, value, keyname ,tick,onCheck, 
       return (
         <>
 
-          <label style={{...styles_id, ...customStyle}} className = "col-md-12 mt-2" >
+          <label style={{...styles_id, ...customStyle}} className = {className || "col-md-12 mt-2"} >
               <input
                   name={keyname}
                   type="checkbox"
