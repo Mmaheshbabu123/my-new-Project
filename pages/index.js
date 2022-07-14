@@ -11,11 +11,11 @@ function Myoverview(props) {
    'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
     return (
         <div>
-        <div className = 'go_to_dashboard'>
+      {/*  <div className = 'go_to_dashboard'>
         <Link href={dashboard_url}>
           <a> Back to dashboard </a>
           </Link>
-        </div>
+        </div>*/}
 {/* REMOVE THIS MANAGETYPE-INDEX COMPONENT TAG, AFTER ADDING DEVELOPMENT RELATED CODE  */}
          <ManageTypeIndex />
 
