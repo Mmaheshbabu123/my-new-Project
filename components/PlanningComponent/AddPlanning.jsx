@@ -21,6 +21,8 @@ function Planning(props) {
 	const [ location, setLocation ] = useState([]);
 	const [ costcenter, setCostcenter ] = useState([]);
 	const [ company_name, setCompany_name ] = useState([]);
+	const [ empr_id, setEmpr_id ] = useState('');
+
 
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
@@ -32,6 +34,13 @@ function Planning(props) {
 		location_id: '',
 		cost_center_id: ''
 	});
+
+
+	useEffect(() => {
+		if(localStorage.getItem("uid")!= null){
+			setEmpr_id(localStorage.getItem("uid"));
+		}
+	}, []);
 
 	// FETCHING COMPANY FROM DRUPAL //
 	useEffect(() => {
@@ -163,6 +172,7 @@ function Planning(props) {
 
 	// SHOW POPUP //
 	const showPopup = (id) => {
+		alert(empr_id);
 		setShow(true);
 	};
 
