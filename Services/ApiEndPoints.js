@@ -129,3 +129,4 @@ export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agree
 export const fetchCompaniesBasedOnEmployer = BASE_URL + "get-employeer-agreements-data";
 export const saveRequestedCompanies = BASE_URL + "save-requested-companies";
 export const fetchRequestOverview = BASE_URL + "get-all-agreement-requests";
+export const saveSalesAgentSvData = BASE_URL + "save-agent-assigned-data";

@@ -65,12 +65,12 @@ const RequestAgreement = (props) => {
     return (
       <>
           <Modal size={'lg'} show={showPopup} onHide={handleClose}>
-            <Modal.Header closeButton style={{marginLeft: '30%'}}>
+            <Modal.Header closeButton style={{paddingLeft: '30%'}}>
               <Modal.Title> Request agreement </Modal.Title>
             </Modal.Header>
           <Modal.Body>
               <div>
-                  <p style={{textAlign: 'center', fontSize: 'larger'}}> Please select company </p>
+                  <p style={{fontSize: 'larger'}}> Please select company </p>
                   <div style={{margin: '20px 0'}}>
                   {Object.values(companies).map(company => {
                     return(

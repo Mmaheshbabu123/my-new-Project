@@ -20,7 +20,7 @@ const AdminCooperationAgreementMain = (props) => {
   const fetchData = async () => {
     await APICALL.service(`${fetchRequestOverview}`, 'GET').then(response => {
       if (response.status === 200)
-        setState({...state, overviewData: response.data || [], loaded: true });
+        setState({...state, overviewData: response.data.overviewData || [], salesAgentArray: response.data.salesAgentArray , loaded: true });
     }).catch(error => console.error(error))
   }
 
