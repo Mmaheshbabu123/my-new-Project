@@ -7,25 +7,38 @@ import { MdNotifications } from 'react-icons/md';
 import Link from 'next/link';
 function Header() {
 	  const server_url = process.env.NEXT_PUBLIC_APP_URL;
-	let dashboard_url = server_url.includes('test')?'https://test.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1':
-   'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
+// 	let dashboard_url = server_url.includes('test')?'https://test.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1':
+//    'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
 	return (
-		<nav className="navbar navbar-light bg-light ">
-		<div className = 'go_to_dashboard'>
+		<div className='custom-header col-md-10 m-auto border-bottom border-2 py-4'>
+		
+		{/* <nav className="navbar"> */}
+		{/* <div className = 'go_to_dashboard'>
 	<Link href={dashboard_url}>
 		<a> Back to dashboard </a>
 		</Link>
-	</div>
-			<div classame="container-fluid ">
+	</div> */} <div class="clip0"></div>
+			<div classame="container-fluid  col-md-12">
 				<div className="d-flex row">
 
-					<div className="col">
+					<div className="col-md-4">
 						<a className="navbar-brand" href="">
-							<img src="/absoluteyou_logo.png" className="mt-2" />
+							<img style={{width: '250px'}} src="/logo.svg" className="mt-2" />
 						</a>
 					</div>
 
-					<div className="col">
+					<div className="d-flex justify-content-end  col-md-8">
+                <ul className="d-flex list-unstyled mb-0">
+                    <li className='list-unstyled mx-3 align-self-center'><img src="/notifications.svg"/></li>
+                    <li className='list-unstyled mx-3 align-self-center'><img style={{width: '50px'}} src="/account.png"/></li>
+                    <li className='list-unstyled mx-3 align-self-center'><select type="" className="border-0 bg-light p-1 mt-2">
+							<option>EN</option>
+							<option>NL</option>
+							<option>FR</option>
+						</select></li>
+                </ul>
+            </div>
+					{/* <div className="col">
 						<button type="button" className="btn  position-relative mt-1 p-2">
 							<MdNotifications className="" />
 							<span className="position-absolute  top-0 start-100 translate-middle badge border border-light rounded-circle bg-primary p-2">
@@ -35,15 +48,18 @@ function Header() {
 						<button type="button" className="btn  position-relative mt-2 p-2 ">
 							<FaRegUserCircle className="" />
 						</button>
-						{/* <select type="" className="border-0 bg-light p-1 mt-2">
+						<select type="" className="border-0 bg-light p-1 mt-2">
 							<option>EN</option>
 							<option>NL</option>
 							<option>FR</option>
-						</select> */}
-					</div>
+						</select>
+					</div> */}
 				</div>
 			</div>
-		</nav>
+			
+		{/* </nav> */}
+		
+		</div>
 	);
 }
 
