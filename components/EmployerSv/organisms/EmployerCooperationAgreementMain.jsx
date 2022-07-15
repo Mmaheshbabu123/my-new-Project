@@ -44,7 +44,7 @@ const EmployerCooperationAgreementMain = (props) => {
     <div>
     {state.loaded === true ?
           <div className="col-md-12 row">
-          <h4 className={`${styles['employer-sv-page-title']}`}> Manage employer cooperation agreement </h4>
+          <h1 className={`${styles['employer-sv-page-title']} text-center page-title`}> Manage agreements </h1>
               <OverviewPage state={state} setState={setState}/>
               {state.companies && Object.keys(state.companies).length > 0 &&
                 <RequestAgreement state={state} setState={setState} employer_id = {props.employerid} />}

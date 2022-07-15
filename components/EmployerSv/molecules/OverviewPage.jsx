@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import SearchIcon from '../../SearchIcon';
 import styles from './EmployerSv.module.css';
+import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
@@ -114,15 +115,15 @@ const OverviewPage = (props) => {
                 return (
                   <tr key={eachRow.company_id}>
                       <td> {eachRow.company_name} </td>
-                      <td> {eachRow.date_of_request} </td>
-                      <td> {eachRow.date_of_commencement} </td>
+                      <td> {formatDate(eachRow.date_of_request)} </td>
+                      <td> {formatDate(eachRow.date_of_commencement) || '--'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
                       <td> {getNeededActions(eachRow) } </td>
                   </tr>
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found... </p>}
+            : <p style={{paddingTop: '10px'}}> No data found. </p>}
           </table>
         </div>
         <div>
@@ -163,8 +164,8 @@ const OverviewPage = (props) => {
         </div>
         )
         :
-      <pre> {`We notice that you do not have any cooperation agreement for your company/companies,
-                please click on "Request agreement" button to request for an agreement`} </pre>}
+      <p style={{marginTop: '20px', textAlign: 'center'}}> {`We notice that you do not have any cooperation agreement for your company/companies,`} <br />
+	      {`please click on "Request agreement" button to request for an agreement.`} </p>}
 
      </div>
   );

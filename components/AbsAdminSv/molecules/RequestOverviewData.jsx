@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
 import SearchIcon from '../../SearchIcon';
 import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
 import { AiFillFilePdf, AiOutlineRedo } from 'react-icons/ai';
+import { deleteCooperationAgreement } from '@/Services/ApiEndPoints';
+import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
+import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import styles from './AbsAdminSv.module.css';
 
 const itemsPerPage = 5;
 const RequestOverviewData = (props) => {
-  const { overviewData, salesAgentArray } = props;
+  const router = useRouter();
+  const { overviewData, salesAgentArray, assignedData } = props;
 
   /**
    * [getSelectedStatus description]
@@ -31,10 +36,12 @@ const RequestOverviewData = (props) => {
       showPopup: false,
       selectedSalesAgent: 0,
       warning: false,
+      reassign: false,
       pageCount: 0,
       itemOffset: 0,
       currentPage: 0,
-      selectedTabId: 1
+      selectedTabId: 1,
+      savedAgentId: 0,
   })
 
   const handleTabClick = ({ target: { id } }) => {
@@ -125,15 +132,15 @@ const RequestOverviewData = (props) => {
                       <td> {eachRow.employer_name} </td>
                       <td> {eachRow.employer_email} </td>
                       <td> {eachRow.company_name} </td>
-                      <td> {eachRow.date_of_request} </td>
-                      <td> {eachRow.date_of_commencement} </td>
+                      <td> {formatDate(eachRow.date_of_request)} </td>
+                      <td> {formatDate(eachRow.date_of_commencement) || '--'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
                       <td> {getNeededActions(eachRow) } </td>
                   </tr>
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found... </p>}
+            : <p style={{paddingTop: '10px'}}> No data found. </p>}
           </table>
         </div>
         <div>
@@ -163,7 +170,7 @@ const RequestOverviewData = (props) => {
       return(
         <div>
           <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
+          <span title={'PDF'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
           <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
@@ -186,10 +193,10 @@ const RequestOverviewData = (props) => {
     switch (action) {
       case 'delete':
         confirmAlert({
-          message: `Do you want to delete the cooperation agreement?`,
+          message: `Do you want to delete the request of cooperation agreement?`,
           buttons: [
             { label: 'No' },
-            { label: 'Yes', onClick: () => deleteCooperationAgreement(eachRow) }
+            { label: 'Yes', onClick: () => handleDelete(eachRow) }
           ]
         });
         break;
@@ -200,35 +207,34 @@ const RequestOverviewData = (props) => {
           console.log('Download clicked');
         break;
      case 'assign':
-           stateObj['showPopup'] = true;
-           stateObj['selectedCompanyId'] = eachRow.company_id;
-           stateObj['selectedEmployerId'] = eachRow.employer_id;
-           stateObj['selectedSalesAgent'] = 0;
-       break;
-     case 'reassign':
-          console.log('reassign clicked');
+         let savedAgentId = assignedData[eachRow.employer_id] ? assignedData[eachRow.employer_id][eachRow.company_id] ? assignedData[eachRow.employer_id][eachRow.company_id] : 0:0;
+         stateObj['showPopup'] = true;
+         stateObj['selectedCompanyId'] = eachRow.company_id;
+         stateObj['selectedEmployerId'] = eachRow.employer_id;
+         stateObj['selectedSalesAgent'] = savedAgentId;
+         stateObj['savedAgentId'] = savedAgentId;
        break;
       default:
     }
     setState(stateObj);
   }
 
-  const deleteCooperationAgreement = (eachRow) => {
-
+  const handleDelete = async (eachRow) => {
+    await APICALL.service(`${deleteCooperationAgreement}`, 'POST', { company_id: eachRow.company_id, employer_id: eachRow.employer_id })
+    .then(response => {
+      if(response.status === 200) {
+        router.reload()
+      }
+    }).catch(error => console.error(error))
   }
 
 
   return(
     <div className={`${styles['emp-sv-overview-page-div']}`}>
-      {overviewData.length > 0 ? (
         <div>
           {showTabs()}
           {showOverviewOfCompanies()}
         </div>
-        )
-        :
-      <pre> There is no cooperation agreement request. </pre>}
-
      </div>
   );
 }
