@@ -6,19 +6,18 @@ import { FaUserAlt, FaRegUserCircle } from 'react-icons/fa';
 import { MdNotifications } from 'react-icons/md';
 import Link from 'next/link';
 function Header() {
-	  const server_url = process.env.NEXT_PUBLIC_APP_URL;
-	let dashboard_url = server_url.includes('test')?'https://test.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1':
-   'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
+	const server_url = process.env.NEXT_PUBLIC_APP_URL;
+	// 	let dashboard_url = server_url.includes('test')?'https://test.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1':
+	//    'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
 	return (
 		<nav className="navbar navbar-light bg-light ">
-		<div className = 'go_to_dashboard'>
-	<Link href={dashboard_url}>
+			<div className="go_to_dashboard">
+				{/* <Link href={dashboard_url}>
 		<a> Back to dashboard </a>
-		</Link>
-	</div>
+	</Link> */}
+			</div>
 			<div classame="container-fluid ">
 				<div className="d-flex row">
-
 					<div className="col">
 						<a className="navbar-brand" href="">
 							<img src="/absoluteyou_logo.png" className="mt-2" />
