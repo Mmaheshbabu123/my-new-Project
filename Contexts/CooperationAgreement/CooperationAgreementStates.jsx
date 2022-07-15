@@ -23,7 +23,7 @@ const takeElementStatus = (type = 1) => type === 1 ?
 const CooperationAgreementStates = (props) => {
   const initialState = {
       tab_1 : { worksServantsData: {1: [], 2: []}, cooperationCoeffData: {} }
-    , tab_2 : {'22':1,'23':1,'24':1,validations:{'17':{'type':1,validate:false,'text':'Only numbers will accept' },'19':{'type':2,validate:false},'14':{'type':3,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'}}}
+    , tab_2 : {'22':1,'23':1,'24':1,'10':'1',validations:{'17':{'type':1,validate:false,'text':'Only numbers will accept' },'19':{'type':2,validate:false},'14':{'type':3,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'}}}
     , tab_3 : {1:{'25':1,'30':1,'31':2,'32':2,'38':2,'39':2,validations:{'34':{'type':1,validate:false},'35':{'type':2,validate:false}}},2:{'25':1,'30':1,'31':2,'32':2,'38':2,'39':2,validations:{'34':{'type':1,validate:false},'35':{'type':2,validate:false}}},loaded:true,selected_person_id:1}
     , tab_4 : {'43':1,'44':2,'48':1,'49':1,validations:{'40':{'type':2,validate:false},'41':{'type':2,validate:false},'42':{'type':2,validate:false},'45':{'type':2,validate:false},'46':{'type':2,validate:false},'47':{'type':2,validate:false}}}
     , tab_5 : {
