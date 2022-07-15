@@ -183,6 +183,8 @@ const Overviewpage = (props) => {
   }
 
   const handleActionClick = (action, eachRow) => {
+    var ref_id = eachRow.ref_id;
+    var root_parent_id = eachRow.root_parent_id;
     switch (action) {
       case 'delete':
         confirmAlert({
@@ -194,13 +196,12 @@ const Overviewpage = (props) => {
         });
         break;
      case 'edit':
-        console.log('Edit');
+        router.push(`cooperation-agreement?root_parent_id=${root_parent_id}&selectedTabId=0&ref_id=${ref_id}`);
         break;
      case 'download':
           console.log('Download clicked');
         break;
       case 'add':
-      const ref_id = eachRow.ref_id;
        router.push(`cooperation-agreement?root_parent_id=0&selectedTabId=0&ref_id=${ref_id}`);
        break;
       default:
