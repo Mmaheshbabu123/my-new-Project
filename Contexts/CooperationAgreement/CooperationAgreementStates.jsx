@@ -47,6 +47,7 @@ const CooperationAgreementStates = (props) => {
     , tab_6_action : 1
     , element_status: takeElementStatus()
     , dependecyDataStatus: takeElementStatus(2)
+    , salesAgentRefId: 0
   };
   const [state, dispatch] = useReducer(CooperationAgreementReducer, initialState);
   const updateStateChanges = (obj) => {
