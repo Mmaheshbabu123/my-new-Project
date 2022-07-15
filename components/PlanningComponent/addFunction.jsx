@@ -4,14 +4,15 @@ import Select from 'react-select';
 import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 import { da, id } from 'date-fns/locale';
 import { max } from 'date-fns';
-// import { FormControl } from 'react-bootstrap';
-// import { FormLabel } from 'react-bootstrap';
-// import { Printer } from 'react-bootstrap-icons';
+import { data } from 'node_modules/autoprefixer/lib/autoprefixer';
+import { validate } from 'uuid';
 
 const AddFunction = () => {
 	const router = useRouter();
+	const salaryref = useRef(null);
 	const [ ischecked, setChecked ] = useState(true);
 	const [ Data, setData ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
@@ -20,13 +21,16 @@ const AddFunction = () => {
 	//functionid,salary
 	const [ functionid, setFunctionId ] = useState();
 	//employee id,employee type id
-	const [ emptypetoid, setEmptypeTOid ] = useState();
+	const [ functionselected, setFunctionSelected ] = useState();
 	const [ fulllist, setFulllist ] = useState();
 	const [ listtype, setListtype ] = useState();
 	const [ selectedOption, setSelectedOption ] = useState([]);
 	const [ employeeobject, setEmployeeObject ] = useState([]);
 	const [ storeddata, setStoredData ] = useState([]);
 	const [ funcChanged, setFuncChanged ] = useState(false);
+	const [ salaryerror, setSalaryError ] = useState();
+	const [ errcount, seterrcount ] = useState(0);
+	const [ submitclick, setSubmitClick ] = useState(false);
 
 	useEffect(
 		() => {
@@ -39,7 +43,6 @@ const AddFunction = () => {
 					var sdata = result.data[2];
 					var employeetypes = result.data[3];
 					var functionsdata = result.data[1];
-
 					if (Data.length == 0) {
 						setData(data);
 						createAllObjects(data);
@@ -68,26 +71,13 @@ const AddFunction = () => {
 		setStoredData(sdata);
 	}
 
-	useEffect(
-		() => {
-			if (funcChanged == false) {
-				if (storeddata != null && storeddata != '') {
-					if (functions != null) {
-						var func = [ ...functions ];
-						func.map((val, key) => {
-							if (val.id == storeddata[0].function_id) {
-								func[key].funct_checked = parseInt(storeddata[0].function_id);
-							} else {
-								func[key].funct_checked = '';
-							}
-						});
-						setFunctions(func);
-					}
-				}
-			}
-		},
-		[ functions, storeddata ]
-	);
+	function ercount(v) {
+		if (v == '' || v == null || v == undefined) {
+			seterrcount(1);
+			return true;
+		}
+		return false;
+	}
 
 	function createAllObjects(result) {
 		if (result.length != 0 && employeeobject.length == 0) {
@@ -96,7 +86,10 @@ const AddFunction = () => {
 					employeeid: element[4],
 					functionid: '',
 					salary: '',
-					employeetypeid: ''
+					employeetypeid: '',
+					salaryerror: '',
+					employeeiderror: '',
+					functioniderror: ''
 				};
 				if (element[4] != null) {
 					setEmployeeObject((employeeobject) => [ ...employeeobject, obj ]);
@@ -109,29 +102,59 @@ const AddFunction = () => {
 		setSelectedOption(employeTypeSelection(V));
 	};
 
+	function validateErrors() {
+		let v = 0;
+		const newstate = employeeobject.map((value) => {
+			let func,
+				sal,
+				emp = '';
+			if (value.functionid == '' || value.functionid == null || value.functionid == 'This field is required') {
+				func = 'This field is required';
+				v++;
+			}
+
+			if (value.salary == '' || value.salary == null || value.salary == 'This field is required') {
+				sal = 'This field is required';
+				v++;
+			}
+
+			if (
+				value.employeetypeid == '' ||
+				value.employeetypeid == null ||
+				value.salary == 'This field is required'
+			) {
+				emp = 'This field is required';
+				v++;
+			}
+			return { ...value, functioniderror: func, employeeiderror: emp, salaryerror: sal };
+		});
+
+		setEmployeeObject(newstate);
+		return v;
+	}
+
 	const submit = (e) => {
 		e.preventDefault();
 		//return
 		var p_unique_key = router.query.p_unique_key;
 		//functionid, salary,employeetypeid,employeeid
-		// var data = [ ...functionid, ...emptypetoid ];
-
-		APICALL.service(
-			process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/storeFunctionEmptypeSalary/' + p_unique_key,
-			'POST',
-			employeeobject
-		)
-			.then((res) => {
-				router.push('/planning/timings/' + router.query.p_unique_key);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
-
-	const EmpSalary = (id, key) => {
-		if (id.value != '' && key != '') {
-			setEmptypeTOid([ id.value, key ]);
+		let errors = validateErrors();
+		if (errors != 0) {
+			console.log('errors are there');
+		} else {
+			if (errcount == 0) {
+				APICALL.service(
+					process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/storeFunctionEmptypeSalary/' + p_unique_key,
+					'POST',
+					employeeobject
+				)
+					.then((res) => {
+						router.push('/planning/timings/' + router.query.p_unique_key);
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
 		}
 	};
 
@@ -146,41 +169,57 @@ const AddFunction = () => {
 			});
 			setEmployeeObject(newState);
 		}
+		console.log(employeeobject);
 	}
 
-	async function updatingObjectFunction(functionid, empid, salari) {
+	function updatingObjectSlary(empid, salary) {
 		var objects = employeeobject;
 		if (objects != undefined) {
 			const newState = objects.map((element) => {
 				if (empid != 0) {
 					if (element.employeeid == empid) {
-						return { ...element, functionid: functionid, salary: salari };
+						return { ...element, salary: salary };
 					}
-				} else {
-					return { ...element, functionid: functionid, salary: salari };
 				}
 				return element;
 			});
 			setEmployeeObject(newState);
 		}
+		console.log(employeeobject);
 	}
 
-	function addsalary(id, empid, salary, level) {
+	function updatingObjectFunction(empid, funcid) {
+		var objects = employeeobject;
+		if (objects != undefined) {
+			const newState = objects.map((element) => {
+				if (empid != 0) {
+					if (element.employeeid == empid) {
+						return { ...element, functionid: funcid };
+					}
+				} else {
+					return { ...element, functionid: funcid };
+				}
+				return element;
+			});
+			setEmployeeObject(newState);
+		}
+		console.log(employeeobject);
+	}
+
+	function setsaalary(empid, e) {
+		let value = e.target.value;
+		setSalaries(value);
+		updatingObjectSlary(empid, Number(value));
+	}
+
+	function updateValue(empid, value, level) {
 		if (level == 1) {
-			setFunctionId([ id, salary ]);
-			setSalaries(salary);
-			updatingObjectFunction(id, empid, salary);
+			updatingObjectFunction(empid, value);
 		} else if (level == 2) {
-			if (id != undefined && id != '' && id != null) {
-				setEmptypeTOid([ id.value, salary ]);
-				updatingObjectTypeid(empid, id.value);
-			}
+			updatingObjectTypeid(empid, value);
 		} else if (level == 3) {
-			if (id != undefined) {
-				setFunctionId([ id.value, id.salary ]);
-				setSalaries(id.salary);
-				updatingObjectFunction(id.value, empid, Number(id.salary));
-			}
+			//setFunctionId([ id.value, id.salary ]);
+			updatingObjectSlary(empid, Number(value));
 		} else {
 		}
 	}
@@ -215,7 +254,10 @@ const AddFunction = () => {
 		router.push('/planning/employees/' + p_unique_key);
 	};
 
-	const empid = (parameter = 0) => {
+	const empid = (parameter = 0, error = '') => {
+		if (error == '' && employeeobject[0] != undefined) {
+			error = employeeobject[0].functioniderror;
+		}
 		var func = (
 			<div className="row ms-5">
 				<ul>
@@ -223,11 +265,15 @@ const AddFunction = () => {
 						functions.slice(0, 4).map((key, value) => (
 							<div key={key['id']} className="row ms-5">
 								<div className="col-md-6">
+									{/* {console.log(key)} */}
 									<div
 										className="mt-2 mb-2 bg-light h-75 p-3"
 										defaultValue={prefill(key['id'])}
-										onChange={() =>
-											addsalary(key['id'], parameter, value < 3 ? Number(key['salary']) : '', 1)}
+										onChange={() => {
+											updateValue(parameter, key['id'], 1);
+											console.log(key['id']);
+											setSalaries(key['salary']);
+										}}
 									>
 										{value < 3 ? (
 											<input
@@ -244,21 +290,27 @@ const AddFunction = () => {
 											''
 										)}
 										{value < 3 ? key['name'] : ''}
-										{!ischecked ? (
+										{!ischecked && value == 3 ? (
 											<div>
 												<input
 													type="radio"
 													value={'select a function from drop down'}
-													name="functions"
+													name={'functions'}
 													className="p-3"
 												/>
 												<Select
+													placeholder={<div>Function</div>}
 													//value={selectedOption}
 													name="employefunctionsall"
 													options={fulllist}
-													onChange={setListtype}
+													onChange={setFunctionSelected}
 													onInputChange={() => {
-														addsalary(listtype, parameter, 3, 3);
+														if (functionselected != undefined) {
+															updateValue(parameter, functionselected.value, 1);
+														}
+														if (functionselected != undefined) {
+															setSalaries(functionselected.salary);
+														}
 													}}
 												/>
 											</div>
@@ -271,12 +323,18 @@ const AddFunction = () => {
 													className="p-3 "
 												/>
 												<Select
+													placeholder={<div>Function</div>}
 													//value={selectedOption}
 													name="employefunctionsall"
 													options={fulllist}
-													onChange={setListtype}
+													onChange={setFunctionSelected}
 													onInputChange={() => {
-														addsalary(listtype, parameter, 3, 3);
+														if (functionselected != undefined) {
+															updateValue(parameter, functionselected.value, 1);
+														}
+														if (functionselected != undefined) {
+															setSalaries(functionselected.salary);
+														}
 													}}
 												/>
 											</div>
@@ -284,12 +342,14 @@ const AddFunction = () => {
 											''
 										)}
 									</div>
+									{}
 								</div>
 							</div>
 						))
 					) : (
 						''
 					)}
+					<p style={{ color: 'red' }}>{error}</p>
 				</ul>
 			</div>
 		);
@@ -357,19 +417,20 @@ const AddFunction = () => {
 										{() => setSelected(storeddata[value])}
 										{emptypes != null ? (
 											<Select
+												placeholder={<div>Employee type</div>}
 												// value={employeTypeSelection(storeddata[value])}
 												options={emptypes}
 												name="functionss"
 												onChange={setSelectedOption}
 												onInputChange={(e) => {
-													addsalary(selectedOption, key[4], 2, 2);
-													updatestoredata(e);
+													updateValue(key[4], selectedOption.value, 2);
+													//updatestoredata(e);
 												}}
 											/>
 										) : (
 											''
 										)}
-										{/* {selectedOption == ''?<span>this field is required</span>:''} */}
+										{<p style={{ color: 'red' }}>{employeeobject[value].employeeiderror}</p>}
 									</div>
 									<div className="col-md-2 bg-light mb-2">
 										<span className="p-1">
@@ -377,27 +438,32 @@ const AddFunction = () => {
 												'€' + salaries
 											) : (
 												''
-											) : employeeobject[value].salary != '' ? (
-												'€' + employeeobject[value].salary
+											) : employeeobject[value].functionid != '' ? (
+												'€' + salaries
 											) : (
 												''
 											)}
 										</span>
 									</div>
 									<div className="col-md-2">
-										{salaries != undefined || employeeobject[value].salary != '' ? (
-											<input
-												type="textfield"
-												name="salary"
-												className="form-control"
-												on={() => addsalary(selectedOption, key[4], 2, 2)}
-											/>
+										{employeeobject[value].functionid != '' ? (
+											<div>
+												<input
+													ref={salaryref}
+													type="textfield"
+													name="salary"
+													placeholder="salary"
+													className="form-control"
+													onChange={(e) => setsaalary(key[4], e)}
+												/>
+												<p style={{ color: 'red' }}>{employeeobject[value].salaryerror}</p>
+											</div>
 										) : (
 											''
 										)}
 									</div>
 								</div>
-								{!ischecked ? empid(key[4]) : ''}
+								{!ischecked ? empid(key[4], employeeobject[value].functioniderror) : ''}
 							</div>
 						))}
 					</ol>
@@ -423,6 +489,7 @@ const AddFunction = () => {
 						</button>
 					</div>
 				</div>
+				{console.log(employeeobject)}
 			</form>
 		</div>
 	);
