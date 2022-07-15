@@ -95,7 +95,7 @@ const AddEmployee = () => {
 		router.push('/planning/add/' + p_unique_key);
 	};
 	return (
-		<div className="container" style={{ marginTop: '15%', marginBottom: '2%', fontWeight: 'bold' }}>
+		<div className="container" style={{ marginTop: '1%', marginBottom: '2%', fontWeight: 'bold' }}>
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row">
 					<div className="row" style={{ marginBottom: '5%' }}>
