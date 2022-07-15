@@ -4,6 +4,7 @@ import SearchIcon from '../../SearchIcon';
 import styles from './AbsSalesAgentSv.module.css';
 //import SearchIcon from '../../SearchIcon';
 import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
+import { confirmAlert } from 'react-confirm-alert';
 import { AiFillFilePdf, AiOutlineRedo} from 'react-icons/ai';
 import { HiPlusCircle} from 'react-icons/hi';
 import { useRouter } from 'next/router';
@@ -136,7 +137,7 @@ const Overviewpage = (props) => {
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found... </p>}
+            : <p style={{paddingTop: '10px'}}> No data found. </p>}
           </table>
         </div>
         <div>
@@ -209,15 +210,10 @@ const Overviewpage = (props) => {
 
   return(
     <div className={`${styles['emp-sv-overview-page-div']}`}>
-      {overviewData.length > 0 ? (
         <div>
           {showTabs()}
           {showOverviewOfCompanies()}
         </div>
-        )
-        :
-      <pre> There is no cooperation agreement request. </pre>}
-
      </div>
   );
 }

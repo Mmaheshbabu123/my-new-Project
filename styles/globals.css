@@ -22,6 +22,268 @@
 	src: url("fonts/OpenSans-Bold.ttf") format("truetype");
 }
 
+/* for poppin font */
+@font-face {
+    font-family: 'Poppins-bold';
+    font-weight: 800;
+    font-style: normal;
+	src: url("./fonts/OpenSans-Bold.ttf");
+    /* src: url(/themes/custom/absolute_you/fonts/Poppins/Poppins-Bold.ttf ); */
+}
+@font-face {
+    font-family: 'Poppins-italac';
+    font-weight: 500;
+    font-style: normal;
+    src: url("./fonts/Poppins-Italic.ttf" );
+}
+@font-face {
+    font-family: 'Poppins-normal';
+    font-weight: 500;
+    font-style: normal;
+    src: url( "./fonts/Poppins-Light.ttf" );
+}
+@font-face {
+    font-family: 'Poppins-extraitalic';
+    font-weight: 600;
+    font-style: normal;
+    src: url("./fonts/Poppins-ExtraLightItalic.ttf" );
+}
+@font-face {
+    font-family: 'Poppins-lightitalic';
+    font-weight: 500;
+    font-style: normal;
+    src: url("./fonts/Poppins-LightItalic.ttf");
+} 
+@font-face {
+    font-family: 'Poppins-regular';
+    font-weight: 500;
+    font-style: normal;
+    src: url("./fonts/Poppins-Regular.ttf");
+} 
+@font-face {
+    font-family: 'Poppins-thin';
+    font-weight: 500;
+    font-style: normal;
+    src: url("./fonts/Poppins-Thin.ttf");
+} 
+@font-face {
+    font-family: 'Poppins-thinitalic';
+    font-weight: 500;
+    font-style: normal;
+    src: url("./fonts/Poppins-ThinItalic.ttf");
+} 
+@font-face {
+    font-family: 'Poppins-mediun';
+    font-weight: 500;
+    font-style: normal;
+    src: url("./fonts/Poppins-Medium.ttf");
+} 
+@font-face {
+    font-family: 'Poppins-mediumitalic';
+    font-weight: 500;
+    font-style: normal;
+	src: url("./fonts/Poppins-MediumItalic.ttf");
+} 
+
+
+body {
+    /* for title */
+    --color-purple: #7761A7;
+    /* for lable and footer background-color */
+    --color-label-footer-gray: #4C4D55;
+    
+    /* for border color*/
+    --color-input-border-lightgrey: #B5B5B5;
+    --color-white: #fff;
+    /* for pagination background color */
+    --bg-gray-dark: #4C4D5580;
+    --bg-grey-medium: #4C4D550F;
+    --color-skyblue: #79B1BD;
+   
+    /* for font sizes */
+    --font-size-s: 0.75em;
+    --font-size-xl: 1.125rem;
+    --font-size-xs: 0.625rem;
+    --font-size-xxl: 1.25rem;
+    --font-size-xxs: 0.5rem;
+
+
+
+    /* for label  */
+    --color-grey-dark: #515050;
+    --color-black: #0b0c0c;
+    --font-family-regular: LibreFranklin-Regular;
+    --font-family-light: LibreFranklin-Normal;
+    --font-family-extralightitalic: LibreFranklin-extralightitalic;
+    --font-family-bold: LibreFranklin-bold;
+    --font-size-default:14px;
+    --font-size-small: 12px;
+   /* for input field */
+   --height-normal:35px;
+   --border-input-lightgray: #dddddd;
+
+}
+:root {
+  /* for title */
+    --color-purple: #7761A7;
+    /* for lable and footer background-color */
+    --color-label-footer-gray: #4C4D55;
+    
+    /* for border color*/
+    --color-border-lightgrey: #B5B5B5;
+    --color-white: #fff;
+    /* for pagination background color */
+    --bg-gray-dark: #4C4D5580;
+    --bg-grey-medium: #4C4D550F;
+    --color-skyblue: #79B1BD;
+    
+      /* for font sizes */
+      --font-size-s: 0.75rem;
+      --font-size-xl: 1.125rem;
+      --font-size-xs: 0.625rem;
+      --font-size-xxl: 1.25rem;
+      --font-size-xxs: 0.5rem;
+      --font-size-m: 1rem;
+
+  /* font family */
+    --font-family-poppins-regular: Poppins-regular;
+    --font-family-poppins-italic: Poppins-italac;
+    --font-family-poppins-light: Poppins-normal;
+    --font-family-poppins-bold: Poppins-bold;
+    --font-family-poppins-thin: Poppins-thin;
+    --font-family-poppins-medium: Poppins-medium;
+}
+
+
+.poppins-regular-14px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-regular);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 400;
+}
+
+
+.poppins-regular-16px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-regular);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.poppins-regular-18px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-regular);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.poppins-regular-20px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-regular);
+    font-size: var(--font-size-xl);
+    font-style: normal;
+    font-weight: 400;
+}
+.poppins-italic-14px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-italic);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 400;
+}
+
+
+.poppins-italic-16px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-italicr);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.poppins-italic-18px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-italic);
+    font-size: var(--font-size-l);
+    font-style: italic;
+    font-weight: 400;
+}
+
+.poppins-italic-20px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-italic);
+    font-size: var(--font-size-xl);
+    font-style: italic;
+    font-weight: 400;
+}
+
+
+.poppins-bold-14px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-bold);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 800;
+}
+
+
+.poppins-bold-16px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-bold);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 800;
+}
+
+.poppins-bold-18px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-bold);
+    font-size: var(--font-size-l);
+    font-style: italic;
+    font-weight: 800;
+}
+
+.poppins-bold-20px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-bold);
+    font-size: var(--font-size-xl);
+    font-style: italic;
+    font-weight: 800;
+}
+.input-border-lightgray {
+    border: 1px solid var(--color-input-border-lightgrey);
+}
+.custom-label {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+}
+.custom-btn {
+    background-color: var(--color-purple);
+    color: var(--color-white);
+    font-family: var(--font-family-poppins-regular);
+}
+.clip0 {
+    clip-path: polygon(0% -5%, 3.3% 0.3%, 20% 62%, 0% 100%);
+    background-color: darkcyan;
+    width: 330px;
+    height: 500px;
+    position: absolute;
+    top: 0;
+}
+.clip1 {
+    clip-path: polygon(100% 0%, 100% 100%, 75% 57%);
+    background-color: yellow;
+    width: 300px;
+    height: 430px;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    bottom: 0;
+}
 .screen a {
 	display: contents;
 	text-decoration: none;

@@ -19,3 +19,13 @@
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   }
+  .planningheight {
+    min-height: calc(90vh - 180px);
+  }
+  .poppinsregular20px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-regular);
+    font-size: var(--font-size-xl);
+    font-style: normal;
+    font-weight: 400;
+  }

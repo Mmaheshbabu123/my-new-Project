@@ -198,13 +198,14 @@ function absoluteYouPostData(state) {
   let workers = 1;
   let servants = 2;
   let data = {...state['tab_1']};
+  let alreadyLinkedIds = state['alreadyLinked'];
   let workersServantsCompState = {...state['workersServantsCompState']}
   let selectedPc    = workersServantsCompState['selectedPc'] || {};
   let selectedEmpId = workersServantsCompState['selectedEmpId'] || {};
-  if(selectedEmpId[workers] && selectedEmpId[workers].length) {
+  if(selectedEmpId[workers] && selectedEmpId[workers].length && !alreadyLinkedIds.includes(selectedPc[workers])) {
     data['worksServantsData'][workers].push(insertObj(selectedPc, selectedEmpId, workers));
   }
-  if(selectedEmpId[servants] && selectedEmpId[servants].length) {
+  if(selectedEmpId[servants] && selectedEmpId[servants].length && !alreadyLinkedIds.includes(selectedPc[servants])) {
     data['worksServantsData'][servants].push(insertObj(selectedPc, selectedEmpId, servants))
   }
   let coeffPageData = state['coeffPageData'] || {};

@@ -8,6 +8,7 @@ import { AiFillFilePdf, AiOutlineRedo } from 'react-icons/ai';
 import { deleteCooperationAgreement } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
+import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import styles from './AbsAdminSv.module.css';
 
 const itemsPerPage = 5;
@@ -131,8 +132,8 @@ const RequestOverviewData = (props) => {
                       <td> {eachRow.employer_name} </td>
                       <td> {eachRow.employer_email} </td>
                       <td> {eachRow.company_name} </td>
-                      <td> {eachRow.date_of_request} </td>
-                      <td> {eachRow.date_of_commencement} </td>
+                      <td> {formatDate(eachRow.date_of_request)} </td>
+                      <td> {formatDate(eachRow.date_of_commencement) || '--'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
                       <td> {getNeededActions(eachRow) } </td>
                   </tr>
@@ -169,7 +170,7 @@ const RequestOverviewData = (props) => {
       return(
         <div>
           <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
+          <span title={'PDF'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
           <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
@@ -192,7 +193,7 @@ const RequestOverviewData = (props) => {
     switch (action) {
       case 'delete':
         confirmAlert({
-          message: `Do you want to delete the cooperation agreement?`,
+          message: `Do you want to delete the request of cooperation agreement?`,
           buttons: [
             { label: 'No' },
             { label: 'Yes', onClick: () => handleDelete(eachRow) }

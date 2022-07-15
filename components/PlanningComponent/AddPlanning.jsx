@@ -109,7 +109,7 @@ function Planning(props) {
 	useEffect(
 		() => {
 			APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
-				if (result.data.length > 0) {
+				if (result && result.data.length > 0) {
 					var res = result.data[0];
 					res.p_unique_key = result.data[0].p_unique_key;
 					res.comp_id = result.data[0].comp_id;

@@ -32,4 +32,14 @@ export const soortOptions = [
   {value: 2, label: 'Day'},
   {value: 3, label: 'Week'},
 ];
+
+export const whoWillSignOptions = [
+  {
+    id: 1, label: 'Employer'
+  },{
+    id: 2, label: 'Co-employer'
+  },{
+    id: 3, label: 'Location manager'
+  }
+];
 //-----
