@@ -16,11 +16,11 @@ const ContactPersons = (props) => {
   let tab_3 = { ...state[stateKey] };
   var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
 
-  let apiData = Object.keys(data['tab_3']['personsData']).length ? data['tab_3']['personsData'] : 0;
+  let apiData = Object.keys(data['tab_3']).length ? data['tab_3']['personsData'] : 0;
 
   tab_3_action = apiData === 0 ? 1 :2;
   if(apiData) {
-    
+
   tab_3 = {...tab_3,...apiData}
   }
 
