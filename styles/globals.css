@@ -139,11 +139,13 @@ body {
     
       /* for font sizes */
       --font-size-s: 0.75rem;
-      --font-size-xl: 1.125rem;
+      --font-size-xl: 1.25rem;
       --font-size-xs: 0.625rem;
-      --font-size-xxl: 1.25rem;
+      --font-size-xxl: 1.5rem;
+      --font-size-xxxl: 1.7rem;
       --font-size-xxs: 0.5rem;
       --font-size-m: 1rem;
+      --font-size-l: 1.125rem;
 
   /* font family */
     --font-family-poppins-regular: Poppins-regular;
@@ -157,7 +159,7 @@ body {
 
 .poppins-regular-14px {
     color: var(--color-label-footer-gray);
-    font-family: var(--font-family-regular);
+    font-family: var(--font-family-poppins-regular);
     font-size: var(--font-size-s);
     font-style: normal;
     font-weight: 400;
@@ -166,7 +168,7 @@ body {
 
 .poppins-regular-16px {
     color: var(--color-label-footer-gray);
-    font-family: var(--font-family-regular);
+    font-family: var(--font-family-poppins-regular);
     font-size: var(--font-size-m);
     font-style: normal;
     font-weight: 400;
@@ -174,7 +176,7 @@ body {
 
 .poppins-regular-18px {
     color: var(--color-label-footer-gray);
-    font-family: var(--font-family-regular);
+    font-family: var(--font-family-poppins-regular);
     font-size: var(--font-size-l);
     font-style: normal;
     font-weight: 400;
@@ -182,7 +184,7 @@ body {
 
 .poppins-regular-20px {
     color: var(--color-label-footer-gray);
-    font-family: var(--font-family-regular);
+    font-family: var(--font-family-poppins-regular);
     font-size: var(--font-size-xl);
     font-style: normal;
     font-weight: 400;
@@ -219,8 +221,31 @@ body {
     font-style: italic;
     font-weight: 400;
 }
+.poppins-italic-22px {
+    color: var(--color-label-footer-gray);
+    font-family: var(--font-family-poppins-italic);
+    font-size: var(--font-size-xxl);
+    font-style: italic;
+    font-weight: 400;
+}
 
-
+.poppins-italic-24px {
+    color: var(--color-purple);
+    font-family: var(--font-family-poppins-italic);
+    font-size: var(--font-size-xxxl);
+    font-style: italic;
+    font-weight: 400;
+}
+.purple-bg-color {
+    background-color: var(--color-purple);
+    color: var(--color-white);
+    font-size: var(--font-size-m);
+}
+.skyblue-bg-color {
+    background-color: var(--color-skyblue);
+    color: var(--color-white);
+    font-size: var(--font-size-l);
+}
 .poppins-bold-14px {
     color: var(--color-label-footer-gray);
     font-family: var(--font-family-poppins-bold);
@@ -252,6 +277,9 @@ body {
     font-size: var(--font-size-xl);
     font-style: italic;
     font-weight: 800;
+}
+.border-form-sec {
+    border: 1px solid var(--color-purple);
 }
 .input-border-lightgray {
     border: 1px solid var(--color-input-border-lightgrey);
@@ -420,7 +448,8 @@ a {
 	color:#999 !important;
 }
 .container-height {
-	min-height: calc(90vh - 84px);
+	/* min-height: calc(90vh - 84px); */
+    min-height: calc(90vh - 90px);
 }
 
 .atom-input-field-default {
@@ -482,4 +511,15 @@ a {
     right: 0;
     z-index: 1;
     bottom: 0;
+}
+/* .calc-height {
+    min-height: calc(80vh - 100px);
+} */
+.selectemp-height {
+    min-height: calc(65vh - 90px);
+}
+.select-relative {
+    top: 185px;
+    position: relative;
+    bottom: 50px;
 }

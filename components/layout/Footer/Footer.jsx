@@ -37,25 +37,27 @@ function Footer() {
 		// 	</div>
 		// </div>
 		<div className='footer col-md-12 d-flex bg-secondary text-white py-4'>
-        <div className='col-md-3'>
-          <p className='text-white text-center mb-0 pt-2'>Copyright © 2022 Absolute YOU</p>
-        </div>
-        <div className='col-md-6 d-flex justify-content-center'>
-           <ul className='text-white d-flex list-unstyled mb-0'>
-               <li className='list-unstyled mx-3 align-self-center'>Contact Us</li>
-               <li className='list-unstyled mx-3 align-self-center'>Privacy Policy</li>
-               <li className='list-unstyled mx-3 align-self-center'>Disclaimer</li>
-           </ul>
-        </div>
-        <div class="col-md-3 d-flex justify-content-center">
-           <ul className='d-flex list-unstyled mb-0'>
-           <li className='list-unstyled mx-2 align-self-center'><img className='rounded-circle' style={{width: '30px'}} src="/facebook.png"/></li>
-           <li className='list-unstyled mx-2 mr-5 align-self-center'><img className='rounded-circle' style={{width: '30px'}} src="/linkedin.png"/></li>
-           </ul>
-        </div>
-		<div class="clip1"></div>
+			<div className='col-md-10 m-auto row'>
+				<div className='col-md-3 px-0'>
+				<p className='text-white text-left mb-0 pt-2'>Copyright © 2022 Absolute YOU</p>
+				</div>
+			<div className='col-md-6 d-flex justify-content-center'>
+			<ul className='text-white d-flex list-unstyled mb-0'>
+				<li className='list-unstyled mx-3 align-self-center'>Contact Us</li>
+				<li className='list-unstyled mx-3 align-self-center'>Privacy Policy</li>
+				<li className='list-unstyled mx-3 align-self-center'>Disclaimer</li>
+			</ul>
+			</div>
+			<div className="col-md-3 d-flex justify-content-end px-0">
+				<ul className='d-flex list-unstyled mb-0'>
+				<li className='list-unstyled mx-2 align-self-center'><img className='rounded-circle' style={{width: '30px'}} src="/facebook.png"/></li>
+				<li className='list-unstyled mx-2 mr-5 align-self-center'><img className='rounded-circle' style={{width: '30px'}} src="/linkedin.png"/></li>
+				</ul>
+			</div>
+			<div className="clip1"></div>
+			</div>
         
-   </div>
+       </div>
 	);
 }
 export default Footer;
