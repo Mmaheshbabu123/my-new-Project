@@ -11,7 +11,7 @@ const CooperationAgreementMain = dynamic(
 
 const CooperationAgreement = (props) => {
   const router = useRouter();
-  const { root_parent_id, selectedTabId } = router.query;
+  const { root_parent_id, selectedTabId, ref_id =0 } = router.query;
   if (root_parent_id !== undefined)
     return (
       <CooperationAgreementStates>
@@ -20,6 +20,7 @@ const CooperationAgreement = (props) => {
               corporateAgreementId={root_parent_id}
               cooperTabs = {props.data}
               selectedTabParam={selectedTabId}
+              salesAgentRefId = {ref_id}
          />
         </Suspense>
       </CooperationAgreementStates>

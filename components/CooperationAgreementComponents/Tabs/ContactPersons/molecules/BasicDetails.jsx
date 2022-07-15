@@ -6,6 +6,7 @@ import RadioField from '@/atoms/RadioField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import RequiredField from '@/atoms/RequiredSpanField';
 import { requiredFields} from '../../../RequiredFields';
+import ValidateMessage from '@/atoms/validationError';
 import styles from '../Contactperson.module.css';
 import DateField from '@/atoms/DateField';
 import {locationArray,contactArray,contactPersonsRow1,contactPersonsRow2,defaultFileds} from '../ContactPersonsFields';
@@ -47,6 +48,7 @@ console.log(personId);
           name={data.id}
           //{`tab_2_${data.id}`}
          />
+         
         </div>
       )
     }
