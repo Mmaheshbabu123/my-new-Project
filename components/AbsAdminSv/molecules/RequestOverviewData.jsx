@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
-import SearchIcon from '../../SearchIcon';
-import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
-import { AiFillFilePdf, AiOutlineRedo } from 'react-icons/ai';
+import {MdEdit, MdDelete } from 'react-icons/md';
+import { AiFillFilePdf, AiOutlineUserAdd, AiOutlineUserSwitch } from 'react-icons/ai';
 import { deleteCooperationAgreement } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import styles from './AbsAdminSv.module.css';
+// import SearchIcon from '../../SearchIcon';
 
 const itemsPerPage = 5;
 const RequestOverviewData = (props) => {
@@ -175,14 +175,13 @@ const RequestOverviewData = (props) => {
         </div>
       )
     } else {
+      let assigned = assignedOrNot(eachRow);
       return (
         <div>
-          {!eachRow.assignedTo ?
-              <span title={'Assign'} className="actions-span text-dark" onClick={() => handleActionClick('assign', eachRow)}> <MdOutlineAddTask /> </span>
-            : <><span title={'Re-assign'} className="actions-span text-dark" onClick={() => handleActionClick('reassign', eachRow)}> <AiOutlineRedo /> </span>
-                <span> {`Assigned to: ${eachRow.assignedTo ? eachRow.assignedTo:''}`} </span> </>
-          }
-          <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          {!assigned ?
+              <span title={'Assign'} style={{width:'50%'}} className={`${styles['expand-minimize-span']}`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
+            : <span title={'Re-assign'} style={{width:'50%'}} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span>
+          }   <span title={'Delete'} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
     }
@@ -207,7 +206,7 @@ const RequestOverviewData = (props) => {
           console.log('Download clicked');
         break;
      case 'assign':
-         let savedAgentId = assignedData[eachRow.employer_id] ? assignedData[eachRow.employer_id][eachRow.company_id] ? assignedData[eachRow.employer_id][eachRow.company_id] : 0:0;
+         let savedAgentId = assignedOrNot(eachRow)
          stateObj['showPopup'] = true;
          stateObj['selectedCompanyId'] = eachRow.company_id;
          stateObj['selectedEmployerId'] = eachRow.employer_id;
@@ -219,6 +218,19 @@ const RequestOverviewData = (props) => {
     setState(stateObj);
   }
 
+  /**
+   * [assignedOrNot description]
+   * @param  {Object} eachRow               [description]
+   * @return {int}         [description]
+   */
+  const assignedOrNot = (eachRow) =>
+  assignedData[eachRow.employer_id] ? assignedData[eachRow.employer_id][eachRow.company_id] ?  assignedData[eachRow.employer_id][eachRow.company_id] : 0 : 0;
+
+  /**
+   * [handleDelete description]
+   * @param  {[type]}  eachRow               [description]
+   * @return {Promise}         [description]
+   */
   const handleDelete = async (eachRow) => {
     await APICALL.service(`${deleteCooperationAgreement}`, 'POST', { company_id: eachRow.company_id, employer_id: eachRow.employer_id })
     .then(response => {
