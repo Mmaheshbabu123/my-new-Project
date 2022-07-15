@@ -207,24 +207,6 @@ function Addproject(props) {
 		}
 	};
 
-	// const companyname = [
-	// 	{
-	// 		value: '10',
-	// 		label: 'Infanion1'
-	// 	},
-	// 	{
-	// 		value: '11',
-	// 		label: 'Infanion2'
-	// 	},
-	// 	{
-	// 		value: '12',
-	// 		label: 'Infanion3'
-	// 	},
-	// 	{
-	// 		value: '13',
-	// 		label: 'Infanion4'
-	// 	}
-	// ];
 	return (
 		<div>
 			<form onSubmit={(e) => submit(e)}>
@@ -249,7 +231,7 @@ function Addproject(props) {
 							<div className="modal-body ">
 								<div className="container">
 									<div className="row">
-										<div className="col-sm-6  ">
+										<div className=" ">
 											{/* PROJECT NAME */}
 											<label className="font-weight-bold custom_astrick">Project name</label>
 											<input
@@ -261,59 +243,9 @@ function Addproject(props) {
 												}}
 											/>
 											<p className="error mt-2">{error_project_name}</p>
-											<div />
+											{/* COMPANY */}
 
-											{/* LOCATION */}
-											<label className="mt-2 custom_astrick">Location</label>
-											<input
-												type="text"
-												className="form-control mt-2 mb-2"
-												value={data.project_location}
-												onChange={(e) => {
-													setData((prev) => ({ ...prev, project_location: e.target.value }));
-												}}
-											/>
-											<p className="error mt-2">{error_project_location}</p>
-											<div />
-											{/* HOUSE NUMBER */}
-											<label className="custom_astrick mt-2">House number</label>
-											<input
-												type="text"
-												className="form-control mt-2 mb-2"
-												value={data.hno}
-												onChange={(e) => {
-													setData((prev) => ({ ...prev, hno: e.target.value }));
-												}}
-											/>
-											<p className="error mt-2">{error_hno}</p>
-
-											{/* CITY */}
-											<label className="custom_astrick mt-2">City</label>
-											<input
-												type="text"
-												className="form-control mt-2 mb-2"
-												value={data.city}
-												onChange={(e) => {
-													setData((prev) => ({ ...prev, city: e.target.value }));
-												}}
-											/>
-											{/* EXTRA */}
-											<p className="error mt-2">{error_city}</p>
-
-											<label className=" mt-2">Extra</label>
-											<input
-												type="text"
-												className="form-control mt-2 mb-2"
-												value={data.extra}
-												onChange={(e) => {
-													setData((prev) => ({ ...prev, extra: e.target.value }));
-												}}
-											/>
-											<p className="error mt-2">{error_extra}</p>
-										</div>
-										{/* COMPANY */}
-										<div className="col-sm-6">
-											<label className=" custom_astrick">Company</label>
+											<label className="custom_astrick">Company</label>
 											<select
 												className="form-select mt-2 mb-2"
 												value={data.comp_id}
@@ -336,60 +268,131 @@ function Addproject(props) {
 												))}
 											</select>
 											<p className="error mt-2">{error_comp_id}</p>
-											<label className="custom_astrick mt-2">Street</label>
-											<input
-												type="text"
-												className="form-control mt-2 mb-2"
-												value={data.street}
-												onChange={(e) => {
-													setData((prev) => ({ ...prev, street: e.target.value }));
-												}}
-											/>
-											<p className="error mt-2">{error_street}</p>
 
-											<label className="custom_astrick mt-2">Postalcode</label>
-											<input
-												type="text"
-												className="form-control mt-2 mb-2"
-												value={data.postal_code}
-												onChange={(e) => {
-													setData((prev) => ({ ...prev, postal_code: e.target.value }));
-												}}
-											/>
-											<p className="error mt-2">{error_postal_code}</p>
+											{/* LOCATION */}
+											<div className="row">
+												<div className="col">
+													<label className="mt-2 custom_astrick">Location</label>
+													<input
+														type="text"
+														className="form-control mt-2 mb-2"
+														value={data.project_location}
+														onChange={(e) => {
+															setData((prev) => ({
+																...prev,
+																project_location: e.target.value
+															}));
+														}}
+													/>
+													<p className="error mt-2">{error_project_location}</p>
+												</div>
+												<div className="col">
+													<label className="custom_astrick mt-2">Street</label>
+													<input
+														type="text"
+														className="form-control mt-2 mb-2"
+														value={data.street}
+														onChange={(e) => {
+															setData((prev) => ({ ...prev, street: e.target.value }));
+														}}
+													/>
+													<p className="error mt-2">{error_street}</p>
+												</div>
 
-											<label className="custom_astrick mt-2">Country</label>
-											<select
-												className="form-select mt-2 mb-2 custom-select"
-												value={data.country}
-												onChange={(e) => {
-													setData((prev) => ({ ...prev, country: e.target.value }));
-												}}
-											>
-												<option>Select country</option>
-												{countrylist.map((options) => (
-													<option key={options.iso} value={options.iso}>
-														{options.country}
-													</option>
-												))}
-											</select>
-											<p className="error mt-2">{error_countrylist}</p>
+												{/* HOUSE NUMBER */}
+												<div className="col">
+													<label className="custom_astrick mt-2">House number</label>
+													<input
+														type="text"
+														className="form-control mt-2 mb-2"
+														value={data.hno}
+														onChange={(e) => {
+															setData((prev) => ({ ...prev, hno: e.target.value }));
+														}}
+													/>
+													<p className="error mt-2">{error_hno}</p>
+												</div>
+											</div>
+											{/* CITY */}
+											<div className="row">
+												<div className="col">
+													<label className="custom_astrick mt-2">City</label>
+													<input
+														type="text"
+														className="form-control mt-2 mb-2"
+														value={data.city}
+														onChange={(e) => {
+															setData((prev) => ({ ...prev, city: e.target.value }));
+														}}
+													/>
+
+													<p className="error mt-2">{error_city}</p>
+												</div>
+												<div className="col">
+													<label className="custom_astrick mt-2">Postalcode</label>
+													<input
+														type="text"
+														className="form-control mt-2 mb-2"
+														value={data.postal_code}
+														onChange={(e) => {
+															setData((prev) => ({
+																...prev,
+																postal_code: e.target.value
+															}));
+														}}
+													/>
+													<p className="error mt-2">{error_postal_code}</p>
+												</div>
+											</div>
+											{/* EXTRA */}
+											<div className="row">
+												<div className="col">
+													<label className="custom_astrick mt-2">Country</label>
+													<select
+														className="form-select mt-2 mb-2 custom-select"
+														value={data.country}
+														onChange={(e) => {
+															setData((prev) => ({ ...prev, country: e.target.value }));
+														}}
+													>
+														<option value="">Select country</option>
+														{countrylist.map((options) => (
+															<option key={options.iso} value={options.iso}>
+																{options.country}
+															</option>
+														))}
+													</select>
+													<p className="error mt-2">{error_countrylist}</p>
+												</div>
+												<div className="col">
+													<label className=" mt-2">Extra</label>
+													<input
+														type="text"
+														className="form-control mt-2 mb-2"
+														value={data.extra}
+														onChange={(e) => {
+															setData((prev) => ({ ...prev, extra: e.target.value }));
+														}}
+													/>
+													<p className="error mt-2">{error_extra}</p>
+												</div>
+											</div>
 										</div>
 									</div>
-									<div className="modal-footer">
-										<button
-											type="submit"
-											className="btn btn-secondary btn-lg btn-block float-right "
-											// data-bs-dismiss="modal"
-											// onClick={() => props.popupActionNo()}
-											onClick={(e) => {
-												setData((prev) => ({ ...prev, p_unique_key: p_unique_key }));
-												// ;
-											}}
-										>
-											Save
-										</button>
-									</div>
+								</div>
+								<div className="modal-footer">
+									<button
+										type="submit"
+										className="btn btn-secondary btn-lg btn-block float-right "
+										// </div>data-bs-dismiss="modal"
+										// onClick={() => props.popupActionNo()}
+										onClick={(e) => {
+											setData((prev) => ({ ...prev, p_unique_key: p_unique_key }));
+											// ;
+										}}
+									>
+										Save
+									</button>
 								</div>
 							</div>
 						</div>
