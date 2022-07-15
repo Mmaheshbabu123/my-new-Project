@@ -25,7 +25,7 @@ function QRCode(props) {
 						</div>
 
 						<div className="modal-body ">
-							<MdQrCode className="w-50 h-auto m-auto  " />
+							<MdQrCode className="w-50 h-auto m-auto text-center  " />
 						</div>
 					</div>
 				</div>

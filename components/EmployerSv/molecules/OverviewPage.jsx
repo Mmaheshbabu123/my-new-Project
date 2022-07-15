@@ -164,8 +164,8 @@ const OverviewPage = (props) => {
         </div>
         )
         :
-      <p style={{marginTop: '20px', textAlig: 'center'}}> We notice that you do not have any cooperation agreement for your company/companies, <br />
-                please click on "Request agreement" button to request for an agreement. </p>}
+      <p style={{marginTop: '20px', textAlign: 'center'}}> {`We notice that you do not have any cooperation agreement for your company/companies,`} <br />
+	      {`please click on "Request agreement" button to request for an agreement.`} </p>}
 
      </div>
   );

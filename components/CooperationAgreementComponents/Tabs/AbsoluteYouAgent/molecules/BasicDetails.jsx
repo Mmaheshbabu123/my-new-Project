@@ -8,12 +8,13 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 // import { helpers } from '../../../CooperationAgreementHelper'; //.
 import styles from '../absoluteAgent.module.css';
 
-import { consultantArray, consultantNumArray } from '../../../Definations';
+import { consultantArray, consultantNumArray, whoWillSignOptions } from '../../../Definations';
 
 var startDateAgreement    = 1;
 var absoluteConsultant    = 2;
 var absoluteConsultantNum = 3;
 var activateAddProject    = 4;
+var whoWillSign           = 80;
 var consultNumber = [];
 
 const BasicDetails = (props) => {
@@ -23,6 +24,7 @@ const BasicDetails = (props) => {
 
   useEffect(() => {
     consultNumber = consultantNumArray[tab_1[absoluteConsultant]] || [];
+    tab_1[whoWillSign] = tab_1[whoWillSign] || [];
     setRender(!render);
   }, [])
 
@@ -58,6 +60,20 @@ const BasicDetails = (props) => {
     element_status['tab_1'].push(key);
     tab_1[key] = obj.value;
     updateStateChanges({ tab_1, element_status });
+  }
+
+  const handleSignCheckChange = ({ target: { value, checked } }) => {
+    let valueId = Number(value);
+    let selectedIds = tab_1[whoWillSign];
+    element_status['tab_1'].push(whoWillSign)
+    if(checked) {
+      selectedIds.push(valueId);
+    } else {
+      selectedIds.indexOf(valueId) > -1 ?
+        selectedIds.splice(selectedIds.indexOf(valueId), 1) : null;
+    }
+    tab_1[whoWillSign] = selectedIds;
+    updateStateChanges({ tab_1, element_status })
   }
 
   return(
@@ -104,10 +120,30 @@ const BasicDetails = (props) => {
               disabled={false}
               onCheck={(obj) => handleChange(obj, 1)}
               name={`Activate "Add project" for the employer in the planning.`}
-              className="col-md-6"
+              customStyle={{margin: '2px 0', cursor:'pointer'}}
+              className="col-md-5"
             />
       </div>
-
+      <div className={`${styles['add-div-margings']}`}>
+          <LabelField title="Who will sign the Werkpostfiche?" />
+          {whoWillSignOptions.map(option => {
+            return (
+              <div key={`checkbox_${option.id}`}>
+              <CheckBoxField
+                  id={option.id}
+                  tick={tab_1[whoWillSign] && tab_1[whoWillSign].includes(option.id)}
+                  disabled={false}
+                  value={option.id}
+                  onCheck={handleSignCheckChange}
+                  customStyle={{margin: '2px 0', cursor:'pointer'}}
+                  name={option.label}
+                  className="col-md-2"
+                />
+              </div>
+            )
+          })
+          }
+      </div>
     </div>
   );
 }

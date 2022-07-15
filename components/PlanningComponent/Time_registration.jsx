@@ -32,15 +32,15 @@ function TimeRegistration(props) {
 	};
 
 	//POPUP FOR EMPLOYER.
-	const [ showemployer, setShowEmployer ] = useState(false);
+	// const [ showemployer, setShowEmployer ] = useState(false);
 	//CLOSE EMPLOYER POPUP
-	const closeEmployerPopup = () => {
-		setShowEmployer(false);
-	};
+	// const closeEmployerPopup = () => {
+	// 	setShowEmployer(false);
+	// };
 	// SHOW EMPLOYER POPUP //
-	const showEmployerPopup = (id) => {
-		setShowEmployer(true);
-	};
+	// const showEmployerPopup = (id) => {
+	// 	setShowEmployer(true);
+	// };
 
 	let submit = (event) => {
 		event.preventDefault();
@@ -48,30 +48,30 @@ function TimeRegistration(props) {
 	return (
 		<div className="container   ">
 			<form onSubmit={(e) => submit(e)}>
-				<div className="row d-flex text-center  align-items-center vh-100   ">
+				<div className="row text-center">
 					<div className="">
 						<p className="h2">Time Registration</p>
 					</div>
-					<div className=" col ">
-						<span className="text-center  ">
+					<div className=" col-sm-6 ">
+						<span className="text-center">
 							<button className="btn btn-large">
-								<MdQrCode className="w-100 h-20 m-auto  " onClick={showQRPopup} />
+								<MdQrCode className="m-auto" onClick={showQRPopup} />
 							</button>
 						</span>
 						<p className="h3 mt-3">QR code</p>
 					</div>
-					<div className="col ">
+					<div className="col-sm-6 ">
 						<button className="btn btn-large">
-							<FaLaptopCode className="w-100 h-20 m-auto " onClick={showPincodePopup} />
+							<FaLaptopCode className=" m-auto " onClick={showPincodePopup} />
 						</button>
 						<p className="h3 mt-3">Pin code</p>
 					</div>
-					<div className="col">
+					{/* <div className="col">
 						<button className="btn btn-large">
 							<BsPersonFill className="w-100 h-20 m-auto" onClick={showEmployerPopup} />
 						</button>
 						<p className="h3  mt-3">Employer</p>
-					</div>
+					</div> */}
 				</div>
 			</form>
 			{showQR == true && (
@@ -87,13 +87,13 @@ function TimeRegistration(props) {
 					pincodepopupActionYes={showPincodePopup}
 				/>
 			)}
-			{showemployer == true && (
+			{/* {showemployer == true && (
 				<EmployerPopup
 					display={'block'}
 					employerpopupActionNo={closeEmployerPopup}
 					employerpopupActionYes={showEmployerPopup}
 				/>
-			)}
+			)} */}
 		</div>
 	);
 }
