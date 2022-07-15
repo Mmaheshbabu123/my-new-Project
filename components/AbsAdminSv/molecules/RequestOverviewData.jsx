@@ -140,7 +140,7 @@ const RequestOverviewData = (props) => {
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found... </p>}
+            : <p style={{paddingTop: '10px'}}> No data found. </p>}
           </table>
         </div>
         <div>
@@ -231,15 +231,10 @@ const RequestOverviewData = (props) => {
 
   return(
     <div className={`${styles['emp-sv-overview-page-div']}`}>
-      {overviewData.length > 0 ? (
         <div>
           {showTabs()}
           {showOverviewOfCompanies()}
         </div>
-        )
-        :
-      <pre> There is no cooperation agreement request. </pre>}
-
      </div>
   );
 }
