@@ -48,9 +48,7 @@ console.log(personId);
           name={data.id}
           //{`tab_2_${data.id}`}
          />
-         {tab_3[personId]['validations'][data.id] && tab_3[personId]['validations'][data.id]['validate'] &&
-           <ValidateMessage text = {'This field is invalid'}/>
-         }
+         
         </div>
       )
     }
