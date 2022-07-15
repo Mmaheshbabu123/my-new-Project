@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { addPlanning, fetchPlanning } from '../../Services/ApiEndPoints';
+import { addPlanning, fetchPlanning, getEmployeerCompanylist } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import Addproject from './AddProject';
 import ValidationService from '../../Services/ValidationService';
@@ -23,7 +23,6 @@ function Planning(props) {
 	const [ company_name, setCompany_name ] = useState([]);
 	const [ empr_id, setEmpr_id ] = useState('');
 
-
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
 	const [ error_location_id, setError_location_id ] = useState('');
@@ -35,28 +34,39 @@ function Planning(props) {
 		cost_center_id: ''
 	});
 
-
 	useEffect(() => {
-		if(localStorage.getItem("uid")!= null){
-			setEmpr_id(localStorage.getItem("uid"));
+		if (localStorage.getItem('uid') != null) {
+			setEmpr_id(localStorage.getItem('uid'));
 		}
 	}, []);
 
-	// FETCHING COMPANY FROM DRUPAL //
+	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
 	useEffect(() => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
+		APICALL.service(getEmployeerCompanylist + 102, 'GET')
 			.then((result) => {
-				if (result.length > 0) {
-					setCompany(result);
-				} else {
-				}
+				console.log(result.data[0]);
+				setCompany(result.data[0]);
 			})
 			.catch((error) => {
-				console.error(error);
+				console.log(error);
 			});
 	}, []);
 
-	//LOCATION FETCHING FROM DRUPAL
+	// FETCHING COMPANY FROM DRUPAL //
+	// useEffect(() => {
+	// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
+	// 		.then((result) => {
+	// 			if (result.length > 0) {
+	// 				setCompany(result);
+	// 			} else {
+	// 			}
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error(error);
+	// 		});
+	// }, []);
+
+	// //LOCATION FETCHING FROM DRUPAL
 	useEffect(
 		() => {
 			setLocation([]);
@@ -148,10 +158,11 @@ function Planning(props) {
 	let validate = (res) => {
 		console.log(res);
 		var error1 = [];
+		error1['location_id'] = '';
 
 		//check if required fields are empty
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
-		error1['location_id'] = ValidationService.emptyValidationMethod(res.location_id);
+		// error1['location_id'] = ValidationService.emptyValidationMethod(res.location_id);
 
 		//seterror messages
 		setError_comp_id(error1['comp_id']);
@@ -212,10 +223,10 @@ function Planning(props) {
 									onClick={(e) => {
 										setCompany_name(options.comp_name);
 									}}
-									key={options.comp_id}
-									value={options.comp_id}
+									key={options.nid}
+									value={options.nid}
 								>
-									{options.comp_name}
+									{options.title}
 								</option>
 							))}
 						</select>
