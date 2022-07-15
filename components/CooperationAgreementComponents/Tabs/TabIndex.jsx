@@ -77,9 +77,13 @@ const TabIndex = (props) => {
             obj['root_parent_id']= response.data;
             router.query.root_parent_id = obj['root_parent_id'];
           }
-          router.query.selectedTabId = nextTab;
-          router.push(router, undefined, { shallow: true })
-          updateStateChanges(obj);
+          if(selectedTabId === INVOIING_TAB) {
+            router.push('/manage-cooperation-overview?type=sales_agent&id=1')
+          } else {
+            router.query.selectedTabId = nextTab;
+            router.push(router, undefined, { shallow: true })
+            updateStateChanges(obj);
+          }
         } else {
           console.error(response.msg);
         }
@@ -97,14 +101,14 @@ const TabIndex = (props) => {
       {showComponentBasedOnTabSelection()}
       <div className={`col-md-12 row`} >
           <div className={`col-md-11 ${styles['tab-index-back-div']}`}>
-            <p className={`${styles['tab-index-back-btn']}`}> Back </p>
+            <p className={`${styles['tab-index-back-btn']}`} onClick={() => router.back()}> Back </p>
           </div>
           <div className={`col-md-1`}>
             <button
               onClick={forWardToNextStepTab}
               type="button"
               className="btn btn-dark pcp_btn">
-              Next
+              {selectedTabId === INVOIING_TAB ? 'Save' : 'Next'}
             </button>
           </div>
       </div>
@@ -136,6 +140,7 @@ function getTabRelatedData(state, tabId) {
     data: getTabWisePostData(state, tabId),
     element_status: state['element_status'][`tab_${tabId}`],
     depedency_data_status:state['dependecyDataStatus'],
+    salesAgentRefId: state['salesAgentRefId']
   }
 }
 

@@ -4,6 +4,7 @@ import SearchIcon from '../../SearchIcon';
 import styles from './AbsSalesAgentSv.module.css';
 //import SearchIcon from '../../SearchIcon';
 import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
+import { confirmAlert } from 'react-confirm-alert';
 import { AiFillFilePdf, AiOutlineRedo} from 'react-icons/ai';
 import { HiPlusCircle} from 'react-icons/hi';
 import { useRouter } from 'next/router';
@@ -136,7 +137,7 @@ const Overviewpage = (props) => {
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found... </p>}
+            : <p style={{paddingTop: '10px'}}> No data found. </p>}
           </table>
         </div>
         <div>
@@ -182,6 +183,8 @@ const Overviewpage = (props) => {
   }
 
   const handleActionClick = (action, eachRow) => {
+    var ref_id = eachRow.ref_id;
+    var root_parent_id = eachRow.root_parent_id;
     switch (action) {
       case 'delete':
         confirmAlert({
@@ -193,13 +196,12 @@ const Overviewpage = (props) => {
         });
         break;
      case 'edit':
-        console.log('Edit');
+        router.push(`cooperation-agreement?root_parent_id=${root_parent_id}&selectedTabId=0&ref_id=${ref_id}`);
         break;
      case 'download':
           console.log('Download clicked');
         break;
       case 'add':
-      const ref_id = eachRow.ref_id;
        router.push(`cooperation-agreement?root_parent_id=0&selectedTabId=0&ref_id=${ref_id}`);
        break;
       default:
@@ -209,15 +211,10 @@ const Overviewpage = (props) => {
 
   return(
     <div className={`${styles['emp-sv-overview-page-div']}`}>
-      {overviewData.length > 0 ? (
         <div>
           {showTabs()}
           {showOverviewOfCompanies()}
         </div>
-        )
-        :
-      <pre> There is no cooperation agreement request. </pre>}
-
      </div>
   );
 }

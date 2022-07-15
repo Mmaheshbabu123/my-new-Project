@@ -245,11 +245,11 @@ function Addtiming(props) {
 									>
 										<div className="col-md-1 h5">{++count}.</div>
 										<div className="col-md-3 h6">{result.employee_name}</div>
-										<div className="col-md-3 h6">
-											{/* {result.emp_type} */}
+										<div className="col-md-4 h6">
+											{result.employee_type_name}
 											</div>
 										<div className="col-md-3 h6">
-											{/* {result.function_id} */}
+											{result.function_name}
 											</div>
 									</div>
 								))}
@@ -325,8 +325,8 @@ function Addtiming(props) {
 													)}
 												</div>
 												<div className="col-md-3 h6">{result.employee_name}</div>
-												<div className="col-md-3 h6">{result.emp_type}</div>
-												<div className="col-md-3 h6">{result.function_id}</div>
+												<div className="col-md-4 h6">{result.employee_type_name}</div>
+												<div className="col-md-3 h6">{result.function_name}</div>
 											</div>
 											{result.collapseOpen == true && (
 												<div>

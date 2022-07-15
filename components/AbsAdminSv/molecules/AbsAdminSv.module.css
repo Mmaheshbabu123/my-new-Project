@@ -1,5 +1,6 @@
 .employer-sv-page-title {
   margin: 25px 0;
+  font-size: 1.5rem;
 }
 
 .request-agreeemnt-comp-btn {
@@ -21,11 +22,14 @@
   margin: 20px 0 40px 0;
 }
 
+
 .employer-overview-tabs > li {
   display: inline-block;
   width: 30%;
-  font-weight: bold;
-  font-size: large;
+}
+
+.employer-overview-tabs > li:first-child {
+  width: 20%;
 }
 
 .employer-overview-tabs > li > span {
@@ -75,4 +79,27 @@
 
 .signed-class.sv-pending {
 	background-color: orange;
+}
+
+
+
+.expand-minimize-span > svg {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  vertical-align: text-top;
+}
+
+.expand-minimize-span {
+  vertical-align: middle;
+  height: 35px;
+  width: 4%;
+}
+
+.expand-minimize-span {
+  display: inline-block;
+}
+
+.expand-minimize-span > svg:hover{
+  opacity: 0.7;
 }

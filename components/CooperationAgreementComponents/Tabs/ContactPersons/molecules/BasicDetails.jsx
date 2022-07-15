@@ -6,6 +6,7 @@ import RadioField from '@/atoms/RadioField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import RequiredField from '@/atoms/RequiredSpanField';
 import { requiredFields} from '../../../RequiredFields';
+import ValidateMessage from '@/atoms/validationError';
 import styles from '../Contactperson.module.css';
 import DateField from '@/atoms/DateField';
 import {locationArray,contactArray,contactPersonsRow1,contactPersonsRow2,defaultFileds} from '../ContactPersonsFields';
@@ -13,7 +14,8 @@ const BasicDetails= ({props,personId}) => {
 var Title_key = 25;
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
-
+console.log(tab_3);
+console.log(personId);
   const handleChange = (event) => {
     const { value, name } = event.target;
     tab_3[personId][name] = value;
@@ -46,6 +48,7 @@ var Title_key = 25;
           name={data.id}
           //{`tab_2_${data.id}`}
          />
+         
         </div>
       )
     }
@@ -54,8 +57,8 @@ var Title_key = 25;
       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
           <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_3'][data.id] && <RequiredField />}
           <div>
-          <RadioField   name = {data.id} checked = {tab_3[personId][data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} />
-          <RadioField  name = {data.id} checked = {tab_3[personId][data.id] === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} />
+          <RadioField   name = {data.id} checked = {Number(tab_3[personId][data.id]) === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} />
+          <RadioField  name = {data.id} checked = {Number(tab_3[personId][data.id]) === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} />
           </div>
       </div>
     )
@@ -100,8 +103,8 @@ fieldData.push(
     <div className = {`col-md-12 ${styles['add-div-margings']}`}>
         <LabelField title={'Title'} customStyle = {{display:''}}/>{requiredFields['tab_3'][Title_key] && <RequiredField />}
         <div>
-        <RadioField   name = {Title_key} checked = {tab_3[personId][Title_key] === 1} handleChange = {(e)=>handleRadioSelect(Title_key,1)} label= {'Mr'} />
-        <RadioField  name = {Title_key} checked = {tab_3[personId][Title_key] === 2} handleChange = {(e)=>handleRadioSelect(Title_key,2)} label= {'Mrs'} />
+        <RadioField   name = {Title_key} checked = {Number(tab_3[personId][Title_key]) === 1} handleChange = {(e)=>handleRadioSelect(Title_key,1)} label= {'Mr'} />
+        <RadioField  name = {Title_key} checked = {Number(tab_3[personId][Title_key]) === 2} handleChange = {(e)=>handleRadioSelect(Title_key,2)} label= {'Mrs'} />
         </div>
     </div>
       <div className = 'col-md-6'>
