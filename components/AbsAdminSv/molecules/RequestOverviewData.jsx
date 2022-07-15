@@ -179,8 +179,8 @@ const RequestOverviewData = (props) => {
       return (
         <div>
           {!assigned ?
-              <span title={'Assign'} style={{width:'50%'}} className={`${styles['expand-minimize-span']}`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
-            : <span title={'Re-assign'} style={{width:'50%'}} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span>
+              <span title={'Assign'} style={{width:'25%'}} className={`${styles['expand-minimize-span']}`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
+            : <span title={'Re-assign'} style={{width:'25%'}} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span>
           }   <span title={'Delete'} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
