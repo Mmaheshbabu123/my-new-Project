@@ -523,3 +523,6 @@ a {
     position: relative;
     bottom: 50px;
 }
+.custom-modal-width-90 {
+    max-width: 90% !important;
+}

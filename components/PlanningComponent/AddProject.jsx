@@ -216,10 +216,11 @@ function Addproject(props) {
 					tabIndex="-1"
 					style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}
 				>
-					<div className="modal-dialog modal-lg ">
+					{/* <div className="modal-dialog custom-modal-width-90 modal-xl "> */}
+					<div className="modal-dialog  modal-xl ">
 						<div className="modal-content  ">
 							<div className="modal-header">
-								<p className="modal-title h4">Add project</p>
+								<p className="modal-title  mt-3 font-weight-bold  poppins-italic-24px">Add project</p>
 								<button
 									type="button"
 									className="btn-close"
@@ -233,7 +234,9 @@ function Addproject(props) {
 									<div className="row">
 										<div className=" ">
 											{/* PROJECT NAME */}
-											<label className="font-weight-bold custom_astrick">Project name</label>
+											<div className='row col-md-12 m-0'>
+												<div className='col-6'>
+												<label className="font-weight-bold custom_astrick">Project name</label>
 											<input
 												type="text"
 												className="form-control mt-2 mb-2 "
@@ -243,9 +246,9 @@ function Addproject(props) {
 												}}
 											/>
 											<p className="error mt-2">{error_project_name}</p>
-											{/* COMPANY */}
-
-											<label className="custom_astrick">Company</label>
+												</div>
+												<div className='col-6'>
+												<label className="custom_astrick">Company</label>
 											<select
 												className="form-select mt-2 mb-2"
 												value={data.comp_id}
@@ -268,10 +271,17 @@ function Addproject(props) {
 												))}
 											</select>
 											<p className="error mt-2">{error_comp_id}</p>
+												</div>
+
+											</div>
+											
+											{/* COMPANY */}
+
+											
 
 											{/* LOCATION */}
-											<div className="row">
-												<div className="col">
+											<div className='col-md-12 row m-0'>
+											<div className="col-6">
 													<label className="mt-2 custom_astrick">Location</label>
 													<input
 														type="text"
@@ -286,7 +296,10 @@ function Addproject(props) {
 													/>
 													<p className="error mt-2">{error_project_location}</p>
 												</div>
-												<div className="col">
+											</div>
+											<div className="row col-md-12 m-0">
+											
+												<div className="col-6">
 													<label className="custom_astrick mt-2">Street</label>
 													<input
 														type="text"
@@ -300,8 +313,20 @@ function Addproject(props) {
 												</div>
 
 												{/* HOUSE NUMBER */}
-												<div className="col">
+												<div className="col-3">
 													<label className="custom_astrick mt-2">House number</label>
+													<input
+														type="text"
+														className="form-control mt-2 mb-2"
+														value={data.hno}
+														onChange={(e) => {
+															setData((prev) => ({ ...prev, hno: e.target.value }));
+														}}
+													/>
+													<p className="error mt-2">{error_hno}</p>
+												</div>
+												<div className="col-3">
+													<label className="custom_astrick mt-2">Bus number</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2"
@@ -314,21 +339,8 @@ function Addproject(props) {
 												</div>
 											</div>
 											{/* CITY */}
-											<div className="row">
-												<div className="col">
-													<label className="custom_astrick mt-2">City</label>
-													<input
-														type="text"
-														className="form-control mt-2 mb-2"
-														value={data.city}
-														onChange={(e) => {
-															setData((prev) => ({ ...prev, city: e.target.value }));
-														}}
-													/>
-
-													<p className="error mt-2">{error_city}</p>
-												</div>
-												<div className="col">
+											<div className="row col-md-12 m-0">
+											<div className="col-6">
 													<label className="custom_astrick mt-2">Postalcode</label>
 													<input
 														type="text"
@@ -343,10 +355,24 @@ function Addproject(props) {
 													/>
 													<p className="error mt-2">{error_postal_code}</p>
 												</div>
+												<div className="col-6">
+													<label className="custom_astrick mt-2">City</label>
+													<input
+														type="text"
+														className="form-control mt-2 mb-2"
+														value={data.city}
+														onChange={(e) => {
+															setData((prev) => ({ ...prev, city: e.target.value }));
+														}}
+													/>
+
+													<p className="error mt-2">{error_city}</p>
+												</div>
+											
 											</div>
 											{/* EXTRA */}
-											<div className="row">
-												<div className="col">
+											<div className="row col-md-12 m-0">
+												<div className="col-6">
 													<label className="custom_astrick mt-2">Country</label>
 													<select
 														className="form-select mt-2 mb-2 custom-select"
@@ -364,7 +390,10 @@ function Addproject(props) {
 													</select>
 													<p className="error mt-2">{error_countrylist}</p>
 												</div>
-												<div className="col">
+												
+											</div>
+											<div className="row col-md-12 m-0">
+											<div className="col-12">
 													<label className=" mt-2">Extra</label>
 													<input
 														type="text"
@@ -376,14 +405,14 @@ function Addproject(props) {
 													/>
 													<p className="error mt-2">{error_extra}</p>
 												</div>
-											</div>
+												</div>
 										</div>
 									</div>
 								</div>
-								<div className="modal-footer">
+								<div className="modal-footer border-0 col-md-12 ">
 									<button
 										type="submit"
-										className="btn btn-secondary btn-lg btn-block float-right "
+										className="btn btn-lg btn-block float-right add-proj-btn custom-btn px-3 "
 										// </div>data-bs-dismiss="modal"
 										// onClick={() => props.popupActionNo()}
 										onClick={(e) => {
