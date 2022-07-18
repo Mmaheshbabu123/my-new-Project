@@ -109,7 +109,7 @@ function Planning(props) {
 	useEffect(
 		() => {
 			APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
-				if (result.data.length > 0) {
+				if (result && result.data.length > 0) {
 					var res = result.data[0];
 					res.p_unique_key = result.data[0].p_unique_key;
 					res.comp_id = result.data[0].comp_id;
@@ -183,21 +183,25 @@ function Planning(props) {
 	};
 
 	return (
-		<div className="container calc-height ">
+		<div className="col-md-10 m-auto  ">
 			<form onSubmit={(e) => submit(e)}>
-				<div className="row   planning-container ">
-					<p className="mb-4 mt-3 font-weight-bold h3">Add Planning</p>
-					<div>
-						{/* <button
+				<div className="row   planning-container calc-height m-0 col-md-12">
+					<div className='col-md-12'>
+					<h1 className=" mt-3 font-weight-bold  poppins-italic-24px px-0 ">Add Planning</h1>
+					</div>
+					<div className='col-md-12 px-0 mt-3 mb-4'>
+						<button
 							onClick={showPopup}
 							type="button"
-							className="btn btn-secondary   btn-block float-end mt-2 mb-2 ms-2"
+							className=" btn mb-4 skyblue-bg-color border-0 poppins-regular-24px px-5 py-3  btn-block float-end mt-2 mb-2 ms-2"
 						>
-							+Add project
-						</button> */}
+							<span className=''>+</span>  Add project
+						</button>
 					</div>
+					<div className='form-sec border-form-sec p-5'>
+						<div className='col-md-6'>
 					<div className="form-group">
-						<label className="form-label mb-2 custom_astrick">Company</label>
+						<label className="form-label mb-2 custom_astrick poppins-regular-16px">Company</label>
 						<select
 							value={data.comp_id}
 							className="form-select mb-2 mt-2"
@@ -223,7 +227,7 @@ function Planning(props) {
 					</div>
 
 					<div className="form-group">
-						<label className="form-label mb-2 mt-2 custom_astrick">Location</label>
+						<label className="form-label mb-2 mt-2 custom_astrick poppins-regular-16px">Location</label>
 						<select
 							value={data.location_id}
 							className="form-select mb-2 mt-2"
@@ -242,7 +246,7 @@ function Planning(props) {
 					</div>
 
 					<div className="form-group ">
-						<label className="form-label mb-2 mt-2">Cost center</label>
+						<label className="form-label mb-2 mt-2 poppins-regular-16px">Cost center</label>
 						<select
 							className="form-select mb-2 mt-2"
 							value={data.cost_center_id}
@@ -258,24 +262,26 @@ function Planning(props) {
 							))}
 						</select>
 					</div>
+					</div>
+					</div>
 				</div>
-				<div className="row mt-4">
+				<div className="row mt-4 col-md-12">
 					<div className="col-md-6">
-						<button type="button" className="btn btn-secondary btn-block ">
+						<button type="button" className="btn  btn-block ">
 							<Link href={'/planning/options'}>
-								<p className="">Back</p>
+								<p className="bg-white border-bottom border-3 text-dark">BACK</p>
 							</Link>
 						</button>
 					</div>
 					<div className="col-md-6">
 						<button
 							type="submit"
-							className="btn btn-secondary   btn-block float-end"
+							className="btn btn-secondary  custom-btn px-3  btn-block float-end"
 							onClick={() => {
 								setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
 							}}
 						>
-							Next
+							NEXT
 						</button>
 					</div>
 				</div>

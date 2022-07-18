@@ -59,6 +59,8 @@ const AddFunction = () => {
 						setFunctions(functionsdata);
 						getOptions(functionsdata);
 					}
+
+					
 				})
 				.catch((error) => {
 					console.error(error);
@@ -69,6 +71,7 @@ const AddFunction = () => {
 
 	function storedDataAssigning(sdata) {
 		setStoredData(sdata);
+		console.log(sdata);
 	}
 
 	function ercount(v) {
@@ -208,7 +211,7 @@ const AddFunction = () => {
 
 	function setsaalary(empid, e) {
 		let value = e.target.value;
-		setSalaries(value);
+		// setSalaries(value);
 		updatingObjectSlary(empid, Number(value));
 	}
 
@@ -258,8 +261,10 @@ const AddFunction = () => {
 		if (error == '' && employeeobject[0] != undefined) {
 			error = employeeobject[0].functioniderror;
 		}
+
+		console.log((storeddata[0]!=undefined)?storeddata[0].functionid:'em rale');
 		var func = (
-			<div className="row ms-5">
+			<div className="row ms-6">
 				<ul>
 					{functions != null ? (
 						functions.slice(0, 4).map((key, value) => (
@@ -289,17 +294,20 @@ const AddFunction = () => {
 										) : (
 											''
 										)}
-										{value < 3 ? key['name'] : ''}
+										{value < 3 ? <span className='ps-2'>{key['name']}</span> : ''}
 										{!ischecked && value == 3 ? (
 											<div>
 												<input
 													type="radio"
 													value={'select a function from drop down'}
+													style={{display:'inline-block !important'}}
 													name={'functions'}
-													className="p-3"
+													className="p-3 d-inline"
 												/>
+												<div  className="ps-2 w-75" style={{display:'inline-block'}}>
 												<Select
 													placeholder={<div>Function</div>}
+													
 													//value={selectedOption}
 													name="employefunctionsall"
 													options={fulllist}
@@ -313,17 +321,21 @@ const AddFunction = () => {
 														}
 													}}
 												/>
+												</div>
 											</div>
 										) : value == 3 ? (
 											<div>
 												<input
 													type="radio"
+													style={{display:'inline-block'}}
 													value={key['id']}
 													name="functions"
 													className="p-3 "
 												/>
+												<div  className="ps-2 w-75" style={{display:'inline-block'}}>
 												<Select
 													placeholder={<div>Function</div>}
+													style={{display:'inline-block !important'}}
 													//value={selectedOption}
 													name="employefunctionsall"
 													options={fulllist}
@@ -337,6 +349,7 @@ const AddFunction = () => {
 														}
 													}}
 												/>
+												</div>
 											</div>
 										) : (
 											''
@@ -448,6 +461,8 @@ const AddFunction = () => {
 									<div className="col-md-2">
 										{employeeobject[value].functionid != '' ? (
 											<div>
+																		<div className="input-group">
+
 												<input
 													ref={salaryref}
 													type="textfield"
@@ -456,6 +471,9 @@ const AddFunction = () => {
 													className="form-control"
 													onChange={(e) => setsaalary(key[4], e)}
 												/>
+												<span className="input-group-text">€</span>
+												</div>
+
 												<p style={{ color: 'red' }}>{employeeobject[value].salaryerror}</p>
 											</div>
 										) : (

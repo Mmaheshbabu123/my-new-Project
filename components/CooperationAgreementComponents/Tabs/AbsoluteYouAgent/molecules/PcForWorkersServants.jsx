@@ -34,16 +34,15 @@ const PcForWorkersServants = () => {
   });
 
   useEffect(() => {
-    const { tab_1:{ worksServantsData }, workersServantsCompState = {} } = state;
+    const { tab_1:{ worksServantsData } = {} } = state;
     let editIndex = {};
     let newItems = {
       [workersType]: worksServantsData[workersType] || [],
       [servantsType]: worksServantsData[servantsType] || []
     }
-    let editIndexObj = workersServantsCompState['editIndex'] || {};
     let alreadyLinked = updateAlreadyLinkedPcIds(newItems);
-    editIndex[workersType] =  editIndexObj[workersType] !== undefined  ? editIndexObj[workersType]  : newItems[workersType].length;
-    editIndex[servantsType] = editIndexObj[servantsType] !== undefined ? editIndexObj[servantsType] : newItems[servantsType].length;
+    editIndex[workersType] =  newItems[workersType].length;
+    editIndex[servantsType] = newItems[servantsType].length;
     let obj = { selectedPc: {}, selectedEmpId: {}, newItems, editIndex, alreadyLinked }
     updateStateChanges({alreadyLinked: alreadyLinked, workersServantsCompState: {...compState, ...obj},
       workerServentsCompLoaded: true,

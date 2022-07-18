@@ -1,3 +1,25 @@
+
+   .clip0 {
+    clip-path: polygon(0% -5%, 3.3% 0.3%, 20% 62%, 0% 100%);
+    background-color: darkcyan;
+    width: 330px;
+    height: 500px;
+    position: absolute;
+    top: 0;
+}
+.clip1 {
+    clip-path: polygon(100% 0%, 100% 100%, 75% 57%);
+    background-color: yellow;
+    width: 300px;
+    height: 430px;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    bottom: 0;
+}
+.container-fluid {
+    padding: 0px !important;
+}
 .layout {
     width: 1300px;
     margin: 0px auto;

@@ -46,7 +46,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
     })
   }
 
-  const handleClose = () => setState({...state, showPopup: false})
+  const handleClose = () => setState({...state, showPopup: false, warning: false, reassign: false})
 
   return(
     <>
@@ -73,7 +73,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
                 })}
                 </div>
                 {warning === true && <small style={{color:'red'}}> Select atleast one agent </small>}
-                {reassign === true && <small style={{color:'red'}}> Do you want change sales agent? </small>}
+                {reassign === true && <small style={{color:'red'}}> Do you want to change sales agent? </small>}
             </div>
         </Modal.Body>
         <Modal.Footer>
