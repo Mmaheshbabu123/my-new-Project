@@ -6,7 +6,7 @@ import { AiFillEye, AiFillInfoCircle, AiOutlineArrowRight } from 'react-icons/ai
 import { ViewState } from '@devexpress/dx-react-scheduler';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-import { fetchemployeeid } from '../../Services/ApiEndPoints';
+import { fetchemployeeplanning } from '../../Services/ApiEndPoints';
 
 import {
 	Scheduler,
@@ -20,14 +20,12 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui';
 
 function EmployeeMonthlyPlanning(props) {
-	const [ data, setData ] = useState({
-		employee_id: ''
-	});
+	const [ data, setData ] = useState();
 	/**
 	 * FETCHING EMPLOYEE ID
 	 */
 	useEffect(() => {
-		APICALL.service(fetchemployeeid, 'GET')
+		APICALL.service(fetchemployeeplanning + 105, 'GET')
 			.then((result) => {
 				console.log(result.data);
 
@@ -254,7 +252,7 @@ function EmployeeMonthlyPlanning(props) {
 								<th className="border-end  border-info">End time</th>
 								<th className="border-end  border-info">Employer</th>
 								<th className="border-end  border-info">Location</th>
-								<th className="border-end  border-info">COmpany</th>
+								<th className="border-end  border-info">Company</th>
 								<th className="border-end  border-info">Action</th>
 							</tr>
 						</thead>

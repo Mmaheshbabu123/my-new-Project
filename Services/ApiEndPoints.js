@@ -138,4 +138,4 @@ export const fetchSalesAgenetAgreements = BASE_URL + "get-all-sales-agent-agreem
 export const saveSalesAgentSvData = BASE_URL + "save-agent-assigned-data";
 
 //-----------EMPLOYEE PLANNING---------------------//
-export const fetchemployeeid = BASE_URL + "get-all-employee-id";
+export const fetchemployeeplanning = BASE_URL + "get-all-employee-planning/";
