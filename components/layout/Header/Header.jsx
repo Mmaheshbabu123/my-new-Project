@@ -17,8 +17,8 @@ function Header() {
 	<Link href={dashboard_url}>
 		<a> Back to dashboard </a>
 		</Link>
-	</div> */} <div class="clip0"></div>
-			<div classame="container-fluid  col-md-12">
+	</div> */} <div className="clip0"></div>
+			<div className="container-fluid  col-md-12">
 				<div className="d-flex row">
 
 					<div className="col-md-4">
