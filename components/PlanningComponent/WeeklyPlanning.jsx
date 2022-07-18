@@ -7,6 +7,7 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 function WeeklyPlanning(props) {
 	const [ empr_id, setEmpr_id ] = useState(86);
 	const [ showview, setShowview ] = useState(false);
+	const [planning,setPlanning] = useState([]);
 	const [ weeklyplanning, setWeeklyPlanning ] = useState([
 		{
 			id: 1,
@@ -56,6 +57,9 @@ function WeeklyPlanning(props) {
 				if(company != ''){
 				APICALL.service(getWeeklyPlanning + company, 'GET')
 					.then((result) => {
+						if(result.status == 200){
+							setPlanning(result.data);
+						}
 						console.log(result);
 					})
 					.catch((error) => {
@@ -91,7 +95,7 @@ function WeeklyPlanning(props) {
 		<div className="container">
 			<div className="row">
 				<p className="mt-2 mb-2 h3">Weekly Planning</p>
-				{showview && <p className="h6">For the week of Monday from 27/06/2022 to sunday 03/07/2022</p>}
+				{showview && <p className="h6">For the week of Monday from 10/07/2022 to sunday 17/07/2022</p>}
 
 				{showview && (
 					<div className=" mt-4 d-flex justify-content-end">
@@ -136,38 +140,51 @@ function WeeklyPlanning(props) {
 				<div className="mt-2 ">
 					{showview && (
 						<table className="table border border-secondary ">
-							<thead className="">
-								<tr className="">
+							<thead className="table-light">
+								<tr className="border-bottom border-secondary">
 									<th className="border-end border-secondary">
-										Monday<br />27-06-2022
+										Monday<br />10-07-2022
 									</th>
 									<th className="border-end border-secondary">
-										Tuesday <br />28-06-2022
+										Tuesday <br />11-07-2022
 									</th>
 									<th className="border-end border-secondary">
-										Wednesday <br />29-06-2022
+										Wednesday <br />12-07-2022
 									</th>
 									<th className="border-end border-secondary">
-										Thursday <br />30-06-2022
+										Thursday <br />13-07-2022
 									</th>
 									<th className="border-end border-secondary">
-										Friday<br />01-07-2022
+										Friday<br />14-07-2022
 									</th>
 									<th className="border-end border-secondary">
-										Saturday<br />02-07-2022
+										Saturday<br />15-07-2022
 									</th>
 									<th>
-										Sunday<br />13-03-2022
+										Sunday<br />16-03-2022
 									</th>
 								</tr>
 							</thead>
 							<tbody>
+							{planning.map((value) => (
+    	<tr className='border-bottom border-secondary' key={value.id}>
+      <td className="border-end border-secondary">{value.employee_name}</td>
+      <td className="border-end border-secondary">Otto</td>
+      <td className="border-end border-secondary">@mdo</td>
+	  <td className="border-end border-secondary">Mark</td>
+      <td className="border-end border-secondary">Otto</td>
+      <td className="border-end border-secondary">@mdo</td>
+	  <td>@mdo</td>
+    </tr>
+							))
+}
+	</tbody>
+							{/* <tbody>
 								<tr className="border-bottom border-secondary">
 									{weeklyplanning.map((value) => (
 										<td className="border-end border-secondary" key={value.id}>
 											<a>
 												<MdEdit className="float-right" />
-												{/* <i className="bi bi-pencil float-right" /> */}
 											</a>
 											{value.fullName}
 											<br />
@@ -208,7 +225,7 @@ function WeeklyPlanning(props) {
 									<td className="border-end border-secondary" />
 									<td className="border-end border-secondary" />
 								</tr>
-							</tbody>
+							</tbody> */}
 						</table>
 					)}
 				</div>
