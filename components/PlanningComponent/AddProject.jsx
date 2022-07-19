@@ -413,7 +413,7 @@ function Addproject(props) {
 									<button
 										type="submit"
 										className="btn btn-lg btn-block float-right add-proj-btn custom-btn px-3 "
-										// </div>data-bs-dismiss="modal"
+													// </div>data-bs-dismiss="modal"
 										// onClick={() => props.popupActionNo()}
 										onClick={(e) => {
 											setData((prev) => ({ ...prev, p_unique_key: p_unique_key }));

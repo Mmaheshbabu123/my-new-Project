@@ -42,7 +42,7 @@ function Planning(props) {
 
 	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
 	useEffect(() => {
-		APICALL.service(getEmployeerCompanylist + 102, 'GET')
+		APICALL.service(getEmployeerCompanylist + 1, 'GET')
 			.then((result) => {
 				console.log(result.data[0]);
 				setCompany(result.data[0]);
