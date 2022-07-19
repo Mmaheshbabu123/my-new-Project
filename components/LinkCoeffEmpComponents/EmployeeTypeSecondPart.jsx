@@ -168,7 +168,7 @@ const EmployeeTypeSecondPart = () => {
     let lowRef = inputRef.current[`${refkey}_1`];
     let highRef = inputRef.current[`${refkey}_3`];
     let title = '';
-    if (lowVal > highVal && type) {
+    if (lowVal >= highVal && type) {
       title = 'Low value should be less then high value (Low < High)';
       if (lowHighValidation.includes(refkey)) return lowHighValidation;
       lowRef.classList.add("warning");

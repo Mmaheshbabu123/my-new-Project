@@ -36,8 +36,9 @@
   text-align: right;
 }
 
-#pcp_name_warning {
+.pcp_name_warning {
   color: red !important;
+  margin: 10px;
 }
 
 .add-item-div{
