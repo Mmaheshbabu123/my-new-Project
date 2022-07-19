@@ -138,7 +138,7 @@ const LinkCoeffEmpComponent = (props) => {
 
   if (SERVER_SIDE_RENDERING)
     return <>
-      <div className="m-4">
+      <div className="mt-4">
         <div className="col-md-12 row p-0 m-0">
           <h4>{(Number(props.pcid) ? 'Edit' : 'Add') + ' link coefficients to employee types.'}</h4>
           <div className="col-md-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
