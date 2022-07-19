@@ -111,22 +111,27 @@ const AddFunction = () => {
 			let func,
 				sal,
 				emp = '';
-			if (value.functionid == '' || value.functionid == null || value.functionid == 'This field is required') {
-				func = 'This field is required';
+			if (value.functionid == '' || value.functionid == null || value.functionid == 'This field is required.') {
+				func = 'This field is required.';
 				v++;
 			}
 
-			if (value.salary == '' || value.salary == null || value.salary == 'This field is required') {
-				sal = 'This field is required';
+			if (value.salary == '' || value.salary == null || value.salary == 'This field is required.') {
+				sal= 'This field is invalid.';
 				v++;
+			}else{
+				if(value.salary<Number(salaries)){
+					sal= 'This field is invalid.';
+					v++;
+				}
 			}
 
 			if (
 				value.employeetypeid == '' ||
 				value.employeetypeid == null ||
-				value.salary == 'This field is required'
+				value.salary == 'This field is required.'
 			) {
-				emp = 'This field is required';
+				emp = 'This field is required.';
 				v++;
 			}
 			return { ...value, functioniderror: func, employeeiderror: emp, salaryerror: sal };
@@ -162,16 +167,29 @@ const AddFunction = () => {
 	};
 
 	function updatingObjectTypeid(empid, emptype) {
+		console.log(emptype)
 		var objects = [ ...employeeobject ];
-		if (objects != undefined) {
-			const newState = objects.map((element) => {
-				if (element.employeeid == empid) {
-					return { ...element, employeetypeid: emptype };
-				}
-				return element;
-			});
-			setEmployeeObject(newState);
-		}
+		var data1 = [...storeddata];
+		data1.map((val,key)=>{
+			if(val.emp_id == empid){
+				console.log(data1[key].emp_type);
+				data1[key].emp_type = emptype;
+			}
+			
+		});
+		setStoredData(data1);
+		
+
+		// if (objects != undefined) {
+		// 	const newState = objects.map((element) => {
+		// 		if (element.employeeid == empid) {
+		// 			return { ...element, employeetypeid: emptype };
+		// 		}
+		// 		return element;
+		// 	});
+		// 	setEmployeeObject(newState);
+		// }
+
 		console.log(employeeobject);
 	}
 
@@ -355,14 +373,13 @@ const AddFunction = () => {
 											''
 										)}
 									</div>
-									{}
 								</div>
 							</div>
 						))
 					) : (
 						''
 					)}
-					<p style={{ color: 'red' }}>{error}</p>
+					<p  style={{ color: 'red',paddingLeft:'77px' }}>{error}</p>
 				</ul>
 			</div>
 		);
@@ -391,6 +408,10 @@ const AddFunction = () => {
 		setFulllist(options);
 	};
 
+	// const setit=(val)=>{
+	// 	setSelectedOption(val);
+	// }
+
 	const employeTypeSelection = (val) => {
 		var op = '';
 		emptypes.forEach((element) => {
@@ -398,10 +419,12 @@ const AddFunction = () => {
 				op = element;
 			}
 		});
+		// setit(op);
 		return op;
 	};
-	let updatestoredata = (e) => {
-		// alert(e.target.value);
+	let updatestoredata = (key,val) => {
+
+		console.log(val);
 	};
 
 	return (
@@ -426,24 +449,24 @@ const AddFunction = () => {
 									<div className="col-md-3 p-1">
 										{value + 1}. {key[1]}
 									</div>
+									{console.log(storeddata[value])}
 									<div className="col-md-4 bg-light">
 										{() => setSelected(storeddata[value])}
 										{emptypes != null ? (
 											<Select
 												placeholder={<div>Employee type</div>}
-												// value={employeTypeSelection(storeddata[value])}
+												defaultValue={employeTypeSelection(storeddata[value])}
 												options={emptypes}
 												name="functionss"
 												onChange={setSelectedOption}
 												onInputChange={(e) => {
 													updateValue(key[4], selectedOption.value, 2);
-													//updatestoredata(e);
 												}}
 											/>
 										) : (
 											''
 										)}
-										{<p style={{ color: 'red' }}>{employeeobject[value].employeeiderror}</p>}
+										{<p style={{ color: 'red',paddingTop: '5px' }}>{employeeobject[value].employeeiderror}</p>}
 									</div>
 									<div className="col-md-2 bg-light mb-2">
 										<span className="p-1">
