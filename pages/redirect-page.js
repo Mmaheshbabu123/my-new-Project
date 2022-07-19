@@ -6,13 +6,11 @@ import { Uniquekey } from '../Services/GenetateUniqueKey';
 
 const Redirectpage = () => {
     const { query } = useRouter();
-	if(query.hasOwnProperty('uid')){
-		localStorage.setItem("uid",query.uid);
-	}
 	return (
        
 		<div>
-			{query.hasOwnProperty('dest') && <RedirectPages dest={query.dest} src={query.src} type={query.hasOwnProperty('type')?query.type:''} />}
+			{console.log(query)}
+			{query.hasOwnProperty('dest') && query.hasOwnProperty('src') && <RedirectPages dest={query.dest} src={query.src} type={query.hasOwnProperty('type')?query.type:''} />}
 		</div>
 	);
 };

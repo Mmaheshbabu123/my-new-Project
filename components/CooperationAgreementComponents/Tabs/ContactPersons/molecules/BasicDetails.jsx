@@ -43,12 +43,17 @@ console.log(personId);
           className = {'col-md-8'}
           value={tab_3[personId][data.id] }
           isDisabled= {false}
-          placeholder={'Enter...'}
+          placeholder={''}
           handleChange={handleChange}
           name={data.id}
           //{`tab_2_${data.id}`}
          />
-         
+         {tab_3[personId]['validations'][data.id] && tab_3[personId]['validations'][data.id]['validate'] &&
+           <ValidateMessage text = {'This field is invalid'}/>
+         }
+         { tab_3[personId]['required'][data.id] !== undefined && !tab_3[personId]['required'][data.id] &&
+          <ValidateMessage text = {'This field is required'}/>
+        }
         </div>
       )
     }
@@ -75,6 +80,9 @@ console.log(personId);
         isMulti={false}
         className="col-md-6"
       />
+      { tab_3[personId]['required'][data.id] !== undefined && !tab_3[personId]['required'][data.id] &&
+       <ValidateMessage text = {'This field is required'}/>
+     }
       </div>
     )
   }
@@ -91,6 +99,9 @@ fieldData.push(
              name = {data.id}
              value={tab_3[personId][data.id]}
             />
+            { tab_3[personId]['required'][data.id] !== undefined && !tab_3[personId]['required'][data.id] &&
+             <ValidateMessage text = {'This field is required'}/>
+           }
       </div>
     )
   }

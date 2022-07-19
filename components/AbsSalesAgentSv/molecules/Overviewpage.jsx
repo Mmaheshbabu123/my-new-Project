@@ -25,7 +25,7 @@ const Overviewpage = (props) => {
   }
 
   const [state, setState] = useState({
-      headers: ['Employer name', 'Email', 'Company', 'Date of request', 'Date of commencement', 'Status', 'Actions'],
+      headers: ['Employer name',  'Company', 'Date of request', 'Start date of cooperation agreement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
       searchKey: 'company_name',
       currentItems: [],
@@ -127,7 +127,7 @@ const Overviewpage = (props) => {
                 return (
                   <tr key={index}>
                       <td> {eachRow.employer_name} </td>
-                      <td> {eachRow.employer_email} </td>
+                    
                       <td> {eachRow.company_name} </td>
                       <td> {eachRow.date_of_request} </td>
                       <td> {eachRow.date_of_commencement} </td>

@@ -9,6 +9,7 @@ import styles from '../companyInformation.module.css';
 import { requiredFields} from '../../../RequiredFields';
 import RequiredField from '@/atoms/RequiredSpanField';
 import ValidateMessage from '@/atoms/validationError';
+
 import emailValidate from '@/atoms/emailValidate';
 const LegalAddress = (props) => {
   var Language = 22;
@@ -21,7 +22,7 @@ const LegalAddress = (props) => {
     validations:{'17':{'type':1,validate:false,'text':'Only numbers will accept' },'14':{'type':1,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'}}
   })
   var { tab_2,element_status } = state;
-
+  console.log(tab_2);
   const handleChange = (event) => {
     const {name,value} = event.target;
     tab_2[name] = value;
@@ -77,13 +78,16 @@ const LegalAddress = (props) => {
          className = {'col-md-8'}
          value={tab_2[data.id]}
          isDisabled= {false}
-         placeholder={'Enter...'}
+         placeholder={''}
          handleChange={(e)=>handleChange(e)}
          name={data.id}
 
         />
         {tab_2['validations'][data.id] && tab_2['validations'][data.id]['validate'] &&
           <ValidateMessage text = {'This field is invalid'}/>
+        }
+         { tab_2['required'][data.id] !== undefined && !tab_2['required'][data.id] &&
+          <ValidateMessage text = {'This field is required'}/>
         }
        </div>
      )

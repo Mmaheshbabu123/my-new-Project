@@ -4,14 +4,15 @@ import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
 import RadioField from '@/atoms/RadioField';
 import RequiredField from '@/atoms/RequiredSpanField';
+import { requiredFields} from '../../../RequiredFields';
 import styles from '../OnlineDetails.module.css';
 import { onlineDetailsRow1,onlineDetailsRow2,onlineDetaillsRadioRow1,onlineDetaillsRadioRow2} from '../OnlineDetailsFields';
-import { requiredFields} from '../../../RequiredFields';
+
 import ValidateMessage from '@/atoms/validationError';
 const BasicDetails = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_4,element_status} = state;
-
+  console.log(tab_4);
   const OnlineFieldData = (onlineRow) => {
     let  fieldsArray = [];
     onlineRow.map(data=>{
@@ -24,13 +25,16 @@ const BasicDetails = (props) => {
          className = {'col-md-8'}
          value={tab_4[data.id]}
          isDisabled= {false}
-         placeholder={'Enter...'}
+         placeholder={''}
          handleChange={handleChange}
          name={data.id}
          //{`tab_2_${data.id}`}
         />
         {tab_4['validations'][data.id] && tab_4['validations'][data.id]['validate'] &&
           <ValidateMessage text = {'This field is invalid'}/>
+        }
+        {!tab_4['required'][data.id] &&
+          <ValidateMessage text = {'This field is required'}/>
         }
        </div>
      )
