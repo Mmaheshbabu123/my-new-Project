@@ -3,6 +3,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import BasicDetails from '../molecules/BasicDetails';
 import { helpers } from '../../../CooperationAgreementHelper';
 import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
+import { requiredFields} from '../../../RequiredFields';
 const OnlineDetails = (props) => {
   const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_4_action}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
 
@@ -15,7 +16,7 @@ const OnlineDetails = (props) => {
   let stateKey = `tab_${selectedTabId}`;
   let tab_4 = { ...state[stateKey] };
   var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
-
+  tab_4['required'] = requiredFields['tab_4'];
   let apiData = Object.keys(data['tab_4']).length ? data['tab_4'] : 0;
   tab_4_action = apiData === 0 ? 1 :2;
   if(apiData) {
