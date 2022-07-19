@@ -29,7 +29,7 @@ const AddEditSalaryBenefits = (props) => {
     , newItems: []
     , nameWarning: false
     , editIndex: 0
-    , minDate: `${year}-${month < 10 ? '0' + month : month}-${day}`
+    , minDate: `${year}-${month < 10 ? '0' + month : month}-${day + 1}`
   })
 
 
@@ -65,12 +65,9 @@ const AddEditSalaryBenefits = (props) => {
       }
       setState(stateObj);
     }
+
    const checkDateFieldValid = (value) => {
-     if(new Date(value).getTime() > new Date(state.minDate).getTime() || value === '') {
-       return false;
-      } else {
-       return true;
-      }
+     return (new Date(value).getTime() > new Date(state.minDate).getTime() || value === '') ? false: true
    }
     /**
      * [handleSubmit: function to save and edit employee/coefficient types]
@@ -203,18 +200,16 @@ const AddEditSalaryBenefits = (props) => {
             className="form-control col-md-10 pcp_name"
             value={state.name}
             onChange={(e) => handleChange(e.target)}
-            placeholder='Enter name'
+            placeholder='Please add salary benefit'
           />
           {state.nameWarning &&
             <small
-              id="pcp_name_warning"
-              className="form-text text-muted col-md-5">
-              Name field is required
+              className="form-text text-muted col-md-5 pcp_name_warning">
+              This field is required.
             </small>}
           {state.uniqueError &&
             <small
-              id="pcp_name_warning"
-              className="form-text text-muted col-md-5">
+              className="form-text text-muted col-md-5 pcp_name_warning">
               {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
             </small>}
         </div>
@@ -231,8 +226,7 @@ const AddEditSalaryBenefits = (props) => {
           />
           {state.valueWarning &&
             <small
-              id="pcp_name_warning"
-              className="form-text text-muted col-md-5">
+              className="form-text text-muted col-md-5 pcp_name_warning">
               {`It'll accept only numeric/decimal values`}
             </small>}
         </div>
@@ -249,8 +243,7 @@ const AddEditSalaryBenefits = (props) => {
           />
           {state.dateWarning &&
             <small
-              id="pcp_name_warning"
-              className="form-text text-muted col-md-5">
+              className="form-text text-muted col-md-5 pcp_name_warning">
               Date should not be before {state.minDate}
             </small>}
         </div>
@@ -269,9 +262,9 @@ const AddEditSalaryBenefits = (props) => {
             <button
               onClick={() => addItemAndUpdateIndex({...state})}
               type="button"
-              style={{marginTop: '60px'}}
+              style={{marginTop: '0'}}
               className="btn btn-dark pcp_btn">
-              {`+ Add`}
+              {`Add`}
             </button>
           }
           </div>

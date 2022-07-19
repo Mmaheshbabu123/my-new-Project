@@ -91,6 +91,10 @@
   border-bottom: 1px solid;
 }
 
+.table-second-part-th-class {
+  min-width: 100px;
+}
+
 .header-div-tag {
   overflow: hidden;
   text-overflow: ellipsis;

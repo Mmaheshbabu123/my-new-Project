@@ -17,6 +17,7 @@ const AddEmployeeType = (props) => {
     , newItems: []
     , nameWarning: false
     , editIndex: 0
+    , typeName: `${props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient name'}`
   })
 
     /**
@@ -139,8 +140,8 @@ const AddEmployeeType = (props) => {
   return <>
     <div className='add-edit-types'>
       <div className="row m-3">
-        <h4 className="mb-4"> {`${props.id ? 'Edit ' : 'Add '} ${props.manageType === 'employee-types' ? 'employee type' : 'coefficient'}`} </h4>
-        <label className = "mb-3" htmlFor="name"> {`${props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient name'}`} <span style={{color:'red'}}> * </span></label>
+        <h4 className="mb-4"> {`${props.id ? 'Edit ' : 'Add '} ${state.typeName}`} </h4>
+        <label className = "mb-3" htmlFor="name"> {state.typeName} <span style={{color:'red'}}> * </span></label>
         <div className='row'>
           <input
             ref={inputRef}
@@ -149,27 +150,25 @@ const AddEmployeeType = (props) => {
             value={state.name}
             onChange={(e) => handleInputChange(e)}
             onKeyUp={(e) => handleAdd(e)}
-            placeholder={state.editFlow ? 'Enter name' : 'Press enter to add new one'}
+            placeholder={state.editFlow ? `Please add ${state.typeName}` : `Press enter to add new ${state.typeName}`}
           />
           {!state.editFlow &&
             <button
               onClick={() => addItemAndUpdateIndex({ ...state }, state.name)}
               type="button"
               className="btn btn-dark pcp_btn col-3">
-              {`+ Add`}
+              {`Add`}
             </button>
           }
         </div>
         {state.nameWarning &&
           <small
-            id="pcp_name_warning"
-            className="form-text text-muted col-md-5">
-            Please add type
+            className="m-0 form-text text-muted col-md-5 pcp_name_warning">
+            {`This field is required.`}
           </small>}
         {state.uniqueError &&
           <small
-            id="pcp_name_warning"
-            className="form-text text-muted col-md-5">
+            className="form-text text-muted col-md-5 pcp_name_warning">
             {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
           </small>}
       </div>
