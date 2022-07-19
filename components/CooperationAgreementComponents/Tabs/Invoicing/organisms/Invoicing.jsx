@@ -2,10 +2,13 @@ import React,{useContext,useEffect} from 'react';
 import InvoiceDetails from '../molecules/InvoiceDetails';
 import { helpers } from '../../../CooperationAgreementHelper';
 import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
+import { requiredFields} from '../../../RequiredFields';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 const Invoicing = (props) => {
   const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_6_action}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
-  const { tab_6,tab_2} = state;
+  const { tab_6,tab_2,tab_3} = state;
+  console.log(tab_6);
+  const PersonId = 1;
   useEffect(()=>{
   if(!state.loadedTabs.includes(selectedTabId))
     loadData();
@@ -24,24 +27,27 @@ const Invoicing = (props) => {
   if(apiData) {
   tab_6 = {...apiData,...tab_6}
 }else {
-  prefillFieldsDefault(tab_6,tab_2);
+  prefillFieldsDefault(tab_6,tab_2,tab_3);
 
 }
 
   updateStateChanges({tab_6,tab_6_action})
   }
- const prefillFieldsDefault = (tab_6,tab_2) =>{
+ const prefillFieldsDefault = (tab_6,tab_2,tab_3) =>{
 
-   tab_6['51']  = tab_2['11'];
-   tab_6['52']  = tab_2['14'];
-   tab_6['53']  = tab_2['16'];
-   tab_6['54']  = tab_2['17'];
-   tab_6['71']  = tab_2['18'];
-   tab_6['55']  = tab_2['19'];
-   tab_6['68']  = tab_2['12'];
-   tab_6['69']  = tab_2['13'];
-   tab_6['70']  = tab_2['15'];
-  
+   tab_6['51']  = tab_2['11'] || '';
+   tab_6['52']  = tab_2['14'] || '';
+   tab_6['53']  = tab_2['16'] || '';
+   tab_6['54']  = tab_2['17'] || '';
+   tab_6['71']  = tab_2['18'] || '';
+   tab_6['55']  = tab_2['19'] || '';
+   tab_6['68']  = tab_2['12'] || '';
+   tab_6['69']  = tab_2['13'] || '';
+   tab_6['70']  = tab_2['15'] || '';
+   tab_6['50']  = tab_3[PersonId]['26'] || '';
+   tab_6['67']  = tab_3[PersonId]['33'] || '';
+   tab_6['required'] = requiredFields['tab_6'];
+
  }
 
   return (

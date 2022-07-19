@@ -8,6 +8,7 @@ import MultiSelectField from '@/atoms/MultiSelectField';
 import { companyRow1,comapanyRow2,companyArray} from '../ComapanyInformationFields';
 import { requiredFields} from '../../../RequiredFields';
 import RequiredField from '@/atoms/RequiredSpanField';
+import ValidateMessage from '@/atoms/validationError';
 const CompanyDetails = (props) => {
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
 var { tab_2,element_status } = state;
@@ -31,11 +32,17 @@ const CompanyFieldData = (companyRow1) => {
        className = {'col-md-8'}
        value={tab_2[data.id]}
        isDisabled= {false}
-       placeholder={'Enter...'}
+       placeholder={''}
        handleChange={handleChange}
        name={data.id}
        //{`tab_2_${data.id}`}
       />
+      {tab_2['validations'][data.id] && tab_2['validations'][data.id]['validate'] &&
+        <ValidateMessage text = {'This field is invalid'}/>
+      }
+       { tab_2['required'][data.id] !== undefined && !tab_2['required'][data.id] &&
+        <ValidateMessage text = {'This field is required'}/>
+      }
      </div>
    )
   })
@@ -115,6 +122,9 @@ return(
      name={Vat_Number}
       //{`tab_2_${data.id}`}
      />
+     {tab_2['validations'][Vat_Number] && tab_2['validations'][Vat_Number]['validate'] &&
+       <ValidateMessage text = {'This field is invalid'}/>
+     }
     </div>
      {CompanyFieldData(companyRow1)}
      </div>
