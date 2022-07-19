@@ -6,6 +6,7 @@ import Addproject from './AddProject';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import RadioField from '@/atoms/RadioField';
 
 function Planning(props) {
 	const router = useRouter();
@@ -41,30 +42,30 @@ function Planning(props) {
 	}, []);
 
 	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
-	useEffect(() => {
-		APICALL.service(getEmployeerCompanylist + 102, 'GET')
-			.then((result) => {
-				console.log(result.data[0]);
-				setCompany(result.data[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
-
-	// FETCHING COMPANY FROM DRUPAL //
 	// useEffect(() => {
-	// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
+	// 	APICALL.service(getEmployeerCompanylist + 102, 'GET')
 	// 		.then((result) => {
-	// 			if (result.length > 0) {
-	// 				setCompany(result);
-	// 			} else {
-	// 			}
+	// 			console.log(result.data[0]);
+	// 			setCompany(result.data[0]);
 	// 		})
 	// 		.catch((error) => {
-	// 			console.error(error);
+	// 			console.log(error);
 	// 		});
 	// }, []);
+
+	// FETCHING COMPANY FROM DRUPAL //
+	useEffect(() => {
+		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managecompanies?_format=json', 'GET')
+			.then((result) => {
+				if (result.length > 0) {
+					setCompany(result);
+				} else {
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
 
 	// //LOCATION FETCHING FROM DRUPAL
 	useEffect(
@@ -72,7 +73,7 @@ function Planning(props) {
 			setLocation([]);
 			if (data.comp_id != '') {
 				APICALL.service(
-					process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managelocations?_format=json&comp_id=' + data.comp_id,
+					process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managelocations?_format=json&comp_id=' + data.comp_id,
 					'GET'
 				)
 					.then((result) => {
@@ -227,10 +228,10 @@ function Planning(props) {
 									onClick={(e) => {
 										setCompany_name(options.comp_name);
 									}}
-									key={options.nid}
-									value={options.nid}
+									key={options.comp_id}
+									value={options.comp_id}
 								>
-									{options.title}
+									{options.comp_name}
 								</option>
 							))}
 						</select>

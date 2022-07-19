@@ -5,7 +5,8 @@ import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
-import { da, id } from 'date-fns/locale';
+import { da, id } from 'date-fns/locale'
+import RadioField from '@/atoms/RadioField';;
 import { max } from 'date-fns';
 import { data } from 'node_modules/autoprefixer/lib/autoprefixer';
 import { validate } from 'uuid';
@@ -169,27 +170,26 @@ const AddFunction = () => {
 	function updatingObjectTypeid(empid, emptype) {
 		console.log(emptype)
 		var objects = [ ...employeeobject ];
-		var data1 = [...storeddata];
-		data1.map((val,key)=>{
-			if(val.emp_id == empid){
-				console.log(data1[key].emp_type);
-				data1[key].emp_type = emptype;
-			}
+		// var data1 = [...storeddata];
+		// data1.map((val,key)=>{
+		// 	if(val.emp_id == empid){
+		// 		console.log(data1[key].emp_type);
+		// 		data1[key].emp_type = emptype;
+		// 	}
 			
-		});
-		setStoredData(data1);
+		// });
+		// setStoredData(data1);
 		
 
-		// if (objects != undefined) {
-		// 	const newState = objects.map((element) => {
-		// 		if (element.employeeid == empid) {
-		// 			return { ...element, employeetypeid: emptype };
-		// 		}
-		// 		return element;
-		// 	});
-		// 	setEmployeeObject(newState);
-		// }
-
+		if (objects != undefined) {
+			const newState = objects.map((element) => {
+				if (element.employeeid == empid) {
+					return { ...element, employeetypeid: emptype };
+				}
+				return element;
+			});
+			setEmployeeObject(newState);
+		}
 		console.log(employeeobject);
 	}
 
@@ -449,7 +449,7 @@ const AddFunction = () => {
 									<div className="col-md-3 p-1">
 										{value + 1}. {key[1]}
 									</div>
-									{console.log(storeddata[value])}
+									{/* {console.log(storeddata[value])} */}
 									<div className="col-md-4 bg-light">
 										{() => setSelected(storeddata[value])}
 										{emptypes != null ? (
@@ -466,6 +466,7 @@ const AddFunction = () => {
 										) : (
 											''
 										)}
+										{console.log(selectedOption)}
 										{<p style={{ color: 'red',paddingTop: '5px' }}>{employeeobject[value].employeeiderror}</p>}
 									</div>
 									<div className="col-md-2 bg-light mb-2">
