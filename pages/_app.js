@@ -18,7 +18,9 @@ function MyApp({ Component, pageProps }) {
 				/>
 			</Head>
 			<Layout>
+				<div className='col-md-10 m-auto'>
 				<Component {...pageProps} />
+				</div>
 			</Layout>
 			<Script
 				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
