@@ -17,7 +17,7 @@ const AddEmployeeType = (props) => {
     , newItems: []
     , nameWarning: false
     , editIndex: 0
-    , typeName: `${props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient name'}`
+    , typeName: `${props.manageType === 'employee-types' ? 'employee type' : 'coefficient name'}`
   })
 
     /**
@@ -141,7 +141,7 @@ const AddEmployeeType = (props) => {
     <div className='add-edit-types'>
       <div className="row m-3">
         <h4 className="mb-4"> {`${props.id ? 'Edit ' : 'Add '} ${state.typeName}`} </h4>
-        <label className = "mb-3" htmlFor="name"> {state.typeName} <span style={{color:'red'}}> * </span></label>
+        <label className = "mb-3" htmlFor="name"> {props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient'} <span style={{color:'red'}}> * </span></label>
         <div className='row'>
           <input
             ref={inputRef}
@@ -150,7 +150,7 @@ const AddEmployeeType = (props) => {
             value={state.name}
             onChange={(e) => handleInputChange(e)}
             onKeyUp={(e) => handleAdd(e)}
-            placeholder={state.editFlow ? `Please add ${state.typeName}` : `Press enter to add new ${state.typeName}`}
+            placeholder={`Please enter ${state.typeName}`}
           />
           {!state.editFlow &&
             <button

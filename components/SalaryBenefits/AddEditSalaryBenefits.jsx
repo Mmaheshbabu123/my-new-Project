@@ -6,7 +6,7 @@ import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 let dateObj = new Date()
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
-let day = dateObj.getUTCDate();
+let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear()-1;
 
 const AddEditSalaryBenefits = (props) => {
@@ -29,7 +29,7 @@ const AddEditSalaryBenefits = (props) => {
     , newItems: []
     , nameWarning: false
     , editIndex: 0
-    , minDate: `${year}-${month < 10 ? '0' + month : month}-${day + 1}`
+    , minDate: `${year}-${month < 10 ? '0' + month : month}-${day}`
   })
 
 
@@ -55,6 +55,7 @@ const AddEditSalaryBenefits = (props) => {
             stateObj['name'] = '';
             stateObj['date'] = '';
             stateObj['value'] = '';
+            stateObj['dateWarning'] = false;
             stateObj['editIndex'] = stateObj['newItems'].length;
         }else {
             stateObj['dateWarning'] = true;
@@ -67,7 +68,9 @@ const AddEditSalaryBenefits = (props) => {
     }
 
    const checkDateFieldValid = (value) => {
-     return (new Date(value).getTime() > new Date(state.minDate).getTime() || value === '') ? false: true
+     let miDate = state.minDate;
+     console.log({value, miDate});
+     return (new Date(value).getTime() >= new Date(state.minDate).getTime() || value === '') ? false: true
    }
     /**
      * [handleSubmit: function to save and edit employee/coefficient types]
@@ -244,7 +247,7 @@ const AddEditSalaryBenefits = (props) => {
           {state.dateWarning &&
             <small
               className="form-text text-muted col-md-5 pcp_name_warning">
-              Date should not be before {state.minDate}
+              Date should not be before {formatDate(state.minDate)}
             </small>}
         </div>
       </div>

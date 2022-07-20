@@ -124,6 +124,8 @@ const LinkCoeffEmpComponent = (props) => {
 
   const addMultiSelectTag = () => {
     return (
+      <>
+      <p className='my-2'> Select paritair comite </p>
       <MultiSelect
         options={state.pcArray}
         standards={state.pcArray.filter(val => val.value === state.selectedPc)}
@@ -133,6 +135,7 @@ const LinkCoeffEmpComponent = (props) => {
         className="pc-single-select"
         placeholder={'Select paritair comite'}
       />
+      </>
     )
   }
 
@@ -140,13 +143,13 @@ const LinkCoeffEmpComponent = (props) => {
     return <>
       <div className="mt-4">
         <div className="col-md-12 row p-0 m-0">
-          <h4>Link coefficients to employee types</h4>
+          <h4 className={`sv-cp-page-title text-center page-title`}> Link coefficients to employee types</h4>
           <div className="col-md-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
             {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
           </div>
           {state.lowHighValidation.length > 0 &&
             <small className="col-md-6 mt-3 mb-3 warning-message">
-              {`Change highlighted low and high values low value should be less than high value (Low < High).`}
+              {`Please change the highlighted low and high values, low value should be less than high value (Low < High)`}
             </small>}
           {state.emptyDataWarning === true &&
             <small className="col-md-6 mt-3 mb-3 warning-message">
