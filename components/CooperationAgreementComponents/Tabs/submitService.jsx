@@ -12,6 +12,7 @@ import emailValidate from '@/atoms/emailValidate';
 import postalCodeValidate from '@/atoms/postalCodeValidate';
 import urlValidate from '@/atoms/urlValidate';
 import vatNumberVaidate from '@/atoms/vatNumberValidate';
+import vatRateValidate from '@/atoms/vatRateValidate';
 const {
   tab_1,
   tab_2,
@@ -190,6 +191,9 @@ function checkValidationFields(key,value,type,tab_key,stateData) {
   }
   else if(type === 5 && vatNumberVaidate(value) ) {
      stateData['validations'][key]['validate'] = false;
+  }
+  else if(type === 6 && vatRateValidate(value)) {
+   stateData['validations'][key]['validate'] = false;
   }
   else {
      stateData['validations'][key]['validate'] = true;

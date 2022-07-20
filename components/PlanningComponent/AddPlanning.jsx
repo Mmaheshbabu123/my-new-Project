@@ -6,6 +6,7 @@ import Addproject from './AddProject';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import RadioField from '@/atoms/RadioField';
 
 function Planning(props) {
 	const router = useRouter();
@@ -41,30 +42,30 @@ function Planning(props) {
 	}, []);
 
 	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
-	useEffect(() => {
-		APICALL.service(getEmployeerCompanylist + 102, 'GET')
-			.then((result) => {
-				console.log(result.data[0]);
-				setCompany(result.data[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
-
-	// FETCHING COMPANY FROM DRUPAL //
 	// useEffect(() => {
-	// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
+	// 	APICALL.service(getEmployeerCompanylist + 102, 'GET')
 	// 		.then((result) => {
-	// 			if (result.length > 0) {
-	// 				setCompany(result);
-	// 			} else {
-	// 			}
+	// 			console.log(result.data[0]);
+	// 			setCompany(result.data[0]);
 	// 		})
 	// 		.catch((error) => {
-	// 			console.error(error);
+	// 			console.log(error);
 	// 		});
 	// }, []);
+
+	// FETCHING COMPANY FROM DRUPAL //
+	useEffect(() => {
+		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managecompanies?_format=json', 'GET')
+			.then((result) => {
+				if (result.length > 0) {
+					setCompany(result);
+				} else {
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
 
 	// //LOCATION FETCHING FROM DRUPAL
 	useEffect(
@@ -72,7 +73,7 @@ function Planning(props) {
 			setLocation([]);
 			if (data.comp_id != '') {
 				APICALL.service(
-					process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managelocations?_format=json&comp_id=' + data.comp_id,
+					process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managelocations?_format=json&comp_id=' + data.comp_id,
 					'GET'
 				)
 					.then((result) => {
@@ -194,25 +195,25 @@ function Planning(props) {
 	};
 
 	return (
-		<div className="col-md-10 m-auto  ">
+		<div className="col-md-12">
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row   planning-container calc-height m-0 col-md-12">
-					<div className='col-md-12'>
-					<h1 className=" mt-3 font-weight-bold  poppins-italic-24px px-0 ">Add Planning</h1>
+					<div className='col-md-12 px-0'>
+					<h1 className=" mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-mediun-24">Add Planning</h1>
 					</div>
-					<div className='col-md-12 px-0 mt-3 mb-4'>
+					<div className='col-md-12 px-0 mt-3 mb-3'>
 						<button
 							onClick={showPopup}
 							type="button"
-							className=" btn mb-4 skyblue-bg-color border-0 poppins-regular-24px px-5 py-3  btn-block float-end mt-2 mb-2 ms-2"
+							className=" btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center"
 						>
-							<span className=''>+</span>  Add project
+							<span style={{fontSize: '24px'}} className=''>+</span> &nbsp; Add project
 						</button>
 					</div>
 					<div className='form-sec border-form-sec p-5'>
 						<div className='col-md-6'>
-					<div className="form-group">
-						<label className="form-label mb-2 custom_astrick poppins-regular-16px">Company</label>
+					<div className="form-group mb-3">
+						<label className="form-label mb-2 mt-2 custom_astrick poppins-regular-16px">Company</label>
 						<select
 							value={data.comp_id}
 							className="form-select mb-2 mt-2"
@@ -227,17 +228,17 @@ function Planning(props) {
 									onClick={(e) => {
 										setCompany_name(options.comp_name);
 									}}
-									key={options.nid}
-									value={options.nid}
+									key={options.comp_id}
+									value={options.comp_id}
 								>
-									{options.title}
+									{options.comp_name}
 								</option>
 							))}
 						</select>
 						<p className="error mt-2">{error_comp_id}</p>
 					</div>
 
-					<div className="form-group">
+					<div className="form-group mb-3">
 						<label className="form-label mb-2 mt-2 custom_astrick poppins-regular-16px">Location</label>
 						<select
 							value={data.location_id}
@@ -256,7 +257,7 @@ function Planning(props) {
 						<p className="error mt-2">{error_location_id}</p>
 					</div>
 
-					<div className="form-group ">
+					<div className="form-group mb-3">
 						<label className="form-label mb-2 mt-2 poppins-regular-16px">Cost center</label>
 						<select
 							className="form-select mb-2 mt-2"
@@ -276,18 +277,18 @@ function Planning(props) {
 					</div>
 					</div>
 				</div>
-				<div className="row mt-4 col-md-12">
-					<div className="col-md-6">
-						<button type="button" className="btn  btn-block ">
+				<div className="row mt-4 mb-4 col-md-12 m-0">
+					<div className="col-md-6 p-0">
+						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/options'}>
-								<p className="bg-white border-bottom border-3 text-dark">BACK</p>
+								<p className="bg-white  back-btn-text ">BACK</p>
 							</Link>
 						</button>
 					</div>
-					<div className="col-md-6">
+					<div className="col-md-6 p-0">
 						<button
 							type="submit"
-							className="btn btn-secondary  custom-btn px-3  btn-block float-end"
+							className="btn btn-secondary rounded-0  custom-btn px-3  btn-block float-end"
 							onClick={() => {
 								setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
 							}}

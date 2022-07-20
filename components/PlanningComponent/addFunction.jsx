@@ -5,7 +5,8 @@ import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
-import { da, id } from 'date-fns/locale';
+import { da, id } from 'date-fns/locale'
+import RadioField from '@/atoms/RadioField';;
 import { max } from 'date-fns';
 import { data } from 'node_modules/autoprefixer/lib/autoprefixer';
 import { validate } from 'uuid';
@@ -169,27 +170,26 @@ const AddFunction = () => {
 	function updatingObjectTypeid(empid, emptype) {
 		console.log(emptype)
 		var objects = [ ...employeeobject ];
-		var data1 = [...storeddata];
-		data1.map((val,key)=>{
-			if(val.emp_id == empid){
-				console.log(data1[key].emp_type);
-				data1[key].emp_type = emptype;
-			}
+		// var data1 = [...storeddata];
+		// data1.map((val,key)=>{
+		// 	if(val.emp_id == empid){
+		// 		console.log(data1[key].emp_type);
+		// 		data1[key].emp_type = emptype;
+		// 	}
 			
-		});
-		setStoredData(data1);
+		// });
+		// setStoredData(data1);
 		
 
-		// if (objects != undefined) {
-		// 	const newState = objects.map((element) => {
-		// 		if (element.employeeid == empid) {
-		// 			return { ...element, employeetypeid: emptype };
-		// 		}
-		// 		return element;
-		// 	});
-		// 	setEmployeeObject(newState);
-		// }
-
+		if (objects != undefined) {
+			const newState = objects.map((element) => {
+				if (element.employeeid == empid) {
+					return { ...element, employeetypeid: emptype };
+				}
+				return element;
+			});
+			setEmployeeObject(newState);
+		}
 		console.log(employeeobject);
 	}
 
@@ -299,7 +299,8 @@ const AddFunction = () => {
 										}}
 									>
 										{value < 3 ? (
-											<input
+											
+											<span className='custom-radio-input'><input
 												type="radio"
 												value={key['id']}
 												name={'functions'}
@@ -308,7 +309,7 @@ const AddFunction = () => {
 												onChange={(e) => {
 													updateRes(e, value);
 												}}
-											/>
+											/></span>
 										) : (
 											''
 										)}
@@ -428,13 +429,13 @@ const AddFunction = () => {
 	};
 
 	return (
-		<div className="container" style={{ marginTop: '5%', marginBottom: '2%' }}>
+		<div className="col-md-12" style={{  }}>
 			<form onSubmit={(e) => submit(e)}>
-				<div className="row">
-					<div className="row">
-						<p className="h1">Add function</p>
+				<div className="row m-0">
+					<div className="col-md-12">
+						<p className="h1 mt-3 font-weight-bold  poppins-italic-24px">Add function</p>
 					</div>
-					<div className="form-check">
+					<div className="form-check px-0 my-3">
 						<input type="checkbox" checked={ischecked} onChange={() => checkbox()} />
 						<label className="form-check-label p-1 " htmlFor="flexCheckChecked">
 							Same functions for all employees
@@ -446,15 +447,15 @@ const AddFunction = () => {
 						{Data.map((key, value) => (
 							<div key={value}>
 								<div key={key} className="row bg-light mb-2 p-3">
-									<div className="col-md-3 p-1">
+									<div className="col-md-3 p-1 d-flex align-items-center justify-content-start">
 										{value + 1}. {key[1]}
 									</div>
-									{console.log(storeddata[value])}
-									<div className="col-md-4 bg-light">
+									{/* {console.log(storeddata[value])} */}
+									<div className="col-md-4  border-0 d-flex align-items-center justify-content-start">
 										{() => setSelected(storeddata[value])}
 										{emptypes != null ? (
 											<Select
-												placeholder={<div>Employee type</div>}
+												placeholder={<div className='hiii'>Employee type</div>}
 												defaultValue={employeTypeSelection(storeddata[value])}
 												options={emptypes}
 												name="functionss"
@@ -466,9 +467,10 @@ const AddFunction = () => {
 										) : (
 											''
 										)}
+										{console.log(selectedOption)}
 										{<p style={{ color: 'red',paddingTop: '5px' }}>{employeeobject[value].employeeiderror}</p>}
 									</div>
-									<div className="col-md-2 bg-light mb-2">
+									<div className="col-md-2 bg-white border-0 mb-2 d-flex align-items-center justify-content-center">
 										<span className="p-1">
 											{ischecked ? salaries != undefined && salaries != '' ? (
 												'€' + salaries
@@ -481,17 +483,17 @@ const AddFunction = () => {
 											)}
 										</span>
 									</div>
-									<div className="col-md-2">
+									<div className="col-md-2 d-flex align-items-center justify-content-center ">
 										{employeeobject[value].functionid != '' ? (
 											<div>
-																		<div className="input-group">
+											   <div className="input-group">
 
 												<input
 													ref={salaryref}
 													type="textfield"
 													name="salary"
 													placeholder="salary"
-													className="form-control"
+													className="form-control bg-white"
 													onChange={(e) => setsaalary(key[4], e)}
 												/>
 												<span className="input-group-text">€</span>

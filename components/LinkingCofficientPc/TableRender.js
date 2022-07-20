@@ -69,6 +69,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
     handleSearch(state.searchTerm);
   }
 
+
   //------------------- Pagination code -------------------------//
   //-------------------
      useEffect(() => {
@@ -101,6 +102,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
             className="form-control col-7 pcp_name"
             onChange={(e) => setState({...state, searchTerm: e.target.value})}
             placeholder={'Search'}
+            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
           />
           {/*<button
             onClick={() => router.push(`${manageType}/add?id=0`)}

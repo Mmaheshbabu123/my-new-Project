@@ -16,6 +16,9 @@ const InvoiceDetails = (props) => {
   console.log(state);
   const handleChange = (event) => {
     const { value, name } = event.target;
+    if(name === '72' && value === '') { //Vat Rate should be % present
+      value = '%';
+    }
     tab_6[name] = value;
     element_status['tab_6'].push(name);
     updateStateChanges({ tab_6,element_status });

@@ -216,11 +216,11 @@ function Addproject(props) {
 					tabIndex="-1"
 					style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}
 				>
-					{/* <div className="modal-dialog custom-modal-width-90 modal-xl "> */}
-					<div className="modal-dialog  modal-xl ">
+					<div className="modal-dialog custom-modal-width-85 modal-xl ">
+					{/* <div className="modal-dialog  modal-xl "> */}
 						<div className="modal-content  ">
-							<div className="modal-header">
-								<p className="modal-title  mt-3 font-weight-bold  poppins-italic-24px">Add project</p>
+							<div className="modal-header mx-4 px-0">
+								<div className='col-md-10 px-3'><p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-5">Add project</p></div>
 								<button
 									type="button"
 									className="btn-close"
@@ -230,7 +230,7 @@ function Addproject(props) {
 							</div>
 
 							<div className="modal-body ">
-								<div className="container">
+								<div className="col-md-11 m-auto">
 									<div className="row">
 										<div className=" ">
 											{/* PROJECT NAME */}
@@ -409,18 +409,18 @@ function Addproject(props) {
 										</div>
 									</div>
 								</div>
-								<div className="modal-footer border-0 col-md-12 ">
+								<div className="modal-footer border-0 col-md-11 m-auto px-2 ">
 									<button
 										type="submit"
-										className="btn btn-lg btn-block float-right add-proj-btn custom-btn px-3 "
-										// </div>data-bs-dismiss="modal"
+										className="btn btn-lg btn-block float-right add-proj-btn custom-btn px-3 rounded-0 "
+													// </div>data-bs-dismiss="modal"
 										// onClick={() => props.popupActionNo()}
 										onClick={(e) => {
 											setData((prev) => ({ ...prev, p_unique_key: p_unique_key }));
 											// ;
 										}}
 									>
-										Save
+										SAVE
 									</button>
 								</div>
 							</div>
