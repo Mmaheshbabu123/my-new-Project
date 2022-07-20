@@ -49,6 +49,7 @@
   background-size: 100% 100%;
   height: 100%;
   border-right: 1px solid;
+  border-bottom: 1px solid;
 }
 
 .cell--topRight {
@@ -99,6 +100,7 @@
 
 .table-second-part-th-class {
   min-width: 100px;
+  border-bottom: 1px solid;
 }
 
 .header-div-tag {

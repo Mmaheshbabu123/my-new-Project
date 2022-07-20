@@ -149,7 +149,7 @@ const LinkCoeffEmpComponent = (props) => {
           </div>
           {state.lowHighValidation.length > 0 &&
             <small className="col-md-6 mt-3 mb-3 warning-message">
-              {`Please change the highlighted low and high values, low value should be less than high value (Low < High)`}
+              {`Please change the highlighted low and high values, low value should be less than high value (Low < High).`}
             </small>}
           {state.emptyDataWarning === true &&
             <small className="col-md-6 mt-3 mb-3 warning-message">

@@ -247,7 +247,7 @@ const AddEditSalaryBenefits = (props) => {
           {state.dateWarning &&
             <small
               className="form-text text-muted col-md-5 pcp_name_warning">
-              Date should not be before {formatDate(state.minDate)}
+              Date should not be earlier than {formatDate(state.minDate)}
             </small>}
         </div>
       </div>

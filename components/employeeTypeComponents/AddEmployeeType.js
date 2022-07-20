@@ -17,7 +17,7 @@ const AddEmployeeType = (props) => {
     , newItems: []
     , nameWarning: false
     , editIndex: 0
-    , typeName: `${props.manageType === 'employee-types' ? 'employee type' : 'coefficient name'}`
+    , typeName: `${props.manageType === 'employee-types' ? 'employee type name' : 'coefficient name'}`
   })
 
     /**
