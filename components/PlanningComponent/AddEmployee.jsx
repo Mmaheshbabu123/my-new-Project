@@ -95,16 +95,16 @@ const AddEmployee = () => {
 		router.push('/planning/add/' + p_unique_key);
 	};
 	return (
-		<div className="col-md-10 m-auto " style={{  }}>
+		<div className="col-md-12" style={{  }}>
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row m-0">
 					<div className="row col-md-12" style={{ }}>
-						<h1 className='mt-3 font-weight-bold  poppins-italic-24px px-0' >Select employee</h1>
+						<h1 className='mt-3 font-weight-bold  bitter-italic-normal-mediun-24 px-0' >Select employee</h1>
 					</div>
 				</div>
 				<div className='col-md-12 selectemp-height'>
 				<div className="row col-md-6 m-auto select-relative">
-					<label className="custom_astrick form-label mb-2 custom_astrick poppins-regular-16px" style={{ }}>
+					<label className="custom_astrick form-label mb-3 custom_astrick poppins-regular-16px" style={{ }}>
 						Employee
 					</label>
 					{console.log(Data)}
@@ -124,19 +124,19 @@ const AddEmployee = () => {
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="bg-white border-bottom border-3 text-dark btn  btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="btn  btn-block px-0"
 							onClick={() => backToDashboard()}
 						>
-							Back
+							<p className="bg-white  back-btn-text ">BACK</p>
 						</button>
 					</div>
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn custom-btn px-3  btn-block float-end"
+							className="btn btn-secondary rounded-0  custom-btn px-3  btn-block float-end"
 							onClick={() => submit}
 						>
-							Next
+							NEXT
 						</button>
 					</div>
 				</div>

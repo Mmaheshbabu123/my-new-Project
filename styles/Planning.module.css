@@ -24,7 +24,7 @@
   }
   .poppinsregular20px {
     color: var(--color-label-footer-gray);
-    font-family: var(--font-family-regular);
+    font-family: var(--font-family-poppins-regular);
     font-size: var(--font-size-xl);
     font-style: normal;
     font-weight: 400;
