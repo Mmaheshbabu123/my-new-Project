@@ -53,37 +53,37 @@
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-LightItalic.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-regular';
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-Regular.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-thin';
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-Thin.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-thinitalic';
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-ThinItalic.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-mediun';
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-Medium.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-mediumitalic';
     font-weight: 500;
     font-style: normal;
 	src: url("./fonts/Poppins-MediumItalic.ttf");
-} 
+}
 
 /* for bitter font */
 @font-face {
@@ -103,7 +103,7 @@ body {
     --color-purple: #7761A7;
     /* for lable and footer background-color */
     --color-label-footer-gray: #4C4D55;
-    
+
     /* for border color*/
     --color-input-border-lightgrey: #B5B5B5;
     --color-white: #fff;
@@ -111,7 +111,7 @@ body {
     --bg-gray-dark: #4C4D5580;
     --bg-grey-medium: #4C4D550F;
     --color-skyblue: #79B1BD;
-   
+
     /* for font sizes */
     --font-size-s: 0.75em;
     --font-size-xl: 1.125rem;
@@ -147,7 +147,7 @@ body {
     --color-purple: #7761A7;
     /* for lable and footer background-color */
     --color-label-footer-gray: #4C4D55;
-    
+
     /* for border color*/
     --color-border-lightgrey: #B5B5B5;
     --color-white: #fff;
@@ -155,7 +155,7 @@ body {
     --bg-gray-dark: #4C4D5580;
     --bg-grey-medium: #4C4D550F;
     --color-skyblue: #79B1BD;
-    
+
       /* for font sizes */
       --font-size-s: 0.75rem;
       --font-size-xl: 1.25rem;
@@ -578,4 +578,30 @@ label {
     font-size: var(--font-size-m);
     font-style: normal;
     font-weight: 400px;
+}
+
+.custom-modal-width-90 {
+    max-width: 90% !important;
+}
+.inline-block-child {
+	display: inline-block;
+	float:left;
+}
+.svadmin_icon {
+	text-align: right;
+width: 20px !important;
+top: 17px;
+position: absolute;
+cursor: pointer;
+
+left: 21%;
+}
+.svadmin_icon2 {
+	text-align: right;
+width: 20px !important;
+top: 17px;
+position: absolute;
+cursor: pointer;
+
+left: 46%;
 }
