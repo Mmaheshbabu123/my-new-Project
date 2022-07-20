@@ -140,7 +140,7 @@ const LinkCoeffEmpComponent = (props) => {
     return <>
       <div className="mt-4">
         <div className="col-md-12 row p-0 m-0">
-          <h4>{(Number(props.pcid) ? 'Edit' : 'Add') + ' link coefficients to employee types.'}</h4>
+          <h4>Link coefficients to employee types</h4>
           <div className="col-md-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
             {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
           </div>
@@ -159,7 +159,7 @@ const LinkCoeffEmpComponent = (props) => {
           {state.defaultValueError.length > 0 &&
             <small className="col-md-3 mt-3 mb-3 warning-message">
               {`Default value should be in between low and high values.`}
-            </small>}  
+            </small>}
         </div>
         <div className="col-md-12 m-0 p-0 relative-div">
           {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
