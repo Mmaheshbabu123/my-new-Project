@@ -31,6 +31,7 @@ const Overviewpage = (props) => {
       currentItems: [],
       status: [1, 0],
       searchTerm: '',
+      searchColumn:'',
       showPopup: false,
       selectedSalesAgent: 0,
       warning: false,
@@ -63,9 +64,11 @@ const Overviewpage = (props) => {
 
 
   const handleSearchClick = (e) => {
-    const { name} = e.target;
-
+    //const { name} = e.target;
+console.log(e)
     let value = state.searchTerm;
+    let name = state.searchColumn;
+  console.log(state);
     let filterRows = overviewData.filter((item) => {
       let rowVal = item[name];
       //`${item['employer_name']}${item['company_name']}`
@@ -115,31 +118,33 @@ const Overviewpage = (props) => {
       <>
 {<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
 
-      <div className="col-sm-3">
+      <div className="col-sm-3 px-0">
 
           <input
             type="text"
-            className={`${styles['icon-rtl']}`}
+            className='form-control mt-2 mb-2'
             style={{margin: '10px 0'}}
             name = {'employer_name'}
-            onChange={(e) => setState({...state, searchTerm: e.target.value})}
+            onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'employer_name'})}
             onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
             placeholder={'Search employer '}
           />
 
-
+<span className="searchIconCss svadmin_icon"> <SearchIcon handleSearchClick={(e)=>handleSearchClick(e)} /></span>
         </div>
 
-        <div className="col-sm-3">
-        <input
-          type="text"
-          name = {'company_name'}
-          className={`${styles['icon-rtl']}`}
-          style={{margin: '10px 0'}}
-          onChange={(e) => setState({...state, searchTerm: e.target.value})}
-          onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
-          placeholder={'Search company'}
-        />
+      <div className="col-sm-3">
+      <input
+        type="text"
+        className='form-control mt-2 mb-2'
+        style={{margin: '10px 0'}}
+        name = {'company_name'}
+        onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'company_name'})}
+        onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+        placeholder={'Search company '}
+      />
+
+<span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
         </div>
 
       </div>}

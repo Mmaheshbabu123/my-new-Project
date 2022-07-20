@@ -530,3 +530,21 @@ a {
 	display: inline-block;
 	float:left;
 }
+.svadmin_icon {
+	text-align: right;
+width: 20px !important;
+top: 17px;
+position: absolute;
+cursor: pointer;
+
+left: 21%;
+}
+.svadmin_icon2 {
+	text-align: right;
+width: 20px !important;
+top: 17px;
+position: absolute;
+cursor: pointer;
+
+left: 46%;
+}
