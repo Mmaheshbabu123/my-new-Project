@@ -27,7 +27,7 @@ const Overviewpage = (props) => {
   const [state, setState] = useState({
       headers: ['Employer name',  'Company', 'Date of request', 'Start date of cooperation agreement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
-      searchKey: 'company_name',
+      searchKey: 'employer_name',
       currentItems: [],
       status: [1, 0],
       searchTerm: '',
@@ -62,12 +62,19 @@ const Overviewpage = (props) => {
   }
 
 
-  const handleSearchClick = () => {
+  const handleSearchClick = (e) => {
+    const { name} = e.target;
+
     let value = state.searchTerm;
     let filterRows = overviewData.filter((item) => {
-      return (item[state.searchKey].toLowerCase().toString())
+      let rowVal = item[name];
+      //`${item['employer_name']}${item['company_name']}`
+      return (rowVal.toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
+    //   return (item[state.searchKey].toLowerCase().toString())
+    //     .indexOf(value.toLowerCase().toString()) !== -1;
+    // })
     setState({ ...state,
       searchTerm: value,
       filterRows: filterRows,
@@ -106,6 +113,36 @@ const Overviewpage = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
+{<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
+
+      <div className="col-sm-3">
+
+          <input
+            type="text"
+            className={`${styles['icon-rtl']}`}
+            style={{margin: '10px 0'}}
+            name = {'employer_name'}
+            onChange={(e) => setState({...state, searchTerm: e.target.value})}
+            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+            placeholder={'Search employer '}
+          />
+
+
+        </div>
+
+        <div className="col-sm-3">
+        <input
+          type="text"
+          name = {'company_name'}
+          className={`${styles['icon-rtl']}`}
+          style={{margin: '10px 0'}}
+          onChange={(e) => setState({...state, searchTerm: e.target.value})}
+          onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+          placeholder={'Search company'}
+        />
+        </div>
+
+      </div>}
         {/*<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
           <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
           <input
@@ -113,6 +150,7 @@ const Overviewpage = (props) => {
             className="form-control col-7 pcp_name"
             style={{margin: '10px 0'}}
             onChange={(e) => setState({...state, searchTerm: e.target.value})}
+            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
             placeholder={'Search'}
           />
         </div>*/}
@@ -127,10 +165,10 @@ const Overviewpage = (props) => {
                 return (
                   <tr key={index}>
                       <td> {eachRow.employer_name} </td>
-                    
+
                       <td> {eachRow.company_name} </td>
                       <td> {eachRow.date_of_request} </td>
-                      <td> {eachRow.date_of_commencement} </td>
+                      <td> {eachRow.startdate_agreement} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
                       <td> {getNeededActions(eachRow) } </td>
                   </tr>
