@@ -3,6 +3,8 @@ import { APICALL } from '../../Services/ApiServices';
 import { getFunctions, deleteFunction } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Popup from './Popupfunction';
+import ReactPaginate from 'react-paginate';
+
 import Link from 'next/link';
 
 const ManageFunction = () => {
@@ -16,6 +18,23 @@ const ManageFunction = () => {
 	const [ searchSal, setSearchSal ] = useState('');
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ funcnid, setFucnid ] = useState('');
+
+	// const [ state, setState ] = useState({
+	// 	searchTerm: '',
+	// 	filterRows: rows,
+	// 	searchKey: 'name',
+	// 	currentItems: [],
+	// 	pageCount: 0,
+	// 	itemOffset: 0,
+	// 	currentPage: 0
+	// });
+
+	// useEffect(
+	// 	() => {
+	// 		setState({ ...state, filterRows: rows });
+	// 	},
+	// 	[ rows.length ]
+	// );
 
 	useEffect(
 		() => {
@@ -66,9 +85,19 @@ const ManageFunction = () => {
 		if (searchPc != '' && searchFunc != '' && searchCat != '' && searchSal != '') {
 			functionsTemp.map((val) => {
 				if (
-					(( val['pc_number'] != undefined && val['pc_number'] != '' && val['pc_number'] != null  && val['pc_number'].trim().includes(searchPc))||(val['pc_num'] != undefined && val['pc_num'] != '' && val['pc_num'] != null  && val['pc_num'].trim().includes(searchPc)) ) &&
+					((val['pc_number'] != undefined &&
+						val['pc_number'] != '' &&
+						val['pc_number'] != null &&
+						val['pc_number'].trim().includes(searchPc)) ||
+						(val['pc_num'] != undefined &&
+							val['pc_num'] != '' &&
+							val['pc_num'] != null &&
+							val['pc_num'].trim().includes(searchPc))) &&
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase()) &&
-					(val['cat_name'] != undefined && val['cat_name'] != '' && val['cat_name'] != null  && val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()))  &&
+					(val['cat_name'] != undefined &&
+						val['cat_name'] != '' &&
+						val['cat_name'] != null &&
+						val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase())) &&
 					val['min_salary'].toLowerCase().includes(searchSal)
 				) {
 					res.push(val);
@@ -80,9 +109,19 @@ const ManageFunction = () => {
 		} else if (searchPc != '' && searchFunc != '' && searchCat != '') {
 			functionsTemp.map((val) => {
 				if (
-					(( val['pc_number'] != undefined && val['pc_number'] != '' && val['pc_number'] != null  &&val['pc_number'].trim().includes(searchPc))||(val['pc_num'] != undefined && val['pc_num'] != '' && val['pc_num'] != null  && val['pc_num'].trim().includes(searchPc)) ) &&
+					((val['pc_number'] != undefined &&
+						val['pc_number'] != '' &&
+						val['pc_number'] != null &&
+						val['pc_number'].trim().includes(searchPc)) ||
+						(val['pc_num'] != undefined &&
+							val['pc_num'] != '' &&
+							val['pc_num'] != null &&
+							val['pc_num'].trim().includes(searchPc))) &&
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase()) &&
-					(val['cat_name'] != undefined && val['cat_name'] != '' && val['cat_name'] != null  && val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase())) 
+					(val['cat_name'] != undefined &&
+						val['cat_name'] != '' &&
+						val['cat_name'] != null &&
+						val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()))
 				) {
 					res.push(val);
 				}
@@ -92,7 +131,10 @@ const ManageFunction = () => {
 			functionsTemp.map((val) => {
 				if (
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase()) &&
-					(val['cat_name'] != undefined && val['cat_name'] != '' && val['cat_name'] != null  && val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()))  &&
+					(val['cat_name'] != undefined &&
+						val['cat_name'] != '' &&
+						val['cat_name'] != null &&
+						val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase())) &&
 					val['min_salary'].trim().toLowerCase().includes(searchSal.toLowerCase())
 				) {
 					res.push(val);
@@ -102,9 +144,19 @@ const ManageFunction = () => {
 		} else if (searchCat != '' && searchSal != '' && searchPc != '') {
 			functionsTemp.map((val) => {
 				if (
-					(val['cat_name'] != undefined && val['cat_name'] != '' && val['cat_name'] != null  && val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()))  &&
+					val['cat_name'] != undefined &&
+					val['cat_name'] != '' &&
+					val['cat_name'] != null &&
+					val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()) &&
 					val['min_salary'].trim().toLowerCase().includes(searchSal.toLowerCase()) &&
-					(( val['pc_number'] != undefined && val['pc_number'] != '' && val['pc_number'] != null  &&val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase()))||(val['pc_num'] != undefined && val['pc_num'] != '' && val['pc_num'] != null  && val['pc_num'].trim().includes(searchPc)) )
+					((val['pc_number'] != undefined &&
+						val['pc_number'] != '' &&
+						val['pc_number'] != null &&
+						val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase())) ||
+						(val['pc_num'] != undefined &&
+							val['pc_num'] != '' &&
+							val['pc_num'] != null &&
+							val['pc_num'].trim().includes(searchPc)))
 				) {
 					res.push(val);
 				}
@@ -114,7 +166,14 @@ const ManageFunction = () => {
 			functionsTemp.map((val) => {
 				if (
 					val['min_salary'].trim().includes(searchSal) &&
-					(val['pc_number'] != undefined && val['pc_number'] != '' && val['pc_number'] != null && val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase())||(val['pc_num'] != undefined && val['pc_num'] != '' && val['pc_num'] != null  && val['pc_num'].trim().includes(searchPc)) ) &&
+					((val['pc_number'] != undefined &&
+						val['pc_number'] != '' &&
+						val['pc_number'] != null &&
+						val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase())) ||
+						(val['pc_num'] != undefined &&
+							val['pc_num'] != '' &&
+							val['pc_num'] != null &&
+							val['pc_num'].trim().includes(searchPc))) &&
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase())
 				) {
 					res.push(val);
@@ -125,7 +184,14 @@ const ManageFunction = () => {
 			// CONDITIONS WHEN TWO VALUES ARE GIVEN //
 			functionsTemp.map((val) => {
 				if (
-					(( val['pc_number'] != undefined && val['pc_number'] != '' && val['pc_number'] != null  &&val['pc_number'].trim().includes(searchPc))||(val['pc_num'] != undefined && val['pc_num'] != '' && val['pc_num'] != null  && val['pc_num'].trim().includes(searchPc)) ) &&
+					((val['pc_number'] != undefined &&
+						val['pc_number'] != '' &&
+						val['pc_number'] != null &&
+						val['pc_number'].trim().includes(searchPc)) ||
+						(val['pc_num'] != undefined &&
+							val['pc_num'] != '' &&
+							val['pc_num'] != null &&
+							val['pc_num'].trim().includes(searchPc))) &&
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase())
 				) {
 					res.push(val);
@@ -136,7 +202,10 @@ const ManageFunction = () => {
 			functionsTemp.map((val) => {
 				if (
 					val['function_name'].trim().toLowerCase().includes(searchFunc.toLowerCase()) &&
-					(val['cat_name'] != undefined && val['cat_name'] != '' && val['cat_name'] != null  && val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase())) 
+					(val['cat_name'] != undefined &&
+						val['cat_name'] != '' &&
+						val['cat_name'] != null &&
+						val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()))
 				) {
 					res.push(val);
 				}
@@ -145,7 +214,10 @@ const ManageFunction = () => {
 		} else if (searchCat != '' && searchSal != '') {
 			functionsTemp.map((val) => {
 				if (
-					(val['cat_name'] != undefined && val['cat_name'] != '' && val['cat_name'] != null  && val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()))  &&
+					val['cat_name'] != undefined &&
+					val['cat_name'] != '' &&
+					val['cat_name'] != null &&
+					val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()) &&
 					val['min_salary'].trim().includes(searchSal)
 				) {
 					res.push(val);
@@ -154,7 +226,17 @@ const ManageFunction = () => {
 			setFunctions(res);
 		} else if (searchPc != '' && searchSal != '') {
 			functionsTemp.map((val) => {
-				if ((( val['pc_number'] != undefined && val['pc_number'] != '' && val['pc_number'] != null  && val['pc_number'].trim().includes(searchPc))||(val['pc_num'] != undefined && val['pc_num'] != '' && val['pc_num'] != null  && val['pc_num'].trim().includes(searchPc)) ) && val['min_salary'].trim().includes(searchSal)) {
+				if (
+					((val['pc_number'] != undefined &&
+						val['pc_number'] != '' &&
+						val['pc_number'] != null &&
+						val['pc_number'].trim().includes(searchPc)) ||
+						(val['pc_num'] != undefined &&
+							val['pc_num'] != '' &&
+							val['pc_num'] != null &&
+							val['pc_num'].trim().includes(searchPc))) &&
+					val['min_salary'].trim().includes(searchSal)
+				) {
 					res.push(val);
 				}
 			});
@@ -172,8 +254,18 @@ const ManageFunction = () => {
 		} else if (searchPc != '' && searchCat != '') {
 			functionsTemp.map((val) => {
 				if (
-					(( val['pc_number'] != undefined && val['pc_number'] != '' && val['pc_number'] != null  &&val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase()))||(val['pc_num'] != undefined && val['pc_num'] != '' && val['pc_num'] != null  && val['pc_num'].trim().includes(searchPc)) ) &&
-					(val['cat_name'] != undefined && val['cat_name'] != '' && val['cat_name'] != null  && val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase())) 
+					((val['pc_number'] != undefined &&
+						val['pc_number'] != '' &&
+						val['pc_number'] != null &&
+						val['pc_number'].trim().toLowerCase().includes(searchPc.toLowerCase())) ||
+						(val['pc_num'] != undefined &&
+							val['pc_num'] != '' &&
+							val['pc_num'] != null &&
+							val['pc_num'].trim().includes(searchPc))) &&
+					(val['cat_name'] != undefined &&
+						val['cat_name'] != '' &&
+						val['cat_name'] != null &&
+						val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase()))
 				) {
 					res.push(val);
 				}
@@ -183,14 +275,28 @@ const ManageFunction = () => {
 			// CONDITIONS WHEN ONLY ONE VALUE IS GIVEN //
 		} else if (searchPc != '') {
 			functionsTemp.map((val) => {
-				if (( val['pc_number'] != undefined && val['pc_number'] != '' && val['pc_number'] != null  && val['pc_number'].trim().includes(searchPc))||(val['pc_num'] != undefined && val['pc_num'] != '' && val['pc_num'] != null  && val['pc_num'].trim().includes(searchPc)) ) {
+				if (
+					(val['pc_number'] != undefined &&
+						val['pc_number'] != '' &&
+						val['pc_number'] != null &&
+						val['pc_number'].trim().includes(searchPc)) ||
+					(val['pc_num'] != undefined &&
+						val['pc_num'] != '' &&
+						val['pc_num'] != null &&
+						val['pc_num'].trim().includes(searchPc))
+				) {
 					res.push(val);
 				}
 			});
 			setFunctions(res);
 		} else if (searchCat != '') {
 			functionsTemp.map((val) => {
-				if ((val['cat_name'] != undefined && val['cat_name'] != '' && val['cat_name'] != null  && val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase())) ) {
+				if (
+					val['cat_name'] != undefined &&
+					val['cat_name'] != '' &&
+					val['cat_name'] != null &&
+					val['cat_name'].trim().toLowerCase().includes(searchCat.toLowerCase())
+				) {
 					res.push(val);
 				}
 			});
@@ -223,9 +329,36 @@ const ManageFunction = () => {
 		setSearchSal('');
 		setSearchFunc('');
 	}
-	let backToDashboard = () =>{
-		window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL+"dashboard?access=administrator&check_logged_in=1")	  
-}
+	let backToDashboard = () => {
+		window.location.assign(
+			process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'dashboard?access=administrator&check_logged_in=1'
+		);
+	};
+	// PAGINATION STARTS
+
+	//------------------- Pagination code -------------------------//
+
+	const [ currentItems, setCurrentItems ] = useState([]);
+	const [ pageCount, setPageCount ] = useState(0);
+	const [ itemOffset, setItemOffset ] = useState(0);
+	const itemsPerPage = 1;
+
+	useEffect(
+		() => {
+			const endOffset = itemOffset + itemsPerPage;
+			console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+			setCurrentItems(functions.slice(itemOffset, endOffset));
+			setPageCount(Math.ceil(functions.length / itemsPerPage));
+		},
+		[ itemOffset, itemsPerPage, functions ]
+	);
+
+	const handlePageClick = (event) => {
+		const newOffset = (event.selected * itemsPerPage) % functions.length;
+		console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
+		setItemOffset(newOffset);
+	};
+	//------------------- Pagination code -------------------------//
 
 	return (
 		<div className="container">
@@ -309,14 +442,28 @@ const ManageFunction = () => {
 								{functions.length > 0 &&
 									functions.map((result) => (
 										<tr className="border-bottom border-secondary" key={result.funcn_id}>
-											<td className="border-end border-secondary">{result.pc_number?result.pc_number:result.pc_num}</td>
+											<td className="border-end border-secondary">
+												{result.pc_number ? result.pc_number : result.pc_num}
+											</td>
 											<td className="border-end border-secondary">{result.function_name}</td>
 											<td className="border-end border-secondary">€ {result.min_salary}</td>
 											<td className="border-end border-secondary">{result.cat_name}</td>
 											<td className="d-flex justify-content-center ">
-												<Link href={result.pc_unique_key?"/editpc/"+result.pc_unique_key+"?fid="+result.funcn_id:"/editpc/"+result.unique_key+"?fid="+result.funcn_id} className="">
+												<Link
+													href={
+														result.pc_unique_key ? (
+															'/editpc/' +
+															result.pc_unique_key +
+															'?fid=' +
+															result.funcn_id
+														) : (
+															'/editpc/' + result.unique_key + '?fid=' + result.funcn_id
+														)
+													}
+													className=""
+												>
 													<a className="">
-														<MdEdit className="mt-2 ms-3"/>
+														<MdEdit className="mt-2 ms-3" />
 													</a>
 												</Link>
 												<span onClick={() => showPopup(result.funcn_id)} type="button">
@@ -336,28 +483,42 @@ const ManageFunction = () => {
 						</table>
 					</div>
 				</div>
-				<div className='row'>
-				<div className="text-start col-md-6">
+				<div className="row">
+					<div className="text-start col-md-6">
 						<button
 							type="button"
 							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-							onClick={()=>backToDashboard()}
+							onClick={() => backToDashboard()}
 						>
 							Back
 						</button>
 					</div>
-					<div className='col-md-6'>
-					{/* <Link href={"/redirect-page?src=/manage-function&dest=addpc"}> 
+					<div className="col-md-6">
+						{/* <Link href={"/redirect-page?src=/manage-function&dest=addpc"}> 
 					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Function</a>
 				</Link> */}
 					</div>
-
 				</div>
-				
 			</form>
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletefuncn} />
 			)}
+			<div className="justify-content-center">
+				<ReactPaginate
+					breakLabel="..."
+					nextLabel="next >"
+					onPageChange={handlePageClick}
+					pageRangeDisplayed={5}
+					pageCount={pageCount}
+					previousLabel="< previous"
+					renderOnZeroPageCount={null}
+					containerClassName={'pagination'}
+					itemClass="page-item"
+					linkClass="page-link"
+					subContainerClassName={'pages pagination'}
+					activeClassName={'active'}
+				/>
+			</div>
 		</div>
 	);
 };
