@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import RadioField from '@/atoms/RadioField';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import { handleClientScriptLoad } from 'node_modules/next/script';
 
 function Planning(props) {
 	const router = useRouter();
@@ -31,7 +32,7 @@ function Planning(props) {
 	const [ costcenter, setCostcenter ] = useState([]);
 	const [ company_name, setCompany_name ] = useState([]);
 	const [ empr_id, setEmpr_id ] = useState('');
-	const [ projectname, setProjectname ] = useState('project1');
+	const [ projectname, setProjectname ] = useState('');
 
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
@@ -44,6 +45,10 @@ function Planning(props) {
 		location_id: '',
 		cost_center_id: ''
 	});
+
+	// PROJECT FIELD HIDE AND SHOW
+	// const [ hideproject, setHideproject ] = useState(1);
+	const [ showproject, setShowproject ] = useState(true);
 
 	const [ project, setProject ] = useState({
 		id: '',
@@ -185,7 +190,7 @@ function Planning(props) {
 					console.log(data);
 				}
 
-				console.log(countrylist);
+				// console.log(countrylist);
 
 				// setData(result.data);
 			})
@@ -219,11 +224,11 @@ function Planning(props) {
 	let validate = (res) => {
 		console.log(res);
 		var error1 = [];
-		error1['location_id'] = '';
+		// error1['location_id'] = '';
 
 		//check if required fields are empty
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
-		// error1['location_id'] = ValidationService.emptyValidationMethod(res.location_id);
+		error1['location_id'] = ValidationService.emptyValidationMethod(res.location_id);
 
 		//seterror messages
 		setError_comp_id(error1['comp_id']);
@@ -264,16 +269,19 @@ function Planning(props) {
 						</h1>
 					</div>
 					<div className="col-md-12 px-0 mt-3 mb-3">
-						<button
-							onClick={showPopup}
-							type="button"
-							className=" btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center"
-						>
-							<span style={{ fontSize: '24px' }} className="">
-								+
-							</span>
-							&nbsp; Add project
-						</button>
+						{showproject && (
+							<button
+								onClick={showPopup}
+								// onClick={() => setShowproject(true)}
+								type="button"
+								className=" btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center"
+							>
+								<span style={{ fontSize: '24px' }} className="">
+									+
+								</span>
+								&nbsp; Add project
+							</button>
+						)}
 					</div>
 					<div className="form-sec border-form-sec p-5">
 						<div className="col-md-6">
@@ -343,19 +351,24 @@ function Planning(props) {
 									))}
 								</select>
 							</div>
-							<div className="form-group ">
-								<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
-								<div className=" d-flex d-inline">
-									<input
-										type="text mb-2 mt-2"
-										value={projectname}
-										className="form-control"
-										disabled
-									/>
-									<MdEdit type="button" className="mt-2 ms-3 " onClick={showPopup} />
-									<MdDelete className="mt-2 ms-3 " />
+							{!showproject && (
+								<div className="form-group ">
+									<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
+									<div className=" d-flex d-inline">
+										<input
+											type="text mb-2 mt-2"
+											value={projectname}
+											className="form-control"
+											onChange={(e) => {
+												setData((prev) => ({ ...prev, project_name: e.target.value }));
+											}}
+											disabled
+										/>
+										<MdEdit type="button" className="mt-2 ms-3 " onClick={showPopup} />
+										<MdDelete className="mt-2 ms-3 " />
+									</div>
 								</div>
-							</div>
+							)}
 						</div>
 					</div>
 				</div>
