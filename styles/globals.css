@@ -605,3 +605,14 @@ cursor: pointer;
 
 left: 46%;
 }
+
+.legal12, .legal13 ,.invoice68,.invoice69{
+	width: 50%;
+	float:left;
+}
+.legal12 input, .legal13 input,.invoice68 input,.invoice69 input{
+  width: 90%;
+}
+.legal15,.invoice70,.invoice71,.invoice75 {
+	margin-bottom: 80px !important ;
+}
