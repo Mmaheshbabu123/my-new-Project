@@ -12,8 +12,13 @@ import { requiredFields} from '../../../RequiredFields';
 const InvoiceDetails = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_6 ,element_status} = state;
+  console.log(tab_6)
+  console.log(state);
   const handleChange = (event) => {
     const { value, name } = event.target;
+    if(name === '72' && value === '') { //Vat Rate should be % present
+      value = '%';
+    }
     tab_6[name] = value;
     element_status['tab_6'].push(name);
     updateStateChanges({ tab_6,element_status });
@@ -42,7 +47,7 @@ const InvoiceDetails = (props) => {
            className = {'col-md-8'}
            value={tab_6[data.id] }
            isDisabled= {false}
-           placeholder={'Enter...'}
+           placeholder={''}
            handleChange={handleChange}
            name={data.id}
            //{`tab_2_${data.id}`}
@@ -50,6 +55,9 @@ const InvoiceDetails = (props) => {
           {tab_6['validations'][data.id] && tab_6['validations'][data.id]['validate'] &&
             <ValidateMessage text = {'This field is invalid'}/>
           }
+          { tab_6['required'][data.id] !== undefined && !tab_6['required'][data.id] &&
+           <ValidateMessage text = {'This field is required'}/>
+         }
          </div>
        )
      }

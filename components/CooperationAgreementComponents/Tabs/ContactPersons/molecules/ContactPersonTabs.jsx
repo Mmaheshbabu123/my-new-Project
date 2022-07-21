@@ -59,8 +59,9 @@ return tabsData;
 
   return (
     <div className =''>
-    {LoadTabs()}
-       {(tab_3.loaded === true) && <BasicDetails  personId = {contactstate.id} />}
+    {/*LoadTabs()*/}
+    {/*(tab_3.loaded === true) &&*/}
+       { <BasicDetails  personId = {contactstate.id} />}
     </div>
   )
 }

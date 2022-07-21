@@ -3,8 +3,7 @@ export default function validationError ( {text }) {
   return (
     <>
     <small
-       id="pcp_name_warning"
-       className="form-text text-muted col-md-5">
+       className="form-text text-muted col-md-5 pcp_name_warning">
        {text}
      </small>
     </>

@@ -13,7 +13,7 @@ import { MdStarRate } from 'react-icons/md';
 function Addtiming(props) {
 	const count = 0;
 	const router = useRouter();
-	const [ value, setValue ] = useState();
+	const [ value, setValue ] = useState(new Date("2022/07/25"));
 	const [ selectedDate, setSelectedDate ] = useState([]);
 	const [ commonDatetime, setCommonDatetime ] = useState([]);
 
@@ -25,32 +25,6 @@ function Addtiming(props) {
 	const [ error_selected_date, setError_selected_date ] = useState('');
 
 	const [ employee_planning, setEmployee_planning ] = useState([]);
-	const [ employees, setEmployees ] = useState([
-		{
-			id: 1,
-			name: 'Steve Jobs',
-			employeetype: 'Flexworker',
-			function: 'Productie',
-			collapseOpen: true,
-			error: ''
-		},
-		{
-			id: 2,
-			name: 'Smith Jones',
-			employeetype: 'Normal employee',
-			function: 'Productie',
-			collapseOpen: false,
-			error: ''
-		},
-		{
-			id: 3,
-			name: 'Mark Henry',
-			employeetype: 'Freelancer',
-			function: 'Productie',
-			collapseOpen: false,
-			error: ''
-		}
-	]);
 
 	useEffect(
 		() => {
@@ -59,6 +33,13 @@ function Addtiming(props) {
 					.then((result) => {
 						if (result.status == 200) {
 							setEmployee_planning(result.data);
+							result.data.map((obj,key)=>{
+								obj.date.map((obj1,key1)=>{
+									result.data[key].date[key1] = new Date(obj1);
+									console.log(obj1);
+
+								});
+							});
 						}
 						console.log(result);
 					})
@@ -96,7 +77,7 @@ function Addtiming(props) {
 		setError_selected_date('');
 		var selected = [];
 		value.map((val) => {
-			selected.push(val.format());
+			selected.push(val.format('DD/MM/YYYY'));
 		});
 		setSelectedDate(selected);
 	};
@@ -115,7 +96,7 @@ function Addtiming(props) {
 				});
 				if (!isFound) {
 					res[key].timings.push({
-						date: obj.format(),
+						date: obj.format('DD/MM/YYYY'),
 						starttime: '',
 						endtime: '',
 						error_starttime: '',
@@ -128,7 +109,7 @@ function Addtiming(props) {
 		} else {
 			res[key].error_selected_date = '';
 			res[key].timings.push({
-				date: value[0].format(),
+				date: value[0].format('DD/MM/YYYY'),
 				starttime: '',
 				endtime: '',
 				error_starttime: '',
@@ -334,13 +315,13 @@ function Addtiming(props) {
 														<div className="col-md-1" />
 														<div className="col-md-11">
 															<Calendar
-																value={value}
+																value={result.date}
 																multiple={true}
-																format="YYYY/MM/DD"
+																format="DD/MM/YYYY"
 																onChange={(date) => {
 																	handleChange2(date, key);
 																}}
-																minDate={new Date()}
+																// minDate={new Date()}
 															/>
 															<p className="error mt-2">{result.error_selected_date}</p>
 														</div>
@@ -356,7 +337,7 @@ function Addtiming(props) {
 																<div className="pb-2 custom_astrick">Start time</div>
 																<TimePicker
 																	placeholder="Select Time"
-																	use12Hours={false}
+																	use12Hours={true}
 																	showSecond={false}
 																	focusOnOpen={true}
 																	format="hh:mm A"
@@ -369,7 +350,7 @@ function Addtiming(props) {
 																<div className="pb-2 custom_astrick">End time</div>
 																<TimePicker
 																	placeholder="Select Time"
-																	use12Hours={false}
+																	use12Hours={true}
 																	showSecond={false}
 																	focusOnOpen={true}
 																	format="hh:mm A"
