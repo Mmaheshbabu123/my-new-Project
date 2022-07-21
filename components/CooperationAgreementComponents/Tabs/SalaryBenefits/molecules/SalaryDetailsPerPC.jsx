@@ -30,7 +30,7 @@ const SalaryDetailsPerPC = () => {
 
   const onDelete = (pcId, index) => {
     confirmAlert({
-      message: 'Do you want to delete paritair comité',
+      message: 'Do you want to delete paritair comité?',
       buttons: [
         { label: 'No' },
         { label: 'Yes', onClick: () => deleteAndUpdateState(pcId, index) }
@@ -70,7 +70,7 @@ const SalaryDetailsPerPC = () => {
       </div>
       <div >
         <MultiSelectField
-            options={helpers.getDifference(salaryBenefitPcArray, cooperationSalaryDetails, 'value', 'pc_id')}
+            options={helpers.getDifference(salaryBenefitPcArray, cooperationSalaryDetails, 'value', 'pc_id', state.alreadyLinked)}
             handleChange={onSelect}
             isMulti={false}
             standards={[]}

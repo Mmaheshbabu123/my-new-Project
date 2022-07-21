@@ -50,6 +50,11 @@ const PcForWorkersServants = () => {
     setCompState({...compState, ...obj});
   }, [])
 
+  /**
+   * [useEffect to set states on submit validation errors ]
+   * @param  {[type]} if               [description]
+   * @return {[type]}    [description]
+   */
   useEffect(() => {
     if(state.uniqueId) {
       const {  workersServantsCompState = {} } = state;
@@ -123,7 +128,7 @@ const PcForWorkersServants = () => {
     return <div className={`${type === 1 ? 'col-md-9' : 'col-md-9 ' + styles['margin-auto-class']}`}>
         <p className={styles['worker-servants-title']}> {type === 1 ? `Paritair comité for workers (arbeiders)` : `Paritair comité for servants (bedienden)`} </p>
         <div className={`${styles['add-div-margings']}`}>
-            <LabelField title={`Paritair comité (PC) ${type}`} customStyle={{display: 'inline-block'}} /> <span style={{color:'red'}}>*</span>
+            <LabelField title={`Paritair comité (PC) ${type}`} mandotory={true} />
             <MultiSelectField
                 options={pcOptions.filter(val => val.value === false || !alreadyLinked.includes(val.value))}
                 standards={allPCs.filter(val => val.value === compState['selectedPc'][type])}
@@ -134,7 +139,7 @@ const PcForWorkersServants = () => {
               />
         </div>
         <div className={`${styles['add-div-margings']}`}>
-            <LabelField title="Selection of employee types (statuut) that can be used" customStyle={{display: 'inline-block'}} /> <span style={{color:'red'}}>*</span>
+            <LabelField title="Selection of employee types (statuut) that can be used" mandotory={true} />
             <MultiSelectField
                 options={emplOptions}
                 standards={emplOptions.filter(val => compState['selectedEmpId'][type].includes(val.value))}

@@ -46,11 +46,11 @@ const SalaryDetails = (props) => {
     return(
       <div key = {val.pc_id} className={`${styles['expand-minimize-div']}`}>
         <div>
-          <span onClick={() => expandMinimizeDiv(val.pc_id)} title={expand[val.pc_id] === true ? 'Close' : 'Open'} className={`${styles['expand-minimize-span']}`} > {expand[val.pc_id] === true ? <FaRegMinusSquare />: <FaRegPlusSquare />} </span>
+          <span onClick={() => expandMinimizeDiv(val.pc_id)} title={expand[val.pc_id] === true ? 'Close' : 'Open'} className={`${styles['expand-minimize-span']}`} > {!expand[val.pc_id] ? <FaRegMinusSquare />: <FaRegPlusSquare />} </span>
           <div  onClick={() => expandMinimizeDiv(val.pc_id)} className={`${styles['expand-minimize-box']}`}> <span> {val.pc_name} </span> </div>
           <span onClick={() => props.onDelete(val.pc_id, index)} title={'Delete'} className={`${styles['expand-minimize-span']}`}> <TiDelete /> </span>
         </div>
-        {expand[val.pc_id] === true ? <div className={`${styles['salay-content-div']}`}>
+        {!expand[val.pc_id] ? <div className={`${styles['salay-content-div']}`}>
               {showSalaryContent(val.pc_id)}
         </div>:null}
       </div>
@@ -95,7 +95,7 @@ const SalaryDetails = (props) => {
             className = {`${styles['salary-input-value']} col-md-4`}
             name={'value'}
             value={valueObj['value'] !== undefined ? valueObj['value'] : salaryObj.salary_value}
-            isDisabled= {false} placeholder={'Value'}
+            isDisabled= {salaryObj.salary_value} placeholder={'Value'}
             handleChange={(e)=>handleChange('value', pcId, fieldId, '', 0, e.target)}
           />:null}
         </div>
