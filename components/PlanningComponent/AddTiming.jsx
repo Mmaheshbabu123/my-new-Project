@@ -103,7 +103,7 @@ function Addtiming(props) {
 						error_endtime: ''
 					});
 				} else {
-					res[key].timings[ky].starttime = '';
+					// res[key].timings[ky].starttime = '';
 				}
 			});
 		} else {
