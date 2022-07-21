@@ -81,6 +81,8 @@ const CoefficientPage = (props) => {
     let selectedIds = helpers.takeSelectedIds(alreadyLinked, state['workersServantsCompState']);
     let pcoptions = [{value: false, label: '--- Select ---'}, ...pcArray];
     return (
+      <>
+      <p className='my-2'> Select paritair comite </p>
       <MultiSelectField
         options={pcoptions.filter(val => selectedIds.includes(val.value))}
         standards={pcoptions.filter(val => val.value === compState.selectedPc)}
@@ -89,19 +91,21 @@ const CoefficientPage = (props) => {
         className="pc-single-select"
         placeholder={'Select paritair comite'}
       />
+      </>
     )
   }
   return (
     <div className={`${styles['coeffcient-table-parent']}`}>
       <div className="col-md-3 mt-2 mb-3 p-0"> {addPCSelectDropDown()}
         {compState.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
-        {compState.valueErrorArray.length > 0 &&
-          <small className="col-md-3 mt-3 mb-3 warning-message">
-            {`Some values are not in between low and high value.`}
-          </small>}
       </div>
+      {compState.valueErrorArray.length > 0 &&
+        <small className="col-md-3 mt-3 mb-3 warning-message">
+          {`Some values are not in between low and high value.`}
+        </small>}
       {compState.selectedPc ? <div className="col-md-12 m-0 p-0 relative-div">
         {compState.emptyError !== true ? <>
+        <p className={`my-2 text-center ${styles['worker-servants-title']}`}> Link coefficients to employee types</p>
         {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
             <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
         {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>

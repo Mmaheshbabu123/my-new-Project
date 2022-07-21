@@ -12,7 +12,7 @@ var absoluteConsultantNum = 3;
 var activateAddProject    = 4;
 var whoWillSign           = 80;
 const AbsoluteYouAgent = (props) => {
-  const { state: { selectedTabId, renderTabComponents, root_parent_id, workerServentsCompLoaded }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+  const { state: { selectedTabId, renderTabComponents, root_parent_id, workerServentsCompLoaded, absoluteAgentTabRender }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   useEffect(() => {
     if(!state.loadedTabs.includes(selectedTabId))
     		loadData();
@@ -40,15 +40,16 @@ const AbsoluteYouAgent = (props) => {
     data['pcLinkedEmployeeTypes'] = data.pcLinkedEmployeeTypes || {};
     data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
     data['renderTabComponents'] = true;
+    data['absoluteAgentTabRender'] = true;
     updateStateChanges(data)
   }
 
   return(
-    <>{renderTabComponents === true ?
+    <>{renderTabComponents === true && absoluteAgentTabRender === true ?
        <div className="_absolute-you-agend_">
            <BasicDetails />
            <PcForWorkersServants />
-           {workerServentsCompLoaded === true ? <CoefficientPage /> : null}
+           {workerServentsCompLoaded && workerServentsCompLoaded === true ? <CoefficientPage /> : null}
        </div>
      : <p>Loading...</p>}
     </>

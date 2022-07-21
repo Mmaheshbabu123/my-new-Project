@@ -43,14 +43,15 @@ const RightPart = ( { compState, setCompState } ) => {
    * @return {[void]}          [description]
    */
   const handleValueChange = (target, _EmpId, _Coeffid, lowVal, highVal) => {
-    if (!target.value.match(compState.regexp)) return;
+    let value = target.value;
+    if (!target.value.match(compState.regexp) || checkDecimalPointError(value)) return;
     let valueDataObj = {
       ...pclinkingValueobj,
       [_EmpId]: {
         ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId] : {}),
         [_Coeffid]: {
           ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] : {}),
-          [defaultKey]: target.value
+          [defaultKey]: value
         }
       }
     }
@@ -58,12 +59,28 @@ const RightPart = ( { compState, setCompState } ) => {
     stateData['cooperationCoeffData'] = valueDataObj;
     let dataObj = {...compState,
       pclinkingValueobj: valueDataObj,
-      valueErrorArray: valueValidation(_EmpId, _Coeffid, target.value, lowVal, highVal),
+      valueErrorArray: valueValidation(_EmpId, _Coeffid, value, lowVal, highVal),
       emptyDataWarning: false
      };
      dependecyDataStatus['cooperationCoeffData'] = true;
     updateStateChanges({ [TABKEY]: stateData,  coeffPageData: dataObj, dependecyDataStatus });
     setCompState(dataObj);
+  }
+
+
+  /**
+   * [checkDecimalPointError description]
+   * @param  {[type]} value               [description]
+   * @return {[type]}       [description]
+   */
+  const checkDecimalPointError = (value) => {
+    let status = false;
+    if(value) {
+      let inputVal = value.replace(',', '.');
+      let decimals = inputVal.split('.')[1];
+      status =  decimals && decimals.length > 2 ? true : false;
+    }
+    return status;
   }
 
 

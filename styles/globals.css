@@ -498,6 +498,11 @@ a {
 	-webkit-appearance: none;
 }
 
+.atom-input-field-default:disabled {
+	background-color: #e9ecef;
+  opacity: 1;
+}
+
 .atom-input-field-default:focus{
 	outline: 0;
 	box-shadow: 0 0 0 .25rem rgba(13,110,253,.25)
