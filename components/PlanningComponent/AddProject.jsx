@@ -4,11 +4,12 @@ import { addProject, fetchproject } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
-
+import { addPlanning } from '../../Services/ApiEndPoints';
 // import './addproject.css';
 function Addproject(props) {
 	const router = useRouter();
 	const { p_unique_key } = router.query;
+
 	// console.log(p_unique_key);
 	/**
 	 * FOR ASSIGNING COMPANY LOCATION VALUES
@@ -25,12 +26,14 @@ function Addproject(props) {
 	const [ error_street, setError_street ] = useState('');
 	const [ error_postal_code, setError_postal_code ] = useState('');
 	const [ error_countrylist, setError_countrylist ] = useState('');
+	const [ error_bus_number, setError_bus_number ] = useState('');
 
 	const [ data, setData ] = useState({
 		id: '',
 		project_name: '',
 		project_location: '',
 		hno: '',
+		bno: '',
 		city: '',
 		extra: '',
 		comp_id: '',
@@ -39,6 +42,10 @@ function Addproject(props) {
 		country: '',
 		address_id: ''
 	});
+
+	// const handletable = (e) => {
+	// 	setShowtable(e);
+	// };
 
 	/**
 	 * FETCHING COMPANY FROM DRUPAL
@@ -58,6 +65,13 @@ function Addproject(props) {
 
 	useEffect(
 		() => {
+			console.log(props.countries);
+			if (props.countries) {
+				setCountrylist(props.countries);
+			}
+			if (props.data) {
+				setData(props.data);
+			}
 			if (data.comp_id == '') {
 				var res = data;
 				res.comp_id = props.company_id;
@@ -70,33 +84,34 @@ function Addproject(props) {
 	/**
 	 * FETCHING PROJECT
 	 */
-	useEffect(() => {
-		APICALL.service(fetchproject + p_unique_key, 'GET')
-			.then((result) => {
-				// console.log(result.data);
-				if (result.data.length > 0) {
-					var res = [];
-					res.project_name = result.data.project_name;
-					res.project_location = result.data.project_location;
-					res.hno = result.data.hno;
-					res.city = result.data.city;
-					res.extra = result.data.extra;
-					res.comp_id = result.data.comp_id;
-					res.street = result.data.street;
-					res.postal_code = result.data.postal_code;
-					res.country = result.data.country;
-					setData(res);
-					console.log(data);
-				}
+	// useEffect(() => {
+	// 	APICALL.service(fetchproject + p_unique_key, 'GET')
+	// 		.then((result) => {
+	// 			// console.log(result.data);
+	// 			if (result.data.length > 0) {
+	// 				var res = [];
+	// 				res.project_name = result.data.project_name;
+	// 				res.project_location = result.data.project_location;
+	// 				res.hno = result.data.hno;
+	// 				res.bno = result.data.bno;
+	// 				res.city = result.data.city;
+	// 				res.extra = result.data.extra;
+	// 				res.comp_id = result.data.comp_id;
+	// 				res.street = result.data.street;
+	// 				res.postal_code = result.data.postal_code;
+	// 				res.country = result.data.country;
+	// 				setData(res);
+	// 				console.log(data);
+	// 			}
 
-				setCountrylist(result.data.countrylist);
+	// 			setCountrylist(result.data.countrylist);
 
-				// setData(result.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
+	// 			// setData(result.data);
+	// 		})
+	// 		.catch((error) => {
+	// 			console.log(error);
+	// 		});
+	// }, []);
 
 	/**
 	 * 
@@ -120,6 +135,8 @@ function Addproject(props) {
 	};
 
 	let validate = (res) => {
+		// console.log(res.bno);
+		// return;
 		var error1 = [];
 		/**
 		 * check if required fields are empty
@@ -128,10 +145,11 @@ function Addproject(props) {
 		error1['project_location'] = ValidationService.emptyValidationMethod(res.project_location);
 		error1['hno'] = ValidationService.emptyValidationMethod(res.hno);
 		error1['city'] = ValidationService.emptyValidationMethod(res.city);
-		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
+		// error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['street'] = ValidationService.emptyValidationMethod(res.street);
 		error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
 		error1['country'] = ValidationService.emptyValidationMethod(res.country);
+		error1['bno'] = ValidationService.emptyValidationMethod(res.bno);
 
 		/**
 		 * check if project name is valid
@@ -151,6 +169,7 @@ function Addproject(props) {
 		 * check if hno is valid
 		 */
 		error1['hno'] = error1['hno'] == '' ? ValidationService.projectNameValidationMethod(res.hno) : error1['hno'];
+		error1['bno'] = error1['bno'] == '' ? ValidationService.projectNameValidationMethod(res.bno) : error1['bno'];
 
 		/**
 		 * check if city is valid
@@ -180,12 +199,13 @@ function Addproject(props) {
 		setError_hno(error1['hno']);
 		setError_city(error1['city']);
 		setError_extra(error1['extra']);
-		setError_comp_id(error1['comp_id']);
+		// setError_comp_id(error1['comp_id']);
 		setError_street(error1['street']);
 		setError_postal_code(error1['postal_code']);
 		setError_countrylist(error1['country']);
+		setError_bus_number(error1['bno']);
 
-		// alert(error1);
+		// console.log(error1);
 
 		//return false if there is an error else return true
 		if (
@@ -193,10 +213,11 @@ function Addproject(props) {
 			error1['project_location'] == '' &&
 			error1['hno'] == '' &&
 			error1['city'] == '' &&
-			error1['comp_id'] == '' &&
+			// error1['comp_id'] == '' &&
 			error1['street'] == '' &&
 			error1['postal_code'] == '' &&
-			error1['country'] == ''
+			error1['country'] == '' &&
+			error1['bno'] == ''
 		) {
 			// alert('true');
 			return true;
@@ -234,54 +255,56 @@ function Addproject(props) {
 									<div className="row">
 										<div className=" ">
 											{/* PROJECT NAME */}
-											<div className='row col-md-12 m-0'>
-												<div className='col-6'>
-												<label className="font-weight-bold custom_astrick">Project name</label>
-											<input
-												type="text"
-												className="form-control mt-2 mb-2 "
-												value={data.project_name}
-												onChange={(e) => {
-													setData((prev) => ({ ...prev, project_name: e.target.value }));
-												}}
-											/>
-											<p className="error mt-2">{error_project_name}</p>
-												</div>
-												<div className='col-6'>
-												<label className="custom_astrick">Company</label>
-											<select
-												className="form-select mt-2 mb-2"
-												value={data.comp_id}
-												onChange={(e) => {
-													setData((prev) => ({ ...prev, comp_id: e.target.value }));
-													props.updatecompany(e.target.value);
-												}}
-											>
-												<option value="">Select</option>
-												{props.company.map((options) => (
-													<option
-														onClick={(e) => {
-															setCompany(options.comp_name);
+											<div className="row col-md-12 m-0">
+												<div className="col-6">
+													<label className="font-weight-bold custom_astrick">
+														Project name
+													</label>
+													<input
+														type="text"
+														className="form-control mt-2 mb-2 "
+														value={data.project_name}
+														onChange={(e) => {
+															setData((prev) => ({
+																...prev,
+																project_name: e.target.value
+															}));
 														}}
-														key={options.comp_id}
-														value={options.comp_id}
-													>
-														{options.comp_name}
-													</option>
-												))}
-											</select>
-											<p className="error mt-2">{error_comp_id}</p>
+													/>
+													<p className="error mt-2">{error_project_name}</p>
 												</div>
-
+												<div className="col-6">
+													<label className="custom_astrick">Company</label>
+													<select
+														className="form-select mt-2 mb-2"
+														value={data.comp_id}
+														onChange={(e) => {
+															setData((prev) => ({ ...prev, comp_id: e.target.value }));
+															props.updatecompany(e.target.value);
+														}}
+													>
+														<option value="">Select</option>
+														{company.map((options) => (
+															<option
+																onClick={(e) => {
+																	setCompany(options.comp_name);
+																}}
+																key={options.nid}
+																value={options.nid}
+															>
+																{options.title}
+															</option>
+														))}
+													</select>
+													<p className="error mt-2">{error_comp_id}</p>
+												</div>
 											</div>
-											
+
 											{/* COMPANY */}
 
-											
-
 											{/* LOCATION */}
-											<div className='col-md-12 row m-0'>
-											<div className="col-6">
+											<div className="col-md-12 row m-0">
+												<div className="col-6">
 													<label className="mt-2 custom_astrick">Location</label>
 													<input
 														type="text"
@@ -298,7 +321,6 @@ function Addproject(props) {
 												</div>
 											</div>
 											<div className="row col-md-12 m-0">
-											
 												<div className="col-6">
 													<label className="custom_astrick mt-2">Street</label>
 													<input
@@ -325,22 +347,23 @@ function Addproject(props) {
 													/>
 													<p className="error mt-2">{error_hno}</p>
 												</div>
+												{/* BUS NUMBER */}
 												<div className="col-3">
 													<label className="custom_astrick mt-2">Bus number</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2"
-														value={data.hno}
+														value={data.bno}
 														onChange={(e) => {
-															setData((prev) => ({ ...prev, hno: e.target.value }));
+															setData((prev) => ({ ...prev, bno: e.target.value }));
 														}}
 													/>
-													<p className="error mt-2">{error_hno}</p>
+													<p className="error mt-2">{error_bus_number}</p>
 												</div>
 											</div>
 											{/* CITY */}
 											<div className="row col-md-12 m-0">
-											<div className="col-6">
+												<div className="col-6">
 													<label className="custom_astrick mt-2">Postalcode</label>
 													<input
 														type="text"
@@ -368,7 +391,6 @@ function Addproject(props) {
 
 													<p className="error mt-2">{error_city}</p>
 												</div>
-											
 											</div>
 											{/* EXTRA */}
 											<div className="row col-md-12 m-0">
@@ -390,10 +412,9 @@ function Addproject(props) {
 													</select>
 													<p className="error mt-2">{error_countrylist}</p>
 												</div>
-												
 											</div>
 											<div className="row col-md-12 m-0">
-											<div className="col-12">
+												<div className="col-12">
 													<label className=" mt-2">Extra</label>
 													<input
 														type="text"
@@ -405,7 +426,7 @@ function Addproject(props) {
 													/>
 													<p className="error mt-2">{error_extra}</p>
 												</div>
-												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -417,7 +438,7 @@ function Addproject(props) {
 										// onClick={() => props.popupActionNo()}
 										onClick={(e) => {
 											setData((prev) => ({ ...prev, p_unique_key: p_unique_key }));
-											// ;
+											// handletable(0);
 										}}
 									>
 										SAVE

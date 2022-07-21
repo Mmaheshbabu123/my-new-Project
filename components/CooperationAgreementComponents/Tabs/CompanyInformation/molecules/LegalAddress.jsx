@@ -70,7 +70,7 @@ const LegalAddress = (props) => {
    let fieldsArray = [];
    Rowdata.map(data => {
      fieldsArray.push(
-       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
+       <div className = {`col-md-12 ${styles['add-div-margings']}  legal${data.id}`}>
        <LabelField title={data.key_name} customStyle = {{display:''}} /> {requiredFields['tab_2'][data.id] && <RequiredField />}
        <InputField
          id = {data.id}

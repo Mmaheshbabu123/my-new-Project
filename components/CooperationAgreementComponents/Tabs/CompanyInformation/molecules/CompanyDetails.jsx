@@ -24,7 +24,7 @@ const CompanyFieldData = (companyRow1) => {
   let  fieldsArray = [];
   companyRow1.map(data=>{
    fieldsArray.push(
-     <div className = ''>
+     <div className = {data.id}>
      <LabelField title={data.key_name}  customStyle = {{display:''}}/> {requiredFields['tab_2'][data.id] && <RequiredField />}
      <InputField
      id = {data.id}

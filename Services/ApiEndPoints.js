@@ -136,6 +136,7 @@ export const deleteCooperationAgreement = BASE_URL + "delete-cooperation-agreeme
 //------SALES AGENT COOPERATION AGREEMENTS -------//
 export const fetchSalesAgenetAgreements = BASE_URL + "get-all-sales-agent-agreement-requests";
 export const saveSalesAgentSvData = BASE_URL + "save-agent-assigned-data";
+export const deleteSalesAgenetAgreements = BASE_URL + "delete-sales-agent-agreement-request";
 
 //-----------EMPLOYEE PLANNING---------------------//
 export const fetchemployeeplanning = BASE_URL + "get-all-employee-planning/";
