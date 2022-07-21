@@ -7,8 +7,9 @@ import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
 import { AiFillFilePdf, AiOutlineRedo} from 'react-icons/ai';
 import { HiPlusCircle} from 'react-icons/hi';
+import { deleteSalesAgenetAgreements} from '@/Services/ApiEndPoints'
 import { useRouter } from 'next/router';
-
+import { APICALL } from '@/Services/ApiServices';
 
 const itemsPerPage = 5;
 const Overviewpage = (props) => {
@@ -212,14 +213,14 @@ console.log(e)
         <div>
           <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
           <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
-          <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          {/*<span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>*/}
         </div>
       )
     } else {
       return (
         <div>
           <span title = {'Add'} className="actions-span text-dark" onClick={() => handleActionClick('add', eachRow)}> <HiPlusCircle /> </span>
-          <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          {/*<span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>*/}
         </div>
       )
     }
@@ -234,7 +235,7 @@ console.log(e)
           message: `Do you want to delete the cooperation agreement?`,
           buttons: [
             { label: 'No' },
-            { label: 'Yes', onClick: () => console.log(eachRow) }
+            { label: 'Yes', onClick: () => handleDelete(ref_id) }
           ]
         });
         break;
@@ -249,6 +250,11 @@ console.log(e)
        break;
       default:
     }
+  }
+  const handleDelete = async (id) => {
+    await APICALL.service(`${deleteSalesAgenetAgreements}/${id}`, 'DELETE')
+      .then((result) => router.reload())
+      .catch((error) => window.alert('Error occurred'));
   }
 
 
