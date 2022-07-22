@@ -50,8 +50,8 @@ function Footer() {
 			</div>
 			<div className="col-md-3 d-flex justify-content-end px-0">
 				<ul className='d-flex list-unstyled mb-0'>
-				<li className='list-unstyled mx-2 align-self-center'><img className='rounded-circle' style={{width: '30px'}} src="/facebook.png"/></li>
-				<li className='list-unstyled mx-2 mr-5 align-self-center'><img className='rounded-circle' style={{width: '30px'}} src="/linkedin.png"/></li>
+				<li className='list-unstyled mx-3 align-self-center'><img className='rounded-circle' style={{width: '30px'}} src="/facebook.png"/></li>
+				<li className='list-unstyled  mr-5 align-self-center'><img className='rounded-circle' style={{width: '30px'}} src="/linkedin.png"/></li>
 				</ul>
 			</div>
 			<div className="clip1"></div>

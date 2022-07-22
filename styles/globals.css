@@ -53,45 +53,57 @@
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-LightItalic.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-regular';
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-Regular.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-thin';
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-Thin.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-thinitalic';
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-ThinItalic.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-mediun';
     font-weight: 500;
     font-style: normal;
     src: url("./fonts/Poppins-Medium.ttf");
-} 
+}
 @font-face {
     font-family: 'Poppins-mediumitalic';
     font-weight: 500;
     font-style: normal;
 	src: url("./fonts/Poppins-MediumItalic.ttf");
-} 
+}
 
-
+/* for bitter font */
+@font-face {
+    font-family: 'bitter-regular';
+    font-weight: 500;
+    font-style: normal;
+	src: url("./fonts/Bitter-Regular.ttf");
+}
+@font-face {
+    font-family: 'Bitter-italic-normal-mediun';
+    font-weight: 500;
+    font-style: normal;
+	src: url("./fonts/Bitter-MediumItalic.ttf");
+}
 body {
     /* for title */
     --color-purple: #7761A7;
     /* for lable and footer background-color */
     --color-label-footer-gray: #4C4D55;
-    
+
     /* for border color*/
     --color-input-border-lightgrey: #B5B5B5;
     --color-white: #fff;
@@ -99,7 +111,7 @@ body {
     --bg-gray-dark: #4C4D5580;
     --bg-grey-medium: #4C4D550F;
     --color-skyblue: #79B1BD;
-   
+
     /* for font sizes */
     --font-size-s: 0.75em;
     --font-size-xl: 1.125rem;
@@ -121,6 +133,13 @@ body {
    /* for input field */
    --height-normal:35px;
    --border-input-lightgray: #dddddd;
+   --font-family-bitter-italic-normal-medium: Bitter-italic-normal-mediun;
+   --font-family-poppins-regular: Poppins-regular;
+    --font-family-poppins-italic: Poppins-italac;
+    --font-family-poppins-light: Poppins-normal;
+    --font-family-poppins-bold: Poppins-bold;
+    --font-family-poppins-thin: Poppins-thin;
+    --font-family-poppins-medium: Poppins-medium;
 
 }
 :root {
@@ -128,7 +147,7 @@ body {
     --color-purple: #7761A7;
     /* for lable and footer background-color */
     --color-label-footer-gray: #4C4D55;
-    
+
     /* for border color*/
     --color-border-lightgrey: #B5B5B5;
     --color-white: #fff;
@@ -136,7 +155,7 @@ body {
     --bg-gray-dark: #4C4D5580;
     --bg-grey-medium: #4C4D550F;
     --color-skyblue: #79B1BD;
-    
+
       /* for font sizes */
       --font-size-s: 0.75rem;
       --font-size-xl: 1.25rem;
@@ -154,9 +173,17 @@ body {
     --font-family-poppins-bold: Poppins-bold;
     --font-family-poppins-thin: Poppins-thin;
     --font-family-poppins-medium: Poppins-medium;
+
+    /* bitter font-family */
+    --font-family-bitter-italic-normal-medium: Bitter-italic-normal-mediun;
 }
 
-
+.bitter-italic-normal-mediun-24 {
+    color: var(--color-purple);
+    font-family: var(--font-family-bitter-italic-normal-medium);
+    font-weight: 500;
+    font-size: var(--font-size-xxxl);
+}
 .poppins-regular-14px {
     color: var(--color-label-footer-gray);
     font-family: var(--font-family-poppins-regular);
@@ -293,6 +320,12 @@ body {
     background-color: var(--color-purple);
     color: var(--color-white);
     font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+}
+.custom-btn:hover {
+    color: var(--color-white) !important;
+    background-color: var(--color-purple) !important;
+    border: var(--color-purple) !important;
 }
 .clip0 {
     clip-path: polygon(0% -5%, 3.3% 0.3%, 20% 62%, 0% 100%);
@@ -448,8 +481,8 @@ a {
 	color:#999 !important;
 }
 .container-height {
-	/* min-height: calc(90vh - 84px); */
-    min-height: calc(90vh - 90px);
+	min-height: calc(90vh - 84px);
+    /* min-height: calc(90vh - 90px); */
 }
 
 .atom-input-field-default {
@@ -468,6 +501,11 @@ a {
 	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 	-moz-appearance: none;
 	-webkit-appearance: none;
+}
+
+.atom-input-field-default:disabled {
+	background-color: #e9ecef;
+  opacity: 1;
 }
 
 .atom-input-field-default:focus{
@@ -495,7 +533,7 @@ a {
 }
 .clip0 {
     clip-path: polygon(0% -5%, 3.3% 0.3%, 20% 62%, 0% 100%);
-    background-color: darkcyan;
+    background-color: #79B1BD;
     width: 330px;
     height: 500px;
     position: absolute;
@@ -504,7 +542,7 @@ a {
 }
 .clip1 {
     clip-path: polygon(100% 0%, 100% 100%, 75% 57%);
-    background-color: yellow;
+    background-color: #FDF082;
     width: 300px;
     height: 430px;
     position: absolute;
@@ -516,13 +554,86 @@ a {
     min-height: calc(80vh - 100px);
 } */
 .selectemp-height {
-    min-height: calc(65vh - 90px);
+    min-height: calc(75vh - 90px);
 }
 .select-relative {
-    top: 185px;
+    top: 135px;
     position: relative;
     bottom: 50px;
 }
+.custom-modal-width-85 {
+    max-width: 85% !important;
+    margin-top: 2rem;
+}
+/* .css-1s2u09g-control {
+    padding: 10px 5px ;
+   ;
+} */
+.custom-radio-input {
+    background-color: var(--color-skyblue);
+    padding: 5px;
+}
+.back-btn-text {
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+    text-decoration: underline;
+
+}
+input::placeholder, select {
+    font-family: var(--font-family-poppins-light);
+    font-size: var(--font-size-m);
+}
+label {
+    font-family: var(--font-family-poppins-light);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400px;
+}
+
 .custom-modal-width-90 {
     max-width: 90% !important;
+}
+.inline-block-child {
+	display: inline-block;
+	float:left;
+}
+.svadmin_icon {
+	text-align: right;
+width: 20px !important;
+top: 17px;
+position: absolute;
+cursor: pointer;
+
+left: 19%;
+}
+.svadmin_icon2 {
+	text-align: right;
+width: 20px !important;
+top: 17px;
+position: absolute;
+cursor: pointer;
+
+left: 43%;
+}
+
+.legal12, .legal13 ,.invoice68,.invoice69{
+	width: 50%;
+	float:left;
+}
+.legal12 input, .legal13 input,.invoice68 input,.invoice69 input{
+  width: 90%;
+}
+.legal15,.invoice70,.invoice71,.invoice75 {
+	margin-bottom: 80px !important ;
+}
+.custom-position-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+.add-pln:hover {
+  color: var(--color-white);
+}
+.custom-header {
+    background-color: var(--color-white);
 }

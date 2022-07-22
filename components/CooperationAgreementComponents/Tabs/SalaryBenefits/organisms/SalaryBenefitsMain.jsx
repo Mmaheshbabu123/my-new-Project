@@ -19,6 +19,7 @@ const SalaryBenefitsMain = (props) => {
     var response = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
     data['salaryBenefitPcArray'] = response.pc_array || [];
     data['salaryDataPerPc'] = response.salaryData || {};
+    data['alreadyLinked'] = response.alreayLinkedPcIds || state.alreadyLinked;
     let apiData = Object.keys(response['tab_data']).length ? response['tab_data'] : 0;
     if(apiData) {
       let { cooperationSalaryDetails = [], cooperationSalaryLinked = {}, cooperationBenefits = {} } = apiData;

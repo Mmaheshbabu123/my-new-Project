@@ -125,6 +125,7 @@ export const getPcLinkedCoeffData = BASE_URL + "get-pclinked-coeff-data";
 export const fetchSalaryBenefitsPerPc = BASE_URL + "get-salary-benefits-per-pc";
 export const saveCooperationDataTabWise = BASE_URL + "save-cooperationdata-tab-wise";
 export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agreements";
+export const getDefaultOptionsData = BASE_URL + "getDefaultOptionsData";
 //------------------- @
 //-------------------
 //--------EMPLOYER COOPERATION AGREEMENTS------------//
@@ -136,6 +137,7 @@ export const deleteCooperationAgreement = BASE_URL + "delete-cooperation-agreeme
 //------SALES AGENT COOPERATION AGREEMENTS -------//
 export const fetchSalesAgenetAgreements = BASE_URL + "get-all-sales-agent-agreement-requests";
 export const saveSalesAgentSvData = BASE_URL + "save-agent-assigned-data";
+export const deleteSalesAgenetAgreements = BASE_URL + "delete-sales-agent-agreement-request";
 
 //-----------EMPLOYEE PLANNING---------------------//
 export const fetchemployeeplanning = BASE_URL + "get-all-employee-planning/";

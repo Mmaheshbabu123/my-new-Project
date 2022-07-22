@@ -21,9 +21,7 @@ const takeElementStatus = (type = 1) => type === 1 ?
   };
 
 const CooperationAgreementStates = (props) => {
-  const   requiredElements  = structuredClone(requiredFields);
-  console.log(requiredFields)
-  console.log(requiredElements)
+  const requiredElements  = structuredClone(requiredFields);
   const initialState = {
       tab_1 : { worksServantsData: {1: [], 2: []}, cooperationCoeffData: {} }
     , tab_2 : {'22':1,'23':1,'24':1,'10':'1',required:requiredElements['tab_2'],validations:{'17':{'type':1,validate:false,'text':'Only numbers will accept' },'19':{'type':2,validate:false},'14':{'type':3,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'},'20':{'type':4,validate:false,'text':'Only numbers will accept'},'8':{'type':5,validate:false,'text':'Only numbers will accept'}}}
@@ -35,7 +33,7 @@ const CooperationAgreementStates = (props) => {
       cooperationBenefits: {},
     }
     , tab_6:  {'56':1,'57':2,'58':1,'61':2,'60':'Correction on one document','62':2,'63':2,'64':2,'65':2,'72':'21%','73':2,'74':1,'76':2,'77':2,'78':2,'79':2,required:requiredElements['tab_6'],
-       validations:{'54':{'type':1,validate:false},'55':{'type':2,validate:false} ,'52':{'type':3,validate:false},}
+       validations:{'54':{'type':1,validate:false},'55':{'type':2,validate:false} ,'52':{'type':3,validate:false},'72':{'type':6,validate:false},}
      }
     , selectedTabId: 1
     , loadedTabs: []
@@ -51,6 +49,8 @@ const CooperationAgreementStates = (props) => {
     , element_status: takeElementStatus()
     , dependecyDataStatus: takeElementStatus(2)
     , salesAgentRefId: 0
+    , defaultOptions : []
+    , renderedOptions:0
   };
   const [state, dispatch] = useReducer(CooperationAgreementReducer, initialState);
   const updateStateChanges = (obj) => {

@@ -10,15 +10,17 @@ function Header() {
 // 	let dashboard_url = server_url.includes('test')?'https://test.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1':
 //    'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
 	return (
-		<div className='custom-header col-md-10 m-auto border-bottom border-2 py-4'>
+		<div className='custom-position-sticky'>
+		<div className="clip0"></div>
+		<div className='custom-header  col-md-10 m-auto border-bottom border-2 py-4'>
 		
 		{/* <nav className="navbar"> */}
 		{/* <div className = 'go_to_dashboard'>
 	<Link href={dashboard_url}>
 		<a> Back to dashboard </a>
 		</Link>
-	</div> */} <div className="clip0"></div>
-			<div className="container-fluid  col-md-12">
+	</div> */} 
+			<div className="container-fluid  col-md-12 p-0">
 				<div className="d-flex row">
 
 					<div className="col-md-4">
@@ -27,11 +29,11 @@ function Header() {
 						</a>
 					</div>
 
-					<div className="d-flex justify-content-end  col-md-8">
+					<div className="d-flex justify-content-end  col-md-8 p-0">
                 <ul className="d-flex list-unstyled mb-0">
                     <li className='list-unstyled mx-3 align-self-center'><img src="/notifications.svg"/></li>
                     <li className='list-unstyled mx-3 align-self-center'><img style={{width: '50px'}} src="/account.png"/></li>
-                    <li className='list-unstyled mx-3 align-self-center'><select type="" className="border-0 bg-light p-1 mt-2">
+                    <li className='list-unstyled mx-3 align-self-center'><select type="" className="border-0 bg-white poppins-regular-16px p-1 mt-2">
 							<option>EN</option>
 							<option>NL</option>
 							<option>FR</option>
@@ -59,6 +61,7 @@ function Header() {
 			
 		{/* </nav> */}
 		
+		</div>
 		</div>
 	);
 }

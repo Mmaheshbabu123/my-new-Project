@@ -47,25 +47,41 @@ const EmployeeTypeSecondPart = () => {
    * @return {[void]}          [description]
    */
   const handleValueChange = (target, _EmpId, _Coeffid, _ValId) => {
-    if (!target.value.match(state.regexp)) return;
+    let value = target.value;
+    if (!target.value.match(state.regexp) || checkDecimalPointError(value)) return;
     let valueDataObj = {
       ...pclinkingValueobj,
       [_EmpId]: {
         ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId] : {}),
         [_Coeffid]: {
           ...(pclinkingValueobj[_EmpId] ? pclinkingValueobj[_EmpId][_Coeffid] : {}),
-          [_ValId]: target.value
+          [_ValId]: value
         }
       }
     }
     // lowHighDefaultChanges(_EmpId, _Coeffid, _ValId, valueDataObj) //not needed as of now
     updateStateChanges({
       pclinkingValueobj: valueDataObj,
-      valueErrorArray: valueValidation(_EmpId, _Coeffid, _ValId, target.value),
+      valueErrorArray: valueValidation(_EmpId, _Coeffid, _ValId, value),
       defaultValueError: validationForDefaultValue(valueDataObj, _EmpId, _Coeffid),
       lowHighValidation: handleValidation(valueDataObj, _EmpId, _Coeffid, _ValId),
       emptyDataWarning: false
     });
+  }
+
+  /**
+   * [checkDecimalPointError description]
+   * @param  {[type]} value               [description]
+   * @return {[type]}       [description]
+   */
+  const checkDecimalPointError = (value) => {
+    let status = false;
+    if(value) {
+      let inputVal = value.replace(',', '.');
+      let decimals = inputVal.split('.')[1];
+      status =  decimals && decimals.length > 2 ? true : false;
+    }
+    return status;
   }
 
   const validationForDefaultValue = (valueDataObj, _EmpId, _Coeffid) => {
@@ -168,7 +184,7 @@ const EmployeeTypeSecondPart = () => {
     let lowRef = inputRef.current[`${refkey}_1`];
     let highRef = inputRef.current[`${refkey}_3`];
     let title = '';
-    if (lowVal > highVal && type) {
+    if (lowVal >= highVal && type) {
       title = 'Low value should be less then high value (Low < High)';
       if (lowHighValidation.includes(refkey)) return lowHighValidation;
       lowRef.classList.add("warning");

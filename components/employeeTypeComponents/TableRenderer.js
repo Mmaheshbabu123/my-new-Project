@@ -107,6 +107,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
           className="form-control col-7 pcp_name"
           onChange={(e) => setState({...state, searchTerm: e.target.value})}
           placeholder={'Search'}
+          onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
         />
         <button
           onClick={() => router.push(`${manageType}/add?id=0`)}

@@ -18,21 +18,27 @@ const RedirectPages = (props) => {
 		if (props.hasOwnProperty('type')) {
 			localStorage.setItem('type', JSON.stringify(props.type));
 		}
+		// if (props.hasOwnProperty('uid')) {
+		// 	localStorage.setItem('uid', JSON.stringify(props.uid));
+		// }
 		if (props.hasOwnProperty('dest')) {
 			localStorage.setItem('dest', JSON.stringify(props.dest));
 			switch (props.dest) {
 				case 'addpc':
 					router.push('/addpc/' + unique_key);
 					break;
-					case 'manage-category':
+				case 'manage-category':
 					router.push('/manage-category');
+					break;
+				case 'planning':
+					router.push('/planning/options');
 					break;
 				default:
 					router.push('/');
 					break;
 			}
 		} else {
-			window.location.assign(process.env.NEXT_PUBLIC_APP_BACKEND_URL);
+			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 		}
 	}, []);
 };

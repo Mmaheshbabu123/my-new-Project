@@ -16,6 +16,9 @@ const InvoiceDetails = (props) => {
   console.log(state);
   const handleChange = (event) => {
     const { value, name } = event.target;
+    if(name === '72' && value === '') { //Vat Rate should be % present
+      value = '%';
+    }
     tab_6[name] = value;
     element_status['tab_6'].push(name);
     updateStateChanges({ tab_6,element_status });
@@ -36,7 +39,7 @@ const InvoiceDetails = (props) => {
      ContactInvoiceRow.filter(data=>{
        if(data.type === 1) {
        fieldData.push(
-         <div className = {`col-md-12 ${styles['add-div-margings']}`}>
+         <div className = {`col-md-12 ${styles['add-div-margings']} invoice${data.id}`}>
          <LabelField title={data.key_name} customStyle = {{display:''}} /> {requiredFields['tab_6'][data.id] && <RequiredField />}
          <InputField
          id = {data.id}
@@ -60,7 +63,7 @@ const InvoiceDetails = (props) => {
      }
      else if (data.type === 6) {
      fieldData.push(
-       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
+       <div className = {`col-md-12 ${styles['add-div-margings']} invoice${data.id}`}>
            <LabelField title={data.key_name} customStyle = {{display:''}} /> {requiredFields['tab_6'][data.id] && <RequiredField />}
            <div>
            <RadioField   name = {data.id} checked = {tab_6[data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} />
@@ -70,7 +73,7 @@ const InvoiceDetails = (props) => {
      )
    } else if(data.type === 8) {
    fieldData.push(
-     <div className=''>
+     <div className={`invoice${data.id}`}>
      <LabelField title={data.key_name}  customStyle = {{display:''}}/>
      <MultiSelectField
          id={data.id}

@@ -7,8 +7,9 @@ import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
 import { AiFillFilePdf, AiOutlineRedo} from 'react-icons/ai';
 import { HiPlusCircle} from 'react-icons/hi';
+import { deleteSalesAgenetAgreements} from '@/Services/ApiEndPoints'
 import { useRouter } from 'next/router';
-
+import { APICALL } from '@/Services/ApiServices';
 
 const itemsPerPage = 5;
 const Overviewpage = (props) => {
@@ -27,10 +28,11 @@ const Overviewpage = (props) => {
   const [state, setState] = useState({
       headers: ['Employer name',  'Company', 'Date of request', 'Start date of cooperation agreement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
-      searchKey: 'company_name',
+      searchKey: 'employer_name',
       currentItems: [],
       status: [1, 0],
       searchTerm: '',
+      searchColumn:'',
       showPopup: false,
       selectedSalesAgent: 0,
       warning: false,
@@ -62,12 +64,21 @@ const Overviewpage = (props) => {
   }
 
 
-  const handleSearchClick = () => {
+  const handleSearchClick = (e) => {
+    //const { name} = e.target;
+console.log(e)
     let value = state.searchTerm;
+    let name = state.searchColumn;
+  console.log(state);
     let filterRows = overviewData.filter((item) => {
-      return (item[state.searchKey].toLowerCase().toString())
+      let rowVal = item[name];
+      //`${item['employer_name']}${item['company_name']}`
+      return (rowVal.toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
+    //   return (item[state.searchKey].toLowerCase().toString())
+    //     .indexOf(value.toLowerCase().toString()) !== -1;
+    // })
     setState({ ...state,
       searchTerm: value,
       filterRows: filterRows,
@@ -106,6 +117,38 @@ const Overviewpage = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
+{<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
+
+      <div className="col-sm-3 px-0">
+
+          <input
+            type="text"
+            className='form-control mt-2 mb-2'
+            style={{margin: '10px 0'}}
+            name = {'employer_name'}
+            onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'employer_name'})}
+            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+            placeholder={'Search employer '}
+          />
+
+<span className="searchIconCss svadmin_icon"> <SearchIcon handleSearchClick={(e)=>handleSearchClick(e)} /></span>
+        </div>
+
+      <div className="col-sm-3">
+      <input
+        type="text"
+        className='form-control mt-2 mb-2'
+        style={{margin: '10px 0'}}
+        name = {'company_name'}
+        onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'company_name'})}
+        onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+        placeholder={'Search company '}
+      />
+
+<span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
+        </div>
+
+      </div>}
         {/*<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
           <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
           <input
@@ -113,6 +156,7 @@ const Overviewpage = (props) => {
             className="form-control col-7 pcp_name"
             style={{margin: '10px 0'}}
             onChange={(e) => setState({...state, searchTerm: e.target.value})}
+            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
             placeholder={'Search'}
           />
         </div>*/}
@@ -127,10 +171,10 @@ const Overviewpage = (props) => {
                 return (
                   <tr key={index}>
                       <td> {eachRow.employer_name} </td>
-                    
+
                       <td> {eachRow.company_name} </td>
                       <td> {eachRow.date_of_request} </td>
-                      <td> {eachRow.date_of_commencement} </td>
+                      <td> {eachRow.startdate_agreement} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
                       <td> {getNeededActions(eachRow) } </td>
                   </tr>
@@ -169,14 +213,14 @@ const Overviewpage = (props) => {
         <div>
           <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
           <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
-          <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          {/*<span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>*/}
         </div>
       )
     } else {
       return (
         <div>
           <span title = {'Add'} className="actions-span text-dark" onClick={() => handleActionClick('add', eachRow)}> <HiPlusCircle /> </span>
-          <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          {/*<span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>*/}
         </div>
       )
     }
@@ -191,7 +235,7 @@ const Overviewpage = (props) => {
           message: `Do you want to delete the cooperation agreement?`,
           buttons: [
             { label: 'No' },
-            { label: 'Yes', onClick: () => console.log(eachRow) }
+            { label: 'Yes', onClick: () => handleDelete(ref_id) }
           ]
         });
         break;
@@ -206,6 +250,11 @@ const Overviewpage = (props) => {
        break;
       default:
     }
+  }
+  const handleDelete = async (id) => {
+    await APICALL.service(`${deleteSalesAgenetAgreements}/${id}`, 'DELETE')
+      .then((result) => router.reload())
+      .catch((error) => window.alert('Error occurred'));
   }
 
 
