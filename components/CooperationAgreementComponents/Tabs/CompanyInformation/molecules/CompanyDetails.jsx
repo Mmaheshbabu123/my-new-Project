@@ -19,7 +19,6 @@ const [companyState,setCompanyState] = useState({
 })
 var TypeOfCompany = 10;
 var Vat_Number = 8;
-console.log(tab_2);
 const CompanyFieldData = (companyRow1) => {
   let  fieldsArray = [];
   companyRow1.map(data=>{
@@ -53,7 +52,6 @@ const handleChange = (event) => {
   const { value, name } = event.target;
   tab_2[name] = value;
 element_status['tab_2'].push(name);
-   console.log(name);
 
     updateStateChanges({ tab_2,element_status });
 
