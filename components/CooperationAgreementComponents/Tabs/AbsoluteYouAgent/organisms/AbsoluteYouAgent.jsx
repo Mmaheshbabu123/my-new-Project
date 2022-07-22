@@ -23,7 +23,7 @@ const AbsoluteYouAgent = (props) => {
     let stateKey = `tab_${selectedTabId}`;
     let tab_1 = { ...state[stateKey] };
     var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
-    let apiData = Object.keys(data['tab_data']).length ? data['tab_data'] : 0;
+    let apiData = data['tab_data'] && Object.keys(data['tab_data']).length ? data['tab_data'] : 0;
     if(apiData) {
       let { basicDetails = {}, cooperationCoeffData = {}, worksServantsData = {} } = apiData;
       tab_1[startDateAgreement]     = basicDetails && basicDetails['startdateagreement'] || helpers.formatDate(new Date());
@@ -38,6 +38,7 @@ const AbsoluteYouAgent = (props) => {
     data[stateKey] = tab_1;
     data['pcArray'] = data.pc_array || [];
     data['pcLinkedEmployeeTypes'] = data.pcLinkedEmployeeTypes || {};
+    data['filledTabs'] = data.completedTabIds.length ? [...data.completedTabIds, selectedTabId] : [selectedTabId];
     data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
     data['renderTabComponents'] = true;
     data['absoluteAgentTabRender'] = true;
