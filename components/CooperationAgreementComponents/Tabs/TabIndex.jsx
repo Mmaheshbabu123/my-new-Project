@@ -73,7 +73,8 @@ const loadData = async () => {
   await APICALL.service(getDefaultOptionsData, 'GET').then(response => {
     if (response.status === 200)
       data = response.data || {};
-      defaultOptions['countrylist'] = data['countrylist'];
+      defaultOptions['countrylist']   =  data['countrylist'];
+      defaultOptions['locationslist'] =  data['locationslist'];
       updateStateChanges({defaultOptions,renderedOptions:1})
   }).catch((error) => console.log(error) )
 
