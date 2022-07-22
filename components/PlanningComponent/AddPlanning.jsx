@@ -12,16 +12,11 @@ import Addproject from './AddProject';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import RadioField from '@/atoms/RadioField';
 import { MdEdit, MdDelete } from 'react-icons/md';
-import { handleClientScriptLoad } from 'node_modules/next/script';
 
 function Planning(props) {
 	const router = useRouter();
-	const [ showtable, setShowtable ] = useState(0);
 	const { p_unique_key } = router.query;
-
-	console.log(p_unique_key);
 
 	// For popup
 	const [ show, setShow ] = useState(false);
@@ -30,24 +25,24 @@ function Planning(props) {
 	const [ company, setCompany ] = useState([]);
 	const [ location, setLocation ] = useState([]);
 	const [ costcenter, setCostcenter ] = useState([]);
-	const [ company_name, setCompany_name ] = useState([]);
 	const [ empr_id, setEmpr_id ] = useState('');
 	const [ projectname, setProjectname ] = useState('');
 
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
 	const [ error_location_id, setError_location_id ] = useState('');
+
 	const [ countrylist, setCountrylist ] = useState([]);
 
 	const [ data, setData ] = useState({
 		p_unique_key: '',
+		id: '',
 		comp_id: '',
 		location_id: '',
 		cost_center_id: ''
 	});
 
 	// PROJECT FIELD HIDE AND SHOW
-	// const [ hideproject, setHideproject ] = useState(1);
 	const [ showproject, setShowproject ] = useState(true);
 
 	const [ project, setProject ] = useState({
@@ -68,84 +63,110 @@ function Planning(props) {
 
 	useEffect(() => {
 		if (localStorage.getItem('uid') != null) {
-			setEmpr_id(localStorage.getItem('uid'));
+			setEmpr_id(JSON.parse(localStorage.getItem('uid')));
 		}
 	}, []);
 
 	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
-	// useEffect(() => {
-	// 	APICALL.service(getEmployeerCompanylist + 102, 'GET')
-	// 		.then((result) => {
-	// 			console.log(result.data[0]);
-	// 			setCompany(result.data[0]);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-	// }, []);
-
-	// FETCHING COMPANY FROM DRUPAL //
-	useEffect(() => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managecompanies?_format=json', 'GET')
-			.then((result) => {
-				if (result.length > 0) {
-					setCompany(result);
-				} else {
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, []);
-
-	// //LOCATION FETCHING FROM DRUPAL
 	useEffect(
 		() => {
-			setLocation([]);
-			if (data.comp_id != '') {
-				APICALL.service(
-					process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managelocations?_format=json&comp_id=' + data.comp_id,
-					'GET'
-				)
+			if (empr_id) {
+				APICALL.service(getEmployeerCompanylist + empr_id, 'GET')
 					.then((result) => {
-						if (result.length > 0) {
-							setLocation(result);
-						} else {
-							setLocation([]);
+						console.log(result);
+						setCompany(result.data[0]);
+						setLocation(result.data[1]);
+						setCostcenter(result.data[2]);
+						if (data.id == '') {
+							var data1 = data;
+							if (result.data[0].length == 1) {
+								data1.comp_id = result.data[0].nid;
+							}
+							if (result.data[1].length == 1) {
+								data1.location_id = result.data[1].value;
+							}
+							if (result.data[2].length == 1) {
+								data1.cost_center_id = result.data[2].value;
+							}
+							data1.p_unique_key = p_unique_key;
+
+							setData(data1);
+							if(result.data[0].length == 1 && result.data[1].length == 1 && result.data[1].length == 1){
+								postData(data);
+							}
+
 						}
 					})
 					.catch((error) => {
-						console.error(error);
+						console.log(error);
 					});
 			}
 		},
-		[ data.comp_id ]
+		[ empr_id ]
 	);
 
+	// FETCHING COMPANY FROM DRUPAL //
+	// useEffect(() => {
+	// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managecompanies?_format=json', 'GET')
+	// 		.then((result) => {
+	// 			if (result.length > 0) {
+	// 				setCompany(result);
+	// 			} else {
+	// 			}
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error(error);
+	// 		});
+	// }, []);
+
+	// //LOCATION FETCHING FROM DRUPAL
+	// useEffect(
+	// 	() => {
+	// 		setLocation([]);
+	// 		if (data.comp_id != '') {
+	// 			APICALL.service(
+	// 				process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managelocations?_format=json&comp_id=' + data.comp_id,
+	// 				'GET'
+	// 			)
+	// 				.then((result) => {
+	// 					if (result.length > 0) {
+	// 						setLocation(result);
+	// 					} else {
+	// 						setLocation([]);
+	// 					}
+	// 				})
+	// 				.catch((error) => {
+	// 					console.error(error);
+	// 				});
+	// 		}
+	// 	},
+	// 	[ data.comp_id ]
+	// );
+
 	//COST CENTER FETCHING FROM DRUPAL
-	useEffect(
-		() => {
-			APICALL.service(
-				process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
-					'manage-costcenter?_format=json&comp_id=' +
-					data.comp_id +
-					'&location_id=' +
-					data.location_id,
-				'GET'
-			)
-				.then((result) => {
-					if (result.length > 0) {
-						setCostcenter(result);
-					} else {
-						setCostcenter([]);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-		},
-		[ data.comp_id, data.location_id ]
-	);
+	// useEffect(
+	// 	() => {
+	// 		APICALL.service(
+	// 			process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
+	// 				'manage-costcenter?_format=json&comp_id=' +
+	// 				data.comp_id +
+	// 				'&location_id=' +
+	// 				data.location_id,
+	// 			'GET'
+	// 		)
+	// 			.then((result) => {
+	// 				if (result.length > 0) {
+	// 					setCostcenter(result);
+	// 				} else {
+	// 					setCostcenter([]);
+	// 				}
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error(error);
+	// 			});
+	// 	},
+	// 	[ data.comp_id, data.location_id ]
+	// );
 
 	// FETCH PLANNING
 	useEffect(
@@ -153,6 +174,7 @@ function Planning(props) {
 			APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
 				if (result && result.data.length > 0) {
 					var res = result.data[0];
+					res.id = result.data[0].id;
 					res.p_unique_key = result.data[0].p_unique_key;
 					res.comp_id = result.data[0].comp_id;
 					res.location_id = result.data[0].location_id;
@@ -168,36 +190,36 @@ function Planning(props) {
 	/**
 	 * FETCHING PROJECT
 	 */
-	useEffect(() => {
-		APICALL.service(fetchproject + p_unique_key, 'GET')
-			.then((result) => {
-				console.log(result);
-				setCountrylist(result.data.countrylist);
-				if (result.data.length > 0) {
-					var res = [];
-					res.project_name = result.data.project_name;
-					setProjectname(result.data.project_name);
-					res.project_location = result.data.project_location;
-					res.hno = result.data.hno;
-					res.bno = result.data.bno;
-					res.city = result.data.city;
-					res.extra = result.data.extra;
-					res.comp_id = result.data.comp_id;
-					res.street = result.data.street;
-					res.postal_code = result.data.postal_code;
-					res.country = result.data.country;
-					setProject(res);
-					console.log(data);
-				}
+	// useEffect(() => {
+	// 	APICALL.service(fetchproject + p_unique_key, 'GET')
+	// 		.then((result) => {
+	// 			console.log(result);
+	// 			setCountrylist(result.data.countrylist);
+	// 			if (result.data.length > 0) {
+	// 				var res = [];
+	// 				res.project_name = result.data.project_name;
+	// 				setProjectname(result.data.project_name);
+	// 				res.project_location = result.data.project_location;
+	// 				res.hno = result.data.hno;
+	// 				res.bno = result.data.bno;
+	// 				res.city = result.data.city;
+	// 				res.extra = result.data.extra;
+	// 				res.comp_id = result.data.comp_id;
+	// 				res.street = result.data.street;
+	// 				res.postal_code = result.data.postal_code;
+	// 				res.country = result.data.country;
+	// 				setProject(res);
+	// 				console.log(data);
+	// 			}
 
-				// console.log(countrylist);
+	// 			// console.log(countrylist);
 
-				// setData(result.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
+	// 			// setData(result.data);
+	// 		})
+	// 		.catch((error) => {
+	// 			console.log(error);
+	// 		});
+	// }, []);
 
 	// ON SUBMIT //
 	let submit = (event) => {
@@ -205,7 +227,13 @@ function Planning(props) {
 		console.log(data);
 		var valid_res = validate(data);
 		if (valid_res) {
-			APICALL.service(addPlanning, 'POST', data)
+			postData();
+			
+		}
+	};
+
+	let postData = () =>{
+		APICALL.service(addPlanning, 'POST', data)
 				.then((result) => {
 					console.log(result);
 					if (result.status === 200) {
@@ -217,14 +245,11 @@ function Planning(props) {
 				.catch((error) => {
 					console.error(error);
 				});
-		}
-	};
+	}
 
 	//VALIDATE FORM //
 	let validate = (res) => {
-		console.log(res);
 		var error1 = [];
-		// error1['location_id'] = '';
 
 		//check if required fields are empty
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
@@ -259,6 +284,37 @@ function Planning(props) {
 		setData(res);
 	};
 
+	let updateLocation = (comp_id) => {
+		let counter = 0;
+		location.map((loc) => {
+			if (loc.comp_id == comp_id) counter++;
+		});
+		if (counter == 1) {
+			var result = location.find((obj) => {
+				return obj.comp_id == comp_id ? obj : '';
+			});
+			if (result != '') {
+				setData((prev) => ({ ...prev, location_id: result.value }));
+			}
+			updateCostCenter(result.value);
+		}
+	};
+	let updateCostCenter = (loc_id) =>{
+		let counter = 0;
+		costcenter.map((loc) => {
+			if (loc.location_id == loc_id) counter++;
+		});
+		if (counter == 1) {
+			var result = costcenter.find((obj) => {
+				return obj.location_id == loc_id ? obj : '';
+			});
+			if (result != '') {
+				setData((prev) => ({ ...prev, cost_center_id: result.value }));
+			}
+		}
+
+	}
+
 	return (
 		<div className="col-md-12">
 			<form onSubmit={(e) => submit(e)}>
@@ -272,7 +328,6 @@ function Planning(props) {
 						{showproject && (
 							<button
 								onClick={showPopup}
-								// onClick={() => setShowproject(true)}
 								type="button"
 								className=" btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center"
 							>
@@ -295,18 +350,13 @@ function Planning(props) {
 									placeholder="select company"
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, comp_id: e.target.value }));
+										updateLocation(e.target.value);
 									}}
 								>
 									<option value="">Select</option>
 									{company.map((options) => (
-										<option
-											onClick={(e) => {
-												setCompany_name(options.comp_name);
-											}}
-											key={options.comp_id}
-											value={options.comp_id}
-										>
-											{options.comp_name}
+										<option key={options.nid} value={options.nid}>
+											{options.title}
 										</option>
 									))}
 								</select>
@@ -322,14 +372,19 @@ function Planning(props) {
 									className="form-select mb-2 mt-2"
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, location_id: e.target.value }));
+										updateCostCenter(e.target.value);
 									}}
 								>
 									<option value="">Select</option>
-									{location.map((options) => (
-										<option key={options.location_id} value={options.location_id}>
-											{options.location_name}
-										</option>
-									))}
+									{data.comp_id != '' &&
+										location.map(
+											(options) =>
+												options.comp_id == data.comp_id && (
+													<option key={options.value} value={options.value}>
+														{options.title}
+													</option>
+												)
+										)}
 								</select>
 								<p className="error mt-2">{error_location_id}</p>
 							</div>
@@ -344,11 +399,15 @@ function Planning(props) {
 									}}
 								>
 									<option value="">Select</option>
-									{costcenter.map((options) => (
-										<option key={options.cost_center_id} value={options.cost_center_id}>
-											{options.cost_center_name}
-										</option>
-									))}
+									{data.location_id != '' &&
+										costcenter.map(
+											(options) =>
+												options.location_id == data.location_id && (
+													<option key={options.value} value={options.value}>
+														{options.title}
+													</option>
+												)
+										)}
 								</select>
 							</div>
 							{!showproject && (
