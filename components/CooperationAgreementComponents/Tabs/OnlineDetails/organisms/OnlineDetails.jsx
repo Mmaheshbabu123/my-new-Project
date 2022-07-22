@@ -22,8 +22,8 @@ const OnlineDetails = (props) => {
   if(apiData) {
   tab_4 = {...apiData,...tab_4}
   }
-
-  updateStateChanges({tab_4,tab_4_action})
+  
+  updateStateChanges({tab_4,tab_4_action,loadedTabs:[...state.loadedTabs, selectedTabId] })
   }
 
     return(

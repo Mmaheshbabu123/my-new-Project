@@ -107,6 +107,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           className="form-control col-7 pcp_name"
           onChange={(e) => setState({...state, searchTerm: e.target.value})}
           placeholder={'Search'}
+          onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
         />
         <button
           onClick={() => router.push(`manage-salary-benefits?action=create&id=0`)}

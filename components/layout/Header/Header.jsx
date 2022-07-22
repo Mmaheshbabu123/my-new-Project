@@ -10,14 +10,16 @@ function Header() {
 // 	let dashboard_url = server_url.includes('test')?'https://test.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1':
 //    'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
 	return (
-		<div className='custom-header col-md-10 m-auto border-bottom border-2 py-4'>
+		<div className='custom-position-sticky'>
+		<div className="clip0"></div>
+		<div className='custom-header  col-md-10 m-auto border-bottom border-2 py-4'>
 		
 		{/* <nav className="navbar"> */}
 		{/* <div className = 'go_to_dashboard'>
 	<Link href={dashboard_url}>
 		<a> Back to dashboard </a>
 		</Link>
-	</div> */} <div className="clip0"></div>
+	</div> */} 
 			<div className="container-fluid  col-md-12 p-0">
 				<div className="d-flex row">
 
@@ -59,6 +61,7 @@ function Header() {
 			
 		{/* </nav> */}
 		
+		</div>
 		</div>
 	);
 }

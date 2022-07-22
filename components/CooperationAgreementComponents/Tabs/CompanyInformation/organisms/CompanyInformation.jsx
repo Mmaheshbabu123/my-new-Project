@@ -22,9 +22,7 @@ const CompanyInformation = (props) => {
    if(apiData) {
     tab_2 = {...apiData,...tab_2}
    }
-  
-
-   updateStateChanges({tab_2,tab_2_action})
+   updateStateChanges({tab_2,tab_2_action,loadedTabs:[...state.loadedTabs, selectedTabId] })
  }
     return(
       <div className="">
