@@ -2,6 +2,8 @@ import React, {useContext } from 'react';
 import { useRouter } from 'next/router';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import styles from './AbsoluteYouAgent/absoluteAgent.module.css';
+import { APICALL } from '@/Services/ApiServices';
+import { getDefaultOptionsData } from '@/Services/ApiEndPoints'
 import { submitService } from './submitService';
 import {
     ABSOLUTEYOU_AGENT_TAB
@@ -23,7 +25,7 @@ import SalaryBenefitsMain  from './SalaryBenefits/organisms/SalaryBenefitsMain';
 
 
 const TabIndex = (props) => {
-	const { state: { selectedTabId }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+	const { state: { selectedTabId ,renderedOptions }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
 
 	/**
@@ -57,6 +59,22 @@ const TabIndex = (props) => {
     return component || <> {`Selected tab id: ${selectedTabId}`} </>;
   }
 
+useEffect(()=> {
+  if(!renderedOptions)  loadData()
+}, [])
+
+const loadData = async () => {
+ let data = [];
+ let defaultOptions = {...state['defaultOptions']};
+  await APICALL.service(getDefaultOptionsData, 'GET').then(response => {
+    if (response.status === 200) {
+      data = response.data || {};
+      defaultOptions['countrylist'] = data['countrylist'];
+      updateStateChanges({defaultOptions,renderedOptions:1})
+    }
+  }).catch((error) => console.log(error) )
+}
+
   const forWardToNextStepTab = async (draft = 0) => {
     await submitService.forWardToNextStepTab(router, state, updateStateChanges, selectedTabId, draft);
   }
@@ -70,8 +88,12 @@ const TabIndex = (props) => {
             <p className={`${styles['tab-index-back-btn']}`} onClick={() => router.back()}> Back </p>
           </div>
           <div className={`col-md-3 text-end`}>
-            <button onClick={forWardToNextStepTab} type="button" className="btn btn-dark pcp_btn"> {'Save as draft'} </button>
-            <button onClick={forWardToNextStepTab} type="button" className="btn btn-dark pcp_btn"> {selectedTabId === INVOIING_TAB ? 'Save' : 'Next'} </button>
+            <button onClick={() => forWardToNextStepTab(1)} type="button" className="btn btn-dark pcp_btn">
+              {'Save as draft'}
+            </button>
+            <button onClick={() => forWardToNextStepTab()} type="button" className="btn btn-dark pcp_btn">
+              {selectedTabId === INVOIING_TAB ? 'Save' : 'Next'}
+            </button>
           </div>
       </div>
     </div>

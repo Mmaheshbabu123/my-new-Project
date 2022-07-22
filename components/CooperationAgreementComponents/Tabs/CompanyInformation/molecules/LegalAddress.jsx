@@ -9,12 +9,13 @@ import styles from '../companyInformation.module.css';
 import { requiredFields} from '../../../RequiredFields';
 import RequiredField from '@/atoms/RequiredSpanField';
 import ValidateMessage from '@/atoms/validationError';
-
+import MultiSelectField from '@/atoms/MultiSelectField';
 import emailValidate from '@/atoms/emailValidate';
 const LegalAddress = (props) => {
   var Language = 22;
   var Labour_regulations_share = 23;
   var Labour_regulations = 24;
+
 //  '19':{'type':2,validate:false}
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   const [legalState,setLegalState] = useState({
@@ -22,7 +23,7 @@ const LegalAddress = (props) => {
     validations:{'17':{'type':1,validate:false,'text':'Only numbers will accept' },'14':{'type':1,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'}}
   })
   var { tab_2,element_status } = state;
-  console.log(tab_2);
+  let countrylist = state.defaultOptions['countrylist'] || [];
   const handleChange = (event) => {
     const {name,value} = event.target;
     tab_2[name] = value;
@@ -35,6 +36,10 @@ const LegalAddress = (props) => {
       updateStateChanges({ tab_2 ,element_status});
     //}
 
+  }
+  const handleSelect = (obj,key) => {
+    tab_2[key]  = obj.value;
+    updateStateChanges({ tab_2 });
   }
 
 
@@ -69,6 +74,7 @@ const LegalAddress = (props) => {
  const LegalaAddressFieldData = (Rowdata) =>{
    let fieldsArray = [];
    Rowdata.map(data => {
+       if(data.type === 1) {
      fieldsArray.push(
        <div className = {`col-md-12 ${styles['add-div-margings']}  legal${data.id}`}>
        <LabelField title={data.key_name} customStyle = {{display:''}} /> {requiredFields['tab_2'][data.id] && <RequiredField />}
@@ -91,6 +97,25 @@ const LegalAddress = (props) => {
         }
        </div>
      )
+   }else if(data.type === 8) {
+     fieldsArray.push(
+       <div className=''>
+       <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_2'][data.id] && <RequiredField />}
+       <MultiSelectField
+           id={data.id}
+           options={countrylist}
+           standards={countrylist.filter(val => val.value === tab_2[data.id])}
+           disabled={false}
+           handleChange={(obj) => handleSelect(obj, data.id)}
+           isMulti={false}
+           className="col-md-6"
+         />
+         { tab_2['required'][data.id] !== undefined && !tab_2['required'][data.id] &&
+          <ValidateMessage text = {'This field is required'}/>
+        }
+         </div>
+       )
+   }
    })
    return fieldsArray;
  }

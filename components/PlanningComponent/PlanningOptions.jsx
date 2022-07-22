@@ -13,11 +13,13 @@ function Add_manage_planning(props) {
 		);
 	};
 	return (
-		<div className="col-md-10 m-auto">
+		<div className="col-md-12 ">
 			{/* <div className="row mt-5 text-center planning-height "> */}
-
-			<div className={`${styles.planningheight} popup-btn col-md-12 row align-items-center justify-content-center`}>
-				<div className="col d-flex justify-content-end mx-5">
+			<div className='col-md-12 px-0'>
+					<h1 className=" mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-mediun-24">My Planning</h1>
+					</div>
+			<div className={`${styles.planningheight} popup-btn col-md-12 row align-items-center justify-content-center m-0`}>
+				<div className="col-md-6 d-flex justify-content-end px-5">
 				<Link href={'/planning/add/' + unique_key}>
 					<button style={{background: '#4C4D550F', width: '200px', height: '200px'}} type="button " className="btn-lg border-0 ">
 						
@@ -28,7 +30,7 @@ function Add_manage_planning(props) {
 					</button>
 					</Link>
 				</div>
-				<div className="col d-flex justify-content-start mx-5">
+				<div className="col-md-6 d-flex justify-content-start px-5">
 				<Link href={'/manage-planning/weekly'}>
 					<button style={{background: '#4C4D550F', width: '200px', height: '200px'}} type="button" className="btn-lg border-0">
 					<div><img style={{width: '100px'}} src="/manageplanning.png" className="mt-2 mb-3" />
@@ -40,8 +42,8 @@ function Add_manage_planning(props) {
 				</div>
 			</div>
 			<div className="">
-				<button type="button" style={{background: 'none'}} className="btn-lg border-0 text-secondary  " onClick={() => backToDashboard()}>
-					<span className='border-bottom border-3'>Back</span>
+				<button type="button" style={{background: 'none'}} className="btn  btn-block px-0 " onClick={() => backToDashboard()}>
+					<span className='bg-white  back-btn-text'>BACK</span>
 				</button>
 			</div>
 		</div>

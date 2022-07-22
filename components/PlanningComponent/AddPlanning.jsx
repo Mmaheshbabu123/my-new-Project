@@ -274,7 +274,7 @@ function Planning(props) {
 								onClick={showPopup}
 								// onClick={() => setShowproject(true)}
 								type="button"
-								className=" btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center"
+								className=" btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln"
 							>
 								<span style={{ fontSize: '24px' }} className="">
 									+
@@ -383,7 +383,7 @@ function Planning(props) {
 					<div className="col-md-6 p-0">
 						<button
 							type="submit"
-							className="btn btn-secondary rounded-0  custom-btn px-3  btn-block float-end"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end"
 							onClick={() => {
 								setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
 							}}

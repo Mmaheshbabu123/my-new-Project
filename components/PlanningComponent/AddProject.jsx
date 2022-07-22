@@ -240,8 +240,13 @@ function Addproject(props) {
 					<div className="modal-dialog custom-modal-width-85 modal-xl ">
 					{/* <div className="modal-dialog  modal-xl "> */}
 						<div className="modal-content  ">
-							<div className="modal-header mx-4 px-0">
-								<div className='col-md-10 px-3'><p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-5">Add project</p></div>
+							{/* <div className="modal-header mx-4 px-0"> */}
+							<div className='modal-header col-md-11 m-auto px-0'>
+								{/* <div className='col-md-10 px-3'> */}
+								<div className='col-md-10'>
+									{/* <p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-5">Add project</p> */}
+									<p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-4">Add project</p>
+									</div>
 								<button
 									type="button"
 									className="btn-close"
