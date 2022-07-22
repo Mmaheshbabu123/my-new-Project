@@ -7,7 +7,6 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 const Invoicing = (props) => {
   const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_6_action}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
   const { tab_6,tab_2,tab_3} = state;
-  console.log(tab_6);
   const PersonId = 1;
   useEffect(()=>{
   if(!state.loadedTabs.includes(selectedTabId))
@@ -21,9 +20,6 @@ const Invoicing = (props) => {
 
   let apiData = Object.keys(data['tab_6']).length ? data['tab_6'] : 0;
   tab_6_action = apiData === 0 ? 1 :2;
-  console.log(tab_6_action)
-  console.log(state)
-  console.log(apiData)
   if(apiData) {
   tab_6 = {...apiData,...tab_6}
 }else {
@@ -31,7 +27,7 @@ const Invoicing = (props) => {
 
 }
 
-  updateStateChanges({tab_6,tab_6_action})
+  updateStateChanges({tab_6,tab_6_action,loadedTabs:[...state.loadedTabs, selectedTabId]})
   }
  const prefillFieldsDefault = (tab_6,tab_2,tab_3) =>{
 

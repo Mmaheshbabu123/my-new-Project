@@ -16,19 +16,19 @@ export const comapanyRow2 = [
 ];
 
 export const legalAdressRow1 = [
-  {id:11,key_name:'Legal address: street'},
-  {id:14,key_name:'Legal address: postal code'},
-  {id:16,key_name:'Legal address: country'},
-  {id:17,key_name:'Legal address: phone number'},
-  {id:19,key_name:'Legal address: email'},
-  {id:21,key_name:'Browsers'},
+  {id:11,key_name:'Legal address: street',type:1},
+  {id:14,key_name:'Legal address: postal code',type:1},
+  {id:16,key_name:'Legal address: country',type:8},
+  {id:17,key_name:'Legal address: phone number',type:1},
+  {id:19,key_name:'Legal address: email',type:1},
+  {id:21,key_name:'Browsers',type:1},
 
 ];
 
 export const legalAdressRow2 = [
-  {id:12,key_name:'Legal address: house number'},
-  {id:13,key_name:'Legal address: box'},
-  {id:15,key_name:'Legal address: city'},
-  {id:18,key_name:'Legal address: fax number'},
-  {id:20,key_name:'Website'},
+  {id:12,key_name:'Legal address: house number',type:1},
+  {id:13,key_name:'Legal address: box',type:1},
+  {id:15,key_name:'Legal address: city',type:1},
+  {id:18,key_name:'Legal address: fax number',type:1},
+  {id:20,key_name:'Website',type:1},
 ];

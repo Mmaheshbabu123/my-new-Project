@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import styles from './AbsoluteYouAgent/absoluteAgent.module.css';
 import { APICALL } from '@/Services/ApiServices';
+import { getDefaultOptionsData } from '@/Services/ApiEndPoints'
 import { submitService } from './submitService';
 import {
   saveCooperationDataTabWise
@@ -27,7 +28,7 @@ import SalaryBenefitsMain  from './SalaryBenefits/organisms/SalaryBenefitsMain';
 
 
 const TabIndex = (props) => {
-	const { state: { selectedTabId }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+	const { state: { selectedTabId ,renderedOptions }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
 
 	/**
@@ -60,6 +61,23 @@ const TabIndex = (props) => {
     }
     return component || <> {`Selected tab id: ${selectedTabId}`} </>;
   }
+useEffect(()=>{
+  if(!state.renderedOptions) {
+    loadData();
+  }
+},[])
+const loadData = async () => {
+ let data = [];
+ let defaultOptions = {...state['defaultOptions']};
+
+  await APICALL.service(getDefaultOptionsData, 'GET').then(response => {
+    if (response.status === 200)
+      data = response.data || {};
+      defaultOptions['countrylist'] = data['countrylist'];
+      updateStateChanges({defaultOptions,renderedOptions:1})
+  }).catch((error) => console.log(error) )
+
+}
 
   const forWardToNextStepTab = async () => {
     let proceed = submitService.proceedToNextStepTab({state, selectedTabId, updateStateChanges});
