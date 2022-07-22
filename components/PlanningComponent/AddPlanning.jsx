@@ -91,10 +91,13 @@ function Planning(props) {
 							data1.p_unique_key = p_unique_key;
 
 							setData(data1);
-							if(result.data[0].length == 1 && result.data[1].length == 1 && result.data[1].length == 1){
+							if (
+								result.data[0].length == 1 &&
+								result.data[1].length == 1 &&
+								result.data[1].length == 1
+							) {
 								postData(data);
 							}
-
 						}
 					})
 					.catch((error) => {
@@ -173,7 +176,7 @@ function Planning(props) {
 		() => {
 			APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
 				if (result && result.data.length > 0) {
-					var res = result.data[0];
+					var res = data;
 					res.id = result.data[0].id;
 					res.p_unique_key = result.data[0].p_unique_key;
 					res.comp_id = result.data[0].comp_id;
@@ -228,24 +231,23 @@ function Planning(props) {
 		var valid_res = validate(data);
 		if (valid_res) {
 			postData();
-			
 		}
 	};
 
-	let postData = () =>{
+	let postData = () => {
 		APICALL.service(addPlanning, 'POST', data)
-				.then((result) => {
+			.then((result) => {
+				console.log(result);
+				if (result.status === 200) {
+					router.push('/planning/employees/' + router.query.p_unique_key);
+				} else {
 					console.log(result);
-					if (result.status === 200) {
-						router.push('/planning/employees/' + router.query.p_unique_key);
-					} else {
-						console.log(result);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-	}
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};
 
 	//VALIDATE FORM //
 	let validate = (res) => {
@@ -299,7 +301,7 @@ function Planning(props) {
 			updateCostCenter(result.value);
 		}
 	};
-	let updateCostCenter = (loc_id) =>{
+	let updateCostCenter = (loc_id) => {
 		let counter = 0;
 		costcenter.map((loc) => {
 			if (loc.location_id == loc_id) counter++;
@@ -312,8 +314,7 @@ function Planning(props) {
 				setData((prev) => ({ ...prev, cost_center_id: result.value }));
 			}
 		}
-
-	}
+	};
 
 	return (
 		<div className="col-md-12">
