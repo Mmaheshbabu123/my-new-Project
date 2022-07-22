@@ -20,6 +20,16 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui';
 
 function EmployeeMonthlyPlanning(props) {
+	/**
+	 * View more functionality
+	 */
+	const [ items, setItems ] = useState([]);
+	const [ visible, setVisible ] = useState(3);
+
+	const viewMoreItems = () => {
+		setVisible((prevValue) => prevValue + 3);
+	};
+
 	// const [ data, setData ] = useState();
 	/**
 	 * FETCHING EMPLOYEE ID
@@ -233,7 +243,7 @@ function EmployeeMonthlyPlanning(props) {
 							</tr>
 						</thead>
 						<tbody>
-							{data.map((result) => (
+							{data.slice(0, visible).map((result) => (
 								<tr className="border-bottom  border-info" key={result.title}>
 									<td className="border-end  border-info">{result.Date}</td>
 									<td className="border-end  border-info">{result.startTime}</td>
@@ -254,11 +264,10 @@ function EmployeeMonthlyPlanning(props) {
 					</table>
 				</div>
 				<div className="text-end mb-3">
-					<Link href="/">
-						<a className="link-primary">
-							View more<AiOutlineArrowRight />
-						</a>
-					</Link>
+					<button type="button" className="btn btn-link text-decoration-none" onClick={viewMoreItems}>
+						View more
+						<AiOutlineArrowRight />
+					</button>
 				</div>
 			</div>
 
