@@ -14,7 +14,7 @@ import { validate } from 'uuid';
 const AddFunction = () => {
 	const router = useRouter();
 	const salaryref = useRef(null);
-	const [ ischecked, setChecked ] = useState(true);
+	const [ ischecked, setChecked ] = useState(false);
 	const [ Data, setData ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
 	const [ functions, setFunctions ] = useState([]);
@@ -24,14 +24,11 @@ const AddFunction = () => {
 	//employee id,employee type id
 	const [ functionselected, setFunctionSelected ] = useState();
 	const [ fulllist, setFulllist ] = useState();
-	const [ listtype, setListtype ] = useState();
 	const [ selectedOption, setSelectedOption ] = useState([]);
 	const [ employeeobject, setEmployeeObject ] = useState([]);
 	const [ storeddata, setStoredData ] = useState([]);
-	const [ funcChanged, setFuncChanged ] = useState(false);
-	const [ salaryerror, setSalaryError ] = useState();
 	const [ errcount, seterrcount ] = useState(0);
-	const [ submitclick, setSubmitClick ] = useState(false);
+	const [ dradio,setdradio]=useState(true);
 
 	useEffect(
 		() => {
@@ -60,8 +57,6 @@ const AddFunction = () => {
 						setFunctions(functionsdata);
 						getOptions(functionsdata);
 					}
-
-					
 				})
 				.catch((error) => {
 					console.error(error);
@@ -70,9 +65,39 @@ const AddFunction = () => {
 		[ router.query ]
 	);
 
+	useEffect(
+		()=>{
+			if(storeddata!=undefined){
+			assignStoredtoEmployeeObject(storeddata);
+			}
+		},[storeddata]
+	);
+
+	function assignStoredtoEmployeeObject(storage){
+		//functionid
+		//salary
+		var object = [...employeeobject];
+		if (object != undefined) {
+			
+			object.map((element,key) => {
+				if (element.employeeid == storage[key].emp_id) {
+					object[key].functionid=storage[key].function_id
+					object[key].salary=storage[key].salary
+				}
+
+		});
+		
+		if(object.length!=0){
+		setEmployeeObject(object);
+		}
+		}
+		}
+
 	function storedDataAssigning(sdata) {
 		setStoredData(sdata);
-		console.log(sdata);
+		// if(sdata.length!=0){
+		// 	assignStoredtoEmployeeObject(sdata);
+		// }
 	}
 
 	function ercount(v) {
@@ -89,7 +114,9 @@ const AddFunction = () => {
 				var obj = {
 					employeeid: element[4],
 					functionid: '',
+					functionsalary:'',
 					salary: '',
+					radioactive:true,
 					employeetypeid: '',
 					salaryerror: '',
 					employeeiderror: '',
@@ -117,11 +144,11 @@ const AddFunction = () => {
 				v++;
 			}
 
-			if (value.salary == '' || value.salary == null || value.salary == 'This field is required.') {
+			if (value.functionsalary == '' || value.functionsalary == null || value.functionsalary == 'This field is required.') {
 				sal= 'This field is invalid.';
 				v++;
 			}else{
-				if(value.salary<Number(salaries)){
+				if(value.salary<value.functionsalary){
 					sal= 'This field is invalid.';
 					v++;
 				}
@@ -170,16 +197,6 @@ const AddFunction = () => {
 	function updatingObjectTypeid(empid, emptype) {
 		console.log(emptype)
 		var objects = [ ...employeeobject ];
-		// var data1 = [...storeddata];
-		// data1.map((val,key)=>{
-		// 	if(val.emp_id == empid){
-		// 		console.log(data1[key].emp_type);
-		// 		data1[key].emp_type = emptype;
-		// 	}
-			
-		// });
-		// setStoredData(data1);
-		
 
 		if (objects != undefined) {
 			const newState = objects.map((element) => {
@@ -189,6 +206,35 @@ const AddFunction = () => {
 				return element;
 			});
 			setEmployeeObject(newState);
+		}
+		console.log(employeeobject);
+	}
+
+ function updatingObjectradiobutton(empid,status) {
+		var object = [...employeeobject];
+		if (object != undefined) {
+			object.map((element,key) => {
+				if (element.employeeid == empid) {
+				object[key].radioactive = status
+				}
+		});
+			
+		setEmployeeObject(object);
+
+		}
+	}
+
+	function updatingObjectfunctionSlary(empid, salary) {
+		var objects = employeeobject;
+		if (objects != undefined) {
+			 objects.map((element,key) => {
+				//if (empid != 0) {
+					if (element.employeeid == empid) {
+						objects[key].functionsalary= Number(salary) ;
+					}
+				//}
+			});
+			setEmployeeObject(objects);
 		}
 		console.log(employeeobject);
 	}
@@ -206,25 +252,24 @@ const AddFunction = () => {
 			});
 			setEmployeeObject(newState);
 		}
-		console.log(employeeobject);
+		//console.log(employeeobject);
 	}
 
-	function updatingObjectFunction(empid, funcid) {
-		var objects = employeeobject;
+	function updatingObjectFunction(empiD, funcid) {
+		//functionsalary
+		var objects = [...employeeobject];
 		if (objects != undefined) {
-			const newState = objects.map((element) => {
-				if (empid != 0) {
-					if (element.employeeid == empid) {
-						return { ...element, functionid: funcid };
+			objects.map((element,key) => {
+				if (empiD != 0) {
+					if (element.employeeid == empiD) {
+						objects[key].functionid=funcid ;
 					}
 				} else {
-					return { ...element, functionid: funcid };
+					objects[key].functionid=funcid ;
 				}
-				return element;
 			});
-			setEmployeeObject(newState);
+			setEmployeeObject(objects);
 		}
-		console.log(employeeobject);
 	}
 
 	function setsaalary(empid, e) {
@@ -258,7 +303,7 @@ const AddFunction = () => {
 	};
 
 	let updateRes = (event, key) => {
-		setFuncChanged(true);
+		//setFuncChanged(true);
 		var res1 = [ ...functions ];
 		res1.map((val, k) => {
 			if (k == key) {
@@ -275,36 +320,45 @@ const AddFunction = () => {
 		router.push('/planning/employees/' + p_unique_key);
 	};
 
-	const empid = (parameter = 0, error = '') => {
+	const radioButn= (val)=>{
+		setdradio(val);
+	}
+
+
+	const empid = (parameter = 0, error = '',val) => {
+	//	console.log(val);
 		if (error == '' && employeeobject[0] != undefined) {
 			error = employeeobject[0].functioniderror;
 		}
-
-		console.log((storeddata[0]!=undefined)?storeddata[0].functionid:'em rale');
+			var group='';
 		var func = (
 			<div className="row ms-6">
 				<ul>
 					{functions != null ? (
 						functions.slice(0, 4).map((key, value) => (
 							<div key={key['id']} className="row ms-5">
+								
+							<div style={{visibility:'hidden'}}>{(value==0)?group =(!ischecked)?parameter+'function':'function':''}</div>
 								<div className="col-md-6">
-									{/* {console.log(key)} */}
 									<div
 										className="mt-2 mb-2 bg-light h-75 p-3"
 										defaultValue={prefill(key['id'])}
 										onChange={() => {
 											updateValue(parameter, key['id'], 1);
-											console.log(key['id']);
 											setSalaries(key['salary']);
+											updatingObjectfunctionSlary(parameter,key['salary']);
+											updatingObjectSlary(parameter,Number(key['salary']));
 										}}
 									>
 										{value < 3 ? (
 											<input
 												type="radio"
 												value={key['id']}
-												name={'functions'}
+												name={group}
 												className="p-3"
-												checked={key['funct_checked'] == key['id'] ? true : false}
+												onClick={()=>updatingObjectradiobutton(parameter,true)}
+												checked={(key['id']==storeddata[val].function_id)?true:false}
+											//	checked={key['funct_checked'] == key['id'] ? true : false}
 												onChange={(e) => {
 													updateRes(e, value);
 												}}
@@ -317,26 +371,28 @@ const AddFunction = () => {
 											<div>
 												<input
 													type="radio"
-													value={'select a function from drop down'}
+													value={'finaldrop'}
 													style={{display:'inline-block !important'}}
-													name={'functions'}
+													name={group}
+													onClick={()=>updatingObjectradiobutton(parameter,false)}
 													className="p-3 d-inline"
 												/>
 												<div  className="ps-2 w-75" style={{display:'inline-block'}}>
 												<Select
 													placeholder={<div>Function</div>}
-													
-													//value={selectedOption}
+													isDisabled={(employeeobject[val]!=undefined)?(employeeobject[val].radioactive)?true:false:''}
+													//value='finaldrop'
 													name="employefunctionsall"
 													options={fulllist}
 													onChange={setFunctionSelected}
+													//updatingObjectfunctionSlary(parameter,Number(key['salary'])
 													onInputChange={() => {
 														if (functionselected != undefined) {
 															updateValue(parameter, functionselected.value, 1);
-														}
-														if (functionselected != undefined) {
 															setSalaries(functionselected.salary);
+															updatingObjectfunctionSlary(parameter,functionselected.salary);
 														}
+														
 													}}
 												/>
 												</div>
@@ -346,16 +402,19 @@ const AddFunction = () => {
 												<input
 													type="radio"
 													style={{display:'inline-block'}}
-													value={key['id']}
-													name="functions"
+													value='finaldrop'
+													onClick={()=>updatingObjectradiobutton(parameter,false)}
+													name={group}
 													className="p-3 "
 												/>
 												<div  className="ps-2 w-75" style={{display:'inline-block'}}>
+													{(employeeobject[val]!=undefined)?console.log(employeeobject[val]):''}
 												<Select
+													isDisabled={(employeeobject[val].radioactive)?true:false}
 													placeholder={<div>Function</div>}
 													style={{display:'inline-block !important'}}
-													//value={selectedOption}
-													name="employefunctionsall"
+													//value='finaldrop'
+													name='employefunctionsall'
 													options={fulllist}
 													onChange={setFunctionSelected}
 													onInputChange={() => {
@@ -365,6 +424,7 @@ const AddFunction = () => {
 														if (functionselected != undefined) {
 															setSalaries(functionselected.salary);
 														}
+														updatingObjectfunctionSlary(parameter,functionselected.salary)
 													}}
 												/>
 												</div>
@@ -385,7 +445,7 @@ const AddFunction = () => {
 		);
 
 		return func;
-	};
+}
 
 	const getOptions = (res) => {
 		var options = [];
@@ -442,6 +502,7 @@ const AddFunction = () => {
 					</div>
 				</div>
 				<div className="row ">
+					{console.log(storeddata)}
 					<ol type="1">
 						{Data.map((key, value) => (
 							<div key={value}>
@@ -466,24 +527,23 @@ const AddFunction = () => {
 										) : (
 											''
 										)}
-										{console.log(selectedOption)}
 										{<p style={{ color: 'red',paddingTop: '5px' }}>{employeeobject[value].employeeiderror}</p>}
 									</div>
 									<div className="col-md-2 bg-light mb-2">
 										<span className="p-1">
 											{ischecked ? salaries != undefined && salaries != '' ? (
-												'€' + salaries
+												'€' + employeeobject[value].functionsalary
 											) : (
 												''
 											) : employeeobject[value].functionid != '' ? (
-												'€' + salaries
+												'€' + employeeobject[value].functionsalary
 											) : (
 												''
 											)}
 										</span>
 									</div>
 									<div className="col-md-2">
-										{employeeobject[value].functionid != '' ? (
+										{(employeeobject[value].functionid != '' )? (
 											<div>
 																		<div className="input-group">
 
@@ -505,7 +565,7 @@ const AddFunction = () => {
 										)}
 									</div>
 								</div>
-								{!ischecked ? empid(key[4], employeeobject[value].functioniderror) : ''}
+								{!ischecked ? empid(key[4], employeeobject[value].functioniderror,value) : ''}
 							</div>
 						))}
 					</ol>
