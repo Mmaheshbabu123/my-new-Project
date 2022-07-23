@@ -1,4 +1,4 @@
-import React, {useContext } from 'react';
+import React, {useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import styles from './AbsoluteYouAgent/absoluteAgent.module.css';
@@ -19,13 +19,13 @@ import AbsoluteYouAgent from './AbsoluteYouAgent/organisms/AbsoluteYouAgent';
 import CompanyInformation from './CompanyInformation/organisms/CompanyInformation';
 import OnlineDetails  from './OnlineDetails/organisms/OnlineDetails';
 import ContactPersons from './ContactPersons/organisms/ContactPersons';
-import Invoicing from './Invoicing/organisms/Invoicing';
 import SalaryBenefitsMain  from './SalaryBenefits/organisms/SalaryBenefitsMain';
+import Invoicing from './Invoicing/organisms/Invoicing';
 //----
 
 
 const TabIndex = (props) => {
-	const { state: { selectedTabId ,renderedOptions }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+	const { state: { selectedTabId ,renderedOptions, filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
 
 	/**
@@ -84,15 +84,15 @@ const loadData = async () => {
       {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields. </p> : null}
       {showComponentBasedOnTabSelection()}
       <div className={`col-md-12 row`} >
-          <div className={`col-md-9 ${styles['tab-index-back-div']}`}>
+          <div className={`col-md-7 ${styles['tab-index-back-div']}`}>
             <p className={`${styles['tab-index-back-btn']}`} onClick={() => router.back()}> Back </p>
           </div>
-          <div className={`col-md-3 text-end`}>
-            <button onClick={() => forWardToNextStepTab(1)} type="button" className="btn btn-dark pcp_btn">
-              {'Save as draft'}
+          <div className={`col-md-5 text-end`}>
+            <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab(1)} type="button" className="btn btn-dark pcp_btn">
+              <span className="sv-save-btn-text_1 spinner-border-sm me-2"></span>{'Save as draft'}
             </button>
-            <button onClick={() => forWardToNextStepTab()} type="button" className="btn btn-dark pcp_btn">
-              {selectedTabId === INVOIING_TAB ? 'Save' : 'Next'}
+            <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab()} type="button" className="btn btn-dark pcp_btn">
+              <span className="sv-save-btn-text_0 spinner-border-sm me-2"></span>{selectedTabId === INVOIING_TAB ? 'Save' : 'Next'}
             </button>
           </div>
       </div>

@@ -320,10 +320,19 @@ function checkRequiredContractPersons(tab_data,tab_key,selectPersonId) {
 
 
 
-
 //--------------------------- SAVE/---FORWARD-TO-NEXT-STEP--/--SAVE AS DRAFT METHOD-----////
 
+/**
+ * [forWardToNextStepTab used for validation and saving cooperation data]
+ * @param  {Object} router                      [description]
+ * @param  {Object} contextState                [description]
+ * @param  {Method reference} contextUpdate     [description]
+ * @param  {int} currentTab                     [description]
+ * @param  {int} draft                          [description]
+ * @return {void}                               [description]
+ */
 async function forWardToNextStepTab(router, contextState, contextUpdate, currentTab, draft) {
+  addRemoveLoadedClass(1, draft);
   stateObj = contextState;
   selectedTabId = currentTab;
   updateStateChanges = contextUpdate;
@@ -343,7 +352,7 @@ async function forWardToNextStepTab(router, contextState, contextUpdate, current
           obj['root_parent_id']= response.data;
           router.query.root_parent_id = obj['root_parent_id'];
         }
-        if(selectedTabId === INVOIING_TAB) {
+        if(selectedTabId === INVOIING_TAB || draft === 1) {
           router.push('/manage-cooperation-overview?type=sales_agent&id=1')
         } else {
           router.query.selectedTabId = nextTab;
@@ -359,6 +368,7 @@ async function forWardToNextStepTab(router, contextState, contextUpdate, current
   } else {
     updateStateChanges({proceedToNextTabWarning: true});
   }
+  addRemoveLoadedClass(0, draft);
 }
 
 /**
@@ -375,6 +385,10 @@ async function saveDataTabWise(url) {
   return apiResponse;
 }
 
+/**
+ * [getTabRelatedData description]
+ * @return {Object} [description]
+ */
 function getTabRelatedData() {
   return {
     root_parent_id: stateObj.root_parent_id || 0,
@@ -388,7 +402,10 @@ function getTabRelatedData() {
 }
 
 
-
+/**
+ * [getTabWisePostData description]
+ * @return {[Object]} [description]
+ */
 function getTabWisePostData() {
   let data = {}
   switch (selectedTabId) {
@@ -416,5 +433,14 @@ function getTabWisePostData() {
   return data;
 }
 
-//---------------------------
-//---------------------------
+/**
+ * [addRemoveLoadedClass description]
+ * @param {Number} [add=1]  [description]
+ */
+function addRemoveLoadedClass(add = 1, draft = 0) {
+  document.querySelectorAll(`.sv-save-btn-text_${draft}`).forEach(el =>
+    add ? el.classList.add("spinner-border") : el.classList.remove("spinner-border")
+  );
+}
+
+//---------------------------//---------------------------//---------------------------//---------------------------
