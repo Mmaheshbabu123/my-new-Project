@@ -184,6 +184,12 @@ body {
     font-weight: 500;
     font-size: var(--font-size-xxxl);
 }
+.bitter-italic-normal-mediun-20 {
+    color: var(--color-purple);
+    font-family: var(--font-family-bitter-italic-normal-medium);
+    font-weight: 500;
+    font-size: var(--font-size-xl);
+}
 .poppins-regular-14px {
     color: var(--color-label-footer-gray);
     font-family: var(--font-family-poppins-regular);
@@ -643,4 +649,25 @@ background-color: var(--color-label-footer-gray);
 }
 input {
     font-family: var(--font-family-poppins-light);
+}
+.btn-bg-gray-medium {
+   background-color: var(--bg-grey-medium);
+   color: var(--color-label-footer-gray);
+   font-size: var(--font-size-l);
+}
+.select-bg-gray {
+    background-color: var(--bg-grey-medium);
+    color: var(--color-label-footer-gray);
+   font-size: var(--font-size-m);
+}
+.color-skyblue {
+    color: var(--color-skyblue);
+    font-size: 20px;
+}
+.font-poppins-light {
+    font-family: var(--font-family-poppins-light);
+    font-size: var(--font-size-small);
+}
+.table-border-gray {
+    border: apx solid var(--bg-gray-dark);
 }

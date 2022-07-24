@@ -74,8 +74,6 @@ const AddFunction = () => {
 	);
 
 	function assignStoredtoEmployeeObject(storage){
-		//functionid
-		//salary
 		var object = [...employeeobject];
 		if (object != undefined) {
 			
@@ -83,6 +81,8 @@ const AddFunction = () => {
 				if (element.employeeid == storage[key].emp_id) {
 					object[key].functionid=storage[key].function_id
 					object[key].salary=storage[key].salary
+					object[key].functionsalary=storage[key].function_slary
+					object[key].employeetypeid=storage[key].emp_type
 				}
 
 		});
@@ -94,6 +94,7 @@ const AddFunction = () => {
 		}
 
 	function storedDataAssigning(sdata) {
+		console.log(sdata)
 		setStoredData(sdata);
 		// if(sdata.length!=0){
 		// 	assignStoredtoEmployeeObject(sdata);
@@ -292,6 +293,7 @@ const AddFunction = () => {
 
 	function checkbox() {
 		setChecked(!ischecked);
+		emptyemployeeData();
 	}
 
 	const prefill = (Value) => {
@@ -324,8 +326,20 @@ const AddFunction = () => {
 		setdradio(val);
 	}
 
+	function updateStoredfunction(empiD,functionid){
+		var objects = [...storeddata];
+		if (objects != undefined) {
+			objects.map((element,key) => {
+					if (element.emp_id == empiD) {
+						objects[key].function_id=functionid;
+					}
+			});
+			setStoredData(objects);
+		}
 
-	const empid = (parameter = 0, error = '',val) => {
+	}
+	
+	const empid = (parameter = 0, error = '',val=0) => {
 	//	console.log(val);
 		if (error == '' && employeeobject[0] != undefined) {
 			error = employeeobject[0].functioniderror;
@@ -344,10 +358,11 @@ const AddFunction = () => {
 										className="mt-2 mb-2 bg-light h-75 p-3"
 										defaultValue={prefill(key['id'])}
 										onChange={() => {
-											updateValue(parameter, key['id'], 1);
-											setSalaries(key['salary']);
-											updatingObjectfunctionSlary(parameter,key['salary']);
-											updatingObjectSlary(parameter,Number(key['salary']));
+											(value<3)?(
+											updateValue(parameter, key['id'], 1),
+											setSalaries(key['salary']),
+											updatingObjectfunctionSlary(parameter,key['salary']),
+											updatingObjectSlary(parameter,Number(key['salary']))):'';
 										}}
 									>
 										{value < 3 ? (
@@ -357,7 +372,7 @@ const AddFunction = () => {
 												value={key['id']}
 												name={group}
 												className="p-3"
-												onClick={()=>updatingObjectradiobutton(parameter,true)}
+												onClick={()=>{updatingObjectradiobutton(parameter,true);updateStoredfunction(parameter,key['id']);}}
 												checked={(key['id']==storeddata[val].function_id)?true:false}
 											//	checked={key['funct_checked'] == key['id'] ? true : false}
 												onChange={(e) => {
@@ -375,16 +390,18 @@ const AddFunction = () => {
 													value={'finaldrop'}
 													style={{display:'inline-block !important'}}
 													name={group}
-													onClick={()=>updatingObjectradiobutton(parameter,false)}
+													checked={(key['id']==storeddata[val].function_id)?(true):false}
+													onClick={()=>{updatingObjectradiobutton(parameter,false);updateStoredfunction(parameter,key['id']);}}
 													className="p-3 d-inline"
 												/>
 												<div  className="ps-2 w-75" style={{display:'inline-block'}}>
 												<Select
 													placeholder={<div>Function</div>}
-													isDisabled={(employeeobject[val]!=undefined)?(employeeobject[val].radioactive)?true:false:''}
+													isDisabled={(employeeobject[val]!=undefined)?(employeeobject[val].radioactive && (!(key['id']==storeddata[val].function_id)))?true:false:''}
 													//value='finaldrop'
 													name="employefunctionsall"
 													options={fulllist}
+													defaultValue={(key['id']==storeddata[val].function_id)?dropfunctionupdate(storeddata[val].function_id):''}
 													onChange={setFunctionSelected}
 													//updatingObjectfunctionSlary(parameter,Number(key['salary'])
 													onInputChange={() => {
@@ -417,6 +434,7 @@ const AddFunction = () => {
 													//value='finaldrop'
 													name='employefunctionsall'
 													options={fulllist}
+													defaultValue={employeTypeSelection(storeddata[value])}
 													onChange={setFunctionSelected}
 													onInputChange={() => {
 														if (functionselected != undefined) {
@@ -474,18 +492,60 @@ const AddFunction = () => {
 	// }
 
 	const employeTypeSelection = (val) => {
+		console.log(val);
+		// if(val==undefined){
+		// 	val=val[0];
+		// }
 		var op = '';
 		emptypes.forEach((element) => {
+			if(val!=undefined){
 			if (element['value'] == val.emp_type) {
 				op = element;
+			}}else{
+
 			}
 		});
 		// setit(op);
 		return op;
 	};
-	let updatestoredata = (key,val) => {
 
-		console.log(val);
+	const dropfunctionupdate=(val)=>{
+		var op = '';
+		fulllist.forEach((element) => {
+			if (element['value'] == val) {
+				op = element;
+			}
+		});
+
+		// var objects = [...storeddata];
+		// if (objects != undefined) {
+		// 	objects.map((element,key) => {
+		// 			if (element.functionid == val) {
+		// 				objects[key].radioactive=true;
+		// 			}
+		// 	});
+		// 	setStoredData(objects);
+		// }
+		return op;
+	}
+
+	let emptyemployeeData = () => {
+		var object = [...employeeobject];
+		if (object != undefined) {
+			
+			object.map((element,key) => {
+				//if (element.employeeid == storage[key].emp_id) {
+					object[key].functionid=''
+					object[key].salary=''
+					object[key].functionsalary=''
+				//}
+
+		});
+		
+		if(object.length!=0){
+		setEmployeeObject(object);
+		}
+		}
 	};
 
 	return (
@@ -496,7 +556,8 @@ const AddFunction = () => {
 						<p className="h1 mt-3 font-weight-bold  poppins-italic-24px">Add function</p>
 					</div>
 					<div className="form-check px-0 my-3">
-						<input type="checkbox" checked={ischecked} onChange={() => checkbox()} />
+						<input type="checkbox" checked={ischecked} onChange={() => checkbox()
+					} />
 						<label className="form-check-label p-1 " htmlFor="flexCheckChecked">
 							Same functions for all employees
 						</label>
@@ -553,6 +614,7 @@ const AddFunction = () => {
 													type="textfield"
 													name="salary"
 													placeholder="salary"
+													defaultValue={ storeddata[value].salary }
 													className="form-control bg-white"
 													onChange={(e) => setsaalary(key[4], e)}
 												/>
