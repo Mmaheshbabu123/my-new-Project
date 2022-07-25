@@ -21,6 +21,8 @@ const {
   tab_5,
   tab_6
 } = requiredFields;
+import { APICALL } from '@/Services/ApiServices';
+import { saveCooperationDataTabWise } from '@/Services/ApiEndPoints';
 
 export const submitService = {
   proceedToNextStepTab,
@@ -29,6 +31,7 @@ export const submitService = {
   onlineDetailsPostData,
   invoiceDetailsPostData,
   contractPersonsPostData,
+  forWardToNextStepTab
 }
 
 
@@ -36,10 +39,10 @@ let stateObj = {};
 let selectedTabKey;
 let validationStatus;
 let updateStateChanges;
+let selectedTabId = 1;
 
-function proceedToNextStepTab({ state, selectedTabId, ...props }) {
-  updateStateChanges = props.updateStateChanges;
-  stateObj = state || {};
+
+function proceedToNextStepTab() {
   selectedTabKey = selectedTabId || 0;
   validationStatus = true;
   switch (selectedTabKey) {
@@ -56,7 +59,7 @@ function proceedToNextStepTab({ state, selectedTabId, ...props }) {
       validationStatus = checkOnlineDetailsValidation(tab_4,'tab_4');
       break;
     case SALARY_BENEFITS_TAB:
-
+      validationStatus = true;
       break;
     case INVOIING_TAB:
       validationStatus = checkInvoiceValidation(tab_6,'tab_6');
@@ -313,3 +316,131 @@ function checkRequiredContractPersons(tab_data,tab_key,selectPersonId) {
 
   return tempStatus;
  }
+
+
+
+
+//--------------------------- SAVE/---FORWARD-TO-NEXT-STEP--/--SAVE AS DRAFT METHOD-----////
+
+/**
+ * [forWardToNextStepTab used for validation and saving cooperation data]
+ * @param  {Object} router                      [description]
+ * @param  {Object} contextState                [description]
+ * @param  {Method reference} contextUpdate     [description]
+ * @param  {int} currentTab                     [description]
+ * @param  {int} draft                          [description]
+ * @return {void}                               [description]
+ */
+async function forWardToNextStepTab(router, contextState, contextUpdate, currentTab, draft) {
+  addRemoveLoadedClass(1, draft);
+  stateObj = contextState;
+  selectedTabId = currentTab;
+  updateStateChanges = contextUpdate;
+
+  let proceed = draft === 1 ? true : proceedToNextStepTab();
+  if(proceed) {
+    await saveDataTabWise(saveCooperationDataTabWise).then((response) => {
+      if(response.status === 200) {
+        let nextTab = selectedTabId + 1;
+        let obj = {
+          selectedTabId: nextTab,
+          proceedToNextTabWarning: false,
+          filledTabs: [...stateObj.filledTabs, nextTab],
+          renderTabComponents: false,
+        }
+        if(selectedTabId === 1) {
+          obj['root_parent_id']= response.data;
+          router.query.root_parent_id = obj['root_parent_id'];
+        }
+        if(selectedTabId === INVOIING_TAB || draft === 1) {
+          router.push('/manage-cooperation-overview?type=sales_agent&id=1')
+        } else {
+          router.query.selectedTabId = nextTab;
+          router.push(router, undefined, { shallow: true })
+          updateStateChanges(obj);
+        }
+      } else {
+        console.error(response.msg);
+      }
+    }).catch(error => {
+      console.log(error);
+    })
+  } else {
+    updateStateChanges({proceedToNextTabWarning: true});
+  }
+  addRemoveLoadedClass(0, draft);
+}
+
+/**
+ * [saveDataTabWise description]
+ * @param  {String} url                 [description]
+ * @return {Object}       [description]
+ */
+async function saveDataTabWise(url) {
+  let apiResponse = '';
+  await APICALL.service(`${url}`, 'POST', getTabRelatedData())
+  .then(response => {
+    apiResponse = response;
+  })
+  return apiResponse;
+}
+
+/**
+ * [getTabRelatedData description]
+ * @return {Object} [description]
+ */
+function getTabRelatedData() {
+  return {
+    root_parent_id: stateObj.root_parent_id || 0,
+    tab_id: selectedTabId,
+    action:stateObj[`tab_${selectedTabId}_action`] || 1,
+    data: getTabWisePostData(),
+    element_status: stateObj['element_status'][`tab_${selectedTabId}`],
+    depedency_data_status:stateObj['dependecyDataStatus'],
+    salesAgentRefId: stateObj['salesAgentRefId']
+  }
+}
+
+
+/**
+ * [getTabWisePostData description]
+ * @return {[Object]} [description]
+ */
+function getTabWisePostData() {
+  let data = {}
+  switch (selectedTabId) {
+    case ABSOLUTEYOU_AGENT_TAB:
+      data = absoluteYouPostData(stateObj)
+      break;
+    case COMPANY_INFORMATION_TAB:
+      data = companyInformationPostData(stateObj,'tab_2');
+      break;
+    case CONTACT_PERSONS_TAB:
+      data =  contractPersonsPostData(stateObj,'tab_3');
+      break;
+    case ONLINE_DETAILS_TAB:
+      data = onlineDetailsPostData(stateObj,'tab_4');
+      break;
+    case SALARY_BENEFITS_TAB:
+      data = stateObj['tab_5'];
+      break;
+    case INVOIING_TAB:
+      data = invoiceDetailsPostData(stateObj,'tab_6');
+    break;
+    default:
+      data = {};
+  }
+  return data;
+}
+
+/**
+ * [addRemoveLoadedClass description]
+ * @param {Number} [add=1]  [description]
+ */
+function addRemoveLoadedClass(add = 1, draft = 0) {
+  document.querySelectorAll(`.sv-save-btn-text_${draft}`).forEach(el =>
+    add ? el.classList.add("spinner-border") : el.classList.remove("spinner-border")
+  );
+}
+
+//---------------------------//---------------------------//---------------------------//---------------------------

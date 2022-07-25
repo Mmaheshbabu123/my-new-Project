@@ -128,7 +128,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
                 <td>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found... </p>}
+            : <p style={{paddingTop: '10px'}}> No records </p>}
           </table>
       </div>
       <div>
