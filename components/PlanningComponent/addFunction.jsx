@@ -5,8 +5,8 @@ import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
-import { da, id } from 'date-fns/locale'
-import RadioField from '@/atoms/RadioField';;
+import { da, id } from 'date-fns/locale';
+import RadioField from '@/atoms/RadioField';
 import { max } from 'date-fns';
 import { data } from 'node_modules/autoprefixer/lib/autoprefixer';
 import { validate } from 'uuid';
@@ -28,25 +28,27 @@ const AddFunction = () => {
 	const [ employeeobject, setEmployeeObject ] = useState([]);
 	const [ storeddata, setStoredData ] = useState([]);
 	const [ errcount, seterrcount ] = useState(0);
-	const [ dradio,setdradio]=useState(true);
+	const [ dradio, setdradio ] = useState(true);
 
 	useEffect(
 		() => {
-			if (!router.isReady) return;
+			//if (!router.isReady) return;
 			var p_unique_key = router.query.p_unique_key;
 
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + p_unique_key, 'GET')
-				.then((result) => {
+				.then(async (result) => {
 					var data = result.data[0];
 					var sdata = result.data[2];
 					var employeetypes = result.data[3];
 					var functionsdata = result.data[1];
 					if (Data.length == 0) {
 						setData(data);
-						createAllObjects(data);
-					}
-					if (sdata.length != 0) {
-						storedDataAssigning(sdata);
+						//if (sdata.length != 0) {
+						//storedDataAssigning(sdata);
+						createAllObjects(data, sdata);
+						//    }else{
+						// 	createAllObjects(data);
+						//    }
 					}
 
 					if (employeetypes.length != 0) {
@@ -66,35 +68,35 @@ const AddFunction = () => {
 	);
 
 	useEffect(
-		()=>{
-			if(storeddata!=undefined){
-			assignStoredtoEmployeeObject(storeddata);
+		() => {
+			if (storeddata != undefined) {
+				assignStoredtoEmployeeObject(storeddata);
 			}
-		},[storeddata]
+		},
+		[ storeddata ]
 	);
 
-	function assignStoredtoEmployeeObject(storage){
-		var object = [...employeeobject];
+	function assignStoredtoEmployeeObject(storage) {
+		var object = [ ...employeeobject ];
 		if (object != undefined) {
-			
-			object.map((element,key) => {
-				if (element.employeeid == storage[key].emp_id) {
-					object[key].functionid=storage[key].function_id
-					object[key].salary=storage[key].salary
-					object[key].functionsalary=storage[key].function_slary
-					object[key].employeetypeid=storage[key].emp_type
+			object.map((element, key) => {
+				if (storage[key] != undefined) {
+					if (element.employeeid == storage[key].emp_id) {
+						object[key].functionid = storage[key].function_id;
+						object[key].salary = storage[key].salary;
+						object[key].functionsalary = storage[key].function_slary;
+						object[key].employeetypeid = storage[key].emp_type;
+					}
 				}
-
-		});
-		
-		if(object.length!=0){
-		setEmployeeObject(object);
+			});
+			if (object.length != 0) {
+				setEmployeeObject(object);
+			}
 		}
-		}
-		}
+	}
 
 	function storedDataAssigning(sdata) {
-		console.log(sdata)
+		console.log(sdata);
 		setStoredData(sdata);
 		// if(sdata.length!=0){
 		// 	assignStoredtoEmployeeObject(sdata);
@@ -109,24 +111,28 @@ const AddFunction = () => {
 		return false;
 	}
 
-	function createAllObjects(result) {
+	function createAllObjects(result, storage) {
 		if (result.length != 0 && employeeobject.length == 0) {
-			result.forEach((element) => {
+			result.forEach((element, val) => {
 				var obj = {
 					employeeid: element[4],
-					functionid: '',
-					functionsalary:'',
-					salary: '',
-					radioactive:true,
-					employeetypeid: '',
+					functionid: storage[val] != undefined ? storage[val].function_id : '',
+					functionsalary: storage[val] != undefined ? storage[val].function_slary : '',
+					salary: storage[val] != undefined ? storage[val].salary : '',
+					radioactive: true,
+					employeetypeid: storage[val] != undefined ? storage[val].emp_type : '',
 					salaryerror: '',
 					employeeiderror: '',
-					functioniderror: ''
+					functioniderror: '',
+					default:false
 				};
 				if (element[4] != null) {
 					setEmployeeObject((employeeobject) => [ ...employeeobject, obj ]);
 				}
 			});
+			// if(sdata.length!=0){
+			// 	assignStoredtoEmployeeObject(sdata);
+			// }
 		}
 	}
 
@@ -140,25 +146,41 @@ const AddFunction = () => {
 			let func,
 				sal,
 				emp = '';
-			if (value.functionid == '' || value.functionid == null || value.functionid == 'This field is required.') {
+
+			if (
+				value.functionid == '' ||
+				value.functionid == null ||
+				value.functionid == 'This field is required.' ||
+				value.functionid == 'finaldrop'
+			) {
 				func = 'This field is required.';
 				v++;
 			}
 
-			if (value.functionsalary == '' || value.functionsalary == null || value.functionsalary == 'This field is required.') {
-				sal= 'This field is invalid.';
-				v++;
-			}else{
-				if(value.salary<value.functionsalary){
-					sal= 'This field is invalid.';
+			// if(value.salary==''){
+			// 	console.log('its empty sathish');
+			// }
+			if (v == 0) {
+				if (
+					value.functionsalary == '' ||
+					value.functionsalary == null ||
+					value.functionsalary == 'This field is required.'
+				) {
+					//sal= 'This field is required.';
+					func = 'Please select the function';
 					v++;
+				} else {
+					if (value.salary < value.functionsalary) {
+						sal = 'This field is invalid.';
+						v++;
+					}
 				}
 			}
 
 			if (
 				value.employeetypeid == '' ||
 				value.employeetypeid == null ||
-				value.salary == 'This field is required.'
+				value.employeetypeid == 'This field is required.'
 			) {
 				emp = 'This field is required.';
 				v++;
@@ -196,7 +218,7 @@ const AddFunction = () => {
 	};
 
 	function updatingObjectTypeid(empid, emptype) {
-		console.log(emptype)
+		console.log(emptype);
 		var objects = [ ...employeeobject ];
 
 		if (objects != undefined) {
@@ -211,29 +233,36 @@ const AddFunction = () => {
 		console.log(employeeobject);
 	}
 
- function updatingObjectradiobutton(empid,status) {
-		var object = [...employeeobject];
+	function updatingObjectradiobutton(empid=0, status) {
+		var object = [ ...employeeobject ];
 		if (object != undefined) {
-			object.map((element,key) => {
+			object.map((element, key) => {
+				if(empid!=0){
 				if (element.employeeid == empid) {
-				object[key].radioactive = status
+					object[key].radioactive = status;
 				}
-		});
-			
-		setEmployeeObject(object);
+				}else{
+					object[key].radioactive=status;
+				}
+			});
 
+			setEmployeeObject(object);
 		}
 	}
 
-	function updatingObjectfunctionSlary(empid, salary) {
+	function updatingObjectfunctionSlary(empid=0, salary) {
 		var objects = employeeobject;
 		if (objects != undefined) {
-			 objects.map((element,key) => {
-				//if (empid != 0) {
-					if (element.employeeid == empid) {
-						objects[key].functionsalary= Number(salary) ;
-					}
-				//}
+			objects.map((element, key) => {
+				if (empid != 0) {
+				if (element.employeeid == empid) {
+					objects[key].functionsalary = Number(salary);
+					objects[key].salary = Number(salary);
+				}
+				}else{
+					objects[key].functionsalary = Number(salary);
+					objects[key].salary = Number(salary);
+				}
 			});
 			setEmployeeObject(objects);
 		}
@@ -256,17 +285,18 @@ const AddFunction = () => {
 		//console.log(employeeobject);
 	}
 
-	function updatingObjectFunction(empiD, funcid) {
+	function updatingObjectFunction(empiD=0, funcid) {
 		//functionsalary
-		var objects = [...employeeobject];
+		var objects = [ ...employeeobject ];
 		if (objects != undefined) {
-			objects.map((element,key) => {
+			objects.map((element, key) => {
 				if (empiD != 0) {
 					if (element.employeeid == empiD) {
-						objects[key].functionid=funcid ;
+						objects[key].functionid = funcid;
 					}
 				} else {
-					objects[key].functionid=funcid ;
+					console.log('yes');
+					objects[key].functionid = funcid;
 				}
 			});
 			setEmployeeObject(objects);
@@ -281,6 +311,7 @@ const AddFunction = () => {
 
 	function updateValue(empid, value, level) {
 		if (level == 1) {
+			console.log(value);
 			updatingObjectFunction(empid, value);
 		} else if (level == 2) {
 			updatingObjectTypeid(empid, value);
@@ -322,130 +353,224 @@ const AddFunction = () => {
 		router.push('/planning/employees/' + p_unique_key);
 	};
 
-	const radioButn= (val)=>{
+	const radioButn = (val) => {
 		setdradio(val);
+	};
+
+	// function updateStoredfunction(empiD, functionid) {
+	// 	var objects = [ ...storeddata ];
+	// 	if (objects != undefined) {
+	// 		objects.map((element, key) => {
+	// 			if (element.emp_id == empiD) {
+	// 				objects[key].function_id = functionid;
+	// 			}
+	// 		});
+	// 		setStoredData(objects);
+	// 	}
+	// }
+
+	function verifyfunctionid(val){  
+		let v=0;
+		console.log('reached here sathish');
+		functions.slice(4,functions.length).map((key,value)=>{
+			if(key['id']==val){
+				v++;
+			}
+		});
+		if(v>0){return true}else{false}
 	}
 
-	function updateStoredfunction(empiD,functionid){
-		var objects = [...storeddata];
-		if (objects != undefined) {
-			objects.map((element,key) => {
-					if (element.emp_id == empiD) {
-						objects[key].function_id=functionid;
-					}
-			});
-			setStoredData(objects);
-		}
-
-	}
-	
-	const empid = (parameter = 0, error = '',val=0) => {
-	//	console.log(val);
+	const empid = (parameter = 0, error = '', val = 0) => {
+			console.log(functions);
 		if (error == '' && employeeobject[0] != undefined) {
 			error = employeeobject[0].functioniderror;
 		}
-			var group='';
+		var group = '';
 		var func = (
 			<div className="row ms-6">
 				<ul>
 					{functions != null ? (
 						functions.slice(0, 4).map((key, value) => (
 							<div key={key['id']} className="row ms-5">
-								
-							<div style={{visibility:'hidden'}}>{(value==0)?group =(!ischecked)?parameter+'function':'function':''}</div>
+								<div style={{ visibility: 'hidden' }}>
+									{value == 0 ? (group = !ischecked ? parameter + 'function' : 'function') : ''}
+								</div>
 								<div className="col-md-6">
 									<div
 										className="mt-2 mb-2 bg-light h-75 p-3"
 										defaultValue={prefill(key['id'])}
 										onChange={() => {
-											(value<3)?(
-											updateValue(parameter, key['id'], 1),
-											setSalaries(key['salary']),
-											updatingObjectfunctionSlary(parameter,key['salary']),
-											updatingObjectSlary(parameter,Number(key['salary']))):'';
+											value < 3
+												? (updateValue(parameter, key['id'], 1),
+													setSalaries(key['salary']),
+													updatingObjectfunctionSlary(parameter, key['salary']),
+													updatingObjectSlary(parameter, Number(key['salary'])))
+												: '';
 										}}
 									>
 										{value < 3 ? (
-											
-											<span className='custom-radio-input'><input
-												type="radio"
-												value={key['id']}
-												name={group}
-												className="p-3"
-												onClick={()=>{updatingObjectradiobutton(parameter,true);updateStoredfunction(parameter,key['id']);}}
-												checked={(key['id']==storeddata[val].function_id)?true:false}
-											//	checked={key['funct_checked'] == key['id'] ? true : false}
-												onChange={(e) => {
-													updateRes(e, value);
-												}}
-											/></span>
+											<span className="custom-radio-input">
+												<input
+													type="radio"
+													value={key['id']}
+													name={group}
+													className="p-3"
+													onClick={() => {
+														updatingObjectradiobutton(parameter, true);
+														//	updateStoredfunction(parameter,key['id']);
+														updateValue(parameter, key['id'], 1);
+													}}
+													checked={employeeobject[val].functionid == key['id'] ? true : false}
+													//(storeddata[val]!=undefined)?(key['id']==storeddata[val].function_id)?true:false:""}
+													//	checked={key['funct_checked'] == key['id'] ? true : false}
+													onChange={(e) => {
+														updateRes(e, value);
+													}}
+												/>
+											</span>
 										) : (
 											''
 										)}
-										{value < 3 ? <span className='ps-2'>{key['name']}</span> : ''}
+										{value < 3 ? <span className="ps-2">{key['name']}</span> : ''}
 										{!ischecked && value == 3 ? (
 											<div>
 												<input
 													type="radio"
 													value={'finaldrop'}
-													style={{display:'inline-block !important'}}
+													style={{ display: 'inline-block !important' }}
 													name={group}
-													checked={(key['id']==storeddata[val].function_id)?(true):false}
-													onClick={()=>{updatingObjectradiobutton(parameter,false);updateStoredfunction(parameter,key['id']);}}
+													checked={verifyfunctionid(employeeobject[val].functionid)
+														// == key['id']||(employeeobject[val].functionid)
+														//? true : false
+													}
+													onClick={() => {
+														updatingObjectradiobutton(parameter, false);
+														updateValue(parameter, key['id'], 1);
+													}}
 													className="p-3 d-inline"
 												/>
-												<div  className="ps-2 w-75" style={{display:'inline-block'}}>
-												<Select
-													placeholder={<div>Function</div>}
-													isDisabled={(employeeobject[val]!=undefined)?(employeeobject[val].radioactive && (!(key['id']==storeddata[val].function_id)))?true:false:''}
-													//value='finaldrop'
-													name="employefunctionsall"
-													options={fulllist}
-													defaultValue={(key['id']==storeddata[val].function_id)?dropfunctionupdate(storeddata[val].function_id):''}
-													onChange={setFunctionSelected}
-													//updatingObjectfunctionSlary(parameter,Number(key['salary'])
-													onInputChange={() => {
-														if (functionselected != undefined) {
-															updateValue(parameter, functionselected.value, 1);
-															setSalaries(functionselected.salary);
-															updatingObjectfunctionSlary(parameter,functionselected.salary);
+												<div className="ps-2 w-75" style={{ display: 'inline-block' }}>
+													<Select
+														placeholder={<div>Function</div>}
+														isDisabled={
+															employeeobject[val] != undefined &&
+															storeddata[val] != undefined ? employeeobject[val]
+																.radioactive &&
+															!(key['id'] == storeddata[val].function_id) ? (
+																true
+															) : (
+																false
+															) : (
+																''
+															)
 														}
-														
-													}}
-												/>
+														//value='finaldrop'
+														name="employefunctionsall"
+														options={fulllist}
+														defaultValue={
+															//key['id'] == employeeobject[val].functionid ? (
+																verifyfunctionid(employeeobject[val].functionid)?dropfunctionupdate(employeeobject[val].functionid):''
+															//) : (
+															//	''
+															//)
+														}
+														//(storeddata[val]!=undefined)?((key['id']==storeddata[val].function_id)?dropfunctionupdate(storeddata[val].function_id):''):''
+														onChange={setFunctionSelected}
+														//updatingObjectfunctionSlary(parameter,Number(key['salary'])
+														onInputChange={() => {
+															if (functionselected != undefined) {
+																updateValue(parameter, functionselected.value, 1);
+																setSalaries(functionselected.salary);
+																updatingObjectfunctionSlary(
+																	parameter,
+																	functionselected.salary
+																);
+															}
+														}}
+													/>
 												</div>
 											</div>
 										) : value == 3 ? (
 											<div>
 												<input
 													type="radio"
-													style={{display:'inline-block'}}
-													value='finaldrop'
-													onClick={()=>updatingObjectradiobutton(parameter,false)}
+													style={{ display: 'inline-block' }}
+													value="finaldrop"
+													checked={verifyfunctionid(employeeobject[val].functionid)}
+													onClick={() => {
+														updatingObjectradiobutton(parameter, false);
+														updateValue(parameter, key['id'], 1);
+														}
+													}
+
 													name={group}
 													className="p-3 "
 												/>
-												<div  className="ps-2 w-75" style={{display:'inline-block'}}>
-													{(employeeobject[val]!=undefined)?console.log(employeeobject[val]):''}
-												<Select
-													isDisabled={(employeeobject[val].radioactive)?true:false}
+												<div className="ps-2 w-75" style={{ display: 'inline-block' }}>
+													{employeeobject[val] != undefined ? (
+														console.log(employeeobject[val])
+													) : (
+														''
+													)}
+													<Select
 													placeholder={<div>Function</div>}
-													style={{display:'inline-block !important'}}
+													isDisabled={
+														employeeobject[val] != undefined &&
+														storeddata[val] != undefined ? employeeobject[val]
+															.radioactive &&
+														!(key['id'] == storeddata[val].function_id) ? (
+															true
+														) : (
+															false
+														) : (
+															''
+														)
+													}
 													//value='finaldrop'
-													name='employefunctionsall'
+													name="employefunctionsall"
 													options={fulllist}
-													defaultValue={employeTypeSelection(storeddata[value])}
+													defaultValue={
+														//key['id'] == employeeobject[val].functionid ? (
+															verifyfunctionid(employeeobject[val].functionid)?dropfunctionupdate(employeeobject[val].functionid):''
+														//) : (
+														//	''
+														//)
+													}
+													//(storeddata[val]!=undefined)?((key['id']==storeddata[val].function_id)?dropfunctionupdate(storeddata[val].function_id):''):''
 													onChange={setFunctionSelected}
+													//updatingObjectfunctionSlary(parameter,Number(key['salary'])
 													onInputChange={() => {
 														if (functionselected != undefined) {
 															updateValue(parameter, functionselected.value, 1);
-														}
-														if (functionselected != undefined) {
 															setSalaries(functionselected.salary);
+															updatingObjectfunctionSlary(
+																parameter,
+																functionselected.salary
+															);
 														}
-														updatingObjectfunctionSlary(parameter,functionselected.salary)
 													}}
-												/>
+														// isDisabled={employeeobject[val].radioactive ? true : false}
+														// placeholder={<div>Function</div>}
+														// style={{ display: 'inline-block !important' }}
+														// //value='finaldrop'
+														// name="employefunctionsall"
+														// options={fulllist}
+														// defaultValue={
+														// 		verifyfunctionid(employeeobject[val].functionid)?dropfunctionupdate(employeeobject[val].functionid):''
+														// }
+														// //defaultValue={employeTypeSelection(storeddata[value])}
+														// onChange={setFunctionSelected}
+														// onInputChange={() => {
+														// 	if (functionselected != undefined) {
+														// 		updateValue(parameter, functionselected.value, 1);
+														// 		setSalaries(functionselected.salary);
+														// 		updatingObjectfunctionSlary(
+														// 			parameter,
+														// 			functionselected.salary
+														// 		);
+														// 	}
+														// }}
+													/>
 												</div>
 											</div>
 										) : (
@@ -458,13 +583,13 @@ const AddFunction = () => {
 					) : (
 						''
 					)}
-					<p  style={{ color: 'red',paddingLeft:'77px' }}>{error}</p>
+					<p style={{ color: 'red', paddingLeft: '77px' }}>{error}</p>
 				</ul>
 			</div>
 		);
 
 		return func;
-}
+	};
 
 	const getOptions = (res) => {
 		var options = [];
@@ -492,24 +617,20 @@ const AddFunction = () => {
 	// }
 
 	const employeTypeSelection = (val) => {
-		console.log(val);
-		// if(val==undefined){
-		// 	val=val[0];
-		// }
 		var op = '';
 		emptypes.forEach((element) => {
-			if(val!=undefined){
-			if (element['value'] == val.emp_type) {
-				op = element;
-			}}else{
-
+			if (val != undefined) {
+				if (element['value'] == val) {
+					op = element;
+				}
+			} else {
 			}
 		});
 		// setit(op);
 		return op;
 	};
 
-	const dropfunctionupdate=(val)=>{
+	const dropfunctionupdate = (val) => {
 		var op = '';
 		fulllist.forEach((element) => {
 			if (element['value'] == val) {
@@ -527,37 +648,34 @@ const AddFunction = () => {
 		// 	setStoredData(objects);
 		// }
 		return op;
-	}
+	};
 
 	let emptyemployeeData = () => {
-		var object = [...employeeobject];
+		var object = [ ...employeeobject ];
 		if (object != undefined) {
-			
-			object.map((element,key) => {
+			object.map((element, key) => {
 				//if (element.employeeid == storage[key].emp_id) {
-					object[key].functionid=''
-					object[key].salary=''
-					object[key].functionsalary=''
+				object[key].functionid = '';
+				object[key].salary = '';
+				object[key].functionsalary = '';
 				//}
+			});
 
-		});
-		
-		if(object.length!=0){
-		setEmployeeObject(object);
-		}
+			if (object.length != 0) {
+				setEmployeeObject(object);
+			}
 		}
 	};
 
 	return (
-		<div className="col-md-12" style={{  }}>
+		<div className="col-md-12" style={{}}>
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row m-0">
 					<div className="col-md-12">
 						<p className="h1 mt-3 font-weight-bold  poppins-italic-24px">Add function</p>
 					</div>
 					<div className="form-check px-0 my-3">
-						<input type="checkbox" checked={ischecked} onChange={() => checkbox()
-					} />
+						<input type="checkbox" checked={ischecked} onChange={() => checkbox()} />
 						<label className="form-check-label p-1 " htmlFor="flexCheckChecked">
 							Same functions for all employees
 						</label>
@@ -577,8 +695,10 @@ const AddFunction = () => {
 										{() => setSelected(storeddata[value])}
 										{emptypes != null ? (
 											<Select
-												placeholder={<div className='hiii'>Employee type</div>}
-												defaultValue={employeTypeSelection(storeddata[value])}
+												placeholder={<div className="hiii">Employee type</div>}
+												defaultValue={employeTypeSelection(
+													employeeobject[value].employeetypeid
+												)}
 												options={emptypes}
 												name="functionss"
 												onChange={setSelectedOption}
@@ -589,7 +709,11 @@ const AddFunction = () => {
 										) : (
 											''
 										)}
-										{<p style={{ color: 'red',paddingTop: '5px' }}>{employeeobject[value].employeeiderror}</p>}
+										{
+											<p style={{ color: 'red', paddingTop: '5px' }}>
+												{employeeobject[value].employeeiderror}
+											</p>
+										}
 									</div>
 									<div className="col-md-2 bg-white border-0 mb-2 d-flex align-items-center justify-content-center">
 										<span className="p-1">
@@ -607,18 +731,23 @@ const AddFunction = () => {
 									<div className="col-md-2 d-flex align-items-center justify-content-center ">
 										{employeeobject[value].functionid != '' ? (
 											<div>
-											   <div className="input-group">
-
-												<input
-													ref={salaryref}
-													type="textfield"
-													name="salary"
-													placeholder="salary"
-													defaultValue={ storeddata[value].salary }
-													className="form-control bg-white"
-													onChange={(e) => setsaalary(key[4], e)}
-												/>
-												<span className="input-group-text">€</span>
+												<div className="input-group">
+													<input
+														ref={salaryref}
+														type="textfield"
+														name="salary"
+														placeholder="salary"
+														defaultValue={
+															employeeobject[value] != undefined ? (
+																employeeobject[value].salary
+															) : (
+																''
+															)
+														}
+														className="form-control bg-white"
+														onChange={(e) => setsaalary(key[4], e)}
+													/>
+													<span className="input-group-text">€</span>
 												</div>
 
 												<p style={{ color: 'red' }}>{employeeobject[value].salaryerror}</p>
@@ -628,7 +757,7 @@ const AddFunction = () => {
 										)}
 									</div>
 								</div>
-								{!ischecked ? empid(key[4], employeeobject[value].functioniderror,value) : ''}
+								{!ischecked ? empid(key[4], employeeobject[value].functioniderror, value) : ''}
 							</div>
 						))}
 					</ol>
