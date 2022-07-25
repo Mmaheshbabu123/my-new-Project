@@ -4,6 +4,7 @@ import { APICALL } from '../../Services/ApiServices';
 import { planningoverview, getweekly_planning } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { useRouter } from 'next/router';
+import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
 
 const PlanningFinalize = () => {
 	const router = useRouter();
@@ -88,29 +89,32 @@ const PlanningFinalize = () => {
 					</select> */}
 				</div>
 				<div className="mt-2 ">
+				{/* <p className=' bitter-italic-normal-mediun-22 col-md-12 text-center table-border-gray py-2'><span className='less-grather mx-4 '>&lt;</span> current week  <span className='less-grather mx-4'>&gt;</span></p>  */}
+				<p className=' bitter-italic-normal-mediun-22 col-md-12 text-center table-title-bg py-3'><FaLessThan className='less-grather mx-4'/> Current week <FaGreaterThan className='less-grather mx-4' /> </p> 
 					<table className="table border table-border-gray ">
+						
 						<thead className="">
-							<tr className='col-md-12 select-bg-gray '><p className='bitter-italic-normal-mediun-20 col-md-12 text-center'>current week</p> </tr>
+							
 							<tr className="skyblue-bg-color">
-								<th className="border-end table-border-gray  text-center align-items-center justify-content-center ">
+								<th className=" table-border-gray  text-center align-items-center justify-content-center ">
 									Monday<br />27-06-2022
 								</th>
-								<th className="border-end table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-border-gray   text-center align-items-center justify-content-center">
 									Tuesday <br />28-06-2022
 								</th>
-								<th className="border-end table-border-gray   text-center align-items-center justify-content-center">
+								<th className="table-border-gray   text-center align-items-center justify-content-center">
 									Wednesday <br />29-06-2022
 								</th>
-								<th className="border-end table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-border-gray   text-center align-items-center justify-content-center">
 									Thursday <br />30-06-2022
 								</th>
-								<th className="border-end table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-border-gray   text-center align-items-center justify-content-center">
 									Friday<br />01-07-2022
 								</th>
-								<th className="border-end table-border-gray  text-center  align-items-center justify-content-center">
+								<th className=" table-border-gray  text-center  align-items-center justify-content-center">
 									Saturday<br />02-07-2022
 								</th>
-								<th className="border-end table-border-gray  text-center  align-items-center justify-content-center">
+								<th className=" table-border-gray  text-center  align-items-center justify-content-center">
 									Sunday<br />13-03-2022
 								</th>
 							</tr>
@@ -118,9 +122,9 @@ const PlanningFinalize = () => {
 						<tbody>
 							<tr className="border-bottom table-border-gray">
 								{weeklyplanning.map((value) => (
-									<td className="border-end table-border-gray font-poppins-light" key={value.id}>
+									<td className=" table-border-gray font-poppins-light" key={value.id}>
 										
-										<div className='text-right color-skyblue my-4 text-end'><a>
+										<div className='text-right color-skyblue my-2 mt-1 text-end'><a>
 											<MdEdit className="float-right" />
 											{/* <i className="bi bi-pencil float-right" /> */}
 										</a></div>
@@ -136,14 +140,14 @@ const PlanningFinalize = () => {
 										<br />
 									</td>
 								))}
-								<td className="border-end table-border-gray" />
-								<td className="border-end table-border-gray" />
-								<td className="border-end table-border-gray" />
-								<td className="border-end table-border-gray" />
+								<td className=" table-border-gray" />
+								<td className=" table-border-gray" />
+								<td className=" table-border-gray" />
+								<td className=" table-border-gray" />
 							</tr>
 							<tr className="border-bottom table-border-gray">
 								{weeklyplanning.map((value) => (
-									<td className="border-end table-border-gray font-poppins-light" key={value.id}>
+									<td className=" table-border-gray font-poppins-light" key={value.id}>
 										<p>{value.fullName}</p>
 										<br />
 										<p>{value.worktype}</p>
@@ -156,10 +160,10 @@ const PlanningFinalize = () => {
 										<br />
 									</td>
 								))}
-								<td className="border-end table-border-gray" />
-								<td className="border-end table-border-gray" />
-								<td className="border-end table-border-gray" />
-								<td className="border-end table-border-gray" />
+								<td className=" table-border-gray" />
+								<td className=" table-border-gray" />
+								<td className=" table-border-gray" />
+								<td className=" table-border-gray" />
 							</tr>
 						</tbody>
 					</table>
