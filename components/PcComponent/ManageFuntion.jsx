@@ -305,6 +305,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchFunc != '') {
 			functionsTemp.map((val) => {
 				if (val['function_name'].toLowerCase().includes(searchFunc.toLowerCase())) {

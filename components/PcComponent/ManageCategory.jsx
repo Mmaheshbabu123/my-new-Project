@@ -73,8 +73,8 @@ const ManageCategoryComponent = () => {
 			categoriesTemp.map((val) => {
 				if (
 					val['pc_number'].trim().includes(searchPc) &&
-					val['category_name'].trim().toLowerCase().includes(searchCat.toLowerCase()) &&
-					val['min_salary'].toLowerCase().includes(searchSal)
+					val['category_name'].trim().toLowerCase().includes(searchCat.trim().toLowerCase()) &&
+					val['min_salary'].toLowerCase().includes(searchSal.trim())
 				) {
 					res.push(val);
 				}
@@ -86,8 +86,8 @@ const ManageCategoryComponent = () => {
 		} else if (searchPc != '' && searchCat != '') {
 			categoriesTemp.map((val) => {
 				if (
-					val['pc_number'].trim().includes(searchPc) &&
-					val['category_name'].trim().toLowerCase().includes(searchCat.toLowerCase())
+					val['pc_number'].trim().includes(searchPc.trim()) &&
+					val['category_name'].trim().toLowerCase().includes(searchCat.trim().toLowerCase())
 				) {
 					res.push(val);
 				}
@@ -96,8 +96,8 @@ const ManageCategoryComponent = () => {
 		} else if (searchCat != '' && searchSal != '') {
 			categoriesTemp.map((val) => {
 				if (
-					val['category_name'].trim().toLowerCase().includes(searchCat.toLowerCase()) &&
-					val['min_salary'].includes(searchSal)
+					val['category_name'].trim().toLowerCase().includes(searchCat.trim().toLowerCase()) &&
+					val['min_salary'].includes(searchSal.trim())
 				) {
 					res.push(val);
 				}
@@ -106,7 +106,7 @@ const ManageCategoryComponent = () => {
 			setItemOffset(0);
 		} else if (searchPc != '' && searchSal != '') {
 			categoriesTemp.map((val) => {
-				if (val['pc_number'].trim().includes(searchPc) && val['min_salary'].includes(searchSal)) {
+				if (val['pc_number'].trim().includes(searchPc) && val['min_salary'].includes(searchSal.trim())) {
 					res.push(val);
 				}
 			});
@@ -116,7 +116,7 @@ const ManageCategoryComponent = () => {
 			//  CONDITION WHEN ONLY ONE VALUES ARE GIVEN //
 		} else if (searchPc != '') {
 			categoriesTemp.map((val) => {
-				if (val['pc_number'].trim().includes(searchPc)) {
+				if (val['pc_number'].trim().includes(searchPc.trim())) {
 					res.push(val);
 				}
 			});
@@ -124,14 +124,15 @@ const ManageCategoryComponent = () => {
 			setItemOffset(0);
 		} else if (searchCat != '') {
 			categoriesTemp.map((val) => {
-				if (val['category_name'].trim().toLowerCase().includes(searchCat.toLowerCase())) {
+				if (val['category_name'].trim().toLowerCase().includes(searchCat.trim().toLowerCase())) {
 					res.push(val);
 				}
 			});
 			setCategories(res);
+			setItemOffset(0);
 		} else if (searchSal != '') {
 			categoriesTemp.map((val) => {
-				if (val['min_salary'].includes(searchSal)) {
+				if (val['min_salary'].trim().includes(searchSal.trim())) {
 					res.push(val);
 				}
 			});
@@ -242,7 +243,7 @@ const ManageCategoryComponent = () => {
 								</tr>
 							</thead>
 							<tbody className="">
-								{categories.length > 0 &&
+								{categoriestemp2.length > 0 &&
 									categoriestemp2.map((result) => (
 										<tr className="border-bottom border-secondary" key={result.cat_id}>
 											<td className="border-end border-secondary">{result.pc_number}</td>
