@@ -96,7 +96,7 @@ function checkAbsoluteAgentTabValidation() {
   if(!validationStatus) {
     let { employee_type_id } = stateWS;
     validationStatus = loopAndCheckLength(employee_type_id, noPcWarning);
-    if(!validationStatus)
+    // if(!validationStatus)
       // updateStateChanges({workersServantsCompState: compStateObj, uniqueId: Math.random()});
   }
   return basicDetailsFilled && validationStatus ? true : false;
