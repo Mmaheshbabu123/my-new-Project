@@ -10,6 +10,9 @@ import { useRouter } from 'next/router';
 const ManageCategoryComponent = () => {
 	const [ categories, setCategories ] = useState([]);
 	const [ categoriesTemp, setCategoriesTemp ] = useState([]);
+	const [ categoriestemp2, setCategoriestemp2 ] = useState([]);
+	const [ itemsPerPage, setItemsPerPage ] = useState(10);
+
 	const [ updated, setUpdated ] = useState(0);
 	const [ searchPc, setSearchPc ] = useState('');
 	const [ searchCat, setSearchcat ] = useState('');
@@ -27,6 +30,7 @@ const ManageCategoryComponent = () => {
 					console.log(result.data);
 					setCategories(result.data);
 					setCategoriesTemp(result.data);
+					setCategoriestemp2(result.data);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -69,20 +73,21 @@ const ManageCategoryComponent = () => {
 			categoriesTemp.map((val) => {
 				if (
 					val['pc_number'].trim().includes(searchPc) &&
-					val['category_name'].trim().toLowerCase().includes(searchCat.toLowerCase()) &&
-					val['min_salary'].toLowerCase().includes(searchSal)
+					val['category_name'].trim().toLowerCase().includes(searchCat.trim().toLowerCase()) &&
+					val['min_salary'].toLowerCase().includes(searchSal.trim())
 				) {
 					res.push(val);
 				}
 			});
 			setCategories(res);
+			setItemOffset(0);
 
 			// CONDITIONS WHEN TWO VALUES ARE GIVEN //
 		} else if (searchPc != '' && searchCat != '') {
 			categoriesTemp.map((val) => {
 				if (
-					val['pc_number'].trim().includes(searchPc) &&
-					val['category_name'].trim().toLowerCase().includes(searchCat.toLowerCase())
+					val['pc_number'].trim().includes(searchPc.trim()) &&
+					val['category_name'].trim().toLowerCase().includes(searchCat.trim().toLowerCase())
 				) {
 					res.push(val);
 				}
@@ -91,43 +96,48 @@ const ManageCategoryComponent = () => {
 		} else if (searchCat != '' && searchSal != '') {
 			categoriesTemp.map((val) => {
 				if (
-					val['category_name'].trim().toLowerCase().includes(searchCat.toLowerCase()) &&
-					val['min_salary'].includes(searchSal)
+					val['category_name'].trim().toLowerCase().includes(searchCat.trim().toLowerCase()) &&
+					val['min_salary'].includes(searchSal.trim())
 				) {
 					res.push(val);
 				}
 			});
 			setCategories(res);
+			setItemOffset(0);
 		} else if (searchPc != '' && searchSal != '') {
 			categoriesTemp.map((val) => {
-				if (val['pc_number'].trim().includes(searchPc) && val['min_salary'].includes(searchSal)) {
+				if (val['pc_number'].trim().includes(searchPc) && val['min_salary'].includes(searchSal.trim())) {
 					res.push(val);
 				}
 			});
 			setCategories(res);
+			setItemOffset(0);
 
 			//  CONDITION WHEN ONLY ONE VALUES ARE GIVEN //
 		} else if (searchPc != '') {
 			categoriesTemp.map((val) => {
-				if (val['pc_number'].trim().includes(searchPc)) {
+				if (val['pc_number'].trim().includes(searchPc.trim())) {
 					res.push(val);
 				}
 			});
 			setCategories(res);
+			setItemOffset(0);
 		} else if (searchCat != '') {
 			categoriesTemp.map((val) => {
-				if (val['category_name'].trim().toLowerCase().includes(searchCat.toLowerCase())) {
+				if (val['category_name'].trim().toLowerCase().includes(searchCat.trim().toLowerCase())) {
 					res.push(val);
 				}
 			});
 			setCategories(res);
+			setItemOffset(0);
 		} else if (searchSal != '') {
 			categoriesTemp.map((val) => {
-				if (val['min_salary'].includes(searchSal)) {
+				if (val['min_salary'].trim().includes(searchSal.trim())) {
 					res.push(val);
 				}
 			});
 			setCategories(res);
+			setItemOffset(0);
 		} else {
 			setCategories(categoriesTemp);
 		}
@@ -148,16 +158,13 @@ const ManageCategoryComponent = () => {
 
 	//------------------- Pagination code -------------------------//
 
-	const [ currentItems, setCurrentItems ] = useState([]);
 	const [ pageCount, setPageCount ] = useState(0);
 	const [ itemOffset, setItemOffset ] = useState(0);
-	const itemsPerPage = 1;
 
 	useEffect(
 		() => {
 			const endOffset = itemOffset + itemsPerPage;
-			console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-			setCurrentItems(categories.slice(itemOffset, endOffset));
+			setCategoriestemp2(categories.slice(itemOffset, endOffset));
 			setPageCount(Math.ceil(categories.length / itemsPerPage));
 		},
 		[ itemOffset, itemsPerPage, categories ]
@@ -165,7 +172,6 @@ const ManageCategoryComponent = () => {
 
 	const handlePageClick = (event) => {
 		const newOffset = (event.selected * itemsPerPage) % categories.length;
-		console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
 		setItemOffset(newOffset);
 	};
 	//------------------- Pagination code -------------------------//
@@ -212,17 +218,17 @@ const ManageCategoryComponent = () => {
 					<div className="col-sm-2">
 						<button
 							type="button"
-							className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
-							onClick={() => handleReset()}
-						>
-							Reset
-						</button>
-						<button
-							type="button"
 							className="btn btn-secondary btn-block float-right mt-2 mb-2 "
 							onClick={() => handleSearch()}
 						>
 							Search
+						</button>
+						<button
+							type="button"
+							className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
+							onClick={() => handleReset()}
+						>
+							Reset
 						</button>
 					</div>
 
@@ -237,8 +243,8 @@ const ManageCategoryComponent = () => {
 								</tr>
 							</thead>
 							<tbody className="">
-								{categories.length > 0 &&
-									categories.map((result) => (
+								{categoriestemp2.length > 0 &&
+									categoriestemp2.map((result) => (
 										<tr className="border-bottom border-secondary" key={result.cat_id}>
 											<td className="border-end border-secondary">{result.pc_number}</td>
 											<td className="border-end border-secondary">{result.category_name}</td>
@@ -306,20 +312,22 @@ const ManageCategoryComponent = () => {
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletecat} />
 			)}
 			<div className="">
-				<ReactPaginate
-					breakLabel="..."
-					nextLabel="next >"
-					onPageChange={handlePageClick}
-					pageRangeDisplayed={5}
-					pageCount={pageCount}
-					previousLabel="< previous"
-					renderOnZeroPageCount={null}
-					containerClassName={'pagination'}
-					itemClass="page-item"
-					linkClass="page-link"
-					subContainerClassName={'pages pagination'}
-					activeClassName={'active'}
-				/>
+				{categories.length >= itemsPerPage && (
+					<ReactPaginate
+						breakLabel="..."
+						nextLabel="next >"
+						onPageChange={handlePageClick}
+						pageRangeDisplayed={5}
+						pageCount={pageCount}
+						previousLabel="< previous"
+						renderOnZeroPageCount={null}
+						containerClassName={'pagination justify-content-center'}
+						itemClass="page-item"
+						linkClass="page-link"
+						subContainerClassName={'pages pagination'}
+						activeClassName={'active'}
+					/>
+				)}
 			</div>
 		</div>
 	);

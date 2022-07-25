@@ -27,7 +27,7 @@
     font-family: 'Poppins-bold';
     font-weight: 800;
     font-style: normal;
-	src: url("./fonts/OpenSans-Bold.ttf");
+	src: url("fonts/OpenSans-Bold.ttf");
     /* src: url(/themes/custom/absolute_you/fonts/Poppins/Poppins-Bold.ttf ); */
 }
 @font-face {
@@ -40,49 +40,49 @@
     font-family: 'Poppins-normal';
     font-weight: 500;
     font-style: normal;
-    src: url( "./fonts/Poppins-Light.ttf" );
+    src: url( "fonts/Poppins-Light.ttf" );
 }
 @font-face {
     font-family: 'Poppins-extraitalic';
     font-weight: 600;
     font-style: normal;
-    src: url("./fonts/Poppins-ExtraLightItalic.ttf" );
+    src: url("fonts/Poppins-ExtraLightItalic.ttf" );
 }
 @font-face {
     font-family: 'Poppins-lightitalic';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-LightItalic.ttf");
+    src: url("fonts/Poppins-LightItalic.ttf");
 }
 @font-face {
     font-family: 'Poppins-regular';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-Regular.ttf");
+    src: url("fonts/Poppins-Regular.ttf");
 }
 @font-face {
     font-family: 'Poppins-thin';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-Thin.ttf");
+    src: url("fonts/Poppins-Thin.ttf");
 }
 @font-face {
     font-family: 'Poppins-thinitalic';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-ThinItalic.ttf");
+    src: url("fonts/Poppins-ThinItalic.ttf");
 }
 @font-face {
     font-family: 'Poppins-mediun';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-Medium.ttf");
+    src: url("fonts/Poppins-Medium.ttf");
 }
 @font-face {
     font-family: 'Poppins-mediumitalic';
     font-weight: 500;
     font-style: normal;
-	src: url("./fonts/Poppins-MediumItalic.ttf");
+	src: url("fonts/Poppins-MediumItalic.ttf");
 }
 
 /* for bitter font */
@@ -90,13 +90,13 @@
     font-family: 'bitter-regular';
     font-weight: 500;
     font-style: normal;
-	src: url("./fonts/Bitter-Regular.ttf");
+	src: url("fonts/Bitter-Regular.ttf");
 }
 @font-face {
     font-family: 'Bitter-italic-normal-mediun';
     font-weight: 500;
     font-style: normal;
-	src: url("./fonts/Bitter-MediumItalic.ttf");
+	src: url("fonts/Bitter-MediumItalic.ttf");
 }
 body {
     /* for title */
@@ -124,6 +124,7 @@ body {
     /* for label  */
     --color-grey-dark: #515050;
     --color-black: #0b0c0c;
+    --color-less-greater: #4C4D554D;
     --font-family-regular: LibreFranklin-Regular;
     --font-family-light: LibreFranklin-Normal;
     --font-family-extralightitalic: LibreFranklin-extralightitalic;
@@ -189,6 +190,12 @@ body {
     font-family: var(--font-family-bitter-italic-normal-medium);
     font-weight: 500;
     font-size: var(--font-size-xl);
+}
+.bitter-italic-normal-mediun-22 {
+    color: var(--color-purple);
+    font-family: var(--font-family-bitter-italic-normal-medium);
+    font-weight: 500;
+    font-size: var(--font-size-xxl);
 }
 .poppins-regular-14px {
     color: var(--color-label-footer-gray);
@@ -670,7 +677,17 @@ input {
 }
 .table-border-gray {
     border: apx solid var(--bg-gray-dark);
+    border: 1px solid var(--bg-gray-dark);
 }
+.less-grather {
+    color: var(--color-less-greater);
+    font-size: 28px;
+    font-weight: bold;
+}
+.table-title-bg {
+background: var(--bg-grey-medium);
+}
+
 div[disabled]{
 	pointer-events: none;
   opacity: 0.7;

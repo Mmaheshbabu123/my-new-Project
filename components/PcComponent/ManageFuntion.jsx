@@ -90,7 +90,6 @@ const ManageFunction = () => {
 			setFunctions(res);
 			setItemOffset(0);
 
-
 			// CONDITIONS WHEN ALL THREE VALUES ARE GIVEN //
 		} else if (searchPc != '' && searchFunc != '' && searchCat != '') {
 			functionsTemp.map((val) => {
@@ -113,6 +112,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchFunc != '' && searchCat != '' && searchSal != '') {
 			functionsTemp.map((val) => {
 				if (
@@ -127,6 +127,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchCat != '' && searchSal != '' && searchPc != '') {
 			functionsTemp.map((val) => {
 				if (
@@ -148,6 +149,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchSal != '' && searchPc != '' && searchFunc != '') {
 			functionsTemp.map((val) => {
 				if (
@@ -166,6 +168,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchPc != '' && searchFunc != '') {
 			// CONDITIONS WHEN TWO VALUES ARE GIVEN //
 			functionsTemp.map((val) => {
@@ -184,6 +187,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchFunc != '' && searchCat != '') {
 			functionsTemp.map((val) => {
 				if (
@@ -197,6 +201,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchCat != '' && searchSal != '') {
 			functionsTemp.map((val) => {
 				if (
@@ -210,6 +215,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchPc != '' && searchSal != '') {
 			functionsTemp.map((val) => {
 				if (
@@ -227,6 +233,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchFunc != '' && searchSal != '') {
 			functionsTemp.map((val) => {
 				if (
@@ -237,6 +244,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchPc != '' && searchCat != '') {
 			functionsTemp.map((val) => {
 				if (
@@ -257,7 +265,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
-
+			setItemOffset(0);
 			// CONDITIONS WHEN ONLY ONE VALUE IS GIVEN //
 		} else if (searchPc != '') {
 			functionsTemp.map((val) => {
@@ -289,6 +297,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchSal != '') {
 			functionsTemp.map((val) => {
 				if (val['min_salary'].includes(searchSal)) {
@@ -296,6 +305,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else if (searchFunc != '') {
 			functionsTemp.map((val) => {
 				if (val['function_name'].toLowerCase().includes(searchFunc.toLowerCase())) {
@@ -303,6 +313,7 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
 		} else {
 			setFunctions(functionsTemp);
 		}
@@ -370,8 +381,6 @@ const ManageFunction = () => {
 						/>
 					</div>
 
-					
-
 					<div className="col-sm-2">
 						<input
 							type="search"
@@ -401,14 +410,15 @@ const ManageFunction = () => {
 						>
 							Search
 						</button>
-						{(searchPc != '' || searchFunc != '' || searchCat != '' || searchSal != '') &&
-						<button
-							type="button"
-							className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2"
-							onClick={() => handleReset()}
-						>
-							Reset
-						</button>}
+						{(searchPc != '' || searchFunc != '' || searchCat != '' || searchSal != '') && (
+							<button
+								type="button"
+								className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2"
+								onClick={() => handleReset()}
+							>
+								Reset
+							</button>
+						)}
 					</div>
 
 					<div className="form-check mt-2 text-center ">
@@ -467,7 +477,7 @@ const ManageFunction = () => {
 						</table>
 					</div>
 				</div>
-				{functions.length >= itemsPerPage && 
+				{functions.length >= itemsPerPage && (
 					<div className="row">
 						<ReactPaginate
 							breakLabel="..."
@@ -484,7 +494,7 @@ const ManageFunction = () => {
 							activeClassName={'active'}
 						/>
 					</div>
-}
+				)}
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
@@ -495,8 +505,7 @@ const ManageFunction = () => {
 							Back
 						</button>
 					</div>
-					<div className="col-md-6">
-					</div>
+					<div className="col-md-6" />
 				</div>
 			</form>
 			{showdeletepopup == true && (
