@@ -88,8 +88,7 @@ function Planning(props) {
 									}
 								}
 							}
-							
-							
+
 							data1.p_unique_key = p_unique_key;
 
 							setData(data1);
@@ -309,8 +308,8 @@ function Planning(props) {
 				setData((prev) => ({ ...prev, location_id: result.value }));
 			}
 			updateCostCenter(result.value);
-		}else{
-			setData((prev) => ({ ...prev, location_id: ''}));
+		} else {
+			setData((prev) => ({ ...prev, location_id: '' }));
 		}
 	};
 	let updateCostCenter = (loc_id) => {
@@ -326,9 +325,8 @@ function Planning(props) {
 			if (result != '') {
 				setData((prev) => ({ ...prev, cost_center_id: result.value }));
 			}
-		}else{
+		} else {
 			setData((prev) => ({ ...prev, cost_center_id: '' }));
-
 		}
 	};
 
@@ -471,7 +469,7 @@ function Planning(props) {
 			</form>
 			{show == true && (
 				<div className="">
-					{console.log(project)}
+					{/* {console.log(project)} */}
 					{project.id && (
 						<Addproject
 							data={project}

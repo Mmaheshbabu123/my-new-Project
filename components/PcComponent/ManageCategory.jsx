@@ -224,13 +224,15 @@ const ManageCategoryComponent = () => {
 						>
 							Search
 						</button>
-						<button
-							type="button"
-							className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
-							onClick={() => handleReset()}
-						>
-							Reset
-						</button>
+						{(searchPc != '' || searchCat != '' || searchSal != '') && (
+							<button
+								type="button"
+								className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
+								onClick={() => handleReset()}
+							>
+								Reset
+							</button>
+						)}
 					</div>
 
 					<div className="form-check mt-2 text-center ">
