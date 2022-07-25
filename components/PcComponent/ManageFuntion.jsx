@@ -10,39 +10,23 @@ import Link from 'next/link';
 const ManageFunction = () => {
 	const [ functions, setFunctions ] = useState([]);
 	const [ functionsTemp, setFunctionsTemp ] = useState([]);
+	const [ functionsTemp2, setFunctionsTemp2 ] = useState([]);
 	const [ updated, setUpdated ] = useState(0);
-
 	const [ searchPc, setSearchPc ] = useState('');
 	const [ searchFunc, setSearchFunc ] = useState('');
 	const [ searchCat, setSearchCat ] = useState('');
 	const [ searchSal, setSearchSal ] = useState('');
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ funcnid, setFucnid ] = useState('');
-
-	// const [ state, setState ] = useState({
-	// 	searchTerm: '',
-	// 	filterRows: rows,
-	// 	searchKey: 'name',
-	// 	currentItems: [],
-	// 	pageCount: 0,
-	// 	itemOffset: 0,
-	// 	currentPage: 0
-	// });
-
-	// useEffect(
-	// 	() => {
-	// 		setState({ ...state, filterRows: rows });
-	// 	},
-	// 	[ rows.length ]
-	// );
+	const [ itemsPerPage, setItemsPerPage ] = useState(10);
 
 	useEffect(
 		() => {
 			APICALL.service(getFunctions, 'GET')
 				.then((result) => {
-					console.log(result);
 					setFunctions(result.data);
 					setFunctionsTemp(result.data);
+					setFunctionsTemp2(result.data);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -104,6 +88,8 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
+
 
 			// CONDITIONS WHEN ALL THREE VALUES ARE GIVEN //
 		} else if (searchPc != '' && searchFunc != '' && searchCat != '') {
@@ -289,6 +275,8 @@ const ManageFunction = () => {
 				}
 			});
 			setFunctions(res);
+			setItemOffset(0);
+			// setFunctionsTemp2(res);
 		} else if (searchCat != '') {
 			functionsTemp.map((val) => {
 				if (
@@ -337,17 +325,13 @@ const ManageFunction = () => {
 	// PAGINATION STARTS
 
 	//------------------- Pagination code -------------------------//
-
-	const [ currentItems, setCurrentItems ] = useState([]);
 	const [ pageCount, setPageCount ] = useState(0);
 	const [ itemOffset, setItemOffset ] = useState(0);
-	const itemsPerPage = 5;
 
 	useEffect(
 		() => {
 			const endOffset = itemOffset + itemsPerPage;
-			console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-			setCurrentItems(functions.slice(itemOffset, endOffset));
+			setFunctionsTemp2(functions.slice(itemOffset, endOffset));
 			setPageCount(Math.ceil(functions.length / itemsPerPage));
 		},
 		[ itemOffset, itemsPerPage, functions ]
@@ -355,7 +339,6 @@ const ManageFunction = () => {
 
 	const handlePageClick = (event) => {
 		const newOffset = (event.selected * itemsPerPage) % functions.length;
-		console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
 		setItemOffset(newOffset);
 	};
 	//------------------- Pagination code -------------------------//
@@ -387,6 +370,18 @@ const ManageFunction = () => {
 						/>
 					</div>
 
+					
+
+					<div className="col-sm-2">
+						<input
+							type="search"
+							id="form12"
+							value={searchSal}
+							onChange={(e) => setSearchSal(e.target.value)}
+							className="form-control mt-2 mb-2"
+							placeholder="Minimum salary"
+						/>
+					</div>
 					<div className="col-sm-2">
 						<input
 							type="search"
@@ -399,25 +394,6 @@ const ManageFunction = () => {
 					</div>
 
 					<div className="col-sm-2">
-						<input
-							type="search"
-							id="form12"
-							value={searchSal}
-							onChange={(e) => setSearchSal(e.target.value)}
-							className="form-control mt-2 mb-2"
-							placeholder="Minimum salary"
-						/>
-					</div>
-
-					<div className="col-sm-2">
-						<button
-							type="button"
-							className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2"
-							onClick={() => handleReset()}
-						>
-							Reset
-						</button>
-
 						<button
 							type="button"
 							className="btn btn-secondary   btn-block float-right mt-2 mb-2"
@@ -425,6 +401,14 @@ const ManageFunction = () => {
 						>
 							Search
 						</button>
+						{(searchPc != '' || searchFunc != '' || searchCat != '' || searchSal != '') &&
+						<button
+							type="button"
+							className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2"
+							onClick={() => handleReset()}
+						>
+							Reset
+						</button>}
 					</div>
 
 					<div className="form-check mt-2 text-center ">
@@ -440,7 +424,7 @@ const ManageFunction = () => {
 							</thead>
 							<tbody>
 								{functions.length > 0 &&
-									functions.map((result) => (
+									functionsTemp2.map((result) => (
 										<tr className="border-bottom border-secondary" key={result.funcn_id}>
 											<td className="border-end border-secondary">
 												{result.pc_number ? result.pc_number : result.pc_num}
@@ -483,6 +467,24 @@ const ManageFunction = () => {
 						</table>
 					</div>
 				</div>
+				{functions.length >= itemsPerPage && 
+					<div className="row">
+						<ReactPaginate
+							breakLabel="..."
+							nextLabel="next >"
+							onPageChange={handlePageClick}
+							pageRangeDisplayed={5}
+							pageCount={pageCount}
+							previousLabel="< previous"
+							renderOnZeroPageCount={null}
+							containerClassName={'pagination justify-content-center'}
+							itemClass="page-item"
+							linkClass="page-link"
+							subContainerClassName={'pages pagination'}
+							activeClassName={'active'}
+						/>
+					</div>
+}
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
@@ -494,31 +496,12 @@ const ManageFunction = () => {
 						</button>
 					</div>
 					<div className="col-md-6">
-						{/* <Link href={"/redirect-page?src=/manage-function&dest=addpc"}> 
-					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Function</a>
-				</Link> */}
 					</div>
 				</div>
 			</form>
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletefuncn} />
 			)}
-			<div className="justify-content-center">
-				<ReactPaginate
-					breakLabel="..."
-					nextLabel="next >"
-					onPageChange={handlePageClick}
-					pageRangeDisplayed={5}
-					pageCount={pageCount}
-					previousLabel="< previous"
-					renderOnZeroPageCount={null}
-					containerClassName={'pagination'}
-					itemClass="page-item"
-					linkClass="page-link"
-					subContainerClassName={'pages pagination'}
-					activeClassName={'active'}
-				/>
-			</div>
 		</div>
 	);
 };

@@ -81,20 +81,22 @@ function Planning(props) {
 							var data1 = data;
 							if (result.data[0].length == 1) {
 								data1.comp_id = result.data[0].nid;
+								if (result.data[1].length == 1) {
+									data1.location_id = result.data[1].value;
+									if (result.data[2].length == 1) {
+										data1.cost_center_id = result.data[2].value;
+									}
+								}
 							}
-							if (result.data[1].length == 1) {
-								data1.location_id = result.data[1].value;
-							}
-							if (result.data[2].length == 1) {
-								data1.cost_center_id = result.data[2].value;
-							}
+							
+							
 							data1.p_unique_key = p_unique_key;
 
 							setData(data1);
 							if (
 								result.data[0].length == 1 &&
 								result.data[1].length == 1 &&
-								result.data[1].length == 1
+								result.data[2].length == 1
 							) {
 								postData(data);
 							}
