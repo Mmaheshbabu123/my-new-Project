@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getCategory, updateCategory } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { APICALL } from '../../Services/ApiServices';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Popup from './Popupcategory';
 import ReactPaginate from 'react-paginate';
 import { useRouter } from 'next/router';
@@ -315,11 +316,11 @@ const ManageCategoryComponent = () => {
 				{categories.length >= itemsPerPage && (
 					<ReactPaginate
 						breakLabel="..."
-						nextLabel="next >"
+						nextLabel={<AiOutlineArrowRight />}
 						onPageChange={handlePageClick}
 						pageRangeDisplayed={5}
 						pageCount={pageCount}
-						previousLabel="< previous"
+						previousLabel={<AiOutlineArrowLeft />}
 						renderOnZeroPageCount={null}
 						containerClassName={'pagination justify-content-center'}
 						itemClass="page-item"
