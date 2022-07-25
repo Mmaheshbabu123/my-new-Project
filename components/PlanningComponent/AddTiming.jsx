@@ -13,7 +13,7 @@ import { MdStarRate } from 'react-icons/md';
 function Addtiming(props) {
 	const count = 0;
 	const router = useRouter();
-	const [ value, setValue ] = useState(new Date("2022/07/25"));
+	const [ value, setValue ] = useState(new Date('2022/07/25'));
 	const [ selectedDate, setSelectedDate ] = useState([]);
 	const [ commonDatetime, setCommonDatetime ] = useState([]);
 
@@ -32,12 +32,12 @@ function Addtiming(props) {
 				APICALL.service(fetchPlannedTimings + props.p_unique_key, 'GET')
 					.then((result) => {
 						if (result.status == 200) {
+							console.log(result.data);
 							setEmployee_planning(result.data);
-							result.data.map((obj,key)=>{
-								obj.date.map((obj1,key1)=>{
+							result.data.map((obj, key) => {
+								obj.date.map((obj1, key1) => {
 									result.data[key].date[key1] = new Date(obj1);
 									console.log(obj1);
-
 								});
 							});
 						}
@@ -125,7 +125,7 @@ function Addtiming(props) {
 			.then((result) => {
 				console.log(result);
 				if (result.status === 200) {
-					router.push('/planning/finalize/'+props.p_unique_key)
+					router.push('/planning/finalize/' + props.p_unique_key);
 				}
 			})
 			.catch((error) => {
@@ -202,20 +202,22 @@ function Addtiming(props) {
 			<form onSubmit={(e) => submitPlanningTimings(e)}>
 				<div className="row">
 					<p className="my-4 h4">Add timing</p>
-					<div className="form-check mt-2 ">
-						<input
-							className="form-check-input "
-							type="checkbox"
-							checked={checked}
-							id="flexCheckChecked"
-							onChange={() => {
-								setChecked(!checked);
-							}}
-						/>
-						<label className="form-check-label " htmlFor="flexCheckChecked">
-							Same timing for all employees
-						</label>
-					</div>
+					{employee_planning.length > 1 && (
+						<div className="form-check mt-2 ">
+							<input
+								className="form-check-input "
+								type="checkbox"
+								checked={checked}
+								id="flexCheckChecked"
+								onChange={() => {
+									setChecked(!checked);
+								}}
+							/>
+							<label className="form-check-label " htmlFor="flexCheckChecked">
+								Same timing for all employees
+							</label>
+						</div>
+					)}
 					{checked ? (
 						<div>
 							<div className=" mt-3">
@@ -226,12 +228,8 @@ function Addtiming(props) {
 									>
 										<div className="col-md-1 h5">{++count}.</div>
 										<div className="col-md-3 h6">{result.employee_name}</div>
-										<div className="col-md-4 h6">
-											{result.employee_type_name}
-											</div>
-										<div className="col-md-3 h6">
-											{result.function_name}
-											</div>
+										<div className="col-md-4 h6">{result.employee_type_name}</div>
+										<div className="col-md-3 h6">{result.function_name}</div>
 									</div>
 								))}
 							</div>
@@ -299,11 +297,14 @@ function Addtiming(props) {
 												className={`row d-flex justify-content-start py-3 my-3 ${style.sec_background}`}
 											>
 												<div className="col-md-1 h5">
+												{employee_planning.length > 1 && <span>
 													{result.collapseOpen == true ? (
 														<FaRegMinusSquare onClick={() => updateState(result.id)} />
 													) : (
 														<FaRegPlusSquare onClick={() => updateState(result.id)} />
 													)}
+													</span>
+}
 												</div>
 												<div className="col-md-3 h6">{result.employee_name}</div>
 												<div className="col-md-4 h6">{result.employee_type_name}</div>
@@ -326,44 +327,49 @@ function Addtiming(props) {
 															<p className="error mt-2">{result.error_selected_date}</p>
 														</div>
 													</div>
-													{result.timings.length>0 && result.timings.map((value, index) => (
-														<div className="row" key={index}>
-															<div className="col-md-1" />
-															<div className="col-md-3 py-3">
-																<div className="pb-2" />
-																{value.date}
+													{result.timings.length > 0 &&
+														result.timings.map((value, index) => (
+															<div className="row" key={index}>
+																<div className="col-md-1" />
+																<div className="col-md-3 py-3">
+																	<div className="pb-2" />
+																	{value.date}
+																</div>
+																<div className="col-md-2 py-3">
+																	<div className="pb-2 custom_astrick">
+																		Start time
+																	</div>
+																	<TimePicker
+																		placeholder="Select Time"
+																		use12Hours={true}
+																		showSecond={false}
+																		focusOnOpen={true}
+																		format="hh:mm A"
+																		onChange={(e) =>
+																			updatetime('starttime', index, e, key)}
+																	/>
+																	<p className="error mt-2">
+																		{value.error_starttime}
+																	</p>
+																</div>
+																<div className="col-md-2 py-3">
+																	<div className="pb-2 custom_astrick">End time</div>
+																	<TimePicker
+																		placeholder="Select Time"
+																		use12Hours={true}
+																		showSecond={false}
+																		focusOnOpen={true}
+																		format="hh:mm A"
+																		onChange={(e) =>
+																			updatetime('endtime', index, e, key)}
+																	/>
+																	<p className="error mt-2">{value.error_endtime}</p>
+																</div>
+																<div className="col-md-2 py-3">
+																	<MdStarRate />
+																</div>
 															</div>
-															<div className="col-md-2 py-3">
-																<div className="pb-2 custom_astrick">Start time</div>
-																<TimePicker
-																	placeholder="Select Time"
-																	use12Hours={true}
-																	showSecond={false}
-																	focusOnOpen={true}
-																	format="hh:mm A"
-																	onChange={(e) =>
-																		updatetime('starttime', index, e, key)}
-																/>
-																<p className="error mt-2">{value.error_starttime}</p>
-															</div>
-															<div className="col-md-2 py-3">
-																<div className="pb-2 custom_astrick">End time</div>
-																<TimePicker
-																	placeholder="Select Time"
-																	use12Hours={true}
-																	showSecond={false}
-																	focusOnOpen={true}
-																	format="hh:mm A"
-																	onChange={(e) =>
-																		updatetime('endtime', index, e, key)}
-																/>
-																<p className="error mt-2">{value.error_endtime}</p>
-															</div>
-															<div className="col-md-2 py-3">
-																<MdStarRate />
-															</div>
-														</div>
-													))}
+														))}
 												</div>
 											)}
 										</div>

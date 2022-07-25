@@ -301,6 +301,8 @@ function Planning(props) {
 				setData((prev) => ({ ...prev, location_id: result.value }));
 			}
 			updateCostCenter(result.value);
+		}else{
+			setData((prev) => ({ ...prev, location_id: ''}));
 		}
 	};
 	let updateCostCenter = (loc_id) => {
@@ -315,6 +317,9 @@ function Planning(props) {
 			if (result != '') {
 				setData((prev) => ({ ...prev, cost_center_id: result.value }));
 			}
+		}else{
+			setData((prev) => ({ ...prev, cost_center_id: '' }));
+
 		}
 	};
 
