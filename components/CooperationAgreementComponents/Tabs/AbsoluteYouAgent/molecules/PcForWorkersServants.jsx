@@ -31,6 +31,10 @@ const PcForWorkersServants = () => {
       [workersType]: false,
       [servantsType]: false
     }
+    , noPcWarning: {
+      [workersType]: false,
+      [servantsType]: false
+    }
   });
 
   useEffect(() => {
@@ -47,7 +51,7 @@ const PcForWorkersServants = () => {
     updateStateChanges({alreadyLinked: alreadyLinked, workersServantsCompState: {...compState, ...obj},
       workerServentsCompLoaded: true,
     })
-    setCompState({...compState, ...obj});
+    setCompState({...compState, ...obj });
   }, [])
 
   /**
@@ -70,6 +74,8 @@ const PcForWorkersServants = () => {
      const value = target.value;
      dataObj['selectedPc'][type] = value;
      dataObj['selectedEmpId'][type] = [];
+     dataObj['noPcWarning'][1] = false;
+     dataObj['noPcWarning'][2] = false;
    } else {
      const value = target.map(val => val.value);
      dataObj['selectedEmpId'][type] = value;
@@ -119,7 +125,7 @@ const PcForWorkersServants = () => {
 
 
   const employeeTypeParitairDropDown = (type = 1) => {
-    const { alreadyLinked, employeeTyperError } = compState;
+    const { alreadyLinked, employeeTyperError, noPcWarning } = compState;
     let selectedPc = compState['selectedPc'][type];
     let emplOptions = pcLinkedEmployeeTypes[selectedPc] ? pcLinkedEmployeeTypes[selectedPc] : [];
     let pcOptions = helpers.returnNotAddedPcOptions(pcArray, state['workersServantsCompState']);
@@ -137,6 +143,7 @@ const PcForWorkersServants = () => {
                 isMulti={false}
                 className="col-md-12"
               />
+          {noPcWarning[type] === true && <small style={{ color:'red', display: 'block', marginTop: '10px' }}> This field is required. </small>}
         </div>
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title="Selection of employee types (statuut) that can be used" mandotory={true} />
@@ -236,7 +243,7 @@ const PcForWorkersServants = () => {
     }
     stateObj['alreadyLinked'] = updateAlreadyLinkedPcIds(stateObj['newItems']);
     dependecyDataStatus['worksServantsData'] = true;
-    updateStateChanges({ workersServantsCompState: stateObj, dependecyDataStatus })
+    updateStateChanges({ workersServantsCompState: stateObj, dependecyDataStatus, alreadyLinked: stateObj['alreadyLinked'] })
     setCompState(stateObj);
   }
 

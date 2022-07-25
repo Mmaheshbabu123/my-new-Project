@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
-import { submitService } from './Tabs/submitService';
+import { submitService } from './Tabs/submitService'; //Might needed NOSONAR
 
 const CooperationAgreementTabs = ({corporateAgreementId = 0, cooperTabs = [], selectedTabParam, salesAgentRefId = 0 }) => {
-  const { state: { selectedTabId, filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+  const { state: { selectedTabId, filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);   //Might needed NOSONAR
   const router = useRouter();
 
   const handleTabClick = async (clickedTabId) => {
@@ -27,7 +27,10 @@ const CooperationAgreementTabs = ({corporateAgreementId = 0, cooperTabs = [], se
 
   useEffect(() => {
     let tabId = Number(selectedTabParam) || selectedTabId;
-    updateStateChanges({ selectedTabId: tabId, root_parent_id: Number(corporateAgreementId), salesAgentRefId, proceedToNextTabWarning: false });
+    updateStateChanges({ selectedTabId: tabId,
+      root_parent_id: Number(corporateAgreementId), salesAgentRefId,
+      uniqueId: 0,
+      proceedToNextTabWarning: false });
   }, [selectedTabParam])
 
   return (
