@@ -198,10 +198,10 @@ function Addtiming(props) {
 	};
 
 	return (
-		<div className="container">
+		<div className="container-fluid">
 			<form onSubmit={(e) => submitPlanningTimings(e)}>
-				<div className="row">
-					<p className="my-4 h4">Add timing</p>
+				<div className="row m-0 p-0">
+					<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-mediun-24">Add timing</h1>
 					{employee_planning.length > 1 && (
 						<div className="form-check mt-2 ">
 							<input
@@ -213,7 +213,7 @@ function Addtiming(props) {
 									setChecked(!checked);
 								}}
 							/>
-							<label className="form-check-label " htmlFor="flexCheckChecked">
+							<label className="form-check-label poppins-regular-18px pt-1 " htmlFor="flexCheckChecked ">
 								Same timing for all employees
 							</label>
 						</div>
@@ -224,19 +224,20 @@ function Addtiming(props) {
 								{employee_planning.map((result) => (
 									<div
 										key={result.id}
-										className={`row d-flex justify-content-start py-3 my-3 ${style.sec_background}`}
+										className={`row d-flex justify-content-start py-3 my-3  ${style.sec_background}`}
 									>
-										<div className="col-md-1 h5">{++count}.</div>
-										<div className="col-md-3 h6">{result.employee_name}</div>
-										<div className="col-md-4 h6">{result.employee_type_name}</div>
-										<div className="col-md-3 h6">{result.function_name}</div>
+										<div className="col-md-1  poppins-regular-18px">{++count}.</div>
+										<div className="col-md-3  poppins-regular-18px">{result.employee_name}</div>
+										<div className="col-md-4  poppins-regular-18px">{result.employee_type_name}</div>
+										<div className="col-md-3  poppins-regular-18px">{result.function_name}</div>
 									</div>
 								))}
 							</div>
 							<div className="mt-2 row">
-								<div className="col-md-1" />
-								<div className="col-md-11">
+								
+								<div className="col-md-12 p-0">
 									<Calendar
+									 className='timepage-calander'
 										value={value}
 										multiple={true}
 										format="DD/MM/YYYY"
@@ -250,14 +251,14 @@ function Addtiming(props) {
 							</div>
 							<div className="mt-3 pt-2">
 								{selectedDate.map((value, index) => (
-									<div className="row" key={index}>
-										<div className="col-md-1" />
-										<div className="col-md-3 py-3">
-											<div className="pb-2" />
+									<div className="row table-title-bg" key={index}>
+										
+										<div className="col-md-2 py-3 color-skyblue2">
+											<div className="pb-2 color-skyblue2" />
 											{value}
 										</div>
-										<div className="col-md-2 py-3">
-											<div className="pb-2 custom_astrick">Start time</div>
+										<div className="col-md-4 d-flex py-3">
+											<div className="py-1 px-2  custom_astrick poppins-regular-20px">Start time</div>
 											<TimePicker
 												placeholder="Select Time"
 												use12Hours
@@ -268,8 +269,8 @@ function Addtiming(props) {
 											/>
 											<p className="error mt-2">{error_start_time}</p>
 										</div>
-										<div className="col-md-2 py-3">
-											<div className="pb-2 custom_astrick">End time</div>
+										<div className="col-md-4 d-flex py-3">
+											<div className="py-1 px-2  custom_astrick poppins-regular-20px">End time</div>
 											<TimePicker
 												placeholder="Select Time"
 												use12Hours
@@ -281,7 +282,7 @@ function Addtiming(props) {
 											<p className="error mt-2">{error_end_time}</p>
 										</div>
 										<div className="col-md-2 py-3">
-											<MdStarRate />
+											<MdStarRate className='purple-color' />
 										</div>
 									</div>
 								))}
@@ -296,7 +297,7 @@ function Addtiming(props) {
 											<div
 												className={`row d-flex justify-content-start py-3 my-3 ${style.sec_background}`}
 											>
-												<div className="col-md-1 h5">
+												<div className="col-md-1 poppins-regular-18px">
 												{employee_planning.length > 1 && <span>
 													{result.collapseOpen == true ? (
 														<FaRegMinusSquare onClick={() => updateState(result.id)} />
@@ -306,16 +307,18 @@ function Addtiming(props) {
 													</span>
 }
 												</div>
-												<div className="col-md-3 h6">{result.employee_name}</div>
-												<div className="col-md-4 h6">{result.employee_type_name}</div>
-												<div className="col-md-3 h6">{result.function_name}</div>
+												<div className="col-md-3 poppins-regular-18px">{result.employee_name}</div>
+												<div className="col-md-4 poppins-regular-18px">{result.employee_type_name}</div>
+												<div className="col-md-3 poppins-regular-18px">{result.function_name}</div>
 											</div>
 											{result.collapseOpen == true && (
 												<div>
 													<div className="mt-2 row">
-														<div className="col-md-1" />
-														<div className="col-md-11">
+														
+														
+														<div className="col-md-12 p-0">
 															<Calendar
+															    className='timepage-calander'
 																value={result.date}
 																multiple={true}
 																format="DD/MM/YYYY"
@@ -329,14 +332,14 @@ function Addtiming(props) {
 													</div>
 													{result.timings.length > 0 &&
 														result.timings.map((value, index) => (
-															<div className="row" key={index}>
-																<div className="col-md-1" />
-																<div className="col-md-3 py-3">
-																	<div className="pb-2" />
+															<div className="row table-title-bg" key={index}>
+															
+																<div className="col-md-2 py-3 color-skyblue2">
+																	<div className="pb-2 color-skyblue2" />
 																	{value.date}
 																</div>
-																<div className="col-md-2 py-3">
-																	<div className="pb-2 custom_astrick">
+																<div className="col-md-4 py-3 d-flex">
+																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
 																		Start time
 																	</div>
 																	<TimePicker
@@ -352,8 +355,8 @@ function Addtiming(props) {
 																		{value.error_starttime}
 																	</p>
 																</div>
-																<div className="col-md-2 py-3">
-																	<div className="pb-2 custom_astrick">End time</div>
+																<div className="col-md-4 d-flex py-3">
+																	<div className="py-1 px-2 custom_astrick poppins-regular-20px">End time</div>
 																	<TimePicker
 																		placeholder="Select Time"
 																		use12Hours={true}
@@ -366,7 +369,7 @@ function Addtiming(props) {
 																	<p className="error mt-2">{value.error_endtime}</p>
 																</div>
 																<div className="col-md-2 py-3">
-																	<MdStarRate />
+																	<MdStarRate  className='purple-color'/>
 																</div>
 															</div>
 														))}
@@ -380,17 +383,17 @@ function Addtiming(props) {
 					)}
 				</div>
 
-				<div className="col-md-12 mt-4 ">
+				<div className="col-md-12 mt-4  mb-4">
 					<div className="d-inline">
 						<button type="button" className="btn btn-link text-dark btn-block ">
 							<Link href={'/planning/functions/' + router.query.p_unique_key}>
-								<p>Back</p>
+								<p className='bg-white  back-btn-text '>BACK</p>
 							</Link>
 						</button>
 					</div>
 					<div className="float-end ">
-						<button type="submit" className="btn btn-secondary   btn-block ">
-							Next
+						<button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end ">
+							NEXT
 						</button>
 					</div>
 				</div>

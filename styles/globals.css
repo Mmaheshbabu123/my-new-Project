@@ -338,7 +338,9 @@ body {
 .custom-btn:hover {
     color: var(--color-white) !important;
     background-color: var(--color-purple) !important;
-    border: var(--color-purple) !important;
+    /* border: var(--color-purple) !important; */
+    font-size: var(--font-size-m);
+    font-family: var(--font-family-poppins-regular);
 }
 .clip0 {
     clip-path: polygon(0% -5%, 3.3% 0.3%, 20% 62%, 0% 100%);
@@ -685,4 +687,95 @@ input {
 }
 .table-title-bg {
 background: var(--bg-grey-medium);
+}
+.footer {
+    position: sticky !important;
+    bottom: 0;
+}
+.timepage-calander .rmdp-header {
+    background: var(--color-skyblue);
+    margin-top: 0px;
+    height: 45px;
+}
+.timepage-calander .rmdp-calendar   {
+   padding: 0px;
+   color: var(--color-white);
+   font-family: var(--font-family-poppins-regular);
+}
+.timepage-calander .rmdp-arrow {
+    border: solid #FFFFFF4D;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    height: 14px;
+    margin-top: 3px;
+    padding: 2px;
+    width: 14px;
+    font-weight: bold;
+}
+/* .timepage-calander .rmdp-left:hover {
+    background-color: none;
+    border: solid #FFFFFF4D;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    height: 14px;
+    margin-top: 3px;
+    padding: 2px;
+    width: 14px;
+    font-weight: bold;
+} */
+.timepage-calander .rmdp-header-values {
+    color: var(--color-white);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-l);
+    padding-top: 4px;
+}
+.timepage-calander .rmdp-left {
+    left: 38%;
+    /* transform: translateY(-39%); */
+}
+.timepage-calander .rmdp-right {
+    right: 38%;
+    /* transform: translateY(-39%); */
+}
+.timepage-calander .rmdp-week-day {
+color: var(--color-skyblue);
+font-size: var(--font-size-l);
+}
+.timepage-calander .rmdp-day.rmdp-today span {
+    background: var(--color-skyblue) !important;
+    color: var(--color-white);
+    width: 60px;
+    margin: auto;
+    height: 45px;
+}
+.timepage-calander .rmdp-week {
+    height: 45px;
+}
+.timepage-calander .rmdp-day {
+    color: var(--color-label-footer-gray);
+}
+.rmdp-day.rmdp-selected span:not(.highlight) {
+    width: 60px;
+    height: 45px;
+    margin: auto;
+}
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+    /* background-color: rgb(211,211,211); */
+    background-color: var(--color-input-border-lightgrey) !important;
+    box-shadow: var(--color-border-lightgrey);
+    width: 60px;
+    height: 45px;
+    margin: auto;
+}
+.timepage-calander .rmdp-day-picker  {
+ background-color: var(--bg-grey-medium);
+}
+.purple-color {
+    color: var(--color-purple);
+    font-size: var(--font-size-xl);
+}
+.color-skyblue2 {
+  background-color: var(--color-skyblue);
+  font-size: var(--font-size-l);
+  color: var(--color-white);
 }
