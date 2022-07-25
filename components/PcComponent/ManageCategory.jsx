@@ -279,6 +279,24 @@ const ManageCategoryComponent = () => {
 						</table>
 					</div>
 				</div>
+				<div className="">
+					{categories.length >= itemsPerPage && (
+						<ReactPaginate
+							breakLabel="..."
+							nextLabel={<AiOutlineArrowRight />}
+							onPageChange={handlePageClick}
+							pageRangeDisplayed={5}
+							pageCount={pageCount}
+							previousLabel={<AiOutlineArrowLeft />}
+							renderOnZeroPageCount={null}
+							containerClassName={'pagination justify-content-center'}
+							itemClass="page-item"
+							linkClass="page-link"
+							subContainerClassName={'pages pagination'}
+							activeClassName={'active'}
+						/>
+					)}
+				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
@@ -314,24 +332,6 @@ const ManageCategoryComponent = () => {
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletecat} />
 			)}
-			<div className="">
-				{categories.length >= itemsPerPage && (
-					<ReactPaginate
-						breakLabel="..."
-						nextLabel={<AiOutlineArrowRight />}
-						onPageChange={handlePageClick}
-						pageRangeDisplayed={5}
-						pageCount={pageCount}
-						previousLabel={<AiOutlineArrowLeft />}
-						renderOnZeroPageCount={null}
-						containerClassName={'pagination justify-content-center'}
-						itemClass="page-item"
-						linkClass="page-link"
-						subContainerClassName={'pages pagination'}
-						activeClassName={'active'}
-					/>
-				)}
-			</div>
 		</div>
 	);
 };
