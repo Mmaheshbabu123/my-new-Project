@@ -31,7 +31,8 @@ export const submitService = {
   onlineDetailsPostData,
   invoiceDetailsPostData,
   contractPersonsPostData,
-  forWardToNextStepTab
+  forWardToNextStepTab,
+  keepActiveClassOnSelectedTabId
 }
 
 
@@ -331,17 +332,17 @@ function checkRequiredContractPersons(tab_data,tab_key,selectPersonId) {
  * @param  {int} draft                          [description]
  * @return {void}                               [description]
  */
-async function forWardToNextStepTab(router, contextState, contextUpdate, currentTab, draft) {
+async function forWardToNextStepTab(router, contextState, contextUpdate, currentTab, draft, forwardtabId = 0) {
   addRemoveLoadedClass(1, draft);
   stateObj = contextState;
   selectedTabId = currentTab;
   updateStateChanges = contextUpdate;
-
   let proceed = draft === 1 ? true : proceedToNextStepTab();
   if(proceed) {
     await saveDataTabWise(saveCooperationDataTabWise).then((response) => {
+      addRemoveLoadedClass(0, draft);
       if(response.status === 200) {
-        let nextTab = selectedTabId + 1;
+        let nextTab = forwardtabId ? forwardtabId : selectedTabId + 1;
         let obj = {
           selectedTabId: nextTab,
           proceedToNextTabWarning: false,
@@ -359,16 +360,21 @@ async function forWardToNextStepTab(router, contextState, contextUpdate, current
           router.push(router, undefined, { shallow: true })
           updateStateChanges(obj);
         }
+        return proceed;
       } else {
         console.error(response.msg);
+        return false;
       }
     }).catch(error => {
+      addRemoveLoadedClass(0, draft);
       console.log(error);
+      return false;
     })
   } else {
+    addRemoveLoadedClass(0, draft);
     updateStateChanges({proceedToNextTabWarning: true});
+    return false;
   }
-  addRemoveLoadedClass(0, draft);
 }
 
 /**
@@ -441,6 +447,11 @@ function addRemoveLoadedClass(add = 1, draft = 0) {
   document.querySelectorAll(`.sv-save-btn-text_${draft}`).forEach(el =>
     add ? el.classList.add("spinner-border") : el.classList.remove("spinner-border")
   );
+}
+
+function keepActiveClassOnSelectedTabId(selectedTabId, clickedTabId) {
+  document.getElementById(`cooperation_tab_${selectedTabId}`).classList.add('active')
+  document.getElementById(`cooperation_tab_${clickedTabId}`).classList.remove('active')
 }
 
 //---------------------------//---------------------------//---------------------------//---------------------------
