@@ -3,20 +3,31 @@ import { useRouter } from 'next/router';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
+import { submitService } from './Tabs/submitService';
 
 const CooperationAgreementTabs = ({corporateAgreementId = 0, cooperTabs = [], selectedTabParam, salesAgentRefId = 0 }) => {
-  const { state: { selectedTabId, filledTabs }, updateStateChanges } = useContext(CooperationAgreementContext);
+  const { state: { selectedTabId, filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
 
-  const handleTabClick = (selectedTabId) => {
-    router.query.selectedTabId = selectedTabId
-    router.push(router, undefined, { shallow: true })
-    updateStateChanges({selectedTabId: selectedTabId})
+  const handleTabClick = async (clickedTabId) => {
+    if(clickedTabId === selectedTabId) return;
+    // let disabledTab = !filledTabs.includes(Number(selectedTabId));
+    // if(disabledTab || await forWardToNextStepTab(clickedTabId)) {
+      router.query.selectedTabId = clickedTabId
+      router.push(router, undefined, { shallow: true })
+      updateStateChanges({selectedTabId: clickedTabId})
+    // } else {
+       // submitService.keepActiveClassOnSelectedTabId(selectedTabId, clickedTabId);
+    // }
   }
+
+  // const forWardToNextStepTab = async (clickedTabId, draft = 0) => {
+  //   return await submitService.forWardToNextStepTab(router, state, updateStateChanges, selectedTabId, draft, clickedTabId);
+  // }
 
   useEffect(() => {
     let tabId = Number(selectedTabParam) || selectedTabId;
-    updateStateChanges({ selectedTabId: tabId, root_parent_id: Number(corporateAgreementId), salesAgentRefId });
+    updateStateChanges({ selectedTabId: tabId, root_parent_id: Number(corporateAgreementId), salesAgentRefId, proceedToNextTabWarning: false });
   }, [selectedTabParam])
 
   return (
@@ -27,8 +38,8 @@ const CooperationAgreementTabs = ({corporateAgreementId = 0, cooperTabs = [], se
         return(
           <li key={tab.id} className="nav-item" role="presentation">
             <button
-              className={`nav-link py-3 ${disabled} ${selectedTabId === tab.id ? 'active custom-active' : 'custom-inactive'}`}
-              id="pills-pc-tab"
+              className={`nav-link py-3 ${disabled} ${selectedTabId === tab.id ? 'active custom-active' : ''}`}
+              id={`cooperation_tab_${tab.id}`}
               data-bs-toggle="pill"
               data-bs-target="#pills-pc"
               type="button"
