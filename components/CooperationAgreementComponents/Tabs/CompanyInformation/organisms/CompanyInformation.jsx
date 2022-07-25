@@ -21,12 +21,10 @@ const CompanyInformation = (props) => {
    if(apiData) {
     tab_2 = {...apiData,...tab_2}
    }
-   console.log(data, filledTabs);
    updateStateChanges({tab_2,tab_2_action,loadedTabs:[...state.loadedTabs, selectedTabId],
      filledTabs: data.completedTabIds.length ? [...filledTabs, ...data.completedTabIds] : filledTabs,
    })
  }
- console.log(filledTabs);
     return(
       <div className="" disabled={!filledTabs.includes(selectedTabId)}>
         <CompanyDetails />

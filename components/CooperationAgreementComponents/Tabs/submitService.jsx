@@ -71,39 +71,58 @@ function proceedToNextStepTab() {
   return validationStatus;
 }
 
+var startDateAgreement    = 1;
+var absoluteConsultant    = 2;
+var absoluteConsultantNum = 3;
 function checkAbsoluteAgentTabValidation() {
-  var startDateAgreement    = 1;
-  var absoluteConsultant    = 2;
-  var absoluteConsultantNum = 3;
+  let basicDetailsFilled = true;
   let tabStateObj = stateObj['tab_1'];
-  if(!tabStateObj[startDateAgreement] || !tabStateObj[absoluteConsultant] || !tabStateObj[absoluteConsultantNum]) {
+  let validations = tabStateObj['validations'];
+  if(!checkBasicFieldAbsoluteTab(validations, tabStateObj)) {
+    basicDetailsFilled = false;
+  }
+  let compStateObj = stateObj['workersServantsCompState'] || {};
+  let noPcWarning = compStateObj['noPcWarning'];
+  let contextWS = tabStateObj['worksServantsData'] || {};
+  let stateWS = {pc_id: compStateObj['selectedPc'] || 0, employee_type_id: compStateObj['selectedEmpId'] || 0};
+  let employeeTyperError = checkEachPcHasEmployeetypeOrNot(stateWS);
+  if(employeeTyperError[1] || employeeTyperError[2]) {
+    compStateObj['employeeTyperError'] = employeeTyperError;
+    updateStateChanges({workersServantsCompState: compStateObj, uniqueId: Math.random()});
     validationStatus = false;
+    return validationStatus;
   }
-  if(validationStatus) {
-    let compStateObj = stateObj['workersServantsCompState'] || {};
-    let contextWS = tabStateObj['worksServantsData'] || {};
-    let stateWS = {pc_id: compStateObj['selectedPc'] || 0, employee_type_id: compStateObj['selectedEmpId'] || 0};
-    let employeeTyperError = checkEachPcHasEmployeetypeOrNot(stateWS);
-    if(employeeTyperError[1] || employeeTyperError[2]) {
-      compStateObj['employeeTyperError'] = employeeTyperError;
-      updateStateChanges({workersServantsCompState: compStateObj, uniqueId: Math.random()});
-      validationStatus = false;
-      return validationStatus;
-    }
-    validationStatus = loopAndCheckLength(contextWS);
-    if(!validationStatus) {
-      let { employee_type_id } = stateWS;
-      validationStatus = loopAndCheckLength(employee_type_id);
-    }
+  validationStatus = loopAndCheckLength(contextWS, noPcWarning);
+  if(!validationStatus) {
+    let { employee_type_id } = stateWS;
+    validationStatus = loopAndCheckLength(employee_type_id, noPcWarning);
+    if(!validationStatus)
+      // updateStateChanges({workersServantsCompState: compStateObj, uniqueId: Math.random()});
   }
-  return validationStatus;
+  return basicDetailsFilled && validationStatus ? true : false;
 }
 
-function loopAndCheckLength(obj) {
+function checkBasicFieldAbsoluteTab(validations, tabStateObj) {
+  let proceed = true;
+  Object.keys(tab_1).map(eachField => {
+    if(!tabStateObj[eachField]) {
+      proceed = false;
+      validations[eachField] = true;
+    }
+    return 1;
+  })
+  return proceed;
+}
+
+function loopAndCheckLength(obj, validations) {
   let tempStatus = false;
-  Object.values(obj).map(workersServant => {
+  Object.values(obj).map((workersServant, index) => {
       if(workersServant.length && !tempStatus) {
         tempStatus = true;
+        validations[1] = false;
+        validations[2] = false;
+      } else {
+        validations[index + 1] = true;
       }
     return 1;
   })
@@ -305,7 +324,6 @@ function checkRequiredContractPersons(tab_data,tab_key,selectPersonId) {
   let tempStatus = true;
   let contractObj = stateObj[tab_key];
   let validationObj;
-  //console.log(contractObj);return;
   for(const key in contractObj[selectPersonId]) {
 
     if(!checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj[selectPersonId]) && key !== 'loaded') {
