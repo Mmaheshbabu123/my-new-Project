@@ -124,7 +124,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
                 <td>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found... </p>}
+            : <p style={{paddingTop: '10px'}}> No records </p>}
           </table>
         </div>
         <div>
