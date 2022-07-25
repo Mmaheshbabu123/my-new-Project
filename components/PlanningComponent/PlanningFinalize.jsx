@@ -53,30 +53,30 @@ const PlanningFinalize = () => {
 		[ router.query ]
 	);
 	return (
-		<div className="container">
+		<div className="container p-0 m-0">
 			<div className="row">
-				<p className="mt-2 mb-2 h3">Weekly Planning</p>
-				<p className="h6">For the week of Monday from 27/06/2022 to sunday 03/07/2022</p>
+				<p className=" mt-1 mb-1 font-weight-bold   bitter-italic-normal-mediun-24">Weekly Planning</p>
+				<p className=" poppins-regular-16px">For the week of Monday from 27/06/2022 to sunday 03/07/2022</p>
 
 				<div className=" mt-4 d-flex justify-content-end">
 					<div className="d-inline ">
-						<button type="button" className="btn btn-dark   btn-block ">
+						<button type="button" className="btn  btn my-2 skyblue-bg-color border-0 poppins-regular-24px  rounded-0 btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln   btn-block ">
 							Planning view
 						</button>
 					</div>
 					<div className=" ">
-						<button type="submit" className="btn btn-outline-dark ms-2   btn-block ">
+						<button type="submit" className="btn  my-2 border-0  btn-block btn-bg-gray-medium">
 							Encodage view
 						</button>
 					</div>
 				</div>
 				<div className=" mt-4 d-flex mb-3  ">
-					<select className="form-select w-25 me-2 ">
+					<select className="form-select w-25 me-2  border-0 select-bg-gray">
 						<option> Select company</option>
 						<option value="">Infanion</option>
 						<option value="">Wipro</option>
 					</select>
-					<select className="form-select w-25 me-2 ">
+					<select className="form-select w-25 me-2 border-0 select-bg-gray">
 						<option>Select Location</option>
 						<option value="">Bangalore</option>
 						<option value="">Mangalore</option>
@@ -88,90 +88,90 @@ const PlanningFinalize = () => {
 					</select> */}
 				</div>
 				<div className="mt-2 ">
-					<table className="table border border-secondary ">
+					<table className="table border table-border-gray ">
 						<thead className="">
-							<tr className="">
-								<th className="border-end border-secondary">
+							<tr className='col-md-12 select-bg-gray '><p className='bitter-italic-normal-mediun-20 col-md-12 text-center'>current week</p> </tr>
+							<tr className="skyblue-bg-color">
+								<th className="border-end table-border-gray  text-center align-items-center justify-content-center ">
 									Monday<br />27-06-2022
 								</th>
-								<th className="border-end border-secondary">
+								<th className="border-end table-border-gray   text-center align-items-center justify-content-center">
 									Tuesday <br />28-06-2022
 								</th>
-								<th className="border-end border-secondary">
+								<th className="border-end table-border-gray   text-center align-items-center justify-content-center">
 									Wednesday <br />29-06-2022
 								</th>
-								<th className="border-end border-secondary">
+								<th className="border-end table-border-gray   text-center align-items-center justify-content-center">
 									Thursday <br />30-06-2022
 								</th>
-								<th className="border-end border-secondary">
+								<th className="border-end table-border-gray   text-center align-items-center justify-content-center">
 									Friday<br />01-07-2022
 								</th>
-								<th className="border-end border-secondary">
+								<th className="border-end table-border-gray  text-center  align-items-center justify-content-center">
 									Saturday<br />02-07-2022
 								</th>
-								<th>
+								<th className="border-end table-border-gray  text-center  align-items-center justify-content-center">
 									Sunday<br />13-03-2022
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr className="border-bottom border-secondary">
+							<tr className="border-bottom table-border-gray">
 								{weeklyplanning.map((value) => (
-									<td className="border-end border-secondary" key={value.id}>
-										<a>
+									<td className="border-end table-border-gray font-poppins-light" key={value.id}>
+										
+										<div className='text-right color-skyblue my-4 text-end'><a>
 											<MdEdit className="float-right" />
 											{/* <i className="bi bi-pencil float-right" /> */}
-										</a>
-										{value.fullName}
+										</a></div>
+										<p className='color-skyblue'>{value.fullName}</p>
 										<br />
-										{value.worktype}
+										<p>{value.worktype}</p>
 										<br />
-										{value.Productie}
+										<p>{value.Productie}</p>
 										<br />
-										{value.salary} <br />
-										{value.time} <br />
-										{value.totalhours}
+										<p>{value.salary}</p> <br />
+										<p>{value.time}</p> <br />
+										<p>{value.totalhours}</p>
 										<br />
 									</td>
 								))}
-								<td className="border-end border-secondary" />
-								<td className="border-end border-secondary" />
-								<td className="border-end border-secondary" />
-								<td className="border-end border-secondary" />
+								<td className="border-end table-border-gray" />
+								<td className="border-end table-border-gray" />
+								<td className="border-end table-border-gray" />
+								<td className="border-end table-border-gray" />
 							</tr>
-							<tr className="border-bottom border-secondary">
+							<tr className="border-bottom table-border-gray">
 								{weeklyplanning.map((value) => (
-									<td className="border-end border-secondary" key={value.id}>
-										{value.fullName}
+									<td className="border-end table-border-gray font-poppins-light" key={value.id}>
+										<p>{value.fullName}</p>
 										<br />
-										{value.worktype}
+										<p>{value.worktype}</p>
 										<br />
-										{value.Productie}
+										<p>{value.Productie}</p>
 										<br />
-										{value.salary}
-										<br />
-										{value.time}
-										<br />
-										{value.totalhours}
+										<p>{value.salary}</p> <br />
+										<p>{value.time}</p> <br />
+										<p>{value.totalhours}</p>
 										<br />
 									</td>
 								))}
-								<td className="border-end border-secondary" />
-								<td className="border-end border-secondary" />
-								<td className="border-end border-secondary" />
-								<td className="border-end border-secondary" />
+								<td className="border-end table-border-gray" />
+								<td className="border-end table-border-gray" />
+								<td className="border-end table-border-gray" />
+								<td className="border-end table-border-gray" />
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div className="text-end ">
-					<button type="submit" className="btn btn-secondary   btn-block ">
+					<button type="submit" className="btn skyblue-bg-color border-0   btn-block ">
 						Dashboard
 					</button>
 				</div>
-				<div>
-					<p className="h5">Is the planning final?</p>
-					<div>
+				<div className='col-12 mb-4'>
+					<p className="poppins-regular-20px mb-3">Is the planning final?</p>
+					<div className='mb-2'>
 						<input
 							className="form-check-input"
 							type="radio"
@@ -180,9 +180,9 @@ const PlanningFinalize = () => {
 							value=""
 							aria-label="..."
 						/>
-						<labe className="ms-2">Yes</labe>
+						<labe className="ms-2 poppins-regular-16px">Yes</labe>
 					</div>
-					<div className="">
+					<div className="mb-2">
 						<input
 							className="form-check-input "
 							type="radio"
@@ -191,7 +191,21 @@ const PlanningFinalize = () => {
 							value=""
 							aria-label="..."
 						/>
-						<labe className="ms-2">No</labe>
+						<labe className="ms-2 poppins-regular-16px">No</labe>
+					</div>
+				</div>
+				<div className="row mt-4 mb-4 col-md-12 m-0">
+					<div className="col-md-6 p-0">
+						<button type="button" className="btn  btn-block px-0 ">
+							
+								<p className="bg-white  back-btn-text ">BACK</p>
+							
+						</button>
+					</div>
+					<div className="col-md-6 p-0">
+						<button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end">
+							SUBMIT
+						</button>
 					</div>
 				</div>
 			</div>

@@ -29,7 +29,7 @@ function EmployeeMonthlyPlanning(props) {
 	const viewMoreItems = () => {
 		setVisible((prevValue) => prevValue + 3);
 	};
-
+	////////////////////////////////////////////////////////////////
 	// const [ data, setData ] = useState();
 	/**
 	 * FETCHING EMPLOYEE ID
@@ -77,7 +77,8 @@ function EmployeeMonthlyPlanning(props) {
 			endTime: '3PM',
 			employer: 'Preeti',
 			location: 'Bangalore',
-			Date: '06 - 07 - 2018'
+			Date: '06 - 07 - 2018',
+			company: 'Infanion'
 		},
 		{
 			title: 'Book Flights to San Fran for Sales Trip',
@@ -87,7 +88,8 @@ function EmployeeMonthlyPlanning(props) {
 			endTime: '3PM',
 			employer: 'Preeti',
 			location: 'Bangalore',
-			Date: '06 - 07 - 2018'
+			Date: '06 - 07 - 2018',
+			company: 'Infanion'
 		},
 		{
 			title: 'Install New Router in Dev Room',
@@ -97,7 +99,8 @@ function EmployeeMonthlyPlanning(props) {
 			endTime: '3PM',
 			employer: 'Preeti',
 			location: 'Bangalore',
-			Date: '06 - 07 - 2018'
+			Date: '06 - 07 - 2018',
+			company: 'Infanion'
 		},
 		{
 			title: 'Approve Personal Computer Upgrade Plan',
@@ -106,7 +109,8 @@ function EmployeeMonthlyPlanning(props) {
 			startTime: '1 PM',
 			endTime: '3PM',
 			employer: 'Preeti',
-			location: 'Bangalore'
+			location: 'Bangalore',
+			company: 'Infanion'
 		},
 		{
 			title: 'Final Budget Review',
@@ -250,6 +254,7 @@ function EmployeeMonthlyPlanning(props) {
 									<td className="border-end border-info">{result.endTime}</td>
 									<td className="border-end  border-info">{result.employer}</td>
 									<td className="border-end  border-info">{result.location}</td>
+									<td className="border-end  border-info">{result.company}</td>
 									<td className="d-flex justify-content-center">
 										<AiFillEye className="mt-2 ms-3 " />
 

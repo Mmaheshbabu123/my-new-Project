@@ -92,9 +92,9 @@ function WeeklyPlanning(props) {
 		[ empr_id ]
 	);
 	return (
-		<div className="container">
+		<div className="container p-0 m-0">
 			<div className="row">
-				<p className="mt-2 mb-2 h3">Weekly Planning</p>
+				<p className="  mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-mediun-24">Weekly Planning</p>
 				{showview && <p className="h6">For the week of Monday from 10/07/2022 to sunday 17/07/2022</p>}
 
 				{showview && (

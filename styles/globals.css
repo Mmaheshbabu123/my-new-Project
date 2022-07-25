@@ -184,6 +184,12 @@ body {
     font-weight: 500;
     font-size: var(--font-size-xxxl);
 }
+.bitter-italic-normal-mediun-20 {
+    color: var(--color-purple);
+    font-family: var(--font-family-bitter-italic-normal-medium);
+    font-weight: 500;
+    font-size: var(--font-size-xl);
+}
 .poppins-regular-14px {
     color: var(--color-label-footer-gray);
     font-family: var(--font-family-poppins-regular);
@@ -481,8 +487,9 @@ a {
 	color:#999 !important;
 }
 .container-height {
-	min-height: calc(90vh - 84px);
-    /* min-height: calc(90vh - 90px); */
+	/* min-height: calc(90vh - 100px); */
+    min-height: calc(92vh - 52px);
+    /* height: 86.5vh; */
 }
 
 .atom-input-field-default {
@@ -637,7 +644,33 @@ left: 43%;
 .custom-header {
     background-color: var(--color-white);
 }
-
+.footer-bg-color {
+background-color: var(--color-label-footer-gray);
+}
+input {
+    font-family: var(--font-family-poppins-light);
+}
+.btn-bg-gray-medium {
+   background-color: var(--bg-grey-medium);
+   color: var(--color-label-footer-gray);
+   font-size: var(--font-size-l);
+}
+.select-bg-gray {
+    background-color: var(--bg-grey-medium);
+    color: var(--color-label-footer-gray);
+   font-size: var(--font-size-m);
+}
+.color-skyblue {
+    color: var(--color-skyblue);
+    font-size: 20px;
+}
+.font-poppins-light {
+    font-family: var(--font-family-poppins-light);
+    font-size: var(--font-size-small);
+}
+.table-border-gray {
+    border: apx solid var(--bg-gray-dark);
+}
 div[disabled]{
 	pointer-events: none;
   opacity: 0.7;
