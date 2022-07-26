@@ -54,7 +54,7 @@ const PlanningFinalize = () => {
 		[ router.query ]
 	);
 	return (
-		<div className="container p-0 m-0">
+		<div className="container-fluid p-0 m-0">
 			<div className="row">
 				<p className=" mt-1 mb-1 font-weight-bold   bitter-italic-normal-mediun-24">Weekly Planning</p>
 				<p className=" poppins-regular-16px">For the week of Monday from 27/06/2022 to sunday 03/07/2022</p>
@@ -120,7 +120,7 @@ const PlanningFinalize = () => {
 							</tr>
 						</thead>
 						<tbody>
-							<tr className="border-bottom table-border-gray">
+							<tr className="border-bottom table-border-gray equal-width-calc">
 								{weeklyplanning.map((value) => (
 									<td className=" table-border-gray font-poppins-light" key={value.id}>
 										
