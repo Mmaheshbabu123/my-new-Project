@@ -288,7 +288,7 @@ function ManageProject(props) {
 				<ReactPaginate
 					breakLabel="..."
 					nextLabel={<AiOutlineArrowRight />}
-					// onPageChange={handlePageClick}
+					onPageChange={handlePageClick}
 					pageRangeDisplayed={5}
 					pageCount={pageCount}
 					previousLabel={<AiOutlineArrowLeft />}
