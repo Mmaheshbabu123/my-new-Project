@@ -773,7 +773,7 @@ const AddFunction = () => {
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="bg-white  back-btn-text  border-0 poppins-regular-20px btn-block float-sm-right mt-5 md-5 add-proj-btn"
 							onClick={() => router.push('/planning/employees/' + router.query.p_unique_key)}
 						>
 							Back

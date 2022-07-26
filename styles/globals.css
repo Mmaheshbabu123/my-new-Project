@@ -359,7 +359,7 @@ body {
     position: absolute;
     right: 0;
     z-index: 1;
-    bottom: 0;
+    bottom: 25px;
 }
 .screen a {
 	display: contents;
@@ -565,7 +565,7 @@ a {
     position: absolute;
     right: 0;
     z-index: 1;
-    bottom: 0;
+    bottom: 25px;
 }
 /* .calc-height {
     min-height: calc(80vh - 100px);
@@ -791,6 +791,11 @@ font-size: var(--font-size-l);
     color: var(--color-purple);
     font-size: var(--font-size-xl);
 }
+.purple-color2 {
+    color: var(--color-purple);
+    font-size: var(--font-size-m);
+    font-family: var(--font-family-poppins-regular);
+}
 .color-skyblue2 {
   background-color: var(--color-skyblue);
   font-size: var(--font-size-l);
@@ -835,4 +840,9 @@ font-size: var(--font-size-l);
     font-size: var(--font-size-l);
     color: var(--color-label-footer-gray);
     font-weight: 600;
+}
+.footer-content {
+color: var(--color-white);
+font-family: var(--font-family-poppins-regular);
+font-size: var(--font-size-m);
 }

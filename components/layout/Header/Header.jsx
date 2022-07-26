@@ -31,6 +31,7 @@ function Header() {
 
 					<div className="d-flex justify-content-end  col-md-8 p-0">
                 <ul className="d-flex list-unstyled mb-0">
+				<li className='list-unstyled mx-3 align-self-center d-flex mt-2 purple-color2'>DASHBOARD</li>
                     <li className='list-unstyled mx-3 align-self-center d-flex'><img style={{width: '25px', marginTop: '8px'}} src="/notifications.svg"/></li>
                     <li className='list-unstyled mx-3 align-self-center d-flex'><img style={{width: '40px', marginTop: '7px'}} src="/account.png"/></li>
                     <li className='list-unstyled mx-3 align-self-center d-flex'><select type="" className="border-0 bg-white poppins-regular-16px p-1 mt-1">
