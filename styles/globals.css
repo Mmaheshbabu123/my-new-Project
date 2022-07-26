@@ -678,7 +678,7 @@ input {
     font-size: var(--font-size-small);
 }
 .table-border-gray {
-    border: apx solid var(--bg-gray-dark);
+    /* border: apx solid var(--bg-gray-dark); */
     border: 1px solid var(--bg-gray-dark);
 }
 .less-grather {
@@ -800,4 +800,26 @@ font-size: var(--font-size-l);
 }
 .table-right-border-white {
     border-right: 1px solid var(--color-white);
+}
+.planning-table .css-1b7ni76-MuiToolbar-root.Toolbar-toolbar {
+    border: 1px solid var(--color-border-lightgrey);
+}
+.planning-table .css-1ps6pg7-MuiPaper-root {
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+    color: var(--color-label-footer-gray);
+}
+.planning-table .Cell-dayOfWeek {
+    background-color: var(--color-skyblue);
+    color: var(--color-white);
+    height: 45px;
+    font-family: var(--font-family-poppins-regular) ;
+    font-size: var(--font-size-m);
+}
+.planning-table  .css-xya8j6-MuiButtonBase-root-MuiButton-root.TodayButton-button:first-of-type {
+    border: 1px solid var(--color-skyblue);
+    color: var(--color-skyblue);
+}
+.css-71a9mb-MuiButtonBase-root-MuiIconButton-root, .css-vnscjq-MuiButtonBase-root-MuiButton-root {
+    color: var(--color-skyblue);
 }
