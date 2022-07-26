@@ -4,7 +4,7 @@ import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
 import { helpers } from '../../../CooperationAgreementHelper';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 const ContactPersons = (props) => {
-  const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_3_action}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
+  const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_3_action, filledTabs}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
 const personId  = 1;
   useEffect(()=>{
   if(!state.loadedTabs.includes(selectedTabId))
@@ -28,12 +28,14 @@ const personId  = 1;
   }
 
 
-  updateStateChanges({tab_3,tab_3_action,loadedTabs:[...state.loadedTabs, selectedTabId]})
+  updateStateChanges({tab_3,tab_3_action,loadedTabs:[...state.loadedTabs, selectedTabId],
+    filledTabs: data.completedTabIds.length ? [...filledTabs, ...data.completedTabIds] : filledTabs
+  })
   }
 
 
   return (
-    <div className = ''>
+    <div className = '' disabled={!filledTabs.includes(selectedTabId)}>
      <ContactPersonTabs />
     </div>
   )

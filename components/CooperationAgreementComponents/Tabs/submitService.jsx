@@ -21,6 +21,8 @@ const {
   tab_5,
   tab_6
 } = requiredFields;
+import { APICALL } from '@/Services/ApiServices';
+import { saveCooperationDataTabWise } from '@/Services/ApiEndPoints';
 
 export const submitService = {
   proceedToNextStepTab,
@@ -29,6 +31,8 @@ export const submitService = {
   onlineDetailsPostData,
   invoiceDetailsPostData,
   contractPersonsPostData,
+  forWardToNextStepTab,
+  keepActiveClassOnSelectedTabId
 }
 
 
@@ -36,10 +40,10 @@ let stateObj = {};
 let selectedTabKey;
 let validationStatus;
 let updateStateChanges;
+let selectedTabId = 1;
 
-function proceedToNextStepTab({ state, selectedTabId, ...props }) {
-  updateStateChanges = props.updateStateChanges;
-  stateObj = state || {};
+
+function proceedToNextStepTab() {
   selectedTabKey = selectedTabId || 0;
   validationStatus = true;
   switch (selectedTabKey) {
@@ -56,7 +60,7 @@ function proceedToNextStepTab({ state, selectedTabId, ...props }) {
       validationStatus = checkOnlineDetailsValidation(tab_4,'tab_4');
       break;
     case SALARY_BENEFITS_TAB:
-
+      validationStatus = true;
       break;
     case INVOIING_TAB:
       validationStatus = checkInvoiceValidation(tab_6,'tab_6');
@@ -67,39 +71,58 @@ function proceedToNextStepTab({ state, selectedTabId, ...props }) {
   return validationStatus;
 }
 
+var startDateAgreement    = 1;
+var absoluteConsultant    = 2;
+var absoluteConsultantNum = 3;
 function checkAbsoluteAgentTabValidation() {
-  var startDateAgreement    = 1;
-  var absoluteConsultant    = 2;
-  var absoluteConsultantNum = 3;
+  let basicDetailsFilled = true;
   let tabStateObj = stateObj['tab_1'];
-  if(!tabStateObj[startDateAgreement] || !tabStateObj[absoluteConsultant] || !tabStateObj[absoluteConsultantNum]) {
+  let validations = tabStateObj['validations'];
+  if(!checkBasicFieldAbsoluteTab(validations, tabStateObj)) {
+    basicDetailsFilled = false;
+  }
+  let compStateObj = stateObj['workersServantsCompState'] || {};
+  let noPcWarning = compStateObj['noPcWarning'];
+  let contextWS = tabStateObj['worksServantsData'] || {};
+  let stateWS = {pc_id: compStateObj['selectedPc'] || 0, employee_type_id: compStateObj['selectedEmpId'] || 0};
+  let employeeTyperError = checkEachPcHasEmployeetypeOrNot(stateWS);
+  if(employeeTyperError[1] || employeeTyperError[2]) {
+    compStateObj['employeeTyperError'] = employeeTyperError;
+    updateStateChanges({workersServantsCompState: compStateObj, uniqueId: Math.random()});
     validationStatus = false;
+    return validationStatus;
   }
-  if(validationStatus) {
-    let compStateObj = stateObj['workersServantsCompState'] || {};
-    let contextWS = tabStateObj['worksServantsData'] || {};
-    let stateWS = {pc_id: compStateObj['selectedPc'] || 0, employee_type_id: compStateObj['selectedEmpId'] || 0};
-    let employeeTyperError = checkEachPcHasEmployeetypeOrNot(stateWS);
-    if(employeeTyperError[1] || employeeTyperError[2]) {
-      compStateObj['employeeTyperError'] = employeeTyperError;
-      updateStateChanges({workersServantsCompState: compStateObj, uniqueId: Math.random()});
-      validationStatus = false;
-      return validationStatus;
-    }
-    validationStatus = loopAndCheckLength(contextWS);
-    if(!validationStatus) {
-      let { employee_type_id } = stateWS;
-      validationStatus = loopAndCheckLength(employee_type_id);
-    }
+  validationStatus = loopAndCheckLength(contextWS, noPcWarning);
+  if(!validationStatus) {
+    let { employee_type_id } = stateWS;
+    validationStatus = loopAndCheckLength(employee_type_id, noPcWarning);
+    // if(!validationStatus)
+      // updateStateChanges({workersServantsCompState: compStateObj, uniqueId: Math.random()});
   }
-  return validationStatus;
+  return basicDetailsFilled && validationStatus ? true : false;
 }
 
-function loopAndCheckLength(obj) {
+function checkBasicFieldAbsoluteTab(validations, tabStateObj) {
+  let proceed = true;
+  Object.keys(tab_1).map(eachField => {
+    if(!tabStateObj[eachField]) {
+      proceed = false;
+      validations[eachField] = true;
+    }
+    return 1;
+  })
+  return proceed;
+}
+
+function loopAndCheckLength(obj, validations) {
   let tempStatus = false;
-  Object.values(obj).map(workersServant => {
+  Object.values(obj).map((workersServant, index) => {
       if(workersServant.length && !tempStatus) {
         tempStatus = true;
+        validations[1] = false;
+        validations[2] = false;
+      } else {
+        validations[index + 1] = true;
       }
     return 1;
   })
@@ -301,7 +324,6 @@ function checkRequiredContractPersons(tab_data,tab_key,selectPersonId) {
   let tempStatus = true;
   let contractObj = stateObj[tab_key];
   let validationObj;
-  //console.log(contractObj);return;
   for(const key in contractObj[selectPersonId]) {
 
     if(!checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj[selectPersonId]) && key !== 'loaded') {
@@ -313,3 +335,141 @@ function checkRequiredContractPersons(tab_data,tab_key,selectPersonId) {
 
   return tempStatus;
  }
+
+
+
+
+//--------------------------- SAVE/---FORWARD-TO-NEXT-STEP--/--SAVE AS DRAFT METHOD-----////
+
+/**
+ * [forWardToNextStepTab used for validation and saving cooperation data]
+ * @param  {Object} router                      [description]
+ * @param  {Object} contextState                [description]
+ * @param  {Method reference} contextUpdate     [description]
+ * @param  {int} currentTab                     [description]
+ * @param  {int} draft                          [description]
+ * @return {void}                               [description]
+ */
+async function forWardToNextStepTab(router, contextState, contextUpdate, currentTab, draft, forwardtabId = 0) {
+  addRemoveLoadedClass(1, draft);
+  stateObj = contextState;
+  selectedTabId = currentTab;
+  updateStateChanges = contextUpdate;
+  let proceed = draft === 1 ? true : proceedToNextStepTab();
+  if(proceed) {
+    await saveDataTabWise(saveCooperationDataTabWise).then((response) => {
+      addRemoveLoadedClass(0, draft);
+      if(response.status === 200) {
+        let nextTab = forwardtabId ? forwardtabId : selectedTabId + 1;
+        let obj = {
+          selectedTabId: nextTab,
+          proceedToNextTabWarning: false,
+          filledTabs: [...stateObj.filledTabs, nextTab],
+          renderTabComponents: false,
+        }
+        if(selectedTabId === 1) {
+          obj['root_parent_id']= response.data;
+          router.query.root_parent_id = obj['root_parent_id'];
+        }
+        if(selectedTabId === INVOIING_TAB || draft === 1) {
+          router.push('/manage-cooperation-overview?type=sales_agent&id=1')
+        } else {
+          router.query.selectedTabId = nextTab;
+          router.push(router, undefined, { shallow: true })
+          updateStateChanges(obj);
+        }
+        return proceed;
+      } else {
+        console.error(response.msg);
+        return false;
+      }
+    }).catch(error => {
+      addRemoveLoadedClass(0, draft);
+      console.log(error);
+      return false;
+    })
+  } else {
+    addRemoveLoadedClass(0, draft);
+    updateStateChanges({proceedToNextTabWarning: true});
+    return false;
+  }
+}
+
+/**
+ * [saveDataTabWise description]
+ * @param  {String} url                 [description]
+ * @return {Object}       [description]
+ */
+async function saveDataTabWise(url) {
+  let apiResponse = '';
+  await APICALL.service(`${url}`, 'POST', getTabRelatedData())
+  .then(response => {
+    apiResponse = response;
+  })
+  return apiResponse;
+}
+
+/**
+ * [getTabRelatedData description]
+ * @return {Object} [description]
+ */
+function getTabRelatedData() {
+  return {
+    root_parent_id: stateObj.root_parent_id || 0,
+    tab_id: selectedTabId,
+    action:stateObj[`tab_${selectedTabId}_action`] || 1,
+    data: getTabWisePostData(),
+    element_status: stateObj['element_status'][`tab_${selectedTabId}`],
+    depedency_data_status:stateObj['dependecyDataStatus'],
+    salesAgentRefId: stateObj['salesAgentRefId']
+  }
+}
+
+
+/**
+ * [getTabWisePostData description]
+ * @return {[Object]} [description]
+ */
+function getTabWisePostData() {
+  let data = {}
+  switch (selectedTabId) {
+    case ABSOLUTEYOU_AGENT_TAB:
+      data = absoluteYouPostData(stateObj)
+      break;
+    case COMPANY_INFORMATION_TAB:
+      data = companyInformationPostData(stateObj,'tab_2');
+      break;
+    case CONTACT_PERSONS_TAB:
+      data =  contractPersonsPostData(stateObj,'tab_3');
+      break;
+    case ONLINE_DETAILS_TAB:
+      data = onlineDetailsPostData(stateObj,'tab_4');
+      break;
+    case SALARY_BENEFITS_TAB:
+      data = stateObj['tab_5'];
+      break;
+    case INVOIING_TAB:
+      data = invoiceDetailsPostData(stateObj,'tab_6');
+    break;
+    default:
+      data = {};
+  }
+  return data;
+}
+
+/**
+ * [addRemoveLoadedClass description]
+ * @param {Number} [add=1]  [description]
+ */
+function addRemoveLoadedClass(add = 1, draft = 0) {
+  document.querySelectorAll(`.sv-save-btn-text_${draft}`).forEach(el =>
+    add ? el.classList.add("spinner-border") : el.classList.remove("spinner-border")
+  );
+}
+
+function keepActiveClassOnSelectedTabId(selectedTabId, clickedTabId) {
+  document.getElementById(`cooperation_tab_${selectedTabId}`).classList.add('active')
+  document.getElementById(`cooperation_tab_${clickedTabId}`).classList.remove('active')
+}
+
+//---------------------------//---------------------------//---------------------------//---------------------------

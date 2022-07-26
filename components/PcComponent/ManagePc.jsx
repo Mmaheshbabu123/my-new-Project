@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { MdEdit, MdDelete, MdRemoveRedEye } from 'react-icons/md';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { APICALL } from '../../Services/ApiServices';
 import { getPcOverviewDetails, deletePcdetails } from '../../Services/ApiEndPoints';
 import Link from 'next/link';
@@ -92,7 +93,6 @@ const ManagePc = (props) => {
 			setItemOffset(0);
 		}
 	};
-	// PAGINATION STARTS
 
 	//------------------- Pagination code -------------------------//
 	const [ pageCount, setPageCount ] = useState(0);
@@ -116,7 +116,7 @@ const ManagePc = (props) => {
 	return (
 		<div className="container">
 			<div className="row ps-3 ms-3">
-				<p className="row mt-3 ms-5 text-bold h4">Manage paritaire comite</p>
+				<p className="row mt-3 ms-5 text-bold h4">Manage paritair comite</p>
 				<div className="col-md-9">
 					<div className="row">
 						<div className="col-sm-3">
@@ -141,7 +141,6 @@ const ManagePc = (props) => {
 							/>
 						</div>
 
-						
 						<div className="col-sm-1">
 							<button
 								type="button"
@@ -152,15 +151,15 @@ const ManagePc = (props) => {
 							</button>
 						</div>
 						<div className="col-sm-1">
-						{(searchPcnum != '' ||searchPcname != '') &&
-							<button
-								type="button"
-								className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
-								onClick={() => handleReset()}
-							>
-								Reset
-							</button>
-						}
+							{(searchPcnum != '' || searchPcname != '') && (
+								<button
+									type="button"
+									className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
+									onClick={() => handleReset()}
+								>
+									Reset
+								</button>
+							)}
 						</div>
 					</div>
 				</div>
@@ -168,7 +167,7 @@ const ManagePc = (props) => {
 					<span>
 						<Link href={'/redirect-page?src=/manage-pc&dest=addpc'}>
 							<a className={'ml-2 btn float-sm-right' + styles.addprojbtn + styles.btncolor}>
-								Add paritaire comite
+								Add paritair comite
 							</a>
 						</Link>
 					</span>
@@ -209,18 +208,18 @@ const ManagePc = (props) => {
 			))}
 			{data.length == 0 && (
 				<div className="bg-light py-3 mt-3">
-					<div className="text-center"> No paritaire comitee </div>
+					<div className="text-center"> No paritair comitee </div>
 				</div>
 			)}
 			{data.length >= itemsPerPage && (
 				<div className="row">
 					<ReactPaginate
 						breakLabel="..."
-						nextLabel="next >"
+						nextLabel={<AiOutlineArrowRight />}
 						onPageChange={handlePageClick}
 						pageRangeDisplayed={5}
 						pageCount={pageCount}
-						previousLabel="< previous"
+						previousLabel={<AiOutlineArrowLeft />}
 						renderOnZeroPageCount={null}
 						containerClassName={'pagination justify-content-center'}
 						itemClass="page-item"

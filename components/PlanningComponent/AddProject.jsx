@@ -10,7 +10,6 @@ function Addproject(props) {
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 
-	// console.log(p_unique_key);
 	/**
 	 * FOR ASSIGNING COMPANY LOCATION VALUES
 	 */
@@ -71,6 +70,7 @@ function Addproject(props) {
 			}
 			if (props.data) {
 				setData(props.data);
+				console.log(data);
 			}
 			if (data.comp_id == '') {
 				var res = data;
@@ -145,7 +145,7 @@ function Addproject(props) {
 		error1['project_location'] = ValidationService.emptyValidationMethod(res.project_location);
 		error1['hno'] = ValidationService.emptyValidationMethod(res.hno);
 		error1['city'] = ValidationService.emptyValidationMethod(res.city);
-		// error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
+		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['street'] = ValidationService.emptyValidationMethod(res.street);
 		error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
 		error1['country'] = ValidationService.emptyValidationMethod(res.country);
@@ -199,7 +199,7 @@ function Addproject(props) {
 		setError_hno(error1['hno']);
 		setError_city(error1['city']);
 		setError_extra(error1['extra']);
-		// setError_comp_id(error1['comp_id']);
+		setError_comp_id(error1['comp_id']);
 		setError_street(error1['street']);
 		setError_postal_code(error1['postal_code']);
 		setError_countrylist(error1['country']);
@@ -213,7 +213,7 @@ function Addproject(props) {
 			error1['project_location'] == '' &&
 			error1['hno'] == '' &&
 			error1['city'] == '' &&
-			// error1['comp_id'] == '' &&
+			error1['comp_id'] == '' &&
 			error1['street'] == '' &&
 			error1['postal_code'] == '' &&
 			error1['country'] == '' &&
@@ -238,15 +238,17 @@ function Addproject(props) {
 					style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}
 				>
 					<div className="modal-dialog custom-modal-width-85 modal-xl ">
-					{/* <div className="modal-dialog  modal-xl "> */}
+						{/* <div className="modal-dialog  modal-xl "> */}
 						<div className="modal-content  ">
 							{/* <div className="modal-header mx-4 px-0"> */}
-							<div className='modal-header col-md-11 m-auto px-0'>
+							<div className="modal-header col-md-11 m-auto px-0">
 								{/* <div className='col-md-10 px-3'> */}
-								<div className='col-md-10'>
+								<div className="col-md-10">
 									{/* <p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-5">Add project</p> */}
-									<p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-4">Add project</p>
-									</div>
+									<p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-4">
+										Add project
+									</p>
+								</div>
 								<button
 									type="button"
 									className="btn-close"
@@ -278,34 +280,29 @@ function Addproject(props) {
 													/>
 													<p className="error mt-2">{error_project_name}</p>
 												</div>
+												{/* COMPANY */}
 												<div className="col-6">
 													<label className="custom_astrick">Company</label>
 													<select
-														className="form-select mt-2 mb-2"
 														value={data.comp_id}
+														className="form-select mb-2 mt-2"
+														placeholder="select company"
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, comp_id: e.target.value }));
-															props.updatecompany(e.target.value);
+															// updateLocation(e.target.value);
 														}}
 													>
 														<option value="">Select</option>
-														{company.map((options) => (
-															<option
-																onClick={(e) => {
-																	setCompany(options.comp_name);
-																}}
-																key={options.nid}
-																value={options.nid}
-															>
+														{props.company.map((options) => (
+															<option key={options.nid} value={options.nid}>
 																{options.title}
 															</option>
 														))}
 													</select>
+
 													<p className="error mt-2">{error_comp_id}</p>
 												</div>
 											</div>
-
-											{/* COMPANY */}
 
 											{/* LOCATION */}
 											<div className="col-md-12 row m-0">
@@ -410,7 +407,7 @@ function Addproject(props) {
 													>
 														<option value="">Select country</option>
 														{countrylist.map((options) => (
-															<option key={options.iso} value={options.iso}>
+															<option key={options.id} value={options.id}>
 																{options.country}
 															</option>
 														))}
@@ -439,7 +436,7 @@ function Addproject(props) {
 									<button
 										type="submit"
 										className="btn btn-lg btn-block float-right add-proj-btn custom-btn px-3 rounded-0 "
-													// </div>data-bs-dismiss="modal"
+										// </div>data-bs-dismiss="modal"
 										// onClick={() => props.popupActionNo()}
 										onClick={(e) => {
 											setData((prev) => ({ ...prev, p_unique_key: p_unique_key }));

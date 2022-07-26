@@ -5,7 +5,7 @@ import { helpers } from '../../../CooperationAgreementHelper';
 import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
 import { requiredFields} from '../../../RequiredFields';
 const OnlineDetails = (props) => {
-  const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_4_action}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
+  const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_4_action, filledTabs}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
 
   useEffect(()=>{
   if(!state.loadedTabs.includes(selectedTabId))
@@ -22,12 +22,14 @@ const OnlineDetails = (props) => {
   if(apiData) {
   tab_4 = {...apiData,...tab_4}
   }
-  
-  updateStateChanges({tab_4,tab_4_action,loadedTabs:[...state.loadedTabs, selectedTabId] })
+
+  updateStateChanges({tab_4,tab_4_action,loadedTabs:[...state.loadedTabs, selectedTabId],
+    filledTabs: data.completedTabIds.length ? [...filledTabs, ...data.completedTabIds] : filledTabs
+  })
   }
 
     return(
-      <div className="">
+      <div className="" disabled={!filledTabs.includes(selectedTabId)}>
         <BasicDetails />
       </div>
     );

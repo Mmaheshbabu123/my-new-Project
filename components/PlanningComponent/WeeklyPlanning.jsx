@@ -105,7 +105,7 @@ function WeeklyPlanning(props) {
 		[ empr_id ]
 	);
 	return (
-		<div className="container p-0 m-0">
+		<div className="container-fluid p-0 m-0">
 			<div className="row">
 				<p className="  mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-mediun-24">Weekly Planning</p>
 				{showview && <p className="h6">For the week of Monday from 10/07/2022 to sunday 17/07/2022</p>}
@@ -165,23 +165,23 @@ function WeeklyPlanning(props) {
 					{showview && (
 						<table className="table border border-secondary ">
 							<thead className="table-light">
-								<tr className="border-bottom border-secondary">
-									<th className="border-end border-secondary">
-										Monday<br />25-07-2022
+								<tr className="border-bottom ">
+									<th className="border-end table-right-border-white">
+										Monday<br />10-07-2022
 									</th>
-									<th className="border-end border-secondary">
-										Tuesday <br />26-07-2022
+									<th className="border-end table-right-border-white">
+										Tuesday <br />11-07-2022
 									</th>
-									<th className="border-end border-secondary">
+									<th className="border-end table-right-border-white">
 										Wednesday <br />12-07-2022
 									</th>
-									<th className="border-end border-secondary">
+									<th className="border-end table-right-border-white">
 										Thursday <br />13-07-2022
 									</th>
-									<th className="border-end border-secondary">
+									<th className="border-end table-right-border-white">
 										Friday<br />14-07-2022
 									</th>
-									<th className="border-end border-secondary">
+									<th className="border-end table-right-border-white">
 										Saturday<br />15-07-2022
 									</th>
 									<th>

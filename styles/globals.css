@@ -27,7 +27,7 @@
     font-family: 'Poppins-bold';
     font-weight: 800;
     font-style: normal;
-	src: url("./fonts/OpenSans-Bold.ttf");
+	src: url("fonts/OpenSans-Bold.ttf");
     /* src: url(/themes/custom/absolute_you/fonts/Poppins/Poppins-Bold.ttf ); */
 }
 @font-face {
@@ -40,49 +40,49 @@
     font-family: 'Poppins-normal';
     font-weight: 500;
     font-style: normal;
-    src: url( "./fonts/Poppins-Light.ttf" );
+    src: url( "fonts/Poppins-Light.ttf" );
 }
 @font-face {
     font-family: 'Poppins-extraitalic';
     font-weight: 600;
     font-style: normal;
-    src: url("./fonts/Poppins-ExtraLightItalic.ttf" );
+    src: url("fonts/Poppins-ExtraLightItalic.ttf" );
 }
 @font-face {
     font-family: 'Poppins-lightitalic';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-LightItalic.ttf");
+    src: url("fonts/Poppins-LightItalic.ttf");
 }
 @font-face {
     font-family: 'Poppins-regular';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-Regular.ttf");
+    src: url("fonts/Poppins-Regular.ttf");
 }
 @font-face {
     font-family: 'Poppins-thin';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-Thin.ttf");
+    src: url("fonts/Poppins-Thin.ttf");
 }
 @font-face {
     font-family: 'Poppins-thinitalic';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-ThinItalic.ttf");
+    src: url("fonts/Poppins-ThinItalic.ttf");
 }
 @font-face {
     font-family: 'Poppins-mediun';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-Medium.ttf");
+    src: url("fonts/Poppins-Medium.ttf");
 }
 @font-face {
     font-family: 'Poppins-mediumitalic';
     font-weight: 500;
     font-style: normal;
-	src: url("./fonts/Poppins-MediumItalic.ttf");
+	src: url("fonts/Poppins-MediumItalic.ttf");
 }
 
 /* for bitter font */
@@ -90,13 +90,13 @@
     font-family: 'bitter-regular';
     font-weight: 500;
     font-style: normal;
-	src: url("./fonts/Bitter-Regular.ttf");
+	src: url("fonts/Bitter-Regular.ttf");
 }
 @font-face {
     font-family: 'Bitter-italic-normal-mediun';
     font-weight: 500;
     font-style: normal;
-	src: url("./fonts/Bitter-MediumItalic.ttf");
+	src: url("fonts/Bitter-MediumItalic.ttf");
 }
 body {
     /* for title */
@@ -124,6 +124,7 @@ body {
     /* for label  */
     --color-grey-dark: #515050;
     --color-black: #0b0c0c;
+    --color-less-greater: #4C4D554D;
     --font-family-regular: LibreFranklin-Regular;
     --font-family-light: LibreFranklin-Normal;
     --font-family-extralightitalic: LibreFranklin-extralightitalic;
@@ -189,6 +190,12 @@ body {
     font-family: var(--font-family-bitter-italic-normal-medium);
     font-weight: 500;
     font-size: var(--font-size-xl);
+}
+.bitter-italic-normal-mediun-22 {
+    color: var(--color-purple);
+    font-family: var(--font-family-bitter-italic-normal-medium);
+    font-weight: 500;
+    font-size: var(--font-size-xxl);
 }
 .poppins-regular-14px {
     color: var(--color-label-footer-gray);
@@ -331,7 +338,9 @@ body {
 .custom-btn:hover {
     color: var(--color-white) !important;
     background-color: var(--color-purple) !important;
-    border: var(--color-purple) !important;
+    /* border: var(--color-purple) !important; */
+    font-size: var(--font-size-m);
+    font-family: var(--font-family-poppins-regular);
 }
 .clip0 {
     clip-path: polygon(0% -5%, 3.3% 0.3%, 20% 62%, 0% 100%);
@@ -670,4 +679,125 @@ input {
 }
 .table-border-gray {
     border: apx solid var(--bg-gray-dark);
+    border: 1px solid var(--bg-gray-dark);
+}
+.less-grather {
+    color: var(--color-less-greater);
+    font-size: 28px;
+    font-weight: bold;
+}
+.table-title-bg {
+background: var(--bg-grey-medium);
+}
+
+div[disabled]{
+	pointer-events: none;
+  opacity: 0.7;
+	cursor: not-allowed;
+}
+
+.signatureCanvas {
+	display: block;
+  border: 1px solid black;
+  width: 100%;
+  min-height: 100%;
+	cursor: crosshair;
+}
+.footer {
+    position: sticky !important;
+    bottom: 0;
+		z-index: 10;
+}
+.timepage-calander .rmdp-header {
+    background: var(--color-skyblue);
+    margin-top: 0px;
+    height: 45px;
+}
+.timepage-calander .rmdp-calendar   {
+   padding: 0px;
+   color: var(--color-white);
+   font-family: var(--font-family-poppins-regular);
+}
+.timepage-calander .rmdp-arrow {
+    border: solid #FFFFFF4D;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    height: 14px;
+    margin-top: 3px;
+    padding: 2px;
+    width: 14px;
+    font-weight: bold;
+}
+/* .timepage-calander .rmdp-left:hover {
+    background-color: none;
+    border: solid #FFFFFF4D;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    height: 14px;
+    margin-top: 3px;
+    padding: 2px;
+    width: 14px;
+    font-weight: bold;
+} */
+.timepage-calander .rmdp-header-values {
+    color: var(--color-white);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-l);
+    padding-top: 4px;
+}
+.timepage-calander .rmdp-left {
+    left: 38%;
+    /* transform: translateY(-39%); */
+}
+.timepage-calander .rmdp-right {
+    right: 38%;
+    /* transform: translateY(-39%); */
+}
+.timepage-calander .rmdp-week-day {
+color: var(--color-skyblue);
+font-size: var(--font-size-l);
+}
+.timepage-calander .rmdp-day.rmdp-today span {
+    background: var(--color-skyblue) !important;
+    color: var(--color-white);
+    width: 60px;
+    margin: auto;
+    height: 45px;
+}
+.timepage-calander .rmdp-week {
+    height: 45px;
+}
+.timepage-calander .rmdp-day {
+    color: var(--color-label-footer-gray);
+}
+.rmdp-day.rmdp-selected span:not(.highlight) {
+    width: 60px;
+    height: 45px;
+    margin: auto;
+}
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+    /* background-color: rgb(211,211,211); */
+    background-color: var(--color-input-border-lightgrey) !important;
+    box-shadow: var(--color-border-lightgrey);
+    width: 60px;
+    height: 45px;
+    margin: auto;
+}
+.timepage-calander .rmdp-day-picker  {
+ background-color: var(--bg-grey-medium);
+}
+.purple-color {
+    color: var(--color-purple);
+    font-size: var(--font-size-xl);
+}
+.color-skyblue2 {
+  background-color: var(--color-skyblue);
+  font-size: var(--font-size-l);
+  color: var(--color-white);
+}
+.equal-width-calc td {
+    width: calc(100%/7);
+}
+.table-right-border-white {
+    border-right: 1px solid var(--color-white);
 }

@@ -141,3 +141,8 @@ export const deleteSalesAgenetAgreements = BASE_URL + "delete-sales-agent-agreem
 
 //-----------EMPLOYEE PLANNING---------------------//
 export const fetchemployeeplanning = BASE_URL + "get-all-employee-planning/";
+
+//-- SIGNATURE API END POINTS----------------//
+export const getSignatureData = BASE_URL + 'get-signature-data';
+export const storeUpdateSignatureData = BASE_URL + 'store-update-signature-data';
+//-- -------------

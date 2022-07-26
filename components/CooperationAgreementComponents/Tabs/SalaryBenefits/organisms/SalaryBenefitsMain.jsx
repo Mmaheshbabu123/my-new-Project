@@ -5,7 +5,7 @@ import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
 import { helpers } from '../../../CooperationAgreementHelper';
 
 const SalaryBenefitsMain = (props) => {
-  const { state: { selectedTabId, renderTabComponents, root_parent_id }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+  const { state: { selectedTabId, renderTabComponents, root_parent_id, filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   useEffect(() => {
     if(!state.loadedTabs.includes(selectedTabId))
         loadData();
@@ -29,6 +29,7 @@ const SalaryBenefitsMain = (props) => {
     }
     data[stateKey] = tab_5;
     data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
+    data['filledTabs'] = response.completedTabIds.length ? [...filledTabs, ...response.completedTabIds] : filledTabs;
     data['renderTabComponents'] = true;
     updateStateChanges(data);
   }

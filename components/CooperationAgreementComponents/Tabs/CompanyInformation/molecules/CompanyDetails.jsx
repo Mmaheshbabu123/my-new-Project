@@ -12,7 +12,6 @@ import ValidateMessage from '@/atoms/validationError';
 const CompanyDetails = (props) => {
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
 var { tab_2,element_status } = state;
-console.log(state);
 const [companyState,setCompanyState] = useState({
   vat_number:0,
   validations:{'17':{'type':1,validate:false },'19':{'type':2,validate:true},'14':{'type':1,validate:true},'18':{'type':1,validate:true}}
