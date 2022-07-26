@@ -7,6 +7,16 @@ export const SALARY_BENEFITS_TAB     = 5;
 export const INVOIING_TAB            = 6;
 
 
+export const COOPERATION_TABS_JSON = [
+  {tab_id: ABSOLUTEYOU_AGENT_TAB, tab_name: 'AbsoluteYou agent', tab_status: 1 },
+  {tab_id: COMPANY_INFORMATION_TAB, tab_name: 'Company information', tab_status: 1 },
+  {tab_id: CONTACT_PERSONS_TAB, tab_name: 'Contact persons', tab_status: 1 },
+  {tab_id: ONLINE_DETAILS_TAB, tab_name: 'Online details', tab_status: 1 },
+  {tab_id: SALARY_BENEFITS_TAB, tab_name: 'Salary benefits', tab_status: 1 },
+  {tab_id: INVOIING_TAB, tab_name: 'Invoicing', tab_status: 1 }
+];
+
+
 export const consultantArray = [
   {value: 1, label: 'Consultant-1'},
   {value: 2, label: 'Consultant-2'},
