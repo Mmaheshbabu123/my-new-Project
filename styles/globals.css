@@ -111,6 +111,7 @@ body {
     --bg-gray-dark: #4C4D5580;
     --bg-grey-medium: #4C4D550F;
     --color-skyblue: #79B1BD;
+    --bg-btn-gray: #4C4D55B3;
 
     /* for font sizes */
     --font-size-s: 0.75em;
@@ -822,4 +823,16 @@ font-size: var(--font-size-l);
 }
 .css-71a9mb-MuiButtonBase-root-MuiIconButton-root, .css-vnscjq-MuiButtonBase-root-MuiButton-root {
     color: var(--color-skyblue);
+}
+.reset-btn {
+    background-color: var(--bg-btn-gray);
+    color: var(--color-white);
+    font-size: var(--font-size-l);
+    font-family: var(--font-family-poppins-regular);
+}
+.poppinns-regular-thin {
+    font-family: var(--font-family-poppins-thin);
+    font-size: var(--font-size-l);
+    color: var(--color-label-footer-gray);
+    font-weight: 600;
 }
