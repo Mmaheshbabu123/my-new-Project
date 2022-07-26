@@ -71,6 +71,8 @@ function Planning(props) {
 	useEffect(() => {
 		if (localStorage.getItem('uid') != null) {
 			setEmpr_id(JSON.parse(localStorage.getItem('uid')));
+		} else {
+			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 		}
 	}, []);
 
@@ -87,25 +89,16 @@ function Planning(props) {
 						setUniquekey(result.data[0].p_unique_key);
 
 						// if (data.id == '') {
-						// 	var data1 = data;
-						// 	if (result.data[0].length == 1) {
-						// 		data1.comp_id = result.data[0].nid;
-						// 		if (result.data[1].length == 1) {
-						// 			data1.location_id = result.data[1].value;
-						// 			if (result.data[2].length == 1) {
-						// 				data1.cost_center_id = result.data[2].value;
-						// 			}
-						// 		}
-						// 	}
-
-						// setData(data1);
-						// if (
-						// 	result.data[0].length == 1 &&
-						// 	result.data[1].length == 1 &&
-						// 	result.data[2].length == 1
-						// ) {
-						// 	postData(data);
-						// }
+							if (result.data[0].length == 1) {
+								setCompanyid(result.data[0].nid);
+								if (result.data[1].length == 1) {
+									setLocationid(result.data[1].value);
+									if (result.data[2].length == 1) {
+										setCostcenterid(result.data[2].value);
+										postData();
+									}
+								}
+							}
 						// }
 					})
 					.catch((error) => {
@@ -252,11 +245,11 @@ function Planning(props) {
 				return obj.comp_id == comp_id ? obj : '';
 			});
 			if (result != '') {
-				setData((prev) => ({ ...prev, location_id: result.value }));
+				setLocationid(result.value);
 			}
 			updateCostCenter(result.value);
 		} else {
-			setData((prev) => ({ ...prev, location_id: '' }));
+			setLocationid('');
 		}
 	};
 	let updateCostCenter = (loc_id) => {
@@ -264,16 +257,15 @@ function Planning(props) {
 		costcenter.map((loc) => {
 			if (loc.location_id == loc_id) counter++;
 		});
-		console.log(costcenter);
 		if (counter == 1) {
 			var result = costcenter.find((obj) => {
 				return obj.location_id == loc_id ? obj : '';
 			});
 			if (result != '') {
-				setData((prev) => ({ ...prev, cost_center_id: result.value }));
+				setCostcenterid(result.value);
 			}
 		} else {
-			setData((prev) => ({ ...prev, cost_center_id: '' }));
+			setCostcenterid('');
 		}
 	};
 
@@ -334,7 +326,7 @@ function Planning(props) {
 									className="form-select mb-2 mt-2"
 									onChange={(e) => {
 										setLocationid(e.target.value);
-										// updateCostCenter(e.target.value);
+										updateCostCenter(e.target.value);
 									}}
 								>
 									<option value="">Select</option>
@@ -371,6 +363,13 @@ function Planning(props) {
 													</option>
 												)
 										)}
+								</select>
+							</div>
+
+							<div className="form-group mb-3">
+								<label className="form-label mb-2 mt-2 poppins-regular-16px">Paritair comite</label>
+								<select className="form-select mb-2 mt-2">
+									<option value="">Select</option>
 								</select>
 							</div>
 							{!showproject && (
@@ -418,18 +417,19 @@ function Planning(props) {
 			{show == true && (
 				<div className="">
 					{/* {console.log(project)} */}
-					{project.id && (
-						<Addproject
-							data={project}
-							display={'block'}
-							company={company}
-							company_id={data.comp_id}
-							popupActionNo={closePopup}
-							popupActionYes={showPopup}
-							updatecompany={updatcomp}
-							countries={countrylist}
-						/>
-					)}
+					{/* {project.id && 
+					( */}
+					<Addproject
+						data={project}
+						display={'block'}
+						company={company}
+						company_id={data.comp_id}
+						popupActionNo={closePopup}
+						popupActionYes={showPopup}
+						updatecompany={updatcomp}
+						countries={countrylist}
+					/>
+					{/* )} */}
 				</div>
 			)}
 		</div>
