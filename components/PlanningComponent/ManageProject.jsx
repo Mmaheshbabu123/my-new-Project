@@ -151,17 +151,17 @@ function ManageProject(props) {
 	};
 
 	return (
-		<div className="container">
+		<div className="container-fluid p-0">
 			<form>
-				<div className="row ">
-					<div className="form-check mt-2  ">
-						<p className="h3">Manage project</p>
-						<div className="row d-flex">
+				<div className="row m-0 ">
+					<div className="form-check p-0 mt-2  ">
+						<h1 className="mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage project</h1>
+						<div className="row d-flex mt-3">
 							<div className="col-sm-3">
 								<input
 									type="search"
 									id="form12"
-									className="form-control mt-2 mb-2"
+									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 									placeholder="Project name"
 									value={searchProjectname}
 									onChange={(e) => setSearchProjectname(e.target.value)}
@@ -172,7 +172,7 @@ function ManageProject(props) {
 								<input
 									type="search"
 									id="form12"
-									className="form-control mt-2 mb-2"
+									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 									placeholder="Location"
 									value={searchlocation}
 									onChange={(e) => setSearchlocation(e.target.value)}
@@ -183,7 +183,7 @@ function ManageProject(props) {
 								<input
 									type="search"
 									id="form12"
-									className="form-control mt-2 mb-2 text-break"
+									className="form-control mt-2 mb-2 text-break input-border-lightgray poppins-regular-18px mh-50 rounded-0  "
 									placeholder="Address"
 									value={searchaddress}
 									onChange={(e) => setSearchaddress(e.target.value)}
@@ -192,41 +192,41 @@ function ManageProject(props) {
 							<div className="col-sm-2">
 								<button
 									type="button"
-									className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2 "
+									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
 									onClick={() => handleSearch()}
 								>
-									Search
+									SEARCH
 								</button>
 								<button
 									type="button"
-									className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
+									className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
 									onClick={() => handleReset()}
 								>
-									Reset
+									RESET
 								</button>
 							</div>
 						</div>
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
-								<tr className="table-secondary">
-									<th className="">Project name</th>
-									<th className="">Location</th>
-									<th className="">Address</th>
-									<th className="">Action</th>
+								<tr className="btn-bg-gray-medium">
+									<th className="poppins-regular-18px justify-content-center d-flex align-items-center">Project name</th>
+									<th className="poppins-regular-18px">Location</th>
+									<th className="poppins-regular-18px">Address</th>
+									<th className="poppins-regular-18px">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								{project.length > 0 &&
 									project.map((result) => (
-										<tr className="border p-2" key={result.id}>
-											<td className="">{result.project_name}</td>
-											<td className="">{result.project_location}</td>
-											<td className="">{result.address_id}</td>
+										<tr className="border poppinns-regular-thin p-2" key={result.id}>
+											<td className="poppinns-regular-thin">{result.project_name}</td>
+											<td className="poppinns-regular-thin">{result.project_location}</td>
+											<td className="poppinns-regular-thin">{result.address_id}</td>
 											<td className="d-flex justify-content-center">
-												<MdEdit className="mt-2 ms-3 " />
+												<MdEdit className="mt-2 ms-3 color-skyblue " />
 
 												<span onClick={() => showPopup()} type="button">
-													<MdDelete className="mt-2 ms-3 " />
+													<MdDelete className="mt-2 ms-3 color-skyblue " />
 												</span>
 											</td>
 										</tr>
@@ -245,10 +245,10 @@ function ManageProject(props) {
 				<div className="text-start col-md-6">
 					<button
 						type="button"
-						className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+						className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 md-5 "
 						onClick={() => backToDashboard()}
 					>
-						Back
+						BACK
 					</button>
 				</div>
 			</form>
