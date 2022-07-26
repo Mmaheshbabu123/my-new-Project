@@ -706,6 +706,7 @@ div[disabled]{
 .footer {
     position: sticky !important;
     bottom: 0;
+		z-index: 10;
 }
 .timepage-calander .rmdp-header {
     background: var(--color-skyblue);
