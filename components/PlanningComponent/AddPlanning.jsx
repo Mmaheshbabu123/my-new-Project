@@ -397,7 +397,7 @@ function Planning(props) {
 					<div className="col-md-6 p-0">
 						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/options'}>
-								<p className="bg-white  back-btn-text ">BACK</p>
+								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px ">BACK</p>
 							</Link>
 						</button>
 					</div>
