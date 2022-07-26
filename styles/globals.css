@@ -7,19 +7,19 @@
 	font-family: "Tahoma-Bold";
 	font-style: normal;
 	font-weight: 700;
-	src: url("fonts/Tahoma Bold.ttf") format("truetype");
+	src: url("/fonts/Tahoma Bold.ttf") format("truetype");
 }
 @font-face {
 	font-family: "Tahoma-Regular";
 	font-style: normal;
 	font-weight: 400;
-	src: url("fonts/Tahoma.ttf") format("truetype");
+	src: url("/fonts/Tahoma.ttf") format("truetype");
 }
 @font-face {
 	font-family: "Arial-NarrowBold";
 	font-style: normal;
 	font-weight: 700;
-	src: url("fonts/OpenSans-Bold.ttf") format("truetype");
+	src: url("/fonts/OpenSans-Bold.ttf") format("truetype");
 }
 
 /* for poppin font */
@@ -27,62 +27,62 @@
     font-family: 'Poppins-bold';
     font-weight: 800;
     font-style: normal;
-	src: url("fonts/OpenSans-Bold.ttf");
+	src: url("/fonts/OpenSans-Bold.ttf");
     /* src: url(/themes/custom/absolute_you/fonts/Poppins/Poppins-Bold.ttf ); */
 }
 @font-face {
     font-family: 'Poppins-italac';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-Italic.ttf" );
+    src: url("/fonts/Poppins-Italic.ttf" );
 }
 @font-face {
     font-family: 'Poppins-normal';
     font-weight: 500;
     font-style: normal;
-    src: url( "fonts/Poppins-Light.ttf" );
+    src: url( "/fonts/Poppins-Light.ttf" );
 }
 @font-face {
     font-family: 'Poppins-extraitalic';
     font-weight: 600;
     font-style: normal;
-    src: url("fonts/Poppins-ExtraLightItalic.ttf" );
+    src: url("/fonts/Poppins-ExtraLightItalic.ttf" );
 }
 @font-face {
     font-family: 'Poppins-lightitalic';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-LightItalic.ttf");
+    src: url("/fonts/Poppins-LightItalic.ttf");
 }
 @font-face {
     font-family: 'Poppins-regular';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-Regular.ttf");
+    src: url("/fonts/Poppins-Regular.ttf");
 }
 @font-face {
     font-family: 'Poppins-thin';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-Thin.ttf");
+    src: url("/fonts/Poppins-Thin.ttf");
 }
 @font-face {
     font-family: 'Poppins-thinitalic';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-ThinItalic.ttf");
+    src: url("/fonts/Poppins-ThinItalic.ttf");
 }
 @font-face {
     font-family: 'Poppins-mediun';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-Medium.ttf");
+    src: url("/fonts/Poppins-Medium.ttf");
 }
 @font-face {
     font-family: 'Poppins-mediumitalic';
     font-weight: 500;
     font-style: normal;
-	src: url("fonts/Poppins-MediumItalic.ttf");
+	src: url("/fonts/Poppins-MediumItalic.ttf");
 }
 
 /* for bitter font */
@@ -90,13 +90,13 @@
     font-family: 'bitter-regular';
     font-weight: 500;
     font-style: normal;
-	src: url("fonts/Bitter-Regular.ttf");
+	src: url("/fonts/Bitter-Regular.ttf");
 }
 @font-face {
     font-family: 'Bitter-italic-normal-mediun';
     font-weight: 500;
     font-style: normal;
-	src: url("fonts/Bitter-MediumItalic.ttf");
+	src: url("/fonts/Bitter-MediumItalic.ttf");
 }
 body {
     /* for title */
