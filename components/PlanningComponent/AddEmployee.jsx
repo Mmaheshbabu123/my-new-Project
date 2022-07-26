@@ -99,7 +99,7 @@ const AddEmployee = () => {
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row m-0">
 					<div className="row col-md-12" style={{ }}>
-						<h1 className='mt-3 font-weight-bold  bitter-italic-normal-mediun-24 px-0' >Select employee</h1>
+						<h1 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0' >Select employee</h1>
 					</div>
 				</div>
 				<div className='col-md-12 selectemp-height'>

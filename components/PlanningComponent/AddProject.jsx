@@ -244,8 +244,8 @@ function Addproject(props) {
 							<div className="modal-header col-md-11 m-auto px-0">
 								{/* <div className='col-md-10 px-3'> */}
 								<div className="col-md-10">
-									{/* <p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-5">Add project</p> */}
-									<p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-4">
+									{/* <p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-5">Add project</p> */}
+									<p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-4">
 										Add project
 									</p>
 								</div>

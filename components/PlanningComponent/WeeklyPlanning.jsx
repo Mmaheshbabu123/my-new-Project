@@ -107,7 +107,7 @@ function WeeklyPlanning(props) {
 	return (
 		<div className="container-fluid p-0 m-0">
 			<div className="row">
-				<p className="  mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-mediun-24">Weekly Planning</p>
+				<p className="  mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-medium-24">Weekly Planning</p>
 				{showview && <p className="h6">For the week of Monday from 10/07/2022 to sunday 17/07/2022</p>}
 
 				{showview && (

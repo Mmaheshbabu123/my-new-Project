@@ -16,7 +16,7 @@ function Add_manage_planning(props) {
 		<div className="col-md-12 ">
 			{/* <div className="row mt-5 text-center planning-height "> */}
 			<div className='col-md-12 px-0'>
-					<h1 className=" mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-mediun-24">My Planning</h1>
+					<h1 className=" mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-medium-24">My Planning</h1>
 					</div>
 			<div className={`${styles.planningheight} popup-btn col-md-12 row align-items-center justify-content-center m-0`}>
 				<div className="col-md-6 d-flex justify-content-end px-5">

@@ -73,7 +73,7 @@
     src: url("/fonts/Poppins-ThinItalic.ttf");
 }
 @font-face {
-    font-family: 'Poppins-mediun';
+    font-family: 'Poppins-medium';
     font-weight: 500;
     font-style: normal;
     src: url("/fonts/Poppins-Medium.ttf");
@@ -93,7 +93,7 @@
 	src: url("/fonts/Bitter-Regular.ttf");
 }
 @font-face {
-    font-family: 'Bitter-italic-normal-mediun';
+    font-family: 'Bitter-italic-normal-medium';
     font-weight: 500;
     font-style: normal;
 	src: url("/fonts/Bitter-MediumItalic.ttf");
@@ -134,7 +134,7 @@ body {
    /* for input field */
    --height-normal:35px;
    --border-input-lightgray: #dddddd;
-   --font-family-bitter-italic-normal-medium: Bitter-italic-normal-mediun;
+   --font-family-bitter-italic-normal-medium: Bitter-italic-normal-medium;
    --font-family-poppins-regular: Poppins-regular;
     --font-family-poppins-italic: Poppins-italac;
     --font-family-poppins-light: Poppins-normal;
@@ -176,22 +176,22 @@ body {
     --font-family-poppins-medium: Poppins-medium;
 
     /* bitter font-family */
-    --font-family-bitter-italic-normal-medium: Bitter-italic-normal-mediun;
+    --font-family-bitter-italic-normal-medium: Bitter-italic-normal-medium;
 }
 
-.bitter-italic-normal-mediun-24 {
+.bitter-italic-normal-medium-24 {
     color: var(--color-purple);
     font-family: var(--font-family-bitter-italic-normal-medium);
     font-weight: 500;
     font-size: var(--font-size-xxxl);
 }
-.bitter-italic-normal-mediun-20 {
+.bitter-italic-normal-medium-20 {
     color: var(--color-purple);
     font-family: var(--font-family-bitter-italic-normal-medium);
     font-weight: 500;
     font-size: var(--font-size-xl);
 }
-.bitter-italic-normal-mediun-22 {
+.bitter-italic-normal-medium-22 {
     color: var(--color-purple);
     font-family: var(--font-family-bitter-italic-normal-medium);
     font-weight: 500;
