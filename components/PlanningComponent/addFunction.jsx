@@ -371,13 +371,15 @@ const AddFunction = () => {
 
 	function verifyfunctionid(val){  
 		let v=0;
-		console.log('reached here sathish');
+		//console.log('reached here sathish');
 		functions.slice(4,functions.length).map((key,value)=>{
+		//	console.log(key['id']);
 			if(key['id']==val){
+			//	console.log('reached');
 				v++;
 			}
 		});
-		if(v>0){return true}else{false}
+		if(v>0){return true}else{return false}
 	}
 
 	const empid = (parameter = 0, error = '', val = 0) => {
@@ -391,6 +393,7 @@ const AddFunction = () => {
 				<ul>
 					{functions != null ? (
 						functions.slice(0, 4).map((key, value) => (
+							
 							<div key={key['id']} className="row ms-5">
 								<div style={{ visibility: 'hidden' }}>
 									{value == 0 ? (group = !ischecked ? parameter + 'function' : 'function') : ''}
@@ -420,7 +423,8 @@ const AddFunction = () => {
 														//	updateStoredfunction(parameter,key['id']);
 														updateValue(parameter, key['id'], 1);
 													}}
-													checked={employeeobject[val].functionid == key['id'] ? true : false}
+													
+													checked={(employeeobject[val]!=undefined)?(employeeobject[val].functionid == key['id'] ? true : false):''}
 													//(storeddata[val]!=undefined)?(key['id']==storeddata[val].function_id)?true:false:""}
 													//	checked={key['funct_checked'] == key['id'] ? true : false}
 													onChange={(e) => {
@@ -439,7 +443,7 @@ const AddFunction = () => {
 													value={'finaldrop'}
 													style={{ display: 'inline-block !important' }}
 													name={group}
-													checked={verifyfunctionid(employeeobject[val].functionid)
+													checked={(employeeobject[val]!=undefined)?verifyfunctionid(employeeobject[val].functionid):""
 														// == key['id']||(employeeobject[val].functionid)
 														//? true : false
 													}
@@ -450,13 +454,14 @@ const AddFunction = () => {
 													className="p-3 d-inline"
 												/>
 												<div className="ps-2 w-75" style={{ display: 'inline-block' }}>
+													{/* {console.log(verifyfunctionid(employeeobject[value].functionid)?dropfunctionupdate(employeeobject[val].functionid):'')} */}
 													<Select
 														placeholder={<div>Function</div>}
 														isDisabled={
-															employeeobject[val] != undefined &&
-															storeddata[val] != undefined ? employeeobject[val]
-																.radioactive &&
-															!(key['id'] == storeddata[val].function_id) ? (
+															(employeeobject[val] != undefined) ? employeeobject[val].radioactive 
+																&&
+															(key['id'] == employeeobject[val].functionid) 
+															? (
 																true
 															) : (
 																false
@@ -467,6 +472,7 @@ const AddFunction = () => {
 														//value='finaldrop'
 														name="employefunctionsall"
 														options={fulllist}
+														
 														defaultValue={
 															//key['id'] == employeeobject[val].functionid ? (
 																verifyfunctionid(employeeobject[val].functionid)?dropfunctionupdate(employeeobject[val].functionid):''
