@@ -28,6 +28,13 @@ function Planning(props) {
 	const [ empr_id, setEmpr_id ] = useState('');
 	const [ projectname, setProjectname ] = useState('');
 
+	//FOR ASSIGNING ID VALUES TO LOCATION, COMPANY, COST-CENTER, ID,
+	const [ companyid, setCompanyid ] = useState('');
+	const [ locationid, setLocationid ] = useState('');
+	const [ costcenterid, setCostcenterid ] = useState('');
+	const [ id, setId ] = useState('');
+	const [ uniquekey, setUniquekey ] = useState('');
+
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
 	const [ error_location_id, setError_location_id ] = useState('');
@@ -77,29 +84,29 @@ function Planning(props) {
 						setCompany(result.data[0]);
 						setLocation(result.data[1]);
 						setCostcenter(result.data[2]);
-						if (data.id == '') {
-							var data1 = data;
-							if (result.data[0].length == 1) {
-								data1.comp_id = result.data[0].nid;
-								if (result.data[1].length == 1) {
-									data1.location_id = result.data[1].value;
-									if (result.data[2].length == 1) {
-										data1.cost_center_id = result.data[2].value;
-									}
-								}
-							}
+						setUniquekey(result.data[0].p_unique_key);
 
-							data1.p_unique_key = p_unique_key;
+						// if (data.id == '') {
+						// 	var data1 = data;
+						// 	if (result.data[0].length == 1) {
+						// 		data1.comp_id = result.data[0].nid;
+						// 		if (result.data[1].length == 1) {
+						// 			data1.location_id = result.data[1].value;
+						// 			if (result.data[2].length == 1) {
+						// 				data1.cost_center_id = result.data[2].value;
+						// 			}
+						// 		}
+						// 	}
 
-							setData(data1);
-							if (
-								result.data[0].length == 1 &&
-								result.data[1].length == 1 &&
-								result.data[2].length == 1
-							) {
-								postData(data);
-							}
-						}
+						// setData(data1);
+						// if (
+						// 	result.data[0].length == 1 &&
+						// 	result.data[1].length == 1 &&
+						// 	result.data[2].length == 1
+						// ) {
+						// 	postData(data);
+						// }
+						// }
 					})
 					.catch((error) => {
 						console.log(error);
@@ -109,69 +116,6 @@ function Planning(props) {
 		[ empr_id ]
 	);
 
-	// FETCHING COMPANY FROM DRUPAL //
-	// useEffect(() => {
-	// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managecompanies?_format=json', 'GET')
-	// 		.then((result) => {
-	// 			if (result.length > 0) {
-	// 				setCompany(result);
-	// 			} else {
-	// 			}
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error(error);
-	// 		});
-	// }, []);
-
-	// //LOCATION FETCHING FROM DRUPAL
-	// useEffect(
-	// 	() => {
-	// 		setLocation([]);
-	// 		if (data.comp_id != '') {
-	// 			APICALL.service(
-	// 				process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managelocations?_format=json&comp_id=' + data.comp_id,
-	// 				'GET'
-	// 			)
-	// 				.then((result) => {
-	// 					if (result.length > 0) {
-	// 						setLocation(result);
-	// 					} else {
-	// 						setLocation([]);
-	// 					}
-	// 				})
-	// 				.catch((error) => {
-	// 					console.error(error);
-	// 				});
-	// 		}
-	// 	},
-	// 	[ data.comp_id ]
-	// );
-
-	//COST CENTER FETCHING FROM DRUPAL
-	// useEffect(
-	// 	() => {
-	// 		APICALL.service(
-	// 			process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
-	// 				'manage-costcenter?_format=json&comp_id=' +
-	// 				data.comp_id +
-	// 				'&location_id=' +
-	// 				data.location_id,
-	// 			'GET'
-	// 		)
-	// 			.then((result) => {
-	// 				if (result.length > 0) {
-	// 					setCostcenter(result);
-	// 				} else {
-	// 					setCostcenter([]);
-	// 				}
-	// 			})
-	// 			.catch((error) => {
-	// 				console.error(error);
-	// 			});
-	// 	},
-	// 	[ data.comp_id, data.location_id ]
-	// );
-
 	// FETCH PLANNING
 	useEffect(
 		() => {
@@ -179,14 +123,12 @@ function Planning(props) {
 				APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
 					console.log(result);
 					if (result && result.data.length > 0) {
-						var res = data;
-						res.id = result.data[0].id;
-						res.p_unique_key = result.data[0].p_unique_key;
-						res.comp_id = result.data[0].comp_id;
-						res.location_id = result.data[0].location_id;
-						res.cost_center_id = result.data[0].cost_center_id == null ? '' : result.data[0].cost_center_id;
-						setData(res);
-						console.log(data);
+						setId(result.data[0].id);
+						setUniquekey(result.data[0].p_unique_key);
+						setCompanyid(result.data[0].comp_id);
+						setLocationid(result.data[0].location_id);
+						var cc_id = result.data[0].cost_center_id == null ? '' : result.data[0].cost_center_id;
+						setCostcenterid(cc_id);
 					}
 				});
 			}
@@ -236,14 +178,19 @@ function Planning(props) {
 	// ON SUBMIT //
 	let submit = (event) => {
 		event.preventDefault();
-		console.log(data);
-		var valid_res = validate(data);
+		var valid_res = validate();
 		if (valid_res) {
 			postData();
 		}
 	};
 
 	let postData = () => {
+		var data = {};
+		data.p_unique_key = uniquekey;
+		data.id = id;
+		data.comp_id = companyid;
+		data.location_id = locationid;
+		data.cost_center_id = costcenterid == null ? '' : costcenterid;
 		APICALL.service(addPlanning, 'POST', data)
 			.then((result) => {
 				console.log(result);
@@ -259,12 +206,12 @@ function Planning(props) {
 	};
 
 	//VALIDATE FORM //
-	let validate = (res) => {
+	let validate = () => {
 		var error1 = [];
 
 		//check if required fields are empty
-		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
-		error1['location_id'] = ValidationService.emptyValidationMethod(res.location_id);
+		error1['comp_id'] = ValidationService.emptyValidationMethod(companyid);
+		error1['location_id'] = ValidationService.emptyValidationMethod(locationid);
 
 		//seterror messages
 		setError_comp_id(error1['comp_id']);
@@ -360,11 +307,11 @@ function Planning(props) {
 									Company
 								</label>
 								<select
-									value={data.comp_id}
+									value={companyid}
 									className="form-select mb-2 mt-2"
 									placeholder="select company"
 									onChange={(e) => {
-										setData((prev) => ({ ...prev, comp_id: e.target.value }));
+										setCompanyid(e.target.value);
 										updateLocation(e.target.value);
 									}}
 								>
@@ -383,18 +330,18 @@ function Planning(props) {
 									Location
 								</label>
 								<select
-									value={data.location_id}
+									value={locationid}
 									className="form-select mb-2 mt-2"
 									onChange={(e) => {
-										setData((prev) => ({ ...prev, location_id: e.target.value }));
-										updateCostCenter(e.target.value);
+										setLocationid(e.target.value);
+										// updateCostCenter(e.target.value);
 									}}
 								>
 									<option value="">Select</option>
-									{data.comp_id != '' &&
+									{companyid != '' &&
 										location.map(
 											(options) =>
-												options.comp_id == data.comp_id && (
+												options.comp_id == companyid && (
 													<option key={options.value} value={options.value}>
 														{options.title}
 													</option>
@@ -408,16 +355,17 @@ function Planning(props) {
 								<label className="form-label mb-2 mt-2 poppins-regular-16px">Cost center</label>
 								<select
 									className="form-select mb-2 mt-2"
-									value={data.cost_center_id}
+									value={costcenterid}
 									onChange={(e) => {
-										setData((prev) => ({ ...prev, cost_center_id: e.target.value }));
+										setCostcenterid(e.target.value);
 									}}
 								>
 									<option value="">Select</option>
-									{data.location_id != '' &&
+									{locationid != '' &&
+										costcenter.length > 0 &&
 										costcenter.map(
 											(options) =>
-												options.location_id == data.location_id && (
+												options.location_id == locationid && (
 													<option key={options.value} value={options.value}>
 														{options.title}
 													</option>
@@ -459,7 +407,7 @@ function Planning(props) {
 							type="submit"
 							className="btn rounded-0  custom-btn px-3  btn-block float-end"
 							onClick={() => {
-								setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
+								setUniquekey(router.query.p_unique_key);
 							}}
 						>
 							NEXT
@@ -488,3 +436,66 @@ function Planning(props) {
 	);
 }
 export default Planning;
+
+// FETCHING COMPANY FROM DRUPAL //
+// useEffect(() => {
+// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managecompanies?_format=json', 'GET')
+// 		.then((result) => {
+// 			if (result.length > 0) {
+// 				setCompany(result);
+// 			} else {
+// 			}
+// 		})
+// 		.catch((error) => {
+// 			console.error(error);
+// 		});
+// }, []);
+
+// //LOCATION FETCHING FROM DRUPAL
+// useEffect(
+// 	() => {
+// 		setLocation([]);
+// 		if (data.comp_id != '') {
+// 			APICALL.service(
+// 				process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'managelocations?_format=json&comp_id=' + data.comp_id,
+// 				'GET'
+// 			)
+// 				.then((result) => {
+// 					if (result.length > 0) {
+// 						setLocation(result);
+// 					} else {
+// 						setLocation([]);
+// 					}
+// 				})
+// 				.catch((error) => {
+// 					console.error(error);
+// 				});
+// 		}
+// 	},
+// 	[ data.comp_id ]
+// );
+
+//COST CENTER FETCHING FROM DRUPAL
+// useEffect(
+// 	() => {
+// 		APICALL.service(
+// 			process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
+// 				'manage-costcenter?_format=json&comp_id=' +
+// 				data.comp_id +
+// 				'&location_id=' +
+// 				data.location_id,
+// 			'GET'
+// 		)
+// 			.then((result) => {
+// 				if (result.length > 0) {
+// 					setCostcenter(result);
+// 				} else {
+// 					setCostcenter([]);
+// 				}
+// 			})
+// 			.catch((error) => {
+// 				console.error(error);
+// 			});
+// 	},
+// 	[ data.comp_id, data.location_id ]
+// );
