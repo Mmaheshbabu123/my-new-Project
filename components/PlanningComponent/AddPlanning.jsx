@@ -373,6 +373,13 @@ function Planning(props) {
 										)}
 								</select>
 							</div>
+
+							<div className="form-group mb-3">
+								<label className="form-label mb-2 mt-2 poppins-regular-16px">Paritair comite</label>
+								<select className="form-select mb-2 mt-2">
+									<option value="">Select</option>
+								</select>
+							</div>
 							{!showproject && (
 								<div className="form-group ">
 									<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
@@ -418,18 +425,19 @@ function Planning(props) {
 			{show == true && (
 				<div className="">
 					{/* {console.log(project)} */}
-					{project.id && (
-						<Addproject
-							data={project}
-							display={'block'}
-							company={company}
-							company_id={data.comp_id}
-							popupActionNo={closePopup}
-							popupActionYes={showPopup}
-							updatecompany={updatcomp}
-							countries={countrylist}
-						/>
-					)}
+					{/* {project.id && 
+					( */}
+					<Addproject
+						data={project}
+						display={'block'}
+						company={company}
+						company_id={data.comp_id}
+						popupActionNo={closePopup}
+						popupActionYes={showPopup}
+						updatecompany={updatcomp}
+						countries={countrylist}
+					/>
+					{/* )} */}
 				</div>
 			)}
 		</div>
