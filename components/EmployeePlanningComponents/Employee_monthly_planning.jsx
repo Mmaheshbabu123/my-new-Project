@@ -47,21 +47,21 @@ function EmployeeMonthlyPlanning(props) {
 	// }, []);
 	const ExternalViewSwitcher = ({ currentViewName, onChange }) => (
 		<div
-			className="row mb-5"
+			className="row mb-5 m-0"
 			aria-label="Views"
 			style={{ flexDirection: 'row' }}
 			name="views"
 			value={currentViewName}
 			onClick={onChange}
 		>
-			<button type="button" value="Day" className="btn btn-outline-info col-md-4 ">
+			<button type="button" value="Day" className="btn table-border-gray  col-md-4  poppins-regular-16px">
 				Day
 			</button>
-			<button value="Week" type="button" className="btn btn-outline-info col-md-4">
+			<button value="Week" type="button" className="btn table-border-gray  col-md-4 poppins-regular-16px">
 				Week
 			</button>
 
-			<button value="Month" type="button" className="btn btn-outline-info col-md-4  ">
+			<button value="Month" type="button" className="btn table-border-gray  col-md-4 poppins-regular-16px ">
 				Month
 			</button>
 		</div>
@@ -227,55 +227,55 @@ function EmployeeMonthlyPlanning(props) {
 	};
 
 	return (
-		<div className="container-fluid">
-			<div className="row">
-				<p className="h3">My planning</p>
-				<div className="mt-3 ms-3">
-					<p className="h6">My upcoming plannings</p>
+		<div className="container-fluid p-0">
+			<div className="row m-0 p-0">
+				<p className="mt-1 mb-1 p-0 font-weight-bold   bitter-italic-normal-mediun-24">My planning</p>
+				<div className="mt-3 col-md-12 p-0">
+					<p className="poppins-regular-16px">My upcoming plannings</p>
 				</div>
-				<div className="form-check mt-2 text-center ">
+				<div className=" mt-2 text-center col-md-12 p-0 ">
 					<table className="table border  border-info mt-3 mb-3">
 						<thead>
-							<tr className="table-info">
-								<th className="border-end  border-info">Date</th>
-								<th className="border-end  border-info">Start time</th>
-								<th className="border-end  border-info">End time</th>
-								<th className="border-end  border-info">Employer</th>
-								<th className="border-end  border-info">Location</th>
-								<th className="border-end  border-info">Company</th>
-								<th className="border-end  border-info">Action</th>
+							<tr className=" skyblue-bg-color">
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">Date</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">Start time</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">End time</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">Employer</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">Location</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">Company</th>
+								<th className=" text-center align-items-center justify-content-center ">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							{data.slice(0, visible).map((result) => (
 								<tr className="border-bottom  border-info" key={result.title}>
-									<td className="border-end  border-info">{result.Date}</td>
-									<td className="border-end  border-info">{result.startTime}</td>
-									<td className="border-end border-info">{result.endTime}</td>
-									<td className="border-end  border-info">{result.employer}</td>
-									<td className="border-end  border-info">{result.location}</td>
-									<td className="border-end  border-info">{result.company}</td>
+									<td className="table-border-gray font-poppins-light">{result.Date}</td>
+									<td className="table-border-gray font-poppins-light">{result.startTime}</td>
+									<td className="table-border-gray font-poppins-light">{result.endTime}</td>
+									<td className="table-border-gray font-poppins-light">{result.employer}</td>
+									<td className=" table-border-gray font-poppins-light">{result.location}</td>
+									<td className="table-border-gray font-poppins-light">{result.company}</td>
 									<td className="d-flex justify-content-center">
-										<AiFillEye className="mt-2 ms-3 " />
+										<AiFillEye className="mt-2 ms-3 color-skyblue" />
 
 										<span>
-											<MdReviews className="mt-2 ms-3 " />
+											<MdReviews className="mt-2 ms-3 color-skyblue " />
 										</span>
-										<AiFillInfoCircle className="mt-2 ms-3" />
+										<AiFillInfoCircle className="mt-2 ms-3 color-skyblue " />
 									</td>
 								</tr>
 							))}
 						</tbody>
 					</table>
 				</div>
-				<div className="text-end mb-3">
-					<button type="button" className="btn btn-link text-decoration-none" onClick={viewMoreItems}>
-						View more
-						<AiOutlineArrowRight />
+				<div className="text-end mb-3 p-0">
+					<button type="button" className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-regular-20px" onClick={viewMoreItems}>
+						View more &nbsp;
+						<AiOutlineArrowRight className=""/>
 					</button>
 				</div>
 			</div>
-
+        <div className="planning-table col-md-12 mb-5">
 			<React.Fragment>
 				<ExternalViewSwitcher currentViewName={currentViewName} onChange={currentViewNameChange} />
 
@@ -294,6 +294,7 @@ function EmployeeMonthlyPlanning(props) {
 					</Scheduler>
 				</Paper>
 			</React.Fragment>
+			</div>
 		</div>
 	);
 }
