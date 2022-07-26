@@ -797,3 +797,6 @@ font-size: var(--font-size-l);
 .equal-width-calc td {
     width: calc(100%/7);
 }
+.table-right-border-white {
+    border-right: 1px solid var(--color-white);
+}

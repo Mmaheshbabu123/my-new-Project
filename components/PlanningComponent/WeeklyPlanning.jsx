@@ -141,23 +141,23 @@ function WeeklyPlanning(props) {
 					{showview && (
 						<table className="table border border-secondary ">
 							<thead className="table-light">
-								<tr className="border-bottom border-secondary">
-									<th className="border-end border-secondary">
+								<tr className="border-bottom ">
+									<th className="border-end table-right-border-white">
 										Monday<br />10-07-2022
 									</th>
-									<th className="border-end border-secondary">
+									<th className="border-end table-right-border-white">
 										Tuesday <br />11-07-2022
 									</th>
-									<th className="border-end border-secondary">
+									<th className="border-end table-right-border-white">
 										Wednesday <br />12-07-2022
 									</th>
-									<th className="border-end border-secondary">
+									<th className="border-end table-right-border-white">
 										Thursday <br />13-07-2022
 									</th>
-									<th className="border-end border-secondary">
+									<th className="border-end table-right-border-white">
 										Friday<br />14-07-2022
 									</th>
-									<th className="border-end border-secondary">
+									<th className="border-end table-right-border-white">
 										Saturday<br />15-07-2022
 									</th>
 									<th>

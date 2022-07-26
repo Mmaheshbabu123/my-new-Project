@@ -96,25 +96,25 @@ const PlanningFinalize = () => {
 						<thead className="">
 							
 							<tr className="skyblue-bg-color">
-								<th className=" table-border-gray  text-center align-items-center justify-content-center ">
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
 									Monday<br />27-06-2022
 								</th>
-								<th className=" table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
 									Tuesday <br />28-06-2022
 								</th>
-								<th className="table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
 									Wednesday <br />29-06-2022
 								</th>
-								<th className=" table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
 									Thursday <br />30-06-2022
 								</th>
-								<th className=" table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
 									Friday<br />01-07-2022
 								</th>
-								<th className=" table-border-gray  text-center  align-items-center justify-content-center">
+								<th className=" table-right-border-white  text-center  align-items-center justify-content-center">
 									Saturday<br />02-07-2022
 								</th>
-								<th className=" table-border-gray  text-center  align-items-center justify-content-center">
+								<th className="  text-center  align-items-center justify-content-center">
 									Sunday<br />13-03-2022
 								</th>
 							</tr>

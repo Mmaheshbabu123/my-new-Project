@@ -227,7 +227,7 @@ function EmployeeMonthlyPlanning(props) {
 	};
 
 	return (
-		<div className="container">
+		<div className="container-fluid">
 			<div className="row">
 				<p className="h3">My planning</p>
 				<div className="mt-3 ms-3">
