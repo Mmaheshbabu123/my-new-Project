@@ -5,9 +5,18 @@ import { getEmployeerCompanylist, getWeeklyPlanning } from '../../Services/ApiEn
 import { MdEdit, MdDelete } from 'react-icons/md';
 
 function WeeklyPlanning(props) {
-	const [ empr_id, setEmpr_id ] = useState(86);
+	const [ empr_id, setEmpr_id ] = useState(143);
 	const [ showview, setShowview ] = useState(false);
-	const [planning,setPlanning] = useState([]);
+	const [ planning, setPlanning ] = useState([]);
+	const [activeWeek, setActiveWeek] = useState([
+		'2022/07/24',
+		'2022/07/25',
+		'2022/07/26',
+		'2022/07/27',
+		'2022/07/28',
+		'2022/07/29',
+		'2022/07/30',
+	]);
 	const [ weeklyplanning, setWeeklyPlanning ] = useState([
 		{
 			id: 1,
@@ -41,34 +50,36 @@ function WeeklyPlanning(props) {
 	const [ company, setCompany ] = useState(253);
 	const [ project, setProject ] = useState('');
 	const [ costcenter, setCostcenter ] = useState('');
-	const [ companylist, setCompanylist ] = useState('');
+	const [ companylist, setCompanylist ] = useState([]);
+	const [ locationlist, setLocationlist ] = useState([]);
+	const [ costcenterlist, setCostcenterlist ] = useState([]);
 
-	// useEffect(() => {
-	// 	if (localStorage.getItem('uid') != null) {
-	// 		setEmpr_id(localStorage.getItem('uid'));
-	// 	} else {
-	// 		window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-	// 	}
-	// }, []);
+	useEffect(() => {
+		if (localStorage.getItem('uid') != null) {
+			setEmpr_id(localStorage.getItem('uid'));
+			// } else {
+			// 	window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+		}
+	}, []);
 
 	useEffect(
 		() => {
 			if (showview == true) {
-				if(company != ''){
-				APICALL.service(getWeeklyPlanning + company, 'GET')
-					.then((result) => {
-						if(result.status == 200){
-							setPlanning(result.data);
-						}
-						console.log(result);
-					})
-					.catch((error) => {
-						console.error(error);
-					});
+				if (company != '') {
+					APICALL.service(getWeeklyPlanning + company, 'GET')
+						.then((result) => {
+							if (result.status == 200) {
+								setPlanning(result.data);
+							}
+							console.log(result);
+						})
+						.catch((error) => {
+							console.error(error);
+						});
 				}
 			}
 		},
-		[ showview,company ]
+		[ showview, company ]
 	);
 
 	useEffect(
@@ -79,6 +90,8 @@ function WeeklyPlanning(props) {
 						if (result.status == 200) {
 							console.log(result);
 							setCompanylist(result.data[0]);
+							setLocationlist(result.data[1]);
+							setCostcenterlist(result.data[2]);
 							console.log(result.data[0]);
 							setShowview(true);
 						}
@@ -111,31 +124,42 @@ function WeeklyPlanning(props) {
 						</div>
 					</div>
 				)}
-				<div className=" mt-4 d-flex mb-3  ">
-					<select className="form-select w-25 me-2 ">
-						<option> Select company</option>
-						{Object.keys(companylist).map((value) => (
-							<option key={value} value={companylist[value].nid}>
-								{companylist[value].title}
+				<div className=" mt-4 d-flex mb-3 ">
+					<select
+						className="form-select w-25 me-2 "
+						onChange={(e) => {
+							setCompany(e.target.value);
+						}}
+					>
+						<option value=""> Select company</option>
+						{companylist.map((value) => (
+							<option key={value.nid} value={value.nid}>
+								{value.title}
 							</option>
 						))}
 					</select>
 
 					<select className="form-select w-25 me-2 ">
-						<option>Select Location</option>
-						<option value="">Bangalore</option>
-						<option value="">Mangalore</option>
+						<option value="">Select Location</option>
+						{locationlist.map((value) => (
+							<option key={value.value} value={value.value}>
+								{value.title}
+							</option>
+						))}
 					</select>
 					<select className="form-select w-25 me-2">
-						<option>Cost center</option>
-						<option value="">Cost center 1</option>
-						<option value="">Cost center 2</option>
+						<option value="">Cost center</option>
+						{costcenterlist.map((value) => (
+							<option key={value.value} value={value.value}>
+								{value.title}
+							</option>
+						))}
 					</select>
-					<select className="form-select w-25 me-2">
+					{/* <select className="form-select w-25 me-2">
 						<option>Select Project</option>
 						<option value="">Project-1</option>
 						<option value="">Project-2</option>
-					</select>
+					</select> */}
 				</div>
 				<div className="mt-2 ">
 					{showview && (
@@ -143,10 +167,10 @@ function WeeklyPlanning(props) {
 							<thead className="table-light">
 								<tr className="border-bottom border-secondary">
 									<th className="border-end border-secondary">
-										Monday<br />10-07-2022
+										Monday<br />25-07-2022
 									</th>
 									<th className="border-end border-secondary">
-										Tuesday <br />11-07-2022
+										Tuesday <br />26-07-2022
 									</th>
 									<th className="border-end border-secondary">
 										Wednesday <br />12-07-2022
@@ -166,19 +190,23 @@ function WeeklyPlanning(props) {
 								</tr>
 							</thead>
 							<tbody>
-							{planning.map((value) => (
-    	<tr className='border-bottom border-secondary' key={value.id}>
-      <td className="border-end border-secondary">{value.employee_name}</td>
-      <td className="border-end border-secondary">Otto</td>
-      <td className="border-end border-secondary">@mdo</td>
-	  <td className="border-end border-secondary">Mark</td>
-      <td className="border-end border-secondary">Otto</td>
-      <td className="border-end border-secondary">@mdo</td>
-	  <td>@mdo</td>
-    </tr>
-							))
-}
-	</tbody>
+								{console.log(planning)}
+								{Object.keys(planning).map((value, key) => (
+									<tr className="border-bottom border-secondary" key={value}>
+										{planning[value].map((val1) => (
+											<td key={val1.id} className="border-end border-secondary">
+												<p>{val1.employee_name}</p>
+												<p>{val1.employee_type_name}</p>
+												<p>{val1.function_name}</p>
+												<p>{"€ "+val1.salary}</p>
+											</td>
+											
+										))}
+
+										{/* 6 */}
+									</tr>
+								))}
+							</tbody>
 							{/* <tbody>
 								<tr className="border-bottom border-secondary">
 									{weeklyplanning.map((value) => (
