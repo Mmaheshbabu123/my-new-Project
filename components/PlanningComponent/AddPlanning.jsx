@@ -81,20 +81,21 @@ function Planning(props) {
 							var data1 = data;
 							if (result.data[0].length == 1) {
 								data1.comp_id = result.data[0].nid;
+								if (result.data[1].length == 1) {
+									data1.location_id = result.data[1].value;
+									if (result.data[2].length == 1) {
+										data1.cost_center_id = result.data[2].value;
+									}
+								}
 							}
-							if (result.data[1].length == 1) {
-								data1.location_id = result.data[1].value;
-							}
-							if (result.data[2].length == 1) {
-								data1.cost_center_id = result.data[2].value;
-							}
+
 							data1.p_unique_key = p_unique_key;
 
 							setData(data1);
 							if (
 								result.data[0].length == 1 &&
 								result.data[1].length == 1 &&
-								result.data[1].length == 1
+								result.data[2].length == 1
 							) {
 								postData(data);
 							}
@@ -174,18 +175,21 @@ function Planning(props) {
 	// FETCH PLANNING
 	useEffect(
 		() => {
-			APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
-				if (result && result.data.length > 0) {
-					var res = data;
-					res.id = result.data[0].id;
-					res.p_unique_key = result.data[0].p_unique_key;
-					res.comp_id = result.data[0].comp_id;
-					res.location_id = result.data[0].location_id;
-					res.cost_center_id = result.data[0].cost_center_id == null ? '' : result.data[0].cost_center_id;
-					setData(res);
-					console.log(data);
-				}
-			});
+			if (p_unique_key != undefined) {
+				APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
+					console.log(result);
+					if (result && result.data.length > 0) {
+						var res = data;
+						res.id = result.data[0].id;
+						res.p_unique_key = result.data[0].p_unique_key;
+						res.comp_id = result.data[0].comp_id;
+						res.location_id = result.data[0].location_id;
+						res.cost_center_id = result.data[0].cost_center_id == null ? '' : result.data[0].cost_center_id;
+						setData(res);
+						console.log(data);
+					}
+				});
+			}
 		},
 		[ p_unique_key ]
 	);
@@ -193,36 +197,41 @@ function Planning(props) {
 	/**
 	 * FETCHING PROJECT
 	 */
-	// useEffect(() => {
-	// 	APICALL.service(fetchproject + p_unique_key, 'GET')
-	// 		.then((result) => {
-	// 			console.log(result);
-	// 			setCountrylist(result.data.countrylist);
-	// 			if (result.data.length > 0) {
-	// 				var res = [];
-	// 				res.project_name = result.data.project_name;
-	// 				setProjectname(result.data.project_name);
-	// 				res.project_location = result.data.project_location;
-	// 				res.hno = result.data.hno;
-	// 				res.bno = result.data.bno;
-	// 				res.city = result.data.city;
-	// 				res.extra = result.data.extra;
-	// 				res.comp_id = result.data.comp_id;
-	// 				res.street = result.data.street;
-	// 				res.postal_code = result.data.postal_code;
-	// 				res.country = result.data.country;
-	// 				setProject(res);
-	// 				console.log(data);
-	// 			}
+	useEffect(
+		() => {
+			if (p_unique_key != undefined) {
+				APICALL.service(fetchproject + p_unique_key, 'GET')
+					.then((result) => {
+						console.log(result);
+						setCountrylist(result.data.countrylist);
+						if (result.data > 0) {
+							var res = project;
+							res.project_name = result.data.project_name;
+							setProjectname(result.data.project_name);
+							res.project_location = result.data.project_location;
+							res.hno = result.data.hno;
+							res.bno = result.data.bno;
+							res.city = result.data.city;
+							res.extra = result.data.extra;
+							res.comp_id = result.data.comp_id;
+							res.street = result.data.street;
+							res.postal_code = result.data.postal_code;
+							res.country = result.data.country;
+							setProject(res);
+							console.log(project);
+						}
 
-	// 			// console.log(countrylist);
+						// console.log(countrylist);
 
-	// 			// setData(result.data);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-	// }, []);
+						// setData(result.data);
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+			}
+		},
+		[ p_unique_key ]
+	);
 
 	// ON SUBMIT //
 	let submit = (event) => {
@@ -299,6 +308,8 @@ function Planning(props) {
 				setData((prev) => ({ ...prev, location_id: result.value }));
 			}
 			updateCostCenter(result.value);
+		} else {
+			setData((prev) => ({ ...prev, location_id: '' }));
 		}
 	};
 	let updateCostCenter = (loc_id) => {
@@ -306,6 +317,7 @@ function Planning(props) {
 		costcenter.map((loc) => {
 			if (loc.location_id == loc_id) counter++;
 		});
+		console.log(costcenter);
 		if (counter == 1) {
 			var result = costcenter.find((obj) => {
 				return obj.location_id == loc_id ? obj : '';
@@ -313,6 +325,8 @@ function Planning(props) {
 			if (result != '') {
 				setData((prev) => ({ ...prev, cost_center_id: result.value }));
 			}
+		} else {
+			setData((prev) => ({ ...prev, cost_center_id: '' }));
 		}
 	};
 
@@ -455,16 +469,19 @@ function Planning(props) {
 			</form>
 			{show == true && (
 				<div className="">
-					<Addproject
-						data={project}
-						display={'block'}
-						company={company}
-						company_id={data.comp_id}
-						popupActionNo={closePopup}
-						popupActionYes={showPopup}
-						updatecompany={updatcomp}
-						countries={countrylist}
-					/>
+					{/* {console.log(project)} */}
+					{project.id && (
+						<Addproject
+							data={project}
+							display={'block'}
+							company={company}
+							company_id={data.comp_id}
+							popupActionNo={closePopup}
+							popupActionYes={showPopup}
+							updatecompany={updatcomp}
+							countries={countrylist}
+						/>
+					)}
 				</div>
 			)}
 		</div>

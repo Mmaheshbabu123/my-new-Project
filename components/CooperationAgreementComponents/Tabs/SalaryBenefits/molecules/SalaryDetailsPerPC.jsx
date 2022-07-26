@@ -10,7 +10,7 @@ const TAB_ID = 5;
 const stateKey = 'tab_5';
 const SalaryDetailsPerPC = () => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  var { tab_5: {  cooperationSalaryDetails }, salaryBenefitPcArray, dependecyDataStatus, salaryDataPerPc } = state;
+  var { tab_5: {  cooperationSalaryDetails }, salaryBenefitPcArray, dependecyDataStatus, salaryDataPerPc, filledTabs, selectedTabId } = state;
 
   const onSelect = (e) => {
     let salaryDetailsObj = [...cooperationSalaryDetails];
@@ -64,7 +64,7 @@ const SalaryDetailsPerPC = () => {
   }
 
   return (
-    <div className={`${styles['salary-benefits-tab-parent']}`}>
+    <div className={`${styles['salary-benefits-tab-parent']}`} disabled={!filledTabs.includes(selectedTabId)}>
       <div>
         {cooperationSalaryDetails.length > 0 ? <SalaryDetails onDelete={onDelete}/> : null}
       </div>

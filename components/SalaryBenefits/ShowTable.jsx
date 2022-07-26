@@ -121,6 +121,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           <thead className="table-render-thead">
             <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
           </thead>
+          {state.currentItems && state.currentItems.length > 0 ?
           <tbody>
             {state.currentItems.map(eachRow => <tr key={eachRow.sb_id} id={eachRow.sb_id}>
               <td> {eachRow.name} </td>
@@ -128,7 +129,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
               <td> {eachRow.value ? eachRow.value : '--'} </td>
               <td>{ getNeededActions(eachRow) } </td>
             </tr>)}
-          </tbody>
+          </tbody>: <p style={{paddingTop: '10px'}}> No records </p>}
         </table>
       </div>
       <div>

@@ -12,7 +12,7 @@ function Header() {
 	return (
 		<div className='custom-position-sticky'>
 		<div className="clip0"></div>
-		<div className='custom-header  col-md-10 m-auto border-bottom border-2 py-4'>
+		<div className='custom-header  col-md-10 m-auto border-bottom border-2 py-2'>
 		
 		{/* <nav className="navbar"> */}
 		{/* <div className = 'go_to_dashboard'>
@@ -31,9 +31,9 @@ function Header() {
 
 					<div className="d-flex justify-content-end  col-md-8 p-0">
                 <ul className="d-flex list-unstyled mb-0">
-                    <li className='list-unstyled mx-3 align-self-center'><img src="/notifications.svg"/></li>
-                    <li className='list-unstyled mx-3 align-self-center'><img style={{width: '50px'}} src="/account.png"/></li>
-                    <li className='list-unstyled mx-3 align-self-center'><select type="" className="border-0 bg-white poppins-regular-16px p-1 mt-2">
+                    <li className='list-unstyled mx-3 align-self-center d-flex'><img style={{width: '25px', marginTop: '8px'}} src="/notifications.svg"/></li>
+                    <li className='list-unstyled mx-3 align-self-center d-flex'><img style={{width: '40px', marginTop: '7px'}} src="/account.png"/></li>
+                    <li className='list-unstyled mx-3 align-self-center d-flex'><select type="" className="border-0 bg-white poppins-regular-16px p-1 mt-1">
 							<option>EN</option>
 							<option>NL</option>
 							<option>FR</option>

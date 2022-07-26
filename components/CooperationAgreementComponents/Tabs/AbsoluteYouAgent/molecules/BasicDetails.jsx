@@ -3,8 +3,8 @@ import LabelField from '@/atoms/LabelField';
 import DateField from '@/atoms/DateField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import CheckBoxField from '@/atoms/CheckBoxField';
-import RequiredField from '@/atoms/RequiredSpanField';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
+import ValidateMessage from '@/atoms/validationError';
 // import { helpers } from '../../../CooperationAgreementHelper'; //.
 import styles from '../absoluteAgent.module.css';
 
@@ -20,6 +20,7 @@ var consultNumber = [];
 const BasicDetails = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   var { tab_1, element_status } = state;
+  var { validations } = tab_1;
   const [ render, setRender ] = useState(false);
 
   useEffect(() => {
@@ -42,7 +43,9 @@ const BasicDetails = (props) => {
     } else {
       tab_1[startDateAgreement] = value;
       element_status['tab_1'].push(startDateAgreement);
+      validations[startDateAgreement] = false;
     }
+    tab_1['validations'] = validations;
     updateStateChanges({ tab_1, element_status })
   }
 
@@ -59,6 +62,8 @@ const BasicDetails = (props) => {
     }
     element_status['tab_1'].push(key);
     tab_1[key] = obj.value;
+    validations[key] = false;
+    tab_1['validations'] = validations;
     updateStateChanges({ tab_1, element_status });
   }
 
@@ -79,7 +84,7 @@ const BasicDetails = (props) => {
   return(
     <div className="">
       <div className={`${styles['add-div-margings']}`}>
-          <LabelField title="Start date of agreement" customStyle = {{display:''}}/> <RequiredField />
+          <LabelField title="Start date of agreement" mandotory = {true}/>
           <DateField
              id={startDateAgreement}
              isDisabled= {false}
@@ -88,9 +93,10 @@ const BasicDetails = (props) => {
              className="col-md-6"
              value={tab_1[startDateAgreement]}
             />
+           {validations[startDateAgreement] && <ValidateMessage style={{margin:0}} text = {'This field is required'}/>}
       </div>
       <div className={`${styles['add-div-margings']}`}>
-          <LabelField title="AbsoluteYou consultant" customStyle = {{display:''}}/> <RequiredField />
+          <LabelField title="AbsoluteYou consultant" mandotory = {true}/>
           <MultiSelectField
               id={absoluteConsultant}
               options={consultantArray}
@@ -100,9 +106,10 @@ const BasicDetails = (props) => {
               isMulti={false}
               className="col-md-6"
             />
+      {validations[absoluteConsultant] && <ValidateMessage style={{margin:0}} text = {'This field is required'}/>}
       </div>
       <div className={`${styles['add-div-margings']}`}>
-          <LabelField title="AbsoluteYou office number" customStyle = {{display:''}}/> <RequiredField />
+          <LabelField title="AbsoluteYou office number" mandotory = {true}/>
           <MultiSelectField
               id={absoluteConsultantNum}
               options={consultNumber}
@@ -112,6 +119,7 @@ const BasicDetails = (props) => {
               isMulti={false}
               className="col-md-6"
             />
+      {validations[absoluteConsultantNum] && <ValidateMessage style={{margin:0}} text = {'This field is required'}/>}
       </div>
       <div className={`${styles['add-div-margings']}`}>
           <CheckBoxField

@@ -5,7 +5,7 @@ import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
 import { requiredFields} from '../../../RequiredFields';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 const Invoicing = (props) => {
-  const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_6_action}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
+  const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_6_action, filledTabs}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
   const { tab_6,tab_2,tab_3} = state;
   const PersonId = 1;
   useEffect(()=>{
@@ -27,7 +27,9 @@ const Invoicing = (props) => {
 
 }
 
-  updateStateChanges({tab_6,tab_6_action,loadedTabs:[...state.loadedTabs, selectedTabId]})
+  updateStateChanges({tab_6,tab_6_action,loadedTabs:[...state.loadedTabs, selectedTabId],
+    filledTabs: data.completedTabIds.length ? [...filledTabs, ...data.completedTabIds] : filledTabs
+  })
   }
  const prefillFieldsDefault = (tab_6,tab_2,tab_3) =>{
 
@@ -47,7 +49,7 @@ const Invoicing = (props) => {
  }
 
   return (
-    <div className =''>
+    <div className ='' disabled={!filledTabs.includes(selectedTabId)}>
      <InvoiceDetails />
     </div>
   )
