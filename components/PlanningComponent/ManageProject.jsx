@@ -161,9 +161,10 @@ function ManageProject(props) {
 								</button>
 							</div>
 						</div>
+						<div className="form-check p-0 mt-2 text-center max-height-420">
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
-								<tr className="btn-bg-gray-medium">
+								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 									<th className="poppins-regular-18px justify-content-center d-flex align-items-center">
 										Project name
 									</th>
@@ -197,6 +198,7 @@ function ManageProject(props) {
 								)}
 							</tbody>
 						</table>
+						</div>
 					</div>
 				</div>
 				<div className="row my-4">
