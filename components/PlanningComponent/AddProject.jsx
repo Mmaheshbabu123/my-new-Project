@@ -64,18 +64,11 @@ function Addproject(props) {
 
 	useEffect(
 		() => {
-			console.log(props.countries);
 			if (props.countries) {
 				setCountrylist(props.countries);
 			}
 			if (props.data) {
 				setData(props.data);
-				console.log(data);
-			}
-			if (data.comp_id == '') {
-				var res = data;
-				res.comp_id = props.company_id;
-				setData(res);
 			}
 		},
 		[ props ]
@@ -287,6 +280,7 @@ function Addproject(props) {
 														value={data.comp_id}
 														className="form-select mb-2 mt-2"
 														placeholder="select company"
+														disabled = {props.company_id!=''?true:false}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, comp_id: e.target.value }));
 															// updateLocation(e.target.value);
@@ -405,8 +399,9 @@ function Addproject(props) {
 															setData((prev) => ({ ...prev, country: e.target.value }));
 														}}
 													>
+														{console.log(countrylist)};
 														<option value="">Select country</option>
-														{countrylist.map((options) => (
+														{countrylist.length>0 && countrylist.map((options) => (
 															<option key={options.id} value={options.id}>
 																{options.country}
 															</option>
@@ -419,7 +414,7 @@ function Addproject(props) {
 												<div className="col-12">
 													<label className=" mt-2">Extra</label>
 													<input
-														type="text"
+														type="textarea"
 														className="form-control mt-2 mb-2"
 														value={data.extra}
 														onChange={(e) => {

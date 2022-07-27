@@ -65,7 +65,6 @@ function Planning(props) {
 		postal_code: '',
 		country: '',
 		address_id: '',
-		countrylist: []
 	});
 
 	useEffect(() => {
@@ -139,10 +138,10 @@ function Planning(props) {
 					.then((result) => {
 						console.log(result);
 						setCountrylist(result.data.countrylist);
-						if (result.data > 0) {
+						if (result.data) {
 							var res = project;
+							res.id = result.data.id;
 							res.project_name = result.data.project_name;
-							setProjectname(result.data.project_name);
 							res.project_location = result.data.project_location;
 							res.hno = result.data.hno;
 							res.bno = result.data.bno;
@@ -153,12 +152,7 @@ function Planning(props) {
 							res.postal_code = result.data.postal_code;
 							res.country = result.data.country;
 							setProject(res);
-							console.log(project);
 						}
-
-						// console.log(countrylist);
-
-						// setData(result.data);
 					})
 					.catch((error) => {
 						console.log(error);
@@ -279,7 +273,7 @@ function Planning(props) {
 						</h1>
 					</div>
 					<div className="col-md-12 px-0 mt-3 mb-3">
-						{showproject && (
+						{project.id == '' && (
 							<button
 								onClick={showPopup}
 								type="button"
@@ -365,17 +359,14 @@ function Planning(props) {
 										)}
 								</select>
 							</div>
-							{!showproject && (
+							{project.id != '' && (
 								<div className="form-group ">
 									<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
 									<div className=" d-flex d-inline">
 										<input
 											type="text mb-2 mt-2"
-											value={projectname}
+											value={project.project_name}
 											className="form-control"
-											onChange={(e) => {
-												setData((prev) => ({ ...prev, project_name: e.target.value }));
-											}}
 											disabled
 										/>
 										<MdEdit type="button" className="mt-2 ms-3 " onClick={showPopup} />
@@ -409,19 +400,19 @@ function Planning(props) {
 			</form>
 			{show == true && (
 				<div className="">
-					{/* {console.log(project)} */}
-					{project.id && (
+					{console.log(countrylist)}
+					{/* {project.id && ( */}
 						<Addproject
 							data={project}
 							display={'block'}
 							company={company}
-							company_id={data.comp_id}
+							company_id={companyid}
 							popupActionNo={closePopup}
 							popupActionYes={showPopup}
 							updatecompany={updatcomp}
 							countries={countrylist}
 						/>
-					)}
+					{/* )} */}
 				</div>
 			)}
 		</div>
