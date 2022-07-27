@@ -127,7 +127,7 @@ const AddEmployee = () => {
 							className="btn  btn-block px-0"
 							onClick={() => backToDashboard()}
 						>
-							<p className="bg-white  back-btn-text ">BACK</p>
+							<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">BACK</p>
 						</button>
 					</div>
 					<div className="text-end col-md-6">

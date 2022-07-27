@@ -387,7 +387,7 @@ function Addtiming(props) {
 					<div className="d-inline">
 						<button type="button" className="btn btn-link text-dark btn-block ">
 							<Link href={'/planning/functions/' + router.query.p_unique_key}>
-								<p className='bg-white  back-btn-text '>BACK</p>
+								<p className='bg-white  back-btn-textbg-white  back-btn-text  border-0 poppins-regular-20px '>BACK</p>
 							</Link>
 						</button>
 					</div>

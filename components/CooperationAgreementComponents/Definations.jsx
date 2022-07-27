@@ -8,12 +8,12 @@ export const INVOIING_TAB            = 6;
 
 
 export const COOPERATION_TABS_JSON = [
-  {tab_id: ABSOLUTEYOU_AGENT_TAB, tab_name: 'AbsoluteYou agent', tab_status: 1 },
-  {tab_id: COMPANY_INFORMATION_TAB, tab_name: 'Company information', tab_status: 1 },
-  {tab_id: CONTACT_PERSONS_TAB, tab_name: 'Contact persons', tab_status: 1 },
-  {tab_id: ONLINE_DETAILS_TAB, tab_name: 'Online details', tab_status: 1 },
-  {tab_id: SALARY_BENEFITS_TAB, tab_name: 'Salary benefits', tab_status: 1 },
-  {tab_id: INVOIING_TAB, tab_name: 'Invoicing', tab_status: 1 }
+  {id: ABSOLUTEYOU_AGENT_TAB, name: 'AbsoluteYou agent', status: 1 },
+  {id: COMPANY_INFORMATION_TAB, name: 'Company information', status: 1 },
+  {id: CONTACT_PERSONS_TAB, name: 'Contact persons', status: 1 },
+  {id: ONLINE_DETAILS_TAB, name: 'Online details', status: 1 },
+  {id: SALARY_BENEFITS_TAB, name: 'Salary benefits', status: 1 },
+  {id: INVOIING_TAB, name: 'Invoicing', status: 1 }
 ];
 
 

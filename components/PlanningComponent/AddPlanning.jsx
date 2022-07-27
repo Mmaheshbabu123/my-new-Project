@@ -32,12 +32,14 @@ function Planning(props) {
 	const [ companyid, setCompanyid ] = useState('');
 	const [ locationid, setLocationid ] = useState('');
 	const [ costcenterid, setCostcenterid ] = useState('');
+	const [ pcid, setPcid ] = useState('');
 	const [ id, setId ] = useState('');
 	const [ uniquekey, setUniquekey ] = useState('');
 
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
 	const [ error_location_id, setError_location_id ] = useState('');
+	const [ error_pcid, setError_pcid ] = useState('');
 
 	const [ countrylist, setCountrylist ] = useState([]);
 
@@ -46,7 +48,8 @@ function Planning(props) {
 		id: '',
 		comp_id: '',
 		location_id: '',
-		cost_center_id: ''
+		cost_center_id: '',
+		pcid: ''
 	});
 
 	// PROJECT FIELD HIDE AND SHOW
@@ -88,16 +91,16 @@ function Planning(props) {
 						setUniquekey(result.data[0].p_unique_key);
 
 						// if (data.id == '') {
-							if (result.data[0].length == 1) {
-								setCompanyid(result.data[0].nid);
-								if (result.data[1].length == 1) {
-									setLocationid(result.data[1].value);
-									if (result.data[2].length == 1) {
-										setCostcenterid(result.data[2].value);
-										postData();
-									}
+						if (result.data[0].length == 1) {
+							setCompanyid(result.data[0].nid);
+							if (result.data[1].length == 1) {
+								setLocationid(result.data[1].value);
+								if (result.data[2].length == 1) {
+									setCostcenterid(result.data[2].value);
+									postData();
 								}
 							}
+						}
 						// }
 					})
 					.catch((error) => {
@@ -199,10 +202,12 @@ function Planning(props) {
 		//check if required fields are empty
 		error1['comp_id'] = ValidationService.emptyValidationMethod(companyid);
 		error1['location_id'] = ValidationService.emptyValidationMethod(locationid);
+		// error1['pcid'] = ValidationService.emptyValidationMethod(pcid);
 
 		//seterror messages
 		setError_comp_id(error1['comp_id']);
 		setError_location_id(error1['location_id']);
+		// setError_pcid(error1['pcid']);
 
 		//return false if there is an error else return true
 		if (error1['comp_id'] == '' && error1['location_id'] == '') {
@@ -222,6 +227,7 @@ function Planning(props) {
 		// alert(empr_id);
 		setShow(true);
 	};
+	error_location_id;
 
 	let updatcomp = (comp_id) => {
 		var res = data;
@@ -381,7 +387,7 @@ function Planning(props) {
 					<div className="col-md-6 p-0">
 						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/options'}>
-								<p className="bg-white  back-btn-text ">BACK</p>
+								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px ">BACK</p>
 							</Link>
 						</button>
 					</div>
