@@ -199,6 +199,22 @@ function ManageProject(props) {
 						</table>
 					</div>
 				</div>
+				<div className="row my-4">
+				<ReactPaginate
+					breakLabel="..."
+					nextLabel={<AiOutlineArrowRight className='rtarw' />}
+					onPageChange={handlePageClick}
+					pageRangeDisplayed={5}
+					pageCount={pageCount}
+					previousLabel={<AiOutlineArrowLeft className='ltarw'/>}
+					renderOnZeroPageCount={null}
+					containerClassName={'pagination justify-content-center project-pagination'}
+					itemClass="page-item"
+					linkClass="page-link"
+					subContainerClassName={'pages pagination'}
+					activeClassName={'active'}
+				/>
+			</div>
 				<div className="text-start col-md-6">
 					<button
 						type="button"
@@ -212,22 +228,7 @@ function ManageProject(props) {
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionDeleteNo={closeDeletePopup} popupActionDeleteYes={deleteproject} />
 			)}
-			<div className="row">
-				<ReactPaginate
-					breakLabel="..."
-					nextLabel={<AiOutlineArrowRight />}
-					onPageChange={handlePageClick}
-					pageRangeDisplayed={5}
-					pageCount={pageCount}
-					previousLabel={<AiOutlineArrowLeft />}
-					renderOnZeroPageCount={null}
-					containerClassName={'pagination justify-content-center'}
-					itemClass="page-item"
-					linkClass="page-link"
-					subContainerClassName={'pages pagination'}
-					activeClassName={'active'}
-				/>
-			</div>
+			
 		</div>
 	);
 }
