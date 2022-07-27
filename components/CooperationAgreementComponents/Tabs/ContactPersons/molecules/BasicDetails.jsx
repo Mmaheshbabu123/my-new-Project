@@ -12,10 +12,16 @@ import DateField from '@/atoms/DateField';
 import {locationArray,contactArray,contactPersonsRow1,contactPersonsRow2,defaultFileds} from '../ContactPersonsFields';
 const BasicDetails= ({props,personId}) => {
 var Title_key = 25;
+var Location_key = 36;
+var Contack_key =  37;
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
-console.log(tab_3);
-console.log(personId);
+  let defaultOptions = [];
+   defaultOptions[Location_key] = state.defaultOptions['locationslist'] || [];
+   defaultOptions[Contack_key]  =  [
+     {value: '1', label: 'Contact1'},
+     {value: '2', label: 'Contact2'},
+   ];
   const handleChange = (event) => {
     const { value, name } = event.target;
     tab_3[personId][name] = value;
@@ -73,8 +79,8 @@ console.log(personId);
     <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_3'][data.id] && <RequiredField />}
     <MultiSelectField
         id={data.id}
-        options={data.options}
-        standards={data.options.filter(val => val.value === tab_3[personId][data.id])}
+        options={defaultOptions[data.id]}
+        standards={defaultOptions[data.id].filter(val => val.value === tab_3[personId][data.id])}
         disabled={false}
         handleChange={(obj) => handleSelect(obj, data.id)}
         isMulti={false}

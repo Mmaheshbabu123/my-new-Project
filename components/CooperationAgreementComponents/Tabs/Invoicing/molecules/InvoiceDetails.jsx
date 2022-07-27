@@ -12,6 +12,7 @@ import { requiredFields} from '../../../RequiredFields';
 const InvoiceDetails = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_6 ,element_status} = state;
+  let paymentList = state.defaultOptions['payment_condtion'] || [];
   console.log(tab_6)
   console.log(state);
   const handleChange = (event) => {
@@ -77,8 +78,8 @@ const InvoiceDetails = (props) => {
      <LabelField title={data.key_name}  customStyle = {{display:''}}/>
      <MultiSelectField
          id={data.id}
-         options={data.options}
-         standards={data.options.filter(val => val.value === tab_6[data.id])}
+         options={paymentList}
+         standards={paymentList.filter(val => val.value === tab_6[data.id])}
          disabled={false}
          handleChange={(obj) => handleSelect(obj, data.id)}
          isMulti={false}
