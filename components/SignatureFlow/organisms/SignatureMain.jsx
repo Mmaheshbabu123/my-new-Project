@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import SignatureDetails from '../molecules/SignatureDetails';
+import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
-import { getSignatureData, storeUpdateSignatureData } from '@/Services/ApiEndPoints';
+import { getSignatureData, storeUpdateSignatureData, deleteSignatureData } from '@/Services/ApiEndPoints';
 
 const SignatureMain = ({ entityId, entityType }) => {
+  const router = useRouter();
   const entityTypeId = entityType === 'absolute_you_admin_config_user' ? 1 : entityType === 'employeer' ? 2 : entityType === 'employee' ? 3 : -999;
   const [state, setState] = useState({
     loaded: false,
@@ -39,12 +41,26 @@ const SignatureMain = ({ entityId, entityType }) => {
     }).catch(error => console.error(error))
   }
 
+  const eraseSignature = async () => {
+    await APICALL.service(`${deleteSignatureData}/${entityId}/${entityTypeId}`, 'DELETE').then(response => {
+      if (response.status === 200)
+        setState({...state, sign: '' });
+    }).catch(error => console.error(error))
+  }
+
+
   const postObj = (signData) => {return { sign: signData, entity_id: entityId, entity_type: entityTypeId }}
 
   return (
     <div>
     {state.loaded === true ?
-        <SignatureDetails state = {state} setState = {setState} submitSignData={submitSignData}/>
+      <>
+        <h4 className={`page-title-font-class text-center page-title`}> Manage signature</h4>
+        <SignatureDetails state = {state} setState = {setState} submitSignData={submitSignData} eraseSignature={eraseSignature}/>
+        <button onClick={() => router.back()} type="button" className="btn btn-dark pcp_btn col-1">
+          {`Back`}
+        </button>
+      </>
     : <p>Loading...</p>}
     </div>
   );

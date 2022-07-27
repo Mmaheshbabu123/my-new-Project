@@ -7,19 +7,19 @@
 	font-family: "Tahoma-Bold";
 	font-style: normal;
 	font-weight: 700;
-	src: url("fonts/Tahoma Bold.ttf") format("truetype");
+	src: url("/fonts/Tahoma Bold.ttf") format("truetype");
 }
 @font-face {
 	font-family: "Tahoma-Regular";
 	font-style: normal;
 	font-weight: 400;
-	src: url("fonts/Tahoma.ttf") format("truetype");
+	src: url("/fonts/Tahoma.ttf") format("truetype");
 }
 @font-face {
 	font-family: "Arial-NarrowBold";
 	font-style: normal;
 	font-weight: 700;
-	src: url("fonts/OpenSans-Bold.ttf") format("truetype");
+	src: url("/fonts/OpenSans-Bold.ttf") format("truetype");
 }
 
 /* for poppin font */
@@ -27,62 +27,62 @@
     font-family: 'Poppins-bold';
     font-weight: 800;
     font-style: normal;
-	src: url("fonts/OpenSans-Bold.ttf");
+	src: url("/fonts/OpenSans-Bold.ttf");
     /* src: url(/themes/custom/absolute_you/fonts/Poppins/Poppins-Bold.ttf ); */
 }
 @font-face {
     font-family: 'Poppins-italac';
     font-weight: 500;
     font-style: normal;
-    src: url("./fonts/Poppins-Italic.ttf" );
+    src: url("/fonts/Poppins-Italic.ttf" );
 }
 @font-face {
     font-family: 'Poppins-normal';
     font-weight: 500;
     font-style: normal;
-    src: url( "fonts/Poppins-Light.ttf" );
+    src: url( "/fonts/Poppins-Light.ttf" );
 }
 @font-face {
     font-family: 'Poppins-extraitalic';
     font-weight: 600;
     font-style: normal;
-    src: url("fonts/Poppins-ExtraLightItalic.ttf" );
+    src: url("/fonts/Poppins-ExtraLightItalic.ttf" );
 }
 @font-face {
     font-family: 'Poppins-lightitalic';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-LightItalic.ttf");
+    src: url("/fonts/Poppins-LightItalic.ttf");
 }
 @font-face {
     font-family: 'Poppins-regular';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-Regular.ttf");
+    src: url("/fonts/Poppins-Regular.ttf");
 }
 @font-face {
     font-family: 'Poppins-thin';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-Thin.ttf");
+    src: url("/fonts/Poppins-Thin.ttf");
 }
 @font-face {
     font-family: 'Poppins-thinitalic';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-ThinItalic.ttf");
+    src: url("/fonts/Poppins-ThinItalic.ttf");
 }
 @font-face {
-    font-family: 'Poppins-mediun';
+    font-family: 'Poppins-medium';
     font-weight: 500;
     font-style: normal;
-    src: url("fonts/Poppins-Medium.ttf");
+    src: url("/fonts/Poppins-Medium.ttf");
 }
 @font-face {
     font-family: 'Poppins-mediumitalic';
     font-weight: 500;
     font-style: normal;
-	src: url("fonts/Poppins-MediumItalic.ttf");
+	src: url("/fonts/Poppins-MediumItalic.ttf");
 }
 
 /* for bitter font */
@@ -90,13 +90,13 @@
     font-family: 'bitter-regular';
     font-weight: 500;
     font-style: normal;
-	src: url("fonts/Bitter-Regular.ttf");
+	src: url("/fonts/Bitter-Regular.ttf");
 }
 @font-face {
-    font-family: 'Bitter-italic-normal-mediun';
+    font-family: 'Bitter-italic-normal-medium';
     font-weight: 500;
     font-style: normal;
-	src: url("fonts/Bitter-MediumItalic.ttf");
+	src: url("/fonts/Bitter-MediumItalic.ttf");
 }
 body {
     /* for title */
@@ -111,6 +111,7 @@ body {
     --bg-gray-dark: #4C4D5580;
     --bg-grey-medium: #4C4D550F;
     --color-skyblue: #79B1BD;
+    --bg-btn-gray: #4C4D55B3;
 
     /* for font sizes */
     --font-size-s: 0.75em;
@@ -134,7 +135,7 @@ body {
    /* for input field */
    --height-normal:35px;
    --border-input-lightgray: #dddddd;
-   --font-family-bitter-italic-normal-medium: Bitter-italic-normal-mediun;
+   --font-family-bitter-italic-normal-medium: Bitter-italic-normal-medium;
    --font-family-poppins-regular: Poppins-regular;
     --font-family-poppins-italic: Poppins-italac;
     --font-family-poppins-light: Poppins-normal;
@@ -176,22 +177,22 @@ body {
     --font-family-poppins-medium: Poppins-medium;
 
     /* bitter font-family */
-    --font-family-bitter-italic-normal-medium: Bitter-italic-normal-mediun;
+    --font-family-bitter-italic-normal-medium: Bitter-italic-normal-medium;
 }
 
-.bitter-italic-normal-mediun-24 {
+.bitter-italic-normal-medium-24 {
     color: var(--color-purple);
     font-family: var(--font-family-bitter-italic-normal-medium);
     font-weight: 500;
     font-size: var(--font-size-xxxl);
 }
-.bitter-italic-normal-mediun-20 {
+.bitter-italic-normal-medium-20 {
     color: var(--color-purple);
     font-family: var(--font-family-bitter-italic-normal-medium);
     font-weight: 500;
     font-size: var(--font-size-xl);
 }
-.bitter-italic-normal-mediun-22 {
+.bitter-italic-normal-medium-22 {
     color: var(--color-purple);
     font-family: var(--font-family-bitter-italic-normal-medium);
     font-weight: 500;
@@ -358,7 +359,7 @@ body {
     position: absolute;
     right: 0;
     z-index: 1;
-    bottom: 0;
+    bottom: 25px;
 }
 .screen a {
 	display: contents;
@@ -564,7 +565,7 @@ a {
     position: absolute;
     right: 0;
     z-index: 1;
-    bottom: 0;
+    bottom: 25px;
 }
 /* .calc-height {
     min-height: calc(80vh - 100px);
@@ -591,7 +592,7 @@ a {
 }
 .back-btn-text {
     font-family: var(--font-family-poppins-regular);
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-l);
     text-decoration: underline;
 
 }
@@ -678,7 +679,7 @@ input {
     font-size: var(--font-size-small);
 }
 .table-border-gray {
-    border: apx solid var(--bg-gray-dark);
+    /* border: apx solid var(--bg-gray-dark); */
     border: 1px solid var(--bg-gray-dark);
 }
 .less-grather {
@@ -706,6 +707,7 @@ div[disabled]{
 .footer {
     position: sticky !important;
     bottom: 0;
+		z-index: 10;
 }
 .timepage-calander .rmdp-header {
     background: var(--color-skyblue);
@@ -789,8 +791,95 @@ font-size: var(--font-size-l);
     color: var(--color-purple);
     font-size: var(--font-size-xl);
 }
+.purple-color2 {
+    color: var(--color-purple);
+    font-size: var(--font-size-m);
+    font-family: var(--font-family-poppins-regular);
+}
 .color-skyblue2 {
   background-color: var(--color-skyblue);
   font-size: var(--font-size-l);
   color: var(--color-white);
 }
+.equal-width-calc td {
+    width: calc(100%/7);
+}
+.table-right-border-white {
+    border-right: 1px solid var(--color-white);
+}
+.planning-table .css-1b7ni76-MuiToolbar-root.Toolbar-toolbar {
+    border: 1px solid var(--color-border-lightgrey);
+}
+.planning-table .css-1ps6pg7-MuiPaper-root {
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+    color: var(--color-label-footer-gray);
+}
+.planning-table .Cell-dayOfWeek {
+    background-color: var(--color-skyblue);
+    color: var(--color-white);
+    height: 45px;
+    font-family: var(--font-family-poppins-regular) ;
+    font-size: var(--font-size-m);
+}
+.planning-table  .css-xya8j6-MuiButtonBase-root-MuiButton-root.TodayButton-button:first-of-type {
+    border: 1px solid var(--color-skyblue);
+    color: var(--color-skyblue);
+}
+.css-71a9mb-MuiButtonBase-root-MuiIconButton-root, .css-vnscjq-MuiButtonBase-root-MuiButton-root {
+    color: var(--color-skyblue);
+}
+.reset-btn {
+    background-color: var(--bg-btn-gray);
+    color: var(--color-white);
+    font-size: var(--font-size-l);
+    font-family: var(--font-family-poppins-regular);
+}
+.poppinns-regular-thin {
+    font-family: var(--font-family-poppins-thin);
+    font-size: var(--font-size-l);
+    color: var(--color-label-footer-gray);
+    font-weight: 600;
+}
+.footer-content {
+    color: var(--color-white);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+}
+/* .lang-options option {
+  
+   font-family: var(--font-family-poppins-regular);
+   font-size: var(--font-size-m);
+}
+.lang-options option:hover {
+    background-color: var(--color-skyblue) !important;
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+ } */
+ .lang {
+    color: red !important;
+ }
+ .lang:hover {
+    background-color: green !important;
+ }
+ .project-pagination > .next > a  {
+ background-color: var(--color-purple);
+ color: var(--color-white);
+ border: none;
+ padding: 5px 15px;
+ font-size: 20px;
+ }
+ .project-pagination > .previous  > a {
+    background-color: var(--bg-gray-dark);
+    color: var(--color-white);
+    border: none;
+    padding: 5px 15px;
+    font-size: 20px;
+ }
+ .project-pagination > .active  > a {
+    background-color: var(--color-white);
+    color: var( --bg-gray-dark);
+    border: none;
+    padding: 5px 15px;
+    font-size: 20px;
+ }

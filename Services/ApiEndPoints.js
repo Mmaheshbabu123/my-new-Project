@@ -66,6 +66,7 @@ export const addplanningemployee = BASE_URL + "addplanningemployee";
 export const planningoverview = BASE_URL + "planningdetails-by-uniquekey/";
 export const fetchPlannedTimings = BASE_URL + "fetch-planned-timings/"
 export const storePlannedTimings = BASE_URL + "store-planned-timings"
+export const updateProject = BASE_URL + "updateProject";
 
 
 
@@ -145,4 +146,9 @@ export const fetchemployeeplanning = BASE_URL + "get-all-employee-planning/";
 //-- SIGNATURE API END POINTS----------------//
 export const getSignatureData = BASE_URL + 'get-signature-data';
 export const storeUpdateSignatureData = BASE_URL + 'store-update-signature-data';
+export const deleteSignatureData = BASE_URL + 'delete-signature-data';
 //-- -------------
+
+//------ COOPERATION_PDF_URL's-----------------------//
+export const cooperationAgreementPreview = BASE_URL + 'cooperation-agreement-preview';
+//------

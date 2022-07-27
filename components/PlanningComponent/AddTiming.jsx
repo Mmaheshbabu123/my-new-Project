@@ -201,7 +201,7 @@ function Addtiming(props) {
 		<div className="container-fluid">
 			<form onSubmit={(e) => submitPlanningTimings(e)}>
 				<div className="row m-0 p-0">
-					<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-mediun-24">Add timing</h1>
+					<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Add timing</h1>
 					{employee_planning.length > 1 && (
 						<div className="form-check mt-2 ">
 							<input
@@ -387,7 +387,7 @@ function Addtiming(props) {
 					<div className="d-inline">
 						<button type="button" className="btn btn-link text-dark btn-block ">
 							<Link href={'/planning/functions/' + router.query.p_unique_key}>
-								<p className='bg-white  back-btn-text '>BACK</p>
+								<p className='bg-white  back-btn-textbg-white  back-btn-text  border-0 poppins-regular-20px '>BACK</p>
 							</Link>
 						</button>
 					</div>

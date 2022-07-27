@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-import { getCooperationAgreementsTabs } from '@/Services/ApiEndPoints';
+import { COOPERATION_TABS_JSON } from '@/components/CooperationAgreementComponents/Definations';
 import CooperationAgreementStates from '@/Contexts/CooperationAgreement/CooperationAgreementStates';
 const CooperationAgreementMain = dynamic(
   () =>
@@ -30,9 +30,9 @@ const CooperationAgreement = (props) => {
 
 //------SERVER SIDE RENDERING-------//
 export async function getStaticProps() {
-  const response = await fetch(getCooperationAgreementsTabs);
-  const data = await response.json();
-  return { props: { data: data.status === 200 ? data.data: [] } }
+  // const response = await fetch(getCooperationAgreementsTabs); //
+  // const data = await response.json();
+  return { props: { data: COOPERATION_TABS_JSON } }
 }
 
 export default CooperationAgreement;

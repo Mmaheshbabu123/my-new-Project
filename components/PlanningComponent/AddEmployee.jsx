@@ -99,7 +99,7 @@ const AddEmployee = () => {
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row m-0">
 					<div className="row col-md-12" style={{ }}>
-						<h1 className='mt-3 font-weight-bold  bitter-italic-normal-mediun-24 px-0' >Select employee</h1>
+						<h1 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0' >Select employee</h1>
 					</div>
 				</div>
 				<div className='col-md-12 selectemp-height'>
@@ -127,7 +127,7 @@ const AddEmployee = () => {
 							className="btn  btn-block px-0"
 							onClick={() => backToDashboard()}
 						>
-							<p className="bg-white  back-btn-text ">BACK</p>
+							<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">BACK</p>
 						</button>
 					</div>
 					<div className="text-end col-md-6">

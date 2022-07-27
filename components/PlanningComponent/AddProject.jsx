@@ -5,6 +5,8 @@ import { APICALL } from '../../Services/ApiServices';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { addPlanning } from '../../Services/ApiEndPoints';
+import Popup from './ProjectDeletePopup';
+
 // import './addproject.css';
 function Addproject(props) {
 	const router = useRouter();
@@ -26,6 +28,8 @@ function Addproject(props) {
 	const [ error_postal_code, setError_postal_code ] = useState('');
 	const [ error_countrylist, setError_countrylist ] = useState('');
 	const [ error_bus_number, setError_bus_number ] = useState('');
+
+	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 
 	const [ data, setData ] = useState({
 		id: '',
@@ -244,8 +248,8 @@ function Addproject(props) {
 							<div className="modal-header col-md-11 m-auto px-0">
 								{/* <div className='col-md-10 px-3'> */}
 								<div className="col-md-10">
-									{/* <p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-5">Add project</p> */}
-									<p className="modal-title  font-weight-bold  bitter-italic-normal-mediun-24 px-4">
+									{/* <p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-5">Add project</p> */}
+									<p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-4">
 										Add project
 									</p>
 								</div>

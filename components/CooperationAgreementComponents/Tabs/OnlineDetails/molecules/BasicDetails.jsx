@@ -34,7 +34,7 @@ const BasicDetails = (props) => {
           <ValidateMessage text = {'This field is invalid'}/>
         }
         {!tab_4['required'][data.id] &&
-          <ValidateMessage text = {'This field is required'}/>
+          <ValidateMessage text = {'This field is required.'}/>
         }
        </div>
      )

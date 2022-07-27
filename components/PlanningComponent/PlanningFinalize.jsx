@@ -54,9 +54,9 @@ const PlanningFinalize = () => {
 		[ router.query ]
 	);
 	return (
-		<div className="container p-0 m-0">
+		<div className="container-fluid p-0 m-0">
 			<div className="row">
-				<p className=" mt-1 mb-1 font-weight-bold   bitter-italic-normal-mediun-24">Weekly Planning</p>
+				<p className=" mt-1 mb-1 font-weight-bold   bitter-italic-normal-medium-24">Weekly Planning</p>
 				<p className=" poppins-regular-16px">For the week of Monday from 27/06/2022 to sunday 03/07/2022</p>
 
 				<div className=" mt-4 d-flex justify-content-end">
@@ -89,38 +89,38 @@ const PlanningFinalize = () => {
 					</select> */}
 				</div>
 				<div className="mt-2 ">
-				{/* <p className=' bitter-italic-normal-mediun-22 col-md-12 text-center table-border-gray py-2'><span className='less-grather mx-4 '>&lt;</span> current week  <span className='less-grather mx-4'>&gt;</span></p>  */}
-				<p className=' bitter-italic-normal-mediun-22 col-md-12 text-center table-title-bg py-3'><FaLessThan className='less-grather mx-4'/> Current week <FaGreaterThan className='less-grather mx-4' /> </p> 
+				{/* <p className=' bitter-italic-normal-medium-22 col-md-12 text-center table-border-gray py-2'><span className='less-grather mx-4 '>&lt;</span> current week  <span className='less-grather mx-4'>&gt;</span></p>  */}
+				<p className=' bitter-italic-normal-medium-22 col-md-12 text-center table-title-bg py-3'><FaLessThan className='less-grather mx-4'/> Current week <FaGreaterThan className='less-grather mx-4' /> </p> 
 					<table className="table border table-border-gray ">
 						
 						<thead className="">
 							
 							<tr className="skyblue-bg-color">
-								<th className=" table-border-gray  text-center align-items-center justify-content-center ">
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
 									Monday<br />27-06-2022
 								</th>
-								<th className=" table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
 									Tuesday <br />28-06-2022
 								</th>
-								<th className="table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
 									Wednesday <br />29-06-2022
 								</th>
-								<th className=" table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
 									Thursday <br />30-06-2022
 								</th>
-								<th className=" table-border-gray   text-center align-items-center justify-content-center">
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
 									Friday<br />01-07-2022
 								</th>
-								<th className=" table-border-gray  text-center  align-items-center justify-content-center">
+								<th className=" table-right-border-white  text-center  align-items-center justify-content-center">
 									Saturday<br />02-07-2022
 								</th>
-								<th className=" table-border-gray  text-center  align-items-center justify-content-center">
+								<th className="  text-center  align-items-center justify-content-center">
 									Sunday<br />13-03-2022
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr className="border-bottom table-border-gray">
+							<tr className="border-bottom table-border-gray equal-width-calc">
 								{weeklyplanning.map((value) => (
 									<td className=" table-border-gray font-poppins-light" key={value.id}>
 										
