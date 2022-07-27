@@ -5,6 +5,8 @@ import { APICALL } from '../../Services/ApiServices';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { addPlanning } from '../../Services/ApiEndPoints';
+import Popup from './ProjectDeletePopup';
+
 // import './addproject.css';
 function Addproject(props) {
 	const router = useRouter();
@@ -26,6 +28,8 @@ function Addproject(props) {
 	const [ error_postal_code, setError_postal_code ] = useState('');
 	const [ error_countrylist, setError_countrylist ] = useState('');
 	const [ error_bus_number, setError_bus_number ] = useState('');
+
+	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 
 	const [ data, setData ] = useState({
 		id: '',
@@ -64,11 +68,18 @@ function Addproject(props) {
 
 	useEffect(
 		() => {
+			console.log(props.countries);
 			if (props.countries) {
 				setCountrylist(props.countries);
 			}
 			if (props.data) {
 				setData(props.data);
+				console.log(data);
+			}
+			if (data.comp_id == '') {
+				var res = data;
+				res.comp_id = props.company_id;
+				setData(res);
 			}
 		},
 		[ props ]
@@ -280,7 +291,6 @@ function Addproject(props) {
 														value={data.comp_id}
 														className="form-select mb-2 mt-2"
 														placeholder="select company"
-														disabled = {props.company_id!=''?true:false}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, comp_id: e.target.value }));
 															// updateLocation(e.target.value);
@@ -399,9 +409,8 @@ function Addproject(props) {
 															setData((prev) => ({ ...prev, country: e.target.value }));
 														}}
 													>
-														{console.log(countrylist)};
 														<option value="">Select country</option>
-														{countrylist.length>0 && countrylist.map((options) => (
+														{countrylist.map((options) => (
 															<option key={options.id} value={options.id}>
 																{options.country}
 															</option>
@@ -414,7 +423,7 @@ function Addproject(props) {
 												<div className="col-12">
 													<label className=" mt-2">Extra</label>
 													<input
-														type="textarea"
+														type="text"
 														className="form-control mt-2 mb-2"
 														value={data.extra}
 														onChange={(e) => {
