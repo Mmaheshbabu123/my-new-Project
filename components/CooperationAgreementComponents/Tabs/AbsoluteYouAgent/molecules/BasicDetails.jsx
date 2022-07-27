@@ -93,7 +93,7 @@ const BasicDetails = (props) => {
              className="col-md-6"
              value={tab_1[startDateAgreement]}
             />
-           {validations[startDateAgreement] && <ValidateMessage style={{margin:0}} text = {'This field is required'}/>}
+           {validations[startDateAgreement] && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
       </div>
       <div className={`${styles['add-div-margings']}`}>
           <LabelField title="AbsoluteYou consultant" mandotory = {true}/>
@@ -106,7 +106,7 @@ const BasicDetails = (props) => {
               isMulti={false}
               className="col-md-6"
             />
-      {validations[absoluteConsultant] && <ValidateMessage style={{margin:0}} text = {'This field is required'}/>}
+      {validations[absoluteConsultant] && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
       </div>
       <div className={`${styles['add-div-margings']}`}>
           <LabelField title="AbsoluteYou office number" mandotory = {true}/>
@@ -119,7 +119,7 @@ const BasicDetails = (props) => {
               isMulti={false}
               className="col-md-6"
             />
-      {validations[absoluteConsultantNum] && <ValidateMessage style={{margin:0}} text = {'This field is required'}/>}
+      {validations[absoluteConsultantNum] && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
       </div>
       <div className={`${styles['add-div-margings']}`}>
           <CheckBoxField

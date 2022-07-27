@@ -371,7 +371,11 @@ async function forWardToNextStepTab(router, contextState, contextUpdate, current
           obj['root_parent_id']= response.data;
           router.query.root_parent_id = obj['root_parent_id'];
         }
-        if(selectedTabId === INVOIING_TAB || draft === 1) {
+        if(draft === 1) {
+          router.push('/manage-cooperation-overview?type=sales_agent&id=1');
+        }
+        if(selectedTabId === INVOIING_TAB || draft !== 1) {
+          window.open(`/cooperation-agreement-preview?root_parent_id=${stateObj.root_parent_id}&ref_id=${stateObj.salesAgentRefId}&approved=0`, '_blank');
           router.push('/manage-cooperation-overview?type=sales_agent&id=1')
         } else {
           router.query.selectedTabId = nextTab;
