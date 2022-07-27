@@ -592,7 +592,7 @@ a {
 }
 .back-btn-text {
     font-family: var(--font-family-poppins-regular);
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-l);
     text-decoration: underline;
 
 }
@@ -842,7 +842,23 @@ font-size: var(--font-size-l);
     font-weight: 600;
 }
 .footer-content {
-color: var(--color-white);
-font-family: var(--font-family-poppins-regular);
-font-size: var(--font-size-m);
+    color: var(--color-white);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
 }
+/* .lang-options option {
+  
+   font-family: var(--font-family-poppins-regular);
+   font-size: var(--font-size-m);
+}
+.lang-options option:hover {
+    background-color: var(--color-skyblue) !important;
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+ } */
+ .lang {
+    color: red !important;
+ }
+ .lang:hover {
+    background-color: green !important;
+ }
