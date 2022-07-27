@@ -279,7 +279,7 @@ function Planning(props) {
 						</h1>
 					</div>
 					<div className="col-md-12 px-0 mt-3 mb-3">
-						{project.id == '' && (
+					{(project.id == ''||project.id == undefined) && (
 							<button
 								onClick={showPopup}
 								type="button"
@@ -365,7 +365,7 @@ function Planning(props) {
 										)}
 								</select>
 							</div>
-							{project.id != '' && (
+							{project.id != '' && project.id != undefined && (
 								<div className="form-group ">
 									<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
 									<div className=" d-flex d-inline">
@@ -406,8 +406,7 @@ function Planning(props) {
 			</form>
 			{show == true && (
 				<div className="">
-					{console.log(countrylist)}
-					{/* {project.id && ( */}
+					{/* {(project.id == ''||project.id == undefined) && ( */}
 						<Addproject
 							data={project}
 							display={'block'}
@@ -418,7 +417,7 @@ function Planning(props) {
 							updatecompany={updatcomp}
 							countries={countrylist}
 						/>
-					{/* )} */}
+					 {/* )} */}
 				</div>
 			)}
 		</div>
