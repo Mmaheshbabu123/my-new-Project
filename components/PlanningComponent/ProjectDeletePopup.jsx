@@ -11,7 +11,7 @@ function Popup(props) {
 							type="button"
 							className="btn-close"
 							data-bs-dismiss="modal"
-							onClick={() => props.popupActionNo()}
+							onClick={() => props.popupActionDeleteNo()}
 						/>
 					</div>
 
@@ -20,10 +20,10 @@ function Popup(props) {
 					</div>
 
 					<div className="modal-footer">
-						<button type="button" className="btn btn-danger" onClick={() => props.popupActionNo()}>
+						<button type="button" className="btn btn-danger" onClick={() => props.popupActionDeleteNo()}>
 							No
 						</button>
-						<button className="btn btn-danger m-2" onClick={() => props.popupActionYes()}>
+						<button className="btn btn-danger m-2" onClick={() => props.popupActionDeleteYes()}>
 							Yes
 						</button>
 					</div>

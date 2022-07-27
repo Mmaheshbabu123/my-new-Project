@@ -5,7 +5,8 @@ import {
 	fetchPlanning,
 	getEmployeerCompanylist,
 	// addProject,
-	fetchproject
+	fetchproject,
+	updateProject
 } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import Addproject from './AddProject';
@@ -13,12 +14,16 @@ import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import Popup from './ProjectDeletePopup';
 
 function Planning(props) {
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 
-	// For popup
+	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
+	const [ projectid, setProjectid ] = useState('');
+
+	// For popup add project
 	const [ show, setShow ] = useState(false);
 
 	//FOR ASSIGNING COMPANY LOCATION VALUES
@@ -67,7 +72,7 @@ function Planning(props) {
 		street: '',
 		postal_code: '',
 		country: '',
-		address_id: '',
+		address_id: ''
 	});
 
 	useEffect(() => {
@@ -268,7 +273,28 @@ function Planning(props) {
 			setCostcenterid('');
 		}
 	};
-
+	// DELETE FUNCTIONALITY //
+	const deleteproject = async () => {
+		var data = {
+			id: projectid
+		};
+		APICALL.service(updateProject, 'POST', data)
+			.then((result) => {
+				console.log(result.status);
+				setUpdated(updated + 1);
+				setShowdeletepopup(false);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};
+	const closeDeletePopup = () => {
+		setShowdeletepopup(false);
+	};
+	const showDeletePopup = (id) => {
+		setProjectid(id);
+		setShowdeletepopup(true);
+	};
 	return (
 		<div className="col-md-12">
 			<form onSubmit={(e) => submit(e)}>
@@ -279,7 +305,7 @@ function Planning(props) {
 						</h1>
 					</div>
 					<div className="col-md-12 px-0 mt-3 mb-3">
-					{(project.id == ''||project.id == undefined) && (
+						{(project.id == '' || project.id == undefined) && (
 							<button
 								onClick={showPopup}
 								type="button"
@@ -365,7 +391,8 @@ function Planning(props) {
 										)}
 								</select>
 							</div>
-							{project.id != '' && project.id != undefined && (
+							{project.id != '' &&
+							project.id != undefined && (
 								<div className="form-group ">
 									<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
 									<div className=" d-flex d-inline">
@@ -376,7 +403,9 @@ function Planning(props) {
 											disabled
 										/>
 										<MdEdit type="button" className="mt-2 ms-3 " onClick={showPopup} />
-										<MdDelete className="mt-2 ms-3 " />
+										<span onClick={() => showDeletePopup(project.id)} type="button">
+											<MdDelete className="mt-2 ms-3 color-skyblue " />
+										</span>
 									</div>
 								</div>
 							)}
@@ -387,7 +416,9 @@ function Planning(props) {
 					<div className="col-md-6 p-0">
 						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/options'}>
-								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px ">BACK</p>
+								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px ">
+									BACK
+								</p>
 							</Link>
 						</button>
 					</div>
@@ -407,18 +438,21 @@ function Planning(props) {
 			{show == true && (
 				<div className="">
 					{/* {(project.id == ''||project.id == undefined) && ( */}
-						<Addproject
-							data={project}
-							display={'block'}
-							company={company}
-							company_id={companyid}
-							popupActionNo={closePopup}
-							popupActionYes={showPopup}
-							updatecompany={updatcomp}
-							countries={countrylist}
-						/>
-					 {/* )} */}
+					<Addproject
+						data={project}
+						display={'block'}
+						company={company}
+						company_id={companyid}
+						popupActionNo={closePopup}
+						popupActionYes={showPopup}
+						updatecompany={updatcomp}
+						countries={countrylist}
+					/>
+					{/* )} */}
 				</div>
+			)}
+			{showdeletepopup == true && (
+				<Popup display={'block'} popupActionDeleteNo={closeDeletePopup} popupActionDeleteYes={deleteproject} />
 			)}
 		</div>
 	);
