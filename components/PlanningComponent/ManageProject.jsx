@@ -161,15 +161,16 @@ function ManageProject(props) {
 								</button>
 							</div>
 						</div>
+						<div className="form-check p-0 mt-2 text-center max-height-420">
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
-								<tr className="btn-bg-gray-medium">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center">
+								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
+									<th className="poppins-regular-18px justify-content-center d-flex align-items-center btn-bg-gray-medium">
 										Project name
 									</th>
-									<th className="poppins-regular-18px">Location</th>
-									<th className="poppins-regular-18px">Address</th>
-									<th className="poppins-regular-18px">Action</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Location</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Address</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -197,6 +198,7 @@ function ManageProject(props) {
 								)}
 							</tbody>
 						</table>
+						</div>
 					</div>
 				</div>
 				<div className="row my-4">
