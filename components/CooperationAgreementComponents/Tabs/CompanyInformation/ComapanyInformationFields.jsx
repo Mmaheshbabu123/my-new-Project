@@ -8,10 +8,14 @@ export const companyRow1 = [
   {id:6,key_name:'Company call name'},
 
 
+
 ];
 export const comapanyRow2 = [
+
   {id:7,key_name:'Company client number'},
   {id:9,key_name:'RSZ-number'},
+
+
 
 ];
 
