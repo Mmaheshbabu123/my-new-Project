@@ -239,10 +239,10 @@ const ManageCategoryComponent = () => {
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center">Paritair comite number</th>
-									<th className="poppins-regular-18px">Category name</th>
-									<th className="poppins-regular-18px">Minimum salary</th>
-									<th className="poppins-regular-18px">Action</th>
+									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">Paritair comite number</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Category name</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Minimum salary</th>
+									<th className="poppins-regular-18px   btn-bg-gray-medium">Action</th>
 								</tr>
 							</thead>
 							<tbody className="">

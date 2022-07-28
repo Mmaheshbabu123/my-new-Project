@@ -839,7 +839,7 @@ font-size: var(--font-size-l);
 }
 .poppinns-regular-thin {
     font-family: var(--font-family-poppins-thin);
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-m);
     color: var(--color-label-footer-gray);
     font-weight: 600;
 }
@@ -904,3 +904,25 @@ font-size: var(--font-size-l);
     z-index: 999;
     background-color: var(--bg-grey-medium);
  }
+ .red {
+    background-color: red !important;
+ }
+ @media screen {
+    
+ }
+ @media only screen and  (min-width: 0px) and (max-width: 480px){
+    
+
+ }
+ @media only screen and  (min-width: 481px) and (max-width: 1024px){
+    .container-height {
+        min-height: calc(88vh - 48px) !important;
+    } 
+
+}
+@media only screen and  (min-width: 1025px) and (max-width: 1360px){
+    .container-height {
+        min-height: calc(88vh - 48px) !important;
+    } 
+
+}

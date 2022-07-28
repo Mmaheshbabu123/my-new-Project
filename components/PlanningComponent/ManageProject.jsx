@@ -165,12 +165,12 @@ function ManageProject(props) {
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center">
+									<th className="poppins-regular-18px justify-content-center d-flex align-items-center btn-bg-gray-medium">
 										Project name
 									</th>
-									<th className="poppins-regular-18px">Location</th>
-									<th className="poppins-regular-18px">Address</th>
-									<th className="poppins-regular-18px">Action</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Location</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Address</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
 								</tr>
 							</thead>
 							<tbody>
