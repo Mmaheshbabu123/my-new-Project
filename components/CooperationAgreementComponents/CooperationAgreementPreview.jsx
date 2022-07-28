@@ -47,7 +47,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
 
   return(
     <div className="">
-      {state.alertSuccess === true && <div class="alert alert-success" role="alert">
+      {state.alertSuccess === true && <div className="alert alert-success" role="alert">
         {Number(type) !== 2 ? `Sign added and forwarded to employer` : 'Approved successfully'}
       </div>}
       <div>
