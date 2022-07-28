@@ -7,6 +7,7 @@ import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import Popup from './ProjectDeletePopup';
 import ReactPaginate from 'react-paginate';
+import Link from 'node_modules/next/link';
 
 function ManageProject(props) {
 	const router = useRouter();
@@ -178,9 +179,13 @@ function ManageProject(props) {
 										<tr className="border poppinns-regular-thin p-2" key={result.id}>
 											<td className="poppinns-regular-thin">{result.project_name}</td>
 											<td className="poppinns-regular-thin">{result.project_location}</td>
-											<td className="poppinns-regular-thin">{result.address_id}</td>
+											<td className="poppinns-regular-thin">{result.address}</td>
 											<td className="d-flex justify-content-center">
-												<MdEdit className="mt-2 ms-3 color-skyblue " />
+												<Link href="edit-project">
+													<a type="button">
+														<MdEdit className="mt-2 ms-3 color-skyblue " />
+													</a>
+												</Link>
 
 												<span onClick={() => showDeletePopup(result.id)} type="button">
 													<MdDelete className="mt-2 ms-3 color-skyblue " />
