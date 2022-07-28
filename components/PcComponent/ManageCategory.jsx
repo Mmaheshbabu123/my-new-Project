@@ -181,8 +181,7 @@ const ManageCategoryComponent = () => {
 		<div className="container-fluid p-0">
 			<form>
 				<div className="row m-0">
-					<p className="mt-3 mb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0">Manage Categories</p>
-
+					<p className="mt-3 mb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0">Manage categories</p>
 					<div className="col-md-2 ps-0">
 						<input
 							type="search"
@@ -222,9 +221,9 @@ const ManageCategoryComponent = () => {
 							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color "
 							onClick={() => handleSearch()}
 						>
-							SEARCH
+							FILTER
 						</button>
-						{(searchPc != '' || searchCat != '' || searchSal != '') && (
+						{(searchPc.trim() != '' || searchCat.trim() != '' || searchSal.trim() != '') && (
 							<button
 								type="button"
 								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"

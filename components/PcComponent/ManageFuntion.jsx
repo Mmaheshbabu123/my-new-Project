@@ -408,9 +408,9 @@ const ManageFunction = () => {
 							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
 							onClick={() => handleSearch()}
 						>
-							Search
+							Filter
 						</button>
-						{(searchPc != '' || searchFunc != '' || searchCat != '' || searchSal != '') && (
+						{(searchPc.trim() != '' || searchFunc.trim() != '' || searchCat.trim() != '' || searchSal.trim() != '') && (
 							<button
 								type="button"
 								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"

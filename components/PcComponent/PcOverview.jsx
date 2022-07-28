@@ -11,9 +11,6 @@ import AddAge from './AddAge';
 import EmployeeType from './EmployeeType';
 import SalaryBenefits from './SalaryBenifits';
 
-
-
-
 import {
 	FaEdit,
 	FaRegPlusSquare,
@@ -25,6 +22,7 @@ import {
 	FaRegMinusSquare
 } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import CompanyOptions from 'pages/manage-planning/select';
 
 const PcOverview = (params) => {
 	const {
@@ -44,7 +42,7 @@ const PcOverview = (params) => {
 		cat_subsec_id,
 		setCat_subsec_id,
 		setCurrent_sec,
-		pc_view_type, 
+		pc_view_type,
 		setPc_view_type
 	} = useContext(PcContext);
 
@@ -54,7 +52,6 @@ const PcOverview = (params) => {
 	const [ secid, setSecid ] = useState('');
 	const [ pc_number, setPc_number ] = useState('');
 	const [ type, setType ] = useState('');
-
 
 	if (router.query.uid && router.query.uid != undefined) {
 		setPc_unique_key(router.query.uid);
@@ -80,6 +77,7 @@ const PcOverview = (params) => {
 							setPc_number(result.data['pc_number']);
 							setType(params.type);
 							setPc_view_type(params.type);
+							window.scrollTo(0, 0)
 						})
 						.catch((error) => {
 							console.error(error);
@@ -116,11 +114,39 @@ const PcOverview = (params) => {
 		setSec_completed(res1);
 	};
 
+	let updateCollapseSec = (level, id, val,val2) => {
+		var pc1 = pc;
+		if (level == 1) {
+			setPc((current) => {
+				return {
+					...current,
+					collapseOpen: !val
+				};
+			});
+		}
+		else if (level == 2) {
+			pc1['childObj'][id]['collapseOpen'] = !val;
+			setPc((prev) => ({ ...prev, pc: pc1 }));
+		}
+		// else{
+		// 	pc1['childObj'][val][
+		// 		'childObj'
+		// 	][val2]['collapseOpen'] = !val;
+		// 	setPc((prev) => ({ ...prev, pc: pc1 }));
+		// }
+	};
+
 	return (
 		<div className="container">
 			<div className="row pt-4 min-vh-75">
 				<div className={`px-5 ${cat_leftsec}`}>
-					{params.type == 'editpc' ? <p className="h4">Edit paritair comite</p> : (params.type == 'viewpc'?<p className="h4">View paritair comite</p>:'')}
+					{params.type == 'editpc' ? (
+						<p className="h4">Edit paritair comite</p>
+					) : params.type == 'viewpc' ? (
+						<p className="h4">View paritair comite</p>
+					) : (
+						''
+					)}
 					{pc && (
 						<div>
 							{cat_subsec_type == 0 &&
@@ -158,18 +184,30 @@ const PcOverview = (params) => {
 								<li>
 									<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
 										<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
-											<a
-												data-bs-toggle="collapse"
-												href={'#collapsepc' + pc_unique_key}
-												role="button"
-												aria-expanded="false"
-												aria-controls={'collapsepc' + pc_unique_key}
-											>
-												<span>
-													<FaRegMinusSquare />
-												</span>
-											</a>
+											{/* <a
+												// data-bs-toggle="collapse"
+												// href={'#collapsepc' + pc_unique_key}
+												// role="button"
+												// aria-expanded="false"
+												// aria-controls={'collapsepc' + pc_unique_key}
+												onClick={updateCollapseSec(1,pc['id'])}
+											> */}
+											<span>
+												{pc['collapseOpen'] == true || pc['childObj'] == undefined? (
+													<FaRegMinusSquare
+														onClick={() =>
+															updateCollapseSec(1, pc['id'], pc['collapseOpen'])}
+													/>
+												) : (
+													<FaRegPlusSquare
+														onClick={() =>
+															updateCollapseSec(1, pc['id'], pc['collapseOpen'])}
+													/>
+												)}
+											</span>
+											{/* </li>	</a> */}
 										</li>
+
 										<ListView
 											pcid={pc_unique_key}
 											pc_number={pc_number}
@@ -198,19 +236,38 @@ const PcOverview = (params) => {
 								</li>
 								<li>
 									{pc['childObj'] &&
+										pc['collapseOpen'] == true &&
 										Object.keys(pc['childObj']).map((val, key) => (
 											<ul
 												id={'collapsepc' + pc_unique_key}
 												className={`collapse show list-unstyled ms-5 my-0 py-1 ${styles.lev1} ${styles.tree}`}
 												key={val}
 											>
-												{pc['childObj'][val]['type'] === 2 ? (
+												{pc['childObj'][val]['type'] == 2 ? (
 													<li>
 														<ul className="list-inline">
 															<li>
 																<ul>
 																	<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
-																		<FaRegMinusSquare />
+																		<span>
+																			{pc['childObj'] && console.log(pc['childObj'])}
+																			{pc['childObj'][val]['collapseOpen'] ==
+																			true|| pc['childObj'][val]['childObj'] == undefined ? (
+																				<FaRegMinusSquare
+																					onClick={(prev) =>
+																						updateCollapseSec(
+																							2,
+																							val,
+																							pc['childObj'][val]['collapseOpen']
+																						)}
+																				/>
+																			) : (
+																				<FaRegPlusSquare
+																					onClick={() =>updateCollapseSec(2,val,pc['childObj'][val]['collapseOpen'])}
+																				/>
+																			)}
+																		</span>
+																		{/* <FaRegMinusSquare /> */}
 																	</li>
 																	<ListView
 																		pcid={pc_unique_key}
@@ -233,13 +290,34 @@ const PcOverview = (params) => {
 																<ul className={`list-unstyled ms-5 ${styles.tree}`}>
 																	{/* <ul className={`list-inline list-unstyled ms-5`}> */}
 																	{pc['childObj'][val]['childObj'] &&
+																		pc['childObj'][val]['collapseOpen'] == true &&
 																		Object.keys(
 																			pc['childObj'][val]['childObj']
 																		).map((val2, key2) => (
 																			<li key={key2}>
 																				<ul className="list-inline">
 																					<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
-																						<FaRegMinusSquare />
+																					{/* {pc['childObj'][val][
+																								'childObj'
+																							][val2]['collapseOpen'] ==
+																			true ? ( */}
+																				<FaRegMinusSquare
+																					// onClick={(prev) =>
+																					// 	updateCollapseSec(
+																					// 		3,
+																					// 		val,
+																					// 		pc['childObj'][val][
+																					// 			'childObj'
+																					// 		][val2]['collapseOpen'],val2
+																					// 	)}
+																				/>
+																			{/* ) : (
+																				<FaRegPlusSquare
+																					onClick={() =>updateCollapseSec(3,val,pc['childObj'][val][
+																						'childObj'
+																					][val2]['collapseOpen'],val2)}
+																				/>
+																			)} */}
 																					</li>
 																					<ListView
 																						pcid={pc_unique_key}
@@ -256,21 +334,15 @@ const PcOverview = (params) => {
 																								'childObj'
 																							][val2]['header']
 																						}
-																						tvalue={																							
-																								[
-																									pc['childObj'][val][
-																										'childObj'
-																									][val2][
-																										'function_name'
-																									],
-																									'€ ' +
-																										pc['childObj'][
-																											val
-																										]['childObj'][
-																											val2
-																										]['min_salary']
-																								]
-																						}
+																						tvalue={[
+																							pc['childObj'][val][
+																								'childObj'
+																							][val2]['function_name'],
+																							'€ ' +
+																								pc['childObj'][val][
+																									'childObj'
+																								][val2]['min_salary']
+																						]}
 																						className="ms-2"
 																						secId={
 																							pc['childObj'][val][
@@ -291,7 +363,26 @@ const PcOverview = (params) => {
 													<li>
 														<ul>
 															<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
-																<FaRegMinusSquare />
+																{console.log(pc['childObj'][val]['childObj'])}
+																{pc['childObj'][val]['collapseOpen'] == true || pc['childObj'][val]['childObj'] == undefined ? (
+																	<FaRegMinusSquare
+																		onClick={() =>
+																			updateCollapseSec(
+																				2,
+																				val,
+																				pc['childObj'][val]['collapseOpen']
+																			)}
+																	/>
+																) : (
+																	<FaRegPlusSquare
+																		onClick={() =>
+																			updateCollapseSec(
+																				2,
+																				val,
+																				pc['childObj'][val]['collapseOpen']
+																			)}
+																	/>
+																)}
 															</li>
 															<ListView
 																pcid={pc_unique_key}
@@ -301,7 +392,7 @@ const PcOverview = (params) => {
 																theader={pc['childObj'][val]['header']}
 																tvalue={[
 																	pc['childObj'][val]['function_name'],
-																	'€ ' +pc['childObj'][val]['min_salary']
+																	'€ ' + pc['childObj'][val]['min_salary']
 																]}
 																secId={pc['childObj'][val]['id']}
 																sectype="funct"
@@ -350,81 +441,74 @@ const PcOverview = (params) => {
 			</div>
 		</div>
 			} */}
-			{pc_view_type != 'addpc' &&
-			<div className="row">
-			<div className="text-start col-md-6">
-				<button
-					type="button"
-					className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-					onClick={() => {
-						if(router.query.fid){
-						router.push('/manage-function');
-						}else if(router.query.cid){
-							router.push('/manage-category');
-						}else{
-							router.push('/manage-pc');
-						}	
-					}}
-				>
-					Back
-				</button>
-			</div>
-			<div className="text-end col-md-6">
-			</div>
-		</div>
-			}
+					{pc_view_type != 'addpc' && (
+						<div className="row">
+							<div className="text-start col-md-6">
+								<button
+									type="button"
+									className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+									onClick={() => {
+										if (router.query.fid) {
+											router.push('/manage-function');
+										} else if (router.query.cid) {
+											router.push('/manage-category');
+										} else {
+											router.push('/manage-pc');
+										}
+									}}
+								>
+									Back
+								</button>
+							</div>
+							<div className="text-end col-md-6" />
+						</div>
+					)}
 				</div>
 				<div className={`px-4 pt-2 border-start border-2 ${cat_rightsec}`}>
-					{pc_view_type != 'viewpc' &&
-					<div className="text-center">
-						<button
-							type="button"
-							to="category"
-							pcid={pc_unique_key}
-							className={'btn me-3' + styles.btncolor}
-							onClick={() => {
-								setCat_subsec_type(1);
-								setCat_subsec_id('');
-							}}
-						>
-							Add category
-						</button>
-						<button
-							type="button"
-							to="function"
-							pcid={pc_unique_key}
-							className={'btn me-2' + styles.btncolor}
-							onClick={() => {
-								setCat_subsec_type(2);
-								setCat_subsec_id('');
-							}}
-						>
-							Add function
-						</button>
-					</div>
-}
+					{pc_view_type != 'viewpc' && (
+						<div className="text-center">
+							<button
+								type="button"
+								to="category"
+								pcid={pc_unique_key}
+								className={'btn me-3' + styles.btncolor}
+								onClick={() => {
+									setCat_subsec_type(1);
+									setCat_subsec_id('');
+								}}
+							>
+								Add category
+							</button>
+							<button
+								type="button"
+								to="function"
+								pcid={pc_unique_key}
+								className={'btn me-2' + styles.btncolor}
+								onClick={() => {
+									setCat_subsec_type(2);
+									setCat_subsec_id('');
+								}}
+							>
+								Add function
+							</button>
+						</div>
+					)}
 					{cat_subsec_type == 1 && (
 						<AddCategory id={secid} categorylist={pc['childObj'] ? pc['childObj'] : []} />
 					)}
 					{cat_subsec_type == 2 && (
 						<AddFunction id={secid} categorylist={pc['childObj'] ? pc['childObj'] : []} />
 					)}
-					{cat_subsec_type == 3 && (
-						<AddPc />
-					)}
-					{cat_subsec_type == 4 && (
-						<AddAge />
-					)}
-					{cat_subsec_type == 5 && (
-						<EmployeeType />
-					)}
-					{cat_subsec_type == 6 && (
-						<SalaryBenefits />
-					)}
+					{cat_subsec_type == 3 && <AddPc />}
+					{cat_subsec_type == 4 && <AddAge />}
+					{cat_subsec_type == 5 && <EmployeeType />}
+					{cat_subsec_type == 6 && <SalaryBenefits />}
 				</div>
 			</div>
 			{console.log(router.query)}
-			{router.query.cid || router.query.fid || params.type != 'addpc' ? '' : (
+			{router.query.cid || router.query.fid || params.type != 'addpc' ? (
+				''
+			) : (
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
@@ -450,7 +534,6 @@ const PcOverview = (params) => {
 					</div>
 				</div>
 			)}
-			
 		</div>
 	);
 };
