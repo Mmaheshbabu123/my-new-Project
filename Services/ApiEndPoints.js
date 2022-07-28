@@ -151,4 +151,6 @@ export const deleteSignatureData = BASE_URL + 'delete-signature-data';
 
 //------ COOPERATION_PDF_URL's-----------------------//
 export const cooperationAgreementPreview = BASE_URL + 'cooperation-agreement-preview';
+export const sendToEmployer = BASE_URL + 'send-to-employer';
+export const updateEmployerSign = BASE_URL + 'employer-sign-update';
 //------
