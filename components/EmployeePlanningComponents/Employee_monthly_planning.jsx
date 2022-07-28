@@ -229,7 +229,7 @@ function EmployeeMonthlyPlanning(props) {
 	return (
 		<div className="container-fluid p-0">
 			<div className="row m-0 p-0">
-				<p className="mt-1 mb-1 p-0 font-weight-bold   bitter-italic-normal-mediun-24">My planning</p>
+				<p className="mt-1 mb-1 p-0 font-weight-bold   bitter-italic-normal-medium-24">My planning</p>
 				<div className="mt-3 col-md-12 p-0">
 					<p className="poppins-regular-16px">My upcoming plannings</p>
 				</div>
@@ -237,7 +237,7 @@ function EmployeeMonthlyPlanning(props) {
 					<table className="table border  border-info mt-3 mb-3">
 						<thead>
 							<tr className=" skyblue-bg-color">
-								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">Date</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex  ">Date</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">Start time</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">End time</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">Employer</th>
