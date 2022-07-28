@@ -6,7 +6,7 @@ import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
-  const { state: {  overviewData } } = props;
+  const { state: {  overviewData, salesAgentUpdates } } = props;
 
   /**
    * [getSelectedStatus description]
@@ -147,10 +147,28 @@ const OverviewPage = (props) => {
     );
   }
 
+  /**
+   * [handleEmployerSign description]
+   * @param  {int} employer_id                  [description]
+   * @param  {int} company_id                   [description]
+   * @param  {int} root_parent_id               [description]
+   * @return {url}                [description]
+   */
+  const handleEmployerSign = (empRefId, company_id, root_parent_id) => {
+    window.open(`/cooperation-agreement-preview?root_parent_id=${root_parent_id}&emp_ref=${empRefId}&type=2`, '_blank');
+  }
+
   const getNeededActions = (eachRow) => {
+    const { epa_id, employer_id, company_id } = eachRow;
+    let agent = salesAgentUpdates[employer_id] && salesAgentUpdates[employer_id][company_id] ? salesAgentUpdates[employer_id][company_id] : {};
+    let signed = Number(eachRow.signed);
     return (
       <>
-      -
+        {agent.approved ? <span title={'Sign'}
+          className="actions-span me-2 text-dark"
+          onClick={() => !signed ? handleEmployerSign(epa_id, company_id, agent.root_parent_id):null}> {signed ? 'Signed' : 'Sign'} </span>
+        : null}
+        {/* <span title={'View'} className="actions-span me-2 text-dark" onClick={() =>  console.log('view')}> View </span> */}
       </>
     )
   }
