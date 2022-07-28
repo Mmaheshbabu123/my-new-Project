@@ -1,5 +1,5 @@
 import React from "react";
-import AddFunction from "../../../components/PlanningComponent/addFunction";
+import AddFunction from "../../../components/PlanningComponent/AddFunction";
 
 const functioninplanning = () => {
 

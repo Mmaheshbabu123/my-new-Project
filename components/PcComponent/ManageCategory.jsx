@@ -181,7 +181,7 @@ const ManageCategoryComponent = () => {
 		<div className="container">
 			<form>
 				<div className="row">
-					<p className="mt-4 mb-2 h4">Manage Categories</p>
+					<p className="mt-4 mb-2 h4">Manage categories</p>
 
 					<div className="col-sm-2">
 						<input
@@ -222,9 +222,9 @@ const ManageCategoryComponent = () => {
 							className="btn btn-secondary btn-block float-right mt-2 mb-2 "
 							onClick={() => handleSearch()}
 						>
-							Search
+							Filter
 						</button>
-						{(searchPc != '' || searchCat != '' || searchSal != '') && (
+						{(searchPc.trim() != '' || searchCat.trim() != '' || searchSal.trim() != '') && (
 							<button
 								type="button"
 								className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2"
