@@ -500,8 +500,9 @@ a {
 }
 .container-height {
 	/* min-height: calc(90vh - 100px); */
-    min-height: calc(92vh - 52px);
+    /* min-height: calc(92vh - 52px); */
     /* height: 86.5vh; */
+    min-height: calc(90vh - 45px);
 }
 
 .atom-input-field-default {
