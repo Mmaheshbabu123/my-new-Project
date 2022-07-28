@@ -39,6 +39,7 @@ const LegalAddress = (props) => {
   }
   const handleSelect = (obj,key) => {
     tab_2[key]  = obj.value;
+    element_status['tab_2'].push(key);
     updateStateChanges({ tab_2 });
   }
 

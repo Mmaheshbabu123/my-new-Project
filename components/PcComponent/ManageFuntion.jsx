@@ -355,57 +355,57 @@ const ManageFunction = () => {
 	//------------------- Pagination code -------------------------//
 
 	return (
-		<div className="container">
+		<div className="container-fluid">
 			<form>
 				<div className="row">
-					<p className="mt-4 mb-2 h4">Manage functions</p>
-					<div className="col-sm-2">
+					<p className="mt-3 mb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0">Manage functions</p>
+					<div className="col-md-2 ps-0">
 						<input
 							type="search"
 							id="form12"
 							value={searchPc}
 							onChange={(e) => setSearchPc(e.target.value)}
-							className="form-control mt-2 mb-2"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 							placeholder="Paritair comite number"
 						/>
 					</div>
 
-					<div className="col-sm-2">
+					<div className="col-md-2">
 						<input
 							type="search"
 							id="form12"
 							value={searchFunc}
 							onChange={(e) => setSearchFunc(e.target.value)}
-							className="form-control mt-2 mb-2 "
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 "
 							placeholder="Function Name"
 						/>
 					</div>
 
-					<div className="col-sm-2">
+					<div className="col-md-2">
 						<input
 							type="search"
 							id="form12"
 							value={searchSal}
 							onChange={(e) => setSearchSal(e.target.value)}
-							className="form-control mt-2 mb-2"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 							placeholder="Minimum salary"
 						/>
 					</div>
-					<div className="col-sm-2">
+					<div className="col-md-2">
 						<input
 							type="search"
 							id="form12"
 							value={searchCat}
 							onChange={(e) => setSearchCat(e.target.value)}
-							className="form-control mt-2 mb-2"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 							placeholder="Category name"
 						/>
 					</div>
 
-					<div className="col-sm-2">
+					<div className="col-md-2">
 						<button
 							type="button"
-							className="btn btn-secondary   btn-block float-right mt-2 mb-2"
+							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
 							onClick={() => handleSearch()}
 						>
 							Filter
@@ -413,7 +413,7 @@ const ManageFunction = () => {
 						{(searchPc.trim() != '' || searchFunc.trim() != '' || searchCat.trim() != '' || searchSal.trim() != '') && (
 							<button
 								type="button"
-								className="btn btn-secondary   btn-block float-right mt-2 mb-2 ms-2"
+								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
 								onClick={() => handleReset()}
 							>
 								Reset
@@ -421,27 +421,27 @@ const ManageFunction = () => {
 						)}
 					</div>
 
-					<div className="form-check mt-2 text-center ">
-						<table className="table border border-secondary mt-3">
+					<div className="form-check p-0 mt-2 text-center max-height-420">
+						<table className="table   mt-3 mb-3 text-center">
 							<thead>
-								<tr className="table-secondary">
-									<th className="border-end border-secondary">Paritair comite number</th>
-									<th className="border-end border-secondary">Function name</th>
-									<th className="border-end border-secondary">Minimum salary</th>
-									<th className="border-end border-secondary">Category</th>
-									<th className="border-end border-secondary">Action</th>
+								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
+									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">Paritair comite number</th>
+									<th className="oppins-regular-18px btn-bg-gray-medium">Function name</th>
+									<th className="oppins-regular-18px btn-bg-gray-medium">Minimum salary</th>
+									<th className="oppins-regular-18px btn-bg-gray-medium">Category</th>
+									<th className="oppins-regular-18px btn-bg-gray-medium">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								{functionsTemp2.length > 0 &&
 									functionsTemp2.map((result) => (
-										<tr className="border-bottom border-secondary" key={result.funcn_id}>
-											<td className="border-end border-secondary">
+										<tr className="border poppinns-regular-thin p-2" key={result.funcn_id}>
+											<td className="poppinns-regular-thin">
 												{result.pc_number ? result.pc_number : result.pc_num}
 											</td>
-											<td className="border-end border-secondary">{result.function_name}</td>
-											<td className="border-end border-secondary">€ {result.min_salary}</td>
-											<td className="border-end border-secondary">{result.cat_name}</td>
+											<td className="poppinns-regular-thin">{result.function_name}</td>
+											<td className="poppinns-regular-thin">€ {result.min_salary}</td>
+											<td className="poppinns-regular-thin">{result.cat_name}</td>
 											<td className="d-flex justify-content-center ">
 												<Link
 													href={
@@ -457,18 +457,18 @@ const ManageFunction = () => {
 													className=""
 												>
 													<a className="">
-														<MdEdit className="mt-2 ms-3" />
+														<MdEdit className="mt-2 ms-3 color-skyblue" />
 													</a>
 												</Link>
 												<span onClick={() => showPopup(result.funcn_id)} type="button">
-													<MdDelete className="mt-2 ms-3" />
+													<MdDelete className="mt-2 ms-3 color-skyblue" />
 												</span>
 											</td>
 										</tr>
 									))}
 								{functions.length == 0 && (
 									<tr>
-										<td colSpan={4} className="text-center">
+										<td colSpan={4} className="text-center poppins-regular-18px">
 											No records
 										</td>
 									</tr>
@@ -478,7 +478,7 @@ const ManageFunction = () => {
 					</div>
 				</div>
 				{functions.length >= itemsPerPage && (
-					<div className="row">
+					<div className="row my-4">
 						<ReactPaginate
 							breakLabel="..."
 							nextLabel={<AiOutlineArrowRight />}
@@ -487,7 +487,7 @@ const ManageFunction = () => {
 							pageCount={pageCount}
 							previousLabel={<AiOutlineArrowLeft />}
 							renderOnZeroPageCount={null}
-							containerClassName={'pagination justify-content-center'}
+							containerClassName={'pagination justify-content-center project-pagination'}
 							itemClass="page-item"
 							linkClass="page-link"
 							subContainerClassName={'pages pagination'}
@@ -499,7 +499,7 @@ const ManageFunction = () => {
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 md-5"
 							onClick={() => backToDashboard()}
 						>
 							Back

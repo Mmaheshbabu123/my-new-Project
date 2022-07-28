@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { fetchallproject, addProject } from '../../Services/ApiEndPoints';
+import { fetchallproject, updateProject } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import Popup from './ProjectDeletePopup';
@@ -51,7 +51,7 @@ function ManageProject(props) {
 		var data = {
 			id: projectid
 		};
-		APICALL.service(addProject, 'POST', data)
+		APICALL.service(updateProject, 'POST', data)
 			.then((result) => {
 				console.log(result.status);
 				setUpdated(updated + 1);
@@ -61,10 +61,10 @@ function ManageProject(props) {
 				console.error(error);
 			});
 	};
-	const closePopup = () => {
+	const closeDeletePopup = () => {
 		setShowdeletepopup(false);
 	};
-	const showPopup = (id) => {
+	const showDeletePopup = (id) => {
 		setProjectid(id);
 		setShowdeletepopup(true);
 	};
@@ -90,78 +90,6 @@ function ManageProject(props) {
 	/**
      *  SEARCH FUNCTIONALITY
      */
-	function handleSearch() {
-		var res = [];
-		/**
-		 * CONDITIONS WHEN ALL THREE VALUES ARE GIVEN 
-		 */
-		// if (searchProjectname != '' && searchlocation != '' && searchaddress != '') {
-		// 	projectTemp.map((val) => {
-		// 		if (
-		// 			val['project_name'].trim().toLowerCase().includes(searchProjectname.toLowerCase()) &&
-		// 			val['project_location'].trim().toLowerCase().includes(searchlocation.toLowerCase()) &&
-		// 			val['address_id'].trim().toLowerCase().includes(searchaddress.toLowerCase())
-		// 		) {
-		// 			res.push(val);
-		// 		}
-		// 	});
-		// 	setProject(res);
-		// CONDITIONS WHEN TWO VALUES ARE GIVEN //
-		// } else if (searchProjectname != '' && searchlocation != '') {
-		// 	projectTemp.map((val) => {
-		// 		if (
-		// 			val['projectname'].trim().toLowerCase().includes(searchProjectname.toLowerCase()) &&
-		// 			val['location'].trim().toLowerCase().includes(searchlocation.toLowerCase())
-		// 		) {
-		// 			res.push(val);
-		// 		}
-		// 	});
-		// 	setProject(res);
-		// } else if (searchlocation != '' && searchaddress != '') {
-		// 	projectTemp.map((val) => {
-		// 		if (
-		// 			val['location'].trim().toLowerCase().includes(searchlocation.toLowerCase()) &&
-		// 			val['address'].trim().toLowerCase().includes(searchaddress.toLowerCase())
-		// 		) {
-		// 			res.push(val);
-		// 		}
-		// 	});
-		// 	setProject(res);
-		// } else if (searchaddress != '' && searchProjectname != '') {
-		// 	projectTemp.map((val) => {
-		// 		if (
-		// 			val['address'].trim().toLowerCase().includes(searchaddress.toLowerCase()) &&
-		// 			val['projectname'].trim().toLowerCase().includes(searchProjectname.toLowerCase())
-		// 		) {
-		// 			res.push(val);
-		// 		}
-		// 	});
-		// 	setProject(res);
-		//  CONDITION WHEN ONLY ONE VALUES ARE GIVEN //
-		// } else if (searchProjectname != '') {
-		// 	projectTemp.map((val) => {
-		// 		if (val['projectname'].trim().toLowerCase().includes(searchProjectname.toLowerCase())) {
-		// 			res.push(val);
-		// 		}
-		// 	});
-		// 	setProject(res);
-		// } else if (searchlocation != '') {
-		// 	projectTemp.map((val) => {
-		// 		if (val['location'].trim().toLowerCase().includes(searchlocation.toLowerCase())) {
-		// 			res.push(val);
-		// 		}
-		// 	});
-		// 	setProject(res);
-		// } else if (searchaddress != '') {
-		// 	projectTemp.map((val) => {
-		// 		if (val['address'].trim().toLowerCase().includes(searchaddress.toLowerCase())) {
-		// 			res.push(val);
-		// 		}
-		// 	});
-		// 	setProject(res);
-		// }
-	}
-	// RESET FUNCTIONALITY //
 
 	function handleReset() {
 		setProject(projectTemp);
@@ -233,15 +161,16 @@ function ManageProject(props) {
 								</button>
 							</div>
 						</div>
+						<div className="form-check p-0 mt-2 text-center max-height-420">
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
-								<tr className="btn-bg-gray-medium">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center">
+								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
+									<th className="poppins-regular-18px justify-content-center d-flex align-items-center btn-bg-gray-medium">
 										Project name
 									</th>
-									<th className="poppins-regular-18px">Location</th>
-									<th className="poppins-regular-18px">Address</th>
-									<th className="poppins-regular-18px">Action</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Location</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Address</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -254,7 +183,7 @@ function ManageProject(props) {
 											<td className="d-flex justify-content-center">
 												<MdEdit className="mt-2 ms-3 color-skyblue " />
 
-												<span onClick={() => showPopup()} type="button">
+												<span onClick={() => showDeletePopup(result.id)} type="button">
 													<MdDelete className="mt-2 ms-3 color-skyblue " />
 												</span>
 											</td>
@@ -269,8 +198,25 @@ function ManageProject(props) {
 								)}
 							</tbody>
 						</table>
+						</div>
 					</div>
 				</div>
+				<div className="row my-4">
+				<ReactPaginate
+					breakLabel="..."
+					nextLabel={<AiOutlineArrowRight className='rtarw' />}
+					onPageChange={handlePageClick}
+					pageRangeDisplayed={5}
+					pageCount={pageCount}
+					previousLabel={<AiOutlineArrowLeft className='ltarw'/>}
+					renderOnZeroPageCount={null}
+					containerClassName={'pagination justify-content-center project-pagination'}
+					itemClass="page-item"
+					linkClass="page-link"
+					subContainerClassName={'pages pagination'}
+					activeClassName={'active'}
+				/>
+			</div>
 				<div className="text-start col-md-6">
 					<button
 						type="button"
@@ -282,24 +228,9 @@ function ManageProject(props) {
 				</div>
 			</form>
 			{showdeletepopup == true && (
-				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deleteproject} />
+				<Popup display={'block'} popupActionDeleteNo={closeDeletePopup} popupActionDeleteYes={deleteproject} />
 			)}
-			<div className="row">
-				<ReactPaginate
-					breakLabel="..."
-					nextLabel={<AiOutlineArrowRight />}
-					onPageChange={handlePageClick}
-					pageRangeDisplayed={5}
-					pageCount={pageCount}
-					previousLabel={<AiOutlineArrowLeft />}
-					renderOnZeroPageCount={null}
-					containerClassName={'pagination justify-content-center'}
-					itemClass="page-item"
-					linkClass="page-link"
-					subContainerClassName={'pages pagination'}
-					activeClassName={'active'}
-				/>
-			</div>
+			
 		</div>
 	);
 }
