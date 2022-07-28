@@ -219,7 +219,7 @@ const ManageCategoryComponent = () => {
 					<div className="col-md-2">
 						<button
 							type="button"
-							className="btn btn-secondary btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color "
+							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color "
 							onClick={() => handleSearch()}
 						>
 							SEARCH
@@ -227,7 +227,7 @@ const ManageCategoryComponent = () => {
 						{(searchPc != '' || searchCat != '' || searchSal != '') && (
 							<button
 								type="button"
-								className="btn btn-secondary btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
 								onClick={() => handleReset()}
 							>
 								RESET
