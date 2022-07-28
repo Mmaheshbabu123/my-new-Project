@@ -10,6 +10,7 @@ const EmployerCooperationAgreementMain = (props) => {
   const [state, setState] = useState({
       companies: {}
     , overviewData: []
+    , salesAgentUpdates: {}
     , selectedTabId: 1
     , status: [1, 0] // By default show all pending and signed
     , loaded: false
@@ -36,6 +37,7 @@ const EmployerCooperationAgreementMain = (props) => {
     setState({...state,
         companies: data.companies || {}
       , overviewData: data.overviewData || []
+      , salesAgentUpdates: data.salesAgentData || {}
       , loaded: true
     })
   }
