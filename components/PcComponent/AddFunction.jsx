@@ -40,7 +40,6 @@ function AddFunction(props) {
 			var fid = router.query.fid ? router.query.fid : '';
 			APICALL.service(addFunction, 'POST', data)
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
 						if (fid != null && fid != undefined && fid != '') {
 							router.push('/manage-function');
@@ -61,7 +60,6 @@ function AddFunction(props) {
 		} else {
 			APICALL.service(updateFunction, 'POST', data)
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
 						if (fid != null && fid != undefined && fid != '') {
 							router.push('/manage-function');
@@ -107,15 +105,14 @@ function AddFunction(props) {
 			if (id != '') {
 				APICALL.service(fetchFunction + id, 'GET')
 					.then((result) => {
-						console.log(result);
 						if (result.data.length > 0) {
 							var res = [];
 							res.function_name = result.data[0].function_name;
 							res.id = result.data[0].id;
 							res.min_salary = result.data[0].min_salary;
+							res.min_salary_temp = result.data[0].min_salary;
 							res.category_id = result.data[0].category_id == null? '':result.data[0].category_id;
 							setData(res);
-							console.log(result);
 						}
 					})
 					.catch((error) => {
@@ -133,13 +130,8 @@ function AddFunction(props) {
 		}
 	};
 	let validate = () => {
-		console.log(props.categorylist);
-		// alert("2");return;
 		var error = [];
 		error['error_function_name'] = ValidationService.emptyValidationMethod(data.function_name);
-			// ValidationService.emptyValidationMethod(data.function_name) == ''
-			// 	? ValidationService.nameValidationMethod(data.function_name) == '' ? '' : 'This field is invalid.'
-			// 	: 'This field is required.';
 		error['error_min_salary'] =
 			ValidationService.emptyValidationMethod(data.min_salary) == ''
 				? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
@@ -152,7 +144,6 @@ function AddFunction(props) {
 					error['error_function_name'] = 'Function name already exist.';
 				}
 				if(props.categorylist[element].type == '2'){
-					console.log(props.categorylist[element].childObj)
 					if(props.categorylist[element].childObj != undefined){
 						Object.keys(props.categorylist[element].childObj).map((val)=>{
 						if (props.categorylist[element].childObj[val].type == '3' && props.categorylist[element].childObj[val].id != id && props.categorylist[element].childObj[val].function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
@@ -169,14 +160,11 @@ function AddFunction(props) {
 					error['error_function_name'] = 'Function name already exist.';
 				}
 				if(val1.type == '2'){
-					console.log(val1.childObj)
 					if(val1.childObj != undefined){
 					val1.childObj.forEach((v, k)=>{
 						if (v.type == '3' && v.id != id && v.function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
 							error['error_function_name'] = 'Function name already exist.';
 						}
-						console.log(v)
-
 					})
 					}
 				}
@@ -246,7 +234,9 @@ function AddFunction(props) {
 										if(typeof props.categorylist == 'object'){
 
 											Object.keys(props.categorylist).map((element) => {
-												sal = props.categorylist[element].min_salary;
+												if(e.target.value == props.categorylist[element].id){
+												sal = data.min_salary_temp>props.categorylist[element].min_salary?data.min_salary_temp:props.categorylist[element].min_salary;
+												}
 											});
 											
 										}else{
