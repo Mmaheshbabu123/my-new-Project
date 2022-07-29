@@ -28,7 +28,7 @@
 .pclinking-table-thead {
   position: sticky;
   top: 0;
-  background-color: lightgray;
+  background-color: #4C4D550F;
 }
 
 
@@ -50,6 +50,7 @@
   height: 100%;
   border-right: 1px solid;
   border-bottom: 1px solid;
+  background-color: #4C4D550F;
 }
 
 .cell--topRight {

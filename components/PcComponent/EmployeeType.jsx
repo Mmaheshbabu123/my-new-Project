@@ -90,28 +90,30 @@ const EmployeeType = () => {
 		if (event.target.checked) {
 			if (!res1.includes(parseInt(event.target.value))) {
 				res1.push(parseInt(event.target.value));
+				var index1 = temp2.indexOf(parseInt(event.target.value));
+
+				
+					if( index2 > -1){
+						if(index1 > -1){
+						temp1.splice(index1, 1);
+						setTemp2(temp1);
+					}
+				}
 			}
-			if( index2 > -1){
-				temp1.splice(index2, 1);
-				setTemp2(temp1);
-			}
+			
 			console.log('✅ Checkbox is checked');
 		} else {
 			var index = res1.indexOf(parseInt(event.target.value));
 			if (index > -1) {
 				res1.splice(index, 1);
-				
-				// 2nd parameter means remove one item only
 			}
+			
 			if( index2 > -1){
+				if(!temp1.indexOf(parseInt(event.target.value))>-1){
 				temp1.push(parseInt(event.target.value)); 
 				setTemp2(temp1);
 			}
-		// 	var index2 = temp.indexOf(parseInt(event.target.value));
-
-		// 	if( index2 > -1){
-		// 		temp1.push(parseInt(event.target.value));
-		// }
+		}
 			
 			console.log('⛔️ Checkbox is NOT checked');
 		}
@@ -123,7 +125,6 @@ const EmployeeType = () => {
 		if (id == '') {
 			APICALL.service(storePcEmployeeTypes, 'POST', data1)
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
 						if(cat_subsec_type == 5){
 							setCat_fun_updated('employeetype' + result.pcid);
@@ -156,7 +157,6 @@ const EmployeeType = () => {
 		} else {
 			setError_emp_type('Select atleast one employee type.');
 		}
-		console.log(data1);
 	};
 
 	return (
@@ -176,7 +176,7 @@ const EmployeeType = () => {
 								onChange={(e) => {
 									updateRes(e);
 								}}
-							/>{console.log(res)}
+							/>
 							<label className="form-check-label"> {val.name}</label>
 						</div>
 					// 	<div className="form-check mt-4">
