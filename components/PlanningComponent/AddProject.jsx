@@ -100,7 +100,7 @@ function Addproject(props) {
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['street'] = ValidationService.emptyValidationMethod(res.street);
 		error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
-		error1['country'] = ValidationService.emptyValidationMethod(res.country);
+		// error1['country'] = ValidationService.emptyValidationMethod(res.country);
 		error1['bno'] = ValidationService.emptyValidationMethod(res.bno);
 
 		/**

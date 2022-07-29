@@ -94,6 +94,7 @@ const ManageCategoryComponent = () => {
 				}
 			});
 			setCategories(res);
+			setItemOffset(0);
 		} else if (searchCat != '' && searchSal != '') {
 			categoriesTemp.map((val) => {
 				if (
@@ -181,7 +182,9 @@ const ManageCategoryComponent = () => {
 		<div className="container-fluid p-0">
 			<form>
 				<div className="row m-0">
-					<p className="mt-3 mb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0">Manage categories</p>
+					<p className="mt-3 mb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0">
+						Manage categories
+					</p>
 					<div className="col-md-2 ps-0">
 						<input
 							type="search"
@@ -238,7 +241,9 @@ const ManageCategoryComponent = () => {
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">Paritair comite number</th>
+									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">
+										Paritair comite number
+									</th>
 									<th className="poppins-regular-18px btn-bg-gray-medium">Category name</th>
 									<th className="poppins-regular-18px btn-bg-gray-medium">Minimum salary</th>
 									<th className="poppins-regular-18px   btn-bg-gray-medium">Action</th>
