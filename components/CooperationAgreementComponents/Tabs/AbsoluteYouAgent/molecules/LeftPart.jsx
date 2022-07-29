@@ -8,7 +8,7 @@ const LeftPart = ( { compState, setCompState } ) => {
     coefficientTypeArray.map(coefficient => {
       htmlContent.push(
         <tr height="50" key={coefficient.id} id={coefficient.id}>
-          <td className="" title={coefficient.name}> {coefficient.name} </td>
+          <td className="poppins-regular-16px" title={coefficient.name}> {coefficient.name} </td>
         </tr>
       )
     })
@@ -21,13 +21,13 @@ const LeftPart = ( { compState, setCompState } ) => {
           <tr>
             <th height= "50" colSpan="2" className="p-0">
               <div className="firstpart-cell">
-                <span title="Employee types" className="cell--topRight" key={`tablecolindex`} scope="col"> Employee types </span>
-                <span title="Coefficients" className="cell--bottomLeft" key={`tablecolindex2`} scope="col"> Coefficients </span>
+                <span title="Employee types" className="cell--topRight poppins-regular-18px" key={`tablecolindex`} scope="col"> Employee types </span>
+                <span title="Coefficients" className="cell--bottomLeft poppins-regular-18px" key={`tablecolindex2`} scope="col"> Coefficients </span>
               </div>
             </th>
           </tr>
         </thead>
-        <tbody className="pclinking-table-tbody table-first-part-tbody">
+        <tbody className="pclinking-table-tbody table-first-part-tbody poppins-regular-18px">
           {getTableContent()}
         </tbody>
       </table>

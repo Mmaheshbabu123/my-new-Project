@@ -917,6 +917,9 @@ font-size: var(--font-size-l);
  .table-border-bottom:last-child() {
     border-bottom: none !important;
  }
+ .linkcoe .css-1vdcg37-control {
+    border-width: 0px;
+ }
  
  @media screen {
 
