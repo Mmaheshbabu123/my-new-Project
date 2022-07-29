@@ -4,6 +4,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { deleteEmployeeType ,deleteCoefficientType} from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import SearchIcon from '../SearchIcon';
 import ReactPaginate from 'react-paginate';
 const itemsPerPage = 8;
@@ -28,8 +29,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+        <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className="color-skyblue"/> </span>
+        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className="color-skyblue"/> </span>
       </>
     )
   }
@@ -99,55 +100,59 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
 const button_title = manageType == 'employee-types'? `Add employee type`:`Add coefficient`;
   return (
     <>
-      <h4> {`Manage ${button_title.includes('employee') ? 'employee types' : 'coefficients'}`} </h4>
-      <div className='row searchbox' style={{ margin: '10px 0', position: 'relative' }}>
+      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage ${button_title.includes('employee') ? 'employee types' : 'coefficients'}`} </h4>
+      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+       <div className='col-md-9 p-0'>
         <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
         <input
           type="text"
-          className="form-control col-7 pcp_name"
+          className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
           onChange={(e) => setState({...state, searchTerm: e.target.value})}
           placeholder={'Search'}
           onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
         />
+        </div>
+        <div className='col-md-3'>
         <button
           onClick={() => router.push(`${manageType}/add?id=0`)}
           type="button"
-          className="btn btn-dark pcp_btn col-3">
+          className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content">
           {`+ ${button_title}`}
         </button>
+        </div>
       </div>
       <div className="table-render-parent-div">
-          <table className="table table-hover manage-types-table">
-            <thead className="table-render-thead">
-              <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+          <table className="table table-hover manage-types-table table  mb-3 text-start">
+            <thead className="table-render-thead ">
+              <tr className='table-sticky-bg-gray poppins-regular-18px ' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='action-sec px-5' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
             <tbody>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-                <td> {eachRow.name} </td>
-                <td>{ getNeededActions(eachRow) } </td>
+                <td className='text-start px-5 poppinns-regular-thin py-4'> {eachRow.name} </td>
+                <td className='text-end px-5 poppinns-regular-thin py-4 '>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
             : <p style={{paddingTop: '10px'}}> No records </p>}
           </table>
       </div>
       <div>
-      {state.filterRows.length > itemsPerPage && <ReactPaginate
+      {state.filterRows.length > itemsPerPage && <div className='pgnation col-md-3 my-5 m-auto'><ReactPaginate
           breakLabel="..."
-          nextLabel="Next >"
+          nextLabel={<AiOutlineArrowRight />}
           onPageChange={handlePageClick}
           pageRangeDisplayed={5}
           pageCount={state.pageCount}
           forcePage={state.currentPage}
-          previousLabel="< Previous"
+          previousLabel={<AiOutlineArrowLeft />}
           renderOnZeroPageCount={null}
-          containerClassName={"pagination"}
+          containerClassName={"pagination justify-content-center project-pagination"}
           itemClass="page-item"
           linkClass="page-link"
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
-      />}
-        <button onClick={() => router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
+      /></div>}
+        <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 md-5">
           {`Back`}
         </button>
       </div>
