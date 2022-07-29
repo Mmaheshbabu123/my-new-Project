@@ -43,7 +43,7 @@ const SalaryBenefits = (props) => {
 
   return (
     <>
-      <div className='container'>
+      <div className='container-fluid'>
         <div className='mt-3 md-3'>
           {state.loaded === true ?
           <> {state.editPage === true ?

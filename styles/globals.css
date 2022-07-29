@@ -900,10 +900,18 @@ font-size: var(--font-size-l);
     overflow: auto;
  }
  .table-sticky-bg-gray {
-    position: sticky;
+    /* position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 999; */
     background-color: var(--bg-grey-medium);
+ }
+ .min-height-AET {
+    /* min-height: calc(85vh - 100px); */
+    min-height: calc(85vh - 120px);
+    /* min-height: calc(92vh - 52px); */
+ }
+ .table-border-bottom:last-child() {
+    border-bottom: none !important;
  }
  
  @media screen {
