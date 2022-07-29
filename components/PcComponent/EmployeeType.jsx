@@ -100,18 +100,13 @@ const EmployeeType = () => {
 			var index = res1.indexOf(parseInt(event.target.value));
 			if (index > -1) {
 				res1.splice(index, 1);
-				
-				// 2nd parameter means remove one item only
 			}
+			if(!temp2.indexOf(parseInt(event.target.value))>-1){
 			if( index2 > -1){
 				temp1.push(parseInt(event.target.value)); 
 				setTemp2(temp1);
 			}
-		// 	var index2 = temp.indexOf(parseInt(event.target.value));
-
-		// 	if( index2 > -1){
-		// 		temp1.push(parseInt(event.target.value));
-		// }
+		}
 			
 			console.log('⛔️ Checkbox is NOT checked');
 		}
@@ -177,7 +172,8 @@ const EmployeeType = () => {
 									updateRes(e);
 								}}
 							/>{console.log(res)}
-							<label className="form-check-label"> {val.name}</label>
+							{console.log(temp2)}
+							<label className="form-check-label"> {val.name} {val.id}</label>
 						</div>
 					// 	<div className="form-check mt-4">
 					// 	<input
