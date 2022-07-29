@@ -168,8 +168,30 @@ function AddCategory(props) {
 			});
 		}
 		}
+
+		if (error['error_min_salary'] == '') {
+			console.log(data);
+			console.log(props.categorylist);
+			props.categorylist.map((element) => {
+				if (element.type == '2' && element.id == id){
+					element.childObj.map((value)=>{
+						if(parseFloat(data.min_salary.replace(',', '.')) > parseFloat(value.min_salary.replace(',', '.'))){
+							error['error_min_salary'] = 'Category minimum salary cannot be greater than function minimum salary.';
+						}
+						console.log(value)
+					})
+				}
+			// if(typeof props.categorylist == 'object'){
+			// Object.keys(props.categorylist).map((element) => {
+			// 	if (props.categorylist[element].type == '2' && props.categorylist[element].id != id && data.category_name.replaceAll(' ','').toLowerCase() == props.categorylist[element].category_name.replaceAll(' ','').toLowerCase()) {
+			// 		error['error_category_name'] = 'Category name already exist.';
+			// 	}
+			// });
+		})
+	}
 		setError_category_name(error['error_category_name']);
 		setError_min_salary(error['error_min_salary']);
+
 		if (error['error_category_name'] == '' && error['error_min_salary'] == '') {
 			return true;
 		} else {

@@ -4,14 +4,19 @@ export const companyArray = [
 
 export const companyRow1 = [
   //{id :8,key_name:'VAT-number'},
-  {id:5,key_name:'Official legal company name'},
+
   {id:6,key_name:'Company call name'},
+  {id:9,key_name:'RSZ-number'},
+
 
 
 ];
 export const comapanyRow2 = [
-  {id:7,key_name:'Company client number'},
-  {id:9,key_name:'RSZ-number'},
+{id:5,key_name:'Official legal company name'},
+{id:7,key_name:'Company client number'},
+
+
+
 
 ];
 

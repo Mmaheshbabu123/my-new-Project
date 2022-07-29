@@ -281,8 +281,8 @@ function Planning(props) {
 		APICALL.service(updateProject, 'POST', data)
 			.then((result) => {
 				console.log(result.status);
-				setUpdated(updated + 1);
 				setShowdeletepopup(false);
+				setUpdated(updated + 1);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -391,6 +391,13 @@ function Planning(props) {
 										)}
 								</select>
 							</div>
+							{/* <div className="form-group mb-3">
+								<label className="form-label mb-2 mt-2 poppins-regular-16px">Paritair comite</label>
+								<select className="form-select mb-2 mt-2">
+									<option value="">Select</option>
+								</select>
+							</div> */}
+
 							{project.id != '' &&
 							project.id != undefined && (
 								<div className="form-group ">

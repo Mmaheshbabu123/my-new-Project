@@ -7,6 +7,7 @@ import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import Popup from './ProjectDeletePopup';
 import ReactPaginate from 'react-paginate';
+import Link from 'node_modules/next/link';
 
 function ManageProject(props) {
 	const router = useRouter();
@@ -24,7 +25,7 @@ function ManageProject(props) {
 
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ projectid, setProjectid ] = useState('');
-	const [ itemsPerPage, setItemsPerPage ] = useState(10);
+	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 
 	/**
 	/**
@@ -90,7 +91,109 @@ function ManageProject(props) {
 	/**
      *  SEARCH FUNCTIONALITY
      */
-
+	function handleSearch() {
+		var res = [];
+		//-------------------------IF ALL THREE VALUES ARE GIVEN----------------------//
+		if (searchProjectname != '' && searchlocation != '' && searchaddress != '') {
+			projectTemp.map((val) => {
+				if (
+					val['project_name'].trim().toLowerCase().includes(searchProjectname.trim().toLowerCase()) &&
+					(val['project_location'] != undefined &&
+						val['project_location'] != '' &&
+						val['project_location'] != null &&
+						val['project_location'].trim().toLowerCase().includes(searchlocation.trim().toLowerCase())) &&
+					val['address'].trim().toLowerCase().includes(searchaddress.trim().toLowerCase())
+				) {
+					res.push(val);
+				}
+			});
+			setProject(res);
+			setItemOffset(0);
+		} else if (searchProjectname != '' && searchlocation != '') {
+			//--------------FOR WHEN TWO VALUES ARE GIVEN--------------------//
+			projectTemp.map((val) => {
+				if (
+					val['project_name'].trim().toLowerCase().includes(searchProjectname.toLowerCase()) &&
+					(val['project_location'] != undefined &&
+						val['project_location'] != '' &&
+						val['project_location'] != null &&
+						val['project_location'].trim().toLowerCase().includes(searchlocation.trim().toLowerCase()))
+				) {
+					res.push(val);
+				}
+			});
+			setProject(res);
+			setItemOffset(0);
+		} else if (searchlocation != '' && searchaddress != '') {
+			projectTemp.map((val) => {
+				if (
+					val['project_location'].trim().toLowerCase().includes(searchlocation.toLowerCase()) &&
+					(val['address'] != undefined &&
+						val['address'] != '' &&
+						val['address'] != null &&
+						val['address'].trim().toLowerCase().includes(searchaddress.trim().toLowerCase()))
+				) {
+					res.push(val);
+				}
+			});
+			setProject(res);
+			setItemOffset(0);
+		} else if (searchProjectname != '' && searchaddress != '') {
+			projectTemp.map((val) => {
+				if (
+					val['project_name'].trim().toLowerCase().includes(searchProjectname.toLowerCase()) &&
+					(val['address'] != undefined &&
+						val['address'] != '' &&
+						val['address'] != null &&
+						val['address'].trim().toLowerCase().includes(searchaddress.trim().toLowerCase()))
+				) {
+					res.push(val);
+				}
+			});
+			setProject(res);
+			setItemOffset(0);
+		} else if (searchProjectname != '') {
+			// ----------FOR SINGLE VALUES---------------//
+			projectTemp.map((val) => {
+				if (
+					val['project_name'] != undefined &&
+					val['project_name'] != '' &&
+					val['project_name'] != null &&
+					val['project_name'].trim().toLowerCase().includes(searchProjectname.trim().toLowerCase())
+				) {
+					res.push(val);
+				}
+			});
+			setProject(res);
+			setItemOffset(0);
+		} else if (searchlocation != '') {
+			projectTemp.map((val) => {
+				if (
+					val['project_location'] != undefined &&
+					val['project_location'] != '' &&
+					val['project_location'] != null &&
+					val['project_location'].trim().toLowerCase().includes(searchlocation.trim().toLowerCase())
+				) {
+					res.push(val);
+				}
+			});
+			setProject(res);
+			setItemOffset(0);
+		} else if (searchaddress != '') {
+			projectTemp.map((val) => {
+				if (
+					val['address'] != undefined &&
+					val['address'] != '' &&
+					val['address'] != null &&
+					val['address'].trim().toLowerCase().includes(searchaddress.trim().toLowerCase())
+				) {
+					res.push(val);
+				}
+			});
+			setProject(res);
+			setItemOffset(0);
+		}
+	}
 	function handleReset() {
 		setProject(projectTemp);
 		setSearchProjectname('');
@@ -162,61 +265,67 @@ function ManageProject(props) {
 							</div>
 						</div>
 						<div className="form-check p-0 mt-2 text-center max-height-420">
-						<table className="table   mt-3 mb-3 text-center">
-							<thead>
-								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center btn-bg-gray-medium">
-										Project name
-									</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium">Location</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium">Address</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								{projectTemp2.length > 0 &&
-									projectTemp2.map((result) => (
-										<tr className="border poppinns-regular-thin p-2" key={result.id}>
-											<td className="poppinns-regular-thin">{result.project_name}</td>
-											<td className="poppinns-regular-thin">{result.project_location}</td>
-											<td className="poppinns-regular-thin">{result.address_id}</td>
-											<td className="d-flex justify-content-center">
-												<MdEdit className="mt-2 ms-3 color-skyblue " />
+							<table className="table   mt-3 mb-3 text-center">
+								<thead>
+									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
+										<th className="poppins-regular-18px justify-content-center d-flex align-items-center btn-bg-gray-medium">
+											Project name
+										</th>
+										<th className="poppins-regular-18px btn-bg-gray-medium">Location</th>
+										<th className="poppins-regular-18px btn-bg-gray-medium">Address</th>
+										<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{projectTemp2.length > 0 &&
+										projectTemp2.map((result) => (
+											<tr className="border poppinns-regular-thin p-2" key={result.id}>
+												<td className="poppinns-regular-thin">{result.project_name}</td>
+												<td className="poppinns-regular-thin">{result.project_location}</td>
+												<td className="poppinns-regular-thin">{result.address}</td>
+												<td className="d-flex justify-content-center">
+													<Link href="edit-project">
+														<a type="button">
+															<MdEdit className="mt-2 ms-3 color-skyblue " />
+														</a>
+													</Link>
 
-												<span onClick={() => showDeletePopup(result.id)} type="button">
-													<MdDelete className="mt-2 ms-3 color-skyblue " />
-												</span>
+													<span onClick={() => showDeletePopup(result.id)} type="button">
+														<MdDelete className="mt-2 ms-3 color-skyblue " />
+													</span>
+												</td>
+											</tr>
+										))}
+									{project.length == 0 && (
+										<tr>
+											<td colSpan={4} className="text-center">
+												No records
 											</td>
 										</tr>
-									))}
-								{project.length == 0 && (
-									<tr>
-										<td colSpan={4} className="text-center">
-											No records
-										</td>
-									</tr>
-								)}
-							</tbody>
-						</table>
+									)}
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 				<div className="row my-4">
-				<ReactPaginate
-					breakLabel="..."
-					nextLabel={<AiOutlineArrowRight className='rtarw' />}
-					onPageChange={handlePageClick}
-					pageRangeDisplayed={5}
-					pageCount={pageCount}
-					previousLabel={<AiOutlineArrowLeft className='ltarw'/>}
-					renderOnZeroPageCount={null}
-					containerClassName={'pagination justify-content-center project-pagination'}
-					itemClass="page-item"
-					linkClass="page-link"
-					subContainerClassName={'pages pagination'}
-					activeClassName={'active'}
-				/>
-			</div>
+					{project.length >= itemsPerPage && (
+						<ReactPaginate
+							breakLabel="..."
+							nextLabel={<AiOutlineArrowRight className="rtarw" />}
+							onPageChange={handlePageClick}
+							pageRangeDisplayed={5}
+							pageCount={pageCount}
+							previousLabel={<AiOutlineArrowLeft className="ltarw" />}
+							renderOnZeroPageCount={null}
+							containerClassName={'pagination justify-content-center project-pagination'}
+							itemClass="page-item"
+							linkClass="page-link"
+							subContainerClassName={'pages pagination'}
+							activeClassName={'active'}
+						/>
+					)}
+				</div>
 				<div className="text-start col-md-6">
 					<button
 						type="button"
@@ -230,7 +339,6 @@ function ManageProject(props) {
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionDeleteNo={closeDeletePopup} popupActionDeleteYes={deleteproject} />
 			)}
-			
 		</div>
 	);
 }

@@ -46,26 +46,6 @@ function Addproject(props) {
 		address_id: ''
 	});
 
-	// const handletable = (e) => {
-	// 	setShowtable(e);
-	// };
-
-	/**
-	 * FETCHING COMPANY FROM DRUPAL
-	 */
-	// useEffect(() => {
-	// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
-	// 		.then((result) => {
-	// 			if (result.length > 0) {
-	// 				setCompany(result);
-	// 			} else {
-	// 			}
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error(error);
-	// 		});
-	// }, []);
-
 	useEffect(
 		() => {
 			console.log(props.countries);
@@ -84,38 +64,6 @@ function Addproject(props) {
 		},
 		[ props ]
 	);
-
-	/**
-	 * FETCHING PROJECT
-	 */
-	// useEffect(() => {
-	// 	APICALL.service(fetchproject + p_unique_key, 'GET')
-	// 		.then((result) => {
-	// 			// console.log(result.data);
-	// 			if (result.data.length > 0) {
-	// 				var res = [];
-	// 				res.project_name = result.data.project_name;
-	// 				res.project_location = result.data.project_location;
-	// 				res.hno = result.data.hno;
-	// 				res.bno = result.data.bno;
-	// 				res.city = result.data.city;
-	// 				res.extra = result.data.extra;
-	// 				res.comp_id = result.data.comp_id;
-	// 				res.street = result.data.street;
-	// 				res.postal_code = result.data.postal_code;
-	// 				res.country = result.data.country;
-	// 				setData(res);
-	// 				console.log(data);
-	// 			}
-
-	// 			setCountrylist(result.data.countrylist);
-
-	// 			// setData(result.data);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-	// }, []);
 
 	/**
 	 * 
@@ -152,7 +100,7 @@ function Addproject(props) {
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['street'] = ValidationService.emptyValidationMethod(res.street);
 		error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
-		error1['country'] = ValidationService.emptyValidationMethod(res.country);
+		// error1['country'] = ValidationService.emptyValidationMethod(res.country);
 		error1['bno'] = ValidationService.emptyValidationMethod(res.bno);
 
 		/**
@@ -460,3 +408,55 @@ function Addproject(props) {
 }
 
 export default Addproject;
+
+/**
+	 * FETCHING PROJECT
+	 */
+// useEffect(() => {
+// 	APICALL.service(fetchproject + p_unique_key, 'GET')
+// 		.then((result) => {
+// 			// console.log(result.data);
+// 			if (result.data.length > 0) {
+// 				var res = [];
+// 				res.project_name = result.data.project_name;
+// 				res.project_location = result.data.project_location;
+// 				res.hno = result.data.hno;
+// 				res.bno = result.data.bno;
+// 				res.city = result.data.city;
+// 				res.extra = result.data.extra;
+// 				res.comp_id = result.data.comp_id;
+// 				res.street = result.data.street;
+// 				res.postal_code = result.data.postal_code;
+// 				res.country = result.data.country;
+// 				setData(res);
+// 				console.log(data);
+// 			}
+
+// 			setCountrylist(result.data.countrylist);
+
+// 			// setData(result.data);
+// 		})
+// 		.catch((error) => {
+// 			console.log(error);
+// 		});
+// }, []);
+
+// const handletable = (e) => {
+// 	setShowtable(e);
+// };
+
+/**
+	 * FETCHING COMPANY FROM DRUPAL
+	 */
+// useEffect(() => {
+// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
+// 		.then((result) => {
+// 			if (result.length > 0) {
+// 				setCompany(result);
+// 			} else {
+// 			}
+// 		})
+// 		.catch((error) => {
+// 			console.error(error);
+// 		});
+// }, []);

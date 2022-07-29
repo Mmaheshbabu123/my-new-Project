@@ -107,12 +107,13 @@ function AddFunction(props) {
 			if (id != '') {
 				APICALL.service(fetchFunction + id, 'GET')
 					.then((result) => {
+						console.log(result);
 						if (result.data.length > 0) {
 							var res = [];
 							res.function_name = result.data[0].function_name;
 							res.id = result.data[0].id;
 							res.min_salary = result.data[0].min_salary;
-							res.category_id = result.data[0].category_id;
+							res.category_id = result.data[0].category_id == null? '':result.data[0].category_id;
 							setData(res);
 							console.log(result);
 						}
@@ -255,7 +256,7 @@ function AddFunction(props) {
 										}
 									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: sal }));
 								}else{
-									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: ''}));
+									setData((prev) => ({ ...prev, category_id: '',min_salary: ''}));
 								}
 								}}
 							>

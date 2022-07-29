@@ -12,7 +12,6 @@ import { MdOutlineGroups } from 'react-icons/md';
 
 
 const Table = (props) => {
-	console.log(props)
 	const [ thvalues, setThvalues ] = useState([]);
 	const [ tvalues, setTvalues ] = useState([]);
 	const [type, setType] = useState('');
