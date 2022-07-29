@@ -6,15 +6,15 @@
 
 .pcp_name{
   width: 70% !important;  /* not needed */
-  margin: 10px;
-  height: 38px !important;
+  /* margin: 10px;
+  height: 38px !important; */
 }
 .pcp_btn {
-  background-color: #707070 !important;
-  margin: 10px;
+  /* backg;
+  margin: 10px; */
 }
 .pcp_btn:hover {
-  background-color: black !important;
+  /* background-color: black !important; */
 }
 
 .manage-types-table {
@@ -23,12 +23,12 @@
 }
 
 .manage-types-table tr {
-  border-bottom: 1pt solid cadetblue;
+  border-bottom: 1pt solid #4C4D554D;
   height: 45px;
 }
 
 .add-edit-types {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .managetype-save-btn {
@@ -49,18 +49,29 @@
 .add-item-table tr{
   height: 30px;
 }
+.table-border-bottom {
+  border-bottom: 1px solid #4C4D554D;
+}
 .table-render-parent-div{
   height: 450px;
-  border: 1px solid cadetblue;
+  border: 1px solid #4C4D554D;
   overflow-y: scroll;
 }
 
 .table-render-thead{
-  background-color: lightgray;
+  background-color: #4C4D550F;
   height: 50px;
   position: sticky;
   top: 0;
-  textAlign: center;
+  text-align: left;
+ 
+}
+.action-sec:nth-child(2) {
+  text-align: right;
+}
+.action-sec:nth-child(1) {
+  display: flex;
+  align-items: center;
 }
 
 .show-box-link:hover {
@@ -88,7 +99,8 @@
   top: 15px;
   position: absolute;
   cursor: pointer;
-  right: 30%;
+  /* right: 30%; */
+  right: 27%;
 }
 
 /* Salary benefits css  */

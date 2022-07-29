@@ -115,8 +115,8 @@ const AddEmployeeType = (props) => {
   const getNeededActions = (item, index) => {
     return (
       <>
-        <span className='actions-span' onClick={() => handleActionClick('edit', item, index)}> <MdEdit /> </span>
-        <span className='actions-span' onClick={() => handleActionClick('delete', item, index)}> <MdDelete /> </span>
+        <span className='actions-span' onClick={() => handleActionClick('edit', item, index)}> <MdEdit  className="color-skyblue"/> </span>
+        <span className='actions-span' onClick={() => handleActionClick('delete', item, index)}> <MdDelete  className="color-skyblue"/> </span>
       </>
     )
   }
@@ -138,64 +138,73 @@ const AddEmployeeType = (props) => {
   }
 
   return <>
-    <div className='add-edit-types'>
-      <div className="row m-3">
-        <h4 className="mb-4"> {`${props.id ? 'Edit ' : 'Add '} ${state.typeName}`} </h4>
-        <label className = "mb-3" htmlFor="name"> {props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient'} <span style={{color:'red'}}> * </span></label>
-        <div className='row'>
+    <div className='add-edit-types col-md-12'>
+      <div className='min-height-AET'>
+      <div className="row  p-0 m-0">
+        <h4 className="mb-5 mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${props.id ? 'Edit ' : 'Add '} ${state.typeName}`} </h4>
+        <label className = "mb-3 p-0 poppins-regular-18px" htmlFor="name"> {props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient'} <span style={{color:'red'}}> * </span></label>
+        <div className='row m-0 p-0'>
+          <div className='col-md-11 ps-0'>
           <input
             ref={inputRef}
             type="text"
-            className="form-control col-7 pcp_name"
+            className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 py-2"
             value={state.name}
             onChange={(e) => handleInputChange(e)}
             onKeyUp={(e) => handleAdd(e)}
             placeholder={`Please enter ${state.typeName}`}
-          />
+          /></div>
+          <div className='col-md-1'>
           {!state.editFlow &&
             <button
               onClick={() => addItemAndUpdateIndex({ ...state }, state.name)}
               type="button"
-              className="btn btn-dark pcp_btn col-3">
-              {`Add`}
+              className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content w-100 py-2">
+              + {`Add`}
             </button>
           }
+          </div>
         </div>
         {state.nameWarning &&
           <small
-            className="m-0 form-text text-muted col-md-5 pcp_name_warning">
+            className="m-0 p-0 form-text text-muted col-md-5 pcp_name_warning error">
             {`This field is required.`}
           </small>}
         {state.uniqueError &&
           <small
-            className="form-text text-muted col-md-5 pcp_name_warning">
+            className="form-text text-muted col-md-5 pcp_name_warning error p-0">
             {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
           </small>}
       </div>
       {state.newItems.length > 0 && !state.editFlow &&
-        <div className='add-item-div'>
-          <table className='table-hover col-md-10 m-3 add-item-table'>
+        <div className='col-md-12 input-border-lightgray'>
+          <table className='table table-hover col-md-12 mb-0'>
             {state.newItems.map((item, index) =>
-              <tr Key={index} id={index}>
-                <td style={{ width: '80%' }}> {item.name} </td>
-                <td style={{ width: '20%' }}> {getNeededActions(item, index)} </td>
+              <tr className=' py-2 table-border-bottom row m-0 col-md-12' Key={index} id={index}>
+                <td className='col-md-9 align-items-center d-flex' style={{ width: '' }}> {item.name} </td>
+                <td className='col-md-3 text-end ' style={{ width: '' }}> {getNeededActions(item, index)} </td>
               </tr>
             )}
           </table>
         </div>}
-      <div className='managetype-save-btn'>
+        </div>
+      <div className='col-md-12 row m-0'>
+        <div className='col-md-6 p-0'>
         <button
           type="button"
-          className="btn btn-dark pcp_btn col-2"
+          className="btn btn-dark pcp_btn col-2 bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right text-left p-0 md-5"
           onClick={() => router.back()} >
-          Back
+          BACK
         </button>
+        </div>
+        <div className='col-md-6 text-end p-0'>
         <button
           type="button"
-          className="btn btn-dark pcp_btn col-2"
+          className=" btn rounded-0  custom-btn px-3  btn-block float-end"
           onClick={handleSubmit} >
-          Save
+          SAVE
         </button>
+        </div>
       </div>
     </div>
   </>

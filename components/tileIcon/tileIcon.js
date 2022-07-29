@@ -9,12 +9,12 @@ export default function tileIcon({ props }) {
   let url = props.url || 'manage/employee-types';
   return (
     <React.Fragment>
-       <div className={styles["dashboard-tile-parent"]}>
+       <div className={`${styles["dashboard-tile-parent"]} select-bg-gray border-0 my-5 `}>
          <div className={styles["dashboard-tile-field-content"]}>
            <Link href={`${url}`}>
              <a className={styles["anchor-tag"]}>
                <Image src={iconPath} alt={name} loading="lazy"  width="85%" height="75%"  />
-               <div title={name} className = {styles["tile-title-text"]}> {name} </div>
+               <div title={name} className = {`{styles["tile-title-text"] poppins-regular-16px  my-3`}> {name} </div>
              </a>
            </Link>
          </div>

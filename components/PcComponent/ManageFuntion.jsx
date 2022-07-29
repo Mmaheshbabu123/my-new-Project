@@ -426,10 +426,10 @@ const ManageFunction = () => {
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">Paritair comite number</th>
-									<th className="oppins-regular-18px btn-bg-gray-medium">Function name</th>
-									<th className="oppins-regular-18px btn-bg-gray-medium">Minimum salary</th>
-									<th className="oppins-regular-18px btn-bg-gray-medium">Category</th>
-									<th className="oppins-regular-18px btn-bg-gray-medium">Action</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Function name</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Minimum salary</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Category</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
 								</tr>
 							</thead>
 							<tbody>
