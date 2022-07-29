@@ -281,8 +281,8 @@ function Planning(props) {
 		APICALL.service(updateProject, 'POST', data)
 			.then((result) => {
 				console.log(result.status);
-				setUpdated(updated + 1);
 				setShowdeletepopup(false);
+				setUpdated(updated + 1);
 			})
 			.catch((error) => {
 				console.error(error);
