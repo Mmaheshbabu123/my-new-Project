@@ -323,7 +323,7 @@ const PcOverview = (params) => {
 																						pcid={pc_unique_key}
 																						key={val2}
 																						pc_number={pc_number}
-																						index={'fun1-' + val2}
+																						index={'fun1-cat'+val + val2}
 																						title={
 																							pc['childObj'][val][
 																								'childObj'
