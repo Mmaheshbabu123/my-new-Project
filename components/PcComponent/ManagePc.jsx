@@ -147,7 +147,7 @@ const ManagePc = (props) => {
 								className="btn btn-secondary btn-block float-right mt-2 mb-2 "
 								onClick={() => handleSearch()}
 							>
-								Search
+								Filter
 							</button>
 						</div>
 						<div className="col-sm-1">
