@@ -927,7 +927,19 @@ font-size: var(--font-size-l);
  .linkcoe .css-1vdcg37-control {
     border-width: 0px;
  }
- 
+ .input-h-w {
+    width: 20px;
+    height: 20px;
+ }
+ .custom-drop-btn  .css-b62m3t-container {
+    width: 100%;
+ }
+ .custom-drop-btn .css-1s2u09g-control,  .css-1s2u09g-control {
+    border: none !important;
+ }
+ .bg-4C4D550F {
+    background-color: var(--bg-grey-medium);
+ }
  @media screen {
 
  }
