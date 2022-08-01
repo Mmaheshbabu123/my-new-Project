@@ -9,6 +9,11 @@ import { companyRow1,comapanyRow2,companyArray} from '../ComapanyInformationFiel
 import { requiredFields} from '../../../RequiredFields';
 import RequiredField from '@/atoms/RequiredSpanField';
 import ValidateMessage from '@/atoms/validationError';
+import debounceFunCall from '@/atoms/debounceFun';
+import { fecthCompanyDetailsByVatNum } from '@/Services/ApiEndPoints'
+import { APICALL } from '@/Services/ApiServices';
+
+var filterTimeout;
 const CompanyDetails = (props) => {
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
 var { tab_2,element_status } = state;
@@ -55,7 +60,20 @@ element_status['tab_2'].push(name);
     updateStateChanges({ tab_2,element_status });
 
 }
+const getCompanyDetailsByvat = async() => {
+   let data = {};
+   let vatNumber = tab_2['8'] !== "" ? tab_2['8']: 0
+  await APICALL.service(`${fecthCompanyDetailsByVatNum}/${vatNumber}`, 'GET')
+    .then((result) =>{
+       data = result.data;
+      data['8'] = tab_2['8'];
+      tab_2 = {...tab_2,...data,}
+      console.log(tab_2);
+      updateStateChanges({ tab_2});
+    } )
+    .catch((error) => window.alert('Error occurred'));
 
+}
 const validateFields = (text) => {
 }
 const handleVatChange = (event) => {
@@ -69,35 +87,13 @@ document.getElementById(Vat_Number).value = value;
   })
   updateStateChanges({ tab_2 });
 }
-let filterTimeout
 
-const doCityFilter = event => {
+
+const onVatnumber = event => {
   const { value, name } = event.target;
-tab_2[name] = value;
-element_status['tab_2'].push(name);
-updateStateChanges({ tab_2 ,element_status});
-  // clearTimeout(filterTimeout)
-  // if (!event) return setFilteredCities([])
-  //
-  // filterTimeout = setTimeout(() => {
-  //   setCompanyState({
-  //     ...companyState,
-  //     vat_number:value,
-  //   })
-  // //  tab_2[name] = value;
-  //
-  //   console.log('----event')
-  //
-  // }, 500)
-    //updateStateChanges({ tab_2 });
-}
-const optimizedFn = (event) => {
-    // const { value, name } = event.target;
-    //   tab_2[name] = value;
-    //   updateStateChanges({ tab_2 },()=>{
-         debounceFun(handleVatChange,100);
-    //  });
-
+  tab_2[name] = value;
+ updateStateChanges({ tab_2 ,element_status});
+ debounceFunCall(getCompanyDetailsByvat,500)
 }
 const handleSelect = (obj,key) => {
   tab_2[key]  = obj.value;
@@ -113,8 +109,8 @@ return(
       type = 'text'
       placeholder="Enter something here..."
       className = {'atom-input-field-default ' + 'col-md-8'}
-      value={tab_2[Vat_Number]}
-      onChange={(e) => doCityFilter (e) }
+       value={tab_2[Vat_Number]}
+      onChange={(e) => onVatnumber (e) }
         //optimizedFn(e)}
      name={Vat_Number}
       //{`tab_2_${data.id}`}

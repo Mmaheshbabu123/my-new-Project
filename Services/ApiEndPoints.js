@@ -154,3 +154,7 @@ export const cooperationAgreementPreview = BASE_URL + 'cooperation-agreement-pre
 export const sendToEmployer = BASE_URL + 'send-to-employer';
 export const updateEmployerSign = BASE_URL + 'employer-sign-update';
 //------
+
+
+//----- BBRIGHT_API-------------------------//
+export const fecthCompanyDetailsByVatNum  = BASE_URL + 'enterprise-get-companydetails-by-vat';

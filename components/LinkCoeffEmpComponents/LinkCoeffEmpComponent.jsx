@@ -125,14 +125,14 @@ const LinkCoeffEmpComponent = (props) => {
   const addMultiSelectTag = () => {
     return (
       <>
-      <p className='my-2'> Select paritair comite </p>
+      <p className='my-2 poppins-regular-20px'> Select paritair comite </p>
       <MultiSelect
         options={state.pcArray}
         standards={state.pcArray.filter(val => val.value === state.selectedPc)}
         disabled={parseInt(props.pcid) && state.selectedPc ? true : false}
         handleChange={onSelect}
         isMulti={false}
-        className="pc-single-select"
+        className="pc-single-select  input-border-lightgray poppins-regular-18px mh-50 rounded-0 linkcoe "
         placeholder={'Select paritair comite'}
       />
       </>
@@ -143,7 +143,7 @@ const LinkCoeffEmpComponent = (props) => {
     return <>
       <div className="mt-4">
         <div className="col-md-12 row p-0 m-0">
-          <h4 className={`sv-cp-page-title text-center page-title`}> Link coefficients to employee types</h4>
+          <h4 className={`sv-cp-page-title  page-title mb-5 mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4>
           <div className="col-md-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
             {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
           </div>
@@ -178,13 +178,17 @@ const LinkCoeffEmpComponent = (props) => {
             </div>
           </div>
         </div>
-        <div style={{ textAlign: 'end', marginTop: '10px' }}>
-          <button onClick={() => parseInt(props.pcid) ? props.router.back() : props.router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
-            {`Back`}
+        <div className='col-md-12 row m-0 my-5' style={{  }}>
+          <div className='col-md-6 p-0'>
+          <button onClick={() => parseInt(props.pcid) ? props.router.back() : props.router.push('/')} type="button" className="btn btn-dark pcp_btn col-2 bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right text-left p-0 md-5">
+            {`BACK`}
           </button>
-          <button onClick={() => handleSubmit()} type="button" className="btn btn-dark pcp_btn col-1">
-            {`Save`}
-          </button> </div>
+          </div>
+          <div className='col-md-6 p-0'>
+          <button onClick={() => handleSubmit()} type="button" className=" btn rounded-0  custom-btn px-3  btn-block float-end">
+            {`SAVE`}
+          </button></div>
+           </div>
       </div>
     </>
   else
