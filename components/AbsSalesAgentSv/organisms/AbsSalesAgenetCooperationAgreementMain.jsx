@@ -21,7 +21,7 @@ const AbsSalesAgenetCooperationAgreementMain = (props) => {
    */
   const fetchData = async () => {
 
-    await APICALL.service(`${fetchSalesAgenetAgreements}`, 'GET').then(response => {
+    await APICALL.service(`${fetchSalesAgenetAgreements}/${props.agentId}`, 'GET').then(response => {
       if (response.status === 200)
         assignDataToStateVariables(response.data);
     })

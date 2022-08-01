@@ -9,7 +9,7 @@ import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import styles from './AbsAdminSv.module.css';
-// import SearchIcon from '../../SearchIcon';
+import SearchIcon from '../../SearchIcon';
 
 const itemsPerPage = 5;
 const RequestOverviewData = (props) => {
@@ -66,10 +66,12 @@ const RequestOverviewData = (props) => {
   }
 
 
-  const handleSearchClick = () => {
+  const handleSearchClick = (e) => {
     let value = state.searchTerm;
+    let name = state.searchColumn;
     let filterRows = overviewData.filter((item) => {
-      return (item[state.searchKey].toLowerCase().toString())
+      let rowVal = item[name];
+      return (rowVal.toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
     setState({ ...state,
@@ -109,16 +111,32 @@ const RequestOverviewData = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
-        {/*<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-          <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-          <input
-            type="text"
-            className="form-control col-7 pcp_name"
-            style={{margin: '10px 0'}}
-            onChange={(e) => setState({...state, searchTerm: e.target.value})}
-            placeholder={'Search'}
-          />
-        </div>*/}
+        {<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
+              <div className="col-sm-3 px-0">
+                  <input
+                    type="text"
+                    className='form-control mt-2 mb-2'
+                    style={{margin: '10px 0'}}
+                    name = {'employer_name'}
+                    onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'employer_name'})}
+                    onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+                    placeholder={'Search employer '}
+                  />
+                    <span className="searchIconCss svadmin_icon"> <SearchIcon handleSearchClick={(e)=>handleSearchClick(e)} /></span>
+                </div>
+              <div className="col-sm-3">
+                <input
+                  type="text"
+                  className='form-control mt-2 mb-2'
+                  style={{margin: '10px 0'}}
+                  name = {'company_name'}
+                  onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'company_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+                  placeholder={'Search company '}
+                  />
+                 <span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
+              </div>
+          </div>}
         <div className={`${styles['table-parent-div']}`}>
           <table className="table table-hover manage-types-table">
             <thead className="table-render-thead">
@@ -130,7 +148,7 @@ const RequestOverviewData = (props) => {
                 return (
                   <tr key={index}>
                       <td> {eachRow.employer_name} </td>
-                      <td> {eachRow.employer_email} </td>
+                      <td> {eachRow.employer_mail} </td>
                       <td> {eachRow.company_name} </td>
                       <td> {formatDate(eachRow.date_of_request)} </td>
                       <td> {formatDate(eachRow.date_of_commencement) || '--'} </td>

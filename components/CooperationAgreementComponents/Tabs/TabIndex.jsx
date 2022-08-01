@@ -94,7 +94,7 @@ const loadData = async () => {
               <span className="sv-save-btn-text_1 spinner-border-sm me-2"></span>{'Save as draft'}
             </button>
             <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab()} type="button" className="btn btn-dark pcp_btn">
-              <span className="sv-save-btn-text_0 spinner-border-sm me-2"></span>{selectedTabId === INVOIING_TAB ? 'Save' : 'Next'}
+              <span className="sv-save-btn-text_0 spinner-border-sm me-2"></span>{selectedTabId === INVOIING_TAB ? 'Submit' : 'Next'}
             </button>
           </div>
       </div>

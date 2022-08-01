@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import SearchIcon from '../../SearchIcon';
 import styles from './AbsSalesAgentSv.module.css';
-//import SearchIcon from '../../SearchIcon';
 import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
 import { AiFillFilePdf, AiOutlineRedo} from 'react-icons/ai';
@@ -10,12 +9,13 @@ import { HiPlusCircle} from 'react-icons/hi';
 import { deleteSalesAgenetAgreements} from '@/Services/ApiEndPoints'
 import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
+import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 
 const itemsPerPage = 5;
 const Overviewpage = (props) => {
   const { overviewData } = props;
   const router = useRouter();
-  console.log(overviewData)
+
   /**
    * [getSelectedStatus description]
    * @param  {int}    selectedTabId               [description]
@@ -65,20 +65,13 @@ const Overviewpage = (props) => {
 
 
   const handleSearchClick = (e) => {
-    //const { name} = e.target;
-console.log(e)
     let value = state.searchTerm;
     let name = state.searchColumn;
-  console.log(state);
     let filterRows = overviewData.filter((item) => {
       let rowVal = item[name];
-      //`${item['employer_name']}${item['company_name']}`
       return (rowVal.toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
-    //   return (item[state.searchKey].toLowerCase().toString())
-    //     .indexOf(value.toLowerCase().toString()) !== -1;
-    // })
     setState({ ...state,
       searchTerm: value,
       filterRows: filterRows,
@@ -98,7 +91,6 @@ console.log(e)
      const updatePaginationData = (filterRows, offset) => {
        let items = [...filterRows];
        const endOffset = offset + itemsPerPage;
-       console.log({items, endOffset}, items.slice(offset, endOffset));
        return {
          currentItems: items.slice(offset, endOffset),
          pageCount: Math.ceil(items.length / itemsPerPage)
@@ -117,38 +109,38 @@ console.log(e)
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
-{<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
+      <div className='row' style={{ margin: '10px 0', position: 'relative' }}>
 
-      <div className="col-sm-3 px-0">
+            <div className="col-sm-3 px-0">
 
-          <input
-            type="text"
-            className='form-control mt-2 mb-2'
-            style={{margin: '10px 0'}}
-            name = {'employer_name'}
-            onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'employer_name'})}
-            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
-            placeholder={'Search employer '}
-          />
+                <input
+                  type="text"
+                  className='form-control mt-2 mb-2'
+                  style={{margin: '10px 0'}}
+                  name = {'employer_name'}
+                  onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'employer_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+                  placeholder={'Search employer '}
+                />
 
-<span className="searchIconCss svadmin_icon"> <SearchIcon handleSearchClick={(e)=>handleSearchClick(e)} /></span>
-        </div>
+      <span className="searchIconCss svadmin_icon"> <SearchIcon handleSearchClick={(e)=>handleSearchClick(e)} /></span>
+              </div>
 
-      <div className="col-sm-3">
-      <input
-        type="text"
-        className='form-control mt-2 mb-2'
-        style={{margin: '10px 0'}}
-        name = {'company_name'}
-        onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'company_name'})}
-        onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
-        placeholder={'Search company '}
-      />
+            <div className="col-sm-3">
+            <input
+              type="text"
+              className='form-control mt-2 mb-2'
+              style={{margin: '10px 0'}}
+              name = {'company_name'}
+              onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'company_name'})}
+              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+              placeholder={'Search company '}
+            />
 
-<span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-        </div>
+      <span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
+              </div>
 
-      </div>}
+            </div>
         {/*<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
           <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
           <input
@@ -173,8 +165,8 @@ console.log(e)
                       <td> {eachRow.employer_name} </td>
 
                       <td> {eachRow.company_name} </td>
-                      <td> {eachRow.date_of_request} </td>
-                      <td> {eachRow.startdate_agreement} </td>
+                      <td> {formatDate(eachRow.date_of_request ? Number(eachRow.date_of_request) * 1000 : '') || '-'} </td>
+                      <td> {formatDate(eachRow.startdate_agreement ? Number(eachRow.startdate_agreement) * 1000 : '') || '-'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
                       <td> {getNeededActions(eachRow) } </td>
                   </tr>

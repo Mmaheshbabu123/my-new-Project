@@ -7,6 +7,7 @@ export default function DateField({
     value,
     handleChange,
     minDate='1947-08-15',
+    maxDate='2222-08-15',
     id,
     customStyle = {},
     className = 'col-md-5'
@@ -18,6 +19,7 @@ export default function DateField({
        type="date"
        name={name}
        min={minDate}
+       max={maxDate}
        value={value}
        className={'atom-input-field-default ' + className}
        id={id}
