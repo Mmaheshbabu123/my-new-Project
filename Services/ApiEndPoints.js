@@ -75,6 +75,7 @@ export const updateProject = BASE_URL + "updateProject";
 export const fetchPlanning = BASE_URL + "fetch-planning-details/";
 export const fetchproject = BASE_URL + "fetch-project/";
 export const fetchallproject = BASE_URL + "fetch-all-project";
+export const fetchallarchivedprojects = BASE_URL + "fetch-all-archived-project"
 
 //--------------Manage Planning-----------------------------------//
 export const getWeeklyPlanning = BASE_URL + "get-weekly-planning/";
