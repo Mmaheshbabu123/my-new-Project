@@ -235,7 +235,7 @@ function AddFunction(props) {
 
 											Object.keys(props.categorylist).map((element) => {
 												if(e.target.value == props.categorylist[element].id){
-												sal = data.min_salary_temp>props.categorylist[element].min_salary?data.min_salary_temp:props.categorylist[element].min_salary;
+												sal = parseFloat(data.min_salary_temp.replace(',', '.'))>parseFloat(props.categorylist[element].min_salary.replace(',', '.'))?data.min_salary_temp:props.categorylist[element].min_salary;
 												}
 											});
 											
