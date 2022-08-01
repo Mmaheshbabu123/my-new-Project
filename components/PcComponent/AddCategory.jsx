@@ -174,7 +174,7 @@ function AddCategory(props) {
 			console.log(props.categorylist);
 			props.categorylist.map((element) => {
 				if (element.type == '2' && element.id == id){
-					element.childObj.map((value)=>{
+					element.childObj && element.childObj.map((value)=>{
 						if(parseFloat(data.min_salary.replace(',', '.')) > parseFloat(value.min_salary.replace(',', '.'))){
 							error['error_min_salary'] = 'Category minimum salary cannot be greater than function minimum salary.';
 						}
