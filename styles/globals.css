@@ -289,6 +289,11 @@ body {
     color: var(--color-white);
     font-size: var(--font-size-l);
 }
+.skyblue-bg-color:hover {
+    background-color: var(--color-skyblue);
+    color: var(--color-white);
+    font-size: var(--font-size-m);
+}
 .poppins-bold-14px {
     color: var(--color-label-footer-gray);
     font-family: var(--font-family-poppins-bold);
@@ -693,6 +698,9 @@ input {
     font-size: 28px;
     font-weight: bold;
 }
+.border-4C4D554D {
+  border: 1px solid var(--color-less-greater);
+}
 .table-title-bg {
 background: var(--bg-grey-medium);
 }
@@ -940,6 +948,10 @@ font-size: var(--font-size-l);
  } */
  .bg-4C4D550F {
     background-color: var(--bg-grey-medium);
+ }
+ .padding-t-b-10 {
+    padding: 10px !important;
+    padding-top: 25px !important;
  }
  @media screen {
 
