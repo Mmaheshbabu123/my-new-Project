@@ -5,11 +5,13 @@ import { planningoverview, getweekly_planning } from '../../Services/ApiEndPoint
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
+import { ProjectorFill } from 'node_modules/react-bootstrap-icons/dist/index';
 
 const PlanningFinalize = () => {
 	const router = useRouter();
 	console.log(router.query);
 	const p_unique_key = router.query.p_unique_key;
+	const [planning,setPlanning] = useState([]);
 
 	const weeklyplanning = [
 		{
@@ -43,21 +45,25 @@ const PlanningFinalize = () => {
 
 	useEffect(
 		() => {
+			if (!router.isReady) return;
 			APICALL.service(planningoverview + router.query.p_unique_key, 'GET')
 				.then((result) => {
-					console.log(result);
+					if(result.data.length > 0){
+						setPlanning(result.data[0])
+					}
+					console.log(result.data[0]);
 				})
 				.catch((error) => {
 					console.error(error);
 				});
 		},
-		[ router.query ]
+		[ router.isReady ]
 	);
 	return (
 		<div className="container-fluid p-0 m-0">
 			<div className="row">
 				<p className=" mt-1 mb-1 font-weight-bold   bitter-italic-normal-medium-24">Weekly Planning</p>
-				<p className=" poppins-regular-16px">For the week of Monday from 27/06/2022 to sunday 03/07/2022</p>
+				<p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p>
 
 				<div className=" mt-4 d-flex justify-content-end">
 					<div className="d-inline ">
@@ -72,21 +78,12 @@ const PlanningFinalize = () => {
 					</div>
 				</div>
 				<div className=" mt-4 d-flex mb-3  ">
-					<select className="form-select w-25 me-2  border-0 select-bg-gray">
-						<option> Select company</option>
-						<option value="">Infanion</option>
-						<option value="">Wipro</option>
+					<select className="form-select w-25 me-2  border-0 select-bg-gray" disabled>
+					{planning.company?<option value="">{planning.company}</option>:	<option>Select Company</option>}
 					</select>
-					<select className="form-select w-25 me-2 border-0 select-bg-gray">
-						<option>Select Location</option>
-						<option value="">Bangalore</option>
-						<option value="">Mangalore</option>
+					<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
+					{planning.location?<option value="">{planning.location}</option>:	<option>Select Location</option>}
 					</select>
-					{/* <select className="form-select w-25 me-2">
-						<option>Select Project</option>
-						<option value="">Project-1</option>
-						<option value="">Project-2</option>
-					</select> */}
 				</div>
 				<div className="mt-2 ">
 				{/* <p className=' bitter-italic-normal-medium-22 col-md-12 text-center table-border-gray py-2'><span className='less-grather mx-4 '>&lt;</span> current week  <span className='less-grather mx-4'>&gt;</span></p>  */}
@@ -97,36 +94,61 @@ const PlanningFinalize = () => {
 							
 							<tr className="skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
-									Monday<br />27-06-2022
+									Monday<br />01-08-2022
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
-									Tuesday <br />28-06-2022
+									Tuesday <br />02-08-2022
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
-									Wednesday <br />29-06-2022
+									Wednesday <br />03-08-2022
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
-									Thursday <br />30-06-2022
+									Thursday <br />04-08-2022
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
-									Friday<br />01-07-2022
+									Friday<br />05-08-2022
 								</th>
 								<th className=" table-right-border-white  text-center  align-items-center justify-content-center">
-									Saturday<br />02-07-2022
+									Saturday<br />06-08-2022
 								</th>
 								<th className="  text-center  align-items-center justify-content-center">
-									Sunday<br />13-03-2022
+									Sunday<br />07-08-2022
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr className="border-bottom table-border-gray equal-width-calc">
+						{planning.planning && Object.keys(planning.planning).map((value)=>(
+							<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
+								{planning.planning[value].map((val1,key)=>(
+									<td className=" table-border-gray font-poppins-light" key={key}>
+										<div className='text-right color-skyblue my-2 mt-1 text-end'><a>
+											<MdEdit className="float-right" />
+											{/* <i className="bi bi-pencil float-right" /> */}
+										</a></div>
+									<p className='color-skyblue'>{val1.employee_name}</p>
+									<br />
+									<p>{val1.employee_type_name}</p>
+									<br />
+									<p>{val1.function_name}</p>
+									<br />
+									<p>{"€ "+val1.salary}</p> <br />
+									{/* <p>{value.time}</p> <br />
+									<p>{value.totalhours}</p> */}
+									<br />
+								</td>
+
+								))}
+								{[...Array(7-planning.planning[value].length)].map((e, i) => <td className=" table-border-gray font-poppins-light" key={i}></td>)}
+
+							</tr>
+							)
+							)}
+							{/* <tr className="border-bottom table-border-gray equal-width-calc">
 								{weeklyplanning.map((value) => (
 									<td className=" table-border-gray font-poppins-light" key={value.id}>
 										
 										<div className='text-right color-skyblue my-2 mt-1 text-end'><a>
 											<MdEdit className="float-right" />
-											{/* <i className="bi bi-pencil float-right" /> */}
 										</a></div>
 										<p className='color-skyblue'>{value.fullName}</p>
 										<br />
@@ -144,8 +166,10 @@ const PlanningFinalize = () => {
 								<td className=" table-border-gray" />
 								<td className=" table-border-gray" />
 								<td className=" table-border-gray" />
-							</tr>
-							<tr className="border-bottom table-border-gray">
+							</tr> */}
+							
+						
+							{/* <tr className="border-bottom table-border-gray">
 								{weeklyplanning.map((value) => (
 									<td className=" table-border-gray font-poppins-light" key={value.id}>
 										<p>{value.fullName}</p>
@@ -164,15 +188,15 @@ const PlanningFinalize = () => {
 								<td className=" table-border-gray" />
 								<td className=" table-border-gray" />
 								<td className=" table-border-gray" />
-							</tr>
+							</tr> */}
 						</tbody>
 					</table>
 				</div>
-				<div className="text-end ">
+				{/* <div className="text-end ">
 					<button type="submit" className="btn skyblue-bg-color border-0   btn-block ">
 						Dashboard
 					</button>
-				</div>
+				</div> */}
 				<div className='col-12 mb-4'>
 					<p className="poppins-regular-20px mb-3">Is the planning final?</p>
 					<div className='mb-2'>
@@ -207,7 +231,7 @@ const PlanningFinalize = () => {
 						</button>
 					</div>
 					<div className="col-md-6 p-0">
-						<button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end">
+						<button type="button" className="btn rounded-0  custom-btn px-3  btn-block float-end"  onClick={() => router.push('/manage-planning/weekly')}>
 							SUBMIT
 						</button>
 					</div>

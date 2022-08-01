@@ -69,6 +69,7 @@ function Addtiming(props) {
 	 * @param {*} value 
 	 */
 	let handleChange = (value) => {
+		console.log(value);
 		var dateobj = {
 			date: '',
 			starttime: '',
@@ -121,7 +122,6 @@ function Addtiming(props) {
 	};
 
 	let postdata = () => {
-		return;
 		APICALL.service(storePlannedTimings, 'POST', employee_planning)
 			.then((result) => {
 				console.log(result);
@@ -182,8 +182,12 @@ function Addtiming(props) {
 
 	let updatetime = (type, index, e, key) => {
 		var res = [ ...employee_planning ];
-		console.log(res[key]);
+		console.log(res);
+		if(checked == true){
 
+		}else{
+
+		
 		if (e != null && res[key].timings.length > 0) {
 			if (type == 'starttime') {
 				res[key].timings[index].error_starttime = '';
@@ -195,7 +199,7 @@ function Addtiming(props) {
 				setEmployee_planning(res);
 			}
 		}
-		console.log(employee_planning);
+	}
 	};
 
 	return (
@@ -262,7 +266,7 @@ function Addtiming(props) {
 											<div className="py-1 px-2  custom_astrick poppins-regular-20px">Start time</div>
 											<TimePicker
 												placeholder="Select Time"
-												use12Hours
+												use12Hours={false}
 												showSecond={false}
 												focusOnOpen={true}
 												format="hh:mm A"
@@ -274,7 +278,7 @@ function Addtiming(props) {
 											<div className="py-1 px-2  custom_astrick poppins-regular-20px">End time</div>
 											<TimePicker
 												placeholder="Select Time"
-												use12Hours
+												use12Hours={false}
 												showSecond={false}
 												focusOnOpen={true}
 												format="hh:mm A"
@@ -346,7 +350,7 @@ function Addtiming(props) {
 																	</div>
 																	<TimePicker
 																		placeholder="Select Time"
-																		use12Hours={true}
+																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
 																		format="hh:mm A"
@@ -364,7 +368,7 @@ function Addtiming(props) {
 																	<span className='poppins-regular-16px'>End time</span></div>
 																	<TimePicker
 																		placeholder="Select Time"
-																		use12Hours={true}
+																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
 																		format="hh:mm A"
