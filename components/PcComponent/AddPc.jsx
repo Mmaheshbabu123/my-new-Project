@@ -34,6 +34,10 @@ function AddPc(props) {
 	const [ error_pc_number, setError_pc_number ] = useState('');
 	const [ error_pc_name, setError_pc_name ] = useState('');
 	const [ error_pc_alias_name, setError_pc_alias_name ] = useState('');
+	const [ error_min_time, setError_min_time ] = useState('');
+	const [ error_max_time, setError_max_time ] = useState('');
+
+	
 	const [ disableSave, setDisableSave ] = useState(false);
 
 	const [ data, setData ] = useState({
@@ -41,7 +45,9 @@ function AddPc(props) {
 		pc_unique_key: '',
 		pc_number: '',
 		pc_name: '',
-		pc_alias_name: ''
+		pc_alias_name: '',
+		min_work_timings: '',
+		max_work_timings: ''
 	});
 	const [ id, setId ] = useState('');
 
@@ -264,15 +270,28 @@ function AddPc(props) {
 		//check if required fields are empty
 		error1['pc_name'] = ValidationService.emptyValidationMethod(res.pc_name);
 		error1['pc_number'] = ValidationService.emptyValidationMethod(res.pc_number);
+		error1['min_work_timings'] = ValidationService.emptyValidationMethod(res.min_work_timings);
+		error1['max_work_timings'] = ValidationService.emptyValidationMethod(res.max_work_timings);
+
+
 		//check if fields are valid
 		error1['pc_number'] =
 			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number) : error1['pc_number'];
+
+			error1['min_work_timings'] =
+			error1['min_work_timings'] == '' ? ValidationService.hoursperdayValidationMethod(res.min_work_timings) : error1['min_work_timings'];
+			error1['max_work_timings'] =
+			error1['max_work_timings'] == '' ? ValidationService.hoursperdayValidationMethod(res.max_work_timings) : error1['max_work_timings'];
 		// error1['pc_name'] =
 		// 	error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
 		// error1['pc_alias_name'] =
 		// 	res.pc_alias_name != '' && res.pc_alias_name != undefined
 		// 		? ValidationService.nameValidationMethod(res.pc_alias_name)
 		// 		: '';
+
+		if(error1['min_work_timings'] == '' && error1['max_work_timings'] == ''){
+			error1['max_work_timings'] = parseFloat(res.min_work_timings) > parseFloat(res.max_work_timings)? 'Maximum work timing cannot be lesser than minimum work timing.':'';
+		}
 		error1['pc_alias_name'] =
 			res.pc_alias_name != '' &&
 			res.pc_alias_name != null &&
@@ -283,8 +302,12 @@ function AddPc(props) {
 		setError_pc_number(error1['pc_number']);
 		setError_pc_name(error1['pc_name']);
 		setError_pc_alias_name(error1['pc_alias_name']);
+		setError_min_time(error1['min_work_timings']);
+		setError_max_time(error1['max_work_timings']);
+
+
 		//return false if there is an error else return true
-		if (error1['pc_number'] == '' && error1['pc_name'] == '' && error1['pc_alias_name'] == '') {
+		if (error1['pc_number'] == '' && error1['pc_name'] == '' && error1['pc_alias_name'] == '' && error1['min_work_timings']=='' && error1['max_work_timings'] == '') {
 			return true;
 		} else {
 			return false;
@@ -344,6 +367,30 @@ function AddPc(props) {
 								}}
 							/>
 							<p className="error mt-2">{error_pc_alias_name}</p>
+						</div>
+						<div className="form-group py-2">
+							<label className="custom_astrick">Minimum work timings per day </label>
+							<input
+								type="text"
+								value={data.min_work_timings}
+								className="form-control mt-2"
+								onChange={(e) => {
+									setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
+								}}
+							/>
+							<p className="error mt-2">{error_min_time}</p>
+						</div>
+						<div className="form-group py-2">
+							<label className="custom_astrick">Maximum work timings per day </label>
+							<input
+								type="text"
+								value={data.max_work_timings}
+								className="form-control mt-2"
+								onChange={(e) => {
+									setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
+								}}
+							/>
+							<p className="error mt-2">{error_max_time}</p>
 						</div>
 					</div>
 					{/* <div className="col-md-6" /> */}
