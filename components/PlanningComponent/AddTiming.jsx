@@ -319,7 +319,7 @@ function Addtiming(props) {
 														
 														<div className="col-md-12 p-0">
 															<Calendar
-															    className='timepage-calander'
+															    className='timepage-calander '
 																value={result.date}
 																multiple={true}
 																format="DD/MM/YYYY"
@@ -333,15 +333,16 @@ function Addtiming(props) {
 													</div>
 													{result.timings.length > 0 &&
 														result.timings.map((value, index) => (
-															<div className="row table-title-bg" key={index}>
+															<div className="row table-title-bg my-2" key={index}>
 															
 																<div className="col-md-2 py-3 color-skyblue2">
 																	<div className="pb-2 color-skyblue2" />
 																	{value.date}
 																</div>
-																<div className="col-md-4 py-3 d-flex">
+																<div className="col-md-4 py-3 ">
+																	<div className='d-flex'>
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
-																		Start time
+																		<span className='poppins-regular-16px'>Start time</span>
 																	</div>
 																	<TimePicker
 																		placeholder="Select Time"
@@ -352,12 +353,15 @@ function Addtiming(props) {
 																		onChange={(e) =>
 																			updatetime('starttime', index, e, key)}
 																	/>
-																	<p className="error mt-2">
+																	</div>
+																	<p className="error mt-2 px-2">
 																		{value.error_starttime}
 																	</p>
 																</div>
-																<div className="col-md-4 d-flex py-3">
-																	<div className="py-1 px-2 custom_astrick poppins-regular-20px">End time</div>
+																<div className="col-md-4 py-3">
+																<div className='d-flex'>
+																	<div className="py-1 px-2 custom_astrick poppins-regular-18px">
+																	<span className='poppins-regular-16px'>End time</span></div>
 																	<TimePicker
 																		placeholder="Select Time"
 																		use12Hours={true}
@@ -367,9 +371,10 @@ function Addtiming(props) {
 																		onChange={(e) =>
 																			updatetime('endtime', index, e, key)}
 																	/>
-																	<p className="error mt-2">{value.error_endtime}</p>
+																	</div>
+																	<p className="error mt-2 px-2">{value.error_endtime}</p>
 																</div>
-																<div className="col-md-2 py-3">
+																<div className="col-md-2 py-3 d-flex align-items-center justify-content-center">
 																	<MdStarRate  className='purple-color'/>
 																</div>
 															</div>

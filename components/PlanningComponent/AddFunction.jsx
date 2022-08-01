@@ -5,11 +5,6 @@ import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
-import { da, id } from 'date-fns/locale';
-import RadioField from '@/atoms/RadioField';
-import { max } from 'date-fns';
-import { data } from 'node_modules/autoprefixer/lib/autoprefixer';
-import { validate } from 'uuid';
 
 const AddFunction = () => {
 	const router = useRouter();
@@ -403,7 +398,7 @@ const AddFunction = () => {
 								</div>
 								<div className="col-md-6">
 									<div
-										className="mt-2 mb-2 bg-light h-75 p-3"
+										className="mt-2 mb-2 bg-light h-75 p-3 bg-4C4D550F"
 										defaultValue={prefill(key['id'])}
 										onChange={() => {
 											value < 3
@@ -697,11 +692,11 @@ const AddFunction = () => {
 		<div className="col-md-12" style={{}}>
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row m-0">
-					<div className="col-md-12">
+					<div className="col-md-12 p-0">
 						<p className="h1 mt-3 font-weight-bold  poppins-italic-24px">Add function</p>
 					</div>
-					{employeeobject.length>1 && <div className="form-check px-0 my-3">
-						<input type="checkbox" checked={ischecked} onChange={() => checkbox()} />
+					{employeeobject.length>1 && <div className="form-check px-0 my-3 align-items-center d-flex">
+						<input className='input-h-w' type="checkbox" checked={ischecked} onChange={() => checkbox()} />
 						<label className="form-check-label p-1 " htmlFor="flexCheckChecked">
 							Same functions for all employees
 						</label>
@@ -713,12 +708,12 @@ const AddFunction = () => {
 					<ol type="1">
 						{Data.map((key, value) => (
 							<div key={value}>
-								<div key={key} className="row bg-light mb-2 p-3">
-									<div className="col-md-3 p-1 d-flex align-items-center justify-content-start">
+								<div key={key} className="row bg-4C4D550F mb-2 p-3">
+									<div className="col-md-4 p-1 d-flex align-items-center justify-content-start">
 										{value + 1}. {key[1]}
 									</div>
 									{/* {console.log(storeddata[value])} */}
-									<div className="col-md-4  border-0 d-flex align-items-center justify-content-start">
+									<div className="col-md-3  border-0 d-flex align-items-center h-40 justify-content-start custom-drop-btn">
 										{() => setSelected(storeddata[value])}
 										{emptypes != null ? (
 											<Select
@@ -742,7 +737,7 @@ const AddFunction = () => {
 											</p>
 										}
 									</div>
-									<div className="col-md-2 bg-white border-0 mb-2 d-flex align-items-center justify-content-center">
+									<div className="col-md-2 bg-white border-0 h-40 d-flex align-items-center justify-content-center">
 										<span className="p-1">
 											{ischecked ? salaries != undefined && salaries != '' ? (
 												'€' + employeeobject[value].functionsalary
@@ -755,7 +750,7 @@ const AddFunction = () => {
 											)}
 										</span>
 									</div>
-									<div className="col-md-2 d-flex align-items-center justify-content-center ">
+									<div className="col-md-2 d-flex align-items-center justify-content-center h-40 ">
 										{employeeobject[value].functionid != '' ? (
 											<div>
 												<div className="input-group">
@@ -771,10 +766,10 @@ const AddFunction = () => {
 																''
 															)
 														}
-														className="form-control bg-white"
+														className="form-control bg-white border-0"
 														onChange={(e) => setsaalary(key[4], e)}
 													/>
-													<span className="input-group-text">€</span>
+													<span className="input-group-text border-0">€</span>
 												</div>
 
 												<p style={{ color: 'red' }}>{employeeobject[value].salaryerror}</p>
@@ -790,23 +785,23 @@ const AddFunction = () => {
 					</ol>
 				</div>
 				{ischecked ? empid() : ''}
-				<div className="row">
-					<div className="text-start col-md-6">
+				<div className="row m-0 my-4">
+					<div className="text-start col-md-6 p-0 align-items-center d-flex">
 						<button
 							type="button"
-							className="bg-white  back-btn-text  border-0 poppins-regular-20px btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="bg-white  back-btn-text  border-0 poppins-regular-20px btn-block float-sm-right  md-5 add-proj-btn"
 							onClick={() => router.push('/planning/employees/' + router.query.p_unique_key)}
 						>
-							Back
+							BACK
 						</button>
 					</div>
-					<div className="text-end col-md-6">
+					<div className="text-end col-md-6 p-0">
 						<button
 							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end"
 							onClick={() => submit}
 						>
-							Next
+							NEXT
 						</button>
 					</div>
 				</div>
