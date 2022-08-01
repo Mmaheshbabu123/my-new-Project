@@ -11,6 +11,7 @@ const EmployerCooperationAgreementMain = (props) => {
       companies: {}
     , overviewData: []
     , salesAgentUpdates: {}
+    , alreadyRequestedCompanies: []
     , selectedTabId: 1
     , status: [1, 0] // By default show all pending and signed
     , loaded: false
@@ -47,8 +48,8 @@ const EmployerCooperationAgreementMain = (props) => {
     {state.loaded === true ?
           <div className="col-md-12 row">
           <h1 className={`${styles['employer-sv-page-title']} text-center page-title`}> Manage agreements </h1>
-              <OverviewPage state={state} setState={setState}/>
-              {state.companies && Object.keys(state.companies).length > 0 &&
+              <OverviewPage state={state} setState={setState} companyLength={state.companies.length}/>
+              {state.companies &&
                 <RequestAgreement state={state} setState={setState} employer_id = {props.employerid} />}
           </div>
         : <p>Loading...</p>}

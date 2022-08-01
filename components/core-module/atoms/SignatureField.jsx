@@ -14,8 +14,7 @@ const SignatureField = ({
   }) => {
 
   const signature = useRef({});
-
-  const saveClearBtnWidth = { width:parseInt(width)/2, margin: '5px 0' };
+  const saveClearBtnWidth = { width:`${parseInt(width)/2}%`, margin: '5px 0' };
 
   /* a function that uses the canvas ref to clear the canvas
   via a method given by react-signature-canvas */

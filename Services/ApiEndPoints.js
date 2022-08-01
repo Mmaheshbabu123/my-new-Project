@@ -136,7 +136,7 @@ export const fetchRequestOverview = BASE_URL + "get-all-agreement-requests";
 export const deleteCooperationAgreement = BASE_URL + "delete-cooperation-agreement";
 
 //------SALES AGENT COOPERATION AGREEMENTS -------//
-export const fetchSalesAgenetAgreements = BASE_URL + "get-all-sales-agent-agreement-requests";
+export const fetchSalesAgenetAgreements = BASE_URL + "get-sales-agent-agreement-requests";
 export const saveSalesAgentSvData = BASE_URL + "save-agent-assigned-data";
 export const deleteSalesAgenetAgreements = BASE_URL + "delete-sales-agent-agreement-request";
 
@@ -154,3 +154,14 @@ export const cooperationAgreementPreview = BASE_URL + 'cooperation-agreement-pre
 export const sendToEmployer = BASE_URL + 'send-to-employer';
 export const updateEmployerSign = BASE_URL + 'employer-sign-update';
 //------
+
+
+//---------------ADDITIONAL DOCUMENTS---------------//
+export const fetchAdditionalDocuments = BASE_URL + 'fetch-additional-docs';
+export const updateAdditionalDocuments = BASE_URL + 'update-additional-docs';
+export const deleteAdditionalDocuments = BASE_URL + 'delete-additional-docs';
+export const storeAdditionalDocuments = BASE_URL + 'store-additional-docs';
+export const downloadAdditionalDocuments = BASE_URL + 'download-additional-docs';
+export const deleteUploadedFiles = BASE_URL + 'delete-files';
+export const uploadFiles = BASE_URL + 'upload-files';
+//---------------

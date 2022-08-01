@@ -9,7 +9,7 @@ const CooperationAgreementPreview = dynamic(
 
 const PreviewIndex = (props) => {
   const router = useRouter();
-  const { root_parent_id, sales_ref = 0, emp_ref = 0 } = router.query;
+  const { root_parent_id, sales_ref = 0, emp_ref = 0, preview = 0 } = router.query;
   if (root_parent_id !== undefined)
     return (
         <Suspense fallback={`Loading...`}>
@@ -18,6 +18,7 @@ const PreviewIndex = (props) => {
               salesAgentRefId = {sales_ref}
               employerRefId = {emp_ref}
               renderOutSideOfLayout={1}
+              preview = {Number(preview)}
          />
         </Suspense>
     )

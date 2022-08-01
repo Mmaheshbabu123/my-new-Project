@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import SearchIcon from '../../SearchIcon';
+import { CgEye } from 'react-icons/cg';
 import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 
@@ -154,8 +155,8 @@ const OverviewPage = (props) => {
    * @param  {int} root_parent_id               [description]
    * @return {url}                [description]
    */
-  const handleEmployerSign = (empRefId, company_id, root_parent_id) => {
-    window.open(`/cooperation-agreement-preview?root_parent_id=${root_parent_id}&emp_ref=${empRefId}&type=2`, '_blank');
+  const handleEmployerSign = (empRefId, company_id, root_parent_id, preview = 0) => {
+    window.open(`/cooperation-agreement-preview?root_parent_id=${root_parent_id}&emp_ref=${empRefId}&type=2&preview=${preview}`, '_blank');
   }
 
   const getNeededActions = (eachRow) => {
@@ -168,7 +169,7 @@ const OverviewPage = (props) => {
           className="actions-span me-2 text-dark"
           onClick={() => !signed ? handleEmployerSign(epa_id, company_id, agent.root_parent_id):null}> {signed ? 'Signed' : 'Sign'} </span>
         : null}
-        {/* <span title={'View'} className="actions-span me-2 text-dark" onClick={() =>  console.log('view')}> View </span> */}
+        {agent.approved ? <span title={'View'} className="actions-span me-2 text-dark" onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id, 1)}> View </span>:null}
       </>
     )
   }
