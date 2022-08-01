@@ -10,11 +10,11 @@
   height: 38px !important; */
 }
 .pcp_btn {
-  /* backg;
-  margin: 10px; */
+  background-color: #707070 !important;
+  margin: 10px;
 }
 .pcp_btn:hover {
-  /* background-color: black !important; */
+  background-color: black !important;
 }
 
 .manage-types-table {
@@ -64,7 +64,7 @@
   position: sticky;
   top: 0;
   text-align: left;
- 
+
 }
 .action-sec:nth-child(2) {
   text-align: right;

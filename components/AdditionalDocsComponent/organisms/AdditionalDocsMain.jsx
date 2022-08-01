@@ -11,7 +11,7 @@ const AdditionalDocsMain = (props) => {
       overviewData: []
     , loaded: false
     , employers: []
-    , companies: []
+    , companies: {}
     , assignedData: {}
     , headers: ['Document title', 'Start date', 'End date', 'Link to cooperation agreeemnt', 'Actions']
     , documentDetails: {}
@@ -29,7 +29,7 @@ const AdditionalDocsMain = (props) => {
         setState({...state,
           overviewData: response.data.overviewData ? Object.values(response.data.overviewData) :[],
           loaded: true,
-          companies: response.data.companies || [],
+          companies: response.data.companies || {},
           employers: response.data.employers || [],
           documentDetails: response.data.documentDetails || {}
         });

@@ -212,8 +212,8 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
         <div className="col-md-6">
           <LabelField title={`Company`} />
           <MultiSelectField
-            options={state.employerId !== 0 ? companies : []}
-            standards={companies.filter(val => val.value === state.companyId)}
+            options={state.employerId ? companies[state.employerId] : []}
+            standards={state.employerId ? companies[state.employerId].filter(val => val.value === state.companyId) : []}
             handleChange={(e) => onSelect(e, 2)}
             isMulti={false}
             className="col-md-12"
