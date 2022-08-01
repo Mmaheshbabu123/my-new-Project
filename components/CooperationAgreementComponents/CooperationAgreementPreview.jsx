@@ -1,18 +1,17 @@
-import { Suspense, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
 import { cooperationAgreementPreview, sendToEmployer, updateEmployerSign } from '@/Services/ApiEndPoints';
 import styles from './CooperationAgreement.module.css'
 import CheckBoxField from '@/atoms/CheckBoxField';
 
-const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRefId }) => {
+const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRefId, preview = 0 }) => {
   const router = useRouter();
   const { type, approved }  = router.query;
   const [state, setState] = useState({
     approved: Number(approved),
     alertSuccess: false,
-    iframeUrl: `${cooperationAgreementPreview}/${rootParentId}?type=${type}&approved=${0}`,
+    iframeUrl: `${cooperationAgreementPreview}/${rootParentId}?type=${type}&approved=${0}&preview=${preview}`,
   });
 
 
@@ -27,7 +26,9 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
    */
   const handleCheckbox = ({ target: { checked } }) => {
     let approved = checked ? 1 : 0;
-    setState({...state, approved: approved, iframeUrl: `${cooperationAgreementPreview}/${rootParentId}?type=${type}&entityid=${employerRefId}&approved=${approved}`})
+    setState({...state,
+      approved: approved,
+      iframeUrl: `${cooperationAgreementPreview}/${rootParentId}?type=${type}&entityid=${employerRefId}&approved=${approved}&preview=${preview}`})
   }
 
   /**
@@ -36,7 +37,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
    */
   const forwardToApproveProcess = async () => {
     let url = Number(type) === 2 ? updateEmployerSign : sendToEmployer;
-    await APICALL.service(url, 'POST', { salesAgentRefId, employerRefId, rootParentId, approved }).then(response => {
+    await APICALL.service(url, 'POST', getDataToPost()).then(response => {
       if (response.status === 200) {
          setState({...state, alertSuccess: true})
          setTimeout(() => window.close(), 1500);
@@ -44,6 +45,16 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
     }).catch((error) => console.log(error) )
   }
 
+  const getDataToPost = () => {
+    return {
+      salesAgentRefId,
+      employerRefId,
+      rootParentId,
+      type,
+      entityid: employerRefId,
+      approved:state.approved
+    }
+  }
 
   return(
     <div className="">
@@ -53,7 +64,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
       <div>
         <iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 200} />
       </div>
-      <div className = {`${styles['term_and_conditions_class']} row`}>
+      {!preview && <div className = {`${styles['term_and_conditions_class']} row`}>
         <CheckBoxField
          id={'approved_check'}
          tick={state.approved}
@@ -65,9 +76,9 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
        {state.approved === 1 && <div className="col-md-3">
         <button onClick={forwardToApproveProcess} type="button" className="btn btn-dark pcp_btn"> {Number(type) === 2 ? 'Approve' : 'Send to employer'} </button>
       </div>}
-    </div>
+    </div>}
     </div>
   );
 }
 
-export default CooperationAgreementPreview;
+export default React.memo(CooperationAgreementPreview);

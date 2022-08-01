@@ -10,7 +10,7 @@ import { APICALL } from '@/Services/ApiServices';
 
 const RequestAgreement = (props) => {
   const router = useRouter();
-  const { state: { companies = {} }, employer_id } =  props;
+  const { state: { companies = {} }, employer_id, alreadyRequestedCompanies } =  props;
   const [compState, setCompState] = useState({
       showPopup: false
     , companies: companies
@@ -65,14 +65,15 @@ const RequestAgreement = (props) => {
     return (
       <>
           <Modal size={'lg'} show={showPopup} onHide={handleClose}>
-            <Modal.Header closeButton style={{paddingLeft: '30%'}}>
+            <Modal.Header closeButton style={{paddingLeft: '36%'}}>
               <Modal.Title> Request agreement </Modal.Title>
             </Modal.Header>
           <Modal.Body>
               <div>
+               {companies && companies.length > 0 ? <>
                   <p style={{fontSize: 'larger'}}> Please select company </p>
                   <div style={{margin: '20px 0'}}>
-                  {Object.values(companies).map(company => {
+                  {companies.map(company => {
                     return(
                       <CheckBoxField
                           key={company.id}
@@ -88,14 +89,15 @@ const RequestAgreement = (props) => {
                   })}
                   </div>
                   {warning === true && <small style={{color:'red'}}> Select atleast one company </small>}
+                </> : <p className="text-center"> No companies found </p>}
               </div>
           </Modal.Body>
-          <Modal.Footer>
+          {companies && companies.length > 0 && <Modal.Footer>
             <p className={`${styles['popup-back-btn']}`} onClick={handleClose}> Back </p>
             <Button variant="secondary" onClick={handleRequest}>
               Request agreement
             </Button>
-          </Modal.Footer>
+          </Modal.Footer>}
         </Modal>
       </>
     );
