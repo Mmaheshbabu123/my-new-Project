@@ -23,7 +23,7 @@ width: 94%
 
 }
  
-/* .tree .lev1 li::before {
+.tree .lev1 li::before {
     border-left: 1px solid #999;
     bottom: 50px;
     height: 100%;
@@ -44,7 +44,7 @@ width: 94%
     left: -32px;
     position: absolute;
     right: auto;
-} */
+}
 .tree{
     position: relative;
 }
