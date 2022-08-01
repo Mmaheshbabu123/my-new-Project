@@ -14,7 +14,6 @@ export default function FileUpload({
         <input
             type="file"
             className=""
-            style= {{cursor:'pointer'}}
             id={`_file_upload_input_tag_`}
             name={name}
             accept ={accept}
