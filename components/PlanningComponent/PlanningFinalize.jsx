@@ -118,7 +118,7 @@ const PlanningFinalize = () => {
 						</thead>
 						<tbody>
 						{planning.planning && Object.keys(planning.planning).map((value)=>(
-							<tr className="border-bottom table-border-gray equal-width-calc">
+							<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
 								{planning.planning[value].map((val1,key)=>(
 									<td className=" table-border-gray font-poppins-light" key={key}>
 										<div className='text-right color-skyblue my-2 mt-1 text-end'><a>
