@@ -160,7 +160,7 @@ const AddEmployeeType = (props) => {
               onClick={() => addItemAndUpdateIndex({ ...state }, state.name)}
               type="button"
               className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content w-100 py-2">
-              + {`Add`}
+              + {`ADD`}
             </button>
           }
           </div>
@@ -192,7 +192,7 @@ const AddEmployeeType = (props) => {
         <div className='col-md-6 p-0'>
         <button
           type="button"
-          className="btn btn-dark pcp_btn col-2 bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right text-left p-0 md-5"
+          className=" col-2 bg-white  back-btn-text  border-0 poppins-regular-20px text-start  float-sm-right text-left p-0 md-5"
           onClick={() => router.back()} >
           BACK
         </button>
