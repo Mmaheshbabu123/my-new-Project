@@ -14,7 +14,7 @@ import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MdEdit, MdDelete } from 'react-icons/md';
-import Popup from './ProjectDeletePopup';
+import Popup from './ProjectArchivePopup';
 
 function Planning(props) {
 	const router = useRouter();
@@ -119,21 +119,23 @@ function Planning(props) {
 	// FETCH PLANNING
 	useEffect(
 		() => {
-			if (p_unique_key != undefined) {
+			if (p_unique_key != undefined && show == false) {
 				APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
 					console.log(result);
 					if (result && result.data.length > 0) {
 						setId(result.data[0].id);
 						setUniquekey(result.data[0].p_unique_key);
 						setCompanyid(result.data[0].comp_id);
+						if(result.data[0].location_id != null && result.data[0].location_id != undefined){
 						setLocationid(result.data[0].location_id);
+						}
 						var cc_id = result.data[0].cost_center_id == null ? '' : result.data[0].cost_center_id;
 						setCostcenterid(cc_id);
 					}
 				});
 			}
 		},
-		[ p_unique_key ]
+		[ p_unique_key,show ]
 	);
 
 	/**
@@ -141,7 +143,7 @@ function Planning(props) {
 	 */
 	useEffect(
 		() => {
-			if (p_unique_key != undefined && show == false) {
+			if (p_unique_key != undefined && show == false && showdeletepopup == false) {
 				APICALL.service(fetchproject + p_unique_key, 'GET')
 					.then((result) => {
 						console.log(result);
@@ -169,7 +171,7 @@ function Planning(props) {
 					});
 			}
 		},
-		[ p_unique_key, show ]
+		[ p_unique_key, show, showdeletepopup ]
 	);
 
 	// ON SUBMIT //
@@ -278,7 +280,8 @@ function Planning(props) {
 	// DELETE FUNCTIONALITY //
 	const deleteproject = async () => {
 		var data = {
-			id: projectid
+			id: projectid,
+			type:'delete'
 		};
 		APICALL.service(updateProject, 'POST', data)
 			.then((result) => {
@@ -461,7 +464,7 @@ function Planning(props) {
 				</div>
 			)}
 			{showdeletepopup == true && (
-				<Popup display={'block'} popupActionDeleteNo={closeDeletePopup} popupActionDeleteYes={deleteproject} />
+				<Popup display={'block'} popupActionDeleteNo={closeDeletePopup} popupActionDeleteYes={deleteproject} body={"Are you sure you want to delete this project?"}/>
 			)}
 		</div>
 	);

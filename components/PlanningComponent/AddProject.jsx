@@ -5,7 +5,7 @@ import { APICALL } from '../../Services/ApiServices';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { addPlanning } from '../../Services/ApiEndPoints';
-import Popup from './ProjectDeletePopup';
+import Popup from './ProjectArchivePopup';
 
 // import './addproject.css';
 function Addproject(props) {
@@ -51,14 +51,6 @@ function Addproject(props) {
 			if (props.countries) {
 				setCountrylist(props.countries);
 			}
-			console.log(props.data);
-			var data1 = props.data;
-			if (data1) {
-				
-				setData((prev) => ({ ...prev, data: data1 }));
-				// setData(props.data);
-				// console.log(data);
-			}
 			if (data.comp_id == '') {
 				var res = data;
 				res.comp_id = props.company_id;
@@ -68,16 +60,39 @@ function Addproject(props) {
 		[ props ]
 	);
 
+	useEffect(
+		() => {
+			
+			console.log(props.data);
+			var data1 = props.data;
+			if (data1) {
+				setData((prev) => ({ ...prev,
+					id:data1.id,
+					project_name: data1.project_name,
+					project_location:data1.project_location,
+					hno:data1.hno,
+					street:data1.street,
+					bno:data1.bno,
+					postal_code:data1.postal_code,
+					city:data1.city,
+					country:data1.country,
+					extra:data1.extra,
+					}));
+				// setData(props.data);
+				// console.log(data);
+			}
+		},
+		[ props.data ]
+	);
+
 	/**
 	 * 
 	 * @param {*} event 
 	 * Submit function
 	 */
 	let submit = async (event) => {
-		alert("check")
 		event.preventDefault();
 		var valid_res = validate(data);
-		alert(valid_res);
 		if (valid_res) {
 			console.log(data);
 			APICALL.service(addProject, 'POST', data)
@@ -176,11 +191,8 @@ function Addproject(props) {
 			error1['country'] == '' &&
 			error1['bno'] == ''
 		) {
-			// alert('true');
 			return true;
 		} else {
-			// alert('false');
-
 			return false;
 		}
 	};

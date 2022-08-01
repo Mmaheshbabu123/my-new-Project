@@ -5,7 +5,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { fetchallproject, updateProject } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-import Popup from './ProjectDeletePopup';
+import Popup from './ProjectArchivePopup';
 import ReactPaginate from 'react-paginate';
 import Link from 'node_modules/next/link';
 
