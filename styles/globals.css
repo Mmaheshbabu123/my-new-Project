@@ -764,8 +764,15 @@ div[disabled]{
 color: var(--color-skyblue);
 font-size: var(--font-size-l);
 }
-.timepage-calander .rmdp-day.rmdp-today span {
+.timepage-calander .rmdp-day.rmdp-selected span {
     background: var(--color-skyblue) !important;
+    color: var(--color-white);
+    width: 60px;
+    margin: auto;
+    height: 45px;
+}
+.timepage-calander .rmdp-day.rmdp-today span {
+    background: var(--color-label-footer-gray);
     color: var(--color-white);
     width: 60px;
     margin: auto;

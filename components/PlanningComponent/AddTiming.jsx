@@ -13,7 +13,7 @@ import { MdStarRate } from 'react-icons/md';
 function Addtiming(props) {
 	const count = 0;
 	const router = useRouter();
-	const [ value, setValue ] = useState(new Date('2022/07/25'));
+	const [ value, setValue ] = useState([]);
 	const [ selectedDate, setSelectedDate ] = useState([]);
 	const [ commonDatetime, setCommonDatetime ] = useState([]);
 
@@ -121,6 +121,7 @@ function Addtiming(props) {
 	};
 
 	let postdata = () => {
+		return;
 		APICALL.service(storePlannedTimings, 'POST', employee_planning)
 			.then((result) => {
 				console.log(result);
@@ -325,7 +326,7 @@ function Addtiming(props) {
 																onChange={(date) => {
 																	handleChange2(date, key);
 																}}
-																// minDate={new Date()}
+																minDate={new Date()}
 															/>
 															<p className="error mt-2">{result.error_selected_date}</p>
 														</div>
