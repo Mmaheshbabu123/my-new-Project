@@ -935,9 +935,9 @@ font-size: var(--font-size-l);
  .custom-drop-btn  .css-b62m3t-container {
     width: 100%;
  }
- .custom-drop-btn .css-1s2u09g-control,  .css-1s2u09g-control {
+ /* .custom-drop-btn .css-1s2u09g-control,  .css-1s2u09g-control {
     border: none !important;
- }
+ } */
  .bg-4C4D550F {
     background-color: var(--bg-grey-medium);
  }
