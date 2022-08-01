@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { fetchallproject, updateProject } from '../../Services/ApiEndPoints';
+import { fetchallproject, updateProject, fetchallarchivedprojects } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import Popup from './ProjectDeletePopup';
@@ -19,7 +19,7 @@ function ManageProject(props) {
 	const [ searchProjectname, setSearchProjectname ] = useState('');
 	const [ searchlocation, setSearchlocation ] = useState('');
 	const [ searchaddress, setSearchaddress ] = useState('');
-	const [ project, setProject ] = useState('');
+	const [ project, setProject ] = useState([]);
 	const [ projectTemp, setProjectTemp ] = useState([]);
 	const [ projectTemp2, setProjectTemp2 ] = useState([]);
 
@@ -27,7 +27,16 @@ function ManageProject(props) {
 	const [ projectid, setProjectid ] = useState('');
 	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 
-	/**
+	const [ showtab, setShowtab ] = useState(1);
+
+	const [ archivedProject, setArchivedProject ] = useState([]);
+	const [ archivedProjectTemp, setArchivedProjectTemp ] = useState([]);
+	const [ archivedProjectTemp2, setArchivedProjectTemp2 ] = useState([]);
+
+	const handletab = (e) => {
+		setShowtab(e);
+	};
+
 	/**
 	 * FETCHING PROJECT
 	 */
@@ -47,6 +56,25 @@ function ManageProject(props) {
 		},
 		[ updated ]
 	);
+	/**
+	 * FETCHING ARCHIVED PROJECT
+	 */
+	// useEffect(
+	// 	() => {
+	// 		APICALL.service(fetchallarchivedprojects, 'GET')
+	// 			.then((result) => {
+	// 				console.log(result.data);
+
+	// 				setArchivedProject(result.data);
+	// 				setArchivedProjectTemp(result.data);
+	// 				setArchivedProjectTemp2(result.data);
+	// 			})
+	// 			.catch((error) => {
+	// 				console.log(error);
+	// 			});
+	// 	},
+	// 	[ updated ]
+	// );
 	// DELETE FUNCTIONALITY //
 	const deleteproject = async () => {
 		var data = {
@@ -76,7 +104,7 @@ function ManageProject(props) {
 	useEffect(
 		() => {
 			const endOffset = itemOffset + itemsPerPage;
-			setProjectTemp2(project.slice(itemOffset, endOffset));
+			setProjectTemp(project.slice(itemOffset, endOffset));
 			setPageCount(Math.ceil(project.length / itemsPerPage));
 		},
 		[ itemOffset, itemsPerPage, project ]
@@ -214,6 +242,24 @@ function ManageProject(props) {
 						<h1 className="mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-medium-24">
 							Manage project
 						</h1>
+						<ul className="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
+							<li className="nav-item" role="presentation">
+								<button
+									className={showtab === 1 ? 'nav-link active' : 'nav-link'}
+									onClick={() => handletab(1)}
+								>
+									Manage Project
+								</button>
+							</li>
+							<li className="nav-item" role="presentation">
+								<button
+									className={showtab === 2 ? 'nav-link active' : 'nav-link'}
+									onClick={() => handletab(2)}
+								>
+									Manage archive Project
+								</button>
+							</li>
+						</ul>
 						<div className="row d-flex mt-3">
 							<div className="col-sm-3">
 								<input
@@ -264,47 +310,69 @@ function ManageProject(props) {
 								</button>
 							</div>
 						</div>
-						<div className="form-check p-0 mt-2 text-center max-height-420">
-							<table className="table   mt-3 mb-3 text-center">
-								<thead>
-									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-										<th className="poppins-regular-18px justify-content-center d-flex align-items-center btn-bg-gray-medium">
-											Project name
-										</th>
-										<th className="poppins-regular-18px btn-bg-gray-medium">Location</th>
-										<th className="poppins-regular-18px btn-bg-gray-medium">Address</th>
-										<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									{projectTemp2.length > 0 &&
-										projectTemp2.map((result) => (
-											<tr className="border poppinns-regular-thin p-2" key={result.id}>
-												<td className="poppinns-regular-thin">{result.project_name}</td>
-												<td className="poppinns-regular-thin">{result.project_location}</td>
-												<td className="poppinns-regular-thin">{result.address}</td>
-												<td className="d-flex justify-content-center">
-													<Link href="edit-project">
-														<a type="button">
-															<MdEdit className="mt-2 ms-3 color-skyblue " />
-														</a>
-													</Link>
+						<div className="tab-content text-dark" id="pills-tabContent">
+							<div
+								className={
+									showtab === 1 ? (
+										'form-check p-0 mt-2 text-center max-height-420 tab-pane fade show  active'
+									) : (
+										'form-check p-0 mt-2 text-center max-height-420 tab-pane fade show '
+									)
+								}
+							>
+								<table className="table   mt-3 mb-3 text-center">
+									<thead>
+										<tr className="btn-bg-gray-medium table-sticky-bg-gray">
+											<th className="poppins-regular-18px justify-content-center d-flex align-items-center btn-bg-gray-medium">
+												Project name
+											</th>
+											<th className="poppins-regular-18px btn-bg-gray-medium">Location</th>
+											<th className="poppins-regular-18px btn-bg-gray-medium">Address</th>
+											<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{projectTemp2.length > 0 &&
+											projectTemp2.map((result) => (
+												<tr className="border poppinns-regular-thin p-2" key={result.id}>
+													<td className="poppinns-regular-thin">{result.project_name}</td>
+													<td className="poppinns-regular-thin">{result.project_location}</td>
+													<td className="poppinns-regular-thin">{result.address}</td>
+													<td className="d-flex justify-content-center">
+														<Link href="edit-project">
+															<a type="button">
+																<MdEdit className="mt-2 ms-3 color-skyblue " />
+															</a>
+														</Link>
 
-													<span onClick={() => showDeletePopup(result.id)} type="button">
-														<MdDelete className="mt-2 ms-3 color-skyblue " />
-													</span>
+														<span onClick={() => showDeletePopup(result.id)} type="button">
+															<MdDelete className="mt-2 ms-3 color-skyblue " />
+														</span>
+													</td>
+												</tr>
+											))}
+										{project.length == 0 && (
+											<tr>
+												<td colSpan={4} className="text-center">
+													No records
 												</td>
 											</tr>
-										))}
-									{project.length == 0 && (
-										<tr>
-											<td colSpan={4} className="text-center">
-												No records
-											</td>
-										</tr>
-									)}
-								</tbody>
-							</table>
+										)}
+									</tbody>
+								</table>
+							</div>
+							<div
+								className={
+									showtab === 2 ? (
+										'form-check p-0 mt-2 text-center max-height-420 tab-pane fade show  active'
+									) : (
+										'form-check p-0 mt-2 text-center max-height-420 tab-pane fade show '
+									)
+								}
+							/>
+							<div>
+								<p>Manage Archived project</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -312,11 +380,11 @@ function ManageProject(props) {
 					{project.length >= itemsPerPage && (
 						<ReactPaginate
 							breakLabel="..."
-							nextLabel={<AiOutlineArrowRight className="rtarw" />}
+							nextLabel={<AiOutlineArrowRight />}
 							onPageChange={handlePageClick}
 							pageRangeDisplayed={5}
 							pageCount={pageCount}
-							previousLabel={<AiOutlineArrowLeft className="ltarw" />}
+							previousLabel={<AiOutlineArrowLeft />}
 							renderOnZeroPageCount={null}
 							containerClassName={'pagination justify-content-center project-pagination'}
 							itemClass="page-item"
