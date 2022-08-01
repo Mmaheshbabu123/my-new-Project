@@ -115,6 +115,8 @@ function AddPc(props) {
 							data1['pc_unique_key'] = result.data[0].pc_unique_key;
 							data1['pc_number'] = result.data[0].pc_number;
 							data1['pc_name'] = result.data[0].pc_name;
+							data1['min_work_timings'] = result.data[0].min_work_timings;
+							data1['max_work_timings'] = result.data[0].max_work_timings;
 							data1['pc_alias_name'] =
 								result.data[0].pc_alias_name != null ? result.data[0].pc_alias_name : '';
 							// setUpdate_sec_completed(result.data[0].completed)

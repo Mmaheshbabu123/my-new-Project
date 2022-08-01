@@ -141,7 +141,7 @@ function Planning(props) {
 	 */
 	useEffect(
 		() => {
-			if (p_unique_key != undefined) {
+			if (p_unique_key != undefined && show == false) {
 				APICALL.service(fetchproject + p_unique_key, 'GET')
 					.then((result) => {
 						console.log(result);
@@ -159,7 +159,9 @@ function Planning(props) {
 							res.street = result.data.street;
 							res.postal_code = result.data.postal_code;
 							res.country = result.data.country;
-							setProject(res);
+							setProject((prev) => ({ ...prev, project: res }));
+
+							// setProject(res);
 						}
 					})
 					.catch((error) => {
@@ -167,7 +169,7 @@ function Planning(props) {
 					});
 			}
 		},
-		[ p_unique_key ]
+		[ p_unique_key, show ]
 	);
 
 	// ON SUBMIT //

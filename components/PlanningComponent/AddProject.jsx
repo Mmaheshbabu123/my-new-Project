@@ -48,13 +48,16 @@ function Addproject(props) {
 
 	useEffect(
 		() => {
-			console.log(props.countries);
 			if (props.countries) {
 				setCountrylist(props.countries);
 			}
-			if (props.data) {
-				setData(props.data);
-				console.log(data);
+			console.log(props.data);
+			var data1 = props.data;
+			if (data1) {
+				
+				setData((prev) => ({ ...prev, data: data1 }));
+				// setData(props.data);
+				// console.log(data);
 			}
 			if (data.comp_id == '') {
 				var res = data;
@@ -71,8 +74,10 @@ function Addproject(props) {
 	 * Submit function
 	 */
 	let submit = async (event) => {
+		alert("check")
 		event.preventDefault();
 		var valid_res = validate(data);
+		alert(valid_res);
 		if (valid_res) {
 			console.log(data);
 			APICALL.service(addProject, 'POST', data)
@@ -100,7 +105,7 @@ function Addproject(props) {
 		error1['comp_id'] = ValidationService.emptyValidationMethod(res.comp_id);
 		error1['street'] = ValidationService.emptyValidationMethod(res.street);
 		error1['postal_code'] = ValidationService.emptyValidationMethod(res.postal_code);
-		// error1['country'] = ValidationService.emptyValidationMethod(res.country);
+		error1['country'] = ValidationService.emptyValidationMethod(res.country);
 		error1['bno'] = ValidationService.emptyValidationMethod(res.bno);
 
 		/**
@@ -239,6 +244,7 @@ function Addproject(props) {
 														value={data.comp_id}
 														className="form-select mb-2 mt-2"
 														placeholder="select company"
+														disabled={props.company_id != ''}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, comp_id: e.target.value }));
 															// updateLocation(e.target.value);
