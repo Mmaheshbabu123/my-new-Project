@@ -130,7 +130,7 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
     return(
       files.map((file, index) => {
         return (
-          <div className="my-2">
+          <div key = {index} className="my-2">
             <span className="actions-span text-dark w-50"> {file.file_name} </span>
             <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', index)}> <MdDelete/> </span>
           </div>
