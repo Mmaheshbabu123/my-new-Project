@@ -19,7 +19,7 @@ const ManageFunction = () => {
 	const [ searchSal, setSearchSal ] = useState('');
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ funcnid, setFucnid ] = useState('');
-	const [ itemsPerPage, setItemsPerPage ] = useState(10);
+	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 
 	useEffect(
 		() => {
@@ -358,7 +358,9 @@ const ManageFunction = () => {
 		<div className="container-fluid">
 			<form>
 				<div className="row">
-					<p className="mt-3 mb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0">Manage functions</p>
+					<p className="mt-3 mb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0">
+						Manage functions
+					</p>
 					<div className="col-md-2 ps-0">
 						<input
 							type="search"
@@ -410,7 +412,10 @@ const ManageFunction = () => {
 						>
 							Filter
 						</button>
-						{(searchPc.trim() != '' || searchFunc.trim() != '' || searchCat.trim() != '' || searchSal.trim() != '') && (
+						{(searchPc.trim() != '' ||
+							searchFunc.trim() != '' ||
+							searchCat.trim() != '' ||
+							searchSal.trim() != '') && (
 							<button
 								type="button"
 								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
@@ -425,7 +430,9 @@ const ManageFunction = () => {
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">Paritair comite number</th>
+									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">
+										Paritair comite number
+									</th>
 									<th className="poppins-regular-18px btn-bg-gray-medium">Function name</th>
 									<th className="poppins-regular-18px btn-bg-gray-medium">Minimum salary</th>
 									<th className="poppins-regular-18px btn-bg-gray-medium">Category</th>

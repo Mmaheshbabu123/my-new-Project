@@ -12,7 +12,7 @@ const ManageCategoryComponent = () => {
 	const [ categories, setCategories ] = useState([]);
 	const [ categoriesTemp, setCategoriesTemp ] = useState([]);
 	const [ categoriestemp2, setCategoriestemp2 ] = useState([]);
-	const [ itemsPerPage, setItemsPerPage ] = useState(10);
+	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 
 	const [ updated, setUpdated ] = useState(0);
 	const [ searchPc, setSearchPc ] = useState('');
