@@ -193,21 +193,21 @@ const AddEditSalaryBenefits = (props) => {
   }
   const renderInputFields = () => {
     return (
-      <div className='col-md-9'>
+      <div className='col-md-12 border-form-sec'>
         <div className="salary-input-fields">
-          <label className = "mb-2 input-label-class" htmlFor="name"> {`Salary benefit name`} <span style={{color:'red'}}> * </span></label>
+          <label className = "mb-2 " htmlFor="name"> {`Salary benefit name`} <span style={{color:'red'}}> * </span></label>
           <input
             ref={ref => inputRef.current['name'] = ref}
             type="text"
             name="name"
-            className="form-control col-md-10 pcp_name"
+            className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
             value={state.name}
             onChange={(e) => handleChange(e.target)}
             placeholder='Please add salary benefit'
           />
           {state.nameWarning &&
             <small
-              className="form-text text-muted col-md-5 pcp_name_warning">
+              className="form-text text-muted col-md-5 pcp_name_warning ">
               This field is required.
             </small>}
           {state.uniqueError &&
@@ -217,12 +217,12 @@ const AddEditSalaryBenefits = (props) => {
             </small>}
         </div>
         <div className="salary-input-fields">
-          <label className = "mb-2 input-label-class" htmlFor="name"> {`Salary benefit value`} </label>
+          <label className = "mb-2 " htmlFor="name"> {`Salary benefit value`} </label>
           <input
             ref={ref => inputRef.current['value'] = ref}
             type="text"
             name='value'
-            className="form-control col-md-10 pcp_name"
+            className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
             value={state.value}
             onChange={(e) => handleChange(e.target)}
             placeholder= 'Enter value'
@@ -234,14 +234,14 @@ const AddEditSalaryBenefits = (props) => {
             </small>}
         </div>
         <div className="salary-input-fields">
-          <label className = "mb-2 input-label-class" htmlFor="name"> {`Date`} </label>
+          <label className = "mb-2 " htmlFor="name"> {`Date`} </label>
           <input
             ref={ref => inputRef.current['date'] = ref}
             type="date"
             name='date'
             min={state.minDate}
             value={state.date}
-            className="form-control col-md-10 salary-date pcp_name"
+            className="form-control col-md-10 salary-date pcp_name poppins-regular-18px border-4C4D554D rounded-0"
             onChange={(e) => handleChange(e.target)}
           />
           {state.dateWarning &&
@@ -256,21 +256,22 @@ const AddEditSalaryBenefits = (props) => {
 
   return <>
     <div className='add-edit-types'>
-      <div className="row m-3">
-        <h4 className="mb-4"> {`${state.editFlow ? 'Edit' : 'Add'} salary benefit`} </h4>
-        <div className='row'>
-          {renderInputFields()}
-          <div className="col-md-3">
+      <div className="row m-0 p-0">
+        <h4 className="mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${state.editFlow ? 'Edit' : 'Add'} salary benefit`} </h4>
+        <div className='row p-0 m-0'>
+         
+          <div className="col-md-12 d-flex justify-content-end p-0">
           {!state.editFlow &&
             <button
               onClick={() => addItemAndUpdateIndex({...state})}
               type="button"
               style={{marginTop: '0'}}
-              className="btn btn-dark pcp_btn">
-              {`Add`}
+              className="btn  py-2 btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0">
+              {`+ ADD`}
             </button>
           }
           </div>
+          {renderInputFields()}
         </div>
       </div>
       {state.newItems.length > 0 && !state.editFlow &&
@@ -294,19 +295,23 @@ const AddEditSalaryBenefits = (props) => {
             </tbody>
           </table>
         </div>}
-      <div className='managetype-save-btn'>
+      <div className=' row m-0 p-0 my-4'>
+        <div className='ext-start col-md-6 p-0'>
         <button
           type="button"
-          className="btn btn-dark pcp_btn col-2"
+          className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
           onClick={() => router.back()} >
-          Back
+          BACK
         </button>
+        </div>
+        <div className='col-md-6 text-end p-0'>
         <button
           type="button"
-          className="btn btn-dark pcp_btn col-2"
+          className="btn btn-secondary rounded-0  custom-btn px-3  btn-block float-end"
           onClick={handleSubmit} >
-          Save
+          SAVE
         </button>
+        </div>
       </div>
     </div>
   </>
