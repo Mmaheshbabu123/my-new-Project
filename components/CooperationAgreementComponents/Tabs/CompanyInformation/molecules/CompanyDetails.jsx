@@ -67,8 +67,8 @@ const getCompanyDetailsByvat = async() => {
     .then((result) =>{
        data = result.data;
       data['8'] = tab_2['8'];
+      data['10']   = '1';
       tab_2 = {...tab_2,...data,}
-      console.log(tab_2);
       updateStateChanges({ tab_2});
     } )
     .catch((error) => window.alert('Error occurred'));

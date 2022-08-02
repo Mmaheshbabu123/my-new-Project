@@ -167,5 +167,6 @@ export const deleteAdditionalDocuments = BASE_URL + 'delete-additional-docs';
 export const storeAdditionalDocuments = BASE_URL + 'store-additional-docs';
 export const downloadAdditionalDocuments = BASE_URL + 'download-additional-docs';
 export const deleteUploadedFiles = BASE_URL + 'delete-files';
+export const uploadAdditionalDocs = BASE_URL + 'upload-additional-docs';
 export const uploadFiles = BASE_URL + 'upload-files';
 //---------------

@@ -24,7 +24,7 @@ const AdditionalDocsMain = (props) => {
    * @return {Promise} [description]
    */
   const fetchData = async () => {
-    await APICALL.service(`${fetchAdditionalDocuments}/${editId}/${action}`, 'GET').then(response => {
+    await APICALL.service(`${fetchAdditionalDocuments}/${entityId}/${entityType}/${editId}/${action}`, 'GET').then(response => {
       if (response.status === 200)
         setState({...state,
           overviewData: response.data.overviewData ? Object.values(response.data.overviewData) :[],
@@ -44,15 +44,16 @@ const AdditionalDocsMain = (props) => {
                 : Number(editId) ? 'Edit additional document': 'Add additional document'}`}</h4>
               {   action !== 0  ?
                   <EditUpdateAdditionalDoc
-                    entityId = {entityId}
+                    entityType={Number(entityType)}
+                    entityId = {Number(entityId)}
                     editId={Number(editId)}
                     documentDetails={state.documentDetails[Number(editId)] || {}}
                     companies={state.companies}
                     employers={state.employers}
                   /> :
                   <AdditionalDocsOverview
-                    entityType={entityType}
-                    entityId = {entityId}
+                    entityType={Number(entityType)}
+                    entityId = {Number(entityId)}
                     rows={state.overviewData}
                     headers={state.headers}
                   />

@@ -5,7 +5,8 @@ export default function FileUpload({
   className='',
   disabled = false,
   handleChange = () => console.log(),
-  fileUploadText = 'Choose file'
+  fileUploadText = 'Choose file',
+  browseBtnText = 'Browse'
 })
 {
   return (
@@ -23,7 +24,7 @@ export default function FileUpload({
             style={{display:'none'}}
         />
         {fileUploadText}
-        <button style={{pointerEvents: "none"}} className="float-end"> Browse </button>
+        <button style={{pointerEvents: "none"}} className="float-end"> {browseBtnText} </button>
       </label>
       </div>
   );
