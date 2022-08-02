@@ -175,7 +175,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
       />}
-        <button onClick={() => router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
+        <button onClick={() => router.back()} type="button" className="btn btn-dark pcp_btn col-1">
           {`Back`}
         </button>
       </div>

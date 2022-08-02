@@ -174,7 +174,8 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
           {state.files.length > 0 && showUploadedFiles()}
         </div>
       </div>
-      <div className="col-md-12 row my-3">
+      <LabelField title={`Document validity`}/>
+      <div className="col-md-12 row my-1">
         <div className="col-md-6">
           <LabelField title={`Start date`}/>
           <DateField
@@ -238,6 +239,9 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
       <button onClick={() => handleSave(1)} type="button" className="btn btn-dark pcp_btn"> Save as draft </button>
       <button onClick={() => handleSave()} type="button" className="btn btn-dark pcp_btn"> Send to employer </button>
       </div>
+      <button onClick={() => router.back()} type="button" className="btn btn-dark pcp_btn col-1">
+        {`Back`}
+      </button>
       </div>
     </div>
   </>

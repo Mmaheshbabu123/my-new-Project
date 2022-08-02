@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdditionalDocsOverview  from '../molecules/AdditionalDocsOverview';
 import EditUpdateAdditionalDoc  from '../molecules/EditUpdateAdditionalDoc';
-import styles from '../molecules/AdditionalDocsOverview.module.css';
 import { fetchAdditionalDocuments } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 
@@ -13,7 +12,7 @@ const AdditionalDocsMain = (props) => {
     , employers: []
     , companies: {}
     , assignedData: {}
-    , headers: ['Document title', 'Start date', 'End date', 'Link to cooperation agreeemnt', 'Actions']
+    , headers: ['Document name', 'Start date', 'End date', 'Link to cooperation agreeemnt', 'Actions']
     , documentDetails: {}
   })
 
