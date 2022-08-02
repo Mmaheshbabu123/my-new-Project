@@ -9,7 +9,7 @@ import styles from './AbsAdminSv.module.css';
 
 const SalesAgentPopUpComponent = ( { state, setState } ) => {
   const router = useRouter();
-  const { showPopup, salesAgentArray, warning, reassign,
+  const { showPopup, salesAgentArray, warning, reassign, //NOSONAR
     selectedSalesAgent,
     selectedCompanyId,
     selectedEmployerId,
@@ -52,7 +52,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
     <>
         <Modal size={'lg'} show={showPopup} onHide={handleClose}>
           <Modal.Header closeButton style={{paddingLeft: '30%'}}>
-            <Modal.Title> Assign to sales agent </Modal.Title>
+            <Modal.Title>{savedAgentId ? 'Re-assign sales agent' : 'Assign to sales agent'}</Modal.Title>
           </Modal.Header>
         <Modal.Body>
             <div>
@@ -73,7 +73,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
                 })}
                 </div>
                 {warning === true && <small style={{color:'red'}}> Select atleast one agent </small>}
-                {reassign === true && <small style={{color:'red'}}> Do you want to change sales agent? </small>}
+                {/*reassign === true && <small style={{color:'red'}}> Do you want to change sales agent? </small>*/}
             </div>
         </Modal.Body>
         <Modal.Footer>

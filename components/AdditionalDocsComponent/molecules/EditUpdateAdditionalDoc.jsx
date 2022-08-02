@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { updateAdditionalDocuments, storeAdditionalDocuments } from '@/Services/ApiEndPoints'
+import { updateAdditionalDocuments, storeAdditionalDocuments, uploadAdditionalDocs } from '@/Services/ApiEndPoints'
 import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
 import { file } from '@/atoms/handleFileUpload';
@@ -10,7 +10,7 @@ import CheckBoxField from '@/atoms/CheckBoxField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { APICALL } from '@/Services/ApiServices';
 import ValidateMessage from '@/atoms/validationError';
-import {MdEdit, MdDelete} from 'react-icons/md';
+import { MdDelete } from 'react-icons/md';
 
 const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, companies, employers }) => {
   const router = useRouter();
@@ -108,11 +108,12 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
   }
 
   const handleFileChange = async (e) => {
-    let response = await file.uploadFile(e);
+    let response = await file.uploadFile(e, uploadAdditionalDocs);
     if(response.status === 200){
       setState({...state, files: [...state.files, ...response.data], fileWarning: false});
     }
   }
+
   const onSelect = async (e, type) => {
     if(type === 1) {
       setState({...state, employerId: e.value, companyId: 0, employerWarning: false, companyWarning: false})

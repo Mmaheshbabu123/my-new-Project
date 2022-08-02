@@ -8,14 +8,17 @@ export const file = {
   downloadFile
 };
 
-async function uploadFile(e){
+async function uploadFile(e, customUrl = '', path = ''){
   var result = {};
   const formData = new FormData();
   for (const key of Object.keys(e.target.files)) {
     formData.append(`file_${key}`, e.target.files[key])
   }
+  if(path)
+    formData.append('path', path);
   document.getElementById("__next").setAttribute("style", "cursor: not-allowed");
-  await axios.post(uploadFiles, formData, { headers: { "Authorization": "Bearer " + 'abs' } })
+  let url = customUrl || uploadFiles;
+  await axios.post(url, formData, { headers: { "Authorization": "Bearer " + 'abs' } })
       .then(response => {
           document.getElementById("__next").setAttribute("style", "cursor:auto;");
           result = response.data;
