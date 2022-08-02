@@ -287,7 +287,7 @@ body {
 .skyblue-bg-color {
     background-color: var(--color-skyblue);
     color: var(--color-white);
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-m);
 }
 .skyblue-bg-color:hover {
     background-color: var(--color-skyblue);
@@ -952,6 +952,21 @@ font-size: var(--font-size-l);
  .padding-t-b-10 {
     padding: 10px !important;
     padding-top: 25px !important;
+ }
+ .empty-sec {
+    background-color: #4C4D550F;
+    height: 60px;
+    padding: 20px;
+ }
+ .height-60 {
+    height: 70px;
+    background-color: var(--color-skyblue);
+    font-family: var(--font-family-poppins-regular);
+    color: var(--color-white);
+    font-size: var(--font-size-m);
+ }
+ .rc-time-picker-input {
+    border-radius: 0px !important;
  }
  @media screen {
 
