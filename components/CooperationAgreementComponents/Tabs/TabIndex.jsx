@@ -25,9 +25,9 @@ import Invoicing from './Invoicing/organisms/Invoicing';
 
 
 const TabIndex = (props) => {
-	const { state: { selectedTabId ,renderedOptions, filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+	const { state: { selectedTabId ,renderedOptions, filledTabs,salesAgentRefId }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
-
+  console.log(salesAgentRefId);
 	/**
    * [showComponentBasedOnTabSelection rendering component according to tab selection]
    * @return {[ReactElement]} [correspoding React component]
@@ -66,7 +66,7 @@ useEffect(()=> {
 const loadData = async () => {
  let data = [];
  let defaultOptions = {...state['defaultOptions']};
-  await APICALL.service(getDefaultOptionsData, 'GET').then(response => {
+  await APICALL.service(getDefaultOptionsData + `/${salesAgentRefId}`, 'GET').then(response => {
     if (response.status === 200) {
       data = response.data || {};
       defaultOptions['countrylist']          =  data['countrylist'];
