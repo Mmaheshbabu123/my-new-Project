@@ -102,7 +102,6 @@ function Planning(props) {
 								setLocationid(result.data[1].value);
 								if (result.data[2].length == 1) {
 									setCostcenterid(result.data[2].value);
-									postData();
 								}
 							}
 						}
