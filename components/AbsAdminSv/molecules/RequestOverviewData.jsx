@@ -42,6 +42,7 @@ const RequestOverviewData = (props) => {
       currentPage: 0,
       selectedTabId: 1,
       savedAgentId: 0,
+      bbrightId: 0,
   })
 
   const handleTabClick = ({ target: { id } }) => {

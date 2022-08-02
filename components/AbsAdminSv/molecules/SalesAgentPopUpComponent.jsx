@@ -13,7 +13,8 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
     selectedSalesAgent,
     selectedCompanyId,
     selectedEmployerId,
-    savedAgentId
+    savedAgentId,
+    bbrightId
    } = state;
 
   const handleRequest = async () => {
@@ -33,7 +34,8 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
     return {
       company_id: selectedCompanyId,
       employer_id: selectedEmployerId,
-      sales_agent_id: selectedSalesAgent
+      sales_agent_id: selectedSalesAgent,
+      bbrightId: bbrightId
     };
   }
 
@@ -43,6 +45,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
     setState({...state, reassign,
       selectedSalesAgent: radioVal,
       warning: false,
+      bbrightId: agent.bbright_id || 0
     })
   }
 
