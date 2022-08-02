@@ -9,6 +9,8 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import { FaRegPlusSquare, FaRegMinusSquare } from 'react-icons/fa';
 import { MdStarRate } from 'react-icons/md';
+import moment from "moment";
+
 
 function Addtiming(props) {
 	const count = 0;
@@ -181,6 +183,7 @@ function Addtiming(props) {
 	};
 
 	let updatetime = (type, index, e, key) => {
+		alert(moment(e).format("HH:mm"));
 		var res = [ ...employee_planning ];
 		console.log(res);
 		if(checked == true){
@@ -191,11 +194,11 @@ function Addtiming(props) {
 		if (e != null && res[key].timings.length > 0) {
 			if (type == 'starttime') {
 				res[key].timings[index].error_starttime = '';
-				res[key].timings[index].starttime = e.format('LT');
+				res[key].timings[index].starttime = moment(e).format('HH:mm');
 				setEmployee_planning(res);
 			} else {
 				res[key].timings[index].error_endtime = '';
-				res[key].timings[index].endtime = e.format('LT');
+				res[key].timings[index].endtime = moment(e).format('HH:mm');
 				setEmployee_planning(res);
 			}
 		}
@@ -269,7 +272,7 @@ function Addtiming(props) {
 												use12Hours={false}
 												showSecond={false}
 												focusOnOpen={true}
-												format="hh:mm A"
+												format="hh:mm"
 												onChange={(e) => updatetime('starttime', index, e, '')}
 											/>
 											<p className="error mt-2">{error_start_time}</p>
@@ -281,8 +284,8 @@ function Addtiming(props) {
 												use12Hours={false}
 												showSecond={false}
 												focusOnOpen={true}
-												format="hh:mm A"
-												onChange={(e) => setTime(e.format('LT'))}
+												format="hh:mm"
+												onChange={(e) => setTime(e.format('hh:mm'))}
 											/>
 											<p className="error mt-2">{error_end_time}</p>
 										</div>
@@ -353,7 +356,7 @@ function Addtiming(props) {
 																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
-																		format="hh:mm A"
+																		format="HH:mm"
 																		onChange={(e) =>
 																			updatetime('starttime', index, e, key)}
 																	/>
@@ -371,7 +374,7 @@ function Addtiming(props) {
 																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
-																		format="hh:mm A"
+																		format="HH:mm"
 																		onChange={(e) =>
 																			updatetime('endtime', index, e, key)}
 																	/>

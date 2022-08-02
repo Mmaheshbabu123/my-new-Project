@@ -6,12 +6,15 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
 import { ProjectorFill } from 'node_modules/react-bootstrap-icons/dist/index';
+import EditEmployee from './EditEmployee';
 
 const PlanningFinalize = () => {
 	const router = useRouter();
 	console.log(router.query);
 	const p_unique_key = router.query.p_unique_key;
 	const [planning,setPlanning] = useState([]);
+	const [enableEdit,setEnableEdit] = useState(true);
+
 
 	const weeklyplanning = [
 		{
@@ -65,7 +68,7 @@ const PlanningFinalize = () => {
 				<p className=" mt-1 mb-1 font-weight-bold   bitter-italic-normal-medium-24">Weekly Planning</p>
 				<p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p>
 
-				<div className=" mt-4 d-flex justify-content-end">
+				{/* <div className=" mt-4 d-flex justify-content-end">
 					<div className="d-inline ">
 						<button type="button" className="btn  btn my-2 skyblue-bg-color border-0 poppins-regular-24px  rounded-0 btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln   btn-block ">
 							Planning view
@@ -76,7 +79,7 @@ const PlanningFinalize = () => {
 							Encodage view
 						</button>
 					</div>
-				</div>
+				</div> */}
 				<div className=" mt-4 d-flex mb-3  ">
 					<select className="form-select w-25 me-2  border-0 select-bg-gray" disabled>
 					{planning.company?<option value="">{planning.company}</option>:	<option>Select Company</option>}
@@ -84,8 +87,15 @@ const PlanningFinalize = () => {
 					<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
 					{planning.location?<option value="">{planning.location}</option>:	<option>Select Location</option>}
 					</select>
+
+					<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
+					{planning.location?<option value="">{planning.location}</option>:	<option>Select Location</option>}
+					</select>
+					<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
+					{planning.location?<option value="">{planning.location}</option>:	<option>Select Location</option>}
+					</select>
 				</div>
-				<div className="mt-2 ">
+				<div className="mt-2 col-md-9">
 				{/* <p className=' bitter-italic-normal-medium-22 col-md-12 text-center table-border-gray py-2'><span className='less-grather mx-4 '>&lt;</span> current week  <span className='less-grather mx-4'>&gt;</span></p>  */}
 				<p className=' bitter-italic-normal-medium-22 col-md-12 text-center table-title-bg py-3'><FaLessThan className='less-grather mx-4'/> Current week <FaGreaterThan className='less-grather mx-4' /> </p> 
 					<table className="table border table-border-gray ">
@@ -122,7 +132,7 @@ const PlanningFinalize = () => {
 								{planning.planning[value].map((val1,key)=>(
 									<td className=" table-border-gray font-poppins-light" key={key}>
 										<div className='text-right color-skyblue my-2 mt-1 text-end'><a>
-											<MdEdit className="float-right" />
+											<MdEdit className="float-right" 	onClick={() =>setEnableEdit(true)}/>
 											{/* <i className="bi bi-pencil float-right" /> */}
 										</a></div>
 									<p className='color-skyblue'>{val1.employee_name}</p>
@@ -192,6 +202,11 @@ const PlanningFinalize = () => {
 						</tbody>
 					</table>
 				</div>
+				{enableEdit &&
+				<div className='mt-2 col-md-3'>
+					<EditEmployee/>
+					</div>
+}
 				{/* <div className="text-end ">
 					<button type="submit" className="btn skyblue-bg-color border-0   btn-block ">
 						Dashboard
