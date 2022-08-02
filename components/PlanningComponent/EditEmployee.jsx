@@ -106,15 +106,18 @@ function EditEmployee(props) {
 	};
 
 	return (
-		<div className="container">
+		<div className="container-fluid p-0">
+			<div className='empty-sec'></div>
 			<form onSubmit={(e) => submit(e)}>
-				<div className="row">
-					<p className="mt-5 mb-2 h4">Edit Employee</p>
+				<div className="row  m-0 ">
+				
+					<p className=" mb-2 h4 height-60 text-center align-items-center justify-content-center text-white d-flex">Edit Employee</p>
+					<div className='table-border-gray p-4'>
 					<div className="form-group ">
-						<label className="mb-2 custom_astrick">Employee name</label>
+						<label className="mb-2 custom_astrick poppins-regular-16px">Employee name</label>
 						<input
 							type="text"
-							className="form-control mb-2"
+							className="form-control mb-2 poppins-regular-16px rounded-0 mb-4"
 							defaultValue=""
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, employee_name: e.target.value }));
@@ -122,7 +125,7 @@ function EditEmployee(props) {
 						/>
 						<p className="error  mt-2 mb-2">{error_employee_name}</p>
 
-						<label className=" mb-2 custom_astrick">Employee type</label>
+						<label className=" mb-2 custom_astrick poppins-regular-16px">Employee type</label>
 						{/* <input
 							type="text"
 							className="form-select mb-2"
@@ -132,7 +135,7 @@ function EditEmployee(props) {
 							}}
 						/> */}
 						<select
-							className="form-select mt-2 mb-2 custom-select "
+							className="form-select mt-2 mb-2 custom-select poppins-regular-16px rounded-0 mb-4 "
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, employee_type: e.target.value }));
 							}}
@@ -146,7 +149,7 @@ function EditEmployee(props) {
 						</select>
 						<p className="error  mt-2 mb-2">{error_employee_type}</p>
 
-						<label className=" mb-2 custom_astrick">Function</label>
+						<label className=" mb-2 custom_astrick poppins-regular-16px">Function</label>
 						{/* <input
 							type="text"
 							className="form-select mb-2"
@@ -156,7 +159,7 @@ function EditEmployee(props) {
 							}}
 						/> */}
 						<select
-							className="form-select mt-2 mb-2 custom-select "
+							className="form-select mt-2 mb-2 custom-select poppins-regular-16px  rounded-0 mb-4"
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, employee_type: e.target.value }));
 							}}
@@ -170,23 +173,24 @@ function EditEmployee(props) {
 						</select>
 						<p className="error  mt-2 mb-2">{error_function}</p>
 
-						<label className="mb-3 custom_astrick">Minimum salary</label>
-						<div className="input-group mb-1">
+						<label className="mb-3 custom_astrick poppins-regular-16px">Minimum salary</label>
+						<div className="input-group mb-4">
 							<input
 								type="text"
-								className="form-control"
+								className="form-control rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, minimum_salary: e.target.value }));
 								}}
 							/>
-							<span className="input-group-text">€</span>
+							<span className="input-group-text rounded-0">€</span>
 						</div>
 						<p className="error mt-2 mb-2">{error_minimum_salary}</p>
 					</div>
-					<div className="d-flex ">
-						<div className="mt-2 col-md-3 py-3  ">
-							<div className="pb-2 custom_astrick">Start time</div>
+					<div className="d-flex col-md-12 row m-0 ">
+						<div className=" col-md-6 ps-0  ">
+							<div className="pb-2 custom_astrick poppins-regular-16px rounded-0">Start time</div>
 							<TimePicker
+								className='rounded-0'
 								placeholder="Select Time"
 								use12Hours
 								showSecond={false}
@@ -199,9 +203,10 @@ function EditEmployee(props) {
 							/>
 							<p className="error mt-2 mb-2 ">{error_start_time}</p>
 						</div>
-						<div className="col-md-2 py-3 mt-2">
+						<div className="col-md-6  p-0">
 							<div className="pb-2 custom_astrick">End time</div>
 							<TimePicker
+							    className='rounded-0'
 								placeholder="Select Time"
 								use12Hours
 								showSecond={false}
@@ -214,18 +219,22 @@ function EditEmployee(props) {
 							/>
 							<p className="error mt-3">{error_end_time}</p>
 						</div>
+					
 					</div>
-				</div>
-				<div className="text-end ">
+					
+				
+				<div className="text-end  mt-2">
 					<button
 						type="submit"
-						className="btn btn-secondary   btn-block "
+						className="btn rounded-0  custom-btn px-3  btn-block float-end "
 						onClick={() => {
 							setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
 						}}
 					>
-						Save
+						SAVE
 					</button>
+				</div>
+				</div>
 				</div>
 			</form>
 		</div>

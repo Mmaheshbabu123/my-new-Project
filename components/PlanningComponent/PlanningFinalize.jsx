@@ -103,7 +103,7 @@ const PlanningFinalize = () => {
 						<thead className="">
 							
 							<tr className="skyblue-bg-color">
-								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex ">
 									Monday<br />01-08-2022
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
