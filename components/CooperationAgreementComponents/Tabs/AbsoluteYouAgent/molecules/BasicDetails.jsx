@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import LabelField from '@/atoms/LabelField';
 import DateField from '@/atoms/DateField';
 import MultiSelectField from '@/atoms/MultiSelectField';
@@ -8,7 +8,7 @@ import ValidateMessage from '@/atoms/validationError';
 // import { helpers } from '../../../CooperationAgreementHelper'; //.
 import styles from '../absoluteAgent.module.css';
 
-import { consultantArray, consultantNumArray, whoWillSignOptions } from '../../../Definations';
+import { whoWillSignOptions } from '../../../Definations';
 
 var startDateAgreement    = 1;
 var absoluteConsultant    = 2;
@@ -16,18 +16,40 @@ var absoluteConsultantNum = 3;
 var activateAddProject    = 4;
 var whoWillSign           = 80;
 var consultNumber = [];
+var consultantArray = [];
+var consultantNumArray = [];
 
 const BasicDetails = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  var { tab_1, element_status } = state;
+  var { tab_1, element_status, defaultOptions } = state;
   var { validations } = tab_1;
-  const [ render, setRender ] = useState(false);
 
   useEffect(() => {
-    consultNumber = consultantNumArray[tab_1[absoluteConsultant]] || [];
-    tab_1[whoWillSign] = tab_1[whoWillSign] || [];
-    setRender(!render);
-  }, [])
+    if(defaultOptions) {
+      let { agent_details, absolute_consultant } = defaultOptions;
+      let bbright_id = agent_details && agent_details.bbright_id ? agent_details.bbright_id : 0;
+      consultantArray = absolute_consultant ? absolute_consultant.filter(val => Number(val.value) === Number(bbright_id)) : [];
+      consultNumber = [{label: bbright_id, value: Number(bbright_id)}];
+      tab_1 = getTabBasicData(consultantArray, consultNumber, bbright_id);
+      updateStateChanges({tab_1, bbright_id});
+    }
+  }, [defaultOptions])
+
+/**
+ * [getTabBasicData description]
+ * @param  {[type]} consultantArray               [description]
+ * @param  {[type]} consultNumber                 [description]
+ * @param  {[type]} bbright_id                    [description]
+ * @return {[type]}                 [description]
+ */
+    const getTabBasicData = (consultantArray, consultNumber, bbright_id) => {
+      let obj = consultantArray.length ? consultantArray[0] : {};
+      return {...tab_1,
+        [whoWillSign]: tab_1[whoWillSign] || [],
+        [absoluteConsultant]: Number(obj.value) || 0,
+        [absoluteConsultantNum]: Number(bbright_id) || 0
+      }
+    }
 
   /**
    * [handleChange description]
@@ -57,11 +79,10 @@ const BasicDetails = (props) => {
    */
   const onSelect = (obj, key) => {
     if(key === absoluteConsultant) {
-      consultNumber = consultantNumArray[obj.value];
       tab_1[absoluteConsultantNum] = '';
     }
     element_status['tab_1'].push(key);
-    tab_1[key] = obj.value;
+    tab_1[key] = Number(obj.value);
     validations[key] = false;
     tab_1['validations'] = validations;
     updateStateChanges({ tab_1, element_status });
@@ -100,7 +121,7 @@ const BasicDetails = (props) => {
           <MultiSelectField
               id={absoluteConsultant}
               options={consultantArray}
-              standards={consultantArray.filter(val => val.value === tab_1[absoluteConsultant])}
+              standards={consultantArray.filter(val => Number(val.value) === tab_1[absoluteConsultant])}
               disabled={false}
               handleChange={(obj) => onSelect(obj, absoluteConsultant)}
               isMulti={false}
@@ -113,7 +134,7 @@ const BasicDetails = (props) => {
           <MultiSelectField
               id={absoluteConsultantNum}
               options={consultNumber}
-              standards={consultNumber.filter(val => val.value === tab_1[absoluteConsultantNum])}
+              standards={consultNumber.filter(val => Number(val.value) === tab_1[absoluteConsultantNum])}
               disabled={false}
               handleChange={(obj) => onSelect(obj, absoluteConsultantNum)}
               isMulti={false}
