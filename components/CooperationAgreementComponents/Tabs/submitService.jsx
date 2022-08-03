@@ -376,7 +376,7 @@ async function forWardToNextStepTab(router, contextState, contextUpdate, current
         }
         if(selectedTabId === INVOIING_TAB && draft !== 1) {
           window.open(`/cooperation-agreement-preview?root_parent_id=${stateObj.root_parent_id}&sales_ref=${stateObj.salesAgentRefId}&type=1`, '_blank');
-          router.push('/manage-cooperation-overview?type=sales_agent&id=1')
+          router.push(`/manage-cooperation-overview?type=sales_agent&id=${stateObj.defaultOptions.agent_details['sales_agent_id']}`);
         } else {
           router.query.selectedTabId = nextTab;
           router.push(router, undefined, { shallow: true })
