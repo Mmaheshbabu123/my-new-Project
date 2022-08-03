@@ -218,7 +218,7 @@ function checkValidationFields(key,value,type,tab_key,stateData) {
   else if(type === 6 && vatRateValidate(value)) {
    stateData['validations'][key]['validate'] = false;
   }
-  else {
+  else  {
      stateData['validations'][key]['validate'] = true;
   }
 }
@@ -226,11 +226,10 @@ function checkValidationFieldsEachTab(validationObj,tab_key,stateData) {
   Object.keys(validationObj).map((key)=>{
     var value = stateData[key] || '';
     var type  = validationObj[key]['type'];
-     if(value) {
+     if(value != '') {
        checkValidationFields(key,value,type,tab_key,stateData);
      }
   })
-
   return validationsObjCheckStatus(stateData['validations']);
 }
 function absoluteYouPostData(state) {
