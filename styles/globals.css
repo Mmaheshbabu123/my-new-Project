@@ -206,6 +206,7 @@ body {
     font-size: var(--font-size-s);
     font-style: normal;
     font-weight: 400;
+    line-height: initial;
 }
 
 
@@ -215,6 +216,7 @@ body {
     font-size: var(--font-size-m);
     font-style: normal;
     font-weight: 400;
+    line-height: initial;
 }
 
 .poppins-regular-18px {
@@ -223,6 +225,7 @@ body {
     font-size: var(--font-size-l);
     font-style: normal;
     font-weight: 400;
+    line-height: initial;
 }
 
 .poppins-regular-20px {
@@ -231,6 +234,7 @@ body {
     font-size: var(--font-size-xl);
     font-style: normal;
     font-weight: 400;
+    line-height: initial;
 }
 .poppins-italic-14px {
     color: var(--color-label-footer-gray);
@@ -255,6 +259,7 @@ body {
     font-size: var(--font-size-l);
     font-style: italic;
     font-weight: 400;
+    line-height: initial;
 }
 
 .poppins-italic-20px {
@@ -263,6 +268,7 @@ body {
     font-size: var(--font-size-xl);
     font-style: italic;
     font-weight: 400;
+    line-height: initial;
 }
 .poppins-italic-22px {
     color: var(--color-label-footer-gray);
@@ -270,6 +276,7 @@ body {
     font-size: var(--font-size-xxl);
     font-style: italic;
     font-weight: 400;
+    line-height: initial;
 }
 
 .poppins-italic-24px {
@@ -967,6 +974,26 @@ font-size: var(--font-size-l);
  }
  .rc-time-picker-input {
     border-radius: 0px !important;
+ }
+ .firsrt-line {
+    height: 65px;
+    position: absolute;
+    left: -42px;
+    border-left: 1px solid #4C4D554D !important;
+ }
+ .second-line {
+    height: 1px;
+    position: absolute;
+    left: -41px;
+    border-bottom: 1px solid #4C4D554D !important;
+    width: 50px;
+    top: 30px;
+ }
+ span .firsrt-line:last-child() {
+    height: 40px !important;
+ }
+ .accordi span .second-line:last-child() {
+   border-bottom: 1px solid red !important;
  }
  @media screen {
 

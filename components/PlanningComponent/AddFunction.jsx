@@ -389,11 +389,13 @@ const AddFunction = () => {
 		var group = '';
 		var func = (
 			<div className="row ms-6">
-				<ul>
+				<ul className='ulitem'>
 					{functions != null ? (
 						functions.slice(0, 4).map((key, value) => (
-							<div key={key['id']} className="row ms-5">
-								<div style={{ visibility: 'hidden' }}>
+							<div key={key['id']} className="row ms-5 position-relative accordi">
+								<span className='firsrt-line'></span>
+								<span className='second-line'> </span>
+								<div style={{ display: 'none' }}>
 									{value == 0 ? (group = !ischecked ? parameter + 'function' : 'function') : ''}
 								</div>
 								<div className="col-md-6">

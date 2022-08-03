@@ -114,9 +114,9 @@ const ManagePc = (props) => {
 	//------------------- Pagination code -------------------------//
 
 	return (
-		<div className="container">
-			<div className="row ps-3 ms-3">
-				<p className="row mt-3 ms-5 text-bold h4">Manage paritair comite</p>
+		<div className="container-fluid p-0">
+			<div className="row m-0">
+				<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage paritair comite</h1>
 				<div className="col-md-9">
 					<div className="row">
 						<div className="col-sm-3">

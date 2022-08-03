@@ -129,8 +129,8 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
             {state.currentItems && state.currentItems.length > 0 ?
             <tbody>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-                <td className='text-start px-5 poppinns-regular-thin py-4'> {eachRow.name} </td>
-                <td className='text-end px-5 poppinns-regular-thin py-4 '>{ getNeededActions(eachRow) } </td>
+                <td className='text-start px-5 poppinns-regular-thin py-1'> {eachRow.name} </td>
+                <td className='text-end px-5 poppinns-regular-thin py-1 '>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
             : <p style={{paddingTop: '10px'}}> No records </p>}

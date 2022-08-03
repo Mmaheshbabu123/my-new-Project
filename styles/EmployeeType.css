@@ -111,6 +111,15 @@
   /* right: 30%; */
   right: 33rem;
 }
+.searchIconCss3 {
+  text-align: right;
+  width: 5% !important;
+  top: 7px;
+  position: absolute;
+  cursor: pointer;
+  /* right: 30%; */
+  right: 27%;
+}
 
 /* Salary benefits css  */
 .salary-input-fields{
