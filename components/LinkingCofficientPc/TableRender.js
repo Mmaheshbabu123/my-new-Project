@@ -27,8 +27,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className='mt-2 ms-3 color-skyblue' /> </span>
+        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='mt-2 ms-3 color-skyblue'/> </span>
       </>
     )
   }
@@ -94,12 +94,12 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   //-------------------
     return (
       <>
-        <h4> {`Manage coefficients per PC`} </h4>
+        <h4 className='mt-2 mb-4 font-weight-bold   px-0  bitter-italic-normal-medium-24'> {`Manage coefficients per PC`} </h4>
         <div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-          <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
+          <span className="searchIconCss3"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
           <input
             type="text"
-            className="form-control col-7 pcp_name"
+            className="form-control col-7 pcp_name poppins-regular-16px rounded-0 mb-4"
             onChange={(e) => setState({...state, searchTerm: e.target.value})}
             placeholder={'Search'}
             onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
@@ -111,17 +111,18 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
             {`+ ${button_title}`}
           </button>*/}
         </div>
-        <div className="table-render-parent-div">
-          <table className="table table-hover manage-types-table">
+        <div className="table-render-parent-div ">
+          <table className="table table-hover manage-types-table  mb-3 text-center">
             <thead className="table-render-thead">
-              <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+              <tr className='btn-bg-gray-medium table-sticky-bg-gray' key={'header-row-tr'}>{headers.map((eachHeader, index) => 
+              <th className='poppins-regular-18px justify-content-center align-items-center btn-bg-gray-medium text-center pt-4' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
             <tbody>
-              {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-                <td> {eachRow.pc_number} </td>
-                <td> {eachRow.name} </td>
-                <td>{ getNeededActions(eachRow) } </td>
+              {state.currentItems.map(eachRow => <tr className='border poppinns-regular-thin p-2' key={eachRow.id} id={eachRow.id}>
+                <td className="poppinns-regular-thin"> {eachRow.pc_number} </td>
+                <td className="poppinns-regular-thin"> {eachRow.name} </td>
+                <td className="poppinns-regular-thin">{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
             : <p style={{paddingTop: '10px'}}> No records </p>}
@@ -140,12 +141,14 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
             containerClassName={"pagination"}
             itemClass="page-item"
             linkClass="page-link"
-            subContainerClassName={"pages pagination"}
+            subContainerClassName={"pages pagination justify-content-center project-pagination"}
             activeClassName={"active"}
         />}
-          <button onClick={() => router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
-            {`Back`}
+        <div className="text-start col-md-6">
+          <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5">
+            {`BACK`}
           </button>
+          </div>
         </div>
       </>
     );

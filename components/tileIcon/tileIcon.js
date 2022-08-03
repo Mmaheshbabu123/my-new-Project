@@ -11,9 +11,9 @@ export default function tileIcon({ props }) {
     <React.Fragment>
        <div className={`${styles["dashboard-tile-parent"]} select-bg-gray border-0 my-5 `}>
          <div className={styles["dashboard-tile-field-content"]}>
-           <Link href={`${url}`}>
-             <a className={styles["anchor-tag"]}>
-               <Image src={iconPath} alt={name} loading="lazy"  width="85%" height="75%"  />
+           <Link className='sree' href={`${url}`}>
+             <a className={styles["anchor-tag"]} >
+               <Image src={iconPath} alt={name} loading="lazy"  width="70%" height="60%"  />
                <div title={name} className = {`{styles["tile-title-text"] poppins-regular-16px  my-3`}> {name} </div>
              </a>
            </Link>
