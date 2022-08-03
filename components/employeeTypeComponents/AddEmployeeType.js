@@ -7,16 +7,18 @@ import {MdEdit, MdDelete} from 'react-icons/md';
 
 
 const AddEmployeeType = (props) => {
+  console.log(props)
   const router = useRouter();
   const inputRef = useRef(null);
   const [state, setState] = useState({
       name: props.id ? props.rows[0]['name'] : ''
+    , rows:props.rows
     , editFlow: props.id
     , editUrl:props.manageType == 'employee-types' ? editEmployeeType : editCofficientType
     , createUrl:props.manageType == 'employee-types' ? createEmployeeTypes:createCofficientType
     , newItems: []
     , nameWarning: false
-    , editIndex: 0
+    , editIndex: -1
     , typeName: `${props.manageType === 'employee-types' ? 'employee type name' : 'coefficient name'}`
   })
 
@@ -26,12 +28,17 @@ const AddEmployeeType = (props) => {
      * @param {String} nameValue  [description]
      */
     const addItemAndUpdateIndex = (stateObj, nameValue) => {
+      let totalRows = stateObj['newItems'].length > 0 ?  stateObj['newItems'] : state.rows;
+
       if (nameValue.length) {
-        let duplicates = stateObj['newItems'].filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
+
+        let duplicates = totalRows.filter((val, index) =>  (index !== state.editIndex && val.name.toLowerCase().trim() === state.name.toLowerCase().trim()))
+
         if(duplicates.length) {
             stateObj['uniqueError'] = true;
             stateObj['duplicates'] = duplicates.map(obj => obj.name);
         } else {
+          state.editIndex =   state.editIndex === -1 ? 0 :state.editIndex;
           stateObj['newItems'][state.editIndex] = { name: nameValue };
           stateObj['name'] = '';
           stateObj['editIndex'] = stateObj['newItems'].length;
