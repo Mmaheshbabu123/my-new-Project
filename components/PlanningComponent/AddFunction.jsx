@@ -398,9 +398,9 @@ const AddFunction = () => {
 								<div style={{ display: 'none' }}>
 									{value == 0 ? (group = !ischecked ? parameter + 'function' : 'function') : ''}
 								</div>
-								<div className="col-md-6">
+								<div className="col-md-6 zindex-999">
 									<div
-										className="mt-2 mb-2 bg-light h-75 p-3 bg-4C4D550F"
+										className="mt-2 mb-2 bg-light h-75 p-3 bg-4C4D550F z-999"
 										defaultValue={prefill(key['id'])}
 										onChange={() => {
 											value < 3
