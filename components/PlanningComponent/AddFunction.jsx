@@ -5,6 +5,8 @@ import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
+import { FaRegPlusSquare, FaRegMinusSquare,FaEuroSign } from 'react-icons/fa';
+
 
 const AddFunction = () => {
 	const router = useRouter();
@@ -38,6 +40,7 @@ const AddFunction = () => {
 					var functionsdata = result.data[1];
 					if (Data.length == 0) {
 						setData(data);
+						console.log(data);
 						//if (sdata.length != 0) {
 						//storedDataAssigning(sdata);
 						createAllObjects(data, sdata);
@@ -107,8 +110,17 @@ const AddFunction = () => {
 	}
 
 	function createAllObjects(result, storage) {
+		var collapseOpen = false;
 		if (result.length != 0 && employeeobject.length == 0) {
+			console.log(employeeobject)
+			console.log(result);
 			result.forEach((element, val) => {
+
+				if(val == 0){
+					collapseOpen = true
+				}else{
+					collapseOpen = false
+				}
 				var obj = {
 					employeeid: element[4],
 					functionid: storage[val] != undefined ? storage[val].function_id : '',
@@ -119,7 +131,8 @@ const AddFunction = () => {
 					salaryerror: '',
 					employeeiderror: '',
 					functioniderror: '',
-					default: false
+					default: false,
+					collapseOpen:collapseOpen
 				};
 				if (element[4] != null) {
 					setEmployeeObject((employeeobject) => [ ...employeeobject, obj ]);
@@ -136,55 +149,82 @@ const AddFunction = () => {
 	};
 
 	function validateErrors() {
-		let v = 0;
-		const newstate = employeeobject.map((value) => {
-			let func,
-				sal,
-				emp = '';
-
+		let count = 0;
+		const newstate = employeeobject.map((value,key) => {
+			let func = '';
+			let	sal = '';
+			let	emp = '';
 			if (
 				value.functionid == '' ||
 				value.functionid == null ||
-				value.functionid == 'This field is required.' ||
 				value.functionid == 'finaldrop'
 			) {
 				func = 'This field is required.';
-				v++;
+				
+				count++;
+			}else{
+				func = '';
+				console.log(value);
+				if(value.salary == ''||value.salary == null||value.salary == undefined){
+					sal = "This field is required."
+					count++;
+
+				}else{
+
+				}
 			}
 
 			// if(value.salary==''){
 			// 	console.log('its empty sathish');
 			// }
-			if (v == 0) {
-				if (
-					value.functionsalary == '' ||
-					value.functionsalary == null ||
-					value.functionsalary == 'This field is required.'
-				) {
-					//sal= 'This field is required.';
-					func = 'Please select the function';
-					v++;
-				} else {
-					if (value.salary < value.functionsalary) {
-						sal = 'This field is invalid.';
-						v++;
-					}
-				}
-			}
+			// if (v == 0) {
+				
+				// if (
+				// 	value.functionsalary == '' ||
+				// 	value.functionsalary == null ||
+				// 	value.functionsalary == 'This field is required.'
+				// ) {
+				// 	//sal= 'This field is required.';
+				// 	func = 'Please select the function';
+				// 	// v++;
+				// } else {
+				// 	if (value.salary < value.functionsalary) {
+				// 		sal = 'This field is invalid.';
+				// 		// v++;
+				// 	}
+				// }
+			// }
 
 			if (
 				value.employeetypeid == '' ||
-				value.employeetypeid == null ||
-				value.employeetypeid == 'This field is required.'
+				value.employeetypeid == null 
 			) {
 				emp = 'This field is required.';
-				v++;
+				count++;
 			}
-			return { ...value, functioniderror: func, employeeiderror: emp, salaryerror: sal };
+			var collapseOpen = true;
+			if(func != '' && func != null && func != undefined){
+				collapseOpen = true;
+			}else{
+				// if(key != 0){
+				// collapseOpen = true;
+				// }else{
+				// 	collapseOpen = false;
+				// }
+			}
+			if(func == '' && emp == '' && sal == ''){
+				if(key == 0){
+				collapseOpen = true;
+				}else{
+					collapseOpen = false;
+				}
+			}
+			return { ...value, functioniderror: func, employeeiderror: emp, salaryerror: sal,collapseOpen:collapseOpen };
+			
 		});
-
+		console.log(newstate)
 		setEmployeeObject(newstate);
-		return v;
+		return count;
 	}
 
 	const submit = (e) => {
@@ -252,11 +292,12 @@ const AddFunction = () => {
 				if (empid != 0) {
 					if (element.employeeid == empid) {
 						objects[key].functionsalary = Number(salary);
-						objects[key].salary = Number(salary);
+						objects[key].salary = objects[key].salary!= '' ?objects[key].salary:'';
 					}
 				} else {
 					objects[key].functionsalary = Number(salary);
-					objects[key].salary = Number(salary);
+					objects[key].salary = objects[key].salary!= '' ?objects[key].salary:'';
+
 				}
 			});
 			setEmployeeObject(objects);
@@ -382,9 +423,9 @@ const AddFunction = () => {
 	}
 
 	const empid = (parameter = 0, error = '', val = 0) => {
-		console.log(functions);
-		if (error == '' && employeeobject[0] != undefined) {
-			error = employeeobject[0].functioniderror;
+		console.log(employeeobject);
+		if (error == '' && employeeobject[val] != undefined) {
+			error = employeeobject[val].functioniderror;
 		}
 		var group = '';
 		var func = (
@@ -404,8 +445,10 @@ const AddFunction = () => {
 											value < 3
 												? (updateValue(parameter, key['id'], 1),
 													setSalaries(key['salary']),
-													updatingObjectfunctionSlary(parameter, key['salary']),
-													updatingObjectSlary(parameter, Number(key['salary'])))
+													updatingObjectfunctionSlary(parameter, key['salary'])
+													// ,
+													// updatingObjectSlary(parameter, Number(key['salary']))
+													)
 												: '';
 										}}
 									>
@@ -679,6 +722,9 @@ const AddFunction = () => {
 				object[key].functionid = '';
 				object[key].salary = '';
 				object[key].functionsalary = '';
+				object[key].employeeiderror = '';
+				object[key].functioniderror = '';
+				object[key].salaryerror = '';
 				//}
 			});
 
@@ -687,9 +733,16 @@ const AddFunction = () => {
 			}
 		}
 	};
+	let updateCollapseState = (index, val) => {
+		var object = [ ...employeeobject ];
+		object[index].collapseOpen = !val;
+		setEmployeeObject(object);
+
+	}
 
 	return (
 		<div className="col-md-12" style={{}}>
+			{console.log(employeeobject)}
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row m-0">
 					<div className="col-md-12 p-0">
@@ -704,16 +757,18 @@ const AddFunction = () => {
 					}
 				</div>
 				<div className="row ">
-					{console.log(storeddata)}
 					<ol type="1">
 						{Data.map((key, value) => (
 							<div key={value}>
 								<div key={key} className="row bg-4C4D550F mb-2 p-3">
-									<div className="col-md-4 p-1 d-flex align-items-center justify-content-start">
-										{value + 1}. {key[1]}
+								<div className="col-md-1 d-flex align-items-center justify-content-start poppins-regular-18px">
+									{ischecked?(value + 1): (employeeobject[value].collapseOpen == false?<FaRegPlusSquare onClick={() => updateCollapseState(value,employeeobject[value].collapseOpen)}/>:<FaRegMinusSquare onClick={() => updateCollapseState(value, employeeobject[value].collapseOpen)}/>)}															
+									</div>
+									<div className="col-md-3 p-1 d-flex align-items-center justify-content-start">
+										 {key[1]}
 									</div>
 									{/* {console.log(storeddata[value])} */}
-									<div className="col-md-3  border-0 d-flex align-items-center h-40 justify-content-start custom-drop-btn">
+									<div className="col-md-3  border-0  align-items-center h-40 justify-content-start custom-drop-btn">
 										{() => setSelected(storeddata[value])}
 										{emptypes != null ? (
 											<Select
@@ -732,28 +787,34 @@ const AddFunction = () => {
 											''
 										)}
 										{
-											<p style={{ color: 'red', paddingTop: '5px' }}>
+											<div style={{ color: 'red', paddingTop: '5px' }}>
 												{employeeobject[value].employeeiderror}
-											</p>
+											</div>
 										}
 									</div>
-									<div className="col-md-2 bg-white border-0 h-40 d-flex align-items-center justify-content-center">
-										<span className="p-1">
-											{ischecked ? salaries != undefined && salaries != '' ? (
-												'€' + employeeobject[value].functionsalary
+									<div className="col-md-2 border-0 h-40 d-flex align-items-center justify-content-center">
+										{console.log(salaries)}
+											{ischecked ? salaries != undefined && salaries != '' && salaries != null && employeeobject[value].functionsalary!=''? (
+												
+												<span className="p-1 w-100 h-100 d-flex align-items-center justify-content-center poppins-regular-18px">
+												{'€ ' + employeeobject[value].functionsalary}
+												</span>
+
 											) : (
 												''
 											) : employeeobject[value].functionid != '' ? (
-												'€' + employeeobject[value].functionsalary
+												<span className="p-1 w-100 h-100 d-flex align-items-center justify-content-center poppins-regular-18px">
+												{'€ ' + employeeobject[value].functionsalary}
+												</span>
 											) : (
 												''
 											)}
-										</span>
 									</div>
 									<div className="col-md-2 d-flex align-items-center justify-content-center h-40 ">
 										{employeeobject[value].functionid != '' ? (
 											<div>
 												<div className="input-group">
+												<span className="input-group-text border-0 poppins-regular-18px">€</span>
 													<input
 														ref={salaryref}
 														type="textfield"
@@ -766,10 +827,10 @@ const AddFunction = () => {
 																''
 															)
 														}
-														className="form-control bg-white border-0"
+														className="form-control bg-white border-0 poppins-regular-18px"
 														onChange={(e) => setsaalary(key[4], e)}
 													/>
-													<span className="input-group-text border-0">€</span>
+													
 												</div>
 
 												<p style={{ color: 'red' }}>{employeeobject[value].salaryerror}</p>
@@ -779,7 +840,7 @@ const AddFunction = () => {
 										)}
 									</div>
 								</div>
-								{!ischecked ? empid(key[4], employeeobject[value].functioniderror, value) : ''}
+								{!ischecked && employeeobject[value].collapseOpen ? empid(key[4], employeeobject[value].functioniderror, value) : ''}
 							</div>
 						))}
 					</ol>
