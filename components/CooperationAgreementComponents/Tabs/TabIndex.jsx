@@ -61,7 +61,7 @@ const TabIndex = (props) => {
 
 useEffect(()=> {
   if(!renderedOptions)  loadData()
-}, [])
+}, [salesAgentRefId])
 
 const loadData = async () => {
  let data = [];
