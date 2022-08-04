@@ -6,7 +6,7 @@ const Editproject = () => {
     const router = useRouter();
     return (
         <div>
-            <EdtiProject />
+            <EdtiProject pid={router.query.pid} type="editproject" />
         </div>
     );
 };
