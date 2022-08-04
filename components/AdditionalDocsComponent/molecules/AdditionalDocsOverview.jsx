@@ -135,7 +135,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
           onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
         />
         <button
-          onClick={() => router.push(`/manage-additional-docs?entitytype=${props.entityType}&entityid=${props.entityId}&action=1&id=0`)}
+          onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
           type="button"
           className="btn btn-dark pcp_btn col-3">
           {`+Add a document`}

@@ -170,3 +170,11 @@ export const deleteUploadedFiles = BASE_URL + 'delete-files';
 export const uploadAdditionalDocs = BASE_URL + 'upload-additional-docs';
 export const uploadFiles = BASE_URL + 'upload-files';
 //---------------
+
+
+//---------------Composition coeffcients-------------//
+export const fetchCompositions = BASE_URL + "get-compositions";
+export const createCompositions = BASE_URL + "create-compositions";
+export const updateCompositions = BASE_URL + "update-compositions";
+export const deleteCompositions = BASE_URL + "delete-compositions";
+//----------------------
