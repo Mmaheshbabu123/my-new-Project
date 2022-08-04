@@ -1,3 +1,4 @@
+const withPWA = require('next-pwa')
 const nextConfig = {
   reactStrictMode: false,
   serverRuntimeConfig: {
@@ -13,7 +14,10 @@ const nextConfig = {
   },
   cssLoaderOptions: {
     url: false
+  },
+  pwa: {
+    dest: 'public'
   }
 }
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig)
