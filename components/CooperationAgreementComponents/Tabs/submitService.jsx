@@ -151,6 +151,7 @@ function checkCompanyInformationTabValidation(tab_data,tab_key) {
       let stateData = stateObj[tab_key];
     var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key,stateData);
     var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key,stateData);
+  
   return  requiredFields && validateFileds;
 
 }
@@ -226,10 +227,15 @@ function checkValidationFieldsEachTab(validationObj,tab_key,stateData) {
   Object.keys(validationObj).map((key)=>{
     var value = stateData[key] || '';
     var type  = validationObj[key]['type'];
-     if(value != '') {
+     if(value) {
+
        checkValidationFields(key,value,type,tab_key,stateData);
      }
+     else {
+       stateData['validations'][key]['validate'] = false;
+     }
   })
+
   return validationsObjCheckStatus(stateData['validations']);
 }
 function absoluteYouPostData(state) {

@@ -15,30 +15,13 @@ const ProjectCommon = (props) => {
 					<li className="nav-item" role="presentation">
 						<button
 							className={showtab === 1 ? ' nav-link active ' : '  nav-link'}
-							// id="home-tab0"
-							// data-mdb-toggle="tab"
-							// data-mdb-target="#home0"
-							// type="button"
-							// role="tab"
-							// aria-controls="home"
-							// aria-selected="true"
 							onClick={() => handletab(1)}
 						>
 							Manage project
 						</button>
 					</li>
 					<li className="nav-item" role="presentation">
-						<button
-							className={showtab == 2 ? 'nav-link active' : 'nav-link'}
-							// id="profile-tab0"
-							// data-mdb-toggle="tab"
-							// data-mdb-target="#profile0"
-							// type="button"
-							// role="tab"
-							// aria-controls="profile"
-							// aria-selected="false"
-							onClick={() => handletab(2)}
-						>
+						<button className={showtab == 2 ? 'nav-link active' : 'nav-link'} onClick={() => handletab(2)}>
 							Manage archived project
 						</button>
 					</li>

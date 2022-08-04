@@ -16,7 +16,7 @@ function Popup(props) {
 					</div>
 
 					<div className="modal-body title">
-						<p className="my-1">{props.body}</p>{' '}
+						<p className="my-1">{props.body}</p>
 					</div>
 
 					<div className="modal-footer">
