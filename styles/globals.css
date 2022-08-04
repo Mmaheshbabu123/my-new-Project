@@ -980,6 +980,7 @@ font-size: var(--font-size-l);
     position: absolute;
     left: -42px;
     border-left: 1px solid #4C4D554D !important;
+    width: 60px;
  }
  .second-line {
     height: 1px;
@@ -995,6 +996,9 @@ font-size: var(--font-size-l);
  .accordi span .second-line:last-child() {
    border-bottom: 1px solid red !important;
  }
+ /* .zindex-999 {
+    z-index: 999;
+ } */
  @media screen {
 
  }

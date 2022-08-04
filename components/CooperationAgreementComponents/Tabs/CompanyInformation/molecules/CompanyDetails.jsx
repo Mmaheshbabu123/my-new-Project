@@ -62,7 +62,7 @@ element_status['tab_2'].push(name);
 }
 const getCompanyDetailsByvat = async() => {
    let data = {};
-   let vatNumber = tab_2['8'] !== "" ? tab_2['8']: 0
+   let vatNumber = tab_2['8'] !== "" ? tab_2['8']: '';
   await APICALL.service(`${fecthCompanyDetailsByVatNum}/${vatNumber}`, 'GET')
     .then((result) =>{
        data = result.data;

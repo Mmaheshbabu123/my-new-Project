@@ -11,7 +11,6 @@ import Link from 'node_modules/next/link';
 
 function ManageProject(props) {
 	const router = useRouter();
-	const { p_unique_key } = router.query;
 	/**
      * Initialise search filter 
      */
@@ -25,7 +24,7 @@ function ManageProject(props) {
 
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ projectid, setProjectid ] = useState('');
-	const [ itemsPerPage, setItemsPerPage ] = useState(5);
+	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 
 	// const [ showtab, setShowtab ] = useState(2);
 
@@ -306,7 +305,12 @@ function ManageProject(props) {
 												<td className="poppinns-regular-thin">{result.project_location}</td>
 												<td className="poppinns-regular-thin">{result.address}</td>
 												<td className="d-flex justify-content-center">
-													<Link href="edit-project">
+													<Link
+														href={
+															'/editproject/' + result.p_unique_key + '?pid=' + result.id
+														}
+														className=""
+													>
 														<a type="button">
 															<MdEdit className="mt-2 ms-3 color-skyblue" />
 														</a>
@@ -359,7 +363,12 @@ function ManageProject(props) {
 				</div>
 			</form>
 			{showdeletepopup == true && (
-				<Popup display={'block'} popupActionDeleteNo={closeDeletePopup} popupActionDeleteYes={deleteproject} />
+				<Popup
+					display={'block'}
+					popupActionDeleteNo={closeDeletePopup}
+					popupActionDeleteYes={deleteproject}
+					body={'Are you sure you want to delete this project?'}
+				/>
 			)}
 		</div>
 	);
