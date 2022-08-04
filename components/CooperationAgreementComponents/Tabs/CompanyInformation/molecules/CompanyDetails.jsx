@@ -71,10 +71,21 @@ const getCompanyDetailsByvat = async() => {
       tab_2 = {...tab_2,...data,}
       updateStateChanges({ tab_2});
     } )
-    .catch((error) => window.alert('Error occurred'));
+    .catch((error) => setIntialStateObj(tab_2) );
 
 }
-const validateFields = (text) => {
+const setIntialStateObj = (tab_2) => {
+    for (let i = 5; i < 22; i++) {
+      if( i!== 8) {
+      tab_2[i] =  '';
+    }
+    }
+    for(let i = 22; i < 25;i ++) {
+      tab_2[i]  = 1;
+    }
+    updateStateChanges({ tab_2});
+
+
 }
 const handleVatChange = (event) => {
 

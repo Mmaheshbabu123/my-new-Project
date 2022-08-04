@@ -13,8 +13,6 @@ const InvoiceDetails = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_6 ,element_status} = state;
   let paymentList = state.defaultOptions['payment_condtion'] || [];
-  console.log(tab_6)
-  console.log(state);
   const handleChange = (event) => {
     const { value, name } = event.target;
     if(name === '72' && value === '') { //Vat Rate should be % present

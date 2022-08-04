@@ -46,15 +46,16 @@ const CoefficientPage = (props) => {
     }
     await APICALL.service(`${getPcLinkedCoeffData}/${value}`, 'GET').then(response => {
       if (response.status === 200) {
+        let tab_1 = state['tab_1'];
         let data = assignDataToStateVariables(value, response.data);
         dependecyDataStatus['cooperationCoeffData'] = true;
         data['emptyError'] = !response['data'].employeeTypeArray.length;
         setCompState(data);
-        updateStateChanges({coeffPageData: data, dependecyDataStatus})
+        tab_1['cooperationCoeffData'] = data.pclinkingValueobj || {};
+        updateStateChanges({coeffPageData: data, dependecyDataStatus, tab_1})
       }
     })
   }
-
   /**
    * [assignDataToStateVariables updating data in state variables/ context state variables]
    * @param  {Object}     data  [response data from backend]

@@ -12,7 +12,7 @@ var year = dateObj.getUTCFullYear()-1;
 const AddEditSalaryBenefits = (props) => {
   const router = useRouter();
   const inputRef = useRef({});
-
+ console.log(props);
   const assignInitialValues = () => {
     if(props.id && props.rows.length)
       return {
@@ -26,9 +26,10 @@ const AddEditSalaryBenefits = (props) => {
   const [state, setState] = useState({
       ...assignInitialValues()
     , editFlow: props.id ? true : false
+    , rows    : props.rows
     , newItems: []
     , nameWarning: false
-    , editIndex: 0
+    , editIndex: -1
     , minDate: `${year}-${month < 10 ? '0' + month : month}-${day}`
   })
 
@@ -39,13 +40,16 @@ const AddEditSalaryBenefits = (props) => {
      * @param {String} nameValue  [description]
      */
     const addItemAndUpdateIndex = (stateObj) => {
+        let totalRows = stateObj['newItems'].length > 0 ?  stateObj['newItems'] : state.rows;
+
       if (stateObj['name'].length) {
-        let duplicates = stateObj['newItems'].filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
+        let duplicates = totalRows.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase().trim() === state.name.toLowerCase().trim()))
         if(duplicates.length) {
             stateObj['uniqueError'] = true;
             stateObj['duplicates'] = duplicates.map(obj => obj.name);
         } else {
           if(!checkDateFieldValid(state.date)) {
+              state.editIndex =   state.editIndex === -1 ? 0 :state.editIndex;
             stateObj['newItems'][state.editIndex] = {
               name: state.name,
               date: state.date,
@@ -259,7 +263,7 @@ const AddEditSalaryBenefits = (props) => {
       <div className="row m-0 p-0">
         <h4 className="mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${state.editFlow ? 'Edit' : 'Add'} salary benefit`} </h4>
         <div className='row p-0 m-0'>
-         
+
           <div className="col-md-12 d-flex justify-content-end p-0">
           {!state.editFlow &&
             <button

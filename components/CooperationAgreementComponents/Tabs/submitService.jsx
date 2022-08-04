@@ -218,7 +218,7 @@ function checkValidationFields(key,value,type,tab_key,stateData) {
   else if(type === 6 && vatRateValidate(value)) {
    stateData['validations'][key]['validate'] = false;
   }
-  else {
+  else  {
      stateData['validations'][key]['validate'] = true;
   }
 }
@@ -226,11 +226,10 @@ function checkValidationFieldsEachTab(validationObj,tab_key,stateData) {
   Object.keys(validationObj).map((key)=>{
     var value = stateData[key] || '';
     var type  = validationObj[key]['type'];
-     if(value) {
+     if(value != '') {
        checkValidationFields(key,value,type,tab_key,stateData);
      }
   })
-
   return validationsObjCheckStatus(stateData['validations']);
 }
 function absoluteYouPostData(state) {
@@ -376,7 +375,7 @@ async function forWardToNextStepTab(router, contextState, contextUpdate, current
         }
         if(selectedTabId === INVOIING_TAB && draft !== 1) {
           window.open(`/cooperation-agreement-preview?root_parent_id=${stateObj.root_parent_id}&sales_ref=${stateObj.salesAgentRefId}&type=1`, '_blank');
-          router.push('/manage-cooperation-overview?type=sales_agent&id=1')
+          router.push(`/manage-cooperation-overview?type=sales_agent&id=${stateObj.defaultOptions.agent_details['sales_agent_id']}`);
         } else {
           router.query.selectedTabId = nextTab;
           router.push(router, undefined, { shallow: true })
