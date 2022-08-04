@@ -14,6 +14,7 @@ const AddEmployee = () => {
 	const p_unique_key = router.query.p_unique_key;
 	const [ defaultvalue, setDefaultValue ] = useState(null);
 	const [ selectedOption, setSelectedOption ] = useState([]);
+	const [ tempOption, setTempOption ] = useState([]);
 
 	useEffect(
 		() => {
@@ -24,7 +25,7 @@ const AddEmployee = () => {
 				'GET'
 			)
 				.then((result) => {
-					 getOptions(result,1);
+					getOptions(result, 1);
 				})
 				.catch((error) => {
 					console.error(error);
@@ -32,7 +33,8 @@ const AddEmployee = () => {
 
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/selectedEmployees/' + p_unique_key, 'GET')
 				.then((result) => {
-					getOptions(result,2);
+					console.log(result);
+					getOptions(result, 2);
 				})
 				.catch((error) => {
 					console.error(error);
@@ -41,7 +43,7 @@ const AddEmployee = () => {
 		[ router.query ]
 	);
 
-	const getOptions = (res,c) => {
+	const getOptions = (res, c) => {
 		var options = [];
 		if (res !== null) {
 			res.map((val, key) => {
@@ -54,87 +56,89 @@ const AddEmployee = () => {
 
 				options[key] = opt;
 			});
-			if(c==1){
-			  setData(options);
-			}else{
+			if (c == 1) {
+				setData(options);
+			} else {
 				setSelectedOption(options);
+				setTempOption(options);
 			}
 		}
 	};
 
 	const submit = (e) => {
 		e.preventDefault();
-		
+
 		var err = ValidationService.emptyValidationMethod(selectedOption);
 
 		if (err != '') {
 			setError(err);
 		} else {
 			setError(err);
-			if(selectedOption.length!=0){
-			let data = [ selectedOption, p_unique_key ];
+			if (selectedOption.length != 0) {
+				let data = [ selectedOption, p_unique_key, tempOption ];
 
-			APICALL.service(addplanningemployee, 'POST', data)
-				.then((result) => {
-					if (result.status === 200) {
-						router.push('/planning/functions/' + p_unique_key);
-					} else {
-						console.log(result);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			}else{
+				APICALL.service(addplanningemployee, 'POST', data)
+					.then((result) => {
+						if (result.status === 200) {
+							router.push('/planning/functions/' + p_unique_key);
+						} else {
+							console.log(result);
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			} else {
 				router.push('/planning/functions/' + p_unique_key);
 			}
 		}
 	};
 
-	const backToDashboard = () => {
-		router.push('/planning/add/' + p_unique_key);
-	};
 	return (
-		<div className="col-md-12" style={{  }}>
+		<div className="col-md-12" style={{}}>
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row m-0">
-					<div className="row col-md-12" style={{ }}>
-						<h1 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0' >Select employee</h1>
+					<div className="row col-md-12" style={{}}>
+						<h1 className="mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0">Select employee</h1>
 					</div>
 				</div>
-				<div className='col-md-12 selectemp-height'>
-				<div className="row col-md-6 m-auto select-relative">
-					<label className="custom_astrick form-label mb-3 custom_astrick poppins-regular-16px" style={{ }}>
-						Employee
-					</label>
-					{console.log(Data)}
-					{console.log(selectedOption)}
+				<div className="col-md-12 selectemp-height">
+					<div className="row col-md-6 m-auto select-relative">
+						<label
+							className="custom_astrick form-label mb-3 custom_astrick poppins-regular-16px"
+							style={{}}
+						>
+							Employee
+						</label>
+						{console.log(Data)}
+						{console.log(selectedOption)}
 
-					<Select
-					    value={selectedOption}
-						isMulti
-						name="employees"
-						options={Data}
-						onChange={setSelectedOption}
-					/>
-					<span style={{ color: 'red' }}>{Error}</span>
-				</div>
+						<Select
+							value={selectedOption}
+							isMulti
+							name="employees"
+							options={Data}
+							onChange={setSelectedOption}
+						/>
+						<span style={{ color: 'red' }}>{Error}</span>
+					</div>
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
 						<button
 							type="button"
 							className="btn  btn-block px-0"
-							onClick={() => backToDashboard()}
+							onClick={() => router.push('/planning/add/' + p_unique_key)}
 						>
-							<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">BACK</p>
+							<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
+								BACK
+							</p>
 						</button>
 					</div>
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
 							className="btn btn-secondary rounded-0  custom-btn px-3  btn-block float-end"
-							onClick={() => submit}
 						>
 							NEXT
 						</button>
