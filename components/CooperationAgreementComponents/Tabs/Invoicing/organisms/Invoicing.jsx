@@ -7,11 +7,15 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 const Invoicing = (props) => {
   const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_6_action, filledTabs}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
   const { tab_6,tab_2,tab_3} = state;
+
   const PersonId = 1;
   useEffect(()=>{
   if(!state.loadedTabs.includes(selectedTabId))
     loadData();
-  else updateStateChanges({renderTabComponents: true});
+  else  {
+      prefillFieldsDefault(tab_6,tab_2,tab_3);
+    updateStateChanges({tab_6,renderTabComponents: true});
+  }
   },[])
   const loadData = async () => {
   let stateKey = `tab_${selectedTabId}`;
@@ -45,6 +49,7 @@ const Invoicing = (props) => {
    tab_6['50']  = tab_3[PersonId]['26'] || '';
    tab_6['67']  = tab_3[PersonId]['33'] || '';
    tab_6['required'] = requiredFields['tab_6'];
+
 
  }
 
