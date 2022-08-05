@@ -1059,6 +1059,9 @@ font-size: var(--font-size-l);
     border-color: var(--color-skyblue) !important;
 
 }
+.hover-white:hover {
+  color: var(--color-white) !important;
+}
   @media screen {
 
  }
