@@ -1051,6 +1051,14 @@ font-size: var(--font-size-l);
     border-radius: 0px;
     border: 1px solid var(--bg-gray-dark);
 }
+.bg-4C4D550F {
+    background-color: #4C4D550F;
+}
+.form-check-input:checked {
+    background-color: var(--color-skyblue) !important;
+    border-color: var(--color-skyblue) !important;
+
+}
   @media screen {
 
  }

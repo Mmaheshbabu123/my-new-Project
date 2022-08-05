@@ -28,7 +28,8 @@
 .pclinking-table-thead {
   position: sticky;
   top: 0;
-  background-color: #4C4D550F;
+  /* background-color: #4C4D550F; */
+  background-color: lightgray;
 }
 
 

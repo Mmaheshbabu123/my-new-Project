@@ -6,11 +6,15 @@ import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
 import { requiredFields} from '../../../RequiredFields';
 const OnlineDetails = (props) => {
   const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_4_action, filledTabs}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
-
+  const { tab_4,tab_2,} = state;
   useEffect(()=>{
   if(!state.loadedTabs.includes(selectedTabId))
     loadData();
-  else updateStateChanges({renderTabComponents: true});
+  else {
+    console.log(tab_2)
+   prefillFieldsDefault(tab_4,tab_2);
+   updateStateChanges({tab_4,renderTabComponents: true});
+  }
   },[])
   const loadData = async () => {
   let stateKey = `tab_${selectedTabId}`;
@@ -26,6 +30,14 @@ const OnlineDetails = (props) => {
   updateStateChanges({tab_4,tab_4_action,loadedTabs:[...state.loadedTabs, selectedTabId],
     filledTabs: data.completedTabIds.length ? [...filledTabs, ...data.completedTabIds] : filledTabs
   })
+  }
+
+  const prefillFieldsDefault = (tab_4,tab_2) =>{
+    let defaultKeys = ['40','42','45','46','47'];
+    defaultKeys.forEach((item)=>{
+      tab_4[item] = tab_2['19'] || tab_4[item];
+    })
+
   }
 
     return(

@@ -334,7 +334,7 @@ function AddPc(props) {
 				{cat_subsec_type == 3 ? <h4 className="h5 mt-3">Edit paritair comite</h4> : ''}
 				<div className="row  parithair-border m-0">
 					{/* <div className={sec_width} > */}
-					<div className="col-md-12 row my-4" >
+					<div className="col-md-12 row my-4 m-0" >
 						<div className="form-group py-2 col-md-6">
 							<label className="custom_astrick">Paritair comite number</label>
 							<input
