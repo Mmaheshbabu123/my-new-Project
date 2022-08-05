@@ -200,15 +200,15 @@ function AddCategory(props) {
 	};
 
 	return (
-		<div className="mt-4">
+		<div className="mt-4 table-title-bg p-3">
 			<form onSubmit={submit}>
-				{id != '' ? <h4 className="h5 mb-3">Edit category</h4> : <h4 className="h5 mb-3">Add category</h4>}
+				{id != '' ? <h4 className="h5 mb-3">Edit category</h4> : <h4 className="h5 mb-3 bitter-italic">Add category</h4>}
 				<div className="row">
-					<label className="mb-2 custom_astrick">Category name</label>
+					<label className="mb-2 custom_astrick mb-2 mt-2 poppins-regular-16px">Category name</label>
 					<div className="form-group mb-3">
 						<input
 							type="text"
-							className=" form-control my-2 "
+							className=" form-control my-2  input-border-lightgray poppins-regular-18px mh-50 rounded-0 "
 							value={data.category_name}
 							name="name"
 							id="name"
@@ -219,12 +219,12 @@ function AddCategory(props) {
 
 						<p style={{ color: 'red' }}>{error_category_name}</p>
 					</div>
-					<label className="custom_astrick">Minimum salary</label>
+					<label className="custom_astrick mb-2 mb-2 mt-2 poppins-regular-16px">Minimum salary</label>
 					<div className="form-group mb-3">
 					<div className="input-group">
 						<input
 							type="text"
-							className="form-control"
+							className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 							value={data.min_salary}
 							name="salary"
 							id="salary"
@@ -232,7 +232,7 @@ function AddCategory(props) {
 								setData((prev) => ({ ...prev, min_salary: e.target.value }));
 							}}
 						/>
-						<span className="input-group-text">€</span>
+						<span className="input-group-text mh-50 rounded-0 mt-2 mb-2">€</span>
 						</div>
 						<p style={{ color: 'red' }}>{error_min_salary}</p>
 					</div>
@@ -241,16 +241,16 @@ function AddCategory(props) {
 					<div className="text-start col-md-6">
 						{(router.query.cid) && (
 							<Link href={'/manage-category'}>
-								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
-									Back
+								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
+									BACK
 								</a>
 							</Link>
 						)}
 
 						{router.query.fid && (
 							<Link href={'/manage-function'}>
-								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
-									Back
+								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
+									BACK
 								</a>
 							</Link>
 						)}
@@ -258,13 +258,13 @@ function AddCategory(props) {
 					</div>
 					<div className="text-end col-md-6">
 						<button
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end"
 							disabled={disableSave}
 							onClick={() => {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
 							}}
 						>
-							Save
+							SAVE
 						</button>
 					</div>
 				</div>

@@ -332,62 +332,63 @@ function AddPc(props) {
 		<div className="">
 			<form onSubmit={(e) => submit(e)}>
 				{cat_subsec_type == 3 ? <h4 className="h5 mt-3">Edit paritair comite</h4> : ''}
-				<div className="row pt-4">
-					<div className={sec_width}>
-						<div className="form-group py-2">
+				<div className="row  parithair-border m-0">
+					{/* <div className={sec_width} > */}
+					<div className="col-md-12 row my-4" >
+						<div className="form-group py-2 col-md-6">
 							<label className="custom_astrick">Paritair comite number</label>
 							<input
 								type="text"
 								value={data.pc_number}
-								className=" form-control mt-2"
+								className=" form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, pc_number: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{error_pc_number}</p>
 						</div>
-						<div className="form-group py-2">
+						<div className="form-group py-2 col-md-6">
 							<label className="custom_astrick">Paritair comite name </label>
 							<input
 								type="text"
 								value={data.pc_name}
-								className="form-control mt-2"
+								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, pc_name: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{error_pc_name}</p>
 						</div>
-						<div className="form-group py-2">
+						<div className="form-group py-2 col-md-6">
 							<label>Paritair comite alias name </label>
 							<input
 								type="text"
 								value={data.pc_alias_name}
-								className="form-control mt-2"
+								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{error_pc_alias_name}</p>
 						</div>
-						<div className="form-group py-2">
+						<div className="form-group py-2 col-md-6">
 							<label className="custom_astrick">Minimum work timings per day </label>
 							<input
 								type="text"
 								value={data.min_work_timings}
-								className="form-control mt-2"
+								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{error_min_time}</p>
 						</div>
-						<div className="form-group py-2">
+						<div className="form-group py-2 col-md-6">
 							<label className="custom_astrick">Maximum work timings per day </label>
 							<input
 								type="text"
 								value={data.max_work_timings}
-								className="form-control mt-2"
+								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
 								}}
@@ -398,42 +399,42 @@ function AddPc(props) {
 					{/* <div className="col-md-6" /> */}
 				</div>
 				{cat_subsec_type == 3 ? (
-					<div className="row">
+					<div className="row m-0 my-4">
 						<div className="text-start col-md-6" />
-						<div className="text-end col-md-6">
+						<div className="text-end col-md-6 p-0">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end"
 								disabled={disableSave}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								Save
+								SAVE
 							</button>
 						</div>
 					</div>
 				) : (
-					<div className="row">
-						<div className="text-start col-md-6">
+					<div className="row m-0 my-4">
+						<div className="text-start col-md-6 p-0">
 							<button
 								type="button"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
 								onClick={() => backToDashboard()}
 							>
-								Back
+								BACK
 							</button>
 						</div>
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end"
 								disabled={disableSave}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								Next
+								NEXT
 							</button>
 						</div>
 					</div>

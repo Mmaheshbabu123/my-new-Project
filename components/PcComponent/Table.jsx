@@ -140,7 +140,7 @@ const Table = (props) => {
 					
 						<tr>
 							{tvalues.map((tval, key) => (
-								<td className="fw-bold text-break" key={key}>
+								<td className="fw-bold text-break poppins-regular-18px" key={key}>
 									{tval}
 								</td>
 							))}

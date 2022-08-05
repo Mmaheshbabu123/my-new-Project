@@ -137,9 +137,9 @@ const PcOverview = (params) => {
 	};
 
 	return (
-		<div className="container">
+		<div className="container-fluid p-0">
 			<div className="row pt-4 min-vh-75">
-				<div className={`px-5 ${cat_leftsec}`}>
+				<div className={` ${cat_leftsec}`}>
 					{params.type == 'editpc' ? (
 						<p className="h4">Edit paritair comite</p>
 					) : params.type == 'viewpc' ? (
@@ -151,39 +151,41 @@ const PcOverview = (params) => {
 						<div>
 							{cat_subsec_type == 0 &&
 							params.type != 'viewpc' && (
-								<div className="text-end me-4">
+								<div className="text-end ">
 									<button
 										type="button"
 										to="category"
 										pcid={pc_unique_key}
-										className={'btn me-3' + styles.btncolor}
+										// className={'btn me-3 blue-border-bg-white' + styles.btncolor}
+										className='btn me-3 blue-border-bg-white  me-3'
 										onClick={() => {
 											setCat_leftsec('col-md-9');
 											setCat_rightsec('d-block col-md-3');
 											setCat_subsec_type(1);
 										}}
 									>
-										Add category
+										+ Add category
 									</button>
 									<button
 										type="button"
 										to="function"
 										pcid={pc_unique_key}
-										className={'btn me-2' + styles.btncolor}
+										className='btn me-2 blue-border-bg-white'
 										onClick={() => {
 											setCat_leftsec('col-md-9');
 											setCat_rightsec('d-block col-md-3');
 											setCat_subsec_type(2);
 										}}
 									>
-										Add function
+										+ Add function
 									</button>
 								</div>
 							)}
+							<div className=''>
 							<ul className={`list-unstyled ${styles.tree}`}>
 								<li>
 									<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
-										<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+										<li className="list-inline-item section-plus-icon fs-4  ">
 											{/* <a
 												// data-bs-toggle="collapse"
 												// href={'#collapsepc' + pc_unique_key}
@@ -248,7 +250,7 @@ const PcOverview = (params) => {
 														<ul className="list-inline">
 															<li>
 																<ul>
-																	<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+																	<li className="list-inline-item section-plus-icon fs-4  mt-3">
 																		<span>
 																			{pc['childObj'] && console.log(pc['childObj'])}
 																			{pc['childObj'][val]['collapseOpen'] ==
@@ -296,7 +298,7 @@ const PcOverview = (params) => {
 																		).map((val2, key2) => (
 																			<li key={key2}>
 																				<ul className="list-inline">
-																					<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+																					<li className="list-inline-item section-plus-icon fs-4 mt-3">
 																					{/* {pc['childObj'][val][
 																								'childObj'
 																							][val2]['collapseOpen'] ==
@@ -362,7 +364,7 @@ const PcOverview = (params) => {
 												) : (
 													<li>
 														<ul>
-															<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+															<li className="list-inline-item section-plus-icon fs-4  mt-3">
 																{console.log(pc['childObj'][val]['childObj'])}
 																{pc['childObj'][val]['collapseOpen'] == true || pc['childObj'][val]['childObj'] == undefined ? (
 																	<FaRegMinusSquare
@@ -405,6 +407,7 @@ const PcOverview = (params) => {
 										))}
 								</li>
 							</ul>
+							</div>
 						</div>
 					)}
 					{/* {router.query.cid &&
@@ -464,32 +467,32 @@ const PcOverview = (params) => {
 						</div>
 					)}
 				</div>
-				<div className={`px-4 pt-2 border-start border-2 ${cat_rightsec}`}>
+				<div className={`col pt-2  ${cat_rightsec}`}>
 					{pc_view_type != 'viewpc' && (
-						<div className="text-center">
+						<div className="text-center form-group row m-0 ">
 							<button
 								type="button"
 								to="category"
 								pcid={pc_unique_key}
-								className={'btn me-3' + styles.btncolor}
+								className='btn  blue-border-bg-white col me-3'
 								onClick={() => {
 									setCat_subsec_type(1);
 									setCat_subsec_id('');
 								}}
 							>
-								Add category
+								+ Add category
 							</button>
 							<button
 								type="button"
 								to="function"
 								pcid={pc_unique_key}
-								className={'btn me-2' + styles.btncolor}
+								className= 'btn  blue-border-bg-white col'
 								onClick={() => {
 									setCat_subsec_type(2);
 									setCat_subsec_id('');
 								}}
 							>
-								Add function
+								+ Add function
 							</button>
 						</div>
 					)}
@@ -509,27 +512,27 @@ const PcOverview = (params) => {
 			{router.query.cid || router.query.fid || params.type != 'addpc' ? (
 				''
 			) : (
-				<div className="row">
+				<div className="row my-4 m-0">
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
 							onClick={() => {
 								params.pc_type == 'edit' ? router.push('/manage-pc') : setCurrent_sec(1);
 							}}
 						>
-							Back
+							BACK
 						</button>
 					</div>
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end"
 							onClick={() => {
 								next_redirection();
 							}}
 						>
-							Next
+							NEXT
 						</button>
 					</div>
 				</div>
