@@ -160,24 +160,24 @@ const EmployeeType = () => {
 	};
 
 	return (
-		<div className="container">
+		<div className="container-fluid p-0">
 			<form onSubmit={submit}>
 			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
 
-				<div className="row pt-4">
+				<div className="row pt-4 border-form-sec m-0 p-4">
 					{data.map((val) => (
 						<div className={"form-check mt-4 "+sec_width} key={val.id}>
 							<input
 								disabled={disableForm}
 								type="checkbox"
-								className="form-check-input"
+								className="form-check-input rounded-0 "
 								value={val.id}
 								checked = {res.includes(val.id)?true:false} 
 								onChange={(e) => {
 									updateRes(e);
 								}}
 							/>
-							<label className="form-check-label"> {val.name}</label>
+							<label className="form-check-label pt-1" > {val.name}</label>
 						</div>
 					// 	<div className="form-check mt-4">
 					// 	<input
@@ -201,36 +201,36 @@ const EmployeeType = () => {
 					</p>
 				</div>
 				{pc_view_type == 'editpc' ? (
-					<div className="row">
+					<div className="row my-4">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end"
 							>
-								Save
+								SAVE
 							</button>
 						</div>
 					</div>
 				) : pc_view_type == 'addpc'?
-				<div className="row">
+				<div className="row my-4">
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
 							onClick={() => {
 								setCurrent_sec(3);
 							}}
 						>
-							Back
+							BACK
 						</button>
 					</div>
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end"
 						>
-							Next
+							NEXT
 						</button>
 					</div>
 				</div>:''
