@@ -131,7 +131,7 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
             {state.currentItems.map(eachRow => <tr className='border poppinns-regular-thin p-2' key={eachRow.cc_id} id={eachRow.cc_id}>
               <td className='poppinns-regular-thin py-2'> {eachRow.name} </td>
               <td className='poppinns-regular-thin'> {eachRow.including ? 'Yes' : '-'} </td>
-              <td className='poppinns-regular-thin'> {eachRow.including ? 'No' : '-'} </td>
+              <td className='poppinns-regular-thin'> {eachRow.including ? '' : 'No'} </td>
               <td className='poppinns-regular-thin'> {eachRow.remark ? eachRow.remark : '-'} </td>
               <td className='poppinns-regular-thin'> { getNeededActions(eachRow) } </td>
             </tr>)}
