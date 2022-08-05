@@ -11,6 +11,7 @@ const OnlineDetails = (props) => {
   if(!state.loadedTabs.includes(selectedTabId))
     loadData();
   else {
+    console.log(tab_2)
    prefillFieldsDefault(tab_4,tab_2);
    updateStateChanges({tab_4,renderTabComponents: true});
   }
@@ -34,7 +35,7 @@ const OnlineDetails = (props) => {
   const prefillFieldsDefault = (tab_4,tab_2) =>{
     let defaultKeys = ['40','42','45','46','47'];
     defaultKeys.forEach((item)=>{
-      tab_4[item] = tab_2['19'];
+      tab_4[item] = tab_2['19'] || tab_4[item];
     })
 
   }
