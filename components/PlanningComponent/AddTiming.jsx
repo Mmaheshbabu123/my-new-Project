@@ -56,7 +56,7 @@ function Addtiming(props) {
 	 * Method to open and close collapsible section when user click on '+' or '-' icon
 	 * @param {} id id of the collapsible element clicked
 	 */
-	const updateState = (id) => {
+	const updateCollapse = (id) => {
 		const newState = employee_planning.map((obj) => {
 			if (obj.id === id) {
 				return { ...obj, collapseOpen: !obj.collapseOpen };
@@ -308,9 +308,9 @@ function Addtiming(props) {
 												<div className="col-md-1 poppins-regular-18px">
 												{employee_planning.length > 1 && <span>
 													{result.collapseOpen == true ? (
-														<FaRegMinusSquare onClick={() => updateState(result.id)} />
+														<FaRegMinusSquare onClick={() => updateCollapse(result.id)} />
 													) : (
-														<FaRegPlusSquare onClick={() => updateState(result.id)} />
+														<FaRegPlusSquare onClick={() => updateCollapse(result.id)} />
 													)}
 													</span>
 }
