@@ -151,7 +151,7 @@ const PcOverview = (params) => {
 						<div>
 							{cat_subsec_type == 0 &&
 							params.type != 'viewpc' && (
-								<div className="text-end ">
+								<div className="text-end mb-3">
 									<button
 										type="button"
 										to="category"

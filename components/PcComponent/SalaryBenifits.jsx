@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 const SalaryBenifits = () => {
 	const router = useRouter();
 	const [ disableForm, setDisableForm ] = useState(false);
-	const [ sec_width, setSec_width ] = useState('col-md-5');
+	const [ sec_width, setSec_width ] = useState('col-6');
 
 	const [ visible, setVisible ] = useState(false);
 	const [ data, setData ] = useState([]);
@@ -168,7 +168,7 @@ const SalaryBenifits = () => {
 	};
 
 	return (
-		<div className="container">
+		<div className="container-fluid p-0">
 			<form onSubmit={submit}>
 				{pc_view_type == 'editpc' ? (
 					<h4 className="h5 mt-3">Edit salary benefits</h4>
@@ -177,13 +177,13 @@ const SalaryBenifits = () => {
 				) : (
 					''
 				)}
-				<div className="row">
+				<div className="row border-form-sec m-0 p-4">
 					{data.map((val, key) => (
-						<div key={key} className={`form-check mt-4 bg-light me-3 ${sec_width}`}>
-							<div className="form-check mt-4">
+						<div key={key} className={`form-check mt-1  me-3 ${sec_width}`}>
+							<div className="form-check my-2">
 								<input
 									disabled={disableForm}
-									className="form-check-input"
+									className="form-check-input rounded-0"
 									type="checkbox"
 									value={val.sb_id}
 									id={'flexCheckDefault' + key}
@@ -192,27 +192,27 @@ const SalaryBenifits = () => {
 										updateRes(e, key);
 									}}
 								/>
-								<label className="form-check-label" htmlFor="flexCheckDefault">
+								<label className="form-check-label pt-1" htmlFor="flexCheckDefault">
 									{val.name}
 								</label>
 							</div>
 							{val.checked && (
-								<div>
-									<div className="mt-3">
-										<p className={'fw-bold custom_astrick '}>Is this mandatory?</p>
+								<div className='bg-4C4D550F p-3'>
+									<div className="">
+										<p className={' custom_astrick poppins-regular-16px'}>Is this mandatory?</p>
 
 										<div className="d-flex mt-3">
 											<div className="form-check  ">
 												<input
 													disabled={disableForm}
-													className="form-check-input d-flex"
+													className="form-check-input d-flex rounded-0"
 													type="radio"
 													value="true"
 													name={'yes' + val.sb_id}
 													checked={val.mandatory === true}
 													onChange={(e) => handleRadio(e, key)}
 												/>
-												<label className="form-check-label ms-1" htmlFor="exampleRadios1">
+												<label className="form-check-label ms-1 poppins-regular-16px" htmlFor="exampleRadios1">
 													Yes
 												</label>
 											</div>
@@ -220,13 +220,13 @@ const SalaryBenifits = () => {
 											<div className="form-check">
 												<input
 													disabled={disableForm}
-													className="form-check-input ms-2"
+													className="form-check-input ms-2 rounded-0"
 													type="radio"
 													name={'yes' + val.sb_id}
 													checked={val.mandatory === false}
 													onChange={(e) => handleRadio(e, key)}
 												/>
-												<label className="form-check-label ms-1" htmlFor="exampleRadios2">
+												<label className="form-check-label ms-1 poppins-regular-16px" htmlFor="exampleRadios2">
 													No
 												</label>
 											</div>
@@ -245,36 +245,36 @@ const SalaryBenifits = () => {
 					</p>
 				</div>
 				{pc_view_type == 'editpc' ? (
-					<div className="row">
+					<div className="row my-4">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end"
 							>
-								Save
+								SAVE
 							</button>
 						</div>
 					</div>
 				) : pc_view_type == 'addpc' ? (
-					<div className="row">
+					<div className="row my-4">
 						<div className="text-start col-md-6">
 							<button
 								type="button"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
 								onClick={() => {
 									setCurrent_sec(4);
 								}}
 							>
-								Back
+								BACK
 							</button>
 						</div>
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end"
 							>
-								Save
+								SAVE
 							</button>
 						</div>
 					</div>
