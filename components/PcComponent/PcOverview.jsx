@@ -185,7 +185,7 @@ const PcOverview = (params) => {
 							<ul className={`list-unstyled ${styles.tree}`}>
 								<li>
 									<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
-										<li className="list-inline-item section-plus-icon fs-4  ">
+										<li className="list-inline-item section-plus-icon  align-top fs-4  ">
 											{/* <a
 												// data-bs-toggle="collapse"
 												// href={'#collapsepc' + pc_unique_key}
@@ -250,7 +250,7 @@ const PcOverview = (params) => {
 														<ul className="list-inline">
 															<li>
 																<ul>
-																	<li className="list-inline-item section-plus-icon fs-4  mt-3">
+																	<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
 																		<span>
 																			{pc['childObj'] && console.log(pc['childObj'])}
 																			{pc['childObj'][val]['collapseOpen'] ==
@@ -298,7 +298,7 @@ const PcOverview = (params) => {
 																		).map((val2, key2) => (
 																			<li key={key2}>
 																				<ul className="list-inline">
-																					<li className="list-inline-item section-plus-icon fs-4 mt-3">
+																					<li className="list-inline-item section-plus-icon  align-top fs-4 mt-3">
 																					{/* {pc['childObj'][val][
 																								'childObj'
 																							][val2]['collapseOpen'] ==
@@ -364,7 +364,7 @@ const PcOverview = (params) => {
 												) : (
 													<li>
 														<ul>
-															<li className="list-inline-item section-plus-icon fs-4  mt-3">
+															<li className="list-inline-item section-plus-icon align-top fs-4  mt-3">
 																{console.log(pc['childObj'][val]['childObj'])}
 																{pc['childObj'][val]['collapseOpen'] == true || pc['childObj'][val]['childObj'] == undefined ? (
 																	<FaRegMinusSquare
