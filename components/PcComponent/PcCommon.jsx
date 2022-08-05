@@ -70,7 +70,7 @@ const PcCommon = (props) => {
 	// );
 
 	return (
-		<div className="container">
+		<div className="container-fluid p-0">
 			<PcContext.Provider
 				value={{
 					pc_unique_key,
@@ -98,7 +98,7 @@ const PcCommon = (props) => {
 			>
 				{props.type == 'add' ? (
 					<div>
-						<p className="h4">
+						<p className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">
 							{current_sec == 1 ? (
 								'Add paritair comite'
 							) : current_sec == 2 ? (
@@ -114,10 +114,10 @@ const PcCommon = (props) => {
 							)}
 						</p>
 						<div className="row mt-4 pt-2">
-							<ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-								<li className="nav-item" role="presentation">
+							<ul className="nav nav-pills nav-justified mb-3 row" id="pills-tab" role="tablist">
+								<li className=" border-0 rounded-0  col" role="presentation">
 									<button
-										className={`nav-link py-3 ${current_sec == 1
+										className={`nav-link parithair-tabs  py-3 border-0 rounded-0 w-100 ${current_sec == 1
 											? 'active custom-active'
 											: 'custom-inactive'}`}
 										id="pills-pc-tab"
@@ -140,9 +140,9 @@ const PcCommon = (props) => {
 										<p>Paritair comite details</p>
 									</button>
 								</li>
-								<li className="nav-item" role="presentation">
+								<li className="col border-0 rounded-0 " role="presentation">
 									<button
-										className={`nav-link py-3 ${sec_completed.pc == false
+										className={`nav-link parithair-tabs w-100 py-3 border-0 rounded-0 ${sec_completed.pc == false
 											? 'disabled'
 											: ''} ${current_sec == 2 ? 'active custom-active' : 'custom-inactive'}`}
 										id="pills-profile-tab"
@@ -164,9 +164,9 @@ const PcCommon = (props) => {
 										<p className="mb-2">Step 2:</p> <p>Category and Function</p>
 									</button>
 								</li>
-								<li className="nav-item" role="presentation">
+								<li className="col border-0 rounded-0 " role="presentation">
 									<button
-										className={`nav-link py-3 ${current_sec != 3 && sec_completed.cat == false
+										className={`nav-link parithair-tabs w-100 border-0 rounded-0  py-3 ${current_sec != 3 && sec_completed.cat == false
 											? 'disabled'
 											: ''} ${current_sec == 3 ? 'active custom-active' : 'custom-inactive'}`}
 										id="pills-contact-tab"
@@ -188,9 +188,9 @@ const PcCommon = (props) => {
 										<p className="mb-2">Step 3:</p> <p>Age</p>
 									</button>
 								</li>
-								<li className="nav-item" role="presentation">
+								<li className="col border-0 rounded-0 " role="presentation">
 									<button
-										className={`nav-link py-3 ${current_sec != 4 && sec_completed.age == false
+										className={`nav-link parithair-tabs w-100 border-0 rounded-0  py-3 ${current_sec != 4 && sec_completed.age == false
 											? 'disabled'
 											: ''} ${current_sec == 4 ? 'active custom-active' : 'custom-inactive'}`}
 										id="pills-contact-tab"
@@ -212,9 +212,9 @@ const PcCommon = (props) => {
 										<p className="mb-2">Step 4:</p> <p>Employee type</p>
 									</button>
 								</li>
-								<li className="nav-item" role="presentation">
+								<li className="col border-0 rounded-0 " role="presentation">
 									<button
-										className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
+										className={`nav-link parithair-tabs w-100 border-0 rounded-0  py-3 ${current_sec != 5 && sec_completed.emp_type == false
 											? 'disabled'
 											: ''} ${current_sec == 5 ? 'active custom-active' : 'custom-inactive'}`}
 										id="pills-contact-tab"
@@ -237,7 +237,7 @@ const PcCommon = (props) => {
 									</button>
 								</li>
 							</ul>
-							<div className="tab-content" id="pills-tabContent">
+							<div className="tab-content col-md-12 p-0" id="pills-tabContent">
 								<div
 									className={`tab-pane fade ${current_sec == 1 ? 'show active' : ''}`}
 									id="pills-pc"
