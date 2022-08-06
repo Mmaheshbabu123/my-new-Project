@@ -35,15 +35,20 @@ function Addtiming(props) {
 					.then((result) => {
 						if (result.status == 200) {
 							console.log(result.data);
-							setEmployee_planning(result.data);
 							result.data.map((obj, key) => {
 								obj.date.map((obj1, key1) => {
 									result.data[key].date[key1] = new Date(obj1);
-									console.log(obj1);
+									// result.data[key].starttime[key1] = moment(obj1);
+								});
+								obj.timings.map((obj1, key1) => {
+									result.data[key].timings[key1].starttimeObj = moment(obj1.starttime);
+									result.data[key].timings[key1].endtimeObj = moment(obj1.endtime);
+
 								});
 							});
+							setEmployee_planning(result.data);
+
 						}
-						console.log(result);
 					})
 					.catch((error) => {
 						console.error(error);
@@ -71,7 +76,6 @@ function Addtiming(props) {
 	 * @param {*} value 
 	 */
 	let handleChange = (value) => {
-		console.log(value);
 		var dateobj = {
 			date: '',
 			starttime: '',
@@ -124,9 +128,13 @@ function Addtiming(props) {
 	};
 
 	let postdata = () => {
-		APICALL.service(storePlannedTimings, 'POST', employee_planning)
+		var data1 = [];
+		data1[0] = props.p_unique_key
+		data1[1] = checked
+		data1[2] = employee_planning;
+		data1[3] = commonDatetime;
+		APICALL.service(storePlannedTimings, 'POST', data1)
 			.then((result) => {
-				console.log(result);
 				if (result.status === 200) {
 					router.push('/planning/finalize/' + props.p_unique_key);
 				}
@@ -155,7 +163,6 @@ function Addtiming(props) {
 				count++;
 				setError_selected_date('Select atleast one date.');
 			} else {
-				console.log(selectedDate);
 			}
 		} else {
 			var res = [ ...employee_planning ];
@@ -183,9 +190,7 @@ function Addtiming(props) {
 	};
 
 	let updatetime = (type, index, e, key) => {
-		alert(moment(e).format("HH:mm"));
 		var res = [ ...employee_planning ];
-		console.log(res);
 		if(checked == true){
 
 		}else{
@@ -194,11 +199,15 @@ function Addtiming(props) {
 		if (e != null && res[key].timings.length > 0) {
 			if (type == 'starttime') {
 				res[key].timings[index].error_starttime = '';
-				res[key].timings[index].starttime = moment(e).format('HH:mm');
+				res[key].timings[index].starttimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
+				res[key].timings[index].starttime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+
 				setEmployee_planning(res);
 			} else {
 				res[key].timings[index].error_endtime = '';
-				res[key].timings[index].endtime = moment(e).format('HH:mm');
+				res[key].timings[index].endtimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
+				res[key].timings[index].endtime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+
 				setEmployee_planning(res);
 			}
 		}
@@ -356,7 +365,8 @@ function Addtiming(props) {
 																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
-																		format="HH:mm"
+																		// format="HH:mm"
+																		value = {value.starttimeObj?value.starttimeObj:null}
 																		onChange={(e) =>
 																			updatetime('starttime', index, e, key)}
 																	/>
@@ -375,6 +385,7 @@ function Addtiming(props) {
 																		showSecond={false}
 																		focusOnOpen={true}
 																		format="HH:mm"
+																		value = {value.endtimeObj?value.endtimeObj:null}
 																		onChange={(e) =>
 																			updatetime('endtime', index, e, key)}
 																	/>
