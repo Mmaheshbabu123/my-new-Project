@@ -67,6 +67,7 @@ export const planningoverview = BASE_URL + "planningdetails-by-uniquekey/";
 export const fetchPlannedTimings = BASE_URL + "fetch-planned-timings/"
 export const storePlannedTimings = BASE_URL + "store-planned-timings"
 export const updateProject = BASE_URL + "updateProject";
+export const updateEditproject = BASE_URL + "updateproject"
 
 
 
@@ -76,6 +77,7 @@ export const fetchPlanning = BASE_URL + "fetch-planning-details/";
 export const fetchproject = BASE_URL + "fetch-project/";
 export const fetchallproject = BASE_URL + "fetch-all-project";
 export const fetchallarchivedprojects = BASE_URL + "fetch-all-archived-project"
+export const fetchprojectbyid = BASE_URL + "getproject/"
 
 //--------------Manage Planning-----------------------------------//
 export const getWeeklyPlanning = BASE_URL + "get-weekly-planning/";
@@ -158,7 +160,7 @@ export const updateEmployerSign = BASE_URL + 'employer-sign-update';
 
 
 //----- BBRIGHT_API-------------------------//
-export const fecthCompanyDetailsByVatNum  = BASE_URL + 'enterprise-get-companydetails-by-vat';
+export const fecthCompanyDetailsByVatNum = BASE_URL + 'enterprise-get-companydetails-by-vat';
 
 //---------------ADDITIONAL DOCUMENTS---------------//
 export const fetchAdditionalDocuments = BASE_URL + 'fetch-additional-docs';
