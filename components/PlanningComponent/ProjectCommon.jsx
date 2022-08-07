@@ -14,14 +14,17 @@ const ProjectCommon = (props) => {
 				<ul className="nav nav-tabs mb-3 mt-3" id="myTab0" role="tablist">
 					<li className="nav-item" role="presentation">
 						<button
-							className={showtab === 1 ? ' nav-link active ' : '  nav-link'}
+							className={showtab === 1 ? ' nav-link  project-active ' : '  nav-link'}
 							onClick={() => handletab(1)}
 						>
 							Manage project
 						</button>
 					</li>
 					<li className="nav-item" role="presentation">
-						<button className={showtab == 2 ? 'nav-link active' : 'nav-link'} onClick={() => handletab(2)}>
+						<button
+							className={showtab == 2 ? 'nav-link project-active' : 'nav-link'}
+							onClick={() => handletab(2)}
+						>
 							Manage archived project
 						</button>
 					</li>

@@ -160,6 +160,7 @@ function Planning(props) {
 							res.street = result.data.street;
 							res.postal_code = result.data.postal_code;
 							res.country = result.data.country;
+							// console.log(res.country);
 							setProject((prev) => ({ ...prev, project: res }));
 
 							// setProject(res);

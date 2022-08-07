@@ -2,12 +2,12 @@ import EditProject from '@/components/PlanningComponent/EditProject';
 import { useRouter } from 'next/router';
 
 
-const editproject = () => {
+const Editproject = () => {
     const router = useRouter();
     return (
         <div>
-            <EditProject pid={router.query.pid} type="editproject" />
+            <EditProject id={router.query.pid} />
         </div>
     );
 };
-export default editproject;
+export default Editproject;

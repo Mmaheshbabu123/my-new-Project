@@ -51,6 +51,7 @@ function Addproject(props) {
 			if (props.countries) {
 				setCountrylist(props.countries);
 			}
+
 			if (data.comp_id == '') {
 				var res = data;
 				res.comp_id = props.company_id;
@@ -62,22 +63,22 @@ function Addproject(props) {
 
 	useEffect(
 		() => {
-			
 			console.log(props.data);
 			var data1 = props.data;
 			if (data1) {
-				setData((prev) => ({ ...prev,
-					id:data1.id,
+				setData((prev) => ({
+					...prev,
+					id: data1.id,
 					project_name: data1.project_name,
-					project_location:data1.project_location,
-					hno:data1.hno,
-					street:data1.street,
-					bno:data1.bno,
-					postal_code:data1.postal_code,
-					city:data1.city,
-					country:data1.country,
-					extra:data1.extra,
-					}));
+					project_location: data1.project_location,
+					hno: data1.hno,
+					street: data1.street,
+					bno: data1.bno,
+					postal_code: data1.postal_code,
+					city: data1.city,
+					country: data1.country,
+					extra: data1.extra
+				}));
 				// setData(props.data);
 				// console.log(data);
 			}
