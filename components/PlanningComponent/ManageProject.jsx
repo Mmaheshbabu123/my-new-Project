@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { fetchallproject, updateProject } from '../../Services/ApiEndPoints';
+import { fetchallproject, updateProject, fetchprojectbyid } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import Popup from './ProjectArchivePopup';
@@ -133,10 +133,12 @@ function ManageProject(props) {
 			setProject(res);
 			setItemOffset(0);
 		} else if (searchProjectname != '' && searchlocation != '') {
-			//--------------FOR WHEN TWO VALUES ARE GIVEN--------------------//
 			projectTemp.map((val) => {
 				if (
-					val['project_name'].trim().toLowerCase().includes(searchProjectname.toLowerCase()) &&
+					val['project_name'] != undefined &&
+					val['project_name'] != '' &&
+					val['project_name'] != null &&
+					val['project_name'].trim().toLowerCase().includes(searchProjectname.trim().toLowerCase()) &&
 					(val['project_location'] != undefined &&
 						val['project_location'] != '' &&
 						val['project_location'] != null &&
@@ -147,6 +149,7 @@ function ManageProject(props) {
 			});
 			setProject(res);
 			setItemOffset(0);
+			//--------------FOR WHEN TWO VALUES ARE GIVEN--------------------//
 		} else if (searchlocation != '' && searchaddress != '') {
 			projectTemp.map((val) => {
 				if (
@@ -164,7 +167,10 @@ function ManageProject(props) {
 		} else if (searchProjectname != '' && searchaddress != '') {
 			projectTemp.map((val) => {
 				if (
-					val['project_name'].trim().toLowerCase().includes(searchProjectname.toLowerCase()) &&
+					val['project_name'] != undefined &&
+					val['project_name'] != '' &&
+					val['project_name'] != null &&
+					val['project_name'].trim().toLowerCase().includes(searchProjectname.trim().toLowerCase()) &&
 					(val['address'] != undefined &&
 						val['address'] != '' &&
 						val['address'] != null &&
@@ -303,18 +309,16 @@ function ManageProject(props) {
 											<tr className="border poppinns-regular-thin p-2" key={result.id}>
 												<td className="poppinns-regular-thin">{result.project_name}</td>
 												<td className="poppinns-regular-thin">{result.project_location}</td>
-												<td className="poppinns-regular-thin">{result.address}</td>
+												<td className="poppinns-regular-thin">
+													{result.address.replace(',', '').length > 7 ? result.address : '-'}
+												</td>
 												<td className="d-flex justify-content-center">
-													<Link
-														href={
-															'/editproject/' + result.p_unique_key + '?pid=' + result.id
-														}
-														className=""
-													>
+													<Link href={'/editproject/' + result.id} className="">
 														<a type="button">
 															<MdEdit className="mt-2 ms-3 color-skyblue" />
 														</a>
 													</Link>
+													{/* <MdEdit type="button" className="mt-2 ms-3 " onClick={showPopup} /> */}
 
 													<span onClick={() => showDeletePopup(result.id)} type="button">
 														<MdDelete className="mt-2 ms-3 color-skyblue " />

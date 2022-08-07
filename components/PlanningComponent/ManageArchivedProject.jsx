@@ -65,6 +65,9 @@ function ManageArchivedProject(props) {
 		if (searchArchivedProjectname != '' && searchArchivedlocation != '' && searchArchivedaddress != '') {
 			archivedprojectTemp.map((val) => {
 				if (
+					val['project_name'] != undefined &&
+					val['project_name'] != '' &&
+					val['project_name'] != null &&
 					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.trim().toLowerCase()) &&
 					(val['project_location'] != undefined &&
 						val['project_location'] != '' &&
@@ -84,7 +87,10 @@ function ManageArchivedProject(props) {
 			//--------------FOR WHEN TWO VALUES ARE GIVEN--------------------//
 			archivedprojectTemp.map((val) => {
 				if (
-					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.toLowerCase()) &&
+					val['project_name'] != undefined &&
+					val['project_name'] != '' &&
+					val['project_name'] != null &&
+					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.trim().toLowerCase()) &&
 					(val['project_location'] != undefined &&
 						val['project_location'] != '' &&
 						val['project_location'] != null &&
@@ -101,7 +107,13 @@ function ManageArchivedProject(props) {
 		} else if (searchArchivedlocation != '' && searchArchivedaddress != '') {
 			archivedprojectTemp.map((val) => {
 				if (
-					val['project_location'].trim().toLowerCase().includes(searchArchivedlocation.toLowerCase()) &&
+					val['project_location'] != undefined &&
+					val['project_location'] != '' &&
+					val['project_location'] != null &&
+					val['project_location']
+						.trim()
+						.toLowerCase()
+						.includes(searchArchivedlocation.trim().toLowerCase()) &&
 					(val['address'] != undefined &&
 						val['address'] != '' &&
 						val['address'] != null &&
@@ -115,7 +127,10 @@ function ManageArchivedProject(props) {
 		} else if (searchArchivedProjectname != '' && searchArchivedaddress != '') {
 			archivedprojectTemp.map((val) => {
 				if (
-					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.toLowerCase()) &&
+					val['project_name'] != undefined &&
+					val['project_name'] != '' &&
+					val['project_name'] != null &&
+					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.trim().toLowerCase()) &&
 					(val['address'] != undefined &&
 						val['address'] != '' &&
 						val['address'] != null &&
@@ -252,7 +267,9 @@ function ManageArchivedProject(props) {
 											<tr className="border poppinns-regular-thin p-2" key={result.id}>
 												<td className="poppinns-regular-thin">{result.project_name}</td>
 												<td className="poppinns-regular-thin">{result.project_location}</td>
-												<td className="poppinns-regular-thin">{result.address}</td>
+												<td className="poppinns-regular-thin">
+													{result.address.replace(',', '').length > 7 ? result.address : '-'}
+												</td>
 											</tr>
 										))}
 
