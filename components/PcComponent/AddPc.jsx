@@ -334,63 +334,73 @@ function AddPc(props) {
 		<div className="">
 			<form onSubmit={(e) => submit(e)}>
 				{cat_subsec_type == 3 ? <h4 className="h5 mt-3">Edit paritair comite</h4> : ''}
-				<div className="row  parithair-border m-0">
+				<div className="row parithair-border m-0 px-4">
 					{/* <div className={sec_width} > */}
-					<div className="col-md-12 row my-4 m-0" >
-						<div className="form-group py-2 col-md-6">
+					<div className="col-md-12 row  my-4 m-0" >
+						<div className="form-group py-2 col-md-6 flex-1 me-2 ">
 							<label className="custom_astrick">Paritair comite number</label>
 							<input
 								type="text"
 								value={data.pc_number}
-								className=" form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+								className=" form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, pc_number: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{error_pc_number}</p>
 						</div>
-						<div className="form-group py-2 col-md-6">
-							<label className="custom_astrick">Paritair comite name </label>
+						<div className="form-group py-2 col-md-6 flex-1 ms-2">
+							<label className="custom_astrick">Paritair comite name</label>
 							<input
 								type="text"
 								value={data.pc_name}
-								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, pc_name: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{error_pc_name}</p>
 						</div>
-						<div className="form-group py-2 col-md-6">
+						<div className="form-group py-2 col-md-6 flex-1 me-2">
 							<label>Paritair comite alias name </label>
 							<input
 								type="text"
 								value={data.pc_alias_name}
-								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{error_pc_alias_name}</p>
 						</div>
-						<div className="form-group py-2 col-md-6">
-							<label className="custom_astrick">Minimum work timings per day </label>
+						<div className="form-group py-2 col-md-6 flex-1 ms-2">
+							<label className="custom_astrick">Buffer time between two plannings</label>
+							<input
+								type="text"
+								
+								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
+								
+							/>
+							<p className="error mt-2">{error_pc_alias_name}</p>
+						</div>
+						<div className="form-group py-2 col-md-6 flex-1 me-2">
+							<label className="custom_astrick">Minimum work timings per day</label>
 							<input
 								type="text"
 								value={data.min_work_timings}
-								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
 								}}
 							/>
 							<p className="error mt-2">{error_min_time}</p>
 						</div>
-						<div className="form-group py-2 col-md-6">
-							<label className="custom_astrick">Maximum work timings per day </label>
+						<div className="form-group py-2 col-md-6 flex-1 ms-2">
+							<label className="custom_astrick">Maximum work timings per day</label>
 							<input
 								type="text"
 								value={data.max_work_timings}
-								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
 								}}
@@ -421,16 +431,16 @@ function AddPc(props) {
 						<div className="text-start col-md-6 p-0">
 							<button
 								type="button"
-								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
+								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-18px px-0"
 								onClick={() => backToDashboard()}
 							>
 								BACK
 							</button>
 						</div>
-						<div className="text-end col-md-6">
+						<div className="text-end col-md-6 px-0">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end px-0"
 								disabled={disableSave}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
