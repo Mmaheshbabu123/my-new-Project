@@ -1,4 +1,3 @@
-const withPWA = require('next-pwa')
 const nextConfig = {
   reactStrictMode: false,
   serverRuntimeConfig: {
@@ -20,4 +19,4 @@ const nextConfig = {
   }
 }
 
-module.exports = withPWA(nextConfig)
+module.exports = nextConfig

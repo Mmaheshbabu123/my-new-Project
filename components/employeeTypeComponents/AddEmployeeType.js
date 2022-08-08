@@ -7,7 +7,6 @@ import {MdEdit, MdDelete} from 'react-icons/md';
 
 
 const AddEmployeeType = (props) => {
-  console.log(props)
   const router = useRouter();
   const inputRef = useRef(null);
   const [state, setState] = useState({
@@ -18,7 +17,7 @@ const AddEmployeeType = (props) => {
     , createUrl:props.manageType == 'employee-types' ? createEmployeeTypes:createCofficientType
     , newItems: []
     , nameWarning: false
-    , editIndex: -1
+    , editIndex: 0
     , typeName: `${props.manageType === 'employee-types' ? 'employee type name' : 'coefficient name'}`
   })
 

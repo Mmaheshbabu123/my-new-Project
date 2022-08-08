@@ -12,7 +12,6 @@ var year = dateObj.getUTCFullYear()-1;
 const AddEditSalaryBenefits = (props) => {
   const router = useRouter();
   const inputRef = useRef({});
- console.log(props);
   const assignInitialValues = () => {
     if(props.id && props.rows.length)
       return {
@@ -29,7 +28,7 @@ const AddEditSalaryBenefits = (props) => {
     , rows    : props.rows
     , newItems: []
     , nameWarning: false
-    , editIndex: -1
+    , editIndex: 0
     , minDate: `${year}-${month < 10 ? '0' + month : month}-${day}`
   })
 
@@ -72,8 +71,6 @@ const AddEditSalaryBenefits = (props) => {
     }
 
    const checkDateFieldValid = (value) => {
-     let miDate = state.minDate;
-     console.log({value, miDate});
      return (new Date(value).getTime() >= new Date(state.minDate).getTime() || value === '') ? false: true
    }
     /**
