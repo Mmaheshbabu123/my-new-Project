@@ -560,6 +560,7 @@ a {
 }
 .nav-pills .nav-link.active {
 	background-color: var(--color-skyblue) !important;
+    color: var(--color-white) !important;
 }
 
 .nav-link:hover {
@@ -572,7 +573,7 @@ a {
 }
 .custom_astrick::after {
 	content: "*";
-	padding-left: 3px;
+	/* padding-left: 3px; */
 	color: red;
 }
 .custom-inactive:hover {
@@ -591,10 +592,8 @@ a {
 	color: #999 !important;
 }
 .container-height {
-	/* min-height: calc(90vh - 100px); */
-	/* min-height: calc(92vh - 52px); */
-	/* height: 86.5vh; */
-	min-height: calc(90vh - 45px);
+	
+    min-height: calc(93vh - 4rem);
 }
 
 .atom-input-field-default {
@@ -686,9 +685,10 @@ a {
 	padding: 5px;
 }
 .back-btn-text {
-	font-family: var(--font-family-poppins-regular);
-	font-size: var(--font-size-l);
-	text-decoration: underline;
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+    text-decoration: underline;
+
 }
 input::placeholder,
 select {
@@ -816,11 +816,12 @@ div[disabled] {
 	min-height: 100%;
 	cursor: crosshair;
 }
-.footer {
-	position: sticky !important;
-	bottom: 0;
-	z-index: 10;
-}
+/* footer section sticky position */
+/* .footer {
+    position: sticky !important;
+    bottom: 0;
+		z-index: 10;
+} */
 .timepage-calander .rmdp-header {
 	background: var(--color-skyblue);
 	margin-top: 0px;
@@ -1091,24 +1092,26 @@ span .firsrt-line:last-child() {
 /* .zindex-999 {
     z-index: 999;
  } */
-.font-l {
-	font-size: var(--font-size-l) !important;
-}
-.parithair-border {
-	border: 1px solid var(--border-paritair-gray);
-}
-.parithair-tabs {
-	background-color: var(--color-border-lightgrey) !important;
-	color: var(--color-white) !important;
-	font-family: var(--font-family-poppins-regular) !important;
-	font-size: var(--font-size-m) !important;
-}
-.blue-border-bg-white {
-	background-color: var(--color-white);
-	border: 1px solid var(--color-skyblue);
-	color: var(--color-skyblue);
-	font-family: var(--font-family-poppins-regular);
-	font-size: var(--font-size-m);
+ .font-l {
+    font-size: var(--font-size-l) !important;
+ }
+ .parithair-border {
+    border: 1px solid var(--border-paritair-gray)
+ }
+ .parithair-tabs {
+    background-color: var(--bg-grey-medium) !important;
+    color: var(--color-label-footer-gray) !important;
+    font-family: var(--font-family-poppins-regular) !important;
+    font-size: var(--font-size-m) !important;
+   
+
+ }
+ .blue-border-bg-white {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-skyblue);
+    color: var(--color-skyblue);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
 }
 .blue-border-bg-white:focus {
 	background-color: var(--color-skyblue);
@@ -1124,12 +1127,12 @@ span .firsrt-line:last-child() {
 	font-size: var(--font-size-m);
 }
 .age-sec.input-group-text {
-	background: none;
-	border-left: 0px;
-	height: 41px;
-	margin-top: 8px;
-	border-radius: 0px;
-	border: 1px solid var(--bg-gray-dark);
+    background: none;
+    border-left: 0px;
+    height: 39px;
+    margin-top: 8px;
+    border-radius: 0px;
+    border: 1px solid var(--bg-gray-dark);
 }
 .bg-4C4D550F {
 	background-color: #4C4D550F;
@@ -1150,7 +1153,29 @@ span .firsrt-line:last-child() {
 		min-height: calc(88vh - 48px) !important;
 	}
 }
+/* .position-sticky-pc {
+    position: sticky;
+    top: 12%;
+    background-color: var(--color-white);
+    z-index: 999;
+} */
+.flex-1 {
+    flex: 1%;
+    float: left;
+    min-width: 49%;
+}
+  @media screen {
 
+ }
+ @media only screen and  (min-width: 0px) and (max-width: 480px){
+
+
+ }
+ @media only screen and  (min-width: 481px) and (max-width: 1024px){
+    .container-height {
+        min-height: calc(88vh - 48px) !important;
+    }
+ }
 .bg-4C4D550F {
 	background-color: var(--bg-grey-medium);
 }

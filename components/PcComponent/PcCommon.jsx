@@ -97,8 +97,9 @@ const PcCommon = (props) => {
 				}}
 			>
 				{props.type == 'add' ? (
-					<div>
-						<p className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">
+					<div className='col-md-12'>
+						<div className='col-md-12 position-sticky-pc'>
+						<p className="pt-3 pb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 ">
 							{current_sec == 1 ? (
 								'Add paritair comite'
 							) : current_sec == 2 ? (
@@ -113,9 +114,10 @@ const PcCommon = (props) => {
 								'Add paritair comite'
 							)}
 						</p>
-						<div className="row mt-4 pt-2">
-							<ul className="nav nav-pills nav-justified mb-3 row" id="pills-tab" role="tablist">
-								<li className=" border-0 rounded-0  col" role="presentation">
+						</div>
+						<div className="row mt-4 pt-2 m-0">
+							<ul className="nav nav-pills nav-justified mb-3 row m-0 p-0" id="pills-tab" role="tablist">
+								<li className=" border-0 rounded-0  col ps-0" role="presentation">
 									<button
 										className={`nav-link parithair-tabs  py-3 border-0 rounded-0 w-100 ${current_sec == 1
 											? 'active custom-active'
@@ -212,7 +214,7 @@ const PcCommon = (props) => {
 										<p className="mb-2">Step 4:</p> <p>Employee type</p>
 									</button>
 								</li>
-								<li className="col border-0 rounded-0 " role="presentation">
+								<li className="col border-0 rounded-0 pe-0" role="presentation">
 									<button
 										className={`nav-link parithair-tabs w-100 border-0 rounded-0  py-3 ${current_sec != 5 && sec_completed.emp_type == false
 											? 'disabled'
