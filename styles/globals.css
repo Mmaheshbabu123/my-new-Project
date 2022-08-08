@@ -488,6 +488,7 @@ a {
 }
 .nav-pills .nav-link.active {
 	background-color: var(--color-skyblue) !important;
+    color: var(--color-white) !important;
 }
 
 .nav-link:hover {
@@ -500,7 +501,7 @@ a {
 }
 .custom_astrick::after {
 	content: "*";
-	padding-left: 3px;
+	/* padding-left: 3px; */
 	color: red;
 }
 .custom-inactive:hover {
@@ -519,10 +520,8 @@ a {
 	color:#999 !important;
 }
 .container-height {
-	/* min-height: calc(90vh - 100px); */
-    /* min-height: calc(92vh - 52px); */
-    /* height: 86.5vh; */
-    min-height: calc(90vh - 45px);
+	
+    min-height: calc(93vh - 4rem);
 }
 
 .atom-input-field-default {
@@ -615,7 +614,7 @@ a {
 }
 .back-btn-text {
     font-family: var(--font-family-poppins-regular);
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-m);
     text-decoration: underline;
 
 }
@@ -735,11 +734,12 @@ div[disabled]{
   min-height: 100%;
 	cursor: crosshair;
 }
-.footer {
+/* footer section sticky position */
+/* .footer {
     position: sticky !important;
     bottom: 0;
 		z-index: 10;
-}
+} */
 .timepage-calander .rmdp-header {
     background: var(--color-skyblue);
     margin-top: 0px;
@@ -1016,8 +1016,8 @@ font-size: var(--font-size-l);
     border: 1px solid var(--border-paritair-gray)
  }
  .parithair-tabs {
-    background-color: var(--color-border-lightgrey) !important;
-    color: var(--color-white) !important;
+    background-color: var(--bg-grey-medium) !important;
+    color: var(--color-label-footer-gray) !important;
     font-family: var(--font-family-poppins-regular) !important;
     font-size: var(--font-size-m) !important;
    
@@ -1046,7 +1046,7 @@ font-size: var(--font-size-l);
 .age-sec.input-group-text {
     background: none;
     border-left: 0px;
-    height: 41px;
+    height: 39px;
     margin-top: 8px;
     border-radius: 0px;
     border: 1px solid var(--bg-gray-dark);
@@ -1061,6 +1061,17 @@ font-size: var(--font-size-l);
 }
 .hover-white:hover {
   color: var(--color-white) !important;
+}
+/* .position-sticky-pc {
+    position: sticky;
+    top: 12%;
+    background-color: var(--color-white);
+    z-index: 999;
+} */
+.flex-1 {
+    flex: 1%;
+    float: left;
+    min-width: 49%;
 }
   @media screen {
 

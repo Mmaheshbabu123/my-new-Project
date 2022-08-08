@@ -340,9 +340,9 @@ const Addage = () => {
 			<form onSubmit={(e) => submit(e)}>
 				{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Age</h4>:'')}
 
-				<div className="row pt-4 border-form-sec m-0">
+				<div className="row p-4 pt-5 border-form-sec m-0">
 					{/* <div className={sec_width}> */}
-					<div className="col-md-12 row m-0 mb-4">
+					<div className="col-md-12  m-0 mb-4 ">
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}
 
 						<div className="mb-3 col-md-6">
@@ -350,7 +350,7 @@ const Addage = () => {
 							<select
 								disabled={disableForm}
 								type="text"
-								className="form-select mt-2 mb-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+								className="form-select mt-2 mb-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
 								value={data.age}
 								onChange={(e) => {
 									handleshowhide(e);
@@ -363,7 +363,7 @@ const Addage = () => {
 								<option value="2">19 years</option>
 								<option value="1">18 years</option>
 							</select>
-							<p className="error mt-2">{error_age}</p>
+							<p className="error">{error_age}</p>
 						</div>
 
 						{/* IF AGE = 21 */}
@@ -374,7 +374,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-end-0"
+										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
 										value={data.min_sal_20}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_20: e.target.value }));
@@ -382,7 +382,7 @@ const Addage = () => {
 									/>
 									<span className="input-group-text age-sec">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_20}</p>
+								<p className="error">{error_min_sal_20}</p>
 							</div>
 						)}
 						{/* IF AGE >= 20 */}
@@ -393,7 +393,7 @@ const Addage = () => {
 									<input
 									    disabled={disableForm}
 										type="text"
-										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-end-0"
+										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
 										value={data.min_sal_19}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_19: e.target.value }));
@@ -401,7 +401,7 @@ const Addage = () => {
 									/>
 									<span className="input-group-text age-sec">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_19}</p>
+								<p className="error">{error_min_sal_19}</p>
 							</div>
 						)}
 						{/* IF AGE >= 19 */}
@@ -412,7 +412,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-end-0"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
 										value={data.min_sal_18}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_18: e.target.value }));
@@ -420,7 +420,7 @@ const Addage = () => {
 									/>
 									<span className="input-group-text age-sec">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_18}</p>
+								<p className="error">{error_min_sal_18}</p>
 							</div>
 						)}
 
@@ -432,7 +432,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-end-0"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
 										value={data.min_sal_17}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_17: e.target.value }));
@@ -440,7 +440,7 @@ const Addage = () => {
 									/>
 									<span className="input-group-text age-sec">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_17}</p>
+								<p className="error">{error_min_sal_17}</p>
 							</div>
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
@@ -450,7 +450,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-end-0"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
 										value={data.min_sal_16}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_16: e.target.value }));
@@ -458,7 +458,7 @@ const Addage = () => {
 									/>
 									<span className="input-group-text age-sec">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_16}</p>
+								<p className="error">{error_min_sal_16}</p>
 							</div>
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
@@ -468,7 +468,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-end-0"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
 										value={data.min_sal_15}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_15: e.target.value }));
@@ -476,7 +476,7 @@ const Addage = () => {
 									/>
 									<span className="input-group-text age-sec">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_15}</p>
+								<p className="error">{error_min_sal_15}</p>
 							</div>
 						)}
 						{/* <div>
