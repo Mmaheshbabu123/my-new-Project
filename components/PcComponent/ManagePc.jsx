@@ -22,7 +22,7 @@ const ManagePc = (props) => {
 
 	const [ searchPcnum, setSearchPcnum ] = useState('');
 	const [ searchPcname, setSearchPcname ] = useState('');
-	const [ itemsPerPage, setItemsPerPage ] = useState(10);
+	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 
 	useEffect(() => {
 		APICALL.service(getPcOverviewDetails, 'GET')
