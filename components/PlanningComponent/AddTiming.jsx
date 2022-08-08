@@ -133,6 +133,7 @@ function Addtiming(props) {
 		data1[1] = checked
 		data1[2] = employee_planning;
 		data1[3] = commonDatetime;
+		// console.log(employee_planning);return;
 		APICALL.service(storePlannedTimings, 'POST', data1)
 			.then((result) => {
 				if (result.status === 200) {
@@ -299,7 +300,7 @@ function Addtiming(props) {
 											<p className="error mt-2">{error_end_time}</p>
 										</div>
 										<div className="col-md-2 py-3">
-											<MdStarRate className='purple-color' />
+											{/* <MdStarRate className='purple-color' /> */}
 										</div>
 									</div>
 								))}
@@ -393,7 +394,7 @@ function Addtiming(props) {
 																	<p className="error mt-2 px-2">{value.error_endtime}</p>
 																</div>
 																<div className="col-md-2 py-3 d-flex align-items-center justify-content-center">
-																	<MdStarRate  className='purple-color'/>
+																	{/* <MdStarRate  className='purple-color'/> */}
 																</div>
 															</div>
 														))}

@@ -165,6 +165,9 @@ const EmployeeType = () => {
 			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
 
 				<div className="row pt-4 border-form-sec m-0 p-4">
+				<p className="mt-2" style={{ color: 'red' }}>
+						{error_emp_type}
+					</p>
 					{data.map((val) => (
 						<div className={"form-check mt-4 "+sec_width} key={val.id}>
 							<input
@@ -196,9 +199,7 @@ const EmployeeType = () => {
 					// 	</label>
 					// </div>
 					))}
-					<p className="mt-2" style={{ color: 'red' }}>
-						{error_emp_type}
-					</p>
+
 				</div>
 				{pc_view_type == 'editpc' ? (
 					<div className="row my-4">

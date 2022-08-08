@@ -125,7 +125,7 @@ const SalaryBenifits = () => {
 			setData(data1);
 		} else {
 			error_count++;
-			setError_sal_benifits('Select atleast one salary benifit.');
+			setError_sal_benifits('Select atleast one salary benefit.');
 		}
 		if(error_count == 0){
 			return true;
@@ -178,6 +178,9 @@ const SalaryBenifits = () => {
 					''
 				)}
 				<div className="row border-form-sec m-0 p-4">
+				<p className="mt-2" style={{ color: 'red' }}>
+						{error_sal_benifits}
+					</p>
 					{data.map((val, key) => (
 						<div key={key} className={`form-check mt-1  me-3 ${sec_width}`}>
 							<div className="form-check my-2">
@@ -240,9 +243,7 @@ const SalaryBenifits = () => {
 							)}
 						</div>
 					))}
-					<p className="mt-2" style={{ color: 'red' }}>
-						{error_sal_benifits}
-					</p>
+					
 				</div>
 				{pc_view_type == 'editpc' ? (
 					<div className="row my-4">

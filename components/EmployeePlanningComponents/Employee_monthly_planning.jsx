@@ -145,7 +145,7 @@ function EmployeeMonthlyPlanning(props) {
 
 					<Paper>
 						<Scheduler data={data} height={660}>
-							<ViewState defaultCurrentDate="2018-07-25" currentViewName={currentViewName} />
+							<ViewState defaultCurrentDate="2022-07-25" currentViewName={currentViewName} />
 
 							<DayView startDayHour={10} endDayHour={19} />
 							<WeekView startDayHour={10} endDayHour={19} />

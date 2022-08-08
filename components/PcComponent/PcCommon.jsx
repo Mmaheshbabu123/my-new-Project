@@ -108,7 +108,7 @@ const PcCommon = (props) => {
 							) : current_sec == 4 ? (
 								'Add employee type'
 							) : current_sec == 5 ? (
-								'Add salary benifits'
+								'Add salary benefits'
 							) : (
 								'Add paritair comite'
 							)}
