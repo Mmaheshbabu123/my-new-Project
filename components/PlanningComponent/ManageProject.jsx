@@ -360,7 +360,12 @@ function ManageProject(props) {
 					<button
 						type="button"
 						className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5 "
-						onClick={() => backToDashboard()}
+						onClick={() => {
+							window.location.assign(
+								process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
+									'dashboard?access=administrator&check_logged_in=1'
+							);
+						}}
 					>
 						BACK
 					</button>
