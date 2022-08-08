@@ -269,11 +269,13 @@ function AddPc(props) {
 
 	let validate = (res) => {
 		var error1 = [];
+		var min_time = res.min_work_timings.replaceAll(' ', '');
+		var max_time = res.max_work_timings.replaceAll(' ', '');
 		//check if required fields are empty
 		error1['pc_name'] = ValidationService.emptyValidationMethod(res.pc_name);
 		error1['pc_number'] = ValidationService.emptyValidationMethod(res.pc_number);
-		error1['min_work_timings'] = ValidationService.emptyValidationMethod(res.min_work_timings);
-		error1['max_work_timings'] = ValidationService.emptyValidationMethod(res.max_work_timings);
+		error1['min_work_timings'] = ValidationService.emptyValidationMethod(min_time);
+		error1['max_work_timings'] = ValidationService.emptyValidationMethod(max_time);
 
 
 		//check if fields are valid
@@ -281,9 +283,9 @@ function AddPc(props) {
 			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number) : error1['pc_number'];
 
 			error1['min_work_timings'] =
-			error1['min_work_timings'] == '' ? ValidationService.hoursperdayValidationMethod(res.min_work_timings) : error1['min_work_timings'];
+			error1['min_work_timings'] == '' ? ValidationService.hoursperdayValidationMethod(min_time) : error1['min_work_timings'];
 			error1['max_work_timings'] =
-			error1['max_work_timings'] == '' ? ValidationService.hoursperdayValidationMethod(res.max_work_timings) : error1['max_work_timings'];
+			error1['max_work_timings'] == '' ? ValidationService.hoursperdayValidationMethod(max_time) : error1['max_work_timings'];
 		// error1['pc_name'] =
 		// 	error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
 		// error1['pc_alias_name'] =
@@ -292,7 +294,7 @@ function AddPc(props) {
 		// 		: '';
 
 		if(error1['min_work_timings'] == '' && error1['max_work_timings'] == ''){
-			error1['max_work_timings'] = parseFloat(res.min_work_timings) > parseFloat(res.max_work_timings)? 'Maximum work timing cannot be lesser than minimum work timing.':'';
+			error1['max_work_timings'] = parseFloat(min_time) > parseFloat(max_time)? 'Maximum work timing cannot be lesser than minimum work timing.':'';
 		}
 		error1['pc_alias_name'] =
 			res.pc_alias_name != '' &&
