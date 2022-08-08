@@ -304,7 +304,7 @@ function Planning(props) {
 		<div className="col-md-12">
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row   planning-container calc-height m-0 col-md-12">
-					<div className="col-md-12 px-0">
+					<div className="col-md-12 px-0 py-3">
 						<h1 className=" mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-medium-24">
 							Add Planning
 						</h1>
@@ -314,12 +314,12 @@ function Planning(props) {
 							<button
 								onClick={showPopup}
 								type="button"
-								className=" btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln"
+								className=" btn my-2 skyblue-bg-color border-0 poppins-regular-18px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln"
 							>
 								<span style={{ fontSize: '24px' }} className="">
 									+
 								</span>
-								&nbsp; Add project
+								&nbsp; ADD PROJECT
 							</button>
 						)}
 					</div>
@@ -331,7 +331,7 @@ function Planning(props) {
 								</label>
 								<select
 									value={companyid}
-									className="form-select mb-2 mt-2"
+									className="form-select mb-2 mt-2 poppins-regular-16px rounded-0"
 									placeholder="select company"
 									onChange={(e) => {
 										setCompanyid(e.target.value);
@@ -354,7 +354,7 @@ function Planning(props) {
 								</label>
 								<select
 									value={locationid}
-									className="form-select mb-2 mt-2"
+									className="form-select mb-2 mt-2 poppins-regular-16px rounded-0"
 									onChange={(e) => {
 										setLocationid(e.target.value);
 										updateCostCenter(e.target.value);
@@ -377,7 +377,7 @@ function Planning(props) {
 							<div className="form-group mb-3">
 								<label className="form-label mb-2 mt-2 poppins-regular-16px">Cost center</label>
 								<select
-									className="form-select mb-2 mt-2"
+									className="form-select mb-2 mt-2 poppins-regular-16px rounded-0"
 									value={costcenterid}
 									onChange={(e) => {
 										setCostcenterid(e.target.value);
@@ -409,7 +409,7 @@ function Planning(props) {
 									<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
 									<div className=" d-flex d-inline">
 										<input
-											type="text mb-2 mt-2"
+											type="text mb-2 mt-2 poppins-regular-16px rounded-0"
 											value={project.project_name}
 											className="form-control"
 											disabled

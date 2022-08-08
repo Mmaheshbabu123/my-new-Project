@@ -758,6 +758,9 @@ label {
 .add-pln:hover {
 	color: var(--color-white);
 }
+.add-pln {
+    height: 60px;
+}
 .custom-header {
 	background-color: var(--color-white);
 }
@@ -1229,11 +1232,15 @@ span .firsrt-line:last-child() {
 }
 @media only screen and (min-width: 1025px) and (max-width: 1360px) {
 	.container-height {
-		min-height: calc(88vh - 48px) !important;
+		/* min-height: calc(88vh - 48px) !important; */
+        min-height: calc(90vh - 42px) !important;
 	}
 }
 
 .project-active {
 	background-color: black !important;
 	color: white !important;
+}
+.css-1s2u09g-control {
+    border-radius: 0px !important;
 }
