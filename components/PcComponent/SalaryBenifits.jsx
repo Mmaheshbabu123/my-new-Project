@@ -182,7 +182,8 @@ const SalaryBenifits = () => {
 						{error_sal_benifits}
 					</p>
 					{data.map((val, key) => (
-						<div key={key} className={`form-check mt-1  me-3 ${sec_width}`}>
+						<div className='col-6'>
+						<div key={key} className={`form-check mt-1  me-3 `}>
 							<div className="form-check my-2">
 								<input
 									disabled={disableForm}
@@ -208,7 +209,7 @@ const SalaryBenifits = () => {
 											<div className="form-check  ">
 												<input
 													disabled={disableForm}
-													className="form-check-input d-flex rounded-0"
+													className="form-check-input d-flex"
 													type="radio"
 													value="true"
 													name={'yes' + val.sb_id}
@@ -223,7 +224,7 @@ const SalaryBenifits = () => {
 											<div className="form-check">
 												<input
 													disabled={disableForm}
-													className="form-check-input ms-2 rounded-0"
+													className="form-check-input ms-2"
 													type="radio"
 													name={'yes' + val.sb_id}
 													checked={val.mandatory === false}
@@ -241,6 +242,7 @@ const SalaryBenifits = () => {
 									</div>
 								</div>
 							)}
+						</div>
 						</div>
 					))}
 					

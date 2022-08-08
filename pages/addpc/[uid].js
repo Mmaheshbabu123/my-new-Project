@@ -13,7 +13,8 @@ const Addpc = () => {
 
 	
 	return (
-		<div className="container-fluid pt-5 p-0 ">
+		<div className="container-fluid p-0 ">
+			{/* <div className="hidden-text"><h1>hello</h1></div> */}
 		<PcCommon type="add" pcid={router.query.pcid}/>
 		</div>
 	);

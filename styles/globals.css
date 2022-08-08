@@ -1153,12 +1153,12 @@ span .firsrt-line:last-child() {
 		min-height: calc(88vh - 48px) !important;
 	}
 }
-/* .position-sticky-pc {
-    position: sticky;
-    top: 12%;
-    background-color: var(--color-white);
-    z-index: 999;
-} */
+.position-sticky-pc {
+   position: sticky;
+top: 67px;
+z-index: 999;
+background: white;
+}
 .flex-1 {
     flex: 1%;
     float: left;

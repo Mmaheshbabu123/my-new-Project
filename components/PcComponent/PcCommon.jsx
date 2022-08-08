@@ -98,7 +98,7 @@ const PcCommon = (props) => {
 			>
 				{props.type == 'add' ? (
 					<div className='col-md-12'>
-						<div className='col-md-12 position-sticky-pc'>
+						<div className='col-md-12 position-sticky-pc py-4'>
 						<p className="pt-3 pb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 ">
 							{current_sec == 1 ? (
 								'Add paritair comite'
@@ -115,7 +115,7 @@ const PcCommon = (props) => {
 							)}
 						</p>
 						</div>
-						<div className="row mt-4 pt-2 m-0">
+						<div className="row  pt-2 m-0">
 							<ul className="nav nav-pills nav-justified mb-3 row m-0 p-0" id="pills-tab" role="tablist">
 								<li className=" border-0 rounded-0  col ps-0" role="presentation">
 									<button
