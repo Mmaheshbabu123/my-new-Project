@@ -6,7 +6,7 @@ import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
 import { AiFillFilePdf, AiOutlineRedo} from 'react-icons/ai';
 import { HiPlusCircle} from 'react-icons/hi';
-import { deleteSalesAgenetAgreements} from '@/Services/ApiEndPoints'
+import { deleteSalesAgenetAgreements, downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
@@ -136,22 +136,10 @@ const Overviewpage = (props) => {
               onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
               placeholder={'Search company '}
             />
-
-      <span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
+              <span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
               </div>
 
             </div>
-        {/*<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-          <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-          <input
-            type="text"
-            className="form-control col-7 pcp_name"
-            style={{margin: '10px 0'}}
-            onChange={(e) => setState({...state, searchTerm: e.target.value})}
-            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
-            placeholder={'Search'}
-          />
-        </div>*/}
         <div className={`${styles['table-parent-div']}`}>
           <table className="table table-hover manage-types-table">
             <thead className="table-render-thead">
@@ -205,14 +193,12 @@ const Overviewpage = (props) => {
         <div>
           <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
           <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
-          {/*<span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>*/}
         </div>
       )
     } else {
       return (
         <div>
           <span title = {'Add'} className="actions-span text-dark" onClick={() => handleActionClick('add', eachRow)}> <HiPlusCircle /> </span>
-          {/*<span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>*/}
         </div>
       )
     }
@@ -235,7 +221,7 @@ const Overviewpage = (props) => {
         router.push(`cooperation-agreement?root_parent_id=${root_parent_id}&selectedTabId=0&ref_id=${ref_id}`);
         break;
      case 'download':
-          console.log('Download clicked');
+          handleDownload(eachRow)
         break;
       case 'add':
        router.push(`cooperation-agreement?root_parent_id=0&selectedTabId=0&ref_id=${ref_id}`);
@@ -243,6 +229,27 @@ const Overviewpage = (props) => {
       default:
     }
   }
+
+  const handleDownload = async (eachRow) => {
+    eachRow['type'] = 4;
+    await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
+      .then((response) => {
+        let result = response.data;
+        if(response.status === 200 && result.url) {
+          var a = document.createElement("a");
+          a.setAttribute("type", "file");
+          a.href     = result.url;
+          a.target   = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          window.alert('Error occurred')
+        }
+      })
+      .catch((error) => window.alert('Error occurred'));
+  }
+
   const handleDelete = async (id) => {
     await APICALL.service(`${deleteSalesAgenetAgreements}/${id}`, 'DELETE')
       .then((result) => router.reload())

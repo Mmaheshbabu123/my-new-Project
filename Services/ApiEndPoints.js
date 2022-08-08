@@ -171,6 +171,7 @@ export const downloadAdditionalDocuments = BASE_URL + 'download-additional-docs'
 export const deleteUploadedFiles = BASE_URL + 'delete-files';
 export const uploadAdditionalDocs = BASE_URL + 'upload-additional-docs';
 export const uploadFiles = BASE_URL + 'upload-files';
+export const downloadSvAsPdf = BASE_URL + 'download-cooperation-agreement-pdf';
 //---------------
 
 
