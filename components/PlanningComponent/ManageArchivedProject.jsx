@@ -268,7 +268,7 @@ function ManageArchivedProject(props) {
 												<td className="poppinns-regular-thin">{result.project_name}</td>
 												<td className="poppinns-regular-thin">{result.project_location}</td>
 												<td className="poppinns-regular-thin">
-													{result.address.replace(',', '').length > 7 ? result.address : '-'}
+													{/* {result.address.replace(',', '').length > 7 ? result.address : '-'} */}
 												</td>
 											</tr>
 										))}

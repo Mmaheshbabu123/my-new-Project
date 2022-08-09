@@ -138,7 +138,7 @@ const PcOverview = (params) => {
 
 	return (
 		<div className="container-fluid p-0">
-			<div className="row pt-4 min-vh-75">
+			<div className="row pt-4 min-vh-75 pc-height">
 				<div className={` ${cat_leftsec}`}>
 					{params.type == 'editpc' ? (
 						<p className="h4">Edit paritair comite</p>
