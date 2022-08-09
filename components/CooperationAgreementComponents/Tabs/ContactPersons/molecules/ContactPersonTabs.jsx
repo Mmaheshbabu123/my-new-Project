@@ -3,21 +3,32 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import { personsData } from '../ContactPersonsFields';
 import styles from '../Contactperson.module.css';
 import BasicDetails from './BasicDetails';
+import LabelField from '@/atoms/LabelField';
+import MultiSelectField from '@/atoms/MultiSelectField';
 import {defaultFileds} from '../ContactPersonsFields';
 const ContactPersonTabs = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
-
+let contactOptions = [];
+let contactPersons = [];
+contactOptions   = state.defaultOptions['contactList']  || [];
+contactPersons   = state.defaultOptions['contactsData'] || [];
   const [contactstate,setState] = useState({
     id:1,
-      loaded:false,
+    selectedId: 1,
+    loaded:false,
   })
-  const handleSelect  = (selectId)=> {
+  const handleSelect  = (obj)=> {
     setState({
       ...contactstate,
-       id:selectId,
+       id:1,
+       selectedId:obj.value,
     })
-    tab_3['selected_person_id'] = selectId;
+
+    let personObj =  contactPersons[obj.value];
+
+    tab_3['selected_person_id'] = obj.value;
+    tab_3 = {...tab_3,...personObj}
     updateStateChanges({tab_3});
   }
 const addDefaultValuestoPersons = (personObj) => {
@@ -27,41 +38,41 @@ const addDefaultValuestoPersons = (personObj) => {
  })
  return tempObj;
 }
-useEffect(()=>{
-const personObj = addDefaultValuestoPersons({1:{},2:{},loaded:true});
-personObj.loaded = true;
-
-  tab_3 = {...{1:{},2:{},loaded:true},...tab_3 }
-  updateStateChanges({tab_3});
-  setState({
-    ...contactstate,
-    loaded:true,
-  })
-},[])
+// useEffect(()=>{
+// const personObj = addDefaultValuestoPersons({1:{},2:{},loaded:true});
+// personObj.loaded = true;
+//
+//   tab_3 = {...{1:{},2:{},loaded:true},...tab_3 }
+//   updateStateChanges({tab_3});
+//   setState({
+//     ...contactstate,
+//     loaded:true,
+//   })
+// },[])
 const LoadTabs = () => {
   let tabsData = [];
-  personsData.map(data=>{
   tabsData.push(
-    <React.Fragment>
-       <div className={styles["contactperson-tab-parent"]}onClick={(e)=>handleSelect(data.id)} >
-         <div className={styles["contactperson-tab-field-content"]}>
-             <a className={styles["anchor-tag"]}>
-               {/*<Image src={iconPath} alt={data.name} loading="lazy"  width="85%" height="75%"  />*/}
-               <div title={data.name} className = {styles["tile-title-text"]} > {data.name} </div>
-             </a>
-         </div>
-       </div>
-    </React.Fragment>
+    <div className = 'col-md-6'>
+    <LabelField title="Select contact person" customStyle = {{display:''}}/>
+    <MultiSelectField
+        id={'selected_person_id'}
+        options={contactOptions}
+        standards={contactOptions.filter(val => val.value == tab_3['selected_person_id'])}
+        disabled={false}
+        handleChange={(obj) => handleSelect(obj, 'selected_person_id')}
+        isMulti={false}
+        className="col-md-6"
+      />
+     </div>
   )
-})
 return tabsData;
 }
 
   return (
     <div className =''>
-    {/*LoadTabs()*/}
+    {LoadTabs()}
     {/*(tab_3.loaded === true) &&*/}
-       { <BasicDetails  personId = {contactstate.id} />}
+       {<BasicDetails  personId = {'persons'}  selectedId = {contactstate.selectedId}/> }
     </div>
   )
 }

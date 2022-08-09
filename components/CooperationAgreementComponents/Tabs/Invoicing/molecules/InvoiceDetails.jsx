@@ -11,13 +11,23 @@ import styles from '../Invoicing.module.css';
 import { requiredFields} from '../../../RequiredFields';
 const InvoiceDetails = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
-  var { tab_6 ,element_status} = state;
+  var { tab_6 ,element_status,tab_4} = state;
+  let invoiceRow1Data = structuredClone(invoiceRow1);
+  let invoiceRow2Data  = structuredClone(invoiceRow2);
+  if(tab_6['56'] == 2) {
+    delete invoiceRow2Data['5'];
+  }
   let paymentList = state.defaultOptions['payment_condtion'] || [];
   const handleChange = (event) => {
     const { value, name } = event.target;
     if(name === '72' && value === '') { //Vat Rate should be % present
       value = '%';
     }
+    if(name === '59') {
+      tab_4['41'] = value;
+
+    }
+
     tab_6[name] = value;
     element_status['tab_6'].push(name);
     updateStateChanges({ tab_6,element_status });
@@ -30,6 +40,8 @@ const InvoiceDetails = (props) => {
   const handleSelect = (obj,key) => {
     tab_6[key]  = obj.value;
     element_status['tab_6'].push(key);
+
+
     updateStateChanges({ tab_6 ,element_status});
   }
 
@@ -89,13 +101,14 @@ const InvoiceDetails = (props) => {
      })
      return fieldData;
   }
+//  delete invoiceRow2Data['5']
 return (
   <div className="col-md-12 row">
     <div className = 'col-md-6'>
-     {ConstructHtmlData(invoiceRow1)}
+     {ConstructHtmlData(invoiceRow1Data)}
      </div>
      <div className = 'col-md-6'>
-      {ConstructHtmlData(invoiceRow2)}
+      {ConstructHtmlData(invoiceRow2Data)}
 
       </div>
   </div>

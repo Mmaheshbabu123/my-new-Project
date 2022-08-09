@@ -13,7 +13,7 @@ function Add_manage_planning(props) {
 		);
 	};
 	return (
-		<div className="col-md-12 ">
+		<div className="col-md-12 py-3 ">
 			{/* <div className="row mt-5 text-center planning-height "> */}
 			<div className='col-md-12 px-0'>
 					<h1 className=" mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-medium-24">My Planning</h1>
