@@ -235,7 +235,7 @@ const AddEditCompositions = (props) => {
               <tr key={index} id={index}>
                 <td style={{ width: '30%' }} className= 'p-3'> {item.name} </td>
                 <td style={{ width: '15%' }} className= 'p-3'> {item.including ? 'Yes' : '-'} </td>
-                <td style={{ width: '15%' }} className= 'p-3'> {item.including ? 'No' : '-'} </td>
+                <td style={{ width: '15%' }} className= 'p-3'> {item.including ? '' : 'No'} </td>
                 <td style={{ width: '20%' }} className= 'p-3'> {item.value ? item.value : '--'} </td>
                 <td style={{ width: '20%' }} className= 'p-3'> {getNeededActions(item, index)} </td>
               </tr>
