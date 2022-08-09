@@ -179,12 +179,12 @@ const SalaryBenifits = () => {
 				)}
 				<div className='pc-height'>
 				<div className="row border-form-sec m-0 p-4">
-				<p className="mt-2" style={{ color: 'red' }}>
+				<p className="mb-2 fw-bold" style={{ color: 'red' }}>
 						{error_sal_benifits}
 					</p>
 					{data.map((val, key) => (
 						<div className='col-6' key={key}>
-						<div key={key} className={`form-check mt-1  me-3 `}>
+						<div key={key} className={`form-check mt-1  me-3 p-0 `}>
 							<div className="form-check my-2">
 								<input
 									disabled={disableForm}
