@@ -183,7 +183,7 @@ const SalaryBenifits = () => {
 						{error_sal_benifits}
 					</p>
 					{data.map((val, key) => (
-						<div className='col-6'>
+						<div className='col-6' key={key}>
 						<div key={key} className={`form-check mt-1  me-3 `}>
 							<div className="form-check my-2">
 								<input
