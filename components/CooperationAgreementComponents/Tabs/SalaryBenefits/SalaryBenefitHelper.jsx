@@ -3,7 +3,6 @@ export const helpers = {
 }
 
 function getDifference(array1, array2, key1, key2, alreayLinkedPcIds = []) {
-  console.log({alreayLinkedPcIds});
   let dataArray = array1.filter(object1 => {
     return !array2.some(object2 => {
       return object1[key1] === object2[key2];

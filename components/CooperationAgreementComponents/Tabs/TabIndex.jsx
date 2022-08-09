@@ -27,7 +27,7 @@ import Invoicing from './Invoicing/organisms/Invoicing';
 const TabIndex = (props) => {
 	const { state: { selectedTabId ,renderedOptions, filledTabs,salesAgentRefId }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
-  console.log(salesAgentRefId);
+
 	/**
    * [showComponentBasedOnTabSelection rendering component according to tab selection]
    * @return {[ReactElement]} [correspoding React component]
@@ -89,7 +89,7 @@ const loadData = async () => {
 	return (
 		<div className="">
       {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields. </p> : null}
-      {showComponentBasedOnTabSelection()}
+      {renderedOptions === 1 && showComponentBasedOnTabSelection()}
       <div className={`col-md-12 row`} >
           <div className={`col-md-7 ${styles['tab-index-back-div']}`}>
             <p className={`${styles['tab-index-back-btn']}`} onClick={() => router.back()}> Back </p>

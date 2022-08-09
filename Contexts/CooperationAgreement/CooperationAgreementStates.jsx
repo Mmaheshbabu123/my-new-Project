@@ -51,7 +51,7 @@ const CooperationAgreementStates = (props) => {
     , tab_6_action : 1
     , element_status: takeElementStatus()
     , dependecyDataStatus: takeElementStatus(2)
-    , defaultOptions : []
+    , defaultOptions : {}
     , renderedOptions:0
   };
   const [state, dispatch] = useReducer(CooperationAgreementReducer, initialState);
