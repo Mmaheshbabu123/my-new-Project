@@ -163,8 +163,8 @@ const EmployeeType = () => {
 		<div className="container-fluid p-0">
 			<form onSubmit={submit}>
 			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
-
-				<div className="row pt-4 border-form-sec m-0 p-4">
+            <div className='pc-height'>
+				<div className="row pt-4 border-form-sec m-0 p-4 ">
 				<p className="mt-2 p-0" style={{ color: 'red' }}>
 						{error_emp_type}
 					</p>
@@ -200,6 +200,7 @@ const EmployeeType = () => {
 					// </div>
 					))}
 
+				</div>
 				</div>
 				{pc_view_type == 'editpc' ? (
 					<div className="row my-4">

@@ -177,6 +177,7 @@ const SalaryBenifits = () => {
 				) : (
 					''
 				)}
+				<div className='pc-height'>
 				<div className="row border-form-sec m-0 p-4">
 				<p className="mt-2" style={{ color: 'red' }}>
 						{error_sal_benifits}
@@ -246,6 +247,7 @@ const SalaryBenifits = () => {
 						</div>
 					))}
 					
+				</div>
 				</div>
 				{pc_view_type == 'editpc' ? (
 					<div className="row my-4">
