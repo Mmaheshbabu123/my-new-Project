@@ -58,7 +58,7 @@ export const requiredFields = {
    '51':true,
    '52':true,
    '53':true,
-   '54':true,
+   //'54':true,
    '55':true,
    '56':true,
    '57':true,

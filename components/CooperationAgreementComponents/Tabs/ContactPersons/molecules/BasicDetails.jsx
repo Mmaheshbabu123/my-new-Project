@@ -17,7 +17,7 @@ var Contack_key =  37;
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
   let defaultOptions = [];
-   defaultOptions[Location_key] = state.defaultOptions['locationslist'] || [];
+   defaultOptions[Location_key] = state.defaultOptions['locationObj'] || [];
    defaultOptions[Contack_key]  =  [
      {value: '1', label: 'Contact1'},
      {value: '2', label: 'Contact2'},
@@ -80,7 +80,7 @@ var Contack_key =  37;
     <MultiSelectField
         id={data.id}
         options={defaultOptions[data.id]}
-        standards={defaultOptions[data.id].filter(val => val.value === tab_3[data.id])}
+        standards={defaultOptions[data.id].filter(val => val.value === Number(tab_3[data.id]))}
         disabled={false}
         handleChange={(obj) => handleSelect(obj, data.id)}
         isMulti={false}

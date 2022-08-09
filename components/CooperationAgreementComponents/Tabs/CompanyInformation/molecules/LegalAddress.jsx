@@ -10,6 +10,7 @@ import { requiredFields} from '../../../RequiredFields';
 import RequiredField from '@/atoms/RequiredSpanField';
 import ValidateMessage from '@/atoms/validationError';
 import MultiSelectField from '@/atoms/MultiSelectField';
+import updateTabFields from '../updateTabFields';
 import emailValidate from '@/atoms/emailValidate';
 const LegalAddress = (props) => {
   var Language = 22;
@@ -22,7 +23,7 @@ const LegalAddress = (props) => {
 
     validations:{'17':{'type':1,validate:false,'text':'Only numbers will accept' },'14':{'type':1,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'}}
   })
-  var { tab_2,element_status ,tab_4} = state;
+  var { tab_2,element_status ,tab_4,tab_6} = state;
   let countrylist = state.defaultOptions['countrylist'] || [];
   const handleChange = (event) => {
     const {name,value} = event.target;
@@ -33,8 +34,8 @@ const LegalAddress = (props) => {
     // }
     // else {
       if(name === '19') {
-        prefillFieldsDefault(tab_4,tab_2);
-      updateStateChanges({tab_2 ,tab_4,element_status })  
+      updateTabFields(tab_4,tab_2,tab_6)  
+      updateStateChanges({tab_2 ,tab_4,tab_6,element_status })
       }
       else {
       updateStateChanges({ tab_2 ,element_status});
@@ -42,13 +43,7 @@ const LegalAddress = (props) => {
 
   }
 
-  const prefillFieldsDefault = (tab_4,tab_2) =>{
-    let defaultKeys = ['40','41','42','45','46','47'];
-    defaultKeys.forEach((item)=>{
-      tab_4[item] =  tab_2['19'] ;
-    })
 
-  }
   const handleSelect = (obj,key) => {
     tab_2[key]  = obj.value;
     element_status['tab_2'].push(key);
