@@ -20,8 +20,8 @@ const OnlineDetails = (props) => {
   let tab_4 = { ...state[stateKey] };
   var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
   tab_4['required'] = requiredFields['tab_4'];
-  let apiData = Object.keys(data['tab_4']).length ? data['tab_4'] : 0;
-  tab_4_action = apiData === 0 ? 1 :2;
+  let apiData = Object.keys(data['tab_4']['data']).length ? data['tab_4']['data'] : 0;
+  tab_4_action = data['tab_4']['action'] ? data['tab_4']['action'] :1;
   if(apiData) {
   tab_4 = {...apiData,...tab_4}
   }

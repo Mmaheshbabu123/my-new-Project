@@ -22,8 +22,8 @@ const Invoicing = (props) => {
   let tab_6 = { ...state[stateKey] };
   var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
 
-  let apiData = Object.keys(data['tab_6']).length ? data['tab_6'] : 0;
-  tab_6_action = apiData === 0 ? 1 :2;
+  let apiData = Object.keys(data['tab_6']['data']).length ? data['tab_6']['data'] : 0;
+  tab_6_action = data['tab_6']['action'] ? data['tab_6']['action'] :1;
   if(apiData) {
   tab_6 = {...apiData,...tab_6}
 }else {
