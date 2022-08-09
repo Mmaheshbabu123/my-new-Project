@@ -28,6 +28,7 @@ contactPersons   = state.defaultOptions['contactsData'] || [];
     let personObj =  contactPersons[obj.value];
 
     tab_3['selected_person_id'] = obj.value;
+    emptyFilledDetails(tab_3);
     tab_3 = {...tab_3,...personObj}
     updateStateChanges({tab_3});
   }
@@ -38,17 +39,14 @@ const addDefaultValuestoPersons = (personObj) => {
  })
  return tempObj;
 }
-// useEffect(()=>{
-// const personObj = addDefaultValuestoPersons({1:{},2:{},loaded:true});
-// personObj.loaded = true;
-//
-//   tab_3 = {...{1:{},2:{},loaded:true},...tab_3 }
-//   updateStateChanges({tab_3});
-//   setState({
-//     ...contactstate,
-//     loaded:true,
-//   })
-// },[])
+
+const emptyFilledDetails = (tab_3) => {
+  let defaultKeys = ['36','27','37','34'];
+  defaultKeys.forEach((item)=>{
+    tab_3[item] = '' ;
+  })
+}
+
 const LoadTabs = () => {
   let tabsData = [];
   tabsData.push(
