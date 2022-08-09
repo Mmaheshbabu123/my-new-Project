@@ -193,7 +193,7 @@ const AddEditCompositions = (props) => {
               tick={state.including}
               disabled={false}
               onCheck={(obj) => handleChange(obj.target, 1)}
-              name={`including`}
+              name={`Including`}
               customStyle={{margin: '2px 0', cursor:'pointer'}}
               className="col-md-5"
             />

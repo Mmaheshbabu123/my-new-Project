@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
 import {MdEdit, MdDelete } from 'react-icons/md';
 import { AiFillFilePdf, AiOutlineUserAdd, AiOutlineUserSwitch } from 'react-icons/ai';
-import { deleteCooperationAgreement } from '@/Services/ApiEndPoints';
+import { deleteCooperationAgreement, downloadSvAsPdf } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
@@ -154,7 +154,7 @@ const RequestOverviewData = (props) => {
                       <td> {formatDate(eachRow.date_of_request)} </td>
                       <td> {formatDate(eachRow.date_of_commencement) || '--'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
-                      <td> {getNeededActions(eachRow) } </td>
+                      <td width='100'> {getNeededActions(eachRow) } </td>
                   </tr>
                 );
               })}
@@ -185,22 +185,23 @@ const RequestOverviewData = (props) => {
   }
 
   const getNeededActions = (eachRow) => {
+    let salesObj = assignedOrNot(eachRow);
+    let savedAgentId = salesObj.sales_agent_id || 0;
     if(Number(eachRow.signed)) {
       return(
         <div>
-          <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'PDF'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
-          <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
+          <span title={'PDF'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
+          <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
     } else {
-      let assigned = assignedOrNot(eachRow);
       return (
         <div>
-          {!assigned ?
-              <span title={'Assign'} style={{width:'25%'}} className={`${styles['expand-minimize-span']}`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
-            : <span title={'Re-assign'} style={{width:'25%'}} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span>
-          }   <span title={'Delete'} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          {!savedAgentId ?
+              <span title={'Assign'}  className={`span-action-icons`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
+            : !salesObj.approved ? <span title={'Re-assign'}  className={`span-action-icons`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span> : null
+          }   <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
     }
@@ -222,10 +223,11 @@ const RequestOverviewData = (props) => {
         console.log('Edit');
         break;
      case 'download':
-          console.log('Download clicked');
+          handleDownload(eachRow);
         break;
      case 'assign':
          let savedAgentId = assignedOrNot(eachRow)
+         savedAgentId = savedAgentId.sales_agent_id || 0;
          stateObj['showPopup'] = true;
          stateObj['selectedCompanyId'] = eachRow.company_id;
          stateObj['selectedEmployerId'] = eachRow.employer_id;
@@ -237,13 +239,33 @@ const RequestOverviewData = (props) => {
     setState(stateObj);
   }
 
+  const handleDownload = async (eachRow) => {
+    eachRow['type'] = 1;
+    await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
+      .then((response) => {
+        let result = response.data;
+        if(response.status === 200 && result.url) {
+          var a = document.createElement("a");
+          a.setAttribute("type", "file");
+          a.href     = result.url;
+          a.target   = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          window.alert('Error occurred')
+        }
+      })
+      .catch((error) => window.alert('Error occurred'));
+  }
+
   /**
    * [assignedOrNot description]
    * @param  {Object} eachRow               [description]
    * @return {int}         [description]
    */
   const assignedOrNot = (eachRow) =>
-  assignedData[eachRow.employer_id] ? assignedData[eachRow.employer_id][eachRow.company_id] ?  assignedData[eachRow.employer_id][eachRow.company_id] : 0 : 0;
+  assignedData[eachRow.employer_id] ? assignedData[eachRow.employer_id][eachRow.company_id] ?  assignedData[eachRow.employer_id][eachRow.company_id] : { } : { };
 
   /**
    * [handleDelete description]

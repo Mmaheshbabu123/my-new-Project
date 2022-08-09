@@ -76,6 +76,7 @@ const loadData = async () => {
       defaultOptions['salaryCodes']          =  data['pref_codes'] && data['pref_codes']['salaryCodes'] ? data['pref_codes']['salaryCodes'] : [];
       defaultOptions['benefitCodes']         =  data['benefitCodes'] && data['pref_codes']['benefitCodes'] ? data['pref_codes']['benefitCodes'] : [];
       defaultOptions['agent_details']        =  data['agent_details'] || [];
+      defaultOptions['pref_codes']           =  data['pref_codes'] || [];
       updateStateChanges({defaultOptions,renderedOptions:1})
     }
   }).catch((error) => console.log(error) )

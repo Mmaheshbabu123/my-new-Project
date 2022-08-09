@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import SearchIcon from '../../SearchIcon';
-import { CgEye } from 'react-icons/cg';
+import { AiFillFilePdf } from 'react-icons/ai';
 import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
+import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
+import { APICALL } from '@/Services/ApiServices';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
@@ -167,11 +169,31 @@ const OverviewPage = (props) => {
       <>
         {agent.approved ? <span title={'Sign'}
           className="actions-span me-2 text-dark"
-          onClick={() => !signed ? handleEmployerSign(epa_id, company_id, agent.root_parent_id):null}> {signed ? 'Signed' : 'Sign'} </span>
+          onClick={() => !signed ? handleEmployerSign(epa_id, company_id, agent.root_parent_id): handleDownload(eachRow)}> {signed ? <AiFillFilePdf /> : 'Sign'} </span>
         : null}
         {agent.approved ? <span title={'View'} className="actions-span me-2 text-dark" onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id, 1)}> View </span>:null}
       </>
     )
+  }
+
+  const handleDownload = async (eachRow) => {
+    eachRow['type'] = 2;
+    await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
+      .then((response) => {
+        let result = response.data;
+        if(response.status === 200 && result.url) {
+          var a = document.createElement("a");
+          a.setAttribute("type", "file");
+          a.href     = result.url;
+          a.target   = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          window.alert('Error occurred')
+        }
+      })
+      .catch((error) => window.alert('Error occurred'));
   }
 
   return(
