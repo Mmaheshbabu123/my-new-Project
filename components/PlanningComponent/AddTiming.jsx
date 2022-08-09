@@ -126,6 +126,65 @@ function Addtiming(props) {
 
 		setEmployee_planning(res);
 	};
+	let calenderUpdate = (value,key) => {
+		var dateObj = [];
+		var temp = [];
+		value.map((date1)=>{
+			dateObj.push(date1.format('YYYY-MM-DD'));
+
+		})
+		// console.log(dates);
+		var res = [ ...employee_planning ];
+		
+		if(checked){
+
+
+		}else{
+			console.log(res[key].timings);
+			if(res[key].timings.length > 0){
+				res[key].removetimings= [];
+				res[key].timings.map((val1,key1)=>{
+					if(!dateObj.includes(val1.pdate)){
+						res[key].removetimings.push(val1)
+						res[key].timings.splice(key1,1);
+					}else{
+						temp.push(val1.pdate)
+					}
+
+				})
+				console.log(dateObj);
+				console.log(temp);
+				dateObj.map((value1) => {
+					if(temp.indexOf(value1)<= -1){
+						alert(value1);
+						res[key].timings.push({
+							pdate: value1,
+							starttime: '',
+							endtime: '',
+							error_starttime: '',
+							error_endtime: ''
+						});
+					}	
+
+				})
+				setEmployee_planning(res);
+			}else{
+				res[key].error_selected_date = '';
+				res[key].timings.push({
+					pdate: value[0].format('YYYY-MM-DD'),
+					starttime: '',
+					endtime: '',
+					error_starttime: '',
+					error_endtime: ''
+				});
+				setEmployee_planning(res);
+
+			}
+			console.log(res);
+
+		}
+		
+	}
 
 	let postdata = () => {
 		var data1 = [];
@@ -181,6 +240,10 @@ function Addtiming(props) {
 						if (o1.endtime == '') {
 							count++;
 							res[ky].timings[k1].error_endtime = 'This field is required.';
+						}
+						if(o1.starttime == o1.endtime){
+							count++;
+							res[ky].timings[k1].error_starttime = 'Start time cannot be same as end time.';
 						}
 					});
 				}
@@ -336,12 +399,12 @@ function Addtiming(props) {
 														
 														<div className="col-md-12 p-0">
 															<Calendar
-															    className='timepage-calander '
+															    className='timepage-calander'
 																value={result.date}
 																multiple={true}
 																format="DD/MM/YYYY"
 																onChange={(date) => {
-																	handleChange2(date, key);
+																	calenderUpdate(date, key);
 																}}
 																minDate={new Date()}
 															/>
@@ -354,7 +417,7 @@ function Addtiming(props) {
 															
 																<div className="col-md-2 py-3 color-skyblue2">
 																	<div className="pb-2 color-skyblue2" />
-																	{value.date}
+																	{value.pdate.split('-').reverse().join('/')}
 																</div>
 																<div className="col-md-4 py-3 ">
 																	<div className='d-flex'>
@@ -366,7 +429,7 @@ function Addtiming(props) {
 																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
-																		// format="HH:mm"
+																		format="HH:mm"
 																		value = {value.starttimeObj?value.starttimeObj:null}
 																		onChange={(e) =>
 																			updatetime('starttime', index, e, key)}
