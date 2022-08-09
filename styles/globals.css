@@ -1135,7 +1135,7 @@ span .firsrt-line:last-child() {
 .age-sec.input-group-text {
     background: none;
     border-left: 0px;
-    height: 39px;
+    height: 38px;
     margin-top: 8px;
     border-radius: 0px;
     border: 1px solid var(--bg-gray-dark);
@@ -1265,8 +1265,28 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-l);
 }
+.poppins-regular-16px-white-c {
+	color: var(--color-skyblue);
+	font-size: var(--font-size-m);
+}
+.poppins-regular-18px-white-c {
+	color: var(--color-skyblue);
+	font-size: var(--font-size-l);
+}
 .pc-height {
 	height: calc(52vh - 7vh);
 	overflow: auto;
    
 }
+/* .poppins-regular-16px-white-c:active, .poppins-regular-16px-white-c:focus {
+	color: var(--color-white) !important;
+}
+.done .poppins-regular-16px-white-c, .done .poppins-regular-18px-white-c {
+	color: var(--color-skyblue);
+}
+.done .poppins-regular-16px-white-c:active, .done .poppins-regular-18px-white-c:active {
+	color: var(--color-white) !important;
+}
+.pending .poppins-regular-16px-white-c1, .pending .poppins-regular-18px-white-c2 {
+	color: var(white);
+} */
