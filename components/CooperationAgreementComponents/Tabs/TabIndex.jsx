@@ -69,6 +69,7 @@ const loadData = async () => {
   await APICALL.service(getDefaultOptionsData + `/${salesAgentRefId}`, 'GET').then(response => {
     if (response.status === 200) {
       data = response.data || {};
+
       defaultOptions['countrylist']          =  data['countrylist'];
       defaultOptions['locationslist']        =  data['locationslist'];
       defaultOptions['payment_condtion']     =  data['payment_condtion'];
@@ -77,6 +78,8 @@ const loadData = async () => {
       defaultOptions['benefitCodes']         =  data['benefitCodes'] && data['pref_codes']['benefitCodes'] ? data['pref_codes']['benefitCodes'] : [];
       defaultOptions['agent_details']        =  data['agent_details'] || [];
       defaultOptions['pref_codes']           =  data['pref_codes'] || [];
+      defaultOptions['contactList']          =  data['contactsData'] && data['contactsData']['multiselctObj'] ?  data['contactsData']['multiselctObj']: [];
+      defaultOptions['contactsData']         =   data['contactsData'] ?.['personsData'];
       updateStateChanges({defaultOptions,renderedOptions:1})
     }
   }).catch((error) => console.log(error) )
@@ -89,7 +92,7 @@ const loadData = async () => {
 	return (
 		<div className="">
       {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields. </p> : null}
-      {showComponentBasedOnTabSelection()}
+      {state.renderedOptions === 1 && showComponentBasedOnTabSelection()}
       <div className={`col-md-12 row`} >
           <div className={`col-md-7 ${styles['tab-index-back-div']}`}>
             <p className={`${styles['tab-index-back-btn']}`} onClick={() => router.back()}> Back </p>

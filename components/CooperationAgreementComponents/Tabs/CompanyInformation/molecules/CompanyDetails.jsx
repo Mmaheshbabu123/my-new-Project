@@ -16,7 +16,7 @@ import { APICALL } from '@/Services/ApiServices';
 var filterTimeout;
 const CompanyDetails = (props) => {
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
-var { tab_2,element_status } = state;
+var { tab_2,element_status ,tab_4} = state;
 const [companyState,setCompanyState] = useState({
   vat_number:0,
   validations:{'17':{'type':1,validate:false },'19':{'type':2,validate:true},'14':{'type':1,validate:true},'18':{'type':1,validate:true}}
@@ -60,6 +60,13 @@ element_status['tab_2'].push(name);
     updateStateChanges({ tab_2,element_status });
 
 }
+const prefillFieldsDefault = (tab_4,tab_2) =>{
+  let defaultKeys = ['40','41','42','45','46','47'];
+  defaultKeys.forEach((item)=>{
+    tab_4[item] =  tab_2['19'] ;
+  })
+
+}
 const getCompanyDetailsByvat = async() => {
    let data = {};
    let vatNumber = tab_2['8'] !== "" ? tab_2['8']: '';
@@ -69,7 +76,8 @@ const getCompanyDetailsByvat = async() => {
       data['8'] = tab_2['8'];
       data['10']   = '1';
       tab_2 = {...tab_2,...data,}
-      updateStateChanges({ tab_2});
+      prefillFieldsDefault(tab_4,tab_2);
+      updateStateChanges({ tab_2,tab_4});
     } )
     .catch((error) => setIntialStateObj(tab_2) );
 
