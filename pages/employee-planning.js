@@ -1,9 +1,10 @@
-import EmployeeMonthlyPlanning from "@/components/EmployeePlanningComponents/Employee_monthly_planning";
+import EmployeeMonthlyPlanning from "@/components/EmployeePlanningComponents/EmployeePlanning";
 
-const Employeemonthlyplanning = () => (
-    <div><EmployeeMonthlyPlanning />
-
-    </div>
-);
-
+const Employeemonthlyplanning = () => {
+    return (
+        <div>
+            <EmployeeMonthlyPlanning />
+        </div>
+    );
+}
 export default Employeemonthlyplanning;
