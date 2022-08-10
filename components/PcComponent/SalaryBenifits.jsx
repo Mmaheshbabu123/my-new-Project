@@ -177,7 +177,7 @@ const SalaryBenifits = () => {
 				) : (
 					''
 				)}
-				<div className='pc-height'>
+				<div className='pc-height5'>
 				<div className="row border-form-sec m-0 p-4">
 				<p className="mb-2 fw-bold" style={{ color: 'red' }}>
 						{error_sal_benifits}

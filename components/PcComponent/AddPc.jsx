@@ -354,7 +354,7 @@ function AddPc(props) {
 		<div className="">
 			<form onSubmit={(e) => submit(e)}>
 				{cat_subsec_type == 3 ? <h4 className="h5 mt-3">Edit paritair comite</h4> : ''}
-				<div className="pc-height ">
+				<div className="pc-height1 ">
 					<div className="row parithair-border m-0 px-4 ">
 						{/* <div className={sec_width} > */}
 						<div className="col-md-12 row  my-4 m-0">
