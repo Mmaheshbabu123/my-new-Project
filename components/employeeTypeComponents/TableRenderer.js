@@ -123,11 +123,11 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
       </div>
       <div className="table-render-parent-div">
           <table className="table table-hover manage-types-table table  mb-3 text-start">
-            <thead className="table-render-thead ">
+            <thead className="table-render-thead bg_grey">
               <tr className='table-sticky-bg-gray poppins-regular-18px ' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='action-sec px-5' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
-            <tbody>
+            <tbody className='table-body-employee-type'>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
                 <td className='text-start px-5 poppinns-regular-thin py-1'> {eachRow.name} </td>
                 <td className='text-end px-5 poppinns-regular-thin py-1 '>{ getNeededActions(eachRow) } </td>
