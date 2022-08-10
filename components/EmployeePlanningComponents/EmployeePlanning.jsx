@@ -35,17 +35,23 @@ function EmployeeMonthlyPlanning(props) {
 	/**
 	 * FETCHING EMPLOYEE ID
 	 */
-	useEffect(() => {
-		APICALL.service(fetchemployeeplanning + 104, 'GET')
-			.then((result) => {
-				console.log(result.data);
+	useEffect(
+		() => {
+			APICALL.service(fetchemployeeplanning + 104, 'GET')
+				.then((result) => {
+					console.log(result.data);
+					// result.data[0].map((obj, key) => {
+					// 	result.data[0][key].date[key1] = new Date(obj1);
+					// });
 
-				setData(result.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
+					setData(result.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+		[ props ]
+	);
 	const ExternalViewSwitcher = ({ currentViewName, onChange }) => (
 		<div
 			className="row mb-5 m-0"
@@ -109,12 +115,12 @@ function EmployeeMonthlyPlanning(props) {
 						<tbody>
 							{data.slice(0, visible).map((result) => (
 								<tr className="border-bottom  border-info" key={result.title}>
-									<td className="table-border-gray font-poppins-light">{result.Date}</td>
-									<td className="table-border-gray font-poppins-light">{result.startTime}</td>
-									<td className="table-border-gray font-poppins-light">{result.endTime}</td>
-									<td className="table-border-gray font-poppins-light">{result.employer}</td>
+									<td className="table-border-gray font-poppins-light">{result.pdate}</td>
+									<td className="table-border-gray font-poppins-light">{result.starttime}</td>
+									<td className="table-border-gray font-poppins-light">{result.endtime}</td>
+									<td className="table-border-gray font-poppins-light">{result.emp_id}</td>
 									<td className=" table-border-gray font-poppins-light">{result.location}</td>
-									<td className="table-border-gray font-poppins-light">{result.company}</td>
+									<td className="table-border-gray font-poppins-light">{result.companyname}</td>
 									<td className="d-flex justify-content-center">
 										<AiFillEye className="mt-2 ms-3 color-skyblue" />
 
