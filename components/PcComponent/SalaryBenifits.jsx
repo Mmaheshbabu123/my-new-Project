@@ -204,7 +204,7 @@ const SalaryBenifits = () => {
 							{val.checked && (
 								<div className='bg-4C4D550F p-3'>
 									<div className="">
-										<p className={' custom_astrick poppins-regular-16px'}>Is this mandatory?</p>
+										<p className={' custom_astrick poppins-regular-16px '}>Is this mandatory?</p>
 
 										<div className="d-flex mt-3">
 											<div className="form-check  ">

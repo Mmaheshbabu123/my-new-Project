@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 const EmployeeType = () => {
 	const router = useRouter();
 	const [ disableForm, setDisableForm ] = useState(false);
-	const [ sec_width, setSec_width ] = useState('col-md-5');
+	const [ sec_width, setSec_width ] = useState('col-md-6');
 
 
 	const {
@@ -169,7 +169,7 @@ const EmployeeType = () => {
 						{error_emp_type}
 					</p>
 					{data.map((val) => (
-						<div className={"form-check mt-4 "+sec_width} key={val.id}>
+						<div className={"form-check mt-3 "+sec_width} key={val.id}>
 							<input
 								disabled={disableForm}
 								type="checkbox"
