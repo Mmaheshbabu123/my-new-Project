@@ -34,7 +34,7 @@ const CooperationAgreementStates = (props) => {
       cooperationBenefits: {},
     }
     , tab_6:  {'56':1,'57':2,'58':1,'61':2,'60':'Correction on one document','62':2,'63':2,'64':2,'65':2,'72':'21%','73':2,'74':1,'76':2,'77':2,'78':2,'79':2,required:requiredElements['tab_6'],
-       validations:{'54':{'type':1,validate:false},'55':{'type':2,validate:false} ,'52':{'type':3,validate:false},'72':{'type':6,validate:false},}
+       validations:{'55':{'type':2,validate:false} ,'52':{'type':3,validate:false},'72':{'type':6,validate:false},}
      }
     , selectedTabId: 1
     , loadedTabs: []
