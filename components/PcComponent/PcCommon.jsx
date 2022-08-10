@@ -70,7 +70,7 @@ const PcCommon = (props) => {
 	// );
 
 	return (
-		<div className="container">
+		<div className="container-fluid p-0">
 			<PcContext.Provider
 				value={{
 					pc_unique_key,
@@ -97,8 +97,9 @@ const PcCommon = (props) => {
 				}}
 			>
 				{props.type == 'add' ? (
-					<div>
-						<p className="h4">
+					<div className='col-md-12'>
+						<div className='col-md-12 position-sticky-pc py-4'>
+						<p className="pt-3 pb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 ">
 							{current_sec == 1 ? (
 								'Add paritair comite'
 							) : current_sec == 2 ? (
@@ -108,16 +109,17 @@ const PcCommon = (props) => {
 							) : current_sec == 4 ? (
 								'Add employee type'
 							) : current_sec == 5 ? (
-								'Add salary benifits'
+								'Add salary benefits'
 							) : (
 								'Add paritair comite'
 							)}
 						</p>
-						<div className="row mt-4 pt-2">
-							<ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-								<li className="nav-item" role="presentation">
+						</div>
+						<div className="row  pt-2 m-0">
+							<ul className="nav nav-pills nav-justified mb-3 row m-0 p-0" id="pills-tab" role="tablist">
+								<li className=" border-0 rounded-0 poppins-regular-16px col ps-0" role="presentation">
 									<button
-										className={`nav-link py-3 ${current_sec == 1
+										className={`nav-link parithair-tabs poppins-regular-16px py-3 border-0 rounded-0 w-100 btn-active ${current_sec == 1
 											? 'active custom-active'
 											: 'custom-inactive'}`}
 										id="pills-pc-tab"
@@ -136,13 +138,13 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2">Step 1:</p>
-										<p>Paritair comite details</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">Step 1:</p>
+										<p className='poppins-regular-18px-white btn-active'>Paritair comite details</p>
 									</button>
 								</li>
-								<li className="nav-item" role="presentation">
+								<li className="col border-0 rounded-0 poppins-regular-16px " role="presentation">
 									<button
-										className={`nav-link py-3 ${sec_completed.pc == false
+										className={`nav-link parithair-tabs w-100 py-3 poppins-regular-16px border-0 rounded-0 ${sec_completed.pc == false
 											? 'disabled'
 											: ''} ${current_sec == 2 ? 'active custom-active' : 'custom-inactive'}`}
 										id="pills-profile-tab"
@@ -161,12 +163,12 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2">Step 2:</p> <p>Category and Function</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">Step 2:</p> <p className='poppins-regular-18px-white btn-active'>Category and Function</p>
 									</button>
 								</li>
-								<li className="nav-item" role="presentation">
+								<li className="col border-0 rounded-0 poppins-regular-16px" role="presentation">
 									<button
-										className={`nav-link py-3 ${current_sec != 3 && sec_completed.cat == false
+										className={`nav-link parithair-tabs poppins-regular-16px w-100 border-0 rounded-0  py-3 ${current_sec != 3 && sec_completed.cat == false
 											? 'disabled'
 											: ''} ${current_sec == 3 ? 'active custom-active' : 'custom-inactive'}`}
 										id="pills-contact-tab"
@@ -185,12 +187,12 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2">Step 3:</p> <p>Age</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">Step 3:</p> <p className='poppins-regular-18px-white btn-active'>Age</p>
 									</button>
 								</li>
-								<li className="nav-item" role="presentation">
+								<li className="col border-0 rounded-0 poppins-regular-16px" role="presentation">
 									<button
-										className={`nav-link py-3 ${current_sec != 4 && sec_completed.age == false
+										className={`nav-link parithair-tabs w-100 poppins-regular-16px border-0 rounded-0  py-3 ${current_sec != 4 && sec_completed.age == false
 											? 'disabled'
 											: ''} ${current_sec == 4 ? 'active custom-active' : 'custom-inactive'}`}
 										id="pills-contact-tab"
@@ -209,12 +211,12 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2">Step 4:</p> <p>Employee type</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">Step 4:</p> <p className='poppins-regular-18px-white btn-active'>Employee type</p>
 									</button>
 								</li>
-								<li className="nav-item" role="presentation">
+								<li className="col border-0 rounded-0 pe-0 poppins-regular-16px" role="presentation">
 									<button
-										className={`nav-link py-3 ${current_sec != 5 && sec_completed.emp_type == false
+										className={`nav-link parithair-tabs w-100 border-0 poppins-regular-16px rounded-0  py-3 ${current_sec != 5 && sec_completed.emp_type == false
 											? 'disabled'
 											: ''} ${current_sec == 5 ? 'active custom-active' : 'custom-inactive'}`}
 										id="pills-contact-tab"
@@ -233,11 +235,11 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2">Step 5:</p> <p>Salary benefits</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">Step 5:</p> <p className='poppins-regular-18px-white btn-active'>Salary benefits</p>
 									</button>
 								</li>
 							</ul>
-							<div className="tab-content" id="pills-tabContent">
+							<div className="tab-content col-md-12 p-0" id="pills-tabContent">
 								<div
 									className={`tab-pane fade ${current_sec == 1 ? 'show active' : ''}`}
 									id="pills-pc"

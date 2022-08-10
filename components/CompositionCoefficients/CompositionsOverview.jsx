@@ -56,7 +56,7 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
 
   const handleSearch = (value) => {
     let filterRows = rows.filter((item) => {
-      let rowVal = `${item['name']}${item['date']}${item['value']}`
+      let rowVal = `${item['name']}`
       return (rowVal.toLowerCase().toString())
         .indexOf(value.toLowerCase().toString()) !== -1;
     })
@@ -69,8 +69,8 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
     });
   }
 
-  const handleSearchClick = () => {
-    handleSearch(state.searchTerm);
+  const handleSearchClick = (search = 0) => {
+    handleSearch(search ? state.searchTerm : '' );
   }
 
 //------------------- Pagination code -------------------------//
@@ -99,26 +99,42 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
   return (
     <>
       <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage compositions coeffcients`} </h4>
-      <div className='row searchbox' style={{ margin: '10px 0', position: 'relative' }}>
-        <span className="searchIconCss2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-        <div className='col-md-12 row m-0 p-0'>
-          <div className='col-md-7 p-0'>
-        <input
-          type="text"
-          className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
-          onChange={(e) => setState({...state, searchTerm: e.target.value})}
-          placeholder={'Search'}
-          onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
-        />
-        </div>
-        <div className='col-md-5'>
+      <div className='col-md-12 text-end'>
         <button
           onClick={() => router.push(`composition-coefficient?action=create&id=0`)}
           type="button"
-          className=" py-2 btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln">
+          className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content">
           {`+ Add composition coefficient`}
         </button>
-        </div>
+      </div>
+      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+       <div className='col-md-12 row'>
+         <div className='col-md-6 p-0'>
+           <input
+             type="text"
+             value={state.searchTerm}
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+             onChange={(e) => setState({...state, searchTerm: e.target.value})}
+             placeholder={'Search'}
+             onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+           />
+         </div>
+         <div className='col-md-6'>
+           <button
+             type="button"
+             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+             onClick={() => handleSearchClick(1)}
+           >
+             SEARCH
+           </button>
+           <button
+             type="button"
+             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+             onClick={() => handleSearchClick(0)}
+           >
+             RESET
+           </button>
+         </div>
         </div>
       </div>
       <div className="table-render-parent-div max-height-420">
@@ -131,7 +147,7 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
             {state.currentItems.map(eachRow => <tr className='border poppinns-regular-thin p-2' key={eachRow.cc_id} id={eachRow.cc_id}>
               <td className='poppinns-regular-thin py-2'> {eachRow.name} </td>
               <td className='poppinns-regular-thin'> {eachRow.including ? 'Yes' : '-'} </td>
-              <td className='poppinns-regular-thin'> {eachRow.including ? 'No' : '-'} </td>
+              <td className='poppinns-regular-thin'> {eachRow.including ? '' : 'No'} </td>
               <td className='poppinns-regular-thin'> {eachRow.remark ? eachRow.remark : '-'} </td>
               <td className='poppinns-regular-thin'> { getNeededActions(eachRow) } </td>
             </tr>)}

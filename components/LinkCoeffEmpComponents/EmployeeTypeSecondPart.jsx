@@ -209,7 +209,7 @@ const EmployeeTypeSecondPart = () => {
           employeeTypeArray.map(employeeType => {
             let _EmpId = employeeType.id, _ValId = valueType.id, _Coeffid = coefficient.id;
             let { matrixKey, value } = getPcLinkingValue(_EmpId, _Coeffid, _ValId);
-            return (<td key={matrixKey} id={matrixKey} className="pc-linking-td">
+            return (<td key={matrixKey} id={matrixKey} className="pc-linking-td poppins-regular-16px">
               <input
                 type="text"
                 className="value-input-cell"

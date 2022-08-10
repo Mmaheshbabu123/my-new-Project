@@ -1,16 +1,20 @@
 .sectioncolor {
-    background-color: lightgray !important;
+    background-color: #4C4D550F !important;
 }
-.btncolor {
+/* .btncolor {
     background-color: lightgray !important;
     color:black;
     border:none;
 
-}
+} */
 .sectionli {
-width: 94%
+width: 97%;
+margin: 0px !important
 }
-
+.color-white {
+    color: white !important;
+    
+}
 .listtitle {
     color:black !important;
 }
@@ -22,7 +26,12 @@ width: 94%
     /* box-shadow:  */
 
 }
- 
+#pills-pc-tab {
+    background-color: var(--color-skyblue);
+    color: var(--color-white);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+ }
 .tree .lev1 li::before {
     border-left: 1px solid #999;
     bottom: 50px;
@@ -63,3 +72,16 @@ width: 94%
 .salbenefitwidth {
     width: 45% !important;
 }
+/* .blue-border-bg-white {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-skyblue);
+    color: var(--color-skyblue);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+}
+.blue-border-bg-white:focus-within {
+    background-color: var(--color-skyblue);
+    color: white;
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+} */

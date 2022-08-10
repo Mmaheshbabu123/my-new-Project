@@ -11,7 +11,7 @@ const SelectEmployee = () => {
 			<div className="row text-center">
 				<div className="col-sm-6">
 					<Multiselect
-						className="mb-2 mt-3 p-2  "
+						className="mb-2 mt-3 p-2"
 						displayValue="key"
 						onKeyPressFn={function noRefCheck() {}}
 						onRemove={function noRefCheck() {}}

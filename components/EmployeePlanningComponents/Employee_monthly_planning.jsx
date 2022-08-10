@@ -16,7 +16,8 @@ import {
 	Toolbar,
 	DateNavigator,
 	TodayButton,
-	Appointments
+	Appointments,
+	AppointmentTooltip
 } from '@devexpress/dx-react-scheduler-material-ui';
 
 function EmployeeMonthlyPlanning(props) {
@@ -30,21 +31,21 @@ function EmployeeMonthlyPlanning(props) {
 		setVisible((prevValue) => prevValue + 3);
 	};
 	////////////////////////////////////////////////////////////////
-	// const [ data, setData ] = useState();
+	const [ data, setData ] = useState([]);
 	/**
 	 * FETCHING EMPLOYEE ID
 	 */
-	// useEffect(() => {
-	// 	APICALL.service(fetchemployeeplanning + 105, 'GET')
-	// 		.then((result) => {
-	// 			console.log(result.data);
+	useEffect(() => {
+		APICALL.service(fetchemployeeplanning + 104, 'GET')
+			.then((result) => {
+				console.log(result.data);
 
-	// 			setData(result.data);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-	// }, []);
+				setData(result.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
 	const ExternalViewSwitcher = ({ currentViewName, onChange }) => (
 		<div
 			className="row mb-5 m-0"
@@ -68,160 +69,7 @@ function EmployeeMonthlyPlanning(props) {
 	);
 
 	const [ currentViewName, setCurrentViewName ] = React.useState('Month');
-	const [ data, setData ] = React.useState([
-		{
-			title: 'Website Re-Design Plan',
-			startDate: new Date(2018, 6, 23, 9, 30),
-			endDate: new Date(2018, 6, 23, 11, 30),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			Date: '06 - 07 - 2018',
-			company: 'Infanion'
-		},
-		{
-			title: 'Book Flights to San Fran for Sales Trip',
-			startDate: new Date(2018, 6, 23, 12, 0),
-			endDate: new Date(2018, 6, 23, 13, 0),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			Date: '06 - 07 - 2018',
-			company: 'Infanion'
-		},
-		{
-			title: 'Install New Router in Dev Room',
-			startDate: new Date(2018, 6, 23, 14, 30),
-			endDate: new Date(2018, 6, 23, 15, 30),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			Date: '06 - 07 - 2018',
-			company: 'Infanion'
-		},
-		{
-			title: 'Approve Personal Computer Upgrade Plan',
-			startDate: new Date(2018, 6, 24, 10, 0),
-			endDate: new Date(2018, 6, 24, 11, 0),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			company: 'Infanion'
-		},
-		{
-			title: 'Final Budget Review',
-			startDate: new Date(2018, 6, 24, 12, 0),
-			endDate: new Date(2018, 6, 24, 13, 35),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			Date: '06 - 07 - 2018'
-		},
-		{
-			title: 'Brochure Design Review',
-			startDate: new Date(2018, 6, 26, 14, 0),
-			endDate: new Date(2018, 6, 26, 15, 30),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			Date: '06 - 07 - 2018'
-		},
-		{
-			title: 'Create Icons for Website',
-			startDate: new Date(2018, 6, 27, 10, 0),
-			endDate: new Date(2018, 6, 27, 11, 30),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			Date: '06 - 07 - 2018'
-		},
-		{
-			title: 'Upgrade Server Hardware',
-			startDate: new Date(2018, 6, 27, 14, 30),
-			endDate: new Date(2018, 6, 27, 16, 0),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			Date: '06 - 07 - 2018'
-		},
-		{
-			title: 'Submit New Website Design',
-			startDate: new Date(2018, 6, 27, 16, 30),
-			endDate: new Date(2018, 6, 27, 18, 0),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			Date: '06 - 07 - 2018'
-		},
-		{
-			title: 'Launch New Website',
-			startDate: new Date(2018, 6, 26, 12, 20),
-			endDate: new Date(2018, 6, 26, 14, 0),
-			startTime: '1 PM',
-			endTime: '3PM',
-			employer: 'Preeti',
-			location: 'Bangalore',
-			Date: '06 - 07 - 2018'
-		}
-		// {
-		// 	title: 'Website Re-Design Plan',
-		// 	startDate: new Date(2018, 6, 16, 9, 30),
-		// 	endDate: new Date(2018, 6, 16, 15, 30),
-		// 	startTime: '1 PM',
-		// 	endTime: '3PM'
-		// },
-		// {
-		// 	title: 'Book Flights to San Fran for Sales Trip',
-		// 	startDate: new Date(2018, 6, 16, 12, 0),
-		// 	endDate: new Date(2018, 6, 16, 13, 0),
-		// 	startTime: '1 PM',
-		// 	endTime: '3PM'
-		// },
-		// {
-		// 	title: 'Install New Database',
-		// 	startDate: new Date(2018, 6, 17, 15, 45),
-		// 	endDate: new Date(2018, 6, 18, 12, 15)
-		// },
-		// {
-		// 	title: 'Approve New Online Marketing Strategy',
-		// 	startDate: new Date(2018, 6, 18, 12, 35),
-		// 	endDate: new Date(2018, 6, 18, 14, 15)
-		// },
-		// {
-		// 	title: 'Upgrade Personal Computers',
-		// 	startDate: new Date(2018, 6, 19, 15, 15),
-		// 	endDate: new Date(2018, 6, 20, 20, 30)
-		// },
-		// {
-		// 	title: 'Prepare 2015 Marketing Plan',
-		// 	startDate: new Date(2018, 6, 20, 20, 0),
-		// 	endDate: new Date(2018, 6, 20, 13, 30)
-		// },
-		// {
-		// 	title: 'Brochure Design Review',
-		// 	startDate: new Date(2018, 6, 20, 14, 10),
-		// 	endDate: new Date(2018, 6, 20, 15, 30)
-		// },
-		// {
-		// 	title: 'Vacation',
-		// 	startDate: new Date(2018, 5, 22),
-		// 	endDate: new Date(2018, 6, 1)
-		// },
-		// {
-		// 	title: 'Vacation',
-		// 	startDate: new Date(2018, 6, 28),
-		// 	endDate: new Date(2018, 7, 7)
-		// }
-	]);
+
 	let currentViewNameChange = (e) => {
 		setCurrentViewName(e.target.value);
 	};
@@ -237,12 +85,24 @@ function EmployeeMonthlyPlanning(props) {
 					<table className="table border  border-info mt-3 mb-3">
 						<thead>
 							<tr className=" skyblue-bg-color">
-								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex  ">Date</th>
-								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">Start time</th>
-								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">End time</th>
-								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">Employer</th>
-								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">Location</th>
-								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">Company</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex  ">
+									Date
+								</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
+									Start time
+								</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">
+									End time
+								</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">
+									Employer
+								</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
+									Location
+								</th>
+								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
+									Company
+								</th>
 								<th className=" text-center align-items-center justify-content-center ">Action</th>
 							</tr>
 						</thead>
@@ -269,33 +129,193 @@ function EmployeeMonthlyPlanning(props) {
 					</table>
 				</div>
 				<div className="text-end mb-3 p-0">
-					<button type="button" className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-regular-20px" onClick={viewMoreItems}>
+					<button
+						type="button"
+						className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-regular-20px"
+						onClick={viewMoreItems}
+					>
 						View more &nbsp;
-						<AiOutlineArrowRight className=""/>
+						<AiOutlineArrowRight className="" />
 					</button>
 				</div>
 			</div>
-        <div className="planning-table col-md-12 mb-5">
-			<React.Fragment>
-				<ExternalViewSwitcher currentViewName={currentViewName} onChange={currentViewNameChange} />
+			<div className="planning-table col-md-12 mb-5">
+				<React.Fragment>
+					<ExternalViewSwitcher currentViewName={currentViewName} onChange={currentViewNameChange} />
 
-				<Paper>
-					<Scheduler data={data} height={660}>
-						<ViewState defaultCurrentDate="2018-07-25" currentViewName={currentViewName} />
+					<Paper>
+						<Scheduler data={data} height={660}>
+							<ViewState defaultCurrentDate="2022-07-25" currentViewName={currentViewName} />
 
-						<DayView startDayHour={10} endDayHour={19} />
-						<WeekView startDayHour={10} endDayHour={19} />
-						<WeekView name="Work Week" excludedDays={[ 0, 6 ]} startDayHour={9} endDayHour={19} />
-						<MonthView />
-						<Toolbar />
-						<DateNavigator />
-						<TodayButton />
-						<Appointments />
-					</Scheduler>
-				</Paper>
-			</React.Fragment>
+							<DayView startDayHour={10} endDayHour={19} />
+							<WeekView startDayHour={10} endDayHour={19} />
+							<WeekView name="Work Week" excludedDays={[ 0, 6 ]} startDayHour={9} endDayHour={19} />
+							<MonthView />
+							<Toolbar />
+							<DateNavigator />
+							<TodayButton />
+							<Appointments />
+							<AppointmentTooltip />
+						</Scheduler>
+					</Paper>
+				</React.Fragment>
 			</div>
 		</div>
 	);
 }
 export default EmployeeMonthlyPlanning;
+
+// const [ data, setData ] = React.useState([
+// {
+// 	title: 'Website Re-Design Plan',
+// 	startDate: new Date(2018, 6, 23, 9, 30),
+// 	endDate: new Date(2018, 6, 23, 11, 30),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	Date: '06 - 07 - 2018',
+// 	company: 'Infanion'
+// },
+// {
+// 	title: 'Book Flights to San Fran for Sales Trip',
+// 	startDate: new Date(2018, 6, 23, 12, 0),
+// 	endDate: new Date(2018, 6, 23, 13, 0),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	Date: '06 - 07 - 2018',
+// 	company: 'Infanion'
+// },
+// {
+// 	title: 'Install New Router in Dev Room',
+// 	startDate: new Date(2018, 6, 23, 14, 30),
+// 	endDate: new Date(2018, 6, 23, 15, 30),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	Date: '06 - 07 - 2018',
+// 	company: 'Infanion'
+// },
+// {
+// 	title: 'Approve Personal Computer Upgrade Plan',
+// 	startDate: new Date(2018, 6, 24, 10, 0),
+// 	endDate: new Date(2018, 6, 24, 11, 0),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	company: 'Infanion'
+// },
+// {
+// 	title: 'Final Budget Review',
+// 	startDate: new Date(2018, 6, 24, 12, 0),
+// 	endDate: new Date(2018, 6, 24, 13, 35),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	Date: '06 - 07 - 2018'
+// },
+// {
+// 	title: 'Brochure Design Review',
+// 	startDate: new Date(2018, 6, 26, 14, 0),
+// 	endDate: new Date(2018, 6, 26, 15, 30),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	Date: '06 - 07 - 2018'
+// },
+// // {
+// 	title: 'Create Icons for Website',
+// 	startDate: new Date(2018, 6, 27, 10, 0),
+// 	endDate: new Date(2018, 6, 27, 11, 30),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	Date: '06 - 07 - 2018'
+// },
+// {
+// 	title: 'Upgrade Server Hardware',
+// 	startDate: new Date(2018, 6, 27, 14, 30),
+// 	endDate: new Date(2018, 6, 27, 16, 0),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	Date: '06 - 07 - 2018'
+// },
+// {
+// 	title: 'Submit New Website Design',
+// 	startDate: new Date(2018, 6, 27, 16, 30),
+// 	endDate: new Date(2018, 6, 27, 18, 0),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	Date: '06 - 07 - 2018'
+// },
+// {
+// 	title: 'Launch New Website',
+// 	startDate: new Date(2018, 6, 26, 12, 20),
+// 	endDate: new Date(2018, 6, 26, 14, 0),
+// 	startTime: '1 PM',
+// 	endTime: '3PM',
+// 	employer: 'Preeti',
+// 	location: 'Bangalore',
+// 	Date: '06 - 07 - 2018'
+// }
+// {
+// 	title: 'Website Re-Design Plan',
+// 	startDate: new Date(2018, 6, 16, 9, 30),
+// 	endDate: new Date(2018, 6, 16, 15, 30),
+// 	startTime: '1 PM',
+// 	endTime: '3PM'
+// },
+// {
+// 	title: 'Book Flights to San Fran for Sales Trip',
+// 	startDate: new Date(2018, 6, 16, 12, 0),
+// 	endDate: new Date(2018, 6, 16, 13, 0),
+// 	startTime: '1 PM',
+// 	endTime: '3PM'
+// },
+// {
+// 	title: 'Install New Database',
+// 	startDate: new Date(2018, 6, 17, 15, 45),
+// 	endDate: new Date(2018, 6, 18, 12, 15)
+// },
+// {
+// 	title: 'Approve New Online Marketing Strategy',
+// 	startDate: new Date(2018, 6, 18, 12, 35),
+// 	endDate: new Date(2018, 6, 18, 14, 15)
+// },
+// {
+// 	title: 'Upgrade Personal Computers',
+// 	startDate: new Date(2018, 6, 19, 15, 15),
+// 	endDate: new Date(2018, 6, 20, 20, 30)
+// },
+// {
+// 	title: 'Prepare 2015 Marketing Plan',
+// 	startDate: new Date(2018, 6, 20, 20, 0),
+// 	endDate: new Date(2018, 6, 20, 13, 30)
+// },
+// {
+// 	title: 'Brochure Design Review',
+// 	startDate: new Date(2018, 6, 20, 14, 10),
+// 	endDate: new Date(2018, 6, 20, 15, 30)
+// },
+// {
+// 	title: 'Vacation',
+// 	startDate: new Date(2018, 5, 22),
+// 	endDate: new Date(2018, 6, 1)
+// },
+// {
+// 	title: 'Vacation',
+// 	startDate: new Date(2018, 6, 28),
+// 	endDate: new Date(2018, 7, 7)
+// }
+// ]);
