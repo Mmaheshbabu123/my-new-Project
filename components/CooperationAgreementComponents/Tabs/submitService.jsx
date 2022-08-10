@@ -159,8 +159,9 @@ function checkContactPersonsTabValidation(tab_data,tab_key) {
   let validationObj  = stateObj[tab_key]['validations'];
   let contractObj = stateObj[tab_key];
   const selectPersonId = contractObj['selected_person_id'] || 0;
-  var validateFileds = checkValidationContractPersons(tab_key,selectPersonId);
-  var requiredFields = checkRequiredContractPersons(tab_data,tab_key,selectPersonId);
+  var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key,contractObj);
+  var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj);
+  
   return  requiredFields && validateFileds;
 }
 function checkOnlineDetailsValidation(tab_data,tab_key) {
@@ -183,7 +184,7 @@ function checkRequiredKeyExistStateValue(tab_data,tab_key,stateData) {
   let tempSatatus = true;
 for(const key in tab_data) {
  if(stateData.hasOwnProperty(key)
- && stateData[key] != '' ) {
+ && stateData[key] != ''  && stateData[key] != null ) {
    stateData['required'][key] = true;
    tempSatatus = true;
  }
@@ -287,16 +288,15 @@ function companyInformationPostData(state,tab_key) {
    return   removeValidatioKeyState(data[tab_key])
  }
  function contractPersonsPostData(state,tab_key) {
+   console.log(state)
    let data = structuredClone(state[tab_key]);
-   const selecedPersonId = data['selected_person_id'] || 0;
-   data = data[selecedPersonId] || {};
+   const selectedPersonId = data['selected_person_id'] || 0;
+   console.log(selectedPersonId)
    let obj = {};
-  for(const key in data) {
-    delete data['loaded'];
+    delete data['selected_person_id'];
       removeValidatioKeyState(data);
-  }
   obj['persons'] = data;
-  obj['selected_id'] = selecedPersonId;
+  obj['selected_id'] = selectedPersonId;
  return obj;
  }
 function removeValidatioKeyState(postData) {
@@ -311,11 +311,11 @@ function checkValidationContractPersons(tab_key,selectPersonId) {
 let validationObj;
 
  //delete contractObj['validations'];
- for(const key in contractObj[selectPersonId]) {
-   validationObj = contractObj[selectPersonId]['validations'] || {} ;
+ for(const key in contractObj) {
+   validationObj = contractObj['validations'] || {} ;
 
    if(validationObj)
-   if(!checkValidationFieldsEachTab(validationObj,tab_key,contractObj[selectPersonId])) {
+   if(!checkValidationFieldsEachTab(validationObj,tab_key,contractObj)) {
      tempStatus = false;
      break;
    };
@@ -329,9 +329,9 @@ function checkRequiredContractPersons(tab_data,tab_key,selectPersonId) {
   let tempStatus = true;
   let contractObj = stateObj[tab_key];
   let validationObj;
-  for(const key in contractObj[selectPersonId]) {
+  for(const key in contractObj) {
 
-    if(!checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj[selectPersonId]) && key !== 'loaded') {
+    if(!checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj) && key !== 'loaded') {
       tempStatus = false;
       break;
     };

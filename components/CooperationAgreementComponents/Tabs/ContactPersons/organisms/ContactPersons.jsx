@@ -14,16 +14,19 @@ const personId  = 1;
   const loadData = async () => {
   let stateKey = `tab_${selectedTabId}`;
   let tab_3 = { ...state[stateKey] };
-  let validations = tab_3[2]['validations'] || {};
-  let required  =  tab_3[2]['required'] || {};
+  let validations = tab_3['validations'] || {};
+  let required  =  tab_3['required'] || {};
   var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
 
   let apiData = Object.keys(data['tab_3']).length ? data['tab_3']['personsData'] : 0;
-
+  let personId = data['tab_3']['personId'] ? data['tab_3']['personId'] : 0;
+  console.log(personId);
+  console.log(apiData);
   tab_3_action = apiData === 0 ? 1 :2;
   if(apiData) {
-  apiData[personId]['validations']  = validations;
-  apiData[personId]['required']      = required;
+  apiData['validations']        = validations;
+  apiData['required']           = required;
+  apiData['selected_person_id'] = personId;
   tab_3 = {...tab_3,...apiData}
   }
 

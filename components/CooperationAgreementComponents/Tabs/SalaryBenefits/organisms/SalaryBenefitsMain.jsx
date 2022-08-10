@@ -7,19 +7,25 @@ import { helpers } from '../../../CooperationAgreementHelper';
 const SalaryBenefitsMain = (props) => {
   const { state: { selectedTabId, renderTabComponents, root_parent_id, filledTabs, defaultOptions }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   useEffect(() => {
-    if(!state.loadedTabs.includes(selectedTabId))
+    if(defaultOptions) {
+      if(!state.loadedTabs.includes(selectedTabId))
         loadData();
-    else updateStateChanges({renderTabComponents: true});
-  }, [])
+      else updateStateChanges({renderTabComponents: true});
+    }
+  }, [Object.keys(defaultOptions).length])
 
   const loadData = async () => {
     let data = {};
     let stateKey = 'tab_5';
     let tab_5 = { ...state[stateKey] };
+    let prefCodes = defaultOptions.pref_codes || {};
     var response = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
     data['salaryBenefitPcArray'] = response.pc_array || [];
     data['salaryDataPerPc'] = response.salaryData || {};
     data['alreadyLinked'] = response.alreayLinkedPcIds || state.alreadyLinked;
+    data['benefitCodes'] = prefCodes['benefitCodes'];
+    data['salaryCodes'] = prefCodes['salaryCodes'];
+    data['allCodes'] = prefCodes['allCodes'];
     let apiData = Object.keys(response['tab_data']).length ? response['tab_data'] : 0;
     if(apiData) {
       let { cooperationSalaryDetails = [], cooperationSalaryLinked = {}, cooperationBenefits = {} } = apiData;
@@ -27,7 +33,6 @@ const SalaryBenefitsMain = (props) => {
       tab_5['cooperationSalaryLinked']  = cooperationSalaryLinked || {};
       tab_5['cooperationBenefits']      = cooperationBenefits || {};
     }
-    // console.log(defaultOptions);
     data[stateKey] = tab_5;
     data['loadedTabs'] = [...state.loadedTabs, selectedTabId];
     data['filledTabs'] = response.completedTabIds.length ? [...filledTabs, ...response.completedTabIds] : filledTabs;
