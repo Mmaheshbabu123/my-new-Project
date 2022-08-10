@@ -38,7 +38,6 @@ function Addtiming(props) {
 							result.data[0].map((obj, key) => {
 								obj.date.map((obj1, key1) => {
 									result.data[0][key].date[key1] = new Date(obj1);
-									// result.data[key].starttime[key1] = moment(obj1);
 								});
 								obj.timings.map((obj1, key1) => {
 									result.data[0][key].timings[key1].starttimeObj = moment(obj1.starttime);
@@ -48,12 +47,9 @@ function Addtiming(props) {
 							});
 							setChecked(result.data[1]);
 							setEmployee_planning(result.data[0]);
-							if(checked == true){
-								var datetime = [...commonDatetime];
-								datetime.push(result.data[0][0].timings);
-								var data = result.data[0][0].timings;
+							if(result.data[1] == true){
 								setValue(result.data[0][0].date)
-								setCommonDatetime(datetime);
+								setCommonDatetime(result.data[0][0].timings);
 							}
 						}
 					})
@@ -141,11 +137,10 @@ function Addtiming(props) {
 			dateObj.push(date1.format('YYYY-MM-DD'));
 
 		})
-		// console.log(dates);
 		var res = [ ...employee_planning ];
+		var commondate = commonDatetime;
 		
 		if(checked){
-			var commondate = commonDatetime;
 			if(commondate.length  == 0){
 			commondate.push({
 				pdate: value[0].format('YYYY-MM-DD'),
@@ -155,6 +150,16 @@ function Addtiming(props) {
 				error_endtime: ''
 			})
 		}else{
+			var commondate2 = commondate;
+			commondate.map((data2,k2)=>{
+				console.log(dateObj.indexOf(data2.pdate));
+				if(dateObj.indexOf(data2.pdate) <= -1){
+					commondate2.splice(k2,1);
+
+				}
+
+			})
+			commondate = commondate2;
 			value.map((date1)=>{
 				if(!dateExists(commondate,date1.format('YYYY-MM-DD'))){
 				commondate.push({
@@ -174,20 +179,18 @@ function Addtiming(props) {
 			console.log(res[key].timings);
 			if(res[key].timings.length > 0){
 				res[key].removetimings= [];
+				var res2 = res[key].timings;
 				res[key].timings.map((val1,key1)=>{
-					if(!dateObj.includes(val1.pdate)){
-						res[key].removetimings.push(val1)
-						res[key].timings.splice(key1,1);
-					}else{
-						temp.push(val1.pdate)
+					if(dateObj.indexOf(val1.pdate)<= -1){
+						res2.splice(key1,1);
 					}
 
 				})
+				res[key].timings = res2;
 				console.log(dateObj);
 				console.log(temp);
 				dateObj.map((value1) => {
-					if(temp.indexOf(value1)<= -1){
-						alert(value1);
+					if(!dateExists(res[key].timings,value1)){
 						res[key].timings.push({
 							pdate: value1,
 							starttime: '',
@@ -211,8 +214,6 @@ function Addtiming(props) {
 				setEmployee_planning(res);
 
 			}
-			console.log(res);
-
 		}
 		
 	}
@@ -255,7 +256,7 @@ function Addtiming(props) {
 	let validateTimings = () => {
 		var count = 0;
 		if (checked == true) {
-			if (selectedDate.length == 0) {
+			if (commonDatetime.length == 0) {
 				count++;
 				setError_selected_date('Select atleast one date.');
 			} else {
@@ -364,6 +365,7 @@ function Addtiming(props) {
 		setError_selected_date('');
 		setEmployee_planning(res);
 		setCommonDatetime([]);
+		setValue([]);
 
 
 		
@@ -430,7 +432,7 @@ function Addtiming(props) {
 										
 										<div className="col-md-2 py-3 color-skyblue2">
 											<div className="pb-2 color-skyblue2" />
-											{value.pdate}
+											{value.pdate.split('-').reverse().join('/')}
 										</div>
 										<div className="col-md-4 d-flex py-3">
 											<div className="py-1 px-2  custom_astrick poppins-regular-20px">Start time</div>
@@ -440,6 +442,7 @@ function Addtiming(props) {
 												showSecond={false}
 												focusOnOpen={true}
 												format="HH:mm"
+												value={value.starttimeObj?value.starttimeObj:null}
 												onChange={(e) => updatetime('starttime', index, e, '')}
 											/>
 											<p className="error mt-2">{value.error_starttime}</p>
@@ -452,6 +455,7 @@ function Addtiming(props) {
 												showSecond={false}
 												focusOnOpen={true}
 												format="HH:mm"
+												value={value.endtimeObj?value.endtimeObj:null}
 												onChange={(e) => updatetime('endtime', index, e, '')}
 											/>
 																					<p className="error mt-2">{value.error_endtime}</p>
