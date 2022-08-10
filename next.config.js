@@ -13,9 +13,6 @@ const nextConfig = {
   },
   cssLoaderOptions: {
     url: false
-  },
-  pwa: {
-    dest: 'public'
   }
 }
 

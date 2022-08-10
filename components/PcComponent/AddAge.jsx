@@ -340,17 +340,17 @@ const Addage = () => {
 			<form onSubmit={(e) => submit(e)}>
 				{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Age</h4>:'')}
 
-				<div className="row p-4 pt-5 border-form-sec m-0">
+				<div className="row p-4 pt-3 border-form-sec m-0 pc-height3 scroll ">
 					{/* <div className={sec_width}> */}
 					<div className="col-md-12  m-0 mb-4 ">
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}
 
-						<div className="mb-3 col-md-6">
-							<label className="custom_astrick mb-2">At which age full salary is paid?</label>
+						<div className="mb-3 col-md-6 ">
+							<label className="custom_astrick ">At which age full salary is paid?</label>
 							<select
 								disabled={disableForm}
 								type="text"
-								className="form-select mt-2 mb-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
+								className="form-select mt-2 mb-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 hi-40 rounded-0"
 								value={data.age}
 								onChange={(e) => {
 									handleshowhide(e);
@@ -369,18 +369,18 @@ const Addage = () => {
 						{/* IF AGE = 21 */}
 						{showhideage === '4' && (
 							<div className="mb-3 col-md-6">
-								<label className="custom_astrick mb-2 ">Minimum salary for 20 years?</label>
+								<label className="custom_astrick">Minimum salary for 20 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
+										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_20}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_20: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text age-sec">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
 								<p className="error">{error_min_sal_20}</p>
 							</div>
@@ -388,18 +388,18 @@ const Addage = () => {
 						{/* IF AGE >= 20 */}
 						{(showhideage === '3' || showhideage === '4') && (
 							<div className="mb-3 col-md-6">
-								<label className="custom_astrick  mb-2 ">Minimum salary for 19 years?</label>
+								<label className="custom_astrick">Minimum salary for 19 years?</label>
 								<div className="input-group">
 									<input
 									    disabled={disableForm}
 										type="text"
-										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
+										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_19}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_19: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text age-sec">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
 								<p className="error">{error_min_sal_19}</p>
 							</div>
@@ -412,13 +412,13 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_18}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_18: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text age-sec">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
 								<p className="error">{error_min_sal_18}</p>
 							</div>
@@ -432,13 +432,13 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_17}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_17: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text age-sec">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
 								<p className="error">{error_min_sal_17}</p>
 							</div>
@@ -450,13 +450,13 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_16}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_16: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text age-sec">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
 								<p className="error">{error_min_sal_16}</p>
 							</div>
@@ -468,13 +468,13 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_15}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_15: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text age-sec">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
 								<p className="error">{error_min_sal_15}</p>
 							</div>

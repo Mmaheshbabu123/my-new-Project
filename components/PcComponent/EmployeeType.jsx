@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 const EmployeeType = () => {
 	const router = useRouter();
 	const [ disableForm, setDisableForm ] = useState(false);
-	const [ sec_width, setSec_width ] = useState('col-md-5');
+	const [ sec_width, setSec_width ] = useState('col-md-6');
 
 
 	const {
@@ -163,13 +163,13 @@ const EmployeeType = () => {
 		<div className="container-fluid p-0">
 			<form onSubmit={submit}>
 			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
-
-				<div className="row pt-4 border-form-sec m-0 p-4">
-				<p className="mt-2 p-0" style={{ color: 'red' }}>
+            <div className='pc-height4'>
+				<div className="row pt-0 border-form-sec m-0 p-4 ">
+				<p className="mt-1 p-0" style={{ color: 'red' }}>
 						{error_emp_type}
 					</p>
 					{data.map((val) => (
-						<div className={"form-check mt-4 "+sec_width} key={val.id}>
+						<div className={"form-check mt-3 "+sec_width} key={val.id}>
 							<input
 								disabled={disableForm}
 								type="checkbox"
@@ -200,6 +200,7 @@ const EmployeeType = () => {
 					// </div>
 					))}
 
+				</div>
 				</div>
 				{pc_view_type == 'editpc' ? (
 					<div className="row my-4">

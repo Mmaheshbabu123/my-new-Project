@@ -273,7 +273,7 @@ function ManageProject(props) {
 									onChange={(e) => setSearchaddress(e.target.value)}
 								/>
 							</div>
-							<div className="col-sm-2">
+							<div className="col-sm-3">
 								<button
 									type="button"
 									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
@@ -310,7 +310,7 @@ function ManageProject(props) {
 												<td className="poppinns-regular-thin">{result.project_name}</td>
 												<td className="poppinns-regular-thin">{result.project_location}</td>
 												<td className="poppinns-regular-thin">
-													{result.address.replace(',', '').length > 7 ? result.address : '-'}
+													{/* {result.address.replace(',', '').length > 7 ? result.address : '-'} */}
 												</td>
 												<td className="d-flex justify-content-center">
 													<Link href={'/editproject/' + result.id} className="">

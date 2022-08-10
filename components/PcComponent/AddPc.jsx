@@ -36,8 +36,8 @@ function AddPc(props) {
 	const [ error_pc_alias_name, setError_pc_alias_name ] = useState('');
 	const [ error_min_time, setError_min_time ] = useState('');
 	const [ error_max_time, setError_max_time ] = useState('');
+	const [ error_buffer_time, setError_buffer_time ] = useState('');
 
-	
 	const [ disableSave, setDisableSave ] = useState(false);
 
 	const [ data, setData ] = useState({
@@ -46,6 +46,7 @@ function AddPc(props) {
 		pc_number: '',
 		pc_name: '',
 		pc_alias_name: '',
+		buffer_timings: '',
 		min_work_timings: '',
 		max_work_timings: ''
 	});
@@ -80,7 +81,7 @@ function AddPc(props) {
 										cat: true,
 										age: true,
 										pc: true,
-										emp_type: true,
+										emp_type: true
 									};
 								});
 							} else if (result.data[0].completed == 3) {
@@ -89,7 +90,7 @@ function AddPc(props) {
 										...oldState,
 										cat: true,
 										age: true,
-										pc: true,
+										pc: true
 									};
 								});
 							} else if (result.data[0].completed == 2) {
@@ -97,15 +98,14 @@ function AddPc(props) {
 									return {
 										...oldState,
 										cat: true,
-										pc: true,
+										pc: true
 									};
 								});
-
 							} else if (result.data[0].completed == 1) {
 								setSec_completed((oldState) => {
 									return {
 										...oldState,
-										pc: true,
+										pc: true
 									};
 								});
 							} // setSec_completed(res1); //updating that add pc data is filled so that next section can be enable
@@ -117,6 +117,7 @@ function AddPc(props) {
 							data1['pc_name'] = result.data[0].pc_name;
 							data1['min_work_timings'] = result.data[0].min_work_timings;
 							data1['max_work_timings'] = result.data[0].max_work_timings;
+							data1['buffer_timings'] = result.data[0].buffer_timings;
 							data1['pc_alias_name'] =
 								result.data[0].pc_alias_name != null ? result.data[0].pc_alias_name : '';
 							// setUpdate_sec_completed(result.data[0].completed)
@@ -271,21 +272,30 @@ function AddPc(props) {
 		var error1 = [];
 		var min_time = res.min_work_timings.replaceAll(' ', '');
 		var max_time = res.max_work_timings.replaceAll(' ', '');
+		var buffer_timings = res.buffer_timings.replaceAll(' ', '');
 		//check if required fields are empty
 		error1['pc_name'] = ValidationService.emptyValidationMethod(res.pc_name);
 		error1['pc_number'] = ValidationService.emptyValidationMethod(res.pc_number);
 		error1['min_work_timings'] = ValidationService.emptyValidationMethod(min_time);
 		error1['max_work_timings'] = ValidationService.emptyValidationMethod(max_time);
-
+		error1['buffer_timings'] = ValidationService.emptyValidationMethod(buffer_timings);
 
 		//check if fields are valid
 		error1['pc_number'] =
 			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number) : error1['pc_number'];
 
-			error1['min_work_timings'] =
-			error1['min_work_timings'] == '' ? ValidationService.hoursperdayValidationMethod(min_time) : error1['min_work_timings'];
-			error1['max_work_timings'] =
-			error1['max_work_timings'] == '' ? ValidationService.hoursperdayValidationMethod(max_time) : error1['max_work_timings'];
+		error1['min_work_timings'] =
+			error1['min_work_timings'] == ''
+				? ValidationService.hoursperdayValidationMethod(min_time)
+				: error1['min_work_timings'];
+		error1['max_work_timings'] =
+			error1['max_work_timings'] == ''
+				? ValidationService.hoursperdayValidationMethod(max_time)
+				: error1['max_work_timings'];
+		error1['buffer_timings'] =
+			error1['buffer_timings'] == ''
+				? ValidationService.hoursperdayValidationMethod(buffer_timings)
+				: error1['buffer_timings'];
 		// error1['pc_name'] =
 		// 	error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
 		// error1['pc_alias_name'] =
@@ -293,8 +303,11 @@ function AddPc(props) {
 		// 		? ValidationService.nameValidationMethod(res.pc_alias_name)
 		// 		: '';
 
-		if(error1['min_work_timings'] == '' && error1['max_work_timings'] == ''){
-			error1['max_work_timings'] = parseFloat(min_time) > parseFloat(max_time)? 'Maximum work timing cannot be lesser than minimum work timing.':'';
+		if (error1['min_work_timings'] == '' && error1['max_work_timings'] == '') {
+			error1['max_work_timings'] =
+				parseFloat(min_time) > parseFloat(max_time)
+					? 'Maximum work timing cannot be lesser than minimum work timing.'
+					: '';
 		}
 		error1['pc_alias_name'] =
 			res.pc_alias_name != '' &&
@@ -308,10 +321,17 @@ function AddPc(props) {
 		setError_pc_alias_name(error1['pc_alias_name']);
 		setError_min_time(error1['min_work_timings']);
 		setError_max_time(error1['max_work_timings']);
-
+		setError_buffer_time(error1['buffer_timings']);
 
 		//return false if there is an error else return true
-		if (error1['pc_number'] == '' && error1['pc_name'] == '' && error1['pc_alias_name'] == '' && error1['min_work_timings']=='' && error1['max_work_timings'] == '') {
+		if (
+			error1['pc_number'] == '' &&
+			error1['pc_name'] == '' &&
+			error1['pc_alias_name'] == '' &&
+			error1['min_work_timings'] == '' &&
+			error1['max_work_timings'] == '' &&
+			error1['buffer_timings'] == ''
+		) {
 			return true;
 		} else {
 			return false;
@@ -334,81 +354,97 @@ function AddPc(props) {
 		<div className="">
 			<form onSubmit={(e) => submit(e)}>
 				{cat_subsec_type == 3 ? <h4 className="h5 mt-3">Edit paritair comite</h4> : ''}
-				<div className="row parithair-border m-0 px-4">
-					{/* <div className={sec_width} > */}
-					<div className="col-md-12 row  my-4 m-0" >
-						<div className="form-group py-2 col-md-6 flex-1 me-2 ">
-							<label className="custom_astrick">Paritair comite number</label>
-							<input
-								type="text"
-								value={data.pc_number}
-								className=" form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, pc_number: e.target.value }));
-								}}
-							/>
-							<p className="error mt-2">{error_pc_number}</p>
+				<div className="pc-height1 ">
+					<div className="row parithair-border m-0 px-4 ">
+						{/* <div className={sec_width} > */}
+						<div className="col-md-12 row  my-4 m-0">
+							<div className="form-group py-2 col-md-6 flex-1 me-2 ">
+								<label className="custom_astrick">Paritair comite number</label>
+								<input
+									type="text"
+									value={data.pc_number}
+									className=" form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
+									onChange={(e) => {
+										setData((prev) => ({ ...prev, pc_number: e.target.value }));
+									}}
+								/>
+								<p className="error mt-2">{error_pc_number}</p>
+							</div>
+							<div className="form-group py-2 col-md-6 flex-1 ms-2">
+								<label className="custom_astrick">Paritair comite name</label>
+								<input
+									type="text"
+									value={data.pc_name}
+									className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
+									onChange={(e) => {
+										setData((prev) => ({ ...prev, pc_name: e.target.value }));
+									}}
+								/>
+								<p className="error mt-2">{error_pc_name}</p>
+							</div>
+							<div className="form-group py-2 col-md-6 flex-1 me-2">
+								<label>Paritair comite alias name </label>
+								<input
+									type="text"
+									value={data.pc_alias_name}
+									className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
+									onChange={(e) => {
+										setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
+									}}
+								/>
+								<p className="error mt-2">{error_pc_alias_name}</p>
+							</div>
+							{/* BUFFER TIMING */}
+							<div className="form-group mb-3 py-2 col-md-6 flex-1 ms-2">
+								<label className="custom_astrick">Buffer time between two plannings</label>
+
+								<div className=" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex">
+									<input
+										type="text"
+										value={data.buffer_timings}
+										className="form-control border-0"
+										onChange={(e) => {
+											setData((prev) => ({ ...prev, buffer_timings: e.target.value }));
+										}}
+									/>
+									<span className="input-group-text border-0 rounded-0">hrs.</span>
+								</div>
+								<p className="error mt-2">{error_buffer_time}</p>
+							</div>
+
+							<div className="form-group py-2 col-md-6 flex-1 me-2">
+								<label className="custom_astrick">Minimum work timings per day</label>
+								<div className=" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex">
+									<input
+										type="text"
+										value={data.min_work_timings}
+										className="form-control border-0 "
+										onChange={(e) => {
+											setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
+										}}
+									/>
+									<span className="input-group-text border-0 rounded-0">hrs.</span>
+								</div>
+								<p className="error mt-2">{error_min_time}</p>
+							</div>
+							<div className="form-group py-2 col-md-6 flex-1 ms-2">
+								<label className="custom_astrick">Maximum work timings per day</label>
+								<div className=" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex">
+									<input
+										type="text"
+										value={data.max_work_timings}
+										className="form-control border-0"
+										onChange={(e) => {
+											setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
+										}}
+									/>
+									<span className="input-group-text border-0 rounded-0">hrs.</span>
+								</div>
+								<p className="error mt-2">{error_max_time}</p>
+							</div>
 						</div>
-						<div className="form-group py-2 col-md-6 flex-1 ms-2">
-							<label className="custom_astrick">Paritair comite name</label>
-							<input
-								type="text"
-								value={data.pc_name}
-								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, pc_name: e.target.value }));
-								}}
-							/>
-							<p className="error mt-2">{error_pc_name}</p>
-						</div>
-						<div className="form-group py-2 col-md-6 flex-1 me-2">
-							<label>Paritair comite alias name </label>
-							<input
-								type="text"
-								value={data.pc_alias_name}
-								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
-								}}
-							/>
-							<p className="error mt-2">{error_pc_alias_name}</p>
-						</div>
-						<div className="form-group py-2 col-md-6 flex-1 ms-2">
-							<label className="custom_astrick">Buffer time between two plannings</label>
-							<input
-								type="text"
-								
-								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
-								
-							/>
-							<p className="error mt-2">{error_pc_alias_name}</p>
-						</div>
-						<div className="form-group py-2 col-md-6 flex-1 me-2">
-							<label className="custom_astrick">Minimum work timings per day</label>
-							<input
-								type="text"
-								value={data.min_work_timings}
-								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
-								}}
-							/>
-							<p className="error mt-2">{error_min_time}</p>
-						</div>
-						<div className="form-group py-2 col-md-6 flex-1 ms-2">
-							<label className="custom_astrick">Maximum work timings per day</label>
-							<input
-								type="text"
-								value={data.max_work_timings}
-								className="form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0"
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
-								}}
-							/>
-							<p className="error mt-2">{error_max_time}</p>
-						</div>
+						{/* <div className="col-md-6" /> */}
 					</div>
-					{/* <div className="col-md-6" /> */}
 				</div>
 				{cat_subsec_type == 3 ? (
 					<div className="row m-0 my-4">

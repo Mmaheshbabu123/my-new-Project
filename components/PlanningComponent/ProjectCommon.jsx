@@ -8,27 +8,29 @@ const ProjectCommon = (props) => {
 		setShowtab(e);
 	};
 	return (
-		<div className="container">
+		<div className="container-fluid">
 			<div className="row">
-				<h1 className="mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage project</h1>
-				<ul className="nav nav-tabs mb-3 mt-3" id="myTab0" role="tablist">
-					<li className="nav-item" role="presentation">
+				<h1 className="my-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage project</h1>
+				<div className='col-md-12 row m-0'>
+				<ul className="nav nav-tabs border-0 mb-3 mt-3" id="myTab0" role="tablist">
+					<li className="hi-50 me-4" role="presentation">
 						<button
-							className={showtab === 1 ? ' nav-link  project-active ' : '  nav-link'}
+							className={showtab === 1 ? ' nav-link  project-active rounded-0 ' : ' mng-proj  nav-link'}
 							onClick={() => handletab(1)}
 						>
 							Manage project
 						</button>
 					</li>
-					<li className="nav-item" role="presentation">
+					<li className="hi-50" role="presentation">
 						<button
-							className={showtab == 2 ? 'nav-link project-active' : 'nav-link'}
+							className={showtab == 2 ? 'nav-link  project-active rounded-0' : ' mng-arch nav-link'}
 							onClick={() => handletab(2)}
 						>
 							Manage archived project
 						</button>
 					</li>
 				</ul>
+				</div>
 				<div className="tab-content text-dark" id="pills-tabContent">
 					{/* Tab 1 content */}
 					<div className={showtab === 1 ? 'tab-pane fade show active' : 'tab-pane fade show'}>

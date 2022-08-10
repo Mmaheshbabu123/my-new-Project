@@ -177,13 +177,14 @@ const SalaryBenifits = () => {
 				) : (
 					''
 				)}
+				<div className='pc-height5'>
 				<div className="row border-form-sec m-0 p-4">
-				<p className="mt-2" style={{ color: 'red' }}>
+				<p className="mb-2 fw-bold" style={{ color: 'red' }}>
 						{error_sal_benifits}
 					</p>
 					{data.map((val, key) => (
-						<div className='col-6'>
-						<div key={key} className={`form-check mt-1  me-3 `}>
+						<div className='col-6' key={key}>
+						<div key={key} className={`form-check mt-1  me-3 p-0 `}>
 							<div className="form-check my-2">
 								<input
 									disabled={disableForm}
@@ -203,7 +204,7 @@ const SalaryBenifits = () => {
 							{val.checked && (
 								<div className='bg-4C4D550F p-3'>
 									<div className="">
-										<p className={' custom_astrick poppins-regular-16px'}>Is this mandatory?</p>
+										<p className={' custom_astrick poppins-regular-16px '}>Is this mandatory?</p>
 
 										<div className="d-flex mt-3">
 											<div className="form-check  ">
@@ -246,6 +247,7 @@ const SalaryBenifits = () => {
 						</div>
 					))}
 					
+				</div>
 				</div>
 				{pc_view_type == 'editpc' ? (
 					<div className="row my-4">

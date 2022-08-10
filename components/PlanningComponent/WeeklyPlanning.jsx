@@ -273,7 +273,7 @@ function WeeklyPlanning(props) {
 							value=""
 							aria-label="..."
 						/>
-						<labe className="ms-2">Yes</labe>
+						<label className="ms-2">Yes</label>
 					</div>
 					<div className="">
 						<input
@@ -284,7 +284,7 @@ function WeeklyPlanning(props) {
 							value=""
 							aria-label="..."
 						/>
-						<labe className="ms-2">No</labe>
+						<label className="ms-2">No</label>
 					</div>
 				</div> */}
 			</div>

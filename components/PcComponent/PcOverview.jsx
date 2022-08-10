@@ -138,12 +138,12 @@ const PcOverview = (params) => {
 
 	return (
 		<div className="container-fluid p-0">
-			<div className="row pt-4 min-vh-75">
+			<div className="row pt-4 min-vh-75 pc-height2">
 				<div className={` ${cat_leftsec}`}>
 					{params.type == 'editpc' ? (
-						<p className="h4">Edit paritair comite</p>
+						<p className="mt-1 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Edit paritair comite</p>
 					) : params.type == 'viewpc' ? (
-						<p className="h4">View paritair comite</p>
+						<p className="mt-1 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">View paritair comite</p>
 					) : (
 						''
 					)}
@@ -445,11 +445,11 @@ const PcOverview = (params) => {
 		</div>
 			} */}
 					{pc_view_type != 'addpc' && (
-						<div className="row">
+						<div className="row my-4">
 							<div className="text-start col-md-6">
 								<button
 									type="button"
-									className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+									className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
 									onClick={() => {
 										if (router.query.fid) {
 											router.push('/manage-function');
@@ -460,7 +460,7 @@ const PcOverview = (params) => {
 										}
 									}}
 								>
-									Back
+									BACK
 								</button>
 							</div>
 							<div className="text-end col-md-6" />
