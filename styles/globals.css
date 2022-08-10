@@ -1239,8 +1239,8 @@ span .firsrt-line:last-child() {
         /* min-height: calc(90vh - 42px) !important; */
 	}
 	.pc-height {
-		height: calc(49vh - 5.5vh) !important;
-		overflow: auto;
+		min-height: calc(48vh);
+		/* overflow: auto; */
 	}
 }
 
@@ -1287,8 +1287,8 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 }
 .pc-height {
 	/* height: calc(52vh - 7vh); */
-	height: 52vh;
-	overflow: auto;
+	min-height: calc(48vh);
+	/* overflow: auto; */
    
 }
 .pc-height2 {
