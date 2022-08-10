@@ -99,7 +99,7 @@ const PcCommon = (props) => {
 				{props.type == 'add' ? (
 					<div className='col-md-12'>
 						<div className='col-md-12 position-sticky-pc py-4'>
-						<p className="pt-3 pb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 ">
+						<p className="pb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 ">
 							{current_sec == 1 ? (
 								'Add paritair comite'
 							) : current_sec == 2 ? (

@@ -182,7 +182,7 @@ const ManageCategoryComponent = () => {
 		<div className="container-fluid p-0">
 			<form>
 				<div className="row m-0">
-					<p className="mt-3 mb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0">
+					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
 						Manage categories
 					</p>
 					<div className="col-md-2 ps-0">
@@ -221,7 +221,7 @@ const ManageCategoryComponent = () => {
 					<div className="col-md-2">
 						<button
 							type="button"
-							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color "
+							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right  ms-2 skyblue-bg-color py-2 px-4"
 							onClick={() => handleSearch()}
 						>
 							FILTER
@@ -229,7 +229,7 @@ const ManageCategoryComponent = () => {
 						{(searchPc.trim() != '' || searchCat.trim() != '' || searchSal.trim() != '') && (
 							<button
 								type="button"
-								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right py-2 ms-2 reset-btn px-4"
 								onClick={() => handleReset()}
 							>
 								RESET
@@ -237,7 +237,7 @@ const ManageCategoryComponent = () => {
 						)}
 					</div>
 
-					<div className="form-check p-0 mt-2 text-center max-height-420">
+					<div className="form-check p-0 mt-2 text-center ">
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
@@ -305,10 +305,10 @@ const ManageCategoryComponent = () => {
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 md-5"
+							className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 md-5 px-0"
 							onClick={() => backToDashboard()}
 						>
-							Back
+							BACK
 						</button>
 					</div>
 					<div className="text-end col-md-6">
