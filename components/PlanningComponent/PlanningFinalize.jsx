@@ -345,7 +345,7 @@ const PlanningFinalize = () => {
 							value=""
 							aria-label="..."
 						/>
-						<labe className="ms-2 poppins-regular-16px">Yes</labe>
+						<label className="ms-2 poppins-regular-16px">Yes</label>
 					</div>
 					<div className="mb-2">
 						<input
@@ -356,7 +356,7 @@ const PlanningFinalize = () => {
 							value=""
 							aria-label="..."
 						/>
-						<labe className="ms-2 poppins-regular-16px">No</labe>
+						<label className="ms-2 poppins-regular-16px">No</label>
 					</div>
 				</div>
 				<div className="row mt-4 mb-4 col-md-12 m-0">
