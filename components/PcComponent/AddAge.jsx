@@ -340,7 +340,7 @@ const Addage = () => {
 			<form onSubmit={(e) => submit(e)}>
 				{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Age</h4>:'')}
 
-				<div className="row p-4 pt-3 border-form-sec m-0 pc-height scroll ">
+				<div className="row p-4 pt-3 border-form-sec m-0 pc-height3 scroll ">
 					{/* <div className={sec_width}> */}
 					<div className="col-md-12  m-0 mb-4 ">
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}

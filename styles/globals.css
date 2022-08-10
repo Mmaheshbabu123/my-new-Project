@@ -1239,8 +1239,11 @@ span .firsrt-line:last-child() {
         /* min-height: calc(90vh - 42px) !important; */
 	}
 	.pc-height {
-		min-height: calc(48vh);
+		min-height: calc(45vh);
 		/* overflow: auto; */
+	}
+	.pc-height1, .pc-height2, .pc-height3, .pc-height4, .pc-height1  {
+		min-height: calc(42vh) !important;
 	}
 }
 
@@ -1291,12 +1294,24 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 	/* overflow: auto; */
    
 }
+.pc-height {
+	min-height: calc(47vh);
+}
 .pc-height2 {
-	min-height: 46vh;
+	min-height: 47vh;
 }
 .pc-height3 {
-	min-height: 46vh;
+	min-height: 47vh;
 }
+.pc-height4 {
+	min-height: 47vh;
+}
+.pc-height5 {
+	min-height: 47vh;
+}
+/* .pc-height3 {
+	min-height: 46vh;
+} */
 .hi-50 {
 	height: 50px;
 }
