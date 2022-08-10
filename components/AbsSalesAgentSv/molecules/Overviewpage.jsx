@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import SearchIcon from '../../SearchIcon';
 import styles from './AbsSalesAgentSv.module.css';
 import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
@@ -28,7 +27,8 @@ const Overviewpage = (props) => {
   const [state, setState] = useState({
       headers: ['Employer name',  'Company', 'Date of request', 'Start date of cooperation agreement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
-      searchKey: 'employer_name',
+      searchTermCompany: '',
+      searchTermEmployer: '',
       currentItems: [],
       status: [1, 0],
       searchTerm: '',
@@ -64,16 +64,28 @@ const Overviewpage = (props) => {
   }
 
 
-  const handleSearchClick = (e) => {
-    let value = state.searchTerm;
-    let name = state.searchColumn;
-    let filterRows = overviewData.filter((item) => {
-      let rowVal = item[name];
-      return (rowVal.toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
+  const handleSearchClick = (search = 1) => {
+    let filterRows = [];
+    let { searchTermEmployer = '', searchTermCompany = '' } = state;
+    let status = selectedTabId === 1 ? [1, 0] : selectedTabId === 2 ? [0] : [1];
+    let data = getSelectedStatus(status);
+    if(search && (searchTermEmployer || searchTermCompany)) {
+      filterRows = data.filter((item) => {
+        let status = true;
+        if(searchTermEmployer)
+          status = `${item['employer_name']}`.toLowerCase().toString().indexOf(searchTermEmployer.toLowerCase().toString()) !== -1;
+        if(status && searchTermCompany)
+          status = `${item['company_name']}`.toLowerCase().toString().indexOf(searchTermCompany.toLowerCase().toString()) !== -1;
+       return status;
+      })
+    } else {
+      filterRows = data;
+      searchTermEmployer = '';
+      searchTermCompany = '';
+    }
     setState({ ...state,
-      searchTerm: value,
+      searchTermEmployer: searchTermEmployer,
+      searchTermCompany: searchTermCompany,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -109,37 +121,46 @@ const Overviewpage = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
-      <div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-
-            <div className="col-sm-3 px-0">
-
+        {<div className='col-md-12 row' style={{ margin: '10px 0', position: 'relative' }}>
+              <div className='col-md-9 row'>
                 <input
                   type="text"
-                  className='form-control mt-2 mb-2'
+                  className='form-control mt-2 mb-2 w-auto'
                   style={{margin: '10px 0'}}
+                  value={state.searchTermEmployer}
                   name = {'employer_name'}
-                  onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'employer_name'})}
-                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+                  onChange={(e) => setState({...state, searchTermEmployer: e.target.value,searchColumn:'employer_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
                   placeholder={'Search employer '}
                 />
-
-      <span className="searchIconCss svadmin_icon"> <SearchIcon handleSearchClick={(e)=>handleSearchClick(e)} /></span>
+                <input
+                  type="text"
+                  className='form-control mt-2 mb-2 mx-2 w-auto'
+                  style={{margin: '10px 0'}}
+                  name = {'company_name'}
+                  value={state.searchTermCompany}
+                  onChange={(e) => setState({...state, searchTermCompany: e.target.value,searchColumn:'company_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+                  placeholder={'Search company '}
+                  />
               </div>
-
-            <div className="col-sm-3">
-            <input
-              type="text"
-              className='form-control mt-2 mb-2'
-              style={{margin: '10px 0'}}
-              name = {'company_name'}
-              onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'company_name'})}
-              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
-              placeholder={'Search company '}
-            />
-              <span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
+              <div className='col-md-3'>
+                <button
+                  type="button"
+                  className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+                  onClick={() => handleSearchClick(1)}
+                >
+                  SEARCH
+                </button>
+                <button
+                  type="button"
+                  className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+                  onClick={() => handleSearchClick(0)}
+                >
+                  RESET
+                </button>
               </div>
-
-            </div>
+           </div>}
         <div className={`${styles['table-parent-div']}`}>
           <table className="table table-hover manage-types-table">
             <thead className="table-render-thead">
@@ -161,7 +182,7 @@ const Overviewpage = (props) => {
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found. </p>}
+            : <p style={{paddingTop: '10px'}}> No records. </p>}
           </table>
         </div>
         <div>

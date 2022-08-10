@@ -23,7 +23,7 @@ const OverviewPage = (props) => {
   const [compState, setCompState] = useState({
       headers: ['Company', 'Date of request', 'Date of commencement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
-      searchKey: 'company_name',
+      searchTermCompany: '',
       currentItems: [],
       searchTerm: '',
       pageCount: 0,
@@ -54,12 +54,19 @@ const OverviewPage = (props) => {
   }
 
 
-  const handleSearchClick = () => {
-    let value = compState.searchTerm;
-    let filterRows = overviewData.filter((item) => {
-      return (item[compState.searchKey].toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
+  const handleSearchClick = (search = 1) => {
+    let value = search ? compState.searchTermCompany : '';
+    let status = compState.selectedTabId === 1 ? [1, 0] : compState.selectedTabId === 2 ? [0] : [1];
+    let data = getSelectedStatus(status);
+    let filterRows = [];
+    if(value) {
+      filterRows = data.filter((item) => {
+        return (item['company_name'].toLowerCase().toString())
+          .indexOf(value.toLowerCase().toString()) !== -1;
+      })
+    } else {
+      filterRows = data;
+    }
     setCompState({ ...compState,
       searchTerm: value,
       filterRows: filterRows,
@@ -97,16 +104,36 @@ const OverviewPage = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = compState;
     return(
       <>
-        <div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-          <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-          <input
-            type="text"
-            className="form-control col-7 pcp_name"
-            style={{margin: '10px 0'}}
-            onChange={(e) => setCompState({...compState, searchTerm: e.target.value})}
-            placeholder={'Search'}
-          />
-        </div>
+      <div className='col-md-12 row' style={{ margin: '10px 0', position: 'relative' }}>
+            <div className='col-md-9 row'>
+              <input
+                type="text"
+                className='form-control mt-2 mb-2'
+                style={{margin: '10px 0'}}
+                value={compState.searchTermCompany}
+                name = {'employer_name'}
+                onChange={(e) => setCompState({...compState, searchTermCompany: e.target.value})}
+                onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+                placeholder={'Search employer '}
+              />
+            </div>
+            <div className='col-md-3'>
+              <button
+                type="button"
+                className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+                onClick={() => handleSearchClick(1)}
+              >
+                SEARCH
+              </button>
+              <button
+                type="button"
+                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+                onClick={() => handleSearchClick(0)}
+              >
+                RESET
+              </button>
+            </div>
+         </div>
         <div className={`${styles['table-parent-div']}`}>
           <table className="table table-hover manage-types-table">
             <thead className="table-render-thead">
@@ -126,7 +153,7 @@ const OverviewPage = (props) => {
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found. </p>}
+            : <p style={{paddingTop: '10px'}}> No records. </p>}
           </table>
         </div>
         <div>

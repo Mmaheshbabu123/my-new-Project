@@ -58,8 +58,8 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
 
   return(
     <div className="">
-      {state.alertSuccess === true && <div className="alert alert-success" role="alert">
-        {Number(type) !== 2 ? `Sign added and forwarded to employer` : 'Approved successfully'}
+      {state.alertSuccess === true && <div className="alert alert-success text-center" role="alert">
+        {Number(type) !== 2 ? `Admin signature added on PDF and cooperation agreement sent to employer.` : 'Approved successfully.'}
       </div>}
       <div>
         <iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 200} />
