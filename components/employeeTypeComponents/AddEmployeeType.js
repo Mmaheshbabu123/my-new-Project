@@ -18,7 +18,7 @@ const AddEmployeeType = (props) => {
     , newItems: []
     , nameWarning: false
     , editIndex: 0
-    , typeName: `${props.manageType === 'employee-types' ? 'employee type name' : 'coefficient name'}`
+    , typeName: `${props.manageType === 'employee-types' ? 'employee type' : 'coefficient'}`
   })
 
     /**
@@ -44,6 +44,7 @@ const AddEmployeeType = (props) => {
         }
       } else {
         stateObj['nameWarning'] = true;
+        stateObj['uniqueError'] = false;
       }
       setState(stateObj);
     }
@@ -65,7 +66,7 @@ const AddEmployeeType = (props) => {
           if(result.status === 200) {
             router.push(`${props.manageType}`);
           } else if (result.status === 205) {
-            setState({...state, uniqueError: true, duplicates: result['data']['duplicates'] });
+            setState({...state, uniqueError: true, nameWarning: false, duplicates: result['data']['duplicates'] });
           }
         })
         .catch((error) => console.error('Error occurred'));

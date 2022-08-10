@@ -66,6 +66,7 @@ const AddEditSalaryBenefits = (props) => {
        }
       } else {
         stateObj['nameWarning'] = true;
+        stateObj['uniqueError'] = false;
       }
       setState(stateObj);
     }
@@ -94,7 +95,7 @@ const AddEditSalaryBenefits = (props) => {
           if(result.status === 200) {
             router.push(`/manage-salary-benefits?action=view`);
           } else if (result.status === 205) {
-            setState({...state, uniqueError: true, duplicates: result['data']['duplicates'] });
+            setState({...state, uniqueError: true, nameWarning:false, duplicates: result['data']['duplicates'] });
           }
         })
         .catch((error) => console.error('Error occurred'));
@@ -164,23 +165,12 @@ const AddEditSalaryBenefits = (props) => {
     const { value, name } = target;
     let stateObj = {...state};
     if(name === 'name') {
-      // if(value.match(/^[a-zA-Z0-9 ]*$/) && value.length <= 50) {
         stateObj[name] = value;
         stateObj['nameWarning'] = false;
         stateObj['uniqueError'] = false;
         stateObj['duplicates'] = [];
-      // } else {
-        // stateObj['nameWarning'] = true;
-     // }
     } else if (name === 'value') {
-      // if(value.match(/^[0-9,.]*$/)) {
         stateObj[name] = value;
-
-
-      // stateObj['valueWarning'] = false;
-      // } else {
-      // stateObj['valueWarning'] = true;
-      // }
     } else {
         stateObj['dateWarning'] = false;
         stateObj[name] = value;
