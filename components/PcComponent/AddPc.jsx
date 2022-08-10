@@ -395,7 +395,7 @@ function AddPc(props) {
 								<p className="error mt-2">{error_pc_alias_name}</p>
 							</div>
 							{/* BUFFER TIMING */}
-							<div class="form-group mb-3 py-2 col-md-6 flex-1 ms-2">
+							<div className="form-group mb-3 py-2 col-md-6 flex-1 ms-2">
 								<label className="custom_astrick">Buffer time between two plannings</label>
 
 								<div className=" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex">
@@ -407,7 +407,7 @@ function AddPc(props) {
 											setData((prev) => ({ ...prev, buffer_timings: e.target.value }));
 										}}
 									/>
-									<span class="input-group-text border-0 rounded-0">hrs.</span>
+									<span className="input-group-text border-0 rounded-0">hrs.</span>
 								</div>
 								<p className="error mt-2">{error_buffer_time}</p>
 							</div>
@@ -423,7 +423,7 @@ function AddPc(props) {
 											setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
 										}}
 									/>
-									<span class="input-group-text border-0 rounded-0">hrs.</span>
+									<span className="input-group-text border-0 rounded-0">hrs.</span>
 								</div>
 								<p className="error mt-2">{error_min_time}</p>
 							</div>
@@ -438,7 +438,7 @@ function AddPc(props) {
 											setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
 										}}
 									/>
-									<span class="input-group-text border-0 rounded-0">hrs.</span>
+									<span className="input-group-text border-0 rounded-0">hrs.</span>
 								</div>
 								<p className="error mt-2">{error_max_time}</p>
 							</div>
