@@ -1,6 +1,7 @@
-import ManageProject from "@/components/PlanningComponent/ManageProject";
+// import ManageProject from "@/components/PlanningComponent/ManageProject";
+import ProjectCommon from "@/components/PlanningComponent/ProjectCommon";
 
-const Manageproject = () => (
-    <div><ManageProject /></div>
+const Projectcommon = () => (
+    <div><ProjectCommon /></div>
 )
-export default Manageproject;
+export default Projectcommon;
