@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import SearchIcon from '../../SearchIcon';
 import { AiFillFilePdf } from 'react-icons/ai';
 import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
@@ -68,7 +67,7 @@ const OverviewPage = (props) => {
       filterRows = data;
     }
     setCompState({ ...compState,
-      searchTerm: value,
+      searchTermCompany: value,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
