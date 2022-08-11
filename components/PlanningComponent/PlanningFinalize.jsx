@@ -54,6 +54,7 @@ const PlanningFinalize = () => {
 					if (result.data.length > 0) {
 						setPlanning(result.data[1][0]);
 						setWeek(result.data[0]);
+						console.log(result.data[0])
 					}
 				})
 				.catch((error) => {
@@ -154,9 +155,9 @@ const PlanningFinalize = () => {
 												{val1.pdate.split('-').reverse().join('-') == week[0] && (
 													<div>
 														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															<a>
+															{/* <a>
 																<MdEdit className="float-right" />
-															</a>
+															</a> */}
 														</div>
 														<p className="color-skyblue">{val1.employee_name}</p>
 														<br />
@@ -171,9 +172,9 @@ const PlanningFinalize = () => {
 												{val1.pdate.split('-').reverse().join('-') == week[1] && (
 													<div>
 														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															<a>
+															{/* <a>
 																<MdEdit className="float-right" />
-															</a>
+															</a> */}
 														</div>
 														<p className="color-skyblue">{val1.employee_name}</p>
 														<br />
@@ -188,9 +189,9 @@ const PlanningFinalize = () => {
 												{val1.pdate.split('-').reverse().join('-') == week[2] && (
 													<div>
 														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															<a>
+															{/* <a>
 																<MdEdit className="float-right" />
-															</a>
+															</a> */}
 														</div>
 														<p className="color-skyblue">{val1.employee_name}</p>
 														<br />
@@ -205,9 +206,9 @@ const PlanningFinalize = () => {
 												{val1.pdate.split('-').reverse().join('-') == week[3] && (
 													<div>
 														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															<a>
+															{/* <a>
 																<MdEdit className="float-right" />
-															</a>
+															</a> */}
 														</div>
 														<p className="color-skyblue">{val1.employee_name}</p>
 														<br />
@@ -238,9 +239,9 @@ const PlanningFinalize = () => {
 												{val1.pdate.split('-').reverse().join('-') == week[5] && (
 													<div>
 														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															<a>
+															{/* <a>
 																<MdEdit className="float-right" />
-															</a>
+															</a> */}
 														</div>
 														<p className="color-skyblue">{val1.employee_name}</p>
 														<br />
@@ -255,9 +256,9 @@ const PlanningFinalize = () => {
 												{val1.pdate.split('-').reverse().join('-') == week[6] && (
 													<div>
 														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															<a>
+															{/* <a>
 																<MdEdit className="float-right" />
-															</a>
+															</a> */}
 														</div>
 														<p className="color-skyblue">{val1.employee_name}</p>
 														<br />

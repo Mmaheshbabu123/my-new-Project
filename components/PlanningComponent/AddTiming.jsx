@@ -423,18 +423,19 @@ function Addtiming(props) {
 										}}
 										minDate={new Date()}
 									/>
-									<p className="error mt-2">{error_selected_date}</p>
+									<p className="error mt-2 ">{error_selected_date}</p>
 								</div>
 							</div>
 							<div className="mt-3 pt-2">
 								{commonDatetime.map((value, index) => (
-									<div className="row table-title-bg" key={index}>
+									<div className="row table-title-bg my-2" key={index}>
 										
 										<div className="col-md-2 py-3 color-skyblue2">
 											<div className="pb-2 color-skyblue2" />
 											{value.pdate.split('-').reverse().join('/')}
 										</div>
-										<div className="col-md-4 d-flex py-3">
+										<div className="col-md-4  py-3">
+										<div className='d-flex'>
 											<div className="py-1 px-2  custom_astrick poppins-regular-20px">Start time</div>
 											<TimePicker
 												placeholder="Select Time"
@@ -445,9 +446,11 @@ function Addtiming(props) {
 												value={value.starttimeObj?value.starttimeObj:null}
 												onChange={(e) => updatetime('starttime', index, e, '')}
 											/>
-											<p className="error mt-2">{value.error_starttime}</p>
+											</div>
+											<p className="error mt-2 px-2">{value.error_starttime}</p>
 										</div>
-										<div className="col-md-4 d-flex py-3">
+										<div className="col-md-4  py-3">
+										<div className='d-flex'>
 											<div className="py-1 px-2  custom_astrick poppins-regular-20px">End time</div>
 											<TimePicker
 												placeholder="Select Time"
@@ -458,7 +461,9 @@ function Addtiming(props) {
 												value={value.endtimeObj?value.endtimeObj:null}
 												onChange={(e) => updatetime('endtime', index, e, '')}
 											/>
-																					<p className="error mt-2">{value.error_endtime}</p>
+											</div>
+											<p className="error px-2 mt-2">{value.error_endtime}</p>
+										
 										</div>
 										<div className="col-md-2 py-3">
 											{/* <MdStarRate className='purple-color' /> */}
@@ -520,7 +525,7 @@ function Addtiming(props) {
 																<div className="col-md-4 py-3 ">
 																	<div className='d-flex'>
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
-																		<span className='poppins-regular-16px'>Start time</span>
+																		<span className='poppins-regular-16px'>Start time1</span>
 																	</div>
 																	<TimePicker
 																		placeholder="Select Time"
