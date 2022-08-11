@@ -3,6 +3,8 @@ import { APICALL } from '../../Services/ApiServices';
 import Select from 'react-select';
 import { addplanningemployee, updateSalaryBenefits } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
+import MultiSelectField from '@/atoms/MultiSelectField';
+
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { FaRegPlusSquare, FaRegMinusSquare, FaEuroSign } from 'react-icons/fa';
@@ -467,22 +469,20 @@ const AddFunction = () => {
 										</div>
 										<div className="col-md-3  border-0  align-items-center h-40 justify-content-start custom-drop-btn">
 											{emptypes != null ? (
-												<Select
-													placeholder={<div className="hiii">Employee type</div>}
-													defaultValue={
-														key['emp_type'] == 0 ? (
-															''
-														) : (
-															employeTypeSelection(key['emp_type'])
-														)
-													}
-													options={emptypes}
-													name="functionss"
-													onChange={setSelectedOption}
-													onInputChange={(e) => {
-														updateEmployeeType(value, selectedOption.value);
-													}}
-												/>
+
+												<MultiSelectField
+												         id={'select_id'}
+												         options={emptypes}
+												         standards={key['emp_type'] == 0 ? (
+																	 ''
+																 ) : (
+																	 employeTypeSelection(key['emp_type'])
+																 )}
+												         disabled={false}
+												         handleChange={(obj) => updateEmployeeType(value, obj.value)}
+												         isMulti={false}
+												         className="col-md-6"
+												       />
 											) : (
 												''
 											)}{' '}
@@ -556,14 +556,14 @@ const AddFunction = () => {
 																updateRes(e, value);
 															}}
 														/>
-														
+
 													</span>
 													<span className='ps-2'>{deta['name']}</span>
 													</div>
 												) : (
-													
+
 													ind == 3 && (
-														
+
 														<div>
 															<input
 																type="radio"
@@ -648,7 +648,7 @@ const AddFunction = () => {
 										updateRes(e, null);
 									}}
 								/>
-							
+
 							</span>
 							<span className='ps-2'>	{deta['name']}</span>
 							</div>
@@ -677,7 +677,7 @@ const AddFunction = () => {
 												defultFunction(0,employeeobject[0]['funid'])
 											}
 											onChange={setFunctionSelected}
-											onInputChange={() => { 
+											onInputChange={() => {
 												if (functionselected != undefined) {
 													updatingObjectFunction(null, functionselected.value);
 													updatingCommonObjectfunctionSlary(
