@@ -205,12 +205,12 @@ function AddFunction(props) {
 		}
 	};
 	return (
-		<div className="mt-4">
+		<div className="mt-4 table-title-bg p-3">
 			<form className="Search__form" onSubmit={submit}>
 				<div className="row">
-					{id != '' ? <h4 className="h5 mb-3">Edit function</h4> : <h4 className="h5 mb-3">Add function</h4>}
+					{id != '' ? <h4 className="h5 mb-3">Edit function</h4> : <h4 className="h5 mb-3 bitter-italic">Add function</h4>}
 					<div className="form-group mb-3">
-						<label className="custom_astrick mb-2">Function name</label>
+						<label className="custom_astrick mb-2 poppins-regular-16px">Function name</label>
 						<input
 							type="text"
 							className=" form-control my-2"
@@ -267,7 +267,7 @@ function AddFunction(props) {
 					)}
 
 					<div className="form-group mb-3">
-						<label className="custom_astrick mb-2">Minimum salary</label>
+						<label className="custom_astrick mb-2 poppins-regular-16px">Minimum salary</label>
 						<div className="input-group">
 							<input
 								className=" form-control"
@@ -288,15 +288,15 @@ function AddFunction(props) {
 					<div className="text-start col-md-6">
 						{(router.query.fid ) && (
 							<Link href={'/manage-function'}>
-								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
-									Back
+								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
+									BACK
 								</a>
 							</Link>
 						)}
 						{router.query.cid && (
 							<Link href={'/manage-category'}>
-								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
-									Back
+								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
+									BACK
 								</a>
 							</Link>
 						)}
@@ -304,13 +304,13 @@ function AddFunction(props) {
 					<div className="text-end col-md-6">
 						<button
 							type="submit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end"
 							disabled={disableSave}
 							onClick={() => {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 							}}
 						>
-							Save
+							SAVE
 						</button>
 					</div>
 				</div>
