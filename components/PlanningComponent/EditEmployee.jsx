@@ -1,10 +1,11 @@
-import React, { Component, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import ValidationService from '../../Services/ValidationService';
+import moment from 'moment';
 
 function EditEmployee(props) {
 	const router = useRouter();
@@ -19,14 +20,13 @@ function EditEmployee(props) {
 	const [ error_start_time, setError_start_time ] = useState('');
 	const [ error_end_time, setError_end_time ] = useState('');
 
-	const [ data, setData ] = useState({
-		employee_name: '',
-		employee_type: '',
-		function: '',
-		minimum_salary: '',
-		start_time: '',
-		end_time: ''
-	});
+	const [ data, setData ] = useState({});
+
+	useEffect(() => {
+
+		setData(props.data);
+		console.log(props)
+	}, [props]);
 	/**
 	 * Submit function
 	 * @param {*} res 
@@ -118,7 +118,7 @@ function EditEmployee(props) {
 						<input
 							type="text"
 							className="form-control mb-2 poppins-regular-16px rounded-0 mb-4"
-							defaultValue=""
+							value={data.employee_name}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, employee_name: e.target.value }));
 							}}
@@ -178,6 +178,7 @@ function EditEmployee(props) {
 							<input
 								type="text"
 								className="form-control rounded-0"
+								value={data.salary}
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, minimum_salary: e.target.value }));
 								}}
@@ -195,7 +196,9 @@ function EditEmployee(props) {
 								use12Hours
 								showSecond={false}
 								focusOnOpen={true}
-								format="hh:mm A"
+								format="HH:mm"
+								value={data.starttime? moment(data.starttime):null}
+
 								// onChange={(e) => setTime(e.format('LT'))}
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, start_time: e.target.value }));
@@ -211,7 +214,9 @@ function EditEmployee(props) {
 								use12Hours
 								showSecond={false}
 								focusOnOpen={true}
-								format="hh:mm A"
+								format="HH:mm"
+								value={data.endtime?moment(data.endtime):null}
+
 								// onChange={(e) => setTime(e.format('LT'))}
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, end_time: e.target.value }));
