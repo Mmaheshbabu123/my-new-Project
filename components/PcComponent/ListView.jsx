@@ -58,7 +58,7 @@ const ListView = (props) => {
 						<h4 className="accordion-header" 
 						id={`flush-heading${props.pc_number.replace(".", "")}pc${props.index}`}>
 							<button
-								className={`accordion-button poppins-regular-18px collapsed ${styles.listtitle} ${styles.sectioncolor} fw-bold`}
+								className={`accordion-button mb-2 poppins-regular-18px collapsed ${styles.listtitle} ${styles.sectioncolor} fw-bold`}
 								type="button"
 								data-bs-toggle="collapse"
 								data-bs-target={`#flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
