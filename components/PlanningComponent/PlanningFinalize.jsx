@@ -15,6 +15,8 @@ const PlanningFinalize = () => {
 	const [ enableEdit, setEnableEdit ] = useState(true);
 	const [ week, setWeek ] = useState([]);
 	const [ activeWeek, setActiveWeek ] = useState([]);
+	const [finalized, setFinalized] = useState('');
+	const [errorFinalize, setErrorFinalize] = useState('');
 
 
 	const weeklyplanning = [
@@ -66,6 +68,18 @@ const PlanningFinalize = () => {
 		},
 		[ router.isReady ]
 	);
+	let submit = () => {
+		if(finalized == ''){
+			setErrorFinalize("This field is required.");
+		}
+	}
+	let handleRadio = (e) => {
+		setErrorFinalize('')
+		var finalise = e.target.value === 'true' ? true : false;
+		setFinalized(finalise);
+
+
+	}
 	return (
 		<div className="container-fluid p-0 m-0">
 			<div className="row">
@@ -344,9 +358,11 @@ const PlanningFinalize = () => {
 						<input
 							className="form-check-input"
 							type="radio"
-							name="radioNoLabel"
+							name="radioYesLabel"
 							id="radioNoLabel1"
-							value=""
+							value="true"
+							checked={finalized === true}
+							onChange={(e) => handleRadio(e)}
 							aria-label="..."
 						/>
 						<label className="ms-2 poppins-regular-16px">Yes</label>
@@ -357,11 +373,14 @@ const PlanningFinalize = () => {
 							type="radio"
 							name="radioNoLabel"
 							id="radioNoLabel1"
-							value=""
+							value="false"
+							checked={finalized === false}
+							onChange={(e) => handleRadio(e)}
 							aria-label="..."
 						/>
 						<label className="ms-2 poppins-regular-16px">No</label>
 					</div>
+					<div className="error mt-2">{errorFinalize}</div>
 				</div>
 				<div className="row mt-4 mb-4 col-md-12 m-0">
 					<div className="col-md-6 p-0">
@@ -377,7 +396,8 @@ const PlanningFinalize = () => {
 						<button
 							type="button"
 							className="btn rounded-0  custom-btn px-3  btn-block float-end"
-							onClick={() => router.push('/manage-planning/weekly')}
+							submit
+							onClick={() => submit()}
 						>
 							SUBMIT
 						</button>
