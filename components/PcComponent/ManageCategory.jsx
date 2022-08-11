@@ -241,12 +241,12 @@ const ManageCategoryComponent = () => {
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">
+									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium hi-50">
 										Paritair comite number
 									</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium">Category name</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium">Minimum salary</th>
-									<th className="poppins-regular-18px   btn-bg-gray-medium">Action</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium hi-50">Category name</th>
+									<th className="poppins-regular-18px btn-bg-gray-medium hi-50">Minimum salary</th>
+									<th className="poppins-regular-18px   btn-bg-gray-medium hi-50">Action</th>
 								</tr>
 							</thead>
 							<tbody className="">
@@ -283,7 +283,7 @@ const ManageCategoryComponent = () => {
 						</table>
 					</div>
 				</div>
-				<div className="row my-4">
+				<div className="row my-2">
 					{categories.length >= itemsPerPage && (
 						<ReactPaginate
 							breakLabel="..."
@@ -301,11 +301,11 @@ const ManageCategoryComponent = () => {
 						/>
 					)}
 				</div>
-				<div className="row my-4">
+				<div className="row my-2">
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 md-5 px-0"
+							className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-3 md-5 px-0"
 							onClick={() => backToDashboard()}
 						>
 							BACK
