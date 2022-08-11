@@ -116,7 +116,8 @@ const ManagePc = (props) => {
 	return (
 		<div className="container-fluid p-0">
 			<div className="row m-0">
-				<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 hover-white">Manage paritair comite</h1>
+				{/* <h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 hover-white">Manage paritair comite</h1> */}
+				<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage paritair comite</h1>
 				<div className="col-md-12 p-0">
 					<span className='btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln'>
 						<Link className='hover-white' href={'/redirect-page?src=/manage-pc&dest=addpc'}>
