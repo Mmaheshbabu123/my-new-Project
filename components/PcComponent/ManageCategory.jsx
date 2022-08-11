@@ -185,7 +185,7 @@ const ManageCategoryComponent = () => {
 					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
 						Manage categories
 					</p>
-					<div className="col-md-2 ps-0">
+					<div className="col-md-3 ps-0">
 						<input
 							type="search"
 							id="form12"
@@ -196,7 +196,7 @@ const ManageCategoryComponent = () => {
 						/>
 					</div>
 
-					<div className="col-md-2">
+					<div className="col-md-3">
 						<input
 							type="search"
 							id="form12"
@@ -207,7 +207,7 @@ const ManageCategoryComponent = () => {
 						/>
 					</div>
 
-					<div className="col-md-2">
+					<div className="col-md-3">
 						<input
 							type="search"
 							id="form12"
@@ -218,7 +218,7 @@ const ManageCategoryComponent = () => {
 						/>
 					</div>
 
-					<div className="col-md-2">
+					<div className="col-md-3">
 						<button
 							type="button"
 							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right  ms-2 skyblue-bg-color py-2 px-4"
@@ -238,7 +238,7 @@ const ManageCategoryComponent = () => {
 					</div>
 
 					<div className="form-check p-0 mt-2 text-center ">
-						<table className="table   mt-3 mb-3 text-center">
+						<table className="table  mb-3 text-center">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium hi-50">
