@@ -148,7 +148,7 @@ const PcOverview = (params) => {
 						''
 					)}
 					{pc && (
-						<div>
+						<div className='epc'>
 							{cat_subsec_type == 0 &&
 							params.type != 'viewpc' && (
 								<div className="text-end mb-3">
@@ -446,7 +446,7 @@ const PcOverview = (params) => {
 			} */}
 					{pc_view_type != 'addpc' && (
 						<div className="row my-4">
-							<div className="text-start col-md-6">
+							<div className="text-start col-md-6 align-items-center d-flex">
 								<button
 									type="button"
 									className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"

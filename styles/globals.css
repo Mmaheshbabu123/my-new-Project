@@ -988,7 +988,7 @@ div[disabled] {
 .reset-btn {
 	background-color: var(--bg-btn-gray);
 	color: var(--color-white);
-	font-size: var(--font-size-l);
+	font-size: var(--font-size-m);
 	font-family: var(--font-family-poppins-regular);
 }
 .poppinns-regular-thin {
@@ -1335,6 +1335,9 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 .pc-height4 {
 	min-height: 47vh;
 }
+.epc {
+	min-height: 60vh;
+}
 .pc-height5 {
 	min-height: 47vh;
 }
@@ -1482,4 +1485,34 @@ right: -70px;
 }
 .size-edit, .size-del {
 	font-size: 22px !important;
+}
+.font-16 {
+	font-size: var(--font-size-m) !important;
+}
+.h-50-mf th {
+	height: 50px;
+}
+/* .accordion-flush::before {
+	width: 1px;
+    height: -webkit-fill-available;
+    background: #4C4D554D !important;
+    position: absolute;
+    content: close-quote;
+    top: 20px;
+    left: 12px;
+} */
+/* .accordion-flush::after {
+	width: -webkit-fill-available;
+    height: 2px;
+    background: #4C4D554D !important;
+    position: absolute;
+    content: close-quote;
+    top: 20px;
+    left: 12px;
+} */
+#react-select-2-placeholder {
+	padding-top: 8px;
+}
+.slt-emp .css-1s2u09g-control {
+	height: 50px;
 }

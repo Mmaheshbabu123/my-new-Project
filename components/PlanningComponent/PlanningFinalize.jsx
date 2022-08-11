@@ -121,7 +121,7 @@ const PlanningFinalize = () => {
 															(val1) =>
 																val1.pdate == val ? (
 																	<div key={val1.id}>
-																		<p className="color-skyblue">{val1.employee_name}</p>
+																		<p className="color-skyblue pt-1">{val1.employee_name}</p>
 																		<br />
 																		<p className="poppins-regular-16px">
 																			{val1.employee_type_name}
