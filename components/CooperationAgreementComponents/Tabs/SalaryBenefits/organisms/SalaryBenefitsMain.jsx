@@ -5,21 +5,27 @@ import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
 import { helpers } from '../../../CooperationAgreementHelper';
 
 const SalaryBenefitsMain = (props) => {
-  const { state: { selectedTabId, renderTabComponents, root_parent_id, filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+  const { state: { selectedTabId, renderTabComponents, root_parent_id, filledTabs, defaultOptions }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   useEffect(() => {
-    if(!state.loadedTabs.includes(selectedTabId))
+    if(defaultOptions) {
+      if(!state.loadedTabs.includes(selectedTabId))
         loadData();
-    else updateStateChanges({renderTabComponents: true});
-  }, [])
+      else updateStateChanges({renderTabComponents: true});
+    }
+  }, [Object.keys(defaultOptions).length])
 
   const loadData = async () => {
     let data = {};
     let stateKey = 'tab_5';
     let tab_5 = { ...state[stateKey] };
+    let prefCodes = defaultOptions.pref_codes || {};
     var response = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
     data['salaryBenefitPcArray'] = response.pc_array || [];
     data['salaryDataPerPc'] = response.salaryData || {};
     data['alreadyLinked'] = response.alreayLinkedPcIds || state.alreadyLinked;
+    data['benefitCodes'] = prefCodes['benefitCodes'];
+    data['salaryCodes'] = prefCodes['salaryCodes'];
+    data['allCodes'] = prefCodes['allCodes'];
     let apiData = Object.keys(response['tab_data']).length ? response['tab_data'] : 0;
     if(apiData) {
       let { cooperationSalaryDetails = [], cooperationSalaryLinked = {}, cooperationBenefits = {} } = apiData;

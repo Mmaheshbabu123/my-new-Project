@@ -117,6 +117,7 @@ const AddEmployee = () => {
 							value={selectedOption}
 							isMulti
 							name="employees"
+							className="poppins-regular-16px rounded-0"
 							options={Data}
 							onChange={setSelectedOption}
 						/>

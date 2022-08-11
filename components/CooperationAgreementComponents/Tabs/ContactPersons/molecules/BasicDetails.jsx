@@ -17,23 +17,23 @@ var Contack_key =  37;
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_3 } = state;
   let defaultOptions = [];
-   defaultOptions[Location_key] = state.defaultOptions['locationslist'] || [];
+   defaultOptions[Location_key] = state.defaultOptions['locationObj'] || [];
    defaultOptions[Contack_key]  =  [
      {value: '1', label: 'Contact1'},
      {value: '2', label: 'Contact2'},
    ];
   const handleChange = (event) => {
     const { value, name } = event.target;
-    tab_3[personId][name] = value;
-    //{...tab_3[personId],[name]:value};
+    tab_3[name] = value;
+    //{...tab_3,[name]:value};
     updateStateChanges({ tab_3 });
   }
   const handleSelect = (obj,key) => {
-    tab_3[personId][key]  = obj.value;
+    tab_3[key]  = obj.value;
     updateStateChanges({ tab_3 });
   }
   const handleRadioSelect = (key,type) => {
-   tab_3[personId][key] = type;
+   tab_3[key] = type;
    updateStateChanges({tab_3});
   }
   const ConstructHtmlData = (ContactPersonRow) => {
@@ -47,17 +47,17 @@ var Contack_key =  37;
         id = {data.id}
           type = {'text'}
           className = {'col-md-8'}
-          value={tab_3[personId][data.id] }
+          value={tab_3[data.id] }
           isDisabled= {false}
           placeholder={''}
           handleChange={handleChange}
           name={data.id}
           //{`tab_2_${data.id}`}
          />
-         {tab_3[personId]['validations'][data.id] && tab_3[personId]['validations'][data.id]['validate'] &&
+         {tab_3['validations'][data.id] && tab_3['validations'][data.id]['validate'] &&
            <ValidateMessage text = {'This field is invalid'}/>
          }
-         { tab_3[personId]['required'][data.id] !== undefined && !tab_3[personId]['required'][data.id] &&
+         { tab_3['required'][data.id] !== undefined && !tab_3['required'][data.id] &&
           <ValidateMessage text = {'This field is required'}/>
         }
         </div>
@@ -68,8 +68,8 @@ var Contack_key =  37;
       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
           <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_3'][data.id] && <RequiredField />}
           <div>
-          <RadioField   name = {data.id} checked = {Number(tab_3[personId][data.id]) === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} />
-          <RadioField  name = {data.id} checked = {Number(tab_3[personId][data.id]) === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} />
+          <RadioField   name = {data.id} checked = {Number(tab_3[data.id]) === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} />
+          <RadioField  name = {data.id} checked = {Number(tab_3[data.id]) === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} />
           </div>
       </div>
     )
@@ -80,13 +80,13 @@ var Contack_key =  37;
     <MultiSelectField
         id={data.id}
         options={defaultOptions[data.id]}
-        standards={defaultOptions[data.id].filter(val => val.value === tab_3[personId][data.id])}
+        standards={defaultOptions[data.id].filter(val => val.value === Number(tab_3[data.id]))}
         disabled={false}
         handleChange={(obj) => handleSelect(obj, data.id)}
         isMulti={false}
         className="col-md-6"
       />
-      { tab_3[personId]['required'][data.id] !== undefined && !tab_3[personId]['required'][data.id] &&
+      { tab_3['required'][data.id] !== undefined && !tab_3['required'][data.id] &&
        <ValidateMessage text = {'This field is required'}/>
      }
       </div>
@@ -103,9 +103,9 @@ fieldData.push(
              handleChange={handleChange}
              className="col-md-6"
              name = {data.id}
-             value={tab_3[personId][data.id]}
+             value={tab_3[data.id]}
             />
-            { tab_3[personId]['required'][data.id] !== undefined && !tab_3[personId]['required'][data.id] &&
+            { tab_3['required'][data.id] !== undefined && !tab_3['required'][data.id] &&
              <ValidateMessage text = {'This field is required'}/>
            }
       </div>
@@ -116,13 +116,17 @@ fieldData.push(
   }
 
   return (
+
     <div className="col-md-12 row">
     <div className = {`col-md-12 ${styles['add-div-margings']}`}>
         <LabelField title={'Title'} customStyle = {{display:''}}/>{requiredFields['tab_3'][Title_key] && <RequiredField />}
         <div>
-        <RadioField   name = {Title_key} checked = {Number(tab_3[personId][Title_key]) === 1} handleChange = {(e)=>handleRadioSelect(Title_key,1)} label= {'Mr'} />
-        <RadioField  name = {Title_key} checked = {Number(tab_3[personId][Title_key]) === 2} handleChange = {(e)=>handleRadioSelect(Title_key,2)} label= {'Mrs'} />
+        <RadioField   name = {Title_key} checked = {Number(tab_3[Title_key]) === 1} handleChange = {(e)=>handleRadioSelect(Title_key,1)} label= {'Mr'} />
+        <RadioField  name = {Title_key} checked = {Number(tab_3[Title_key]) === 2} handleChange = {(e)=>handleRadioSelect(Title_key,2)} label= {'Mrs'} />
         </div>
+        { tab_3['required'][Title_key] !== undefined && !tab_3['required'][Title_key] &&
+         <ValidateMessage text = {'This field is required'}/>
+       }
     </div>
       <div className = 'col-md-6'>
 

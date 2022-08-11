@@ -4,17 +4,17 @@ import { confirmAlert } from 'react-confirm-alert';
 import { delteCofficientPerPc} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
-import SearchIcon from '../SearchIcon';
+
 import ReactPaginate from 'react-paginate';
 const itemsPerPage = 8;
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
   const [state, setState] = useState({
-    searchTerm: '',
+    searchTermNumber: '',
+    searchTermName: '',
     deleteUrl :  delteCofficientPerPc,
     filterRows: rows,
-    searchKey: 'name',
     currentItems: [],
     pageCount: 0,
     itemOffset: 0,
@@ -50,14 +50,25 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
       .then((result) => router.reload())
       .catch((error) => window.alert('Error occurred'));
   }
-  const handleSearch = (value) => {
-    let filterRows = rows.filter((item) => {
-      let rowVal = `${item['pc_number']}${item['name']}`
-      return (rowVal.toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
+
+  const handleSearch = (search = 1) => {
+    let filterRows = [];
+    let { searchTermName = '', searchTermNumber = '' } = state;
+    if(search && (searchTermName || searchTermNumber)) {
+      filterRows = rows.filter((item) => {
+        let status = true;
+        if(searchTermName)
+          status = `${item['name']}`.toLowerCase().toString().indexOf(searchTermName.toLowerCase().toString()) !== -1;
+        if(status && searchTermNumber)
+          status = `${item['pc_number']}`.toLowerCase().toString().indexOf(searchTermNumber.toLowerCase().toString()) !== -1;
+       return status;
+      })
+    } else {
+      filterRows = rows;
+    }
     setState({ ...state,
-      searchTerm: value,
+      searchTermName: searchTermName,
+      searchTermNumber: searchTermNumber,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -65,8 +76,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
     });
   }
 
-  const handleSearchClick = () => {
-    handleSearch(state.searchTerm);
+  const handleSearchClick = (search = 0) => {
+    handleSearch(search);
   }
 
 
@@ -95,26 +106,48 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
     return (
       <>
         <h4 className='mt-2 mb-4 font-weight-bold   px-0  bitter-italic-normal-medium-24'> {`Manage coefficients per PC`} </h4>
-        <div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-          <span className="searchIconCss3"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-          <input
-            type="text"
-            className="form-control col-7 pcp_name poppins-regular-16px rounded-0 mb-4"
-            onChange={(e) => setState({...state, searchTerm: e.target.value})}
-            placeholder={'Search'}
-            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
-          />
-          {/*<button
-            onClick={() => router.push(`${manageType}/add?id=0`)}
-            type="button"
-            className="btn btn-dark pcp_btn col-3">
-            {`+ ${button_title}`}
-          </button>*/}
+        <div className='row searchbox m-0 my-4' style={{ margin: '10px 0' }}>
+         <div className='col-md-12 row'>
+           <div className='col-md-9 row'>
+             <input
+               type="text"
+               value={state.searchTerm}
+               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 w-auto rounded-0"
+               onChange={(e) => setState({...state, searchTermNumber: e.target.value})}
+               placeholder={'Pc number search'}
+               onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+             />
+             <input
+               type="text"
+               value={state.searchTerm}
+               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 mx-2 w-auto rounded-0"
+               onChange={(e) => setState({...state, searchTermName: e.target.value})}
+               placeholder={'PC name search'}
+               onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+             />
+           </div>
+           <div className='col-md-3'>
+             <button
+               type="button"
+               className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+               onClick={() => handleSearchClick(1)}
+             >
+               SEARCH
+             </button>
+             <button
+               type="button"
+               className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+               onClick={() => handleSearchClick(0)}
+             >
+               RESET
+             </button>
+           </div>
+          </div>
         </div>
         <div className="table-render-parent-div ">
           <table className="table table-hover manage-types-table  mb-3 text-center">
             <thead className="table-render-thead">
-              <tr className='btn-bg-gray-medium table-sticky-bg-gray' key={'header-row-tr'}>{headers.map((eachHeader, index) => 
+              <tr className='btn-bg-gray-medium table-sticky-bg-gray' key={'header-row-tr'}>{headers.map((eachHeader, index) =>
               <th className='poppins-regular-18px justify-content-center align-items-center btn-bg-gray-medium text-center pt-4' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?

@@ -340,16 +340,17 @@ const Addage = () => {
 			<form onSubmit={(e) => submit(e)}>
 				{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Age</h4>:'')}
 
-				<div className="row pt-4">
-					<div className={sec_width}>
+				<div className="row p-4 pt-3 border-form-sec m-0 pc-height3 scroll ">
+					{/* <div className={sec_width}> */}
+					<div className="col-md-12  m-0 mb-4 ">
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}
 
-						<div className="mb-3">
-							<label className="custom_astrick mb-2">At which age full salary is paid?</label>
+						<div className="mb-3 col-md-6 ">
+							<label className="custom_astrick ">At which age full salary is paid?</label>
 							<select
 								disabled={disableForm}
 								type="text"
-								className="form-select mt-2 mb-2"
+								className="form-select mt-2 mb-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 hi-40 rounded-0"
 								value={data.age}
 								onChange={(e) => {
 									handleshowhide(e);
@@ -362,120 +363,120 @@ const Addage = () => {
 								<option value="2">19 years</option>
 								<option value="1">18 years</option>
 							</select>
-							<p className="error mt-2">{error_age}</p>
+							<p className="error">{error_age}</p>
 						</div>
 
 						{/* IF AGE = 21 */}
 						{showhideage === '4' && (
-							<div className="mb-3">
-								<label className="custom_astrick mb-2">Minimum salary for 20 years?</label>
+							<div className="mb-3 col-md-6">
+								<label className="custom_astrick">Minimum salary for 20 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_20}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_20: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_20}</p>
+								<p className="error">{error_min_sal_20}</p>
 							</div>
 						)}
 						{/* IF AGE >= 20 */}
 						{(showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
-								<label className="custom_astrick  mb-2">Minimum salary for 19 years?</label>
+							<div className="mb-3 col-md-6">
+								<label className="custom_astrick">Minimum salary for 19 years?</label>
 								<div className="input-group">
 									<input
 									    disabled={disableForm}
 										type="text"
-										className="form-control"
+										className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_19}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_19: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_19}</p>
+								<p className="error">{error_min_sal_19}</p>
 							</div>
 						)}
 						{/* IF AGE >= 19 */}
 						{(showhideage === '2' || showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
-								<label className="custom_astrick">Minimum salary for 18 years?</label>
+							<div className="mb-3 col-md-6">
+								<label className="custom_astrick ">Minimum salary for 18 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_18}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_18: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_18}</p>
+								<p className="error">{error_min_sal_18}</p>
 							</div>
 						)}
 
 						{/* IF AGE >= 18 */}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
+							<div className="mb-3 col-md-6">
 								<label className="custom_astrick">Minimum salary for 17 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_17}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_17: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_17}</p>
+								<p className="error">{error_min_sal_17}</p>
 							</div>
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
+							<div className="mb-3 col-md-6">
 								<label className="custom_astrick">Minimum salary for 16 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_16}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_16: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_16}</p>
+								<p className="error">{error_min_sal_16}</p>
 							</div>
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
+							<div className="mb-3 col-md-6">
 								<label className="custom_astrick">Minimum salary for 15 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-end-0 hi-40"
 										value={data.min_sal_15}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_15: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className="input-group-text age-sec hi-40">%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_15}</p>
+								<p className="error">{error_min_sal_15}</p>
 							</div>
 						)}
 						{/* <div>
@@ -486,42 +487,42 @@ const Addage = () => {
 					</div>
 				</div>
 				{pc_view_type == "editpc" ? (
-					<div className="row">
+					<div className="row m-0 my-4">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end"
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								Save
+								SAVE
 							</button>
 						</div>
 					</div>
 				) : pc_view_type == 'addpc'? (
-					<div className="row">
-						<div className="text-start col-md-6">
+					<div className="row m-0 my-4">
+						<div className="text-start col-md-6 p-0">
 							<button
 								type="button"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
 								onClick={() => {
 									setCurrent_sec(2);
 								}}
 							>
-								Back
+								BACK
 							</button>
 						</div>
-						<div className="text-end col-md-6">
+						<div className="text-end col-md-6 p-0">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end"
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								Next
+								NEXT
 							</button>
 						</div>
 					</div>):''

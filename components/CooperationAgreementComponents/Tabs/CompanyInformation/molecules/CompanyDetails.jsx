@@ -6,6 +6,7 @@ import debounceFun from '@/atoms/debounceFun';
 import styles from '../companyInformation.module.css';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { companyRow1,comapanyRow2,companyArray} from '../ComapanyInformationFields';
+import updateTabFields from '../updateTabFields';
 import { requiredFields} from '../../../RequiredFields';
 import RequiredField from '@/atoms/RequiredSpanField';
 import ValidateMessage from '@/atoms/validationError';
@@ -16,7 +17,7 @@ import { APICALL } from '@/Services/ApiServices';
 var filterTimeout;
 const CompanyDetails = (props) => {
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
-var { tab_2,element_status } = state;
+var { tab_2,element_status ,tab_4,tab_6} = state;
 const [companyState,setCompanyState] = useState({
   vat_number:0,
   validations:{'17':{'type':1,validate:false },'19':{'type':2,validate:true},'14':{'type':1,validate:true},'18':{'type':1,validate:true}}
@@ -60,6 +61,7 @@ element_status['tab_2'].push(name);
     updateStateChanges({ tab_2,element_status });
 
 }
+
 const getCompanyDetailsByvat = async() => {
    let data = {};
    let vatNumber = tab_2['8'] !== "" ? tab_2['8']: '';
@@ -69,7 +71,8 @@ const getCompanyDetailsByvat = async() => {
       data['8'] = tab_2['8'];
       data['10']   = '1';
       tab_2 = {...tab_2,...data,}
-      updateStateChanges({ tab_2});
+      updateTabFields(tab_4,tab_2,tab_6)
+      updateStateChanges({ tab_2,tab_4});
     } )
     .catch((error) => setIntialStateObj(tab_2) );
 

@@ -12,7 +12,7 @@ import { APICALL } from '@/Services/ApiServices';
 import ValidateMessage from '@/atoms/validationError';
 import { MdDelete } from 'react-icons/md';
 
-const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, companies, employers }) => {
+const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documentDetails = {}, companies, employers }) => {
   const router = useRouter();
   const assignInitialValues = () => {
     return {
@@ -30,6 +30,7 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
       ...assignInitialValues(),
       nameWarning: false,
       fileWarning: false,
+      fileSizeWarning: false,
       employerWarning: false,
       companyWarning: false,
   })
@@ -62,7 +63,7 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
     const getPostData = (draft) => {
       const { name, startDate, endDate, linkToCooperationAgreement, files, companyId, employerId } = state;
       return {
-        name, startDate, endDate, linkToCooperationAgreement, files, companyId, employerId, draft
+        name, startDate, endDate, linkToCooperationAgreement, files, companyId, employerId, draft, entityType, entityId
       }
     }
 
@@ -108,9 +109,15 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
   }
 
   const handleFileChange = async (e) => {
-    let response = await file.uploadFile(e, uploadAdditionalDocs);
-    if(response.status === 200){
-      setState({...state, files: [...state.files, ...response.data], fileWarning: false});
+    let files = e.target.files;
+    let size = files[0]['size'] / 1000;
+    if(size > 2000) {
+      setState({...state, fileSizeWarning: true});
+    } else {
+      let response = await file.uploadFile(e, uploadAdditionalDocs);
+      if(response.status === 200){
+        setState({...state, files: [...state.files, ...response.data], fileWarning: false, fileSizeWarning: false});
+      }
     }
   }
 
@@ -168,8 +175,11 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
               <FileUpload
                 name={'file'}
                 id='additional_docs_id'
+                multiple={false}
+                fileUploadText={'Choose file, maximum allowed size is 2MB.'}
                 handleChange={handleFileChange}
               />
+          {state.fileSizeWarning && <ValidateMessage style={{margin:0}} text = {'This file is too large to upload, maximum allowed size is 2MB.'}/>}
           {state.fileWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
           {state.files.length > 0 && showUploadedFiles()}
         </div>
@@ -215,7 +225,7 @@ const EditUpdateAdditionalDoc = ({ entityId, editId, documentDetails = {}, compa
           <LabelField title={`Company`} />
           <MultiSelectField
             options={state.employerId ? companies[state.employerId] : []}
-            standards={state.employerId ? companies[state.employerId].filter(val => val.value === state.companyId) : []}
+            standards={state.employerId && companies[state.employerId] ? companies[state.employerId].filter(val => val.value === state.companyId) : []}
             handleChange={(e) => onSelect(e, 2)}
             isMulti={false}
             className="col-md-12"

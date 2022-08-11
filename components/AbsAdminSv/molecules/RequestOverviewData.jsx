@@ -4,12 +4,11 @@ import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
 import {MdEdit, MdDelete } from 'react-icons/md';
 import { AiFillFilePdf, AiOutlineUserAdd, AiOutlineUserSwitch } from 'react-icons/ai';
-import { deleteCooperationAgreement } from '@/Services/ApiEndPoints';
+import { deleteCooperationAgreement, downloadSvAsPdf } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import styles from './AbsAdminSv.module.css';
-import SearchIcon from '../../SearchIcon';
 
 const itemsPerPage = 5;
 const RequestOverviewData = (props) => {
@@ -28,10 +27,10 @@ const RequestOverviewData = (props) => {
   const [state, setState] = useState({
       headers: ['Employer name', 'Email', 'Company', 'Date of request', 'Date of commencement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
-      searchKey: 'company_name',
+      searchTermCompany: '',
+      searchTermEmployer: '',
       currentItems: [],
       status: [1, 0],
-      searchTerm: '',
       salesAgentArray: salesAgentArray,
       showPopup: false,
       selectedSalesAgent: 0,
@@ -67,16 +66,28 @@ const RequestOverviewData = (props) => {
   }
 
 
-  const handleSearchClick = (e) => {
-    let value = state.searchTerm;
-    let name = state.searchColumn;
-    let filterRows = overviewData.filter((item) => {
-      let rowVal = item[name];
-      return (rowVal.toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
+  const handleSearchClick = (search = 1) => {
+    let filterRows = [];
+    let { selectedTabId, searchTermEmployer = '', searchTermCompany = '' } = state;
+    let status = selectedTabId === 1 ? [1, 0] : selectedTabId === 2 ? [0] : [1];
+    let data = getSelectedStatus(status);
+    if(search && (searchTermEmployer || searchTermCompany)) {
+      filterRows = data.filter((item) => {
+        let status = true;
+        if(searchTermEmployer)
+          status = `${item['employer_name']}`.toLowerCase().toString().indexOf(searchTermEmployer.toLowerCase().toString()) !== -1;
+        if(status && searchTermCompany)
+          status = `${item['company_name']}`.toLowerCase().toString().indexOf(searchTermCompany.toLowerCase().toString()) !== -1;
+       return status;
+      })
+    } else {
+      filterRows = data;
+      searchTermEmployer = '';
+      searchTermCompany = '';
+    }
     setState({ ...state,
-      searchTerm: value,
+      searchTermEmployer: searchTermEmployer,
+      searchTermCompany: searchTermCompany,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -112,32 +123,46 @@ const RequestOverviewData = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
-        {<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-              <div className="col-sm-3 px-0">
-                  <input
-                    type="text"
-                    className='form-control mt-2 mb-2'
-                    style={{margin: '10px 0'}}
-                    name = {'employer_name'}
-                    onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'employer_name'})}
-                    onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
-                    placeholder={'Search employer '}
-                  />
-                    <span className="searchIconCss svadmin_icon"> <SearchIcon handleSearchClick={(e)=>handleSearchClick(e)} /></span>
-                </div>
-              <div className="col-sm-3">
+        {<div className='col-md-12 row' style={{ margin: '10px 0', position: 'relative' }}>
+              <div className='col-md-9 row'>
                 <input
                   type="text"
-                  className='form-control mt-2 mb-2'
+                  className='form-control mt-2 mb-2 w-auto'
+                  style={{margin: '10px 0'}}
+                  value={state.searchTermEmployer}
+                  name = {'employer_name'}
+                  onChange={(e) => setState({...state, searchTermEmployer: e.target.value,searchColumn:'employer_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+                  placeholder={'Search employer '}
+                />
+                <input
+                  type="text"
+                  className='form-control mt-2 mb-2 mx-2 w-auto'
                   style={{margin: '10px 0'}}
                   name = {'company_name'}
-                  onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'company_name'})}
-                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
+                  value={state.searchTermCompany}
+                  onChange={(e) => setState({...state, searchTermCompany: e.target.value,searchColumn:'company_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
                   placeholder={'Search company '}
                   />
-                 <span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
               </div>
-          </div>}
+              <div className='col-md-3'>
+                <button
+                  type="button"
+                  className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+                  onClick={() => handleSearchClick(1)}
+                >
+                  SEARCH
+                </button>
+                <button
+                  type="button"
+                  className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+                  onClick={() => handleSearchClick(0)}
+                >
+                  RESET
+                </button>
+              </div>
+           </div>}
         <div className={`${styles['table-parent-div']}`}>
           <table className="table table-hover manage-types-table">
             <thead className="table-render-thead">
@@ -154,12 +179,12 @@ const RequestOverviewData = (props) => {
                       <td> {formatDate(eachRow.date_of_request)} </td>
                       <td> {formatDate(eachRow.date_of_commencement) || '--'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
-                      <td> {getNeededActions(eachRow) } </td>
+                      <td width='100'> {getNeededActions(eachRow) } </td>
                   </tr>
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found. </p>}
+            : <p style={{paddingTop: '10px'}}> No records. </p>}
           </table>
         </div>
         <div>
@@ -185,22 +210,23 @@ const RequestOverviewData = (props) => {
   }
 
   const getNeededActions = (eachRow) => {
+    let salesObj = assignedOrNot(eachRow);
+    let savedAgentId = salesObj.sales_agent_id || 0;
     if(Number(eachRow.signed)) {
       return(
         <div>
-          <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'PDF'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
-          <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
+          <span title={'PDF'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
+          <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
     } else {
-      let assigned = assignedOrNot(eachRow);
       return (
         <div>
-          {!assigned ?
-              <span title={'Assign'} style={{width:'25%'}} className={`${styles['expand-minimize-span']}`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
-            : <span title={'Re-assign'} style={{width:'25%'}} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span>
-          }   <span title={'Delete'} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          {!savedAgentId ?
+              <span title={'Assign'}  className={`span-action-icons`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
+            : !salesObj.approved ? <span title={'Re-assign'}  className={`span-action-icons`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span> : null
+          }   <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
     }
@@ -222,10 +248,11 @@ const RequestOverviewData = (props) => {
         console.log('Edit');
         break;
      case 'download':
-          console.log('Download clicked');
+          handleDownload(eachRow);
         break;
      case 'assign':
          let savedAgentId = assignedOrNot(eachRow)
+         savedAgentId = savedAgentId.sales_agent_id || 0;
          stateObj['showPopup'] = true;
          stateObj['selectedCompanyId'] = eachRow.company_id;
          stateObj['selectedEmployerId'] = eachRow.employer_id;
@@ -237,13 +264,33 @@ const RequestOverviewData = (props) => {
     setState(stateObj);
   }
 
+  const handleDownload = async (eachRow) => {
+    eachRow['type'] = 1;
+    await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
+      .then((response) => {
+        let result = response.data;
+        if(response.status === 200 && result.url) {
+          var a = document.createElement("a");
+          a.setAttribute("type", "file");
+          a.href     = result.url;
+          a.target   = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          window.alert('Error occurred')
+        }
+      })
+      .catch((error) => window.alert('Error occurred'));
+  }
+
   /**
    * [assignedOrNot description]
    * @param  {Object} eachRow               [description]
    * @return {int}         [description]
    */
   const assignedOrNot = (eachRow) =>
-  assignedData[eachRow.employer_id] ? assignedData[eachRow.employer_id][eachRow.company_id] ?  assignedData[eachRow.employer_id][eachRow.company_id] : 0 : 0;
+  assignedData[eachRow.employer_id] ? assignedData[eachRow.employer_id][eachRow.company_id] ?  assignedData[eachRow.employer_id][eachRow.company_id] : { } : { };
 
   /**
    * [handleDelete description]

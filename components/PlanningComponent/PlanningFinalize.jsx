@@ -1,19 +1,20 @@
 import React, { Component, useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
 import { planningoverview, getweekly_planning } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
-import { ProjectorFill } from 'node_modules/react-bootstrap-icons/dist/index';
-import EditEmployee from './EditEmployee';
+import Link from 'next/link';
+import moment from 'moment';
 
 const PlanningFinalize = () => {
 	const router = useRouter();
 	console.log(router.query);
 	const p_unique_key = router.query.p_unique_key;
-	const [planning,setPlanning] = useState([]);
-	const [enableEdit,setEnableEdit] = useState(true);
+	const [ planning, setPlanning ] = useState([]);
+	const [ enableEdit, setEnableEdit ] = useState(true);
+	const [ week, setWeek ] = useState([]);
+	const [ activeWeek, setActiveWeek ] = useState([]);
 
 
 	const weeklyplanning = [
@@ -51,10 +52,13 @@ const PlanningFinalize = () => {
 			if (!router.isReady) return;
 			APICALL.service(planningoverview + router.query.p_unique_key, 'GET')
 				.then((result) => {
-					if(result.data.length > 0){
-						setPlanning(result.data[0])
+					console.log(result.data[1][0].planning);
+					if (result.data.length > 0) {
+						console.log(result.data[1][0])
+						setPlanning(result.data[1][0]);
+						setWeek(result.data[0]);
+						setActiveWeek(result.data[0][0])
 					}
-					console.log(result.data[0]);
 				})
 				.catch((error) => {
 					console.error(error);
@@ -65,8 +69,8 @@ const PlanningFinalize = () => {
 	return (
 		<div className="container-fluid p-0 m-0">
 			<div className="row">
-				<p className=" mt-1 mb-1 font-weight-bold   bitter-italic-normal-medium-24">Weekly Planning</p>
-				<p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p>
+				<p className=" mt-1 mb-1 font-weight-bold   bitter-italic-normal-medium-24">Planning finalize</p>
+				{/* <p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p> */}
 
 				{/* <div className=" mt-4 d-flex justify-content-end">
 					<div className="d-inline ">
@@ -82,77 +86,200 @@ const PlanningFinalize = () => {
 				</div> */}
 				<div className=" mt-4 d-flex mb-3  ">
 					<select className="form-select w-25 me-2  border-0 select-bg-gray" disabled>
-					{planning.company?<option value="">{planning.company}</option>:	<option>Select Company</option>}
+						{planning.company ? (
+							<option value="">{planning.company}</option>
+						) : (
+							<option>Select Company</option>
+						)}
 					</select>
 					<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
-					{planning.location?<option value="">{planning.location}</option>:	<option>Select Location</option>}
+						{planning.location ? (
+							<option value="">{planning.location}</option>
+						) : (
+							<option>Select Location</option>
+						)}
 					</select>
-
-					<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
-					{planning.location?<option value="">{planning.location}</option>:	<option>Select Location</option>}
-					</select>
-					<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
-					{planning.location?<option value="">{planning.location}</option>:	<option>Select Location</option>}
-					</select>
+					{planning.cost_center_id != null && (
+						<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
+							<option value="">{planning.cost_center}</option>
+						</select>
+					)}
+					{planning.project_name != null && (
+						<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
+							<option value="">{planning.project_name}</option>
+						</select>
+					)}
 				</div>
-				<div className="mt-2 col-md-9">
-				{/* <p className=' bitter-italic-normal-medium-22 col-md-12 text-center table-border-gray py-2'><span className='less-grather mx-4 '>&lt;</span> current week  <span className='less-grather mx-4'>&gt;</span></p>  */}
-				<p className=' bitter-italic-normal-medium-22 col-md-12 text-center table-title-bg py-3'><FaLessThan className='less-grather mx-4'/> Current week <FaGreaterThan className='less-grather mx-4' /> </p> 
+				<div className="mt-2 col-md-12">
+					{/* <p className=' bitter-italic-normal-medium-22 col-md-12 text-center table-border-gray py-2'><span className='less-grather mx-4 '>&lt;</span> current week  <span className='less-grather mx-4'>&gt;</span></p>  */}
+					<p className=" bitter-italic-normal-medium-22 col-md-12 text-center table-title-bg py-3">
+						<FaLessThan className="less-grather mx-4" /> Current week{' '}
+						<FaGreaterThan className="less-grather mx-4" />{' '}
+					</p>
 					<table className="table border table-border-gray ">
-						
 						<thead className="">
-							
 							<tr className="skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex ">
-									Monday<br />01-08-2022
+									Monday<br />
+									{activeWeek.length> 0 && activeWeek[0].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
-									Tuesday <br />02-08-2022
+									Tuesday <br />
+									{activeWeek.length> 0 && activeWeek[1].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
-									Wednesday <br />03-08-2022
+									Wednesday <br />
+									{activeWeek.length> 0 && activeWeek[2].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
-									Thursday <br />04-08-2022
+									Thursday <br />
+									{activeWeek.length> 0 && activeWeek[3].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
-									Friday<br />05-08-2022
+									Friday<br />
+									{activeWeek.length> 0 &&  activeWeek[4].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center  align-items-center justify-content-center">
-									Saturday<br />06-08-2022
+									Saturday<br />
+									{activeWeek.length> 0 && activeWeek[5].split('-').reverse().join('-')}
 								</th>
 								<th className="  text-center  align-items-center justify-content-center">
-									Sunday<br />07-08-2022
+									Sunday<br />
+									{activeWeek.length> 0 && activeWeek[6].split('-').reverse().join('-')}
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-						{planning.planning && Object.keys(planning.planning).map((value)=>(
-							<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
-								{planning.planning[value].map((val1,key)=>(
-									<td className=" table-border-gray font-poppins-light" key={key}>
-										<div className='text-right color-skyblue my-2 mt-1 text-end'><a>
-											<MdEdit className="float-right" 	onClick={() =>setEnableEdit(true)}/>
-											{/* <i className="bi bi-pencil float-right" /> */}
-										</a></div>
-									<p className='color-skyblue'>{val1.employee_name}</p>
-									<br />
-									<p>{val1.employee_type_name}</p>
-									<br />
-									<p>{val1.function_name}</p>
-									<br />
-									<p>{"€ "+val1.salary}</p> <br />
-									{/* <p>{value.time}</p> <br />
-									<p>{value.totalhours}</p> */}
-									<br />
-								</td>
-
+							{planning.planning &&
+								Object.keys(planning.planning).map((value) => (
+									<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
+										{planning.planning[value].map((val1, key) => (
+											<td className=" table-border-gray font-poppins-light" key={value.id}>
+												{activeWeek.length> 0 && val1.pdate == activeWeek[0] ? (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}
+												{val1.pdate == activeWeek[1] ? (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}
+												{val1.pdate == activeWeek[2] ? (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}
+												{val1.pdate == activeWeek[3] ? (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}{val1.pdate == activeWeek[4] ? (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}
+												{val1.pdate == activeWeek[5] && (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												)}
+												{val1.pdate == activeWeek[6] && (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												)}
+											</td>
+										))}
+										{[ ...Array(7 - planning.planning[value].length) ].map((e, i) => (
+											<td className=" table-border-gray font-poppins-light" key={i} />
+										))}
+									</tr>
 								))}
-								{[...Array(7-planning.planning[value].length)].map((e, i) => <td className=" table-border-gray font-poppins-light" key={i}></td>)}
-
-							</tr>
-							)
-							)}
 							{/* <tr className="border-bottom table-border-gray equal-width-calc">
 								{weeklyplanning.map((value) => (
 									<td className=" table-border-gray font-poppins-light" key={value.id}>
@@ -177,8 +304,7 @@ const PlanningFinalize = () => {
 								<td className=" table-border-gray" />
 								<td className=" table-border-gray" />
 							</tr> */}
-							
-						
+
 							{/* <tr className="border-bottom table-border-gray">
 								{weeklyplanning.map((value) => (
 									<td className=" table-border-gray font-poppins-light" key={value.id}>
@@ -202,19 +328,19 @@ const PlanningFinalize = () => {
 						</tbody>
 					</table>
 				</div>
-				{enableEdit &&
+				{/* {enableEdit &&
 				<div className='mt-2 col-md-3'>
 					<EditEmployee/>
 					</div>
-}
+} */}
 				{/* <div className="text-end ">
 					<button type="submit" className="btn skyblue-bg-color border-0   btn-block ">
 						Dashboard
 					</button>
 				</div> */}
-				<div className='col-12 mb-4'>
+				<div className="col-12 mb-4">
 					<p className="poppins-regular-20px mb-3">Is the planning final?</p>
-					<div className='mb-2'>
+					<div className="mb-2">
 						<input
 							className="form-check-input"
 							type="radio"
@@ -223,7 +349,7 @@ const PlanningFinalize = () => {
 							value=""
 							aria-label="..."
 						/>
-						<labe className="ms-2 poppins-regular-16px">Yes</labe>
+						<label className="ms-2 poppins-regular-16px">Yes</label>
 					</div>
 					<div className="mb-2">
 						<input
@@ -234,19 +360,25 @@ const PlanningFinalize = () => {
 							value=""
 							aria-label="..."
 						/>
-						<labe className="ms-2 poppins-regular-16px">No</labe>
+						<label className="ms-2 poppins-regular-16px">No</label>
 					</div>
 				</div>
 				<div className="row mt-4 mb-4 col-md-12 m-0">
 					<div className="col-md-6 p-0">
 						<button type="button" className="btn  btn-block px-0 ">
-							
-								<p className="bg-white  back-btn-text ">BACK</p>
-							
+							<Link href={'/planning/timings/' + p_unique_key}>
+								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px ">
+									BACK
+								</a>
+							</Link>
 						</button>
 					</div>
 					<div className="col-md-6 p-0">
-						<button type="button" className="btn rounded-0  custom-btn px-3  btn-block float-end"  onClick={() => router.push('/manage-planning/weekly')}>
+						<button
+							type="button"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end"
+							onClick={() => router.push('/manage-planning/weekly')}
+						>
 							SUBMIT
 						</button>
 					</div>

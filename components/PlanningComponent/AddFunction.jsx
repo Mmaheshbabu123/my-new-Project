@@ -97,7 +97,7 @@ const AddFunction = () => {
 				}
 			}
 
-			if (value.employeetypeid == '' || value.employeetypeid == null) {
+			if (value.emp_type == '' || value.emp_type == null) {
 				emp = 'This field is required.';
 				count++;
 			}
@@ -534,7 +534,7 @@ const AddFunction = () => {
 													!ischecked ? (group = key['emp_id'] + 'function') : '';
 												}
 												return	key['collapseOpen'] && (ind <= 2 ? (
-													<div class="mt-2 mb-2 bg-light h-75 p-3 bg-4C4D550F z-999">
+													<div className="mt-2 mb-2 bg-light h-75 p-3 bg-4C4D550F z-999">
 														<span className="custom-radio-input">
 														<input
 															type="radio"
@@ -630,7 +630,7 @@ const AddFunction = () => {
 							ischecked ? 'function' : '';
 						}
 						return ind <= 2 ? (
-							<div class="mt-2 mb-2 bg-light h-75 p-3 bg-4C4D550F z-999">
+							<div className="mt-2 mb-2 bg-light h-75 p-3 bg-4C4D550F z-999">
 							<span className="custom-radio-input">
 								<input
 									type="radio"

@@ -1,3 +1,11 @@
+:root
+{
+  --border-color-light-gray:#4C4D554D;
+}
+.bg_grey
+{
+  background-color: var(--border-color-light-gray);
+}
 .actions-span{
  cursor: pointer;
  margin: 0 5px;
@@ -21,12 +29,26 @@
   /* border-collapse: collapse;
   border: 1px solid black; */
 }
-
-.manage-types-table tr {
-  border-bottom: 1pt solid #4C4D554D;
-  height: 45px;
+.table-render-thead
+{
+  z-index:999;
 }
-
+.manage-types-table tr {
+  border-bottom: 1px solid var(--border-color-light-gray);
+  height: 60px;
+  vertical-align: middle !important;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+}
+.manage-types-table tr td
+{
+  vertical-align: middle !important;
+}
+.manage-types-table tr:last-child
+{
+  border: none !important;
+}
 .add-edit-types {
   /* border: 1px solid black; */
 }
@@ -53,11 +75,14 @@
   border-bottom: 1px solid #4C4D554D;
 }
 .table-render-parent-div{
-  height: 450px;
-  border: 1px solid #4C4D554D;
-  overflow-y: scroll;
+  /* height: 450px; */
+  /* border: 1px solid #4C4D554D; */
+  /* overflow-y: scroll; */
 }
-
+tbody.table-body-employee-type
+{
+  border: 1px solid var(--border-color-light-gray);
+}
 .table-render-thead{
   background-color: #4C4D550F;
   height: 50px;
@@ -174,4 +199,17 @@
 .page-title-font-class {
   margin: 25px 0;
   font-size: 1.5rem;
+}
+
+
+
+/* Common for all action icon added by orion team */
+.span-action-icons > svg {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.span-action-icons > svg:hover{
+  opacity: 0.8;
 }

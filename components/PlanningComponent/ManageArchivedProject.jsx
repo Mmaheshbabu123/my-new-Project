@@ -65,6 +65,9 @@ function ManageArchivedProject(props) {
 		if (searchArchivedProjectname != '' && searchArchivedlocation != '' && searchArchivedaddress != '') {
 			archivedprojectTemp.map((val) => {
 				if (
+					val['project_name'] != undefined &&
+					val['project_name'] != '' &&
+					val['project_name'] != null &&
 					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.trim().toLowerCase()) &&
 					(val['project_location'] != undefined &&
 						val['project_location'] != '' &&
@@ -84,7 +87,10 @@ function ManageArchivedProject(props) {
 			//--------------FOR WHEN TWO VALUES ARE GIVEN--------------------//
 			archivedprojectTemp.map((val) => {
 				if (
-					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.toLowerCase()) &&
+					val['project_name'] != undefined &&
+					val['project_name'] != '' &&
+					val['project_name'] != null &&
+					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.trim().toLowerCase()) &&
 					(val['project_location'] != undefined &&
 						val['project_location'] != '' &&
 						val['project_location'] != null &&
@@ -101,7 +107,13 @@ function ManageArchivedProject(props) {
 		} else if (searchArchivedlocation != '' && searchArchivedaddress != '') {
 			archivedprojectTemp.map((val) => {
 				if (
-					val['project_location'].trim().toLowerCase().includes(searchArchivedlocation.toLowerCase()) &&
+					val['project_location'] != undefined &&
+					val['project_location'] != '' &&
+					val['project_location'] != null &&
+					val['project_location']
+						.trim()
+						.toLowerCase()
+						.includes(searchArchivedlocation.trim().toLowerCase()) &&
 					(val['address'] != undefined &&
 						val['address'] != '' &&
 						val['address'] != null &&
@@ -115,7 +127,10 @@ function ManageArchivedProject(props) {
 		} else if (searchArchivedProjectname != '' && searchArchivedaddress != '') {
 			archivedprojectTemp.map((val) => {
 				if (
-					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.toLowerCase()) &&
+					val['project_name'] != undefined &&
+					val['project_name'] != '' &&
+					val['project_name'] != null &&
+					val['project_name'].trim().toLowerCase().includes(searchArchivedProjectname.trim().toLowerCase()) &&
 					(val['address'] != undefined &&
 						val['address'] != '' &&
 						val['address'] != null &&
@@ -217,7 +232,7 @@ function ManageArchivedProject(props) {
 									onChange={(e) => setSearchArchivedaddress(e.target.value)}
 								/>
 							</div>
-							<div className="col-sm-2">
+							<div className="col-sm-3">
 								<button
 									type="button"
 									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
@@ -252,7 +267,9 @@ function ManageArchivedProject(props) {
 											<tr className="border poppinns-regular-thin p-2" key={result.id}>
 												<td className="poppinns-regular-thin">{result.project_name}</td>
 												<td className="poppinns-regular-thin">{result.project_location}</td>
-												<td className="poppinns-regular-thin">{result.address}</td>
+												<td className="poppinns-regular-thin">
+													{/* {result.address.replace(',', '').length > 7 ? result.address : '-'} */}
+												</td>
 											</tr>
 										))}
 
@@ -290,7 +307,12 @@ function ManageArchivedProject(props) {
 					<button
 						type="button"
 						className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5 "
-						onClick={() => backToDashboard()}
+						onClick={() => {
+							window.location.assign(
+								process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
+									'dashboard?access=administrator&check_logged_in=1'
+							);
+						}}
 					>
 						BACK
 					</button>

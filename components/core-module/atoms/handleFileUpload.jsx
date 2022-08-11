@@ -16,15 +16,15 @@ async function uploadFile(e, customUrl = '', path = ''){
   }
   if(path)
     formData.append('path', path);
-  document.getElementById("__next").setAttribute("style", "cursor: not-allowed");
+  document.getElementById("file_upload_progress").setAttribute("style", "display: not none");
   let url = customUrl || uploadFiles;
   await axios.post(url, formData, { headers: { "Authorization": "Bearer " + 'abs' } })
       .then(response => {
-          document.getElementById("__next").setAttribute("style", "cursor:auto;");
+          document.getElementById("file_upload_progress").setAttribute("style", "display:none;");
           result = response.data;
       })
       .catch(error => {
-          document.getElementById("__next").setAttribute("style", "cursor:auto;");
+          document.getElementById("file_upload_progress").setAttribute("style", "display:none;");
           console.error(error);
       })
       return result;

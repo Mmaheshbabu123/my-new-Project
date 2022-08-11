@@ -35,15 +35,23 @@ function Addtiming(props) {
 					.then((result) => {
 						if (result.status == 200) {
 							console.log(result.data);
-							setEmployee_planning(result.data);
-							result.data.map((obj, key) => {
+							result.data[0].map((obj, key) => {
 								obj.date.map((obj1, key1) => {
-									result.data[key].date[key1] = new Date(obj1);
-									console.log(obj1);
+									result.data[0][key].date[key1] = new Date(obj1);
+								});
+								obj.timings.map((obj1, key1) => {
+									result.data[0][key].timings[key1].starttimeObj = moment(obj1.starttime);
+									result.data[0][key].timings[key1].endtimeObj = moment(obj1.endtime);
+
 								});
 							});
+							setChecked(result.data[1]);
+							setEmployee_planning(result.data[0]);
+							if(result.data[1] == true){
+								setValue(result.data[0][0].date)
+								setCommonDatetime(result.data[0][0].timings);
+							}
 						}
-						console.log(result);
 					})
 					.catch((error) => {
 						console.error(error);
@@ -52,11 +60,12 @@ function Addtiming(props) {
 		},
 		[ props ]
 	);
+
 	/**
 	 * Method to open and close collapsible section when user click on '+' or '-' icon
 	 * @param {} id id of the collapsible element clicked
 	 */
-	const updateState = (id) => {
+	const updateCollapse = (id) => {
 		const newState = employee_planning.map((obj) => {
 			if (obj.id === id) {
 				return { ...obj, collapseOpen: !obj.collapseOpen };
@@ -71,7 +80,6 @@ function Addtiming(props) {
 	 * @param {*} value 
 	 */
 	let handleChange = (value) => {
-		console.log(value);
 		var dateobj = {
 			date: '',
 			starttime: '',
@@ -122,11 +130,108 @@ function Addtiming(props) {
 
 		setEmployee_planning(res);
 	};
+	let calenderUpdate = (value,key) => {
+		var dateObj = [];
+		var temp = [];
+		value.map((date1)=>{
+			dateObj.push(date1.format('YYYY-MM-DD'));
+
+		})
+		var res = [ ...employee_planning ];
+		var commondate = commonDatetime;
+		
+		if(checked){
+			if(commondate.length  == 0){
+			commondate.push({
+				pdate: value[0].format('YYYY-MM-DD'),
+				starttime: '',
+				endtime: '',
+				error_starttime: '',
+				error_endtime: ''
+			})
+		}else{
+			var commondate2 = commondate;
+			commondate.map((data2,k2)=>{
+				console.log(dateObj.indexOf(data2.pdate));
+				if(dateObj.indexOf(data2.pdate) <= -1){
+					commondate2.splice(k2,1);
+
+				}
+
+			})
+			commondate = commondate2;
+			value.map((date1)=>{
+				if(!dateExists(commondate,date1.format('YYYY-MM-DD'))){
+				commondate.push({
+					pdate: date1.format('YYYY-MM-DD'),
+					starttime: '',
+					endtime: '',
+					error_starttime: '',
+					error_endtime: ''
+				})
+			}
+			})
+		}
+			setCommonDatetime(commondate)
+
+
+		}else{
+			console.log(res[key].timings);
+			if(res[key].timings.length > 0){
+				res[key].removetimings= [];
+				var res2 = res[key].timings;
+				res[key].timings.map((val1,key1)=>{
+					if(dateObj.indexOf(val1.pdate)<= -1){
+						res2.splice(key1,1);
+					}
+
+				})
+				res[key].timings = res2;
+				console.log(dateObj);
+				console.log(temp);
+				dateObj.map((value1) => {
+					if(!dateExists(res[key].timings,value1)){
+						res[key].timings.push({
+							pdate: value1,
+							starttime: '',
+							endtime: '',
+							error_starttime: '',
+							error_endtime: ''
+						});
+					}	
+
+				})
+				setEmployee_planning(res);
+			}else{
+				res[key].error_selected_date = '';
+				res[key].timings.push({
+					pdate: value[0].format('YYYY-MM-DD'),
+					starttime: '',
+					endtime: '',
+					error_starttime: '',
+					error_endtime: ''
+				});
+				setEmployee_planning(res);
+
+			}
+		}
+		
+	}
+
+	let dateExists = (arr,data)=> {
+		return arr.some(function(el) {
+		  return el.pdate === data;
+		}); 
+	  }
 
 	let postdata = () => {
-		APICALL.service(storePlannedTimings, 'POST', employee_planning)
+		var data1 = [];
+		data1[0] = props.p_unique_key
+		data1[1] = checked
+		data1[2] = employee_planning;
+		data1[3] = commonDatetime;
+		APICALL.service(storePlannedTimings, 'POST', data1)
 			.then((result) => {
-				console.log(result);
 				if (result.status === 200) {
 					router.push('/planning/finalize/' + props.p_unique_key);
 				}
@@ -151,11 +256,28 @@ function Addtiming(props) {
 	let validateTimings = () => {
 		var count = 0;
 		if (checked == true) {
-			if (selectedDate.length == 0) {
+			if (commonDatetime.length == 0) {
 				count++;
 				setError_selected_date('Select atleast one date.');
 			} else {
-				console.log(selectedDate);
+				console.log(commonDatetime);
+				var datetime = [...commonDatetime]
+				commonDatetime.map((v1,k1)=>{
+					if (v1.starttime == '') {
+						count++;
+						datetime[k1].error_starttime = 'This field is required.';
+					}
+					if (v1.endtime == '') {
+						count++;
+						datetime[k1].error_endtime = 'This field is required.';
+					}
+					if(v1.starttime != '' && v1.endtime != '' && v1.starttime == v1.endtime){
+						count++;
+						datetime[k1].error_starttime = 'Start time cannot be same as end time.';
+					}
+
+				})
+				setCommonDatetime(datetime);
 			}
 		} else {
 			var res = [ ...employee_planning ];
@@ -169,10 +291,17 @@ function Addtiming(props) {
 						if (o1.starttime == '') {
 							count++;
 							res[ky].timings[k1].error_starttime = 'This field is required.';
+							res[ky].collapseOpen = true;
 						}
 						if (o1.endtime == '') {
 							count++;
 							res[ky].timings[k1].error_endtime = 'This field is required.';
+							res[ky].collapseOpen = true;
+						}
+						if(o1.starttime != '' && o1.endtime != '' && o1.starttime == o1.endtime){
+							count++;
+							res[ky].collapseOpen = true;
+							res[ky].timings[k1].error_starttime = 'Start time cannot be same as end time.';
 						}
 					});
 				}
@@ -183,27 +312,66 @@ function Addtiming(props) {
 	};
 
 	let updatetime = (type, index, e, key) => {
-		alert(moment(e).format("HH:mm"));
 		var res = [ ...employee_planning ];
-		console.log(res);
+		var common = [...commonDatetime];
 		if(checked == true){
 
+			if (type == 'starttime') {
+				common[index].error_starttime = '';
+				common[index].starttimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
+				common[index].starttime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+				setCommonDatetime(common)
+			} else {
+				common[index].error_endtime = '';
+				common[index].endtimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
+				common[index].endtime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+				setCommonDatetime(common)
+			}
 		}else{
 
 		
 		if (e != null && res[key].timings.length > 0) {
 			if (type == 'starttime') {
 				res[key].timings[index].error_starttime = '';
-				res[key].timings[index].starttime = moment(e).format('HH:mm');
+				res[key].timings[index].starttimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
+				res[key].timings[index].starttime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+
 				setEmployee_planning(res);
 			} else {
 				res[key].timings[index].error_endtime = '';
-				res[key].timings[index].endtime = moment(e).format('HH:mm');
+				res[key].timings[index].endtimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
+				res[key].timings[index].endtime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+
 				setEmployee_planning(res);
 			}
 		}
 	}
 	};
+
+	/**
+	 * updateCheckbox 
+	 * 
+	 * 
+	 */
+	let updateCheckbox = () =>{
+		console.log(employee_planning);
+		var res = [ ...employee_planning ];
+		res.map((val,key)=>{
+			res[key].timings = [];
+			res[key].date = [];
+			res[key].error_selected_date = [];
+
+		})
+		setError_selected_date('');
+		setEmployee_planning(res);
+		setCommonDatetime([]);
+		setValue([]);
+
+
+		
+		setChecked(!checked);
+
+	}
 
 	return (
 		<div className="container-fluid">
@@ -218,7 +386,7 @@ function Addtiming(props) {
 								checked={checked}
 								id="flexCheckChecked"
 								onChange={() => {
-									setChecked(!checked);
+									updateCheckbox();
 								}}
 							/>
 							<label className="form-check-label poppins-regular-18px pt-1 " htmlFor="flexCheckChecked ">
@@ -251,46 +419,54 @@ function Addtiming(props) {
 										format="DD/MM/YYYY"
 										onChange={(date) => {
 											handleChange(date);
+											calenderUpdate(date);
 										}}
 										minDate={new Date()}
 									/>
-									<p className="error mt-2">{error_selected_date}</p>
+									<p className="error mt-2 ">{error_selected_date}</p>
 								</div>
 							</div>
 							<div className="mt-3 pt-2">
-								{selectedDate.map((value, index) => (
-									<div className="row table-title-bg" key={index}>
+								{commonDatetime.map((value, index) => (
+									<div className="row table-title-bg my-2" key={index}>
 										
 										<div className="col-md-2 py-3 color-skyblue2">
 											<div className="pb-2 color-skyblue2" />
-											{value}
+											{value.pdate.split('-').reverse().join('/')}
 										</div>
-										<div className="col-md-4 d-flex py-3">
+										<div className="col-md-4  py-3">
+										<div className='d-flex'>
 											<div className="py-1 px-2  custom_astrick poppins-regular-20px">Start time</div>
 											<TimePicker
 												placeholder="Select Time"
 												use12Hours={false}
 												showSecond={false}
 												focusOnOpen={true}
-												format="hh:mm"
+												format="HH:mm"
+												value={value.starttimeObj?value.starttimeObj:null}
 												onChange={(e) => updatetime('starttime', index, e, '')}
 											/>
-											<p className="error mt-2">{error_start_time}</p>
+											</div>
+											<p className="error mt-2 px-2">{value.error_starttime}</p>
 										</div>
-										<div className="col-md-4 d-flex py-3">
+										<div className="col-md-4  py-3">
+										<div className='d-flex'>
 											<div className="py-1 px-2  custom_astrick poppins-regular-20px">End time</div>
 											<TimePicker
 												placeholder="Select Time"
 												use12Hours={false}
 												showSecond={false}
 												focusOnOpen={true}
-												format="hh:mm"
-												onChange={(e) => setTime(e.format('hh:mm'))}
+												format="HH:mm"
+												value={value.endtimeObj?value.endtimeObj:null}
+												onChange={(e) => updatetime('endtime', index, e, '')}
 											/>
-											<p className="error mt-2">{error_end_time}</p>
+											</div>
+											<p className="error px-2 mt-2">{value.error_endtime}</p>
+										
 										</div>
 										<div className="col-md-2 py-3">
-											<MdStarRate className='purple-color' />
+											{/* <MdStarRate className='purple-color' /> */}
 										</div>
 									</div>
 								))}
@@ -308,9 +484,9 @@ function Addtiming(props) {
 												<div className="col-md-1 poppins-regular-18px">
 												{employee_planning.length > 1 && <span>
 													{result.collapseOpen == true ? (
-														<FaRegMinusSquare onClick={() => updateState(result.id)} />
+														<FaRegMinusSquare onClick={() => updateCollapse(result.id)} />
 													) : (
-														<FaRegPlusSquare onClick={() => updateState(result.id)} />
+														<FaRegPlusSquare onClick={() => updateCollapse(result.id)} />
 													)}
 													</span>
 }
@@ -326,12 +502,12 @@ function Addtiming(props) {
 														
 														<div className="col-md-12 p-0">
 															<Calendar
-															    className='timepage-calander '
+															    className='timepage-calander'
 																value={result.date}
 																multiple={true}
 																format="DD/MM/YYYY"
 																onChange={(date) => {
-																	handleChange2(date, key);
+																	calenderUpdate(date, key);
 																}}
 																minDate={new Date()}
 															/>
@@ -344,12 +520,12 @@ function Addtiming(props) {
 															
 																<div className="col-md-2 py-3 color-skyblue2">
 																	<div className="pb-2 color-skyblue2" />
-																	{value.date}
+																	{value.pdate.split('-').reverse().join('/')}
 																</div>
 																<div className="col-md-4 py-3 ">
 																	<div className='d-flex'>
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
-																		<span className='poppins-regular-16px'>Start time</span>
+																		<span className='poppins-regular-16px'>Start time1</span>
 																	</div>
 																	<TimePicker
 																		placeholder="Select Time"
@@ -357,6 +533,7 @@ function Addtiming(props) {
 																		showSecond={false}
 																		focusOnOpen={true}
 																		format="HH:mm"
+																		value = {value.starttimeObj?value.starttimeObj:null}
 																		onChange={(e) =>
 																			updatetime('starttime', index, e, key)}
 																	/>
@@ -375,6 +552,7 @@ function Addtiming(props) {
 																		showSecond={false}
 																		focusOnOpen={true}
 																		format="HH:mm"
+																		value = {value.endtimeObj?value.endtimeObj:null}
 																		onChange={(e) =>
 																			updatetime('endtime', index, e, key)}
 																	/>
@@ -382,7 +560,7 @@ function Addtiming(props) {
 																	<p className="error mt-2 px-2">{value.error_endtime}</p>
 																</div>
 																<div className="col-md-2 py-3 d-flex align-items-center justify-content-center">
-																	<MdStarRate  className='purple-color'/>
+																	{/* <MdStarRate  className='purple-color'/> */}
 																</div>
 															</div>
 														))}
