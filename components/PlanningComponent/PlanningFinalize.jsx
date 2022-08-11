@@ -14,6 +14,8 @@ const PlanningFinalize = () => {
 	const [ planning, setPlanning ] = useState([]);
 	const [ enableEdit, setEnableEdit ] = useState(true);
 	const [ week, setWeek ] = useState([]);
+	const [ activeWeek, setActiveWeek ] = useState([]);
+
 
 	const weeklyplanning = [
 		{
@@ -52,9 +54,10 @@ const PlanningFinalize = () => {
 				.then((result) => {
 					console.log(result.data[1][0].planning);
 					if (result.data.length > 0) {
+						console.log(result.data[1][0])
 						setPlanning(result.data[1][0]);
 						setWeek(result.data[0]);
-						console.log(result.data[0])
+						setActiveWeek(result.data[0][0])
 					}
 				})
 				.catch((error) => {
@@ -118,31 +121,31 @@ const PlanningFinalize = () => {
 							<tr className="skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex ">
 									Monday<br />
-									{week[0]}
+									{activeWeek.length> 0 && activeWeek[0].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
 									Tuesday <br />
-									{week[1]}
+									{activeWeek.length> 0 && activeWeek[1].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
 									Wednesday <br />
-									{week[2]}
+									{activeWeek.length> 0 && activeWeek[2].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center">
 									Thursday <br />
-									{week[3]}
+									{activeWeek.length> 0 && activeWeek[3].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center">
 									Friday<br />
-									{week[4]}
+									{activeWeek.length> 0 &&  activeWeek[4].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center  align-items-center justify-content-center">
 									Saturday<br />
-									{week[5]}
+									{activeWeek.length> 0 && activeWeek[5].split('-').reverse().join('-')}
 								</th>
 								<th className="  text-center  align-items-center justify-content-center">
 									Sunday<br />
-									{week[6]}
+									{activeWeek.length> 0 && activeWeek[6].split('-').reverse().join('-')}
 								</th>
 							</tr>
 						</thead>
@@ -152,7 +155,7 @@ const PlanningFinalize = () => {
 									<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
 										{planning.planning[value].map((val1, key) => (
 											<td className=" table-border-gray font-poppins-light" key={value.id}>
-												{val1.pdate.split('-').reverse().join('-') == week[0] && (
+												{activeWeek.length> 0 && val1.pdate == activeWeek[0] ? (
 													<div>
 														<div className="text-right color-skyblue my-2 mt-1 text-end">
 															{/* <a>
@@ -165,11 +168,95 @@ const PlanningFinalize = () => {
 														<br />
 														<p>{val1.function_name}</p>
 														<br />
-														<p>{val1.salary}</p> <br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}
+												{val1.pdate == activeWeek[1] ? (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}
+												{val1.pdate == activeWeek[2] ? (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}
+												{val1.pdate == activeWeek[3] ? (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}{val1.pdate == activeWeek[4] ? (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
+														<br />
+													</div>
+												):<div></div>}
+												{val1.pdate == activeWeek[5] && (
+													<div>
+														<div className="text-right color-skyblue my-2 mt-1 text-end">
+															{/* <a>
+																<MdEdit className="float-right" />
+															</a> */}
+														</div>
+														<p className="color-skyblue">{val1.employee_name}</p>
+														<br />
+														<p>{val1.employee_type_name}</p>
+														<br />
+														<p>{val1.function_name}</p>
+														<br />
+														<p>{"€ "+val1.salary}</p> <br />
 														<br />
 													</div>
 												)}
-												{val1.pdate.split('-').reverse().join('-') == week[1] && (
+												{val1.pdate == activeWeek[6] && (
 													<div>
 														<div className="text-right color-skyblue my-2 mt-1 text-end">
 															{/* <a>
@@ -182,91 +269,7 @@ const PlanningFinalize = () => {
 														<br />
 														<p>{val1.function_name}</p>
 														<br />
-														<p>{val1.salary}</p> <br />
-														<br />
-													</div>
-												)}
-												{val1.pdate.split('-').reverse().join('-') == week[2] && (
-													<div>
-														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															{/* <a>
-																<MdEdit className="float-right" />
-															</a> */}
-														</div>
-														<p className="color-skyblue">{val1.employee_name}</p>
-														<br />
-														<p>{val1.employee_type_name}</p>
-														<br />
-														<p>{val1.function_name}</p>
-														<br />
-														<p>{val1.salary}</p> <br />
-														<br />
-													</div>
-												)}
-												{val1.pdate.split('-').reverse().join('-') == week[3] && (
-													<div>
-														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															{/* <a>
-																<MdEdit className="float-right" />
-															</a> */}
-														</div>
-														<p className="color-skyblue">{val1.employee_name}</p>
-														<br />
-														<p>{val1.employee_type_name}</p>
-														<br />
-														<p>{val1.function_name}</p>
-														<br />
-														<p>{val1.salary}</p> <br />
-														<br />
-													</div>
-												)}{val1.pdate.split('-').reverse().join('-') == week[4] && (
-													<div>
-														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															<a>
-																<MdEdit className="float-right" />
-															</a>
-														</div>
-														<p className="color-skyblue">{val1.employee_name}</p>
-														<br />
-														<p>{val1.employee_type_name}</p>
-														<br />
-														<p>{val1.function_name}</p>
-														<br />
-														<p>{val1.salary}</p> <br />
-														<br />
-													</div>
-												)}
-												{val1.pdate.split('-').reverse().join('-') == week[5] && (
-													<div>
-														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															{/* <a>
-																<MdEdit className="float-right" />
-															</a> */}
-														</div>
-														<p className="color-skyblue">{val1.employee_name}</p>
-														<br />
-														<p>{val1.employee_type_name}</p>
-														<br />
-														<p>{val1.function_name}</p>
-														<br />
-														<p>{val1.salary}</p> <br />
-														<br />
-													</div>
-												)}
-												{val1.pdate.split('-').reverse().join('-') == week[6] && (
-													<div>
-														<div className="text-right color-skyblue my-2 mt-1 text-end">
-															{/* <a>
-																<MdEdit className="float-right" />
-															</a> */}
-														</div>
-														<p className="color-skyblue">{val1.employee_name}</p>
-														<br />
-														<p>{val1.employee_type_name}</p>
-														<br />
-														<p>{val1.function_name}</p>
-														<br />
-														<p>{val1.salary}</p> <br />
+														<p>{"€ "+val1.salary}</p> <br />
 														<br />
 													</div>
 												)}
