@@ -66,7 +66,7 @@ const Overviewpage = (props) => {
 
   const handleSearchClick = (search = 1) => {
     let filterRows = [];
-    let { searchTermEmployer = '', searchTermCompany = '' } = state;
+    let { searchTermEmployer = '', searchTermCompany = '', selectedTabId } = state;
     let status = selectedTabId === 1 ? [1, 0] : selectedTabId === 2 ? [0] : [1];
     let data = getSelectedStatus(status);
     if(search && (searchTermEmployer || searchTermCompany)) {
