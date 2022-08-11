@@ -1476,3 +1476,10 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 .bg-4C4D550F .css-1s2u09g-control {
 	border: none;
 }
+.edit-del-planning {
+	position: absolute;
+right: -70px;
+}
+.size-edit, .size-del {
+	font-size: 22px !important;
+}
