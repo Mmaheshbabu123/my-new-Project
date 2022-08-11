@@ -90,10 +90,10 @@ const ManagePc = (props) => {
 		}
 	};
 	function handleReset() {
-		setSearch(false);
 		setData(temp);
 		setSearchPcnum('');
 		setSearchPcname('');
+		setSearch(false);
 	}
 
 	//------------------- Pagination code -------------------------//
@@ -192,11 +192,9 @@ const ManagePc = (props) => {
 
 							<div className="row col-md-10 poppins-regular-16px">
 								<div className="col-md-2 py-2 ps- 4 fw-bold align-items-center d-flex poppins-regular-16px">
-									{' '}
 									{val.pc_number}
 								</div>
 								<div className="col-md-9 py-2 fw-bold align-items-center d-flex poppins-regular-16px">
-									{' '}
 									{val.pc_alias_name ? val.pc_alias_name : val.pc_name}
 								</div>
 							</div>

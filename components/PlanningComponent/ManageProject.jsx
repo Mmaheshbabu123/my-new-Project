@@ -22,6 +22,7 @@ function ManageProject(props) {
 	const [ project, setProject ] = useState([]);
 	const [ projectTemp, setProjectTemp ] = useState([]);
 	const [ projectTemp2, setProjectTemp2 ] = useState([]);
+	const [ search, setSearch ] = useState(false);
 
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ projectid, setProjectid ] = useState('');
@@ -52,25 +53,7 @@ function ManageProject(props) {
 		},
 		[ updated ]
 	);
-	/**
-	 * FETCHING ARCHIVED PROJECT
-	 */
-	// useEffect(
-	// 	() => {
-	// 		APICALL.service(fetchallarchivedprojects, 'GET')
-	// 			.then((result) => {
-	// 				console.log(result.data);
 
-	// 				setArchivedProject(result.data);
-	// 				setArchivedProjectTemp(result.data);
-	// 				setArchivedProjectTemp2(result.data);
-	// 			})
-	// 			.catch((error) => {
-	// 				console.log(error);
-	// 			});
-	// 	},
-	// 	[ updated ]
-	// );
 	// DELETE FUNCTIONALITY //
 	const deleteproject = async () => {
 		var data = {
@@ -116,6 +99,7 @@ function ManageProject(props) {
      *  SEARCH FUNCTIONALITY
      */
 	function handleSearch() {
+		setSearch(true);
 		var res = [];
 		//-------------------------IF ALL THREE VALUES ARE GIVEN----------------------//
 		if (searchProjectname != '' && searchlocation != '' && searchaddress != '') {
@@ -225,6 +209,7 @@ function ManageProject(props) {
 		}
 	}
 	function handleReset() {
+		setSearch(false);
 		setProject(projectTemp);
 		setSearchProjectname('');
 		setSearchlocation('');
@@ -275,20 +260,29 @@ function ManageProject(props) {
 								/>
 							</div>
 							<div className="col-sm-3">
-								<button
-									type="button"
-									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
-									onClick={() => handleSearch()}
-								>
-									SEARCH
-								</button>
-								<button
-									type="button"
-									className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
-									onClick={() => handleReset()}
-								>
-									RESET
-								</button>
+								<div className="col-md-1">
+									<button
+										type="button"
+										className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+										onClick={() => handleSearch()}
+									>
+										SEARCH
+									</button>
+								</div>
+								<div className="col-md-1">
+									{(searchProjectname != '' ||
+										searchlocation != '' ||
+										searchaddress != '' ||
+										search === true) && (
+										<button
+											type="button"
+											className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+											onClick={() => handleReset()}
+										>
+											RESET
+										</button>
+									)}
+								</div>
 							</div>
 						</div>
 
