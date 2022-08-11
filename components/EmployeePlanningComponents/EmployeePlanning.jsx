@@ -39,10 +39,9 @@ function EmployeeMonthlyPlanning(props) {
 		() => {
 			APICALL.service(fetchemployeeplanning + 104, 'GET')
 				.then((result) => {
-					console.log(result.data);
-					// result.data[0].map((obj, key) => {
-					// 	result.data[0][key].date[key1] = new Date(obj1);
-					// });
+					if (result.status == 200) {
+						console.log(result.data);
+					}
 
 					setData(result.data);
 				})

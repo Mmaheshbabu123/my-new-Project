@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import { GrUpdate } from 'react-icons/gr';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { fetchallproject, updateProject, fetchprojectbyid } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
@@ -310,7 +311,7 @@ function ManageProject(props) {
 												<td className="poppinns-regular-thin">{result.project_name}</td>
 												<td className="poppinns-regular-thin">{result.project_location}</td>
 												<td className="poppinns-regular-thin">
-													{/* {result.address.replace(',', '').length > 7 ? result.address : '-'} */}
+													{result.address.replace(',', '').length > 7 ? result.address : '-'}
 												</td>
 												<td className="d-flex justify-content-center">
 													<Link href={'/editproject/' + result.id} className="">
@@ -320,8 +321,15 @@ function ManageProject(props) {
 													</Link>
 													{/* <MdEdit type="button" className="mt-2 ms-3 " onClick={showPopup} /> */}
 
-													<span onClick={() => showDeletePopup(result.id)} type="button">
+													{/* <span onClick={() => showDeletePopup(result.id)} type="button">
 														<MdDelete className="mt-2 ms-3 color-skyblue " />
+													</span> */}
+													<span>
+														<Link href="/manage-planning/weekly">
+															<a type="button">
+																<GrUpdate className="mt-2 ms-3 color-skyblue " />
+															</a>
+														</Link>
 													</span>
 												</td>
 											</tr>
