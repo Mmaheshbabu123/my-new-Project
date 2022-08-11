@@ -36,9 +36,14 @@
 .manage-types-table tr {
   border-bottom: 1px solid var(--border-color-light-gray);
   height: 60px;
-  display: flex;
+  vertical-align: middle !important;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
+}
+.manage-types-table tr td
+{
+  vertical-align: middle !important;
 }
 .manage-types-table tr:last-child
 {
@@ -70,9 +75,9 @@
   border-bottom: 1px solid #4C4D554D;
 }
 .table-render-parent-div{
-  height: 450px;
+  /* height: 450px; */
   /* border: 1px solid #4C4D554D; */
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 tbody.table-body-employee-type
 {
