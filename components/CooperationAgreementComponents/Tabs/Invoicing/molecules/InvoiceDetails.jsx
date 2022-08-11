@@ -25,7 +25,7 @@ const InvoiceDetails = (props) => {
     }
     if(name === '59') {
       tab_4['41'] = value;
-
+    element_status['tab_4'].push('41');
     }
 
     tab_6[name] = value;

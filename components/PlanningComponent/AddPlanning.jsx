@@ -407,16 +407,18 @@ function Planning(props) {
 							project.id != undefined && (
 								<div className="form-group ">
 									<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
-									<div className=" d-flex d-inline">
+									<div className=" d-flex col-md-12 d-inline position-relative">
 										<input
 											type="text mb-2 mt-2 poppins-regular-16px rounded-0"
 											value={project.project_name}
 											className="form-control"
 											disabled
 										/>
-										<MdEdit type="button" className="mt-2 ms-3 " onClick={showPopup} />
+										<span className='edit-del-planning'>
+										<MdEdit type="button" className="mt-2 ms-3 size-edit color-skyblue" onClick={showPopup} />
 										<span onClick={() => showDeletePopup(project.id)} type="button">
-											<MdDelete className="mt-2 ms-3 color-skyblue " />
+											<MdDelete className="mt-2 ms-3 color-skyblue size-del " />
+										</span>
 										</span>
 									</div>
 								</div>
