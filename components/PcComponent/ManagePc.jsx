@@ -23,6 +23,7 @@ const ManagePc = (props) => {
 	const [ searchPcnum, setSearchPcnum ] = useState('');
 	const [ searchPcname, setSearchPcname ] = useState('');
 	const [ itemsPerPage, setItemsPerPage ] = useState(8);
+	const [ search, setSearch ] = useState(false);
 
 	useEffect(() => {
 		APICALL.service(getPcOverviewDetails, 'GET')
@@ -39,27 +40,22 @@ const ManagePc = (props) => {
 			});
 	}, []);
 
-	function handleReset() {
-		setData(temp);
-		setSearchPcnum('');
-		setSearchPcname('');
-	}
-
 	let handleSearch = () => {
+		setSearch(true);
 		var res = [];
 		if (searchPcnum != '' && searchPcname != '') {
 			temp.map((val) => {
 				if (
 					val['pc_alias_name'] != null &&
-					val['pc_number'].trim().includes(searchPcnum) &&
-					val['pc_alias_name'].trim().toLowerCase().includes(searchPcname.toLowerCase())
+					val['pc_number'].trim().includes(searchPcnum.trim()) &&
+					val['pc_alias_name'].trim().toLowerCase().includes(searchPcname.trim().toLowerCase())
 				) {
 					res.push(val);
 				} else if (
 					val['pc_alias_name'] == null &&
 					val['pc_name'] != null &&
-					val['pc_number'].trim().includes(searchPcnum) &&
-					val['pc_name'].trim().toLowerCase().includes(searchPcname.toLowerCase())
+					val['pc_number'].trim().includes(searchPcnum.trim()) &&
+					val['pc_name'].trim().toLowerCase().includes(searchPcname.trim().toLowerCase())
 				) {
 					res.push(val);
 				}
@@ -68,7 +64,7 @@ const ManagePc = (props) => {
 			setItemOffset(0);
 		} else if (searchPcnum != '') {
 			temp.map((val) => {
-				if (val['pc_number'].trim().includes(searchPcnum)) {
+				if (val['pc_number'].trim().includes(searchPcnum.trim())) {
 					res.push(val);
 				}
 			});
@@ -78,13 +74,13 @@ const ManagePc = (props) => {
 			temp.map((val) => {
 				if (
 					val['pc_alias_name'] != null &&
-					val['pc_alias_name'].trim().toLowerCase().includes(searchPcname.toLowerCase())
+					val['pc_alias_name'].trim().toLowerCase().includes(searchPcname.trim().toLowerCase())
 				) {
 					res.push(val);
 				} else if (
 					val['pc_alias_name'] == null &&
 					val['pc_name'] != null &&
-					val['pc_name'].trim().toLowerCase().includes(searchPcname.toLowerCase())
+					val['pc_name'].trim().toLowerCase().includes(searchPcname.trim().toLowerCase())
 				) {
 					res.push(val);
 				}
@@ -93,6 +89,12 @@ const ManagePc = (props) => {
 			setItemOffset(0);
 		}
 	};
+	function handleReset() {
+		setSearch(false);
+		setData(temp);
+		setSearchPcnum('');
+		setSearchPcname('');
+	}
 
 	//------------------- Pagination code -------------------------//
 	const [ pageCount, setPageCount ] = useState(0);
@@ -117,79 +119,87 @@ const ManagePc = (props) => {
 		<div className="container-fluid p-0">
 			<div className="row m-0">
 				{/* <h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 hover-white">Manage paritair comite</h1> */}
-				<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage paritair comite</h1>
+				<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">
+					Manage paritair comite
+				</h1>
 				<div className="col-md-12 p-0">
-					<span className='btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln'>
-						<Link className='hover-white' href={'/redirect-page?src=/manage-pc&dest=addpc'}>
-							<span className={'ml-2 poppins-regular-18x float-sm-right color-white py-2 font-l hover-white' + styles.addprojbtn + styles.btncolor}>
-								+  ADD PARITAIR COMMITE
+					<span className="btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln">
+						<Link className="hover-white" href={'/redirect-page?src=/manage-pc&dest=addpc'}>
+							<span
+								className={
+									'ml-2 poppins-regular-18x float-sm-right color-white py-2 font-l hover-white' +
+									styles.addprojbtn +
+									styles.btncolor
+								}
+							>
+								+ ADD PARITAIR COMMITE
 							</span>
 						</Link>
 					</span>
 				</div>
 				<div className="col-md-12 row m-0 p-0">
-					
-						<div className="col-md-3 ps-0">
-							<input
-								type="search"
-								id="form12"
-								className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
-								placeholder="Paritair comite number"
-								value={searchPcnum}
-								onChange={(e) => setSearchPcnum(e.target.value)}
-							/>
-						</div>
+					<div className="col-md-3 ps-0">
+						<input
+							type="search"
+							id="form12"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+							placeholder="Paritair comite number"
+							value={searchPcnum}
+							onChange={(e) => setSearchPcnum(e.target.value)}
+						/>
+					</div>
 
-						<div className="col-md-3">
-							<input
-								type="search"
-								id="form12"
-								className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 "
-								placeholder="Paritair comite name"
-								value={searchPcname}
-								onChange={(e) => setSearchPcname(e.target.value)}
-							/>
-						</div>
+					<div className="col-md-3">
+						<input
+							type="search"
+							id="form12"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 "
+							placeholder="Paritair comite name"
+							value={searchPcname}
+							onChange={(e) => setSearchPcname(e.target.value)}
+						/>
+					</div>
 
-						<div className="col-md-1">
+					<div className="col-md-1">
+						<button
+							type="button"
+							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-regular-18px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color font-l"
+							onClick={() => handleSearch()}
+						>
+							FILTER
+						</button>
+					</div>
+					<div className="col-md-1">
+						{(searchPcnum != '' || searchPcname != '' || search === true) && (
 							<button
 								type="button"
-								className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-regular-18px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color font-l"
-								onClick={() => handleSearch()}
+								className="btn w-100 btn-block float-right mt-2 mb-2 ms-2 poppins-regular-18px  border-0 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn font-l hover-white"
+								onClick={() => handleReset()}
 							>
-								FILTER
+								RESET
 							</button>
-						</div>
-						<div className="col-md-1">
-							{(searchPcnum != '' || searchPcname != '') && (
-								<button
-									type="button"
-									className="btn w-100 btn-block float-right mt-2 mb-2 ms-2 poppins-regular-18px  border-0 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn font-l hover-white"
-									onClick={() => handleReset()}
-								>
-									RESET
-								</button>
-							)}
-						</div>
-					
+						)}
+					</div>
 				</div>
-				
 			</div>
 			{temp2.map((val, key) => (
 				<div className="row my-2 pt-2 m-0" key={key}>
 					<div className={`col-md-10 d-flex`}>
 						<div className={`row py-2   ps-4 w-100 poppins-regular-16px ${styles.sectioncolor}`}>
-						<div className='col-md-1 align-items-center d-flex poppins-regular-16px'>
-						<span className={`py-2 poppins-regular-16px ${styles.pcid} fw-bold`}>{key + 1}.</span>
-						</div>
-
-						<div className="row col-md-10 poppins-regular-16px">
-							<div className="col-md-2 py-2 ps- 4 fw-bold align-items-center d-flex poppins-regular-16px"> {val.pc_number}</div>
-							<div className="col-md-9 py-2 fw-bold align-items-center d-flex poppins-regular-16px">
-								{' '}
-								{val.pc_alias_name ? val.pc_alias_name : val.pc_name}
+							<div className="col-md-1 align-items-center d-flex poppins-regular-16px">
+								<span className={`py-2 poppins-regular-16px ${styles.pcid} fw-bold`}>{key + 1}.</span>
 							</div>
-						</div>
+
+							<div className="row col-md-10 poppins-regular-16px">
+								<div className="col-md-2 py-2 ps- 4 fw-bold align-items-center d-flex poppins-regular-16px">
+									{' '}
+									{val.pc_number}
+								</div>
+								<div className="col-md-9 py-2 fw-bold align-items-center d-flex poppins-regular-16px">
+									{' '}
+									{val.pc_alias_name ? val.pc_alias_name : val.pc_name}
+								</div>
+							</div>
 						</div>
 					</div>
 					<div className="col-md-2  ps-3 pe-0 ">
