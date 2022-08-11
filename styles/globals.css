@@ -1335,6 +1335,9 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 .pc-height4 {
 	min-height: 47vh;
 }
+.epc {
+	min-height: 60vh;
+}
 .pc-height5 {
 	min-height: 47vh;
 }
@@ -1500,3 +1503,9 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
     top: 20px;
     left: 12px;
 } */
+#react-select-2-placeholder {
+	padding-top: 8px;
+}
+.slt-emp .css-1s2u09g-control {
+	height: 50px;
+}

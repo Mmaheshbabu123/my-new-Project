@@ -148,7 +148,7 @@ const PcOverview = (params) => {
 						''
 					)}
 					{pc && (
-						<div>
+						<div className='epc'>
 							{cat_subsec_type == 0 &&
 							params.type != 'viewpc' && (
 								<div className="text-end mb-3">
