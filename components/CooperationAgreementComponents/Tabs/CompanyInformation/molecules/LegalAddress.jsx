@@ -34,7 +34,7 @@ const LegalAddress = (props) => {
     // }
     // else {
       if(name === '19') {
-      updateTabFields(tab_4,tab_2,tab_6)  
+      updateTabFields(tab_4,tab_2,tab_6,element_status)  
       updateStateChanges({tab_2 ,tab_4,tab_6,element_status })
       }
       else {
