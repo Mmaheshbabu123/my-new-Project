@@ -988,7 +988,7 @@ div[disabled] {
 .reset-btn {
 	background-color: var(--bg-btn-gray);
 	color: var(--color-white);
-	font-size: var(--font-size-l);
+	font-size: var(--font-size-m);
 	font-family: var(--font-family-poppins-regular);
 }
 .poppinns-regular-thin {
@@ -1335,6 +1335,9 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 .pc-height4 {
 	min-height: 47vh;
 }
+.epc {
+	min-height: 60vh;
+}
 .pc-height5 {
 	min-height: 47vh;
 }
@@ -1350,45 +1353,7 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
     z-index: 999;
     background: #fff;
 }
-/* for scroll bar color change */
-/* .scroll {
-    scrollbar-face-color: #fff;
-    scrollbar-shadow-color: #FFFFFF;
-    scrollbar-highlight-color: #FFFFFF;
-    scrollbar-3dlight-color: #FFFFFF;
-    scrollbar-darkshadow-color: #FFFFFF;
-    scrollbar-track-color: #FFFFFF;
-    scrollbar-arrow-color: #FFFFFF;
-}
-.scroll::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px #fff;
-	background-color: #fff;
-}
 
-.scroll::-webkit-scrollbar
-{
-	width: 6px;
-	background-color: #fff;
-}
-
-.scroll::-webkit-scrollbar-thumb
-{
-	background-color: #fff;
-} */
-
-/* .poppins-regular-16px-white-c:active, .poppins-regular-16px-white-c:focus {
-	color: var(--color-white) !important;
-}
-.done .poppins-regular-16px-white-c, .done .poppins-regular-18px-white-c {
-	color: var(--color-skyblue);
-}
-.done .poppins-regular-16px-white-c:active, .done .poppins-regular-18px-white-c:active {
-	color: var(--color-white) !important;
-}
-.pending .poppins-regular-16px-white-c1, .pending .poppins-regular-18px-white-c2 {
-	color: var(white);
-} */
 .fun-line::before {
 	
 	width: 1px;
@@ -1476,27 +1441,27 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 .bg-4C4D550F .css-1s2u09g-control {
 	border: none;
 }
+.edit-del-planning {
+	position: absolute;
+right: -70px;
+}
+.size-edit, .size-del {
+	font-size: 22px !important;
+}
 .font-16 {
 	font-size: var(--font-size-m) !important;
 }
 .h-50-mf th {
 	height: 50px;
 }
-/* .accordion-flush::before {
-	width: 1px;
-    height: -webkit-fill-available;
-    background: #4C4D554D !important;
-    position: absolute;
-    content: close-quote;
-    top: 20px;
-    left: 12px;
-} */
-/* .accordion-flush::after {
-	width: -webkit-fill-available;
-    height: 2px;
-    background: #4C4D554D !important;
-    position: absolute;
-    content: close-quote;
-    top: 20px;
-    left: 12px;
-} */
+
+#react-select-2-placeholder {
+	padding-top: 8px;
+	padding-top: 8px;
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+    color: var(--bg-gray-dark);
+}
+.slt-emp .css-1s2u09g-control {
+	height: 50px;
+}

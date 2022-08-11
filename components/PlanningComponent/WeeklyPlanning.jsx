@@ -103,7 +103,7 @@ function WeeklyPlanning(props) {
 		<div className="container-fluid p-0 m-0">
 			<div className="row">
 				<p className=" mt-3 mb-1 font-weight-bold   bitter-italic-normal-medium-24">Weekly planning</p>
-				<p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p>
+				<p className=" poppins-regular-16px py-2">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p>
 
 				<div className=" mt-4 d-flex justify-content-end">
 					<div className="d-inline ">
@@ -138,7 +138,7 @@ function WeeklyPlanning(props) {
 				)} */}
 				<div className=" mt-4 d-flex mb-3 ">
 					<select
-						className="form-select w-25 me-2 "
+						className="form-select w-25 me-2 rounded-0"
 						onChange={(e) => {
 							setCompany(e.target.value);
 						}}
@@ -151,7 +151,7 @@ function WeeklyPlanning(props) {
 						))}
 					</select>
 
-					<select className="form-select w-25 me-2 ">
+					<select className="form-select w-25 me-2 rounded-0">
 						<option value="">Select Location</option>
 						{locationlist.map((value) => (
 							<option key={value.value} value={value.value}>
@@ -159,7 +159,7 @@ function WeeklyPlanning(props) {
 							</option>
 						))}
 					</select>
-					<select className="form-select w-25 me-2">
+					<select className="form-select w-25 me-2 rounded-0">
 						<option value="">Cost center</option>
 						{costcenterlist.map((value) => (
 							<option key={value.value} value={value.value}>
