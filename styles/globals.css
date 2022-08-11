@@ -1476,3 +1476,27 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 .bg-4C4D550F .css-1s2u09g-control {
 	border: none;
 }
+.font-16 {
+	font-size: var(--font-size-m) !important;
+}
+.h-50-mf th {
+	height: 50px;
+}
+/* .accordion-flush::before {
+	width: 1px;
+    height: -webkit-fill-available;
+    background: #4C4D554D !important;
+    position: absolute;
+    content: close-quote;
+    top: 20px;
+    left: 12px;
+} */
+/* .accordion-flush::after {
+	width: -webkit-fill-available;
+    height: 2px;
+    background: #4C4D554D !important;
+    position: absolute;
+    content: close-quote;
+    top: 20px;
+    left: 12px;
+} */
