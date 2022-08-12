@@ -29,7 +29,7 @@ const BasicDetails = (props) => {
       let { agent_details, absolute_consultant } = defaultOptions;
       let bbright_id = agent_details && agent_details.bbright_id ? agent_details.bbright_id : 0;
       consultantArray = absolute_consultant ? absolute_consultant.filter(val => Number(val.value) === Number(bbright_id)) : [];
-      consultNumber = [{label: bbright_id, value: Number(bbright_id)}];
+      consultNumber = consultantArray.length ? [{label: bbright_id, value: Number(bbright_id)}] : [];
       tab_1 = getTabBasicData(consultantArray, consultNumber, bbright_id);
       updateStateChanges({tab_1, bbright_id});
     }

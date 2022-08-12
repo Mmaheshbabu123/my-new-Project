@@ -161,7 +161,7 @@ function checkContactPersonsTabValidation(tab_data,tab_key) {
   const selectPersonId = contractObj['selected_person_id'] || 0;
   var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key,contractObj);
   var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj);
-  
+
   return  requiredFields && validateFileds;
 }
 function checkOnlineDetailsValidation(tab_data,tab_key) {
@@ -377,11 +377,11 @@ async function forWardToNextStepTab(router, contextState, contextUpdate, current
           router.query.root_parent_id = obj['root_parent_id'];
         }
         if(draft === 1) {
-          router.push(`/manage-cooperation-overview?type=sales_agent&id=${stateObj.defaultOptions.agent_details['sales_agent_id']}`);
+          setTimeout(() => window.close(), 1000);
         }
         if(selectedTabId === INVOIING_TAB && draft !== 1) {
           window.open(`/cooperation-agreement-preview?root_parent_id=${stateObj.root_parent_id}&sales_ref=${stateObj.salesAgentRefId}&type=1`, '_blank');
-          router.push(`/manage-cooperation-overview?type=sales_agent&id=${stateObj.defaultOptions.agent_details['sales_agent_id']}`);
+          setTimeout(() => window.close(), 500);
         } else {
           router.query.selectedTabId = nextTab;
           router.push(router, undefined, { shallow: true })

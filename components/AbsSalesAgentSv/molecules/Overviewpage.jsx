@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import styles from './AbsSalesAgentSv.module.css';
+import { AiFillFilePdf, AiOutlineDownload } from 'react-icons/ai';
+import { FaFileSignature } from 'react-icons/fa';
 import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
-import { AiFillFilePdf, AiOutlineRedo} from 'react-icons/ai';
 import { HiPlusCircle} from 'react-icons/hi';
 import { deleteSalesAgenetAgreements, downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { useRouter } from 'next/router';
@@ -213,7 +214,7 @@ const Overviewpage = (props) => {
       return(
         <div>
           <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
+          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiOutlineDownload /> </span>
         </div>
       )
     } else {
@@ -239,13 +240,13 @@ const Overviewpage = (props) => {
         });
         break;
      case 'edit':
-        router.push(`cooperation-agreement?root_parent_id=${root_parent_id}&selectedTabId=0&ref_id=${ref_id}`);
+        window.open(`cooperation-agreement?root_parent_id=${root_parent_id}&selectedTabId=0&ref_id=${ref_id}`, '_blank');
         break;
      case 'download':
           handleDownload(eachRow)
         break;
       case 'add':
-       router.push(`cooperation-agreement?root_parent_id=0&selectedTabId=0&ref_id=${ref_id}`);
+       window.open(`cooperation-agreement?root_parent_id=0&selectedTabId=0&ref_id=${ref_id}`, '_blank');
        break;
       default:
     }

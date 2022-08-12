@@ -86,8 +86,8 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
     });
   }
 
-  const handleSearchClick = () => {
-    handleSearch(state.searchTerm);
+  const handleSearchClick = (search = 0) => {
+    handleSearch(search ? state.searchTerm : '' );
   }
 
   //------------------- Pagination code -------------------------//
@@ -125,21 +125,43 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
 
   return (
     <>
-      <div className='row searchbox' style={{ margin: '10px 0', position: 'relative' }}>
-        <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-        <input
-          type="text"
-          className="form-control col-7 pcp_name"
-          onChange={(e) => setState({...state, searchTerm: e.target.value})}
-          placeholder={'Search'}
-          onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
-        />
-        <button
-          onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
-          type="button"
-          className="btn btn-dark pcp_btn col-3">
-          {`+Add a document`}
-        </button>
+      <div className='col-md-12 text-end'>
+      {entityType !== 2 && <button
+        onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
+        type="button"
+        className="btn btn-dark pcp_btn col-3">
+        {`+Add a document`}
+      </button>}
+      </div>
+      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+       <div className='col-md-12 row'>
+         <div className='col-md-6 p-0'>
+           <input
+             type="text"
+             value={state.searchTerm}
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+             onChange={(e) => setState({...state, searchTerm: e.target.value})}
+             placeholder={'Search'}
+             onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+           />
+         </div>
+         <div className='col-md-6'>
+           <button
+             type="button"
+             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+             onClick={() => handleSearchClick(1)}
+           >
+             SEARCH
+           </button>
+           <button
+             type="button"
+             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+             onClick={() => handleSearchClick(0)}
+           >
+             RESET
+           </button>
+         </div>
+        </div>
       </div>
       <div className="table-render-parent-div">
           <table className="table table-hover manage-types-table">
