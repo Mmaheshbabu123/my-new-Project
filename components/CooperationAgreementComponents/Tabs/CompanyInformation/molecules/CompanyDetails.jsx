@@ -70,12 +70,26 @@ const getCompanyDetailsByvat = async() => {
        data = result.data;
       data['8'] = tab_2['8'];
       data['10']   = '1';
-      tab_2 = {...tab_2,...data,}
-      updateTabFields(tab_4,tab_2,tab_6)
+      console.log(data);
+      tab_2 = {...tab_2,...data}
+      console.log(tab_2)
+
+      updateTabFieldsData(tab_4,tab_2,tab_6)
       updateStateChanges({ tab_2,tab_4});
     } )
     .catch((error) => setIntialStateObj(tab_2) );
 
+}
+const updateTabFieldsData = (tab_4,tab_2,tab_6) =>{
+  let defaultKeys = ['40','41','42','45','46','47'];
+  defaultKeys.forEach((item)=>{
+    tab_4[item] =tab_2['19'];
+    element_status['tab_4'].push(item);
+  })
+  tab_6['59']  = tab_2['19'] ;
+  tab_6['55']  = tab_2 ['19'];
+ element_status['tab_6'].push('59');
+ element_status['tab_6'].push('55');
 }
 const setIntialStateObj = (tab_2) => {
     for (let i = 5; i < 22; i++) {
