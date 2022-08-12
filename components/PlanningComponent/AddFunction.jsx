@@ -220,8 +220,8 @@ const AddFunction = () => {
 		} else {
 			object.map((element, key) => {
 				object[key].funid = index != null ? Number(funcid) : funcid;
-				object[index].salary = null;
-				object[index].warning='';
+				object[key].salary = null;
+				object[key].warning='';
 			});
 			setEmployeeObject(object);
 		}
@@ -333,8 +333,8 @@ const AddFunction = () => {
 		console.log(object);
 		if (object != undefined) {
 			object.map((element, key) => {
-				object[key].emp_type = 0;
-				object[key].employeetypeid = 0;
+				object[key].emp_type = null;
+				//object[key].employeetypeid = 0;
 				object[key].funid = null;
 				object[key].salary = null;
 				object[key].function_salary = null;
@@ -369,12 +369,11 @@ const AddFunction = () => {
 	let updateEmployeeType = (index = null, val) => {
 		var object = [ ...employeeobject ];
 		if (index !== null) {
-			object[index].employeetypeid = val;
 			object[index].emp_type = val;
 			setEmployeeObject(object);
 		} else {
 			const newState = object.map((element) => {
-				return { ...element, employeetypeid: val, emp_type: val };
+				return { ...element, emp_type: val, emp_type: val };
 			});
 			setEmployeeObject(newState);
 		}
@@ -387,7 +386,7 @@ const AddFunction = () => {
 			setEmployeeObject(object);
 		} else {
 			const newState = object.map((element) => {
-				return { ...element, employeetypeid: val };
+				return { ...element, emp_type: val };
 			});
 			setEmployeeObject(newState);
 		}
