@@ -41,6 +41,9 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
       if (response.status === 200) {
          setState({...state, alertSuccess: true})
          setTimeout(() => window.close(), 1500);
+      } else {
+        setState({...state, alertWarning: true})
+        setTimeout(() => setState({...state, alertWarning: false }), 3000);
       }
     }).catch((error) => console.log(error) )
   }
@@ -60,6 +63,9 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
     <div className="">
       {state.alertSuccess === true && <div className="alert alert-success text-center" role="alert">
         {Number(type) !== 2 ? `Admin signature added on PDF and cooperation agreement sent to employer.` : 'Approved successfully.'}
+      </div>}
+      {state.alertWarning === true && <div className="alert alert-danger text-center" role="alert">
+        {Number(type) !== 2 ? `Admin signature has not been added yet, please contact the admin.` : `You haven't added any signature yet, please add it.`}
       </div>}
       <div>
         <iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 200} />

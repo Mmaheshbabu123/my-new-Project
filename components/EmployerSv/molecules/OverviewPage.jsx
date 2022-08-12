@@ -194,11 +194,11 @@ const OverviewPage = (props) => {
     let signed = Number(eachRow.signed);
     return (
       <>
-        {agent.approved ? <span title={signed ? 'Download' : 'Sign'}
+        {!signed && agent.approved ? <span title={signed ? 'Download' : 'Sign'}
           className="span-action-icons"
-          onClick={() => !signed ? handleEmployerSign(epa_id, company_id, agent.root_parent_id): handleDownload(eachRow)}> {signed ? <AiOutlineDownload /> : <FaFileSignature /> } </span>
+          onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id)}> <FaFileSignature /> </span>
         : null}
-        {agent.approved ? <span title={'View'} className="span-action-icons" onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id, 1)}> <AiFillFilePdf /> </span>:null}
+        {agent.approved ? <span title={'Download'} className="span-action-icons" onClick={() => handleDownload(eachRow)}> <AiFillFilePdf /> </span>:null}
       </>
     )
   }
