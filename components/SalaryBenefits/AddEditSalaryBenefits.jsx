@@ -30,8 +30,8 @@ const AddEditSalaryBenefits = (props) => {
     , nameWarning: false
     , editIndex: 0
     , minDate: `${year}-${month < 10 ? '0' + month : month}-${day}`
+    , maxDate: `${year + 2}-${month < 10 ? '0' + month : month}-${day - 1}`
   })
-
 
     /**
      * [addItemAndUpdateIndex: used to create multiple index of emp/coeff types]
@@ -72,7 +72,7 @@ const AddEditSalaryBenefits = (props) => {
     }
 
    const checkDateFieldValid = (value) => {
-     return (new Date(value).getTime() >= new Date(state.minDate).getTime() || value === '') ? false: true
+     return value === '' || (new Date(value).getTime() >= new Date(state.minDate).getTime() && new Date(value).getTime() <= new Date(state.maxDate).getTime()) ? false: true
    }
     /**
      * [handleSubmit: function to save and edit employee/coefficient types]
@@ -231,6 +231,7 @@ const AddEditSalaryBenefits = (props) => {
             type="date"
             name='date'
             min={state.minDate}
+            max={state.maxDate}
             value={state.date}
             className="form-control col-md-10 salary-date pcp_name poppins-regular-18px border-4C4D554D rounded-0"
             onChange={(e) => handleChange(e.target)}
@@ -238,7 +239,7 @@ const AddEditSalaryBenefits = (props) => {
           {state.dateWarning &&
             <small
               className="form-text text-muted col-md-5 pcp_name_warning">
-              Date should not be earlier than {formatDate(state.minDate)}
+              Date should be between {formatDate(state.minDate)} - {formatDate(state.maxDate)}
             </small>}
         </div>
       </div>

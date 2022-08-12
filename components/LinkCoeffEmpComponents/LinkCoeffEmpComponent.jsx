@@ -55,7 +55,7 @@ const LinkCoeffEmpComponent = (props) => {
       await APICALL.service(`${savePcLinkingData}`, 'POST', postdata())
         .then(response => {
           if (response.status === 200)
-            props.router.push('/');
+            props.router.push('/linkcofficientpc/manage');
         })
     }
   }
@@ -125,7 +125,7 @@ const LinkCoeffEmpComponent = (props) => {
   const addMultiSelectTag = () => {
     return (
       <>
-      <p className='my-2 poppins-regular-20px'> Select paritair comite </p>
+      <p className='my-2 poppins-regular-20px custom_astrick'> Select paritair comite </p>
       <MultiSelect
         options={state.pcArray}
         standards={state.pcArray.filter(val => val.value === state.selectedPc)}
