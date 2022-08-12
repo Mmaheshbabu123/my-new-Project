@@ -209,12 +209,11 @@ const Overviewpage = (props) => {
   }
 
   const getNeededActions = (eachRow) => {
-
     if(Number(eachRow.root_parent_id) !== 0) {
       return(
         <div>
           <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiOutlineDownload /> </span>
+          {eachRow.approved ? <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span> : null}
         </div>
       )
     } else {

@@ -32,8 +32,8 @@ const AddEditCompositions = (props) => {
      * @param {String} nameValue  [description]
      */
     const addItemAndUpdateIndex = (stateObj) => {
-      if (stateObj['name'].length) {
-        let duplicates = stateObj['newItems'].filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
+      if (stateObj['name'].replaceAll(' ', '').length) {
+        let duplicates = stateObj['newItems'].filter((val, index) => (index !== state.editIndex && val.name.toLowerCase().replaceAll(' ', '') === state.name.toLowerCase().replaceAll(' ', '')))
         if(duplicates.length) {
             stateObj['uniqueError'] = true;
             stateObj['duplicates'] = duplicates.map(obj => obj.name);
