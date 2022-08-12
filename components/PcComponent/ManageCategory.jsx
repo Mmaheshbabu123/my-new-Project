@@ -13,6 +13,7 @@ const ManageCategoryComponent = () => {
 	const [ categoriesTemp, setCategoriesTemp ] = useState([]);
 	const [ categoriestemp2, setCategoriestemp2 ] = useState([]);
 	const [ itemsPerPage, setItemsPerPage ] = useState(8);
+	const [ search, setSearch ] = useState(false);
 
 	const [ updated, setUpdated ] = useState(0);
 	const [ searchPc, setSearchPc ] = useState('');
@@ -66,6 +67,7 @@ const ManageCategoryComponent = () => {
 
 	// SEARCH FUNCTIONALITY //
 	function handleSearch() {
+		setSearch(true);
 		var res = [];
 
 		// CONDITIONS WHEN ALL THREE VALUES ARE GIVEN //
@@ -147,6 +149,7 @@ const ManageCategoryComponent = () => {
 	// RESET FUNCTIONALITY //
 
 	function handleReset() {
+		setSearch(false);
 		setCategories(categoriesTemp);
 		setSearchPc('');
 		setSearchcat('');
@@ -226,7 +229,10 @@ const ManageCategoryComponent = () => {
 						>
 							FILTER
 						</button>
-						{(searchPc.trim() != '' || searchCat.trim() != '' || searchSal.trim() != '') && (
+						{(searchPc.trim() != '' ||
+							searchCat.trim() != '' ||
+							searchSal.trim() != '' ||
+							search === true) && (
 							<button
 								type="button"
 								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right py-2 ms-2 reset-btn px-4"

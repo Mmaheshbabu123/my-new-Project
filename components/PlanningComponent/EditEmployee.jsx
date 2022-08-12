@@ -1,16 +1,23 @@
-import React, { Component, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import ValidationService from '../../Services/ValidationService';
+import moment from 'moment';
+import { fetchEmpDetails } from '../../Services/ApiEndPoints';
+
 
 function EditEmployee(props) {
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 	// console.log(p_unique_key);
 	const [ company, setCompany ] = useState([]);
+	const [ functions, setFunctions ] = useState([]);
+	const [ emptypes, setEmptypes ] = useState([]);
+
+
 	const [ time, setTime ] = useState('');
 	const [ error_employee_name, setError_employee_name ] = useState('');
 	const [ error_employee_type, setError_employee_type ] = useState('');
@@ -19,14 +26,31 @@ function EditEmployee(props) {
 	const [ error_start_time, setError_start_time ] = useState('');
 	const [ error_end_time, setError_end_time ] = useState('');
 
-	const [ data, setData ] = useState({
-		employee_name: '',
-		employee_type: '',
-		function: '',
-		minimum_salary: '',
-		start_time: '',
-		end_time: ''
-	});
+	const [ data, setData ] = useState({});
+
+	useEffect(() => {
+
+		setData(props.data);
+		console.log(props)
+	}, [props]);
+
+
+	useEffect(() => {
+		
+		if(data.id != undefined){
+			APICALL.service(fetchEmpDetails + data.id, 'GET')
+				.then((result) => {
+					console.log(result.data)
+					setFunctions(result.data[0]);
+					setEmptypes(result.data[1])
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		}
+		// 
+		// alert("check")
+	}, [data]);
 	/**
 	 * Submit function
 	 * @param {*} res 
@@ -105,6 +129,18 @@ function EditEmployee(props) {
 		setError_end_time(error1['end_time']);
 	};
 
+	let updatetime = (e,date,type) => {
+		var data1 = data;
+		if(type == 'starttime'){
+			data1.starttime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+			setData(data1);
+		}else{
+			data1.endtime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+			setData(data1);
+		}
+
+	}
+
 	return (
 		<div className="container-fluid p-0">
 			<div className='empty-sec'></div>
@@ -118,7 +154,7 @@ function EditEmployee(props) {
 						<input
 							type="text"
 							className="form-control mb-2 poppins-regular-16px rounded-0 mb-4"
-							defaultValue=""
+							value={data.employee_name}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, employee_name: e.target.value }));
 							}}
@@ -141,7 +177,7 @@ function EditEmployee(props) {
 							}}
 						>
 							<option>--Select--</option>
-							{employeetype.map((options) => (
+							{emptypes.map((options) => (
 								<option key={options.value} value={options.value}>
 									{options.label}
 								</option>
@@ -165,9 +201,9 @@ function EditEmployee(props) {
 							}}
 						>
 							<option>--Select--</option>
-							{employeetype.map((options) => (
-								<option key={options.value} value={options.function}>
-									{options.function}
+							{functions.map((options) => (
+								<option key={options.id} value={options.id}>
+									{options.name}
 								</option>
 							))}
 						</select>
@@ -178,6 +214,7 @@ function EditEmployee(props) {
 							<input
 								type="text"
 								className="form-control rounded-0"
+								value={data.salary}
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, minimum_salary: e.target.value }));
 								}}
@@ -195,10 +232,11 @@ function EditEmployee(props) {
 								use12Hours
 								showSecond={false}
 								focusOnOpen={true}
-								format="hh:mm A"
-								// onChange={(e) => setTime(e.format('LT'))}
+								format="HH:mm"
+								value={data.starttime? moment(data.starttime):null}
+
 								onChange={(e) => {
-									setData((prev) => ({ ...prev, start_time: e.target.value }));
+									updatetime(e,data.pdate,'starttime');
 								}}
 							/>
 							<p className="error mt-2 mb-2 ">{error_start_time}</p>
@@ -211,10 +249,10 @@ function EditEmployee(props) {
 								use12Hours
 								showSecond={false}
 								focusOnOpen={true}
-								format="hh:mm A"
-								// onChange={(e) => setTime(e.format('LT'))}
+								format="HH:mm"
+								value={data.endtime?moment(data.endtime):null}
 								onChange={(e) => {
-									setData((prev) => ({ ...prev, end_time: e.target.value }));
+									updatetime(e,data.pdate,'starttime');
 								}}
 							/>
 							<p className="error mt-3">{error_end_time}</p>

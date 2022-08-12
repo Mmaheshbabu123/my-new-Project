@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
-import { planningoverview, getweekly_planning } from '../../Services/ApiEndPoints';
+import { planningoverview, getweekly_planning, planningfinalize } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
@@ -36,9 +36,21 @@ const PlanningFinalize = () => {
 		[ router.isReady ]
 	);
 	let submit = () => {
-		if (finalized == '') {
+		if (finalized === '') {
 			setErrorFinalize('This field is required.');
 		} else {
+			APICALL.service(planningfinalize, 'POST', [p_unique_key,finalized])
+			.then((result) => {
+				console.log(result);
+				if (result.status === 200) {
+					router.push('/weekly-planning');
+				} else {
+					console.log(result);
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 		}
 	};
 	let handleRadio = (e) => {

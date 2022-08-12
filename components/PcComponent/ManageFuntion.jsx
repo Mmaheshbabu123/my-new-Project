@@ -20,6 +20,7 @@ const ManageFunction = () => {
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ funcnid, setFucnid ] = useState('');
 	const [ itemsPerPage, setItemsPerPage ] = useState(8);
+	const [ search, setSearch ] = useState(false);
 
 	useEffect(
 		() => {
@@ -63,6 +64,7 @@ const ManageFunction = () => {
 	// SEARCH FUNCTIONALITY //
 
 	function handleSearch() {
+		setSearch(true);
 		var res = [];
 
 		// CONDITIONS WHEN ALL FOUR VALUES ARE GIVEN //
@@ -323,6 +325,7 @@ const ManageFunction = () => {
 	// RESET FUNCTIONALITY //
 
 	function handleReset() {
+		setSearch(false);
 		setFunctions(functionsTemp);
 		setSearchPc('');
 		setSearchCat('');
@@ -415,7 +418,8 @@ const ManageFunction = () => {
 						{(searchPc.trim() != '' ||
 							searchFunc.trim() != '' ||
 							searchCat.trim() != '' ||
-							searchSal.trim() != '') && (
+							searchSal.trim() != '' ||
+							search === true) && (
 							<button
 								type="button"
 								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right font-16 py-2 px-4 ms-2 reset-btn"
