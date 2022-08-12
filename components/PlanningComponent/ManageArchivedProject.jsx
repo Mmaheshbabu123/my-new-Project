@@ -17,6 +17,7 @@ function ManageArchivedProject(props) {
 	const [ archivedproject, setArchivedproject ] = useState([]);
 	const [ archivedprojectTemp, setArchivedprojectTemp ] = useState([]);
 	const [ archivedprojectTemp2, setarchivedprojectTemp2 ] = useState([]);
+	const [ search, setSearch ] = useState(false);
 
 	const [ archivedprojectid, setArchivedprojectid ] = useState('');
 	const [ itemsPerPage, setItemsPerPage ] = useState(8);
@@ -60,6 +61,7 @@ function ManageArchivedProject(props) {
 
 	// ----------------------Search --------------------------------//
 	function handleSearch() {
+		setSearch(true);
 		var res = [];
 		//-------------------------IF ALL THREE VALUES ARE GIVEN----------------------//
 		if (searchArchivedProjectname != '' && searchArchivedlocation != '' && searchArchivedaddress != '') {
@@ -185,6 +187,7 @@ function ManageArchivedProject(props) {
 	}
 	function handleReset() {
 		setArchivedproject(archivedprojectTemp);
+		setSearch(false);
 		setSearchArchivedProjectname('');
 		setSearchArchivedlocation('');
 		setSearchArchivedaddress('');
@@ -240,13 +243,18 @@ function ManageArchivedProject(props) {
 								>
 									SEARCH
 								</button>
-								<button
-									type="button"
-									className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
-									onClick={() => handleReset()}
-								>
-									RESET
-								</button>
+								{(searchArchivedProjectname != '' ||
+									searchArchivedlocation != '' ||
+									searchArchivedaddress != '' ||
+									search === true) && (
+									<button
+										type="button"
+										className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+										onClick={() => handleReset()}
+									>
+										RESET
+									</button>
+								)}
 							</div>
 						</div>
 
@@ -268,7 +276,7 @@ function ManageArchivedProject(props) {
 												<td className="poppinns-regular-thin">{result.project_name}</td>
 												<td className="poppinns-regular-thin">{result.project_location}</td>
 												<td className="poppinns-regular-thin">
-													{/* {result.address.replace(',', '').length > 7 ? result.address : '-'} */}
+													{result.address.replace(',', '').length > 7 ? result.address : '-'}
 												</td>
 											</tr>
 										))}

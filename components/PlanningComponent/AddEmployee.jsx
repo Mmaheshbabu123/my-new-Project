@@ -103,9 +103,9 @@ const AddEmployee = () => {
 					</div>
 				</div>
 				<div className="col-md-12 selectemp-height">
-					<div className="row col-md-6 m-auto select-relative">
+					<div className="row col-md-6 m-auto select-relative slt-emp">
 						<label
-							className="custom_astrick form-label mb-3 custom_astrick poppins-regular-16px"
+							className="custom_astrick form-label mb-3 custom_astrick poppins-regular-18px"
 							style={{}}
 						>
 							Employee

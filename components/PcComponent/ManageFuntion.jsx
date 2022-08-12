@@ -20,6 +20,7 @@ const ManageFunction = () => {
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ funcnid, setFucnid ] = useState('');
 	const [ itemsPerPage, setItemsPerPage ] = useState(8);
+	const [ search, setSearch ] = useState(false);
 
 	useEffect(
 		() => {
@@ -63,6 +64,7 @@ const ManageFunction = () => {
 	// SEARCH FUNCTIONALITY //
 
 	function handleSearch() {
+		setSearch(true);
 		var res = [];
 
 		// CONDITIONS WHEN ALL FOUR VALUES ARE GIVEN //
@@ -323,6 +325,7 @@ const ManageFunction = () => {
 	// RESET FUNCTIONALITY //
 
 	function handleReset() {
+		setSearch(false);
 		setFunctions(functionsTemp);
 		setSearchPc('');
 		setSearchCat('');
@@ -404,7 +407,7 @@ const ManageFunction = () => {
 						/>
 					</div>
 
-					<div className="col-md-2">
+					<div className="col-md-4">
 						<button
 							type="button"
 							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 ms-2 skyblue-bg-color"
@@ -415,10 +418,11 @@ const ManageFunction = () => {
 						{(searchPc.trim() != '' ||
 							searchFunc.trim() != '' ||
 							searchCat.trim() != '' ||
-							searchSal.trim() != '') && (
+							searchSal.trim() != '' ||
+							search === true) && (
 							<button
 								type="button"
-								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right  py-2 px-4 ms-2 reset-btn"
+								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right font-16 py-2 px-4 ms-2 reset-btn"
 								onClick={() => handleReset()}
 							>
 								RESET
@@ -429,7 +433,7 @@ const ManageFunction = () => {
 					<div className="form-check p-0 mt-2 text-center ">
 						<table className="table   mt-3 mb-3 text-center">
 							<thead>
-								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
+								<tr className="btn-bg-gray-medium table-sticky-bg-gray h-50-mf">
 									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">
 										Paritair comite number
 									</th>
@@ -485,7 +489,7 @@ const ManageFunction = () => {
 					</div>
 				</div>
 				{functions.length >= itemsPerPage && (
-					<div className="row my-4">
+					<div className="row mt-1 mb-2">
 						<ReactPaginate
 							breakLabel="..."
 							nextLabel={<AiOutlineArrowRight />}

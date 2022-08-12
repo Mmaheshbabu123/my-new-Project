@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import { GrUpdate } from 'react-icons/gr';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { fetchallproject, updateProject, fetchprojectbyid } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
@@ -21,6 +22,7 @@ function ManageProject(props) {
 	const [ project, setProject ] = useState([]);
 	const [ projectTemp, setProjectTemp ] = useState([]);
 	const [ projectTemp2, setProjectTemp2 ] = useState([]);
+	const [ search, setSearch ] = useState(false);
 
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ projectid, setProjectid ] = useState('');
@@ -51,25 +53,7 @@ function ManageProject(props) {
 		},
 		[ updated ]
 	);
-	/**
-	 * FETCHING ARCHIVED PROJECT
-	 */
-	// useEffect(
-	// 	() => {
-	// 		APICALL.service(fetchallarchivedprojects, 'GET')
-	// 			.then((result) => {
-	// 				console.log(result.data);
 
-	// 				setArchivedProject(result.data);
-	// 				setArchivedProjectTemp(result.data);
-	// 				setArchivedProjectTemp2(result.data);
-	// 			})
-	// 			.catch((error) => {
-	// 				console.log(error);
-	// 			});
-	// 	},
-	// 	[ updated ]
-	// );
 	// DELETE FUNCTIONALITY //
 	const deleteproject = async () => {
 		var data = {
@@ -115,6 +99,7 @@ function ManageProject(props) {
      *  SEARCH FUNCTIONALITY
      */
 	function handleSearch() {
+		setSearch(true);
 		var res = [];
 		//-------------------------IF ALL THREE VALUES ARE GIVEN----------------------//
 		if (searchProjectname != '' && searchlocation != '' && searchaddress != '') {
@@ -224,6 +209,7 @@ function ManageProject(props) {
 		}
 	}
 	function handleReset() {
+		setSearch(false);
 		setProject(projectTemp);
 		setSearchProjectname('');
 		setSearchlocation('');
@@ -274,20 +260,29 @@ function ManageProject(props) {
 								/>
 							</div>
 							<div className="col-sm-3">
-								<button
-									type="button"
-									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
-									onClick={() => handleSearch()}
-								>
-									SEARCH
-								</button>
-								<button
-									type="button"
-									className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
-									onClick={() => handleReset()}
-								>
-									RESET
-								</button>
+								<div className="col-md-1">
+									<button
+										type="button"
+										className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+										onClick={() => handleSearch()}
+									>
+										SEARCH
+									</button>
+								</div>
+								<div className="col-md-1">
+									{(searchProjectname != '' ||
+										searchlocation != '' ||
+										searchaddress != '' ||
+										search === true) && (
+										<button
+											type="button"
+											className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+											onClick={() => handleReset()}
+										>
+											RESET
+										</button>
+									)}
+								</div>
 							</div>
 						</div>
 
@@ -310,7 +305,7 @@ function ManageProject(props) {
 												<td className="poppinns-regular-thin">{result.project_name}</td>
 												<td className="poppinns-regular-thin">{result.project_location}</td>
 												<td className="poppinns-regular-thin">
-													{/* {result.address.replace(',', '').length > 7 ? result.address : '-'} */}
+													{result.address.replace(',', '').length > 7 ? result.address : '-'}
 												</td>
 												<td className="d-flex justify-content-center">
 													<Link href={'/editproject/' + result.id} className="">
@@ -320,8 +315,15 @@ function ManageProject(props) {
 													</Link>
 													{/* <MdEdit type="button" className="mt-2 ms-3 " onClick={showPopup} /> */}
 
-													<span onClick={() => showDeletePopup(result.id)} type="button">
+													{/* <span onClick={() => showDeletePopup(result.id)} type="button">
 														<MdDelete className="mt-2 ms-3 color-skyblue " />
+													</span> */}
+													<span>
+														<Link href="/manage-planning/weekly">
+															<a type="button">
+																<GrUpdate className="mt-2 ms-3 color-skyblue " />
+															</a>
+														</Link>
 													</span>
 												</td>
 											</tr>
