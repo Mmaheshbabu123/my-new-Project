@@ -6,7 +6,7 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import ValidationService from '../../Services/ValidationService';
 import moment from 'moment';
-import { fetchEmpDetails } from '../../Services/ApiEndPoints';
+import { fetchEmpDetails,updateEmployeePlanning } from '../../Services/ApiEndPoints';
 
 
 function EditEmployee(props) {
@@ -65,8 +65,24 @@ function EditEmployee(props) {
 		// });
 		var valid_res = validate(data);
 		if (valid_res) {
+			postdata();
 		}
 	};
+
+	let postdata = ()=>{
+				APICALL.service(updateEmployeePlanning, 'POST', data)
+					.then((result) => {
+						console.log(result);
+						if (result.status === 200) {
+							
+						} else if (result.status == 205) {
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+
+	}
 
 	const employeetype = [
 		{
@@ -98,11 +114,11 @@ function EditEmployee(props) {
 		 * check if required fields are empty
 		 */
 		error1['employee_name'] = ValidationService.emptyValidationMethod(res.employee_name);
-		error1['employee_type'] = ValidationService.emptyValidationMethod(res.employee_type);
-		error1['function'] = ValidationService.emptyValidationMethod(res.function);
-		error1['minimum_salary'] = ValidationService.emptyValidationMethod(res.minimum_salary);
-		error1['start_time'] = ValidationService.emptyValidationMethod(res.start_time);
-		error1['end_time'] = ValidationService.emptyValidationMethod(res.end_time);
+		error1['employee_type'] = ValidationService.emptyValidationMethod(res.emp_type);
+		error1['function'] = ValidationService.emptyValidationMethod(res.function_id);
+		error1['minimum_salary'] = ValidationService.emptyValidationMethod(res.salary);
+		error1['start_time'] = ValidationService.emptyValidationMethod(res.starttime);
+		error1['end_time'] = ValidationService.emptyValidationMethod(res.endtime);
 
 		/**
 		 * check if employee name is valid
@@ -116,7 +132,7 @@ function EditEmployee(props) {
 		 */
 		error1['minimum_salary'] =
 			error1['minimum_salary'] == ''
-				? ValidationService.minSalaryValidationMethod(res.minimum_salary)
+				? ValidationService.minSalaryValidationMethod(res.salary)
 				: error1['minimum_salary'];
 		/**
 		 * seterror messages
@@ -127,6 +143,12 @@ function EditEmployee(props) {
 		setError_minimum_salary(error1['minimum_salary']);
 		setError_start_time(error1['start_time']);
 		setError_end_time(error1['end_time']);
+		console.log(error1);
+		if(error1['employee_name'] =='' && error1['employee_type'] =='' && error1['function'] == '' && error1['minimum_salary'] =='' && error1['start_time'] == '' && error1['end_time'] ==''){
+			return true;
+		}else{
+			return false;
+		}
 	};
 
 	let updatetime = (e,date,type) => {
@@ -172,8 +194,9 @@ function EditEmployee(props) {
 						/> */}
 						<select
 							className="form-select mt-2 mb-2 custom-select poppins-regular-16px rounded-0 mb-4 "
+							value={data.emp_type}
 							onChange={(e) => {
-								setData((prev) => ({ ...prev, employee_type: e.target.value }));
+								setData((prev) => ({ ...prev, emp_type: e.target.value }));
 							}}
 						>
 							<option>--Select--</option>
@@ -196,8 +219,9 @@ function EditEmployee(props) {
 						/> */}
 						<select
 							className="form-select mt-2 mb-2 custom-select poppins-regular-16px  rounded-0 mb-4"
+							value={data.function_id}
 							onChange={(e) => {
-								setData((prev) => ({ ...prev, employee_type: e.target.value }));
+								setData((prev) => ({ ...prev, function_id: e.target.value }));
 							}}
 						>
 							<option>--Select--</option>
@@ -216,7 +240,7 @@ function EditEmployee(props) {
 								className="form-control rounded-0"
 								value={data.salary}
 								onChange={(e) => {
-									setData((prev) => ({ ...prev, minimum_salary: e.target.value }));
+									setData((prev) => ({ ...prev, salary: e.target.value }));
 								}}
 							/>
 							<span className="input-group-text rounded-0">€</span>
