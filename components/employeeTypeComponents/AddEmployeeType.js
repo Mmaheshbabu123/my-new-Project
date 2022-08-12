@@ -28,11 +28,8 @@ const AddEmployeeType = (props) => {
      */
     const addItemAndUpdateIndex = (stateObj, nameValue) => {
       let totalRows = stateObj['newItems'].length > 0 ?  stateObj['newItems'] : state.rows;
-
-      if (nameValue.length) {
-
-        let duplicates = totalRows.filter((val, index) =>  (index !== state.editIndex && val.name.toLowerCase().trim() === state.name.toLowerCase().trim()))
-
+      if (nameValue.replaceAll(' ', '').length) {
+        let duplicates = totalRows.filter((val, index) =>  (index !== state.editIndex && val.name.toLowerCase().replaceAll(' ', '') === state.name.toLowerCase().replaceAll(' ', '')))
         if(duplicates.length) {
             stateObj['uniqueError'] = true;
             stateObj['duplicates'] = duplicates.map(obj => obj.name);
