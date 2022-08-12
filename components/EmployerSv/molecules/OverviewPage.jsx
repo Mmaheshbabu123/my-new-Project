@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import { AiFillFilePdf } from 'react-icons/ai';
+import { AiFillFilePdf, AiOutlineDownload } from 'react-icons/ai';
+import { FaFileSignature } from 'react-icons/fa';
 import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
@@ -193,11 +194,11 @@ const OverviewPage = (props) => {
     let signed = Number(eachRow.signed);
     return (
       <>
-        {agent.approved ? <span title={'Sign'}
-          className="actions-span me-2 text-dark"
-          onClick={() => !signed ? handleEmployerSign(epa_id, company_id, agent.root_parent_id): handleDownload(eachRow)}> {signed ? <AiFillFilePdf /> : 'Sign'} </span>
+        {agent.approved ? <span title={signed ? 'Download' : 'Sign'}
+          className="span-action-icons"
+          onClick={() => !signed ? handleEmployerSign(epa_id, company_id, agent.root_parent_id): handleDownload(eachRow)}> {signed ? <AiOutlineDownload /> : <FaFileSignature /> } </span>
         : null}
-        {agent.approved ? <span title={'View'} className="actions-span me-2 text-dark" onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id, 1)}> View </span>:null}
+        {agent.approved ? <span title={'View'} className="span-action-icons" onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id, 1)}> <AiFillFilePdf /> </span>:null}
       </>
     )
   }

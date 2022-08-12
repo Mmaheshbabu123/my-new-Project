@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
 import {MdEdit, MdDelete } from 'react-icons/md';
-import { AiFillFilePdf, AiOutlineUserAdd, AiOutlineUserSwitch } from 'react-icons/ai';
+import {  AiOutlineUserAdd, AiOutlineUserSwitch, AiOutlineDownload } from 'react-icons/ai';
 import { deleteCooperationAgreement, downloadSvAsPdf } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
@@ -216,7 +216,7 @@ const RequestOverviewData = (props) => {
       return(
         <div>
           <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'PDF'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
+          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiOutlineDownload /> </span>
           <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
@@ -226,7 +226,9 @@ const RequestOverviewData = (props) => {
           {!savedAgentId ?
               <span title={'Assign'}  className={`span-action-icons`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
             : !salesObj.approved ? <span title={'Re-assign'}  className={`span-action-icons`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span> : null
-          }   <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          }
+          {salesObj.approved ? <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>:null}
+          <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
     }
@@ -245,7 +247,8 @@ const RequestOverviewData = (props) => {
         });
         break;
      case 'edit':
-        console.log('Edit');
+        let salesObj = assignedData[eachRow['employer_id']][eachRow['company_id']]
+        router.push(`cooperation-agreement?root_parent_id=${salesObj.root_parent_id}&selectedTabId=0&ref_id=${salesObj.sca_id}`);
         break;
      case 'download':
           handleDownload(eachRow);
