@@ -6,8 +6,10 @@ import ValidationService from '../../Services/ValidationService';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
-import { FaRegPlusSquare, FaRegMinusSquare, FaEuroSign } from 'react-icons/fa';
-import { CodeSlash } from 'node_modules/react-bootstrap-icons/dist/index';
+
+import { FaRegPlusSquare, FaRegMinusSquare ,FaEuroSign } from 'react-icons/fa';
+
+import { CodeSlash, ExclamationTriangle } from 'node_modules/react-bootstrap-icons/dist/index';
 
 const AddFunction = () => {
 	const router = useRouter();
@@ -216,12 +218,14 @@ const AddFunction = () => {
 			object[index].funid = funcid;
 			object[index].salary = null;
 			object[index].warning='';
+			(funcid=='drop')?object[index].function_salary=null:'';
 			setEmployeeObject(object);
 		} else {
 			object.map((element, key) => {
 				object[key].funid = index != null ? Number(funcid) : funcid;
 				object[key].salary = null;
 				object[key].warning='';
+			(funcid=='drop')?object[key].function_salary=null:'';
 			});
 			setEmployeeObject(object);
 		}
@@ -540,7 +544,7 @@ const AddFunction = () => {
 
 												<p style={{ color: 'red' }}>{key['salaryerror']}</p>
 											</div>
-											{/* <div style={{'color':'red'}}>{key['warning']}</div> */}
+											
 										</div>
 										{!ischecked &&
 											key['functionslist'].map((deta, ind) => {
@@ -640,35 +644,6 @@ const AddFunction = () => {
 																		isMulti={false}
 																		className="col-md-6"
 																	/>
-																	{/* <Select
-																	placeholder={<div>Function</div>}
-																	isDisabled={!isThere(value,key['funid'])}
-																	name="employefunctionsall"
-																	options={getOptions(
-																		key['functionslist'].slice(
-																			3,
-																			key['functionslist'].length
-																		)
-																	)}
-																	defaultValue={
-																		 defultFunction(value,key['funid'])
-																	}
-																	onChange={setFunctionSelected}
-																	onInputChange={() => {
-																		if (functionselected != undefined) {
-																			updatingObjectFunction(
-																				value,
-																				functionselected.value
-																			);
-																			setSalaries(functionselected.salary);
-																			updatingObjectfunctionSlary(
-																				value,
-																				functionselected.salary
-																			);
-																		}
-																		blur()
-																	}}
-																/> */}
 																</div>
 																</div>
 																<div className='error 2 ps-5 ms-5 my-2' style={{ color: 'red' }}>
@@ -679,6 +654,7 @@ const AddFunction = () => {
 													))
 												);
 											})}
+										{key['warning']!=''&&<div className='py-2' style={{'color':'red', 'paddingLeft': '130px'}}><ExclamationTriangle/> {key['warning']}</div>}
 									</div>
 								</div>
 							))}
