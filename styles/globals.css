@@ -294,8 +294,8 @@ body {
 }
 
 .poppins-regular-16px {
-	color: var(--color-label-footer-gray);
-	font-family: var(--font-family-poppins-regular);
+	color: var(--color-label-footer-gray) ;
+	font-family: var(--font-family-poppins-regular) ;
 	font-size: var(--font-size-m);
 	font-style: normal;
 	font-weight: 400;
@@ -1464,4 +1464,25 @@ right: -70px;
 }
 .slt-emp .css-1s2u09g-control {
 	height: 50px;
+}
+.sky-border-white {
+	/* background-color: var(--color-skyblue); */
+	color: var(--color-skyblue);
+	
+}
+.sectioncolor {
+    background-color: #4C4D550F !important;
+}
+.mrg-lf-rt {
+	margin-top: 12px;
+margin-left: 10px;
+}
+.color-gray-lt {
+	color: var(--color-label-footer-gray) !important;
+}
+.col-4C4D550F {
+	color: #4C4D554D;
+}
+.border-4C4D554D {
+	border-top: 1px solid #4C4D554D;
 }

@@ -14,12 +14,12 @@ import SalaryBenefits from './SalaryBenifits';
 import {
 	FaEdit,
 	FaRegPlusSquare,
-	FaMinusSquare,
 	FaAngleUp,
 	FaAngleDown,
 	FaArrowCircleRight,
 	FaRedo,
-	FaRegMinusSquare
+	FaRegMinusSquare,
+	FaMinusSquare
 } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import CompanyOptions from 'pages/manage-planning/select';
@@ -183,9 +183,9 @@ const PcOverview = (params) => {
 							)}
 							<div className=''>
 							<ul className={`list-unstyled ${styles.tree}`}>
-								<li>
-									<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
-										<li className="list-inline-item section-plus-icon  align-top fs-4  ">
+								<li className={styles.sectioncolor}>
+									<ul className={`list-inline my-2 list-unstyled  pc ${styles.tree}`}>
+										<li className="list-inline-item section-plus-icon  align-top fs-4 mrg-lf-rt ">
 											{/* <a
 												// data-bs-toggle="collapse"
 												// href={'#collapsepc' + pc_unique_key}
@@ -196,12 +196,12 @@ const PcOverview = (params) => {
 											> */}
 											<span>
 												{pc['collapseOpen'] == true || pc['childObj'] == undefined? (
-													<FaRegMinusSquare
+													<FaMinusSquare className="sky-border-white"
 														onClick={() =>
 															updateCollapseSec(1, pc['id'], pc['collapseOpen'])}
 													/>
 												) : (
-													<FaRegPlusSquare
+													<FaRegPlusSquare className="sky-border-white"
 														onClick={() =>
 															updateCollapseSec(1, pc['id'], pc['collapseOpen'])}
 													/>
@@ -233,6 +233,7 @@ const PcOverview = (params) => {
 											sectype="pc"
 											secId={pc['id']}
 											type={type}
+											level="1"
 										/>
 									</ul>
 								</li>
@@ -247,15 +248,15 @@ const PcOverview = (params) => {
 											>
 												{pc['childObj'][val]['type'] == 2 ? (
 													<li>
-														<ul className="list-inline">
-															<li>
+														<ul className="list-inline my-2 ">
+															<li className='sectioncolor'>
 																<ul>
-																	<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+																	<li className="list-inline-item section-plus-icon fs-4 mrg-lf-rt align-top">
 																		<span>
 																			{pc['childObj'] && console.log(pc['childObj'])}
 																			{pc['childObj'][val]['collapseOpen'] ==
 																			true|| pc['childObj'][val]['childObj'] == undefined ? (
-																				<FaRegMinusSquare
+																				<FaMinusSquare className="sky-border-white"
 																					onClick={(prev) =>
 																						updateCollapseSec(
 																							2,
@@ -264,12 +265,12 @@ const PcOverview = (params) => {
 																						)}
 																				/>
 																			) : (
-																				<FaRegPlusSquare
+																				<FaRegPlusSquare className="sky-border-white"
 																					onClick={() =>updateCollapseSec(2,val,pc['childObj'][val]['collapseOpen'])}
 																				/>
 																			)}
 																		</span>
-																		{/* <FaRegMinusSquare /> */}
+																		{/* <FaMinusSquare /> */}
 																	</li>
 																	<ListView
 																		pcid={pc_unique_key}
@@ -285,6 +286,7 @@ const PcOverview = (params) => {
 																		sectype="cat"
 																		secId={pc['childObj'][val]['id']}
 																		type={type}
+																		level="2"
 																	/>
 																</ul>
 															</li>
@@ -297,29 +299,10 @@ const PcOverview = (params) => {
 																			pc['childObj'][val]['childObj']
 																		).map((val2, key2) => (
 																			<li key={key2}>
-																				<ul className="list-inline">
-																					<li className="list-inline-item section-plus-icon  align-top fs-4 mt-3">
-																					{/* {pc['childObj'][val][
-																								'childObj'
-																							][val2]['collapseOpen'] ==
-																			true ? ( */}
-																				<FaRegMinusSquare
-																					// onClick={(prev) =>
-																					// 	updateCollapseSec(
-																					// 		3,
-																					// 		val,
-																					// 		pc['childObj'][val][
-																					// 			'childObj'
-																					// 		][val2]['collapseOpen'],val2
-																					// 	)}
-																				/>
-																			{/* ) : (
-																				<FaRegPlusSquare
-																					onClick={() =>updateCollapseSec(3,val,pc['childObj'][val][
-																						'childObj'
-																					][val2]['collapseOpen'],val2)}
-																				/>
-																			)} */}
+																				<ul className="list-inline my-2 gggg">
+																					<li className="list-inline-item section-plus-icon  align-top mrg-lf-rt fs-4 ">
+																				{/* <FaMinusSquare className="sky-border-white"
+																				/> */}
 																					</li>
 																					<ListView
 																						pcid={pc_unique_key}
@@ -353,6 +336,7 @@ const PcOverview = (params) => {
 																						}
 																						sectype="funct"
 																						type={type}
+																						level="3"
 																					/>
 																				</ul>
 																			</li>
@@ -364,10 +348,11 @@ const PcOverview = (params) => {
 												) : (
 													<li>
 														<ul>
-															<li className="list-inline-item section-plus-icon align-top fs-4  mt-3">
+															<li className="list-inline-item section-plus-icon align-top mrg-lf-rt fs-4  ">
 																{console.log(pc['childObj'][val]['childObj'])}
 																{pc['childObj'][val]['collapseOpen'] == true || pc['childObj'][val]['childObj'] == undefined ? (
-																	<FaRegMinusSquare
+																	<FaMinusSquare
+																	className="sky-border-white"
 																		onClick={() =>
 																			updateCollapseSec(
 																				2,
@@ -399,6 +384,7 @@ const PcOverview = (params) => {
 																secId={pc['childObj'][val]['id']}
 																sectype="funct"
 																type={type}
+																level="2"
 															/>
 														</ul>
 													</li>

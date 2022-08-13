@@ -113,24 +113,24 @@ const Table = (props) => {
 									{props.sectype != 'pc' && props.type == "addpc" && <FaEdit />}
 								</div> */}
 								<div onClick={() => {editSec('pc')}} className="h5">
-									{props.type == "editpc" && props.sectype == 'pc'&& (<FaEdit />
+									{props.type == "editpc" && props.sectype == 'pc'&& (<FaEdit className="col-4C4D550F" />
 									)}
 								</div>
 
 								<div onClick={() => {editCatOrFun()}} className="h5">
-									{props.sectype != 'pc' && (props.type == "addpc"||props.type == "editpc") && (<FaEdit />
+									{props.sectype != 'pc' && (props.type == "addpc"||props.type == "editpc") && (<FaEdit lassName="col-4C4D550F" />
 									)}
 								</div>
 								<div onClick={() => {editSec('age')}} className="h5">
-									{props.sectype == 'pc' && props.type != "addpc" && (<GrRotateRight />
+									{props.sectype == 'pc' && props.type != "addpc" && (<GrRotateRight className="col-4C4D550F" />
 									)}
 								</div>
 								<div onClick={() => {editSec('emp_type')}} className="h5">
-									{props.sectype == 'pc' && props.type != "addpc" && (<MdOutlineGroups />
+									{props.sectype == 'pc' && props.type != "addpc" && (<MdOutlineGroups  className="col-4C4D550F"/>
 									)}
 								</div>
 								<div onClick={() => {editSec('sal_benifts')}} className="h5">
-									{props.sectype == 'pc' && props.type != "addpc" && (<RiHandCoinLine />
+									{props.sectype == 'pc' && props.type != "addpc" && (<RiHandCoinLine className="col-4C4D550F" />
 									)}
 								</div>
 								
