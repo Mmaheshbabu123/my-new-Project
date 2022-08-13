@@ -28,6 +28,7 @@ const AddFunction = () => {
 	const [ errcount, seterrcount ] = useState(0);
 	const [ dradio, setdradio ] = useState(true);
 	const [ recentfuncitons, setrecentfunctions ] = useState();
+	const [salChanged,setSalChanged] = useState(false);
 	var hidefiled = '';
 	var selectnchecked = false;
 	useEffect(
@@ -91,7 +92,13 @@ const AddFunction = () => {
 				if (value.salary == '' || value.salary == null || value.salary == undefined) {
 					value.salary = value.function_salary;
 				} else {
-					if (value.salary < value.function_salary) {
+					if(sal!=''){
+						sal=ValidationService.minSalaryValidationMethod(value.salary);
+						count++;
+					}
+					let rsalary=(String)(value.salary).replace(',','.');
+					let rfsalary=(String)(value.function_salary).replace(',','.');
+					if (sal==''&& parseFloat(rsalary) < parseFloat(rfsalary)) {
 						sal = 'You cannot enter salary lesser than the minimum salary';
 						count++;
 					}
@@ -189,11 +196,11 @@ const AddFunction = () => {
 	function updatingObjectfunctionSlary(index = null, salary) {
 		var object = [ ...employeeobject ];
 		if (index != null) {
-			object[index].function_salary = Number(salary);
+			object[index].function_salary = parseFloat(salary);
 			setEmployeeObject(object);
 		} else {
 			object.map((element, key) => {
-				object[key].function_salary = salary != null ? Number(salary) : salary;
+				object[key].function_salary = salary != null ? salary : salary;
 			});
 			setEmployeeObject(object);
 		}
@@ -206,7 +213,7 @@ const AddFunction = () => {
 			setEmployeeObject(object);
 		} else {
 			object.map((element, key) => {
-				object[key].salary = salary != null ? Number(salary) : salary;
+				object[key].salary = salary != null ? salary : salary;
 			});
 			setEmployeeObject(object);
 		}
@@ -234,13 +241,16 @@ const AddFunction = () => {
 	function setsaalary(index, e) {
 		var object = [ ...employeeobject ];
 		let value = e.target.value;
+
 		if(value!=''){
-			if(Number(value)>Number(object[index].function_salary)){
+			let rsalary=(String)(value).replace(',','.');
+			let rfsalary=(String)(object[index].function_salary).replace(',','.');
+			if(parseFloat(rsalary)>parseFloat(rfsalary)){
 				object[index].warning='We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will considered as the minimum salary for all the future planning.';
 			}else{
 				object[index].warning='';
 			}
-			updatingObjectSlary(index, Number(value));
+			updatingObjectSlary(index, value);
 		}else{
 			updatingObjectSlary(index, value);
 		}
@@ -360,11 +370,11 @@ const AddFunction = () => {
 	let updateSalary = (index = null, salary) => {
 		var object = [ ...employeeobject ];
 		if (index !== null) {
-			object[index].function_salary = Number(salary);
+			object[index].function_salary = parseFloat(salary);
 			setEmployeeObject(object);
 		} else {
 			const newState = object.map((element) => {
-				return { ...element, function_salary: Number(salary) };
+				return { ...element, function_salary: parseFloat(salary) };
 			});
 			setEmployeeObject(newState);
 		}
@@ -535,9 +545,10 @@ const AddFunction = () => {
 															type="textfield"
 															name="salary"
 															placeholder="salary"
-															value={key['salary']!=null?key['salary']:''}
+															//((key['salary'] !=key['function_salary'])||(salChanged == true))?
+															value={key['salary']!=null? key['salary']:''}
 															className="form-control bg-white border-0 poppins-regular-16px"
-															onChange={(e) => setsaalary(value, e)}
+															onChange={(e) => {setsaalary(value, e);setSalChanged(true)}}
 														/>
 													</div>
 												)}
