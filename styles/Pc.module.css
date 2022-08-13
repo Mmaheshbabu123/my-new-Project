@@ -85,3 +85,8 @@ margin: 0px !important
     font-family: var(--font-family-poppins-regular);
     font-size: var(--font-size-m);
 } */
+
+.section_func_li {
+    width: 100%;
+    margin: 0px !important  
+}
