@@ -92,8 +92,10 @@ const AddFunction = () => {
 				if (value.salary == '' || value.salary == null || value.salary == undefined) {
 					value.salary = value.function_salary;
 				} else {
-					if(sal!=''){
-						sal=ValidationService.minSalaryValidationMethod(value.salary);
+					
+					
+						sal=!(value.salary == '' || value.salary == null || value.salary == undefined)?ValidationService.minSalaryValidationMethod(value.salary):'';
+						if(sal!=''){
 						count++;
 					}
 					let rsalary=(String)(value.salary).replace(',','.');
