@@ -227,6 +227,7 @@ const AddFunction = () => {
 			object[index].funid = funcid;
 			object[index].salary = null;
 			object[index].warning='';
+			object[index].salaryerror='';
 			(funcid=='drop')?object[index].function_salary=null:'';
 			setEmployeeObject(object);
 		} else {
@@ -234,6 +235,7 @@ const AddFunction = () => {
 				object[key].funid = index != null ? Number(funcid) : funcid;
 				object[key].salary = null;
 				object[key].warning='';
+				object[index].salaryerror='';
 			(funcid=='drop')?object[key].function_salary=null:'';
 			});
 			setEmployeeObject(object);
