@@ -1,12 +1,11 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { MdEdit } from 'react-icons/md';
 import { GrUpdate } from 'react-icons/gr';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { fetchallproject, updateProject, fetchprojectbyid } from '../../Services/ApiEndPoints';
+import { fetchallproject, updateProject } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-import Popup from './ProjectArchivePopup';
 import ReactPaginate from 'react-paginate';
 import Link from 'node_modules/next/link';
 
@@ -15,24 +14,34 @@ function ManageProject(props) {
 	/**
      * Initialise search filter 
      */
-	const [ updated, setUpdated ] = useState(0);
 	const [ searchProjectname, setSearchProjectname ] = useState('');
 	const [ searchlocation, setSearchlocation ] = useState('');
 	const [ searchaddress, setSearchaddress ] = useState('');
+
+	/**
+	 * Project data assigned variables
+	 */
+
 	const [ project, setProject ] = useState([]);
 	const [ projectTemp, setProjectTemp ] = useState([]);
 	const [ projectTemp2, setProjectTemp2 ] = useState([]);
+	const [ updated, setUpdated ] = useState(0);
+
+	/**
+	 * Reset button hide and show depending on the search values
+	 */
 	const [ search, setSearch ] = useState(false);
 
+	/**
+	 * Delete popup functionality assigned variables
+	 */
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ projectid, setProjectid ] = useState('');
+
+	/**
+	 * Pagination related variables
+	 */
 	const [ itemsPerPage, setItemsPerPage ] = useState(8);
-
-	// const [ showtab, setShowtab ] = useState(2);
-
-	// const handletab = (e) => {
-	// 	setShowtab(e);
-	// };
 
 	/**
 	 * FETCHING PROJECT
@@ -54,7 +63,7 @@ function ManageProject(props) {
 		[ updated ]
 	);
 
-	// DELETE FUNCTIONALITY //
+	// ------------------------Delete functionality------------------------ //
 	const deleteproject = async () => {
 		var data = {
 			id: projectid
@@ -95,13 +104,12 @@ function ManageProject(props) {
 	};
 	//------------------- Pagination code -------------------------//
 
-	/**
-     *  SEARCH FUNCTIONALITY
-     */
+	// ------------------------- Search functionality----------------------------//
+
 	function handleSearch() {
 		setSearch(true);
 		var res = [];
-		//-------------------------IF ALL THREE VALUES ARE GIVEN----------------------//
+		//-------------------------If all three values are given to filter----------------------//
 		if (searchProjectname != '' && searchlocation != '' && searchaddress != '') {
 			projectTemp.map((val) => {
 				if (
@@ -134,7 +142,7 @@ function ManageProject(props) {
 			});
 			setProject(res);
 			setItemOffset(0);
-			//--------------FOR WHEN TWO VALUES ARE GIVEN--------------------//
+			//--------------If two values are given to filter-------------------//
 		} else if (searchlocation != '' && searchaddress != '') {
 			projectTemp.map((val) => {
 				if (
@@ -167,7 +175,7 @@ function ManageProject(props) {
 			setProject(res);
 			setItemOffset(0);
 		} else if (searchProjectname != '') {
-			// ----------FOR SINGLE VALUES---------------//
+			// ----------If single value is given to filter---------------//
 			projectTemp.map((val) => {
 				if (
 					val['project_name'] != undefined &&
@@ -208,6 +216,7 @@ function ManageProject(props) {
 			setItemOffset(0);
 		}
 	}
+	// ---------------------Search reset------------------- //
 	function handleReset() {
 		setSearch(false);
 		setProject(projectTemp);
@@ -215,17 +224,14 @@ function ManageProject(props) {
 		setSearchlocation('');
 		setSearchaddress('');
 	}
-	let backToDashboard = () => {
-		window.location.assign(
-			process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'dashboard?access=administrator&check_logged_in=1'
-		);
-	};
 
 	return (
 		<div className="container-fluid p-0">
 			<form>
 				<div className="row m-0 ">
 					<div className="form-check p-0 mt-2  ">
+						{/* ----------------Search functionality--------------------------------*/}
+
 						<div className="row d-flex mt-3">
 							<div className="col-sm-3">
 								<input
@@ -263,12 +269,17 @@ function ManageProject(props) {
 								<div className="col-md-1">
 									<button
 										type="button"
+										data-bs-toggle="tooltip"
+										data-bs-placement="top"
+										title="Search"
 										className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
 										onClick={() => handleSearch()}
 									>
 										SEARCH
 									</button>
 								</div>
+								{/*---------------- Reset functionality---------------------- */}
+
 								<div className="col-md-1">
 									{(searchProjectname != '' ||
 										searchlocation != '' ||
@@ -276,6 +287,9 @@ function ManageProject(props) {
 										search === true) && (
 										<button
 											type="button"
+											data-bs-toggle="tooltip"
+											data-bs-placement="top"
+											title="Reset"
 											className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
 											onClick={() => handleReset()}
 										>
@@ -285,6 +299,7 @@ function ManageProject(props) {
 								</div>
 							</div>
 						</div>
+						{/* ---------------------Manage project table-------------------------*/}
 
 						<div className="form-check p-0 mt-2 text-center max-height-420 tab-pane fade show ">
 							<table className="table   mt-3 mb-3 text-center">
@@ -307,27 +322,36 @@ function ManageProject(props) {
 												<td className="poppinns-regular-thin">
 													{result.address.replace(',', '').length > 7 ? result.address : '-'}
 												</td>
+												{/*-------------------------Edit projects------------------------- */}
+
 												<td className="d-flex justify-content-center">
 													<Link href={'/editproject/' + result.id} className="">
-														<a type="button">
+														<a
+															type="button"
+															data-toggle="tooltip"
+															title="Edit project"
+															// data-bs-placement="top"
+														>
 															<MdEdit className="mt-2 ms-3 color-skyblue" />
 														</a>
 													</Link>
-													{/* <MdEdit type="button" className="mt-2 ms-3 " onClick={showPopup} /> */}
+													{/*-------------------- Planning update----------------------- */}
 
-													{/* <span onClick={() => showDeletePopup(result.id)} type="button">
-														<MdDelete className="mt-2 ms-3 color-skyblue " />
-													</span> */}
 													<span>
-														<Link href="/manage-planning/weekly">
-															<a type="button">
-																<GrUpdate className="mt-2 ms-3 color-skyblue " />
-															</a>
-														</Link>
+														<a
+															type="button"
+															data-toggle="tooltip"
+															title="Update planning"
+															onClick={() =>
+																router.push('/planning/add/' + result.p_unique_key)}
+														>
+															<GrUpdate className="mt-2 ms-3 color-skyblue " />
+														</a>
 													</span>
 												</td>
 											</tr>
 										))}
+									{/*----------------------------No records found-------------------------- */}
 									{project.length == 0 && (
 										<tr>
 											<td colSpan={4} className="text-center">
@@ -340,6 +364,8 @@ function ManageProject(props) {
 						</div>
 					</div>
 				</div>
+
+				{/*-------------------------- Pagination---------------------------*/}
 				<div className="row my-4">
 					{project.length >= itemsPerPage && (
 						<ReactPaginate
@@ -358,6 +384,7 @@ function ManageProject(props) {
 						/>
 					)}
 				</div>
+				{/*---------------Back to dashobard redirection------------------ */}
 				<div className="text-start col-md-6">
 					<button
 						type="button"
@@ -373,14 +400,15 @@ function ManageProject(props) {
 					</button>
 				</div>
 			</form>
-			{showdeletepopup == true && (
+			{/* Delete popup */}
+			{/* {showdeletepopup == true && (
 				<Popup
 					display={'block'}
 					popupActionDeleteNo={closeDeletePopup}
 					popupActionDeleteYes={deleteproject}
 					body={'Are you sure you want to delete this project?'}
 				/>
-			)}
+			)} */}
 		</div>
 	);
 }
