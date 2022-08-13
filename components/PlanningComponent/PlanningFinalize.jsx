@@ -16,6 +16,7 @@ const PlanningFinalize = () => {
 	const [ activeWeek, setActiveWeek ] = useState([]);
 	const [ finalized, setFinalized ] = useState('');
 	const [ errorFinalize, setErrorFinalize ] = useState('');
+	const [weekCount, setWeekCount] = useState(0);
 
 	useEffect(
 		() => {
@@ -35,6 +36,23 @@ const PlanningFinalize = () => {
 		},
 		[ router.isReady ]
 	);
+
+	let updateActiveWeek = (type) => {
+		var count = 0;
+		
+		if(weekCount >=0 && weekCount < week.length-1){
+			if(type == 'next'){
+				count = weekCount+1;
+			}
+			else{
+				count = weekCount > 0 ?weekCount-1:weekCount;
+
+			}
+		}
+	setWeekCount(count);
+	setActiveWeek(week[count]);
+
+	}
 	let submit = () => {
 		if (finalized === '') {
 			setErrorFinalize('This field is required.');
@@ -85,8 +103,8 @@ const PlanningFinalize = () => {
 				</div>
 				<div className="mt-2 col-md-12">
 					<p className=" bitter-italic-normal-medium-22 col-md-12 text-center table-title-bg py-3">
-						<FaLessThan className="less-grather mx-4" /> Current week{' '}
-						<FaGreaterThan className="less-grather mx-4" />{' '}
+						<FaLessThan className="less-grather mx-4" onClick={()=>{updateActiveWeek('previous')}}/> <span>Current week</span>{' '}
+						<FaGreaterThan className="less-grather mx-4" onClick={()=>{updateActiveWeek('next')}}/>{' '}
 					</p>
 					<table className="table border table-border-gray ">
 						<thead className="">
