@@ -205,14 +205,22 @@ const ManagePc = (props) => {
 							<span className="pe-2">
 								<Link href={'/editpc/' + val.pc_unique_key}>
 									<a className="text-dark h5">
-										<MdEdit className="mx-2 color-skyblue " />
+										<MdEdit
+											className="mx-2 color-skyblue "
+											data-toggle="tooltip"
+											title="Edit paritair comite"
+										/>
 									</a>
 								</Link>
 							</span>
 							<span className="py-2">
 								<Link href={'/viewpc/' + val.pc_unique_key}>
 									<a className="text-dark h5">
-										<MdRemoveRedEye className="mx-2 color-skyblue " />
+										<MdRemoveRedEye
+											className="mx-2 color-skyblue"
+											data-toggle="tooltip"
+											title="View paritair comite"
+										/>
 									</a>
 								</Link>
 							</span>

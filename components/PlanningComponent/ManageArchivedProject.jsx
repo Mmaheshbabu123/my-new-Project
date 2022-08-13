@@ -1,28 +1,39 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { fetchallproject, updateProject, fetchallarchivedprojects } from '../../Services/ApiEndPoints';
+import { fetchallproject, fetchallarchivedprojects } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-import Popup from './ProjectArchivePopup';
 import ReactPaginate from 'react-paginate';
-import Link from 'node_modules/next/link';
 
 function ManageArchivedProject(props) {
-	const [ updated, setUpdated ] = useState(0);
+	/**
+     * Initialise search filter 
+     */
 	const [ searchArchivedProjectname, setSearchArchivedProjectname ] = useState('');
 	const [ searchArchivedlocation, setSearchArchivedlocation ] = useState('');
 	const [ searchArchivedaddress, setSearchArchivedaddress ] = useState('');
+
+	/**
+	 * Project data assigned variables
+	 */
+	const [ updated, setUpdated ] = useState(0);
 	const [ archivedproject, setArchivedproject ] = useState([]);
 	const [ archivedprojectTemp, setArchivedprojectTemp ] = useState([]);
 	const [ archivedprojectTemp2, setarchivedprojectTemp2 ] = useState([]);
+
+	/**
+	 * Reset button hide and show depending on the search values
+	 */
 	const [ search, setSearch ] = useState(false);
 
-	const [ archivedprojectid, setArchivedprojectid ] = useState('');
-	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 	/**
-	 * FETCHING ARCHIVED PROJECT
+	 * Pagination related variables
+	 */
+	const [ itemsPerPage, setItemsPerPage ] = useState(8);
+
+	/**
+	 * Fetch archived project using useEffect
 	 */
 	useEffect(
 		() => {
@@ -41,6 +52,7 @@ function ManageArchivedProject(props) {
 		[ updated ]
 	);
 	//------------------- Pagination code -------------------------//
+
 	const [ pageCount, setPageCount ] = useState(0);
 	const [ itemOffset, setItemOffset ] = useState(0);
 
@@ -59,11 +71,13 @@ function ManageArchivedProject(props) {
 	};
 	//------------------- Pagination code -------------------------//
 
-	// ----------------------Search --------------------------------//
+	// ------------------------- Search functionality----------------------------//
+
 	function handleSearch() {
 		setSearch(true);
 		var res = [];
-		//-------------------------IF ALL THREE VALUES ARE GIVEN----------------------//
+		//-------------------------If all three values are given to filter----------------------//
+
 		if (searchArchivedProjectname != '' && searchArchivedlocation != '' && searchArchivedaddress != '') {
 			archivedprojectTemp.map((val) => {
 				if (
@@ -86,7 +100,8 @@ function ManageArchivedProject(props) {
 			setArchivedproject(res);
 			setItemOffset(0);
 		} else if (searchArchivedProjectname != '' && searchArchivedlocation != '') {
-			//--------------FOR WHEN TWO VALUES ARE GIVEN--------------------//
+			//--------------------If two values are given to filter---------------------//
+
 			archivedprojectTemp.map((val) => {
 				if (
 					val['project_name'] != undefined &&
@@ -144,7 +159,8 @@ function ManageArchivedProject(props) {
 			setArchivedproject(res);
 			setItemOffset(0);
 		} else if (searchArchivedProjectname != '') {
-			// ----------FOR SINGLE VALUES---------------//
+			//------- ----------If single value is given to filter-------------------------//
+
 			archivedprojectTemp.map((val) => {
 				if (
 					val['project_name'] != undefined &&
@@ -185,6 +201,9 @@ function ManageArchivedProject(props) {
 			setItemOffset(0);
 		}
 	}
+
+	// ---------------------Search reset------------------- //
+
 	function handleReset() {
 		setArchivedproject(archivedprojectTemp);
 		setSearch(false);
@@ -202,6 +221,8 @@ function ManageArchivedProject(props) {
 			<form>
 				<div className="row m-0 ">
 					<div className="form-check p-0 mt-2  ">
+						{/* ----------------Search functionality--------------------------------*/}
+
 						<div className="row d-flex mt-3">
 							<div className="col-sm-3">
 								<input
@@ -243,6 +264,8 @@ function ManageArchivedProject(props) {
 								>
 									SEARCH
 								</button>
+								{/*---------------- Reset functionality---------------------- */}
+
 								{(searchArchivedProjectname != '' ||
 									searchArchivedlocation != '' ||
 									searchArchivedaddress != '' ||
@@ -259,6 +282,8 @@ function ManageArchivedProject(props) {
 						</div>
 
 						<div className="form-check p-0 mt-2 text-center max-height-420 tab-pane fade show ">
+							{/* ---------------------Manage project table-------------------------*/}
+
 							<table className="table   mt-3 mb-3 text-center">
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
@@ -281,6 +306,7 @@ function ManageArchivedProject(props) {
 											</tr>
 										))}
 
+									{/*----------------------------No records found-------------------------- */}
 									{archivedproject.length == 0 && (
 										<tr>
 											<td colSpan={4} className="text-center">
@@ -293,6 +319,7 @@ function ManageArchivedProject(props) {
 						</div>
 					</div>
 				</div>
+				{/*-------------------------- Pagination---------------------------*/}
 				<div className="row my-4">
 					{archivedproject.length >= itemsPerPage && (
 						<ReactPaginate
@@ -311,6 +338,7 @@ function ManageArchivedProject(props) {
 						/>
 					)}
 				</div>
+				{/*---------------Back to dashobard redirection------------------ */}
 				<div className="text-start col-md-6">
 					<button
 						type="button"
