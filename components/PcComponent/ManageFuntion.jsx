@@ -468,11 +468,19 @@ const ManageFunction = () => {
 													className=""
 												>
 													<a className="">
-														<MdEdit className="mt-2 ms-3 color-skyblue" />
+														<MdEdit
+															className="mt-2 ms-3 color-skyblue"
+															data-toggle="tooltip"
+															title="Edit function"
+														/>
 													</a>
 												</Link>
 												<span onClick={() => showPopup(result.funcn_id)} type="button">
-													<MdDelete className="mt-2 ms-3 color-skyblue" />
+													<MdDelete
+														className="mt-2 ms-3 color-skyblue"
+														data-toggle="tooltip"
+														title="Delete function"
+													/>
 												</span>
 											</td>
 										</tr>

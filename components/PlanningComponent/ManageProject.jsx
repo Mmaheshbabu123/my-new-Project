@@ -269,9 +269,6 @@ function ManageProject(props) {
 								<div className="col-md-1">
 									<button
 										type="button"
-										data-bs-toggle="tooltip"
-										data-bs-placement="top"
-										title="Search"
 										className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
 										onClick={() => handleSearch()}
 									>
@@ -287,9 +284,6 @@ function ManageProject(props) {
 										search === true) && (
 										<button
 											type="button"
-											data-bs-toggle="tooltip"
-											data-bs-placement="top"
-											title="Reset"
 											className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
 											onClick={() => handleReset()}
 										>
@@ -326,13 +320,12 @@ function ManageProject(props) {
 
 												<td className="d-flex justify-content-center">
 													<Link href={'/editproject/' + result.id} className="">
-														<a
-															type="button"
-															data-toggle="tooltip"
-															title="Edit project"
-															// data-bs-placement="top"
-														>
-															<MdEdit className="mt-2 ms-3 color-skyblue" />
+														<a type="button">
+															<MdEdit
+																className="mt-2 ms-3 color-skyblue"
+																data-toggle="tooltip"
+																title="Edit project"
+															/>
 														</a>
 													</Link>
 													{/*-------------------- Planning update----------------------- */}
@@ -340,12 +333,14 @@ function ManageProject(props) {
 													<span>
 														<a
 															type="button"
-															data-toggle="tooltip"
-															title="Update planning"
 															onClick={() =>
 																router.push('/planning/add/' + result.p_unique_key)}
 														>
-															<GrUpdate className="mt-2 ms-3 color-skyblue " />
+															<GrUpdate
+																className="mt-2 ms-3 color-skyblue "
+																data-toggle="tooltip"
+																title="Update planning"
+															/>
 														</a>
 													</span>
 												</td>

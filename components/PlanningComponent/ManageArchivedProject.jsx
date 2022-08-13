@@ -259,9 +259,6 @@ function ManageArchivedProject(props) {
 							<div className="col-sm-3">
 								<button
 									type="button"
-									data-bs-toggle="tooltip"
-									data-bs-placement="top"
-									title="Search"
 									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
 									onClick={() => handleSearch()}
 								>
@@ -275,9 +272,6 @@ function ManageArchivedProject(props) {
 									search === true) && (
 									<button
 										type="button"
-										data-bs-toggle="tooltip"
-										data-bs-placement="top"
-										title="Reset"
 										className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
 										onClick={() => handleReset()}
 									>
