@@ -23,6 +23,7 @@ const ManagePc = (props) => {
 	const [ searchPcnum, setSearchPcnum ] = useState('');
 	const [ searchPcname, setSearchPcname ] = useState('');
 	const [ itemsPerPage, setItemsPerPage ] = useState(8);
+	const [ count, setCount ] = useState(0);
 	const [ search, setSearch ] = useState(false);
 
 	useEffect(() => {
@@ -111,6 +112,7 @@ const ManagePc = (props) => {
 
 	const handlePageClick = (event) => {
 		const newOffset = (event.selected * itemsPerPage) % data.length;
+		setCount(newOffset);
 		setItemOffset(newOffset);
 	};
 	//------------------- Pagination code -------------------------//
@@ -187,7 +189,7 @@ const ManagePc = (props) => {
 					<div className={`col-md-10 d-flex`}>
 						<div className={`row py-2   ps-4 w-100 poppins-regular-16px ${styles.sectioncolor}`}>
 							<div className="col-md-1 align-items-center d-flex poppins-regular-16px">
-								<span className={`py-2 poppins-regular-16px ${styles.pcid} fw-bold`}>{key + 1}.</span>
+								<span className={`py-2 poppins-regular-16px ${styles.pcid} fw-bold`}>{count+key+1}.</span>
 							</div>
 
 							<div className="row col-md-10 poppins-regular-16px">
@@ -233,7 +235,7 @@ const ManagePc = (props) => {
 					<div className="text-center poppins-regular-16px"> No paritair comitee </div>
 				</div>
 			)}
-			{data.length >= itemsPerPage && (
+			{data.length > itemsPerPage && (
 				<div className="row">
 					<ReactPaginate
 						breakLabel="..."

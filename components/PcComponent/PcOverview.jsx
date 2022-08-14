@@ -13,14 +13,24 @@ import SalaryBenefits from './SalaryBenifits';
 
 import {
 	FaEdit,
-	FaRegPlusSquare,
+	FaPlusSquare,
 	FaAngleUp,
 	FaAngleDown,
 	FaArrowCircleRight,
 	FaRedo,
 	FaRegMinusSquare,
-	FaMinusSquare
+	FaMinusSquare,
 } from 'react-icons/fa';
+
+// import {
+// 	BsFillPlusSquareFill,
+// } from 'react-icons/bs';
+
+import {
+	AiFillPlusSquare,
+	AiFillMinusSquare
+} from 'react-icons/ai';
+
 import { useRouter } from 'next/router';
 import CompanyOptions from 'pages/manage-planning/select';
 
@@ -196,12 +206,12 @@ const PcOverview = (params) => {
 											> */}
 											<span>
 												{pc['collapseOpen'] == true || pc['childObj'] == undefined? (
-													<FaMinusSquare className="sky-border-white"
+													<AiFillMinusSquare className="sky-border-white"
 														onClick={() =>
 															updateCollapseSec(1, pc['id'], pc['collapseOpen'])}
 													/>
 												) : (
-													<FaRegPlusSquare className="sky-border-white"
+													<AiFillPlusSquare className="sky-border-white"
 														onClick={() =>
 															updateCollapseSec(1, pc['id'], pc['collapseOpen'])}
 													/>
@@ -256,7 +266,7 @@ const PcOverview = (params) => {
 																			{pc['childObj'] && console.log(pc['childObj'])}
 																			{pc['childObj'][val]['collapseOpen'] ==
 																			true|| pc['childObj'][val]['childObj'] == undefined ? (
-																				<FaMinusSquare className="sky-border-white"
+																				<AiFillMinusSquare className="sky-border-white"
 																					onClick={(prev) =>
 																						updateCollapseSec(
 																							2,
@@ -265,7 +275,7 @@ const PcOverview = (params) => {
 																						)}
 																				/>
 																			) : (
-																				<FaRegPlusSquare className="sky-border-white"
+																				<AiFillPlusSquare className="sky-border-white"
 																					onClick={() =>updateCollapseSec(2,val,pc['childObj'][val]['collapseOpen'])}
 																				/>
 																			)}
@@ -351,7 +361,7 @@ const PcOverview = (params) => {
 															<li className="list-inline-item section-plus-icon align-top mrg-lf-rt fs-4  ">
 																{console.log(pc['childObj'][val]['childObj'])}
 																{pc['childObj'][val]['collapseOpen'] == true || pc['childObj'][val]['childObj'] == undefined ? (
-																	<FaMinusSquare
+																	<AiFillMinusSquare
 																	className="sky-border-white"
 																		onClick={() =>
 																			updateCollapseSec(
@@ -361,7 +371,7 @@ const PcOverview = (params) => {
 																			)}
 																	/>
 																) : (
-																	<FaRegPlusSquare
+																	<AiFillPlusSquare
 																		onClick={() =>
 																			updateCollapseSec(
 																				2,
