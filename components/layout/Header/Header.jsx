@@ -23,7 +23,9 @@ function Header() {
 					<div className="d-flex row">
 						<div className="col-md-4">
 							<a className="navbar-brand" href="">
-								<img style={{ width: '250px' }} src="/logo.svg" className="mt-2" />
+								<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL}>
+									<img style={{ width: '250px' }} src="/logo.svg" className="mt-2" />
+								</Link>
 							</a>
 						</div>
 
