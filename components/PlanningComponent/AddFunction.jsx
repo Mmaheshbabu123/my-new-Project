@@ -237,7 +237,7 @@ const AddFunction = () => {
 				object[key].funid = index != null ? Number(funcid) : funcid;
 				object[key].salary = null;
 				object[key].warning = '';
-				object[index].salaryerror = '';
+				object[key].salaryerror = '';
 				funcid == 'drop' ? (object[key].function_salary = null) : '';
 			});
 			setEmployeeObject(object);
