@@ -274,27 +274,27 @@ function AddPc(props) {
 		var max_time = res.max_work_timings.replaceAll(' ', '');
 		var buffer_timings = res.buffer_timings.replaceAll(' ', '');
 		//check if required fields are empty
-		error1['pc_name'] = ValidationService.emptyValidationMethod(res.pc_name);
-		error1['pc_number'] = ValidationService.emptyValidationMethod(res.pc_number);
-		error1['min_work_timings'] = ValidationService.emptyValidationMethod(min_time);
-		error1['max_work_timings'] = ValidationService.emptyValidationMethod(max_time);
-		error1['buffer_timings'] = ValidationService.emptyValidationMethod(buffer_timings);
+		error1['pc_name'] = ValidationService.emptyValidationMethod(res.pc_name.trim());
+		error1['pc_number'] = ValidationService.emptyValidationMethod(res.pc_number.trim());
+		error1['min_work_timings'] = ValidationService.emptyValidationMethod(min_time.trim());
+		error1['max_work_timings'] = ValidationService.emptyValidationMethod(max_time.trim());
+		error1['buffer_timings'] = ValidationService.emptyValidationMethod(buffer_timings.trim());
 
 		//check if fields are valid
 		error1['pc_number'] =
-			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number) : error1['pc_number'];
+			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number.trim()) : error1['pc_number'];
 
 		error1['min_work_timings'] =
 			error1['min_work_timings'] == ''
-				? ValidationService.hoursperdayValidationMethod(min_time)
+				? ValidationService.hoursperdayValidationMethod(min_time.trim())
 				: error1['min_work_timings'];
 		error1['max_work_timings'] =
 			error1['max_work_timings'] == ''
-				? ValidationService.hoursperdayValidationMethod(max_time)
+				? ValidationService.hoursperdayValidationMethod(max_time.trim())
 				: error1['max_work_timings'];
 		error1['buffer_timings'] =
 			error1['buffer_timings'] == ''
-				? ValidationService.hoursperdayValidationMethod(buffer_timings)
+				? ValidationService.hoursperdayValidationMethod(buffer_timings.trim())
 				: error1['buffer_timings'];
 		// error1['pc_name'] =
 		// 	error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
@@ -305,14 +305,14 @@ function AddPc(props) {
 
 		if (error1['min_work_timings'] == '' && error1['max_work_timings'] == '') {
 			error1['max_work_timings'] =
-				parseFloat(min_time) > parseFloat(max_time)
+				parseFloat(min_time.trim()) > parseFloat(max_time.trim())
 					? 'Maximum work timing cannot be lesser than minimum work timing.'
 					: '';
 		}
 		error1['pc_alias_name'] =
 			res.pc_alias_name != '' &&
 			res.pc_alias_name != null &&
-			res.pc_name.replaceAll(' ', '').toLowerCase() == res.pc_alias_name.replaceAll(' ', '').toLowerCase()
+			res.pc_name.replaceAll(' ', '').toLowerCase().trim() == res.pc_alias_name.replaceAll(' ', '').toLowerCase().trim()
 				? 'Alias name cannot be same as paritair committe name.'
 				: '';
 		//seterror messages
