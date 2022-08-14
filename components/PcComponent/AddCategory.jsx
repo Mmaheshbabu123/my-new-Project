@@ -138,16 +138,16 @@ function AddCategory(props) {
 
 	let validate = () => {
 		var error = [];
-		error['error_category_name'] = ValidationService.emptyValidationMethod(data.category_name);
+		error['error_category_name'] = ValidationService.emptyValidationMethod(data.category_name.trim());
 			// ValidationService.emptyValidationMethod(data.category_name) == ''
 			// 	? ValidationService.nameValidationMethod(data.category_name) == ''
 			// 		? ''
 			// 		: ValidationService.nameValidationMethod(data.category_name)
 			// 	: ValidationService.emptyValidationMethod(data.category_name);
 		error['error_min_salary'] =
-			ValidationService.emptyValidationMethod(data.min_salary) == ''
-				? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
-				: ValidationService.emptyValidationMethod(data.min_salary);
+			ValidationService.emptyValidationMethod(data.min_salary.trim()) == ''
+				? ValidationService.minSalaryValidationMethod(data.min_salary.trim()) == '' ? '' : 'This field is invalid.'
+				: ValidationService.emptyValidationMethod(data.min_salary.trim());
 
 		if (error['error_category_name'] == '') {
 			if(typeof props.categorylist == 'object'){
@@ -181,7 +181,7 @@ function AddCategory(props) {
 			props.categorylist.map((element) => {
 				if (element.type == '2' && element.id == id){
 					element.childObj && element.childObj.map((value)=>{
-						if(parseFloat(data.min_salary.replace(',', '.')) > parseFloat(value.min_salary.replace(',', '.'))){
+						if(parseFloat(data.min_salary.replace(',', '.').trim()) > parseFloat(value.min_salary.replace(',', '.').trim())){
 							error['error_min_salary'] = 'Category minimum salary cannot be greater than function minimum salary.';
 						}
 					})
