@@ -23,7 +23,6 @@ function WeeklyPlanning(props) {
 	const [ edit, setEdit ] = useState(false);
 	const [ editDate, setEditDate ] = useState([]);
 
-
 	const [ styleEdit, setStyleEdit ] = useState('col-md-12');
 
 	useEffect(() => {
@@ -83,7 +82,7 @@ function WeeklyPlanning(props) {
 		setEdit(true);
 		setStyleEdit('col-md-9');
 		setEditDate(data);
-		window.scrollTo(0, 0)
+		window.scrollTo(0, 0);
 	};
 	return (
 		<div className="container-fluid p-0 m-0">
@@ -170,115 +169,131 @@ function WeeklyPlanning(props) {
 				</div>
 				<div className={'mt-2 '}>
 					{planning && Object.keys(planning).length > 0 ? (
-						<div className='row'>
-						<div className={styleEdit}>
-							<p className={' bitter-italic-normal-medium-22 text-center table-title-bg py-3 '}>
-								<FaLessThan className="less-grather mx-4" /> Current week{' '}
-								<FaGreaterThan className="less-grather mx-4" />{' '}
-							</p>
-							<table className="table border table-border-gray ">
-								<thead className="">
-									{console.log(activeWeek)}
-									{activeWeek &&
-									activeWeek.length > 0 && (
-										<tr className="skyblue-bg-color">
-											<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
-												Monday<br />
-												{activeWeek.length > 0 && activeWeek[0].split('-').reverse().join('-')}
-											</th>
-											<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-												Tuesday <br />
-												{activeWeek.length > 0 && activeWeek[1].split('-').reverse().join('-')}
-											</th>
-											<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-												Wednesday <br />
-												{activeWeek.length > 0 && activeWeek[2].split('-').reverse().join('-')}
-											</th>
-											<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-												Thursday <br />
-												{activeWeek.length > 0 && activeWeek[3].split('-').reverse().join('-')}
-											</th>
-											<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-												Friday<br />
-												{activeWeek.length > 0 && activeWeek[4].split('-').reverse().join('-')}
-											</th>
-											<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
-												Saturday<br />
-												{activeWeek.length > 0 && activeWeek[5].split('-').reverse().join('-')}
-											</th>
-											<th className="  text-center  align-items-center justify-content-center lh-base">
-												Sunday<br />
-												{activeWeek.length > 0 && activeWeek[6].split('-').reverse().join('-')}
-											</th>
-										</tr>
-									)}
-								</thead>
-								<tbody>
-									{Object.keys(planning).map((value) => (
-										<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
-											{console.log(planning)}
-											{activeWeek.map((val, key) => (
-												<td className=" table-border-gray font-poppins-light" key={key}>
-													{planning[value].some((el) => el.pdate === val) ? (
-														<div>
-															{planning[value].map(
-																(val1) =>
-																	val1.pdate == val ? (
-																		<div key={val1.id}>
-																			<div className="text-right color-skyblue my-2 mt-1 text-end">
-																				<a>
-																					<MdEdit
-																						className="float-right"
-																						onClick={() => editplanning(val1)}
-																					/>
-																				</a>
-																			</div>
-																			<p className="color-skyblue pt-1">
-																				{val1.employee_name}
-																			</p>
-																			<br />
-																			<p className="poppins-regular-16px">
-																				{val1.employee_type_name}
-																			</p>
-																			<br />
-																			<p className="poppins-regular-16px">
-																				{val1.function_name}
-																			</p>
-																			<br />
-																			<p className="poppins-regular-16px">
-																				{'€ ' + val1.salary}
-																			</p>
-																			<br />
-																			<p className="poppins-regular-16px">
-																				{moment(val1.starttime).format(
-																					'HH:mm'
-																				) +
-																					' to ' +
-																					moment(val1.endtime).format(
+						<div className="row">
+							<div className={styleEdit}>
+								<p className={' bitter-italic-normal-medium-22 text-center table-title-bg py-3 '}>
+									<FaLessThan className="less-grather mx-4" /> Current week{' '}
+									<FaGreaterThan className="less-grather mx-4" />{' '}
+								</p>
+								<table className="table border table-border-gray ">
+									<thead className="">
+										{console.log(activeWeek)}
+										{activeWeek &&
+										activeWeek.length > 0 && (
+											<tr className="skyblue-bg-color">
+												<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
+													Monday<br />
+													{activeWeek.length > 0 &&
+														activeWeek[0].split('-').reverse().join('-')}
+												</th>
+												<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
+													Tuesday <br />
+													{activeWeek.length > 0 &&
+														activeWeek[1].split('-').reverse().join('-')}
+												</th>
+												<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
+													Wednesday <br />
+													{activeWeek.length > 0 &&
+														activeWeek[2].split('-').reverse().join('-')}
+												</th>
+												<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
+													Thursday <br />
+													{activeWeek.length > 0 &&
+														activeWeek[3].split('-').reverse().join('-')}
+												</th>
+												<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
+													Friday<br />
+													{activeWeek.length > 0 &&
+														activeWeek[4].split('-').reverse().join('-')}
+												</th>
+												<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
+													Saturday<br />
+													{activeWeek.length > 0 &&
+														activeWeek[5].split('-').reverse().join('-')}
+												</th>
+												<th className="  text-center  align-items-center justify-content-center lh-base">
+													Sunday<br />
+													{activeWeek.length > 0 &&
+														activeWeek[6].split('-').reverse().join('-')}
+												</th>
+											</tr>
+										)}
+									</thead>
+									<tbody>
+										{Object.keys(planning).map((value) => (
+											<tr
+												className="border-bottom table-border-gray equal-width-calc"
+												key={value}
+											>
+												{console.log(planning)}
+												{activeWeek.map((val, key) => (
+													<td className=" table-border-gray font-poppins-light" key={key}>
+														{planning[value].some((el) => el.pdate === val) ? (
+															<div>
+																{planning[value].map(
+																	(val1) =>
+																		val1.pdate == val ? (
+																			<div key={val1.id}>
+																				<div className="text-right color-skyblue my-2 mt-1 text-end">
+																					<a>
+																						<MdEdit
+																							className="float-right"
+																							data-toggle="tooltip"
+																							title="Edit plannig"
+																							onClick={() =>
+																								editplanning(val1)}
+																						/>
+																					</a>
+																				</div>
+																				<p className="color-skyblue pt-1">
+																					{val1.employee_name}
+																				</p>
+																				<br />
+																				<p className="poppins-regular-16px">
+																					{val1.employee_type_name}
+																				</p>
+																				<br />
+																				<p className="poppins-regular-16px">
+																					{val1.function_name}
+																				</p>
+																				<br />
+																				<p className="poppins-regular-16px">
+																					{'€ ' + val1.salary}
+																				</p>
+																				<br />
+																				<p className="poppins-regular-16px">
+																					{moment(val1.starttime).format(
 																						'HH:mm'
-																					)}
-																			</p>
+																					) +
+																						' to ' +
+																						moment(val1.endtime).format(
+																							'HH:mm'
+																						)}
+																				</p>
 
-																			<br />
-																		</div>
-																	) : (
-																		''
-																	)
-															)}
-														</div>
-													) : (
-														<div />
-													)}
-												</td>
-											))}
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-						
-						{edit && <div className='col-md-3'><EditEmployee data={editDate}/></div>}
+																				<br />
+																			</div>
+																		) : (
+																			''
+																		)
+																)}
+															</div>
+														) : (
+															<div />
+														)}
+													</td>
+												))}
+											</tr>
+										))}
+									</tbody>
+								</table>
+							</div>
 
+							{edit && (
+								<div className="col-md-3">
+									<EditEmployee data={editDate} />
+								</div>
+							)}
 						</div>
 					) : (
 						<div className="col-md-12 week-height align-items-center d-flex justify-content-center mb-4">
