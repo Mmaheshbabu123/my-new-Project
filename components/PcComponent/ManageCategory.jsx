@@ -298,7 +298,7 @@ const ManageCategoryComponent = () => {
 					</div>
 				</div>
 				<div className="row my-2">
-					{categories.length >= itemsPerPage && (
+					{categories.length > itemsPerPage && (
 						<ReactPaginate
 							breakLabel="..."
 							nextLabel={<AiOutlineArrowRight />}
