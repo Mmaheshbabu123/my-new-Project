@@ -6,7 +6,7 @@ import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
 import { helpers } from '../../../CooperationAgreementHelper';
 const CompanyInformation = (props) => {
   var {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_2_action, filledTabs}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
-
+  let companyId = state['defaultOptions']?.['agent_details']['company_id'];
  useEffect(()=>{
    if(!state.loadedTabs.includes(selectedTabId))
       loadData();
@@ -15,9 +15,13 @@ const CompanyInformation = (props) => {
  const loadData = async () => {
    let stateKey = `tab_${selectedTabId}`;
    let tab_2 = { ...state[stateKey] };
-   var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
-   let apiData = Object.keys(data['tab_2']).length ? data['tab_2'] : 0;
-   tab_2_action = apiData === 0 ? 1 :2;
+
+   var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId,companyId);
+   let companyObj = data['tab_2']['data']
+  // let obj2 = companyObj.map(e => [+e[0], e[1]])
+
+   let apiData = Object.keys(data['tab_2']['data']).length ? data['tab_2']['data'] : 0;
+   tab_2_action = data['tab_2']['action'] ? data['tab_2']['action'] :1;
    if(apiData) {
     tab_2 = {...apiData,...tab_2}
    }
