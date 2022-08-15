@@ -751,23 +751,31 @@ const AddFunction = () => {
 												/>
 											</span>
 											<div className="ps-2 w-95per" style={{ display: 'inline-block' }}>
-												<Select
+												<MultiSelectField
 													placeholder={<div>Function</div>}
-													isDisabled={!isThere(0, employeeobject[0]['funid'])}
 													name="employefunctionsall"
+													// id={'select_id'}
 													options={getOptions(functions.slice(3, functions.length))}
-													defaultValue={defultFunction(0, employeeobject[0]['funid'])}
+													standards={defultFunction(0, employeeobject[0]['funid'])}
+													disabled={!isThere(0, employeeobject[0]['funid'])}
+													handleChange={(obj) => {
+														updatingObjectFunction(null, obj.value);
+														updatingCommonObjectfunctionSlary(null, obj.salary);
+													}}
+													isMulti={false}
+													className="col-md-6"
+												/>
+												{/* <Select
+													// name="employefunctionsall"
+													// options={getOptions(functions.slice(3, functions.length))}
+													// defaultValue={}
 													onChange={setFunctionSelected}
 													onInputChange={() => {
 														if (functionselected != undefined) {
-															updatingObjectFunction(null, functionselected.value);
-															updatingCommonObjectfunctionSlary(
-																functionselected.value,
-																functionselected.salary
-															);
+															
 														}
 													}}
-												/>
+												/> */}
 											</div>
 											<div style={{ color: 'red' }}>{employeeobject[0]['functioniderror']}</div>
 										</div>
