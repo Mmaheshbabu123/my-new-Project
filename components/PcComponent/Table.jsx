@@ -121,12 +121,20 @@ const Table = (props) => {
 									}}
 									className="h5"
 								>
-									{props.sectype != 'pc' &&
+									{props.sectype == 'cat' &&
 									(props.type == 'addpc' || props.type == 'editpc') && (
 										<FaEdit
 											lassName="col-4C4D550F"
 											data-toggle="tooltip"
-											title="Edit paritair comite"
+											title="Edit category"
+										/>
+									)}
+									{props.sectype == 'funct' &&
+									(props.type == 'addpc' || props.type == 'editpc') && (
+										<FaEdit
+											lassName="col-4C4D550F"
+											data-toggle="tooltip"
+											title="Edit function"
 										/>
 									)}
 								</div>

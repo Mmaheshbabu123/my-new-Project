@@ -131,10 +131,10 @@ function AddFunction(props) {
 	};
 	let validate = () => {
 		var error = [];
-		error['error_function_name'] = ValidationService.emptyValidationMethod(data.function_name);
+		error['error_function_name'] = ValidationService.emptyValidationMethod(data.function_name.trim());
 		error['error_min_salary'] =
-			ValidationService.emptyValidationMethod(data.min_salary) == ''
-				? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
+			ValidationService.emptyValidationMethod(data.min_salary.trim()) == ''
+				? ValidationService.minSalaryValidationMethod(data.min_salary.trim()) == '' ? '' : 'This field is invalid.'
 				: 'This field is required.';
 
 		if (error['error_function_name'] == '') {

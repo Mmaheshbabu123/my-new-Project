@@ -6,6 +6,7 @@ import { addplanningemployee } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { Printer } from 'react-bootstrap-icons';
+import Link from 'next/link';
 
 const AddEmployee = () => {
 	const [ Data, setData ] = useState([]);
@@ -129,11 +130,13 @@ const AddEmployee = () => {
 						<button
 							type="button"
 							className="btn  btn-block px-0"
-							onClick={() => router.push('/planning/add/' + p_unique_key)}
+						
 						>
-							<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
-								BACK
-							</p>
+							<Link href={'/planning/add/' + p_unique_key}>
+								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px ">
+									BACK
+								</p>
+							</Link>
 						</button>
 					</div>
 					<div className="text-end col-md-6">
