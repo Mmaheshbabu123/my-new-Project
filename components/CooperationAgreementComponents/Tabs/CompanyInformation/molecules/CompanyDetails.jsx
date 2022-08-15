@@ -70,17 +70,16 @@ const getCompanyDetailsByvat = async() => {
        data = result.data;
       data['8'] = tab_2['8'];
       data['10']   = '1';
-      console.log(data);
       tab_2 = {...tab_2,...data}
-      console.log(tab_2)
 
-      updateTabFieldsData(tab_4,tab_2,tab_6)
+      updateTabFields(tab_4,tab_2,tab_6,element_status)
       updateStateChanges({ tab_2,tab_4});
     } )
     .catch((error) => setIntialStateObj(tab_2) );
 
 }
-const updateTabFieldsData = (tab_4,tab_2,tab_6) =>{
+const updateTabFieldsData = (tab_4,tab_2,tab_6,element_status) =>{
+  console.log(element_status)
   let defaultKeys = ['40','41','42','45','46','47'];
   defaultKeys.forEach((item)=>{
     tab_4[item] =tab_2['19'];
