@@ -362,7 +362,7 @@ function ManageProject(props) {
 
 				{/*-------------------------- Pagination---------------------------*/}
 				<div className="row my-4">
-					{project.length >= itemsPerPage && (
+					{project.length > itemsPerPage && (
 						<ReactPaginate
 							breakLabel="..."
 							nextLabel={<AiOutlineArrowRight />}

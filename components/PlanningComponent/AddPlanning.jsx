@@ -47,6 +47,7 @@ function Planning(props) {
 	const [ error_pcid, setError_pcid ] = useState('');
 
 	const [ countrylist, setCountrylist ] = useState([]);
+	const [loading,setLoading] = useState(true)
 
 	const [ data, setData ] = useState({
 		p_unique_key: '',
@@ -106,6 +107,7 @@ function Planning(props) {
 							}
 						}
 						}
+						setLoading(false)
 					})
 					.catch((error) => {
 						console.log(error);
@@ -304,6 +306,7 @@ function Planning(props) {
 	};
 	return (
 		<div className="col-md-12">
+		{loading == true? <p>Loading...</p>:<div>
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row   planning-container calc-height m-0 col-md-12">
 					<div className="col-md-12 px-0 py-3">
@@ -484,6 +487,8 @@ function Planning(props) {
 					body={'Are you sure you want to delete this project?'}
 				/>
 			)}
+			</div>
+}
 		</div>
 	);
 }

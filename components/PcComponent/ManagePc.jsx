@@ -25,6 +25,8 @@ const ManagePc = (props) => {
 	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 	const [ count, setCount ] = useState(0);
 	const [ search, setSearch ] = useState(false);
+	const [loading,setLoading] = useState(true)
+
 
 	useEffect(() => {
 		APICALL.service(getPcOverviewDetails, 'GET')
@@ -34,6 +36,7 @@ const ManagePc = (props) => {
 					setData(result.paritairecomitee);
 					setTemp(result.paritairecomitee);
 					setTemp2(result.paritairecomitee);
+					setLoading(false)
 				}
 			})
 			.catch((error) => {
@@ -119,6 +122,8 @@ const ManagePc = (props) => {
 
 	return (
 		<div className="container-fluid p-0">
+			{loading == true?<p>Loading...</p>:
+		<div>
 			<div className="row m-0">
 				{/* <h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 hover-white">Manage paritair comite</h1> */}
 				<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">
@@ -269,6 +274,8 @@ const ManagePc = (props) => {
 					</button>
 				</div>
 			</div>
+		</div>
+}
 		</div>
 	);
 };
