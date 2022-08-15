@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
 import {MdEdit, MdDelete } from 'react-icons/md';
-import {  AiOutlineUserAdd, AiOutlineUserSwitch, AiOutlineDownload } from 'react-icons/ai';
+import {  AiOutlineUserAdd, AiOutlineUserSwitch, AiOutlineDownload, AiFillFilePdf } from 'react-icons/ai';
 import { deleteCooperationAgreement, downloadSvAsPdf } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
@@ -216,7 +216,7 @@ const RequestOverviewData = (props) => {
       return(
         <div>
           <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiOutlineDownload /> </span>
+          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
           <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
@@ -228,6 +228,7 @@ const RequestOverviewData = (props) => {
             : !salesObj.approved ? <span title={'Re-assign'}  className={`span-action-icons`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span> : null
           }
           {salesObj.approved ? <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>:null}
+          {salesObj.approved ? <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>:null}
           <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )

@@ -268,12 +268,20 @@ const ManageCategoryComponent = () => {
 													className=""
 												>
 													<a>
-														<MdEdit className="mt-2 ms-3 color-skyblue " />
+														<MdEdit
+															className="mt-2 ms-3 color-skyblue "
+															data-toggle="tooltip"
+															title="Update planning"
+														/>
 													</a>
 												</Link>
 
 												<span onClick={() => showPopup(result.cat_id)} type="button">
-													<MdDelete className="mt-2 ms-3 color-skyblue " />
+													<MdDelete
+														className="mt-2 ms-3 color-skyblue "
+														data-toggle="tooltip"
+														title="Delete category"
+													/>
 												</span>
 											</td>
 										</tr>
@@ -290,7 +298,7 @@ const ManageCategoryComponent = () => {
 					</div>
 				</div>
 				<div className="row my-2">
-					{categories.length >= itemsPerPage && (
+					{categories.length > itemsPerPage && (
 						<ReactPaginate
 							breakLabel="..."
 							nextLabel={<AiOutlineArrowRight />}

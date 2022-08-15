@@ -20,10 +20,6 @@ function Addtiming(props) {
 	const [ commonDatetime, setCommonDatetime ] = useState([]);
 
 	const [ checked, setChecked ] = useState(false);
-	const [ time, setTime ] = useState('');
-	const [ error_start_time, setError_start_time ] = useState('');
-	const [ error_end_time, setError_end_time ] = useState('');
-
 	const [ error_selected_date, setError_selected_date ] = useState('');
 
 	const [ employee_planning, setEmployee_planning ] = useState([]);
@@ -149,6 +145,9 @@ function Addtiming(props) {
 				error_starttime: '',
 				error_endtime: ''
 			})
+
+		
+			// commondate = _.sortBy( commondate, 'pdate' );
 		}else{
 			var commondate2 = commondate;
 			commondate.map((data2,k2)=>{
@@ -172,6 +171,11 @@ function Addtiming(props) {
 			}
 			})
 		}
+		commondate.sort((a, b) => {
+			let da = new Date(a.pdate),
+				db = new Date(b.pdate);
+			return da - db;
+		});
 			setCommonDatetime(commondate)
 
 
@@ -201,7 +205,7 @@ function Addtiming(props) {
 					}	
 
 				})
-				setEmployee_planning(res);
+				
 			}else{
 				res[key].error_selected_date = '';
 				res[key].timings.push({
@@ -214,6 +218,12 @@ function Addtiming(props) {
 				setEmployee_planning(res);
 
 			}
+			res[key].timings.sort((a, b) => {
+				let da = new Date(a.pdate),
+					db = new Date(b.pdate);
+				return da - db;
+			});
+			setEmployee_planning(res);
 		}
 		
 	}

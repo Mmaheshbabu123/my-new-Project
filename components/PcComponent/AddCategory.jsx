@@ -46,7 +46,6 @@ function AddCategory(props) {
 			var cid = router.query.cid ? router.query.cid : '';
 			APICALL.service(storeCategoryDetails, 'POST', data)
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
 						if (cid != null && cid != undefined && cid != '') {
 							router.push('/manage-category');
@@ -67,7 +66,6 @@ function AddCategory(props) {
 			setDisableSave(true);
 			APICALL.service(catUpdate, 'POST', data)
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
 						if (cid != null && cid != undefined && cid != '') {
 							router.push('/manage-category');
@@ -96,7 +94,6 @@ function AddCategory(props) {
 			if (id != '') {
 				APICALL.service(getCat + id, 'GET')
 					.then((result) => {
-						console.log(result);
 						if (result.data.length > 0) {
 							setData(result.data[0]);
 						}
@@ -141,19 +138,18 @@ function AddCategory(props) {
 
 	let validate = () => {
 		var error = [];
-		error['error_category_name'] = ValidationService.emptyValidationMethod(data.category_name);
+		error['error_category_name'] = ValidationService.emptyValidationMethod(data.category_name.trim());
 			// ValidationService.emptyValidationMethod(data.category_name) == ''
 			// 	? ValidationService.nameValidationMethod(data.category_name) == ''
 			// 		? ''
 			// 		: ValidationService.nameValidationMethod(data.category_name)
 			// 	: ValidationService.emptyValidationMethod(data.category_name);
 		error['error_min_salary'] =
-			ValidationService.emptyValidationMethod(data.min_salary) == ''
-				? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
-				: ValidationService.emptyValidationMethod(data.min_salary);
+			ValidationService.emptyValidationMethod(data.min_salary.trim()) == ''
+				? ValidationService.minSalaryValidationMethod(data.min_salary.trim()) == '' ? '' : 'This field is invalid.'
+				: ValidationService.emptyValidationMethod(data.min_salary.trim());
 
 		if (error['error_category_name'] == '') {
-			console.log(props.categorylist);
 			if(typeof props.categorylist == 'object'){
 			Object.keys(props.categorylist).map((element) => {
 				if (props.categorylist[element].type == '2' && props.categorylist[element].id != id && data.category_name.replaceAll(' ','').toLowerCase() == props.categorylist[element].category_name.replaceAll(' ','').toLowerCase()) {
@@ -170,15 +166,24 @@ function AddCategory(props) {
 		}
 
 		if (error['error_min_salary'] == '') {
-			console.log(data);
-			console.log(props.categorylist);
+			if(typeof props.categorylist == 'object'){
+				Object.keys(props.categorylist).map((element) => {
+					if (props.categorylist[element].type == '2' && props.categorylist[element].id == id){
+						props.categorylist[element].childObj && props.categorylist[element].childObj.map((value)=>{
+							if(parseFloat(data.min_salary.replace(',', '.')) > parseFloat(value.min_salary.replace(',', '.'))){
+								error['error_min_salary'] = 'Category minimum salary cannot be greater than function minimum salary.';
+							}
+						})
+					}
+
+				})
+			}else{
 			props.categorylist.map((element) => {
 				if (element.type == '2' && element.id == id){
 					element.childObj && element.childObj.map((value)=>{
-						if(parseFloat(data.min_salary.replace(',', '.')) > parseFloat(value.min_salary.replace(',', '.'))){
+						if(parseFloat(data.min_salary.replace(',', '.').trim()) > parseFloat(value.min_salary.replace(',', '.').trim())){
 							error['error_min_salary'] = 'Category minimum salary cannot be greater than function minimum salary.';
 						}
-						console.log(value)
 					})
 				}
 			// if(typeof props.categorylist == 'object'){
@@ -188,6 +193,7 @@ function AddCategory(props) {
 			// 	}
 			// });
 		})
+	}
 	}
 		setError_category_name(error['error_category_name']);
 		setError_min_salary(error['error_min_salary']);
@@ -239,7 +245,7 @@ function AddCategory(props) {
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
-						{(router.query.cid) && (
+						{/* {(router.query.cid) && (
 							<Link href={'/manage-category'}>
 								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
 									BACK
@@ -253,7 +259,7 @@ function AddCategory(props) {
 									BACK
 								</a>
 							</Link>
-						)}
+						)} */}
 
 					</div>
 					<div className="text-end col-md-6">

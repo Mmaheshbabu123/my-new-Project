@@ -414,11 +414,21 @@ function Planning(props) {
 											className="form-control"
 											disabled
 										/>
-										<span className='edit-del-planning'>
-										<MdEdit type="button" className="mt-2 ms-3 size-edit color-skyblue" onClick={showPopup} />
-										<span onClick={() => showDeletePopup(project.id)} type="button">
-											<MdDelete className="mt-2 ms-3 color-skyblue size-del " />
-										</span>
+										<span className="edit-del-planning">
+											<MdEdit
+												type="button"
+												className="mt-2 ms-3 size-edit color-skyblue"
+												onClick={showPopup}
+												data-toggle="tooltip"
+												title="Edit project"
+											/>
+											<span onClick={() => showDeletePopup(project.id)} type="button">
+												<MdDelete
+													className="mt-2 ms-3 color-skyblue size-del "
+													data-toggle="tooltip"
+													title="Delete project"
+												/>
+											</span>
 										</span>
 									</div>
 								</div>

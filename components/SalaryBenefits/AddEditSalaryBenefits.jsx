@@ -41,8 +41,8 @@ const AddEditSalaryBenefits = (props) => {
     const addItemAndUpdateIndex = (stateObj) => {
         let totalRows = stateObj['newItems'].length > 0 ?  stateObj['newItems'] : state.rows;
 
-      if (stateObj['name'].length) {
-        let duplicates = totalRows.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase().trim() === state.name.toLowerCase().trim()))
+      if (stateObj['name'].replaceAll(' ', '').length) {
+        let duplicates = totalRows.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase().replaceAll(' ', '') === state.name.toLowerCase().replaceAll(' ', '')))
         if(duplicates.length) {
             stateObj['uniqueError'] = true;
             stateObj['duplicates'] = duplicates.map(obj => obj.name);

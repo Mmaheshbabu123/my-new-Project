@@ -286,7 +286,7 @@ function AddFunction(props) {
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
-						{(router.query.fid ) && (
+						{/* {(router.query.fid ) && (
 							<Link href={'/manage-function'}>
 								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
 									BACK
@@ -299,7 +299,7 @@ function AddFunction(props) {
 									BACK
 								</a>
 							</Link>
-						)}
+						)} */}
 					</div>
 					<div className="text-end col-md-6">
 						<button
