@@ -93,19 +93,19 @@ function Planning(props) {
 						setCompany(result.data[0]);
 						setLocation(result.data[1]);
 						setCostcenter(result.data[2]);
-						setUniquekey(result.data[0].p_unique_key);
+						// setUniquekey(result.data[0].p_unique_key);
 
-						// if (data.id == '') {
+						if (id == '') {
 						if (result.data[0].length == 1) {
-							setCompanyid(result.data[0].nid);
+							setCompanyid(result.data[0][0].nid);
 							if (result.data[1].length == 1) {
-								setLocationid(result.data[1].value);
+								setLocationid(result.data[1][0].value);
 								if (result.data[2].length == 1) {
-									setCostcenterid(result.data[2].value);
+									setCostcenterid(result.data[2][0].value);
 								}
 							}
 						}
-						// }
+						}
 					})
 					.catch((error) => {
 						console.log(error);
@@ -245,6 +245,8 @@ function Planning(props) {
 	};
 
 	let updateLocation = (comp_id) => {
+		setCompanyid(comp_id);
+
 		let counter = 0;
 		location.map((loc) => {
 			if (loc.comp_id == comp_id) counter++;
@@ -334,7 +336,6 @@ function Planning(props) {
 									className="form-select mb-2 mt-2 poppins-regular-16px rounded-0"
 									placeholder="select company"
 									onChange={(e) => {
-										setCompanyid(e.target.value);
 										updateLocation(e.target.value);
 									}}
 								>
