@@ -86,11 +86,10 @@ function WeeklyPlanning(props) {
 		window.scrollTo(0, 0);
 	};
 	let updateParent = () => {
-		setEdit(false);
+		
 		setStyleEdit('col-md-12');
 		setEditDate([]);
-		setShowview(false);
-		setShowview(true);
+		setEdit(false);
 
 
 
@@ -300,7 +299,7 @@ function WeeklyPlanning(props) {
 											</tr>
 										)):company != ''?<tr>
 											<td colSpan={7} className="align-middle text-center" style={{height:'5rem'}}>
-											No planning
+											No planning for this week.
 						</td></tr>:<tr>
 											<td colSpan={7} className="align-middle text-center" style={{height:'5rem'}}>						
 							Select company and location to view planning.
