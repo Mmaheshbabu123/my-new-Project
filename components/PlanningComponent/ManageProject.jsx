@@ -332,7 +332,7 @@ function ManageProject(props) {
 													</Link>
 													{/*-------------------- Planning update----------------------- */}
 
-													<span>
+													<span className="ms-2 ">
 														<a
 															type="button"
 															onClick={() =>
@@ -341,6 +341,7 @@ function ManageProject(props) {
 															<Image
 																src={UpdatePlanningIcon}
 																// src={Updateplanning}
+
 																alt="update planning"
 																data-toggle="tooltip"
 																title="Update planning"
