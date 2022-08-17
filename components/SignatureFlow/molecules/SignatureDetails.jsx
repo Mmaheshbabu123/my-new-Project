@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import SignatureField from '@/atoms/SignatureField';
 import { confirmAlert } from 'react-confirm-alert';
 
-const SignatureDetails = ({ state, setState, submitSignData, eraseSignature }) => {
+const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fromSvPreview = 0 }) => {
   const handleSave      = (e) => submitSignData(e);
   const handleClose     = ( ) => setState({...state, showPopup: false})
   const handleEdit      = ( ) => setState({...state, showPopup: true, disabled: false })
@@ -34,7 +34,7 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature }) =
                   />
           </Modal.Body>
         </Modal>
-        <div className='border p-2 row'>
+        {fromSvPreview === 0 && <div className='border p-2 row'>
           {state.sign !== '' ? <>
           <span> Signature: </span>
           <div className='col-md-6'> <img src={state.sign} alt="no sign"/> </div>
@@ -50,7 +50,7 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature }) =
               </button>
          </>
         }
-        </div>
+        </div>}
     </div>
   );
 }

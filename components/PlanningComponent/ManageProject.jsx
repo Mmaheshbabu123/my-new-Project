@@ -8,6 +8,8 @@ import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import Link from 'node_modules/next/link';
+import Image from 'next/image';
+import UpdatePlanningIcon from '../images/Update-planning.svg';
 
 function ManageProject(props) {
 	const router = useRouter();
@@ -330,17 +332,29 @@ function ManageProject(props) {
 													</Link>
 													{/*-------------------- Planning update----------------------- */}
 
-													<span>
+													<span className="ms-2 ">
 														<a
 															type="button"
 															onClick={() =>
 																router.push('/planning/add/' + result.p_unique_key)}
 														>
-															<GrUpdate
+															<Image
+																src={UpdatePlanningIcon}
+																// src={Updateplanning}
+
+																alt="update planning"
+																data-toggle="tooltip"
+																title="Update planning"
+																id="Update_p"
+																// width={500}
+																// height={500}
+															/>
+
+															{/* <GrUpdate
 																className="mt-2 ms-3 color-skyblue "
 																data-toggle="tooltip"
 																title="Update planning"
-															/>
+															/> */}
 														</a>
 													</span>
 												</td>
@@ -362,7 +376,7 @@ function ManageProject(props) {
 
 				{/*-------------------------- Pagination---------------------------*/}
 				<div className="row my-4">
-					{project.length >= itemsPerPage && (
+					{project.length > itemsPerPage && (
 						<ReactPaginate
 							breakLabel="..."
 							nextLabel={<AiOutlineArrowRight />}
@@ -385,10 +399,7 @@ function ManageProject(props) {
 						type="button"
 						className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5 "
 						onClick={() => {
-							window.location.assign(
-								process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
-									'dashboard?access=administrator&check_logged_in=1'
-							);
+							window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 						}}
 					>
 						BACK

@@ -74,6 +74,7 @@ function EditEmployee(props) {
 					.then((result) => {
 						console.log(result);
 						if (result.status === 200) {
+							props.childtoparent();
 							
 						} else if (result.status == 205) {
 						}

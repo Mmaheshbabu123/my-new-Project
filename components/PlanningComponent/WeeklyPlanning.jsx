@@ -14,7 +14,7 @@ function WeeklyPlanning(props) {
 	const [ planning, setPlanning ] = useState([]);
 	const [ activeWeek, setActiveWeek ] = useState([]);
 	const [ location, setLocation ] = useState('');
-	const [ company, setCompany ] = useState(253);
+	const [ company, setCompany ] = useState('');
 	const [ project, setProject ] = useState('');
 	const [ costcenter, setCostcenter ] = useState('');
 	const [ companylist, setCompanylist ] = useState([]);
@@ -22,14 +22,16 @@ function WeeklyPlanning(props) {
 	const [ costcenterlist, setCostcenterlist ] = useState([]);
 	const [ edit, setEdit ] = useState(false);
 	const [ editDate, setEditDate ] = useState([]);
+	const [weekCount, setWeekCount] = useState(0);
+
 
 	const [ styleEdit, setStyleEdit ] = useState('col-md-12');
 
 	useEffect(() => {
 		if (localStorage.getItem('uid') != null) {
-			setEmpr_id(localStorage.getItem('uid'));
-			// } else {
-			// 	window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+			setEmpr_id(JSON.parse(localStorage.getItem('uid')));
+		} else {
+			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 		}
 	}, []);
 
@@ -37,12 +39,12 @@ function WeeklyPlanning(props) {
 		() => {
 			if (showview == true) {
 				if (company != '') {
-					APICALL.service(getWeeklyPlanning + company, 'GET')
+					APICALL.service(getWeeklyPlanning + company+'/'+weekCount, 'GET')
 						.then((result) => {
 							if (result.status == 200) {
-								console.log(result.data[0][0]);
+								console.log(result.data[0]);
 								setPlanning(result.data[1]);
-								setActiveWeek(result.data[0][0]);
+								setActiveWeek(result.data[0]);
 							}
 						})
 						.catch((error) => {
@@ -53,7 +55,7 @@ function WeeklyPlanning(props) {
 				}
 			}
 		},
-		[ showview, company ]
+		[ showview, company, weekCount ]
 	);
 
 	useEffect(
@@ -66,7 +68,6 @@ function WeeklyPlanning(props) {
 							setCompanylist(result.data[0]);
 							setLocationlist(result.data[1]);
 							setCostcenterlist(result.data[2]);
-							console.log(result.data[0]);
 							setShowview(true);
 						}
 						console.log(result);
@@ -84,6 +85,17 @@ function WeeklyPlanning(props) {
 		setEditDate(data);
 		window.scrollTo(0, 0);
 	};
+	let updateParent = () => {
+		
+		setStyleEdit('col-md-12');
+		setEditDate([]);
+		setEdit(false);
+
+
+
+
+
+	}
 	return (
 		<div className="container-fluid p-0 m-0">
 			<div className="row">
@@ -168,12 +180,12 @@ function WeeklyPlanning(props) {
 					</select> */}
 				</div>
 				<div className={'mt-2 '}>
-					{planning && Object.keys(planning).length > 0 ? (
+					{(planning||company != '') ? (
 						<div className="row">
 							<div className={styleEdit}>
 								<p className={' bitter-italic-normal-medium-22 text-center table-title-bg py-3 '}>
-									<FaLessThan className="less-grather mx-4" /> Current week{' '}
-									<FaGreaterThan className="less-grather mx-4" />{' '}
+									<FaLessThan className="less-grather mx-4" onClick={()=>{setWeekCount(weekCount-1)}}/> <span onClick={()=>{setWeekCount(0)}}>Current week</span>{' '}
+									<FaGreaterThan className="less-grather mx-4" onClick={()=>{setWeekCount(weekCount+1)}}/>{' '}
 								</p>
 								<table className="table border table-border-gray ">
 									<thead className="">
@@ -220,7 +232,7 @@ function WeeklyPlanning(props) {
 										)}
 									</thead>
 									<tbody>
-										{Object.keys(planning).map((value) => (
+										{Object.keys(planning).length>0?Object.keys(planning).map((value) => (
 											<tr
 												className="border-bottom table-border-gray equal-width-calc"
 												key={value}
@@ -235,7 +247,7 @@ function WeeklyPlanning(props) {
 																		val1.pdate == val ? (
 																			<div key={val1.id}>
 																				<div className="text-right color-skyblue my-2 mt-1 text-end">
-																					<a>
+																					{new Date(val1.starttime) > new Date() ? <a>
 																						<MdEdit
 																							className="float-right"
 																							data-toggle="tooltip"
@@ -243,7 +255,8 @@ function WeeklyPlanning(props) {
 																							onClick={() =>
 																								editplanning(val1)}
 																						/>
-																					</a>
+																					</a>:<span className='invisible'>edit</span>
+																					}
 																				</div>
 																				<p className="color-skyblue pt-1">
 																					{val1.employee_name}
@@ -284,14 +297,20 @@ function WeeklyPlanning(props) {
 													</td>
 												))}
 											</tr>
-										))}
+										)):company != ''?<tr>
+											<td colSpan={7} className="align-middle text-center" style={{height:'5rem'}}>
+											No planning for this week.
+						</td></tr>:<tr>
+											<td colSpan={7} className="align-middle text-center" style={{height:'5rem'}}>						
+							Select company and location to view planning.
+							</td></tr>}
 									</tbody>
 								</table>
 							</div>
 
 							{edit && (
 								<div className="col-md-3">
-									<EditEmployee data={editDate} />
+									<EditEmployee data={editDate} childtoparent={updateParent}/>
 								</div>
 							)}
 						</div>

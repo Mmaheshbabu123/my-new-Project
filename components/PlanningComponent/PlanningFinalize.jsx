@@ -103,7 +103,7 @@ const PlanningFinalize = () => {
 				</div>
 				<div className="mt-2 col-md-12">
 					<p className=" bitter-italic-normal-medium-22 col-md-12 text-center table-title-bg py-3">
-						<FaLessThan className="less-grather mx-4" onClick={()=>{updateActiveWeek('previous')}}/> <span>Current week</span>{' '}
+						<FaLessThan className="less-grather mx-4" onClick={()=>{updateActiveWeek('previous')}}/> <span onClick={()=>{setWeekCount(0);setActiveWeek(week[0]);}}>Current week</span>{' '}
 						<FaGreaterThan className="less-grather mx-4" onClick={()=>{updateActiveWeek('next')}}/>{' '}
 					</p>
 					<table className="table border table-border-gray ">

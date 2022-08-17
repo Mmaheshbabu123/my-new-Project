@@ -271,7 +271,7 @@ const ManageCategoryComponent = () => {
 														<MdEdit
 															className="mt-2 ms-3 color-skyblue "
 															data-toggle="tooltip"
-															title="Update planning"
+															title="Edit category"
 														/>
 													</a>
 												</Link>
