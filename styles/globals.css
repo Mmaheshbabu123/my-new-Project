@@ -124,22 +124,22 @@ body {
 	--color-grey-dark: #515050;
 	--color-black: #0b0c0c;
 	--color-less-greater: #4C4D554D;
-	--font-family-regular: LibreFranklin-Regular;
-	--font-family-light: LibreFranklin-Normal;
-	--font-family-extralightitalic: LibreFranklin-extralightitalic;
-	--font-family-bold: LibreFranklin-bold;
+	--font-family-regular: 'LibreFranklin-Regular';
+	--font-family-light: 'LibreFranklin-Normal';
+	--font-family-extralightitalic: 'LibreFranklin-extralightitalic';
+	--font-family-bold: 'LibreFranklin-bold';
 	--font-size-default: 14px;
 	--font-size-small: 12px;
 	/* for input field */
 	--height-normal: 35px;
 	--border-input-lightgray: #dddddd;
-	--font-family-bitter-italic-normal-medium: Bitter-italic-normal-medium;
-	--font-family-poppins-regular: Poppins-regular;
-	--font-family-poppins-italic: Poppins-italac;
-	--font-family-poppins-light: Poppins-normal;
-	--font-family-poppins-bold: Poppins-bold;
-	--font-family-poppins-thin: Poppins-thin;
-	--font-family-poppins-medium: Poppins-medium;
+	--font-family-bitter-italic-normal-medium: 'Bitter-italic-normal-medium';
+	--font-family-poppins-regular:'Poppins-regular';
+	--font-family-poppins-italic: 'Poppins-italac';
+	--font-family-poppins-light: 'Poppins-normal';
+	--font-family-poppins-bold: 'Poppins-bold';
+	--font-family-poppins-thin: 'Poppins-thin';
+	--font-family-poppins-medium: 'Poppins-medium';
 
 	--error-message-color: #ff0000;
 	--border-paritair-gray: #4C4D5559;
@@ -170,12 +170,12 @@ body {
 	--font-size-l: 1.125rem;
 
 	/* font family */
-	--font-family-poppins-regular: Poppins-regular;
-	--font-family-poppins-italic: Poppins-italac;
-	--font-family-poppins-light: Poppins-normal;
-	--font-family-poppins-bold: Poppins-bold;
-	--font-family-poppins-thin: Poppins-thin;
-	--font-family-poppins-medium: Poppins-medium;
+	--font-family-poppins-regular: 'Poppins-regular';
+	--font-family-poppins-italic:'Poppins-italac';
+	--font-family-poppins-light: 'Poppins-normal';
+	--font-family-poppins-bold: 'Poppins-bold';
+	--font-family-poppins-thin: 'Poppins-thin';
+	--font-family-poppins-medium: 'Poppins-medium';
 
 	/* bitter font-family */
 	--font-family-bitter-italic-normal-medium: Bitter-italic-normal-medium;
@@ -207,26 +207,28 @@ body {
 	--font-size-xxl: 1.25rem;
 	--font-size-xxs: 0.5rem;
 
+	
+
 	/* for label  */
 	--color-grey-dark: #515050;
 	--color-black: #0b0c0c;
 	--color-less-greater: #4C4D554D;
-	--font-family-regular: LibreFranklin-Regular;
-	--font-family-light: LibreFranklin-Normal;
-	--font-family-extralightitalic: LibreFranklin-extralightitalic;
-	--font-family-bold: LibreFranklin-bold;
+	--font-family-regular: 'LibreFranklin-Regular';
+	--font-family-light: 'LibreFranklin-Normal';
+	--font-family-extralightitalic: 'LibreFranklin-extralightitalic';
+	--font-family-bold: 'LibreFranklin-bold';
 	--font-size-default: 14px;
 	--font-size-small: 12px;
 	/* for input field */
 	--height-normal: 35px;
 	--border-input-lightgray: #dddddd;
-	--font-family-bitter-italic-normal-medium: Bitter-italic-normal-medium;
-	--font-family-poppins-regular: Poppins-regular;
-	--font-family-poppins-italic: Poppins-italac;
-	--font-family-poppins-light: Poppins-normal;
-	--font-family-poppins-bold: Poppins-bold;
-	--font-family-poppins-thin: Poppins-thin;
-	--font-family-poppins-medium: Poppins-medium;
+	--font-family-bitter-italic-normal-medium: 'Bitter-italic-normal-medium';
+	--font-family-poppins-regular: 'Poppins-regular';
+	--font-family-poppins-italic: 'Poppins-italac';
+	--font-family-poppins-light: 'Poppins-normal';
+	--font-family-poppins-bold:' Poppins-bold';
+	--font-family-poppins-thin: 'Poppins-thin';
+	--font-family-poppins-medium: 'Poppins-medium';
 
 	--error-message-color: #ff0000;
 }
@@ -253,17 +255,31 @@ body {
 	--font-size-xxs: 0.5rem;
 	--font-size-m: 1rem;
 	--font-size-l: 1.125rem;
+	--font-size-20px:1.25rem;
+	/* Line Height */
+	--line-height-24px:1.5rem;
+	--line-height-29px:1.8125rem;
+	--line-height-33px:2.0625rem;
+
 
 	/* font family */
-	--font-family-poppins-regular: Poppins-regular;
-	--font-family-poppins-italic: Poppins-italac;
-	--font-family-poppins-light: Poppins-normal;
-	--font-family-poppins-bold: Poppins-bold;
-	--font-family-poppins-thin: Poppins-thin;
-	--font-family-poppins-medium: Poppins-medium;
+	--font-family-poppins-regular: 'Poppins-regular';
+	--font-family-poppins-italic:' Poppins-italac';
+	--font-family-poppins-light: 'Poppins-normal';
+	--font-family-poppins-bold: 'Poppins-bold';
+	--font-family-poppins-thin: 'Poppins-thin';
+	--font-family-poppins-medium: 'Poppins-medium';
 
 	/* bitter font-family */
-	--font-family-bitter-italic-normal-medium: Bitter-italic-normal-medium;
+	--font-family-bitter-italic-normal-medium: 'Bitter-italic-normal-medium';
+}
+.bitter_medium_italic_18px
+{
+	font-family: var(--font-family-bitter-italic-normal-medium);
+	color: var(--color-purple);
+	font-size: var(--font-size-20px);
+	line-height: var(--line-height-24px);
+	font-weight: normal;
 }
 
 .bitter-italic-normal-medium-24 {
@@ -307,10 +323,26 @@ body {
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-l);
 	font-style: normal;
+	line-height: var(--line-height-29px);
 	font-weight: 400;
 	/* line-height: initial; */
 }
 
+.poppins-medium-18px
+{
+	font-size: var(--font-size-l);
+	line-height: var(--line-height-29px);
+	font-family: var(--font-family-poppins-medium);
+	color: var(--color-label-footer-gray);
+	font-weight: normal;
+}
+.poppins-medium-20px
+{
+	font-size: var(--font-size-20px);
+	line-height: var(--line-height-33px);
+	font-family: var(--font-family-poppins-medium);
+	color: var(--color-label-footer-gray);
+}
 .poppins-regular-20px {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular);
@@ -318,6 +350,15 @@ body {
 	font-style: normal;
 	font-weight: 400;
 	/* line-height: initial; */
+}
+
+.poppins-light-20px
+{
+	color: var(--color-label-footer-gray) !important;
+	font-family: var(--font-family-poppins-light) !important;
+	font-size: var(--font-size-20px) !important;
+	line-height: var(--line-height-33px) !important;
+	font-weight: normal;
 }
 .poppins-italic-14px {
 	color: var(--color-label-footer-gray);
@@ -1147,19 +1188,22 @@ span .firsrt-line:last-child() {
     color: var(--color-skyblue);
     font-family: var(--font-family-poppins-regular);
     font-size: var(--font-size-m);
+		border-radius: 0px;
 }
 .blue-border-bg-white:focus {
 	background-color: var(--color-skyblue);
 	color: white;
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m);
+	border-radius: 0px;
 }
 .blue-border-bg-white:hover {
-	background-color: var(--color-white);
+	background-color: var(--color-skyblue);
+	color: white;
 	border: 1px solid var(--color-skyblue);
-	color: var(--color-skyblue);
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m);
+	border-radius: 0px;
 }
 .age-sec.input-group-text {
     background: none;
@@ -1474,7 +1518,7 @@ right: -70px;
     background-color: #4C4D550F !important;
 }
 .mrg-lf-rt {
-	margin-top: 12px;
+	/* margin-top: 12px; */
 margin-left: 10px;
 }
 .color-gray-lt {
@@ -1485,4 +1529,18 @@ margin-left: 10px;
 }
 .border-4C4D554D {
 	border-top: 1px solid #4C4D554D;
+}
+.first-col
+{
+    width: 30%;
+		word-break: break-word;
+}
+.second-col
+{
+    width: 60%;
+		word-break: break-word;
+}
+.edit-icon-color
+{
+	color: #4C4D554D;
 }
