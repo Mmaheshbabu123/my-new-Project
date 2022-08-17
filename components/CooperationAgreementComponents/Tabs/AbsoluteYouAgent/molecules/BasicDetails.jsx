@@ -26,10 +26,10 @@ const BasicDetails = (props) => {
 
   useEffect(() => {
     if(defaultOptions) {
-      let { agent_details, absolute_consultant } = defaultOptions;
+      let { agent_details, absolute_consultant, absolute_office_num } = defaultOptions;
       let bbright_id = agent_details && agent_details.bbright_id ? agent_details.bbright_id : 0;
       consultantArray = absolute_consultant ? absolute_consultant.filter(val => Number(val.value) === Number(bbright_id)) : [];
-      consultNumber = consultantArray.length ? [{label: bbright_id, value: Number(bbright_id)}] : [];
+      consultNumber = absolute_office_num.length ? absolute_office_num : [];
       tab_1 = getTabBasicData(consultantArray, consultNumber, bbright_id);
       updateStateChanges({tab_1, bbright_id});
     }
@@ -47,7 +47,6 @@ const BasicDetails = (props) => {
       return {...tab_1,
         [whoWillSign]: tab_1[whoWillSign] || [],
         [absoluteConsultant]: Number(obj.value) || 0,
-        [absoluteConsultantNum]: Number(bbright_id) || 0
       }
     }
 
