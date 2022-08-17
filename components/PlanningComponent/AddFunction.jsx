@@ -574,7 +574,7 @@ const AddFunction = () => {
 												</div>
 											</div>
 											{!ischecked &&
-												key['functionslist'].map((deta, ind) => {
+												key['functionslist']!=undefined&&key['functionslist'].map((deta, ind) => {
 													{
 														var group = 'function';
 													}
