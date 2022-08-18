@@ -219,7 +219,7 @@ const EmployeeType = () => {
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px px-0"
+							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0"
 							onClick={() => {
 								setCurrent_sec(3);
 							}}
@@ -230,7 +230,7 @@ const EmployeeType = () => {
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end px-0"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px"
 						>
 							NEXT
 						</button>

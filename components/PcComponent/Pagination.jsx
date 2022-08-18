@@ -13,7 +13,7 @@ return (
 							pageCount={props.pageCount}
 							previousLabel={props.itemOffset>0?<AiOutlineArrowLeft />:<AiOutlineArrowLeft />}
 							renderOnZeroPageCount={null}
-							containerClassName={'pagination justify-content-center project-pagination'}
+							containerClassName={'pagination justify-content-center project-pagination align-items-center'}
 							itemClass="page-item"
 							linkClass="page-link"
 							subContainerClassName={'pages pagination'}

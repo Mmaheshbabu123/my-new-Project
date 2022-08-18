@@ -521,7 +521,7 @@ const ManageFunction = () => {
 					<div className="text-start col-md-6 mb-4">
 						<button
 							type="button"
-							className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right  md-5 px-0"
+							className="bg-white  back-btn-text  border-0 poppins-medium-18px float-sm-right  md-5 px-0"
 							onClick={() => backToDashboard()}
 						>
 							BACK
