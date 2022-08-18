@@ -160,27 +160,27 @@ const EmployeeType = () => {
 	};
 
 	return (
-		<div className="container-fluid p-0">
+		<div className={pc_view_type == 'addpc'?"container-fluid p-0":"sectioncolor p-3 my-3"}>
 			<form onSubmit={submit}>
-			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
+			{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
             <div className='pc-height4'>
-				<div className="row pt-0 border-form-sec m-0 p-4 ">
+				<div className={pc_view_type == 'addpc'?"row pt-0 border-form-sec m-0 p-5 ":"border-0"}>
 				<p className="mt-1 p-0" style={{ color: 'red' }}>
 						{error_emp_type}
 					</p>
 					{data.map((val) => (
-						<div className={"form-check mt-3 "+sec_width} key={val.id}>
+						<div className={"form-check mb-3 "+sec_width} key={val.id}>
 							<input
 								disabled={disableForm}
 								type="checkbox"
-								className="form-check-input rounded-0 "
+								className="form-check-input rounded-0 poppins-regular-18px "
 								value={val.id}
 								checked = {res.includes(val.id)?true:false} 
 								onChange={(e) => {
 									updateRes(e);
 								}}
 							/>
-							<label className="form-check-label pt-1" > {val.name}</label>
+							<label className={pc_view_type == 'addpc'? "form-check-label poppins-regular-18px":" form-check-label poppins-regular-18px"} > {val.name}</label>
 						</div>
 					// 	<div className="form-check mt-4">
 					// 	<input
@@ -208,7 +208,7 @@ const EmployeeType = () => {
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"
 							>
 								SAVE
 							</button>

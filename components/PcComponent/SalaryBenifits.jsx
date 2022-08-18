@@ -168,27 +168,27 @@ const SalaryBenifits = () => {
 	};
 
 	return (
-		<div className="container-fluid p-0">
+		<div className={pc_view_type == 'addpc'?"container-fluid p-0":"sectioncolor p-3 mt-3"}>
 			<form onSubmit={submit}>
 				{pc_view_type == 'editpc' ? (
-					<h4 className="h5 mt-3">Edit salary benefits</h4>
+					<h4 className= {pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit salary benefits</h4>
 				) : pc_view_type == 'viewpc' ? (
 					<h4 className="h5 mt-3">Salary benefits</h4>
 				) : (
 					''
 				)}
 				<div className='pc-height5'>
-				<div className="row border-form-sec m-0 p-4">
+				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 p-4":"border-0"}>
 				<p className="mb-2 fw-bold" style={{ color: 'red' }}>
 						{error_sal_benifits}
 					</p>
 					{data.map((val, key) => (
-						<div className='col-6' key={key}>
+						<div className={pc_view_type == 'addpc'?'col-6':"col-md-12"} key={key}>
 						<div key={key} className={`form-check mt-1  me-3 p-0 `}>
-							<div className="form-check my-2">
+							<div className="form-check my-2 ps-0">
 								<input
 									disabled={disableForm}
-									className="form-check-input rounded-0"
+									className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px":"poppins-regular-18px me-2"}
 									type="checkbox"
 									value={val.sb_id}
 									id={'flexCheckDefault' + key}
@@ -197,14 +197,14 @@ const SalaryBenifits = () => {
 										updateRes(e, key);
 									}}
 								/>
-								<label className="form-check-label pt-1" htmlFor="flexCheckDefault">
+								<label className={pc_view_type == 'addpc'?"form-check-label poppins-regular-18px":"poppins-regular-18px"}htmlFor="flexCheckDefault">
 									{val.name}
 								</label>
 							</div>
 							{val.checked && (
-								<div className='bg-4C4D550F p-3'>
+								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3 px-4':"bg-4C4D550F px-5 py-2 bg-white"}>
 									<div className="">
-										<p className={' custom_astrick poppins-regular-16px '}>Is this mandatory?</p>
+										<p className={' custom_astrick poppins-medium-16px '}>Is this mandatory?</p>
 
 										<div className="d-flex mt-3">
 											<div className="form-check  ">
