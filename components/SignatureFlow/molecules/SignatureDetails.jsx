@@ -37,8 +37,8 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fro
         {fromSvPreview === 0 && <div className='border p-2 row'>
           {state.sign !== '' ? <>
           <span> Signature: </span>
-          <div className='col-md-6'> <img src={state.sign} alt="no sign"/> </div>
-          <div className='col-md-6'>
+          <div className='col-md-7'> <img src={state.sign} alt="no sign" width="100%"/> </div>
+          <div className='col-md-5'>
             <button className={`btn btn-secondary mx-2`} style={{width:'30%'}} onClick={handleEdit}> Edit </button>
             <button className={`btn btn-light`} style={{width:'30%'}} onClick={handleDelete}> Delete </button>
           </div>
