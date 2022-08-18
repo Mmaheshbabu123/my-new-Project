@@ -1601,8 +1601,6 @@ input[type="checkbox"]:checked
 {
 	color: var(--color-white);
 	background-color: var(--color-skyblue);
-	accent-color: rgba(95, 158, 160,0.6);
-	opacity: 0.8;
 }
 .category_currency_height
 {
@@ -1645,4 +1643,8 @@ input[type="text"]::placeholder
 	border: 1px solid var(--color-skyblue) !important;
 	background-color: var(--color-white) !important;
 	color: var(--color-skyblue) !important;
+}
+.view_pc_form_width
+{
+	width: 8%;
 }

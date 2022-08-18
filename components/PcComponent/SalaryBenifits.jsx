@@ -168,12 +168,12 @@ const SalaryBenifits = () => {
 	};
 
 	return (
-		<div className={pc_view_type == 'addpc'?"container-fluid p-0":"sectioncolor p-3 mt-3"}>
+		<div className={pc_view_type == 'addpc'?"container-fluid p-0":pc_view_type == 'viewpc'?"my-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
 			<form onSubmit={submit}>
 				{pc_view_type == 'editpc' ? (
 					<h4 className= {pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit salary benefits</h4>
 				) : pc_view_type == 'viewpc' ? (
-					<h4 className="h5 mt-3">Salary benefits</h4>
+					<h4 className="h5 mt-3 bitter_medium_italic_18px mb-4">Salary benefits</h4>
 				) : (
 					''
 				)}
@@ -184,12 +184,14 @@ const SalaryBenifits = () => {
 					</p>
 					{data.map((val, key) => (
 						<div className={pc_view_type == 'addpc'?'col-6':"col-md-12"} key={key}>
-						<div key={key} className={`form-check mt-1  me-3 p-0 `}>
+						<div key={key} className={`form-check mt-1`}>
 							<div className="form-check my-2 ps-0">
 								<input
 									disabled={disableForm}
-									className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px":"poppins-regular-18px me-2"}
+									// className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px":"poppins-regular-18px me-2"}
+									// type="checkbox"
 									type="checkbox"
+								className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px ":"form-check-input rounded-0 poppins-regular-18px border-0 me-2"}
 									value={val.sb_id}
 									id={'flexCheckDefault' + key}
 									checked={val.checked == true ? true : false}
@@ -197,12 +199,13 @@ const SalaryBenifits = () => {
 										updateRes(e, key);
 									}}
 								/>
-								<label className={pc_view_type == 'addpc'?"form-check-label poppins-regular-18px":"poppins-regular-18px"}htmlFor="flexCheckDefault">
+								<label className={pc_view_type == 'addpc'?"form-check-label poppins-regular-18px":" form-check-label poppins-regular-18px"}htmlFor="flexCheckDefault" style={val.checked ?{opacity:'1'}:{}}>
 									{val.name}
+									
 								</label>
 							</div>
 							{val.checked && (
-								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3 px-4':"bg-4C4D550F px-5 py-2 bg-white"}>
+								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3 px-4':"bg-4C4D550F px-3 py-2 bg-white"}>
 									<div className="">
 										<p className={' custom_astrick poppins-medium-16px '}>Is this mandatory?</p>
 

@@ -351,7 +351,7 @@ function AddPc(props) {
 	};
 
 	return (
-		<div className={pc_view_type == 'addpc'?"":"sectioncolor p-3 mt-3"}>
+		<div className={pc_view_type == 'addpc'?"":"sectioncolor p-3 my-3"}>
 			<form onSubmit={(e) => submit(e)}>
 				{/* {cat_subsec_type == 3 ? <h4 className="h5 mt-3" >Edit paritair comite</h4> : ''} */}
 				{cat_subsec_type == 3 ? <h4 className= {pc_view_type == 'addpc'?"h5 mt-3 ":"bitter_medium_italic_18px mb-4"} >Edit paritair comite</h4> : ''}
@@ -361,7 +361,7 @@ function AddPc(props) {
 						{/* <div className={sec_width} > */}
 						<div className="col-md-12 row  my-4 m-0">
 
-							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px"}>
+							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px my-2"}>
 								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Paritair comite number</label>
 								<input
 									type="text"
@@ -376,7 +376,7 @@ function AddPc(props) {
 								<p className="error mt-2">{error_pc_number}</p>
 							</div>
 
-							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2 ":" px-0 poppins-regular-18px"}>
+							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2 ":" px-0 poppins-regular-18px my-2"}>
 								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Paritair comite name</label>
 								<input
 									type="text"
@@ -390,7 +390,7 @@ function AddPc(props) {
 								<p className="error mt-2">{error_pc_name}</p>
 							</div>
 
-							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px"}>
+							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px my-2"}>
 								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Paritair comite alias name </label>
 								<input
 									type="text"
@@ -406,7 +406,7 @@ function AddPc(props) {
 
 							{/* BUFFER TIMING */}
 
-							<div className={pc_view_type == 'addpc'?"form-group mb-3 py-2 col-md-6 flex-1 ms-2":" px-0 poppins-regular-18px "}>
+							<div className={pc_view_type == 'addpc'?"form-group mb-3 py-2 col-md-6 flex-1 ms-2":" px-0 poppins-regular-18px my-2"}>
 								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Buffer time between two plannings</label>
 
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
@@ -424,7 +424,7 @@ function AddPc(props) {
 								<p className="error mt-2">{error_buffer_time}</p>
 							</div>
 
-							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2":" px-0 poppins-regular-18px"}>
+							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2":" px-0 poppins-regular-18px my-2"}>
 								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Minimum work timings per day</label>
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
 									<input
@@ -441,7 +441,7 @@ function AddPc(props) {
 								<p className="error mt-2">{error_min_time}</p>
 							</div>
 							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2":" px-0 "}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Maximum work timings per day</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px my-2"}>Maximum work timings per day</label>
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
 									<input
 										type="text"
