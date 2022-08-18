@@ -7,7 +7,8 @@ import { MdOutlineGroups } from 'react-icons/md';
 import Image from 'next/image'
 import edit_icon from '../images/edit.svg';
 import age_icon from '../images/age.svg';
-import employee_type_icon from '../images/employee_type.svg'
+import employee_type_icon from '../images/employee_type.svg';
+import hand_money_icon from '../images/hand-money.svg'
 
 const Table = (props) => {
 	const [ thvalues, setThvalues ] = useState([]);
@@ -222,11 +223,19 @@ const Table = (props) => {
 								>
 									{props.sectype == 'pc' &&
 									props.type != 'addpc' && (
-										<RiHandCoinLine
-											className="col-4C4D550F"
-											data-toggle="tooltip"
-											title="Edit salary benefits"
-										/>
+										<Image
+										src={hand_money_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit salary benefits"/>
+										// <RiHandCoinLine
+										// 	className="col-4C4D550F"
+										// 	data-toggle="tooltip"
+										// 	title="Edit salary benefits"
+										// />
 									)}
 								</div>
 							</td>

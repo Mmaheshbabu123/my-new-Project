@@ -463,7 +463,7 @@ const PcOverview = (params) => {
 						</div>
 					)}
 				</div>
-				<div className={`col pt-2 ${cat_rightsec} ${pc_view_type == 'editpc'?'mt-5 pt-4':''}`}>
+				<div className={`col pt-2 ${cat_rightsec} ${pc_view_type == 'editpc'?'mt-5 pt-4':pc_view_type == 'viewpc'?'mt-4':''}`}>
 					{pc_view_type != 'viewpc' && (
 						<div className="text-center form-group row m-0 ">
 							<button

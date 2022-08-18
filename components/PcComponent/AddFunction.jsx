@@ -208,7 +208,7 @@ function AddFunction(props) {
 		<div className="mt-3 table-title-bg p-3">
 			<form className="Search__form" onSubmit={submit}>
 				<div className="row">
-					{id != '' ? <h4 className="h5 mb-3">Edit function</h4> : <h4 className="h5 mb-4 bitter-italic biiter_medium_italic_20px">Add function</h4>}
+					{id != '' ? <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">Edit function</h4> : <h4 className="h5 mb-4 bitter-italic biiter_medium_italic_20px">Add function</h4>}
 					<div className="form-group mb-2">
 						<label className="custom_astrick mt-2 poppins-regular-18px">Function name</label>
 						<input
