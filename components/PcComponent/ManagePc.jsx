@@ -127,7 +127,7 @@ const ManagePc = (props) => {
 		<div>
 			<div className="row m-0">
 				{/* <h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 hover-white">Manage paritair comite</h1> */}
-			<div className='col-md-12 position-sticky-pc py-4'>
+			<div className='col-md-12 py-4'>
 				<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">
 					Manage paritair comite
 				</h1>
