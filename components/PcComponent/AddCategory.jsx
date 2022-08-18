@@ -206,15 +206,15 @@ function AddCategory(props) {
 	};
 
 	return (
-		<div className="mt-4 table-title-bg p-3">
+		<div className="mt-3 table-title-bg p-3">
 			<form onSubmit={submit}>
-				{id != '' ? <h4 className="h5 mb-3">Edit category</h4> : <h4 className="h5 mb-3 bitter-italic">Add category</h4>}
+				{id != '' ? <h4 className="h5 mb-3">Edit category</h4> : <h4 className="h5 mb-4 bitter-italic biiter_medium_italic_20px">Add category</h4>}
 				<div className="row">
-					<label className="mb-2 custom_astrick mb-2 mt-2 poppins-regular-16px">Category name</label>
-					<div className="form-group mb-3">
+					<label className=" custom_astrick mt-2 poppins-regular-18px">Category name</label>
+					<div className="form-group ">
 						<input
 							type="text"
-							className=" form-control my-2  input-border-lightgray poppins-regular-18px mh-50 rounded-0 "
+							className=" form-control mt-2 mb-3  input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-0 shadow-none"
 							value={data.category_name}
 							name="name"
 							id="name"
@@ -225,12 +225,13 @@ function AddCategory(props) {
 
 						<p style={{ color: 'red' }}>{error_category_name}</p>
 					</div>
-					<label className="custom_astrick mb-2 mb-2 mt-2 poppins-regular-16px">Minimum salary</label>
-					<div className="form-group mb-3">
+					<label className="custom_astrick mt-2 poppins-regular-18px">Minimum salary</label>
+					<div className="form-group">
 					<div className="input-group">
+					<span className="input-group-text mh-50 rounded-0 mt-2 border-0 bg-white category_currency_height poppins-medium-18px" >€</span>
 						<input
 							type="text"
-							className=" form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+							className=" form-control mt-2 mb-3 input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-0 shadow-none"
 							value={data.min_salary}
 							name="salary"
 							id="salary"
@@ -238,7 +239,7 @@ function AddCategory(props) {
 								setData((prev) => ({ ...prev, min_salary: e.target.value }));
 							}}
 						/>
-						<span className="input-group-text mh-50 rounded-0 mt-2 mb-2">€</span>
+						
 						</div>
 						<p style={{ color: 'red' }}>{error_min_salary}</p>
 					</div>
@@ -264,7 +265,7 @@ function AddCategory(props) {
 					</div>
 					<div className="text-end col-md-6">
 						<button
-							className="btn rounded-0  custom-btn px-3  btn-block float-end"
+							className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px"
 							disabled={disableSave}
 							onClick={() => {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));

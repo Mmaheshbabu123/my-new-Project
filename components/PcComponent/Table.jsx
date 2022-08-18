@@ -4,6 +4,10 @@ import { PcContext } from '../../Contexts/PcContext';
 import { RiHandCoinLine } from 'react-icons/ri';
 import { GrRotateRight } from 'react-icons/gr';
 import { MdOutlineGroups } from 'react-icons/md';
+import Image from 'next/image'
+import edit_icon from '../images/edit.svg';
+import age_icon from '../images/age.svg';
+import employee_type_icon from '../images/employee_type.svg'
 
 const Table = (props) => {
 	const [ thvalues, setThvalues ] = useState([]);
@@ -127,11 +131,18 @@ const Table = (props) => {
 								>
 									{props.type == 'editpc' &&
 									props.sectype == 'pc' && (
-										<FaEdit
-											className="col-4C4D550F"
-											data-toggle="tooltip"
-											title="Edit paritair comite"
-										/>
+										<Image
+										src={edit_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit paritair comite"/>
+										// <FaEdit
+										// 	className="col-4C4D550F"
+											
+										// />
 									)}
 								</div>
 
@@ -143,11 +154,25 @@ const Table = (props) => {
 								>
 									{props.sectype == 'cat' &&
 									(props.type == 'addpc' || props.type == 'editpc') && (
-										<FaEdit lassName="col-4C4D550F" data-toggle="tooltip" title="Edit category" />
+										<Image
+										src={edit_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit category"/>
 									)}
 									{props.sectype == 'funct' &&
 									(props.type == 'addpc' || props.type == 'editpc') && (
-										<FaEdit lassName="col-4C4D550F" data-toggle="tooltip" title="Edit function" />
+										<Image
+										src={edit_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit function"/>
 									)}
 								</div>
 								<div
@@ -158,11 +183,15 @@ const Table = (props) => {
 								>
 									{props.sectype == 'pc' &&
 									props.type != 'addpc' && (
-										<GrRotateRight
-											className="col-4C4D550F"
-											data-toggle="tooltip"
-											title="Edit age"
-										/>
+
+										<Image
+										src={age_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit age"/>
 									)}
 								</div>
 								<div
@@ -173,12 +202,17 @@ const Table = (props) => {
 								>
 									{props.sectype == 'pc' &&
 									props.type != 'addpc' && (
-										<MdOutlineGroups
-											className="col-4C4D550F"
-											data-toggle="tooltip"
-											title="Edit employee type"
-										/>
+
+										<Image
+										src={employee_type_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit employee type"/>
 									)}
+
 								</div>
 								<div
 									onClick={() => {

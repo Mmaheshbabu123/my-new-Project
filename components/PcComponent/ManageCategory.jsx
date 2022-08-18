@@ -7,6 +7,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Popup from './Popupcategory';
 import ReactPaginate from 'react-paginate';
 import { useRouter } from 'next/router';
+import Pagination from './Pagination';
 
 const ManageCategoryComponent = () => {
 	const [ categories, setCategories ] = useState([]);
@@ -299,20 +300,21 @@ const ManageCategoryComponent = () => {
 				</div>
 				<div className="row my-2">
 					{categories.length > itemsPerPage && (
-						<ReactPaginate
-							breakLabel="..."
-							nextLabel={<AiOutlineArrowRight />}
-							onPageChange={handlePageClick}
-							pageRangeDisplayed={5}
-							pageCount={pageCount}
-							previousLabel={<AiOutlineArrowLeft />}
-							renderOnZeroPageCount={null}
-							containerClassName={'pagination justify-content-center project-pagination'}
-							itemClass="page-item"
-							linkClass="page-link"
-							subContainerClassName={'pages pagination'}
-							activeClassName={'active'}
-						/>
+						<Pagination itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}/>
+						// <ReactPaginate
+						// 	breakLabel="..."
+						// 	nextLabel={itemOffset>0?<AiOutlineArrowRight />:<AiOutlineArrowRight />}
+						// 	onPageChange={handlePageClick}
+						// 	pageRangeDisplayed={5}
+						// 	pageCount={pageCount}
+						// 	previousLabel={itemOffset>0?<AiOutlineArrowLeft />:<AiOutlineArrowLeft />}
+						// 	renderOnZeroPageCount={null}
+						// 	containerClassName={'pagination justify-content-center project-pagination'}
+						// 	itemClass="page-item"
+						// 	linkClass="page-link"
+						// 	subContainerClassName={'pages pagination'}
+						// 	activeClassName={'active'}
+						// />
 					)}
 				</div>
 				<div className="row my-2">
