@@ -9,6 +9,7 @@ import styles from '../../styles/Pc.module.css';
 import PcCommon from './PcCommon';
 import Popup from './Popup';
 import ReactPaginate from 'react-paginate';
+import Pagination from './Pagination';
 
 /**
  * this will project all the partire committee's data.
@@ -126,9 +127,11 @@ const ManagePc = (props) => {
 		<div>
 			<div className="row m-0">
 				{/* <h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 hover-white">Manage paritair comite</h1> */}
+			<div className='col-md-12 position-sticky-pc py-4'>
 				<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">
 					Manage paritair comite
 				</h1>
+			</div>
 				<div className="col-md-12 p-0">
 					<span className="btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln">
 						<Link className="hover-white" href={'/redirect-page?src=/manage-pc&dest=addpc'}>
@@ -149,7 +152,7 @@ const ManagePc = (props) => {
 						<input
 							type="search"
 							id="form12"
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 add-pln"
 							placeholder="Paritair comite number"
 							value={searchPcnum}
 							onChange={(e) => setSearchPcnum(e.target.value)}
@@ -160,7 +163,7 @@ const ManagePc = (props) => {
 						<input
 							type="search"
 							id="form12"
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 "
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 add-pln"
 							placeholder="Paritair comite name"
 							value={searchPcname}
 							onChange={(e) => setSearchPcname(e.target.value)}
@@ -170,7 +173,7 @@ const ManagePc = (props) => {
 					<div className="col-md-1">
 						<button
 							type="button"
-							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-19px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-18px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color add-pln"
 							onClick={() => handleSearch()}
 						>
 							FILTER
@@ -180,7 +183,7 @@ const ManagePc = (props) => {
 						{(searchPcnum != '' || searchPcname != '' || search === true) && (
 							<button
 								type="button"
-								className="btn w-100 btn-block float-right mt-2 mb-2 ms-2 poppins-medium-19px  border-0 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn hover-white"
+								className="btn w-100 btn-block float-right mt-2 mb-2 ms-2 poppins-medium-18px  border-0 rounded-0 float-right mt-2 mb-2 ms-2 reset_button hover-white add-pln"
 								onClick={() => handleReset()}
 							>
 								RESET
@@ -193,7 +196,7 @@ const ManagePc = (props) => {
 					<div className={`col-md-10 d-flex`}>
 						<div className={`row py-2   ps-4 w-100 poppins-medium-18px ${styles.sectioncolor}`}>
 							<div className="col-md-1 align-items-center d-flex poppins-medium-18px">
-								<span className={`py-2 poppins-medium-18px ${styles.pcid} fw-bold`}>Sl.no</span>
+								<span className={`py-2 poppins-medium-18px fw-bold`}>S No.</span>
 							</div>
 
 							<div className="row col-md-11 poppins-medium-18px">
@@ -221,10 +224,10 @@ const ManagePc = (props) => {
 							</div>
 
 							<div className="row col-md-11 poppins-regular-18px">
-								<div className="col-md-2 py-2 ps-4 align-items-center d-flex poppins-regular-18px">
+								<div className="col-md-2 py-2 ps-4 align-items-center d-flex poppins-medium-18px">
 									{val.pc_number}
 								</div>
-								<div className="col-md-9 py-2 align-items-center d-flex poppins-regular-18px">
+								<div className="col-md-9 py-2 align-items-center d-flex poppins-medium-18px">
 									{val.pc_alias_name ? val.pc_alias_name : val.pc_name}
 								</div>
 							</div>
@@ -265,7 +268,8 @@ const ManagePc = (props) => {
 			)}
 			{data.length > itemsPerPage && (
 				<div className="row">
-					<ReactPaginate
+						<Pagination itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}/>
+					{/* <ReactPaginate
 						breakLabel="..."
 						nextLabel={<AiOutlineArrowRight />}
 						onPageChange={handlePageClick}
@@ -278,7 +282,7 @@ const ManagePc = (props) => {
 						linkClass="page-link"
 						subContainerClassName={'pages pagination'}
 						activeClassName={'active'}
-					/>
+					/> */}
 				</div>
 			)}
 			<div className="row m-0 my-4">
