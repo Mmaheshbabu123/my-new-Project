@@ -189,6 +189,29 @@ const ManagePc = (props) => {
 					</div>
 				</div>
 			</div>
+			<div className="row my-2 pt-2 m-0">
+					<div className={`col-md-10 d-flex`}>
+						<div className={`row py-2   ps-4 w-100 poppins-regular-16px ${styles.sectioncolor}`}>
+							<div className="col-md-1 align-items-center d-flex poppins-regular-16px">
+								<span className={`py-2 poppins-regular-16px ${styles.pcid} fw-bold`}>Serial number.</span>
+							</div>
+
+							<div className="row col-md-10 poppins-regular-16px">
+								<div className="col-md-2 py-2 ps- 4 fw-bold align-items-center d-flex poppins-regular-16px">
+									PC number
+								</div>
+								<div className="col-md-9 py-2 fw-bold align-items-center d-flex poppins-regular-16px">
+									PC name
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="col-md-2  ps-3 pe-0 ">
+						<div className={`text-center ${styles.sectioncolor}  p-3 pe-0`}>
+							Actions
+						</div>
+					</div>
+				</div>
 			{temp2.map((val, key) => (
 				<div className="row my-2 pt-2 m-0" key={key}>
 					<div className={`col-md-10 d-flex`}>

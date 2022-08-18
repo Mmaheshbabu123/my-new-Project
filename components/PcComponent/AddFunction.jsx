@@ -205,15 +205,15 @@ function AddFunction(props) {
 		}
 	};
 	return (
-		<div className="mt-4 table-title-bg p-3">
+		<div className="mt-3 table-title-bg p-3">
 			<form className="Search__form" onSubmit={submit}>
 				<div className="row">
-					{id != '' ? <h4 className="h5 mb-3">Edit function</h4> : <h4 className="h5 mb-3 bitter-italic">Add function</h4>}
-					<div className="form-group mb-3">
-						<label className="custom_astrick mb-2 poppins-regular-16px">Function name</label>
+					{id != '' ? <h4 className="h5 mb-3">Edit function</h4> : <h4 className="h5 mb-4 bitter-italic biiter_medium_italic_20px">Add function</h4>}
+					<div className="form-group mb-2">
+						<label className="custom_astrick mt-2 poppins-regular-18px">Function name</label>
 						<input
 							type="text"
-							className=" form-control my-2"
+							className=" form-control my-2 border-0 poppins-medium-18px shadow-none"
 							value={data.function_name}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, function_name: e.target.value }));
@@ -223,10 +223,10 @@ function AddFunction(props) {
 					</div>
 
 					{Object.keys(props.categorylist).length > 0 && (
-						<div className="form-group mb-3">
-							<label className="mt-2 mb-1">Category</label>
+						<div className="form-group mb-2">
+							<label className="custom_astrick mt-2 poppins-regular-18px">Category</label>
 							<select
-								className="form-select my-2 form-control"
+								className="form-select my-2 form-control border-0 rounded-0 poppins-medium-18px shadow-none"
 								value={data.category_id}
 								onChange={(e) => {
 									if(e.target.value != ''){
@@ -266,18 +266,19 @@ function AddFunction(props) {
 						</div>
 					)}
 
-					<div className="form-group mb-3">
-						<label className="custom_astrick mb-2 poppins-regular-16px">Minimum salary</label>
+					<div className="form-group mb-2">
+						<label className="custom_astrick mt-2 poppins-regular-18px">Minimum salary</label>
 						<div className="input-group">
+						<span className="input-group-text bg-white rounded-0 border-0 category_currency_height poppins-medium-18px my-2">€</span>
 							<input
-								className=" form-control"
+								className=" form-control border-0 rounded-0 poppins-medium-18px shadow-none my-2"
 								type="text"
 								value={data.min_salary}
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, min_salary: e.target.value }));
 								}}
 							/>
-							<span className="input-group-text">€</span>
+							
 						</div>
 						<p className="pb-1" style={{ color: 'red' }}>
 							{error_min_salary}
@@ -304,7 +305,7 @@ function AddFunction(props) {
 					<div className="text-end col-md-6">
 						<button
 							type="submit"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end"
+							className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px"
 							disabled={disableSave}
 							onClick={() => {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
