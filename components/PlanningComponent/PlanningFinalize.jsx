@@ -219,7 +219,7 @@ const PlanningFinalize = () => {
 					<div className="col-md-6 p-0">
 						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/timings/' + p_unique_key}>
-								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px ">
+								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px  ">
 									BACK
 								</a>
 							</Link>
@@ -228,7 +228,7 @@ const PlanningFinalize = () => {
 					<div className="col-md-6 p-0">
 						<button
 							type="button"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px "
 							onClick={() => submit()}
 						>
 							SUBMIT

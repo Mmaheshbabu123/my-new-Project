@@ -133,7 +133,7 @@ const AddEmployee = () => {
 						
 						>
 							<Link href={'/planning/add/' + p_unique_key}>
-								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px ">
+								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px ">
 									BACK
 								</p>
 							</Link>

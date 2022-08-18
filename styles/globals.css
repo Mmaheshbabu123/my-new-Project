@@ -772,8 +772,9 @@ a {
 	padding: 5px;
 }
 .back-btn-text {
-    font-family: var(--font-family-poppins-regular);
-    font-size: var(--font-size-l);
+    font-family: var(--font-family-poppins-medium) !important;
+    font-size: var(--font-size-18px) !important;
+		line-height: var(--line-height-29px);
     text-decoration: underline;
 
 }
@@ -846,7 +847,7 @@ label {
 	color: var(--color-white);
 }
 .add-pln {
-    height: 50px;
+    height: 65px;
 }
 .week-height {
 	min-height: 40vh;
@@ -1601,4 +1602,21 @@ input[type="checkbox"]
     -moz-appearance: none; */
     /* appearance: none; */
     /* border: none; */
+}
+li.previous.disabled,
+li.next
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.pagination > li > a
+{
+	font-size: 20px;
+	color: var(--bg-gray-dark);
+}
+.project-pagination > .active > a,
+.project-pagination > .active > a:hover
+{
+	color: var(--color-purple);
 }

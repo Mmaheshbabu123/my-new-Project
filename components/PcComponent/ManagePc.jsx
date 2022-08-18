@@ -134,7 +134,7 @@ const ManagePc = (props) => {
 						<Link className="hover-white" href={'/redirect-page?src=/manage-pc&dest=addpc'}>
 							<span
 								className={
-									'ml-2 poppins-regular-18x float-sm-right color-white py-2 font-l hover-white' +
+									'ml-2 float-sm-right color-white py-2 hover-white poppins-medium-19px ' +
 									styles.addprojbtn +
 									styles.btncolor
 								}
@@ -170,7 +170,7 @@ const ManagePc = (props) => {
 					<div className="col-md-1">
 						<button
 							type="button"
-							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-regular-18px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color font-l"
+							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-19px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
 							onClick={() => handleSearch()}
 						>
 							FILTER
@@ -180,7 +180,7 @@ const ManagePc = (props) => {
 						{(searchPcnum != '' || searchPcname != '' || search === true) && (
 							<button
 								type="button"
-								className="btn w-100 btn-block float-right mt-2 mb-2 ms-2 poppins-regular-18px  border-0 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn font-l hover-white"
+								className="btn w-100 btn-block float-right mt-2 mb-2 ms-2 poppins-medium-19px  border-0 rounded-0 float-right mt-2 mb-2 ms-2 reset-btn hover-white"
 								onClick={() => handleReset()}
 							>
 								RESET
@@ -191,23 +191,23 @@ const ManagePc = (props) => {
 			</div>
 			<div className="row my-2 pt-2 m-0">
 					<div className={`col-md-10 d-flex`}>
-						<div className={`row py-2   ps-4 w-100 poppins-regular-16px ${styles.sectioncolor}`}>
-							<div className="col-md-1 align-items-center d-flex poppins-regular-16px">
-								<span className={`py-2 poppins-regular-16px ${styles.pcid} fw-bold`}>Serial number.</span>
+						<div className={`row py-2   ps-4 w-100 poppins-medium-18px ${styles.sectioncolor}`}>
+							<div className="col-md-1 align-items-center d-flex poppins-medium-18px">
+								<span className={`py-2 poppins-medium-18px ${styles.pcid} fw-bold`}>Sl.no</span>
 							</div>
 
-							<div className="row col-md-10 poppins-regular-16px">
-								<div className="col-md-2 py-2 ps- 4 fw-bold align-items-center d-flex poppins-regular-16px">
+							<div className="row col-md-11 poppins-medium-18px">
+								<div className="col-md-2 py-2 ps-4 fw-bold align-items-center d-flex poppins-medium-18px">
 									PC number
 								</div>
-								<div className="col-md-9 py-2 fw-bold align-items-center d-flex poppins-regular-16px">
+								<div className="col-md-9 py-2 fw-bold align-items-center d-flex poppins-medium-18px">
 									PC name
 								</div>
 							</div>
 						</div>
 					</div>
 					<div className="col-md-2  ps-3 pe-0 ">
-						<div className={`text-center ${styles.sectioncolor}  p-3 pe-0`}>
+						<div className={`text-center ${styles.sectioncolor} poppins-medium-18px p-4 fw-bold`}>
 							Actions
 						</div>
 					</div>
@@ -215,23 +215,23 @@ const ManagePc = (props) => {
 			{temp2.map((val, key) => (
 				<div className="row my-2 pt-2 m-0" key={key}>
 					<div className={`col-md-10 d-flex`}>
-						<div className={`row py-2   ps-4 w-100 poppins-regular-16px ${styles.sectioncolor}`}>
-							<div className="col-md-1 align-items-center d-flex poppins-regular-16px">
-								<span className={`py-2 poppins-regular-16px ${styles.pcid} fw-bold`}>{count+key+1}.</span>
+						<div className={`row py-2   ps-4 w-100 poppins-regular-18px ${styles.sectioncolor}`}>
+							<div className="col-md-1 align-items-center d-flex poppins-regular-18px">
+								<span className={`py-2 poppins-regular-18px ${styles.pcid} opacity-50`}> {count+key+1}.</span>
 							</div>
 
-							<div className="row col-md-10 poppins-regular-16px">
-								<div className="col-md-2 py-2 ps- 4 fw-bold align-items-center d-flex poppins-regular-16px">
+							<div className="row col-md-11 poppins-regular-18px">
+								<div className="col-md-2 py-2 ps-4 align-items-center d-flex poppins-regular-18px">
 									{val.pc_number}
 								</div>
-								<div className="col-md-9 py-2 fw-bold align-items-center d-flex poppins-regular-16px">
+								<div className="col-md-9 py-2 align-items-center d-flex poppins-regular-18px">
 									{val.pc_alias_name ? val.pc_alias_name : val.pc_name}
 								</div>
 							</div>
 						</div>
 					</div>
 					<div className="col-md-2  ps-3 pe-0 ">
-						<div className={`text-center ${styles.sectioncolor}  p-3 pe-0`}>
+						<div className={`text-center ${styles.sectioncolor}  p-3 `}>
 							<span className="pe-2">
 								<Link href={'/editpc/' + val.pc_unique_key}>
 									<a className="text-dark h5">
@@ -260,7 +260,7 @@ const ManagePc = (props) => {
 			))}
 			{data.length == 0 && (
 				<div className="bg-light py-3 mt-3">
-					<div className="text-center poppins-regular-16px"> No paritair comitee </div>
+					<div className="text-center poppins-regular-18px"> No paritair comitee </div>
 				</div>
 			)}
 			{data.length > itemsPerPage && (
@@ -273,7 +273,7 @@ const ManagePc = (props) => {
 						pageCount={pageCount}
 						previousLabel={<AiOutlineArrowLeft />}
 						renderOnZeroPageCount={null}
-						containerClassName={'pagination justify-content-center project-pagination'}
+						containerClassName={'pagination justify-content-center project-pagination align-items-center'}
 						itemClass="page-item"
 						linkClass="page-link"
 						subContainerClassName={'pages pagination'}
@@ -285,7 +285,7 @@ const ManagePc = (props) => {
 				<div className="col-md-6 p-0">
 					<button
 						type="button"
-						className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
+						className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px"
 						onClick={() => {
 							window.location.assign(
 								process.env.NEXT_PUBLIC_APP_URL_DRUPAL +

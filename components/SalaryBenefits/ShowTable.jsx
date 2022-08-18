@@ -170,7 +170,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
             subContainerClassName={"pages pagination justify-content-center project-pagination"}
             activeClassName={"active"}
         />}
-        <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5">
+        <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 ppoppins-medium-18px   float-sm-right mt-5 mb-5">
           {`Back`}
         </button>
       </div>

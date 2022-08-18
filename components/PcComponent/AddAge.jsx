@@ -506,7 +506,7 @@ const Addage = () => {
 						<div className="text-start col-md-6 p-0">
 							<button
 								type="button"
-								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
+								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px"
 								onClick={() => {
 									setCurrent_sec(2);
 								}}
@@ -517,7 +517,7 @@ const Addage = () => {
 						<div className="text-end col-md-6 p-0">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
