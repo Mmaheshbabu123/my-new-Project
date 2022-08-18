@@ -1090,28 +1090,37 @@ div[disabled] {
  .lang:hover {
     background-color: green !important;
  } */
-.project-pagination > .next > a {
+.project-pagination > .previous > a {
 	background-color: var(--color-purple);
-	color: var(--color-white);
+	color: var(--color-white) !important;
 	border: none;
 	padding: 5px 15px;
 	font-size: 20px;
 }
-.project-pagination > .previous > a {
+
+.project-pagination > .next > a {
+	background-color: var(--color-purple);
+	color: var(--color-white) !important;
+	border: none;
+	padding: 5px 15px;
+	font-size: 20px;
+}
+.project-pagination > .disabled > a {
 	background-color: var(--bg-gray-dark);
-	color: var(--color-white);
+	color: var(--color-white) !important;
 	border: none;
 	padding: 5px 15px;
 	font-size: 20px;
 }
 .project-pagination > .active > a {
 	background-color: var(--color-white);
-	color: var(--bg-gray-dark);
+	color: var(--color-grey-dark) !important;
 	border: none;
 	padding: 5px 15px;
 	font-size: 20px;
 }
 .project-pagination.pagination > li > a {
+	color: var(--bg-gray-dark);
 	border: none !important;
 	padding: 5px 15px;
 }

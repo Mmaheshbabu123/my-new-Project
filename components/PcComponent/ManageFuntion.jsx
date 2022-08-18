@@ -5,6 +5,7 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Popup from './Popupfunction';
 import ReactPaginate from 'react-paginate';
+import Pagination from './Pagination';
 
 import Link from 'next/link';
 
@@ -498,7 +499,9 @@ const ManageFunction = () => {
 				</div>
 				{functions.length >= itemsPerPage && (
 					<div className="row mt-1 mb-2">
-						<ReactPaginate
+						<Pagination itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}/>
+
+						{/* <ReactPaginate
 							breakLabel="..."
 							nextLabel={<AiOutlineArrowRight />}
 							onPageChange={handlePageClick}
@@ -511,7 +514,7 @@ const ManageFunction = () => {
 							linkClass="page-link"
 							subContainerClassName={'pages pagination'}
 							activeClassName={'active'}
-						/>
+						/> */}
 					</div>
 				)}
 				<div className="row">
