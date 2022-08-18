@@ -4,6 +4,10 @@ import { PcContext } from '../../Contexts/PcContext';
 import { RiHandCoinLine } from 'react-icons/ri';
 import { GrRotateRight } from 'react-icons/gr';
 import { MdOutlineGroups } from 'react-icons/md';
+import Image from 'next/image'
+import edit_icon from '../images/edit.svg';
+import age_icon from '../images/age.svg';
+import employee_type_icon from '../images/employee_type.svg'
 
 const Table = (props) => {
 	const [ thvalues, setThvalues ] = useState([]);
@@ -90,12 +94,32 @@ const Table = (props) => {
 					<thead />
 					<tbody>
 						<tr>
-							{thvalues.map((th_val, index) => (
-								<td className="fst-normal" key={index}>
-									{th_val}
+							{console.log(thvalues)}
+							{/* {thvalues.map((th_val, index) => ( */}
+								<td className="fst-normal first-col px-0 ">
+									<span className='first_col_row poppins-regular-18px'>
+										{thvalues[0]}
+									</span>
+									<br/>
+								<span className='second_col_row poppins-medium-18px'>
+									{tvalues[0]}
+								</span>
 								</td>
-							))}
-							<td className="text-end " rowSpan="2">
+								<td className="fst-normal second-col px-0" >
+								<span className='first_col_row poppins-regular-18px'>{thvalues[1]}</span>
+									<br/>
+									<span className='second_col_row poppins-medium-18px'>
+									{tvalues[1]}
+									</span>
+								</td>
+
+							{/* ))} */}
+							{/* {tvalues.map((tval, key) => (
+								<td className="fw-bold text-break poppins-regular-18px" key={key}>
+									{tval}
+								</td>
+							))} */}
+							<td className="text-end px-0 edit-icon-color">
 								{/* <div onClick={() => {editCatOrFun()}} className="h5">
 									{props.sectype != 'pc' && props.type == "addpc" && <FaEdit />}
 								</div> */}
@@ -107,11 +131,18 @@ const Table = (props) => {
 								>
 									{props.type == 'editpc' &&
 									props.sectype == 'pc' && (
-										<FaEdit
-											className="col-4C4D550F"
-											data-toggle="tooltip"
-											title="Edit paritair comite"
-										/>
+										<Image
+										src={edit_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit paritair comite"/>
+										// <FaEdit
+										// 	className="col-4C4D550F"
+											
+										// />
 									)}
 								</div>
 
@@ -123,11 +154,25 @@ const Table = (props) => {
 								>
 									{props.sectype == 'cat' &&
 									(props.type == 'addpc' || props.type == 'editpc') && (
-										<FaEdit lassName="col-4C4D550F" data-toggle="tooltip" title="Edit category" />
+										<Image
+										src={edit_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit category"/>
 									)}
 									{props.sectype == 'funct' &&
 									(props.type == 'addpc' || props.type == 'editpc') && (
-										<FaEdit lassName="col-4C4D550F" data-toggle="tooltip" title="Edit function" />
+										<Image
+										src={edit_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit function"/>
 									)}
 								</div>
 								<div
@@ -138,11 +183,15 @@ const Table = (props) => {
 								>
 									{props.sectype == 'pc' &&
 									props.type != 'addpc' && (
-										<GrRotateRight
-											className="col-4C4D550F"
-											data-toggle="tooltip"
-											title="Edit age"
-										/>
+
+										<Image
+										src={age_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit age"/>
 									)}
 								</div>
 								<div
@@ -153,12 +202,17 @@ const Table = (props) => {
 								>
 									{props.sectype == 'pc' &&
 									props.type != 'addpc' && (
-										<MdOutlineGroups
-											className="col-4C4D550F"
-											data-toggle="tooltip"
-											title="Edit employee type"
-										/>
+
+										<Image
+										src={employee_type_icon}
+										alt="edit"
+										id="editpc"
+										width={20}
+										height={20}
+										data-toggle="tooltip"
+											title="Edit employee type"/>
 									)}
+
 								</div>
 								<div
 									onClick={() => {
@@ -176,16 +230,18 @@ const Table = (props) => {
 									)}
 								</div>
 							</td>
+							
 						</tr>
 
-						<tr>
+						{/* <tr>
 							{tvalues.map((tval, key) => (
 								<td className="fw-bold text-break poppins-regular-18px" key={key}>
 									{tval}
 								</td>
 							))}
 							<td />
-						</tr>
+						</tr> */}
+
 					</tbody>
 				</table>
 			)}

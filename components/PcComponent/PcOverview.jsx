@@ -151,23 +151,23 @@ const PcOverview = (params) => {
 			<div className="row pt-4 min-vh-75 pc-height2">
 				<div className={` ${cat_leftsec}`}>
 					{params.type == 'editpc' ? (
-						<p className="mt-1 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Edit paritair comite</p>
+						<p className="mt-1 mb-5 font-weight-bold   px-0  bitter-italic-normal-medium-24">Edit paritair comite</p>
 					) : params.type == 'viewpc' ? (
-						<p className="mt-1 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">View paritair comite</p>
+						<p className="mt-1 mb-5 font-weight-bold   px-0  bitter-italic-normal-medium-24">View paritair comite</p>
 					) : (
 						''
 					)}
 					{pc && (
 						<div className='epc'>
-							{cat_subsec_type == 0 &&
+							{
 							params.type != 'viewpc' && (
-								<div className="text-end mb-3">
+								<div className={cat_subsec_type ==0?"text-end mb-3":"invisible"} style={pc_view_type =='addpc'?{marginBottom:'1.5rem'}:{}}>
 									<button
 										type="button"
 										to="category"
 										pcid={pc_unique_key}
 										// className={'btn me-3 blue-border-bg-white' + styles.btncolor}
-										className='btn me-3 blue-border-bg-white  me-3'
+										className='btn me-3 blue-border-bg-white  me-3 p-3 '
 										onClick={() => {
 											setCat_leftsec('col-md-9');
 											setCat_rightsec('d-block col-md-3');
@@ -180,7 +180,7 @@ const PcOverview = (params) => {
 										type="button"
 										to="function"
 										pcid={pc_unique_key}
-										className='btn me-2 blue-border-bg-white'
+										className='btn blue-border-bg-white p-3 '
 										onClick={() => {
 											setCat_leftsec('col-md-9');
 											setCat_rightsec('d-block col-md-3');
@@ -194,7 +194,7 @@ const PcOverview = (params) => {
 							<div className=''>
 							<ul className={`list-unstyled ${styles.tree}`}>
 								<li className={styles.sectioncolor}>
-									<ul className={`list-inline my-2 list-unstyled  pc ${styles.tree}`}>
+									<ul className={`list-inline my-2 list-unstyled  pc ${styles.tree} d-flex align-items-baseline`}>
 										<li className="list-inline-item section-plus-icon  align-top fs-4 mrg-lf-rt ">
 											{/* <a
 												// data-bs-toggle="collapse"
@@ -260,7 +260,7 @@ const PcOverview = (params) => {
 													<li>
 														<ul className="list-inline my-2 ">
 															<li className='sectioncolor'>
-																<ul>
+																<ul className='d-flex align-items-baseline'>
 																	<li className="list-inline-item section-plus-icon fs-4 mrg-lf-rt align-top">
 																		<span>
 																			{pc['childObj'] && console.log(pc['childObj'])}
@@ -357,7 +357,7 @@ const PcOverview = (params) => {
 													</li>
 												) : (
 													<li>
-														<ul>
+														<ul className='d-flex sectioncolor align-items-baseline'>
 															<li className="list-inline-item section-plus-icon align-top mrg-lf-rt fs-4  ">
 																{console.log(pc['childObj'][val]['childObj'])}
 																{pc['childObj'][val]['collapseOpen'] == true || pc['childObj'][val]['childObj'] == undefined ? (
@@ -463,14 +463,14 @@ const PcOverview = (params) => {
 						</div>
 					)}
 				</div>
-				<div className={`col pt-2  ${cat_rightsec}`}>
+				<div className={`col pt-2 ${cat_rightsec} ${pc_view_type == 'editpc'?'mt-5 pt-4':''}`}>
 					{pc_view_type != 'viewpc' && (
 						<div className="text-center form-group row m-0 ">
 							<button
 								type="button"
 								to="category"
 								pcid={pc_unique_key}
-								className='btn  blue-border-bg-white col me-3'
+								className='btn  blue-border-bg-white col me-3 p-3 '
 								onClick={() => {
 									setCat_subsec_type(1);
 									setCat_subsec_id('');
@@ -482,7 +482,7 @@ const PcOverview = (params) => {
 								type="button"
 								to="function"
 								pcid={pc_unique_key}
-								className= 'btn  blue-border-bg-white col'
+								className= 'btn  blue-border-bg-white col p-3'
 								onClick={() => {
 									setCat_subsec_type(2);
 									setCat_subsec_id('');

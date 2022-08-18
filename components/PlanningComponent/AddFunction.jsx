@@ -96,7 +96,9 @@ const AddFunction = () => {
 			} else {
 				func = '';
 				if (value.salary == '' || value.salary == null || value.salary == undefined) {
+					if(count==0){
 					value.salary = value.function_salary;
+					}
 				} else {
 					sal =
 						emp == '' && value.salary != '' && value.salary != null && value.salary != undefined
@@ -108,7 +110,7 @@ const AddFunction = () => {
 					let rsalary = String(value.salary).replace(',', '.');
 					let rfsalary = String(value.function_salary).replace(',', '.');
 					if (sal == '' && parseFloat(rsalary) < parseFloat(rfsalary)) {
-						sal = 'You cannot enter salary lesser than the minimum salary';
+						sal = 'The new salary cannot be lesser than the minimum salary. The minimum salary for the selected function is '+value.function_salary+' Euro';
 						count++;
 					}
 				}
@@ -247,16 +249,21 @@ const AddFunction = () => {
 	function setsaalary(index, e) {
 		var object = [ ...employeeobject ];
 		let value = e.target.value;
-
 		if (value != '') {
 			let rsalary = String(value).replace(',', '.');
 			let rfsalary = String(object[index].function_salary).replace(',', '.');
-			if (parseFloat(rsalary) > parseFloat(rfsalary)) {
-				object[index].warning =
-					'We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will considered as the minimum salary for all the future planning.';
-			} else {
-				object[index].warning = '';
-			}
+			let err=ValidationService.minSalaryValidationMethod(value.toString());
+			if(err==''){
+				if (parseFloat(rsalary) > parseFloat(rfsalary)) {
+					object[index].warning =
+					'We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will be considered as the minimum salary for all the future planning for this employee. You can click on next to proceed further.';
+					object[index].salaryerror ='';
+				} else {
+					object[index].warning = '';
+					}
+				}else{
+					object[index].warning = '';
+				}
 			updatingObjectSlary(index, value);
 		} else {
 			updatingObjectSlary(index, value);
@@ -567,7 +574,7 @@ const AddFunction = () => {
 												</div>
 											</div>
 											{!ischecked &&
-												key['functionslist'].map((deta, ind) => {
+												key['functionslist']!=undefined&&key['functionslist'].map((deta, ind) => {
 													{
 														var group = 'function';
 													}
