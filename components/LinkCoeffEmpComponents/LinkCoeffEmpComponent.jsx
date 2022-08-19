@@ -70,9 +70,10 @@ const LinkCoeffEmpComponent = (props) => {
       proceed = false;
       updateStateChanges({ pcWarning: true })
     }
-    if (state.selectedPc && !helpers.checkCoefficientsFilledOrNot(state.coefficientTypeArray, state.employeeTypeArray, state.pclinkingValueobj)) {
+    const { status, regExpressionStatus } = helpers.checkCoefficientsFilledOrNot(state.coefficientTypeArray, state.employeeTypeArray, state.pclinkingValueobj);
+    if (state.selectedPc && (!status || !regExpressionStatus)) {
       proceed = false;
-      updateStateChanges({ emptyDataWarning: true })
+      updateStateChanges({ emptyDataWarning: !status, regExpWarning: !regExpressionStatus })
     }
     if (state.lowHighValidation.length)
       proceed = false;
@@ -102,6 +103,7 @@ const LinkCoeffEmpComponent = (props) => {
       selectedPc: e.value,
       pcWarning: false,
       emptyDataWarning: false,
+      regExpWarning: false,
       pclinkingValueobj: {},
       lowHighValidation: [],
       valueErrorArray: [],
@@ -162,6 +164,9 @@ const LinkCoeffEmpComponent = (props) => {
           {state.defaultValueError.length > 0 &&
             <small className="col-md-3 mt-3 mb-3 warning-message">
               {`Default value should be in between low and high values.`}
+            </small>}
+            {state.regExpWarning === true && <small className="col-md-10 mt-3 mb-3 warning-message" id="reg-expression-div">
+              {`Please enter proper values.`}
             </small>}
         </div>
         <div className="col-md-12 m-0 p-0 relative-div">

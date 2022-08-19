@@ -19,7 +19,7 @@ const LinkCoeffEmpStates = (props) => {
     , highKey: 3
     , minValue: 0
     , maxValue: 10
-    , regexp: /^[0-9,.]*$/
+    , regexp: /^[0-9,]*$/
     , valueErrorArray: []
     , defaultValueError: []
     , emptyDataWarning: false

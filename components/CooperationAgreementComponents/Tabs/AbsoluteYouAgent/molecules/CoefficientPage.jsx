@@ -28,7 +28,7 @@ const CoefficientPage = (props) => {
     , highKey: 3
     , minValue: 0
     , maxValue: 10
-    , regexp: /^[0-9,.]*$/
+    , regexp: /^[0-9,]*$/
     , valueErrorArray: []
     , emptyDataWarning: false
     , isOverflow: false
