@@ -208,7 +208,7 @@ function AddCategory(props) {
 	return (
 		<div className="mt-3 table-title-bg p-3">
 			<form onSubmit={submit}>
-				{id != '' ? <h4 className="h5 mb-3">Edit category</h4> : <h4 className="h5 mb-4 bitter-italic biiter_medium_italic_20px">Add category</h4>}
+				{id != '' ? <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">Edit category</h4> : <h4 className="h5 mb-4 bitter-italic biiter_medium_italic_20px">Add category</h4>}
 				<div className="row">
 					<label className=" custom_astrick mt-2 poppins-regular-18px">Category name</label>
 					<div className="form-group ">

@@ -160,11 +160,11 @@ const EmployeeType = () => {
 	};
 
 	return (
-		<div className={pc_view_type == 'addpc'?"container-fluid p-0":"sectioncolor p-3 my-3"}>
+		<div className={pc_view_type == 'addpc'?"container-fluid p-0":pc_view_type == 'viewpc'?"my-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
 			<form onSubmit={submit}>
-			{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
+			{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3 bitter_medium_italic_18px mb-4">Employee type</h4> :'')}
             <div className='pc-height4'>
-				<div className={pc_view_type == 'addpc'?"row pt-0 border-form-sec m-0 p-5 ":"border-0"}>
+				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 p-5 ":"border-0"}>
 				<p className="mt-1 p-0" style={{ color: 'red' }}>
 						{error_emp_type}
 					</p>
@@ -173,14 +173,14 @@ const EmployeeType = () => {
 							<input
 								disabled={disableForm}
 								type="checkbox"
-								className="form-check-input rounded-0 poppins-regular-18px "
+								className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px ":"form-check-input rounded-0 poppins-regular-18px border-0"}
 								value={val.id}
 								checked = {res.includes(val.id)?true:false} 
 								onChange={(e) => {
 									updateRes(e);
 								}}
 							/>
-							<label className={pc_view_type == 'addpc'? "form-check-label poppins-regular-18px":" form-check-label poppins-regular-18px"} > {val.name}</label>
+							<label className={pc_view_type == 'addpc'? "form-check-label poppins-regular-18px":" form-check-label poppins-regular-18px"} style={res.includes(val.id)?{opacity:'1'}:{}} > {val.name}</label>
 						</div>
 					// 	<div className="form-check mt-4">
 					// 	<input
@@ -208,7 +208,7 @@ const EmployeeType = () => {
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"
+								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"}
 							>
 								SAVE
 							</button>
@@ -219,7 +219,7 @@ const EmployeeType = () => {
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0"
+							className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0"}
 							onClick={() => {
 								setCurrent_sec(3);
 							}}
@@ -230,7 +230,7 @@ const EmployeeType = () => {
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px"
+							className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px":"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px"}
 						>
 							NEXT
 						</button>
