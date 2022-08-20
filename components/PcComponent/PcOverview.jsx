@@ -194,8 +194,8 @@ const PcOverview = (params) => {
 							<div className=''>
 							<ul className={`list-unstyled ${styles.tree}`}>
 								<li className={styles.sectioncolor}>
-									<ul className={`list-inline my-2 list-unstyled  pc ${styles.tree} d-flex align-items-baseline`}>
-										<li className="list-inline-item section-plus-icon  align-top fs-4 mrg-lf-rt ">
+									<ul className={`list-inline my-2 list-unstyled  pc ${styles.tree} d-flex `}>
+										<li className="list-inline-item section-plus-icon align-top fs-4 mrg-lf-rt mt-3">
 											{/* <a
 												// data-bs-toggle="collapse"
 												// href={'#collapsepc' + pc_unique_key}
@@ -260,8 +260,8 @@ const PcOverview = (params) => {
 													<li>
 														<ul className="list-inline my-2 ">
 															<li className='sectioncolor'>
-																<ul className='d-flex align-items-baseline'>
-																	<li className="list-inline-item section-plus-icon fs-4 mrg-lf-rt align-top">
+																<ul className='d-flex'>
+																	<li className="list-inline-item section-plus-icon fs-4 mrg-lf-rt align-top mt-3">
 																		<span>
 																			{pc['childObj'] && console.log(pc['childObj'])}
 																			{pc['childObj'][val]['collapseOpen'] ==
@@ -357,8 +357,8 @@ const PcOverview = (params) => {
 													</li>
 												) : (
 													<li className='sectioncolor'>
-														<ul className='d-flex align-items-baseline'>
-															<li className="list-inline-item section-plus-icon align-top mrg-lf-rt fs-4  ">
+														<ul className='d-flex'>
+															<li className="list-inline-item section-plus-icon align-top mrg-lf-rt fs-4 mt-3 ">
 																{console.log(pc['childObj'][val]['childObj'])}
 																{pc['childObj'][val]['collapseOpen'] == true || pc['childObj'][val]['childObj'] == undefined ? (
 																	<AiFillMinusSquare
