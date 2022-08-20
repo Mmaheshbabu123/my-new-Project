@@ -148,7 +148,7 @@ const ManagePc = (props) => {
 					</span>
 				</div>
 				<div className="col-md-12 row m-0 p-0">
-					<div className="col-md-3 ps-0">
+					<div className="col-md-4 ps-0">
 						<input
 							type="search"
 							id="form12"
@@ -159,7 +159,7 @@ const ManagePc = (props) => {
 						/>
 					</div>
 
-					<div className="col-md-3">
+					<div className="col-md-4">
 						<input
 							type="search"
 							id="form12"
@@ -170,7 +170,7 @@ const ManagePc = (props) => {
 						/>
 					</div>
 
-					<div className="col-md-1">
+					<div className="col-md-2">
 						<button
 							type="button"
 							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-18px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color add-pln"
@@ -179,7 +179,7 @@ const ManagePc = (props) => {
 							FILTER
 						</button>
 					</div>
-					<div className="col-md-1">
+					<div className="col-md-2">
 						{(searchPcnum != '' || searchPcname != '' || search === true) && (
 							<button
 								type="button"
@@ -233,7 +233,7 @@ const ManagePc = (props) => {
 							</div>
 						</div>
 					</div>
-					<div className="col-md-2  ps-3 pe-0 ">
+					<div className="col-md-2  ps-3 pe-0 align-self-center">
 						<div className={`text-center ${styles.sectioncolor}  p-3 `}>
 							<span className="pe-2">
 								<Link href={'/editpc/' + val.pc_unique_key}>

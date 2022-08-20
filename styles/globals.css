@@ -843,9 +843,9 @@ label {
 	top: 0;
 	z-index: 999;
 }
-.add-pln:hover {
+/* .add-pln:hover {
 	color: var(--color-white);
-}
+} */
 .add-pln {
     height: 55px;
 }
@@ -1625,10 +1625,15 @@ li.next
 	font-size: 20px;
 	color: var(--bg-gray-dark);
 }
+.pagination>.active>a
+{
+	background-color: transparent !important;
+}
 .project-pagination > .active > a,
 .project-pagination > .active > a:hover
 {
 	color: var(--color-purple) !important;
+	background-color: transparent !important;
 }
 input[type="text"]::placeholder
 {

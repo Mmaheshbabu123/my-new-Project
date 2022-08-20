@@ -356,8 +356,8 @@ const PcOverview = (params) => {
 														</ul>
 													</li>
 												) : (
-													<li>
-														<ul className='d-flex sectioncolor align-items-baseline'>
+													<li className='sectioncolor'>
+														<ul className='d-flex align-items-baseline'>
 															<li className="list-inline-item section-plus-icon align-top mrg-lf-rt fs-4  ">
 																{console.log(pc['childObj'][val]['childObj'])}
 																{pc['childObj'][val]['collapseOpen'] == true || pc['childObj'][val]['childObj'] == undefined ? (

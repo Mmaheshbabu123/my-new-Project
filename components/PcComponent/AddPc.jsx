@@ -406,7 +406,7 @@ function AddPc(props) {
 
 							{/* BUFFER TIMING */}
 
-							<div className={pc_view_type == 'addpc'?"form-group mb-3 py-2 col-md-6 flex-1 ms-2":" px-0 poppins-regular-18px my-2"}>
+							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2":" px-0 poppins-regular-18px my-2"}>
 								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Buffer time between two plannings</label>
 
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
