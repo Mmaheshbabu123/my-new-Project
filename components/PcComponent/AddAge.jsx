@@ -336,7 +336,7 @@ const Addage = () => {
 		return valid;
 	};
 	return (
-		<div className={pc_view_type == 'addpc'?"":pc_view_type == 'viewpc'?"mt-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
+		<div className={pc_view_type == 'addpc'?"":pc_view_type == 'viewpc'?"my-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
 			<form onSubmit={(e) => submit(e)}>
 				{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3 ":"bitter_medium_italic_18px mb-4"}>Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3 bitter_medium_italic_18px mb-4">Age</h4>:'')}
 
