@@ -6,9 +6,16 @@ import { GrRotateRight } from 'react-icons/gr';
 import { MdOutlineGroups } from 'react-icons/md';
 import Image from 'next/image'
 import edit_icon from '../images/edit.svg';
+import edit_active_icon from '../images/edit_active.svg';
+
 import age_icon from '../images/age.svg';
+import age_active_icon from '../images/age_Active.svg';
+
 import employee_type_icon from '../images/employee_type.svg';
+import employee_type_active_icon from '../images/employee_type_active.svg';
 import hand_money_icon from '../images/hand-money.svg'
+import hand_money_active_icon from '../images/hand-money-active.svg'
+
 
 const Table = (props) => {
 	const [ thvalues, setThvalues ] = useState([]);
@@ -131,19 +138,14 @@ const Table = (props) => {
 									className="h5"
 								>
 									{props.type == 'editpc' &&
-									props.sectype == 'pc' && (
-										<Image
-										src={edit_icon}
+									props.sectype == 'pc' && (<Image
+										src={cat_subsec_type == 3?edit_active_icon:edit_icon}
 										alt="edit"
 										id="editpc"
 										width={20}
 										height={20}
 										data-toggle="tooltip"
 											title="Edit paritair comite"/>
-										// <FaEdit
-										// 	className="col-4C4D550F"
-											
-										// />
 									)}
 								</div>
 
@@ -156,7 +158,7 @@ const Table = (props) => {
 									{props.sectype == 'cat' &&
 									(props.type == 'addpc' || props.type == 'editpc') && (
 										<Image
-										src={edit_icon}
+										src={props.sectype == 'cat' && cat_subsec_id == props.secId?edit_active_icon:edit_icon}
 										alt="edit"
 										id="editpc"
 										width={20}
@@ -167,7 +169,7 @@ const Table = (props) => {
 									{props.sectype == 'funct' &&
 									(props.type == 'addpc' || props.type == 'editpc') && (
 										<Image
-										src={edit_icon}
+										src={props.sectype == 'funct' && cat_subsec_id == props.secId?edit_active_icon:edit_icon}
 										alt="edit"
 										id="editpc"
 										width={20}
@@ -184,15 +186,15 @@ const Table = (props) => {
 								>
 									{props.sectype == 'pc' &&
 									props.type != 'addpc' && (
-
+										
 										<Image
-										src={age_icon}
+										src={cat_subsec_type == 4?age_active_icon:age_icon}
 										alt="edit"
 										id="editpc"
 										width={20}
 										height={20}
 										data-toggle="tooltip"
-											title="Edit age"/>
+											title={props.type=="editpc"?"Edit age":"View age"}/>
 									)}
 								</div>
 								<div
@@ -203,15 +205,14 @@ const Table = (props) => {
 								>
 									{props.sectype == 'pc' &&
 									props.type != 'addpc' && (
-
 										<Image
-										src={employee_type_icon}
+										src={cat_subsec_type == 5?employee_type_active_icon:employee_type_icon}
 										alt="edit"
 										id="editpc"
 										width={20}
 										height={20}
 										data-toggle="tooltip"
-											title="Edit employee type"/>
+											title={props.type=="editpc"?"Edit employee type":"View employee type"}/>
 									)}
 
 								</div>
@@ -224,18 +225,13 @@ const Table = (props) => {
 									{props.sectype == 'pc' &&
 									props.type != 'addpc' && (
 										<Image
-										src={hand_money_icon}
-										alt="edit"
-										id="editpc"
-										width={20}
-										height={20}
-										data-toggle="tooltip"
-											title="Edit salary benefits"/>
-										// <RiHandCoinLine
-										// 	className="col-4C4D550F"
-										// 	data-toggle="tooltip"
-										// 	title="Edit salary benefits"
-										// />
+											src={cat_subsec_type == 6?hand_money_active_icon:hand_money_icon}
+											alt="edit"
+											id="editpc"
+											width={20}
+											height={20}
+											data-toggle="tooltip"
+											title={props.type=="editpc"?"Edit salary benefits":"View salary benefits"}/>
 									)}
 								</div>
 							</td>
