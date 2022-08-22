@@ -6,11 +6,11 @@ import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { FiDownload } from 'react-icons/fi';
-import SearchIcon from '../../SearchIcon';
 import ReactPaginate from 'react-paginate';
 const itemsPerPage = 8;
 
 const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props }) => {
+  entityType === 2 ? headers.splice(headers.indexOf('Employer'), 1) : [];
   const router = useRouter();
   const [state, setState] = useState({
     searchTerm: '',
@@ -123,6 +123,18 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
     )
   }
 
+  const getEntityName = (eachRow, type) => {
+    let { employerId, companyId } = eachRow;
+    let { companies, employers } = props;
+    let rowObj = {};
+    if(type) {
+      rowObj = companies[employerId] ? companies[employerId].filter(val => val.id === companyId) : [];
+    } else {
+      rowObj = employers ? employers.filter(val => val.id === employerId) : [];
+    }
+    return rowObj.length ? rowObj[0]['label'] : '';
+  }
+
   return (
     <>
       <div className='col-md-12 text-end'>
@@ -130,7 +142,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
         onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
         type="button"
         className="btn btn-dark pcp_btn col-3">
-        {`+Add a document`}
+        {`+Add my document`}
       </button>}
       </div>
       <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
@@ -172,6 +184,8 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
             <tbody>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
                 <td> {eachRow.name} </td>
+                {entityType !== 2 ? <td width="170px"> {getEntityName(eachRow)} </td> : null}
+                <td width="170px"> {getEntityName(eachRow, 1)} </td>
                 <td> {formatDate(eachRow.startDate) || '-'} </td>
                 <td> {formatDate(eachRow.endDate) || '-'} </td>
                 <td> {eachRow.linkToCooperationAgreement ? 'Yes' : 'No'} </td>
