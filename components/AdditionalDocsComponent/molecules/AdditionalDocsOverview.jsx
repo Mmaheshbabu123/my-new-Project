@@ -10,7 +10,7 @@ import ReactPaginate from 'react-paginate';
 const itemsPerPage = 8;
 
 const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props }) => {
-  entityType === 2 ? headers.splice(headers.indexOf('Employer'), 1) : [];
+  entityType === 2 ? headers.indexOf('Employer') > -1 ? headers.splice(headers.indexOf('Employer'), 1) : headers : [];
   const router = useRouter();
   const [state, setState] = useState({
     searchTerm: '',
