@@ -12,7 +12,7 @@ const AdditionalDocsMain = (props) => {
     , employers: []
     , companies: {}
     , assignedData: {}
-    , headers: ['Document name', 'Start date', 'End date', 'Link to cooperation agreeemnt', 'Actions']
+    , headers: ['Document name', 'Start date', 'End date', 'Link to cooperation agreement', 'Actions']
     , documentDetails: {}
   })
 

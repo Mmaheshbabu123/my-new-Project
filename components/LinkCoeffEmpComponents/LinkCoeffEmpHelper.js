@@ -50,9 +50,11 @@ function checkEachCoefficientValue(filledCoeffObj) {
       if(item[lowKey] === '' || item[highKey] === '' || item[lowKey] === undefined || item[highKey] === undefined) {
         status = false;
       } else if ((item[lowKey] && item[lowKey].length && !item[lowKey].match(regExp)) || (item[highKey] && item[highKey].length && !item[highKey].match(regExp))) {
+        console.log(item);
         regExpressionStatus = false;
       }
     } else if ((item[defaultKey] && item[defaultKey].length && !item[defaultKey].match(regExp)) || (item[lowKey] && item[lowKey].length && !item[lowKey].match(regExp)) || (item[highKey] && item[highKey].length && !item[highKey].match(regExp))) {
+      console.log(item);
       regExpressionStatus = false;
     }
   });
