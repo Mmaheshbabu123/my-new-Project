@@ -319,7 +319,7 @@ function Planning(props) {
 							<button
 								onClick={showPopup}
 								type="button"
-								className=" btn my-2 skyblue-bg-color border-0 poppins-regular-18px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln"
+								className=" btn my-2 skyblue-bg-color border-0 poppins-medium-19px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln"
 							>
 								<span style={{ fontSize: '24px' }} className="">
 									+
@@ -328,15 +328,15 @@ function Planning(props) {
 							</button>
 						)}
 					</div>
-					<div className="form-sec border-form-sec p-5">
+					<div className="form-sec border-form-sec p-4 mb-5">
 						<div className="col-md-6">
 							<div className="form-group mb-3">
-								<label className="form-label mb-2 mt-2 custom_astrick poppins-regular-16px">
+								<label className="form-label mt-2 custom_astrick poppins-regular-18px">
 									Company
 								</label>
 								<select
 									value={companyid}
-									className="form-select mb-2 mt-2 poppins-regular-16px rounded-0"
+									className="form-select mb-2 poppins-regular-16px rounded-0"
 									placeholder="select company"
 									onChange={(e) => {
 										updateLocation(e.target.value);
@@ -353,12 +353,12 @@ function Planning(props) {
 							</div>
 
 							<div className="form-group mb-3">
-								<label className="form-label mb-2 mt-2 custom_astrick poppins-regular-16px">
+								<label className="form-label mt-2 custom_astrick poppins-regular-18px">
 									Location
 								</label>
 								<select
 									value={locationid}
-									className="form-select mb-2 mt-2 poppins-regular-16px rounded-0"
+									className="form-select mb-2 poppins-regular-16px rounded-0"
 									onChange={(e) => {
 										setLocationid(e.target.value);
 										updateCostCenter(e.target.value);
@@ -379,9 +379,9 @@ function Planning(props) {
 							</div>
 
 							<div className="form-group mb-3">
-								<label className="form-label mb-2 mt-2 poppins-regular-16px">Cost center</label>
+								<label className="form-label mt-2 poppins-regular-18px">Cost center</label>
 								<select
-									className="form-select mb-2 mt-2 poppins-regular-16px rounded-0"
+									className="form-select mb-2 poppins-regular-16px rounded-0"
 									value={costcenterid}
 									onChange={(e) => {
 										setCostcenterid(e.target.value);
@@ -444,7 +444,8 @@ function Planning(props) {
 					<div className="col-md-6 p-0">
 						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/options'}>
-								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px ">
+								{/* <p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px "> */}
+								<p className="bg-white border-0 poppins-light-19px text-decoration-underline ">
 									BACK
 								</p>
 							</Link>
@@ -453,7 +454,8 @@ function Planning(props) {
 					<div className="col-md-6 p-0">
 						<button
 							type="submit"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end"
+							// className="btn rounded-0 custom-btn px-3 btn-block float-end"
+							className="btn rounded-0 px-3 float-end poppins-light-19px-next-button"
 							onClick={() => {
 								setUniquekey(router.query.p_unique_key);
 							}}

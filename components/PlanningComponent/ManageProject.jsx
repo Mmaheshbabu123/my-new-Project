@@ -10,6 +10,7 @@ import ReactPaginate from 'react-paginate';
 import Link from 'node_modules/next/link';
 import Image from 'next/image';
 import UpdatePlanningIcon from '../images/Update-planning.svg';
+import Pagination from '../PcComponent/Pagination';
 
 function ManageProject(props) {
 	const router = useRouter();
@@ -235,7 +236,7 @@ function ManageProject(props) {
 						{/* ----------------Search functionality--------------------------------*/}
 
 						<div className="row d-flex mt-3">
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<input
 									type="search"
 									id="form12"
@@ -246,7 +247,7 @@ function ManageProject(props) {
 								/>
 							</div>
 
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<input
 									type="search"
 									id="form12"
@@ -257,7 +258,7 @@ function ManageProject(props) {
 								/>
 							</div>
 
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<input
 									type="search"
 									id="form12"
@@ -267,11 +268,12 @@ function ManageProject(props) {
 									onChange={(e) => setSearchaddress(e.target.value)}
 								/>
 							</div>
-							<div className="col-sm-3">
-								<div className="col-md-1">
+							<div className="col-sm-3 field_height">
+								<div className='row'>
+								<div className="col-md-6">
 									<button
 										type="button"
-										className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+										className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100"
 										onClick={() => handleSearch()}
 									>
 										SEARCH
@@ -279,52 +281,54 @@ function ManageProject(props) {
 								</div>
 								{/*---------------- Reset functionality---------------------- */}
 
-								<div className="col-md-1">
+								<div className="col-md-6">
 									{(searchProjectname != '' ||
 										searchlocation != '' ||
 										searchaddress != '' ||
 										search === true) && (
 										<button
 											type="button"
-											className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+											className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100"
 											onClick={() => handleReset()}
 										>
 											RESET
 										</button>
 									)}
 								</div>
+								</div>
 							</div>
 						</div>
 						{/* ---------------------Manage project table-------------------------*/}
 
-						<div className="form-check p-0 mt-2 text-center max-height-420 tab-pane fade show ">
-							<table className="table   mt-3 mb-3 text-center">
+						<div className="form-check p-0 mt-2 tab-pane fade show ">
+							<table className="table mt-3 mb-3">
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-										<th className="poppins-regular-18px justify-content-center d-flex align-items-center btn-bg-gray-medium">
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-4">
 											Project name
 										</th>
-										<th className="poppins-regular-18px btn-bg-gray-medium">Location</th>
-										<th className="poppins-regular-18px btn-bg-gray-medium">Address</th>
-										<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-4">Location</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-4">Address</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-4">Action</th>
 									</tr>
 								</thead>
+								{/* <hr className="table-header-space"/> */}
 								<tbody>
 									{projectTemp2.length > 0 &&
 										projectTemp2.map((result) => (
-											<tr className="border poppinns-regular-thin p-2" key={result.id}>
-												<td className="poppinns-regular-thin">{result.project_name}</td>
-												<td className="poppinns-regular-thin">{result.project_location}</td>
-												<td className="poppinns-regular-thin">
+											<tr className="border poppins-regular-18px p-2" key={result.id}>
+												<td className="poppins-regular-18px p-4">{result.project_name}</td>
+												<td className="poppins-regular-18px p-4">{result.project_location}</td>
+												<td className="poppins-regular-18px p-4">
 													{result.address.replace(',', '').length > 7 ? result.address : '-'}
 												</td>
 												{/*-------------------------Edit projects------------------------- */}
 
-												<td className="d-flex justify-content-center">
+												<td className="p-4">
 													<Link href={'/editproject/' + result.id} className="">
 														<a type="button">
 															<MdEdit
-																className="mt-2 ms-3 color-skyblue"
+																className="color-skyblue"
 																data-toggle="tooltip"
 																title="Edit project"
 															/>
@@ -337,6 +341,7 @@ function ManageProject(props) {
 															type="button"
 															onClick={() =>
 																router.push('/planning/add/' + result.p_unique_key)}
+																className='mt-2 align-middle'
 														>
 															<Image
 																src={UpdatePlanningIcon}
@@ -346,8 +351,8 @@ function ManageProject(props) {
 																data-toggle="tooltip"
 																title="Update planning"
 																id="Update_p"
-																// width={500}
-																// height={500}
+																width={20}
+																height={20}
 															/>
 
 															{/* <GrUpdate
@@ -363,7 +368,7 @@ function ManageProject(props) {
 									{/*----------------------------No records found-------------------------- */}
 									{project.length == 0 && (
 										<tr>
-											<td colSpan={4} className="text-center">
+											<td colSpan={4} className="text-center ">
 												No records
 											</td>
 										</tr>
@@ -377,20 +382,21 @@ function ManageProject(props) {
 				{/*-------------------------- Pagination---------------------------*/}
 				<div className="row my-4">
 					{project.length > itemsPerPage && (
-						<ReactPaginate
-							breakLabel="..."
-							nextLabel={<AiOutlineArrowRight />}
-							onPageChange={handlePageClick}
-							pageRangeDisplayed={5}
-							pageCount={pageCount}
-							previousLabel={<AiOutlineArrowLeft />}
-							renderOnZeroPageCount={null}
-							containerClassName={'pagination justify-content-center project-pagination'}
-							itemClass="page-item"
-							linkClass="page-link"
-							subContainerClassName={'pages pagination'}
-							activeClassName={'active'}
-						/>
+							<Pagination itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}/>
+						// <ReactPaginate
+						// 	breakLabel="..."
+						// 	nextLabel={<AiOutlineArrowRight />}
+						// 	onPageChange={handlePageClick}
+						// 	pageRangeDisplayed={5}
+						// 	pageCount={pageCount}
+						// 	previousLabel={<AiOutlineArrowLeft />}
+						// 	renderOnZeroPageCount={null}
+						// 	containerClassName={'pagination justify-content-center project-pagination'}
+						// 	itemClass="page-item"
+						// 	linkClass="page-link"
+						// 	subContainerClassName={'pages pagination'}
+						// 	activeClassName={'active'}
+						// />
 					)}
 				</div>
 				{/*---------------Back to dashobard redirection------------------ */}

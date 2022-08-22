@@ -45,7 +45,7 @@ function Header() {
 								<li className="list-unstyled mx-3 align-self-center d-flex">
 									<select
 										type=""
-										className="border-0 bg-white poppins-regular-16px p-1 mt-1 lang-options"
+										className="border-0 bg-white poppins-regular-18px p-1 mt-1 lang-options"
 									>
 										<option className="lang">EN</option>
 										<option className="lang">NL</option>

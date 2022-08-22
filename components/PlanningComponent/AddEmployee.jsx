@@ -106,7 +106,7 @@ const AddEmployee = () => {
 				<div className="col-md-12 selectemp-height">
 					<div className="row col-md-6 m-auto select-relative slt-emp">
 						<label
-							className="custom_astrick form-label mb-3 custom_astrick poppins-regular-18px"
+							className="custom_astrick form-label mb-1 custom_astrick poppins-medium-22px"
 							style={{}}
 						>
 							Employee
@@ -118,11 +118,11 @@ const AddEmployee = () => {
 							value={selectedOption}
 							isMulti
 							name="employees"
-							className="poppins-regular-16px rounded-0"
+							className="poppins-regular-16px rounded-0 select_employee_container"
 							options={Data}
 							onChange={setSelectedOption}
 						/>
-						<span style={{ color: 'red' }}>{Error}</span>
+						<span style={{ color: 'red'}}>{Error}</span>
 					</div>
 				</div>
 				<div className="row">
@@ -142,7 +142,7 @@ const AddEmployee = () => {
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className="btn btn-secondary rounded-0  custom-btn px-3  btn-block float-end"
+							className="btn poppins-light-19px-next-button rounded-0 px-3  btn-block float-end"
 						>
 							NEXT
 						</button>

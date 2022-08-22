@@ -218,7 +218,7 @@ function EditProject(props) {
 				<div>
 					<div className="">
 						<div className="  ">
-							<div className=" col-md-11 m-auto px-0">
+							<div className=" col-md-11 m-auto px-0 py-4">
 								<div className="col-md-10">
 									<p className="h1 mt-1 mb-2 ms-2 font-weight-bold   px-0  bitter-italic-normal-medium-24">
 										Edit project

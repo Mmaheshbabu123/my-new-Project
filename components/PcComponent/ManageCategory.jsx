@@ -189,7 +189,7 @@ const ManageCategoryComponent = () => {
 					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
 						Manage categories
 					</p>
-					<div className="col-md-3 ps-0">
+					<div className="col-md-3 ps-0 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -200,7 +200,7 @@ const ManageCategoryComponent = () => {
 						/>
 					</div>
 
-					<div className="col-md-3">
+					<div className="col-md-3 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -211,7 +211,7 @@ const ManageCategoryComponent = () => {
 						/>
 					</div>
 
-					<div className="col-md-3">
+					<div className="col-md-3 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -222,10 +222,10 @@ const ManageCategoryComponent = () => {
 						/>
 					</div>
 
-					<div className="col-md-3">
+					<div className="col-md-3 field_height pe-0 d-flex justify-content-between">
 						<button
 							type="button"
-							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right  ms-2 skyblue-bg-color py-2 px-4"
+							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right skyblue-bg-color py-2 px-4 w-50"
 							onClick={() => handleSearch()}
 						>
 							FILTER
@@ -236,7 +236,7 @@ const ManageCategoryComponent = () => {
 							search === true) && (
 							<button
 								type="button"
-								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right py-2 ms-2 reset-btn px-4"
+								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right py-2 ms-2 reset-btn px-4 w-50"
 								onClick={() => handleReset()}
 							>
 								RESET
@@ -244,33 +244,33 @@ const ManageCategoryComponent = () => {
 						)}
 					</div>
 
-					<div className="form-check p-0 mt-2 text-center ">
-						<table className="table  mb-3 text-center">
+					<div className="form-check p-0 mt-2  ">
+						<table className="table  mb-3 ">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium hi-50">
+									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-4">
 										Paritair comite number
 									</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium hi-50">Category name</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium hi-50">Minimum salary</th>
-									<th className="poppins-regular-18px   btn-bg-gray-medium hi-50">Action</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-4">Category name</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-4">Minimum salary</th>
+									<th className="poppins-medium-18px   btn-bg-gray-medium hi-50 p-4">Action</th>
 								</tr>
 							</thead>
 							<tbody className="">
 								{categoriestemp2.length > 0 &&
 									categoriestemp2.map((result) => (
-										<tr className="border poppinns-regular-thin p-2" key={result.cat_id}>
-											<td className="poppinns-regular-thin">{result.pc_number}</td>
-											<td className="poppinns-regular-thin">{result.category_name}</td>
-											<td className="poppinns-regular-thin">€ {result.min_salary}</td>
-											<td className="d-flex justify-content-center">
+										<tr className="border poppins-regular-18px p-2" key={result.cat_id}>
+											<td className="poppins-regular-18px p-4">{result.pc_number}</td>
+											<td className="poppins-regular-18px p-4">{result.category_name}</td>
+											<td className="poppins-regular-18px p-4">€ {result.min_salary}</td>
+											<td className=" p-4">
 												<Link
 													href={'/editpc/' + result.pc_unique_key + '?cid=' + result.cat_id}
 													className=""
 												>
 													<a>
 														<MdEdit
-															className="mt-2 ms-3 color-skyblue "
+															className="mt-2 color-skyblue "
 															data-toggle="tooltip"
 															title="Edit category"
 														/>
@@ -279,7 +279,7 @@ const ManageCategoryComponent = () => {
 
 												<span onClick={() => showPopup(result.cat_id)} type="button">
 													<MdDelete
-														className="mt-2 ms-3 color-skyblue "
+														className="mt-2 color-skyblue "
 														data-toggle="tooltip"
 														title="Delete category"
 													/>
