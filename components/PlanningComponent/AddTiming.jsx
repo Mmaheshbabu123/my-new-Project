@@ -384,22 +384,23 @@ function Addtiming(props) {
 	}
 
 	return (
-		<div className="container-fluid">
+		<div className="container-fluid px-0">
 			<form onSubmit={(e) => submitPlanningTimings(e)}>
 				<div className="row m-0 p-0">
 					<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Add timing</h1>
 					{employee_planning.length > 1 && (
 						<div className="form-check mt-2 ">
 							<input
-								className="form-check-input "
+								className="form-check-input rounded-0 shadow-none "
 								type="checkbox"
+								style={{marginTop:'0.35rem'}}
 								checked={checked}
 								id="flexCheckChecked"
 								onChange={() => {
 									updateCheckbox();
 								}}
 							/>
-							<label className="form-check-label poppins-regular-18px pt-1 " htmlFor="flexCheckChecked ">
+							<label className="form-check-label poppins-regular-18px" htmlFor="flexCheckChecked">
 								Same timing for all employees
 							</label>
 						</div>
@@ -412,10 +413,10 @@ function Addtiming(props) {
 										key={result.id}
 										className={`row d-flex justify-content-start py-3 my-3  ${style.sec_background}`}
 									>
-										<div className="col-md-1  poppins-regular-18px">{++count}.</div>
-										<div className="col-md-3  poppins-regular-18px">{result.employee_name}</div>
-										<div className="col-md-4  poppins-regular-18px">{result.employee_type_name}</div>
-										<div className="col-md-3  poppins-regular-18px">{result.function_name}</div>
+										<div className="col-md-1 poppins-light-20px">{++count}.</div>
+										<div className="col-md-3 poppins-light-20px">{result.employee_name}</div>
+										<div className="col-md-4 poppins-light-20px">{result.employee_type_name}</div>
+										<div className="col-md-3 poppins-light-20px">{result.function_name}</div>
 									</div>
 								))}
 							</div>
@@ -440,8 +441,10 @@ function Addtiming(props) {
 								{commonDatetime.map((value, index) => (
 									<div className="row table-title-bg my-2" key={index}>
 										
-										<div className="col-md-2 py-3 color-skyblue2">
-											<div className="pb-2 color-skyblue2" />
+										{/* <div className="col-md-2 py-3 color-skyblue2 poppins-medium-22px">
+											<div className="pb-2 color-skyblue2 poppins-medium-22px" /> */}
+												<div className="col-md-2 py-3  poppins-medium-22px-date-picker text-center">
+											<div className="pb-2 poppins-medium-22px-date-picker" />
 											{value.pdate.split('-').reverse().join('/')}
 										</div>
 										<div className="col-md-4  py-3">
@@ -491,7 +494,7 @@ function Addtiming(props) {
 											<div
 												className={`row d-flex justify-content-start py-3 my-3 ${style.sec_background}`}
 											>
-												<div className="col-md-1 poppins-regular-18px">
+												<div className="col-md-1 poppins-light-20px">
 												{employee_planning.length > 1 && <span>
 													{result.collapseOpen == true ? (
 														<FaRegMinusSquare onClick={() => updateCollapse(result.id)} />
@@ -501,9 +504,9 @@ function Addtiming(props) {
 													</span>
 }
 												</div>
-												<div className="col-md-3 poppins-regular-18px">{result.employee_name}</div>
-												<div className="col-md-4 poppins-regular-18px">{result.employee_type_name}</div>
-												<div className="col-md-3 poppins-regular-18px">{result.function_name}</div>
+												<div className="col-md-3 poppins-light-20px">{result.employee_name}</div>
+												<div className="col-md-4 poppins-light-20px">{result.employee_type_name}</div>
+												<div className="col-md-3 poppins-light-20px">{result.function_name}</div>
 											</div>
 											{result.collapseOpen == true && (
 												<div>
@@ -528,14 +531,16 @@ function Addtiming(props) {
 														result.timings.map((value, index) => (
 															<div className="row table-title-bg my-2" key={index}>
 															
-																<div className="col-md-2 py-3 color-skyblue2">
-																	<div className="pb-2 color-skyblue2" />
+																{/* <div className="col-md-2 py-3 color-skyblue2 poppins-medium-20px"> */}
+																	{/* <div className="pb-2 color-skyblue2 " /> */}
+																	<div className="col-md-2 py-3 poppins-medium-22px-date-picker text-center"> 
+																	<div className="pb-2 poppins-medium-22px-date-picker" />
 																	{value.pdate.split('-').reverse().join('/')}
 																</div>
-																<div className="col-md-4 py-3 ">
+																<div className="col-md-4 py-3 d-flex align-items-center">
 																	<div className='d-flex'>
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
-																		<span className='poppins-regular-16px'>Start time1</span>
+																		<span className='poppins-medium-18px'>Start time1</span>
 																	</div>
 																	<TimePicker
 																		placeholder="Select Time"
@@ -552,10 +557,10 @@ function Addtiming(props) {
 																		{value.error_starttime}
 																	</p>
 																</div>
-																<div className="col-md-4 py-3">
+																<div className="col-md-4 py-3 d-flex align-items-center">
 																<div className='d-flex'>
 																	<div className="py-1 px-2 custom_astrick poppins-regular-18px">
-																	<span className='poppins-regular-16px'>End time</span></div>
+																	<span className='poppins-medium-18px'>End time</span></div>
 																	<TimePicker
 																		placeholder="Select Time"
 																		use12Hours={false}
@@ -588,12 +593,16 @@ function Addtiming(props) {
 					<div className="d-inline">
 						<button type="button" className="btn btn-link text-dark btn-block ">
 							<Link href={'/planning/functions/' + router.query.p_unique_key}>
-								<p className='bg-white  back-btn-textbg-white  back-btn-text  border-0 poppins-regular-20px '>BACK</p>
+								{/* <p className='bg-white  back-btn-textbg-white  back-btn-text  border-0 poppins-light-19px '>BACK</p> */}
+								<p className='bg-white border-0 poppins-light-19px text-decoration-underline'>BACK</p>
 							</Link>
 						</button>
 					</div>
 					<div className="float-end ">
-						<button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end ">
+						{/* <button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-light-19px-next-button">
+							NEXT
+						</button> */}
+						<button type="submit" className="btn rounded-0 px-3  btn-block float-end poppins-light-19px-next-button">
 							NEXT
 						</button>
 					</div>

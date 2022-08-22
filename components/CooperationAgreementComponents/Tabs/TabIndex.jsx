@@ -69,7 +69,6 @@ const loadData = async () => {
   await APICALL.service(getDefaultOptionsData + `/${salesAgentRefId}`, 'GET').then(response => {
     if (response.status === 200) {
       data = response.data || {};
-
       defaultOptions['countrylist']          =  data['countrylist'];
       defaultOptions['locationslist']        =  data['locationslist'];
       defaultOptions['payment_condtion']     =  data['payment_condtion'];
@@ -79,10 +78,9 @@ const loadData = async () => {
       defaultOptions['benefitCodes']         =  data['benefitCodes'] && data['pref_codes']['benefitCodes'] ? data['pref_codes']['benefitCodes'] : [];
       defaultOptions['agent_details']        =  data['agent_details'] || [];
       defaultOptions['pref_codes']           =  data['pref_codes'] || [];
-
       defaultOptions['contactList']          =  data['contactsData'] && data['contactsData']['multiselctObj'] ?  data['contactsData']['multiselctObj']: [];
-      defaultOptions['contactsData']         =   data['contactsData'] ?.['personsData'];
-      defaultOptions['locationObj']          =   data['contactsData'] ?.['locationObj'];
+      defaultOptions['contactsData']         =  data['contactsData'] ?.['personsData'];
+      defaultOptions['locationObj']          =  data['contactsData'] ?.['locationObj'];
       updateStateChanges({defaultOptions,renderedOptions:1})
     }
   }).catch((error) => console.log(error) )

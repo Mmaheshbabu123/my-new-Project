@@ -257,13 +257,17 @@ function ManageArchivedProject(props) {
 								/>
 							</div>
 							<div className="col-sm-3">
-								<button
+								<div className='row'>
+									<div className='col-md-6'>
+									<button
 									type="button"
-									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 w-100 skyblue-bg-color"
 									onClick={() => handleSearch()}
 								>
 									SEARCH
 								</button>
+									</div>
+									<div className='col-md-6'>
 								{/*---------------- Reset functionality---------------------- */}
 
 								{(searchArchivedProjectname != '' ||
@@ -272,35 +276,38 @@ function ManageArchivedProject(props) {
 									search === true) && (
 									<button
 										type="button"
-										className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+										className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100"
 										onClick={() => handleReset()}
 									>
 										RESET
 									</button>
 								)}
+									</div>
+								</div>
+								
 							</div>
 						</div>
 
-						<div className="form-check p-0 mt-2 text-center max-height-420 tab-pane fade show ">
+						<div className="form-check p-0 mt-2 tab-pane fade show ">
 							{/* ---------------------Manage project table-------------------------*/}
 
-							<table className="table   mt-3 mb-3 text-center">
+							<table className="table mt-3 mb-3">
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-										<th className="poppins-regular-18px justify-content-center d-flex align-items-center btn-bg-gray-medium">
+										<th className="poppins-medium-18px btn-bg-gray-medium p-3">
 											Project name
 										</th>
-										<th className="poppins-regular-18px btn-bg-gray-medium">Location</th>
-										<th className="poppins-regular-18px btn-bg-gray-medium">Address</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-3">Location</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-3">Address</th>
 									</tr>
 								</thead>
 								<tbody>
 									{archivedprojectTemp2.length > 0 &&
 										archivedprojectTemp2.map((result) => (
-											<tr className="border poppinns-regular-thin p-2" key={result.id}>
-												<td className="poppinns-regular-thin">{result.project_name}</td>
-												<td className="poppinns-regular-thin">{result.project_location}</td>
-												<td className="poppinns-regular-thin">
+											<tr className="border poppins-regular-18px p-3" key={result.id}>
+												<td className="poppinns-regular-18px p-3">{result.project_name}</td>
+												<td className="poppinns-regular-18px p-3">{result.project_location}</td>
+												<td className="poppinns-regular-18px p-3">
 													{result.address.replace(',', '').length > 7 ? result.address : '-'}
 												</td>
 											</tr>

@@ -365,7 +365,7 @@ const ManageFunction = () => {
 					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
 						Manage functions
 					</p>
-					<div className="col-md-2 ps-0">
+					<div className="col-md-2 ps-0 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -376,7 +376,7 @@ const ManageFunction = () => {
 						/>
 					</div>
 
-					<div className="col-md-2">
+					<div className="col-md-2 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -387,7 +387,7 @@ const ManageFunction = () => {
 						/>
 					</div>
 
-					<div className="col-md-2">
+					<div className="col-md-2 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -397,7 +397,7 @@ const ManageFunction = () => {
 							placeholder="Minimum salary"
 						/>
 					</div>
-					<div className="col-md-2">
+					<div className="col-md-2 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -408,14 +408,16 @@ const ManageFunction = () => {
 						/>
 					</div>
 
-					<div className="col-md-4">
+					<div className="col-md-2 field_height">
 						<button
 							type="button"
-							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 ms-2 skyblue-bg-color"
+							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 ms-2 skyblue-bg-color w-100"
 							onClick={() => handleSearch()}
 						>
 							FILTER
 						</button>
+						</div>
+						<div className="col-md-2 field_height">
 						{(searchPc.trim() != '' ||
 							searchFunc.trim() != '' ||
 							searchCat.trim() != '' ||
@@ -423,7 +425,7 @@ const ManageFunction = () => {
 							search === true) && (
 							<button
 								type="button"
-								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right font-16 py-2 px-4 ms-2 reset-btn"
+								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right font-16 py-2 px-4 ms-2 reset-btn w-100"
 								onClick={() => handleReset()}
 							>
 								RESET
@@ -431,30 +433,30 @@ const ManageFunction = () => {
 						)}
 					</div>
 
-					<div className="form-check p-0 mt-2 text-center ">
-						<table className="table   mt-3 mb-3 text-center">
+					<div className="form-check p-0 mt-2">
+						<table className="table mt-3 mb-3">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray h-50-mf">
-									<th className="poppins-regular-18px justify-content-center d-flex align-items-center  btn-bg-gray-medium">
+									<th className="poppins-medium-18px btn-bg-gray-medium p-4">
 										Paritair comite number
 									</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium">Function name</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium">Minimum salary</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium">Category</th>
-									<th className="poppins-regular-18px btn-bg-gray-medium">Action</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-4">Function name</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-4">Minimum salary</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-4">Category</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-4">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								{functionsTemp2.length > 0 &&
 									functionsTemp2.map((result) => (
-										<tr className="border poppinns-regular-thin p-2" key={result.funcn_id}>
-											<td className="poppinns-regular-thin">
+										<tr className="border poppins-regular-18px p-2" key={result.funcn_id}>
+											<td className="poppins-regular-18px p-4">
 												{result.pc_number ? result.pc_number : result.pc_num}
 											</td>
-											<td className="poppinns-regular-thin">{result.function_name}</td>
-											<td className="poppinns-regular-thin">€ {result.min_salary}</td>
-											<td className="poppinns-regular-thin">{result.cat_name}</td>
-											<td className="d-flex justify-content-center ">
+											<td className="poppins-regular-18px p-4">{result.function_name}</td>
+											<td className="poppins-regular-18px p-4">€ {result.min_salary}</td>
+											<td className="poppins-regular-18px p-4">{result.cat_name}</td>
+											<td className=" p-4">
 												<Link
 													href={
 														result.pc_unique_key ? (
@@ -470,7 +472,7 @@ const ManageFunction = () => {
 												>
 													<a className="">
 														<MdEdit
-															className="mt-2 ms-3 color-skyblue"
+															className="mt-2 color-skyblue"
 															data-toggle="tooltip"
 															title="Edit function"
 														/>
