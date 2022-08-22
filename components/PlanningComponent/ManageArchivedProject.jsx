@@ -257,13 +257,17 @@ function ManageArchivedProject(props) {
 								/>
 							</div>
 							<div className="col-sm-3">
-								<button
+								<div className='row'>
+									<div className='col-md-6'>
+									<button
 									type="button"
-									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 w-100 skyblue-bg-color"
 									onClick={() => handleSearch()}
 								>
 									SEARCH
 								</button>
+									</div>
+									<div className='col-md-6'>
 								{/*---------------- Reset functionality---------------------- */}
 
 								{(searchArchivedProjectname != '' ||
@@ -272,12 +276,15 @@ function ManageArchivedProject(props) {
 									search === true) && (
 									<button
 										type="button"
-										className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+										className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100"
 										onClick={() => handleReset()}
 									>
 										RESET
 									</button>
 								)}
+									</div>
+								</div>
+								
 							</div>
 						</div>
 
