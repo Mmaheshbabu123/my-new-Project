@@ -49,7 +49,7 @@ const EmployerCooperationAgreementMain = (props) => {
           <div className="col-md-12 row">
           <h1 className={`${styles['employer-sv-page-title']} text-center page-title`}> Manage agreements </h1>
               <OverviewPage state={state} setState={setState} companyLength={state.companies.length}/>
-              {state.companies &&
+              {state.companies && state.companies.length > 0 &&
                 <RequestAgreement state={state} setState={setState} employer_id = {props.employerid} />}
           </div>
         : <p>Loading...</p>}

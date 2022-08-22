@@ -5,12 +5,13 @@ import Button from 'react-bootstrap/Button';
 import CheckBoxField from '@/atoms/CheckBoxField';
 import styles from './EmployerSv.module.css';
 import { saveRequestedCompanies } from '@/Services/ApiEndPoints';
+import customAlert from '@/atoms/customAlert';
 import { APICALL } from '@/Services/ApiServices';
 
 
 const RequestAgreement = (props) => {
   const router = useRouter();
-  const { state: { companies = {} }, employer_id, alreadyRequestedCompanies } =  props;
+  const { state: { companies = {} }, employer_id } =  props;
   const [compState, setCompState] = useState({
       showPopup: false
     , companies: companies
@@ -51,7 +52,10 @@ const RequestAgreement = (props) => {
     await APICALL.service(`${saveRequestedCompanies}`, 'POST', getPostData())
     .then(response => {
       if(response.status === 200) {
-        router.reload()
+        customAlert('success', 'Request sent successfully!', 2000); //no of milliseconds
+        setTimeout(() => router.reload(), 2000);
+      } else {
+        customAlert('error', 'Error occured while requesting cooperation agreement', 2000); //no of milliseconds
       }
     })
   }
