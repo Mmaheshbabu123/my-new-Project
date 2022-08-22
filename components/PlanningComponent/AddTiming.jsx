@@ -40,7 +40,13 @@ function Addtiming(props) {
 									result.data[0][key].timings[key1].endtimeObj = moment(obj1.endtime);
 
 								});
+								result.data[0][key].timings.sort((a, b) => {
+									let da = new Date(a.pdate),
+										db = new Date(b.pdate);
+									return da - db;
+								});
 							});
+							
 							setChecked(result.data[1]);
 							setEmployee_planning(result.data[0]);
 							if(result.data[1] == true){
@@ -297,7 +303,9 @@ function Addtiming(props) {
 					res[ky].error_selected_date = 'Select atleast one date.';
 					res[ky].collapseOpen = true;
 				} else {
+					
 					res[ky].timings.map((o1, k1) => {
+						console.log(o1);
 						if (o1.starttime == '') {
 							count++;
 							res[ky].timings[k1].error_starttime = 'This field is required.';
@@ -308,6 +316,13 @@ function Addtiming(props) {
 							res[ky].timings[k1].error_endtime = 'This field is required.';
 							res[ky].collapseOpen = true;
 						}
+						if(o1.pdate == moment(new Date()).format('YYYY-MM-DD') ){
+							if(moment(o1.starttime)< moment(new Date())){
+								res[ky].timings[k1].error_starttime = 'Employee cannot be planned for past time.';
+								count++;
+							}
+						}
+						
 						if(o1.starttime != '' && o1.endtime != '' && o1.starttime == o1.endtime){
 							count++;
 							res[ky].collapseOpen = true;
@@ -540,7 +555,7 @@ function Addtiming(props) {
 																<div className="col-md-4 py-3 d-flex align-items-center">
 																	<div className='d-flex'>
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
-																		<span className='poppins-medium-18px'>Start time1</span>
+																		<span className='poppins-medium-18px'>Start time</span>
 																	</div>
 																	<TimePicker
 																		placeholder="Select Time"

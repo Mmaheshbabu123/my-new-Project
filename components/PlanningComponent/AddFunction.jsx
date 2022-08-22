@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
-import Select from 'react-select';
-import { addplanningemployee, updateSalaryBenefits } from '../../Services/ApiEndPoints';
+import { getPlanningEmployee, addplanningemployee, updateSalaryBenefits } from '../../Services/ApiEndPoints';
 import ValidationService from '../../Services/ValidationService';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { useRouter } from 'next/router';
@@ -9,7 +8,7 @@ import { useRef } from 'react';
 
 import { FaRegPlusSquare, FaRegMinusSquare, FaEuroSign } from 'react-icons/fa';
 
-import { CodeSlash, ExclamationTriangle } from 'node_modules/react-bootstrap-icons/dist/index';
+import { ExclamationTriangle } from 'node_modules/react-bootstrap-icons/dist/index';
 
 const AddFunction = () => {
 	const router = useRouter();
@@ -35,8 +34,7 @@ const AddFunction = () => {
 		() => {
 			if (!router.isReady) return;
 			var p_unique_key = router.query.p_unique_key;
-
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-planningemployee/' + p_unique_key, 'GET')
+			APICALL.service(getPlanningEmployee + p_unique_key, 'GET')
 				.then(async (result) => {
 					var data = result.data;
 					var checkbox = data[0];
@@ -319,7 +317,6 @@ const AddFunction = () => {
 
 	const employeTypeSelection = (val) => {
 		var op = [];
-		console.log(val);
 		emptypes.forEach((element) => {
 			if (val != null) {
 				if (element['value'] == val) {
@@ -358,7 +355,6 @@ const AddFunction = () => {
 
 	let emptyemployeeData = () => {
 		var object = [ ...employeeobject ];
-		console.log(object);
 		if (object != undefined) {
 			object.map((element, key) => {
 				object[key].emp_type = null;
@@ -373,7 +369,6 @@ const AddFunction = () => {
 				// updateEmployeeType(key,0)
 			});
 			if (object.length != 0) {
-				console.log(object);
 				setEmployeeObject(object);
 				setSelectedOption({ value: 0, label: '-Select-' });
 				// setSelectedOption([]);
@@ -815,7 +810,6 @@ const AddFunction = () => {
 						</button>
 					</div>
 				</div>
-				{console.log(employeeobject)}
 			</form>
 		</div>
 	);
