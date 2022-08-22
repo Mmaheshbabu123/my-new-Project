@@ -72,7 +72,7 @@ const AddEditSalaryBenefits = (props) => {
     }
 
    const checkDateFieldValid = (value) => {
-     return value === '' || (new Date(value).getTime() >= new Date(state.minDate).getTime() && new Date(value).getTime() <= new Date(state.maxDate).getTime()) ? false: true
+     return !value || (new Date(value).getTime() >= new Date(state.minDate).getTime() && new Date(value).getTime() <= new Date(state.maxDate).getTime()) ? false: true
    }
     /**
      * [handleSubmit: function to save and edit employee/coefficient types]

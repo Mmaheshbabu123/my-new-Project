@@ -239,7 +239,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
               tick={state.linkToCooperationAgreement}
               disabled={false}
               onCheck={(e) => handleChange(e, 2)}
-              name={`Link to cooperation agreeemnt.`}
+              name={`Link to cooperation agreement.`}
               customStyle={{margin: '10px 0', cursor:'pointer'}}
               className="col-md-12"
             />
