@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import styles from './AbsSalesAgentSv.module.css';
-import { AiFillFilePdf, AiOutlineDownload } from 'react-icons/ai';
-import { FaFileSignature } from 'react-icons/fa';
-import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
+import { AiFillFilePdf } from 'react-icons/ai';
+import {MdEdit } from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
 import { HiPlusCircle} from 'react-icons/hi';
 import { deleteSalesAgenetAgreements, downloadSvAsPdf} from '@/Services/ApiEndPoints'
