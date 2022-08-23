@@ -41,7 +41,9 @@ const CoefficientPage = (props) => {
   const { scrollLeft, scrollRight, tableWidth } = compState;
   const onSelect = async ({ value }) => {
     if(!value) {
+      dependecyDataStatus['cooperationCoeffData'] = true;
       setCompState({...compState, selectedPc: value});
+      updateStateChanges({coeffPageData: {...compState, selectedPc: value}, dependecyDataStatus })
       return;
     }
     await APICALL.service(`${getPcLinkedCoeffData}/${value}`, 'GET').then(response => {
