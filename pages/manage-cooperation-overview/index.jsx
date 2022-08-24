@@ -9,7 +9,7 @@ const EMployerCooperationAgreement = (props) => {
   const router = useRouter();
   const { type, id } = router.query;
   if (id !== undefined) {
-    localStorage.setItem("currentLoggedInUserId", id);
+    localStorage.setItem("currentLoggedInUserId", type === 'admin' ? -999 : id);
     return (
       <div>
         <Suspense fallback={`Loading...`}>
