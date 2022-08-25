@@ -1694,7 +1694,7 @@ margin-left: 10px;
 }
 .accordion-button::after
 {
-	background-image: url(../components/images/arrow-down.svg) !important;
+	background-image: url(/images/arrow-down.svg) !important;
 }
 input[type="checkbox"]:checked
 {
@@ -1783,7 +1783,7 @@ tbody:before {
 }
 .planning-container .form-select
 {
-	background-image: url(../components/images/arrow-down.svg) !important;
+	background-image: url(/images/arrow-down.svg) !important;
 }
 .add_function .css-6j8wv5-Input,
 .add_function .css-6j8wv5-Input input,
