@@ -111,31 +111,31 @@ const PlanningFinalize = () => {
 							<tr className="skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
 									Monday<br />
-									{activeWeek.length > 0 && activeWeek[0].split('-').reverse().join('-')}
+									{activeWeek && activeWeek.length > 0 && activeWeek[0].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
 									Tuesday <br />
-									{activeWeek.length > 0 && activeWeek[1].split('-').reverse().join('-')}
+									{activeWeek && activeWeek.length > 0 && activeWeek[1].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
 									Wednesday <br />
-									{activeWeek.length > 0 && activeWeek[2].split('-').reverse().join('-')}
+									{activeWeek && activeWeek.length > 0 && activeWeek[2].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
 									Thursday <br />
-									{activeWeek.length > 0 && activeWeek[3].split('-').reverse().join('-')}
+									{activeWeek && activeWeek.length > 0 && activeWeek[3].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
 									Friday<br />
-									{activeWeek.length > 0 && activeWeek[4].split('-').reverse().join('-')}
+									{activeWeek && activeWeek.length > 0 && activeWeek[4].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
 									Saturday<br />
-									{activeWeek.length > 0 && activeWeek[5].split('-').reverse().join('-')}
+									{activeWeek && activeWeek.length > 0 && activeWeek[5].split('-').reverse().join('-')}
 								</th>
 								<th className="  text-center  align-items-center justify-content-center lh-base">
 									Sunday<br />
-									{activeWeek.length > 0 && activeWeek[6].split('-').reverse().join('-')}
+									{ activeWeek && activeWeek.length > 0 && activeWeek[6].split('-').reverse().join('-')}
 								</th>
 							</tr>
 						</thead>

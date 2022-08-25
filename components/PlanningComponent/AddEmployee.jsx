@@ -19,13 +19,14 @@ const AddEmployee = () => {
 
 	useEffect(
 		() => {
+			if (!router.isReady) return;
 			var p_unique_key = router.query.p_unique_key;
-			console.log(p_unique_key);
 			APICALL.service(
 				process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getEmployeeByUsingCompanyId/' + p_unique_key,
 				'GET'
 			)
 				.then((result) => {
+					console.log(result);
 					getOptions(result, 1);
 				})
 				.catch((error) => {
@@ -34,7 +35,6 @@ const AddEmployee = () => {
 
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/selectedEmployees/' + p_unique_key, 'GET')
 				.then((result) => {
-					console.log(result);
 					getOptions(result, 2);
 				})
 				.catch((error) => {
@@ -111,9 +111,6 @@ const AddEmployee = () => {
 						>
 							Employee
 						</label>
-						{console.log(Data)}
-						{console.log(selectedOption)}
-
 						<Select
 							value={selectedOption}
 							isMulti

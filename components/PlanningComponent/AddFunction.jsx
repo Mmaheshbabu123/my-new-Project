@@ -522,7 +522,7 @@ const AddFunction = () => {
 														handleChange={(obj) => updateEmployeeType(value, obj.value)}
 														isMulti={false}
 														// className="col-md-6"
-														className="col-md-12 h-100"
+														className="col-md-12 "
 													/>
 												) : (
 													''
@@ -535,11 +535,11 @@ const AddFunction = () => {
 											</div>
 											<div className="col-md-2 border-0 d-flex align-items-center justify-content-start">
 												{key['function_salary'] != null ? (
-													<span className="p-1 px-3 w-100 h-100 d-flex align-items-center justify-content-start poppins-medium-20px bg-white">
+													<span className="p-1 px-3 w-100  d-flex align-items-center justify-content-start poppins-medium-20px bg-white">
 														{'€ ' + key['function_salary']}
 													</span>
 												) : (
-													<span className="p-1 w-100 h-100 d-flex align-items-center justify-content-center poppins-medium-20px bg-white d-none">
+													<span className="p-1 w-100  d-flex align-items-center justify-content-center poppins-medium-20px bg-white d-none">
 														{'€ ' + key['function_salary']}
 													</span>
 												)}
@@ -781,8 +781,9 @@ const AddFunction = () => {
 													}}
 												/> */}
 											</div>
-											<div style={{ color: 'red' }}>{employeeobject[0]['functioniderror']}</div>
+											
 										</div>
+										<div style={{ color: 'red' }}>{employeeobject[0]['functioniderror']}</div>
 									</div>
 								)
 							);

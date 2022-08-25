@@ -82,6 +82,7 @@ export const planningfinalize = BASE_URL + "planning-finalize"
 export const fetchEmpDetails = BASE_URL + "fetch-emp-details/"
 export const updateEmployeePlanning = BASE_URL + "update-employee-planning"
 export const getPlanningEmployee = BASE_URL + "get-planningemployee/"
+export const fetchEmployeeList =  BASE_URL + "getEmployeeByUsingCompanyId/"
 
 
 
