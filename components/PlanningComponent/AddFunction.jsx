@@ -94,8 +94,8 @@ const AddFunction = () => {
 			} else {
 				func = '';
 				if (value.salary == '' || value.salary == null || value.salary == undefined) {
-					if(count==0){
-					value.salary = value.function_salary;
+					if (count == 0) {
+						value.salary = value.function_salary;
 					}
 				} else {
 					sal =
@@ -108,7 +108,10 @@ const AddFunction = () => {
 					let rsalary = String(value.salary).replace(',', '.');
 					let rfsalary = String(value.function_salary).replace(',', '.');
 					if (sal == '' && parseFloat(rsalary) < parseFloat(rfsalary)) {
-						sal = 'The new salary cannot be lesser than the minimum salary. The minimum salary for the selected function is '+value.function_salary+' Euro';
+						sal =
+							'The new salary cannot be lesser than the minimum salary. The minimum salary for the selected function is ' +
+							value.function_salary +
+							' Euro';
 						count++;
 					}
 				}
@@ -250,18 +253,18 @@ const AddFunction = () => {
 		if (value != '') {
 			let rsalary = String(value).replace(',', '.');
 			let rfsalary = String(object[index].function_salary).replace(',', '.');
-			let err=ValidationService.minSalaryValidationMethod(value.toString());
-			if(err==''){
+			let err = ValidationService.minSalaryValidationMethod(value.toString());
+			if (err == '') {
 				if (parseFloat(rsalary) > parseFloat(rfsalary)) {
 					object[index].warning =
-					'We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will be considered as the minimum salary for all the future planning for this employee. You can click on next to proceed further.';
-					object[index].salaryerror ='';
+						'We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will be considered as the minimum salary for all the future planning for this employee. You can click on next to proceed further.';
+					object[index].salaryerror = '';
 				} else {
 					object[index].warning = '';
-					}
-				}else{
-					object[index].warning = '';
 				}
+			} else {
+				object[index].warning = '';
+			}
 			updatingObjectSlary(index, value);
 		} else {
 			updatingObjectSlary(index, value);
@@ -471,7 +474,7 @@ const AddFunction = () => {
 						<div className="form-check rounded-0 my-3 align-items-center d-flex">
 							<input
 								// className="input-h-w"
-								className='form-check-input rounded-0 mb-1 '
+								className="form-check-input rounded-0 mb-1 "
 								type="checkbox"
 								checked={ischecked}
 								onChange={() => {
@@ -490,7 +493,7 @@ const AddFunction = () => {
 								employeeobject.map((key, value) => (
 									<div key={value}>
 										<div key={key} className="row bg-4C4D550F mb-2 p-2">
-											<div className="col-md-1 d-flex align-items-center justify-content-start poppins-light-20px">
+											<div className="col-md-1 poppins-light-20px">
 												{ischecked ? (
 													value + 1
 												) : key['collapseOpen'] == false ? (
@@ -503,10 +506,8 @@ const AddFunction = () => {
 													/>
 												)}
 											</div>
-											<div className="col-md-4 p-1 d-flex align-items-center poppins-light-20px justify-content-start">
-												{key['employeename']}
-											</div>
-											<div className="col-md-3  border-0  align-items-center justify-content-start custom-drop-btn">
+											<div className="col-md-4 p-1 poppins-light-20px">{key['employeename']}</div>
+											<div className="col-md-3  border-0 custom-drop-btn">
 												{emptypes != null ? (
 													<MultiSelectField
 														id={'select_id'}
@@ -533,18 +534,18 @@ const AddFunction = () => {
 													</div>
 												}
 											</div>
-											<div className="col-md-2 border-0 d-flex align-items-center justify-content-start">
+											<div className="col-md-2 border-0">
 												{key['function_salary'] != null ? (
-													<span className="p-1 px-3 w-100 h-100 d-flex align-items-center justify-content-start poppins-medium-20px bg-white">
+													<span className="p-1 px-3 w-100 poppins-medium-20px bg-white">
 														{'€ ' + key['function_salary']}
 													</span>
 												) : (
-													<span className="p-1 w-100 h-100 d-flex align-items-center justify-content-center poppins-medium-20px bg-white d-none">
+													<span className="p-1 w-100 poppins-medium-20px bg-white d-none">
 														{'€ ' + key['function_salary']}
 													</span>
 												)}
 											</div>
-											<div className="col-md-2 d-flex align-items-center justify-content-center py-1 add_function_salary">
+											<div className="col-md-2 py-1 add_function_salary">
 												<div>
 													{key['function_salary'] != null && (
 														<div className="input-group">
@@ -571,7 +572,8 @@ const AddFunction = () => {
 												</div>
 											</div>
 											{!ischecked &&
-												key['functionslist']!=undefined&&key['functionslist'].map((deta, ind) => {
+												key['functionslist'] != undefined &&
+												key['functionslist'].map((deta, ind) => {
 													{
 														var group = 'function';
 													}
@@ -582,7 +584,10 @@ const AddFunction = () => {
 														key['collapseOpen'] &&
 														(ind <= 2 ? (
 															<div className="col-md-12 row m-0 position-relative pe-0">
-																<div className="mt-2 mb-2 bg-light h-75 py-2 bg-4C4D550F z-999 px-0 fun-line col ms-5" style={{height:'48px'}}>
+																<div
+																	className="mt-2 mb-2 bg-light h-75 py-2 bg-4C4D550F z-999 px-0 fun-line col ms-5"
+																	style={{ height: '48px' }}
+																>
 																	<span className="custom-radio-input">
 																		<input
 																			type="radio"
@@ -614,14 +619,22 @@ const AddFunction = () => {
 																			}}
 																		/>
 																	</span>
-																	<span className="ps-2 poppins-light-20px">{deta['name']}</span>
+																	<span className="ps-2 poppins-light-20px">
+																		{deta['name']}
+																	</span>
 																</div>
 															</div>
 														) : (
 															ind == 3 && (
 																<div className="col-md-12 row m-0 position-relative pe-0">
-																	<div className="col ms-5 fun-line2 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999  d-flex align-items-center px-0" style={{height:'49px'}}>
-																		<span className="custom-radio-input d-inline-block p-3 " style={{height:'48px'}}>
+																	<div
+																		className="col ms-5 fun-line2 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999  d-flex align-items-center px-0"
+																		style={{ height: '49px' }}
+																	>
+																		<span
+																			className="custom-radio-input d-inline-block p-3 "
+																			style={{ height: '48px' }}
+																		>
 																			<input
 																				type="radio"
 																				value={'finaldrop'}
@@ -739,8 +752,14 @@ const AddFunction = () => {
 							) : (
 								ind == 3 && (
 									<div className="col-md-11 ms-auto pe-3 row position-relative">
-										<div className="col fun-line33 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999 d-flex align-items-center ps-0" style={{height:'48px'}}>
-											<span className="custom-radio-input d-inline-block p-3 " style={{height:'48px'}}>
+										<div
+											className="col fun-line33 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999 d-flex align-items-center ps-0"
+											style={{ height: '48px' }}
+										>
+											<span
+												className="custom-radio-input d-inline-block p-3 "
+												style={{ height: '48px' }}
+											>
 												<input
 													type="radio"
 													value="drop"

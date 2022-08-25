@@ -16,7 +16,7 @@ const PlanningFinalize = () => {
 	const [ activeWeek, setActiveWeek ] = useState([]);
 	const [ finalized, setFinalized ] = useState('');
 	const [ errorFinalize, setErrorFinalize ] = useState('');
-	const [weekCount, setWeekCount] = useState(0);
+	const [ weekCount, setWeekCount ] = useState(0);
 
 	useEffect(
 		() => {
@@ -39,36 +39,33 @@ const PlanningFinalize = () => {
 
 	let updateActiveWeek = (type) => {
 		var count = 0;
-		
-		if(weekCount >=0 && weekCount < week.length-1){
-			if(type == 'next'){
-				count = weekCount+1;
-			}
-			else{
-				count = weekCount > 0 ?weekCount-1:weekCount;
 
+		if (weekCount >= 0 && weekCount < week.length - 1) {
+			if (type == 'next') {
+				count = weekCount + 1;
+			} else {
+				count = weekCount > 0 ? weekCount - 1 : weekCount;
 			}
 		}
-	setWeekCount(count);
-	setActiveWeek(week[count]);
-
-	}
+		setWeekCount(count);
+		setActiveWeek(week[count]);
+	};
 	let submit = () => {
 		if (finalized === '') {
 			setErrorFinalize('This field is required.');
 		} else {
-			APICALL.service(planningfinalize, 'POST', [p_unique_key,finalized])
-			.then((result) => {
-				console.log(result);
-				if (result.status === 200) {
-					router.push('/weekly-planning');
-				} else {
+			APICALL.service(planningfinalize, 'POST', [ p_unique_key, finalized ])
+				.then((result) => {
 					console.log(result);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+					if (result.status === 200) {
+						router.push('/weekly-planning');
+					} else {
+						console.log(result);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 		}
 	};
 	let handleRadio = (e) => {
@@ -103,8 +100,26 @@ const PlanningFinalize = () => {
 				</div>
 				<div className="mt-2 col-md-12">
 					<p className=" bitter-italic-normal-medium-22 col-md-12 text-center table-title-bg py-3">
-						<FaLessThan className="less-grather mx-4" onClick={()=>{updateActiveWeek('previous')}}/> <span onClick={()=>{setWeekCount(0);setActiveWeek(week[0]);}}>Current week</span>{' '}
-						<FaGreaterThan className="less-grather mx-4" onClick={()=>{updateActiveWeek('next')}}/>{' '}
+						<FaLessThan
+							className="less-grather mx-4"
+							onClick={() => {
+								updateActiveWeek('previous');
+							}}
+						/>{' '}
+						<span
+							onClick={() => {
+								setWeekCount(0);
+								setActiveWeek(week[0]);
+							}}
+						>
+							Current week
+						</span>{' '}
+						<FaGreaterThan
+							className="less-grather mx-4"
+							onClick={() => {
+								updateActiveWeek('next');
+							}}
+						/>{' '}
 					</p>
 					<table className="table border table-border-gray ">
 						<thead className="">
@@ -143,7 +158,7 @@ const PlanningFinalize = () => {
 							{planning.planning &&
 								Object.keys(planning.planning).map((value) => (
 									<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
-										{activeWeek.map((val,key) => (
+										{activeWeek.map((val, key) => (
 											<td className=" table-border-gray font-poppins-light" key={key}>
 												{planning.planning[value].some((el) => el.pdate === val) ? (
 													<div>
@@ -151,7 +166,9 @@ const PlanningFinalize = () => {
 															(val1) =>
 																val1.pdate == val ? (
 																	<div key={val1.id}>
-																		<p className="color-skyblue pt-1">{val1.employee_name}</p>
+																		<p className="color-skyblue pt-1 poppins-regular-18px">
+																			{val1.employee_name}
+																		</p>
 																		<br />
 																		<p className="poppins-regular-16px">
 																			{val1.employee_type_name}
@@ -163,11 +180,14 @@ const PlanningFinalize = () => {
 																		<br />
 																		<p className="poppins-regular-16px">
 																			{'€ ' + val1.salary}
-																		</p><br />
+																		</p>
+																		<br />
 																		<p className="poppins-regular-16px">
-																			{moment(val1.starttime).format('HH:mm')+' to '+ moment(val1.endtime).format('HH:mm')}
-																			</p>
-																		
+																			{moment(val1.starttime).format('HH:mm') +
+																				' to ' +
+																				moment(val1.endtime).format('HH:mm')}
+																		</p>
+
 																		<br />
 																	</div>
 																) : (
