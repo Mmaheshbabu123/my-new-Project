@@ -18,9 +18,9 @@ const RedirectPages = (props) => {
 		if (props.hasOwnProperty('type')) {
 			localStorage.setItem('type', JSON.stringify(props.type));
 		}
-		// if (props.hasOwnProperty('uid')) {
-		// 	localStorage.setItem('uid', JSON.stringify(props.uid));
-		// }
+		if (props.hasOwnProperty('uid')) {
+			localStorage.setItem('uid', JSON.stringify(props.uid));
+		}
 		if (props.hasOwnProperty('dest')) {
 			localStorage.setItem('dest', JSON.stringify(props.dest));
 			switch (props.dest) {
@@ -29,6 +29,12 @@ const RedirectPages = (props) => {
 					break;
 				case 'manage-category':
 					router.push('/manage-category');
+					break;
+				case 'my-planning':
+					router.push('/employee-planning');
+					break;
+				case 'manage-project':
+					router.push('/planning/manage-project');
 					break;
 				case 'planning':
 					router.push('/planning/options');
