@@ -3,6 +3,8 @@ import Paper from '@mui/material/Paper';
 import Link from 'next/link';
 import { MdReviews } from 'react-icons/md';
 import { AiFillEye, AiFillInfoCircle, AiOutlineArrowRight } from 'react-icons/ai';
+import { FcSynchronize } from 'react-icons/fc';
+import { BsFillPrinterFill } from 'react-icons/bs';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
@@ -85,6 +87,12 @@ function EmployeeMonthlyPlanning(props) {
 				<p className="mt-1 mb-1 p-0 font-weight-bold   bitter-italic-normal-medium-24">My planning</p>
 				<div className="mt-3 col-md-12 p-0">
 					<p className="poppins-regular-16px">My upcoming plannings</p>
+				</div>
+				<div className="mt-3 col-md-12 p-0">
+					<FcSynchronize className="float-end" />
+				</div>
+				<div className="mt-3 col-md-12 p-0">
+					<BsFillPrinterFill className="float-end" />
 				</div>
 				<div className=" mt-2 text-center col-md-12 p-0 ">
 					<table className="table border  border-info mt-3 mb-3">
