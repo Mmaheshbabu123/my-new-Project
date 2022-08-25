@@ -138,6 +138,7 @@ export const fetchSalaryBenefitsPerPc = BASE_URL + "get-salary-benefits-per-pc";
 export const saveCooperationDataTabWise = BASE_URL + "save-cooperationdata-tab-wise";
 export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agreements";
 export const getDefaultOptionsData = BASE_URL + "getDefaultOptionsData";
+export const checkAccess = BASE_URL + "check-access";
 //------------------- @
 //-------------------
 //--------EMPLOYER COOPERATION AGREEMENTS------------//

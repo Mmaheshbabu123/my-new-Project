@@ -89,7 +89,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
     await APICALL.service(url, 'POST', getDataToPost(from)).then(response => {
       if (response.status === 200) {
          setState({...state, alertSuccess: true, showPopup: false, ...setObj })
-         timeOutRef = setTimeout(() => window.close(), 3000);
+         timeOutRef = setTimeout(() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self'), 3000);
       } else {
         setState({...state, alertWarning: true, showPopup: false, ...setObj})
         timeOutRef = setTimeout(() => setState({...state, alertWarning: false }), 3000);
@@ -108,7 +108,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
       employer_id: from ? state.employerId || 0 : 0,
     }
   }
-  console.log(state);
+
   return(
     <div className="">
       {state.alertSuccess === true && <div className="alert alert-success text-center" role="alert">

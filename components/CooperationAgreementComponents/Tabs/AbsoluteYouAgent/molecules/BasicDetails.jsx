@@ -44,9 +44,11 @@ const BasicDetails = (props) => {
  */
     const getTabBasicData = (consultantArray, consultNumber, bbright_id) => {
       let obj = consultantArray.length ? consultantArray[0] : {};
+      let selectedConsultNumber = consultNumber.filter(val => Number(val.value) === tab_1[absoluteConsultantNum]);
       return {...tab_1,
         [whoWillSign]: tab_1[whoWillSign] || [],
         [absoluteConsultant]: Number(obj.value) || 0,
+        [absoluteConsultantNum]: selectedConsultNumber.length ? selectedConsultNumber[0].value : 0,
       }
     }
 

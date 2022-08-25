@@ -8,7 +8,8 @@ const AbsSalesAgenetCooperationAgreementMain = dynamic(() => import('@/component
 const EMployerCooperationAgreement = (props) => {
   const router = useRouter();
   const { type, id } = router.query;
-  if (id !== undefined)
+  if (id !== undefined) {
+    localStorage.setItem("currentLoggedInUserId", type === 'admin' ? -999 : id);
     return (
       <div>
         <Suspense fallback={`Loading...`}>
@@ -20,6 +21,7 @@ const EMployerCooperationAgreement = (props) => {
         </Suspense>
       </div>
     )
+  }
   else return (<>  </>);
 }
 

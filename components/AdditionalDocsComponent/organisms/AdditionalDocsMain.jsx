@@ -12,7 +12,7 @@ const AdditionalDocsMain = (props) => {
     , employers: []
     , companies: {}
     , assignedData: {}
-    , headers: ['Document name', 'Start date', 'End date', 'Link to cooperation agreement', 'Actions']
+    , headers: ['Document name', 'Employer', 'Company', 'Start date', 'End date', 'Link to cooperation agreement', 'Actions']
     , documentDetails: {}
   })
 
@@ -26,7 +26,7 @@ const AdditionalDocsMain = (props) => {
     await APICALL.service(`${fetchAdditionalDocuments}/${entityId}/${entityType}/${editId}/${action}`, 'GET').then(response => {
       if (response.status === 200)
         setState({...state,
-          overviewData: response.data.overviewData ? Object.values(response.data.overviewData) :[],
+          overviewData: response.data.overviewData ? Object.values(response.data.overviewData).sort().reverse() :[],
           loaded: true,
           companies: response.data.companies || {},
           employers: response.data.employers || [],
@@ -39,8 +39,8 @@ const AdditionalDocsMain = (props) => {
     <div>
     {state.loaded === true ?
           <div className="col-md-12">
-              <h4 className={`page-title-font-class text-center`}> {`${action === 0 ? 'Manage additional documents'
-                : Number(editId) ? 'Edit additional document': 'Add additional document'}`}</h4>
+              <h4 className={`page-title-font-class text-center`}> {`${action === 0 ? 'Manage my documents'
+                : Number(editId) ? 'Edit my document': 'Add my document'}`}</h4>
               {   action !== 0  ?
                   <EditUpdateAdditionalDoc
                     entityType={Number(entityType)}
@@ -55,6 +55,8 @@ const AdditionalDocsMain = (props) => {
                     entityId = {Number(entityId)}
                     rows={state.overviewData}
                     headers={state.headers}
+                    companies={state.companies}
+                    employers={state.employers}
                   />
               }
           </div>

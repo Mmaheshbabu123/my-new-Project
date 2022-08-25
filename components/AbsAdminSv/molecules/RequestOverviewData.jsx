@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
 import {MdEdit, MdDelete } from 'react-icons/md';
-import {  AiOutlineUserAdd, AiOutlineUserSwitch, AiOutlineDownload, AiFillFilePdf } from 'react-icons/ai';
+import {  AiOutlineUserAdd, AiOutlineUserSwitch, AiFillFilePdf } from 'react-icons/ai';
 import { deleteCooperationAgreement, downloadSvAsPdf } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
@@ -25,7 +25,7 @@ const RequestOverviewData = (props) => {
   }
 
   const [state, setState] = useState({
-      headers: ['Employer name', 'Email', 'Company', 'Date of request', 'Date of commencement', 'Status', 'Actions'],
+      headers: ['Employer name', 'Email', 'Company', 'Sales agent', 'Date of request', 'Date of commencement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
       searchTermCompany: '',
       searchTermEmployer: '',
@@ -93,6 +93,16 @@ const RequestOverviewData = (props) => {
       itemOffset: 0,
       ...updatePaginationData(filterRows, 0)
     });
+  }
+
+  const getEntityName = (eachRow) => {
+    let { employer_id, company_id } = eachRow;
+    let { salesAgentArray, assignedData } = props;
+    let data = assignedData[employer_id] ? assignedData[employer_id][company_id] ? assignedData[employer_id][company_id] : {} : {};
+    let salesAgentId = data.sales_agent_id || 0;
+    let rowObj = [];
+    rowObj = salesAgentArray ? salesAgentArray.filter(val => val.id === salesAgentId) : [];
+    return rowObj.length ? rowObj[0]['name'] : '';
   }
 
 
@@ -176,6 +186,7 @@ const RequestOverviewData = (props) => {
                       <td> {eachRow.employer_name} </td>
                       <td> {eachRow.employer_mail} </td>
                       <td> {eachRow.company_name} </td>
+                      <td> {getEntityName(eachRow)} </td>
                       <td> {formatDate(eachRow.date_of_request)} </td>
                       <td> {formatDate(eachRow.date_of_commencement) || '--'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
