@@ -34,18 +34,30 @@ function EmployeeMonthlyPlanning(props) {
 		setVisible((prevValue) => prevValue + 3);
 	};
 	////////////////////////////////////////////////////////////////
+	const [ userid, setUserid ] = useState([]);
 	const [ data, setData ] = useState([]);
 	/**
 	 * FETCHING EMPLOYEE ID
 	 */
+
+	useEffect(() => {
+		if (localStorage.getItem('uid') != null) {
+			setUserid(JSON.parse(localStorage.getItem('uid')));
+		} else {
+			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+		}
+	}, []);
 	useEffect(
 		() => {
-			APICALL.service(fetchemployeeplanning + 105, 'GET')
+			APICALL.service(fetchemployeeplanning + userid, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
 						result.data.map((val, key) => {
 							console.log(result.data);
 							result.data[key].title = val.companyname + ', ' + val.location;
+							// ', ' +
+							// val.Employer_firstname +
+							// val.Employer_lastname;
 							result.data[key].startDate = new Date(val.starttime);
 							result.data[key].endDate = new Date(val.endtime);
 						});
@@ -57,7 +69,7 @@ function EmployeeMonthlyPlanning(props) {
 					console.log(error);
 				});
 		},
-		[ props ]
+		[ props, userid ]
 	);
 	const ExternalViewSwitcher = ({ currentViewName, onChange }) => (
 		<div
@@ -94,11 +106,11 @@ function EmployeeMonthlyPlanning(props) {
 				<div className="mt-3 col-md-12 p-0">
 					<p className="poppins-regular-16px">My upcoming plannings</p>
 				</div>
-				<div className=" d-flex  ">
-					<div className="mt-3 me-2 p-0">
+				<div className=" d-flex flex-row-reverse  ">
+					<div className="mt-3 me-2 p-2  ">
 						<FcSynchronize className="" data-toggle="tooltip" title="Synchronise planning" />
 					</div>
-					<div className="mt-3  p-0 ">
+					<div className="mt-3 p-2 ">
 						<BsFillPrinterFill className="" data-toggle="tooltip" title="Print planning" />
 					</div>
 				</div>
@@ -137,16 +149,34 @@ function EmployeeMonthlyPlanning(props) {
 									<td className="table-border-gray font-poppins-light">
 										{moment(result.endtime).format('HH:mm')}
 									</td>
-									<td className="table-border-gray font-poppins-light">{result.emp_id}</td>
+									<td className="table-border-gray font-poppins-light">
+										<span>{result.Employer_firstname} </span>
+										<span>{result.Employer_lastname} </span>
+									</td>
 									<td className=" table-border-gray font-poppins-light">{result.location}</td>
 									<td className="table-border-gray font-poppins-light">{result.companyname}</td>
 									<td className="d-flex justify-content-center">
-										<AiFillEye className="mt-2 ms-3 color-skyblue" />
+										<AiFillEye
+											type="button"
+											className="mt-2 ms-3 color-skyblue"
+											data-toggle="tooltip"
+											title="View details"
+										/>
 
 										<span>
-											<MdReviews className="mt-2 ms-3 color-skyblue " />
+											<MdReviews
+												type="button"
+												className="mt-2 ms-3 color-skyblue"
+												data-toggle="tooltip"
+												title=""
+											/>
 										</span>
-										<AiFillInfoCircle className="mt-2 ms-3 color-skyblue " />
+										<AiFillInfoCircle
+											type="button"
+											className="mt-2 ms-3 color-skyblue"
+											data-toggle="tooltip"
+											title="Sign contarct"
+										/>
 									</td>
 								</tr>
 							))}
