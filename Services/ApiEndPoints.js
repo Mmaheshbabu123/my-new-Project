@@ -198,5 +198,6 @@ export const v1DocumentPreview = BASE_URL + "v1-document-preview";
 export const saveV1Document = BASE_URL + "save-v1-document";
 export const getEmployerIdByCompanyId = BASE_URL + "get-employerid-by-company";
 export const checkEmployeeCompV1Status = BASE_URL + "check-employee-company-v1-status";
-// export const deleteCompositions = BASE_URL + "get-employerid-by-company";
+export const getSignedV1Documents = BASE_URL + "get-signed-v1-documents";
+export const downloadV1Documents = BASE_URL + "download-v1-documents";
 //--------------------------

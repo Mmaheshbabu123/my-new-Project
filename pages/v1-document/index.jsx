@@ -5,12 +5,12 @@ const V1DocumentMain = dynamic(() => import('@/components/V1Document/organisms/V
 
 const V1DocumentIndex = (props) => {
   const router = useRouter();
-  const { entitytype, entityid, companyid } = router.query;
+  const { entitytype, entityid, companyid, preview } = router.query;
   if (entityid !== undefined)
     return (
       <div>
         <Suspense fallback={`Loading...`}>
-            <V1DocumentMain entityType={entitytype} entityId = {entityid} companyId={companyid}/>
+            <V1DocumentMain entityType={entitytype} entityId = {entityid} companyId={companyid} preview={Number(preview)}/>
         </Suspense>
       </div>
     )

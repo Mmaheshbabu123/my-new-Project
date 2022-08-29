@@ -5,7 +5,7 @@ import { APICALL } from '@/Services/ApiServices';
 import { getCompaniesByEmployee, checkEmployeeCompV1Status } from '@/Services/ApiEndPoints';
 import styles from '../molecules/V1Document.module.css';
 
-const V1DocumentMain = ({ entityId, entityType, companyId }) => {
+const V1DocumentMain = ({ entityId, entityType, companyId, preview }) => {
   const [state, setState] = useState({
     selectedCompanyId: companyId,
     signed: 0,
@@ -56,8 +56,8 @@ const V1DocumentMain = ({ entityId, entityType, companyId }) => {
   if(Number(entityType) === 3) {
     return (
       <div> {state.selectedCompanyId ?
-        <>  {state.signed ? <p className = 'py-5 text-center lead' > You have already signed V1 document for this company </p>
-            : state.loaded === true && <V1DocumentPreview employeeId={entityId} companyId={state.selectedCompanyId} />}
+        <>  {preview !== 1 && state.signed ? <p className = 'py-5 text-center lead' > You have already signed V1 document for this company </p>
+            : (preview === 1 || state.loaded) === true && <V1DocumentPreview employeeId={entityId} companyId={state.selectedCompanyId} preview={preview} />}
         </> : showLinkedCompanies() }
       </div>
     );
