@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import CheckBoxField from '@/atoms/CheckBoxField';
 import { getSignedV1Documents, downloadV1Documents } from '@/Services/ApiEndPoints';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import ReactPaginate from 'react-paginate';
 import { APICALL } from '@/Services/ApiServices';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { GrView } from 'react-icons/gr';
 import { FiDownload } from 'react-icons/fi';
 import styles from './V1Document.module.css';
 import customAlert from '@/atoms/customAlert';
-const itemsPerPage = 5;
+const itemsPerPage = 8;
 
 const V1DocumentsOverview = (props) => {
   const [state, setState] = useState({
