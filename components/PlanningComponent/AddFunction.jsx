@@ -37,6 +37,8 @@ const AddFunction = () => {
 	const [ dradio, setdradio ] = useState(true);
 	const [ recentfuncitons, setrecentfunctions ] = useState();
 	const [ salChanged, setSalChanged ] = useState(false);
+	const [ pc_min_age, setPc_min_age ] = useState(false);
+
 	var hidefiled = '';
 	var selectnchecked = false;
 	useEffect(
@@ -50,6 +52,7 @@ const AddFunction = () => {
 					var actualdata = result.data[1];
 					var functionsdata = result.data[2];
 					var employeetypes = result.data[3];
+					setPc_min_age(result.data[4])
 
 					if (employeetypes.length != 0) {
 						setEmptypes(employeetypes);
@@ -515,7 +518,7 @@ const AddFunction = () => {
 													/>
 												)}
 											</div>
-											<div className="col-md-4 p-1 poppins-light-20px"><div>{key['employeename']} <span className='ageicon'>{key['age']!= 0 &&
+											<div className="col-md-4 p-1 poppins-light-20px"><div>{key['employeename']} <span className='ageicon'>{key['age']!= 0 && key['age'] <=pc_min_age&&
         {
           '16': <Image src={Age16} width={25}
 		  height={25}/>,
