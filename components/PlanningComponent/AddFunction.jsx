@@ -5,6 +5,15 @@ import ValidationService from '../../Services/ValidationService';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
+import Age16 from '../../public/images/Age_16.svg'
+import Age17 from '../../public/images/Age_17.svg'
+import Age18 from '../../public/images/Age_18.svg'
+import Age19 from '../../public/images/Age_19.svg'
+import Age20 from '../../public/images/Age_20.svg'
+import Age21 from '../../public/images/Age_21.svg'
+
+import Image from 'next/image'
+
 
 import { FaRegPlusSquare, FaRegMinusSquare, FaEuroSign } from 'react-icons/fa';
 
@@ -506,7 +515,24 @@ const AddFunction = () => {
 													/>
 												)}
 											</div>
-											<div className="col-md-4 p-1 poppins-light-20px">{key['employeename']}</div>
+											<div className="col-md-4 p-1 poppins-light-20px"><div>{key['employeename']} <span className='ageicon'>{key['age']!= 0 &&
+        {
+          '16': <Image src={Age16} width={25}
+		  height={25}/>,
+          '17': <Image src={Age17} width={25}
+		  height={25}/>,
+		  '18': <Image src={Age18} width={25}
+		  height={25}/>,
+		  '19': <Image src={Age19} width={25}
+		  height={25}/>,
+		  '20': <Image src={Age20} width={25}
+		  height={25}/>,
+		  '21': <Image src={Age21} width={25}
+		  height={25}/>,
+
+        }[key['age']]
+      
+	}</span></div></div>
 											<div className="col-md-3  border-0 custom-drop-btn">
 												{emptypes != null ? (
 													<MultiSelectField
