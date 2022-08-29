@@ -15,8 +15,9 @@ const SignatureMain = ({ entityId, entityType }) => {
   });
 
   useEffect(() => {  fetchData() }, [])
+
   /**
-   * [fetchEmpCoeffValueTypesData data fetching based on pcid]
+   * [fetchData description]
    * @return {Promise} [description]
    */
   const fetchData = async () => {

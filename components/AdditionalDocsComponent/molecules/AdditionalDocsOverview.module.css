@@ -1,4 +1,4 @@
-.employer-sv-page-title {
+.docs-sv-page-title {
   margin: 25px 0;
   font-size: 1.5rem;
 }
@@ -16,27 +16,27 @@
 
 }
 
-.employer-overview-tabs {
-  display: inline-block;
+.docs-overview-tabs {
+  display: block;
   width: 40%;
   margin: 20px 0 40px 0;
 }
 
 
-.employer-overview-tabs > li {
+.docs-overview-tabs > li {
   display: inline-block;
   width: 30%;
 }
 
-.employer-overview-tabs > li:first-child {
+.docs-overview-tabs > li:first-child {
   width: 20%;
 }
 
-.employer-overview-tabs > li > span {
+.docs-overview-tabs > li > span {
   cursor: pointer;
 }
 
-.employer-overview-tabs > li > span:hover {
+.docs-overview-tabs > li > span:hover {
   opacity: 0.7;
 }
 
@@ -102,4 +102,26 @@
 
 .expand-minimize-span > svg:hover{
   opacity: 0.7;
+}
+
+.docs-overview-tabs > li {
+  display: inline-block;
+  width: 50%;
+}
+
+.docs-overview-tabs > li:first-child {
+  width: 50%;
+}
+
+
+.docs-overview-tabs > li > span {
+  cursor: pointer;
+}
+
+.docs-overview-tabs > li > span:hover {
+  opacity: 0.7;
+}
+
+.underline {
+  border-bottom: 3px solid black;
 }

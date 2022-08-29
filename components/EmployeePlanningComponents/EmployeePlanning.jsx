@@ -9,6 +9,7 @@ import { ViewState } from '@devexpress/dx-react-scheduler';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import { fetchemployeeplanning } from '../../Services/ApiEndPoints';
+import moment from 'moment';
 
 import {
 	Scheduler,
@@ -33,16 +34,33 @@ function EmployeeMonthlyPlanning(props) {
 		setVisible((prevValue) => prevValue + 3);
 	};
 	////////////////////////////////////////////////////////////////
+	const [ userid, setUserid ] = useState([]);
 	const [ data, setData ] = useState([]);
 	/**
 	 * FETCHING EMPLOYEE ID
 	 */
+
+	useEffect(() => {
+		if (localStorage.getItem('uid') != null) {
+			setUserid(JSON.parse(localStorage.getItem('uid')));
+		} else {
+			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+		}
+	}, []);
 	useEffect(
 		() => {
-			APICALL.service(fetchemployeeplanning + 104, 'GET')
+			APICALL.service(fetchemployeeplanning + userid, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
-						console.log(result.data);
+						result.data.map((val, key) => {
+							console.log(result.data);
+							result.data[key].title = val.companyname + ', ' + val.location;
+							// ', ' +
+							// val.Employer_firstname +
+							// val.Employer_lastname;
+							result.data[key].startDate = new Date(val.starttime);
+							result.data[key].endDate = new Date(val.endtime);
+						});
 					}
 
 					setData(result.data);
@@ -51,7 +69,7 @@ function EmployeeMonthlyPlanning(props) {
 					console.log(error);
 				});
 		},
-		[ props ]
+		[ props, userid ]
 	);
 	const ExternalViewSwitcher = ({ currentViewName, onChange }) => (
 		<div
@@ -88,11 +106,13 @@ function EmployeeMonthlyPlanning(props) {
 				<div className="mt-3 col-md-12 p-0">
 					<p className="poppins-regular-16px">My upcoming plannings</p>
 				</div>
-				<div className="mt-3 col-md-12 p-0">
-					<FcSynchronize className="float-end" />
-				</div>
-				<div className="mt-3 col-md-12 p-0">
-					<BsFillPrinterFill className="float-end" />
+				<div className=" d-flex flex-row-reverse  ">
+					<div className="mt-3 me-2 p-2  ">
+						<FcSynchronize className="" data-toggle="tooltip" title="Synchronise planning" />
+					</div>
+					<div className="mt-3 p-2 ">
+						<BsFillPrinterFill className="" data-toggle="tooltip" title="Print planning" />
+					</div>
 				</div>
 				<div className=" mt-2 text-center col-md-12 p-0 ">
 					<table className="table border  border-info mt-3 mb-3">
@@ -123,18 +143,40 @@ function EmployeeMonthlyPlanning(props) {
 							{data.slice(0, visible).map((result) => (
 								<tr className="border-bottom  border-info" key={result.title}>
 									<td className="table-border-gray font-poppins-light">{result.pdate}</td>
-									<td className="table-border-gray font-poppins-light">{result.starttime}</td>
-									<td className="table-border-gray font-poppins-light">{result.endtime}</td>
-									<td className="table-border-gray font-poppins-light">{result.emp_id}</td>
+									<td className="table-border-gray font-poppins-light">
+										{moment(result.starttime).format('HH:mm')}
+									</td>
+									<td className="table-border-gray font-poppins-light">
+										{moment(result.endtime).format('HH:mm')}
+									</td>
+									<td className="table-border-gray font-poppins-light">
+										<span>{result.Employer_firstname} </span>
+										<span>{result.Employer_lastname} </span>
+									</td>
 									<td className=" table-border-gray font-poppins-light">{result.location}</td>
 									<td className="table-border-gray font-poppins-light">{result.companyname}</td>
 									<td className="d-flex justify-content-center">
-										<AiFillEye className="mt-2 ms-3 color-skyblue" />
+										<AiFillEye
+											type="button"
+											className="mt-2 ms-3 color-skyblue"
+											data-toggle="tooltip"
+											title="View details"
+										/>
 
 										<span>
-											<MdReviews className="mt-2 ms-3 color-skyblue " />
+											<MdReviews
+												type="button"
+												className="mt-2 ms-3 color-skyblue"
+												data-toggle="tooltip"
+												title=""
+											/>
 										</span>
-										<AiFillInfoCircle className="mt-2 ms-3 color-skyblue " />
+										<AiFillInfoCircle
+											type="button"
+											className="mt-2 ms-3 color-skyblue"
+											data-toggle="tooltip"
+											title="Sign contarct"
+										/>
 									</td>
 								</tr>
 							))}
@@ -158,11 +200,11 @@ function EmployeeMonthlyPlanning(props) {
 
 					<Paper>
 						<Scheduler data={data} height={660}>
-							<ViewState defaultCurrentDate="2022-07-25" currentViewName={currentViewName} />
+							<ViewState defaultCurrentDate={new Date()} currentViewName={currentViewName} />
 
-							<DayView startDayHour={10} endDayHour={19} />
-							<WeekView startDayHour={10} endDayHour={19} />
-							<WeekView name="Work Week" excludedDays={[ 0, 6 ]} startDayHour={9} endDayHour={19} />
+							<DayView />
+							<WeekView />
+							{/* <WeekView name="Work Week" /> */}
 							<MonthView />
 							<Toolbar />
 							<DateNavigator />
