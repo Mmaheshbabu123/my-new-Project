@@ -1828,3 +1828,11 @@ tbody:before {
 	border: none;
 	border-bottom: 1px solid var(--color-skyblue) !important;
 }
+.text_field_addpc
+{
+	height: 41px;
+}
+.error_text
+{
+	font-family: var(--font-family-poppins-light);
+}

@@ -219,12 +219,12 @@ function AddFunction(props) {
 								setData((prev) => ({ ...prev, function_name: e.target.value }));
 							}}
 						/>
-						<p style={{ color: 'red' }}>{error_function_name}</p>
+						<p className='error_text' style={{ color: 'red' }}>{error_function_name}</p>
 					</div>
 
 					{Object.keys(props.categorylist).length > 0 && (
 						<div className="form-group mb-2">
-							<label className="custom_astrick mt-2 poppins-regular-18px">Category</label>
+							<label className="mt-2 poppins-regular-18px">Category</label>
 							<select
 								className="form-select my-2 form-control border-0 rounded-0 poppins-medium-18px shadow-none"
 								value={data.category_id}
@@ -280,7 +280,7 @@ function AddFunction(props) {
 							/>
 							
 						</div>
-						<p className="pb-1" style={{ color: 'red' }}>
+						<p className="pb-1 error_text" style={{ color: 'red' }}>
 							{error_min_salary}
 						</p>
 					</div>

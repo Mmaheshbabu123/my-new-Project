@@ -331,7 +331,7 @@ function Planning(props) {
 					<div className="form-sec border-form-sec p-4 mb-5">
 						<div className="col-md-6">
 							<div className="form-group mb-3">
-								<label className="form-label mt-2 custom_astrick poppins-regular-18px">
+								<label className="form-label custom_astrick poppins-regular-18px">
 									Company
 								</label>
 								<select
@@ -353,7 +353,7 @@ function Planning(props) {
 							</div>
 
 							<div className="form-group mb-3">
-								<label className="form-label mt-2 custom_astrick poppins-regular-18px">
+								<label className="form-label custom_astrick poppins-regular-18px">
 									Location
 								</label>
 								<select
@@ -379,7 +379,7 @@ function Planning(props) {
 							</div>
 
 							<div className="form-group mb-3">
-								<label className="form-label mt-2 poppins-regular-18px">Cost center</label>
+								<label className="form-label poppins-regular-18px">Cost center</label>
 								<select
 									className="form-select mb-2 poppins-regular-16px rounded-0"
 									value={costcenterid}
