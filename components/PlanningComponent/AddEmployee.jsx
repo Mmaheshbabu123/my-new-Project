@@ -123,7 +123,7 @@ const AddEmployee = () => {
 					</div>
 				</div>
 				<div className="row">
-					<div className="text-start col-md-6">
+					<div className="text-start col-md-6 d-flex align-items-center">
 						<button
 							type="button"
 							className="btn  btn-block px-0"

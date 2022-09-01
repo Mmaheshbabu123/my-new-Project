@@ -1779,6 +1779,7 @@ tbody:before {
 	border: none;
 	border-bottom: 1px solid var(--color-skyblue) !important;
 }
+<<<<<<< HEAD
 
 .access-denied-title {
 	font-size: 30px;
@@ -1794,3 +1795,13 @@ tbody:before {
 	vertical-align: sub !important;
 	padding-left:5px;
 }
+=======
+.text_field_addpc
+{
+	height: 41px;
+}
+.error_text
+{
+	font-family: var(--font-family-poppins-light);
+}
+>>>>>>> sep_1_design_changes_2022
