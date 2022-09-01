@@ -20,7 +20,7 @@ const SalaryDetails = (props) => {
     cooperationSalaryLinked,
     cooperationBenefits
   }, salaryDataPerPc, dependecyDataStatus } = state;
-
+console.log(state)
   const [ compState, setCompState ] = useState({
       expand: {},
       premiesAutoArray: [
