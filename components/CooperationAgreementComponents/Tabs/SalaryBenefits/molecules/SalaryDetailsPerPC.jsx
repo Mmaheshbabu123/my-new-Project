@@ -74,6 +74,7 @@ const SalaryDetailsPerPC = () => {
             handleChange={onSelect}
             isMulti={false}
             standards={[]}
+            key = {123}
             className={`${styles['salary-benefits-multiselect']}`}
             classNamePrefix={`${styles['salary-benefits-multiselect']}`}
             placeholder={'Select paritair comite'}
