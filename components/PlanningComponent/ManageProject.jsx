@@ -240,7 +240,7 @@ function ManageProject(props) {
 								<input
 									type="search"
 									id="form12"
-									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
 									placeholder="Project name"
 									value={searchProjectname}
 									onChange={(e) => setSearchProjectname(e.target.value)}
@@ -251,7 +251,7 @@ function ManageProject(props) {
 								<input
 									type="search"
 									id="form12"
-									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
 									placeholder="Location"
 									value={searchlocation}
 									onChange={(e) => setSearchlocation(e.target.value)}
@@ -262,7 +262,7 @@ function ManageProject(props) {
 								<input
 									type="search"
 									id="form12"
-									className="form-control mt-2 mb-2 text-break input-border-lightgray poppins-regular-18px mh-50 rounded-0  "
+									className="form-control mt-2 mb-2 text-break input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none  "
 									placeholder="Address"
 									value={searchaddress}
 									onChange={(e) => setSearchaddress(e.target.value)}
@@ -273,7 +273,7 @@ function ManageProject(props) {
 								<div className="col-md-6">
 									<button
 										type="button"
-										className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100"
+										className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
 										onClick={() => handleSearch()}
 									>
 										SEARCH
@@ -288,7 +288,7 @@ function ManageProject(props) {
 										search === true) && (
 										<button
 											type="button"
-											className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100"
+											className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
 											onClick={() => handleReset()}
 										>
 											RESET
@@ -304,12 +304,12 @@ function ManageProject(props) {
 							<table className="table mt-3 mb-3">
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-4">
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4">
 											Project name
 										</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-4">Location</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-4">Address</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-4">Action</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Location</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Address</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Action</th>
 									</tr>
 								</thead>
 								{/* <hr className="table-header-space"/> */}
@@ -317,14 +317,14 @@ function ManageProject(props) {
 									{projectTemp2.length > 0 &&
 										projectTemp2.map((result) => (
 											<tr className="border poppins-regular-18px p-2" key={result.id}>
-												<td className="poppins-regular-18px p-4">{result.project_name}</td>
-												<td className="poppins-regular-18px p-4">{result.project_location}</td>
-												<td className="poppins-regular-18px p-4">
+												<td className="poppins-regular-18px p-2 ps-4">{result.project_name}</td>
+												<td className="poppins-regular-18px p-2">{result.project_location}</td>
+												<td className="poppins-regular-18px p-2">
 													{result.address.replace(',', '').length > 7 ? result.address : '-'}
 												</td>
 												{/*-------------------------Edit projects------------------------- */}
 
-												<td className="p-4">
+												<td className="p-2">
 													<Link href={'/editproject/' + result.id} className="">
 														<a type="button">
 															<MdEdit
@@ -336,7 +336,7 @@ function ManageProject(props) {
 													</Link>
 													{/*-------------------- Planning update----------------------- */}
 
-													<span className="ms-2 ">
+													<span className="ms-3 ">
 														<a
 															type="button"
 															onClick={() =>
