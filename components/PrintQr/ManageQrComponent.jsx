@@ -6,6 +6,7 @@ import { FiDownload } from 'react-icons/fi';
 import { BiQrScan } from 'react-icons/bi';
 import { GrRefresh } from 'react-icons/gr';
 import ReactPaginate from 'react-paginate';
+import { formatDate } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
 import customAlert from '@/atoms/customAlert';
 const itemsPerPage = 8;
 
@@ -128,19 +129,21 @@ const ManageQrComponent = ({ headers, rows }) => {
       <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage QR code`} </h4>
       <div className='row searchbox m-0 my-4' style={{ margin: '10px 0' }}>
        <div className='col-md-12 row'>
-         <div className='col-md-9 row'>
+         <div className='col-md-6 row'>
            <input
              type="text"
+             style={{width: '45%'}}
              value={state.companyTerm}
-             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 w-auto rounded-0"
+             className="form-control mt-2 mx-2 mb-2 input-border-lightgray poppins-regular-18px rounded-0"
              onChange={(e) => setState({...state, companyTerm: e.target.value})}
              placeholder={'Search company'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
            <input
              type="text"
+             style={{width: '45%'}}
              value={state.locationTerm}
-             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 mx-2 w-auto rounded-0"
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px rounded-0"
              onChange={(e) => setState({...state, locationTerm: e.target.value})}
              placeholder={'Search location'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
@@ -162,6 +165,7 @@ const ManageQrComponent = ({ headers, rows }) => {
              RESET
            </button>
          </div>
+         <div className="col-md-3 text-end py-3" style={{fontSize: 'x-large'}}> Date: {formatDate(new Date())} </div>
         </div>
       </div>
       <div className="max-height-420">
