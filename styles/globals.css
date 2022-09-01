@@ -1789,3 +1789,7 @@ tbody:before {
 	padding-bottom: 20px;
 	text-align: left;
 }
+
+.force-skyblue > path {
+	stroke: var(--color-skyblue) !important;
+}
