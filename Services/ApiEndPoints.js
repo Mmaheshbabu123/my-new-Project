@@ -202,3 +202,9 @@ export const checkEmployeeCompV1Status = BASE_URL + "check-employee-company-v1-s
 export const getSignedV1Documents = BASE_URL + "get-signed-v1-documents";
 export const downloadV1Documents = BASE_URL + "download-v1-documents";
 //--------------------------
+
+//------------------- QR CODE--------------------//
+export const getCompanyLocationByEmployerId = BASE_URL + "get-company-locations";
+export const downloadQrCode = BASE_URL + "download-qr-code";
+export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
+//-------------------

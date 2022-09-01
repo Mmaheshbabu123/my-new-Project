@@ -1793,3 +1793,15 @@ tbody:before {
 .force-skyblue > path {
 	stroke: var(--color-skyblue) !important;
 }
+.ageicon {
+	vertical-align: sub !important;
+	padding-left:5px;
+}
+.text_field_addpc
+{
+	height: 41px;
+}
+.error_text
+{
+	font-family: var(--font-family-poppins-light);
+}

@@ -179,7 +179,7 @@ const SalaryBenifits = () => {
 				)}
 				<div className='pc-height5'>
 				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 p-4":"border-0"}>
-				<p className="mb-2 fw-bold" style={{ color: 'red' }}>
+				<p className="mb-2 error_text" style={{ color: 'red' }}>
 						{error_sal_benifits}
 					</p>
 					{data.map((val, key) => (

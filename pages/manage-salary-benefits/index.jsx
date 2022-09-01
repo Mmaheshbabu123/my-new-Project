@@ -1,12 +1,9 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic'
 import { APICALL } from '@/Services/ApiServices';
 import { fetchSalaryBenefits } from '@/Services/ApiEndPoints';
 import AddEditSalaryBenefits from '@/components/SalaryBenefits/AddEditSalaryBenefits';
 import ShowTable from '@/components/SalaryBenefits/ShowTable';
-// const LinkCoeffEmpStates = dynamic(() => import('../../Contexts/LinkCoeffEmp/LinkCoeffEmpStates'), { ssr: false });
-// const LinkCoeffEmpComponent = dynamic(() => import('../../components/LinkCoeffEmpComponents/LinkCoeffEmpComponent'), { ssr: false, suspense: true });
 
 const SalaryBenefits = (props) => {
   const router  = useRouter();
