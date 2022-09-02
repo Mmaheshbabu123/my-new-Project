@@ -371,8 +371,8 @@ const ManageFunction = () => {
 							id="form12"
 							value={searchPc}
 							onChange={(e) => setSearchPc(e.target.value)}
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
-							placeholder="Paritair comite number"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
+							placeholder="PC number"
 						/>
 					</div>
 
@@ -382,7 +382,7 @@ const ManageFunction = () => {
 							id="form12"
 							value={searchFunc}
 							onChange={(e) => setSearchFunc(e.target.value)}
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 "
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
 							placeholder="Function Name"
 						/>
 					</div>
@@ -393,7 +393,7 @@ const ManageFunction = () => {
 							id="form12"
 							value={searchSal}
 							onChange={(e) => setSearchSal(e.target.value)}
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
 							placeholder="Minimum salary"
 						/>
 					</div>
@@ -403,7 +403,7 @@ const ManageFunction = () => {
 							id="form12"
 							value={searchCat}
 							onChange={(e) => setSearchCat(e.target.value)}
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
 							placeholder="Category name"
 						/>
 					</div>
@@ -411,13 +411,13 @@ const ManageFunction = () => {
 					<div className="col-md-2 field_height">
 						<button
 							type="button"
-							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 ms-2 skyblue-bg-color w-100"
+							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 skyblue-bg-color w-100 shadow-none"
 							onClick={() => handleSearch()}
 						>
 							FILTER
 						</button>
 						</div>
-						<div className="col-md-2 field_height">
+						<div className="col-md-2 field_height pe-0">
 						{(searchPc.trim() != '' ||
 							searchFunc.trim() != '' ||
 							searchCat.trim() != '' ||
@@ -425,7 +425,7 @@ const ManageFunction = () => {
 							search === true) && (
 							<button
 								type="button"
-								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right font-16 py-2 px-4 ms-2 reset-btn w-100"
+								className="btn  btn-block float-right mt-2 mb-2 rounded-0 float-right py-2 px-4 reset-btn w-100 shadow-none"
 								onClick={() => handleReset()}
 							>
 								RESET
@@ -437,26 +437,26 @@ const ManageFunction = () => {
 						<table className="table mt-3 mb-3">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray h-50-mf">
-									<th className="poppins-medium-18px btn-bg-gray-medium p-4">
+									<th className="poppins-medium-18px btn-bg-gray-medium p-2 ps-4">
 										Paritair comite number
 									</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-4">Function name</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-4">Minimum salary</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-4">Category</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-4">Action</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Function name</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Minimum salary</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Category</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								{functionsTemp2.length > 0 &&
 									functionsTemp2.map((result) => (
 										<tr className="border poppins-regular-18px p-2" key={result.funcn_id}>
-											<td className="poppins-regular-18px p-4">
+											<td className="poppins-regular-18px p-2 ps-4">
 												{result.pc_number ? result.pc_number : result.pc_num}
 											</td>
-											<td className="poppins-regular-18px p-4">{result.function_name}</td>
-											<td className="poppins-regular-18px p-4">€ {result.min_salary}</td>
-											<td className="poppins-regular-18px p-4">{result.cat_name}</td>
-											<td className=" p-4">
+											<td className="poppins-regular-18px p-2">{result.function_name}</td>
+											<td className="poppins-regular-18px p-2">€ {result.min_salary}</td>
+											<td className="poppins-regular-18px p-2">{result.cat_name}</td>
+											<td className=" p-2">
 												<Link
 													href={
 														result.pc_unique_key ? (
@@ -472,7 +472,7 @@ const ManageFunction = () => {
 												>
 													<a className="">
 														<MdEdit
-															className="mt-2 color-skyblue"
+															className=" color-skyblue"
 															data-toggle="tooltip"
 															title="Edit function"
 														/>
@@ -480,7 +480,7 @@ const ManageFunction = () => {
 												</Link>
 												<span onClick={() => showPopup(result.funcn_id)} type="button">
 													<MdDelete
-														className="mt-2 ms-3 color-skyblue"
+														className=" ms-3 color-skyblue"
 														data-toggle="tooltip"
 														title="Delete function"
 													/>
