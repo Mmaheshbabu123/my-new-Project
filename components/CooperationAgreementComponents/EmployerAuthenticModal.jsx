@@ -15,7 +15,7 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
   });
 
   const passwordChange = ({ target: { value } }) => {
-    setState({...state, password: value})
+    setState({...state, password: value, passwordWarning: false})
   }
 
   const handleAuthentic = async (e) => {
@@ -74,7 +74,7 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
            <Modal.Title> Authenticate employer </Modal.Title>
          </Modal.Header>
        <Modal.Body>
-         <form className=' col-md-9 m-auto'>
+         <div className=' col-md-9 m-auto'>
             <div className="mb-3">
                <label htmlFor="inputEmail" className="form-label">Email address</label>
                <input type="email" disabled value={props.employerMail} className="form-control" id="inputEmail" aria-describedby="emailHelp" />
@@ -85,6 +85,7 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
                <input onChange={passwordChange} type={state.showPassword ? "text" : "password"} className="form-control" style={{paddingBottom: '5px' }} id="inputPassword" />
                <span  style={passwordEyeIconStyle} className="span-action-icons" onClick={() => setState({...state, showPassword: !state.showPassword})}> {state.showPassword === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />} </span>
                {state.invalidUser === true && <ValidateMessage style={{margin:0}} text = {'You have entered an invalid password'}/>}
+               {state.passwordWarning === true && <ValidateMessage style={{margin:0}} text = {'Please enter password'}/>}
             </div>
 
             <div className='text-end my-4'>
@@ -94,7 +95,7 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
                 {state.spinner === true ? 'Authenticating...' : 'Authenticate'}
               </button>
             </div>
-         </form>
+         </div>
        </Modal.Body>
      </Modal>
    </div>
