@@ -30,7 +30,7 @@ const AdditionalDocsMain = (props) => {
       await APICALL.service(`${fetchAdditionalDocuments}/${entityId}/${entityType}/${editId}/${action}`, 'GET').then(response => {
         if (response.status === 200)
           setState({...state,
-            overviewData: response.data.overviewData ? Object.values(response.data.overviewData).sort().reverse() :[],
+            overviewData: response.data.overviewData ? response.data.overviewData :[],
             loaded: true,
             companies: response.data.companies || {},
             employers: response.data.employers || [],
@@ -54,7 +54,7 @@ const AdditionalDocsMain = (props) => {
     let selectedTabId = Number(id);
     setState({...state, selectedTabId });
   }
-
+console.log(state.overviewData)
   return (
     <div>
     {state.loaded === true ?
