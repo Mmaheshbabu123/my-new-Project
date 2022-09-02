@@ -7,6 +7,7 @@ import { cooperationAgreementPreview, sendToEmployer, updateEmployerSign,
 import styles from './CooperationAgreement.module.css'
 import CheckBoxField from '@/atoms/CheckBoxField';
 import SignatureDetails from '@/components/SignatureFlow/molecules/SignatureDetails';
+import EmployerAuthenticModal from './EmployerAuthenticModal';
 
 let timeOutRef;
 const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRefId, preview = 0 }) => {
@@ -22,6 +23,8 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
     sign: '',
     showPopup: false,
     employerId: 0,
+    authenticModal: false,
+    authenticated: 0,
     iframeUrl: `${cooperationAgreementPreview}/${rootParentId}?type=${type}&approved=${0}&preview=${preview}&employer_id=${0}`,
   });
 
@@ -40,7 +43,12 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
     await APICALL.service(`${checkEmployerSignature}/${salesAgentRefId}`, 'GET')
     .then(response => {
       if(response.status === 200) {
-        setState({...state, employerAddedSign: response.data.signData || 0, employerId: response.data.employerId || 0 })
+        setState({...state,
+          employerAddedSign: response.data.signData || 0,
+          employerId: response.data.employerId || 0,
+          employerMail: response.data.mail || '',
+          oldpass: response.data.oldpass || '',
+        })
       }
     })
   }
@@ -49,11 +57,19 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
     if(state.employerAddedSign) {
       setState({...state,
         signAsEmployer: 1,
+        authenticated: 1,
+        authenticModal: false,
         iframeUrl: `${cooperationAgreementPreview}/${rootParentId}?type=${type}&approved=${1}&preview=${0}&employer_id=${state.employerId}`
       })
-    } else {
-      setState({...state, showPopup: true })
+     } else {
+       setState({...state, showPopup: true, authenticated: 1, authenticModal: false })
     }
+   }
+
+  const checkAuthenticateEmployer = () => {
+    state.authenticated !== 1 ?
+      setState({...state, authenticModal: true}) :
+      signAsEmployer();
   }
 
   const submitSignData = async (signData) => {
@@ -78,6 +94,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
     let approved = checked ? 1 : 0;
     setState({...state,
       approved: approved,
+      signAsEmployer: approved === 0 ? 0 : state.signAsEmployer,
       iframeUrl: `${cooperationAgreementPreview}/${rootParentId}?type=${type}&entityid=${employerRefId}&approved=${approved}&preview=${preview}`})
   }
   /**
@@ -135,7 +152,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
                <button onClick={() => forwardToApproveProcess()} type="button" className="btn btn-dark pcp_btn"> {type === 2 ? 'Approve' : 'Send to employer'} </button>
              </div>
              <div className="col-md-2 text-end">
-              {type === 1 && <button onClick={signAsEmployer} type="button" className="btn btn-dark pcp_btn"> {'Sign as employer'} </button>}
+              {type === 1 && <button onClick={checkAuthenticateEmployer} type="button" className="btn btn-dark pcp_btn"> {'Sign as employer'} </button>}
              </div>
               {type === 1 && <SignatureDetails state = {state} setState = {setState} submitSignData={submitSignData} fromSvPreview={1} />}
           </>
@@ -145,6 +162,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
          </div>
        }
      </div>}
+     <EmployerAuthenticModal props={state} allowEmployerSignature={signAsEmployer}close={()=>setState({...state, authenticModal: false})} />
     </div>
   );
 }

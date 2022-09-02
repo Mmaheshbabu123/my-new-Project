@@ -166,6 +166,7 @@ export const cooperationAgreementPreview = BASE_URL + 'cooperation-agreement-pre
 export const sendToEmployer = BASE_URL + 'send-to-employer';
 export const updateEmployerSign = BASE_URL + 'employer-sign-update';
 export const checkEmployerSignature = BASE_URL + 'check-employer-signature';
+export const authenticateEmployer = BASE_URL + 'authenticate-employer';
 //------
 
 
