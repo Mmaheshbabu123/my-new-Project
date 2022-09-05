@@ -104,12 +104,13 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
         <button
           onClick={() => router.push(`manage-salary-benefits?action=create&id=0`)}
           type="button"
-          className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content">
+          // className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content"
+          className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3">
           {`+ Add salary benefit`}
         </button>
       </div>
-      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
-       <div className='col-md-12 row'>
+      <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+       <div className='row'>
          <div className='col-md-6 p-0'>
            <input
              type="text"

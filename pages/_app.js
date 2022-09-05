@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import '../styles/style.css';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -18,7 +19,7 @@ function MyApp({ Component, pageProps }) {
 				/>
 			</Head>
 			<Layout>
-				<div className='col-md-10 m-auto'>
+				<div className='col-md-9 col-lg-10 m-auto'>
 				<Component {...pageProps} />
 				</div>
 			</Layout>

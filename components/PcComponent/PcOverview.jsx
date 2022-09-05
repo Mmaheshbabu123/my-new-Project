@@ -161,7 +161,7 @@ const PcOverview = (params) => {
 						<div className='epc'>
 							{
 							params.type != 'viewpc' && (
-								<div className={cat_subsec_type ==0?"text-end mb-3":"invisible"} style={pc_view_type =='addpc'?{marginBottom:'1.5rem'}:{}}>
+								<div className={cat_subsec_type ==0?"text-end mb-3 ":"invisible"} style={pc_view_type =='addpc'?{marginBottom:'1.5rem'}:{}}>
 									<button
 										type="button"
 										to="category"
@@ -192,10 +192,10 @@ const PcOverview = (params) => {
 								</div>
 							)}
 							<div className=''>
-							<ul className={`list-unstyled ${styles.tree}`}>
+							<ul className={`list-unstyled shadow-none ${styles.tree}`}>
 								<li className={styles.sectioncolor}>
 									<ul className={`list-inline my-2 list-unstyled  pc ${styles.tree} d-flex `}>
-										<li className="list-inline-item section-plus-icon align-top fs-4 mrg-lf-rt mt-3">
+										<li className="list-inline-item section-plus-icon align-top fs-4 mrg-lf-rt mt-3 shadow-none">
 											{/* <a
 												// data-bs-toggle="collapse"
 												// href={'#collapsepc' + pc_unique_key}
