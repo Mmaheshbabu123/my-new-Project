@@ -82,6 +82,7 @@ const AddEditSalaryBenefits = (props) => {
             stateObj['coefficientType'] = 2;
             stateObj['coefficientValue'] = 1.15;
             stateObj['granted'] = 1;
+            stateObj['editIndex'] = stateObj['newItems'].length;
         } else {
           stateObj['dateWarning'] = true;
         }
