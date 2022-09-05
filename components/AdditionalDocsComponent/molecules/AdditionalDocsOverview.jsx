@@ -134,7 +134,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
     }
     return rowObj.length ? rowObj[0]['label'] : '';
   }
-console.log(state.currentItems)
+
   return (
     <>
       <div className='col-md-12 text-end'>
