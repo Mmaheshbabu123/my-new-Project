@@ -15,7 +15,7 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
   });
 
   const passwordChange = ({ target: { value } }) => {
-    setState({...state, password: value, passwordWarning: false})
+    setState({...state, password: value, passwordWarning: false, invalidUser: false })
   }
 
   const handleAuthentic = async (e) => {
