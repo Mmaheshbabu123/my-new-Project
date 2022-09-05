@@ -51,7 +51,7 @@ const ManageQrComponent = ({ headers, rows }) => {
     await APICALL.service(`${regenerateQrCode}`, 'POST', eachRow)
       .then((response) => {
         if(response.status === 200) {
-          customAlert('error', `Error occurred while regenerating`, 2000);
+          customAlert('success', `Regenerating successfully!`, 2000);
         }
       }).catch((error) => window.alert('Error occurred'));
   }
