@@ -222,3 +222,7 @@ tbody.table-body-employee-type
 .popup-back-btn:hover{
   text-decoration: underline;
 }
+
+.width-100 {
+  width: 100% !important;
+}
