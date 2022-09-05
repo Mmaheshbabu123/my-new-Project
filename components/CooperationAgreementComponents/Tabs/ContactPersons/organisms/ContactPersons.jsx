@@ -5,7 +5,7 @@ import { helpers } from '../../../CooperationAgreementHelper';
 import { requiredFields } from '@/components/CooperationAgreementComponents/RequiredFields';
 
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
-const requiredElements  = structuredClone(requiredFields);
+const requiredElements  = JSON.parse(JSON.stringify(requiredFields));
 
 const ContactPersons = (props) => {
   const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_3_action, filledTabs}, updateStateChanges, state  } = useContext(CooperationAgreementContext);

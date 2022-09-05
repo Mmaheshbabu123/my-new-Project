@@ -5,7 +5,7 @@ export default function Radio ({name = '', checked =1, handleChange, label, cust
     <>
     <label style={{cursor: 'pointer'}} className={className || ''}>
    <input
-     style = {{...customStyle, ...{margin: '0 10px'}}}
+     style = {{...customStyle, ...{marginRight: '10px'}}}
      type = 'radio'
      name = {name}
      checked = {checked}

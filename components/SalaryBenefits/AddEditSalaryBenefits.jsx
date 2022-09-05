@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { createSalaryBenefits, updateSalaryBenefits } from '@/Services/ApiEndPoints'
 import { formatDate } from './SalaryBenefitsHelpers';
+import RadioField from '@/atoms/RadioField';
+import MultiSelectField from '@/atoms/MultiSelectField';
+import { salaryBenefitOccurenceOptions } from '@/Constants';
+import LabelField from '@/atoms/LabelField';
 import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 let dateObj = new Date()
@@ -13,13 +17,24 @@ const AddEditSalaryBenefits = (props) => {
   const router = useRouter();
   const inputRef = useRef({});
   const assignInitialValues = () => {
-    if(props.id && props.rows.length)
+    if(props.id && props.rows.length) {
+      let data = props.rows[0];
       return {
-        name: props.rows[0]['name']
-      , date: props.rows[0]['date']
-      , value: props.rows[0]['value']
+          name: data['name']
+        , date: data['date']
+        , value: data['value']
+        , occurence: data['occurence']
+        , valueType: data['value_type']
+        , coefficientType: data['coefficient_type']
+        , coefficientValue: data['coefficient_value']
+        , granted: data['granted']
       }
-    else return { name: '', date: '', value: ''}
+    }
+    else return { name: '', date: '', value: '', occurence: ''
+    , valueType: 1
+    , coefficientType: 2
+    , coefficientValue: 1.15
+    , granted: 1 }
   }
 
   const [state, setState] = useState({
@@ -39,29 +54,36 @@ const AddEditSalaryBenefits = (props) => {
      * @param {String} nameValue  [description]
      */
     const addItemAndUpdateIndex = (stateObj) => {
-        let totalRows = stateObj['newItems'].length > 0 ?  stateObj['newItems'] : state.rows;
-
+      let totalRows = stateObj['newItems'].length > 0 ?  stateObj['newItems'] : state.rows;
       if (stateObj['name'].replaceAll(' ', '').length) {
         let duplicates = totalRows.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase().replaceAll(' ', '') === state.name.toLowerCase().replaceAll(' ', '')))
         if(duplicates.length) {
-            stateObj['uniqueError'] = true;
-            stateObj['duplicates'] = duplicates.map(obj => obj.name);
+          stateObj['uniqueError'] = true;
+          stateObj['duplicates'] = duplicates.map(obj => obj.name);
         } else {
           if(!checkDateFieldValid(state.date)) {
-              state.editIndex =   state.editIndex === -1 ? 0 :state.editIndex;
+            state.editIndex =   state.editIndex === -1 ? 0 :state.editIndex;
             stateObj['newItems'][state.editIndex] = {
               name: state.name,
               date: state.date,
-              value: state.value
+              value: state.value,
+              occurence: state.occurence,
+              value_type: state.valueType,
+              coefficient_type: state.coefficientType,
+              coefficient_value: state.coefficientValue,
+              granted: state.granted,
             };
             inputRef.current['date'].value = '';
             stateObj['name'] = '';
             stateObj['date'] = '';
             stateObj['value'] = '';
-            stateObj['dateWarning'] = false;
-            stateObj['editIndex'] = stateObj['newItems'].length;
-        }else {
-            stateObj['dateWarning'] = true;
+            stateObj['occurence'] = '';
+            stateObj['valueType'] = 1;
+            stateObj['coefficientType'] = 2;
+            stateObj['coefficientValue'] = 1.15;
+            stateObj['granted'] = 1;
+        } else {
+          stateObj['dateWarning'] = true;
         }
        }
       } else {
@@ -81,7 +103,6 @@ const AddEditSalaryBenefits = (props) => {
     const handleSubmit = async () => {
       let newItemsList = inertNewItem();
       if(!newItemsList) return;
-
       if ((state.editFlow && !state.name.length) || (!state.editFlow && !newItemsList.length)) {
         setState({ ...state, nameWarning: true });
         return;
@@ -116,6 +137,11 @@ const AddEditSalaryBenefits = (props) => {
             name: state.name
           , date: state.date
           , value: state.value
+          , occurence: state.occurence
+          , value_type: state.valueType
+          , coefficient_type: state.coefficientType
+          , coefficient_value: state.coefficientValue
+          , granted: state.granted
         };
       }
     }
@@ -151,6 +177,11 @@ const AddEditSalaryBenefits = (props) => {
       stateObj['name']  = item.name;
       stateObj['date']  = item.date;
       stateObj['value'] = item.value;
+      stateObj['occurence'] = item.occurence;
+      stateObj['value_type'] = item.value_type;
+      stateObj['coefficient_type'] = item.coefficient_type;
+      stateObj['coefficient_value'] = item.coefficient_value;
+      stateObj['granted'] = item.granted;
       stateObj['editIndex'] = index;
       inputRef.current['date'].value = item.date;
       inputRef.current['name'].focus();
@@ -178,6 +209,24 @@ const AddEditSalaryBenefits = (props) => {
     setState(stateObj);
   }
 
+  const handleRadioSelect = (key, value) => {
+    setState({...state, [key]: value })
+  }
+
+  const onSelect = (e) => {
+    setState({...state, occurence: Number(e.value)})
+  }
+
+  const renderRadioButtons = (label, stateKey, value) => {
+    return (
+      <RadioField
+        customStyle={{margin:'8px 0'}}
+        checked = {state[stateKey] === value}
+        handleChange = {(e) => handleRadioSelect(stateKey, value)}
+        label= {label}
+       />
+    );
+  }
 
   if (!state.initialRenderDone) {
     return <></>
@@ -191,7 +240,7 @@ const AddEditSalaryBenefits = (props) => {
             ref={ref => inputRef.current['name'] = ref}
             type="text"
             name="name"
-            className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
+            className="form-control col-md-12 width-100 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
             value={state.name}
             onChange={(e) => handleChange(e.target)}
             placeholder='Please add salary benefit'
@@ -207,25 +256,66 @@ const AddEditSalaryBenefits = (props) => {
               {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
             </small>}
         </div>
-        <div className="salary-input-fields">
-          <label className = "mb-2 " htmlFor="name"> {`Salary benefit value`} </label>
-          <input
-            ref={ref => inputRef.current['value'] = ref}
-            type="text"
-            name='value'
-            className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
-            value={state.value}
-            onChange={(e) => handleChange(e.target)}
-            placeholder= 'Enter value'
-          />
-          {state.valueWarning &&
-            <small
-              className="form-text text-muted col-md-5 pcp_name_warning">
-              {`It'll accept only numeric/decimal values`}
-            </small>}
+        <div className="salary-input-fields col-md-12 row mx-0 px-0">
+          <div className="col-md-6 mx-0 px-0">
+              <label className = "mb-2 m-0 p-0" htmlFor="name"> {`Salary benefit value`} </label>
+              <div>
+                  {renderRadioButtons('value in €', 'valueType', 1)} <br />
+                  {renderRadioButtons('value in %', 'valueType', 2)}
+              </div>
+              <div className="mx-0 px-0 position-relative">
+              <input
+                ref={ref => inputRef.current['value'] = ref}
+                type="text"
+                name='value'
+                className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
+                value={state.value}
+                onChange={(e) => handleChange(e.target)}
+                placeholder= 'Enter value'
+              />
+              <span className="position-absolute" style = {{right: '30%', bottom: '15px'}}> {state.valueType === 1 ? '€' : '%'} </span>
+              </div>
+              {state.valueWarning &&
+                <small
+                  className="form-text text-muted col-md-5 pcp_name_warning">
+                  {`It'll accept only numeric/decimal values`}
+                </small>}
+            </div>
+          <div className="col-md-6 mx-0 px-0">
+            <LabelField title="Occurence"/>
+            <MultiSelectField
+                options={salaryBenefitOccurenceOptions}
+                standards={salaryBenefitOccurenceOptions.filter(val => val.value === state.occurence)}
+                disabled={false}
+                handleChange={onSelect}
+                isMulti={false}
+                className="col-md-12"
+              />
+          </div>
         </div>
-        <div className="salary-input-fields">
-          <label className = "mb-2 " htmlFor="name"> {`Date`} </label>
+        <div className="salary-input-fields col-md-12 row mx-0 px-0">
+          <div className="col-md-6 mx-0 px-0">
+            <LabelField title="Applicable coefficient"/>
+            {renderRadioButtons('Based on employee type in the cooperation agreement', 'coefficientType', 1)} <br />
+            {renderRadioButtons('Other', 'coefficientType', 2)}
+            <input
+              ref={ref => inputRef.current['value'] = ref}
+              type="text"
+              name='coefficientValue'
+              className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
+              value={state.coefficientValue}
+              onChange={(e) => handleChange(e.target)}
+              placeholder= 'Enter value'
+            />
+          </div>
+          <div className="col-md-6 mx-0 px-0">
+            <LabelField title="Is the benefit granted in case of absence of the employee"/>
+            {renderRadioButtons('Yes', 'granted', 1)} <br />
+            {renderRadioButtons('No', 'granted', 0)}
+          </div>
+        </div>
+        <div className="salary-input-fields col-md-6">
+          <label className = "mb-2 " htmlFor="name"> {`Start date`} </label>
           <input
             ref={ref => inputRef.current['date'] = ref}
             type="date"
@@ -233,7 +323,7 @@ const AddEditSalaryBenefits = (props) => {
             min={state.minDate}
             max={state.maxDate}
             value={state.date}
-            className="form-control col-md-10 salary-date pcp_name poppins-regular-18px border-4C4D554D rounded-0"
+            className="form-control col-md-6 salary-date pcp_name poppins-regular-18px border-4C4D554D rounded-0"
             onChange={(e) => handleChange(e.target)}
           />
           {state.dateWarning &&
@@ -267,7 +357,7 @@ const AddEditSalaryBenefits = (props) => {
         </div>
       </div>
       {state.newItems.length > 0 && !state.editFlow &&
-        <div className='add-item-div'>
+        <div className='add-item-div m-0 w-100'>
           <table className='table-hover col-md-10 m-3 add-item-table'>
           <thead style={{borderBottom: '1px solid', margin: '15px 0'}}>
             <tr key={'header-row-tr'}>
@@ -278,10 +368,11 @@ const AddEditSalaryBenefits = (props) => {
           <tbody>
             {state.newItems.map((item, index) =>
               <tr key={index} id={index}>
-                <td style={{ width: '30%' }}> {item.name} </td>
+                <td style={{ width: '25%' }}> {item.name} </td>
+                <td style={{ width: '15%' }}> {item.value ? `${item.value} ${item.valueType === 1 ? '€' : '%'}` : ''} </td>
+                <td style={{ width: '25%' }}> {item.occurence ? salaryBenefitOccurenceOptions.filter(val => val.value === item.occurence)[0]['label'] : ''} </td>
                 <td style={{ width: '30%' }}> {formatDate(item.date) ? formatDate(item.date) : '--'} </td>
-                <td style={{ width: '20%' }}> {item.value ? item.value : '--'} </td>
-                <td style={{ width: '20%' }}> {getNeededActions(item, index)} </td>
+                <td style={{ width: '10%' }}> {getNeededActions(item, index)} </td>
               </tr>
             )}
             </tbody>
