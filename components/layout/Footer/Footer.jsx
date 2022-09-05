@@ -37,7 +37,7 @@ function Footer() {
 		// 	</div>
 		// </div>
 		<div className='footer col-md-12 d-flex footer-bg-color  text-white py-3 position-relative'>
-			<div className='col-md-10 m-auto row'>
+			<div className='col-md-9 col-lg-10 m-auto row'>
 				<div className='col-md-3 px-0'>
 				<p className='text-white text-left mb-0 pt-2 footer-content'>Copyright © 2022 Absolute YOU</p>
 				</div>

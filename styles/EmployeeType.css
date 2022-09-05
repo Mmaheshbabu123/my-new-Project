@@ -45,10 +45,10 @@
 {
   vertical-align: middle !important;
 }
-.manage-types-table tr:last-child
+/* .manage-types-table tr:last-child
 {
   border: none !important;
-}
+} */
 .add-edit-types {
   /* border: 1px solid black; */
 }
