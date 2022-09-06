@@ -33,7 +33,7 @@ const AddEditSalaryBenefits = (props) => {
     else return { name: '', date: '', value: '', occurence: ''
     , valueType: 1
     , coefficientType: 2
-    , coefficientValue: 1.15
+    , coefficientValue: '1,15'
     , granted: 1 }
   }
 
@@ -46,6 +46,7 @@ const AddEditSalaryBenefits = (props) => {
     , editIndex: 0
     , minDate: `${year}-${month < 10 ? '0' + month : month}-${day}`
     , maxDate: `${year + 2}-${month < 10 ? '0' + month : month}-${day - 1}`
+    , regexp: /^[0-9,]*$/
   })
 
     /**
@@ -70,7 +71,7 @@ const AddEditSalaryBenefits = (props) => {
               occurence: state.occurence,
               value_type: state.valueType,
               coefficient_type: state.coefficientType,
-              coefficient_value: state.coefficientValue,
+              coefficient_value: state.coefficientType === 2 ? state.coefficientValue : '',
               granted: state.granted,
             };
             inputRef.current['date'].value = '';
@@ -80,7 +81,7 @@ const AddEditSalaryBenefits = (props) => {
             stateObj['occurence'] = '';
             stateObj['valueType'] = 1;
             stateObj['coefficientType'] = 2;
-            stateObj['coefficientValue'] = 1.15;
+            stateObj['coefficientValue'] = '1,15';
             stateObj['granted'] = 1;
             stateObj['editIndex'] = stateObj['newItems'].length;
         } else {
@@ -141,7 +142,7 @@ const AddEditSalaryBenefits = (props) => {
           , occurence: state.occurence
           , value_type: state.valueType
           , coefficient_type: state.coefficientType
-          , coefficient_value: state.coefficientValue
+          , coefficient_value: state.coefficientType === 2 ? state.coefficientValue : ''
           , granted: state.granted
         };
       }
@@ -196,22 +197,24 @@ const AddEditSalaryBenefits = (props) => {
   const handleChange = (target) => {
     const { value, name } = target;
     let stateObj = {...state};
-    if(name === 'name') {
-        stateObj[name] = value;
-        stateObj['nameWarning'] = false;
-        stateObj['uniqueError'] = false;
-        stateObj['duplicates'] = [];
-    } else if (name === 'value') {
-        stateObj[name] = value;
-    } else {
-        stateObj['dateWarning'] = false;
-        stateObj[name] = value;
+    if((name ==='value' || name === 'coefficientValue') && !value.match(state.regexp)){
+      return;
     }
+    stateObj[name] = value;
+    stateObj['nameWarning'] = false;
+    stateObj['uniqueError'] = false;
+    stateObj['duplicates'] = [];
     setState(stateObj);
   }
 
   const handleRadioSelect = (key, value) => {
-    setState({...state, [key]: value })
+    let setObj = {...state}
+    if(key === 'coefficientType')
+      setObj['coefficientValue'] = value === 2 ? '1,15' : ''
+    if(key === 'valueType')
+      setObj['value'] = ''
+    setObj[key] = value;
+    setState(setObj);
   }
 
   const onSelect = (e) => {
@@ -299,15 +302,14 @@ const AddEditSalaryBenefits = (props) => {
             <LabelField title="Applicable coefficient"/>
             {renderRadioButtons('Based on employee type in the cooperation agreement', 'coefficientType', 1)} <br />
             {renderRadioButtons('Other', 'coefficientType', 2)}
-            <input
-              ref={ref => inputRef.current['value'] = ref}
+            {state.coefficientType === 2 && <input
               type="text"
               name='coefficientValue'
               className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
               value={state.coefficientValue}
               onChange={(e) => handleChange(e.target)}
               placeholder= 'Enter value'
-            />
+            />}
           </div>
           <div className="col-md-6 mx-0 px-0">
             <LabelField title="Is the benefit granted in case of absence of the employee"/>

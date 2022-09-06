@@ -14,7 +14,7 @@ const SalaryBenefits = (props) => {
     , loaded: false
     , id: undefined
     , rows: []
-    , headers: ['Salary benefits', 'Value', 'Occurence', 'Start date', 'Actions'],
+    , headers: ['Salary benefits name', 'Value', 'Occurence', 'Start date', 'Actions'],
   });
 
   useEffect(() => { loadData() }, [action])
