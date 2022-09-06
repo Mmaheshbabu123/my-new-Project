@@ -11,7 +11,6 @@ const AdditionalDocsMain = (props) => {
   const { entityType, entityId, action, editId } = props;
   const router = useRouter();
   const { tab = 1 } = router.query;
-  console.log(tab);
   const [state, setState] = useState({
       overviewData: []
     , loaded: false

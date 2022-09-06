@@ -48,7 +48,7 @@ export default function MultiSelect(
             isMulti = {isMulti}
             style={customStyles}
             name = {name}
-            classNamePrefix={classNamePrefix || ''}
+            classNamePrefix={classNamePrefix || 'react-select-prefix'}
             noOptionsMessage= {() => 'No option'}
         />
         </div>

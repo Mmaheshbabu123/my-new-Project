@@ -16,7 +16,7 @@ const V1DocumentsOverview = (props) => {
     loaded: false,
     rows: [],
     filterRows: [],
-    headers: ['Employer', 'Company name', 'Employee name', 'Function', 'Date of sign', 'Actions'],
+    headers: ['Employer', 'Company', 'Employee', 'Function', 'Signing date', 'Actions'],
     functions: [{label: '-- Select --', value: 0}],
     period: [{label: '-- Select --', value: 0}],
     employeeSearchTerm: '',
@@ -299,7 +299,7 @@ const V1DocumentsOverview = (props) => {
           Export
         </button>
     </div>
-      <button onClick={() => router.back()} type="button" className="btn btn-dark pcp_btn col-1">
+      <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn btn-dark pcp_btn col-1">
         {`Back`}
       </button>
     </div>
