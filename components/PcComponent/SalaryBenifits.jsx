@@ -258,7 +258,7 @@ const SalaryBenifits = () => {
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
 							>
 								SAVE
 							</button>
@@ -269,7 +269,7 @@ const SalaryBenifits = () => {
 						<div className="text-start col-md-6">
 							<button
 								type="button"
-								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px"
+								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none"
 								onClick={() => {
 									setCurrent_sec(4);
 								}}
@@ -280,7 +280,7 @@ const SalaryBenifits = () => {
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
 							>
 								SAVE
 							</button>

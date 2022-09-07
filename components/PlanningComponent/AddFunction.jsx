@@ -841,7 +841,7 @@ const AddFunction = () => {
 						<button
 							type="button"
 							// className="bg-white  back-btn-text  border-0 poppins-regular-20px btn-block float-sm-right  md-5 add-proj-btn"
-							className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline"
+							className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline shadow-none"
 							onClick={() => router.push('/planning/employees/' + router.query.p_unique_key)}
 						>
 							BACK
@@ -851,7 +851,7 @@ const AddFunction = () => {
 						<button
 							type="sumit"
 							// className="btn rounded-0  custom-btn px-3  btn-block float-end"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-light-19px-next-button"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-light-19px-next-button shadow-none"
 							onClick={() => submit}
 						>
 							NEXT

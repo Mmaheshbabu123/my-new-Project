@@ -224,7 +224,7 @@ function ManageArchivedProject(props) {
 						{/* ----------------Search functionality--------------------------------*/}
 
 						<div className="row d-flex mt-3">
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<input
 									type="search"
 									id="form12"
@@ -235,7 +235,7 @@ function ManageArchivedProject(props) {
 								/>
 							</div>
 
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<input
 									type="search"
 									id="form12"
@@ -246,7 +246,7 @@ function ManageArchivedProject(props) {
 								/>
 							</div>
 
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<input
 									type="search"
 									id="form12"
@@ -256,7 +256,7 @@ function ManageArchivedProject(props) {
 									onChange={(e) => setSearchArchivedaddress(e.target.value)}
 								/>
 							</div>
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<div className='row'>
 									<div className='col-md-6'>
 									<button
