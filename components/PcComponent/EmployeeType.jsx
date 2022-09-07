@@ -216,7 +216,7 @@ const EmployeeType = () => {
 					</div>
 				) : pc_view_type == 'addpc'?
 				<div className="row my-4">
-					<div className="text-start col-md-6">
+					<div className="text-start col-md-6 align-self-center">
 						<button
 							type="button"
 							className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0 shadow-none":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0 shadow-none"}

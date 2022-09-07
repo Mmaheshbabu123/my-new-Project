@@ -138,8 +138,8 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-14px-white btn-active">Step 1:</p>
-										<p className='poppins-regular-16px-white btn-active'>Paritair comite details</p>
+										<p className="mb-2 poppins-regular-16px-white  btn-active">Step 1:</p>
+										<p className='poppins-regular-18px-white btn-active'>Paritair comite details</p>
 									</button>
 								</li>
 								<li className="col border-0 rounded-0 poppins-regular-16px " role="presentation">
