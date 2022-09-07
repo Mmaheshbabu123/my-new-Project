@@ -223,7 +223,7 @@ function AddCategory(props) {
 							}}
 						/>
 
-						<p style={{ color: 'red' }}>{error_category_name}</p>
+						<p  className='error_text' style={{ color: 'red' }}>{error_category_name}</p>
 					</div>
 					<label className="custom_astrick mt-2 poppins-regular-18px">Minimum salary</label>
 					<div className="form-group">
@@ -241,7 +241,7 @@ function AddCategory(props) {
 						/>
 						
 						</div>
-						<p style={{ color: 'red' }}>{error_min_salary}</p>
+						<p className='error_text' style={{ color: 'red' }}>{error_min_salary}</p>
 					</div>
 				</div>
 				<div className="row">
@@ -265,7 +265,7 @@ function AddCategory(props) {
 					</div>
 					<div className="text-end col-md-6">
 						<button
-							className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px"
+							className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px shadow-none"
 							disabled={disableSave}
 							onClick={() => {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));

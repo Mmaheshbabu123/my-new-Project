@@ -254,16 +254,20 @@ body {
 	--font-size-xxs: 0.5rem;
 	--font-size-m: 1rem;
 	--font-size-l: 1.125rem;
+	--font-size-14px: 0.875rem;
 	--font-size-16px: 1rem;
 	--font-size-18px: 1.125rem;
 	--font-size-20px: 1.25rem;
+	--font-size-21px:1.3125rem;
 	--font-size-19px: 1.1875rem;
 	--font-size-22px: 1.375rem;
 	--font-size-24px: 1.5rem;
 	/* Line Height */
 	--line-height-24px: 1.5rem;
 	--line-height-26px: 1.625rem;
+	--line-height-27px:1.6875rem;
 	--line-height-29px: 1.8125rem;
+	--line-height-30px:1.875rem;
 	--line-height-31px: 1.9375rem;
 	--line-height-33px: 2.0625rem;
 	--line-height-37px: 2.3125rem;
@@ -353,6 +357,15 @@ body {
 	color: var(--color-label-footer-gray);
 	font-weight: normal;
 }
+.poppins-medium-18px-save-button,
+.poppins-medium-18px-save-button:hover {
+	font-size: var(--font-size-18px) !important;
+	line-height: var(--line-height-29px);
+	font-family: var(--font-family-poppins-medium) !important;
+	color: var(--color-white);
+	background-color: var(--color-purple);
+	font-weight: normal;
+}
 .poppins-light-19px-next-button,
 .poppins-light-19px-next-button:hover {
 	font-size: var(--font-size-19px) !important;
@@ -410,6 +423,13 @@ body {
 	font-family: var(--font-family-poppins-light) !important;
 	font-size: var(--font-size-20px) !important;
 	line-height: var(--line-height-33px) !important;
+	font-weight: normal;
+}
+.poppins-light-18px {
+	color: var(--color-label-footer-gray) !important;
+	font-family: var(--font-family-poppins-light) !important;
+	font-size: var(--font-size-18px) !important;
+	line-height: var(--line-height-27px) !important;
 	font-weight: normal;
 }
 .poppins-italic-14px {
@@ -470,7 +490,7 @@ body {
 .skyblue-bg-color:hover {
 	background-color: var(--color-skyblue) !important;
 	color: var(--color-white) !important;
-	font-size: var(--font-size-19px);
+	font-size: var(--font-size-18px);
 	font-family: var(--font-family-poppins-medium) !important;
 	line-height: var(--line-height-31px);
 }
@@ -908,7 +928,7 @@ input {
 }
 .color-skyblue {
 	color: var(--color-skyblue);
-	/* font-size: 27px; */
+	font-size: 22px !important;
 }
 .font-poppins-light {
 	font-family: var(--font-family-poppins-light);
@@ -1109,7 +1129,7 @@ div[disabled] {
 	background-color: var(--bg-btn-gray) !important;
 	color: var(--color-white) !important;
 	font-family: var(--font-family-poppins-medium) !important;
-	font-size: var(--font-size-19px) !important;
+	font-size: var(--font-size-18px) !important;
 	line-height: var(--line-height-31px);
 	border: none !important;
 }
@@ -1178,11 +1198,16 @@ div[disabled] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: var(--font-family-poppins-light);
+	font-size: var(--font-size-21px);
+	line-height: var(--line-height-31px);
+	color: var(--bg-gray-dark);
 }
 .error {
-	color: var(error-message-color) !important;
+	color: var(--error-message-color) !important;
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m);
+	margin-bottom: 1rem !important;
 }
 .max-height-420 {
 	max-height: 420px;
@@ -1697,10 +1722,13 @@ li.next {
 .project-pagination > .active > a:hover {
 	color: var(--color-purple) !important;
 	background-color: transparent !important;
+	font-family: var(--font-family-poppins-medium) !important;
+	font-size: var(--font-size-20px) !important;
+	line-height: var(--line-height-30px) !important	;
 }
 input[type="text"]::placeholder {
 	font-family: var(--font-family-poppins-regular);
-	color: var(--color-label-footer-gray);
+	color: #4C4D5573;
 	font-size: var(--font-size-18px);
 	line-height: var(--line-height-29px);
 }
@@ -1726,14 +1754,6 @@ input[type="text"]::placeholder {
 }
 .margin_salary {
 	margin-left: 15px;
-}
-
-tbody:before {
-	/* This doesn't work because of border-collapse */
-	line-height: 1vh;
-	content: "-";
-	color: white; /* bacground color */
-	display: block;
 }
 .planning-container .form-select {
 	border: 1px solid rgb(181 181 181 / 50%) !important;
@@ -1790,7 +1810,26 @@ tbody:before {
 	text-align: left;
 }
 
+.force-skyblue > path {
+	stroke: var(--color-skyblue) !important;
+}
 .ageicon {
 	vertical-align: sub !important;
 	padding-left:5px;
+}
+table thead th
+{
+	vertical-align: middle !important;
+}
+input[type="search"]::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  width: 10px;
+  background-size: 10px 10px;
+  background-image:url(../components/images/close.png);
+}
+
+.react-select-prefix__input {   /* Custom class to hide cursor from react-select dropdown */
+	color: transparent !important;
 }

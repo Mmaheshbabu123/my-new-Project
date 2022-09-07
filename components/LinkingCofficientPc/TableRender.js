@@ -105,50 +105,63 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   //-------------------
     return (
       <>
-        <h4 className='mt-2 mb-4 font-weight-bold   px-0  bitter-italic-normal-medium-24'> {`Manage coefficients per PC`} </h4>
-        <div className='row searchbox m-0 my-4' style={{ margin: '10px 0' }}>
-         <div className='col-md-12 row'>
-           <div className='col-md-9 row'>
-             <input
+
+        <h4 className='mt-2 mb-4 font-weight-bold   px-0  bitter-italic-normal-medium-24 position-sticky pt-3'> {`Manage coefficients per PC`} </h4>
+        <div className='searchbox m-0 my-4' style={{ margin: '10px 0' }}>
+         <div className='row'>
+           <div className='col-md-7 col-lg-8'>
+             <div className='row'>
+               <div className='col-md-6'>
+               <input
                type="text"
                value={state.searchTerm}
-               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 w-auto rounded-0"
+               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
                onChange={(e) => setState({...state, searchTermNumber: e.target.value})}
-               placeholder={'Pc number search'}
+               placeholder={'Pc number'}
                onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
              />
-             <input
+               </div>
+               <div className='col-md-6'>
+               <input
                type="text"
                value={state.searchTerm}
-               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 mx-2 w-auto rounded-0"
+               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
                onChange={(e) => setState({...state, searchTermName: e.target.value})}
-               placeholder={'PC name search'}
+               placeholder={'PC name'}
                onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
              />
+               </div>
+             </div>
            </div>
-           <div className='col-md-3'>
-             <button
+           <div className='col-md-5 col-lg-4'>
+             <div className='row'>
+               <div className='col-md-6 col-lg-6'>
+               <button
                type="button"
-               className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+               className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100"
                onClick={() => handleSearchClick(1)}
              >
                SEARCH
              </button>
-             <button
+               </div>
+               <div className='col-md-6 col-lg-6'>
+               <button
                type="button"
-               className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+               className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100"
                onClick={() => handleSearchClick(0)}
              >
                RESET
              </button>
+               </div>
+             </div>
            </div>
           </div>
         </div>
         <div className="table-render-parent-div ">
           <table className="table table-hover manage-types-table  mb-3 text-center">
             <thead className="table-render-thead">
-              <tr className='btn-bg-gray-medium table-sticky-bg-gray' key={'header-row-tr'}>{headers.map((eachHeader, index) =>
-              <th className='poppins-regular-18px justify-content-center align-items-center btn-bg-gray-medium text-center pt-4' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+              <tr className='btn-bg-gray-medium table-sticky-bg-gray border-bottom-0' key={'header-row-tr'}>{headers.map((eachHeader, index) =>
+              <th className='poppins-regular-18px justify-content-center align-items-center btn-bg-gray-medium text-center' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
             <tbody>

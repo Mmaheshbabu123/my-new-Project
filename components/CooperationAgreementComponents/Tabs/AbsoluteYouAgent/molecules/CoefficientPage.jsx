@@ -85,7 +85,7 @@ const CoefficientPage = (props) => {
     let pcoptions = [{value: false, label: '--- Select ---'}, ...pcArray];
     return (
       <>
-      <p className='my-2'> Select paritair comite </p>
+      <p className='my-2'> Select paritair comite to link coefficients to employee types </p>
       <MultiSelectField
         options={pcoptions.filter(val => selectedIds.includes(val.value))}
         standards={pcoptions.filter(val => val.value === compState.selectedPc)}

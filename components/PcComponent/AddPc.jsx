@@ -367,13 +367,13 @@ function AddPc(props) {
 									type="text"
 									value={data.pc_number}
 									className=
-									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-18px border-0 form-control shadow-none mt-1"}
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-18px border-0 form-control shadow-none mt-1"}
 
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, pc_number: e.target.value }));
 									}}
 								/>
-								<p className="error mt-2">{error_pc_number}</p>
+								<p className="error mt-2 error_text">{error_pc_number}</p>
 							</div>
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2 ":" px-0 poppins-regular-18px my-2"}>
@@ -382,26 +382,26 @@ function AddPc(props) {
 									type="text"
 									value={data.pc_name}
 									className=
-									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-18px border-0 form-control shadow-none mt-1"}
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-18px border-0 form-control shadow-none mt-1"}
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, pc_name: e.target.value }));
 									}}
 								/>
-								<p className="error mt-2">{error_pc_name}</p>
+								<p className="error error_text mt-2">{error_pc_name}</p>
 							</div>
 
 							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Paritair comite alias name </label>
+								<label className={pc_view_type == 'addpc'?"poppins-regular-18px":"poppins-regular-18px"}>Paritair comite alias name </label>
 								<input
 									type="text"
 									value={data.pc_alias_name}
 									className=
-									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-18px border-0 form-control shadow-none mt-1"}
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none text_field_addpc":" px-2 poppins-medium-18px border-0 form-control shadow-none mt-1"}
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
 									}}
 								/>
-								<p className="error mt-2">{error_pc_alias_name}</p>
+								<p className="error mt-2 error_text">{error_pc_alias_name}</p>
 							</div>
 
 							{/* BUFFER TIMING */}
@@ -421,7 +421,7 @@ function AddPc(props) {
 									/>
 									<span className="input-group-text border-0 rounded-0">Hours</span>
 								</div>
-								<p className="error mt-2">{error_buffer_time}</p>
+								<p className="error mt-2 error_text">{error_buffer_time}</p>
 							</div>
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2":" px-0 poppins-regular-18px my-2"}>
@@ -438,7 +438,7 @@ function AddPc(props) {
 									/>
 									<span className="input-group-text border-0 rounded-0">Hours</span>
 								</div>
-								<p className="error mt-2">{error_min_time}</p>
+								<p className="error error_text mt-2">{error_min_time}</p>
 							</div>
 							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2":" px-0 "}>
 								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px my-2"}>Maximum work timings per day</label>
@@ -454,7 +454,7 @@ function AddPc(props) {
 									/>
 									<span className="input-group-text border-0 rounded-0">Hours</span>
 								</div>
-								<p className="error mt-2">{error_max_time}</p>
+								<p className="error mt-2 error_text">{error_max_time}</p>
 							</div>
 						</div>
 						{/* <div className="col-md-6" /> */}
@@ -466,7 +466,7 @@ function AddPc(props) {
 						<div className="text-end col-md-6 p-0">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px"
+								className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px shadow-none"
 								disabled={disableSave}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
@@ -478,10 +478,10 @@ function AddPc(props) {
 					</div>
 				) : (
 					<div className="row m-0 my-4">
-						<div className="text-start col-md-6 p-0">
+						<div className="text-start col-md-6 p-0 d-flex align-items-center">
 							<button
 								type="button"
-								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0"
+								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0 shadow-none"
 								onClick={() => backToDashboard()}
 							>
 								BACK
@@ -490,7 +490,7 @@ function AddPc(props) {
 						<div className="text-end col-md-6 px-0">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none"
 								disabled={disableSave}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));

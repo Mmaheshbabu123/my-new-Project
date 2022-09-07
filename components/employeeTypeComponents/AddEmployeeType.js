@@ -119,8 +119,8 @@ const AddEmployeeType = (props) => {
   const getNeededActions = (item, index) => {
     return (
       <>
-        <span className='actions-span' onClick={() => handleActionClick('edit', item, index)}> <MdEdit  className="color-skyblue"/> </span>
-        <span className='actions-span' onClick={() => handleActionClick('delete', item, index)}> <MdDelete  className="color-skyblue"/> </span>
+        <span className='actions-span mx-0' onClick={() => handleActionClick('edit', item, index)}> <MdEdit  className="color-skyblue"/> </span>
+        <span className='actions-span mx-0' onClick={() => handleActionClick('delete', item, index)}> <MdDelete  className="color-skyblue"/> </span>
       </>
     )
   }
@@ -146,24 +146,27 @@ const AddEmployeeType = (props) => {
       <div className='min-height-AET'>
       <div className="row  p-0 m-0">
         <h4 className="mb-5 mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${props.id ? 'Edit ' : 'Add '} ${state.typeName}`} </h4>
-        <label className = "mb-3 p-0 poppins-regular-18px" htmlFor="name"> {props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient'} <span style={{color:'red'}}> * </span></label>
+        <label className = "p-0 poppins-regular-18px" htmlFor="name"> {props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient'} <span style={{color:'red'}}> * </span></label>
         <div className='row m-0 p-0'>
-          <div className='col-md-11 ps-0'>
+          <div className='col-md-10 ps-0'>
           <input
             ref={inputRef}
             type="text"
-            className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 py-2"
+            // className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 py-2"
+            className="form-control mt-2 mb-3 input-border-lightgray poppins-regular-18px mh-50 rounded-0 py-2 shadow-none"
             value={state.name}
             onChange={(e) => handleInputChange(e)}
             onKeyUp={(e) => handleAdd(e)}
             placeholder={`Please enter ${state.typeName}`}
           /></div>
-          <div className='col-md-1'>
+          <div className='col-md-2 pe-0'>
           {!state.editFlow &&
             <button
               onClick={() => addItemAndUpdateIndex({ ...state }, state.name)}
               type="button"
-              className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content w-100 py-2">
+              // className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content w-100 py-2"
+              className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-3 skyblue-bg-color py-2 px-3 w-100 py-2 shadow-none"
+              >
               + {`ADD`}
             </button>
           }
@@ -182,21 +185,22 @@ const AddEmployeeType = (props) => {
       </div>
       {state.newItems.length > 0 && !state.editFlow &&
         <div className='col-md-12 input-border-lightgray'>
-          <table className='table table-hover col-md-12 mb-0'>
+          <table className='table table-hover col-md-12 mb-0 add_employee_table'>
             {state.newItems.map((item, index) =>
-              <tr className=' py-2 table-border-bottom row m-0 col-md-12' Key={index} id={index}>
-                <td className='col-md-9 align-items-center d-flex' style={{ width: '' }}> {item.name} </td>
-                <td className='col-md-3 text-end ' style={{ width: '' }}> {getNeededActions(item, index)} </td>
+              // <tr className=' py-2 table-border-bottom row m-0 col-md-12' Key={index} id={index}>
+              <tr className='py-2 row m-0 col-md-12 poppins-light-18px border-bottom' Key={index} id={index}>
+                <td className='col-md-10 align-items-center d-flex' style={{ width: '' }}> {item.name} </td>
+                <td className='col-md-2 text-center ' style={{ width: '' }}> {getNeededActions(item, index)} </td>
               </tr>
             )}
           </table>
         </div>}
         </div>
-      <div className='col-md-12 row m-0'>
-        <div className='col-md-6 p-0'>
+      <div className='col-md-12 row m-0 my-4'>
+        <div className='col-md-6 p-0 align-self-center'>
         <button
           type="button"
-          className=" col-2 bg-white  back-btn-text  border-0 poppins-regular-20px text-start  float-sm-right text-left p-0 md-5"
+          className=" col-2 bg-white  back-btn-text  border-0 poppins-medium-18px text-start  float-sm-right text-left p-0 md-5"
           onClick={() => router.back()} >
           BACK
         </button>
@@ -204,7 +208,7 @@ const AddEmployeeType = (props) => {
         <div className='col-md-6 text-end p-0'>
         <button
           type="button"
-          className=" btn rounded-0  custom-btn px-3  btn-block float-end"
+          className=" btn rounded-0 custom-btn px-3  btn-block float-end poppins-medium-18px-save-button"
           onClick={handleSubmit} >
           SAVE
         </button>

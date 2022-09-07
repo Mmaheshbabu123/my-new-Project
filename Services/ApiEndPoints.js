@@ -166,6 +166,7 @@ export const cooperationAgreementPreview = BASE_URL + 'cooperation-agreement-pre
 export const sendToEmployer = BASE_URL + 'send-to-employer';
 export const updateEmployerSign = BASE_URL + 'employer-sign-update';
 export const checkEmployerSignature = BASE_URL + 'check-employer-signature';
+export const authenticateEmployer = BASE_URL + 'authenticate-employer';
 //------
 
 
@@ -202,3 +203,9 @@ export const checkEmployeeCompV1Status = BASE_URL + "check-employee-company-v1-s
 export const getSignedV1Documents = BASE_URL + "get-signed-v1-documents";
 export const downloadV1Documents = BASE_URL + "download-v1-documents";
 //--------------------------
+
+//------------------- QR CODE--------------------//
+export const getCompanyLocationByEmployerId = BASE_URL + "get-company-locations";
+export const downloadQrCode = BASE_URL + "download-qr-code";
+export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
+//-------------------

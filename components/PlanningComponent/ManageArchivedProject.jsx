@@ -224,44 +224,44 @@ function ManageArchivedProject(props) {
 						{/* ----------------Search functionality--------------------------------*/}
 
 						<div className="row d-flex mt-3">
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<input
 									type="search"
 									id="form12"
-									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
 									placeholder="Project name"
 									value={searchArchivedProjectname}
 									onChange={(e) => setSearchArchivedProjectname(e.target.value)}
 								/>
 							</div>
 
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<input
 									type="search"
 									id="form12"
-									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
 									placeholder="Location"
 									value={searchArchivedlocation}
 									onChange={(e) => setSearchArchivedlocation(e.target.value)}
 								/>
 							</div>
 
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<input
 									type="search"
 									id="form12"
-									className="form-control mt-2 mb-2 text-break input-border-lightgray poppins-regular-18px mh-50 rounded-0  "
+									className="form-control mt-2 mb-2 text-break input-border-lightgray poppins-regular-18px mh-50 rounded-0  shadow-none"
 									placeholder="Address"
 									value={searchArchivedaddress}
 									onChange={(e) => setSearchArchivedaddress(e.target.value)}
 								/>
 							</div>
-							<div className="col-sm-3">
+							<div className="col-sm-3 field_height">
 								<div className='row'>
 									<div className='col-md-6'>
 									<button
 									type="button"
-									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 w-100 skyblue-bg-color"
+									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 w-100 skyblue-bg-color shadow-none"
 									onClick={() => handleSearch()}
 								>
 									SEARCH
@@ -276,7 +276,7 @@ function ManageArchivedProject(props) {
 									search === true) && (
 									<button
 										type="button"
-										className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100"
+										className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
 										onClick={() => handleReset()}
 									>
 										RESET
@@ -294,20 +294,20 @@ function ManageArchivedProject(props) {
 							<table className="table mt-3 mb-3">
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-										<th className="poppins-medium-18px btn-bg-gray-medium p-3">
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2 ps-4">
 											Project name
 										</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium p-3">Location</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium p-3">Address</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2">Location</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2">Address</th>
 									</tr>
 								</thead>
 								<tbody>
 									{archivedprojectTemp2.length > 0 &&
 										archivedprojectTemp2.map((result) => (
-											<tr className="border poppins-regular-18px p-3" key={result.id}>
-												<td className="poppinns-regular-18px p-3">{result.project_name}</td>
-												<td className="poppinns-regular-18px p-3">{result.project_location}</td>
-												<td className="poppinns-regular-18px p-3">
+											<tr className="border poppins-regular-18px p-2" key={result.id}>
+												<td className="poppinns-regular-18px p-2 ps-4">{result.project_name}</td>
+												<td className="poppinns-regular-18px p-2">{result.project_location}</td>
+												<td className="poppinns-regular-18px p-2">
 													{result.address.replace(',', '').length > 7 ? result.address : '-'}
 												</td>
 											</tr>

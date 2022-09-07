@@ -161,7 +161,7 @@ const PcOverview = (params) => {
 						<div className='epc'>
 							{
 							params.type != 'viewpc' && (
-								<div className={cat_subsec_type ==0?"text-end mb-3":"invisible"} style={pc_view_type =='addpc'?{marginBottom:'1.5rem'}:{}}>
+								<div className={cat_subsec_type ==0?"text-end mb-3 ":"invisible"} style={pc_view_type =='addpc'?{marginBottom:'1.5rem'}:{}}>
 									<button
 										type="button"
 										to="category"
@@ -192,10 +192,10 @@ const PcOverview = (params) => {
 								</div>
 							)}
 							<div className=''>
-							<ul className={`list-unstyled ${styles.tree}`}>
+							<ul className={`list-unstyled shadow-none ${styles.tree}`}>
 								<li className={styles.sectioncolor}>
 									<ul className={`list-inline my-2 list-unstyled  pc ${styles.tree} d-flex `}>
-										<li className="list-inline-item section-plus-icon align-top fs-4 mrg-lf-rt mt-3">
+										<li className="list-inline-item section-plus-icon align-top fs-4 mrg-lf-rt mt-3 shadow-none">
 											{/* <a
 												// data-bs-toggle="collapse"
 												// href={'#collapsepc' + pc_unique_key}
@@ -445,7 +445,7 @@ const PcOverview = (params) => {
 							<div className="text-start col-md-6 align-items-center d-flex">
 								<button
 									type="button"
-									className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
+									className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px shadow-none"
 									onClick={() => {
 										if (router.query.fid) {
 											router.push('/manage-function');
@@ -509,10 +509,10 @@ const PcOverview = (params) => {
 				''
 			) : (
 				<div className="row my-4 m-0">
-					<div className="text-start col-md-6">
+					<div className="text-start col-md-6 d-flex align-items-center">
 						<button
 							type="button"
-							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px"
+							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none"
 							onClick={() => {
 								params.pc_type == 'edit' ? router.push('/manage-pc') : setCurrent_sec(1);
 							}}
@@ -523,7 +523,7 @@ const PcOverview = (params) => {
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
 							onClick={() => {
 								next_redirection();
 							}}

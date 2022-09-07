@@ -16,13 +16,14 @@ const V1DocumentsOverview = (props) => {
     loaded: false,
     rows: [],
     filterRows: [],
-    headers: ['Employee name', 'Company name', 'Function', 'Date of sign', 'Actions'],
+    headers: ['Employer', 'Company', 'Employee', 'Function', 'Signing date', 'Actions'],
     functions: [{label: '-- Select --', value: 0}],
     period: [{label: '-- Select --', value: 0}],
     employeeSearchTerm: '',
     companySearchTerm: '',
     functionSearchTerm: [],
     periodSearchTerm: [],
+    employerArray: [],
     showPopup: false,
     spinner: false,
     currentItems: [],
@@ -42,9 +43,10 @@ const V1DocumentsOverview = (props) => {
     await APICALL.service(getSignedV1Documents, 'GET').then(response => {
       if(response.status === 200) {
         let apiData = response.data;
-        setObj['functions'] = [...setObj['functions'], ...apiData.map(val => { return {value: val.function_id, label: val.function_name } })]
-        setObj['rows'] = apiData;
-        setObj['filterRows'] = [...apiData];
+        setObj['functions'] = [...setObj['functions'], ...apiData.overviewData.map(val => { return {value: val.function_id, label: val.function_name } })]
+        setObj['rows'] = apiData.overviewData;
+        setObj['filterRows'] = [...apiData.overviewData];
+        setObj['employerArray'] = apiData.employers;
         setObj['loaded'] = true;
       }
     }).catch(error => console.error(error))
@@ -131,6 +133,14 @@ const V1DocumentsOverview = (props) => {
       setState({...state, spinner: false, showPopup: false})
     })
   }
+
+  const getEntityName = (eachRow) => {
+    let { employer_id } = eachRow;
+    let rowObj = [];
+    rowObj = state.employerArray ? state.employerArray.filter(val => val.id === employer_id) : [];
+    return rowObj.length ? rowObj[0]['name'] : '';
+  }
+
 
 
   //------------------- Pagination code -------------------------//
@@ -253,8 +263,9 @@ const V1DocumentsOverview = (props) => {
           {state.currentItems && state.currentItems.length > 0 ?
           <tbody>
             {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-              <td> {eachRow.employee_name} </td>
+              <td> {getEntityName(eachRow)}  </td>
               <td> {eachRow.company_name} </td>
+              <td> {eachRow.employee_name} </td>
               <td> {eachRow.function_name} </td>
               <td> {formatDate(eachRow.date_of_sign) || '-'} </td>
               <td>{ getNeededActions(eachRow) } </td>
@@ -288,7 +299,7 @@ const V1DocumentsOverview = (props) => {
           Export
         </button>
     </div>
-      <button onClick={() => router.back()} type="button" className="btn btn-dark pcp_btn col-1">
+      <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn btn-dark pcp_btn col-1">
         {`Back`}
       </button>
     </div>

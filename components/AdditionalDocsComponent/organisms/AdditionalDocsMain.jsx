@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import AdditionalDocsOverview  from '../molecules/AdditionalDocsOverview';
 import EditUpdateAdditionalDoc  from '../molecules/EditUpdateAdditionalDoc';
 import V1DocumentsOverview  from '@/components/V1Document/molecules/V1DocumentsOverview';
@@ -8,6 +9,8 @@ import styles from '../molecules/AdditionalDocsOverview.module.css';
 
 const AdditionalDocsMain = (props) => {
   const { entityType, entityId, action, editId } = props;
+  const router = useRouter();
+  const { tab = 1 } = router.query;
   const [state, setState] = useState({
       overviewData: []
     , loaded: false
@@ -16,10 +19,10 @@ const AdditionalDocsMain = (props) => {
     , assignedData: {}
     , headers: ['Document name', 'Employer', 'Company', 'Start date', 'End date', 'Link to cooperation agreement', 'Actions']
     , documentDetails: {}
-    , selectedTabId: 1
+    , selectedTabId: Number(tab) || 1,
   })
 
-  useEffect(() => {  fetchData() }, [action])
+  useEffect(() => {  fetchData() }, [state.selectedTabId])
 
   /**
    * [fetchData data fetching based on pcid]
@@ -30,7 +33,7 @@ const AdditionalDocsMain = (props) => {
       await APICALL.service(`${fetchAdditionalDocuments}/${entityId}/${entityType}/${editId}/${action}`, 'GET').then(response => {
         if (response.status === 200)
           setState({...state,
-            overviewData: response.data.overviewData ? Object.values(response.data.overviewData).sort().reverse() :[],
+            overviewData: response.data.overviewData ? response.data.overviewData :[],
             loaded: true,
             companies: response.data.companies || {},
             employers: response.data.employers || [],
@@ -51,13 +54,14 @@ const AdditionalDocsMain = (props) => {
   }
 
   const handleTabClick = ({ target: { id } }) => {
+    router.push(`?entitytype=${entityType}&entityid=${entityId}&tab=${id}`, undefined, { shallow: true })
     let selectedTabId = Number(id);
     setState({...state, selectedTabId });
   }
 
   return (
     <div>
-    {state.loaded === true ?
+    {state.loaded === true || state.selectedTabId === 2 ?
           <div className="col-md-12">
               <h4 className={`page-title-font-class text-center`}> {`${action === 0 ? 'Manage my documents' : Number(editId) ? 'Edit my document': 'Add my document'}`}</h4>
               {Number(entityType) === 1 && showTabs()}

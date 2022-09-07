@@ -165,7 +165,7 @@ const EmployeeType = () => {
 			{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3 bitter_medium_italic_18px mb-4">Employee type</h4> :'')}
             <div className='pc-height4'>
 				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 p-5 ":"border-0"}>
-				<p className="mt-1 p-0" style={{ color: 'red' }}>
+				<p className="mt-1 p-0 error_text mb-2" style={{ color: 'red' }}>
 						{error_emp_type}
 					</p>
 					{data.map((val) => (
@@ -208,7 +208,7 @@ const EmployeeType = () => {
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"}
+								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"}
 							>
 								SAVE
 							</button>
@@ -219,7 +219,7 @@ const EmployeeType = () => {
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0"}
+							className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0 shadow-none":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0 shadow-none"}
 							onClick={() => {
 								setCurrent_sec(3);
 							}}
@@ -230,7 +230,7 @@ const EmployeeType = () => {
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px":"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px"}
+							className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none"}
 						>
 							NEXT
 						</button>

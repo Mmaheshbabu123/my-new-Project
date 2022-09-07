@@ -45,10 +45,10 @@
 {
   vertical-align: middle !important;
 }
-.manage-types-table tr:last-child
+/* .manage-types-table tr:last-child
 {
   border: none !important;
-}
+} */
 .add-edit-types {
   /* border: 1px solid black; */
 }
@@ -212,4 +212,17 @@ tbody.table-body-employee-type
 
 .span-action-icons > svg:hover{
   opacity: 0.8;
+}
+
+.popup-back-btn {
+  cursor: pointer;
+  margin-right: 15px;
+  display: inline-block;
+}
+.popup-back-btn:hover{
+  text-decoration: underline;
+}
+
+.width-100 {
+  width: 100% !important;
 }
