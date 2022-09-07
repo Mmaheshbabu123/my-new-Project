@@ -208,7 +208,7 @@ const EmployeeType = () => {
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"}
+								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"}
 							>
 								SAVE
 							</button>
@@ -219,7 +219,7 @@ const EmployeeType = () => {
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0"}
+							className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0 shadow-none":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0 shadow-none"}
 							onClick={() => {
 								setCurrent_sec(3);
 							}}
@@ -230,7 +230,7 @@ const EmployeeType = () => {
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px":"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px"}
+							className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none"}
 						>
 							NEXT
 						</button>

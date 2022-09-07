@@ -6,9 +6,9 @@ thead:after
 {
   line-height: 1vh;
   content: "-";
-  color: white;
+  color: transparent;
   display: block;
-  background: white;
+  background: transparent;
 }
 /* tbody:before 
 {
@@ -63,4 +63,13 @@ thead:after
     background-color: var(--color-label-footer-gray);
     height: 120px !important;
   }  
+}
+.text_field_addpc
+{
+  height: 41px;
+}
+.error_text
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-14px);
 }

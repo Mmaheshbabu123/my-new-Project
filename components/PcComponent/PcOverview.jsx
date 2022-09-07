@@ -445,7 +445,7 @@ const PcOverview = (params) => {
 							<div className="text-start col-md-6 align-items-center d-flex">
 								<button
 									type="button"
-									className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
+									className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px shadow-none"
 									onClick={() => {
 										if (router.query.fid) {
 											router.push('/manage-function');
@@ -512,7 +512,7 @@ const PcOverview = (params) => {
 					<div className="text-start col-md-6 d-flex align-items-center">
 						<button
 							type="button"
-							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px"
+							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none"
 							onClick={() => {
 								params.pc_type == 'edit' ? router.push('/manage-pc') : setCurrent_sec(1);
 							}}
@@ -523,7 +523,7 @@ const PcOverview = (params) => {
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
 							onClick={() => {
 								next_redirection();
 							}}
