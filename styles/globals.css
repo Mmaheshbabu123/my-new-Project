@@ -319,12 +319,23 @@ body {
 .poppins-regular-14px {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular);
-	font-size: var(--font-size-s);
+	font-size: var(--font-size-14px) !important;
 	font-style: normal;
 	font-weight: 400;
 	/* line-height: initial; */
 }
-
+.poppins-regular-16px-white 
+{
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-regular);
+	font-size: var(--font-size-m) !important;
+	font-style: normal;
+	font-weight: 400;
+} 
+.nav-pills .nav-link.active .poppins-regular-16px-white,.nav-pills .nav-link.active .poppins-regular-18px-white
+{
+	color: var(--color-white) !important;
+}
 .poppins-regular-16px {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular);
@@ -333,7 +344,15 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
-
+.poppins-regular-18px-white {
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-regular) !important;
+	font-size: var(--font-size-18px) !important;
+	font-style: normal;
+	line-height: var(--line-height-29px) !important;
+	font-weight: 400;
+	/* line-height: initial; */
+}
 .poppins-regular-18px {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular) !important;

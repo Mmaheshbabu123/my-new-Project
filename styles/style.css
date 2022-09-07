@@ -73,3 +73,13 @@ thead:after
   font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-14px);
 }
+.position_relative
+{
+  position: relative;
+  left: -1.6rem;
+  padding-left: 1.7rem !important;
+}
+input[type="checkbox"]:focus
+{
+  box-shadow: none;
+}
