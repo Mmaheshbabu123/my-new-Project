@@ -23,7 +23,7 @@ const AddEmployee = () => {
 
 	//--------------------- Add another and remove field ------------------------------//
 	const [ inputlist, setInputlist ] = useState([ { pclist: '', employees: '' } ]);
-	// const [ disabled, setDisabled ] = useState(true);
+	const [ disabled, setDisabled ] = useState(true);
 	const handleinputchange = (e, index) => {
 		const { name, value } = e.target;
 		const list = [ ...inputlist ];
@@ -101,14 +101,14 @@ const AddEmployee = () => {
 		e.preventDefault();
 
 		var err = ValidationService.emptyValidationMethod(selectedOption);
-		// var err = ValidationService.emptyValidationMethod(pclist);
+		// var err1 = ValidationService.emptyValidationMethod(pclist);
 
 		if (err != '') {
 			setError(err);
-			// setError_pclist(err['pclist']);
+			// setError_pclist(err1);
 		} else {
 			setError(err);
-			// setError_pclist(err);
+			// setError_pclist(err1);
 			if (selectedOption.length != 0) {
 				let data = [ selectedOption, p_unique_key, tempOption ];
 
@@ -199,10 +199,8 @@ const AddEmployee = () => {
 												i > 0 && (
 													<button
 														type="button"
-														// disabled={disabled}
 														className="btn  btn-block px-0 "
 														onClick={() => handleremove(i)}
-														// onChange={setDisabled}
 													>
 														<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px ">
 															Remove
@@ -211,11 +209,10 @@ const AddEmployee = () => {
 												)}
 												{inputlist.length - 1 === i && (
 													<button
-														type="button"
+														type="submit"
 														className="btn poppins-light-19px-next-button rounded-0 px-3  btn-block float-end ms-1"
 														onClick={handleaddanother}
-														// disabled="true"
-														// disabled={disabled}
+														
 													>
 														Add another
 													</button>
