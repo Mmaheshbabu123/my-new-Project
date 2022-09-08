@@ -36,7 +36,6 @@ const Pincode = () => {
 
 			const { id = 0 } = router.query;
 
-			console.log(id);
 			var p_unique_key = router.query.p_unique_key;
 			
 				if (id != 0) {
@@ -45,7 +44,6 @@ const Pincode = () => {
 						'GET'
 					)
 					.then((result) => {
-						console.log(result);
 							if (result) {
 								setHasPin(true);
 								setUid(result);
@@ -55,17 +53,26 @@ const Pincode = () => {
 							console.error(error);
 						});
 				} else {
-					if (uid != undefined && uid != null) {
+				    var userid=null;
+					if (localStorage.getItem('uid') != null) {
+						userid = JSON.parse(localStorage.getItem('uid'));
+					} else {
+						window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+					}
+		
+					if (userid != undefined && userid != null) {
 					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/hasPincode/' + uid, 'GET')
 						.then((result) => {
 							if (result != 999) {
 								setHasPin(true);
+								setUid(userid);
 							}
 						})
 						.catch((error) => {
 							console.error(error);
 						});
 				}
+				console.log(userid);
 			}
 		},
 		[ router.query ]
@@ -124,66 +131,69 @@ const Pincode = () => {
 	};
 
 	var display;
-	hasPin?display=<form onSubmit={Submit} style={{ alignItems: 'center' }}>
-			<div className="row mt-5">
-				<div className="col-4" />
-				<div className="mt-2 col-5">
-					<div>
-						<label>Pincode</label>
-					</div>
-					<OTPInput
-						value={otp}
-						onChange={setOTP}
-						autoFocus
-						inputStyles={{
-							width: '60px',
-							height: '60px'
-						}}
-						OTPLength={6}
-						otpType="number"
-						disabled={false}
-						secure
-					/>
-					<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
-						{err}
-					</p>
-				</div>
+	var fields=<form onSubmit={Submit} style={{ alignItems: 'center' }}>
+	<div className="row mt-5">
+		<div className="col-4" />
+		<div className="mt-2 col-5">
+			<div>
+				<label>Pincode</label>
 			</div>
-			<div className="row mt-5">
-				<div className="col-4" />
-				<div className="mt-2 col-5">
-					<div>
-						<label>Confirm pincode</label>
-					</div>
-					<OTPInput
-						value={otp1}
-						onChange={setOTP1}
-						autoFocus
-						inputStyles={{
-							width: '60px',
-							height: '60px'
-						}}
-						OTPLength={6}
-						otpType="number"
-						disabled={false}
-						secure
-					/>
-					<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
-						{err1}
-					</p>
-				</div>
+			<OTPInput
+				value={otp}
+				onChange={setOTP}
+				autoFocus
+				inputStyles={{
+					width: '60px',
+					height: '60px'
+				}}
+				OTPLength={6}
+				otpType="number"
+				disabled={false}
+				secure
+			/>
+			<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
+				{err}
+			</p>
+		</div>
+	</div>
+	<div className="row mt-5">
+		<div className="col-4" />
+		<div className="mt-2 col-5">
+			<div>
+				<label>Confirm pincode</label>
 			</div>
-			<div className="row mt-5">
-				<input
-					type="submit"
-					className="btn btn-secondary"
-					value="Submit"
-					style={{ width: '5%', marginLeft: '45%' }}
-				/>
-			</div>
-		</form>:display=<div>
+			<OTPInput
+				value={otp1}
+				onChange={setOTP1}
+				autoFocus
+				inputStyles={{
+					width: '60px',
+					height: '60px'
+				}}
+				OTPLength={6}
+				otpType="number"
+				disabled={false}
+				secure
+			/>
+			<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
+				{err1}
+			</p>
+		</div>
+	</div>
+	<div className="row mt-5">
+		<input
+			type="submit"
+			className="btn btn-secondary"
+			value="Submit"
+			style={{ width: '5%', marginLeft: '45%' }}
+		/>
+	</div>
+</form>;
+	(uid==null)?
+	(display=fields):
+	(hasPin?(display=fields):(display=<div>
 			Link is expired please try again later.
-		</div>;
+		</div>));
 		return (display);
 };
 
