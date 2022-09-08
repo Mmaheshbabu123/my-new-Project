@@ -83,3 +83,50 @@ input[type="checkbox"]:focus
 {
   box-shadow: none;
 }
+.view_pc_accordion .accordion-item:last-of-type .accordion-button
+{
+  border-bottom: 1px solid var(--border-color-lightgray);
+}
+.view_pc_accordion .accordion-item:last-of-type .accordion-button.collapsed
+{
+  border-bottom: none !important;
+}
+.edit_pc_salary_benefits input[type="radio"],
+.radio[disabled]
+{
+  accent-color: cadetblue;
+  opacity: 0.8;
+  border-color: cadetblue;
+}
+.edit-icon-color img
+{
+  cursor: pointer;
+}
+.border-bottom
+{
+  border-bottom: 1px solid rgba(112, 112, 112,0.5) !important;
+}
+.link-emp-coeff-tableparent thead::after,
+.manage-types-table thead::after
+{
+  display: none;
+}
+.link-emp-coeff-tableparent tbody::before,
+.manage-types-table tbody::before
+{
+  line-height: 1vh;
+  content: "-";
+  color: transparent;
+  display: block;
+  background: transparent;
+}
+.salary-benefits thead
+{
+  z-index: 999;
+  background-color: #4C4D550F;
+  position: sticky;
+}
+.salary-benefits tbody
+{
+  z-index: 99;
+}

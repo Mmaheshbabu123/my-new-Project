@@ -12,7 +12,7 @@ const CoeffcientValuesFirstPart = () => {
       let tempValueTypeArray = [...valueTypeArray];
       htmlContent.push(
         <tr className="" key={coefficient.id} id={coefficient.id}>
-          <td className="three-row-span poppins-regular-16px" rowSpan={valueTypeArray.length} title={coefficient.name}> {coefficient.name} </td>
+          <td className="three-row-span poppins-medium-16px" rowSpan={valueTypeArray.length} title={coefficient.name}> {coefficient.name} </td>
           <td className="value-single-span pc-linking-td poppins-regular-16px"> {tempValueTypeArray.shift().name} </td>
         </tr>
       )
