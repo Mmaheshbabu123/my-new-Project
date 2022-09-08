@@ -71,7 +71,7 @@ thead:after
 .error_text
 {
   font-family: var(--font-family-poppins-light);
-  font-size: var(--font-size-14px);
+  font-size: var(--font-size-16px);
 }
 .position_relative
 {
