@@ -162,10 +162,12 @@ tbody.table-body-employee-type
 
 /* PAGINATION  */
 .pagination {
-  margin: 15px auto;
+  margin: 1rem auto;
   display: flex;
   list-style: none;
   outline: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .pagination > .active > a{

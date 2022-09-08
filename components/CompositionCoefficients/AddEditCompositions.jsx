@@ -244,7 +244,7 @@ const AddEditCompositions = (props) => {
           </table>
         </div>}
       <div className=' row m-0 p-0 my-4'>
-        <div className='ext-start col-md-6 p-0'>
+        <div className='text-start col-md-6 p-0'>
         <button
           type="button"
           className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"

@@ -191,7 +191,7 @@ const SalaryBenifits = () => {
 									// className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px":"poppins-regular-18px me-2"}
 									// type="checkbox"
 									type="checkbox"
-								className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px ":"form-check-input rounded-0 poppins-regular-18px border-0 me-2"}
+								className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px ":"form-check-input rounded-0 poppins-regular-18px border-0 me-2 "}
 									value={val.sb_id}
 									id={'flexCheckDefault' + key}
 									checked={val.checked == true ? true : false}
@@ -205,15 +205,16 @@ const SalaryBenifits = () => {
 								</label>
 							</div>
 							{val.checked && (
-								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3  position_relative':"bg-4C4D550F px-3 py-2 bg-white"}>
+								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3  position_relative':"bg-4C4D550F px-3 py-2 bg-white position_relative edit_pc_salary_benefits"}>
 									<div className="">
 										<p className={' custom_astrick poppins-medium-16px '}>Is this mandatory?</p>
 
 										<div className="d-flex mt-3">
-											<div className="form-check d-inline-flex ">
+											<div className="form-check d-inline-flex ps-0">
 												<input
 													disabled={disableForm}
-													className="form-check-input d-flex"
+													// className="form-check-input d-flex"
+													className="radio d-flex"
 													type="radio"
 													value="true"
 													name={'yes' + val.sb_id}
@@ -228,7 +229,8 @@ const SalaryBenifits = () => {
 											<div className="form-check d-inline-flex">
 												<input
 													disabled={disableForm}
-													className="form-check-input ms-2"
+													// className="form-check-input ms-2"
+													className="radio ms-2"
 													type="radio"
 													name={'yes' + val.sb_id}
 													checked={val.mandatory === false}

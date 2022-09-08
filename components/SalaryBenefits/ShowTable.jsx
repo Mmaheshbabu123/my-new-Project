@@ -140,8 +140,8 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
         </div>
       </div>
       <div className="table-render-parent-div max-height-420">
-        <table className="table table-hover manage-types-table">
-          <thead className="table-render-thead">
+        <table className="table table-hover manage-types-table salary-benefits">
+          <thead className="table-render-thead ">
             <tr className='btn-bg-gray-medium table-sticky-bg-gray py-2' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='poppins-regular-18px justify-content-center btn-bg-gray-medium padding-t-b-10' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
           </thead>
           {state.currentItems && state.currentItems.length > 0 ?

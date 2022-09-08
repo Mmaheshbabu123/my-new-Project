@@ -165,7 +165,7 @@ const EmployeeType = () => {
 			{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3 bitter_medium_italic_18px mb-4">Employee type</h4> :'')}
             <div className='pc-height4'>
 				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 p-5 ":"border-0"}>
-				<p className="mt-1 p-0 error_text mb-2" style={{ color: 'red' }}>
+				<p className="mt-1 p-0 error_text mb-3" style={{ color: 'red' }}>
 						{error_emp_type}
 					</p>
 					{data.map((val) => (

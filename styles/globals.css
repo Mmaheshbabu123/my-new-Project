@@ -244,6 +244,7 @@ body {
 	--bg-gray-dark: #4C4D5580;
 	--bg-grey-medium: #4C4D550F;
 	--color-skyblue: #79b1bd;
+	--border-color-lightgray:#B1B1B1A6;
 
 	/* for font sizes */
 	--font-size-s: 0.75rem;
@@ -436,7 +437,15 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
-
+.poppins-regular-20px-config {
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-regular);
+	font-size: var(--font-size-20px);
+	line-height: var(--line-height-26px);
+	font-style: normal;
+	font-weight: 400;
+	/* line-height: initial; */
+}
 .poppins-light-20px {
 	color: var(--color-label-footer-gray) !important;
 	font-family: var(--font-family-poppins-light) !important;
@@ -1226,7 +1235,7 @@ div[disabled] {
 	color: var(--error-message-color) !important;
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m);
-	margin-bottom: 1rem !important;
+	/* margin-bottom: 1rem !important; */
 }
 .max-height-420 {
 	max-height: 420px;
@@ -1716,7 +1725,7 @@ input[type="checkbox"]:checked {
 	background-color: var(--color-skyblue);
 }
 .category_currency_height {
-	height: 40px;
+	height: 41px;
 }
 input[type="checkbox"] {
 	/* webkit-appearance: none;
@@ -1758,7 +1767,7 @@ input[type="text"]::placeholder {
 	color: var(--color-skyblue) !important;
 }
 .view_pc_form_width {
-	width: 8%;
+	width: 13%;
 }
 .field_height input,
 .field_height button {
@@ -1770,9 +1779,6 @@ input[type="text"]::placeholder {
 	/* padding:0.5rem 2.6rem ; */
 	background-color: transparent;
 	border: none !important;
-}
-.margin_salary {
-	margin-left: 15px;
 }
 .planning-container .form-select {
 	border: 1px solid rgb(181 181 181 / 50%) !important;

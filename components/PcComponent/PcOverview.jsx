@@ -192,7 +192,7 @@ const PcOverview = (params) => {
 								</div>
 							)}
 							<div className=''>
-							<ul className={`list-unstyled shadow-none ${styles.tree}`}>
+							<ul className={`list-unstyled shadow-none view_pc_accordion ${styles.tree}`}>
 								<li className={styles.sectioncolor}>
 									<ul className={`list-inline my-2 list-unstyled  pc ${styles.tree} d-flex `}>
 										<li className="list-inline-item section-plus-icon align-top fs-4 mrg-lf-rt mt-3 shadow-none">
