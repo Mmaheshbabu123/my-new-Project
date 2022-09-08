@@ -1,0 +1,132 @@
+.add_employee_table tr:last-child
+{
+  border-bottom: none !important;
+}
+thead:after 
+{
+  line-height: 1vh;
+  content: "-";
+  color: transparent;
+  display: block;
+  background: transparent;
+}
+/* tbody:before 
+{
+	line-height: 1vh;
+	content: "-";
+	color: white;
+	display: block;
+} */
+.react-confirm-alert-body
+{
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-27px);
+  color: var(--color-label-footer-gray);
+  font-weight: normal;
+  width: 445px !important;
+  text-align: center;
+}
+.react-confirm-alert-button-group button
+{
+  background-color: var(--color-skyblue) !important;
+  color: var(--color-white) !important;
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-16px);
+}
+.react-confirm-alert-button-group
+{
+  justify-content: end;
+}
+.position-sticky
+{
+  position: sticky !important;
+  top: 66px;
+  background-color: white;
+  z-index: 990;
+  height: 60px;
+}
+.reset_skyblue_button,
+.reset_skyblue_button:hover
+{
+  border: 1px solid var(--color-skyblue) !important;
+  background-color: var(--color-white);
+  color: var(--color-skyblue);
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+@media screen and (min-width:768px) and (max-width:1023px) 
+{
+  .footer-bg-color 
+  {
+    background-color: var(--color-label-footer-gray);
+    height: 120px !important;
+  }  
+}
+.text_field_addpc
+{
+  height: 41px;
+}
+.error_text
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-14px);
+}
+.position_relative
+{
+  position: relative;
+  left: -1.6rem;
+  padding-left: 1.7rem !important;
+}
+input[type="checkbox"]:focus
+{
+  box-shadow: none;
+}
+.view_pc_accordion .accordion-item:last-of-type .accordion-button
+{
+  border-bottom: 1px solid var(--border-color-lightgray);
+}
+.view_pc_accordion .accordion-item:last-of-type .accordion-button.collapsed
+{
+  border-bottom: none !important;
+}
+.edit_pc_salary_benefits input[type="radio"],
+.radio[disabled]
+{
+  accent-color: cadetblue;
+  opacity: 0.8;
+  border-color: cadetblue;
+}
+.edit-icon-color img
+{
+  cursor: pointer;
+}
+.border-bottom
+{
+  border-bottom: 1px solid rgba(112, 112, 112,0.5) !important;
+}
+.link-emp-coeff-tableparent thead::after,
+.manage-types-table thead::after
+{
+  display: none;
+}
+.link-emp-coeff-tableparent tbody::before,
+.manage-types-table tbody::before
+{
+  line-height: 1vh;
+  content: "-";
+  color: transparent;
+  display: block;
+  background: transparent;
+}
+.salary-benefits thead
+{
+  z-index: 999;
+  background-color: #4C4D550F;
+  position: sticky;
+}
+.salary-benefits tbody
+{
+  z-index: 99;
+}

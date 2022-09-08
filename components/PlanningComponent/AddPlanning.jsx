@@ -22,6 +22,8 @@ function Planning(props) {
 
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ projectid, setProjectid ] = useState('');
+	const [ addProject, setAddProject ] = useState(false);
+
 
 	// For popup add project
 	const [ show, setShow ] = useState(false);
@@ -59,7 +61,7 @@ function Planning(props) {
 	});
 
 	// PROJECT FIELD HIDE AND SHOW
-	const [ showproject, setShowproject ] = useState(true);
+	const [ showproject, setShowproject ] = useState(false);
 
 	const [ project, setProject ] = useState({
 		id: '',
@@ -99,6 +101,7 @@ function Planning(props) {
 						if (id == '') {
 							if (result.data[0].length == 1) {
 								setCompanyid(result.data[0][0].nid);
+								result.data[0][0].add_project == 1?	setShowproject(true):setShowproject(false)
 								if (result.data[1].length == 1) {
 									setLocationid(result.data[1][0].value);
 									if (result.data[2].length == 1) {
@@ -127,6 +130,7 @@ function Planning(props) {
 						setId(result.data[0].id);
 						setUniquekey(result.data[0].p_unique_key);
 						setCompanyid(result.data[0].comp_id);
+						console.log(company);
 						if (result.data[0].location_id != null && result.data[0].location_id != undefined) {
 							setLocationid(result.data[0].location_id);
 						}
@@ -318,7 +322,7 @@ function Planning(props) {
 								</h1>
 							</div>
 							<div className="col-md-12 px-0 mt-3 mb-3">
-								{(project.id == '' || project.id == undefined) && (
+								{(project.id == '' || project.id == undefined) && showproject == true && (
 									<button
 										onClick={showPopup}
 										type="button"
@@ -347,7 +351,8 @@ function Planning(props) {
 										>
 											<option value="">Select</option>
 											{company.map((options) => (
-												<option key={options.nid} value={options.nid}>
+												<option key={options.nid} value={options.nid} onClick={() => {options.add_project == 1?	setShowproject(true):setShowproject(false);
+												}}>
 													{options.title}
 												</option>
 											))}

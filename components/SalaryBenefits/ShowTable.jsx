@@ -5,8 +5,8 @@ import { deleteSalaryBenefits } from '@/Services/ApiEndPoints';
 import { formatDate } from './SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
-import SearchIcon from '../SearchIcon';
 import ReactPaginate from 'react-paginate';
+import { salaryBenefitOccurenceOptions } from '@/Constants';
 const itemsPerPage = 8;
 
 const ShowTable = ({ headers, rows, manageType, ...props }) => {
@@ -104,12 +104,13 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
         <button
           onClick={() => router.push(`manage-salary-benefits?action=create&id=0`)}
           type="button"
-          className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content">
+          // className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content"
+          className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3">
           {`+ Add salary benefit`}
         </button>
       </div>
-      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
-       <div className='col-md-12 row'>
+      <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+       <div className='row'>
          <div className='col-md-6 p-0'>
            <input
              type="text"
@@ -139,16 +140,17 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
         </div>
       </div>
       <div className="table-render-parent-div max-height-420">
-        <table className="table table-hover manage-types-table">
-          <thead className="table-render-thead">
+        <table className="table table-hover manage-types-table salary-benefits">
+          <thead className="table-render-thead ">
             <tr className='btn-bg-gray-medium table-sticky-bg-gray py-2' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='poppins-regular-18px justify-content-center btn-bg-gray-medium padding-t-b-10' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
           </thead>
           {state.currentItems && state.currentItems.length > 0 ?
           <tbody>
             {state.currentItems.map(eachRow => <tr className='border poppinns-regular-thin p-2' key={eachRow.sb_id} id={eachRow.sb_id}>
               <td className='poppinns-regular-thin py-2'> {eachRow.name} </td>
+              <td className='poppinns-regular-thin'> {eachRow.value ? `${eachRow.value} ${eachRow.valueType === 1 ? '€' : '%'}` : ''} </td>
+              <td className='poppinns-regular-thin'> {eachRow.occurence ? salaryBenefitOccurenceOptions.filter(val => val.value === eachRow.occurence)[0]['label'] : ''} </td>
               <td className='poppinns-regular-thin'> {formatDate(eachRow.date) ? formatDate(eachRow.date) : '--'} </td>
-              <td className='poppinns-regular-thin'> {eachRow.value ? eachRow.value : '--'} </td>
               <td className='poppinns-regular-thin'> { getNeededActions(eachRow) } </td>
             </tr>)}
           </tbody>: <p className='poppins-regular-18px' style={{paddingTop: '10px'}}> No records </p>}

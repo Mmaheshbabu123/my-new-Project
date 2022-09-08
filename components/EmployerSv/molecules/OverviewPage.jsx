@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import { AiFillFilePdf, AiOutlineDownload } from 'react-icons/ai';
+import { AiFillFilePdf } from 'react-icons/ai';
 import { FaFileSignature } from 'react-icons/fa';
 import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';

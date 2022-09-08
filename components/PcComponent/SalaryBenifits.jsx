@@ -179,7 +179,7 @@ const SalaryBenifits = () => {
 				)}
 				<div className='pc-height5'>
 				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 p-4":"border-0"}>
-				<p className="mb-2 fw-bold" style={{ color: 'red' }}>
+				<p className="mb-2 error_text" style={{ color: 'red' }}>
 						{error_sal_benifits}
 					</p>
 					{data.map((val, key) => (
@@ -191,7 +191,7 @@ const SalaryBenifits = () => {
 									// className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px":"poppins-regular-18px me-2"}
 									// type="checkbox"
 									type="checkbox"
-								className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px ":"form-check-input rounded-0 poppins-regular-18px border-0 me-2"}
+								className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px ":"form-check-input rounded-0 poppins-regular-18px border-0 me-2 "}
 									value={val.sb_id}
 									id={'flexCheckDefault' + key}
 									checked={val.checked == true ? true : false}
@@ -205,36 +205,38 @@ const SalaryBenifits = () => {
 								</label>
 							</div>
 							{val.checked && (
-								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3 px-4':"bg-4C4D550F px-3 py-2 bg-white"}>
+								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3  position_relative':"bg-4C4D550F px-3 py-2 bg-white position_relative edit_pc_salary_benefits"}>
 									<div className="">
 										<p className={' custom_astrick poppins-medium-16px '}>Is this mandatory?</p>
 
 										<div className="d-flex mt-3">
-											<div className="form-check  ">
+											<div className="form-check d-inline-flex ps-0">
 												<input
 													disabled={disableForm}
-													className="form-check-input d-flex"
+													// className="form-check-input d-flex"
+													className="radio d-flex"
 													type="radio"
 													value="true"
 													name={'yes' + val.sb_id}
 													checked={val.mandatory === true}
 													onChange={(e) => handleRadio(e, key)}
 												/>
-												<label className="form-check-label ms-1 poppins-regular-16px" htmlFor="exampleRadios1">
+												<label className="form-check-label ms-1 poppins-regular-16px align-self-center" htmlFor="exampleRadios1">
 													Yes
 												</label>
 											</div>
 
-											<div className="form-check">
+											<div className="form-check d-inline-flex">
 												<input
 													disabled={disableForm}
-													className="form-check-input ms-2"
+													// className="form-check-input ms-2"
+													className="radio ms-2"
 													type="radio"
 													name={'yes' + val.sb_id}
 													checked={val.mandatory === false}
 													onChange={(e) => handleRadio(e, key)}
 												/>
-												<label className="form-check-label ms-1 poppins-regular-16px" htmlFor="exampleRadios2">
+												<label className="form-check-label ms-1 poppins-regular-16px align-self-center" htmlFor="exampleRadios2">
 													No
 												</label>
 											</div>
@@ -258,7 +260,7 @@ const SalaryBenifits = () => {
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
 							>
 								SAVE
 							</button>
@@ -269,7 +271,7 @@ const SalaryBenifits = () => {
 						<div className="text-start col-md-6">
 							<button
 								type="button"
-								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px"
+								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none"
 								onClick={() => {
 									setCurrent_sec(4);
 								}}
@@ -280,7 +282,7 @@ const SalaryBenifits = () => {
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"
+								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
 							>
 								SAVE
 							</button>

@@ -36,7 +36,7 @@ export default function MultiSelect(
     return false;
   }
     return (
-      <div className= {className || "col-md-3 mt-2 mb-3 p-0"}>
+      <div className= {className || "col-md-3 mt-2 mb-3 p-0"} style={customStyle}>
         <Select
             placeholder={placeholder}
             value={standards}
@@ -48,7 +48,7 @@ export default function MultiSelect(
             isMulti = {isMulti}
             style={customStyles}
             name = {name}
-            classNamePrefix={classNamePrefix || ''}
+            classNamePrefix={classNamePrefix || 'react-select-prefix'}
             noOptionsMessage= {() => 'No option'}
         />
         </div>

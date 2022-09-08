@@ -8,7 +8,7 @@
  * APICALL.service(URLENDPOINT, httpmethod, data)
  *  .then(result => {
  *  use ur result.json()  object here whatever you want to do.
- * })  
+ * })
  */
 // const proxy_url = "https://cors-anywhere.herokuapp.com/";
 const proxy_url = "https://api.allorigins.win/raw?url=";

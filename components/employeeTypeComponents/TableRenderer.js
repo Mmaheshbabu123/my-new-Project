@@ -6,6 +6,7 @@ import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import ReactPaginate from 'react-paginate';
+import edit_icon from '../images/edit_color.svg'
 const itemsPerPage = 8;
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
@@ -104,50 +105,56 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
       <button
         onClick={() => router.push(`${manageType}/add?id=0`)}
         type="button"
-        className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content">
+        // className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content"
+        className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 shadow-none"
+        >
         {`+ ${button_title}`}
       </button>
       </div>
       <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
-       <div className='col-md-12 row'>
+       <div className='col-md-12 row pe-0'>
          <div className='col-md-6 p-0'>
            <input
              type="text"
              value={state.searchTerm}
-             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
              placeholder={'Search'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
-         <div className='col-md-6'>
-           <button
-             type="button"
-             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
-             onClick={() => handleSearchClick(1)}
-           >
-             SEARCH
-           </button>
-           <button
-             type="button"
-             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
-             onClick={() => handleSearchClick(0)}
-           >
-             RESET
-           </button>
+         <div className='col-md-6 pe-0'>
+            <div className='row justify-content-end'>
+              <div className='col-md-6 col-lg-4'>
+                <button
+                type="button"
+                className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
+                onClick={() => handleSearchClick(1)}>
+                SEARCH
+              </button>
+              </div>
+              <div className='col-md-6 col-lg-4 pe-0'>
+                <button
+                type="button"
+                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
+                onClick={() => handleSearchClick(0)}>
+                RESET
+                </button>
+              </div>
+            </div>
          </div>
         </div>
       </div>
       <div className="table-render-parent-div">
           <table className="table table-hover manage-types-table table  mb-3 text-start">
             <thead className="table-render-thead bg_grey">
-              <tr className='table-sticky-bg-gray poppins-regular-18px ' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='action-sec px-5' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+              <tr className='table-sticky-bg-gray poppins-medium-18px border-0' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='action-sec px-5' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
-            <tbody className='table-body-employee-type'>
+            <tbody className='table-body-employee-type poppins-light-18px'>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-                <td className='text-start px-5 poppinns-regular-thin py-1'> {eachRow.name} </td>
-                <td className='text-end px-5 poppinns-regular-thin py-1 '>{ getNeededActions(eachRow) } </td>
+                <td className='text-start px-5 py-1'> {eachRow.name} </td>
+                <td className='text-end px-5 py-1 '>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
             : <p style={{paddingTop: '10px'}}> No records </p>}
@@ -163,13 +170,13 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
           forcePage={state.currentPage}
           previousLabel={<AiOutlineArrowLeft />}
           renderOnZeroPageCount={null}
-          containerClassName={"pagination justify-content-center project-pagination"}
+          containerClassName={"pagination justify-content-center project-pagination align-items-center"}
           itemClass="page-item"
           linkClass="page-link"
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
       /></div>}
-        <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 md-5">
+        <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-3 mb-5">
           {`Back`}
         </button>
       </div>

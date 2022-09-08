@@ -494,7 +494,7 @@ const Addage = () => {
 						<div className="text-end col-md-6 px-0">
 							<button
 								type="sumit"
-								className={pc_view_type == 'addpc'?"btn rounded-0 custom-btn px-4 btn-block float-end poppins-medium-18px":"btn rounded-0 custom-btn px-4 btn-block float-end poppins-medium-18px"}
+								className={pc_view_type == 'addpc'?"btn rounded-0 custom-btn px-4 btn-block float-end poppins-medium-18px shadow-none":"btn rounded-0 custom-btn px-4 btn-block float-end poppins-medium-18px shadow-none"}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
@@ -505,10 +505,10 @@ const Addage = () => {
 					</div>
 				) : pc_view_type == 'addpc'? (
 					<div className="row m-0 my-4">
-						<div className="text-start col-md-6 p-0">
+						<div className="text-start col-md-6 p-0 align-self-center">
 							<button
 								type="button"
-								className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px ":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px"}
+								className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none ":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none"}
 								onClick={() => {
 									setCurrent_sec(2);
 								}}
@@ -519,7 +519,7 @@ const Addage = () => {
 						<div className="text-end col-md-6 p-0">
 							<button
 								type="sumit"
-								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px"}
+								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}

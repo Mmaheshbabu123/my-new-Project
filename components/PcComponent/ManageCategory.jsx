@@ -193,8 +193,8 @@ const ManageCategoryComponent = () => {
 						<input
 							type="search"
 							id="form12"
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
-							placeholder="Paritair comite number"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
+							placeholder="PC number"
 							value={searchPc}
 							onChange={(e) => setSearchPc(e.target.value)}
 						/>
@@ -204,7 +204,7 @@ const ManageCategoryComponent = () => {
 						<input
 							type="search"
 							id="form12"
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 "
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
 							placeholder="Category Name"
 							value={searchCat}
 							onChange={(e) => setSearchcat(e.target.value)}
@@ -215,7 +215,7 @@ const ManageCategoryComponent = () => {
 						<input
 							type="search"
 							id="form12"
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
 							placeholder="Minimum salary"
 							value={searchSal}
 							onChange={(e) => setSearchSal(e.target.value)}
@@ -245,32 +245,32 @@ const ManageCategoryComponent = () => {
 					</div>
 
 					<div className="form-check p-0 mt-2  ">
-						<table className="table  mb-3 ">
+						<table className="table mb-3 ">
 							<thead>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-4">
+									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-2 ps-4">
 										Paritair comite number
 									</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-4">Category name</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-4">Minimum salary</th>
-									<th className="poppins-medium-18px   btn-bg-gray-medium hi-50 p-4">Action</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-2">Category name</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-2">Minimum salary</th>
+									<th className="poppins-medium-18px   btn-bg-gray-medium hi-50 p-2">Action</th>
 								</tr>
 							</thead>
 							<tbody className="">
 								{categoriestemp2.length > 0 &&
 									categoriestemp2.map((result) => (
 										<tr className="border poppins-regular-18px p-2" key={result.cat_id}>
-											<td className="poppins-regular-18px p-4">{result.pc_number}</td>
-											<td className="poppins-regular-18px p-4">{result.category_name}</td>
-											<td className="poppins-regular-18px p-4">€ {result.min_salary}</td>
-											<td className=" p-4">
+											<td className="poppins-regular-18px p-2 ps-4">{result.pc_number}</td>
+											<td className="poppins-regular-18px p-2">{result.category_name}</td>
+											<td className="poppins-regular-18px p-2">€ {result.min_salary}</td>
+											<td className=" p-2">
 												<Link
 													href={'/editpc/' + result.pc_unique_key + '?cid=' + result.cat_id}
 													className=""
 												>
 													<a>
 														<MdEdit
-															className="mt-2 color-skyblue "
+															className="color-skyblue "
 															data-toggle="tooltip"
 															title="Edit category"
 														/>
@@ -279,7 +279,7 @@ const ManageCategoryComponent = () => {
 
 												<span onClick={() => showPopup(result.cat_id)} type="button">
 													<MdDelete
-														className="mt-2 color-skyblue "
+														className=" ms-3 color-skyblue "
 														data-toggle="tooltip"
 														title="Delete category"
 													/>

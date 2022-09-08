@@ -10,13 +10,13 @@ const ProjectCommon = (props) => {
 	return (
 		<div className="container-fluid manage_project">
 			<div className="row">
-				<h1 className="my-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage project</h1>
+				<h1 className="my-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage projects</h1>
 				<div className="col-md-12 row m-0 ps-0">
 					<ul className="nav nav-tabs border-0 mb-3 mt-3" id="myTab0" role="tablist">
 						<li className="hi-50 me-4" role="presentation">
 							<button
 								className={
-									showtab === 1 ? ' nav-link  project-active rounded-0 ' : ' mng-proj  nav-link'
+									showtab === 1 ? ' nav-link  project-active rounded-0 px-0 ' : ' mng-proj  nav-link px-0'
 								}
 								onClick={() => handletab(1)}
 							>
@@ -25,7 +25,7 @@ const ProjectCommon = (props) => {
 						</li>
 						<li className="hi-50" role="presentation">
 							<button
-								className={showtab == 2 ? 'nav-link  project-active rounded-0' : ' mng-arch nav-link'}
+								className={showtab == 2 ? 'nav-link  project-active rounded-0 px-0' : ' mng-arch nav-link px-0'}
 								onClick={() => handletab(2)}
 							>
 								Archived
@@ -33,7 +33,7 @@ const ProjectCommon = (props) => {
 						</li>
 					</ul>
 				</div>
-				<div className="tab-content text-dark ps-0" id="pills-tabContent">
+				<div className="tab-content text-dark p-0" id="pills-tabContent">
 					{/* Tab 1 content */}
 					<div className={showtab === 1 ? 'tab-pane fade show active' : 'tab-pane fade show'}>
 						<ManageProject />

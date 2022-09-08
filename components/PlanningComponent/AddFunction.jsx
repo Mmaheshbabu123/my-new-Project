@@ -5,6 +5,13 @@ import ValidationService from '../../Services/ValidationService';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
+import Age16 from '../../public/images/Age_16.svg';
+import Age17 from '../../public/images/Age_17.svg';
+import Age18 from '../../public/images/Age_18.svg';
+import Age19 from '../../public/images/Age_19.svg';
+import Age20 from '../../public/images/Age_20.svg';
+import Age21 from '../../public/images/Age_21.svg';
+import Image from 'next/image';
 
 import { FaRegPlusSquare, FaRegMinusSquare, FaEuroSign } from 'react-icons/fa';
 
@@ -28,6 +35,11 @@ const AddFunction = () => {
 	const [ dradio, setdradio ] = useState(true);
 	const [ recentfuncitons, setrecentfunctions ] = useState();
 	const [ salChanged, setSalChanged ] = useState(false);
+	const [ pc_min_age, setPc_min_age ] = useState(false);
+	// const [ pc_age, setPc_age ] = useState([]);
+
+	const [ loading, setLoading ] = useState(true);
+
 	var hidefiled = '';
 	var selectnchecked = false;
 	useEffect(
@@ -41,7 +53,8 @@ const AddFunction = () => {
 					var actualdata = result.data[1];
 					var functionsdata = result.data[2];
 					var employeetypes = result.data[3];
-
+					setPc_min_age(result.data[4]);
+					// setPc_age(result.data[5]);
 					if (employeetypes.length != 0) {
 						setEmptypes(employeetypes);
 					}
@@ -58,6 +71,7 @@ const AddFunction = () => {
 						setEmployeeObject(actualdata);
 						//createAllObjects(actualdata);
 					}
+					setLoading(false);
 				})
 				.catch((error) => {
 					console.error(error);
@@ -251,13 +265,13 @@ const AddFunction = () => {
 		var object = [ ...employeeobject ];
 		let value = e.target.value;
 		if (value != '') {
-			let rsalary = String(value).replace(',', '.');
-			let rfsalary = String(object[index].function_salary).replace(',', '.');
-			let err = ValidationService.minSalaryValidationMethod(value.toString());
+			let rsalary = String(value).replace(',', '.').replace(/\s/g, '');
+			let rfsalary = String(object[index].function_salary).replace(/\s/g, '');
+			let err = ValidationService.minSalaryValidationMethod(value.replace(/\s/g, ''));
 			if (err == '') {
 				if (parseFloat(rsalary) > parseFloat(rfsalary)) {
 					object[index].warning =
-						'We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will be considered as the minimum salary for all the future planning for this employee. You can click on next to proceed further.';
+						'We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will be considered as the minimum salary for all the future planning for this employee for the selected function. You can click on next to proceed further.';
 					object[index].salaryerror = '';
 				} else {
 					object[index].warning = '';
@@ -462,333 +476,394 @@ const AddFunction = () => {
 	}
 
 	return (
-		<div className="col-md-12" style={{}}>
+		<div className="col-md-12">
 			<form onSubmit={(e) => submit(e)}>
 				<div />
 				{/* <div className="row m-0"> */}
 				<div className="col-md-12 p-0 position-sticky-pc py-4">
 					<p className="pb-3 font-weight-bold px-0 bitter-italic-normal-medium-24">Add function</p>
 				</div>
-				<div className="min-hei-addfun add_function">
-					{employeeobject.length > 1 && (
-						<div className="form-check rounded-0 my-3 align-items-center d-flex">
-							<input
-								// className="input-h-w"
-								className="form-check-input rounded-0 mb-1 "
-								type="checkbox"
-								checked={ischecked}
-								onChange={() => {
-									checkbox();
-								}}
-							/>
-							<label className="form-check-label px-1 poppins-regular-18px " htmlFor="flexCheckChecked">
-								Same functions for all employees
-							</label>
-						</div>
-					)}
-					{/* </div> */}
-					<div className="row px-3">
-						<ol type="1">
-							{employeeobject != undefined &&
-								employeeobject.map((key, value) => (
-									<div key={value}>
-										<div key={key} className="row bg-4C4D550F mb-2 p-2">
-											<div className="col-md-1 poppins-light-20px">
-												{ischecked ? (
-													value + 1
-												) : key['collapseOpen'] == false ? (
-													<FaRegPlusSquare
-														onClick={() => updateCollapseState(value, key['collapseOpen'])}
-													/>
-												) : (
-													<FaRegMinusSquare
-														onClick={() => updateCollapseState(value, key['collapseOpen'])}
-													/>
-												)}
-											</div>
-											<div className="col-md-4 p-1 poppins-light-20px">{key['employeename']}</div>
-											<div className="col-md-3  border-0 custom-drop-btn">
-												{emptypes != null ? (
-													<MultiSelectField
-														id={'select_id'}
-														options={emptypes}
-														standards={
-															key['emp_type'] == 0 ? (
-																''
-															) : (
-																employeTypeSelection(key['emp_type'])
-															)
-														}
-														disabled={false}
-														handleChange={(obj) => updateEmployeeType(value, obj.value)}
-														isMulti={false}
-														// className="col-md-6"
-														className="col-md-12 "
-													/>
-												) : (
-													''
-												)}{' '}
-												{
-													<div style={{ color: 'red', paddingTop: '5px' }}>
-														{key['employeeiderror']}
-													</div>
-												}
-											</div>
-											<div className="col-md-2 border-0">
-												{key['function_salary'] != null ? (
-													<span className="p-1 px-3 w-100 poppins-medium-20px bg-white">
-														{'€ ' + key['function_salary']}
-													</span>
-												) : (
-													<span className="p-1 w-100 poppins-medium-20px bg-white d-none">
-														{'€ ' + key['function_salary']}
-													</span>
-												)}
-											</div>
-											<div className="col-md-2 py-1 add_function_salary">
-												<div>
-													{key['function_salary'] != null && (
-														<div className="input-group">
-															<span className="input-group-text border-0 poppins-regular-16px">
-																€
-															</span>
-															<input
-																ref={salaryref}
-																type="textfield"
-																name="salary"
-																placeholder="salary"
-																//((key['salary'] !=key['function_salary'])||(salChanged == true))?
-																value={key['salary'] != null ? key['salary'] : ''}
-																className="form-control bg-white border-0 poppins-regular-16px"
-																onChange={(e) => {
-																	setsaalary(value, e);
-																	setSalChanged(true);
-																}}
+				{loading == true ? (
+					<div>Loading...</div>
+				) : (
+					<div>
+						<div className="min-hei-addfun add_function">
+							{employeeobject.length > 1 && (
+								<div className="form-check rounded-0 my-3 align-items-center d-flex">
+									<input
+										// className="input-h-w"
+										className="form-check-input rounded-0 mb-1 "
+										type="checkbox"
+										checked={ischecked}
+										onChange={() => {
+											checkbox();
+										}}
+									/>
+									<label
+										className="form-check-label px-1 poppins-regular-18px "
+										htmlFor="flexCheckChecked"
+									>
+										Same functions for all employees
+									</label>
+								</div>
+							)}
+							{/* </div> */}
+							<div className="row px-3">
+								<ol type="1">
+									{employeeobject != undefined &&
+										employeeobject.map((key, value) => (
+											<div key={value}>
+												<div key={key} className="row bg-4C4D550F mb-2 p-2">
+													<div className="col-md-1 poppins-light-20px">
+														{ischecked ? (
+															value + 1
+														) : key['collapseOpen'] == false ? (
+															<FaRegPlusSquare
+																onClick={() =>
+																	updateCollapseState(value, key['collapseOpen'])}
 															/>
-														</div>
-													)}
-
-													<p style={{ color: 'red' }}>{key['salaryerror']}</p>
-												</div>
-											</div>
-											{!ischecked &&
-												key['functionslist'] != undefined &&
-												key['functionslist'].map((deta, ind) => {
-													{
-														var group = 'function';
-													}
-													{
-														!ischecked ? (group = key['emp_id'] + 'function') : '';
-													}
-													return (
-														key['collapseOpen'] &&
-														(ind <= 2 ? (
-															<div className="col-md-12 row m-0 position-relative pe-0">
-																<div
-																	className="mt-2 mb-2 bg-light h-75 py-2 bg-4C4D550F z-999 px-0 fun-line col ms-5"
-																	style={{ height: '48px' }}
-																>
-																	<span className="custom-radio-input">
-																		<input
-																			type="radio"
-																			value={deta['name']}
-																			name={group}
-																			className="p-3"
-																			onClick={() => {
-																				updatingObjectradiobutton(value, false);
-																				updatingObjectFunction(
-																					value,
-																					deta['id']
-																				);
-																				updateSalary(
-																					value,
-																					deta['max'] != undefined
-																						? deta['max']
-																						: deta['salary']
-																				);
-																			}}
-																			checked={
-																				key['funid'] == deta['id'] ? (
-																					(true, (selectnchecked = true))
-																				) : (
-																					false
-																				)
-																			}
-																			onChange={(e) => {
-																				updateRes(e, value);
-																			}}
-																		/>
-																	</span>
-																	<span className="ps-2 poppins-light-20px">
-																		{deta['name']}
-																	</span>
-																</div>
-															</div>
 														) : (
-															ind == 3 && (
-																<div className="col-md-12 row m-0 position-relative pe-0">
-																	<div
-																		className="col ms-5 fun-line2 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999  d-flex align-items-center px-0"
-																		style={{ height: '49px' }}
-																	>
-																		<span
-																			className="custom-radio-input d-inline-block p-3 "
+															<FaRegMinusSquare
+																onClick={() =>
+																	updateCollapseState(value, key['collapseOpen'])}
+															/>
+														)}
+													</div>
+													<div className="col-md-4 p-1 poppins-light-20px">
+														<div>
+															{key['employeename']}{' '}
+															<span className="ageicon">
+																{key['age'] != 0 &&
+																	key['age'] <= pc_min_age &&
+																	{
+																		'16': (
+																			<Image src={Age16} width={25} height={25} />
+																		),
+																		'17': (
+																			<Image src={Age17} width={25} height={25} />
+																		),
+																		'18': (
+																			<Image src={Age18} width={25} height={25} />
+																		),
+																		'19': (
+																			<Image src={Age19} width={25} height={25} />
+																		),
+																		'20': (
+																			<Image src={Age20} width={25} height={25} />
+																		),
+																		'21': (
+																			<Image src={Age21} width={25} height={25} />
+																		)
+																	}[key['age']]}
+															</span>
+														</div>
+													</div>
+													<div className="col-md-3  border-0 custom-drop-btn">
+														{emptypes != null ? (
+															<MultiSelectField
+																placeholder={'Select employee type'}
+																id={'select_id'}
+																options={emptypes}
+																standards={
+																	key['emp_type'] == 0 ? (
+																		''
+																	) : (
+																		employeTypeSelection(key['emp_type'])
+																	)
+																}
+																disabled={false}
+																handleChange={(obj) =>
+																	updateEmployeeType(value, obj.value)}
+																isMulti={false}
+																// className="col-md-6"
+																className="col-md-12 "
+															/>
+														) : (
+															''
+														)}{' '}
+														{
+															<div style={{ color: 'red', paddingTop: '5px' }}>
+																{key['employeeiderror']}
+															</div>
+														}
+													</div>
+													<div className="col-md-2 border-0">
+														{key['function_salary'] != null ? (
+															<span className="p-1 px-3 w-100 poppins-medium-20px bg-white">
+																{'€ ' + key['function_salary']}
+															</span>
+														) : (
+															<span className="p-1 w-100 poppins-medium-20px bg-white d-none">
+																{'€ ' + key['function_salary']}
+															</span>
+														)}
+													</div>
+													<div className="col-md-2 py-1 add_function_salary">
+														<div>
+															{key['function_salary'] != null && (
+																<div className="input-group">
+																	<span className="input-group-text border-0 poppins-regular-16px">
+																		€
+																	</span>
+																	<input
+																		ref={salaryref}
+																		type="textfield"
+																		name="salary"
+																		placeholder="salary"
+																		//((key['salary'] !=key['function_salary'])||(salChanged == true))?
+																		value={
+																			key['salary'] != null ? key['salary'] : ''
+																		}
+																		className="form-control bg-white border-0 poppins-regular-16px"
+																		onChange={(e) => {
+																			setsaalary(value, e);
+																			// setSalChanged(true);
+																		}}
+																	/>
+																</div>
+															)}
+
+															<p style={{ color: 'red' }}>{key['salaryerror']}</p>
+														</div>
+													</div>
+													{!ischecked &&
+														key['functionslist'] != undefined &&
+														key['functionslist'].map((deta, ind) => {
+															{
+																var group = 'function';
+															}
+															{
+																!ischecked ? (group = key['emp_id'] + 'function') : '';
+															}
+															return (
+																key['collapseOpen'] &&
+																(ind <= 2 ? (
+																	<div className="col-md-12 row m-0 position-relative pe-0">
+																		<div
+																			className="mt-2 mb-2 bg-light h-75 py-2 bg-4C4D550F z-999 px-0 fun-line col ms-5"
 																			style={{ height: '48px' }}
 																		>
-																			<input
-																				type="radio"
-																				value={'finaldrop'}
-																				style={{
-																					display: 'inline-block !important'
-																				}}
-																				name={group}
-																				checked={
-																					(key['funid'] == 'drop' && true) ||
-																					isThere(value, key['funid'])
-																				}
-																				onClick={() => {
-																					updatingObjectradiobutton(
-																						value,
-																						true
-																					);
-																					updatingObjectFunction(
-																						value,
-																						'drop'
-																					);
-																				}}
-																				className="p-3 d-inline align-middle"
-																			/>
-																		</span>
-																		<div
-																			className="ps-2 mx-1 w-95per"
-																			style={{ display: 'inline-block' }}
-																		>
-																			<MultiSelectField
-																				placeholder={<div>Function</div>}
-																				name="employefunctionsall"
-																				id={'select_id'}
-																				options={getOptions(
-																					key['functionslist'].slice(
-																						3,
-																						key['functionslist'].length
-																					)
-																				)}
-																				standards={defultFunction(
-																					value,
-																					key['funid']
-																				)}
-																				disabled={!isThere(value, key['funid'])}
-																				handleChange={(obj) => {
-																					//if (functionselected != undefined) {
-																					updatingObjectFunction(
-																						value,
-																						obj.value
-																					);
-																					setSalaries(obj.salary);
-																					updatingObjectfunctionSlary(
-																						value,
-																						obj.salary
-																					);
-																					//	}
-																				}}
-																				isMulti={false}
-																				className="col-md-6 select_option_height"
-																			/>
+																			<span className="custom-radio-input">
+																				<input
+																					type="radio"
+																					value={deta['name']}
+																					name={group}
+																					className="p-3"
+																					onClick={() => {
+																						updatingObjectradiobutton(
+																							value,
+																							false
+																						);
+																						updatingObjectFunction(
+																							value,
+																							deta['id']
+																						);
+																						updateSalary(
+																							value,
+																							deta['max'] != undefined
+																								? deta['max']
+																								: deta['salary']
+																						);
+																					}}
+																					checked={
+																						key['funid'] == deta['id'] ? (
+																							(true,
+																							(selectnchecked = true))
+																						) : (
+																							false
+																						)
+																					}
+																					onChange={(e) => {
+																						updateRes(e, value);
+																					}}
+																				/>
+																			</span>
+																			<span className="ps-2 poppins-light-20px">
+																				{deta['name']}
+																			</span>
 																		</div>
 																	</div>
-																	<div
-																		className="error 2 ps-5 ms-5 my-2"
-																		style={{ color: 'red' }}
-																	>
-																		{key['functioniderror']}
-																	</div>
-																</div>
-															)
-														))
-													);
-												})}
-											{key['warning'] != '' && (
-												<div className="py-2" style={{ color: 'red', paddingLeft: '130px' }}>
-													<ExclamationTriangle /> {key['warning']}
+																) : (
+																	ind == 3 && (
+																		<div className="col-md-12 row m-0 position-relative pe-0">
+																			<div
+																				className="col ms-5 fun-line2 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999  d-flex align-items-center px-0"
+																				style={{ height: '49px' }}
+																			>
+																				<span
+																					className="custom-radio-input d-inline-block p-3 "
+																					style={{ height: '48px' }}
+																				>
+																					<input
+																						type="radio"
+																						value={'finaldrop'}
+																						style={{
+																							display:
+																								'inline-block !important'
+																						}}
+																						name={group}
+																						checked={
+																							(key['funid'] == 'drop' &&
+																								true) ||
+																							isThere(value, key['funid'])
+																						}
+																						onClick={() => {
+																							updatingObjectradiobutton(
+																								value,
+																								true
+																							);
+																							updatingObjectFunction(
+																								value,
+																								'drop'
+																							);
+																						}}
+																						className="p-3 d-inline align-middle"
+																					/>
+																				</span>
+																				<div
+																					className="ps-2 mx-1 w-95per"
+																					style={{ display: 'inline-block' }}
+																				>
+																					<MultiSelectField
+																						placeholder={'Select function'}
+																						name="employefunctionsall"
+																						id={'select_id'}
+																						options={getOptions(
+																							key['functionslist'].slice(
+																								3,
+																								key['functionslist']
+																									.length
+																							)
+																						)}
+																						standards={defultFunction(
+																							value,
+																							key['funid']
+																						)}
+																						disabled={
+																							!isThere(
+																								value,
+																								key['funid']
+																							)
+																						}
+																						handleChange={(obj) => {
+																							//if (functionselected != undefined) {
+																							updatingObjectFunction(
+																								value,
+																								obj.value
+																							);
+																							setSalaries(obj.salary);
+																							updatingObjectfunctionSlary(
+																								value,
+																								obj.salary
+																							);
+																							//	}
+																						}}
+																						isMulti={false}
+																						className="col-md-6 select_option_height"
+																					/>
+																				</div>
+																			</div>
+																			<div
+																				className="error 2 ps-5 ms-5 my-2"
+																				style={{ color: 'red' }}
+																			>
+																				{key['functioniderror']}
+																			</div>
+																		</div>
+																	)
+																))
+															);
+														})}
+													{key['warning'] != '' && (
+														<div
+															className="py-2"
+															style={{ color: 'red', paddingLeft: '130px' }}
+														>
+															<ExclamationTriangle /> {key['warning']}
+														</div>
+													)}
 												</div>
-											)}
+											</div>
+										))}
+								</ol>
+							</div>
+							{ischecked &&
+								functions.map((deta, ind) => {
+									{
+										var group = 'function';
+									}
+									{
+										ischecked ? 'function' : '';
+									}
+									return ind <= 2 ? (
+										<div className="col-md-11 pe-3 ms-auto row position-relative">
+											<div className="mt-2 mb-2 bg-light py-2 bg-4C4D550F z-999 px-0">
+												<span className="custom-radio-input">
+													<input
+														type="radio"
+														value={deta['name']}
+														name={group}
+														className="p-3"
+														onClick={() => {
+															updatingObjectradiobutton(null, false);
+															updatingObjectFunction(null, deta['id']);
+															updatingCommonObjectfunctionSlary(
+																deta['id'],
+																deta['salary']
+															);
+															//updateSalary(null, deta['max'] != undefined ? deta['max'] : deta['salary']);
+														}}
+														checked={
+															employeeobject[0]['funid'] == deta['id'] ? true : false
+														}
+														onChange={(e) => {
+															updateRes(e, null);
+														}}
+													/>
+												</span>
+												<span className="ps-2 poppins-light-20px"> {deta['name']}</span>
+											</div>
 										</div>
-									</div>
-								))}
-						</ol>
-					</div>
-					{ischecked &&
-						functions.map((deta, ind) => {
-							{
-								var group = 'function';
-							}
-							{
-								ischecked ? 'function' : '';
-							}
-							return ind <= 2 ? (
-								<div className="col-md-11 pe-3 ms-auto row position-relative">
-									<div className="mt-2 mb-2 bg-light py-2 bg-4C4D550F z-999 px-0">
-										<span className="custom-radio-input">
-											<input
-												type="radio"
-												value={deta['name']}
-												name={group}
-												className="p-3"
-												onClick={() => {
-													updatingObjectradiobutton(null, false);
-													updatingObjectFunction(null, deta['id']);
-													updatingCommonObjectfunctionSlary(deta['id'], deta['salary']);
-													//updateSalary(null, deta['max'] != undefined ? deta['max'] : deta['salary']);
-												}}
-												checked={employeeobject[0]['funid'] == deta['id'] ? true : false}
-												onChange={(e) => {
-													updateRes(e, null);
-												}}
-											/>
-										</span>
-										<span className="ps-2 poppins-light-20px"> {deta['name']}</span>
-									</div>
-								</div>
-							) : (
-								ind == 3 && (
-									<div className="col-md-11 ms-auto pe-3 row position-relative">
-										<div
-											className="col fun-line33 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999 d-flex align-items-center ps-0"
-											style={{ height: '48px' }}
-										>
-											<span
-												className="custom-radio-input d-inline-block p-3 "
-												style={{ height: '48px' }}
-											>
-												<input
-													type="radio"
-													value="drop"
-													style={{ display: 'inline-block !important' }}
-													name={group}
-													checked={isThere(0, employeeobject[0]['funid'])}
-													onClick={() => {
-														updatingObjectradiobutton(null, true);
-														updatingObjectFunction(null, 'drop');
-													}}
-													className="p-3 d-inline align-middle"
-												/>
-											</span>
-											<div className="ps-2 w-95per" style={{ display: 'inline-block' }}>
-												<MultiSelectField
-													placeholder={<div>Function</div>}
-													name="employefunctionsall"
-													// id={'select_id'}
-													options={getOptions(functions.slice(3, functions.length))}
-													standards={defultFunction(0, employeeobject[0]['funid'])}
-													disabled={!isThere(0, employeeobject[0]['funid'])}
-													handleChange={(obj) => {
-														updatingObjectFunction(null, obj.value);
-														updatingCommonObjectfunctionSlary(null, obj.salary);
-													}}
-													isMulti={false}
-													className="col-md-6 select_option_height"
-												/>
-												{/* <Select
+									) : (
+										ind == 3 && (
+											<div className="col-md-11 ms-auto pe-3 row position-relative">
+												<div
+													className="col fun-line33 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999 d-flex align-items-center ps-0"
+													style={{ height: '48px' }}
+												>
+													<span
+														className="custom-radio-input d-inline-block p-3 "
+														style={{ height: '48px' }}
+													>
+														<input
+															type="radio"
+															value="drop"
+															style={{ display: 'inline-block !important' }}
+															name={group}
+															checked={isThere(0, employeeobject[0]['funid'])}
+															onClick={() => {
+																updatingObjectradiobutton(null, true);
+																updatingObjectFunction(null, 'drop');
+															}}
+															className="p-3 d-inline align-middle"
+														/>
+													</span>
+													<div className="ps-2 w-95per" style={{ display: 'inline-block' }}>
+														<MultiSelectField
+															placeholder={'Select function'}
+															name="employefunctionsall"
+															// id={'select_id'}
+															options={getOptions(functions.slice(3, functions.length))}
+															standards={defultFunction(0, employeeobject[0]['funid'])}
+															disabled={!isThere(0, employeeobject[0]['funid'])}
+															handleChange={(obj) => {
+																updatingObjectFunction(null, obj.value);
+																updatingCommonObjectfunctionSlary(null, obj.salary);
+															}}
+															isMulti={false}
+															className="col-md-6 select_option_height"
+														/>
+														{/* <Select
 													// name="employefunctionsall"
 													// options={getOptions(functions.slice(3, functions.length))}
 													// defaultValue={}
@@ -799,36 +874,40 @@ const AddFunction = () => {
 														}
 													}}
 												/> */}
+													</div>
+												</div>
+												<div style={{ color: 'red' }}>
+													{employeeobject[0]['functioniderror']}
+												</div>
 											</div>
-										</div>
-										<div style={{ color: 'red' }}>{employeeobject[0]['functioniderror']}</div>
-									</div>
-								)
-							);
-						})}
-				</div>
-				<div className="row m-0 my-4">
-					<div className="text-start col-md-6 p-0 align-items-center d-flex">
-						<button
-							type="button"
-							// className="bg-white  back-btn-text  border-0 poppins-regular-20px btn-block float-sm-right  md-5 add-proj-btn"
-							className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline"
-							onClick={() => router.push('/planning/employees/' + router.query.p_unique_key)}
-						>
-							BACK
-						</button>
+										)
+									);
+								})}
+						</div>
+						<div className="row m-0 my-4">
+							<div className="text-start col-md-6 p-0 align-items-center d-flex">
+								<button
+									type="button"
+									// className="bg-white  back-btn-text  border-0 poppins-regular-20px btn-block float-sm-right  md-5 add-proj-btn"
+									className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline"
+									onClick={() => router.push('/planning/employees/' + router.query.p_unique_key)}
+								>
+									BACK
+								</button>
+							</div>
+							<div className="text-end col-md-6 p-0">
+								<button
+									type="sumit"
+									// className="btn rounded-0  custom-btn px-3  btn-block float-end"
+									className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-light-19px-next-button"
+									onClick={() => submit}
+								>
+									NEXT
+								</button>
+							</div>
+						</div>
 					</div>
-					<div className="text-end col-md-6 p-0">
-						<button
-							type="sumit"
-							// className="btn rounded-0  custom-btn px-3  btn-block float-end"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-light-19px-next-button"
-							onClick={() => submit}
-						>
-							NEXT
-						</button>
-					</div>
-				</div>
+				)}
 			</form>
 		</div>
 	);

@@ -244,6 +244,7 @@ body {
 	--bg-gray-dark: #4C4D5580;
 	--bg-grey-medium: #4C4D550F;
 	--color-skyblue: #79b1bd;
+	--border-color-lightgray:#B1B1B1A6;
 
 	/* for font sizes */
 	--font-size-s: 0.75rem;
@@ -254,16 +255,20 @@ body {
 	--font-size-xxs: 0.5rem;
 	--font-size-m: 1rem;
 	--font-size-l: 1.125rem;
+	--font-size-14px: 0.875rem;
 	--font-size-16px: 1rem;
 	--font-size-18px: 1.125rem;
 	--font-size-20px: 1.25rem;
+	--font-size-21px:1.3125rem;
 	--font-size-19px: 1.1875rem;
 	--font-size-22px: 1.375rem;
 	--font-size-24px: 1.5rem;
 	/* Line Height */
 	--line-height-24px: 1.5rem;
 	--line-height-26px: 1.625rem;
+	--line-height-27px:1.6875rem;
 	--line-height-29px: 1.8125rem;
+	--line-height-30px:1.875rem;
 	--line-height-31px: 1.9375rem;
 	--line-height-33px: 2.0625rem;
 	--line-height-37px: 2.3125rem;
@@ -315,12 +320,23 @@ body {
 .poppins-regular-14px {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular);
-	font-size: var(--font-size-s);
+	font-size: var(--font-size-14px) !important;
 	font-style: normal;
 	font-weight: 400;
 	/* line-height: initial; */
 }
-
+.poppins-regular-16px-white 
+{
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-regular);
+	font-size: var(--font-size-m) !important;
+	font-style: normal;
+	font-weight: 400;
+} 
+.nav-pills .nav-link.active .poppins-regular-16px-white,.nav-pills .nav-link.active .poppins-regular-18px-white
+{
+	color: var(--color-white) !important;
+}
 .poppins-regular-16px {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular);
@@ -329,7 +345,15 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
-
+.poppins-regular-18px-white {
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-regular) !important;
+	font-size: var(--font-size-18px) !important;
+	font-style: normal;
+	line-height: var(--line-height-29px) !important;
+	font-weight: 400;
+	/* line-height: initial; */
+}
 .poppins-regular-18px {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular) !important;
@@ -351,6 +375,15 @@ body {
 	line-height: var(--line-height-29px);
 	font-family: var(--font-family-poppins-medium) !important;
 	color: var(--color-label-footer-gray);
+	font-weight: normal;
+}
+.poppins-medium-18px-save-button,
+.poppins-medium-18px-save-button:hover {
+	font-size: var(--font-size-18px) !important;
+	line-height: var(--line-height-29px);
+	font-family: var(--font-family-poppins-medium) !important;
+	color: var(--color-white);
+	background-color: var(--color-purple);
 	font-weight: normal;
 }
 .poppins-light-19px-next-button,
@@ -404,12 +437,27 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
-
+.poppins-regular-20px-config {
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-regular);
+	font-size: var(--font-size-20px);
+	line-height: var(--line-height-26px);
+	font-style: normal;
+	font-weight: 400;
+	/* line-height: initial; */
+}
 .poppins-light-20px {
 	color: var(--color-label-footer-gray) !important;
 	font-family: var(--font-family-poppins-light) !important;
 	font-size: var(--font-size-20px) !important;
 	line-height: var(--line-height-33px) !important;
+	font-weight: normal;
+}
+.poppins-light-18px {
+	color: var(--color-label-footer-gray) !important;
+	font-family: var(--font-family-poppins-light) !important;
+	font-size: var(--font-size-18px) !important;
+	line-height: var(--line-height-27px) !important;
 	font-weight: normal;
 }
 .poppins-italic-14px {
@@ -470,7 +518,7 @@ body {
 .skyblue-bg-color:hover {
 	background-color: var(--color-skyblue) !important;
 	color: var(--color-white) !important;
-	font-size: var(--font-size-19px);
+	font-size: var(--font-size-18px);
 	font-family: var(--font-family-poppins-medium) !important;
 	line-height: var(--line-height-31px);
 }
@@ -908,7 +956,7 @@ input {
 }
 .color-skyblue {
 	color: var(--color-skyblue);
-	/* font-size: 27px; */
+	font-size: 22px !important;
 }
 .font-poppins-light {
 	font-family: var(--font-family-poppins-light);
@@ -1109,7 +1157,7 @@ div[disabled] {
 	background-color: var(--bg-btn-gray) !important;
 	color: var(--color-white) !important;
 	font-family: var(--font-family-poppins-medium) !important;
-	font-size: var(--font-size-19px) !important;
+	font-size: var(--font-size-18px) !important;
 	line-height: var(--line-height-31px);
 	border: none !important;
 }
@@ -1178,11 +1226,16 @@ div[disabled] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: var(--font-family-poppins-light);
+	font-size: var(--font-size-21px);
+	line-height: var(--line-height-31px);
+	color: var(--bg-gray-dark);
 }
 .error {
-	color: var(error-message-color) !important;
+	color: var(--error-message-color) !important;
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m);
+	/* margin-bottom: 1rem !important; */
 }
 .max-height-420 {
 	max-height: 420px;
@@ -1672,7 +1725,7 @@ input[type="checkbox"]:checked {
 	background-color: var(--color-skyblue);
 }
 .category_currency_height {
-	height: 40px;
+	height: 41px;
 }
 input[type="checkbox"] {
 	/* webkit-appearance: none;
@@ -1697,10 +1750,13 @@ li.next {
 .project-pagination > .active > a:hover {
 	color: var(--color-purple) !important;
 	background-color: transparent !important;
+	font-family: var(--font-family-poppins-medium) !important;
+	font-size: var(--font-size-20px) !important;
+	line-height: var(--line-height-30px) !important	;
 }
 input[type="text"]::placeholder {
 	font-family: var(--font-family-poppins-regular);
-	color: var(--color-label-footer-gray);
+	color: #4C4D5573;
 	font-size: var(--font-size-18px);
 	line-height: var(--line-height-29px);
 }
@@ -1711,7 +1767,7 @@ input[type="text"]::placeholder {
 	color: var(--color-skyblue) !important;
 }
 .view_pc_form_width {
-	width: 8%;
+	width: 13%;
 }
 .field_height input,
 .field_height button {
@@ -1723,17 +1779,6 @@ input[type="text"]::placeholder {
 	/* padding:0.5rem 2.6rem ; */
 	background-color: transparent;
 	border: none !important;
-}
-.margin_salary {
-	margin-left: 15px;
-}
-
-tbody:before {
-	/* This doesn't work because of border-collapse */
-	line-height: 1vh;
-	content: "-";
-	color: white; /* bacground color */
-	display: block;
 }
 .planning-container .form-select {
 	border: 1px solid rgb(181 181 181 / 50%) !important;
@@ -1788,4 +1833,28 @@ tbody:before {
 	font-family: var(--font-family-bitter-italic-normal-medium);
 	padding-bottom: 20px;
 	text-align: left;
+}
+
+.force-skyblue > path {
+	stroke: var(--color-skyblue) !important;
+}
+.ageicon {
+	vertical-align: sub !important;
+	padding-left:5px;
+}
+table thead th
+{
+	vertical-align: middle !important;
+}
+input[type="search"]::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  width: 10px;
+  background-size: 10px 10px;
+  background-image:url(../components/images/close.png);
+}
+
+.react-select-prefix__input {   /* Custom class to hide cursor from react-select dropdown */
+	color: transparent !important;
 }
