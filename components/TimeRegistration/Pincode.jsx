@@ -182,7 +182,7 @@ const Pincode = () => {
 							<div className="modal-body ">
 								<div>
 									<div className="row mt-3 mx-auto">
-										<h3>We have noticed that you haven't generted your pincode yet.</h3>
+										<h3>We have noticed that you haven&apos;t generted your pincode yet.</h3>
 									</div>
 									<div className="row mt-3 mx-auto">
 										<h4>Do you want generate pincode ?</h4>
