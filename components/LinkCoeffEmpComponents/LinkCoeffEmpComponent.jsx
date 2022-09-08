@@ -134,7 +134,7 @@ const LinkCoeffEmpComponent = (props) => {
         disabled={parseInt(props.pcid) && state.selectedPc ? true : false}
         handleChange={onSelect}
         isMulti={false}
-        className="pc-single-select  input-border-lightgray poppins-regular-18px mh-50 rounded-0 linkcoe "
+        className="pc-single-select  input-border-lightgray poppins-regular-18px mh-50 rounded-0 linkcoe mb-3"
         placeholder={'Select paritair comite'}
       />
       </>
@@ -145,52 +145,61 @@ const LinkCoeffEmpComponent = (props) => {
     return <>
       <div className="mt-4">
         <div className="col-md-12 row p-0 m-0">
-          <h4 className={`sv-cp-page-title  page-title mb-5 mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4>
-          <div className="col-md-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
-            {state.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
+          <h4 className={`sv-cp-page-title  page-title mb-4 mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4>
+          <div className='row'>
+          <div className="col-md-5 col-lg-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
+            {state.pcWarning ? <small style={{ color: 'red' }} className='error_text mt-3'> Choose paritair comite </small> : null}
           </div>
+          <div className='col-md-7 col-lg-8 offset-lg-1'>
+
+          <div className='row'>
           {state.lowHighValidation.length > 0 &&
-            <small className="col-md-6 mt-3 mb-3 warning-message">
+            <small className="col-md-12 my-2 text-danger text-left error_text">
               {`Please change the highlighted low and high values, low value should be less than high value (Low < High).`}
             </small>}
           {state.emptyDataWarning === true &&
-            <small className="col-md-6 mt-3 mb-3 warning-message">
+            <small className="col-md-12 my-2 text-danger text-left error_text">
               {`Please fill all coefficient fields.`}
             </small>}
           {state.valueErrorArray.length > 0 &&
-            <small className="col-md-3 mt-3 mb-3 warning-message">
+            <small className="col-md-12 my-2 text-danger text-left error_text">
               {`Value should be in between 0 to 10.`}
             </small>}
           {state.defaultValueError.length > 0 &&
-            <small className="col-md-3 mt-3 mb-3 warning-message">
+            <small className="col-md-12 my-2 text-danger text-left error_text">
               {`Default value should be in between low and high values.`}
             </small>}
-            {state.regExpWarning === true && <small className="col-md-10 mt-3 mb-3 warning-message" id="reg-expression-div">
+            {state.regExpWarning === true && <small className="col-md-10 my-2 text-danger text-left error_text" id="reg-expression-div">
               {`Please enter proper values.`}
             </small>}
+          </div>
+          </div>
+          </div>
+         
         </div>
-        <div className="col-md-12 m-0 p-0 relative-div">
-          {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
+        <div className="col-md-12 m-0 p-0 relative-div right_arrow_align">
+          {/* {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
               <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
           {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
-              <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>}
-          <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: `${tableWidth}` }}>
-            <div className="col-md-3 m-0 p-0 pc-linking-div firstpart">
+              <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>} */}
+          {/* <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: `${tableWidth}` }}> */}
+          <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId">
+            <div className="col-lg-3 col-md-6 m-0 p-0 pc-linking-div firstpart">
               <CoeffcientValuesFirstPart />
             </div>
-            <div className="col-md-9 m-0 p-0 pc-linking-div secondpart">
+            <div className="col-lg-9 col-md-6 m-0 p-0 pc-linking-div secondpart">
               <EmployeeTypeSecondPart />
             </div>
           </div>
         </div>
         <div className='col-md-12 row m-0 my-5' style={{  }}>
           <div className='col-md-6 p-0 align-self-center'>
-          <button onClick={() => parseInt(props.pcid) ? props.router.back() : props.router.push('/')} type="button" className=" col-2 bg-white  text-start border-0 poppins-regular-18px  float-sm-right text-left p-0 md-5 text-decoration-underline">
+          <button onClick={() => parseInt(props.pcid) ? props.router.back() : props.router.push('/')} type="button" className=" col-2 bg-white  text-start border-0 poppins-regular-18px  float-sm-right text-left p-0 md-5 text-decoration-underline shadow-none">
             {`BACK`}
           </button>
           </div>
           <div className='col-md-6 p-0'>
-          <button onClick={() => handleSubmit()} type="button" className=" btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px">
+          <button onClick={() => handleSubmit()} type="button" className=" btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none">
             {`SAVE`}
           </button></div>
            </div>

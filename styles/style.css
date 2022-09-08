@@ -130,3 +130,14 @@ input[type="checkbox"]:focus
 {
   z-index: 99;
 }
+.pc-single-select .css-6j8wv5-Input
+{
+  margin:0px !important;
+}
+@media screen and (min-width:768px) and (max-width:1023px) 
+{
+  .right_arrow_align span
+  {
+    right: -19px;
+  }
+}
