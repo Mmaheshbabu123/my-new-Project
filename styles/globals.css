@@ -437,10 +437,10 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
-.poppins-regular-20px-config {
+.poppins-regular-16px-config {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular);
-	font-size: var(--font-size-20px);
+	font-size: var(--font-size-16px);
 	line-height: var(--line-height-26px);
 	font-style: normal;
 	font-weight: 400;

@@ -200,7 +200,7 @@ const AddEmployeeType = (props) => {
         <div className='col-md-6 p-0 align-self-center'>
         <button
           type="button"
-          className=" col-2 bg-white border-0 poppins-light-18px text-start  float-sm-right text-left p-0 md-5 text-decoration-underline"
+          className=" col-2 bg-white border-0 poppins-light-18px text-start  float-sm-right text-left p-0 md-5 text-decoration-underline shadow-none"
           onClick={() => router.back()} >
           BACK
         </button>
@@ -208,7 +208,7 @@ const AddEmployeeType = (props) => {
         <div className='col-md-6 text-end p-0'>
         <button
           type="button"
-          className=" btn rounded-0 custom-btn px-3  btn-block float-end poppins-medium-18px-save-button"
+          className=" btn rounded-0 custom-btn px-3  btn-block float-end poppins-medium-18px-save-button shadow-none"
           onClick={handleSubmit} >
           SAVE
         </button>
