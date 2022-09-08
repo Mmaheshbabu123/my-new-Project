@@ -58,7 +58,7 @@ const Pincode = () => {
 		console.log(window);
 	}, []);
 
-  var res=hasPin?<div className='container border'>
+  var res=hasPin?<div className='border'>Something went wrong please try again later</div>:<div className='container border'>
   <div className='row'>
      <h1> Email Sent</h1>
       </div>
@@ -69,9 +69,9 @@ const Pincode = () => {
      Please use the link to reset your pincode.
   </div>
   <div className='row'>
-     It will be expired in 10 minutes.
+     It will be expired in 30 minutes.
   </div>
-</div>:<div className='border'>Something went wrong please try again later</div>;
+</div>;
 	return (
        res 
     );
