@@ -137,7 +137,7 @@ const ManagePc = (props) => {
 						<Link className="hover-white" href={'/redirect-page?src=/manage-pc&dest=addpc'}>
 							<span
 								className={
-									'ml-2 float-sm-right color-white py-2 hover-white poppins-medium-19px ' +
+									'ml-2 float-sm-right color-white py-2 hover-white poppins-medium-18px text-white shadow-none ' +
 									styles.addprojbtn +
 									styles.btncolor
 								}
@@ -152,7 +152,7 @@ const ManagePc = (props) => {
 						<input
 							type="search"
 							id="form12"
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 add-pln"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 add-pln shadow-none"
 							placeholder="Paritair comite number"
 							value={searchPcnum}
 							onChange={(e) => setSearchPcnum(e.target.value)}
@@ -163,7 +163,7 @@ const ManagePc = (props) => {
 						<input
 							type="search"
 							id="form12"
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 add-pln"
+							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 add-pln shadow-none"
 							placeholder="Paritair comite name"
 							value={searchPcname}
 							onChange={(e) => setSearchPcname(e.target.value)}
@@ -173,7 +173,7 @@ const ManagePc = (props) => {
 					<div className="col-md-2">
 						<button
 							type="button"
-							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-18px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color add-pln"
+							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-18px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color add-pln shadow-none"
 							onClick={() => handleSearch()}
 						>
 							FILTER
@@ -183,7 +183,7 @@ const ManagePc = (props) => {
 						{(searchPcnum != '' || searchPcname != '' || search === true) && (
 							<button
 								type="button"
-								className="btn w-100 btn-block float-right mt-2 mb-2 ms-2 poppins-medium-18px  border-0 rounded-0 float-right mt-2 mb-2 ms-2 reset_button hover-white add-pln"
+								className="btn w-100 btn-block float-right mt-2 mb-2 ms-2 poppins-medium-18px  border-0 rounded-0 float-right mt-2 mb-2 ms-2 reset_button hover-white add-pln shadow-none"
 								onClick={() => handleReset()}
 							>
 								RESET

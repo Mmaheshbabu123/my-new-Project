@@ -205,12 +205,12 @@ const SalaryBenifits = () => {
 								</label>
 							</div>
 							{val.checked && (
-								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3 px-4':"bg-4C4D550F px-3 py-2 bg-white"}>
+								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3  position_relative':"bg-4C4D550F px-3 py-2 bg-white"}>
 									<div className="">
 										<p className={' custom_astrick poppins-medium-16px '}>Is this mandatory?</p>
 
 										<div className="d-flex mt-3">
-											<div className="form-check  ">
+											<div className="form-check d-inline-flex ">
 												<input
 													disabled={disableForm}
 													className="form-check-input d-flex"
@@ -220,12 +220,12 @@ const SalaryBenifits = () => {
 													checked={val.mandatory === true}
 													onChange={(e) => handleRadio(e, key)}
 												/>
-												<label className="form-check-label ms-1 poppins-regular-16px" htmlFor="exampleRadios1">
+												<label className="form-check-label ms-1 poppins-regular-16px align-self-center" htmlFor="exampleRadios1">
 													Yes
 												</label>
 											</div>
 
-											<div className="form-check">
+											<div className="form-check d-inline-flex">
 												<input
 													disabled={disableForm}
 													className="form-check-input ms-2"
@@ -234,7 +234,7 @@ const SalaryBenifits = () => {
 													checked={val.mandatory === false}
 													onChange={(e) => handleRadio(e, key)}
 												/>
-												<label className="form-check-label ms-1 poppins-regular-16px" htmlFor="exampleRadios2">
+												<label className="form-check-label ms-1 poppins-regular-16px align-self-center" htmlFor="exampleRadios2">
 													No
 												</label>
 											</div>
