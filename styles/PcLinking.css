@@ -180,7 +180,7 @@ strong{
 {
   border-bottom: 0px;
 }
-span.cell--bottomLeft.poppins-regular-18px
+span.cell--bottomLeft.poppins-medium-16px
 {
   padding-left: 10px;
 }
@@ -194,6 +194,6 @@ th.table-second-part-th-class
   padding: 0.5rem;
   text-align: center;
   font-family: var(--font-family-poppins-medium) !important;
-  font-size: var(--font-size-18px);
-  line-height: var(--line-height-27px);
+  font-size: var(--font-size-16px);
+  line-height: var(--line-height-26px);
 }

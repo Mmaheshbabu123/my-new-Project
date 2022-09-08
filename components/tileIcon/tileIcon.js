@@ -14,7 +14,7 @@ export default function tileIcon({ props }) {
            <Link className='sree' href={`${url}`}>
              <a className={styles["anchor-tag"]} >
                <Image src={iconPath} alt={name} loading="lazy"  width="70%" height="60%"  />
-               <div title={name} className = {`{styles["tile-title-text"] poppins-regular-20px-config  my-3`}> {name} </div>
+               <div title={name} className = {`{styles["tile-title-text"] poppins-regular-16px-config  my-3 text-decoration-none`}> {name} </div>
              </a>
            </Link>
          </div>

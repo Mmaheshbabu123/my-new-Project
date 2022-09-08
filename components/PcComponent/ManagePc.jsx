@@ -127,7 +127,7 @@ const ManagePc = (props) => {
 		<div>
 			<div className="row m-0">
 				{/* <h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 hover-white">Manage paritair comite</h1> */}
-			<div className='col-md-12 py-4'>
+			<div className='col-md-12 py-4 px-0'>
 				<h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">
 					Manage paritair comite
 				</h1>
@@ -173,17 +173,17 @@ const ManagePc = (props) => {
 					<div className="col-md-2">
 						<button
 							type="button"
-							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-18px rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color add-pln shadow-none"
+							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-18px rounded-0 skyblue-bg-color add-pln shadow-none"
 							onClick={() => handleSearch()}
 						>
 							FILTER
 						</button>
 					</div>
-					<div className="col-md-2">
+					<div className="col-md-2 pe-0">
 						{(searchPcnum != '' || searchPcname != '' || search === true) && (
 							<button
 								type="button"
-								className="btn w-100 btn-block float-right mt-2 mb-2 ms-2 poppins-medium-18px  border-0 rounded-0 float-right mt-2 mb-2 ms-2 reset_button hover-white add-pln shadow-none"
+								className="btn w-100 btn-block float-right mt-2 mb-2 poppins-medium-18px  border-0 rounded-0 reset_button hover-white add-pln shadow-none"
 								onClick={() => handleReset()}
 							>
 								RESET
@@ -289,7 +289,7 @@ const ManagePc = (props) => {
 				<div className="col-md-6 p-0">
 					<button
 						type="button"
-						className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px"
+						className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0"
 						onClick={() => {
 							window.location.assign(
 								process.env.NEXT_PUBLIC_APP_URL_DRUPAL +

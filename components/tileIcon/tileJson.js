@@ -37,7 +37,7 @@ export const tileJson = [
   },
   {
     id: 5,
-    name: 'Manage salary benefits',
+    name: 'Salary benefits',
     url: '/manage-salary-benefits?action=view',
     iconPath: salary,
   }
