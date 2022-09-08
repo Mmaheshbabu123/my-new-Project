@@ -163,7 +163,7 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-14px-white btn-active">Step 2:</p> <p className='poppins-regular-16px-white btn-active'>Category and Function</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">Step 2:</p> <p className='poppins-regular-18px-white btn-active'>Category and Function</p>
 									</button>
 								</li>
 								<li className="col border-0 rounded-0 poppins-regular-16px" role="presentation">
@@ -187,7 +187,7 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-14px-white btn-active">Step 3:</p> <p className='poppins-regular-16px-white btn-active'>Age</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">Step 3:</p> <p className='poppins-regular-18px-white  btn-active'>Age</p>
 									</button>
 								</li>
 								<li className="col border-0 rounded-0 poppins-regular-16px" role="presentation">
@@ -211,7 +211,7 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-14px-white btn-active">Step 4:</p> <p className='poppins-regular-16px-white btn-active'>Employee type</p>
+										<p className="mb-2 poppins-regular-16px-white  btn-active">Step 4:</p> <p className='poppins-regular-18px-white btn-active'>Employee type</p>
 									</button>
 								</li>
 								<li className="col border-0 rounded-0 pe-0 poppins-regular-16px" role="presentation">
@@ -235,7 +235,7 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-14px-white btn-active">Step 5:</p> <p className='poppins-regular-16px-white btn-active'>Salary benefits</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">Step 5:</p> <p className='poppins-regular-18px-white btn-active'>Salary benefits</p>
 									</button>
 								</li>
 							</ul>
