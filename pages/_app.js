@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import '../styles/otpone.css';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Script from 'next/script';

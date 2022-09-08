@@ -3,6 +3,9 @@ export const ENV_URL = process.env.NEXT_PUBLIC_APP_BACKEND_URL;
 export const REGEX_URL = 'api/';
 export const BASE_URL = ENV_URL + REGEX_URL;
 
+export const ENV_DRUPAL= process.env.NEXT_PUBLIC_APP_URL_DRUPAL;
+
+
 // EXAMPLE : export const getUserDetails = BASE_URL + 'account/get-user-details';
 export const WithoutAppUrl = BASE_URL + "getParitairecommittes";
 export const getPcByPcnumber = BASE_URL + "getpc/"
@@ -16,7 +19,11 @@ export const fetchFunction = BASE_URL + "get-function/";
 export const updateFunction = BASE_URL + "update-function";
 
 
+//------------Time Registration--------------------------------//
+export const checkPinCode= BASE_URL+ "hasPincode/";
 
+//------------Drupal ------------------------------//
+export const homeScreen= ENV_DRUPAL+ "dashboard/url";
 
 //--------------CATEGORY API ROUTES ----------------//
 export const getCat = BASE_URL + "getcat/";
