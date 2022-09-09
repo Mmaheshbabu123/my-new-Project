@@ -26,30 +26,32 @@ const Pincode = () => {
 	const [ hasPin, setHasPin ] = useState(false);
 	const [ otp, setOTP ] = useState('');
 	const [ err, setErr ] = useState('');
-	const [ uid, Setuid ] = useState(null);
+	const [ uid, setuid ] = useState(null);
 	const [ response, SetResponse ] = useState('');
 	const [ load, setLoad ] = useState(false);
 	const { root_parent_id, selectedTabId, ref_id = 0 } = router.query;
 
 	useEffect(
 		() => {
-			var uid = null;
+			var userid = null;
 			if (!router.isReady) return;
 
 			if (localStorage.getItem('uid') != null) {
-				uid = JSON.parse(localStorage.getItem('uid'));
+				userid = JSON.parse(localStorage.getItem('uid'));
 			} else {
 				window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 			}
 			
 			var p_unique_key = router.query.p_unique_key;
 
-			if (uid != undefined && uid != null) {
-				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + uid, 'GET')
+			if (userid != undefined && userid != null) {
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + userid, 'GET')
 					.then((result) => {
+						console.log(result );
 						if (result == 999) {
 							router.push('/pincode/generate/Pin');
 						}
+						setuid(userid);
 					})
 					.catch((error) => {
 						console.error(error);
