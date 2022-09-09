@@ -126,7 +126,7 @@ input[type="checkbox"]:focus
 } */
 .salary-benefits thead
 {
-  z-index: 999;
+  /* z-index: 999; */
   background-color: #4C4D550F;
   position: sticky;
 }
@@ -167,7 +167,9 @@ input[type="checkbox"]:focus
 {
   height: 43px !important;
 }
-#react-select-2-listbox
+#react-select-2-listbox,
+.css-6j8wv5-Input,
+.css-qc6sy-singleValue
 {
   font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-16px);
@@ -190,4 +192,8 @@ input[type="radio"]
 {
   accent-color: cadetblue;
   border-color: cadetblue;
+}
+.css-319lph-ValueContainer
+{
+  padding: 0px 8px !important;
 }

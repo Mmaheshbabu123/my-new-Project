@@ -12,7 +12,9 @@ function Header() {
 	return (
 		<div className="custom-position-sticky">
 			<div className="clip0" />
-			<div className="custom-header  col-md-9 col-lg-10 m-auto border-bottom border-2 py-2">
+			<div className='container'>
+				<div className='row'>
+				<div className="custom-header  col-md-9 col-lg-11 m-auto border-bottom border-2 py-2">
 				{/* <nav className="navbar"> */}
 				{/* <div className = 'go_to_dashboard'>
 	<Link href={dashboard_url}>
@@ -24,7 +26,7 @@ function Header() {
 						<div className="col-md-4">
 							<a className="navbar-brand" href="">
 								<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL}>
-									<img style={{ width: '250px' }} src="/logo.svg" className="mt-2" />
+									<img style={{ width: '220px' }} src="/logo.svg" className="mt-2" />
 								</Link>
 							</a>
 						</div>
@@ -75,6 +77,9 @@ function Header() {
 
 				{/* </nav> */}
 			</div>
+				</div>
+			</div>
+		
 		</div>
 	);
 }

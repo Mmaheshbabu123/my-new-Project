@@ -305,7 +305,7 @@ function AddFunction(props) {
 					<div className="text-end col-md-6">
 						<button
 							type="submit"
-							className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px shadow-none"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
 							disabled={disableSave}
 							onClick={() => {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
