@@ -348,7 +348,7 @@ const AddEditSalaryBenefits = (props) => {
   return <>
     <div className='add-edit-types'>
       <div className="row m-0 p-0">
-        <h4 className="mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${state.editFlow ? 'Edit' : 'Add'} salary benefit`} </h4>
+        <h4 className="mt-3 mb-4 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${state.editFlow ? 'Edit' : 'Add'} salary benefit`} </h4>
         <div className='row p-0 m-0'>
 
           {/* <div className="col-md-12 d-flex justify-content-end p-0 mb-3">
