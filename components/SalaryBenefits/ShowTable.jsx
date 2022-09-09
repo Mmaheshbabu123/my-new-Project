@@ -112,7 +112,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
       </div>
       <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
        <div className='row'>
-         <div className='col-md-6 p-0'>
+         <div className='col-md-6'>
            <input
              type="text"
              value={state.searchTerm}
