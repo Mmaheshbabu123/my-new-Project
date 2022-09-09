@@ -4,10 +4,11 @@ import { confirmAlert } from 'react-confirm-alert';
 import { deleteSalaryBenefits } from '@/Services/ApiEndPoints';
 import { formatDate } from './SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import ReactPaginate from 'react-paginate';
 import { salaryBenefitOccurenceOptions } from '@/Constants';
-const itemsPerPage = 8;
+const itemsPerPage = 5;
 
 const ShowTable = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
@@ -29,7 +30,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className='mt-2 ms-3 color-skyblue '/> </span>
+        <span className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className='mt-2 color-skyblue '/> </span>
         <span className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='mt-2 ms-3 color-skyblue '/> </span>
       </>
     )
@@ -152,16 +153,16 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
       <div className="table-render-parent-div max-height-420">
         <table className="table table-hover manage-types-table salary-benefits">
           <thead className="table-render-thead ">
-            <tr className='btn-bg-gray-medium table-sticky-bg-gray py-2' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='poppins-regular-18px justify-content-center btn-bg-gray-medium padding-t-b-10' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+            <tr className='btn-bg-gray-medium table-sticky-bg-gray py-2' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='poppins-medium-18px justify-content-center btn-bg-gray-medium' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
           </thead>
           {state.currentItems && state.currentItems.length > 0 ?
           <tbody>
-            {state.currentItems.map(eachRow => <tr className='border poppinns-regular-thin p-2' key={eachRow.sb_id} id={eachRow.sb_id}>
-              <td className='poppinns-regular-thin py-2'> {eachRow.name} </td>
-              <td className='poppinns-regular-thin'> {eachRow.value ? `${eachRow.value} ${eachRow.valueType === 1 ? '€' : '%'}` : ''} </td>
-              <td className='poppinns-regular-thin'> {eachRow.occurence ? salaryBenefitOccurenceOptions.filter(val => val.value === eachRow.occurence)[0]['label'] : ''} </td>
-              <td className='poppinns-regular-thin'> {formatDate(eachRow.date) ? formatDate(eachRow.date) : '--'} </td>
-              <td className='poppinns-regular-thin'> { getNeededActions(eachRow) } </td>
+            {state.currentItems.map(eachRow => <tr className='border poppins-regular-16px p-2' key={eachRow.sb_id} id={eachRow.sb_id}>
+              <td className='poppins-regular-16px py-2'> {eachRow.name} </td>
+              <td className='poppins-regular-16px'> {eachRow.value ? `${eachRow.value} ${eachRow.valueType === 1 ? '€' : '%'}` : ''} </td>
+              <td className='poppins-regular-16px'> {eachRow.occurence ? salaryBenefitOccurenceOptions.filter(val => val.value === eachRow.occurence)[0]['label'] : ''} </td>
+              <td className='poppins-regular-16px'> {formatDate(eachRow.date) ? formatDate(eachRow.date) : '--'} </td>
+              <td className='poppins-regular-16px'> { getNeededActions(eachRow) } </td>
             </tr>)}
           </tbody>: <p className='poppins-regular-18px' style={{paddingTop: '10px'}}> No records </p>}
         </table>
@@ -169,12 +170,12 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
       <div>
         {state.filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="Next >"
+            nextLabel={<AiOutlineArrowRight />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={state.pageCount}
             forcePage={state.currentPage}
-            previousLabel="< Previous"
+            previousLabel={<AiOutlineArrowLeft />}
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"
