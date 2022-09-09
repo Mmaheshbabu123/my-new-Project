@@ -351,7 +351,7 @@ const AddEditSalaryBenefits = (props) => {
         <h4 className="mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${state.editFlow ? 'Edit' : 'Add'} salary benefit`} </h4>
         <div className='row p-0 m-0'>
 
-          <div className="col-md-12 d-flex justify-content-end p-0 mb-3">
+          {/* <div className="col-md-12 d-flex justify-content-end p-0 mb-3">
           {!state.editFlow &&
             <button
               onClick={() => addItemAndUpdateIndex({...state})}
@@ -361,7 +361,7 @@ const AddEditSalaryBenefits = (props) => {
               {`+ ADD`}
             </button>
           }
-          </div>
+          </div> */}
           {renderInputFields()}
         </div>
       </div>
@@ -398,12 +398,31 @@ const AddEditSalaryBenefits = (props) => {
         </button>
         </div>
         <div className='col-md-6 text-end p-0'>
+        <div className='row justify-content-end'>
+          <div className='col-md-4'>
+          {/* <div className="d-flex justify-content-end p-0 mb-3"> */}
+          <div className="">
+          {!state.editFlow &&
+            <button
+              onClick={() => addItemAndUpdateIndex({...state})}
+              type="button"
+              style={{marginTop: '0'}}
+              className="btn btn my-2 skyblue-bg-color border-0  px-5 rounded-0 shadow-none">
+              {`+ ADD`}
+            </button>
+          }
+          </div>
+          </div>
+          <div className='col-md-3 align-self-center'>
+          
         <button
           type="button"
-          className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
+          className="btn rounded-0  custom-btn px-5  btn-block float-end poppins-medium-18px shadow-none"
           onClick={handleSubmit} >
           SAVE
         </button>
+          </div>
+        </div>
         </div>
       </div>
     </div>
