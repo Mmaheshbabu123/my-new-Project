@@ -22,7 +22,7 @@ const AdditionalDocsMain = (props) => {
     , selectedTabId: Number(tab) || 1,
   })
 
-  useEffect(() => {  fetchData() }, [state.selectedTabId])
+  useEffect(() => {  fetchData() }, [state.selectedTabId, action])
 
   /**
    * [fetchData data fetching based on pcid]
@@ -63,12 +63,11 @@ const AdditionalDocsMain = (props) => {
     <div>
     {state.loaded === true || state.selectedTabId === 2 ?
           <div className="col-md-12">
-              <h4 className={`page-title-font-class text-center`}> {`${action === 0 ? 'Manage my documents' : Number(editId) ? 'Edit my document': 'Add my document'}`}</h4>
-              {Number(entityType) === 1 && showTabs()}
-              {state.selectedTabId === 2  && <V1DocumentsOverview />
-              }
-              {state.selectedTabId === 1 && <>
-                {   action !== 0  ?
+              {Number(entityType) === 1 && action === 0 && showTabs()}
+              <h4 className={`page-title-font-class text-center`}> {`${state.selectedTabId === 2 ? 'Manage V1 documents' : action === 0 ? 'Manage additional documents' : Number(editId) ? 'Edit additional document': 'Add additional document'}`}</h4>
+              {state.selectedTabId === 2  && <V1DocumentsOverview /> }
+
+              {state.selectedTabId === 1 && <> {   action !== 0  ?
                     <EditUpdateAdditionalDoc
                       entityType={Number(entityType)}
                       entityId = {Number(entityId)}
@@ -85,8 +84,7 @@ const AdditionalDocsMain = (props) => {
                       companies={state.companies}
                       employers={state.employers}
                     />
-                }
-              </>}
+                } </>}
           </div>
         : <p>Loading...</p>}
     </div>

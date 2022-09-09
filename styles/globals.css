@@ -1662,11 +1662,17 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 	/* padding-top: 8px;
 	padding-top: 8px; */
 	font-family: var(--font-family-poppins-regular);
-	font-size: var(--font-size-18px);
+	font-size: var(--font-size-16px);
 	line-height: var(--line-height-29px);
 	color: var(--color-label-footer-gray);
 	display: flex;
 	align-items: center;
+}
+.css-zke0qo-control
+{
+	border-color:#4c4d554d !important;
+	box-shadow: none !important;
+	border-radius: 0px !important;
 }
 .slt-emp .css-1s2u09g-control,
 .slt-emp .css-1pahdxg-control {

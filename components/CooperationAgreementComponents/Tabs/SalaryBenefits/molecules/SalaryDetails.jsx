@@ -7,7 +7,8 @@ import InputField from '@/atoms/InputTextfield';
 import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import styles from '../SalaryBenefits.module.css';
-import { soortOptions } from '../../../Definations';
+import { soortOptions, premiesAutoArray } from '../../../Definations';
+import CheckBoxField from '@/atoms/CheckBoxField';
 // import { helpers } from '../SalaryBenefitHelper';  //.
 
 
@@ -20,20 +21,7 @@ const SalaryDetails = (props) => {
     cooperationSalaryLinked,
     cooperationBenefits
   }, salaryDataPerPc, dependecyDataStatus } = state;
-console.log(state)
-  const [ compState, setCompState ] = useState({
-      expand: {},
-      premiesAutoArray: [
-        {
-          type: 1,
-           name: 'Premies en vergoeding (Benefits)',
-           rows: [{key: 'code', label: 'Code'}, {key: 'bedrag', label: 'Bedrag'}, {key: 'percentage', label: 'Percentage'}]},
-        {
-          type: 2,
-          name: 'Automatisch looncodes (automatic salarycodes)',
-          rows: [{key: 'code', label: 'Code'}, {key: 'soort_automatisering', label:'Soort automatisering'}]}
-      ],
-  })
+  const [ compState, setCompState ] = useState({  expand: {} })
 
   const expandMinimizeDiv = (pcid) => {
     let expand = {...compState.expand };
@@ -105,7 +93,7 @@ console.log(state)
   const showSalaryCoeffFields = (pcId) => {
     return (
       <div className={`${styles['salary-coeff-fields-div']}`}>
-          {compState.premiesAutoArray.map(obj => {
+          {premiesAutoArray.map(obj => {
             let fieldId = obj.type;
             let valueObj = cooperationBenefits[pcId][fieldId] || {};
             let resetObj = valueObj['checked'] !== 1 ? {code: 0, bedrag: '', percentage: '', soort_automatisering: ''} : {};

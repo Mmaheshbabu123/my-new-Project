@@ -4,6 +4,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { deleteAdditionalDocuments, downloadAdditionalDocuments } from '@/Services/ApiEndPoints'
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
+import { USER_ROLE_ENTITY_TYPE } from '@/Constants';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { FiDownload } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
@@ -116,8 +117,8 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
   const getNeededActions = (eachRow) => {
     return (
       <>
-        {entityType !== 2 && <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>}
-        {entityType !== 2 && <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>}
+        {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) && <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>}
+        {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) &&  <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>}
         <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload/> </span>
       </>
     )
@@ -138,11 +139,11 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
   return (
     <>
       <div className='col-md-12 text-end'>
-      {entityType !== 2 && <button
+      {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) && <button
         onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
         type="button"
         className="btn btn-dark pcp_btn col-3">
-        {`+Add my document`}
+        {`+Add additional document`}
       </button>}
       </div>
       <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
