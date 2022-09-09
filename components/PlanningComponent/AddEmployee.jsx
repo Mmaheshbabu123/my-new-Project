@@ -141,7 +141,7 @@ const AddEmployee = () => {
 				<div>
 					{inputlist.map((input, i) => {
 						return (
-							<div className="row">
+							<div className="row" key={i}>
 								<div className="col-md-7 m-auto mb-3 mt-5 ">
 									<div className="row col-md-8 select-relative slt-emp">
 										<label
@@ -212,7 +212,7 @@ const AddEmployee = () => {
 														type="submit"
 														className="btn poppins-light-19px-next-button rounded-0 px-3  btn-block float-end ms-1"
 														onClick={handleaddanother}
-														
+
 													>
 														Add another
 													</button>
@@ -231,7 +231,7 @@ const AddEmployee = () => {
 						<button
 							type="button"
 							className="btn  btn-block px-0"
-						
+
 						>
 							<Link href={'/planning/add/' + p_unique_key}>
 								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none">

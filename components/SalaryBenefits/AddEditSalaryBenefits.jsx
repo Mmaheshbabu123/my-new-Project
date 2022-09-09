@@ -34,7 +34,7 @@ const AddEditSalaryBenefits = (props) => {
     , valueType: 1
     , coefficientType: 2
     , coefficientValue: '1,15'
-    , granted: 1 }
+    , granted: '' }
   }
 
   const [state, setState] = useState({
@@ -82,7 +82,7 @@ const AddEditSalaryBenefits = (props) => {
             stateObj['valueType'] = 1;
             stateObj['coefficientType'] = 2;
             stateObj['coefficientValue'] = '1,15';
-            stateObj['granted'] = 1;
+            stateObj['granted'] = '';
             stateObj['editIndex'] = stateObj['newItems'].length;
         } else {
           stateObj['dateWarning'] = true;
@@ -253,7 +253,6 @@ const AddEditSalaryBenefits = (props) => {
           {state.nameWarning &&
             <small
               className="form-text text-muted col-md-5 pcp_name_warning error_text mx-0 ">
-              {/* This field is required. */}
               Salary benefit name is required
             </small>}
           {state.uniqueError &&
@@ -277,7 +276,6 @@ const AddEditSalaryBenefits = (props) => {
                 type="text"
                 name='value'
                 className="form-control col-md-12 poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits"
-                // style = {{paddingLeft:'4%'}}
                 value={state.value}
                 onChange={(e) => handleChange(e.target)}
                 placeholder= 'Enter value'
@@ -350,25 +348,12 @@ const AddEditSalaryBenefits = (props) => {
       <div className="row m-0 p-0">
         <h4 className="mt-3 mb-4 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${state.editFlow ? 'Edit' : 'Add'} salary benefit`} </h4>
         <div className='row p-0 m-0'>
-
-          {/* <div className="col-md-12 d-flex justify-content-end p-0 mb-3">
-          {!state.editFlow &&
-            <button
-              onClick={() => addItemAndUpdateIndex({...state})}
-              type="button"
-              style={{marginTop: '0'}}
-              className="btn  py-2 btn my-2 skyblue-bg-color border-0 poppins-regular-24px px-5 rounded-0 shadow-none">
-              {`+ ADD`}
-            </button>
-          }
-          </div> */}
           {renderInputFields()}
         </div>
       </div>
       {state.newItems.length > 0 && !state.editFlow &&
         <div className='add-item-div m-0 w-100 mt-1'>
           <table className='table-hover col-md-11 m-auto my-3 add-item-table'>
-          {/* <thead style={{borderBottom: '1px solid', margin: '15px 0'}}> */}
           <thead style={{borderBottom: '1px solid', }}>
             <tr key={'header-row-tr'}>
               {props.headers.map((eachHeader, index) =>
@@ -400,7 +385,6 @@ const AddEditSalaryBenefits = (props) => {
         <div className='col-md-6 text-end p-0'>
         <div className='row justify-content-end'>
           <div className='col-md-4'>
-          {/* <div className="d-flex justify-content-end p-0 mb-3"> */}
           <div className="">
           {!state.editFlow &&
             <button
@@ -414,7 +398,6 @@ const AddEditSalaryBenefits = (props) => {
           </div>
           </div>
           <div className='col-md-3 align-self-center'>
-          
         <button
           type="button"
           className="btn rounded-0  custom-btn px-5  btn-block float-end poppins-medium-18px shadow-none"

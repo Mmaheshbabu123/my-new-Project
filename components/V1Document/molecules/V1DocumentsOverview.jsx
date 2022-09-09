@@ -113,7 +113,6 @@ const V1DocumentsOverview = (props) => {
     await APICALL.service(`${downloadV1Documents}`, 'POST', postObj)
       .then((response) => {
         let result = response.data;
-        console.log(result);
         if(response.status === 200 && result.url) {
           setState({...state, spinner: false, showPopup: false})
           var a = document.createElement("a");
