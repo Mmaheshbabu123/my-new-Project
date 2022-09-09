@@ -14,14 +14,14 @@ function Header() {
 			<div className="clip0" />
 			<div className='container'>
 				<div className='row'>
-				<div className="custom-header  col-md-9 col-lg-11 m-auto border-bottom border-2 py-2">
+				<div className="custom-header  col-md-9 col-lg-11 m-auto border-2 pt-4 px-0">
 				{/* <nav className="navbar"> */}
 				{/* <div className = 'go_to_dashboard'>
 	<Link href={dashboard_url}>
 		<a> Back to dashboard </a>
 		</Link>
 	</div> */}
-				<div className="container-fluid  col-md-12 p-0">
+				<div className="container-fluid border-bottom pb-2 col-md-12 p-0">
 					<div className="d-flex row">
 						<div className="col-md-4">
 							<a className="navbar-brand" href="">
