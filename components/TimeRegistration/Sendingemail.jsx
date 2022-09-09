@@ -41,6 +41,8 @@ const Pincode = () => {
 					.then((result) => {
 						console.log(true);
 						if (result) {
+							setHasPin(false);
+						}else{
 							setHasPin(true);
 						}
 					})
