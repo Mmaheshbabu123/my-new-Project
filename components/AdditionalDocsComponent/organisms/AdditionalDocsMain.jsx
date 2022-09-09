@@ -22,7 +22,7 @@ const AdditionalDocsMain = (props) => {
     , selectedTabId: Number(tab) || 1,
   })
 
-  useEffect(() => {  fetchData() }, [state.selectedTabId])
+  useEffect(() => {  fetchData() }, [state.selectedTabId, action])
 
   /**
    * [fetchData data fetching based on pcid]
