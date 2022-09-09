@@ -113,19 +113,19 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
       </div>
       <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
        <div className='col-md-12 row pe-0'>
-         <div className='col-md-6 p-0'>
+         <div className='col-md-8 col-lg-9 p-0'>
            <input
              type="text"
              value={state.searchTerm}
              className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
-             placeholder={'Search'}
+             placeholder={'Enployee type'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
-         <div className='col-md-6 pe-0'>
+         <div className='col-md-4 col-lg-3 pe-0'>
             <div className='row justify-content-end'>
-              <div className='col-md-6 col-lg-4'>
+              <div className='col-md-6 col-lg-6 pe-0'>
                 <button
                 type="button"
                 className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
@@ -133,10 +133,11 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
                 SEARCH
               </button>
               </div>
-              <div className='col-md-6 col-lg-4 pe-0'>
+              <div className='col-md-6 col-lg-6 pe-0'>
                 <button
                 type="button"
-                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
+                // className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn  w-100 shadow-none"
+                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
                 onClick={() => handleSearchClick(0)}>
                 RESET
                 </button>
@@ -176,7 +177,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
       /></div>}
-        <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-3 mb-5">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline">
           {`Back`}
         </button>
       </div>

@@ -419,7 +419,7 @@ function AddPc(props) {
 											setData((prev) => ({ ...prev, buffer_timings: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text border-0 rounded-0">Hours</span>
+									<span className="input-group-text border-0 rounded-0 poppins-regular-18px">Hours</span>
 								</div>
 								<p className="error mt-2 error_text">{error_buffer_time}</p>
 							</div>
@@ -436,7 +436,7 @@ function AddPc(props) {
 											setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text border-0 rounded-0">Hours</span>
+									<span className="input-group-text border-0 rounded-0 poppins-regular-18px">Hours</span>
 								</div>
 								<p className="error error_text mt-2">{error_min_time}</p>
 							</div>
@@ -452,7 +452,7 @@ function AddPc(props) {
 											setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text border-0 rounded-0">Hours</span>
+									<span className="input-group-text border-0 rounded-0 poppins-regular-18px">Hours</span>
 								</div>
 								<p className="error mt-2 error_text">{error_max_time}</p>
 							</div>

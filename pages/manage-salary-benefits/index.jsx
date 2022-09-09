@@ -40,7 +40,7 @@ const SalaryBenefits = (props) => {
 
   return (
     <>
-      <div className='container-fluid'>
+      <div className='container-fluid px-0'>
         <div className='mt-3 md-3'>
           {state.loaded === true ?
           <> {state.editPage === true ?

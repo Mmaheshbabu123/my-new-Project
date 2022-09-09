@@ -826,11 +826,11 @@ a {
 .selectemp-height {
 	min-height: calc(75vh - 90px);
 }
-.select-relative {
+/* .select-relative {
 	top: 135px;
 	position: relative;
 	bottom: 50px;
-}
+} */
 .custom-modal-width-85 {
 	max-width: 85% !important;
 	margin-top: 2rem;
@@ -1716,8 +1716,7 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 .edit-icon-color {
 	color: #4C4D554D;
 }
-.accordion-button::after
-{
+.accordion-button::after {
 	background-image: url(/images/arrow-down.svg) !important;
 }
 input[type="checkbox"]:checked {
@@ -1783,8 +1782,7 @@ input[type="text"]::placeholder {
 .planning-container .form-select {
 	border: 1px solid rgb(181 181 181 / 50%) !important;
 }
-.planning-container .form-select
-{
+.planning-container .form-select {
 	background-image: url(/images/arrow-down.svg) !important;
 }
 .add_function .css-6j8wv5-Input,
