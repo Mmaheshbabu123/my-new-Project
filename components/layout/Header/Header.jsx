@@ -12,18 +12,18 @@ function Header() {
 	return (
 		<div className="custom-position-sticky">
 			<div className="clip0" />
-			<div className='container'>
-				<div className='row'>
-				<div className="custom-header  col-md-9 col-lg-11 m-auto border-2 pt-4 px-0">
+			<div className='container border-bottom '>
+				{/* <div className='row'> */}
+				<div className="custom-header  col-md-9 col-lg-12 m-auto border-2 pt-4 px-0">
 				{/* <nav className="navbar"> */}
 				{/* <div className = 'go_to_dashboard'>
 	<Link href={dashboard_url}>
 		<a> Back to dashboard </a>
 		</Link>
 	</div> */}
-				<div className="container-fluid border-bottom pb-2 col-md-12 p-0">
+				<div className="pb-2 col-md-12 p-0">
 					<div className="d-flex row">
-						<div className="col-md-4">
+						<div className="col-md-4 px-0">
 							<a className="navbar-brand" href="">
 								<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL}>
 									<img style={{ width: '220px' }} src="/logo.svg" className="mt-2" />
@@ -73,7 +73,7 @@ function Header() {
 						</select>
 					</div> */}
 					</div>
-				</div>
+				{/* </div> */}
 
 				{/* </nav> */}
 			</div>
