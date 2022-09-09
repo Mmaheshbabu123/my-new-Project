@@ -238,13 +238,14 @@ const AddEditSalaryBenefits = (props) => {
   const renderInputFields = () => {
     return (
       <div className='col-md-12 border-form-sec px-4'>
+        <div className='col-md-6'>
         <div className="salary-input-fields">
           <label className = "mb-2 poppins-regular-18px" htmlFor="name"> {`Salary benefit name`} <span style={{color:'red'}}> * </span></label>
           <input
             ref={ref => inputRef.current['name'] = ref}
             type="text"
             name="name"
-            className="form-control col-md-12 width-100 pcp_name poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits mb-2"
+            className="form-control col-md-6 width-100 poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits mb-2"
             value={state.name}
             onChange={(e) => handleChange(e.target)}
             placeholder='Please add salary benefit'
@@ -261,8 +262,10 @@ const AddEditSalaryBenefits = (props) => {
               {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
             </small>}
         </div>
-        <div className="salary-input-fields col-md-12 row mx-0 px-0">
-          <div className="col-md-6 mx-0 px-0">
+        </div>
+       <div className='col-md-6'>
+       <div className="salary-input-fields col-md-12 row mx-0 px-0">
+          <div className="col-md-12 mx-0 px-0">
               <label className = "mb-2 m-0 p-0 poppins-regular-18px" htmlFor="name"> {`Salary benefit value`} </label>
               <div>
                   {renderRadioButtons('value in €', 'valueType', 1)} <br />
@@ -273,12 +276,13 @@ const AddEditSalaryBenefits = (props) => {
                 ref={ref => inputRef.current['value'] = ref}
                 type="text"
                 name='value'
-                className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits"
+                className="form-control col-md-12 poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits"
+                // style = {{paddingLeft:'4%'}}
                 value={state.value}
                 onChange={(e) => handleChange(e.target)}
                 placeholder= 'Enter value'
               />
-              <span className="position-absolute" style = {{right: '30%', bottom: '15px'}}> {state.valueType === 1 ? '€' : '%'} </span>
+              <span className="position-absolute" style = {{right: '3%', bottom: '15px'}}> {state.valueType === 1 ? '€' : '%'} </span>
               </div>
               {state.valueWarning &&
                 <small
@@ -286,7 +290,7 @@ const AddEditSalaryBenefits = (props) => {
                   {`It'll accept only numeric/decimal values`}
                 </small>}
             </div>
-          <div className="col-md-6 mx-0 px-0">
+          <div className="col-md-12 mx-0 px-0 mt-4">
             <LabelField title="Occurence" className="poppins-regular-18px"/>
             <MultiSelectField
                 options={salaryBenefitOccurenceOptions}
@@ -298,6 +302,7 @@ const AddEditSalaryBenefits = (props) => {
               />
           </div>
         </div>
+       </div>
         <div className="salary-input-fields col-md-12 row mx-0 px-0">
           <div className="col-md-6 mx-0 px-0">
             <LabelField title="Applicable coefficient" className="poppins-regular-18px"/>
@@ -306,20 +311,20 @@ const AddEditSalaryBenefits = (props) => {
             {state.coefficientType === 2 && <input
               type="text"
               name='coefficientValue'
-              className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits"
+              className="form-control col-md-12 poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits"
               value={state.coefficientValue}
               onChange={(e) => handleChange(e.target)}
               placeholder= 'Enter value'
             />}
           </div>
-          <div className="col-md-6 mx-0 px-0">
+          <div className="col-md-12 mx-0 px-0 mt-4">
             <LabelField title="Is the benefit granted in case of absence of the employee" className="poppins-regular-18px"/>
             {renderRadioButtons('Yes', 'granted', 1)} <br />
             {renderRadioButtons('No', 'granted', 0)}
           </div>
         </div>
         <div className="salary-input-fields col-md-6">
-          <label className = "mb-2 poppins-regular-18px" htmlFor="name"> {`Start date`} </label>
+          <label className = "mb-3 poppins-regular-18px" htmlFor="name"> {`Start date`} </label>
           <input
             ref={ref => inputRef.current['date'] = ref}
             type="date"
@@ -327,7 +332,7 @@ const AddEditSalaryBenefits = (props) => {
             min={state.minDate}
             max={state.maxDate}
             value={state.date}
-            className="form-control col-md-6 salary-date pcp_name poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits"
+            className="form-control col-md-6 salary-date poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits"
             onChange={(e) => handleChange(e.target)}
           />
           {state.dateWarning &&

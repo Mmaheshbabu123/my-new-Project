@@ -109,17 +109,21 @@ input[type="checkbox"]:focus
 .link-emp-coeff-tableparent thead::after,
 .manage-types-table thead::after
 {
-  display: none;
+  line-height: 1vh;
+  content: "-";
+  color: white !important;
+  display: block;
+  background: white !important;
 }
-.link-emp-coeff-tableparent tbody::before,
+/* .link-emp-coeff-tableparent tbody::before,
 .manage-types-table tbody::before
 {
   line-height: 1vh;
   content: "-";
-  color: transparent;
+  color: white;
   display: block;
-  background: transparent;
-}
+  background: white;
+} */
 .salary-benefits thead
 {
   z-index: 999;

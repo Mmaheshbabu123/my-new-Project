@@ -33,6 +33,10 @@
 {
   z-index:50;
 }
+.manage-types-table thead tr
+{
+  border-bottom: none !important;
+}
 .manage-types-table tr {
   border-bottom: 1px solid var(--border-color-light-gray);
   height: 60px;
