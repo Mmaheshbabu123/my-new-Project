@@ -39,6 +39,9 @@ const RedirectPages = (props) => {
 				case 'planning':
 					router.push('/planning/options');
 					break;
+				case 'pincode':
+					router.push('/pincode/planning/Verifypin');
+					break;
 				default:
 					router.push('/');
 					break;
