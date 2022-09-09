@@ -105,7 +105,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           onClick={() => router.push(`manage-salary-benefits?action=create&id=0`)}
           type="button"
           // className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content"
-          className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3">
+          className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 shadow-none">
           {`+ Add salary benefit`}
         </button>
       </div>
@@ -115,27 +115,37 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
            <input
              type="text"
              value={state.searchTerm}
-             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
              placeholder={'Search'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
          <div className='col-md-6'>
-           <button
+           <div className='row justify-content-end'>
+             <div className='col-md-3'>
+             <button
              type="button"
-             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 poppins-medium-18px shadow-none"
              onClick={() => handleSearchClick(1)}
            >
              SEARCH
            </button>
-           <button
+             </div>
+             <div className='col-md-3'>
+             <button
              type="button"
-             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+            //  className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 poppins-medium-18px"
+             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 poppins-medium-18px shadow-none"
+             
              onClick={() => handleSearchClick(0)}
            >
              RESET
            </button>
+             </div>
+           </div>
+           
+          
          </div>
         </div>
       </div>

@@ -64,12 +64,14 @@
 }
 
 .add-item-div{
-  border: 1px solid lightsteelblue;
-  width: 70%;
-  margin-left: 30px;
+  border: 1px solid var(--color-purple);
+
 }
 .add-item-table tr{
-  height: 30px;
+  height: 60px;
+}
+.add-item-table td{
+  vertical-align: middle;
 }
 .table-border-bottom {
   border-bottom: 1px solid #4C4D554D;
@@ -148,7 +150,7 @@ tbody.table-body-employee-type
 
 /* Salary benefits css  */
 .salary-input-fields{
-  margin: 30px 0;
+  margin: 1.5rem 0;
 }
 .input-label-class {
   margin-left: 12px

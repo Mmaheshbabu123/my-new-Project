@@ -140,4 +140,50 @@ input[type="checkbox"]:focus
   {
     right: -19px;
   }
+  .manage_coefficient_table_body td:nth-child(2)
+  {
+    width: 50% !important;
+  }
+}
+.manage_coefficient_table_body td:nth-child(2)
+{
+  width: 60%;
+}
+.border-color-addeditsalary-benefits,
+.border-color-addeditsalary-benefits:focus,
+.react-select-prefix__control,
+.react-select-prefix__control:hover,
+.salary-input-fields .css-1pahdxg-control
+{
+	border: 1px solid #4C4D554D !important;
+	border-radius: 0px;
+	box-shadow: none;
+}
+.react-select-prefix__control
+{
+  height: 43px !important;
+}
+#react-select-2-listbox
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-16px);
+  border-radius: 0px;
+  color: var(--color-label-footer-gray) !important;
+}
+.react-select-prefix__single-value,
+.react-select-prefix__input-container
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-18px);
+  border-radius: 0px;
+  color: var(--color-label-footer-gray) !important;
+}
+.salary-input-fields .css-qc6sy-singleValue
+{
+  height: auto !important;
+}
+input[type="radio"]
+{
+  accent-color: cadetblue;
+  border-color: cadetblue;
 }
