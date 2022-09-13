@@ -18,7 +18,7 @@ const AddEmployeeType = (props) => {
     , newItems: []
     , nameWarning: false
     , editIndex: 0
-    , typeName: `${props.manageType === 'employee-types' ? 'employee type' : 'coefficient'}`
+    , typeName: `${props.manageType === 'employee-types' ? 'employee type' : 'Coefficient Name'}`
   })
 
     /**
@@ -145,10 +145,10 @@ const AddEmployeeType = (props) => {
     <div className='add-edit-types col-md-12'>
       <div className='min-height-AET'>
       <div className="row  p-0 m-0">
-        <h4 className="mb-5 mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${props.id ? 'Edit ' : 'Add '} ${state.typeName}`} </h4>
-        <label className = "p-0 poppins-regular-18px" htmlFor="name"> {props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient'} <span style={{color:'red'}}> * </span></label>
+        <h4 className="mb-5 mt-2 font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${props.id ? 'Edit ' : 'Add '} ${state.typeName}`} </h4>
+        <label className = "px-0 poppins-regular-18px" htmlFor="name"> {props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient Name'} <span style={{color:'red'}}> * </span></label>
         <div className='row m-0 p-0'>
-          <div className='col-md-9 col-lg-10 ps-0'>
+          <div className='col-md-9 col-lg-11 ps-0'>
           <input
             ref={inputRef}
             type="text"
@@ -157,9 +157,9 @@ const AddEmployeeType = (props) => {
             value={state.name}
             onChange={(e) => handleInputChange(e)}
             onKeyUp={(e) => handleAdd(e)}
-            placeholder={`Please enter ${state.typeName}`}
+            placeholder={`${state.typeName}`}
           /></div>
-          <div className='col-md-3 col-lg-2 pe-0'>
+          <div className='col-md-3 col-lg-1 pe-0'>
           {!state.editFlow &&
             <button
               onClick={() => addItemAndUpdateIndex({ ...state }, state.name)}
@@ -189,8 +189,8 @@ const AddEmployeeType = (props) => {
             {state.newItems.map((item, index) =>
               // <tr className=' py-2 table-border-bottom row m-0 col-md-12' Key={index} id={index}>
               <tr className='py-2 row m-0 col-md-12 poppins-light-18px border-bottom' Key={index} id={index}>
-                <td className='col-md-9 col-lg-10 align-items-center d-flex' style={{ width: '' }}> {item.name} </td>
-                <td className='col-md-3 col-lg-2 text-center ' style={{ width: '' }}> {getNeededActions(item, index)} </td>
+                <td className='col-md-9 col-lg-11 align-items-center d-flex' style={{ width: '' }}> {item.name} </td>
+                <td className='col-md-3 col-lg-1 text-center ' style={{ width: '' }}> {getNeededActions(item, index)} </td>
               </tr>
             )}
           </table>
