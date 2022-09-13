@@ -1,76 +1,117 @@
 import React, { useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import Select from 'react-select';
-import { NextResponse, NextRequest } from 'next/server';
-import { addplanningemployee } from '../../Services/ApiEndPoints';
-import ValidationService from '../../Services/ValidationService';
+import { addplanningemployee, fetchPlanningEmployee } from '../../Services/ApiEndPoints';
 import { useRouter } from 'next/router';
-import { Printer } from 'react-bootstrap-icons';
 import Link from 'next/link';
 
 const AddEmployee = () => {
-	const [ Data, setData ] = useState([]);
-	const [ Error, setError ] = useState();
+	const [ empList, setEmpList ] = useState([]);
+	const [ tempEmpList, setTempEmpList ] = useState([]);
+
+	const [ pclist, setPclist ] = useState([]);
+	const [ tempPcList, setTempPcList ] = useState([]);
+
 	const router = useRouter();
 	const p_unique_key = router.query.p_unique_key;
-	const [ defaultvalue, setDefaultValue ] = useState(null);
 	const [ selectedOption, setSelectedOption ] = useState([]);
-	const [ pclist, setPclist ] = useState([]);
-
 	const [ tempOption, setTempOption ] = useState([]);
-
-	const [ error_pclist, setError_pclist ] = useState('');
-
 	//--------------------- Add another and remove field ------------------------------//
-	const [ inputlist, setInputlist ] = useState([ { pclist: '', employees: '' } ]);
-	const [ disabled, setDisabled ] = useState(true);
-	const handleinputchange = (e, index) => {
-		const { name, value } = e.target;
+	const [ inputlist, setInputlist ] = useState([ { pc: [], employees: [], pc_error: '', emp_error: '' } ]);
+	const [ previousVal, setPreviousVal ] = useState([]);
+
+
+	const handleinputchange = (type, val, index) => {
 		const list = [ ...inputlist ];
-		list[index][name] = value;
-		setInputlist(list);
+		if (type == 'employees') {
+			list[index].employees = val;
+			list[index].emp_error = '';
+			setInputlist(list);
+
+			updatelist('emp',list);
+		} else {
+			list[index].pc = [ val ];
+			list[index].pc_error = '';
+			setInputlist(list);
+			updatelist('pc',list);
+
+			
+		}
+
+	};
+
+	const updatelist = (type,list) => {
+
+		if(type == 'emp'){
+			const temp = [ ...tempEmpList ];
+			list.map((v1, k1) => {
+				v1.employees.map((v2) => {
+					temp.splice(temp.indexOf(v2), 1);
+				});
+			});
+			setEmpList(temp);
+		}
+		if(type == 'pc'){
+			var pcs = [ ...tempPcList ];
+			list.map((v1, k1) => {
+				pcs.splice(pcs.indexOf(v1.pc[0]), 1);
+
+			})
+			setPclist(pcs);
+		}
+
+		
 	};
 
 	const handleaddanother = () => {
-		// alert('add-another successful ');
-		setInputlist([ ...inputlist, { pclist: '', employees: '' } ]);
+		var error = validate(inputlist);
+		if (!error) {
+			setInputlist([ ...inputlist, { pc: [], employees: [], pc_error: '', emp_error: '' } ]);
+		} else {
+			window.scrollTo(0, 0);
+		}
 	};
 	const handleremove = (index) => {
 		const list = [ ...inputlist ];
 		list.splice(index, 1);
 		setInputlist(list);
+		updatelist('emp',list);
+		updatelist('pc',list);
 	};
-
-	// const handleChange = (e) => {
-	// 	if (inputlist != '') {
-	// 		setDisabled(false);
-	// 	}
-	// };
 	//--------------------- Add another and remove field ------------------------------//
 
 	useEffect(
 		() => {
 			if (!router.isReady) return;
 			var p_unique_key = router.query.p_unique_key;
-			APICALL.service(
-				process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getEmployeeByUsingCompanyId/' + p_unique_key,
-				'GET'
-			)
+			APICALL.service(fetchPlanningEmployee + p_unique_key, 'GET')
 				.then((result) => {
-					console.log(result);
-					getOptions(result, 1);
+					if (result.status == 200) {
+						setEmpList(result.data[0]);
+						setTempEmpList(result.data[0]);
+						setPclist(result.data[1]);
+						setTempPcList(result.data[1]);
+						if(result.data[2].length>0){
+							setInputlist(result.data[2])
+
+						}else if (result.data[1].length == 1) {
+							var list = [ ...inputlist ];
+							list[0].pc = result.data[1];
+							setInputlist(list);
+						}
+					}
 				})
 				.catch((error) => {
 					console.error(error);
 				});
 
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/selectedEmployees/' + p_unique_key, 'GET')
-				.then((result) => {
-					getOptions(result, 2);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+			// APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/selectedEmployees/' + p_unique_key, 'GET')
+			// 	.then((result) => {
+			// 		getOptions(result, 2);
+			// 	})
+			// 	.catch((error) => {
+			// 		console.error(error);
+			// 	});
 		},
 		[ router.query ]
 	);
@@ -85,11 +126,12 @@ const AddEmployee = () => {
 				};
 				opt.value = val.Employee_id;
 				opt.label = val.Employee_name;
+				opt.isDisabled = true;
 
 				options[key] = opt;
 			});
 			if (c == 1) {
-				setData(options);
+				setEmpList(options);
 			} else {
 				setSelectedOption(options);
 				setTempOption(options);
@@ -97,35 +139,45 @@ const AddEmployee = () => {
 		}
 	};
 
+	const validate = (res) => {
+		var count = 0;
+		var data = [ ...res ];
+		data.map((val, key) => {
+			if (val.pc.length == 0) {
+				data[key].pc_error = 'This field is required.';
+				count++;
+			}
+			if (val.employees.length == 0) {
+				data[key].emp_error = 'This field is required.';
+				count++;
+			}
+		});
+		setInputlist(data);
+
+		if (count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	};
+
 	const submit = (e) => {
 		e.preventDefault();
 
-		var err = ValidationService.emptyValidationMethod(selectedOption);
-		// var err1 = ValidationService.emptyValidationMethod(pclist);
-
-		if (err != '') {
-			setError(err);
-			// setError_pclist(err1);
-		} else {
-			setError(err);
-			// setError_pclist(err1);
-			if (selectedOption.length != 0) {
-				let data = [ selectedOption, p_unique_key, tempOption ];
-
-				APICALL.service(addplanningemployee, 'POST', data)
-					.then((result) => {
-						if (result.status === 200) {
-							router.push('/planning/functions/' + p_unique_key);
-						} else {
-							console.log(result);
-						}
-					})
-					.catch((error) => {
-						console.error(error);
-					});
-			} else {
-				router.push('/planning/functions/' + p_unique_key);
-			}
+		var err = validate(inputlist);
+		if (!err) {
+			let data = [ inputlist, p_unique_key, previousVal ];
+			APICALL.service(addplanningemployee, 'POST', data)
+				.then((result) => {
+					if (result.status === 200) {
+						router.push('/planning/functions/' + p_unique_key);
+					} else {
+						console.log(result);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 		}
 	};
 
@@ -139,63 +191,59 @@ const AddEmployee = () => {
 				</div>
 				{/* Select paritair commite */}
 				<div>
-					{inputlist.map((input, i) => {
+					{inputlist.map((val, i) => {
 						return (
 							<div className="row" key={i}>
 								<div className="col-md-7 m-auto mb-3 mt-5 ">
 									<div className="row col-md-8 select-relative slt-emp">
-										<label
-											className="custom_astrick form-label mb-1 custom_astrick poppins-medium-22px ps-0"
-											style={{}}
-										>
+										<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-22px ps-0">
 											Paritair commite
 										</label>
-										<select
-											className="form-select poppins-regular-16px rounded-0 border-0 bg-light"
-											name="pclist"
-											// value={pclist}
-											onChange={(e) => {
-												handleinputchange(e, i);
+										<Select
+											id={'pc-value-select' + i}
+											instanceId={'pc-value-select' + i}
+											value={val['pc']}
+											name="pc"
+											className="poppins-regular-16px rounded-0 select_employee_container px-0"
+											options={pclist}
+											onChange={(value) => {
+												handleinputchange('pc', value, i);
 											}}
-										>
-											<option selected key="1">
-												Select...
-											</option>
-											<option value="1">PC-101</option>
-											<option value="2">PC-102</option>
-											<option value="3">PC-301</option>
-										</select>
+										/>
 									</div>
 									<div className="col-md-4" />
-									{/* <span style={{ color: 'red' }}>{error_pclist}</span> */}
+									<div className="pt-2" style={{ color: 'red' }}>
+										{val['pc_error']}
+									</div>
 								</div>
-								{/* <div className="col-md-12 selectemp-height"> */}
 								<div className="col-md-12 ">
 									<div className="row col-md-7 m-auto">
 										<div className="row col-md-8 select-relative slt-emp ps-1">
-											<label
-												className="custom_astrick form-label mb-1 custom_astrick poppins-medium-22px px-0"
-												style={{}}
-											>
+											<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-22px px-0">
 												Employee
 											</label>
 											<Select
-												value={selectedOption}
+												id={'emp-value-select' + i}
+												instanceId={'emp-value-select' + i}
+												value={val['employees']}
 												isMulti
 												name="employees"
 												className="poppins-regular-16px rounded-0 select_employee_container px-0"
-												options={Data}
-												onChange={(e) => {
-													setSelectedOption, handleinputchange(e, i);
+												options={empList}
+												onChange={(value) => {
+													handleinputchange('employees', value, i);
 												}}
 											/>
-											<span style={{ color: 'red' }}>{Error}</span>
+											<span className="mt-2" style={{ color: 'red' }}>
+												{val['emp_error']}
+											</span>
 										</div>
 										{/* Add or remove button */}
 
 										<div className="col-md-4 bd-highlight align-self-end">
 											<div className="p-2 bd-highlight">
-												{inputlist.length !== 1 &&
+												{// pclist.length > 1 &&
+												inputlist.length !== 1 &&
 												i > 0 && (
 													<button
 														type="button"
@@ -207,12 +255,13 @@ const AddEmployee = () => {
 														</p>
 													</button>
 												)}
-												{inputlist.length - 1 === i && (
+												{tempPcList.length > 1 && 
+												pclist.length >= 1 &&
+												inputlist.length - 1 === i && (
 													<button
 														type="submit"
 														className="btn poppins-light-19px-next-button rounded-0 px-3  btn-block float-end ms-1"
 														onClick={handleaddanother}
-
 													>
 														Add another
 													</button>
