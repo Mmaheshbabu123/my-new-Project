@@ -322,7 +322,7 @@ function Planning(props) {
 								</h1>
 							</div>
 							<div className="col-md-12 px-0 mt-3 mb-3">
-								{(project.id == '' || project.id == undefined) && showproject == true && (
+								{(project.id == '' || project.id == undefined) && showproject == true ? (
 									<button
 										onClick={showPopup}
 										type="button"
@@ -333,7 +333,15 @@ function Planning(props) {
 										</span>
 										&nbsp; ADD PROJECT
 									</button>
-								)}
+								):<button
+								type="button"
+								className=" btn my-2 skyblue-bg-color border-0 poppins-medium-19px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln invisible"
+							>
+								<span style={{ fontSize: '24px' }} className="">
+									+
+								</span>
+								&nbsp; ADD PROJECT
+							</button>}
 							</div>
 							<div className="form-sec border-form-sec p-4 mb-5">
 								<div className="col-md-6">
