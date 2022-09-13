@@ -48,7 +48,7 @@ const AdditionalDocsMain = (props) => {
     return (
       <ul className={`${styles['docs-overview-tabs']}`}>
         <li> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> Additional documents </span> </li>
-        <li> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> V1 documents </span> </li>
+        {Number(entityType) === 1 && <li> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> V1 documents </span> </li>}
       </ul>
     );
   }
@@ -63,8 +63,9 @@ const AdditionalDocsMain = (props) => {
     <div>
     {state.loaded === true || state.selectedTabId === 2 ?
           <div className="col-md-12">
-              {Number(entityType) === 1 && action === 0 && showTabs()}
-              <h4 className={`page-title-font-class text-center`}> {`${state.selectedTabId === 2 ? 'Manage V1 documents' : action === 0 ? 'Manage additional documents' : Number(editId) ? 'Edit additional document': 'Add additional document'}`}</h4>
+              <h4 className='mt-2 mb-4 font-weight-bold   px-0  bitter-italic-normal-medium-24 position-sticky pt-3'> {`Manage my documents`} </h4>
+              {action === 0 && showTabs()}
+
               {state.selectedTabId === 2  && <V1DocumentsOverview /> }
 
               {state.selectedTabId === 1 && <> {   action !== 0  ?
