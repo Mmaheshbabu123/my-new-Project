@@ -89,7 +89,7 @@ const InvoiceDetails = (props) => {
      <MultiSelectField
          id={data.id}
          options={paymentList}
-         standards={paymentList.filter(val => val.value === tab_6[data.id])}
+         standards={paymentList.filter(val => val.value === Number(tab_6[data.id]))}
          disabled={false}
          handleChange={(obj) => handleSelect(obj, data.id)}
          isMulti={false}

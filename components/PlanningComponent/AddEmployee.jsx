@@ -84,9 +84,10 @@ const AddEmployee = () => {
 						setTempEmpList(result.data[0]);
 						setPclist(result.data[1]);
 						setTempPcList(result.data[1]);
+						
 						if (result.data[2].length > 0) {
 							setPreviousVal(cloneDeep(result.data[2]));
-							setInputlist(result.data[2]);							
+							setInputlist(cloneDeep(result.data[2]));							
 						} else if (result.data[1].length == 1) {
 							var list = [ ...inputlist ];
 							list[0].pc = result.data[1];
@@ -248,8 +249,7 @@ const AddEmployee = () => {
 														</p>
 													</button>
 												)}
-												{tempPcList.length > 1 &&
-												pclist.length >= 1 &&
+												{inputlist.length < tempPcList.length &&
 												inputlist.length - 1 === i && (
 													<button
 														type="submit"
