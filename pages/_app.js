@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
 				/>
 			</Head>
 			<Layout>
-				<div className='col-md-9 col-lg-12 m-auto'>
+				<div className='col-md-9 col-lg-11 m-auto'>
 				<Component {...pageProps} />
 				</div>
 			</Layout>

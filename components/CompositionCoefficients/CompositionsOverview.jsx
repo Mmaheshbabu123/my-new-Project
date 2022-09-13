@@ -98,7 +98,7 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
 
   return (
     <>
-      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage compositions coeffcients`} </h4>
+      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0 pt-3'> {`Manage compositions coeffcients`} </h4>
       <div className='col-md-12 text-end'>
         <button
           onClick={() => router.push(`composition-coefficient?action=create&id=0`)}
