@@ -7,7 +7,7 @@ import {MdEdit, MdDelete} from 'react-icons/md';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import ReactPaginate from 'react-paginate';
 import edit_icon from '../images/edit_color.svg'
-const itemsPerPage = 8;
+const itemsPerPage = 5;
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
@@ -100,7 +100,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
 const button_title = manageType == 'employee-types'? `Add employee type`:`Add coefficient`;
   return (
     <>
-      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage ${button_title.includes('employee') ? 'employee types' : 'coefficients'}`} </h4>
+      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0 py-2'> {`Manage ${button_title.includes('employee') ? 'employee types' : 'coefficients'}`} </h4>
       <div className='col-md-12 text-end'>
       <button
         onClick={() => router.push(`${manageType}/add?id=0`)}
@@ -119,7 +119,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
              value={state.searchTerm}
              className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
-             placeholder={'Search'}
+             placeholder={`${button_title.includes('employee') ? 'Employee types' : 'Coefficients'}`}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
