@@ -33,6 +33,10 @@
 {
   z-index:50;
 }
+.manage-types-table thead tr
+{
+  border-bottom: none !important;
+}
 .manage-types-table tr {
   border-bottom: 1px solid var(--border-color-light-gray);
   height: 60px;
@@ -64,12 +68,14 @@
 }
 
 .add-item-div{
-  border: 1px solid lightsteelblue;
-  width: 70%;
-  margin-left: 30px;
+  border: 1px solid var(--color-purple);
+
 }
 .add-item-table tr{
-  height: 30px;
+  height: 60px;
+}
+.add-item-table td{
+  vertical-align: middle;
 }
 .table-border-bottom {
   border-bottom: 1px solid #4C4D554D;
@@ -148,7 +154,7 @@ tbody.table-body-employee-type
 
 /* Salary benefits css  */
 .salary-input-fields{
-  margin: 30px 0;
+  margin: 1.5rem 0;
 }
 .input-label-class {
   margin-left: 12px
@@ -170,19 +176,32 @@ tbody.table-body-employee-type
   align-items: center;
 }
 
-.pagination > .active > a{
+.pagination > .active > a,
+.pagination > .active > a:hover{
   background-color:gray ;
   border-color: gray ;
-  color: #fff;
+  color: var(--color-purple) !important;
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-20px);
+  line-height: var(--line-height-30px);
 }
 .pagination > li > a{
-  border: 1px solid gray ;
+  /* border: 1px solid gray ;
   padding: 5px 10px;
   outline: none;
-  cursor: pointer;
+  cursor: pointer; */
+  border: none!important;
+    padding: 8px 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-family-poppins-light);
+    font-size: var(--font-size-21px);
+    line-height: var(--line-height-31px);
+    color: var(--bg-gray-dark) !important;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-  background-color: gray0 ;
+  background-color: grayz;
   border-color: gray;
   outline: none ;
 }
@@ -227,4 +246,21 @@ tbody.table-body-employee-type
 
 .width-100 {
   width: 100% !important;
+}
+.pagination>.disabled>a,
+.pagination>.disabled>a:hover
+{
+  background-color: var(--bg-gray-dark) !important;
+    color: var(--color-white)!important;
+}
+.pagination>.next>a, .pagination>.previous>a,
+.pagination>.next>a:hover, .pagination>.previous>a:hover
+{
+  background-color: var(--color-purple);
+  color: var(--color-white)!important;
+}
+
+.pagination > li > a:hover, .pagination > li > span:hover
+{
+  color: #000 !important;
 }

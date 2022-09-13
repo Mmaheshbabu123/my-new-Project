@@ -27,7 +27,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className='mt-2 ms-3 color-skyblue' /> </span>
+        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className='mt-2 color-skyblue' /> </span>
         <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='mt-2 ms-3 color-skyblue'/> </span>
       </>
     )
@@ -115,7 +115,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
                <input
                type="text"
                value={state.searchTerm}
-               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
                onChange={(e) => setState({...state, searchTermNumber: e.target.value})}
                placeholder={'Pc number'}
                onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
@@ -125,7 +125,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
                <input
                type="text"
                value={state.searchTerm}
-               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
                onChange={(e) => setState({...state, searchTermName: e.target.value})}
                placeholder={'PC name'}
                onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
@@ -138,7 +138,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
                <div className='col-md-6 col-lg-6'>
                <button
                type="button"
-               className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100"
+               className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
                onClick={() => handleSearchClick(1)}
              >
                SEARCH
@@ -147,7 +147,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
                <div className='col-md-6 col-lg-6'>
                <button
                type="button"
-               className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100"
+               className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
                onClick={() => handleSearchClick(0)}
              >
                RESET
@@ -158,17 +158,17 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
           </div>
         </div>
         <div className="table-render-parent-div ">
-          <table className="table table-hover manage-types-table  mb-3 text-center">
+          <table className="table table-hover manage-types-table  mb-3 ">
             <thead className="table-render-thead">
               <tr className='btn-bg-gray-medium table-sticky-bg-gray border-bottom-0' key={'header-row-tr'}>{headers.map((eachHeader, index) =>
-              <th className='poppins-regular-18px justify-content-center align-items-center btn-bg-gray-medium text-center' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+              <th className='poppins-medium-18px justify-content-center align-items-center btn-bg-gray-medium ps-4' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
-            <tbody>
-              {state.currentItems.map(eachRow => <tr className='border poppinns-regular-thin p-2' key={eachRow.id} id={eachRow.id}>
-                <td className="poppinns-regular-thin"> {eachRow.pc_number} </td>
-                <td className="poppinns-regular-thin"> {eachRow.name} </td>
-                <td className="poppinns-regular-thin">{ getNeededActions(eachRow) } </td>
+            <tbody className='manage_coefficient_table_body'>
+              {state.currentItems.map(eachRow => <tr className='border poppins-regular-18px p-2' key={eachRow.id} id={eachRow.id}>
+                <td className="poppins-regular-18px ps-4"> {eachRow.pc_number} </td>
+                <td className="poppins-regular-18px ps-4"> {eachRow.name} </td>
+                <td className="poppins-regular-18px ps-4">{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
             : <p style={{paddingTop: '10px'}}> No records </p>}
@@ -191,7 +191,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
             activeClassName={"active"}
         />}
         <div className="text-start col-md-6">
-          <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5">
+          <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5 ps-0">
             {`BACK`}
           </button>
           </div>

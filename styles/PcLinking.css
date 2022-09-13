@@ -3,12 +3,13 @@
   --border-color-gray:#4C4D554D;
 }
 .link-emp-coeff-tableparent {
-  height: 475px;
+  max-height: 475px;
   overflow-x: scroll;
   border: 1px solid;
   margin: 0 !important;
   scroll-behavior: smooth;
   border: 0px !important;
+  min-height: 400px;
 }
 
 .sv-cp-page-title {

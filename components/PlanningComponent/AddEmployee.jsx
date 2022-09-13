@@ -277,7 +277,11 @@ const AddEmployee = () => {
 
 				<div className="row">
 					<div className="text-start col-md-6 d-flex align-items-center">
-						<button type="button" className="btn  btn-block px-0">
+						<button
+							type="button"
+							className="btn  btn-block px-0"
+
+						>
 							<Link href={'/planning/add/' + p_unique_key}>
 								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none">
 									BACK

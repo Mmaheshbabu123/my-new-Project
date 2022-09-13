@@ -53,3 +53,15 @@ export const whoWillSignOptions = [
   }
 ];
 //-----
+
+
+export const premiesAutoArray = [   // --------- COOPERATION AGREEMENT 5TH TAB CONSTANTS----------//
+  {
+    type: 1,
+     name: 'Premies en vergoeding (Benefits)',
+     rows: [{key: 'code', label: 'Code'}, {key: 'bedrag', label: 'Bedrag'}, {key: 'percentage', label: 'Percentage'}]},
+  {
+    type: 2,
+    name: 'Automatisch looncodes (automatic salarycodes)',
+    rows: [{key: 'code', label: 'Code'}, {key: 'soort_automatisering', label:'Soort automatisering'}]}
+];

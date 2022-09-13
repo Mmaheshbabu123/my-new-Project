@@ -5,8 +5,8 @@ import MultiSelectField from '@/atoms/MultiSelectField';
 import CheckBoxField from '@/atoms/CheckBoxField';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import ValidateMessage from '@/atoms/validationError';
-// import { helpers } from '../../../CooperationAgreementHelper'; //.
 import styles from '../absoluteAgent.module.css';
+// import { helpers } from '../../../CooperationAgreementHelper'; //.
 
 import { whoWillSignOptions } from '../../../Definations';
 

@@ -17,7 +17,10 @@ const CompositionsIndex = (props) => {
     , headers: ['Title', 'Inbegrepen', 'Niet inbegrepen', 'Opmerking', 'Actions'],
   });
 
-  useEffect(() => { loadData() }, [action])
+  useEffect(() => {
+    loadData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [action])
 
   const loadData = async () => {
     if(!action) return;

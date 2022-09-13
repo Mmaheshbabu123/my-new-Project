@@ -5,6 +5,7 @@ import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import checkPinCode, { homeScreen } from '../../Services/ApiEndPoints';
+import { CodeSharp } from 'node_modules/@material-ui/icons/index';
 
 const OTPInput = dynamic(
 	() => {
@@ -23,7 +24,7 @@ const ResendOTP = dynamic(
 const Pincode = () => {
 	const router = useRouter();
 	const [ hasPin, setHasPin ] = useState(false);
-	const [ uid, setUid ] = useState(null);
+	const [ uid, setUid ] = useState('');
 	const [ otp, setOTP ] = useState('');
 	const [ otp1, setOTP1 ] = useState('');
 	const [ err, setErr ] = useState('');
@@ -35,7 +36,7 @@ const Pincode = () => {
 			if (!router.isReady) return;
 
 			const { id = 0 } = router.query;
-
+			
 			var p_unique_key = router.query.p_unique_key;
 			
 				if (id != 0) {
@@ -54,25 +55,25 @@ const Pincode = () => {
 						});
 				} else {
 				    var userid=null;
+
 					if (localStorage.getItem('uid') != null) {
 						userid = JSON.parse(localStorage.getItem('uid'));
 					} else {
 						window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 					}
-		
+
 					if (userid != undefined && userid != null) {
-					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/hasPincode/' + uid, 'GET')
+					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/hasPincode/' + userid, 'GET')
 						.then((result) => {
 							if (result != 999) {
-								setHasPin(true);
-								setUid(userid);
+								setLoad(true);
 							}
+						   	setUid(userid);
 						})
 						.catch((error) => {
 							console.error(error);
 						});
 				}
-				console.log(userid);
 			}
 		},
 		[ router.query ]
@@ -116,10 +117,11 @@ const Pincode = () => {
 
 	const Submit = (event) => {
 		event.preventDefault();
-
-		if (validate(otp, otp1)) {
+		
+		if (validate(otp, otp1)&&!(load)||validate(otp, otp1)&&hasPin) {
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/pincodegeneration/' + uid + '?pincode=' + otp1, 'GET')
 				.then((result) => {
+					
 					if (result == 200) {
 						window.location.replace(homeScreen);
 					}
@@ -189,9 +191,11 @@ const Pincode = () => {
 		/>
 	</div>
 </form>;
-	(uid==null)?
+	(uid!='')?
 	(display=fields):
-	(hasPin?(display=fields):(display=<div>
+	(hasPin?
+		(display=fields):
+	(display=<div>
 			Link is expired please try again later.
 		</div>));
 		return (display);

@@ -39,10 +39,10 @@ const Pincode = () => {
 			if (uid != undefined && uid != null) {
 				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/forgot-pin/' + uid, 'GET')
 					.then((result) => {
-						console.log(process.env.NEXT_PUBLIC_APP_BACKEND_URL);
-						console.log('sathish' + uid);
+						console.log(true);
 						if (result) {
-							console.log('sathish');
+							setHasPin(false);
+						}else{
 							setHasPin(true);
 						}
 					})
@@ -57,8 +57,11 @@ const Pincode = () => {
 	useEffect(() => {
 		console.log(window);
 	}, []);
-
-  var res=hasPin?<div className='border'>Something went wrong please try again later</div>:<div className='container border'>
+var res='';
+  hasPin?
+   res=<div className='border'>Something went wrong please try again later</div>
+  :
+  res=<div className='container border'>
   <div className='row'>
      <h1> Email Sent</h1>
       </div>
