@@ -98,14 +98,28 @@ const TodosOverview = ({ props }) => {
 
 
   const getNeededActions = (eachRow) => {
+    let accept, reject;
+    let linkArray = eachRow.split(',');
+    if(linkArray.length) {
+      accept = linkArray[0];
+      reject = linkArray[1];
+    } else {
+      reject = accept = 'javascript:void(0)';
+    }
+    eachRow['accept'] = accept;
+    eachRow['reject'] = reject;
     return <>
-      <span title={'accept'} className={styles["span-action-icons"]} onClick={() => handleActionClick(eachRow)}> <MdDone /> </span>
-      <span title={'reject'} className={styles["span-action-icons"]} onClick={() => handleActionClick(eachRow)}> <AiOutlineClose /> </span>
+      <span title={'accept'} className={styles["span-action-icons"]} onClick={() => handleActionClick('accept', eachRow)}> <MdDone /> </span>
+      <span title={'reject'} className={styles["span-action-icons"]} onClick={() => handleActionClick('reject', eachRow)}> <AiOutlineClose /> </span>
     </>
   }
 
-  const handleActionClick = (eachRow) => {
-
+  const handleActionClick = (type, eachRow) => {
+    if(type === 'accept') {
+      window.open(eachRow.accept, '_self')
+    } else {
+      window.open(eachRow.reject, '_self')
+    }
   }
 
   const handleTabClick = (id) => {
