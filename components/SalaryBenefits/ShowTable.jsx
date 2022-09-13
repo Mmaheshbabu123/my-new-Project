@@ -100,7 +100,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
 
   return (
     <>
-      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage salary benefits`} </h4>
+      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0 pt-2'> {`Manage salary benefits`} </h4>
       <div className='col-md-12 text-end'>
         <button
           onClick={() => router.push(`manage-salary-benefits?action=create&id=0`)}

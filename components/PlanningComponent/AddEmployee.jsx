@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { addplanningemployee, fetchPlanningEmployee } from '../../Services/ApiEndPoints';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { cloneDeep } from "lodash";
 
 const AddEmployee = () => {
 	const [ empList, setEmpList ] = useState([]);
@@ -20,7 +21,6 @@ const AddEmployee = () => {
 	const [ inputlist, setInputlist ] = useState([ { pc: [], employees: [], pc_error: '', emp_error: '' } ]);
 	const [ previousVal, setPreviousVal ] = useState([]);
 
-
 	const handleinputchange = (type, val, index) => {
 		const list = [ ...inputlist ];
 		if (type == 'employees') {
@@ -28,21 +28,17 @@ const AddEmployee = () => {
 			list[index].emp_error = '';
 			setInputlist(list);
 
-			updatelist('emp',list);
+			updatelist('emp', list);
 		} else {
 			list[index].pc = [ val ];
 			list[index].pc_error = '';
 			setInputlist(list);
-			updatelist('pc',list);
-
-			
+			updatelist('pc', list);
 		}
-
 	};
 
-	const updatelist = (type,list) => {
-
-		if(type == 'emp'){
+	const updatelist = (type, list) => {
+		if (type == 'emp') {
 			const temp = [ ...tempEmpList ];
 			list.map((v1, k1) => {
 				v1.employees.map((v2) => {
@@ -51,16 +47,13 @@ const AddEmployee = () => {
 			});
 			setEmpList(temp);
 		}
-		if(type == 'pc'){
+		if (type == 'pc') {
 			var pcs = [ ...tempPcList ];
 			list.map((v1, k1) => {
 				pcs.splice(pcs.indexOf(v1.pc[0]), 1);
-
-			})
+			});
 			setPclist(pcs);
 		}
-
-		
 	};
 
 	const handleaddanother = () => {
@@ -75,8 +68,8 @@ const AddEmployee = () => {
 		const list = [ ...inputlist ];
 		list.splice(index, 1);
 		setInputlist(list);
-		updatelist('emp',list);
-		updatelist('pc',list);
+		updatelist('emp', list);
+		updatelist('pc', list);
 	};
 	//--------------------- Add another and remove field ------------------------------//
 
@@ -91,10 +84,10 @@ const AddEmployee = () => {
 						setTempEmpList(result.data[0]);
 						setPclist(result.data[1]);
 						setTempPcList(result.data[1]);
-						if(result.data[2].length>0){
-							setInputlist(result.data[2])
-
-						}else if (result.data[1].length == 1) {
+						if (result.data[2].length > 0) {
+							setPreviousVal(cloneDeep(result.data[2]));
+							setInputlist(result.data[2]);							
+						} else if (result.data[1].length == 1) {
 							var list = [ ...inputlist ];
 							list[0].pc = result.data[1];
 							setInputlist(list);
@@ -116,28 +109,28 @@ const AddEmployee = () => {
 		[ router.query ]
 	);
 
-	const getOptions = (res, c) => {
-		var options = [];
-		if (res !== null) {
-			res.map((val, key) => {
-				var opt = {
-					value: '',
-					label: ''
-				};
-				opt.value = val.Employee_id;
-				opt.label = val.Employee_name;
-				opt.isDisabled = true;
+	// const getOptions = (res, c) => {
+	// 	var options = [];
+	// 	if (res !== null) {
+	// 		res.map((val, key) => {
+	// 			var opt = {
+	// 				value: '',
+	// 				label: ''
+	// 			};
+	// 			opt.value = val.Employee_id;
+	// 			opt.label = val.Employee_name;
+	// 			opt.isDisabled = true;
 
-				options[key] = opt;
-			});
-			if (c == 1) {
-				setEmpList(options);
-			} else {
-				setSelectedOption(options);
-				setTempOption(options);
-			}
-		}
-	};
+	// 			options[key] = opt;
+	// 		});
+	// 		if (c == 1) {
+	// 			setEmpList(options);
+	// 		} else {
+	// 			setSelectedOption(options);
+	// 			setTempOption(options);
+	// 		}
+	// 	}
+	// };
 
 	const validate = (res) => {
 		var count = 0;
@@ -163,8 +156,8 @@ const AddEmployee = () => {
 
 	const submit = (e) => {
 		e.preventDefault();
-
 		var err = validate(inputlist);
+
 		if (!err) {
 			let data = [ inputlist, p_unique_key, previousVal ];
 			APICALL.service(addplanningemployee, 'POST', data)
@@ -255,7 +248,7 @@ const AddEmployee = () => {
 														</p>
 													</button>
 												)}
-												{tempPcList.length > 1 && 
+												{tempPcList.length > 1 &&
 												pclist.length >= 1 &&
 												inputlist.length - 1 === i && (
 													<button
@@ -277,11 +270,7 @@ const AddEmployee = () => {
 
 				<div className="row">
 					<div className="text-start col-md-6 d-flex align-items-center">
-						<button
-							type="button"
-							className="btn  btn-block px-0"
-
-						>
+						<button type="button" className="btn  btn-block px-0">
 							<Link href={'/planning/add/' + p_unique_key}>
 								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none">
 									BACK
