@@ -100,7 +100,7 @@ const TodosOverview = ({ props }) => {
 
   const getNeededActions = (eachRow) => {
     let accept, reject;
-    let linkArray = eachRow.split(',');
+    let linkArray = eachRow.uri.length ? eachRow.uri.split(',') : [];
     if(linkArray.length) {
       accept = linkArray[0];
       reject = linkArray[1];
