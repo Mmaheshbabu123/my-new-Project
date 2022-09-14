@@ -19,7 +19,7 @@ const EmployerCooperationAgreementMain = (props) => {
 
   useEffect(() => {  fetchData() }, [])
   /**
-   * [fetchEmpCoeffValueTypesData data fetching based on pcid]
+   * [fetchData data]
    * @return {Promise} [description]
    */
   const fetchData = async () => {
