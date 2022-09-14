@@ -400,7 +400,7 @@ const AddFunctions = () => {
 							</div>
 							<div className="row px-3">
                                 {employeeobject!= undefined && employeeobject.map((emplist,key)=>(
-                                    <div type="1" className='pt-2'>
+                                    <div type="1" className='pt-2' key={key}>
                                         <div className='py-2 poppins-light-20px'>{emplist.pc}</div>
                                         <div className='border border-secondary mb-2 p-1'>
                                         {emplist.employee_list.map((v1,k1) => (
