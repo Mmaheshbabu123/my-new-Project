@@ -102,8 +102,8 @@ const TodosOverview = ({ props }) => {
     let accept, reject;
     let linkArray = eachRow.uri.length ? eachRow.uri.split(',') : [];
     if(linkArray.length) {
-      accept = linkArray[0];
-      reject = linkArray[1];
+      accept = eachRow.baseUrl + linkArray[0];
+      reject = eachRow.baseUrl + linkArray[1];
     } else {
       reject = accept = 'javascript:void(0)';
     }
