@@ -55,8 +55,6 @@ const AddFunctions = () => {
 
 		let errors = validateErrors();
 
-        alert(errors);
-
 		if (errors != 0) {
 			console.log('errors are there');
 		} else {
