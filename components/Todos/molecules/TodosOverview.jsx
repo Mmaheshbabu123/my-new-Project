@@ -6,6 +6,7 @@ import { CgMailOpen } from 'react-icons/cg';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ImCross } from 'react-icons/im';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { FaFileSignature } from 'react-icons/fa';
 import styles from './Todos.module.css';
 import { getMyTodos } from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
@@ -99,27 +100,37 @@ const TodosOverview = ({ props }) => {
 
 
   const getNeededActions = (eachRow) => {
-    let accept, reject;
-    let linkArray = eachRow.uri.length ? eachRow.uri.split(',') : [];
-    if(linkArray.length) {
-      accept = eachRow.baseUrl + linkArray[0];
-      reject = eachRow.baseUrl + linkArray[1];
-    } else {
-      reject = accept = 'javascript:void(0)';
-    }
-    eachRow['accept'] = accept;
-    eachRow['reject'] = reject;
     return <>
-      <span title={'accept'} className={styles["span-action-icons"]} onClick={() => handleActionClick('accept', eachRow)}> <MdDone /> </span>
-      <span title={'reject'} className={styles["span-action-icons"]} onClick={() => handleActionClick('reject', eachRow)}> <AiOutlineClose /> </span>
+      {eachRow.todo_type === 3 ? <>
+        <span title={'Accept'} className={styles["span-action-icons"]} onClick={() => handleActionClick('accept', eachRow)}> <MdDone /> </span>
+        <span title={'Reject'} className={styles["span-action-icons"]} onClick={() => handleActionClick('reject', eachRow)}> <AiOutlineClose /> </span>
+      </>:
+      <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <FaFileSignature /> </span>
+    }
     </>
   }
 
   const handleActionClick = (type, eachRow) => {
+    if(type === 'accept' || type === 'reject') {
+      let accept, reject;
+      let linkArray = eachRow.uri.length ? eachRow.uri.split(',') : [];
+      if(linkArray.length) {
+        accept = eachRow.baseUrl + linkArray[0];
+        reject = eachRow.baseUrl + linkArray[1];
+      } else {
+        reject = accept = 'javascript:void(0)';
+      }
+      eachRow['accept'] = accept;
+      eachRow['reject'] = reject;
+    }
     if(type === 'accept') {
       window.open(eachRow.accept, '_self')
-    } else {
+    }
+    if(type === 'reject') {
       window.open(eachRow.reject, '_self')
+    }
+    if(type === 'sign') {
+      window.open(eachRow.baseUrl + eachRow.uri, '_self')
     }
   }
 
@@ -203,7 +214,7 @@ const TodosOverview = ({ props }) => {
               <tbody className='table-body-employee-type poppins-light-18px'>
                 {state.currentItems.map(eachRow =>
                   <tr key={eachRow.tid} id={eachRow.tid}>
-                    <td className='text-start px-5 py-1'> <a href={eachRow.todo_status === 1 ? 'javascript:void(0)' : eachRow.uri}> {eachRow.title} </a> </td>
+                    <td className='text-start px-5 py-1'> {eachRow.title} </td>
                     <td> <span className={`${styles['status-icon']} ${Number(eachRow.todo_status) ? styles['status-done'] : styles['status-open']}`}> </span> </td>
                     <td className=''>{eachRow.todo_status !== 1 ? getNeededActions(eachRow) : null} </td>
                   </tr>)}
