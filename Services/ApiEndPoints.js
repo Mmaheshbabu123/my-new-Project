@@ -91,6 +91,8 @@ export const updateEmployeePlanning = BASE_URL + "update-employee-planning"
 export const getPlanningEmployee = BASE_URL + "get-planningemployee/"
 export const fetchEmployeeList =  BASE_URL + "getEmployeeByUsingCompanyId/"
 export const fetchPlanningEmployee =  BASE_URL + "get-planning-employee/"
+export const fetchPlanningFunction =  BASE_URL + "get-planning-functions/"
+
 
 
 
