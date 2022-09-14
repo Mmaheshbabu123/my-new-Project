@@ -8,6 +8,7 @@ import styles from './CooperationAgreement.module.css'
 import CheckBoxField from '@/atoms/CheckBoxField';
 import SignatureDetails from '@/components/SignatureFlow/molecules/SignatureDetails';
 import EmployerAuthenticModal from './EmployerAuthenticModal';
+import customAlert from '@/atoms/customAlert';
 
 let timeOutRef;
 const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRefId, preview = 0 }) => {
@@ -108,8 +109,8 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
          setState({...state, alertSuccess: true, showPopup: false, ...setObj })
          timeOutRef = setTimeout(() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self'), 3000);
       } else {
-        setState({...state, alertWarning: true, showPopup: false, ...setObj})
-        timeOutRef = setTimeout(() => setState({...state, alertWarning: false }), 3000);
+        setState({...state, showPopup: false, ...setObj})
+        customAlert('error', type !== 2 ? `Admin signature has not been added yet, please contact the admin.` : `You haven't added any signature yet, please add it.`, 2500);
       }
     }).catch((error) => console.log(error) )
   }

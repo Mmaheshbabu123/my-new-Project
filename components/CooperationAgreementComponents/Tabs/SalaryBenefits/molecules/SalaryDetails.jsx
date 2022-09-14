@@ -8,7 +8,7 @@ import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import styles from '../SalaryBenefits.module.css';
 import { soortOptions, premiesAutoArray } from '../../../Definations';
-import CheckBoxField from '@/atoms/CheckBoxField';
+// import CheckBoxField from '@/atoms/CheckBoxField';
 // import { helpers } from '../SalaryBenefitHelper';  //.
 
 

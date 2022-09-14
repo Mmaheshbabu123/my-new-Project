@@ -220,3 +220,10 @@ export const getCompanyLocationByEmployerId = BASE_URL + "get-company-locations"
 export const downloadQrCode = BASE_URL + "download-qr-code";
 export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
 //-------------------
+
+//----------------- TODOS ---------------//
+
+export const getMyTodos = BASE_URL + 'get-mytodos';
+
+
+//-----------------

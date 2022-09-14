@@ -325,14 +325,14 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
-.poppins-regular-16px-white 
+.poppins-regular-16px-white
 {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m) !important;
 	font-style: normal;
 	font-weight: 400;
-} 
+}
 .nav-pills .nav-link.active .poppins-regular-16px-white,.nav-pills .nav-link.active .poppins-regular-18px-white
 {
 	color: var(--color-white) !important;
@@ -903,6 +903,7 @@ label {
 .legal15,
 .invoice70,
 .invoice71,
+.online42,
 .invoice75 {
 	margin-bottom: 80px !important;
 }
