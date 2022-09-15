@@ -1,4 +1,4 @@
-import translation from './translation';
+import Translation from './Translation';
 import  Link  from 'next/link';
 import { useRouter} from 'next/router';
 import React, { useState, useEffect } from 'react';
@@ -32,4 +32,4 @@ const Sample = (props) =>{
 		 </ul>		 
 		 </div>
 }
-export default translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword'], 'nl-NL');
+export default Translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword'], 'nl-NL');
