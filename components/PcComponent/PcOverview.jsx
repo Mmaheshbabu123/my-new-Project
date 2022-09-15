@@ -512,7 +512,7 @@ const PcOverview = (params) => {
 					<div className="text-start col-md-6 d-flex align-items-center px-0">
 						<button
 							type="button"
-							className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none px-0"
+							className="bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline"
 							onClick={() => {
 								params.pc_type == 'edit' ? router.push('/manage-pc') : setCurrent_sec(1);
 							}}
