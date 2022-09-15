@@ -1789,7 +1789,7 @@ input[type="text"]::placeholder {
 }
 .field_height input,
 .field_height button {
-	height: 55px;
+	height: 45px;
 	border: 1px solid var(--color-input-border-lightgrey);
 }
 .field_height button,
