@@ -6,7 +6,7 @@ const t = (input) =>{
   return input;
 }
 const Translation = (Component, stringList, lang) => {
-    const translatedComponent = () => {
+    const TranslatedComponent = () => {
         useEffect(() => {
          const getTranslationData = async () => {
          let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/translate';
@@ -33,7 +33,7 @@ const Translation = (Component, stringList, lang) => {
         return <Component t={t}/> 
     };
 
-    return translatedComponent;
+    return TranslatedComponent;
 };
 export default Translation;
 
