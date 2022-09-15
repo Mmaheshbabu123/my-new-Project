@@ -161,6 +161,7 @@ function EmployeeMonthlyPlanning(props) {
 											className="mt-2 ms-3 color-skyblue"
 											data-toggle="tooltip"
 											title="View details"
+											
 										/>
 
 										<span>
@@ -168,14 +169,14 @@ function EmployeeMonthlyPlanning(props) {
 												type="button"
 												className="mt-2 ms-3 color-skyblue"
 												data-toggle="tooltip"
-												title=""
+												title="Remove the add to agenda"
 											/>
 										</span>
 										<AiFillInfoCircle
 											type="button"
 											className="mt-2 ms-3 color-skyblue"
 											data-toggle="tooltip"
-											title="Sign contarct"
+											title="Remove the exclamation"
 										/>
 									</td>
 								</tr>
