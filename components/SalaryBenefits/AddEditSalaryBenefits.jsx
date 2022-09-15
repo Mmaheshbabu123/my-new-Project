@@ -60,6 +60,10 @@ const AddEditSalaryBenefits = (props) => {
      * @param {String} nameValue  [description]
      */
     const addItemAndUpdateIndex = (stateObj) => {
+      const { valueWarning, coefficientValueWarning, valueDecimalWarning, coefficientValueDecimalWarning } = state;
+      if(valueWarning || coefficientValueWarning || valueDecimalWarning || coefficientValueDecimalWarning) {
+        return;
+      }
       let totalRows = stateObj['newItems'].length > 0 ?  stateObj['newItems'] : state.rows;
       if (stateObj['name'].replaceAll(' ', '').length) {
         let duplicates = totalRows.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase().replaceAll(' ', '') === state.name.toLowerCase().replaceAll(' ', '')))
@@ -89,6 +93,7 @@ const AddEditSalaryBenefits = (props) => {
             stateObj['coefficientValue'] = '1,15';
             stateObj['granted'] = '';
             stateObj['editIndex'] = stateObj['newItems'].length;
+            stateObj['dateWarning'] = false;
         } else {
           stateObj['dateWarning'] = true;
         }
@@ -109,7 +114,8 @@ const AddEditSalaryBenefits = (props) => {
      */
     const handleSubmit = async () => {
       let newItemsList = inertNewItem();
-      if(!newItemsList) return;
+      const { valueWarning, coefficientValueWarning, valueDecimalWarning, coefficientValueDecimalWarning } = state;
+      if(!newItemsList || valueWarning || coefficientValueWarning || valueDecimalWarning || coefficientValueDecimalWarning) return;
       if ((state.editFlow && !state.name.length) || (!state.editFlow && !newItemsList.length)) {
         setState({ ...state, nameWarning: true });
         return;
@@ -131,6 +137,10 @@ const AddEditSalaryBenefits = (props) => {
 
   const inertNewItem = () => {
     let newItemsList = [...state.newItems];
+    const { valueWarning, coefficientValueWarning, valueDecimalWarning, coefficientValueDecimalWarning } = state;
+    if(valueWarning || coefficientValueWarning || valueDecimalWarning || coefficientValueDecimalWarning) {
+      return;
+    }
     let duplicates = newItemsList.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
     if(duplicates.length) {
         let stateObj = {...state};
