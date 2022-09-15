@@ -52,6 +52,7 @@ const AddFunctions = () => {
 	const submit = (e) => {
 		e.preventDefault();
 		var p_unique_key = router.query.p_unique_key;
+		// console.log(employeeobject);return;
 
 		let errors = validateErrors();
 
@@ -240,43 +241,43 @@ const AddFunctions = () => {
 			setEmployeeObject(object);
 		}
 	}
-    function validateErrors() {
+
+	function validateErrors() {
 		let count = 0;
-        const newstate = [...employeeobject]; 
+		const newstate = [...employeeobject];
 		newstate.map((v1, k1) => {
 
-            v1.employee_list.map((value,key)=>{
-			newstate[k1].employee_list[key].functioniderror = '';
-			newstate[k1].employee_list[key].salary = '';
-			newstate[k1].employee_list[key].employeeiderror = '';
+		v1.employee_list.map((value, key) => {
+			let func = '';
+			let sal = '';
+			let emp = '';
 
 			if (value.emp_type == '' || value.emp_type == null) {
-				newstate[k1].employee_list[key].employeeiderror = 'This field is required.';
+				emp = 'This field is required.';
 				count++;
 			}
 
 			if (value.funid == '' || value.funid == null || value.funid == 'drop') {
-				newstate[k1].employee_list[key].functioniderror = 'This field is required.';
+				func = 'This field is required.';
 				count++;
-			} 
-            else {
-				newstate[k1].employee_list[key].functioniderror = '';
+			} else {
+				func = '';
 				if (value.salary == '' || value.salary == null || value.salary == undefined) {
 					if (count == 0) {
-						newstate[k1].employee_list[key].salary = value.function_salary;
+						value.salary = value.function_salary;
 					}
 				} else {
-					newstate[k1].employee_list[key].salary =
-						newstate[k1].employee_list[key].employeeiderror == '' && value.salary != '' && value.salary != null && value.salary != undefined
-							? ValidationService.minSalaryValidationMethod(value.salary.toString())
+					sal =
+						emp == '' && value.salary != '' && value.salary != null && value.salary != undefined
+							? ValidationService.minSalaryValidationMethod(value.salary.toString().replace(/\s/g, ''))
 							: '';
-					if (newstate[k1].employee_list[key].salary != '') {
+					if (sal != '') {
 						count++;
 					}
-					let rsalary = String(value.salary).replace(',', '.');
-					let rfsalary = String(value.function_salary).replace(',', '.');
-					if (newstate[k1].employee_list[key].salary == '' && parseFloat(rsalary) < parseFloat(rfsalary)) {
-						newstate[k1].employee_list[key].salary =
+					let rsalary = String(value.salary).replace(',', '.').replace(/\s/g, '');
+					let rfsalary = String(value.function_salary).replace(',', '.').replace(/\s/g, '');
+					if (sal == '' && parseFloat(rsalary) < parseFloat(rfsalary)) {
+						sal =
 							'The new salary cannot be lesser than the minimum salary. The minimum salary for the selected function is ' +
 							value.function_salary +
 							' Euro';
@@ -285,18 +286,37 @@ const AddFunctions = () => {
 				}
 			}
 
-			if (newstate[k1].employee_list[key].functioniderror != '' && newstate[k1].employee_list[key].functioniderror != null && newstate[k1].employee_list[key].functioniderror != undefined) {
-				newstate[k1].employee_list[key].collapseOpen = true;
-			} 
-			if (newstate[k1].employee_list[key].functioniderror == '' && newstate[k1].employee_list[key].employeeiderror == '' && newstate[k1].employee_list[key].salary == '') {
+			var collapseOpen = true;
+			if (func != '' && func != null && func != undefined) {
+				collapseOpen = true;
+			} else {
+				// if(key != 0){
+				// collapseOpen = true;
+				// }else{
+				// 	collapseOpen = false;
+				// }
+			}
+			if (func == '' && emp == '' && sal == '') {
 				if (key == 0) {
-					newstate[k1].employee_list[key].collapseOpen = true;
+					collapseOpen = true;
 				} else {
-					newstate[k1].employee_list[key].collapseOpen = false;
+					collapseOpen = false;
 				}
 			}
-        });
+
+			newstate[k1].employee_list[key].functioniderror = func;
+			newstate[k1].employee_list[key].employeeiderror = emp;
+			newstate[k1].employee_list[key].salaryerror = sal;
+			newstate[k1].employee_list[key].collapseOpen = collapseOpen;
+			// return {
+			// 	...value,
+			// 	functioniderror: func,
+			// 	employeeiderror: emp,
+			// 	salaryerror: sal,
+			// 	collapseOpen: collapseOpen
+			// };
 		});
+	});
 		setEmployeeObject(newstate);
 		return count;
 	}
@@ -529,7 +549,7 @@ const AddFunctions = () => {
                                                         return (
                                                             v1['collapseOpen'] &&
                                                             (ind <= 2 ? (
-                                                                <div className="col-md-12 row m-0 position-relative pe-0">
+                                                                <div className="col-md-12 row mt-3 position-relative pe-0">
                                                                     <div
                                                                         className="mt-2 mb-2 bg-light h-75 py-2 bg-4C4D550F z-999 px-0 fun-line col ms-5"
                                                                         style={{ height: '48px' }}
