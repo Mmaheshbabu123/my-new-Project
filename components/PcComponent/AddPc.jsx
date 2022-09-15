@@ -481,7 +481,7 @@ function AddPc(props) {
 						<div className="text-start col-md-6 p-0 d-flex align-items-center">
 							<button
 								type="button"
-								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px px-0 shadow-none"
+								className="bg-white border-0 poppins-regular-18px px-0 shadow-none text-decoration-underline"
 								onClick={() => backToDashboard()}
 							>
 								BACK
@@ -490,7 +490,7 @@ function AddPc(props) {
 						<div className="text-end col-md-6 px-0">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none"
+								className="btn rounded-0 px-3  btn-block float-end px-0 poppins-medium-18px-next-button shadow-none"
 								disabled={disableSave}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));

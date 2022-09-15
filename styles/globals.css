@@ -397,6 +397,16 @@ body {
 	background-color: var(--color-purple);
 	font-weight: normal;
 }
+.poppins-medium-18px-next-button,
+.poppins-medium-18px-next-button:hover,
+.poppins-medium-18px-next-button:focus {
+	font-size: var(--font-size-18px) !important;
+	line-height: var(--line-height-29px) !important;
+	font-family: var(--font-family-poppins-medium) !important;
+	color: var(--color-white);
+	background-color: var(--color-purple);
+	font-weight: normal;
+}
 .poppins-light-19px {
 	font-size: var(--font-size-19px) !important;
 	line-height: var(--line-height-31px) !important;
@@ -921,7 +931,7 @@ label {
 	color: var(--color-white);
 } */
 .add-pln {
-	height: 55px;
+	height: 45px;
 }
 .week-height {
 	min-height: 40vh;
@@ -1389,7 +1399,7 @@ span .firsrt-line:last-child() {
 }
 .position-sticky-pc {
 	position: sticky;
-	top: 67px;
+	top: 88px;
 	z-index: 999;
 	background: white;
 }
@@ -1779,7 +1789,7 @@ input[type="text"]::placeholder {
 }
 .field_height input,
 .field_height button {
-	height: 55px;
+	height: 45px;
 	border: 1px solid var(--color-input-border-lightgrey);
 }
 .field_height button,

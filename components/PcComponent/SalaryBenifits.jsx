@@ -179,7 +179,7 @@ const SalaryBenifits = () => {
 				)}
 				<div className='pc-height5'>
 				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 px-3":"border-0"}>
-				<p className="mb-2 error_text" style={{ color: 'red' }}>
+				<p className="my-3 error_text" style={{ color: 'red' }}>
 						{error_sal_benifits}
 					</p>
 					{data.map((val, key) => (
@@ -271,7 +271,7 @@ const SalaryBenifits = () => {
 						<div className="text-start col-md-6">
 							<button
 								type="button"
-								className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none px-0"
+								className="bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline"
 								onClick={() => {
 									setCurrent_sec(4);
 								}}
