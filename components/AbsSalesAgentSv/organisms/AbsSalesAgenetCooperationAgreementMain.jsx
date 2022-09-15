@@ -42,8 +42,8 @@ const AbsSalesAgenetCooperationAgreementMain = (props) => {
   return (
     <div>
     {state.loaded === true ?
-          <div className="col-md-12 row">
-          <h4 className={`${styles['employer-sv-page-title']} text-center page-title`}> Manage cooperation agreements </h4>
+          <div className="col-md-12 row ms-0">
+          <h4 className={`${styles['employer-sv-page-title']} page-title manage_cooperation_agreement px-0`}> Manage cooperation agreements </h4>
               <OverviewPage overviewData={state.overviewData} setState={setState}/>
           </div>
         : <p>Loading...</p>}

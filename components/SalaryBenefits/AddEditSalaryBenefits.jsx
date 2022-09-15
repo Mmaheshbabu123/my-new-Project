@@ -8,6 +8,7 @@ import { salaryBenefitOccurenceOptions } from '@/Constants';
 import LabelField from '@/atoms/LabelField';
 import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
+import ValidateMessage from '@/atoms/validationError';
 let dateObj = new Date()
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
@@ -47,6 +48,10 @@ const AddEditSalaryBenefits = (props) => {
     , minDate: `${year}-${month < 10 ? '0' + month : month}-${day}`
     , maxDate: `${year + 2}-${month < 10 ? '0' + month : month}-${day - 1}`
     , regexp: /^[0-9,]*$/
+    , valueWarning: false
+    , coefficientValueWarning: false
+    , valueDecimalWarning: false
+    , coefficientValueDecimalWarning: false
   })
 
     /**
@@ -55,6 +60,10 @@ const AddEditSalaryBenefits = (props) => {
      * @param {String} nameValue  [description]
      */
     const addItemAndUpdateIndex = (stateObj) => {
+      const { valueWarning, coefficientValueWarning, valueDecimalWarning, coefficientValueDecimalWarning } = state;
+      if(valueWarning || coefficientValueWarning || valueDecimalWarning || coefficientValueDecimalWarning) {
+        return;
+      }
       let totalRows = stateObj['newItems'].length > 0 ?  stateObj['newItems'] : state.rows;
       if (stateObj['name'].replaceAll(' ', '').length) {
         let duplicates = totalRows.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase().replaceAll(' ', '') === state.name.toLowerCase().replaceAll(' ', '')))
@@ -84,6 +93,7 @@ const AddEditSalaryBenefits = (props) => {
             stateObj['coefficientValue'] = '1,15';
             stateObj['granted'] = '';
             stateObj['editIndex'] = stateObj['newItems'].length;
+            stateObj['dateWarning'] = false;
         } else {
           stateObj['dateWarning'] = true;
         }
@@ -104,7 +114,8 @@ const AddEditSalaryBenefits = (props) => {
      */
     const handleSubmit = async () => {
       let newItemsList = inertNewItem();
-      if(!newItemsList) return;
+      const { valueWarning, coefficientValueWarning, valueDecimalWarning, coefficientValueDecimalWarning } = state;
+      if(!newItemsList || valueWarning || coefficientValueWarning || valueDecimalWarning || coefficientValueDecimalWarning) return;
       if ((state.editFlow && !state.name.length) || (!state.editFlow && !newItemsList.length)) {
         setState({ ...state, nameWarning: true });
         return;
@@ -126,6 +137,10 @@ const AddEditSalaryBenefits = (props) => {
 
   const inertNewItem = () => {
     let newItemsList = [...state.newItems];
+    const { valueWarning, coefficientValueWarning, valueDecimalWarning, coefficientValueDecimalWarning } = state;
+    if(valueWarning || coefficientValueWarning || valueDecimalWarning || coefficientValueDecimalWarning) {
+      return;
+    }
     let duplicates = newItemsList.filter((val, index) => (index !== state.editIndex && val.name.toLowerCase() === state.name.toLowerCase()))
     if(duplicates.length) {
         let stateObj = {...state};
@@ -199,6 +214,12 @@ const AddEditSalaryBenefits = (props) => {
     let stateObj = {...state};
     if((name ==='value' || name === 'coefficientValue') && !value.match(state.regexp)){
       return;
+    }
+    if(name ==='value' || name === 'coefficientValue') {
+      let numberValue = Number(value.replace(',', '.'));
+      let decimals = value.split(',')[1];
+      stateObj[`${name}DecimalWarning`] = decimals && decimals.length > 2 ? true : false;
+      stateObj[`${name}Warning`] = numberValue > 100 || numberValue < 0 ? true : false;
     }
     stateObj[name] = value;
     stateObj['nameWarning'] = false;
@@ -280,13 +301,10 @@ const AddEditSalaryBenefits = (props) => {
                 onChange={(e) => handleChange(e.target)}
                 placeholder= 'Enter value'
               />
-              <span className="position-absolute" style = {{right: '3%', bottom: '15px'}}> {state.valueType === 1 ? '€' : '%'} </span>
+              <span className="position-absolute" style = {{right: '3%', bottom: '30px'}}> {state.valueType === 1 ? '€' : '%'} </span>
+              {state['valueWarning'] && <ValidateMessage style={{margin:0}} text = {'Value should be between 0 to 100.'}/>} <br />
+              {state['valueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {'Only two decimal places allowed.'}/>}
               </div>
-              {state.valueWarning &&
-                <small
-                  className="form-text text-muted col-md-5 pcp_name_warning">
-                  {`It'll accept only numeric/decimal values`}
-                </small>}
             </div>
           <div className="col-md-12 mx-0 px-0 mt-4">
             <LabelField title="Occurence" className="poppins-regular-18px"/>
@@ -314,6 +332,8 @@ const AddEditSalaryBenefits = (props) => {
               onChange={(e) => handleChange(e.target)}
               placeholder= 'Enter value'
             />}
+            {state['coefficientValueWarning'] && <ValidateMessage style={{margin:0}} text = {'Value should be between 0 to 100.'}/>} <br />
+            {state['coefficientValueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {'Only two decimal places allowed.'}/>}
           </div>
           <div className="col-md-12 mx-0 px-0 mt-4">
             <LabelField title="Is the benefit granted in case of absence of the employee" className="poppins-regular-18px"/>

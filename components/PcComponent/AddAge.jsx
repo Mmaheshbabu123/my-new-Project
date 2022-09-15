@@ -359,11 +359,11 @@ const Addage = () => {
 							>
 
 
-								<option value="">Select age</option>
-								<option value="4">21 years</option>
-								<option value="3">20 years</option>
-								<option value="2">19 years</option>
-								<option value="1">18 years</option>
+								<option value="" className='poppins-medium-18px opt_value'>Select age</option>
+								<option value="4" className='poppins-medium-18px opt_value'>21 years</option>
+								<option value="3" className='poppins-medium-18px opt_value'>20 years</option>
+								<option value="2" className='poppins-medium-18px opt_value'>19 years</option>
+								<option value="1" className='poppins-medium-18px opt_value'>18 years</option>
 							</select>
 							<p className="error">{error_age}</p>
 						</div>
