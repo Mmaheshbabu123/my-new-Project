@@ -18,7 +18,7 @@ const Sample = (props) =>{
 	return <div>
 		<select name="languages" id="language-select" onChange={onSelectChange}>
             {router.locales.map((language) => (
-                <option value={language}>
+                <option key={language} value={language}>
                     {language}
                 </option>
             ))}
