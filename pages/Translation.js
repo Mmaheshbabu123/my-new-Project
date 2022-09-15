@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 const t = (input) =>{
   return input;
 }
-const translation = (Component, stringList, lang) => {
+const Translation = (Component, stringList, lang) => {
     const translatedComponent = () => {
         useEffect(() => {
          const getTranslationData = async () => {
@@ -35,5 +35,5 @@ const translation = (Component, stringList, lang) => {
 
     return translatedComponent;
 };
-export default translation;
+export default Translation;
 
