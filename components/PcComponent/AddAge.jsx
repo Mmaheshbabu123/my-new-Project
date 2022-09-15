@@ -508,7 +508,7 @@ const Addage = () => {
 						<div className="text-start col-md-6 p-0 align-self-center">
 							<button
 								type="button"
-								className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none px-0":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none"}
+								className={pc_view_type == 'addpc'?"bg-white bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline":"bg-white bg-white  border-0 poppins-regular-18px shadow-none text-decoration-underline"}
 								onClick={() => {
 									setCurrent_sec(2);
 								}}

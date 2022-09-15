@@ -214,6 +214,13 @@ input[type="radio"]
   padding-top: 0.75rem !important;
   padding-bottom: 0.75rem !important;
 }
+.position-sticky-manage-pc
+{
+  position: sticky;
+  top: 88px;
+  z-index: 999;
+  background-color: var(--color-white);
+}
 @-moz-document url-prefix() {
   select option {
      font-family: var(--font-family-poppins-medium) !important;
