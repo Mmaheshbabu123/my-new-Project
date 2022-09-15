@@ -197,3 +197,27 @@ input[type="radio"]
 {
   padding: 0px 8px !important;
 }
+.manage_cooperation_agreement
+{
+  font-family: var(--font-family-bitter-italic-normal-medium);
+  font-size: var(--font-size-30px);
+  font-weight: normal;
+  line-height: var(--line-height-44px);
+  color: var(--color-purple);
+}
+.min_height_table
+{
+  min-height: 22rem;
+}
+.line_height_archieved_project
+{
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+@-moz-document url-prefix() {
+  select option {
+     font-family: var(--font-family-poppins-medium) !important;
+     font-size: var(--font-size-18px) !important;
+
+  }
+}

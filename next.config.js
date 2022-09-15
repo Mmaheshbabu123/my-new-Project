@@ -1,4 +1,8 @@
 const nextConfig = {
+  i18n: {
+    locales: ['en-US', 'fr', 'nl-NL'],
+    defaultLocale: 'en-US'
+  },
   reactStrictMode: false,
   serverRuntimeConfig: {
     // Will only be available on the server side
