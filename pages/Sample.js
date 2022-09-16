@@ -5,40 +5,29 @@ import React, { useState, useEffect } from 'react';
 import { APICALL } from '../Services/ApiServices';
 
 const Sample = (props) =>{
-    useState
     let router = useRouter();
     const { t } = props;
-    const [state, setState] = useState({'languages': [], 'lang': 'en'});
-    
+    const [state, setState] = useState({'languages': [], 'lang': ''}); 
     useEffect(()=>{
       let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get_languages';
         APICALL.service(url, 'GET')
           .then((result) => {
 	   if(result['status'] == 200){
-	     setState({"languages": result['data']});  
+	     setState({...state, ...{'languages': result['data'], 'lang': localStorage['servername_'+'lang'] !== undefined ? localStorage['servername_'+'lang'] : 'en'}});  
 	   }else{
 	     alert('Failed');
 	   }
 	  })
     }, []);
-	const onSelectChange = (e) => {
-	  const locale = e.target.value;
-          //localStorage.setItem("");
-	  //router.push(router.asPath, router.asPath, {locale});
-        }
       
 	const handleLangChange = (e) =>{
-	     localStorage.setItem('lang', e.target.value); 
-//	     setState({});
+	  localStorage.setItem('servername_'+'lang', e.target.value);
+	  router.reload();
+	  setState({...state, ...{lang: e.target.value}});
 	}
+console.log(t('Email'));
 	return <div>
-		<select name="languages" id="language-select" onChange={handleLangChange}>
-
-                  {/*router.locales.map((language) => (
-                     <option key={language} value={language}>
-                       {language}
-                     </option>
-                  ))*/}
+		<select name="languages" id="language-select" value={state['lang']} onChange={handleLangChange}>
 	         {
                    state['languages'].map(key=>{
 		   return <option key = {key['code']} value={key['code']}>{key['language']}</option>
@@ -46,12 +35,13 @@ const Sample = (props) =>{
 		 }
                 </select>
 		<ul>
-		  <li>{t('Title')}</li>
+		{/*<li>{t('Title')}</li>
 		  <li>{t('Username')}</li>
 		  <li>{t('Password')}</li>
-		  <li>{t('Email')}</li>
 		  <li>{t('EmailPassword')}</li>
+		  <li>{t('Contact')}</li>*/}
+		  <li>{t('Email')}</li>
 		 </ul>		 
 		 </div>
 }
-export default Translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword'], 'nl');
+export default Translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword', 'Contact']);
