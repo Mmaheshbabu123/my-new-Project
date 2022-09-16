@@ -346,7 +346,7 @@ const Addage = () => {
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}
 
 						<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3 "}>
-							<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>At which age full salary is paid?</label>
+							<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>At which age full salary is paid?</label>
 							<select
 								disabled={disableForm}
 								type="text"
@@ -371,7 +371,7 @@ const Addage = () => {
 						{/* IF AGE = 21 */}
 						{showhideage === '4' && (
 							<div className={pc_view_type == 'addpc'?"mb-4 col-md-6":pc_view_type == 'viewpc'?"col-md-12 my-3":'col-md-12 my-3'}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Minimum salary for 20 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 20 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
@@ -390,7 +390,7 @@ const Addage = () => {
 						{/* IF AGE >= 20 */}
 						{(showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Minimum salary for 19 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 19 years?</label>
 								<div className="input-group">
 									<input
 									    disabled={disableForm}
@@ -409,7 +409,7 @@ const Addage = () => {
 						{/* IF AGE >= 19 */}
 						{(showhideage === '2' || showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Minimum salary for 18 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 18 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
@@ -429,7 +429,7 @@ const Addage = () => {
 						{/* IF AGE >= 18 */}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Minimum salary for 17 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 17 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
@@ -447,7 +447,7 @@ const Addage = () => {
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Minimum salary for 16 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 16 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
@@ -465,7 +465,7 @@ const Addage = () => {
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Minimum salary for 15 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 15 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
