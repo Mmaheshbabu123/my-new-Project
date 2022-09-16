@@ -199,7 +199,7 @@ const SalaryBenifits = () => {
 										updateRes(e, key);
 									}}
 								/>
-								<label className={pc_view_type == 'addpc'?"form-check-label poppins-regular-18px":" form-check-label poppins-regular-18px margin_salary"}htmlFor="flexCheckDefault" style={val.checked ?{opacity:'1'}:{}}>
+								<label className={pc_view_type == 'addpc'?"form-check-label poppins-regular-18px":" form-check-label poppins-regular-16px margin_salary"}htmlFor="flexCheckDefault" style={val.checked ?{opacity:'1'}:{}}>
 									{val.name}
 									
 								</label>

@@ -105,18 +105,18 @@ const Table = (props) => {
 							{console.log(thvalues)}
 							{/* {thvalues.map((th_val, index) => ( */}
 								<td className="fst-normal first-col px-0 ">
-									<span className='first_col_row poppins-regular-18px'>
+									<span className='first_col_row poppins-regular-16px'>
 										{thvalues[0]}
 									</span>
 									<br/>
-								<span className='second_col_row poppins-medium-18px'>
+								<span className='second_col_row poppins-medium-16px'>
 									{tvalues[0]}
 								</span>
 								</td>
 								<td className="fst-normal second-col px-0" >
-								<span className='first_col_row poppins-regular-18px'>{thvalues[1]}</span>
+								<span className='first_col_row poppins-regular-16px'>{thvalues[1]}</span>
 									<br/>
-									<span className='second_col_row poppins-medium-18px'>
+									<span className='second_col_row poppins-medium-16px'>
 									{tvalues[1]}
 									</span>
 								</td>

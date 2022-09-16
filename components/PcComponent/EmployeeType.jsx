@@ -180,7 +180,7 @@ const EmployeeType = () => {
 									updateRes(e);
 								}}
 							/>
-							<label className={pc_view_type == 'addpc'? "form-check-label poppins-regular-18px":" form-check-label poppins-regular-18px"} style={res.includes(val.id)?{opacity:'1'}:{}} > {val.name}</label>
+							<label className={pc_view_type == 'addpc'? "form-check-label poppins-regular-18px":" form-check-label poppins-regular-16px"} style={res.includes(val.id)?{opacity:'1'}:{}} > {val.name}</label>
 						</div>
 					// 	<div className="form-check mt-4">
 					// 	<input
