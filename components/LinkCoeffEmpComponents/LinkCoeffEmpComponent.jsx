@@ -143,9 +143,12 @@ const LinkCoeffEmpComponent = (props) => {
 
   if (SERVER_SIDE_RENDERING)
     return <>
-      <div className="mt-4">
+      <div className="">
         <div className="col-md-12 row p-0 m-0">
-          <h4 className={`sv-cp-page-title  page-title mb-4 mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4>
+         <div className='py-4 px-0 position-sticky-pc'>
+         {/* <h4 className={`sv-cp-page-title  page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4> */}
+         <h4 className={`page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4>
+         </div>
           <div className='row'>
           <div className="col-md-5 col-lg-3 mt-2 mb-3 p-0"> {addMultiSelectTag()}
             {state.pcWarning ? <small style={{ color: 'red' }} className='error_text mt-3'> Choose paritair comite </small> : null}
@@ -175,9 +178,7 @@ const LinkCoeffEmpComponent = (props) => {
           </div>
           </div>
           </div>
-         
-        </div>
-        <div className="col-md-12 m-0 p-0 relative-div right_arrow_align">
+          <div className="col-md-12 m-0 p-0 relative-div right_arrow_align">
           {/* {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
               <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
           {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
@@ -203,6 +204,8 @@ const LinkCoeffEmpComponent = (props) => {
             {`SAVE`}
           </button></div>
            </div>
+        </div>
+        
       </div>
     </>
   else

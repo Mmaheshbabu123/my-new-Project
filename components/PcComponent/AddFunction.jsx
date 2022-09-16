@@ -210,10 +210,10 @@ function AddFunction(props) {
 				<div className="row">
 					{id != '' ? <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">Edit function</h4> : <h4 className="h5 mb-4 bitter-italic biiter_medium_italic_20px">Add function</h4>}
 					<div className="form-group mb-2">
-						<label className="custom_astrick mt-2 poppins-regular-18px">Function name</label>
+						<label className="custom_astrick mt-2 poppins-regular-16px">Function name</label>
 						<input
 							type="text"
-							className=" form-control my-2 border-0 poppins-medium-18px shadow-none"
+							className=" form-control my-2 border-0 poppins-medium-16px shadow-none"
 							value={data.function_name}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, function_name: e.target.value }));
@@ -224,9 +224,9 @@ function AddFunction(props) {
 
 					{Object.keys(props.categorylist).length > 0 && (
 						<div className="form-group mb-2">
-							<label className="mt-2 poppins-regular-18px">Category</label>
+							<label className="mt-2 poppins-regular-16px">Category</label>
 							<select
-								className="form-select my-2 form-control border-0 rounded-0 poppins-medium-18px shadow-none"
+								className="form-select my-2 form-control border-0 rounded-0 poppins-medium-16px shadow-none"
 								value={data.category_id}
 								onChange={(e) => {
 									if(e.target.value != ''){
@@ -267,11 +267,11 @@ function AddFunction(props) {
 					)}
 
 					<div className="form-group mb-2">
-						<label className="custom_astrick mt-2 poppins-regular-18px">Minimum salary</label>
+						<label className="custom_astrick mt-2 poppins-regular-16px">Minimum salary</label>
 						<div className="input-group">
-						<span className="input-group-text bg-white rounded-0 border-0 category_currency_height poppins-medium-18px my-2">€</span>
+						<span className="input-group-text bg-white rounded-0 border-0 category_currency_height poppins-medium-16px my-2">€</span>
 							<input
-								className=" form-control border-0 rounded-0 poppins-medium-18px shadow-none my-2"
+								className=" form-control border-0 rounded-0 poppins-medium-16px shadow-none my-2"
 								type="text"
 								value={data.min_salary}
 								onChange={(e) => {

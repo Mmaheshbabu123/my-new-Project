@@ -362,12 +362,12 @@ function AddPc(props) {
 						<div className="col-md-12 row  my-4 m-0">
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Paritair comite number</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px"}>Paritair comite number</label>
 								<input
 									type="text"
 									value={data.pc_number}
 									className=
-									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-18px border-0 form-control shadow-none mt-1"}
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1"}
 
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, pc_number: e.target.value }));
@@ -377,12 +377,12 @@ function AddPc(props) {
 							</div>
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2 ":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Paritair comite name</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px"}>Paritair comite name</label>
 								<input
 									type="text"
 									value={data.pc_name}
 									className=
-									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-18px border-0 form-control shadow-none mt-1"}
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1"}
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, pc_name: e.target.value }));
 									}}
@@ -391,12 +391,12 @@ function AddPc(props) {
 							</div>
 
 							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"poppins-regular-18px":"poppins-regular-18px"}>Paritair comite alias name </label>
+								<label className={pc_view_type == 'addpc'?"poppins-regular-18px":"poppins-regular-16px"}>Paritair comite alias name </label>
 								<input
 									type="text"
 									value={data.pc_alias_name}
 									className=
-									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none text_field_addpc":" px-2 poppins-medium-18px border-0 form-control shadow-none mt-1"}
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1"}
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
 									}}
@@ -407,52 +407,58 @@ function AddPc(props) {
 							{/* BUFFER TIMING */}
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Buffer time between two plannings</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px"}>Buffer time between two plannings</label>
 
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
 									<input
 										type="text"
 										value={data.buffer_timings}
 										className=
-										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-18px border-0 form-control shadow-none "}
+										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none "}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, buffer_timings: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text border-0 rounded-0 poppins-regular-18px">Hours</span>
+									<span className=
+									{pc_view_type == 'addpc'?"input-group-text border-0 rounded-0 poppins-regular-18px":"input-group-text border-0 rounded-0 poppins-regular-16px"}
+									>Hours</span>
 								</div>
 								<p className="error mt-2 error_text">{error_buffer_time}</p>
 							</div>
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px"}>Minimum work timings per day</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px"}>Minimum work timings per day</label>
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
 									<input
 										type="text"
 										value={data.min_work_timings}
 										className=
-										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-18px border-0 form-control shadow-none"}
+										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none"}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text border-0 rounded-0 poppins-regular-18px">Hours</span>
+									<span className=
+									{pc_view_type == 'addpc'?"input-group-text border-0 rounded-0 poppins-regular-18px":"input-group-text border-0 rounded-0 poppins-regular-16px"}
+									>Hours</span>
 								</div>
 								<p className="error error_text mt-2">{error_min_time}</p>
 							</div>
 							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2":" px-0 "}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-18px my-2"}>Maximum work timings per day</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px my-2"}>Maximum work timings per day</label>
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
 									<input
 										type="text"
 										value={data.max_work_timings}
 										className=
-										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-18px border-0 form-control shadow-none"}
+										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none"}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text border-0 rounded-0 poppins-regular-18px">Hours</span>
+										<span className=
+									{pc_view_type == 'addpc'?"input-group-text border-0 rounded-0 poppins-regular-18px":"input-group-text border-0 rounded-0 poppins-regular-16px"}
+									>Hours</span>
 								</div>
 								<p className="error mt-2 error_text">{error_max_time}</p>
 							</div>

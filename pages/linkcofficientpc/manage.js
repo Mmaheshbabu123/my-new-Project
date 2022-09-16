@@ -20,7 +20,8 @@ const ManagePc = (props)=>{
   return (
     <>
     <div className='container-fluid man px-0'>
-      <div className='mt-3 md-3'>
+      {/* <div className='mt-3 md-3'> */}
+      <div className=' md-3'>
       {state.loaded === true ?
        <TableRenderer {...state} />
        : <div>Loading...</div>}
