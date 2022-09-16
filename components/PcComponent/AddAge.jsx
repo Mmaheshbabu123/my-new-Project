@@ -350,7 +350,7 @@ const Addage = () => {
 							<select
 								disabled={disableForm}
 								type="text"
-								className={pc_view_type == 'addpc'?"form-select mt-2 mb-2 form-control mt-2 mb-2 input-border-lightgray poppins-medium-18px mh-50 hi-40 rounded-0 shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px form-control mt-2 rounded-0 shadow-none bg-transparent px-0":'border-0   poppins-medium-18px form-control mt-2 rounded-0 shadow-none'}
+								className={pc_view_type == 'addpc'?"form-select mt-2 mb-2 form-control mt-2 mb-2 input-border-lightgray poppins-medium-18px mh-50 hi-40 rounded-0 shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px form-control mt-2 rounded-0 shadow-none bg-transparent px-0":'border-0   poppins-medium-16px form-control mt-2 rounded-0 shadow-none'}
 								value={data.age}
 								onChange={(e) => {
 									handleshowhide(e);
@@ -359,11 +359,11 @@ const Addage = () => {
 							>
 
 
-								<option value="" className='poppins-medium-18px opt_value'>Select age</option>
-								<option value="4" className='poppins-medium-18px opt_value'>21 years</option>
-								<option value="3" className='poppins-medium-18px opt_value'>20 years</option>
-								<option value="2" className='poppins-medium-18px opt_value'>19 years</option>
-								<option value="1" className='poppins-medium-18px opt_value'>18 years</option>
+								<option value="" className='poppins-medium-16px opt_value'>Select age</option>
+								<option value="4" className='poppins-medium-16px opt_value'>21 years</option>
+								<option value="3" className='poppins-medium-16px opt_value'>20 years</option>
+								<option value="2" className='poppins-medium-16px opt_value'>19 years</option>
+								<option value="1" className='poppins-medium-16px opt_value'>18 years</option>
 							</select>
 							<p className="error">{error_age}</p>
 						</div>
@@ -376,7 +376,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className={pc_view_type == 'addpc'?" form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0 poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-18px rounded-0 shadow-none"}
+										className={pc_view_type == 'addpc'?" form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0 poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_20}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_20: e.target.value }));
@@ -395,7 +395,7 @@ const Addage = () => {
 									<input
 									    disabled={disableForm}
 										type="text"
-										className= {pc_view_type == 'addpc'?" form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-18px rounded-0 shadow-none"}
+										className= {pc_view_type == 'addpc'?" form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_19}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_19: e.target.value }));
@@ -414,7 +414,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className={pc_view_type == 'addpc'?"form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-18px rounded-0 shadow-none"}
+										className={pc_view_type == 'addpc'?"form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_18}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_18: e.target.value }));
@@ -434,7 +434,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className={pc_view_type == 'addpc'?"form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none ":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-18px rounded-0 shadow-none"}
+										className={pc_view_type == 'addpc'?"form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none ":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_17}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_17: e.target.value }));
@@ -452,7 +452,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className={pc_view_type == 'addpc'?"form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40 poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-18px rounded-0 shadow-none"}
+										className={pc_view_type == 'addpc'?"form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40 poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_16}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_16: e.target.value }));
@@ -470,7 +470,7 @@ const Addage = () => {
 									<input
 										disabled={disableForm}
 										type="text"
-										className= {pc_view_type == 'addpc'? "form-control mt-2 mb-2 input-border-lightgray poppins-medium-18px mh-50 rounded-0 border-end-0 hi-40 shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-18px rounded-0 shadow-none"}
+										className= {pc_view_type == 'addpc'? "form-control mt-2 mb-2 input-border-lightgray poppins-medium-18px mh-50 rounded-0 border-end-0 hi-40 shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_15}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_15: e.target.value }));

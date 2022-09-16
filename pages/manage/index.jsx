@@ -5,7 +5,7 @@ function ManageEmployeeAndCoefficientTypes() {
   return (
     <>
     <div className='container-fluid row p-0 m-0' styles={{ position: 'relative'}}>
-      <div className='col-md-12 px-0'>
+      <div className='col-md-12 px-0 position-sticky-pc'>
       <h4 className='py-4 font-weight-bold  bitter-italic-normal-medium-24 px-0'>Configurations and settings</h4>
 
 

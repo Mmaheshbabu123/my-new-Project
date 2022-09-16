@@ -24,15 +24,24 @@ thead:after
   line-height: var(--line-height-27px);
   color: var(--color-label-footer-gray);
   font-weight: normal;
-  width: 445px !important;
+  width: 500px !important;
   text-align: center;
+  border-radius: 0px;
+  box-shadow: none;
 }
 .react-confirm-alert-button-group button
 {
-  background-color: var(--color-skyblue) !important;
+  background-color: var(--color-purple) !important;
   color: var(--color-white) !important;
   font-family: var(--font-family-poppins-medium);
   font-size: var(--font-size-16px);
+  text-transform: uppercase;
+  border-radius: 0px;
+}
+.react-confirm-alert-overlay
+{
+  background:rgba(0,0,0,0.2);
+  z-index: 1000;
 }
 .react-confirm-alert-button-group
 {
@@ -243,4 +252,12 @@ input[type="radio"]
 .epc_height .accordion-body
 {
   padding: 0.5rem 1.25rem !important;
+}
+.table-second-part-tbody tr:last-child td
+{
+  border-bottom: 1px solid var(--border-color-gray);
+}
+.no_records
+{
+  border: 1px solid var(--border-color-light-gray);
 }

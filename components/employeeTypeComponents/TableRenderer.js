@@ -100,7 +100,9 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
 const button_title = manageType == 'employee-types'? `Add employee type`:`Add coefficient`;
   return (
     <>
-      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0 py-2'> {`Manage ${button_title.includes('employee') ? 'employee types' : 'coefficients'}`} </h4>
+      <div className='py-4 position-sticky-pc px-0'>
+      <h4 className='font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage ${button_title.includes('employee') ? 'employee types' : 'coefficients'}`} </h4>
+      </div>
       <div className='col-md-12 text-end'>
       <button
         onClick={() => router.push(`${manageType}/add?id=0`)}
@@ -158,7 +160,12 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
                 <td className='text-end px-5 py-1 '>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No records </p>}
+            :
+            <tbody className='no_records'>
+               <tr>
+               <td style={{width:'100%'}}> No records </td>
+               </tr>
+              </tbody>}
           </table>
       </div>
       <div>

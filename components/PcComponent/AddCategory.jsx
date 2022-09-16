@@ -210,11 +210,11 @@ function AddCategory(props) {
 			<form onSubmit={submit}>
 				{id != '' ? <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">Edit category</h4> : <h4 className="h5 mb-4 bitter-italic biiter_medium_italic_20px">Add category</h4>}
 				<div className="row">
-					<label className=" custom_astrick mt-2 poppins-regular-18px">Category name</label>
+					<label className=" custom_astrick mt-2 poppins-regular-16px">Category name</label>
 					<div className="form-group ">
 						<input
 							type="text"
-							className=" form-control mt-2 mb-3  input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-0 shadow-none"
+							className=" form-control mt-2 mb-3  input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-0 shadow-none"
 							value={data.category_name}
 							name="name"
 							id="name"
@@ -225,13 +225,13 @@ function AddCategory(props) {
 
 						<p  className='error_text' style={{ color: 'red' }}>{error_category_name}</p>
 					</div>
-					<label className="custom_astrick mt-2 poppins-regular-18px">Minimum salary</label>
+					<label className="custom_astrick mt-2 poppins-regular-16px">Minimum salary</label>
 					<div className="form-group">
 					<div className="input-group">
-					<span className="input-group-text mh-50 rounded-0 mt-2 border-0 bg-white category_currency_height poppins-medium-18px" >€</span>
+					<span className="input-group-text mh-50 rounded-0 mt-2 border-0 bg-white category_currency_height poppins-medium-16px" >€</span>
 						<input
 							type="text"
-							className=" form-control mt-2 mb-3 input-border-lightgray poppins-regular-18px mh-50 rounded-0 border-0 shadow-none"
+							className=" form-control mt-2 mb-3 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-0 shadow-none"
 							value={data.min_salary}
 							name="salary"
 							id="salary"

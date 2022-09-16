@@ -27,8 +27,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className='mt-2 color-skyblue' /> </span>
-        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='mt-2 ms-3 color-skyblue'/> </span>
+        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue' /> </span>
+        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='ms-3 color-skyblue'/> </span>
       </>
     )
   }
@@ -106,7 +106,9 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
     return (
       <>
 
-        <h4 className='mt-2 mb-4 font-weight-bold   px-0  bitter-italic-normal-medium-24 position-sticky pt-3'> {`Manage coefficients per PC`} </h4>
+        <div className='py-4 position-sticky-pc px-0'>
+        <h4 className='font-weight-bold px-0  bitter-italic-normal-medium-24'> {`Manage coefficients per PC`} </h4>
+        </div>
         <div className='searchbox m-0 my-4' style={{ margin: '10px 0' }}>
          <div className='row'>
            <div className='col-md-7 col-lg-8'>
@@ -117,7 +119,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
                value={state.searchTerm}
                className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
                onChange={(e) => setState({...state, searchTermNumber: e.target.value})}
-               placeholder={'Pc number'}
+               placeholder={'Paritair comite number'}
                onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
              />
                </div>
@@ -127,7 +129,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
                value={state.searchTerm}
                className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
                onChange={(e) => setState({...state, searchTermName: e.target.value})}
-               placeholder={'PC name'}
+               placeholder={'Paritair comite name'}
                onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
              />
                </div>
