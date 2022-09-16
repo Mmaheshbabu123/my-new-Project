@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import {ReactDOM} from 'react-dom';
 import { red } from 'tailwindcss/colors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
+import { FaEye,FaEyeSlash } from "react-icons/fa";
 import checkPinCode, { homeScreen } from '../../Services/ApiEndPoints';
-import { CodeSharp } from 'node_modules/@material-ui/icons/index';
 
 const OTPInput = dynamic(
 	() => {
@@ -29,7 +31,11 @@ const Pincode = () => {
 	const [ otp1, setOTP1 ] = useState('');
 	const [ err, setErr ] = useState('');
 	const [ err1, setErr1 ] = useState('');
+	const [ eyeicon,setEyeicon]=useState(FaEye);
+	const [ eyeicon1,setEyeicon1]=useState(FaEye);
 	const [ load, setLoad ] = useState(false);
+	const [ hide,setHide ] = useState(false);
+	const [ hide1,setHide1 ] = useState(false);
 
 	useEffect(
 		() => {
@@ -132,7 +138,18 @@ const Pincode = () => {
 		}
 	};
 
+	const hideShow=()=>{
+		setHide(!hide);
+		(eyeicon==FaEyeSlash)?setEyeicon(FaEye):setEyeicon(FaEyeSlash);
+	}
+
+	const hideShow1=()=>{
+		setHide1(!hide1);
+		(eyeicon1==FaEyeSlash)?setEyeicon1(FaEye):setEyeicon1(FaEyeSlash);
+	}
 	var display;
+	var veye=eyeicon;
+	var veye1=eyeicon1;
 	var fields=<form onSubmit={Submit} style={{ alignItems: 'center' }}>
 	<div className="row mt-5">
 		<div className="col-4" />
@@ -151,8 +168,9 @@ const Pincode = () => {
 				OTPLength={6}
 				otpType="number"
 				disabled={false}
-				secure
+				secure={hide}
 			/>
+			<button onClick={hideShow}>SH</button>
 			<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
 				{err}
 			</p>
@@ -164,6 +182,7 @@ const Pincode = () => {
 			<div>
 				<label>Confirm pincode</label>
 			</div>
+			{/* <div> */}
 			<OTPInput
 				value={otp1}
 				onChange={setOTP1}
@@ -175,8 +194,12 @@ const Pincode = () => {
 				OTPLength={6}
 				otpType="number"
 				disabled={false}
-				secure
+				secure={hide}
 			/>
+			<button style={{ border:'none'}} onClick={hideShow1} className='bg-white'>
+					<veye/>
+			</button> 
+			{/* {/* </div> */}
 			<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
 				{err1}
 			</p>

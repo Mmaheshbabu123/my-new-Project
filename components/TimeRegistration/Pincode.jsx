@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { red } from 'tailwindcss/colors';
 import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
+import { AiFillEye,AiFillEyeInvisible } from 'react-icons/fa';
 import { homeScreen } from '../../Services/ApiEndPoints';
 import checkPinCode from '../../Services/ApiEndPoints';
 
+//to make the otp dynamic
 const OTPInput = dynamic(
 	() => {
 		return import('otp-input-react');
 	},
 	{ ssr: false }
 );
-
+//to make the resend otp dynamic
 const ResendOTP = dynamic(
 	() => {
 		return import('otp-input-react').then((module) => module.ResendOTP);
@@ -22,13 +23,18 @@ const ResendOTP = dynamic(
 );
 
 const Pincode = () => {
+	//for router
 	const router = useRouter();
-	const [ hasPin, setHasPin ] = useState(false);
+	//get the otp
 	const [ otp, setOTP ] = useState('');
+	//to catch the error
 	const [ err, setErr ] = useState('');
+	//to get the user id
 	const [ uid, setuid ] = useState(null);
+	//
 	const [ response, SetResponse ] = useState('');
-	const [ load, setLoad ] = useState(false);
+
+	//if any paremeters there in the url we can get by it
 	const { root_parent_id, selectedTabId, ref_id = 0 } = router.query;
 
 	useEffect(
@@ -36,21 +42,27 @@ const Pincode = () => {
 			var userid = null;
 			if (!router.isReady) return;
 
+			//get the user id from the local storage.
 			if (localStorage.getItem('uid') != null) {
 				userid = JSON.parse(localStorage.getItem('uid'));
 			} else {
 				window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 			}
-			
+
 			var p_unique_key = router.query.p_unique_key;
 
+			//checking the uid is there or not.
 			if (userid != undefined && userid != null) {
+
+				//sending the api to check weather the user have pincode or not.
 				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + userid, 'GET')
 					.then((result) => {
-						console.log(result );
+						console.log(result);
 						if (result == 999) {
+							//if the user don't have the pincode redirecting him to the generate pincode page.
 							router.push('/pincode/generate/Pin');
 						}
+						//setting the user id to the hook.
 						setuid(userid);
 					})
 					.catch((error) => {
@@ -65,6 +77,7 @@ const Pincode = () => {
 		console.log(window);
 	}, []);
 
+	//function to validate the pincode.
 	const validate = (value) => {
 		var valuelength = value.length;
 		if (valuelength == 0 || valuelength == undefined) {
@@ -80,22 +93,18 @@ const Pincode = () => {
 		return false;
 	};
 
-	// const gneratePin = () => {
-	// 	router.push('/pincode/generate/Pin');
-	// };
-
-	// const goHomescreen=()=>{
-	// 	window.location.replace(homeScreen);
-	// }
-
+	//fucntion to call sendmail page.
 	const forgotPassword = () => {
 		router.push('/pincode/forgotpin/Sendmail');
 	};
 
+	//fucntion to submit.
 	const Submit = (event) => {
 		event.preventDefault();
 		validate(otp)
-			? APICALL.service(
+			?
+			//posting the pincode to the backend storing.
+			APICALL.service(
 					process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/planing-by-pincode/' + uid + '?pincode=' + otp,
 					'GET'
 				)
@@ -171,7 +180,7 @@ const Pincode = () => {
 					<OTPInput
 						value={otp}
 						onChange={setOTP}
-						autoFocus
+						
 						inputStyles={{
 							width: '60px',
 							height: '60px'
