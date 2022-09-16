@@ -1553,6 +1553,10 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 .epc {
 	min-height: 60vh;
 }
+.epc_height
+{
+	min-height: 92% !important;
+}
 .pc-height5 {
 	min-height: 47vh;
 }
