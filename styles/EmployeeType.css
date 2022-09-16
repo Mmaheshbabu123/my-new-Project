@@ -264,3 +264,25 @@ tbody.table-body-employee-type
 {
   color: #000 !important;
 }
+
+.qr-custom-multiselect__control {
+  text-align: left;
+  padding-top: 8px;
+}
+
+.qr-custom-multiselect__control:hover{
+  border-color: hsl(0, 0%, 80%);
+}
+
+.qr-custom-multiselect__indicator{
+  display: none !important;
+}
+
+.qr-custom-multiselect__menu{
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.qr-custom-multiselect__input { 
+	color: transparent !important;
+}

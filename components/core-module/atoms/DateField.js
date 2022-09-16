@@ -10,7 +10,8 @@ export default function DateField({
     maxDate='2222-08-15',
     id,
     customStyle = {},
-    className = 'col-md-5'
+    className = 'col-md-5',
+    isDisabled = false,
   }) {
   return (
     <>
@@ -22,6 +23,7 @@ export default function DateField({
        max={maxDate}
        value={value}
        className={'atom-input-field-default ' + className}
+       disabled={isDisabled}
        id={id}
        onChange={handleChange}
      />

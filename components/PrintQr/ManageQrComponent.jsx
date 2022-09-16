@@ -6,11 +6,27 @@ import { FiDownload } from 'react-icons/fi';
 import { BiQrScan } from 'react-icons/bi';
 import { GrRefresh } from 'react-icons/gr';
 import ReactPaginate from 'react-paginate';
+import DateField from '@/atoms/DateField';
+import RadioField from '@/atoms/RadioField';
+import MultiSelectField from '@/atoms/MultiSelectField';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import { formatDate } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
 import customAlert from '@/atoms/customAlert';
 const itemsPerPage = 8;
+let dateObj = new Date()
+let month = dateObj.getUTCMonth() + 1; //months from 1-12
+let day = dateObj.getUTCDate() + 1;
+var year = dateObj.getUTCFullYear();
+let dateValue = `${year}-${month < 10 ? '0' + month : month}`;
+const dateOptions = [-1, 0, 1, 2, 3, 4].map(val => { return (
+  {
+      value:`${year}${month < 10 ? '0' + month : month}${day + val}`,
+      label: `${dateValue}-${day + val}`
+  }
+)})
 
-const ManageQrComponent = ({ headers, rows }) => {
+const ManageQrComponent = ({ props: { headers, rows, renderComp, entityId }, loadData }) => {
   const router = useRouter();
   const [state, setState] = useState({
     searchTerm: '',
@@ -20,19 +36,29 @@ const ManageQrComponent = ({ headers, rows }) => {
     pageCount: 0,
     itemOffset: 0,
     currentPage: 0,
+    showPopup: false,
+    selectedDateOption: 1,
+    headingDate: `${year}${month < 10 ? '0' + month : month}${day - 1}`,
+    selectedDate: `${dateValue}-${day - 1}`,
+    currentDate: `${dateValue}-${day - 1}`,
+    minDate: `${dateValue}-${day}`,
+    maxDate: `${dateValue}-${day + 4}`,
+    selectedRow: {},
+    dateError: false,
   })
 
-
   useEffect(() => {
-    setState({...state, filterRows: rows})
-  }, [rows.length])
+    setState({...state, filterRows: rows, ...updatePaginationData(rows, state.itemOffset || 0) })
+  }, [rows.length, renderComp])
 
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('view', eachRow)}>   <BiQrScan className='mt-2 ms-3 color-skyblue'/> </span>
         <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('regenerate', eachRow)}>   <GrRefresh className='mt-2 ms-3 color-skyblue force-skyblue'/> </span>
-        <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload className='mt-2 ms-3 color-skyblue'/> </span>
+        {eachRow.qr_path !== '' && <>
+          <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('view', eachRow)}>   <BiQrScan className='mt-2 ms-3 color-skyblue'/> </span>
+          <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload className='mt-2 ms-3 color-skyblue'/> </span>
+        </>}
       </>
     )
   }
@@ -41,19 +67,10 @@ const ManageQrComponent = ({ headers, rows }) => {
     if (action === 'view') {
       window.open(eachRow.qr_path, '_blank')
     } else if (action === 'regenerate') {
-      handleRegenerateQrCode(eachRow);
+      handleRegenerateQrCode(eachRow)
     } else {
       handleDownload(eachRow);
     }
-  }
-
-  const handleRegenerateQrCode = async (eachRow) => {
-    await APICALL.service(`${regenerateQrCode}`, 'POST', eachRow)
-      .then((response) => {
-        if(response.status === 200) {
-          customAlert('success', `Regenerating successfully!`, 2000);
-        }
-      }).catch((error) => window.alert('Error occurred'));
   }
 
   const handleDownload = async (eachRow) => {
@@ -124,6 +141,116 @@ const ManageQrComponent = ({ headers, rows }) => {
 //------------------- Pagination code -------------------------//
 //-------------------
 
+  const showDateSelectModal = () => { //NOSONAR
+    const { showPopup, selectedDateOption, selectedDate, minDate, maxDate, dateError } = state;
+    return (
+      <>
+          <Modal size={'lg'} show={showPopup} onHide={handleClose}>
+            <Modal.Header closeButton style={{paddingLeft: '30%'}}>
+              <Modal.Title> Header </Modal.Title>
+            </Modal.Header>
+          <Modal.Body>
+              <div>
+                <div className="col-md-12 row p-0 m-0">
+                  <RadioField
+                      id="1"
+                      checked={selectedDateOption === 1}
+                      disabled={false}
+                      handleChange={handleRadioSelect}
+                      label="Take current date"
+                      className="col-md-6"
+                    />
+                    <RadioField
+                        id="2"
+                        checked={selectedDateOption === 2}
+                        disabled={false}
+                        handleChange={handleRadioSelect}
+                        label="Take future date"
+                        className="col-md-6"
+                      />
+                      <DateField
+                         id="selectedDate"
+                         isDisabled= {selectedDateOption === 1}
+                         placeholder={'date'}
+                         handleChange={handleChange}
+                         className="col-md-6 my-3 mx-2"
+                         value={selectedDate}
+                         minDate={minDate}
+                         maxDate={maxDate}
+                        />
+                       {selectedDateOption === 2 && <small className="small"> Future date only next 5 days are allowed </small>} <br />
+                       {dateError && <small className="my-3 small" style={{color:'red'}}> Date should be between {formatDate(minDate)} - {formatDate(maxDate)} </small>}
+                </div>
+              </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <p className="popup-back-btn" onClick={handleClose}> Back </p>
+            <Button variant="secondary" onClick={handleRegenerateQrCode}>
+              Regenerate
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    )
+  }
+
+  const handleRegenerateQrCode = async (eachRow) => {
+    if(state.selectedDateOption === 1 || checkDateFieldValid()) {
+      let postData = {...eachRow, entityId: entityId, selectedDate: state.headingDate }
+      await APICALL.service(`${regenerateQrCode}`, 'POST', postData)
+        .then((response) => {
+          if(response.status === 200) {
+            setState({...state,
+              filterRows: response.data,
+              dateError: false,
+              showPopup: false,
+              selectedRow: {},
+              selectedDateOption: 1,
+              selectedDate: state.currentDate,
+              ...updatePaginationData(response.data, state.itemOffset || 0)
+            })
+            customAlert('success', `Regenerating successfully!`, 2000);
+          }
+        }).catch((error) => window.alert('Error occurred'));
+    } else {
+      setState({...state, dateError: true});
+    }
+  }
+
+  const handleClose = () => {
+    setState({...state,
+      dateError: false,
+      selectedRow: {},
+      showPopup: false,
+      selectedDateOption: 1,
+      selectedDate: state.currentDate
+    })
+  }
+
+  const handleRadioSelect = ( { target: { id = 1} } ) => {
+    setState({...state,
+      selectedDateOption: Number(id) || 1,
+      selectedDate: Number(id) === 1 ? state.currentDate : ''
+    })
+  }
+
+  const handleChange = ( { target: {value = '',  id = 'selectedDate'} } ) => {
+    setState({...state,
+      [id]: value,
+      dateError: false
+    })
+  }
+
+  const checkDateFieldValid = () => {
+    let value = state.selectedDate;
+    return !value || (new Date(value).getTime() >= new Date(state.minDate).getTime() && new Date(value).getTime() <= new Date(state.maxDate).getTime()) ? true: false
+  }
+
+  const onSelect = (e) => {
+    loadData(e.value);
+    setState({...state, headingDate: e.value});
+  }
+
   return (
     <>
       <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage QR code`} </h4>
@@ -165,7 +292,19 @@ const ManageQrComponent = ({ headers, rows }) => {
              RESET
            </button>
          </div>
-         <div className="col-md-3 text-end py-3" style={{fontSize: 'x-large'}}> Date: {formatDate(new Date())} </div>
+        </div>
+        <div className="col-md-10 row m-0 p-0 text-end py-3">
+        <span style={{fontSize: 'x-large', paddingTop: '10px'}} className="col-md-2 text-start"> Date: </span>
+          <MultiSelectField
+              id="headingDate"
+              options={dateOptions}
+              standards={dateOptions.filter(val => val.value === state.headingDate)}
+              disabled={false}
+              handleChange={onSelect}
+              classNamePrefix="qr-custom-multiselect"
+              isMulti={false}
+              className="col-md-5"
+            />
         </div>
       </div>
       <div className="max-height-420">
@@ -208,6 +347,7 @@ const ManageQrComponent = ({ headers, rows }) => {
           {`Back`}
         </button>
       </div>
+      {/*showDateSelectModal()*/}
     </>
   );
 }

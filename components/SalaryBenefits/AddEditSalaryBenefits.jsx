@@ -384,7 +384,7 @@ const AddEditSalaryBenefits = (props) => {
             {state.newItems.map((item, index) =>
               <tr key={index} id={index}>
                 <td style={{ width: '25%' }} className='poppins-regular-18px'> {item.name} </td>
-                <td style={{ width: '15%' }} className='poppins-regular-18px'> {item.value ? `${item.value} ${item.valueType === 1 ? '€' : '%'}` : ''} </td>
+                <td style={{ width: '15%' }} className='poppins-regular-18px'> {item.value ? `${item.value} ${item.value_type === 1 ? '€' : '%'}` : ''} </td>
                 <td style={{ width: '25%' }} className='poppins-regular-18px'> {item.occurence ? salaryBenefitOccurenceOptions.filter(val => val.value === item.occurence)[0]['label'] : ''} </td>
                 <td style={{ width: '30%' }} className='poppins-regular-18px'> {formatDate(item.date) ? formatDate(item.date) : '--'} </td>
                 <td style={{ width: '10%' }} className='poppins-regular-18px'> {getNeededActions(item, index)} </td>
