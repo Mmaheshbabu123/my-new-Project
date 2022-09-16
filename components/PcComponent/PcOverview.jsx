@@ -163,7 +163,7 @@ const PcOverview = (params) => {
 				<div className={` ${cat_leftsec}`}>
 					
 					{pc && (
-						<div className='epc'>
+						<div className='epc epc_height'>
 							{
 							params.type != 'viewpc' && (
 								<div className={cat_subsec_type ==0?"text-end mb-3 ":"invisible"} style={pc_view_type =='addpc'?{marginBottom:'1.5rem'}:{}}>
@@ -450,7 +450,7 @@ const PcOverview = (params) => {
 							<div className="text-start col-md-6 align-items-center d-flex">
 								<button
 									type="button"
-									className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px shadow-none"
+									className="bg-white border-0 poppins-regular-18px shadow-none text-decoration-underline"
 									onClick={() => {
 										if (router.query.fid) {
 											router.push('/manage-function');
