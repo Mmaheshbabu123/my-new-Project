@@ -159,7 +159,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           <tbody>
             {state.currentItems.map(eachRow => <tr className='border poppins-regular-16px p-2' key={eachRow.sb_id} id={eachRow.sb_id}>
               <td className='poppins-regular-16px py-2'> {eachRow.name} </td>
-              <td className='poppins-regular-16px'> {eachRow.value ? `${eachRow.value} ${eachRow.valueType === 1 ? '€' : '%'}` : ''} </td>
+              <td className='poppins-regular-16px'> {eachRow.value ? `${eachRow.value} ${eachRow.value_type === 1 ? '€' : '%'}` : ''} </td>
               <td className='poppins-regular-16px'> {eachRow.occurence ? salaryBenefitOccurenceOptions.filter(val => val.value === eachRow.occurence)[0]['label'] : ''} </td>
               <td className='poppins-regular-16px'> {formatDate(eachRow.date) ? formatDate(eachRow.date) : '--'} </td>
               <td className='poppins-regular-16px'> { getNeededActions(eachRow) } </td>
