@@ -359,11 +359,11 @@ const Addage = () => {
 							>
 
 
-								<option value="">Select age</option>
-								<option value="4">21 years</option>
-								<option value="3">20 years</option>
-								<option value="2">19 years</option>
-								<option value="1">18 years</option>
+								<option value="" className='poppins-medium-18px opt_value'>Select age</option>
+								<option value="4" className='poppins-medium-18px opt_value'>21 years</option>
+								<option value="3" className='poppins-medium-18px opt_value'>20 years</option>
+								<option value="2" className='poppins-medium-18px opt_value'>19 years</option>
+								<option value="1" className='poppins-medium-18px opt_value'>18 years</option>
 							</select>
 							<p className="error">{error_age}</p>
 						</div>
@@ -508,7 +508,7 @@ const Addage = () => {
 						<div className="text-start col-md-6 p-0 align-self-center">
 							<button
 								type="button"
-								className={pc_view_type == 'addpc'?"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none px-0":"bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none"}
+								className={pc_view_type == 'addpc'?"bg-white bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline":"bg-white bg-white  border-0 poppins-regular-18px shadow-none text-decoration-underline"}
 								onClick={() => {
 									setCurrent_sec(2);
 								}}

@@ -263,6 +263,7 @@ body {
 	--font-size-19px: 1.1875rem;
 	--font-size-22px: 1.375rem;
 	--font-size-24px: 1.5rem;
+	--font-size-30px:1.875rem;
 	/* Line Height */
 	--line-height-24px: 1.5rem;
 	--line-height-26px: 1.625rem;
@@ -273,6 +274,7 @@ body {
 	--line-height-33px: 2.0625rem;
 	--line-height-37px: 2.3125rem;
 	--line-height-40px: 2.5rem;
+	--line-height-44px: 2.75rem;
 
 	/* font family */
 	--font-family-poppins-regular: 'Poppins-regular';
@@ -325,14 +327,14 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
-.poppins-regular-16px-white 
+.poppins-regular-16px-white
 {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m) !important;
 	font-style: normal;
 	font-weight: 400;
-} 
+}
 .nav-pills .nav-link.active .poppins-regular-16px-white,.nav-pills .nav-link.active .poppins-regular-18px-white
 {
 	color: var(--color-white) !important;
@@ -391,6 +393,16 @@ body {
 	font-size: var(--font-size-19px) !important;
 	line-height: var(--line-height-31px) !important;
 	font-family: var(--font-family-poppins-regular) !important;
+	color: var(--color-white);
+	background-color: var(--color-purple);
+	font-weight: normal;
+}
+.poppins-medium-18px-next-button,
+.poppins-medium-18px-next-button:hover,
+.poppins-medium-18px-next-button:focus {
+	font-size: var(--font-size-18px) !important;
+	line-height: var(--line-height-29px) !important;
+	font-family: var(--font-family-poppins-medium) !important;
 	color: var(--color-white);
 	background-color: var(--color-purple);
 	font-weight: normal;
@@ -903,6 +915,7 @@ label {
 .legal15,
 .invoice70,
 .invoice71,
+.online42,
 .invoice75 {
 	margin-bottom: 80px !important;
 }
@@ -918,7 +931,7 @@ label {
 	color: var(--color-white);
 } */
 .add-pln {
-	height: 55px;
+	height: 45px;
 }
 .week-height {
 	min-height: 40vh;
@@ -1386,7 +1399,7 @@ span .firsrt-line:last-child() {
 }
 .position-sticky-pc {
 	position: sticky;
-	top: 67px;
+	top: 88px;
 	z-index: 999;
 	background: white;
 }
@@ -1776,7 +1789,7 @@ input[type="text"]::placeholder {
 }
 .field_height input,
 .field_height button {
-	height: 55px;
+	height: 45px;
 	border: 1px solid var(--color-input-border-lightgrey);
 }
 .field_height button,

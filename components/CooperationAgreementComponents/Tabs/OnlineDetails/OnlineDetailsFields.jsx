@@ -1,6 +1,6 @@
 export const onlineDetailsRow1 = [
   {id:40,key_name:'Email address legal entity'},
-  {id:41,key_name:'Email address digital invoicing'},
+  //{id:41,key_name:'Email address digital invoicing'},
   {id:42,key_name:'Email address prestatieblad'},
 ];
 export const onlineDetailsRow2 = [

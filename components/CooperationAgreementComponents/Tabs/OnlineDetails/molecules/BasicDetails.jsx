@@ -21,7 +21,7 @@ const BasicDetails = (props) => {
     let  fieldsArray = [];
     onlineRow.map(data=>{
      fieldsArray.push(
-       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
+       <div className = {`col-md-12 ${styles['add-div-margings']}  online${data.id}`}>
        <LabelField title={data.key_name} customStyle = {{display:''}}/> {requiredFields['tab_4'][data.id] && <RequiredField />}
        <InputField
        id = {data.id}

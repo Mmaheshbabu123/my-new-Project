@@ -300,7 +300,7 @@ function ManageProject(props) {
 						</div>
 						{/* ---------------------Manage project table-------------------------*/}
 
-						<div className="form-check p-0 mt-2 tab-pane fade show ">
+						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table">
 							<table className="table mt-3 mb-3">
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
@@ -403,7 +403,7 @@ function ManageProject(props) {
 				<div className="text-start col-md-6">
 					<button
 						type="button"
-						className="bg-white  back-btn-text  border-0 poppins-medium-18px  float-sm-right mt-5 mb-5 "
+						className="bg-white border-0 poppins-regular-18px float-sm-right mt-5 mb-5 px-0 text-decoration-underline"
 						onClick={() => {
 							window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 						}}

@@ -288,7 +288,7 @@ function ManageArchivedProject(props) {
 							</div>
 						</div>
 
-						<div className="form-check p-0 mt-2 tab-pane fade show ">
+						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table">
 							{/* ---------------------Manage project table-------------------------*/}
 
 							<table className="table mt-3 mb-3">
@@ -304,10 +304,10 @@ function ManageArchivedProject(props) {
 								<tbody>
 									{archivedprojectTemp2.length > 0 &&
 										archivedprojectTemp2.map((result) => (
-											<tr className="border poppins-regular-18px p-2" key={result.id}>
-												<td className="poppinns-regular-18px p-2 ps-4">{result.project_name}</td>
-												<td className="poppinns-regular-18px p-2">{result.project_location}</td>
-												<td className="poppinns-regular-18px p-2">
+											<tr className="border p-2" key={result.id}>
+												<td className="poppins-regular-18px p-2 ps-4 line_height_archieved_project">{result.project_name}</td>
+												<td className="poppins-regular-18px p-2 line_height_archieved_project">{result.project_location}</td>
+												<td className="poppins-regular-18px p-2 line_height_archieved_project">
 													{result.address.replace(',', '').length > 7 ? result.address : '-'}
 												</td>
 											</tr>
@@ -349,7 +349,7 @@ function ManageArchivedProject(props) {
 				<div className="text-start col-md-6">
 					<button
 						type="button"
-						className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5 "
+						className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5 px-0"
 						onClick={() => {
 							window.location.assign(
 								process.env.NEXT_PUBLIC_APP_URL_DRUPAL +

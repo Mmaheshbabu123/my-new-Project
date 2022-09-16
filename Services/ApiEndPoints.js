@@ -90,6 +90,12 @@ export const fetchEmpDetails = BASE_URL + "fetch-emp-details/"
 export const updateEmployeePlanning = BASE_URL + "update-employee-planning"
 export const getPlanningEmployee = BASE_URL + "get-planningemployee/"
 export const fetchEmployeeList =  BASE_URL + "getEmployeeByUsingCompanyId/"
+export const fetchPlanningEmployee =  BASE_URL + "get-planning-employee/"
+export const fetchPlanningFunction =  BASE_URL + "get-planning-functions/"
+
+
+
+
 
 
 
@@ -216,3 +222,10 @@ export const getCompanyLocationByEmployerId = BASE_URL + "get-company-locations"
 export const downloadQrCode = BASE_URL + "download-qr-code";
 export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
 //-------------------
+
+//----------------- TODOS ---------------//
+
+export const getMyTodos = BASE_URL + 'get-mytodos';
+
+
+//-----------------

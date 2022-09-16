@@ -11,6 +11,12 @@ const nextConfig = {
   images: {
     // domains: [process.env.CMS_BACKEND],
   },
+  cssLoaderOptions: {
+    url: false
+  }
 }
 
-module.exports = nextConfig
+const withPWA = require('next-pwa')({
+  dest: 'public'
+})
+module.exports = withPWA({ nextConfig })
