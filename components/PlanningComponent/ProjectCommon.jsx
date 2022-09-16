@@ -10,7 +10,7 @@ const ProjectCommon = (props) => {
 	return (
 		<div className="container-fluid manage_project">
 			<div className="row">
-				<h1 className="my-3 font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage projects</h1>
+				<h1 className="py-4 position-sticky-pc font-weight-bold   px-0  bitter-italic-normal-medium-24">Manage projects</h1>
 				<div className="col-md-12 row m-0 ps-0">
 					<ul className="nav nav-tabs border-0 mb-3 mt-3" id="myTab0" role="tablist">
 						<li className="hi-50 me-5" role="presentation">

@@ -403,7 +403,7 @@ function ManageProject(props) {
 				<div className="text-start col-md-6">
 					<button
 						type="button"
-						className="bg-white border-0 poppins-regular-18px float-sm-right mt-5 mb-5 px-0 text-decoration-underline"
+						className="bg-white border-0 poppins-regular-18px float-sm-right my-4 px-0 text-decoration-underline d-inline-block"
 						onClick={() => {
 							window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 						}}

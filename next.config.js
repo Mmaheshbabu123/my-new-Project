@@ -1,8 +1,4 @@
 const nextConfig = {
-  i18n: {
-    locales: ['en-US', 'fr', 'nl-NL'],
-    defaultLocale: 'en-US'
-  },
   reactStrictMode: false,
   serverRuntimeConfig: {
     // Will only be available on the server side
@@ -15,6 +11,12 @@ const nextConfig = {
   images: {
     // domains: [process.env.CMS_BACKEND],
   },
+  cssLoaderOptions: {
+    url: false
+  }
 }
 
-module.exports = nextConfig
+const withPWA = require('next-pwa')({
+  dest: 'public'
+})
+module.exports = withPWA({ nextConfig })

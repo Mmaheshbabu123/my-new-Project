@@ -99,6 +99,7 @@
 	src: url("/fonts/Bitter-MediumItalic.ttf");
 }
 body {
+	font-family: var(--font-family-poppins-regular) !important;
 	/* for title */
 	--color-purple: #7761a7;
 	/* for lable and footer background-color */

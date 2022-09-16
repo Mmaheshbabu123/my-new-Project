@@ -148,15 +148,20 @@ const PcOverview = (params) => {
 
 	return (
 		<div className="container-fluid p-0">
-			<div className="row pt-4 min-vh-75 pc-height2">
-				<div className={` ${cat_leftsec}`}>
-					{params.type == 'editpc' ? (
-						<p className="mt-1 mb-5 font-weight-bold   px-0  bitter-italic-normal-medium-24">Edit paritair comite</p>
+			<div className='row position-sticky-pc'>
+				<div className='col-md-12'>
+				{params.type == 'editpc' ? (
+						<p className="py-4 font-weight-bold   px-0  bitter-italic-normal-medium-24 ">Edit paritair comite</p>
 					) : params.type == 'viewpc' ? (
-						<p className="mt-1 mb-5 font-weight-bold   px-0  bitter-italic-normal-medium-24">View paritair comite</p>
+						<p className=" py-4 font-weight-bold   px-0  bitter-italic-normal-medium-24">View paritair comite</p>
 					) : (
 						''
 					)}
+				</div>
+			</div>
+			<div className="row min-vh-75 pc-height2">
+				<div className={` ${cat_leftsec}`}>
+					
 					{pc && (
 						<div className='epc'>
 							{
@@ -463,7 +468,7 @@ const PcOverview = (params) => {
 						</div>
 					)}
 				</div>
-				<div className={`col pt-2 ${cat_rightsec} ${pc_view_type == 'editpc'?'mt-5 pt-4':pc_view_type == 'viewpc'?'mt-4':''}`}>
+				<div className={`col pt-2 ${cat_rightsec} ${pc_view_type == 'editpc'?'mt-5 pt-4':pc_view_type == 'viewpc'?'':''}`}>
 					{pc_view_type != 'viewpc' && (
 						<div className="text-center form-group row m-0 ">
 							<button
