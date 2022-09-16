@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 
 const t = (input) =>{
 	console.log('input', input);
-    const ISSERVER = typeof window === "undefined";
+   const ISSERVER = typeof window === "undefined";
     if(!ISSERVER) {
+//	console.log('lang', (localStorage.getItem('servername_'+'lang') || '')); 
       let lang = localStorage['servername_'+'lang'] !== undefined ? localStorage['servername_'+'lang'] : 'en'; 
       let translations = localStorage['servername_'+'translations'] !== undefined ? JSON.parse(localStorage['servername_'+'translations']) : {};
       if(translations[lang] !== undefined){
@@ -41,11 +42,7 @@ const Translation = (Component, stringList) => {
             }) 
 	      };
         if(stringList.length > 0){
-          const ISSERVER = typeof window === "undefined";
-		    if(!ISSERVER) {
 		getTranslationData();
-		    
-		    }
         }
         }, []);
         return <Component t={t}/> 
