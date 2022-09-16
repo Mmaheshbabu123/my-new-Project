@@ -26,7 +26,7 @@ const dateOptions = [-1, 0, 1, 2, 3, 4].map(val => { return (
   }
 )})
 
-const ManageQrComponent = ({ props: { headers, rows, renderComp, entityId }, loadData }) => {
+const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, entityId }) => {
   const router = useRouter();
   const [state, setState] = useState({
     searchTerm: '',

@@ -20,7 +20,6 @@ const MangeQrCodeIndex = (props) => {
     , rows: []
     , headers: ['Company', 'Location', 'Actions']
     , renderComp: 0
-    , entityId: entityid
   });
 
   useEffect(() => { loadData() }, [entityid])
@@ -44,7 +43,7 @@ const MangeQrCodeIndex = (props) => {
         <div className='mt-3 md-3'>
           {state.loaded === true ?
               <Suspense fallback={`Loading...`}>
-                <ManageQrComponent props = {state} loadData={loadData}/>
+                <ManageQrComponent props = {state} entityId={entityid} loadData={loadData}/>
               </Suspense> : <div>Loading...</div> }
         </div>
       </div>
