@@ -65,7 +65,7 @@ const ListView = (props) => {
 								aria-expanded="false"
 								aria-controls={`flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
 							>
-								{props.sectype=='pc' &&<span className="first-col poppins-medium-20px"> {props.pc_number}</span>}
+								{props.sectype=='pc' &&<span className="first-col poppins-medium-18px"> {props.pc_number}</span>}
 								{/* <span className={`${props.level=='3'?styles.section_funct:styles.section_cat} ${props.sectype=='pc'?'ms-4 poppins-medium-18px':''}`}>{props.title}</span> */}
 								<span className={`${props.level=='3'?styles.section_funct:styles.section_cat} ${props.sectype=='pc'?' poppins-medium-18px second-col':''}`}>{props.title}</span>
 							</button>

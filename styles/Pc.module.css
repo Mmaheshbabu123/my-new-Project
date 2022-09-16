@@ -92,8 +92,8 @@ margin: 0px !important
 }
 
 .section_cat {
-    font-size: var(--font-size-20px);
-    line-height: var(--line-height-33px);
+    font-size: var(--font-size-18px);
+    line-height: var(--line-height-29px);
     font-family: var(--font-family-poppins-medium);
     color: var(--color-label-footer-gray) !important;
 }
@@ -102,8 +102,8 @@ margin: 0px !important
 .section_funct {
     color: var(--color-label-footer-gray) !important;
     font-family: var(--font-family-poppins-light) !important;
-    font-size: var(--font-size-20px) !important;
-    line-height: var(--line-height-33px) !important;
+    font-size: var(--font-size-18px) !important;
+    line-height: var(--line-height-29px) !important;
     font-weight: normal;
 
 }

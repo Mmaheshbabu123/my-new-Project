@@ -232,3 +232,15 @@ input[type="radio"]
 {
   vertical-align: middle;
 }
+.fst-normal thead::after
+{
+  display: none;
+}
+.fst-normal
+{
+  margin-bottom: 0px;
+}
+.epc_height .accordion-body
+{
+  padding: 0.5rem 1.25rem !important;
+}
