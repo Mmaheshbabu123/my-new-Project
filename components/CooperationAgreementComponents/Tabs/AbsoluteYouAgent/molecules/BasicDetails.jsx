@@ -6,15 +6,16 @@ import CheckBoxField from '@/atoms/CheckBoxField';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import ValidateMessage from '@/atoms/validationError';
 import styles from '../absoluteAgent.module.css';
+import { whoWillSignOptions, languageOptions } from '../../../Definations';
 // import { helpers } from '../../../CooperationAgreementHelper'; //.
 
-import { whoWillSignOptions } from '../../../Definations';
 
 var startDateAgreement    = 1;
 var absoluteConsultant    = 2;
 var absoluteConsultantNum = 3;
 var activateAddProject    = 4;
 var whoWillSign           = 80;
+var languageField         = 81;
 var consultNumber = [];
 var consultantArray = [];
 var consultantNumArray = [];
@@ -46,7 +47,8 @@ const BasicDetails = (props) => {
       let obj = consultantArray.length ? consultantArray[0] : {};
       let selectedConsultNumber = consultNumber.filter(val => Number(val.value) === tab_1[absoluteConsultantNum]);
       return {...tab_1,
-        [whoWillSign]: tab_1[whoWillSign] || [],
+        [whoWillSign]: tab_1[whoWillSign] && tab_1[whoWillSign].map(Number) || [],
+        [languageField]: tab_1[languageField] || [],
         [absoluteConsultant]: Number(obj.value) || 0,
         [absoluteConsultantNum]: selectedConsultNumber.length ? selectedConsultNumber[0].value : 0,
       }
@@ -89,17 +91,17 @@ const BasicDetails = (props) => {
     updateStateChanges({ tab_1, element_status });
   }
 
-  const handleSignCheckChange = ({ target: { value, checked } }) => {
-    let valueId = Number(value);
-    let selectedIds = tab_1[whoWillSign];
-    element_status['tab_1'].push(whoWillSign)
+  const handleCheckboxChange = ({ target: { value, checked } }, stateKey = '') => {
+    let valueId = stateKey === languageField ? value: Number(value);
+    let selectedIds = tab_1[stateKey];
+    element_status['tab_1'].push(stateKey)
     if(checked) {
       selectedIds.push(valueId);
     } else {
       selectedIds.indexOf(valueId) > -1 ?
         selectedIds.splice(selectedIds.indexOf(valueId), 1) : null;
     }
-    tab_1[whoWillSign] = selectedIds;
+    tab_1[stateKey] = selectedIds;
     updateStateChanges({ tab_1, element_status })
   }
 
@@ -155,6 +157,26 @@ const BasicDetails = (props) => {
             />
       </div>
       <div className={`${styles['add-div-margings']}`}>
+          <LabelField title="In which language Werkpostfiche should be present?" />
+          {languageOptions.map(option => {
+            return (
+              <div key={`lang_${option.id}`}>
+              <CheckBoxField
+                  id={option.id}
+                  tick={tab_1[languageField] && tab_1[languageField].includes(option.id)}
+                  disabled={false}
+                  value={option.id}
+                  onCheck={(e) => handleCheckboxChange(e, languageField)}
+                  customStyle={{margin: '2px 0', cursor:'pointer'}}
+                  name={option.label}
+                  className="col-md-2"
+                />
+              </div>
+            )
+          })
+          }
+      </div>
+      <div className={`${styles['add-div-margings']}`}>
           <LabelField title="Who will sign the Werkpostfiche?" />
           {whoWillSignOptions.map(option => {
             return (
@@ -164,7 +186,7 @@ const BasicDetails = (props) => {
                   tick={tab_1[whoWillSign] && tab_1[whoWillSign].includes(option.id)}
                   disabled={false}
                   value={option.id}
-                  onCheck={handleSignCheckChange}
+                  onCheck={(e) => handleCheckboxChange(e, whoWillSign)}
                   customStyle={{margin: '2px 0', cursor:'pointer'}}
                   name={option.label}
                   className="col-md-2"

@@ -52,6 +52,14 @@ export const whoWillSignOptions = [
     id: 3, label: 'Location manager'
   }
 ];
+
+export const languageOptions = [
+  {
+    id: 'nl', label: 'Dutch'
+  },{
+    id: 'fr', label: 'French'
+  }
+];
 //-----
 
 

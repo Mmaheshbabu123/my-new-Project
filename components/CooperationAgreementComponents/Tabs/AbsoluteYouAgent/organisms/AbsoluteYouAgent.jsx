@@ -11,6 +11,7 @@ var absoluteConsultant    = 2;
 var absoluteConsultantNum = 3;
 var activateAddProject    = 4;
 var whoWillSign           = 80;
+var languageField         = 81;
 const AbsoluteYouAgent = (props) => {
   const { state: { selectedTabId, renderTabComponents, root_parent_id, workerServentsCompLoaded, absoluteAgentTabRender,filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   useEffect(() => {
@@ -29,8 +30,9 @@ const AbsoluteYouAgent = (props) => {
       tab_1[startDateAgreement]     = basicDetails && basicDetails['startdateagreement'] || helpers.formatDate(new Date());
       tab_1[absoluteConsultant]     = basicDetails && Number(basicDetails['absoluteConsultant'])     || '';
       tab_1[absoluteConsultantNum]  = basicDetails && Number(basicDetails['absoluteConsultantNum'])  || '';
-      tab_1[activateAddProject]     = basicDetails && Number(basicDetails['activateAddProject'])     || '';
-      tab_1[whoWillSign]            = basicDetails && basicDetails['whoWillSign'] || '';
+      tab_1[activateAddProject]     = basicDetails && Number(basicDetails[activateAddProject])     || '';
+      tab_1[whoWillSign]            = basicDetails && basicDetails[whoWillSign] || [];
+      tab_1[languageField]          = basicDetails && basicDetails[languageField] || [];
       tab_1['worksServantsData']    = worksServantsData || {};
       data['coeffPageData']         = cooperationCoeffData || {};
     } else
