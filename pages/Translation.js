@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { APICALL } from '../Services/ApiServices';
 
 
-const t = (input) => {
+const TranslationFunction = (input) => {
   const [hydration, setHydration] = useState(false);
   useEffect(() => { setHydration(true) })
   const ISSERVER = typeof window === "undefined";
@@ -45,7 +45,7 @@ const Translation = (Component, stringList) => {
         getTranslationData();
       }
     }, []);
-    return <Component t={t} />
+    return <Component t={TranslationFunction} />
   };
 
   return TranslatedComponent;
