@@ -1,25 +1,27 @@
-import Translation from './Translation';
+import Translation from '@/Translation';
 import  Link  from 'next/link';
 import { useRouter} from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { APICALL } from '../Services/ApiServices';
+import dynamic from "next/dynamic";
+// const Translation = dynamic(() => import('@/Translation'), { ssr: false })
 
 const Sample = (props) =>{
     let router = useRouter();
     const { t } = props;
-    const [state, setState] = useState({'languages': [], 'lang': ''}); 
+    const [state, setState] = useState({'languages': [], 'lang': ''});
     useEffect(()=>{
       let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get_languages';
         APICALL.service(url, 'GET')
           .then((result) => {
 	   if(result['status'] == 200){
-	     setState({...state, ...{'languages': result['data'], 'lang': localStorage['servername_'+'lang'] !== undefined ? localStorage['servername_'+'lang'] : 'en'}});  
+	     setState({...state, ...{'languages': result['data'], 'lang': localStorage['servername_'+'lang'] !== undefined ? localStorage['servername_'+'lang'] : 'en'}});
 	   }else{
 	     alert('Failed');
 	   }
 	  })
     }, []);
-      
+
 	const handleLangChange = (e) =>{
 	  localStorage.setItem('servername_'+'lang', e.target.value);
 	  router.reload();
@@ -41,7 +43,12 @@ console.log(t('Email'));
 		  <li>{t('EmailPassword')}</li>
 		  <li>{t('Contact')}</li>*/}
 		  <li>{t('Email')}</li>
-		 </ul>		 
+		 </ul>
 		 </div>
 }
-export default Translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword', 'Contact']);
+
+function moviePropsAreEqual(prevValues, nextValues) {
+  console.log({prevValues, nextValues});
+  return false;
+}
+export default React.memo(Translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword', 'Contact']), moviePropsAreEqual);

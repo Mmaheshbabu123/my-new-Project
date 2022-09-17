@@ -20,6 +20,9 @@
       "@/Constants": [
         "Services/Constants"
       ],
+      "@/Translation": [
+        "pages/Translation"
+      ],
     },
     "target": "es5",
     "lib": [
