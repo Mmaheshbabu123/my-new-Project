@@ -4,30 +4,32 @@ import Select from 'react-select';
 import { addplanningemployee, fetchPlanningEmployee } from '../../Services/ApiEndPoints';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { cloneDeep } from "lodash";
+import { cloneDeep } from 'lodash';
 
 const AddEmployee = () => {
-	const [ empList, setEmpList ] = useState([]);
-	const [ tempEmpList, setTempEmpList ] = useState([]);
-
-	const [ pclist, setPclist ] = useState([]);
-	const [ tempPcList, setTempPcList ] = useState([]);
-
 	const router = useRouter();
 	const p_unique_key = router.query.p_unique_key;
-	const [ selectedOption, setSelectedOption ] = useState([]);
-	const [ tempOption, setTempOption ] = useState([]);
-	//--------------------- Add another and remove field ------------------------------//
+
+	const [ empList, setEmpList ] = useState([]);
+	const [ tempEmpList, setTempEmpList ] = useState([]);
+	const [ pclist, setPclist ] = useState([]);
+	const [ tempPcList, setTempPcList ] = useState([]);
 	const [ inputlist, setInputlist ] = useState([ { pc: [], employees: [], pc_error: '', emp_error: '' } ]);
 	const [ previousVal, setPreviousVal ] = useState([]);
+	const [buttonDisable, setButtonDisable] = useState(false);
 
+	/**
+	 * 
+	 * @param {*} type 
+	 * @param {*} val 
+	 * @param {*} index 
+	 */
 	const handleinputchange = (type, val, index) => {
 		const list = [ ...inputlist ];
 		if (type == 'employees') {
 			list[index].employees = val;
 			list[index].emp_error = '';
 			setInputlist(list);
-
 			updatelist('emp', list);
 		} else {
 			list[index].pc = [ val ];
@@ -37,12 +39,19 @@ const AddEmployee = () => {
 		}
 	};
 
+	/** updatelist: Update dropdown list based on the value selected
+	 * 
+	 * @param {*} type 
+	 * @param {*} list 
+	 */
 	const updatelist = (type, list) => {
+		const temp = [ ...tempEmpList ];
+
+		console.log(temp);
 		if (type == 'emp') {
-			const temp = [ ...tempEmpList ];
 			list.map((v1, k1) => {
 				v1.employees.map((v2) => {
-					temp.splice(temp.indexOf(v2), 1);
+					temp.splice(temp.findIndex((a) => a.value == v2.value), 1);
 				});
 			});
 			setEmpList(temp);
@@ -50,12 +59,15 @@ const AddEmployee = () => {
 		if (type == 'pc') {
 			var pcs = [ ...tempPcList ];
 			list.map((v1, k1) => {
-				pcs.splice(pcs.indexOf(v1.pc[0]), 1);
+				pcs.splice(pcs.findIndex((a) => a.value == v1.pc[0].value), 1);
 			});
 			setPclist(pcs);
 		}
 	};
 
+	/**
+	 *  Add another block to select pc and employees
+	 */
 	const handleaddanother = () => {
 		var error = validate(inputlist);
 		if (!error) {
@@ -64,6 +76,11 @@ const AddEmployee = () => {
 			window.scrollTo(0, 0);
 		}
 	};
+
+	/**
+	 * 
+	 * @param {*} index 
+	 */
 	const handleremove = (index) => {
 		const list = [ ...inputlist ];
 		list.splice(index, 1);
@@ -71,7 +88,6 @@ const AddEmployee = () => {
 		updatelist('emp', list);
 		updatelist('pc', list);
 	};
-	//--------------------- Add another and remove field ------------------------------//
 
 	useEffect(
 		() => {
@@ -80,59 +96,48 @@ const AddEmployee = () => {
 			APICALL.service(fetchPlanningEmployee + p_unique_key, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
-						setEmpList(result.data[0]);
-						setTempEmpList(result.data[0]);
-						setPclist(result.data[1]);
-						setTempPcList(result.data[1]);
-						
+						setTempEmpList(cloneDeep(result.data[0]));
+						setTempPcList(cloneDeep(result.data[1]));
+
 						if (result.data[2].length > 0) {
 							setPreviousVal(cloneDeep(result.data[2]));
-							setInputlist(cloneDeep(result.data[2]));							
-						} else if (result.data[1].length == 1) {
+							setInputlist(cloneDeep(result.data[2]));
+							const temp2 = result.data[0];
+							const temp3 = result.data[1];
+
+							result.data[2].map((v1, k1) => {
+								v1.employees.map((v2) => {
+									temp2.splice(temp2.findIndex((a) => a.value == v2.value), 1);
+								});
+									temp3.splice(temp3.findIndex((a) => a.value == v1.pc[0].value), 1);
+							});
+							setEmpList(temp2);
+							setPclist(temp3);
+
+						} else if (result.data[1].length == 1 && result.data[2].length == 0) {
 							var list = [ ...inputlist ];
 							list[0].pc = result.data[1];
 							setInputlist(list);
+							setEmpList(result.data[0]);
+							setPclist(result.data[1]);
+						} else {
+							setEmpList(result.data[0]);
+							setPclist(result.data[1]);
 						}
 					}
 				})
 				.catch((error) => {
 					console.error(error);
 				});
-
-			// APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/selectedEmployees/' + p_unique_key, 'GET')
-			// 	.then((result) => {
-			// 		getOptions(result, 2);
-			// 	})
-			// 	.catch((error) => {
-			// 		console.error(error);
-			// 	});
 		},
 		[ router.query ]
 	);
 
-	// const getOptions = (res, c) => {
-	// 	var options = [];
-	// 	if (res !== null) {
-	// 		res.map((val, key) => {
-	// 			var opt = {
-	// 				value: '',
-	// 				label: ''
-	// 			};
-	// 			opt.value = val.Employee_id;
-	// 			opt.label = val.Employee_name;
-	// 			opt.isDisabled = true;
-
-	// 			options[key] = opt;
-	// 		});
-	// 		if (c == 1) {
-	// 			setEmpList(options);
-	// 		} else {
-	// 			setSelectedOption(options);
-	// 			setTempOption(options);
-	// 		}
-	// 	}
-	// };
-
+	/**
+	 * 
+	 * @param {*} res 
+	 * @returns 
+	 */
 	const validate = (res) => {
 		var count = 0;
 		var data = [ ...res ];
@@ -155,15 +160,21 @@ const AddEmployee = () => {
 		}
 	};
 
+	/**
+	 * 
+	 * @param {*} e 
+	 */
 	const submit = (e) => {
 		e.preventDefault();
 		var err = validate(inputlist);
 
 		if (!err) {
+			setButtonDisable(true);
 			let data = [ inputlist, p_unique_key, previousVal ];
 			APICALL.service(addplanningemployee, 'POST', data)
 				.then((result) => {
 					if (result.status === 200) {
+						setButtonDisable(false);
 						router.push('/planning/functions/' + p_unique_key);
 					} else {
 						console.log(result);
@@ -280,6 +291,7 @@ const AddEmployee = () => {
 					</div>
 					<div className="text-end col-md-6">
 						<button
+						disabled={buttonDisable}
 							type="sumit"
 							className="btn poppins-light-19px-next-button rounded-0 px-3  btn-block float-end shadow-none"
 						>
