@@ -159,7 +159,7 @@ const AddEmployeeType = (props) => {
             value={state.name}
             onChange={(e) => handleInputChange(e)}
             onKeyUp={(e) => handleAdd(e)}
-            placeholder={`${state.typeName}`}
+            placeholder={props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient Name'}
           /></div>
           <div className='col-md-3 col-lg-1 pe-0'>
           {!state.editFlow &&
