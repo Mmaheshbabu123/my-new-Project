@@ -120,7 +120,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
              value={state.searchTerm}
              className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
-             placeholder={`${button_title.includes('employee') ? 'Employee types' : 'Coefficients'}`}
+             placeholder={`${button_title.includes('employee') ? 'Employee types' : 'Coefficient'}`}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
@@ -160,7 +160,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
               </tr>)}
             </tbody>
             :
-            <tbody className='no_records'>
+            <tbody className='no_records text-center'>
                <tr>
                <td style={{width:'100%'}}> No records </td>
                </tr>
@@ -183,7 +183,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
       /></div>}
-        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline text-uppercase">
           {`Back`}
         </button>
       </div>
