@@ -121,7 +121,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
              value={state.searchTerm}
              className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
-             placeholder={`${button_title.includes('employee') ? 'Employee types' : 'Coefficients'}`}
+             placeholder={`${button_title.includes('employee') ? 'Employee types' : 'Coefficient'}`}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
