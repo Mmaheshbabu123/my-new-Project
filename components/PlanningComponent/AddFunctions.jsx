@@ -172,8 +172,8 @@ const AddFunctions = () => {
 			object[parent_index].employee_list[index].radioactive = status;
 			setEmployeeObject(object);
 		} else {
-			object.map((element, key) => {
-				object[key].radioactive = status;
+			object[parent_index].employee_list.map((element, key) => {
+				object[parent_index].employee_list[key].radioactive = status;
 			});
 			setEmployeeObject(object);
 		}
@@ -789,10 +789,10 @@ const AddFunctions = () => {
 																	<input
 																		type="radio"
 																		value={deta['name']}
-																		name={group}
+																		name={group+ind}
 																		className="p-3"
 																		onClick={() => {
-																			updatingObjectradiobutton(null, false);
+																			updatingObjectradiobutton(null, false,key);
 																			updatingObjectFunction(null, deta['id'],key);
 																			updatingCommonObjectfunctionSlary(
 																				deta['id'],
@@ -836,13 +836,13 @@ const AddFunctions = () => {
 																			style={{
 																				display: 'inline-block !important'
 																			}}
-																			name={group}
+																			name={group+ind}
 																			checked={isThere(
 																				0,
 																				employeeobject[key].employee_list[0]['funid'],key
 																			)}
 																			onChange={() => {
-																				updatingObjectradiobutton(null, true);
+																				updatingObjectradiobutton(null, true,key);
 																				updatingObjectFunction(null, 'drop',key);
 																			}}
 																			className="p-3 d-inline align-middle"
