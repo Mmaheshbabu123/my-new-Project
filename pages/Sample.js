@@ -11,6 +11,7 @@ const Sample = (props) => {
 	const { t } = props;
 	const [state, setState] = useState({ 'languages': [], 'lang': '' });
 	useEffect(() => {
+		console.log('---------------');
 		let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get_languages';
 		APICALL.service(url, 'GET')
 			.then((result) => {
@@ -25,9 +26,9 @@ const Sample = (props) => {
 	const handleLangChange = (e) => {
 		localStorage.setItem('servername_' + 'lang', e.target.value);
 		router.reload();
-		setState({ ...state, ...{ lang: e.target.value } });
+//		setState({ ...state, ...{ lang: e.target.value } });
 	}
-	console.log(t('Email'));
+	console.log('hiosho');
 	return <div>
 		<select name="languages" id="language-select" value={state['lang']} onChange={handleLangChange}>
 			{
@@ -37,18 +38,14 @@ const Sample = (props) => {
 			}
 		</select>
 		<ul>
-			{/*<li>{t('Title')}</li>
+		  <li>{t('Title')}</li>
 		  <li>{t('Username')}</li>
 		  <li>{t('Password')}</li>
 		  <li>{t('EmailPassword')}</li>
-		  <li>{t('Contact')}</li>*/}
-			<li>{t('Email')}</li>
+		  <li>{t('Contact')}</li>
+		  <li>{t('Email')}</li>
 		</ul>
 	</div>
 }
 
-function moviePropsAreEqual(prevValues, nextValues) {
-	console.log({ prevValues, nextValues });
-	return false;
-}
-export default React.memo(Translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword', 'Contact']), moviePropsAreEqual);
+export default React.memo(Translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword', 'Contact']));
