@@ -37,7 +37,6 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
 
   const handleActionClick = (action, eachRow) => {
     if (action === 'delete') {
-
       confirmAlert({
         message: `Do you want to delete the ${state.delete_title}?`,
         buttons: [

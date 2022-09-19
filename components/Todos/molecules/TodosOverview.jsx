@@ -123,15 +123,22 @@ const TodosOverview = ({ props }) => {
       eachRow['accept'] = accept;
       eachRow['reject'] = reject;
     }
-    if(type === 'accept') {
-      window.open(eachRow.accept, '_self')
-    }
-    if(type === 'reject') {
-      window.open(eachRow.reject, '_self')
+    if(type === 'accept' || type === 'reject') {
+      showAlert(type, eachRow)
     }
     if(type === 'sign') {
       window.open(eachRow.baseUrl + eachRow.uri, '_self')
     }
+  }
+
+  const showAlert = (action, obj) => {
+    confirmAlert({
+      message: `Do you want to ${action} the invitation?`,
+      buttons: [
+        { label: 'No' },
+        { label: 'Yes', onClick: () => window.open(obj[action], '_self') }
+      ]
+    })
   }
 
   const handleTabClick = (id) => {
