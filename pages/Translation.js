@@ -4,7 +4,7 @@ import { APICALL } from '../Services/ApiServices';
 
 const TranslationFunction = (input) => {
   const [hydration, setHydration] = useState(false);
-  useEffect(() => { setHydration(true) })
+  useEffect(() => { setHydration(true) }, [hydration])
   const ISSERVER = typeof window === "undefined";
   if (!ISSERVER && hydration) {
     let lang = localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en';
@@ -21,7 +21,10 @@ const TranslationFunction = (input) => {
 
 const Translation = (Component, stringList) => {
   const TranslatedComponent = () => {
-    useEffect(() => {
+  const [hydration, setHydration] = useState(false);
+
+
+  useEffect(() => {
       const getTranslationData = async () => {
         let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/translate';
         let lang = localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en';
@@ -44,8 +47,24 @@ const Translation = (Component, stringList) => {
       if (stringList.length > 0) {
         getTranslationData();
       }
+      setHydration(true);	  
     }, []);
-    return <Component t={TranslationFunction} />
+    
+   
+    const t = (input) =>{
+      if (hydration) {
+        let lang = localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en';
+        let translations = localStorage['servername_' + 'translations'] !== undefined ? JSON.parse(localStorage['servername_' + 'translations']) : {};
+      if (translations[lang] !== undefined) {
+        return translations[lang][input] !== undefined ? translations[lang][input] : input;
+      } else {
+        return input;
+      }
+      } else {
+        return input;
+      }
+    }
+    return <Component t={t} />
   };
 
   return TranslatedComponent;
