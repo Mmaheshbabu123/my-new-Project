@@ -13,7 +13,7 @@ const ManagePc = (props)=>{
         setState({...state,
           rows: response.status === 200 ? response.data : [],
           loaded: true,
-          headers: ['PC number','PC name' , 'Actions'],
+          headers: ['Paritair comite number','Paritair comite name' , 'Actions'],
        })
      }).catch((error) => console.error('Error occurred'));
   }

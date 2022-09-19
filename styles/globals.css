@@ -37,7 +37,7 @@
 	src: url("/fonts/Poppins-Italic.ttf");
 }
 @font-face {
-	font-family: 'Poppins-normal';
+	font-family: 'Poppins-light';
 	font-weight: 500;
 	font-style: normal;
 	src: url("/fonts/Poppins-Light.ttf");
@@ -137,7 +137,7 @@ body {
 	--font-family-bitter-italic-normal-medium: 'Bitter-italic-normal-medium';
 	--font-family-poppins-regular: 'Poppins-regular';
 	--font-family-poppins-italic: 'Poppins-italac';
-	--font-family-poppins-light: 'Poppins-normal';
+	--font-family-poppins-light: 'Poppins-light';
 	--font-family-poppins-bold: 'Poppins-bold';
 	--font-family-poppins-thin: 'Poppins-thin';
 	--font-family-poppins-medium: 'Poppins-medium';
@@ -174,7 +174,7 @@ body {
 	/* font family */
 	--font-family-poppins-regular: 'Poppins-regular';
 	--font-family-poppins-italic: 'Poppins-italac';
-	--font-family-poppins-light: 'Poppins-normal';
+	--font-family-poppins-light: 'Poppins-light';
 	--font-family-poppins-bold: 'Poppins-bold';
 	--font-family-poppins-thin: 'Poppins-thin';
 	--font-family-poppins-medium: 'Poppins-medium';
@@ -225,7 +225,7 @@ body {
 	--font-family-bitter-italic-normal-medium: 'Bitter-italic-normal-medium';
 	--font-family-poppins-regular: 'Poppins-regular';
 	--font-family-poppins-italic: 'Poppins-italac';
-	--font-family-poppins-light: 'Poppins-normal';
+	--font-family-poppins-light: 'Poppins-light';
 	--font-family-poppins-bold: ' Poppins-bold';
 	--font-family-poppins-thin: 'Poppins-thin';
 	--font-family-poppins-medium: 'Poppins-medium';
@@ -280,7 +280,7 @@ body {
 	/* font family */
 	--font-family-poppins-regular: 'Poppins-regular';
 	--font-family-poppins-italic: ' Poppins-italac';
-	--font-family-poppins-light: 'Poppins-normal';
+	--font-family-poppins-light: 'Poppins-light';
 	--font-family-poppins-bold: 'Poppins-bold';
 	--font-family-poppins-thin: 'Poppins-thin';
 	--font-family-poppins-medium: 'Poppins-medium';
@@ -359,7 +359,7 @@ body {
 }
 .poppins-regular-18px {
 	color: var(--color-label-footer-gray);
-	font-family: var(--font-family-poppins-regular) !important;
+	font-family: var(--font-family-poppins-light) !important;
 	font-size: var(--font-size-18px) !important;
 	font-style: normal;
 	line-height: var(--line-height-29px) !important;

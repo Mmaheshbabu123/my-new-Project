@@ -161,7 +161,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
               </tr>)}
             </tbody>
             :
-            <tbody className='no_records'>
+            <tbody className='no_records text-center'>
                <tr>
                <td style={{width:'100%'}}> No records </td>
                </tr>
@@ -184,7 +184,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
       /></div>}
-        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline text-uppercase">
           {`Back`}
         </button>
       </div>
