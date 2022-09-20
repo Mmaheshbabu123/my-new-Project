@@ -16,6 +16,7 @@
     "@devexpress/dx-react-scheduler-material-ui": "^3.0.3",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@mui/material": "^5.10.3",
