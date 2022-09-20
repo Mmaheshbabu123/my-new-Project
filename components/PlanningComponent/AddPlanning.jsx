@@ -92,7 +92,6 @@ function Planning(props) {
 			if (empr_id) {
 				APICALL.service(getEmployeerCompanylist + empr_id, 'GET')
 					.then((result) => {
-						console.log(result);
 						setCompany(result.data[0]);
 						setLocation(result.data[1]);
 						setCostcenter(result.data[2]);
@@ -125,7 +124,6 @@ function Planning(props) {
 		() => {
 			if (p_unique_key != undefined && show == false) {
 				APICALL.service(fetchPlanning + p_unique_key, 'GET').then((result) => {
-					console.log(result);
 					if (result && result.data.length > 0) {
 						setId(result.data[0].id);
 						setUniquekey(result.data[0].p_unique_key);
@@ -141,6 +139,27 @@ function Planning(props) {
 			}
 		},
 		[ p_unique_key, show ]
+	);
+	// FETCH PLANNING
+	useEffect(
+		() => {
+			if(company.length > 0 && show == false){
+				if(companyid != ''){
+					var comp = [ ...company ];
+					let obj = comp.find(o => o.id === companyid);
+					if(obj != null){
+					obj.add_project == 1?	setShowproject(true):setShowproject(false)
+					}
+
+
+					
+					console.log(obj)
+
+				}
+			}
+			
+		},
+		[ company, companyid, show ]
 	);
 
 	/**
@@ -295,7 +314,6 @@ function Planning(props) {
 			.then((result) => {
 				console.log(result.status);
 				setShowdeletepopup(false);
-				setUpdated(updated + 1);
 			})
 			.catch((error) => {
 				console.error(error);
