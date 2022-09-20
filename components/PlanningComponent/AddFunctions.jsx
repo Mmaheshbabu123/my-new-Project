@@ -31,10 +31,9 @@ const AddFunctions = () => {
 			APICALL.service(fetchPlanningFunction + p_unique_key, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
-						console.log(result.data)
 						setEmployeeObject(result.data[0]);
+						setIsChecked(result.data[1]);
 					}
-					console.log(result.data[0]);
 					setLoading(false);
 				})
 				.catch((error) => {
@@ -426,8 +425,6 @@ const AddFunctions = () => {
 			if(object[parent_index].employee_list[key].age < pc_min_age){
 
 				object[parent_index].pcAge.map((val)=>{
-					alert("11")
-
 					if(object[parent_index].employee_list[key].age == val.type+14){
 						sal_percent = parseFloat(val.min_sal_percent)
 						sal = (sal_percent/100)*salary;
@@ -438,7 +435,6 @@ const AddFunctions = () => {
 						object[parent_index].employee_list[key].functionslist.map((element1) => {
 							element1.max != undefined ? (element1.id == funcid ? (temp2 = element1.max) : '') : '';
 						});
-						alert(temp2)
 						object[parent_index].employee_list[key].function_salary = temp2 != '' ?(parseFloat(temp2)>parseFloat(sal)?parseFloat(temp2):parseFloat(sal)):parseFloat(sal);
 					}
 				})
