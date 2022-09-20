@@ -31,6 +31,7 @@ const AddFunctions = () => {
 			APICALL.service(fetchPlanningFunction + p_unique_key, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
+						console.log(result.data)
 						setEmployeeObject(result.data[0]);
 					}
 					console.log(result.data[0]);
