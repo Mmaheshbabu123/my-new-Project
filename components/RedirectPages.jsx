@@ -40,7 +40,7 @@ const RedirectPages = (props) => {
 					router.push('/planning/options');
 					break;
 				case 'pincode':
-					router.push('/pincode/planning/Verifypin');
+					router.push('/pincode/Loading');
 					break;
 				default:
 					router.push('/');
