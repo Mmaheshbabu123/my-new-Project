@@ -361,11 +361,14 @@ const ManageFunction = () => {
 	return (
 		<div className="container-fluid">
 			<form>
-				<div className="row">
-					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
+				<div className='minimun_height'>
+					<div className="row">
+					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc">
 						Manage functions
 					</p>
-					<div className="col-md-2 ps-0 field_height">
+					<div className='col-md-9 ps-0'>
+						<div className='row'>
+						<div className="col-md-3 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -376,7 +379,7 @@ const ManageFunction = () => {
 						/>
 					</div>
 
-					<div className="col-md-2 field_height">
+					<div className="col-md-3 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -387,7 +390,7 @@ const ManageFunction = () => {
 						/>
 					</div>
 
-					<div className="col-md-2 field_height">
+					<div className="col-md-3 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -397,7 +400,7 @@ const ManageFunction = () => {
 							placeholder="Minimum salary"
 						/>
 					</div>
-					<div className="col-md-2 field_height">
+					<div className="col-md-3 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -407,17 +410,21 @@ const ManageFunction = () => {
 							placeholder="Category name"
 						/>
 					</div>
+						</div>
+					</div>
 
-					<div className="col-md-2 field_height">
+					<div className='col-md-3 pe-0'>
+						<div className='row'>
+						<div className="col-md-6 field_height">
 						<button
 							type="button"
-							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 skyblue-bg-color w-100 shadow-none"
+							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 skyblue-bg-color w-100 shadow-none text-uppercase"
 							onClick={() => handleSearch()}
 						>
-							FILTER
+							search
 						</button>
 						</div>
-						<div className="col-md-2 field_height pe-0">
+						<div className="col-md-6 field_height">
 						{(searchPc.trim() != '' ||
 							searchFunc.trim() != '' ||
 							searchCat.trim() != '' ||
@@ -425,12 +432,14 @@ const ManageFunction = () => {
 							search === true) && (
 							<button
 								type="button"
-								className="btn  btn-block float-right mt-2 mb-2 rounded-0 float-right py-2 px-4 reset-btn w-100 shadow-none"
+								className="btn  btn-block float-right mt-2 mb-2 rounded-0 float-right py-2 px-4 reset_skyblue w-100 shadow-none"
 								onClick={() => handleReset()}
 							>
 								RESET
 							</button>
 						)}
+					</div>
+						</div>
 					</div>
 
 					<div className="form-check p-0 mt-2">
@@ -490,7 +499,7 @@ const ManageFunction = () => {
 									))}
 								{functions.length == 0 && (
 									<tr>
-										<td colSpan={4} className="text-center poppins-regular-18px">
+										<td colSpan={5} className="text-center poppins-regular-18px no-records">
 											No records
 										</td>
 									</tr>
@@ -519,11 +528,12 @@ const ManageFunction = () => {
 						/> */}
 					</div>
 				)}
+				</div>
 				<div className="row">
 					<div className="text-start col-md-6 mb-4">
 						<button
 							type="button"
-							className="bg-white  back-btn-text  border-0 poppins-medium-18px float-sm-right  md-5 px-0"
+							className="bg-white border-0 poppins-regular-18px float-sm-right md-5 px-0 text-decoration-underline"
 							onClick={() => backToDashboard()}
 						>
 							BACK

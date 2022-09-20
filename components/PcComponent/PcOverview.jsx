@@ -163,10 +163,10 @@ const PcOverview = (params) => {
 				<div className={` ${cat_leftsec}`}>
 					
 					{pc && (
-						<div className='epc epc_height'>
+						<div className='epc epc_height mt-1'>
 							{
 							params.type != 'viewpc' && (
-								<div className={cat_subsec_type ==0?"text-end mb-3 ":"invisible"} style={pc_view_type =='addpc'?{marginBottom:'1.5rem'}:{}}>
+								<div className={cat_subsec_type ==0?"text-end mb-3 ":"d-none"} style={pc_view_type =='addpc'?{marginBottom:'1.5rem'}:{}}>
 									<button
 										type="button"
 										to="category"
@@ -468,7 +468,7 @@ const PcOverview = (params) => {
 						</div>
 					)}
 				</div>
-				<div className={`col pt-2 ${cat_rightsec} ${pc_view_type == 'editpc'?'mt-5 pt-4':pc_view_type == 'viewpc'?'':''}`}>
+				<div className={`col pt-2 ${cat_rightsec} ${pc_view_type == 'editpc'?'':pc_view_type == 'viewpc'?'':''}`}>
 					{pc_view_type != 'viewpc' && (
 						<div className="text-center form-group row m-0 ">
 							<button

@@ -150,7 +150,7 @@ const AddEmployeeType = (props) => {
        </div>
         <label className = "px-0 poppins-regular-18px" htmlFor="name"> {props.manageType === 'employee-types' ? 'Employee type' : 'Coefficient name'} <span style={{color:'red'}}> * </span></label>
         <div className='row m-0 p-0'>
-          <div className='col-md-9 col-lg-11 ps-0'>
+          <div className='col-md-9 col-lg-11 ps-0 pe-4'>
           <input
             ref={inputRef}
             type="text"

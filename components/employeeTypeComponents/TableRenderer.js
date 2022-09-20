@@ -115,7 +115,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
       </div>
       <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
        <div className='col-md-12 row pe-0'>
-         <div className='col-md-8 col-lg-9 p-0'>
+         <div className='col-md-8 col-lg-9 ps-0 pe-4'>
            <input
              type="text"
              value={state.searchTerm}
