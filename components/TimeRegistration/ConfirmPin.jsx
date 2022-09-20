@@ -34,8 +34,8 @@ const Pincode = () => {
 	const [ eyeicon,setEyeicon]=useState(FaEye);
 	const [ eyeicon1,setEyeicon1]=useState(FaEye);
 	const [ load, setLoad ] = useState(false);
-	const [ hide,setHide ] = useState(false);
-	const [ hide1,setHide1 ] = useState(false);
+	const [ hide,setHide ] = useState(true);
+	const [ hide1,setHide1 ] = useState(true);
 
 	useEffect(
 		() => {
@@ -94,19 +94,19 @@ const Pincode = () => {
 		var V1 = value1.length;
         var e=0;
 		if (V == 0 || V == undefined) {
-			setErr('Please enter the pin');
+			setErr('Please enter the Pincode.');
 			e++;
 		} else if (V < 6) {
-			setErr('The pin need to 6 digits length');
+			setErr('Please fill up all the cells.');
 		} else {
 			setErr('');
 		}
 
 		if (V1 == 0 || V1 == undefined) {
-			setErr1('Please enter the pin');
+			setErr1('Please enter the confirm pincode.');
 			e++;
 		} else if (V1 < 6) {
-			setErr1('The pin need to 6 digits length');
+			setErr1('Please fill up all the cells.');
 		} else {
 			setErr1('');
 		}
@@ -138,18 +138,27 @@ const Pincode = () => {
 		}
 	};
 
-	const hideShow=()=>{
+	//to hide and show the pincode1.
+	const hideShow=(e)=>{
+		e.preventDefault();
+		//setting the hide value of pin one.
 		setHide(!hide);
-		(eyeicon==FaEyeSlash)?setEyeicon(FaEye):setEyeicon(FaEyeSlash);
+		//chnaging the icon
+		(hide)?setEyeicon(FaEyeSlash):setEyeicon(FaEye);
 	}
 
-	const hideShow1=()=>{
+	//to hide and show the pincode2.
+	const hideShow1=(e)=>{
+		e.preventDefault();
+	//setting the hide value of pin two.
 		setHide1(!hide1);
-		(eyeicon1==FaEyeSlash)?setEyeicon1(FaEye):setEyeicon1(FaEyeSlash);
+		//chnaging the icon
+		(hide1)?setEyeicon1(FaEyeSlash):setEyeicon1(FaEye);
 	}
+
+
 	var display;
-	var veye=eyeicon;
-	var veye1=eyeicon1;
+
 	var fields=<form onSubmit={Submit} style={{ alignItems: 'center' }}>
 	<div className="row mt-5">
 		<div className="col-4" />
@@ -157,6 +166,7 @@ const Pincode = () => {
 			<div>
 				<label>Pincode</label>
 			</div>
+			<div className='d-flex'>
 			<OTPInput
 				value={otp}
 				onChange={setOTP}
@@ -170,7 +180,10 @@ const Pincode = () => {
 				disabled={false}
 				secure={hide}
 			/>
-			<button onClick={hideShow}>SH</button>
+			<button style={{ border:'none'}} onClick={hideShow} className='bg-white'>
+					{eyeicon}
+			</button> 
+			</div>
 			<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
 				{err}
 			</p>
@@ -182,6 +195,7 @@ const Pincode = () => {
 			<div>
 				<label>Confirm pincode</label>
 			</div>
+			<div className='d-flex'>
 			{/* <div> */}
 			<OTPInput
 				value={otp1}
@@ -194,11 +208,12 @@ const Pincode = () => {
 				OTPLength={6}
 				otpType="number"
 				disabled={false}
-				secure={hide}
+				secure={hide1}
 			/>
 			<button style={{ border:'none'}} onClick={hideShow1} className='bg-white'>
-					<veye/>
+					{eyeicon1}
 			</button> 
+			</div>
 			{/* {/* </div> */}
 			<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
 				{err1}
