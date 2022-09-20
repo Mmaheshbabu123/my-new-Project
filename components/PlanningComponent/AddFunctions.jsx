@@ -201,10 +201,28 @@ const AddFunctions = () => {
 		}
 	}
 
-	let updateSalary = (index = null, salary, parent_index) => {
+	let updateSalary = (index = null, maxsal, salary, parent_index,pc_min_age) => {
 		var object = [ ...employeeobject ];
+		var sal_percent = 100;
+		var sal = '';
 		if (index !== null) {
-			object[parent_index].employee_list[index].function_salary = parseFloat(salary);
+			if(object[parent_index].employee_list[index].age < pc_min_age){
+				object[parent_index].pcAge.map((val,key)=>{
+					if(object[parent_index].employee_list[index].age == val.type+14){
+						sal_percent = parseFloat(val.min_sal_percent)
+						sal = (sal_percent/100)*salary;
+						if((sal - Math.floor(sal)) !== 0){
+							sal = parseFloat(sal).toFixed(2)
+						}
+						object[parent_index].employee_list[index].function_salary = maxsal != undefined ?(parseFloat(maxsal)>parseFloat(sal)?parseFloat(maxsal):parseFloat(sal)):parseFloat(sal);
+					}
+
+				})
+
+			}else{
+				object[parent_index].employee_list[index].function_salary = maxsal != undefined ?parseFloat(maxsal):parseFloat(salary);
+			}
+
 			setEmployeeObject(object);
 		} else {
 			const newState = object.map((element) => {
@@ -626,13 +644,12 @@ const AddFunctions = () => {
 																								);
 																								updateSalary(
 																									k1,
-																									deta['max'] !=
-																									undefined
-																										? deta['max']
-																										: deta[
+																									deta['max'],
+																										deta[
 																												'salary'
 																											],
-																									key
+																									key,
+																									emplist.pc_min_age
 																								);
 																							}}
 																							checked={
