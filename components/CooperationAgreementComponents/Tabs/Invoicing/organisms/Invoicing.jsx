@@ -7,7 +7,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 const Invoicing = (props) => {
   const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_6_action, filledTabs}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
   const { tab_6,tab_2,tab_3,tab_4} = state;
-
+ console.log(state.loadedTabs)
   const PersonId = 1;
   useEffect(()=>{
   if(!state.loadedTabs.includes(selectedTabId))
@@ -36,8 +36,13 @@ const Invoicing = (props) => {
   })
   }
  const prefillFieldsDefault = (tab_6,tab_2,tab_3) =>{
-   let personId  = tab_3['contactSelectedDetails'][0]['person_id'] || 0;
+   console.log(tab_3)
+   let personId  = tab_3['contactSelectedDetails'].length > 0 ? tab_3['contactSelectedDetails'][0]['person_id'] : 0;
+   let firstName = personId  ? tab_3['contactPersonsDetails'][personId]['26'] : '';
+   let lastName  = personId ? tab_3['contactPersonsDetails'][personId]['33'] : '';
 
+  console.log(personId);
+  console.log(tab_6['50']);
    tab_6['51']  =  tab_6['51'] || tab_2['11'];
    tab_6['52']  =  tab_6['52'] || tab_2['14'] ;
    tab_6['53']  =  tab_6['53'] || tab_2['16'];
@@ -48,8 +53,8 @@ const Invoicing = (props) => {
    tab_6['68']  = tab_6['68']  || tab_2['12'] ;
    tab_6['69']  = tab_6['69']  || tab_2['13'] ;
    tab_6['70']  = tab_6['70']  || tab_2['15'] ;
-   tab_6['50']  = tab_6['50'] || personId  ? tab_3['contactPersonsDetails'][personId]['26'] : '';
-   tab_6['67']  = tab_6['67'] || personId ? tab_3['contactPersonsDetails'][personId]['33'] : '';
+   tab_6['50']  = tab_6['50'] || firstName;
+   tab_6['67']  = tab_6['67'] || lastName;
    tab_6['required'] = requiredFields['tab_6'];
 
 
