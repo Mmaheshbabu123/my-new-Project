@@ -213,7 +213,7 @@ function AddFunction(props) {
 						<label className="custom_astrick mt-2 poppins-regular-16px">Function name</label>
 						<input
 							type="text"
-							className=" form-control my-2 border-0 poppins-medium-16px shadow-none"
+							className=" form-control my-2 border-0 poppins-medium-16px shadow-none rounded-0"
 							value={data.function_name}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, function_name: e.target.value }));
