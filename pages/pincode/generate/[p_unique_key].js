@@ -6,7 +6,7 @@ const Pin = () => {
 		<div>
 			<div className="row">
 				<div className="col-4" />
-				<div className="col-5 display-5">Generate pincode</div>
+				<div className="col-5 display-5">Create pincode</div>
 			</div>
 			<Genrate />
 		</div>
