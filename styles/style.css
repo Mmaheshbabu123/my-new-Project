@@ -66,6 +66,7 @@ thead:after
   font-family: var(--font-family-poppins-medium);
   font-size: var(--font-size-18px);
   line-height: var(--line-height-31px);
+  height: 43px;
 }
 @media screen and (min-width:768px) and (max-width:1023px) 
 {
@@ -232,11 +233,16 @@ input[type="radio"]
   z-index: 999;
   background-color: var(--color-white);
 }
-@-moz-document url-prefix() {
-  select option {
+@-moz-document url-prefix() 
+{
+  select option 
+  {
      font-family: var(--font-family-poppins-medium) !important;
      font-size: var(--font-size-18px) !important;
      line-height: var(--line-height-26px) !important;
+     --webkit-line-height: var(--line-height-26px) !important;
+     --webkit-font-size: var(--font-size-18px) !important;
+     --webkit-font-family: var(--font-family-poppins-medium) !important;
   }
 }
 .fst-normal 
