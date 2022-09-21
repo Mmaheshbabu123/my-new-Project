@@ -27,12 +27,12 @@ const Pincode = () => {
 	const router = useRouter();
 	const [ hasPin, setHasPin ] = useState(false);
 	const [ uid, setUid ] = useState('');
-	const [ otp, setOTP ] = useState('');
-	const [ otp1, setOTP1 ] = useState('');
+	const [ otp, setOTP ] = useState(0);
+	const [ otp1, setOTP1 ] = useState(0);
 	const [ err, setErr ] = useState('');
 	const [ err1, setErr1 ] = useState('');
-	const [ eyeicon,setEyeicon]=useState(FaEye);
-	const [ eyeicon1,setEyeicon1]=useState(FaEye);
+	const [ eyeicon,setEyeicon]=useState(FaEyeSlash);
+	const [ eyeicon1,setEyeicon1]=useState(FaEyeSlash);
 	const [ load, setLoad ] = useState(false);
 	const [ hide,setHide ] = useState(true);
 	const [ hide1,setHide1 ] = useState(true);
@@ -144,7 +144,7 @@ const Pincode = () => {
 		//setting the hide value of pin one.
 		setHide(!hide);
 		//chnaging the icon
-		(hide)?setEyeicon(FaEyeSlash):setEyeicon(FaEye);
+		(hide)?setEyeicon(FaEye):setEyeicon(FaEyeSlash);
 	}
 
 	//to hide and show the pincode2.
@@ -153,7 +153,7 @@ const Pincode = () => {
 	//setting the hide value of pin two.
 		setHide1(!hide1);
 		//chnaging the icon
-		(hide1)?setEyeicon1(FaEyeSlash):setEyeicon1(FaEye);
+		(hide1)?setEyeicon1(FaEye):setEyeicon1(FaEyeSlash);
 	}
 
 
@@ -169,16 +169,17 @@ const Pincode = () => {
 			<div className='d-flex'>
 			<OTPInput
 				value={otp}
+				inputClassName={hide?"otp":""}
 				onChange={setOTP}
-				autoFocus
+				// autoFocus
 				inputStyles={{
 					width: '60px',
 					height: '60px'
 				}}
 				OTPLength={6}
 				otpType="number"
-				disabled={false}
-				secure={hide}
+				// disabled={false}
+				// secure={hide}
 			/>
 			<button style={{ border:'none'}} onClick={hideShow} className='bg-white'>
 					{eyeicon}
@@ -199,6 +200,7 @@ const Pincode = () => {
 			{/* <div> */}
 			<OTPInput
 				value={otp1}
+				inputClassName={hide1?"otp":""}
 				onChange={setOTP1}
 				autoFocus
 				inputStyles={{
@@ -207,8 +209,8 @@ const Pincode = () => {
 				}}
 				OTPLength={6}
 				otpType="number"
-				disabled={false}
-				secure={hide1}
+				// disabled={false}
+				// secure={hide1}
 			/>
 			<button style={{ border:'none'}} onClick={hideShow1} className='bg-white'>
 					{eyeicon1}

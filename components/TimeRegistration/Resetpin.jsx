@@ -117,6 +117,7 @@ const Pincode = () => {
 				<div className="mt-2 col-5">
 				<div><label>Pincode</label></div>
 					<OTPInput
+						className="otp"
 						value={otp}
 						onChange={setOTP}
 						autoFocus
@@ -127,7 +128,6 @@ const Pincode = () => {
 						OTPLength={6}
 						otpType="number"
 						disabled={false}
-						secure
 					/>
 					<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
 						{err}
