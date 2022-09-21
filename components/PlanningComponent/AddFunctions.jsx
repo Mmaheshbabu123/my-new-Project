@@ -31,6 +31,31 @@ const AddFunctions = () => {
 			APICALL.service(fetchPlanningFunction + p_unique_key, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
+						console.log(result.data[0]);
+						result.data[0].map((val,key)=>{
+							val.employee_list.map((val2,key2)=>{
+								if(val2.function_salary != null && val2.age < val.pc_min_age){
+									val.pcAge.map((val3,key3)=>{
+										if(val2.age == val3.type+14){
+											var sal_percent = parseFloat(val3.min_sal_percent)
+											var sal = (sal_percent/100)*val2.function_salary;
+											if((sal - Math.floor(sal)) !== 0){
+												sal = parseFloat(sal).toFixed(2)
+											}
+											result.data[0][key].employee_list[key2].function_salary = parseFloat(sal)
+											if(val2.salary == sal){
+												result.data[0][key].employee_list[key2].salary = null
+
+											}
+										}
+					
+									})
+					
+								}
+							})
+							
+						})
+						
 						setEmployeeObject(result.data[0]);
 						setIsChecked(result.data[1]);
 					}
@@ -250,8 +275,8 @@ const AddFunctions = () => {
 			if(object[parent_index].employee_list[index].age < pc_min_age){
 				object[parent_index].pcAge.map((val,key)=>{
 					if(object[parent_index].employee_list[index].age == val.type+14){
-						sal_percent = parseFloat(val.min_sal_percent)
-						sal = (sal_percent/100)*salary;
+						var sal_percent = parseFloat(val.min_sal_percent)
+						var sal = (sal_percent/100)*salary;
 						if((sal - Math.floor(sal)) !== 0){
 							sal = parseFloat(sal).toFixed(2)
 						}
