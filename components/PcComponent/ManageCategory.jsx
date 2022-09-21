@@ -185,11 +185,14 @@ const ManageCategoryComponent = () => {
 	return (
 		<div className="container-fluid p-0">
 			<form>
+				<div className='minimun_height'>
 				<div className="row m-0">
-					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
+					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc">
 						Manage categories
 					</p>
-					<div className="col-md-3 ps-0 field_height">
+					<div className='col-md-9'>
+						<div className='row'>
+						<div className="col-md-4 ps-0 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -200,7 +203,7 @@ const ManageCategoryComponent = () => {
 						/>
 					</div>
 
-					<div className="col-md-3 field_height">
+					<div className="col-md-4 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -211,7 +214,7 @@ const ManageCategoryComponent = () => {
 						/>
 					</div>
 
-					<div className="col-md-3 field_height">
+					<div className="col-md-4 field_height">
 						<input
 							type="search"
 							id="form12"
@@ -221,27 +224,36 @@ const ManageCategoryComponent = () => {
 							onChange={(e) => setSearchSal(e.target.value)}
 						/>
 					</div>
+						</div>
+					</div>
 
-					<div className="col-md-3 field_height pe-0 d-flex justify-content-between">
+					<div className="col-md-3 field_height pe-0 ">
+					<div className='row'>
+						<div className='col-md-6'>
 						<button
 							type="button"
-							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right skyblue-bg-color py-2 px-4 w-50"
+							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right skyblue-bg-color py-2 px-4 w-100 shadow-none text-uppercase"
 							onClick={() => handleSearch()}
 						>
-							FILTER
+							Search
 						</button>
+						</div>
+						<div className='col-md-6'>
 						{(searchPc.trim() != '' ||
 							searchCat.trim() != '' ||
 							searchSal.trim() != '' ||
 							search === true) && (
 							<button
 								type="button"
-								className="btn  btn-block float-right mt-2 mb-2 ms-2 rounded-0 float-right py-2 ms-2 reset-btn px-4 w-50"
+								className="btn  btn-block float-right mt-2 mb-2 rounded-0 float-right py-2 px-4 w-100 shadow-none reset_skyblue"
 								onClick={() => handleReset()}
 							>
 								RESET
 							</button>
 						)}
+						</div>
+					</div>
+					
 					</div>
 
 					<div className="form-check p-0 mt-2  ">
@@ -317,11 +329,12 @@ const ManageCategoryComponent = () => {
 						// />
 					)}
 				</div>
+				</div>
 				<div className="row my-2">
 					<div className="text-start col-md-6">
 						<button
 							type="button"
-							className="bg-white  back-btn-text  border-0 poppins-medium-18px  float-sm-right mt-3 md-5 px-0"
+							className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
 							onClick={() => backToDashboard()}
 						>
 							BACK
