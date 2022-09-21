@@ -4,17 +4,23 @@ import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
 import styles from '../../styles/Pc.module.css';
 import { useRouter } from 'next/router';
+import DatePicker from "react-multi-date-picker";
+import InputIcon from "react-multi-date-picker/components/input_icon";
+import "react-multi-date-picker/styles/colors/purple.css"
+
+
+
 
 const SalaryBenifits = () => {
 	const router = useRouter();
-	const [ disableForm, setDisableForm ] = useState(false);
-	const [ sec_width, setSec_width ] = useState('col-6');
+	const [disableForm, setDisableForm] = useState(false);
+	const [sec_width, setSec_width] = useState('col-6');
 
-	const [ visible, setVisible ] = useState(false);
-	const [ data, setData ] = useState([]);
-	const [ res, setRes ] = useState([]);
-	const [ error_sal_benifits, setError_sal_benifits ] = useState([]);
-	const [ count, setCount ] = useState(0);
+	const [visible, setVisible] = useState(false);
+	const [data, setData] = useState([]);
+	const [res, setRes] = useState([]);
+	const [error_sal_benifits, setError_sal_benifits] = useState([]);
+	const [count, setCount] = useState(0);
 
 	const {
 		pc_unique_key,
@@ -48,7 +54,7 @@ const SalaryBenifits = () => {
 	// 			console.error(error);
 	// 		});
 	// }, []);
-
+	const [value, setValue] = useState(new Date());
 	useEffect(() => {
 		APICALL.service(getPcSalaryBenefits + pc_unique_key, 'GET')
 			.then((result) => {
@@ -72,11 +78,11 @@ const SalaryBenifits = () => {
 				setSec_width('col-md-12');
 			}
 		},
-		[ pc_view_type ]
+		[pc_view_type]
 	);
 
 	let updateRes = (event, key) => {
-		var res1 = [ ...data ];
+		var res1 = [...data];
 		if (event.target.checked) {
 			setCount(count + 1);
 			res1[key]['checked'] = true;
@@ -110,15 +116,15 @@ const SalaryBenifits = () => {
 	};
 
 	let validate = () => {
-		var data1 = [ ...data ];
+		var data1 = [...data];
 		var error_count = 0;
 		if (count > 0) {
 			setError_sal_benifits('');
-			data1.map((value,key) => {
+			data1.map((value, key) => {
 				if (value.checked == true && value.mandatory === '') {
 					data1[key].error_mandatory = 'This field is required.';
 					error_count++;
-				}else{
+				} else {
 					data1[key].error_mandatory = '';
 				}
 			});
@@ -127,9 +133,9 @@ const SalaryBenifits = () => {
 			error_count++;
 			setError_sal_benifits('Select atleast one salary benefit.');
 		}
-		if(error_count == 0){
+		if (error_count == 0) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	};
@@ -160,7 +166,7 @@ const SalaryBenifits = () => {
 	};
 
 	let handleRadio = (e, key) => {
-		var data1 = [ ...data ];
+		var data1 = [...data];
 		var isPublished = e.target.value === 'true' ? true : false;
 		data1[key]['mandatory'] = isPublished;
 		setData(data1);
@@ -168,49 +174,51 @@ const SalaryBenifits = () => {
 	};
 
 	return (
-		<div className={pc_view_type == 'addpc'?"container-fluid p-0":pc_view_type == 'viewpc'?"mb-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
+		<div className={pc_view_type == 'addpc' ? "container-fluid p-0" : pc_view_type == 'viewpc' ? "mb-5 sectioncolor p-3" : "sectioncolor p-3 my-3"}>
 			<form onSubmit={submit}>
 				{pc_view_type == 'editpc' ? (
-					<h4 className= {pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit salary benefits</h4>
+					<h4 className={pc_view_type == 'addpc' ? "h5 mt-3" : "bitter_medium_italic_18px mb-4"}>Edit salary benefits</h4>
 				) : pc_view_type == 'viewpc' ? (
 					<h4 className="h5 bitter_medium_italic_18px mb-4">Salary benefits</h4>
 				) : (
 					''
 				)}
 				<div className='pc-height5'>
-				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 px-3":"border-0"}>
-				<p className="my-3 error_text" style={{ color: 'red' }}>
-						{error_sal_benifits}
-					</p>
-					{data.map((val, key) => (
-						<div className={pc_view_type == 'addpc'?'col-6':"col-md-12"} key={key}>
-						<div key={key} className={`form-check mt-1`}>
-							<div className="form-check my-2 ps-0">
-								<input
-									disabled={disableForm}
-									// className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px":"poppins-regular-18px me-2"}
-									// type="checkbox"
-									type="checkbox"
-								className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px ":"form-check-input rounded-0 poppins-regular-18px border-0 me-2 "}
-									value={val.sb_id}
-									id={'flexCheckDefault' + key}
-									checked={val.checked == true ? true : false}
-									onChange={(e) => {
-										updateRes(e, key);
-									}}
-								/>
-								<label className={pc_view_type == 'addpc'?"form-check-label poppins-regular-18px":" form-check-label poppins-regular-16px margin_salary"}htmlFor="flexCheckDefault" style={val.checked ?{opacity:'1'}:{}}>
-									{val.name}
-									
-								</label>
-							</div>
-							{val.checked && (
-								<div className={pc_view_type == 'addpc'?'bg-4C4D550F p-3  position_relative':"bg-4C4D550F px-3 py-2 bg-white position_relative edit_pc_salary_benefits"}>
-									<div className="">
-										<p className={' custom_astrick poppins-medium-16px '}>Is this mandatory?</p>
+					<div className={pc_view_type == 'addpc' ? "row border-form-sec m-0 px-3" : "border-0"}>
+						<p className="my-3 error_text" style={{ color: 'red' }}>
+							{error_sal_benifits}
+						</p>
+						{data.map((val, key) => (
+							<div
+								// className={pc_view_type == 'addpc' ? 'col-6' : "col-md-12"} 
+								key={key}>
+								<div key={key} className={`form-check mt-1`}>
+									<div className="form-check my-2 ps-0">
+										<input
+											disabled={disableForm}
+											// className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px":"poppins-regular-18px me-2"}
+											// type="checkbox"
+											type="checkbox"
+											className={pc_view_type == 'addpc' ? "form-check-input rounded-0 poppins-regular-18px " : "form-check-input rounded-0 poppins-regular-18px border-0 me-2 "}
+											value={val.sb_id}
+											id={'flexCheckDefault' + key}
+											checked={val.checked == true ? true : false}
+											onChange={(e) => {
+												updateRes(e, key);
+											}}
+										/>
+										<label className={pc_view_type == 'addpc' ? "form-check-label poppins-regular-18px" : " form-check-label poppins-regular-16px margin_salary"} htmlFor="flexCheckDefault" style={val.checked ? { opacity: '1' } : {}}>
+											{val.name}
 
-										<div className="d-flex mt-3">
-											<div className="form-check d-inline-flex ps-0">
+										</label>
+									</div>
+									{val.checked && (
+										<div className={pc_view_type == 'addpc' ? 'bg-4C4D550F p-3  position_relative' : "bg-4C4D550F px-3 py-2 bg-white position_relative edit_pc_salary_benefits"}>
+											<div className="">
+												{/* <p className={' custom_astrick poppins-medium-16px '}>Is this mandatory?</p> */}
+
+												{/* <div className="d-flex mt-3"> */}
+												{/* <div className="form-check d-inline-flex ps-0">
 												<input
 													disabled={disableForm}
 													// className="form-check-input d-flex"
@@ -224,9 +232,9 @@ const SalaryBenifits = () => {
 												<label className="form-check-label ms-1 poppins-regular-16px align-self-center" htmlFor="exampleRadios1">
 													Yes
 												</label>
-											</div>
+												</div> */}
 
-											<div className="form-check d-inline-flex">
+												{/* <div className="form-check d-inline-flex">
 												<input
 													disabled={disableForm}
 													// className="form-check-input ms-2"
@@ -239,20 +247,110 @@ const SalaryBenifits = () => {
 												<label className="form-check-label ms-1 poppins-regular-16px align-self-center" htmlFor="exampleRadios2">
 													No
 												</label>
+												</div> */}
+												{/* </div> */}
+												<div className='row '>
+													<div className="form-check d-inline-flex col-sm-3 ps-0">
+														<input className="form-check-input ms-1 me-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
+														<label className="form-check-label" for="flexCheckDefault">
+															<p className={'  poppins-medium-16px '}>Is this mandatory?</p>
+														</label>
+													</div>
+
+													<div className="form-check d-inline-flex  col ps-0">
+														<input className="form-check-input me-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
+														<label className="form-check-label" for="flexCheckDefault">
+															<p className={'  poppins-medium-16px '}>Allow sales agent to update the value during creation of cooperation agreement</p>
+														</label>
+													</div>
+
+													<p className="mt-2" style={{ color: 'red' }}>
+														{val.error_mandatory}
+													</p>
+												</div>
+												<div className='row'>
+													<div className='col ps-0'><p className={'  poppins-medium-16px '}>Salary benifit value</p>
+														<div className="form-check  ">
+															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															<label className="form-check-label mt-1" for="flexRadioDefault1">
+																value in €
+															</label>
+														</div>
+														<div className="form-check">
+															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															<label className="form-check-label mt-1" for="flexRadioDefault1">
+																value in %
+															</label>
+														</div>
+														<div class="input-group mb-3 col-md-3 mt-5">
+															<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" />
+															<span class="input-group-text">€</span>
+														</div>
+													</div>
+													<div className='col'><p className={'  poppins-medium-16px '}>Applicable coefficient </p>
+														<div className="form-check ">
+															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															<label className="form-check-label mt-1" for="flexRadioDefault1">
+																Based on employee type in the cooperation agreement
+															</label>
+														</div>
+														<div className="form-check">
+															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															<label className="form-check-label mt-1" for="flexRadioDefault1">
+																Other
+															</label>
+														</div>
+														<div class="mb-3">
+															<label for="" className="form-label mt-4"></label>
+															<input type="text" className="form-control" id="" />
+														</div>
+													</div>
+													<div className='col'><p className={'  poppins-medium-16px '}>Occurence</p>
+														<select class="form-select" aria-label="Default select example">
+															<option selected>Select..</option>
+															<option value="1">One</option>
+															<option value="2">Two</option>
+															<option value="3">Three</option>
+														</select>
+													</div>
+												</div>
+												<div className='row'>
+													<div className='col'><p className={'  poppins-medium-16px '}>Is the benefit granted in case of absenceof the employee?</p>
+														<div className="form-check ">
+															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															<label className="form-check-label mt-1" for="flexRadioDefault1">
+																Yes
+															</label>
+														</div>
+														<div className="form-check">
+															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															<label className="form-check-label mt-1" for="flexRadioDefault1">
+																No
+															</label>
+														</div>
+
+													</div>
+													<div className='col'><p className={'  poppins-medium-16px '}>Start date</p>
+														<div className="col-md-12 p-0">
+															<DatePicker className="purple"
+																value={value} 
+																onChange={setValue} 
+																render={<InputIcon />}
+															/>														
+														</div>
+													</div>
+													<div className='col'></div>
+												</div>
 											</div>
-											
 										</div>
-										<p className="mt-2" style={{ color: 'red' }}>
-												{val.error_mandatory}
-											</p>
-									</div>
+
+									)}
+
 								</div>
-							)}
-						</div>
-						</div>
-					))}
-					
-				</div>
+							</div>
+						))}
+
+					</div>
 				</div>
 				{pc_view_type == 'editpc' ? (
 					<div className="row my-4">
