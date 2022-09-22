@@ -545,7 +545,7 @@ const AddFunctions = () => {
 																	{v1['employeename']}{' '}
 																	<span className="ageicon">
 																		{v1['age'] != 0 &&
-																			v1['age'] <= emplist.pc_min_age &&
+																			v1['age'] < emplist.pc_min_age &&
 																			{
 																				'16': (
 																					<Image
