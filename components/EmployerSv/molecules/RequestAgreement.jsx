@@ -110,7 +110,7 @@ const RequestAgreement = (props) => {
   return(
     <div className={`${styles['request-agreeemnt-comp-btn']}`}>
       {companyPopup()}
-      <button onClick={triggerPopup} type="button" className="btn btn-dark pcp_btn col-1">
+      <button onClick={triggerPopup} type="button" className="btn btn-dark buttuon_purple col-1 rounded-0">
         {`Request agreement`}
       </button>
     </div>

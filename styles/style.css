@@ -296,3 +296,11 @@ select option
 {
   margin:0 1rem !important;
 } */
+@-moz-document url-prefix()
+{
+  .link-emp-coeff-tableparent,
+  .salary-benefit-table
+  {
+    padding-left: 1px;
+  }
+}
