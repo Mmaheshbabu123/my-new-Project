@@ -21,6 +21,7 @@ const SalaryBenifits = () => {
 	const [res, setRes] = useState([]);
 	const [error_sal_benifits, setError_sal_benifits] = useState([]);
 	const [count, setCount] = useState(0);
+	const [value, setValue] = useState(new Date());
 
 	const {
 		pc_unique_key,
@@ -54,7 +55,6 @@ const SalaryBenifits = () => {
 	// 			console.error(error);
 	// 		});
 	// }, []);
-	const [value, setValue] = useState(new Date());
 	useEffect(() => {
 		APICALL.service(getPcSalaryBenefits + pc_unique_key, 'GET')
 			.then((result) => {
@@ -263,10 +263,10 @@ const SalaryBenifits = () => {
 															<p className={'  poppins-medium-16px '}>Allow sales agent to update the value during creation of cooperation agreement</p>
 														</label>
 													</div>
-
+{/* 
 													<p className="mt-2" style={{ color: 'red' }}>
 														{val.error_mandatory}
-													</p>
+													</p> */}
 												</div>
 												<div className='row'>
 													<div className='col ps-0'><p className={'  poppins-medium-16px '}>Salary benifit value</p>
