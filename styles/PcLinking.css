@@ -30,7 +30,7 @@
   border: 1px solid var(--border-color-gray);
 }
 
-.pclinking-table-thead {
+.pclinking-table-thead tr {
   position: sticky;
   top: 0;
   /* background-color: #4C4D550F; */

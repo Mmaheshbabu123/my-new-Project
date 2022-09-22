@@ -46,9 +46,9 @@ const OverviewPage = (props) => {
     let { selectedTabId } = compState;
     return (
       <ul className={`${styles['employer-overview-tabs']}`}>
-        <li> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
-        <li> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
-        <li> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
       </ul>
     );
   }
@@ -104,11 +104,13 @@ const OverviewPage = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = compState;
     return(
       <>
-      <div className='col-md-12 row' style={{ margin: '10px 0', position: 'relative' }}>
-            <div className='col-md-9 row'>
+     <div className='row'>
+     <div className='col-md-12 search_field_manage_cooperation_agreement mb-4' style={{position: 'relative' }}>
+           <div className='row'>
+           <div className='col-md-9'>
               <input
                 type="text"
-                className='form-control mt-2 mb-2'
+                className='form-control mt-2 mb-2 rounded-0 shadow-none'
                 style={{margin: '10px 0'}}
                 value={compState.searchTermCompany}
                 name = {'employer_name'}
@@ -118,24 +120,33 @@ const OverviewPage = (props) => {
               />
             </div>
             <div className='col-md-3'>
-              <button
+              <div className='row'>
+                <div className='col-md-6'>
+                <button
                 type="button"
-                className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+                className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
                 onClick={() => handleSearchClick(1)}
               >
                 SEARCH
               </button>
-              <button
+              
+                </div>
+                <div className='col-md-6'>
+                <button
                 type="button"
-                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
                 onClick={() => handleSearchClick(0)}
               >
                 RESET
               </button>
+                </div>
+              </div>
             </div>
+           </div>
          </div>
+     </div>
         <div className={`${styles['table-parent-div']}`}>
-          <table className="table table-hover manage-types-table">
+          <table className="table table-hover manage-types-table manage-cooperation-agreement-table-header">
             <thead className="table-render-thead">
               <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
             </thead>
@@ -153,7 +164,13 @@ const OverviewPage = (props) => {
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No records. </p>}
+            : <tbody>
+            <tr>
+            <td colSpan={8} className="text-center poppins-regular-18px no-records">
+                    No records
+                  </td>
+            </tr>
+            </tbody>}
           </table>
         </div>
         <div>
