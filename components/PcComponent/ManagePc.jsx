@@ -232,8 +232,8 @@ const ManagePc = (props) => {
 							</div>
 						</div>
 					</div>
-					<div className="col-md-2  ps-3 pe-0 align-self-center">
-						<div className={`text-center ${styles.sectioncolor}  p-3 `}>
+					<div className="col-md-2  ps-3 pe-0 d-grid">
+						<div className={`text-center ${styles.sectioncolor}  p-3 d-flex justify-content-center align-items-center`}>
 							<span className="pe-2">
 								<Link href={'/editpc/' + val.pc_unique_key}>
 									<a className="text-dark h5">

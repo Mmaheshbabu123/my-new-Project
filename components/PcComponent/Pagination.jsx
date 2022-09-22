@@ -9,7 +9,8 @@ return (
 							breakLabel="..."
 							nextLabel={props.itemOffset>0?<AiOutlineArrowRight />:<AiOutlineArrowRight />}
 							onPageChange={props.handlePageClick}
-							pageRangeDisplayed={5}
+							pageRangeDisplayed={2}
+							marginPagesDisplayed={2}
 							pageCount={props.pageCount}
 							previousLabel={props.itemOffset>0?<AiOutlineArrowLeft />:<AiOutlineArrowLeft />}
 							renderOnZeroPageCount={null}

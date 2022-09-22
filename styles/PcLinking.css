@@ -9,7 +9,7 @@
   margin: 0 !important;
   scroll-behavior: smooth;
   border: 0px !important;
-  min-height: 400px;
+  min-height: 200px;
 }
 
 .sv-cp-page-title {
@@ -30,7 +30,7 @@
   border: 1px solid var(--border-color-gray);
 }
 
-.pclinking-table-thead {
+.pclinking-table-thead tr {
   position: sticky;
   top: 0;
   /* background-color: #4C4D550F; */

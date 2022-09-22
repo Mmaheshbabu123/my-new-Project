@@ -48,7 +48,7 @@ const ListView = (props) => {
 		props.secInfoFromLst(sectype, secid);
 	};
 	return (
-		<li key={props.index} className= {`list-inline-item ${props.level=='3'?styles.section_func_li:styles.sectionli} ${props.level=='3'?styles.section_funct:styles.section_cat} ms-2 my-2 hi sectioncolor`}>
+		<li key={props.index} className= {`list-inline-item ${props.level=='3'?styles.section_func_li:styles.sectionli} ${props.level=='3'?styles.section_funct:styles.section_cat} hi sectioncolor px-3`}>
 			{header && (
 				<div
 					className={`accordion accordion-flush  accordion_padding `}

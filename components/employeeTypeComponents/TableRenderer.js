@@ -114,7 +114,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
       </div>
       <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
        <div className='col-md-12 row pe-0'>
-         <div className='col-md-8 col-lg-9 p-0'>
+         <div className='col-md-8 col-lg-9 ps-0 pe-4'>
            <input
              type="text"
              value={state.searchTerm}
@@ -126,7 +126,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
          </div>
          <div className='col-md-4 col-lg-3 pe-0'>
             <div className='row justify-content-end'>
-              <div className='col-md-6 col-lg-6 pe-0'>
+              <div className='col-md-6 col-lg-6 ps-0'>
                 <button
                 type="button"
                 className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
@@ -134,7 +134,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
                 SEARCH
               </button>
               </div>
-              <div className='col-md-6 col-lg-6 pe-0'>
+              <div className='col-md-6 col-lg-6 '>
                 <button
                 type="button"
                 // className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn  w-100 shadow-none"

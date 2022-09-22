@@ -114,19 +114,19 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
       </div>
       <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
        <div className='row'>
-         <div className='col-md-6'>
+         <div className='col-lg-9 col-md-7 pe-4'>
            <input
              type="text"
              value={state.searchTerm}
-             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none ps-3"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
-             placeholder={'Search'}
+             placeholder={'Salary benefits'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
-         <div className='col-md-6'>
-           <div className='row justify-content-end'>
-             <div className='col-md-3'>
+         <div className='col-lg-3 col-md-5'>
+           <div className='row '>
+             <div className='col-md-6'>
              <button
              type="button"
              className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 poppins-medium-18px shadow-none"
@@ -135,11 +135,12 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
              SEARCH
            </button>
              </div>
-             <div className='col-md-3'>
+             <div className='col-md-6'>
              <button
              type="button"
             //  className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 poppins-medium-18px"
-             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 poppins-medium-18px shadow-none"
+             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 poppins-medium-18px shadow-none "
+             style={{height:'43px'}}
              
              onClick={() => handleSearchClick(0)}
            >
@@ -152,15 +153,15 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
          </div>
         </div>
       </div>
-      <div className="table-render-parent-div max-height-420">
+      <div className="table-render-parent-div max-height-420 salary-benefit-table">
         <table className="table table-hover manage-types-table salary-benefits">
           <thead className="table-render-thead ">
-            <tr className='btn-bg-gray-medium table-sticky-bg-gray py-2' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='poppins-medium-18px justify-content-center btn-bg-gray-medium' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+            <tr className='btn-bg-gray-medium table-sticky-bg-gray py-2' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='poppins-medium-18px justify-content-center btn-bg-gray-medium padding_first_col' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
           </thead>
           {state.currentItems && state.currentItems.length > 0 ?
           <tbody>
             {state.currentItems.map(eachRow => <tr className='border poppins-regular-16px p-2' key={eachRow.sb_id} id={eachRow.sb_id}>
-              <td className='poppins-regular-16px py-2'> {eachRow.name} </td>
+              <td className='poppins-regular-16px py-2  padding_first_col'> {eachRow.name} </td>
               <td className='poppins-regular-16px'> {eachRow.value ? `${eachRow.value} ${eachRow.value_type === 1 ? '€' : '%'}` : ''} </td>
               <td className='poppins-regular-16px'> {eachRow.occurence ? salaryBenefitOccurenceOptions.filter(val => val.value === eachRow.occurence)[0]['label'] : ''} </td>
               <td className='poppins-regular-16px'> {formatDate(eachRow.date) ? formatDate(eachRow.date) : '--'} </td>
@@ -185,7 +186,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
             subContainerClassName={"pages pagination justify-content-center project-pagination"}
             activeClassName={"active"}
         />}
-        <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 ppoppins-medium-18px   float-sm-right mt-5 mb-5">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px text-decoration-underline text-uppercase float-sm-right mt-5 mb-5">
           {`Back`}
         </button>
       </div>

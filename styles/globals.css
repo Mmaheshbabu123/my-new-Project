@@ -346,6 +346,7 @@ body {
 	font-size: var(--font-size-m);
 	font-style: normal;
 	font-weight: 400;
+	line-height: var(--line-height-26px);
 	/* line-height: initial; */
 }
 .poppins-regular-18px-white {
@@ -1691,6 +1692,11 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 	border-color:#4c4d554d !important;
 	box-shadow: none !important;
 	border-radius: 0px !important;
+	margin: 0px;
+}
+.pc-single-select .css-zke0qo-control
+{
+	border: transparent !important;
 }
 .slt-emp .css-1s2u09g-control,
 .slt-emp .css-1pahdxg-control {
@@ -1748,7 +1754,7 @@ input[type="checkbox"]:checked {
 	background-color: var(--color-skyblue);
 }
 .category_currency_height {
-	height: 41px;
+	height: 38px;
 }
 input[type="checkbox"] {
 	/* webkit-appearance: none;
@@ -1797,11 +1803,16 @@ input[type="text"]::placeholder {
 	height: 45px;
 	border: 1px solid var(--color-input-border-lightgrey);
 }
-.field_height button,
+
 .select_option_height .css-109onse-indicatorSeparator {
 	/* padding:0.5rem 2.6rem ; */
 	background-color: transparent;
 	border: none !important;
+}
+.field_height button
+{
+	background-color: transparent;
+	border: none;
 }
 .planning-container .form-select {
 	border: 1px solid rgb(181 181 181 / 50%) !important;
@@ -1880,3 +1891,14 @@ input[type="search"]::-webkit-search-cancel-button {
 .react-select-prefix__input {   /* Custom class to hide cursor from react-select dropdown */
 	color: transparent !important;
 }
+@font-face {
+	font-family: 'password';
+	font-style: normal;
+	font-weight: 400;
+	src: url("https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf");
+  }
+  
+  input.otp {
+	font-family: 'password';
+	width: 100px; height: 16px;  
+  }

@@ -362,7 +362,7 @@ function AddPc(props) {
 						<div className="col-md-12 row  my-4 m-0">
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px"}>Paritair comite number</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick "}>Paritair comite number</label>
 								<input
 									type="text"
 									value={data.pc_number}
@@ -377,7 +377,7 @@ function AddPc(props) {
 							</div>
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2 ":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px"}>Paritair comite name</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick "}>Paritair comite name</label>
 								<input
 									type="text"
 									value={data.pc_name}
@@ -407,7 +407,7 @@ function AddPc(props) {
 							{/* BUFFER TIMING */}
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px"}>Buffer time between two plannings</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick "}>Buffer time between two plannings</label>
 
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
 									<input
@@ -427,7 +427,7 @@ function AddPc(props) {
 							</div>
 
 							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2":" px-0 poppins-regular-18px my-2"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px"}>Minimum work timings per day</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick "}>Minimum work timings per day</label>
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
 									<input
 										type="text"
@@ -445,7 +445,7 @@ function AddPc(props) {
 								<p className="error error_text mt-2">{error_min_time}</p>
 							</div>
 							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2":" px-0 "}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px my-2"}>Maximum work timings per day</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px my-2 custom_astrick "}>Maximum work timings per day</label>
 								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
 									<input
 										type="text"

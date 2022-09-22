@@ -214,7 +214,8 @@ function AddCategory(props) {
 					<div className="form-group ">
 						<input
 							type="text"
-							className=" form-control mt-2 mb-3  input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-0 shadow-none"
+							// className=" form-control mt-2 mb-3  input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-0 shadow-none"
+							className='form-control my-2 border-0 poppins-medium-16px shadow-none rounded-0 border-0'
 							value={data.category_name}
 							name="name"
 							id="name"
@@ -231,7 +232,8 @@ function AddCategory(props) {
 					<span className="input-group-text mh-50 rounded-0 mt-2 border-0 bg-white category_currency_height poppins-medium-16px" >€</span>
 						<input
 							type="text"
-							className=" form-control mt-2 mb-3 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-0 shadow-none"
+							// className=" form-control mt-2 mb-3 input-border-lightgray poppins-regular-16px mh-50 rounded-0 border-0 shadow-none"
+								className=" form-control border-0 rounded-0 poppins-medium-16px shadow-none my-2"
 							value={data.min_salary}
 							name="salary"
 							id="salary"

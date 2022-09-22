@@ -56,14 +56,17 @@ thead:after
   height: 60px;
 }
 .reset_skyblue_button,
-.reset_skyblue_button:hover
+.reset_skyblue_button:hover,
+.reset_skyblue,
+.reset_skyblue:hover
 {
   border: 1px solid var(--color-skyblue) !important;
   background-color: var(--color-white);
   color: var(--color-skyblue);
   font-family: var(--font-family-poppins-medium);
   font-size: var(--font-size-18px);
-  line-height: var(--line-height-29px);
+  line-height: var(--line-height-31px);
+  height: 43px;
 }
 @media screen and (min-width:768px) and (max-width:1023px) 
 {
@@ -230,11 +233,16 @@ input[type="radio"]
   z-index: 999;
   background-color: var(--color-white);
 }
-@-moz-document url-prefix() {
-  select option {
+@-moz-document url-prefix() 
+{
+  select option 
+  {
      font-family: var(--font-family-poppins-medium) !important;
      font-size: var(--font-size-18px) !important;
-
+     line-height: var(--line-height-26px) !important;
+     --webkit-line-height: var(--line-height-26px) !important;
+     --webkit-font-size: var(--font-size-18px) !important;
+     --webkit-font-family: var(--font-family-poppins-medium) !important;
   }
 }
 .fst-normal 
@@ -260,4 +268,39 @@ input[type="radio"]
 .no_records
 {
   border: 1px solid var(--border-color-light-gray);
+}
+.minimun_height
+{
+  min-height: 77vh;
+}
+.pc-height1, .pc-height2, .pc-height3, .pc-height4, .pc-height1
+{
+  min-height: 50vh;
+}
+.padding_first_col:first-child
+{
+  padding-left: 3rem;
+}
+.border,
+.no-records
+{
+  border: 1px solid #4C4D554D !important;
+}
+select option
+{
+  font-family: var(--font-family-poppins-medium) !important;
+  font-size: var(--font-size-16px) !important;
+  line-height: var(--line-height-26px) !important;
+}
+/* .epc_height .Pc_sectionli__bHrwn
+{
+  margin:0 1rem !important;
+} */
+@-moz-document url-prefix()
+{
+  .link-emp-coeff-tableparent,
+  .salary-benefit-table
+  {
+    padding-left: 1px;
+  }
 }

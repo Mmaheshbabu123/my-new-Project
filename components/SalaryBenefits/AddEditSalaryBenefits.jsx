@@ -182,8 +182,8 @@ const AddEditSalaryBenefits = (props) => {
   const getNeededActions = (item, index) => {
     return (
       <>
-        <span className='actions-span' onClick={() => handleActionClick('edit', item, index)}> <MdEdit /> </span>
-        <span className='actions-span' onClick={() => handleActionClick('delete', item, index)}> <MdDelete /> </span>
+        <span className='actions-span' onClick={() => handleActionClick('edit', item, index)}> <MdEdit className=' color-skyblue '/> </span>
+        <span className='actions-span' onClick={() => handleActionClick('delete', item, index)}> <MdDelete className='color-skyblue '/> </span>
       </>
     )
   }
@@ -259,8 +259,8 @@ const AddEditSalaryBenefits = (props) => {
   const renderInputFields = () => {
     return (
       <div className='col-md-12 border-form-sec px-4'>
-        <div className='col-md-6'>
-        <div className="salary-input-fields">
+        <div className='col-md-6 pb-2 pt-4'>
+        <div className="">
           <label className = "mb-2 poppins-regular-18px" htmlFor="name"> {`Salary benefit name`} <span style={{color:'red'}}> * </span></label>
           <input
             ref={ref => inputRef.current['name'] = ref}
@@ -283,8 +283,8 @@ const AddEditSalaryBenefits = (props) => {
             </small>}
         </div>
         </div>
-       <div className='col-md-6'>
-       <div className="salary-input-fields col-md-12 row mx-0 px-0">
+       <div className='col-md-6 py-2'>
+       <div className="col-md-12 row mx-0 px-0">
           <div className="col-md-12 mx-0 px-0">
               <label className = "mb-2 m-0 p-0 poppins-regular-18px" htmlFor="name"> {`Salary benefit value`} </label>
               <div>
@@ -306,7 +306,7 @@ const AddEditSalaryBenefits = (props) => {
               {state['valueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {'Only two decimal places allowed.'}/>}
               </div>
             </div>
-          <div className="col-md-12 mx-0 px-0 mt-4">
+          <div className="col-md-12 mx-0 px-0 ">
             <LabelField title="Occurence" className="poppins-regular-18px"/>
             <MultiSelectField
                 options={salaryBenefitOccurenceOptions}
@@ -319,7 +319,7 @@ const AddEditSalaryBenefits = (props) => {
           </div>
         </div>
        </div>
-        <div className="salary-input-fields col-md-12 row mx-0 px-0">
+        <div className="col-md-12 row mx-0 px-0 py-2">
           <div className="col-md-6 mx-0 px-0">
             <LabelField title="Applicable coefficient" className="poppins-regular-18px"/>
             {renderRadioButtons('Based on employee type in the cooperation agreement', 'coefficientType', 1)} <br />
@@ -335,13 +335,13 @@ const AddEditSalaryBenefits = (props) => {
             {state['coefficientValueWarning'] && <ValidateMessage style={{margin:0}} text = {'Value should be between 0 to 100.'}/>} <br />
             {state['coefficientValueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {'Only two decimal places allowed.'}/>}
           </div>
-          <div className="col-md-12 mx-0 px-0 mt-4">
+          <div className="col-md-12 mx-0 px-0">
             <LabelField title="Is the benefit granted in case of absence of the employee" className="poppins-regular-18px"/>
             {renderRadioButtons('Yes', 'granted', 1)} <br />
             {renderRadioButtons('No', 'granted', 0)}
           </div>
         </div>
-        <div className="salary-input-fields col-md-6">
+        <div className="pt-2 pb-4 col-md-6">
           <label className = "mb-3 poppins-regular-18px" htmlFor="name"> {`Start date`} </label>
           <input
             ref={ref => inputRef.current['date'] = ref}
@@ -366,15 +366,28 @@ const AddEditSalaryBenefits = (props) => {
   return <>
     <div className='add-edit-types'>
       <div className="row m-0 p-0">
-       <div className='py-4 position-sticky-pc px-0 mb-3'>
+       <div className='py-4 position-sticky-pc px-0'>
        <h4 className="font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`${state.editFlow ? 'Edit' : 'Add'} salary benefit`} </h4>
        </div>
+       <div className='px-0'>
+        <div className='col-md-12 float-end'>
+        {!state.editFlow &&
+            <button
+              onClick={() => addItemAndUpdateIndex({...state})}
+              type="button"
+              style={{marginTop: '0'}}
+              className="btn btn my-2 skyblue-bg-color border-0  px-5 rounded-0 shadow-none float-end">
+              {`+ ADD`}
+            </button>
+          }
+        </div>
+      </div>
         <div className='row p-0 m-0'>
           {renderInputFields()}
         </div>
       </div>
       {state.newItems.length > 0 && !state.editFlow &&
-        <div className='add-item-div m-0 w-100 mt-1'>
+        <div className='add-item-div m-0 w-100 mt-3'>
           <table className='table-hover col-md-11 m-auto my-3 add-item-table'>
           <thead style={{borderBottom: '1px solid', }}>
             <tr key={'header-row-tr'}>
@@ -406,7 +419,7 @@ const AddEditSalaryBenefits = (props) => {
         </div>
         <div className='col-md-6 text-end p-0'>
         <div className='row justify-content-end'>
-          <div className='col-md-4'>
+          {/* <div className='col-md-4'>
           <div className="">
           {!state.editFlow &&
             <button
@@ -418,7 +431,7 @@ const AddEditSalaryBenefits = (props) => {
             </button>
           }
           </div>
-          </div>
+          </div> */}
           <div className='col-md-3 align-self-center'>
         <button
           type="button"

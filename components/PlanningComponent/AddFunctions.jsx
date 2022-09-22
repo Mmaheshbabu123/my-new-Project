@@ -31,9 +31,34 @@ const AddFunctions = () => {
 			APICALL.service(fetchPlanningFunction + p_unique_key, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
+						console.log(result.data[0]);
+						result.data[0].map((val,key)=>{
+							val.employee_list.map((val2,key2)=>{
+								if(val2.function_salary != null && val2.age < val.pc_min_age){
+									val.pcAge.map((val3,key3)=>{
+										if(val2.age == val3.type+14){
+											var sal_percent = parseFloat(val3.min_sal_percent)
+											var sal = (sal_percent/100)*val2.function_salary;
+											if((sal - Math.floor(sal)) !== 0){
+												sal = parseFloat(sal).toFixed(2)
+											}
+											result.data[0][key].employee_list[key2].function_salary = parseFloat(sal)
+											if(val2.salary == sal){
+												result.data[0][key].employee_list[key2].salary = null
+
+											}
+										}
+					
+									})
+					
+								}
+							})
+							
+						})
+						
 						setEmployeeObject(result.data[0]);
+						setIsChecked(result.data[1]);
 					}
-					console.log(result.data[0]);
 					setLoading(false);
 				})
 				.catch((error) => {
@@ -172,8 +197,8 @@ const AddFunctions = () => {
 			object[parent_index].employee_list[index].radioactive = status;
 			setEmployeeObject(object);
 		} else {
-			object.map((element, key) => {
-				object[key].radioactive = status;
+			object[parent_index].employee_list.map((element, key) => {
+				object[parent_index].employee_list[key].radioactive = status;
 			});
 			setEmployeeObject(object);
 		}
@@ -200,10 +225,28 @@ const AddFunctions = () => {
 		}
 	}
 
-	let updateSalary = (index = null, salary, parent_index) => {
+	let updateSalary = (index = null, maxsal, salary, parent_index,pc_min_age) => {
 		var object = [ ...employeeobject ];
+		var sal_percent = 100;
+		var sal = '';
 		if (index !== null) {
-			object[parent_index].employee_list[index].function_salary = parseFloat(salary);
+			if(object[parent_index].employee_list[index].age < pc_min_age){
+				object[parent_index].pcAge.map((val,key)=>{
+					if(object[parent_index].employee_list[index].age == val.type+14){
+						sal_percent = parseFloat(val.min_sal_percent)
+						sal = (sal_percent/100)*salary;
+						if((sal - Math.floor(sal)) !== 0){
+							sal = parseFloat(sal).toFixed(2)
+						}
+						object[parent_index].employee_list[index].function_salary = maxsal != undefined ?(parseFloat(maxsal)>parseFloat(sal)?parseFloat(maxsal):parseFloat(sal)):parseFloat(sal);
+					}
+
+				})
+
+			}else{
+				object[parent_index].employee_list[index].function_salary = maxsal != undefined ?parseFloat(maxsal):parseFloat(salary);
+			}
+
 			setEmployeeObject(object);
 		} else {
 			const newState = object.map((element) => {
@@ -226,11 +269,26 @@ const AddFunctions = () => {
 		// });
 	};
 
-	function updatingObjectfunctionSlary(index = null, salary, parent_index) {
+	function updatingObjectfunctionSlary(index = null,maxsal, salary, parent_index,pc_min_age) {
 		var object = [ ...employeeobject ];
 		if (index != null) {
+			if(object[parent_index].employee_list[index].age < pc_min_age){
+				object[parent_index].pcAge.map((val,key)=>{
+					if(object[parent_index].employee_list[index].age == val.type+14){
+						var sal_percent = parseFloat(val.min_sal_percent)
+						var sal = (sal_percent/100)*salary;
+						if((sal - Math.floor(sal)) !== 0){
+							sal = parseFloat(sal).toFixed(2)
+						}
+						object[parent_index].employee_list[index].function_salary = maxsal != undefined ?(parseFloat(maxsal)>parseFloat(sal)?parseFloat(maxsal):parseFloat(sal)):parseFloat(sal);
+					}
+
+				})
+
+			}else{
 			object[parent_index].employee_list[index].function_salary = salary;
 			setEmployeeObject(object);
+			}
 		} else {
 			object.map((element, key) => {
 				object[key].function_salary = salary != null ? salary : salary;
@@ -383,14 +441,36 @@ const AddFunctions = () => {
 		});
 	};
 
-	function updatingCommonObjectfunctionSlary(funcid, salary,parent_index) {
+	function updatingCommonObjectfunctionSlary(funcid, salary,parent_index,pc_min_age) {
 		var object = [ ...employeeobject ];
+
+		var sal_percent = 100;
+		var sal = '';
 		object[parent_index].employee_list.map((element, key) => {
-			var temp = '';
+			if(object[parent_index].employee_list[key].age < pc_min_age){
+
+				object[parent_index].pcAge.map((val)=>{
+					if(object[parent_index].employee_list[key].age == val.type+14){
+						sal_percent = parseFloat(val.min_sal_percent)
+						sal = (sal_percent/100)*salary;
+						if((sal - Math.floor(sal)) !== 0){
+							sal = parseFloat(sal).toFixed(2)
+						}
+						var temp2 = '';
+						object[parent_index].employee_list[key].functionslist.map((element1) => {
+							element1.max != undefined ? (element1.id == funcid ? (temp2 = element1.max) : '') : '';
+						});
+						object[parent_index].employee_list[key].function_salary = temp2 != '' ?(parseFloat(temp2)>parseFloat(sal)?parseFloat(temp2):parseFloat(sal)):parseFloat(sal);
+					}
+				})
+			}else{
+				var temp = '';
 			object[parent_index].employee_list[key].functionslist.map((element1) => {
 				element1.max != undefined ? (element1.id == funcid ? (temp = element1.max) : '') : '';
 			});
 			object[parent_index].employee_list[key].function_salary = temp != '' ? temp : salary;
+			}
+			
 		});
 		setEmployeeObject(object);
 	}
@@ -625,13 +705,12 @@ const AddFunctions = () => {
 																								);
 																								updateSalary(
 																									k1,
-																									deta['max'] !=
-																									undefined
-																										? deta['max']
-																										: deta[
+																									deta['max'],
+																										deta[
 																												'salary'
 																											],
-																									key
+																									key,
+																									emplist.pc_min_age
 																								);
 																							}}
 																							checked={
@@ -743,8 +822,10 @@ const AddFunctions = () => {
 																									);
 																									updatingObjectfunctionSlary(
 																										k1,
+																										deta['max'],
 																										obj.salary,
-																										key
+																										key,
+																										emplist.pc_min_age
 																									);
 																									//	}
 																								}}
@@ -789,15 +870,16 @@ const AddFunctions = () => {
 																	<input
 																		type="radio"
 																		value={deta['name']}
-																		name={group}
+																		name={group+ind}
 																		className="p-3"
 																		onClick={() => {
-																			updatingObjectradiobutton(null, false);
+																			updatingObjectradiobutton(null, false,key);
 																			updatingObjectFunction(null, deta['id'],key);
 																			updatingCommonObjectfunctionSlary(
 																				deta['id'],
 																				deta['salary'],
-																				key
+																				key,
+																				emplist.pc_min_age
 																			);
 																			//updateSalary(null, deta['max'] != undefined ? deta['max'] : deta['salary']);
 																		}}
@@ -836,13 +918,13 @@ const AddFunctions = () => {
 																			style={{
 																				display: 'inline-block !important'
 																			}}
-																			name={group}
+																			name={group+ind}
 																			checked={isThere(
 																				0,
 																				employeeobject[key].employee_list[0]['funid'],key
 																			)}
 																			onChange={() => {
-																				updatingObjectradiobutton(null, true);
+																				updatingObjectradiobutton(null, true,key);
 																				updatingObjectFunction(null, 'drop',key);
 																			}}
 																			className="p-3 d-inline align-middle"
@@ -872,7 +954,9 @@ const AddFunctions = () => {
 																				updatingCommonObjectfunctionSlary(
 																					null,
 																					obj.salary,
-																					key
+																					key,
+																					emplist.pc_min_age
+
 																				);
 																			}}
 																			isMulti={false}
