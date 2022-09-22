@@ -205,7 +205,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
             </div>
             <div className='col-md-4 col-lg-3 pe-0'>
               <div className='row justify-content-end'>
-                <div className='col-md-6 col-lg-6 pe-0'>
+                <div className='col-md-6 col-lg-6'>
                   <button
                     type="button"
                     className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"

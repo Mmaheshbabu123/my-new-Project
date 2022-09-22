@@ -11,12 +11,11 @@ const Sample = (props) => {
 	const { t } = props;
 	const [state, setState] = useState({ 'languages': [], 'lang': '' });
 	useEffect(() => {
-		console.log('---------------');
 		let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get_languages';
 		APICALL.service(url, 'GET')
 			.then((result) => {
 				if (result['status'] == 200) {
-					setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en' } });
+					setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'nl' } });
 				} else {
 					alert('Failed');
 				}
@@ -28,7 +27,6 @@ const Sample = (props) => {
 		router.reload();
 //		setState({ ...state, ...{ lang: e.target.value } });
 	}
-	console.log('hiosho');
 	return <div>
 		<select name="languages" id="language-select" value={state['lang']} onChange={handleLangChange}>
 			{

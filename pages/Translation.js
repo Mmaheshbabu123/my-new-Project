@@ -1,3 +1,4 @@
+import { ExitToApp } from 'node_modules/@material-ui/icons/index';
 import React, { useState, useEffect } from 'react';
 import { APICALL } from '../Services/ApiServices';
 
@@ -21,14 +22,19 @@ const TranslationFunction = (input) => {
 
 const Translation = (Component, stringList) => {
   const TranslatedComponent = () => {
-  const [hydration, setHydration] = useState(false);
+  const [hydration, setHydration] = useState(0);
 
 
   useEffect(() => {
+    const  asyncFunc = async ()=>{
+      await getTranslationData();
+      setHydration(1);
+    }
       const getTranslationData = async () => {
-        let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/translate';
+        //let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/translate';
+        let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_translations';
         let lang = localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en';
-        await APICALL.service(url, 'POST', { lang: lang, stringList: stringList })
+        await APICALL.service(url, 'POST', { lang: lang, string_list: stringList })
           .then((result) => {
             if (result['status'] == 200) {
               if (localStorage['servername_' + 'translations'] === undefined) {
@@ -45,14 +51,16 @@ const Translation = (Component, stringList) => {
           })
       };
       if (stringList.length > 0) {
-        getTranslationData();
+       // getTranslationData();
+       // setHydration(1);
+         asyncFunc();
       }
-      setHydration(true);	  
+       
     }, []);
     
    
     const t = (input) =>{
-      if (hydration) {
+      if (hydration === 1) {
         let lang = localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en';
         let translations = localStorage['servername_' + 'translations'] !== undefined ? JSON.parse(localStorage['servername_' + 'translations']) : {};
       if (translations[lang] !== undefined) {
