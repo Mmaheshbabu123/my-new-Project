@@ -111,7 +111,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
         </div>
         <div className='searchbox m-0 my-4' style={{ margin: '10px 0' }}>
          <div className='row'>
-           <div className='col-md-7 col-lg-8'>
+           <div className='col-md-7 col-lg-9'>
              <div className='row'>
                <div className='col-md-6'>
                <input
@@ -135,7 +135,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
                </div>
              </div>
            </div>
-           <div className='col-md-5 col-lg-4'>
+           <div className='col-md-5 col-lg-3'>
              <div className='row'>
                <div className='col-md-6 col-lg-6'>
                <button

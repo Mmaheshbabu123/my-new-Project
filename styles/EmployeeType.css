@@ -25,9 +25,9 @@
   background-color: black !important;
 }
 
-.manage-types-table {
-  /* border-collapse: collapse;
-  border: 1px solid black; */
+.manage-types-table tbody {
+  /* border-collapse: collapse;*/
+  /* border: 1px solid var(--border-color-gray);  */
 }
 .table-render-thead
 {

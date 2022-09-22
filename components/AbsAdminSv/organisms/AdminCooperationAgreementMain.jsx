@@ -33,10 +33,12 @@ const AdminCooperationAgreementMain = (props) => {
   return (
     <div>
     {state.loaded === true ?
-          <div className="col-md-12 row">
-          <h4 className={`${styles['employer-sv-page-title']} text-center page-title`}> Manage cooperation agreements</h4>
+          <div className='row'>
+            <div className="col-md-12">
+          <h4 className={`${styles['employer-sv-page-title']} page-title bitter-italic-normal-medium-24 position-sticky-pc py-4`}> Manage cooperation agreements</h4>
               <RequestOverviewData assignedData={state.assignedData} overviewData={state.overviewData} salesAgentArray={state.salesAgentArray}/>
           </div>
+            </div>
         : <p>Loading...</p>}
     </div>
   );

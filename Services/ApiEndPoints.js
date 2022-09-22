@@ -224,8 +224,13 @@ export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
 //-------------------
 
 //----------------- TODOS ---------------//
-
 export const getMyTodos = BASE_URL + 'get-mytodos';
-
-
 //-----------------
+//-----------------
+
+//------------------- Notifications --------------------//
+export const getNotificationsCount = BASE_URL + "get-notifications-count";
+export const getNotifications = BASE_URL + "get-notifications-data";
+export const updateNotifications = BASE_URL + "update-notifications";
+export const deleteNotifications = BASE_URL + "delete-notifications";
+//-------------------

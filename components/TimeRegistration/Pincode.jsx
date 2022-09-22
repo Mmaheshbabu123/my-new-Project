@@ -26,7 +26,7 @@ const Pincode = () => {
 	//for router
 	const router = useRouter();
 	//get the otp
-	const [ otp, setOTP ] = useState('');
+	const [ otp, setOTP ] = useState(0);
 	//to catch the error
 	const [ err, setErr ] = useState('');
 	//to get the user id
@@ -36,7 +36,7 @@ const Pincode = () => {
 
 	const [ hide, setHide ] = useState(true);
 
-	const [ eyeicon, setEyeicon ] = useState(FaEye);
+	const [ eyeicon, setEyeicon ] = useState(FaEyeSlash);
 
 	//if any paremeters there in the url we can get by it
 	const { root_parent_id, selectedTabId, ref_id = 0 } = router.query;
@@ -64,7 +64,7 @@ const Pincode = () => {
 						console.error(error);
 					});
 			} else {
-				window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+				 window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 			}
 		},
 		[ router.query ]
@@ -100,7 +100,7 @@ const Pincode = () => {
 		//setting the hide value of pin one.
 		setHide(!hide);
 		//chnaging the icon
-		hide ? setEyeicon(FaEyeSlash) : setEyeicon(FaEye);
+		hide ?  setEyeicon(FaEye):setEyeicon(FaEyeSlash);
 	};
 
 	//fucntion to submit.
@@ -184,8 +184,11 @@ const Pincode = () => {
 				<div className="col-4" />
 				<div className="col-5">
 					<div className="d-flex">
-						<OTPInput
-							value={otp}
+						
+                           <OTPInput
+						   inputClassName={hide?"otp":""}
+						   className="otp-container"
+						    value={otp}
 							onChange={setOTP}
 							inputStyles={{
 								width: '60px',
@@ -193,9 +196,10 @@ const Pincode = () => {
 							}}
 							OTPLength={6}
 							otpType="number"
-							disabled={false}
-							secure={hide}
+							//secure
+							
 						/>
+						
 						<button style={{ border: 'none' }} onClick={hideShow} className="bg-white">
 							{eyeicon}
 						</button>
