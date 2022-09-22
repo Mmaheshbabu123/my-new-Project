@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import '../styles/style.css';
 import '../styles/cooperation-agreement.css';
+import '../styles/planning.css';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Script from 'next/script';

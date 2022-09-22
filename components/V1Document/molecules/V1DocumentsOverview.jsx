@@ -195,7 +195,7 @@ const V1DocumentsOverview = (props) => {
 
   const searchTextField = (key, placeholder) => {
     return(
-      <div className='p-0' style={{width: '17%', marginLeft: placeholder ===  'company' ? '10px' : 0 }}>
+        <div className='col-md-3' >
         <input
           type="text"
           value={state[key]}
@@ -204,6 +204,7 @@ const V1DocumentsOverview = (props) => {
           placeholder={'Search ' + placeholder}
           onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
         />
+
       </div>
     )
   }
@@ -219,8 +220,8 @@ const V1DocumentsOverview = (props) => {
         standards={options.filter(val => val.value === state[key])}
         handleChange={(e) => onSelect(e, key)}
         isMulti={false}
-        customStyle={{ menuPortal: base => ({ ...base, zIndex: 9999 }), width: '22%', paddingTop: '9px', paddingLeft: placeholder === 'Select period' ? '0' : '10px' }}
-        className={`${styles['v1-multiselect']}`}
+        customStyle={{ menuPortal: base => ({ ...base, zIndex: 9999 }), paddingLeft: placeholder === 'Select period' ? '0' : '10px' }}
+        className={`${styles['v1-multiselect']} col-md-3 my-2 select_option_v1_doc`}
         classNamePrefix={`${styles['v1-multiselect']}`}
         placeholder={placeholder}
       />
@@ -230,29 +231,44 @@ const V1DocumentsOverview = (props) => {
 
   return(
     <div>
-    <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
-     <div className='col-md-12 row m-0 p-0'>
-       {searchTextField('employeeSearchTerm', 'employee')}
+    <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+    <div className='row'>
+    <div className='col-md-12'>
+       <div className='row'>
+       <div className='col-md-9'>
+         <div className='row'>
+         {searchTextField('employeeSearchTerm', 'employee')}
        {searchTextField('companySearchTerm', 'company')}
        {searchSelectField('functionSearchTerm', state.functions, 'Select function')}
        {searchSelectField('periodSearchTerm', state.period, 'Select period')}
-       <div style={{width: '21%', display: 'flex', justifyContent: 'end' }}>
-         <button
+         </div>
+       </div>
+       <div className='col-md-3'>
+         <div className='row'>
+           <div className='col-md-6'>
+           <button
            type="button"
-           className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+           className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color shadow-none w-100"
            onClick={() => handleSearchClick(1)}
          >
            SEARCH
          </button>
-         <button
+         
+           </div>
+           <div className='col-md-6'>
+           <button
            type="button"
-           className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+           className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button shadow-none w-100"
            onClick={() => handleSearchClick(0)}
          >
            RESET
          </button>
+           </div>
+         </div>
+       </div>
        </div>
       </div>
+    </div>
     </div>
     <div className="table-render-parent-div">
         <table className="table table-hover manage-types-table">

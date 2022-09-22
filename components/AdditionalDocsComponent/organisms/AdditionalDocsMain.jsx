@@ -46,10 +46,14 @@ const AdditionalDocsMain = (props) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
-      <ul className={`${styles['docs-overview-tabs']}`}>
-        <li> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> Additional documents </span> </li>
-        {Number(entityType) === 1 && <li> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> V1 documents </span> </li>}
+     <div className='row position-sticky-subhead py-4'>
+       <div className='col-md-12'>
+       <ul className={`${styles['docs-overview-tabs']}  m-0`}>
+        <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> Additional documents </span> </li>
+        {Number(entityType) === 1 && <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> V1 documents </span> </li>}
       </ul>
+       </div>
+     </div>
     );
   }
 
@@ -63,7 +67,7 @@ const AdditionalDocsMain = (props) => {
     <div>
     {state.loaded === true || state.selectedTabId === 2 ?
           <div className="col-md-12">
-              <h4 className='mt-2 mb-4 font-weight-bold   px-0  bitter-italic-normal-medium-24 position-sticky pt-3'> {`Manage my documents`} </h4>
+              <h4 className='py-4 font-weight-bold px-0 bitter-italic-normal-medium-24 position-sticky-pc'> {`Manage my documents`} </h4>
               {action === 0 && showTabs()}
 
               {state.selectedTabId === 2  && <V1DocumentsOverview /> }
