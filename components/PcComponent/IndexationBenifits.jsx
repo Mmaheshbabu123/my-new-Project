@@ -15,26 +15,26 @@ const IndexationBenifits = () => {
             <div className='row ms-1'><p className={'  poppins-medium-16px '}>How do you want to index the benefit?</p>
                 <div className="form-check col mt-2 ">
                     <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                    <label className="form-check-label mt-1" for="flexRadioDefault1">
+                    <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
                         Indexation via selection of one or more benefits
                     </label>
                 </div>
                 <div className="form-check col mt-2 ">
                     <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                    <label className="form-check-label mt-1" for="flexRadioDefault1">
+                    <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
                         Indexation via selection of one or more benefits
                     </label>
                 </div>
             </div>
             <div className='row'>
                 <div className='col-md-6 mt-2'><p className={'  poppins-medium-16px '}>Category</p>
-                    <select class="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example">
                         <option selected>Select..</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
-                    
+
 
                     <div className='mt-3'>
                         <p className={' poppins-medium-16px '}>Date as of which indexation takes place</p>
@@ -67,7 +67,7 @@ const IndexationBenifits = () => {
                     <div className='col-sm-2 ms-2'><p className={'  poppins-medium-16px '}>New value</p></div>
                 </div>
 
-                <label for="" class="col-sm-2 col-form-label">Benefit A (PC 118)</label>
+                <label htmlFor="" className="col-sm-2 col-form-label">Benefit A (PC 118)</label>
                 <div className="col-sm-2">
                     <input type="textfield" className="form-control" id="" placeholder="" />
                 </div>
@@ -77,7 +77,7 @@ const IndexationBenifits = () => {
                 </div>
             </div>
             <div className="form-group row mt-3">
-                <label for="" class="col-sm-2 col-form-label">Benefit B (PC 116)</label>
+                <label htmlFor="" className="col-sm-2 col-form-label">Benefit B (PC 116)</label>
                 <div className="col-sm-2">
                     <input type="textfield" className="form-control" id="" placeholder="" />
                 </div>
@@ -86,7 +86,7 @@ const IndexationBenifits = () => {
                 </div>
             </div>
             <div className="form-group row mt-3">
-                <label for="" class="col-sm-2 col-form-label">Benefit C (PC 119)</label>
+                <label htmlFor="" className="col-sm-2 col-form-label">Benefit C (PC 119)</label>
                 <div className="col-sm-2">
                     <input type="textfield" className="form-control" id="" placeholder="" />
                 </div>
@@ -106,7 +106,7 @@ const IndexationBenifits = () => {
                     />
                     <div className='mt-2'>
                         <p className={'  poppins-medium-16px '}>Function</p>
-                        
+
                           <Multiselect
                         // options={this.state.options} // Options to display in the dropdown
                         // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
@@ -117,7 +117,7 @@ const IndexationBenifits = () => {
                     </div>
                     <div className='mt-2'>
                         <p className={' poppins-medium-16px '}>Employee type (statuut)</p>
-                        
+
                         <Multiselect
                         // options={this.state.options} // Options to display in the dropdown
                         // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
