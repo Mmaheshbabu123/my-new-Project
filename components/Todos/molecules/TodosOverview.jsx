@@ -5,7 +5,8 @@ import { MdDone } from 'react-icons/md';
 import { CgMailOpen } from 'react-icons/cg';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ImCross } from 'react-icons/im';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineDownload } from 'react-icons/ai';
+import {MdEdit } from 'react-icons/md';
 import { FaFileSignature } from 'react-icons/fa';
 import styles from './Todos.module.css';
 import { getMyTodos } from '@/Services/ApiEndPoints'
@@ -14,7 +15,7 @@ import customAlert from '@/atoms/customAlert';
 
 const itemsPerPage = 6;
 
-const TodosOverview = ({ props }) => {
+const TodosOverview = ({ props, entityId, entityType }) => {
   const { todos = [], } = props;
   /**
    * [getSelectedStatus description]
@@ -50,7 +51,6 @@ const TodosOverview = ({ props }) => {
     currentPage: 0,
   });
 
-  console.log(state);
 
   const handleSearchClick = (search = 1) => {
     // let value = search ? state.searchTermCompany : '';
@@ -104,8 +104,12 @@ const TodosOverview = ({ props }) => {
       {eachRow.todo_type === 3 ? <>
         <span title={'Accept'} className={styles["span-action-icons"]} onClick={() => handleActionClick('accept', eachRow)}> <MdDone /> </span>
         <span title={'Reject'} className={styles["span-action-icons"]} onClick={() => handleActionClick('reject', eachRow)}> <AiOutlineClose /> </span>
-      </>:
-      <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <FaFileSignature /> </span>
+      </>: eachRow.todo_type === 2 ? <>
+        <span title={'Edit'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
+        <span title={'Sign'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <FaFileSignature /> </span>
+        <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <AiOutlineDownload /> </span>
+      </>
+      : <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <FaFileSignature /> </span>
     }
     </>
   }
@@ -122,11 +126,21 @@ const TodosOverview = ({ props }) => {
       }
       eachRow['accept'] = accept;
       eachRow['reject'] = reject;
-    }
-    if(type === 'accept' || type === 'reject') {
       showAlert(type, eachRow)
     }
-    if(type === 'sign') {
+    if(eachRow.todo_type === 2) {
+      let { webform_id, submit_id, tid } = eachRow;
+      let path;
+      if(type === 'edit')
+         path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout`;
+      if(type === 'sign')
+         path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityId}?type=${entityType === 2 ? 'employer' : 'employee'}`
+      if(type === 'download')
+         path = entityType === 2 ? `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityId}type=employeer&signed`
+                                 : `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityId}?signed=0&type=employee`;
+      window.open(eachRow.baseUrl  + path, '_self');
+    }
+    if(eachRow.todo_type === 3 && type === 'sign') {
       window.open(eachRow.baseUrl + eachRow.uri, '_self')
     }
   }

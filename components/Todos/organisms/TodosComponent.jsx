@@ -19,7 +19,7 @@ const TodosComponent = (props) => {
    * @return {Promise} [description]
    */
   const fetchData = async () => {
-    await APICALL.service(`${getMyTodos}/${props.entityId}`, 'GET').then(response => {
+    await APICALL.service(`${getMyTodos}/${props.entityId}?entitytype=${props.entityType}`, 'GET').then(response => {
       if (response.status === 200)
         setState({ ...state, loaded: true, todos: response.data });
       else
@@ -29,10 +29,9 @@ const TodosComponent = (props) => {
       customAlert('error', 'Something went wrong while fetching todo\'s', 2000);
     })
   }
-
   return (
     <div>
-      {state.loaded === true ? <TodosOverview props={state} /> : <p> Loading... </p>}
+      {state.loaded === true ? <TodosOverview props={state} entityId = {Number(props.entityId) || 0} entityType = {Number(props.entityType) || 0} /> : <p> Loading... </p>}
     </div>
   );
 }
