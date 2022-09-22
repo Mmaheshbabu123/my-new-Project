@@ -54,7 +54,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('regenerate', eachRow)}>   <GrRefresh className='mt-2 ms-3 color-skyblue force-skyblue'/> </span>
+        <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('regenerate', eachRow)}>   <GrRefresh className='mt-2 color-skyblue force-skyblue'/> </span>
         {eachRow.qr_path !== '' && <>
           <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('view', eachRow)}>   <BiQrScan className='mt-2 ms-3 color-skyblue'/> </span>
           <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload className='mt-2 ms-3 color-skyblue'/> </span>
@@ -253,49 +253,74 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
 
   return (
     <>
-      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage QR code`} </h4>
-      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0' }}>
-       <div className='col-md-12 row'>
-         <div className='col-md-6 row'>
-           <input
+      <div className='row position-sticky-pc'>
+        <div className='col-md-12 px-0'>
+          <h4 className='py-4 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage QR code`} </h4>
+        </div>
+      </div>
+      <div className='searchbox m-0 my-2' style={{ margin: '10px 0' }}>
+       <div className='row'>
+       <div className='col-md-12 px-0'>
+         <div className='row'>
+         <div className='col-md-9 '>
+           <div className='row'>
+             <div className='col-md-6'>
+             <input
              type="text"
-             style={{width: '45%'}}
              value={state.companyTerm}
-             className="form-control mt-2 mx-2 mb-2 input-border-lightgray poppins-regular-18px rounded-0"
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px rounded-0 shadow-none"
              onChange={(e) => setState({...state, companyTerm: e.target.value})}
              placeholder={'Search company'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
-           <input
+           
+             </div>
+             <div className='col-md-6'>
+             <input
              type="text"
-             style={{width: '45%'}}
              value={state.locationTerm}
-             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px rounded-0"
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px rounded-0 shadow-none"
              onChange={(e) => setState({...state, locationTerm: e.target.value})}
              placeholder={'Search location'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
+             </div>
+           </div>
          </div>
          <div className='col-md-3'>
-           <button
+           <div className='row'>
+             <div className='col-md-6'>
+             <button
              type="button"
-             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
              onClick={() => handleSearchClick(1)}
            >
              SEARCH
            </button>
-           <button
+          
+             </div>
+             <div className='col-md-6'>
+             <button
              type="button"
-             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
              onClick={() => handleSearchClick(0)}
            >
              RESET
            </button>
+             </div>
+           </div>
+         </div>
          </div>
         </div>
-        <div className="col-md-10 row m-0 p-0 text-end py-3">
-        <span style={{fontSize: 'x-large', paddingTop: '10px'}} className="col-md-2 text-start"> Date: </span>
-          <MultiSelectField
+       </div>
+        <div className='row'>
+        <div className="col-md-12 m-0 p-0 py-3 ">
+       <div className='row d-flex justify-content-end'>
+         <div className='col-md-1 align-self-center'>
+         <span style={{fontSize: 'x-large'}} className="text-start poppins-medium-18px align-self-center"> Date: </span>
+         </div>
+         <div className='col-md-3'>
+         <MultiSelectField
               id="headingDate"
               options={dateOptions}
               standards={dateOptions.filter(val => val.value === state.headingDate)}
@@ -303,12 +328,18 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
               handleChange={onSelect}
               classNamePrefix="qr-custom-multiselect"
               isMulti={false}
-              className="col-md-5"
+              className="col-md-12 date-select"
             />
+         </div>
+       </div>
+         
+        </div>
         </div>
       </div>
-      <div className="max-height-420">
-        <table className="table table-hover manage-types-table">
+     <div className='row'>
+       <div className='col-md-12 px-0'>
+       <div className="max-height-420">
+        <table className="table table-hover manage-types-table manage-documents-table-header">
           <thead className="table-render-thead ">
             <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className="align-middle" width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
           </thead>
@@ -327,6 +358,8 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
           : <p style={{paddingTop: '10px'}}> No records. </p>}
         </table>
       </div>
+       </div>
+     </div>
       <div>
         {state.filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."

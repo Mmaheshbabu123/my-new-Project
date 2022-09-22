@@ -511,9 +511,9 @@ const AddFunctions = () => {
 							<div className="row px-3">
 								{employeeobject != undefined &&
 									employeeobject.map((emplist, key) => (
-										<div type="1" className="pt-2" key={key}>
+										<div type="1" className="pt-2 px-0" key={key}>
 											<div className="py-2 poppins-light-20px">{emplist.pc}</div>
-											<div className="border border-secondary mb-2 p-1">
+											<div className="border-secondary mb-2 p-1">
 												{emplist.employee_list.map((v1, k1) => (
 													<div key={v1.emp_id}>
 														<div className="row bg-4C4D550F mb-2 p-2">
@@ -593,7 +593,9 @@ const AddFunctions = () => {
 																	</span>
 																</div>
 															</div>
-															<div className="col-md-3  border-0 custom-drop-btn">
+															<div className='col-md-8'>
+																<div className='row'>
+																<div className="col-md-6  border-0 custom-drop-btn">
 																{emplist.employee_types != null ? (
 																	<MultiSelectField
 																		placeholder={'Select employee type'}
@@ -624,7 +626,7 @@ const AddFunctions = () => {
 																	</div>
 																}
 															</div>
-															<div className="col-md-2 border-0">
+															<div className="col-md-3 border-0">
 																{v1['function_salary'] != null ? (
 																	<span className="p-1 px-3 w-100 poppins-medium-20px bg-white">
 																		{'€ ' + v1['function_salary']}
@@ -635,7 +637,7 @@ const AddFunctions = () => {
 																	</span>
 																)}
 															</div>
-															<div className="col-md-2 py-1 add_function_salary">
+															<div className="col-md-3 py-1 add_function_salary">
 																<div>
 																	{v1['function_salary'] != null && (
 																		<div className="input-group">
@@ -667,6 +669,8 @@ const AddFunctions = () => {
 																	<p style={{ color: 'red' }}>{v1['salaryerror']}</p>
 																</div>
 															</div>
+																	</div>
+																</div>
 															{!ischecked &&
 																v1['functionslist'] != undefined &&
 																v1['functionslist'].map((deta, ind) => {

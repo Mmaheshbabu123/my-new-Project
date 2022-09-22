@@ -40,7 +40,7 @@ const MangeQrCodeIndex = (props) => {
   return (
     <>
       <div className='container-fluid'>
-        <div className='mt-3 md-3'>
+        <div className='md-3'>
           {state.loaded === true ?
               <Suspense fallback={`Loading...`}>
                 <ManageQrComponent props = {state} entityId={entityid} loadData={loadData}/>

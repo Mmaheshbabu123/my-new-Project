@@ -5,10 +5,11 @@ import { deleteAdditionalDocuments, downloadAdditionalDocuments } from '@/Servic
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
 import { USER_ROLE_ENTITY_TYPE } from '@/Constants';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { FiDownload } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
-const itemsPerPage = 8;
+const itemsPerPage = 5;
 
 const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props }) => {
   entityType === 2 ? headers.indexOf('Employer') > -1 ? headers.splice(headers.indexOf('Employer'), 1) : headers : [];
@@ -98,6 +99,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
      }, [state.itemOffset]);
 
      const updatePaginationData = (filterRows, offset) => {
+       console.log(filterRows)
        let items = [...filterRows];
        const endOffset = offset + itemsPerPage;
        return {
@@ -137,49 +139,60 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
   }
 
   return (
-    <>
+    < div className='row'>
       <div className='col-md-12 text-end'>
       {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) && <button
         onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
         type="button"
-        className="btn btn-dark pcp_btn col-3">
+        className="btn skyblue-bg-color rounded-0 shadow-none col-3">
         {`+Add additional document`}
       </button>}
       </div>
-      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
-       <div className='col-md-12 row'>
-         <div className='col-md-6 p-0'>
+      <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+      <div className='row'>
+      <div className='col-md-12'>
+         <div className='row'>
+         <div className='col-md-9'>
            <input
              type="text"
              value={state.searchTerm}
-             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
              placeholder={'Search'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
-         <div className='col-md-6'>
-           <button
+         <div className='col-md-3'>
+           <div className='row'>
+             <div className='col-md-6'>
+             <button
              type="button"
-             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
              onClick={() => handleSearchClick(1)}
            >
              SEARCH
            </button>
-           <button
+          
+             </div>
+             <div className='col-md-6'>
+              <button
              type="button"
-             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
+             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
              onClick={() => handleSearchClick(0)}
            >
              RESET
            </button>
+             </div>
+           </div>
+         </div>
          </div>
         </div>
       </div>
+      </div>
       <div className="table-render-parent-div">
-          <table className="table table-hover manage-types-table">
+          <table className="table table-hover manage-types-table manage-documents-table-header">
             <thead className="table-render-thead">
-              <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} className="align-middle" scope="col"> {eachHeader} </th>)} </tr>
+              <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} className="align-middle " scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
             <tbody>
@@ -189,8 +202,8 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
                 <td width="170px"> {getEntityName(eachRow, 1)} </td>
                 <td> {formatDate(eachRow.startDate) || '-'} </td>
                 <td> {formatDate(eachRow.endDate) || '-'} </td>
-                <td> {eachRow.linkToCooperationAgreement ? 'Yes' : 'No'} </td>
-                <td>{ getNeededActions(eachRow) } </td>
+                <td className='text-center'> {eachRow.linkToCooperationAgreement ? 'Yes' : 'No'} </td>
+                <td className='color-skyblue-icon'>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
             : <p style={{paddingTop: '10px'}}> No records </p>}
@@ -199,12 +212,12 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       <div>
       {state.filterRows.length > itemsPerPage && <ReactPaginate
           breakLabel="..."
-          nextLabel="Next >"
+          nextLabel={<AiOutlineArrowRight />}
           onPageChange={handlePageClick}
           pageRangeDisplayed={5}
           pageCount={state.pageCount}
           forcePage={state.currentPage}
-          previousLabel="< Previous"
+          previousLabel={<AiOutlineArrowLeft />}
           renderOnZeroPageCount={null}
           containerClassName={"pagination"}
           itemClass="page-item"
@@ -212,11 +225,15 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
       />}
-        <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn btn-dark pcp_btn col-1">
+       <div className='row my-3'>
+        <div className='col-md-12'>
+         <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn poppins-light-18px text-decoration-underline shadow-none p-0 text-uppercase">
           {`Back`}
         </button>
+        </div>
+       </div>
       </div>
-    </>
+    </div>
   );
 }
 
