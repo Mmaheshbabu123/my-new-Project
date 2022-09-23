@@ -367,6 +367,13 @@ select option
   background-color: var(--color-white);
   z-index: 999;
 }
+.position-sticky-co-op
+{
+  position: sticky;
+  top: 160px;
+  background-color: var(--color-white);
+  z-index: 999;
+}
 .my_todo_tab .Todos_todo-icon__N2dlX img
 {
   width: 25px;
