@@ -149,7 +149,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
       if(type === 'sign')
          path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
       if(type === 'download')
-         path = entityType === 2 ? `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityId}type=employeer&signed`
+         path = entityType === 2 ? `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityId}?type=employeer&signed`
                                  : `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${employer_id}?signed=0&type=employee`;
       window.open(eachRow.baseUrl  + path, '_self');
     }
