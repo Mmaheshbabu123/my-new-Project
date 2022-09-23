@@ -169,11 +169,15 @@ input[type="checkbox"]:focus
 .border-color-addeditsalary-benefits:focus,
 .react-select-prefix__control,
 .react-select-prefix__control:hover,
-.salary-input-fields .css-1pahdxg-control
+.salary-input-fields .css-1pahdxg-control,
+.qr-custom-multiselect__menu:focus,
+.react-select-prefix__menu,
+.react-select-prefix__menu:focus,
+.V1Document_v1-multiselect__EVmAm__menu
 {
 	border: 1px solid #4C4D554D !important;
-	border-radius: 0px;
-	box-shadow: none;
+	border-radius: 0px !important;
+	box-shadow: none !important;
 }
 .react-select-prefix__control
 {
@@ -181,7 +185,10 @@ input[type="checkbox"]:focus
 }
 #react-select-2-listbox,
 .css-6j8wv5-Input,
-.css-qc6sy-singleValue
+.css-qc6sy-singleValue,
+.qr-custom-multiselect__menu,
+.react-select-prefix__menu,
+.V1Document_v1-multiselect__EVmAm__menu
 {
   font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-16px);

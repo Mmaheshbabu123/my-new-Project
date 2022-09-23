@@ -141,7 +141,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
       window.open(eachRow.baseUrl  + path, '_self');
     }
     if(eachRow.todo_type === 1 && type === 'sign') {
-      window.open(eachRow.baseUrl + eachRow.uri, '_self')
+      window.open(eachRow.uri, '_self');
     }
   }
 

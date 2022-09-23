@@ -490,8 +490,10 @@ const AddFunctions = () => {
 					<div>Loading...</div>
 				) : (
 					<div>
+					<div className='row'>
+						<div className='col-md-12'>
 						<div className="min-hei-addfun add_function">
-							<div className="form-check rounded-0 my-3 align-items-center d-flex">
+							<div className="form-check rounded-0 mb-3 align-items-center d-flex">
 								<input
 									className="form-check-input rounded-0 mb-1 "
 									type="checkbox"
@@ -508,16 +510,19 @@ const AddFunctions = () => {
 									Same functions for all employees
 								</label>
 							</div>
-							<div className="row px-3">
+							<div className="row">
 								{employeeobject != undefined &&
 									employeeobject.map((emplist, key) => (
-										<div type="1" className="pt-2" key={key}>
-											<div className="py-2 poppins-light-20px">{emplist.pc}</div>
-											<div className="border border-secondary mb-2 p-1">
+										<div type="1" className="pt-2 col-md-12" key={key}>
+											<div className="py-2 poppins-medium-18px text-capitalize">{emplist.pc}</div>
+											<div className="border-secondary mb-2 p-1">
 												{emplist.employee_list.map((v1, k1) => (
 													<div key={v1.emp_id}>
-														<div className="row bg-4C4D550F mb-2 p-2">
-															<div className="col-md-1 poppins-light-20px">
+														<div className="row mb-2">
+														<div className='col-md-12 px-2'>
+																<div className='bg-4C4D550F'>
+														<div className='row'>
+														<div className="col-md-1 poppins-light-18px align-self-center text-center">
 																{ischecked ? (
 																	k1 + 1
 																) : v1['collapseOpen'] == false ? (
@@ -540,7 +545,7 @@ const AddFunctions = () => {
 																	/>
 																)}
 															</div>
-															<div className="col-md-4 p-1 poppins-light-20px">
+															<div className="col-md-4 p-1 poppins-light-18px align-self-center">
 																<div>
 																	{v1['employeename']}{' '}
 																	<span className="ageicon">
@@ -593,7 +598,9 @@ const AddFunctions = () => {
 																	</span>
 																</div>
 															</div>
-															<div className="col-md-3  border-0 custom-drop-btn">
+															<div className='col-md-7'>
+																<div className='row'>
+																<div className="col-md-6  border-0 custom-drop-btn">
 																{emplist.employee_types != null ? (
 																	<MultiSelectField
 																		placeholder={'Select employee type'}
@@ -619,12 +626,12 @@ const AddFunctions = () => {
 																	''
 																)}{' '}
 																{
-																	<div style={{ color: 'red', paddingTop: '5px' }}>
+																	<div style={{ color: 'red',  }}>
 																		{v1['employeeiderror']}
 																	</div>
 																}
 															</div>
-															<div className="col-md-2 border-0">
+															<div className="col-md-3 border-0">
 																{v1['function_salary'] != null ? (
 																	<span className="p-1 px-3 w-100 poppins-medium-20px bg-white">
 																		{'€ ' + v1['function_salary']}
@@ -635,7 +642,7 @@ const AddFunctions = () => {
 																	</span>
 																)}
 															</div>
-															<div className="col-md-2 py-1 add_function_salary">
+															<div className="col-md-3 py-1 add_function_salary">
 																<div>
 																	{v1['function_salary'] != null && (
 																		<div className="input-group">
@@ -667,6 +674,8 @@ const AddFunctions = () => {
 																	<p style={{ color: 'red' }}>{v1['salaryerror']}</p>
 																</div>
 															</div>
+																	</div>
+																</div>
 															{!ischecked &&
 																v1['functionslist'] != undefined &&
 																v1['functionslist'].map((deta, ind) => {
@@ -681,10 +690,10 @@ const AddFunctions = () => {
 																	return (
 																		v1['collapseOpen'] &&
 																		(ind <= 2 ? (
-																			<div className="col-md-12 row mt-3 position-relative pe-0">
+																			<div className="col-md-11 mx-auto row mt-3 position-relative pe-0">
 																				<div
 																					className="mt-2 mb-2 bg-light h-75 py-2 bg-4C4D550F z-999 px-0 fun-line col ms-5"
-																					style={{ height: '48px' }}
+																					style={{ height: '44px' }}
 																				>
 																					<span className="custom-radio-input">
 																						<input
@@ -727,21 +736,21 @@ const AddFunctions = () => {
 																							}}
 																						/>
 																					</span>
-																					<span className="ps-2 poppins-light-20px">
+																					<span className="ps-2 poppins-light-18px">
 																						{deta['name']}
 																					</span>
 																				</div>
 																			</div>
 																		) : (
 																			ind == 3 && (
-																				<div className="col-md-12 row m-0 position-relative pe-0">
+																				<div className="col-md-11 mx-auto row m-0 mt-2 position-relative pe-0">
 																					<div
 																						className="col ms-5 fun-line2 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999  d-flex align-items-center px-0"
-																						style={{ height: '49px' }}
+																						style={{ height: '44px' }}
 																					>
 																						<span
 																							className="custom-radio-input d-inline-block p-3 "
-																							style={{ height: '48px' }}
+																							style={{ height: '44px' }}
 																						>
 																							<input
 																								type="radio"
@@ -830,7 +839,7 @@ const AddFunctions = () => {
 																									//	}
 																								}}
 																								isMulti={false}
-																								className="col-md-6 select_option_height"
+																								className="col-md-6 select_option_height add_function_height"
 																							/>
 																						</div>
 																					</div>
@@ -853,6 +862,9 @@ const AddFunctions = () => {
 																	<ExclamationTriangle /> {v1['warning']}
 																</div>
 															)}
+															</div>
+																	</div>
+															</div>
 														</div>
 													</div>
 												))}
@@ -864,7 +876,7 @@ const AddFunctions = () => {
 														ischecked ? 'function' : '';
 													}
 													return ind <= 2 ? (
-														<div className="col-md-11 pe-3 ms-auto row position-relative">
+														<div className="col-md-11	pe-2 ms-auto row position-relative">
 															<div className="mt-2 mb-2 bg-light py-2 bg-4C4D550F z-999 px-0">
 																<span className="custom-radio-input">
 																	<input
@@ -895,7 +907,7 @@ const AddFunctions = () => {
 																		}}
 																	/>
 																</span>
-																<span className="ps-2 poppins-light-20px">
+																<span className="ps-2 poppins-light-18px">
 																	{' '}
 																	{deta['name']}
 																</span>
@@ -903,7 +915,7 @@ const AddFunctions = () => {
 														</div>
 													) : (
 														ind == 3 && (
-															<div className="col-md-11 ms-auto pe-3 row position-relative">
+															<div className="col-md-11 ms-auto pe-2 row position-relative">
 																<div
 																	className="col fun-line33 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999 d-flex align-items-center ps-0"
 																	style={{ height: '48px' }}
@@ -960,7 +972,7 @@ const AddFunctions = () => {
 																				);
 																			}}
 																			isMulti={false}
-																			className="col-md-6 select_option_height"
+																			className="col-md-6 select_option_height add_function_height"
 																		/>
 																		{/* <Select
 													// name="employefunctionsall"
@@ -987,6 +999,8 @@ const AddFunctions = () => {
 									))}
 							</div>
 						</div>
+						</div>
+					</div>
 						<div className="row m-0 my-4">
 							<div className="text-start col-md-6 p-0 align-items-center d-flex">
 								<button

@@ -6,11 +6,12 @@ import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
+import sign_icon from '../molecules/images/cooperation_agreement.svg';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
   const { state: {  overviewData, salesAgentUpdates } } = props;
-
+console.log(sign_icon);
   /**
    * [getSelectedStatus description]
    * @param  {int}    selectedTabId               [description]
@@ -213,7 +214,7 @@ const OverviewPage = (props) => {
       <>
         {!signed && agent.approved ? <span title={signed ? 'Download' : 'Sign'}
           className="span-action-icons"
-          onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id)}> <FaFileSignature /> </span>
+          onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id)}> <img src={sign_icon.src} alt="sign" className='action_icon_size'></img></span>
         : null}
         {agent.approved ? <span title={'Download'} className="span-action-icons" onClick={() => handleDownload(eachRow)}> <AiFillFilePdf /> </span>:null}
       </>

@@ -189,19 +189,20 @@ const AddEmployee = () => {
 	return (
 		<div className="col-md-12" style={{}}>
 			<form onSubmit={(e) => submit(e)}>
-				<div className="row m-0">
+				<div className="row m-0  position-sticky-pc">
 					<div className="row col-md-12" style={{}}>
-						<h1 className="mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0">Select employee</h1>
+						<h1 className="py-4  font-weight-bold  bitter-italic-normal-medium-24 px-0">Select employee</h1>
 					</div>
 				</div>
 				{/* Select paritair commite */}
-				<div>
+				<div className='planning-height'>
 					{inputlist.map((val, i) => {
 						return (
 							<div className="row" key={i}>
-								<div className="col-md-7 m-auto mb-3 mt-5 ">
-									<div className="row col-md-8 select-relative slt-emp">
-										<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-22px ps-0">
+								<div className="col-md-7 m-auto mb-3 mt-5 p-0">
+									<div className='row'>
+									<div className="col-md-8 select-relative slt-emp p-0">
+										<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px ps-0">
 											Paritair commite
 										</label>
 										<Select
@@ -217,14 +218,17 @@ const AddEmployee = () => {
 										/>
 									</div>
 									<div className="col-md-4" />
-									<div className="pt-2" style={{ color: 'red' }}>
+									<div className="pt-2 px-0" style={{ color: 'red' }}>
 										{val['pc_error']}
 									</div>
 								</div>
+									</div>
 								<div className="col-md-12 ">
-									<div className="row col-md-7 m-auto">
-										<div className="row col-md-8 select-relative slt-emp ps-1">
-											<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-22px px-0">
+								<div className='row'>
+								<div className="col-md-7 m-auto p-0">
+										<div className='row'>
+										<div className="col-md-8 select-relative slt-emp p-0">
+											<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px px-0">
 												Employee
 											</label>
 											<Select
@@ -246,32 +250,39 @@ const AddEmployee = () => {
 										{/* Add or remove button */}
 
 										<div className="col-md-4 bd-highlight align-self-end">
-											<div className="p-2 bd-highlight">
-												{// pclist.length > 1 &&
+											<div className="bd-highlight row">
+												<div className='col-md-6 align-self-center'>
+													{// pclist.length > 1 &&
 												inputlist.length !== 1 &&
 												i > 0 && (
 													<button
 														type="button"
-														className="btn  btn-block px-0 "
+														className="btn  btn-block px-0 shadow-none"
 														onClick={() => handleremove(i)}
 													>
-														<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px ">
+														<p className="bg-white border-0 poppins-medium-18px poppins-medium-18px shadow-none">
 															Remove
 														</p>
 													</button>
 												)}
+													</div>
+												<div className='col-md-6 align-self-center add_project'>
 												{inputlist.length < tempPcList.length &&
 												inputlist.length - 1 === i && (
 													<button
 														type="submit"
-														className="btn poppins-light-19px-next-button rounded-0 px-3  btn-block float-end ms-1"
+														className="btn rounded-0 px-3  btn-block float-end ms-1 shadow-none add-proj-btn"
 														onClick={handleaddanother}
+														style={{height:'43px'}}
 													>
-														Add another
+														+ Add
 													</button>
 												)}
+													</div>
 											</div>
 										</div>
+											</div>
+									</div>
 									</div>
 								</div>
 							</div>
@@ -279,11 +290,11 @@ const AddEmployee = () => {
 					})}
 				</div>
 
-				<div className="row">
+				<div className="row my-4">
 					<div className="text-start col-md-6 d-flex align-items-center">
-						<button type="button" className="btn  btn-block px-0">
+						<button type="button" className="btn  btn-block px-0 shadow-none">
 							<Link href={'/planning/add/' + p_unique_key}>
-								<p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px shadow-none">
+								<p className="bg-white border-0 poppins-light-18px shadow-none text-decoration-underline">
 									BACK
 								</p>
 							</Link>
@@ -293,7 +304,7 @@ const AddEmployee = () => {
 						<button
 						disabled={buttonDisable}
 							type="sumit"
-							className="btn poppins-light-19px-next-button rounded-0 px-3  btn-block float-end shadow-none"
+							className="btn poppins-medium-18px-next-button rounded-0 px-3  btn-block float-end shadow-none"
 						>
 							NEXT
 						</button>

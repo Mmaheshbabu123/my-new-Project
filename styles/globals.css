@@ -349,6 +349,15 @@ body {
 	line-height: var(--line-height-26px);
 	/* line-height: initial; */
 }
+.poppins-light-16px {
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-light);
+	font-size: var(--font-size-m);
+	font-style: normal;
+	font-weight: 400;
+	line-height: var(--line-height-26px);
+	/* line-height: initial; */
+}
 .poppins-regular-18px-white {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular) !important;
@@ -378,7 +387,7 @@ body {
 	font-size: var(--font-size-18px) !important;
 	line-height: var(--line-height-29px);
 	font-family: var(--font-family-poppins-medium) !important;
-	color: var(--color-label-footer-gray);
+	color: var(--color-label-footer-gray) !important;
 	font-weight: normal;
 }
 .poppins-medium-18px-save-button,
@@ -390,8 +399,8 @@ body {
 	background-color: var(--color-purple);
 	font-weight: normal;
 }
-.poppins-light-19px-next-button,
-.poppins-light-19px-next-button:hover {
+.poppins-light-18px-next-button,
+.poppins-light-18px-next-button:hover {
 	font-size: var(--font-size-19px) !important;
 	line-height: var(--line-height-31px) !important;
 	font-family: var(--font-family-poppins-regular) !important;
@@ -1843,7 +1852,7 @@ input[type="text"]::placeholder {
 	box-shadow: none;
 }
 .add_function .custom-radio-input {
-	padding: 13px 16px !important;
+	padding: 11px 16px !important;
 }
 .select_option_height .css-3iigni-container,
 .select_option_height .css-1insrsq-control,
