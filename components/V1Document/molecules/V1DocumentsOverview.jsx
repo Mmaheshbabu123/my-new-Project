@@ -220,7 +220,7 @@ const V1DocumentsOverview = (props) => {
         standards={options.filter(val => val.value === state[key])}
         handleChange={(e) => onSelect(e, key)}
         isMulti={false}
-        customStyle={{ menuPortal: base => ({ ...base, zIndex: 9999 }), paddingLeft: placeholder === 'Select period' ? '0' : '10px' }}
+        customStyle={{ menuPortal: base => ({ ...base, zIndex: 9999 }), paddingLeft: placeholder === 'Select period' ? '' : '' }}
         className={`${styles['v1-multiselect']} col-md-3 my-2 select_option_v1_doc`}
         classNamePrefix={`${styles['v1-multiselect']}`}
         placeholder={placeholder}
@@ -231,7 +231,7 @@ const V1DocumentsOverview = (props) => {
 
   return(
     <div>
-    <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+    <div className='searchbox m-0 mt-4 mb-2' style={{ margin: '10px 0', position: 'relative' }}>
     <div className='row'>
     <div className='col-md-12'>
        <div className='row'>
