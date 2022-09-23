@@ -311,3 +311,72 @@ select option
     padding-left: 1px;
   }
 }
+.my_todo_tab .Todos_underline__FTL4z
+{
+  color: var(--color-skyblue) !important;
+  border-color: var(--color-skyblue);
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+.my_todo_tab .my_todo_color
+{
+  color: var(--color-label-footer-gray);
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+.my_todo_tab .Todos_todo-icon__N2dlX svg
+{
+  width: 30px !important;
+  text-align: center;
+}
+.my_todo_tab .Todos_todo-icon__N2dlX
+{
+  text-align: center;
+}
+.Todos_todo-tabs___A2Cq > li:first-child
+{
+  width: 30% !important;
+}
+.my_todo_table thead tr th:first-child
+{
+  padding-left: 1.5rem;
+}
+.my_todo_table .Todos_span-action-icons___UbjJ img
+{
+  width: 23px;
+  color: var(--color-skyblue);
+  margin-right: 15px;
+  height: 23px;
+}
+.sign_action_icon_size
+{
+  width: 25px !important;
+}
+.my_todo_table .my_todo_action_icon
+{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.position-sticky-mytodo
+{
+  position: sticky;
+  top: 166px;
+  background-color: var(--color-white);
+  z-index: 999;
+}
+.my_todo_tab .Todos_todo-icon__N2dlX img
+{
+  width: 25px;
+  height: 25px;
+}
+.my_todo_tab .Todos_todo-icon__N2dlX 
+{
+  height: 25px;
+}
+.minimun_height_v1
+{
+  min-height: 26vh;
+}
