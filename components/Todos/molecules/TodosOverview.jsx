@@ -129,15 +129,15 @@ const TodosOverview = ({ props, entityId, entityType }) => {
       showAlert(type, eachRow)
     }
     if(eachRow.todo_type === 2) {
-      let { webform_id, submit_id, tid } = eachRow;
+      let { webform_id, submit_id, tid, employer_id = 0 } = eachRow;
       let path;
       if(type === 'edit')
          path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout`;
       if(type === 'sign')
-         path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityId}?type=${entityType === 2 ? 'employer' : 'employee'}`
+         path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
       if(type === 'download')
          path = entityType === 2 ? `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityId}type=employeer&signed`
-                                 : `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityId}?signed=0&type=employee`;
+                                 : `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${employer_id}?signed=0&type=employee`;
       window.open(eachRow.baseUrl  + path, '_self');
     }
     if(eachRow.todo_type === 1 && type === 'sign') {
