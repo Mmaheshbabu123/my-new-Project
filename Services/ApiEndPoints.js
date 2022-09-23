@@ -229,3 +229,8 @@ export const getMyTodos = BASE_URL + 'get-mytodos';
 
 
 //-----------------
+
+//-------------EMPLOYEERSTOPPLANNING-------//
+export const getStopPlanningDetails = BASE_URL + 'getStopPlanningDetails/';
+export const postStopPlanningDetails = BASE_URL + 'postEmployeerStopPlanningDetails';
+//-----------
