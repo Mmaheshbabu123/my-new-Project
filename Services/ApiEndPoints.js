@@ -233,4 +233,9 @@ export const getNotificationsCount = BASE_URL + "get-notifications-count";
 export const getNotifications = BASE_URL + "get-notifications-data";
 export const updateNotifications = BASE_URL + "update-notifications";
 export const deleteNotifications = BASE_URL + "delete-notifications";
-//-------------------
+//------------------
+
+//-------------EMPLOYEERSTOPPLANNING-------//
+export const getStopPlanningDetails = BASE_URL + 'getStopPlanningDetails/';
+export const postStopPlanningDetails = BASE_URL + 'postEmployeerStopPlanningDetails';
+//-----------
