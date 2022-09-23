@@ -206,7 +206,13 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
                 <td className='color-skyblue-icon'>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No records </p>}
+            :  <tbody>
+            <tr>
+            <td colSpan={8} className="text-center poppins-regular-18px no-records">
+                    No records
+                  </td>
+            </tr>
+            </tbody>}
           </table>
       </div>
       <div>

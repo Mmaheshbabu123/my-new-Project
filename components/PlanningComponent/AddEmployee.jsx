@@ -218,7 +218,7 @@ const AddEmployee = () => {
 										/>
 									</div>
 									<div className="col-md-4" />
-									<div className="pt-2" style={{ color: 'red' }}>
+									<div className="pt-2 px-0" style={{ color: 'red' }}>
 										{val['pc_error']}
 									</div>
 								</div>
@@ -251,13 +251,13 @@ const AddEmployee = () => {
 
 										<div className="col-md-4 bd-highlight align-self-end">
 											<div className="bd-highlight row">
-												<div className='col-md-12'>
+												<div className='col-md-6 align-self-center'>
 													{// pclist.length > 1 &&
 												inputlist.length !== 1 &&
 												i > 0 && (
 													<button
 														type="button"
-														className="btn  btn-block px-0 "
+														className="btn  btn-block px-0 shadow-none"
 														onClick={() => handleremove(i)}
 													>
 														<p className="bg-white border-0 poppins-medium-18px poppins-medium-18px shadow-none">
@@ -266,15 +266,16 @@ const AddEmployee = () => {
 													</button>
 												)}
 													</div>
-												<div className='col-md-12'>
+												<div className='col-md-6 align-self-center add_project'>
 												{inputlist.length < tempPcList.length &&
 												inputlist.length - 1 === i && (
 													<button
 														type="submit"
-														className="btn poppins-light-18px-next-button rounded-0 px-3  btn-block float-end ms-1 mb-2 shadow-none"
+														className="btn rounded-0 px-3  btn-block float-end ms-1 shadow-none add-proj-btn"
 														onClick={handleaddanother}
+														style={{height:'43px'}}
 													>
-														Add another
+														+ Add
 													</button>
 												)}
 													</div>
@@ -289,7 +290,7 @@ const AddEmployee = () => {
 					})}
 				</div>
 
-				<div className="row">
+				<div className="row my-4">
 					<div className="text-start col-md-6 d-flex align-items-center">
 						<button type="button" className="btn  btn-block px-0 shadow-none">
 							<Link href={'/planning/add/' + p_unique_key}>

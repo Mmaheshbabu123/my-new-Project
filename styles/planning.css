@@ -52,7 +52,36 @@ input[type="checkbox"]
   opacity: 0.9;
   border-radius: 0px;
 }
-.select_option_v1_doc .V1Document_v1-multiselect__EVmAm__control
+.select_option_v1_doc .V1Document_v1-multiselect__EVmAm__control,
+.select_option_v1_doc .V1Document_v1-multiselect__EVmAm__control:focus,
+.select_option_v1_doc .css-1pahdxg-control
 {
   height: 43px !important ;
+  border-color: var(--color-border-lightgrey) !important;
+  color: #4C4D5573;
+}
+.add_project input,
+.add_project input:focus,
+.add_project .form-select:focus
+{
+  border-color: var(--color-border-lightgrey);
+}
+.add_project .add-proj-btn
+{
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+  color: var(--color-white);
+  background-color: var(--color-purple);
+}
+.select_employee_container .css-1rhbuit-multiValue .css-12jo7m5
+{
+  font-size: var(--font-size-16px);
+  font-family: var(--font-family-poppins-light);
+}
+.add_function_height .react-select-prefix__control,
+.add_function_height .react-select-prefix__indicators
+{
+  height: 30px !important;
+  border: none !important;
 }

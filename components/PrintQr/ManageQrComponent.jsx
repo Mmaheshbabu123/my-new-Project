@@ -13,7 +13,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { formatDate } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
 import customAlert from '@/atoms/customAlert';
-const itemsPerPage = 8;
+const itemsPerPage = 5;
 let dateObj = new Date()
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
@@ -376,7 +376,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
             subContainerClassName={"pages pagination justify-content-center project-pagination"}
             activeClassName={"active"}
         />}
-        <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 ppoppins-medium-18px   float-sm-right mt-5 mb-5">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-5">
           {`Back`}
         </button>
       </div>

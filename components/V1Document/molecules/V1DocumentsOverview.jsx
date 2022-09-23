@@ -199,7 +199,7 @@ const V1DocumentsOverview = (props) => {
         <input
           type="text"
           value={state[key]}
-          className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
+          className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
           onChange={(e) => setState({...state, [key]: e.target.value })}
           placeholder={'Search ' + placeholder}
           onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
@@ -271,7 +271,7 @@ const V1DocumentsOverview = (props) => {
     </div>
     </div>
     <div className="table-render-parent-div">
-        <table className="table table-hover manage-types-table">
+        <table className="table table-hover manage-types-table manage-documents-table-header ">
           <thead className="table-render-thead">
             <tr key={'header-row-tr'}>{state.headers.map((eachHeader, index) => <th key={`tablecol${index}`} className="align-middle" scope="col"> {eachHeader} </th>)} </tr>
           </thead>
@@ -286,7 +286,13 @@ const V1DocumentsOverview = (props) => {
               <td>{ getNeededActions(eachRow) } </td>
             </tr>)}
           </tbody>
-          : <p style={{paddingTop: '10px'}}> No records </p>}
+          : <tbody>
+          <tr>
+          <td colSpan={8} className="text-center poppins-regular-18px no-records">
+                  No records
+                </td>
+          </tr>
+          </tbody>}
         </table>
     </div>
     <div>
@@ -305,18 +311,24 @@ const V1DocumentsOverview = (props) => {
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}
     />}
-      <div className="text-end">
+     <div className='row justify-content-end'>
+     <div className="col-md-1">
         <button
           type="button"
-          className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
+          className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
           onClick={() => setState({...state, showPopup: true})}
         >
           Export
         </button>
     </div>
-      <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn btn-dark pcp_btn col-1">
+     </div>
+     <div className='row'>
+       <div className='col-md-12'>
+       <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
         {`Back`}
       </button>
+       </div>
+     </div>
     </div>
     {showExportConfirmModal()}
     </div>

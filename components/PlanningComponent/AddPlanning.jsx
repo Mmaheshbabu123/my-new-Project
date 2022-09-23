@@ -339,7 +339,7 @@ function Planning(props) {
 									Add Planning
 								</h1>
 							</div>
-							<div className="col-md-12 px-0 mt-3 mb-3">
+							<div className="col-md-12 px-0 my-2">
 								{(project.id == '' || project.id == undefined) && showproject == true ? (
 									<button
 										onClick={showPopup}
@@ -370,7 +370,7 @@ function Planning(props) {
 										</label>
 										<select
 											value={companyid}
-											className="form-select mb-2 poppins-regular-16px rounded-0"
+											className="form-select mb-2 poppins-regular-16px rounded-0 shadow-none"
 											placeholder="select company"
 											onChange={(e) => {
 												updateLocation(e.target.value);
@@ -388,12 +388,12 @@ function Planning(props) {
 									</div>
 
 									<div className="form-group mb-3">
-										<label className="form-label mt-2 custom_astrick poppins-regular-18px">
+										<label className="form-label mt-2 custom_astrick poppins-regular-18px ">
 											Location
 										</label>
 										<select
 											value={locationid}
-											className="form-select mb-2 poppins-regular-16px rounded-0"
+											className="form-select mb-2 poppins-regular-16px rounded-0 shadow-none"
 											onChange={(e) => {
 												setLocationid(e.target.value);
 												updateCostCenter(e.target.value);
@@ -416,7 +416,7 @@ function Planning(props) {
 									<div className="form-group mb-3">
 										<label className="form-label mt-2 poppins-regular-18px">Cost center</label>
 										<select
-											className="form-select mb-2 poppins-regular-16px rounded-0"
+											className="form-select mb-2 poppins-regular-16px rounded-0 shadow-none"
 											value={costcenterid}
 											onChange={(e) => {
 												setCostcenterid(e.target.value);
