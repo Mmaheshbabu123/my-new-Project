@@ -71,7 +71,6 @@ const AddFunctions = () => {
 	const submit = (e) => {
 		e.preventDefault();
 		var p_unique_key = router.query.p_unique_key;
-		// console.log(employeeobject);return;
 
 		let errors = validateErrors();
 
@@ -317,9 +316,9 @@ const AddFunctions = () => {
 				} else {
 					func = '';
 					if (value.salary == '' || value.salary == null || value.salary == undefined) {
-						if (count == 0) {
-							value.salary = value.function_salary;
-						}
+						// if (count == 0) {
+						// 	value.salary = value.function_salary;
+						// }
 					} else {
 						sal =
 							emp == '' && value.salary != '' && value.salary != null && value.salary != undefined
