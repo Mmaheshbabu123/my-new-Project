@@ -92,6 +92,7 @@ function Planning(props) {
 			if (empr_id) {
 				APICALL.service(getEmployeerCompanylist + empr_id, 'GET')
 					.then((result) => {
+						console.log(result.data[0])
 						setCompany(result.data[0]);
 						setLocation(result.data[1]);
 						setCostcenter(result.data[2]);
@@ -100,7 +101,7 @@ function Planning(props) {
 						if (id == '') {
 							if (result.data[0].length == 1) {
 								setCompanyid(result.data[0][0].nid);
-								result.data[0][0].add_project == 1?	setShowproject(true):setShowproject(false)
+								result.data[0][0].add_project === '1' && result.data[0][0].add_project!= undefined?	setShowproject(true):setShowproject(false)
 								if (result.data[1].length == 1) {
 									setLocationid(result.data[1][0].value);
 									if (result.data[2].length == 1) {
@@ -148,7 +149,7 @@ function Planning(props) {
 					var comp = [ ...company ];
 					let obj = comp.find(o => o.id === companyid);
 					if(obj != null){
-					obj.add_project == 1?	setShowproject(true):setShowproject(false)
+					obj.add_project === "1" && obj.add_project!= undefined?	setShowproject(true):setShowproject(false)
 					}
 
 
@@ -258,7 +259,6 @@ function Planning(props) {
 
 	// SHOW POPUP //
 	const showPopup = (id) => {
-		// alert(empr_id);
 		setShow(true);
 	};
 	error_location_id;
@@ -271,6 +271,10 @@ function Planning(props) {
 
 	let updateLocation = (comp_id) => {
 		setCompanyid(comp_id);
+		var compObj = company.find((obj) => {
+			return obj.nid == comp_id ? obj : '';
+		});
+		compObj!='' && compObj.add_project === "1" && compObj.add_project != undefined?	setShowproject(true):setShowproject(false);
 
 		let counter = 0;
 		location.map((loc) => {
@@ -378,8 +382,7 @@ function Planning(props) {
 										>
 											<option value="">Select</option>
 											{company.map((options) => (
-												<option key={options.nid} value={options.nid} onClick={() => {options.add_project == 1?	setShowproject(true):setShowproject(false);
-												}}>
+												<option key={options.nid} value={options.nid} >
 													{options.title}
 												</option>
 											))}
