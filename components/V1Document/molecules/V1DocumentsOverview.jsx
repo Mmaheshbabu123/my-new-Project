@@ -270,7 +270,7 @@ const V1DocumentsOverview = (props) => {
       </div>
     </div>
     </div>
-    <div className="table-render-parent-div">
+    <div className="table-render-parent-div minimun_height_v1">
         <table className="table table-hover manage-types-table manage-documents-table-header ">
           <thead className="table-render-thead">
             <tr key={'header-row-tr'}>{state.headers.map((eachHeader, index) => <th key={`tablecol${index}`} className="align-middle" scope="col"> {eachHeader} </th>)} </tr>

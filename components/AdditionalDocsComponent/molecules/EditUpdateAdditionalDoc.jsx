@@ -243,7 +243,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
         {state.companyWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
         </div>
        </div>
-        <div className="col-md-6">
+        <div className="col-md-6  ">
           <CheckBoxField
               id={'link_to_sv'}
               tick={state.linkToCooperationAgreement}
@@ -251,7 +251,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
               onCheck={(e) => handleChange(e, 2)}
               name={`Link to cooperation agreement.`}
               customStyle={{margin: '10px 0', cursor:'pointer'}}
-              className="col-md-12"
+              className="col-md-12 d-flex rounded-0"
             />
         </div>
       </div>

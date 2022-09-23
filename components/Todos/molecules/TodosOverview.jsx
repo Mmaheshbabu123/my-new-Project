@@ -12,6 +12,16 @@ import styles from './Todos.module.css';
 import { getMyTodos } from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
 import customAlert from '@/atoms/customAlert';
+import sign_icon from '../molecules/images/cooperation_agreement.svg';
+import open from '../molecules/images/Open.svg';
+import done from '../molecules/images/Done.svg';
+import all from '../molecules/images/All.svg';
+import open_1 from '../molecules/images/Open_1.svg';
+import done_1 from '../molecules/images/Done_1.svg';
+import all_1 from '../molecules/images/All_1.svg';
+import edit_svg from '../molecules/images/edit.svg';
+import download_svg from '../molecules/images/download.svg';
+import sign_icon_1 from '../molecules/images/cooperation_agreement_1.svg';
 
 const itemsPerPage = 6;
 
@@ -32,15 +42,18 @@ const TodosOverview = ({ props, entityId, entityType }) => {
     tabs: [{
       id: 1,
       name: "Open",
-      icon: HiOutlineExternalLink
+      icon: open_1.src,
+      activeIcon:open.src ,
     }, {
       id: 2,
       name: "Done",
-      icon: MdDone
+      icon: done_1.src,
+      activeIcon: done.src
     }, {
       id: 3,
       name: "All",
-      icon: CgMailOpen
+      icon:all_1.src,
+      activeIcon:all.src
     }],
     rows: getSelectedStatus(),
     filterRows: getSelectedStatus(),
@@ -105,11 +118,11 @@ const TodosOverview = ({ props, entityId, entityType }) => {
         <span title={'Accept'} className={styles["span-action-icons"]} onClick={() => handleActionClick('accept', eachRow)}> <MdDone /> </span>
         <span title={'Reject'} className={styles["span-action-icons"]} onClick={() => handleActionClick('reject', eachRow)}> <AiOutlineClose /> </span>
       </>: eachRow.todo_type === 2 ? <>
-        <span title={'Edit'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-        <span title={'Sign'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <FaFileSignature /> </span>
-        <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <AiOutlineDownload /> </span>
+        <span title={'Edit'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className=''></img> </span>
+        <span title={'Sign'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>
+        <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="sign" className=''></img> </span>
       </>
-      : <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <FaFileSignature /> </span>
+      : <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon_1.src} alt="sign" className=''></img> </span>
     }
     </>
   }
@@ -170,30 +183,39 @@ const TodosOverview = ({ props, entityId, entityType }) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
-      <ul className={`${styles['todo-tabs']} col-md-8`}>
+     <div className='row my_todo_tab pt-2'>
+       <div className='col-md-12'>
+       <ul className={`${styles['todo-tabs']} col-md-6 m-0`}>
         {state.tabs.map(tab => {
-          let Icon = tab.icon;
+          let Icon = selectedTabId === tab.id ? tab.activeIcon : tab.icon;
           return (
-            <li key={tab.id}>
-              <div className={`w-50 py-2 text-center ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
-                <span id={tab.id} className={`${styles['todo-icon']}`}>  <Icon /> </span>
-                <span className="d-block my-1"> {tab.name} </span>
+            <li key={tab.id} className='col-md-1'>
+              <div className={`w-auto d-inline-block my_todo_color ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
+                <span id={tab.id} className={`${styles['todo-icon']}`}>  <img src={Icon}></img> </span>
+                <span className="d-block my-1 text-center"> {tab.name} </span>
               </div>
             </li>
           )
         })}
       </ul>
+       </div>
+     </div>
     );
   }
 
   return (
     <div>
       <>
-        <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`My Todos`} </h4>
-        <div className="my-4">  {showTabs()} </div>
-        <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
-          <div className='col-md-12 row pe-0'>
-            <div className='col-md-8 col-lg-9 p-0'>
+       <div className='row position-sticky-pc'>
+         <div className='col-md-12'>
+         <h4 className='py-4 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`My Todos`} </h4>
+         </div>
+       </div>
+        <div className="position-sticky-mytodo">  {showTabs()} </div>
+        <div className='row searchbox m-0 mt-4 mb-2' style={{ margin: '10px 0', position: 'relative' }}>
+          <div className='col-md-12'>
+            <div className='row'>
+            <div className='col-md-8 col-lg-9 ps-0'>
               <input
                 type="text"
                 value={state.searchTerm}
@@ -203,9 +225,9 @@ const TodosOverview = ({ props, entityId, entityType }) => {
                 onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1) : null}
               />
             </div>
-            <div className='col-md-4 col-lg-3 pe-0'>
+            <div className='col-md-4 col-lg-3'>
               <div className='row justify-content-end'>
-                <div className='col-md-6 col-lg-6'>
+                <div className='col-md-6 col-lg-6 pe-0'>
                   <button
                     type="button"
                     className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
@@ -224,10 +246,11 @@ const TodosOverview = ({ props, entityId, entityType }) => {
                 </div>
               </div>
             </div>
+            </div>
           </div>
         </div>
         <div className="table-render-parent-div">
-          <table className="table table-hover manage-types-table table  mb-3 text-start">
+          <table className="table table-hover manage-types-table table  mb-3 text-start manage-documents-table-header my_todo_table">
             <thead className="table-render-thead bg_grey">
               <tr className='table-sticky-bg-gray poppins-medium-18px border-0' key={'header-row-tr'}>{state.headers.map((eachHeader, index) => <th className='' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
@@ -235,12 +258,18 @@ const TodosOverview = ({ props, entityId, entityType }) => {
               <tbody className='table-body-employee-type poppins-light-18px'>
                 {state.currentItems.map(eachRow =>
                   <tr key={eachRow.tid} id={eachRow.tid}>
-                    <td className='text-start px-5 py-1'> {eachRow.title} </td>
+                    <td className='text-start ps-4 py-1'> {eachRow.title} </td>
                     <td> <span className={`${styles['status-icon']} ${Number(eachRow.todo_status) ? styles['status-done'] : styles['status-open']}`}> </span> </td>
-                    <td className=''>{eachRow.todo_status !== 1 ? getNeededActions(eachRow) : null} </td>
+                    <td className='align-self-center my_todo_action_icon'>{eachRow.todo_status !== 1 ? getNeededActions(eachRow) : null} </td>
                   </tr>)}
               </tbody>
-              : <p style={{ paddingTop: '10px' }}> No records </p>}
+              : <tbody>
+              <tr>
+              <td colSpan={8} className="text-center poppins-regular-18px no-records">
+                      No records
+                    </td>
+              </tr>
+              </tbody>}
           </table>
         </div>
         <div>
@@ -259,7 +288,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline">
+          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>
