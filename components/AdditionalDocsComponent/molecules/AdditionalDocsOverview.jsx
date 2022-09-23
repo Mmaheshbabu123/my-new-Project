@@ -148,7 +148,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
         {`+Add additional document`}
       </button>}
       </div>
-      <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+      <div className='searchbox m-0 mt-4 mb-2' style={{ margin: '10px 0', position: 'relative' }}>
       <div className='row'>
       <div className='col-md-12'>
          <div className='row'>

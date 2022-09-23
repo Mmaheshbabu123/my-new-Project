@@ -46,11 +46,15 @@ console.log(sign_icon);
   const showTabs = () => {
     let { selectedTabId } = compState;
     return (
-      <ul className={`${styles['employer-overview-tabs']}`}>
+      <div className='row position-sticky-co-op'>
+        <div className='col-md-12'>
+        <ul className={`${styles['employer-overview-tabs']}`}>
         <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
         <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
         <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
       </ul>
+        </div>
+      </div>
     );
   }
 
@@ -106,7 +110,7 @@ console.log(sign_icon);
     return(
       <>
      <div className='row'>
-     <div className='col-md-12 search_field_manage_cooperation_agreement mb-4' style={{position: 'relative' }}>
+     <div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{position: 'relative' }}>
            <div className='row'>
            <div className='col-md-9'>
               <input
