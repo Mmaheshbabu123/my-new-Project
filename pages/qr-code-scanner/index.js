@@ -26,8 +26,18 @@ const Qrscan = () => {
 			<QrReader
 			delay={500}
 			style={previewStyle}
-			onError={handleError}
-			onScan={handleScan}
+            onResult={(result, error) => {
+                if (!!result) {
+                  setResult(result?.text);
+                }
+      
+                if (!!error) {
+                  console.info(error);
+                }
+              }}
+            constraints = {{
+                facingMode: { exact: "environment" }
+              }}
 			/>
 			<div className="">{result}</div>		
 		</div>
