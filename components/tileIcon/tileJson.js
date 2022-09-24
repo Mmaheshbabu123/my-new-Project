@@ -40,5 +40,11 @@ export const tileJson = [
     name: 'Salary benefits',
     url: '/manage-salary-benefits?action=view',
     iconPath: salary,
+  },
+  {
+    id: 6,
+    name: 'QR code scanner',
+    url: '/qr-code-scanner',
+    iconPath: salary,
   }
 ];
