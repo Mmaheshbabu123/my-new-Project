@@ -169,6 +169,7 @@ input[type="checkbox"]:focus
 .border-color-addeditsalary-benefits:focus,
 .react-select-prefix__control,
 .react-select-prefix__control:hover,
+.react-select-prefix__control:focus,
 .salary-input-fields .css-1pahdxg-control,
 .qr-custom-multiselect__menu:focus,
 .react-select-prefix__menu,

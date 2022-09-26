@@ -328,6 +328,15 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
+.poppins-light-14px {
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-light);
+	font-size: var(--font-size-14px) !important;
+	font-style: normal;
+	font-weight: 400;
+	line-height: var(--line-height-24px);
+	/* line-height: initial; */
+}
 .poppins-regular-16px-white
 {
 	color: var(--color-label-footer-gray);

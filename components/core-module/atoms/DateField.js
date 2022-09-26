@@ -9,7 +9,7 @@ export default function DateField({
     minDate='1947-08-15',
     maxDate='2222-08-15',
     id,
-    customStyle = {},
+    customStyle = {boxShadow:'none',borderRadius:'0px'},
     className = 'col-md-5',
     isDisabled = false,
   }) {

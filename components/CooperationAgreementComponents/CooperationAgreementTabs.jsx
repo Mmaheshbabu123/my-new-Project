@@ -35,7 +35,7 @@ const CooperationAgreementTabs = ({corporateAgreementId = 0, cooperTabs = [], se
 
   return (
     <div>
-      <ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+      <ul className="nav nav-pills nav-justified mb-3 cooperation_agreement_list mt-3" id="pills-tab" role="tablist">
       {cooperTabs.map(tab => {
         let disabled = filledTabs.includes(Number(tab.id)) ? '' : 'disabled';
         return(
@@ -51,8 +51,8 @@ const CooperationAgreementTabs = ({corporateAgreementId = 0, cooperTabs = [], se
               aria-selected="true"
               onClick={() => handleTabClick(Number(tab.id))}
             > {!disabled ? <FaRegCheckCircle className="d-inline mb-2"/> : <BsCircle className="d-inline mb-2" />}
-              <p className="mb-2">Step: {tab.id}</p>
-              <p>{tab.name}</p>
+              <p className="mb-2 poppins-regular-16px-white ">Step: {tab.id}</p>
+              <p className='poppins-regular-18px-white min_height_step'>{tab.name}</p>
             </button>
           </li>
         );

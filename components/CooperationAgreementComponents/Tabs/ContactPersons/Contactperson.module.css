@@ -34,10 +34,10 @@
 .margin-auto-class {
   margin: 0 auto;
 }
-.salary-benefits-tab-parent {
+/* .salary-benefits-tab-parent {
   width: 90%;
   margin: 0 auto;
-}
+} */
 
 .salary-benefits-multiselect {
   line-height: 30px !important;
