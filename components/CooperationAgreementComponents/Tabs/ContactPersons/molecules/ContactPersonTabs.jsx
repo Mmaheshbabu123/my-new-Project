@@ -85,14 +85,15 @@ const onDelete = (personId, index) => {
 
 
   return (
-    <div className='contact_person'>
-      <div className='row'>
+    <div className='contact_person mx-1'>
+      <div className='row '>
         <div className='col-md-12'>
         <div className={`${styles['salary-benefits-tab-parent']}`} disabled={!filledTabs.includes(selectedTabId)}>
       <div>
         {contactSelectedDetails.length > 0 ? <BasicDetails onDelete={onDelete}/> : null}
       </div>
-      <div >
+      <div className='row'>
+        <div className='col-md-11 m-auto px-2 select_contact_person'>
         <MultiSelectField
             options={helpers.getDifference(contactOptions, contactSelectedDetails, 'value', 'person_id', tab_3.alreadyLinked,2)}
             handleChange={onSelect}
@@ -102,6 +103,7 @@ const onDelete = (personId, index) => {
             classNamePrefix={`${styles['salary-benefits-multiselect']}`}
             placeholder={'Select contact person'}
         />
+        </div>
       </div>
     </div>
         </div>

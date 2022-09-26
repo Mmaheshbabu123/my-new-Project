@@ -51,11 +51,11 @@ const InvoiceDetails = (props) => {
        if(data.type === 1) {
        fieldData.push(
          <div className = {`col-md-12 ${styles['add-div-margings']} invoice${data.id}`}>
-         <LabelField title={data.key_name} customStyle = {{display:''}} /> {requiredFields['tab_6'][data.id] && <RequiredField />}
+         <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'} /> {requiredFields['tab_6'][data.id] && <RequiredField />}
          <InputField
          id = {data.id}
            type = {'text'}
-           className = {'col-md-8'}
+           className = {'col-md-11 poppins-regular-18px'}
            value={tab_6[data.id] }
            isDisabled= {false}
            placeholder={''}
@@ -75,17 +75,17 @@ const InvoiceDetails = (props) => {
      else if (data.type === 6) {
      fieldData.push(
        <div className = {`col-md-12 ${styles['add-div-margings']} invoice${data.id}`}>
-           <LabelField title={data.key_name} customStyle = {{display:''}} /> {requiredFields['tab_6'][data.id] && <RequiredField />}
+           <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'}/> {requiredFields['tab_6'][data.id] && <RequiredField />}
            <div>
-           <RadioField   name = {data.id} checked = {tab_6[data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} />
-           <RadioField  name = {data.id} checked = {tab_6[data.id] === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} />
+           <RadioField   name = {data.id} checked = {tab_6[data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} className={'poppins-regular-18px me-3'} />
+           <RadioField  name = {data.id} checked = {tab_6[data.id] === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2}  className={'poppins-regular-18px'}/>
           </div>
        </div>
      )
    } else if(data.type === 8) {
    fieldData.push(
      <div className={`invoice${data.id}`}>
-     <LabelField title={data.key_name}  customStyle = {{display:''}}/>
+     <LabelField title={data.key_name}  customStyle = {{display:''}} className={'poppins-regular-18px'}/>
      <MultiSelectField
          id={data.id}
          options={paymentList}
@@ -93,7 +93,7 @@ const InvoiceDetails = (props) => {
          disabled={false}
          handleChange={(obj) => handleSelect(obj, data.id)}
          isMulti={false}
-         className="col-md-6"
+         className="col-md-6 payment_condition poppins-regular-18px align-self-center"
        />
        </div>
      )
@@ -103,7 +103,10 @@ const InvoiceDetails = (props) => {
   }
 //  delete invoiceRow2Data['5']
 return (
-  <div className="col-md-12 row">
+ <div className='invoicing mx-1 '>
+   <div className='row'>
+   <div className="col-md-12">
+    <div className='row'>
     <div className = 'col-md-6'>
      {ConstructHtmlData(invoiceRow1Data)}
      </div>
@@ -111,7 +114,10 @@ return (
       {ConstructHtmlData(invoiceRow2Data)}
 
       </div>
+    </div>
   </div>
+   </div>
+ </div>
 )
 }
 export default React.memo(InvoiceDetails);

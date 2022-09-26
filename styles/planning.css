@@ -17,6 +17,31 @@
   box-shadow: none !important;
   border-radius: 0px !important;
 }
+.select_contact_person .css-1pahdxg-control:focus
+{
+  border: 1px solid var(--color-label-footer-gray) !important;
+  border-color: var(--color-label-footer-gray) !important;
+}
+.close_open_basic_details svg path,
+.opacity-100-basic-details svg path
+{
+  fill: #4c4d55;
+}
+.salary_benefit_delete svg
+{
+  position: relative;
+  top: -12px;
+}
+.close_open_basic_details svg
+{
+  width: 25px !important;
+  height: 25px !important;
+}
+.close_open_basic_details svg path:focus,
+.close_open_basic_details svg path:hover
+{
+  opacity: 1;
+}
 .position-sticky-subhead
 {
   position: sticky;
@@ -42,6 +67,12 @@
   color: var(--color-white);
 }
 .employer_select .react-select-prefix__single-value.css-qc6sy-singleValue
+{
+  display: flex;
+  align-items: center;
+}
+.basic_details .location_basic_details .react-select-prefix__single-value,
+.payment_condition .react-select-prefix__single-value
 {
   display: flex;
   align-items: center;
@@ -83,5 +114,9 @@ input[type="checkbox"]
 .add_function_height .react-select-prefix__indicators
 {
   height: 30px !important;
+  border: none !important;
+}
+.add_function_dropdown .react-select-prefix__control
+{
   border: none !important;
 }
