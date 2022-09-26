@@ -49,7 +49,7 @@ const AbsoluteYouAgent = (props) => {
 
   return(
     <>{renderTabComponents === true && absoluteAgentTabRender === true ?
-       <div className="_absolute-you-agend_ absolute_you_agent" >
+       <div className="_absolute-you-agend_ absolute_you_agent mx-1" >
            <BasicDetails />
            <PcForWorkersServants />
            {workerServentsCompLoaded && workerServentsCompLoaded === true ? <CoefficientPage /> : null}

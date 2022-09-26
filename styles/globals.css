@@ -410,9 +410,9 @@ body {
 }
 .poppins-light-18px-next-button,
 .poppins-light-18px-next-button:hover {
-	font-size: var(--font-size-19px) !important;
+	font-size: var(--font-size-18px) !important;
 	line-height: var(--line-height-31px) !important;
-	font-family: var(--font-family-poppins-regular) !important;
+	font-family: var(--font-family-poppins-medium) !important;
 	color: var(--color-white);
 	background-color: var(--color-purple);
 	font-weight: normal;
@@ -426,6 +426,7 @@ body {
 	color: var(--color-white);
 	background-color: var(--color-purple);
 	font-weight: normal;
+	opacity: 1;
 }
 .poppins-light-19px {
 	font-size: var(--font-size-19px) !important;
@@ -932,11 +933,7 @@ label {
 .invoice69 input {
 	width: 90%;
 }
-.legal15,
-.invoice70,
-.invoice71,
-.online42,
-.invoice75 {
+.online42{
 	margin-bottom: 80px !important;
 }
 .legal24 {
@@ -1106,7 +1103,7 @@ div[disabled] {
 	height: 55px;
 }
 .timepage-calander .rmdp-day.rmdp-today span {
-	background: var(--color-skyblue);
+	background: var(--color-purple);
 	color: var(--color-white);
 	width: 55px;
 	margin: auto;
@@ -1855,9 +1852,10 @@ input[type="text"]::placeholder {
 .add_function .bg-4C4D550F .css-1s2u09g-control {
 	height: 100%;
 }
-.add_function_salary,
-.add_function_salary .input-group-text {
-	height: 46px;
+
+.add_function_salary .input-group-text,
+.function_salary_height {
+	height: 41px;
 	box-shadow: none;
 }
 .add_function .custom-radio-input {

@@ -266,12 +266,12 @@ const AddEmployee = () => {
 													</button>
 												)}
 													</div>
-												<div className='col-md-6 align-self-center add_project'>
+												<div className='col-md-6 align-self-center add_project float-start'>
 												{inputlist.length < tempPcList.length &&
 												inputlist.length - 1 === i && (
 													<button
 														type="submit"
-														className="btn rounded-0 px-3  btn-block float-end ms-1 shadow-none add-proj-btn"
+														className="btn rounded-0 px-3  btn-block float-start shadow-none add-proj-btn"
 														onClick={handleaddanother}
 														style={{height:'43px'}}
 													>
