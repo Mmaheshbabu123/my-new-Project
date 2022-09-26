@@ -2,7 +2,7 @@
 {
   border-bottom: none !important;
 }
-thead:after 
+thead:after
 {
   line-height: 1vh;
   content: "-";
@@ -10,7 +10,7 @@ thead:after
   display: block;
   background: transparent;
 }
-/* tbody:before 
+/* tbody:before
 {
 	line-height: 1vh;
 	content: "-";
@@ -68,13 +68,13 @@ thead:after
   line-height: var(--line-height-31px);
   height: 43px;
 }
-@media screen and (min-width:768px) and (max-width:1023px) 
+@media screen and (min-width:768px) and (max-width:1023px)
 {
-  .footer-bg-color 
+  .footer-bg-color
   {
     background-color: var(--color-label-footer-gray);
     height: 120px !important;
-  }  
+  }
 }
 .text_field_addpc
 {
@@ -150,7 +150,7 @@ input[type="checkbox"]:focus
 {
   margin:0px !important;
 }
-@media screen and (min-width:768px) and (max-width:1023px) 
+@media screen and (min-width:768px) and (max-width:1023px)
 {
   .right_arrow_align span
   {
@@ -240,9 +240,9 @@ input[type="radio"]
   z-index: 999;
   background-color: var(--color-white);
 }
-@-moz-document url-prefix() 
+@-moz-document url-prefix()
 {
-  select option 
+  select option
   {
      font-family: var(--font-family-poppins-medium) !important;
      font-size: var(--font-size-18px) !important;
@@ -252,7 +252,7 @@ input[type="radio"]
      --webkit-font-family: var(--font-family-poppins-medium) !important;
   }
 }
-.fst-normal 
+.fst-normal
 {
   vertical-align: middle;
 }
@@ -365,7 +365,7 @@ select option
   position: sticky;
   top: 166px;
   background-color: var(--color-white);
-  z-index: 999;
+  z-index: 998;
 }
 .position-sticky-co-op
 {
@@ -379,11 +379,15 @@ select option
   width: 25px;
   height: 25px;
 }
-.my_todo_tab .Todos_todo-icon__N2dlX 
+.my_todo_tab .Todos_todo-icon__N2dlX
 {
   height: 25px;
 }
 .minimun_height_v1
 {
   min-height: 26vh;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
 }

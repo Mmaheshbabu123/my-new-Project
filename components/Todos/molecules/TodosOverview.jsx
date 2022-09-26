@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import { HiOutlineExternalLink, } from 'react-icons/hi';
 import { MdDone } from 'react-icons/md';
-import { CgMailOpen } from 'react-icons/cg';
 import { AiOutlineClose } from 'react-icons/ai';
-import { ImCross } from 'react-icons/im';
-import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineDownload } from 'react-icons/ai';
-import {MdEdit } from 'react-icons/md';
-import { FaFileSignature } from 'react-icons/fa';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styles from './Todos.module.css';
-import { getMyTodos } from '@/Services/ApiEndPoints'
-import { APICALL } from '@/Services/ApiServices';
-import customAlert from '@/atoms/customAlert';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
 import open from '../molecules/images/Open.svg';
 import done from '../molecules/images/Done.svg';
@@ -57,34 +49,35 @@ const TodosOverview = ({ props, entityId, entityType }) => {
     }],
     rows: getSelectedStatus(),
     filterRows: getSelectedStatus(),
-    searchKey: 'name',
+    searchKey: 'title',
     currentItems: [],
     pageCount: 0,
     itemOffset: 0,
     currentPage: 0,
+    titleTerm: '',
   });
 
 
   const handleSearchClick = (search = 1) => {
-    // let value = search ? state.searchTermCompany : '';
-    // let status = state.selectedTabId === 1 ? [1, 0] : state.selectedTabId === 2 ? [0] : [1];
-    // let data = getSelectedStatus(status);
-    // let filterRows = [];
-    // if(value) {
-    //   filterRows = data.filter((item) => {
-    //     return (item['company_name'].toLowerCase().toString())
-    //       .indexOf(value.toLowerCase().toString()) !== -1;
-    //   })
-    // } else {
-    //   filterRows = data;
-    // }
-    // setState({ ...state,
-    //   searchTermCompany: value,
-    //   filterRows: filterRows,
-    //   currentPage: 0,
-    //   itemOffset: 0,
-    //   ...updatePaginationData(filterRows, 0)
-    // });
+    let value = search ? state.titleTerm : '';
+    let status = state.selectedTabId === 1 ? [ 0 ] : state.selectedTabId === 2 ? [ 1 ] : [ 1, 0 ];
+    let data = getSelectedStatus(status);
+    let filterRows = [];
+    if(value) {
+      filterRows = data.filter((item) => {
+        return (item[state.searchKey].toLowerCase().toString())
+          .indexOf(value.toLowerCase().toString()) !== -1;
+      })
+    } else {
+      filterRows = data;
+    }
+    setState({ ...state,
+      titleTerm: value,
+      filterRows: filterRows,
+      currentPage: 0,
+      itemOffset: 0,
+      ...updatePaginationData(filterRows, 0)
+    });
   }
 
 
@@ -114,35 +107,24 @@ const TodosOverview = ({ props, entityId, entityType }) => {
 
   const getNeededActions = (eachRow) => {
     return <>
-      {eachRow.todo_type === 3 ? <>
-        <span title={'Accept'} className={styles["span-action-icons"]} onClick={() => handleActionClick('accept', eachRow)}> <MdDone /> </span>
-        <span title={'Reject'} className={styles["span-action-icons"]} onClick={() => handleActionClick('reject', eachRow)}> <AiOutlineClose /> </span>
-      </>: eachRow.todo_type === 2 ? <>
-        <span title={'Edit'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className=''></img> </span>
-        <span title={'Sign'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>
-        <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="sign" className=''></img> </span>
-      </>
-      : <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon_1.src} alt="sign" className=''></img> </span>
-    }
-    </>
+      {eachRow.todo_type === 2 ?
+        <>
+          <span hidden={eachRow.todo_status === 1} title={'Edit'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className=''></img> </span>
+          <span title={'Sign'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>
+          <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="sign" className=''></img> </span>
+       </>
+      : <span title={'Sign'} hidden={eachRow.todo_status === 1} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon_1.src} alt="sign" className=''></img> </span>
+    }</>
   }
 
   const handleActionClick = (type, eachRow) => {
-    if(type === 'accept' || type === 'reject') {
-      let accept, reject;
-      let linkArray = eachRow.uri.length ? eachRow.uri.split(',') : [];
-      if(linkArray.length) {
-        accept = eachRow.baseUrl + linkArray[0];
-        reject = eachRow.baseUrl + linkArray[1];
-      } else {
-        reject = accept = 'javascript:void(0)';
-      }
-      eachRow['accept'] = accept;
-      eachRow['reject'] = reject;
-      showAlert(type, eachRow)
+    if(eachRow.todo_type === 1 && type === 'sign') {
+      window.open(eachRow.uri, '_self');
+      return;
     }
     if(eachRow.todo_type === 2) {
       let { webform_id, submit_id, tid, employer_id = 0 } = eachRow;
+      let encode = btoa(window.location.href);
       let path;
       if(type === 'edit')
          path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout`;
@@ -150,21 +132,9 @@ const TodosOverview = ({ props, entityId, entityType }) => {
          path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
       if(type === 'download')
          path = `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityType === 3 ? employer_id : entityId}?signed=0&type=employee`
-      window.open(eachRow.baseUrl  + path, type === 'download' ? '_self' : '_blank');
+      setTimeout(() => window.close(), 500);
+      window.open(eachRow.baseUrl  + `${path}&destination_url=${encode}`, type === 'download' ? '_self' : '_blank');
     }
-    if(eachRow.todo_type === 1 && type === 'sign') {
-      window.open(eachRow.uri, '_self');
-    }
-  }
-
-  const showAlert = (action, obj) => {
-    confirmAlert({
-      message: `Do you want to ${action} the invitation?`,
-      buttons: [
-        { label: 'No' },
-        { label: 'Yes', onClick: () => window.open(obj[action], '_self') }
-      ]
-    })
   }
 
   const handleTabClick = (id) => {
@@ -217,9 +187,9 @@ const TodosOverview = ({ props, entityId, entityType }) => {
             <div className='col-md-8 col-lg-9 ps-0'>
               <input
                 type="text"
-                value={state.searchTerm}
+                value={state.titleTerm}
                 className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-                onChange={(e) => setState({ ...state, searchTerm: e.target.value })}
+                onChange={(e) => setState({ ...state, titleTerm: e.target.value })}
                 placeholder={'Search'}
                 onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1) : null}
               />
@@ -259,7 +229,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
                   <tr key={eachRow.tid} id={eachRow.tid}>
                     <td className='text-start ps-4 py-1'> {eachRow.title} </td>
                     <td> <span className={`${styles['status-icon']} ${Number(eachRow.todo_status) ? styles['status-done'] : styles['status-open']}`}> </span> </td>
-                    <td className='align-self-center my_todo_action_icon'>{eachRow.todo_status !== 1 ? getNeededActions(eachRow) : null} </td>
+                    <td className='align-self-center my_todo_action_icon'>{getNeededActions(eachRow)} </td>
                   </tr>)}
               </tbody>
               : <tbody>

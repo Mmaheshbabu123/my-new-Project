@@ -4,6 +4,7 @@ import { APICALL } from '/Services/ApiServices';
 import { header } from '/Services/ApiEndPoints';
 import { FaUserAlt, FaRegUserCircle } from 'react-icons/fa';
 import { MdNotifications } from 'react-icons/md';
+import Notification from '@/components/Notifications/organism/NotificationMain'
 import Link from 'next/link';
 function Header() {
 	const server_url = process.env.NEXT_PUBLIC_APP_URL;
@@ -39,7 +40,7 @@ function Header() {
 									</Link>
 								</li>
 								<li className="list-unstyled mx-3 align-self-center d-flex">
-									<img style={{ width: '25px', marginTop: '8px' }} src="/notifications.svg" />
+									<Notification /> {/*<img style={{ width: '25px', marginTop: '8px' }} src="/notifications.svg" /> */}
 								</li>
 								<li className="list-unstyled mx-3 align-self-center d-flex">
 									<img style={{ width: '40px', marginTop: '7px' }} src="/account.png" />

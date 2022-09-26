@@ -1411,7 +1411,7 @@ span .firsrt-line:last-child() {
 .position-sticky-pc {
 	position: sticky;
 	top: 88px;
-	z-index: 999;
+	z-index: 998;
 	background: white;
 }
 .flex-1 {
@@ -1906,8 +1906,8 @@ input[type="search"]::-webkit-search-cancel-button {
 	font-weight: 400;
 	src: url("https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf");
   }
-  
+
   input.otp {
 	font-family: 'password';
-	width: 100px; height: 16px;  
+	width: 100px; height: 16px;
   }
