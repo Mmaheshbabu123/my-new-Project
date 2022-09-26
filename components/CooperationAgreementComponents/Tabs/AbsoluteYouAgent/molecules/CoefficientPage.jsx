@@ -85,7 +85,7 @@ const CoefficientPage = (props) => {
     let pcoptions = [{value: false, label: '--- Select ---'}, ...pcArray];
     return (
       <>
-      <p className='my-2'> Select paritair comite to link coefficients to employee types </p>
+      <p className='my-2 poppins-medium-18px'> Select paritair comite to link coefficients to employee types </p>
       <MultiSelectField
         options={pcoptions.filter(val => selectedIds.includes(val.value))}
         standards={pcoptions.filter(val => val.value === compState.selectedPc)}
@@ -99,7 +99,7 @@ const CoefficientPage = (props) => {
   }
   return (
     <div className={`${styles['coeffcient-table-parent']}`}>
-      <div className="col-md-3 mt-2 mb-3 p-0"> {addPCSelectDropDown()}
+      <div className="col-md-6 mt-2 mb-3 p-0"> {addPCSelectDropDown()}
         {compState.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
       </div>
       {compState.valueErrorArray.length > 0 &&
@@ -108,12 +108,12 @@ const CoefficientPage = (props) => {
         </small>}
       {compState.selectedPc ? <div className="col-md-12 m-0 p-0 relative-div">
         {compState.emptyError !== true ? <>
-        <p className={`my-2 text-center ${styles['worker-servants-title']}`}> Link coefficients to employee types</p>
+        <p className={`my-4 text-center ${styles['worker-servants-title']}`}> Link coefficients to employee types</p>
         {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
             <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
         {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
             <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>}
-        <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: `${tableWidth}`, height: '350px' }}>
+        <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: `${tableWidth}`, minHeight: '150px' }}>
           <div className="col-md-3 m-0 p-0 pc-linking-div firstpart">
             <LeftPart compState={compState} setCompState = {setCompState} />
           </div>
@@ -121,7 +121,7 @@ const CoefficientPage = (props) => {
             <RightPart compState={compState} setCompState = {setCompState}/>
           </div>
         </div>
-        </>:<p className={'text-align-center'}> This PC is not linked with coefficients to employee types. </p>}
+        </>:<p className={'text-align-left poppins-light-16px'}> This PC is not linked with coefficients to employee types. </p>}
       </div>:null}
     </div>
   );
