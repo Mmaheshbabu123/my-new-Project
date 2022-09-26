@@ -9,6 +9,8 @@ import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import styles from './AbsAdminSv.module.css';
+import edit_svg from '../molecules/images/edit.svg';
+import pdf_icon from '../molecules/images/Pdf.svg';
 
 const itemsPerPage = 5;
 const RequestOverviewData = (props) => {
@@ -253,9 +255,9 @@ const RequestOverviewData = (props) => {
     if(Number(eachRow.signed)) {
       return(
         <div>
-          <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit/> </span>
-          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
-          <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className='sign_action_icon_size'></img> </span>
+          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <img src={pdf_icon.src} alt="sign" className='sign_action_icon_size'></img></span>
+          <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className="color-skyblue"/> </span>
         </div>
       )
     } else {
@@ -267,7 +269,7 @@ const RequestOverviewData = (props) => {
           }
           {salesObj.approved ? <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue' /> </span>:null}
           {salesObj.approved ? <span title={'Download'} className="span-action-icons download" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf className=' color-skyblue'/> </span>:null}
-          <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className=' color-skyblue'/> </span>
+          <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className=' color-skyblue force'/> </span>
         </div>
       )
     }

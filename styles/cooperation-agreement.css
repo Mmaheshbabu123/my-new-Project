@@ -109,3 +109,108 @@
   color:var(--color-skyblue) !important;
   font-size:20px;
 }
+.cooperation_agreement_list li
+{
+  border: none !important;
+}
+.cooperation_agreement_list li .nav-link
+{
+  border-radius: 0px !important;
+  background-color: var(--bg-grey-medium)!important;
+}
+.min_height_step
+{
+  min-height: 4rem;
+}
+.absolute_you_agent,
+.company_information_address,
+.contact_person
+{
+  border: 1px solid var(--color-purple);
+  padding: 1rem;
+}
+.absolute_you_agent label,
+.legal_address label
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-18px) !important;
+  line-height: var(--line-height-29px) !important;
+  color: var(--color-label-footer-gray);
+  font-weight: normal;
+}
+.absolute_you_agent input[type="date"]
+{
+  min-height: 43px;
+  border-radius: 0px !important;
+}
+.absolute_you_agent input,
+.absolute_you_agent .react-select-prefix__multi-value__label,
+.legal_address input
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-16px);
+  line-height: var(--line-height-26px);
+  color: var(--color-label-footer-gray);
+  font-weight: normal;
+}
+.absolute_you_agent .react-select-prefix__single-value,
+.type_of_company .react-select-prefix__value-container,
+.legal_address .react-select-prefix__single-value
+{
+  display: flex;
+  align-items: center;
+}
+.legal_address .react-select-prefix__input-container
+{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.absoluteAgent_worker-servants-title__i18tv
+{
+  margin-left: 0px !important; 
+  font-family:var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+  color: var(--color-label-footer-gray);
+  font-weight: normal;
+}
+.css-1rhbuit-multiValue
+{
+  padding: 0.3rem 0.5rem !important;
+  border-radius: 0px;
+}
+.absolute_you_agent .react-select-prefix__control
+{
+  min-height: 43px !important;
+  height: auto !important;
+}
+.workers_extra_button button,
+.workers_extra_button button:hover,
+.workers_extra_button button:focus
+{
+  border-radius: 1px solid var(--color-purple);
+  background-color: var(--color-purple);
+  color: var(--color-white);
+  font-family:var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+.absolute_you_agent .absoluteAgent_workers-servants-table__En0_u
+{
+  width: 91.8% !important;
+}
+.type_of_company .react-select-prefix__control ,
+.legal_address input[type="text"]
+{
+  min-height: 41px !important;
+  height: 100% !important;
+}
+.legal_address .legal12 input,
+.legal_address .legal13 input
+{
+  width: 84% !important;
+}
+.legal_address .legal12
+{
+  padding-right: 1% !important;
+}

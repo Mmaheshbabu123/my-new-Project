@@ -9,7 +9,7 @@ export default function InputTextfield({
   isDisabled= false,
   placeholder='this is first',
   handleChange,name='input_name',
-  customStyle = {}
+  customStyle = {boxShadow:'none',borderRadius:'0px'}
 }) {
   return (
     <input

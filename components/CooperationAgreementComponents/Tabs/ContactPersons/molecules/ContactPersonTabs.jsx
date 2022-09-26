@@ -85,7 +85,10 @@ const onDelete = (personId, index) => {
 
 
   return (
-    <div className={`${styles['salary-benefits-tab-parent']}`} disabled={!filledTabs.includes(selectedTabId)}>
+    <div className='contact_person'>
+      <div className='row'>
+        <div className='col-md-12'>
+        <div className={`${styles['salary-benefits-tab-parent']}`} disabled={!filledTabs.includes(selectedTabId)}>
       <div>
         {contactSelectedDetails.length > 0 ? <BasicDetails onDelete={onDelete}/> : null}
       </div>
@@ -99,6 +102,9 @@ const onDelete = (personId, index) => {
             classNamePrefix={`${styles['salary-benefits-multiselect']}`}
             placeholder={'Select contact person'}
         />
+      </div>
+    </div>
+        </div>
       </div>
     </div>
   )
