@@ -7,6 +7,7 @@ import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
+import pdf_icon from '../molecules/images/Pdf.svg';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
@@ -220,7 +221,7 @@ console.log(sign_icon);
           className="span-action-icons"
           onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id)}> <img src={sign_icon.src} alt="sign" className='action_icon_size'></img></span>
         : null}
-        {agent.approved ? <span title={'Download'} className="span-action-icons" onClick={() => handleDownload(eachRow)}> <AiFillFilePdf /> </span>:null}
+        {agent.approved ? <span title={'Download'} className="span-action-icons" onClick={() => handleDownload(eachRow)}> <img src={pdf_icon.src} alt="sign" className='sign_action_icon_size_pdf'></img> </span>:null}
       </>
     )
   }
