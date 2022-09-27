@@ -120,3 +120,13 @@ input[type="checkbox"]
 {
   border: none !important;
 }
+.sign_action_icon_size_pdf
+{
+  width: 20px;
+}
+.delete_icon_manage_cooperation
+{
+  margin-bottom: 13px;
+  height: 33px !important;
+  width: 33px !important ;
+}
