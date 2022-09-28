@@ -129,7 +129,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
       if(type === 'sign')
          path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
       if(type === 'download')
-         path = `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityType === 3 ? employer_id : entityId}?signed=0&type=employee`
+         path = `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityType === 3 ? employer_id : entityId}?signed=${eachRow.todo_status}&type=employee`
       setTimeout(() => window.close(), 500);
       window.open(eachRow.baseUrl  + `${path}&destination_url=${encode}`, type === 'download' ? '_self' : '_blank');
     }

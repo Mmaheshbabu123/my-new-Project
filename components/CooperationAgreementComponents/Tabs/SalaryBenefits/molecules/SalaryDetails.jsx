@@ -143,14 +143,14 @@ const SalaryDetails = (props) => {
       let variableType = codeDetailsObj && codeDetailsObj.variable_type ?  codeDetailsObj.variable_type : '';
       let labelKey = label.key;
       let disabled = disabledOrNot(variableType, labelKey);
-      let optionVal = label.label === 'Code' ? valueObj[label.key] : Number(valueObj[label.key]);
+      let expression = /^[0-9,]*$/;
       return <InputField type = {'text'}
         className = {`${styles['salary-coeff-input-value']}`}
         name={label.key}
-        value={optionVal}
+        value={valueObj[label.key] || ''}
         isDisabled= {disabled}
         placeholder={''}
-        handleChange={(e)=>handleChange(label.key, pcId, fieldId, '', 1, e.target)}
+        handleChange={(e)=>handleChange(label.key, pcId, fieldId, '', 1, e.target, {}, expression)}
       />
     }
   }
@@ -182,9 +182,10 @@ const SalaryDetails = (props) => {
     );
   }
 
-  const handleChange = (name, pcId, fieldId, val, from = 0, target = 0, mergeObj = {}) => {
+  const handleChange = (name, pcId, fieldId, val, from = 0, target = 0, mergeObj = {}, expression = '') => {
+    let value = target ? target.value : val;
+    if(expression && !value.match(expression)) return;
     let key = from ? 'cooperationBenefits' : 'cooperationSalaryLinked';
-
     let salaryLinkedData = from ? {...cooperationBenefits} : {...cooperationSalaryLinked};
     salaryLinkedData[pcId][fieldId] = {...(salaryLinkedData[pcId][fieldId] ? salaryLinkedData[pcId][fieldId] : {}),
       [name]: target ? target.value : val,

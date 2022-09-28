@@ -172,7 +172,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
            >
              SEARCH
            </button>
-          
+
              </div>
              <div className='col-md-6'>
               <button
