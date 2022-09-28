@@ -34,7 +34,7 @@ const AdditionalDocsMain = (props) => {
       await APICALL.service(`${fetchAdditionalDocuments}/${entityId}/${entityType}/${editId}/${action}`, 'GET').then(response => {
         if (response.status === 200)
           setState({...state,
-            overviewData: response.data.overviewData ? response.data.overviewData :[],
+            overviewData: response.data.overviewData ? getConstructedOverview(response.data) :[],
             loaded: true,
             companies: response.data.companies || {},
             employers: response.data.employers || [],
@@ -44,15 +44,44 @@ const AdditionalDocsMain = (props) => {
     }
   }
 
+  const getConstructedOverview = (data) => {
+    const { overviewData, companies = {}, employers = []} = data;
+    overviewData.map(eachObj =>
+      eachObj['employer_name'] = getLabel(employers.filter(val => val.id === eachObj.employerId))
+    );
+    overviewData.map(eachObj =>
+      eachObj['company_name'] = getLabel(companies[eachObj.employerId] ? companies[eachObj.employerId].filter(val =>
+        val.id === eachObj.companyId) : []
+      )
+    );
+    return overviewData;
+  }
+  const getLabel = rowObj => rowObj.length ? rowObj[0]['label'] : '';
+
+
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
      <div className='row position-sticky-subhead py-4'>
        <div className='col-md-12'>
        <ul className={`${styles['docs-overview-tabs']}  m-0`}>
-        {Number(entityType) !== 3 && <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> Additional documents </span> </li>}
-        {Number(entityType) === 1 && <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> V1 documents </span> </li>}
-      </ul>
+        {Number(entityType) !== 3 && <li
+          className='manage-cooperation-tabs'>
+            <span
+              id = {1}
+              className={`${selectedTabId === 1 ? styles['underline'] : ''}`}
+              onClick={handleTabClick}> Additional documents
+            </span>
+         </li>}
+        {Number(entityType) === 1 &&
+            <li className='manage-cooperation-tabs'>
+              <span
+                id = {2}
+                className={`${selectedTabId === 2 ? styles['underline'] : ''}`}
+                onClick={handleTabClick}> V1 documents
+              </span>
+            </li>}
+        </ul>
        </div>
      </div>
     );
