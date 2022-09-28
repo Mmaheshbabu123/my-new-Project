@@ -171,7 +171,7 @@ const LegalAddress = (props) => {
         </div>
       </div>
      <div className = "col-md-6">
-       <div className = {`col-md-12 ${styles['add-div-margings']} `}>
+       <div className = {`col-md-12 `}>
          {LegalaAddressFieldData(legalAdressRow2)}
         <div className='row'>
         <div className = {`col-md-12 my-2 ${styles['add-div-margings']} legal${Labour_regulations}`}>

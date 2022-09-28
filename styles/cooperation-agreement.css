@@ -124,11 +124,19 @@
 }
 .absolute_you_agent,
 .company_information_address,
-.contact_person
+.contact_person,
+.basic_online_details,
+.salary_benefits_co_operation_agreement,
+.invoicing
 {
   border: 1px solid var(--color-purple);
   padding: 1rem;
 }
+.salary_benefits_co_operation_agreement .css-6j8wv5-Input
+{
+  font-size: var(--font-size-18px) !important;
+}
+
 .absolute_you_agent label,
 .legal_address label
 {
@@ -213,4 +221,11 @@
 .legal_address .legal12
 {
   padding-right: 1% !important;
+}
+.salary_benefits_paritair_committe .css-26l3qy-menu
+{
+  border-radius: 0px !important;
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
 }

@@ -255,17 +255,17 @@ const RequestOverviewData = (props) => {
     if(Number(eachRow.signed)) {
       return(
         <div>
-          <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className='sign_action_icon_size'></img> </span>
-          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <img src={pdf_icon.src} alt="sign" className='sign_action_icon_size'></img></span>
-          <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className="color-skyblue"/> </span>
+          <span title={'Edit'} className="span-action-icons me-1" onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className='sign_action_icon_size'></img> </span>
+          <span title={'Download'} className="span-action-icons me-1" onClick={() => handleActionClick('download', eachRow)}> <img src={pdf_icon.src} alt="sign" className='sign_action_icon_size_pdf'></img></span>
+          <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className="color-skyblue delete_icon_manage_cooperation"/> </span>
         </div>
       )
     } else {
       return (
         <div className='manage-cooperation-action-icons'>
           {!savedAgentId ?
-              <span title={'Assign'}  className={`span-action-icons`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
-            : !salesObj.approved ? <span title={'Re-assign'}  className={`span-action-icons`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span> : null
+              <span title={'Assign'}  className={`span-action-icons`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd className="color-skyblue"/> </span>
+            : !salesObj.approved ? <span title={'Re-assign'}  className={`span-action-icons`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch className="color-skyblue"/> </span> : null
           }
           {salesObj.approved ? <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue' /> </span>:null}
           {salesObj.approved ? <span title={'Download'} className="span-action-icons download" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf className=' color-skyblue'/> </span>:null}
