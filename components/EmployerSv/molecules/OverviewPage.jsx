@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import { AiFillFilePdf } from 'react-icons/ai';
-import { FaFileSignature } from 'react-icons/fa';
 import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
@@ -134,7 +133,7 @@ console.log(sign_icon);
               >
                 SEARCH
               </button>
-              
+
                 </div>
                 <div className='col-md-6'>
                 <button

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import { MdDone } from 'react-icons/md';
-import { AiOutlineClose } from 'react-icons/ai';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styles from './Todos.module.css';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
@@ -109,8 +107,8 @@ const TodosOverview = ({ props, entityId, entityType }) => {
     return <>
       {eachRow.todo_type === 2 ?
         <>
-          <span hidden={eachRow.todo_status === 1} title={'Edit'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className=''></img> </span>
-          <span title={'Sign'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>
+          {eachRow.todo_status !== 1 && <span title={'Edit'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className=''></img> </span>}
+          {eachRow.todo_status !== 1 && <span title={'Sign'}     className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>}
           <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="sign" className=''></img> </span>
        </>
       : <span title={'Sign'} hidden={eachRow.todo_status === 1} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon_1.src} alt="sign" className=''></img> </span>
