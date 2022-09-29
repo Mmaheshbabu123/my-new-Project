@@ -152,10 +152,10 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       <div className='row'>
       <div className='col-md-12'>
          <div className='row'>
-         {[{value:'searchName', label: 'document'}, {value:'searchEmployer', label: 'employer'},{value:'searchCompany', label: 'company'}].map(key => {
+         {[{value:'searchName', label: 'document'}, {value:'searchEmployer', label: 'employer'},{value:'searchCompany', label: 'company'}].map((key, index) => {
            if((entityType == 2 && key.label === 'employer') || (entityType === 3 && key.label !== 'document')) return;
            return (
-             <div className={entityType === 3 ? 'col-md-9' : entityType === 2 ? 'col-md-4' : 'col-md-3'}>
+             <div key={index} className={entityType === 3 ? 'col-md-9' : entityType === 2 ? 'col-md-4' : 'col-md-3'}>
                <input
                  type="text"
                  value={state[key.value]}

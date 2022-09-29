@@ -61,7 +61,13 @@ const AddSalaryBenefits = () => {
 			.then((result) => {
 				console.log(result.data);
 				if (result.data != undefined || result.data != null) {
+					if(typeof result.data == 'object'){
+						var propertyValues = Object.values(result.data);
+						console.log(propertyValues);
+						setObj(propertyValues);
+					}else{
 					setObj(result.data);
+					}
 				}
 			})
 			.catch((error) => {
