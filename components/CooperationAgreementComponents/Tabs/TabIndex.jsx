@@ -94,19 +94,30 @@ const loadData = async () => {
 		<div className="">
       {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields. </p> : null}
       {renderedOptions === 1 && showComponentBasedOnTabSelection()}
-      <div className={`col-md-12 row`} >
-          <div className={`col-md-7 ${styles['tab-index-back-div']}`}>
-            <p className={`${styles['tab-index-back-btn']}`} onClick={() => router.back()}> Back </p>
+     <div className='row my-3'>
+     <div className={`col-md-12`} >
+        <div className='row'>
+        <div className={`col-md-9 ${styles['tab-index-back-div']}`}>
+            <p className={`${styles['tab-index-back-btn']} poppins-light-18px text-decoration-underline text-uppercase shadow-none`} onClick={() => router.back()}> Back </p>
           </div>
-          <div className={`col-md-5 text-end`}>
-            <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab(1)} type="button" className="btn btn-dark pcp_btn">
-              <span className="sv-save-btn-text_1 spinner-border-sm me-2"></span>{'Save as draft'}
+          <div className={`col-md-3 text-end`}>
+           <div className='row'>
+             <div className='col-md-8'>
+             <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab(1)} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase">
+              <span className="sv-save-btn-text_1 spinner-border-sm me-2 "></span>{'Save as draft'}
             </button>
-            <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab()} type="button" className="btn btn-dark pcp_btn">
-              <span className="sv-save-btn-text_0 spinner-border-sm me-2"></span>{selectedTabId === INVOIING_TAB ? 'Submit' : 'Next'}
+            
+             </div>
+             <div className='col-md-4'>
+             <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab()} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase">
+              <span className="sv-save-btn-text_0 spinner-border-sm text-uppercase"></span>{selectedTabId === INVOIING_TAB ? 'Submit' : 'Next'}
             </button>
+             </div>
+           </div>
           </div>
+        </div>
       </div>
+     </div>
     </div>
 	);
 }

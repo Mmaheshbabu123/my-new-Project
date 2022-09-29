@@ -92,6 +92,7 @@ function Planning(props) {
 			if (empr_id) {
 				APICALL.service(getEmployeerCompanylist + empr_id, 'GET')
 					.then((result) => {
+						console.log(result.data[0])
 						setCompany(result.data[0]);
 						setLocation(result.data[1]);
 						setCostcenter(result.data[2]);
@@ -100,7 +101,7 @@ function Planning(props) {
 						if (id == '') {
 							if (result.data[0].length == 1) {
 								setCompanyid(result.data[0][0].nid);
-								result.data[0][0].add_project == 1?	setShowproject(true):setShowproject(false)
+								result.data[0][0].add_project === '1' && result.data[0][0].add_project!= undefined?	setShowproject(true):setShowproject(false)
 								if (result.data[1].length == 1) {
 									setLocationid(result.data[1][0].value);
 									if (result.data[2].length == 1) {
@@ -148,7 +149,7 @@ function Planning(props) {
 					var comp = [ ...company ];
 					let obj = comp.find(o => o.id === companyid);
 					if(obj != null){
-					obj.add_project == 1?	setShowproject(true):setShowproject(false)
+					obj.add_project === "1" && obj.add_project!= undefined?	setShowproject(true):setShowproject(false)
 					}
 
 
@@ -258,7 +259,6 @@ function Planning(props) {
 
 	// SHOW POPUP //
 	const showPopup = (id) => {
-		// alert(empr_id);
 		setShow(true);
 	};
 	error_location_id;
@@ -271,6 +271,10 @@ function Planning(props) {
 
 	let updateLocation = (comp_id) => {
 		setCompanyid(comp_id);
+		var compObj = company.find((obj) => {
+			return obj.nid == comp_id ? obj : '';
+		});
+		compObj!='' && compObj.add_project === "1" && compObj.add_project != undefined?	setShowproject(true):setShowproject(false);
 
 		let counter = 0;
 		location.map((loc) => {
@@ -333,18 +337,18 @@ function Planning(props) {
 			) : (
 				<div>
 					<form onSubmit={(e) => submit(e)}>
-						<div className="row   planning-container calc-height m-0 col-md-12">
-							<div className="col-md-12 px-0 py-3">
-								<h1 className=" mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-medium-24">
+						<div className="row   planning-container calc-height  m-0 col-md-12">
+							<div className="col-md-12 px-0 py-4 position-sticky-pc">
+								<h1 className="font-weight-bold   px-0  bitter-italic-normal-medium-24">
 									Add Planning
 								</h1>
 							</div>
-							<div className="col-md-12 px-0 mt-3 mb-3">
+							<div className="col-md-12 px-0 my-2">
 								{(project.id == '' || project.id == undefined) && showproject == true ? (
 									<button
 										onClick={showPopup}
 										type="button"
-										className=" btn my-2 skyblue-bg-color border-0 poppins-medium-19px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln"
+										className=" btn my-2 skyblue-bg-color border-0 poppins-medium-18px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln shadow-none"
 									>
 										<span style={{ fontSize: '24px' }} className="">
 											+
@@ -353,7 +357,7 @@ function Planning(props) {
 									</button>
 								):<button
 								type="button"
-								className=" btn my-2 skyblue-bg-color border-0 poppins-medium-19px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln invisible"
+								className=" btn my-2 skyblue-bg-color border-0 poppins-medium-19px px-5 rounded-0  btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln invisible shadow-none"
 							>
 								<span style={{ fontSize: '24px' }} className="">
 									+
@@ -361,7 +365,8 @@ function Planning(props) {
 								&nbsp; ADD PROJECT
 							</button>}
 							</div>
-							<div className="form-sec border-form-sec p-4 mb-5">
+						<div className='planning-height px-0'>
+						<div className="form-sec border-form-sec p-4 mb-5">
 								<div className="col-md-6">
 									<div className="form-group mb-3">
 										<label className="form-label mt-2 custom_astrick poppins-regular-18px">
@@ -369,7 +374,7 @@ function Planning(props) {
 										</label>
 										<select
 											value={companyid}
-											className="form-select mb-2 poppins-regular-16px rounded-0"
+											className="form-select mb-2 poppins-regular-16px rounded-0 shadow-none"
 											placeholder="select company"
 											onChange={(e) => {
 												updateLocation(e.target.value);
@@ -377,8 +382,7 @@ function Planning(props) {
 										>
 											<option value="">Select</option>
 											{company.map((options) => (
-												<option key={options.nid} value={options.nid} onClick={() => {options.add_project == 1?	setShowproject(true):setShowproject(false);
-												}}>
+												<option key={options.nid} value={options.nid} >
 													{options.title}
 												</option>
 											))}
@@ -387,12 +391,12 @@ function Planning(props) {
 									</div>
 
 									<div className="form-group mb-3">
-										<label className="form-label mt-2 custom_astrick poppins-regular-18px">
+										<label className="form-label mt-2 custom_astrick poppins-regular-18px ">
 											Location
 										</label>
 										<select
 											value={locationid}
-											className="form-select mb-2 poppins-regular-16px rounded-0"
+											className="form-select mb-2 poppins-regular-16px rounded-0 shadow-none"
 											onChange={(e) => {
 												setLocationid(e.target.value);
 												updateCostCenter(e.target.value);
@@ -415,7 +419,7 @@ function Planning(props) {
 									<div className="form-group mb-3">
 										<label className="form-label mt-2 poppins-regular-18px">Cost center</label>
 										<select
-											className="form-select mb-2 poppins-regular-16px rounded-0"
+											className="form-select mb-2 poppins-regular-16px rounded-0 shadow-none"
 											value={costcenterid}
 											onChange={(e) => {
 												setCostcenterid(e.target.value);
@@ -474,12 +478,13 @@ function Planning(props) {
 								</div>
 							</div>
 						</div>
+						</div>
 						<div className="row mt-4 mb-4 col-md-12 m-0">
 							<div className="col-md-6 p-0">
-								<button type="button" className="btn  btn-block px-0 ">
+								<button type="button" className="btn  btn-block px-0 shadow-none">
 									<Link href={'/planning/options'}>
 										{/* <p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px "> */}
-										<p className="bg-white border-0 poppins-light-19px text-decoration-underline ">
+										<p className="bg-white border-0 poppins-light-18px text-decoration-underline shadow-none ">
 											BACK
 										</p>
 									</Link>
@@ -489,7 +494,7 @@ function Planning(props) {
 								<button
 									type="submit"
 									// className="btn rounded-0 custom-btn px-3 btn-block float-end"
-									className="btn rounded-0 px-3 float-end poppins-light-19px-next-button"
+									className="btn rounded-0 px-3 float-end poppins-medium-18px-next-button shadow-none"
 									onClick={() => {
 										setUniquekey(router.query.p_unique_key);
 									}}

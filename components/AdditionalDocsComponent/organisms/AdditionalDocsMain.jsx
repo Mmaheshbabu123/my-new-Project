@@ -18,6 +18,7 @@ const AdditionalDocsMain = (props) => {
     , companies: {}
     , assignedData: {}
     , headers: ['Document name', 'Employer', 'Company', 'Start date', 'End date', 'Link to cooperation agreement', 'Actions']
+    , employeeHeaders: ['Document name', 'Actions']
     , documentDetails: {}
     , selectedTabId: Number(tab) || 1,
   })
@@ -33,7 +34,7 @@ const AdditionalDocsMain = (props) => {
       await APICALL.service(`${fetchAdditionalDocuments}/${entityId}/${entityType}/${editId}/${action}`, 'GET').then(response => {
         if (response.status === 200)
           setState({...state,
-            overviewData: response.data.overviewData ? response.data.overviewData :[],
+            overviewData: response.data.overviewData ? getConstructedOverview(response.data) :[],
             loaded: true,
             companies: response.data.companies || {},
             employers: response.data.employers || [],
@@ -43,13 +44,46 @@ const AdditionalDocsMain = (props) => {
     }
   }
 
+  const getConstructedOverview = (data) => {
+    const { overviewData, companies = {}, employers = []} = data;
+    overviewData.map(eachObj =>
+      eachObj['employer_name'] = getLabel(employers.filter(val => val.id === eachObj.employerId))
+    );
+    overviewData.map(eachObj =>
+      eachObj['company_name'] = getLabel(companies[eachObj.employerId] ? companies[eachObj.employerId].filter(val =>
+        val.id === eachObj.companyId) : []
+      )
+    );
+    return overviewData;
+  }
+  const getLabel = rowObj => rowObj.length ? rowObj[0]['label'] : '';
+
+
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
-      <ul className={`${styles['docs-overview-tabs']}`}>
-        <li> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> Additional documents </span> </li>
-        {Number(entityType) === 1 && <li> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> V1 documents </span> </li>}
-      </ul>
+     <div className='row position-sticky-subhead py-4'>
+       <div className='col-md-12'>
+       <ul className={`${styles['docs-overview-tabs']}  m-0`}>
+        {Number(entityType) !== 3 && <li
+          className='manage-cooperation-tabs'>
+            <span
+              id = {1}
+              className={`${selectedTabId === 1 ? styles['underline'] : ''}`}
+              onClick={handleTabClick}> Additional documents
+            </span>
+         </li>}
+        {Number(entityType) === 1 &&
+            <li className='manage-cooperation-tabs'>
+              <span
+                id = {2}
+                className={`${selectedTabId === 2 ? styles['underline'] : ''}`}
+                onClick={handleTabClick}> V1 documents
+              </span>
+            </li>}
+        </ul>
+       </div>
+     </div>
     );
   }
 
@@ -63,7 +97,7 @@ const AdditionalDocsMain = (props) => {
     <div>
     {state.loaded === true || state.selectedTabId === 2 ?
           <div className="col-md-12">
-              <h4 className='mt-2 mb-4 font-weight-bold   px-0  bitter-italic-normal-medium-24 position-sticky pt-3'> {`Manage my documents`} </h4>
+              <h4 className='py-4 font-weight-bold px-0 bitter-italic-normal-medium-24 position-sticky-pc'> {`Manage my documents`} </h4>
               {action === 0 && showTabs()}
 
               {state.selectedTabId === 2  && <V1DocumentsOverview /> }
@@ -81,7 +115,7 @@ const AdditionalDocsMain = (props) => {
                       entityType={Number(entityType)}
                       entityId = {Number(entityId)}
                       rows={state.overviewData}
-                      headers={state.headers}
+                      headers={Number(entityType) === 3 ? state.employeeHeaders : state.headers}
                       companies={state.companies}
                       employers={state.employers}
                     />

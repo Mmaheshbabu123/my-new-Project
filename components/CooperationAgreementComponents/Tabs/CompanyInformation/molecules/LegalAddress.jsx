@@ -94,12 +94,12 @@ const LegalAddress = (props) => {
    Rowdata.map(data => {
        if(data.type === 1) {
      fieldsArray.push(
-       <div className = {`col-md-12 ${styles['add-div-margings']}  legal${data.id}`}>
+       <div className = {`col-md-12 ${styles['add-div-margings']}  legal${data.id} my-2`}>
        <LabelField title={data.key_name} customStyle = {{display:''}} /> {requiredFields['tab_2'][data.id] && <RequiredField />}
        <InputField
          id = {data.id}
          type = {'text'}
-         className = {'col-md-8'}
+         className = {'col-md-11'}
          value={tab_2[data.id]}
          isDisabled= {false}
          placeholder={''}
@@ -117,7 +117,7 @@ const LegalAddress = (props) => {
      )
    }else if(data.type === 8) {
      fieldsArray.push(
-       <div className=''>
+       <div className='col-md-11'>
        <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_2'][data.id] && <RequiredField />}
        <MultiSelectField
            id={data.id}
@@ -126,7 +126,7 @@ const LegalAddress = (props) => {
            disabled={false}
            handleChange={(obj) => handleSelect(obj, data.id)}
            isMulti={false}
-           className="col-md-6"
+           className="col-md-12"
          />
          { tab_2['required'][data.id] !== undefined && !tab_2['required'][data.id] &&
           <ValidateMessage text = {'This field is required'}/>
@@ -139,39 +139,59 @@ const LegalAddress = (props) => {
  }
 
   return (
-    <div className ="col-md-12 row">
-      <div className = 'col-md-6'>
+   <div className='legal_address'>
+     <div className='row'>
+      <div className ="col-md-12 ">
+        <div className='row'>
+        <div className = 'col-md-6'>
         {LegalaAddressFieldData(legalAdressRow1)}
         <div className = 'row'>
-        <div className = {`col-md-12 ${styles['add-div-margings']} legal${Language}` }>
+        <div className = {`col-md-12 ${styles['add-div-margings']} legal${Language} my-2` }>
             <LabelField title="Language"  customStyle = {{display:''}}/>{requiredFields['tab_2'][Language] && <RequiredField />}
             <div>
-            <RadioField   name = {Language} checked = {tab_2[Language] === 1} handleChange = {(e)=>handleRadioSelect(Language,1)} label= 'Dutch' />
+           <div className='d-inline-flex align-items-center me-3'>
+           <RadioField   name = {Language} checked = {tab_2[Language] === 1} handleChange = {(e)=>handleRadioSelect(Language,1)} label= 'Dutch' />
+           </div>
+           <div className='d-inline-flex align-items-center'>
             <RadioField  name = {Language} checked = {tab_2[Language] === 2} handleChange = {(e)=>handleRadioSelect(Language,2)} label= 'French' />
+            </div>
            </div>
         </div>
-         <div className = {`col-md-12 ${styles['add-div-margings']} legal${Labour_regulations_share}`}>
+         <div className = {`col-md-12 ${styles['add-div-margings']} legal${Labour_regulations_share} my-2`}>
             <LabelField title="Labour regulations (arbeidsreglement)" customStyle = {{display:''}}/>{requiredFields['tab_2'][Labour_regulations_share] && <RequiredField />}
              <div>
+             <div className='d-inline-flex align-items-center me-3'>
             <RadioField name = {Labour_regulations_share} checked = {tab_2[Labour_regulations_share] === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,1)} label= 'Yes' />
+            </div>
+            <div className='d-inline-flex align-items-center'>
             <RadioField name = {Labour_regulations_share} checked = {tab_2[Labour_regulations_share] === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,2)} label= 'No' />
+            </div>
              </div>
         </div>
         </div>
       </div>
      <div className = "col-md-6">
-       <div className = {`col-md-12 ${styles['add-div-margings']} `}>
+       <div className = {`col-md-12 `}>
          {LegalaAddressFieldData(legalAdressRow2)}
-         <div className = {`col-md-12 ${styles['add-div-margings']} legal${Labour_regulations}`}>
+        <div className='row'>
+        <div className = {`col-md-12 my-2 ${styles['add-div-margings']} legal${Labour_regulations}`}>
          <LabelField title="Labour regulations (arbeidsreglement) - sharing" customStyle = {{display:''}}/>{requiredFields['tab_2'][Labour_regulations] && <RequiredField />}
          <div>
+         <div className='d-inline-flex align-items-center me-3'>
          <RadioField name = {Labour_regulations} checked = {tab_2[Labour_regulations] === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations,1)} label= 'Yes' />
+         </div>
+         <div className='d-inline-flex align-items-center'>
          <RadioField name = {Labour_regulations} checked = {tab_2[Labour_regulations] === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations,2)} label= 'No' />
          </div>
          </div>
+         </div>
+        </div>
       </div>
      </div>
-    </div>
+        </div>
+      </div>
+     </div>
+   </div>
   )
 }
 

@@ -5,18 +5,20 @@ import { deleteAdditionalDocuments, downloadAdditionalDocuments } from '@/Servic
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
 import { USER_ROLE_ENTITY_TYPE } from '@/Constants';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { FiDownload } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
-const itemsPerPage = 8;
+const itemsPerPage = 5;
 
 const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props }) => {
   entityType === 2 ? headers.indexOf('Employer') > -1 ? headers.splice(headers.indexOf('Employer'), 1) : headers : [];
   const router = useRouter();
   const [state, setState] = useState({
-    searchTerm: '',
+    searchName: '',
+    searchEmployer: '',
+    searchCompany: '',
     filterRows: rows,
-    searchKey: 'name',
     currentItems: [],
     pageCount: 0,
     itemOffset: 0,
@@ -73,22 +75,33 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       .catch((error) => window.alert('Error occurred'));
   }
 
-  const handleSearch = (value) => {
-    let filterRows = rows.filter((item) => {
-      return (item[state.searchKey].toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
+  const handleSearch = (search) => {
+    let filterRows = [];
+    let { searchEmployer = '', searchCompany = '', searchName = '' } = state;
+    if(search && (searchEmployer || searchCompany || searchName)) {
+      filterRows = rows.filter((item) => {
+        let status = true;
+        if(searchName)
+          status = `${item['name']}`.toLowerCase().toString().indexOf(searchName.toLowerCase().toString()) !== -1;
+        if(status && searchEmployer)
+          status = `${item['employer_name']}`.toLowerCase().toString().indexOf(searchEmployer.toLowerCase().toString()) !== -1;
+        if(status && searchCompany)
+          status = `${item['company_name']}`.toLowerCase().toString().indexOf(searchCompany.toLowerCase().toString()) !== -1;
+       return status;
+      })
+    } else {
+      filterRows = rows;
+      searchEmployer = '';
+      searchCompany = '';
+      searchName = '';
+    }
     setState({ ...state,
-      searchTerm: value,
+      searchName, searchCompany, searchEmployer,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
       ...updatePaginationData(filterRows, 0)
     });
-  }
-
-  const handleSearchClick = (search = 0) => {
-    handleSearch(search ? state.searchTerm : '' );
   }
 
   //------------------- Pagination code -------------------------//
@@ -98,6 +111,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
      }, [state.itemOffset]);
 
      const updatePaginationData = (filterRows, offset) => {
+       console.log(filterRows)
        let items = [...filterRows];
        const endOffset = offset + itemsPerPage;
        return {
@@ -124,87 +138,97 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
     )
   }
 
-  const getEntityName = (eachRow, type) => {
-    let { employerId, companyId } = eachRow;
-    let { companies, employers } = props;
-    let rowObj = {};
-    if(type) {
-      rowObj = companies[employerId] ? companies[employerId].filter(val => val.id === companyId) : [];
-    } else {
-      rowObj = employers ? employers.filter(val => val.id === employerId) : [];
-    }
-    return rowObj.length ? rowObj[0]['label'] : '';
-  }
-
   return (
-    <>
+    < div className='row'>
       <div className='col-md-12 text-end'>
       {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) && <button
         onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
         type="button"
-        className="btn btn-dark pcp_btn col-3">
+        className="btn skyblue-bg-color rounded-0 shadow-none col-3">
         {`+Add additional document`}
       </button>}
       </div>
-      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
-       <div className='col-md-12 row'>
-         <div className='col-md-6 p-0'>
-           <input
-             type="text"
-             value={state.searchTerm}
-             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
-             onChange={(e) => setState({...state, searchTerm: e.target.value})}
-             placeholder={'Search'}
-             onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
-           />
-         </div>
-         <div className='col-md-6'>
-           <button
+      <div className='searchbox m-0 mt-4 mb-2' style={{ margin: '10px 0', position: 'relative' }}>
+      <div className='row'>
+      <div className='col-md-12'>
+         <div className='row'>
+         {[{value:'searchName', label: 'document'}, {value:'searchEmployer', label: 'employer'},{value:'searchCompany', label: 'company'}].map(key => {
+           if((entityType == 2 && key.label === 'employer') || (entityType === 3 && key.label !== 'document')) return;
+           return (
+             <div className={entityType === 3 ? 'col-md-9' : entityType === 2 ? 'col-md-4' : 'col-md-3'}>
+               <input
+                 type="text"
+                 value={state[key.value]}
+                 className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+                 onChange={(e) => setState({...state, [key.value]: e.target.value})}
+                 placeholder={`Search ${key.label}`}
+                 onKeyUp={(e) => e.key === 'Enter' ? handleSearch(1): null}
+               />
+             </div>
+           );
+         })}
+         <div className='col-md-3'>
+           <div className='row'>
+             <div className='col-md-6'>
+             <button
              type="button"
-             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
-             onClick={() => handleSearchClick(1)}
+             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
+             onClick={() => handleSearch(1)}
            >
              SEARCH
            </button>
-           <button
+
+             </div>
+             <div className='col-md-6'>
+              <button
              type="button"
-             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
-             onClick={() => handleSearchClick(0)}
+             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
+             onClick={() => handleSearch(0)}
            >
              RESET
            </button>
+             </div>
+           </div>
+         </div>
          </div>
         </div>
       </div>
+      </div>
       <div className="table-render-parent-div">
-          <table className="table table-hover manage-types-table">
+          <table className="table table-hover manage-types-table manage-documents-table-header">
             <thead className="table-render-thead">
-              <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} className="align-middle" scope="col"> {eachHeader} </th>)} </tr>
+              <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} className="align-middle " scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
             <tbody>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
                 <td> {eachRow.name} </td>
-                {entityType !== 2 ? <td width="170px"> {getEntityName(eachRow)} </td> : null}
-                <td width="170px"> {getEntityName(eachRow, 1)} </td>
+                {entityType !== 2 ? <td width="170px"> {eachRow.employer_name} </td> : null}
+                <td width="170px"> {eachRow.company_name} </td>
                 <td> {formatDate(eachRow.startDate) || '-'} </td>
                 <td> {formatDate(eachRow.endDate) || '-'} </td>
-                <td> {eachRow.linkToCooperationAgreement ? 'Yes' : 'No'} </td>
-                <td>{ getNeededActions(eachRow) } </td>
+                <td className='text-center'> {eachRow.linkToCooperationAgreement ? 'Yes' : 'No'} </td>
+                <td className='color-skyblue-icon'>{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No records </p>}
+            :  <tbody>
+            <tr>
+            <td colSpan={8} className="text-center poppins-regular-18px no-records">
+                    No records
+                  </td>
+            </tr>
+            </tbody>}
           </table>
       </div>
       <div>
       {state.filterRows.length > itemsPerPage && <ReactPaginate
           breakLabel="..."
-          nextLabel="Next >"
+          nextLabel={<AiOutlineArrowRight />}
           onPageChange={handlePageClick}
           pageRangeDisplayed={5}
           pageCount={state.pageCount}
           forcePage={state.currentPage}
-          previousLabel="< Previous"
+          previousLabel={<AiOutlineArrowLeft />}
           renderOnZeroPageCount={null}
           containerClassName={"pagination"}
           itemClass="page-item"
@@ -212,11 +236,15 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
       />}
-        <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn btn-dark pcp_btn col-1">
+       <div className='row my-3'>
+        <div className='col-md-12'>
+         <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn poppins-light-18px text-decoration-underline shadow-none p-0 text-uppercase">
           {`Back`}
         </button>
+        </div>
+       </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -139,8 +139,8 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
       files.map((file, index) => {
         return (
           <div key = {index} className="my-2">
-            <span className="actions-span text-dark w-50"> {file.file_name} </span>
-            <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', index)}> <MdDelete/> </span>
+            <span className="actions-span text-dark w-50 poppins-light-16px"> {file.file_name} </span>
+            <span title={'Delete'} className="actions-span color-skyblue" onClick={() => handleActionClick('delete', index)}> <MdDelete/> </span>
           </div>
         );
       })
@@ -154,14 +154,15 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
   }
 
   return <>
-    <div className='add-edit-types my-3'>
-     <div className="m-2">
-      <div className='col-md-6 my-3'>
+    <div className='add-edit-types border-purple p-3 mb-5'>
+     <div className="">
+      <div className='row'>
+      <div className='col-md-6'>
         <div>
-            <LabelField title={`Document name`} mandotory={true}/>
+            <LabelField title={`Document name`} className='poppins-medium-18px' mandotory={true}/>
             <InputField
                 type = {'text'}
-                className = {'col-md-12 my-1'}
+                className = {'col-md-12 my-1 shadow-none rounded-0'}
                 value={state.name}
                 isDisabled= {false}
                 placeholder={'Enter document name'}
@@ -171,69 +172,78 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
           {state.nameWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
         </div>
         <div>
-            <LabelField title={`File upload`} mandotory={true}/>
+            <LabelField title={`File upload`} className='poppins-medium-18px' mandotory={true}/>
               <FileUpload
                 name={'file'}
                 id='additional_docs_id'
                 multiple={false}
                 fileUploadText={'Choose file, maximum allowed size is 2MB.'}
                 handleChange={handleFileChange}
+                className=' shadow-none rounded-0 pos-rel'
               />
           {state.fileSizeWarning && <ValidateMessage style={{margin:0}} text = {'This file is too large to upload, maximum allowed size is 2MB.'}/>}
           {state.fileWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
           {state.files.length > 0 && showUploadedFiles()}
         </div>
       </div>
-      <LabelField title={`Document validity`}/>
-      <div className="col-md-12 row my-1">
+      </div>
+      <LabelField title={`Document validity`} className='poppins-medium-18px' />
+     <div className='row'>
+       <div className='col-md-12'>
+         <div className='row'>
         <div className="col-md-6">
-          <LabelField title={`Start date`}/>
+          <LabelField title={`Start date`} className='poppins-medium-18px'/>
           <DateField
             name={'startDate'}
             value={state.startDate}
             id={'startDate_id'}
-            className={'col-md-12'}
+            className={'col-md-12 rounded-0 shadow-none'}
             handleChange={(e) => handleChange(e, 1)}
           />
       {state.dateWarning && <ValidateMessage style={{margin:0}} text = {'Start date should be earlier than end date.'}/>}
         </div>
         <div className="col-md-6">
-          <LabelField title={`End date`} />
+          <LabelField title={`End date`} className='poppins-medium-18px' />
           <DateField
             name={'endDate'}
             value={state.endDate}
             id={'endDate_id'}
-            className={'col-md-12'}
+            className={'col-md-12 rounded-0 shadow-none'}
             handleChange={(e) => handleChange(e, 1)}
           />
         </div>
-      </div>
-      <div className="col-md-12 row">
-        <div className="col-md-6">
-          <LabelField title={`Employer`}/>
+         </div>
+         </div>
+     </div>
+      <div className='row'>
+      <div className="col-md-12">
+       <div className='row'>
+       <div className="col-md-6">
+          <LabelField title={`Employer`} className='poppins-medium-18px'/>
           <MultiSelectField
             options={employers}
             standards={employers.filter(val => val.value === state.employerId)}
             handleChange={(e) => onSelect(e, 1)}
             isMulti={false}
-            className="col-md-12"
+            className="col-md-12 rounded-0 shadow-none employer_select"
             placeholder={'Select employer'}
           />
         {state.employerWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
         </div>
         <div className="col-md-6">
-          <LabelField title={`Company`} />
+          <LabelField title={`Company`} className='poppins-medium-18px' />
           <MultiSelectField
             options={state.employerId ? companies[state.employerId] : []}
             standards={state.employerId && companies[state.employerId] ? companies[state.employerId].filter(val => val.value === state.companyId) : []}
             handleChange={(e) => onSelect(e, 2)}
             isMulti={false}
-            className="col-md-12"
+            className="col-md-12 rounded-0 shadow-none employer_select"
             placeholder={'Select company'}
           />
         {state.companyWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
         </div>
-        <div className="col-md-6">
+       </div>
+        <div className="col-md-6  ">
           <CheckBoxField
               id={'link_to_sv'}
               tick={state.linkToCooperationAgreement}
@@ -241,19 +251,34 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
               onCheck={(e) => handleChange(e, 2)}
               name={`Link to cooperation agreement.`}
               customStyle={{margin: '10px 0', cursor:'pointer'}}
-              className="col-md-12"
+              className="col-md-12 d-flex rounded-0"
             />
         </div>
       </div>
-      <div className="text-end">
-      <button onClick={() => handleSave(1)} type="button" className="btn btn-dark pcp_btn"> Save as draft </button>
-      <button onClick={() => handleSave()} type="button" className="btn btn-dark pcp_btn"> Send to employer </button>
       </div>
-      <button onClick={() => router.back()} type="button" className="btn btn-dark pcp_btn col-1">
-        {`Back`}
-      </button>
+      <div className="d-flex justify-content-end row">
+      <div className='col-md-5 float-end'>
+        <div className='row'>
+          <div className='col-md-6'>
+          <button onClick={() => handleSave(1)} type="button" className="btn skyblue-bg-color rounded-0 shadow-none w-100"> Save as draft </button>
+          </div>
+          <div className='col-md-6'>
+          <button onClick={() => handleSave()} type="button" className="btn skyblue-bg-color rounded-0 shadow-none w-100"> Send to employer </button>
+          </div>
+        </div>
+      </div>
+      </div>
+     {/* back button */}
+     {/* end of back button */}
       </div>
     </div>
+    <div className='row'>
+       <div className='col-md-12 p-0'>
+       <button onClick={() => router.back()} type="button" className="btn poppins-light-18px text-decoration-underline text-uppercase text-left shadow-none">
+        {`Back`}
+      </button>
+       </div>
+     </div>
   </>
 }
 export default React.memo(EditUpdateAdditionalDoc);

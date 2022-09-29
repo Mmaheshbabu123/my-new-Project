@@ -12,6 +12,7 @@ const CooperationAgreementMain = (props) => {
   const { state: { selectedTabId } } = useContext(CooperationAgreementContext);
   return(
     <div className="">
+        <h4 className='font-weight-bold  bitter-italic-normal-medium-24 px-0 my-2'> {`${Number(props.corporateAgreementId) ? 'Edit' : 'Create'} cooperation agreement`} </h4>
         <CooperationAgreementTabs {...props}/>
         <Suspense fallback={`Loading...`}> {selectedTabId ?   <TabComponent /> : <> Loading... </>} </Suspense>
     </div>

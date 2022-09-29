@@ -22,11 +22,11 @@ const BasicDetails = (props) => {
     onlineRow.map(data=>{
      fieldsArray.push(
        <div className = {`col-md-12 ${styles['add-div-margings']}  online${data.id}`}>
-       <LabelField title={data.key_name} customStyle = {{display:''}}/> {requiredFields['tab_4'][data.id] && <RequiredField />}
+       <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'}/> {requiredFields['tab_4'][data.id] && <RequiredField />}
        <InputField
        id = {data.id}
          type = {'text'}
-         className = {'col-md-8'}
+         className = {'col-md-11 poppins-regular-18px'}
          value={tab_4[data.id]}
          isDisabled= {disableFields[data.id] || false}
          placeholder={''}
@@ -50,10 +50,10 @@ const BasicDetails = (props) => {
    onlineRadioRow.map(data=>{
     fieldsArray.push(
       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-          <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_4'][data.id] && <RequiredField />}
+          <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'}/>{requiredFields['tab_4'][data.id] && <RequiredField />}
           <div>
-          <RadioField   name = {data.id} checked = {tab_4[data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} />
-          <RadioField  name = {data.id} checked = {tab_4[data.id] === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} />
+          <RadioField   name = {data.id} checked = {tab_4[data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} className={'poppins-regular-18px me-3'} />
+          <RadioField  name = {data.id} checked = {tab_4[data.id] === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} className={'poppins-regular-18px'}/>
           </div>
       </div>
     )
@@ -72,15 +72,19 @@ const BasicDetails = (props) => {
    updateStateChanges({tab_4,element_status});
   }
   return (
-    <div className="col-md-12 row">
-      <div className = 'col-md-6'>
-       {OnlineFieldData(onlineDetailsRow1)}
-       {OnlineRadioFieldData(onlineDetaillsRadioRow1)}
-       </div>
-       <div className = 'col-md-6'>
-       {OnlineFieldData(onlineDetailsRow2)}
-       {OnlineRadioFieldData(onlineDetaillsRadioRow2)}
-       </div>
+    <div className='row'>
+      <div className="col-md-12">
+        <div className='row basic_online_details mx-1'>
+          <div className = 'col-md-6'>
+            {OnlineFieldData(onlineDetailsRow1)}
+            {OnlineRadioFieldData(onlineDetaillsRadioRow1)}
+          </div>
+          <div className = 'col-md-6'>
+            {OnlineFieldData(onlineDetailsRow2)}
+            {OnlineRadioFieldData(onlineDetaillsRadioRow2)}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

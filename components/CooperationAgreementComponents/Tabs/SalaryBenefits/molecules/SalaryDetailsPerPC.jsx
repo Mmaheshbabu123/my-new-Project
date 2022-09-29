@@ -64,11 +64,15 @@ const SalaryDetailsPerPC = () => {
   }
 
   return (
-    <div className={`${styles['salary-benefits-tab-parent']}`} disabled={!filledTabs.includes(selectedTabId)}>
+    <div className='salary_benefits_co_operation_agreement'>
+      <div className='row'>
+        <div className='col-md-12'>
+        <div className={`${styles['salary-benefits-tab-parent']}`} disabled={!filledTabs.includes(selectedTabId)}>
       <div>
         {cooperationSalaryDetails.length > 0 ? <SalaryDetails onDelete={onDelete}/> : null}
       </div>
-      <div >
+      <div className='row' >
+        <div className='col-md-11 m-auto px-2 salary_benefits_paritair_committe'>
         <MultiSelectField
             options={helpers.getDifference(salaryBenefitPcArray, cooperationSalaryDetails, 'value', 'pc_id', state.alreadyLinked)}
             handleChange={onSelect}
@@ -79,6 +83,10 @@ const SalaryDetailsPerPC = () => {
             classNamePrefix={`${styles['salary-benefits-multiselect']}`}
             placeholder={'Select paritair comite'}
         />
+        </div>
+      </div>
+    </div>
+        </div>
       </div>
     </div>
   );

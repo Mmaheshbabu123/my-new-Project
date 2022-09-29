@@ -190,7 +190,7 @@ const SalaryBenifits = () => {
 						</p>
 						{data.map((val, key) => (
 							<div
-								// className={pc_view_type == 'addpc' ? 'col-6' : "col-md-12"} 
+								// className={pc_view_type == 'addpc' ? 'col-6' : "col-md-12"}
 								key={key}>
 								<div key={key} className={`form-check mt-1`}>
 									<div className="form-check my-2 ps-0">
@@ -252,18 +252,18 @@ const SalaryBenifits = () => {
 												<div className='row '>
 													<div className="form-check d-inline-flex col-sm-3 ps-0">
 														<input className="form-check-input ms-1 me-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-														<label className="form-check-label" for="flexCheckDefault">
+														<label className="form-check-label" htmlFor="flexCheckDefault">
 															<p className={'  poppins-medium-16px '}>Is this mandatory?</p>
 														</label>
 													</div>
 
 													<div className="form-check d-inline-flex  col ps-0">
 														<input className="form-check-input me-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-														<label className="form-check-label" for="flexCheckDefault">
+														<label className="form-check-label" htmlFor="flexCheckDefault">
 															<p className={'  poppins-medium-16px '}>Allow sales agent to update the value during creation of cooperation agreement</p>
 														</label>
 													</div>
-{/* 
+{/*
 													<p className="mt-2" style={{ color: 'red' }}>
 														{val.error_mandatory}
 													</p> */}
@@ -272,41 +272,41 @@ const SalaryBenifits = () => {
 													<div className='col ps-0'><p className={'  poppins-medium-16px '}>Salary benifit value</p>
 														<div className="form-check  ">
 															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" for="flexRadioDefault1">
+															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																value in €
 															</label>
 														</div>
 														<div className="form-check">
 															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" for="flexRadioDefault1">
+															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																value in %
 															</label>
 														</div>
-														<div class="input-group mb-3 col-md-3 mt-5">
-															<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" />
-															<span class="input-group-text">€</span>
+														<div className="input-group mb-3 col-md-3 mt-5">
+															<input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
+															<span className="input-group-text">€</span>
 														</div>
 													</div>
 													<div className='col'><p className={'  poppins-medium-16px '}>Applicable coefficient </p>
 														<div className="form-check ">
 															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" for="flexRadioDefault1">
+															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																Based on employee type in the cooperation agreement
 															</label>
 														</div>
 														<div className="form-check">
 															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" for="flexRadioDefault1">
+															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																Other
 															</label>
 														</div>
-														<div class="mb-3">
-															<label for="" className="form-label mt-4"></label>
+														<div className="mb-3">
+															<label htmlFor="" className="form-label mt-4"></label>
 															<input type="text" className="form-control" id="" />
 														</div>
 													</div>
 													<div className='col'><p className={'  poppins-medium-16px '}>Occurence</p>
-														<select class="form-select" aria-label="Default select example">
+														<select className="form-select" aria-label="Default select example">
 															<option selected>Select..</option>
 															<option value="1">One</option>
 															<option value="2">Two</option>
@@ -318,13 +318,13 @@ const SalaryBenifits = () => {
 													<div className='col'><p className={'  poppins-medium-16px '}>Is the benefit granted in case of absenceof the employee?</p>
 														<div className="form-check ">
 															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" for="flexRadioDefault1">
+															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																Yes
 															</label>
 														</div>
 														<div className="form-check">
 															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" for="flexRadioDefault1">
+															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																No
 															</label>
 														</div>
@@ -333,10 +333,10 @@ const SalaryBenifits = () => {
 													<div className='col'><p className={'  poppins-medium-16px '}>Start date</p>
 														<div className="col-md-12 p-0">
 															<DatePicker className="purple"
-																value={value} 
-																onChange={setValue} 
+																value={value}
+																onChange={setValue}
 																render={<InputIcon />}
-															/>														
+															/>
 														</div>
 													</div>
 													<div className='col'></div>

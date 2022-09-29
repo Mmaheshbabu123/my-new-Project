@@ -71,7 +71,6 @@ const AddFunctions = () => {
 	const submit = (e) => {
 		e.preventDefault();
 		var p_unique_key = router.query.p_unique_key;
-		// console.log(employeeobject);return;
 
 		let errors = validateErrors();
 
@@ -317,9 +316,9 @@ const AddFunctions = () => {
 				} else {
 					func = '';
 					if (value.salary == '' || value.salary == null || value.salary == undefined) {
-						if (count == 0) {
-							value.salary = value.function_salary;
-						}
+						// if (count == 0) {
+						// 	value.salary = value.function_salary;
+						// }
 					} else {
 						sal =
 							emp == '' && value.salary != '' && value.salary != null && value.salary != undefined
@@ -490,8 +489,10 @@ const AddFunctions = () => {
 					<div>Loading...</div>
 				) : (
 					<div>
+					<div className='row'>
+						<div className='col-md-12'>
 						<div className="min-hei-addfun add_function">
-							<div className="form-check rounded-0 my-3 align-items-center d-flex">
+							<div className="form-check rounded-0 mb-3 align-items-center d-flex">
 								<input
 									className="form-check-input rounded-0 mb-1 "
 									type="checkbox"
@@ -508,16 +509,19 @@ const AddFunctions = () => {
 									Same functions for all employees
 								</label>
 							</div>
-							<div className="row px-3">
+							<div className="row">
 								{employeeobject != undefined &&
 									employeeobject.map((emplist, key) => (
-										<div type="1" className="pt-2" key={key}>
-											<div className="py-2 poppins-light-20px">{emplist.pc}</div>
-											<div className="border border-secondary mb-2 p-1">
+										<div type="1" className="pt-2 col-md-12" key={key}>
+											<div className="py-2 poppins-medium-18px text-capitalize">{emplist.pc}</div>
+											<div className="border-secondary mb-2 p-1">
 												{emplist.employee_list.map((v1, k1) => (
 													<div key={v1.emp_id}>
-														<div className="row bg-4C4D550F mb-2 p-2">
-															<div className="col-md-1 poppins-light-20px">
+														<div className="row mb-2">
+														<div className='col-md-12 px-2'>
+																<div className='bg-4C4D550F'>
+														<div className='row'>
+														<div className="col-md-1 poppins-light-18px align-self-center text-center">
 																{ischecked ? (
 																	k1 + 1
 																) : v1['collapseOpen'] == false ? (
@@ -540,12 +544,12 @@ const AddFunctions = () => {
 																	/>
 																)}
 															</div>
-															<div className="col-md-4 p-1 poppins-light-20px">
+															<div className="col-md-4 p-1 poppins-light-18px align-self-center">
 																<div>
 																	{v1['employeename']}{' '}
 																	<span className="ageicon">
 																		{v1['age'] != 0 &&
-																			v1['age'] <= emplist.pc_min_age &&
+																			v1['age'] < emplist.pc_min_age &&
 																			{
 																				'16': (
 																					<Image
@@ -593,7 +597,9 @@ const AddFunctions = () => {
 																	</span>
 																</div>
 															</div>
-															<div className="col-md-3  border-0 custom-drop-btn">
+															<div className='col-md-7'>
+																<div className='row'>
+																<div className="col-md-6  py-2 border-0 custom-drop-btn add_function_dropdown">
 																{emplist.employee_types != null ? (
 																	<MultiSelectField
 																		placeholder={'Select employee type'}
@@ -619,27 +625,27 @@ const AddFunctions = () => {
 																	''
 																)}{' '}
 																{
-																	<div style={{ color: 'red', paddingTop: '5px' }}>
+																	<div style={{ color: 'red',  }} className='error_text mt-2'>
 																		{v1['employeeiderror']}
 																	</div>
 																}
 															</div>
-															<div className="col-md-2 border-0">
+															<div className="col-md-3 py-2 border-0">
 																{v1['function_salary'] != null ? (
-																	<span className="p-1 px-3 w-100 poppins-medium-20px bg-white">
+																	<div className="p-1 px-3 w-100 poppins-medium-20px bg-white function_salary_height">
 																		{'€ ' + v1['function_salary']}
-																	</span>
+																	</div>
 																) : (
-																	<span className="p-1 w-100 poppins-medium-20px bg-white d-none">
+																	<div className="p-1 w-100 poppins-medium-20px bg-white d-none">
 																		{'€ ' + v1['function_salary']}
-																	</span>
+																	</div>
 																)}
 															</div>
-															<div className="col-md-2 py-1 add_function_salary">
+															<div className="col-md-3 py-2 add_function_salary pe-4">
 																<div>
 																	{v1['function_salary'] != null && (
 																		<div className="input-group">
-																			<span className="input-group-text border-0 poppins-regular-16px">
+																			<span className="input-group-text border-0 poppins-regular-16px rounded-0 shadow-none">
 																				€
 																			</span>
 																			<input
@@ -647,6 +653,7 @@ const AddFunctions = () => {
 																				type="textfield"
 																				name="salary"
 																				placeholder="salary"
+																				
 																				//((v1['salary'] !=v1['function_salary'])||(salChanged == true))?
 																				value={
 																					v1['salary'] != null ? (
@@ -655,7 +662,7 @@ const AddFunctions = () => {
 																						''
 																					)
 																				}
-																				className="form-control bg-white border-0 poppins-regular-16px"
+																				className="form-control bg-white border-0 poppins-regular-16px rounded-0 shadow-none"
 																				onChange={(e) => {
 																					setsaalary(k1, e, key);
 																					// setSalChanged(true);
@@ -664,9 +671,11 @@ const AddFunctions = () => {
 																		</div>
 																	)}
 
-																	<p style={{ color: 'red' }}>{v1['salaryerror']}</p>
+																	<p style={{ color: 'red' }} className='error_text mt-2'>{v1['salaryerror']}</p>
 																</div>
 															</div>
+																	</div>
+																</div>
 															{!ischecked &&
 																v1['functionslist'] != undefined &&
 																v1['functionslist'].map((deta, ind) => {
@@ -681,10 +690,10 @@ const AddFunctions = () => {
 																	return (
 																		v1['collapseOpen'] &&
 																		(ind <= 2 ? (
-																			<div className="col-md-12 row mt-3 position-relative pe-0">
+																			<div className="col-md-11 mx-auto row mt-3 position-relative pe-0">
 																				<div
 																					className="mt-2 mb-2 bg-light h-75 py-2 bg-4C4D550F z-999 px-0 fun-line col ms-5"
-																					style={{ height: '48px' }}
+																					style={{ height: '44px' }}
 																				>
 																					<span className="custom-radio-input">
 																						<input
@@ -727,21 +736,21 @@ const AddFunctions = () => {
 																							}}
 																						/>
 																					</span>
-																					<span className="ps-2 poppins-light-20px">
+																					<span className="ps-2 poppins-light-18px">
 																						{deta['name']}
 																					</span>
 																				</div>
 																			</div>
 																		) : (
 																			ind == 3 && (
-																				<div className="col-md-12 row m-0 position-relative pe-0">
+																				<div className="col-md-11 mx-auto row m-0 mt-2 position-relative pe-0">
 																					<div
 																						className="col ms-5 fun-line2 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999  d-flex align-items-center px-0"
-																						style={{ height: '49px' }}
+																						style={{ height: '44px' }}
 																					>
 																						<span
 																							className="custom-radio-input d-inline-block p-3 "
-																							style={{ height: '48px' }}
+																							style={{ height: '44px' }}
 																						>
 																							<input
 																								type="radio"
@@ -830,12 +839,12 @@ const AddFunctions = () => {
 																									//	}
 																								}}
 																								isMulti={false}
-																								className="col-md-6 select_option_height"
+																								className="col-md-6 select_option_height add_function_height"
 																							/>
 																						</div>
 																					</div>
 																					<div
-																						className="error 2 ps-5 ms-5 my-2"
+																						className="error error_text 2 ps-5 ms-5 my-2"
 																						style={{ color: 'red' }}
 																					>
 																						{v1['functioniderror']}
@@ -847,12 +856,15 @@ const AddFunctions = () => {
 																})}
 															{v1['warning'] != '' && (
 																<div
-																	className="py-2"
+																	className="py-2 error_text"
 																	style={{ color: 'red', paddingLeft: '130px' }}
 																>
 																	<ExclamationTriangle /> {v1['warning']}
 																</div>
 															)}
+															</div>
+																	</div>
+															</div>
 														</div>
 													</div>
 												))}
@@ -864,7 +876,7 @@ const AddFunctions = () => {
 														ischecked ? 'function' : '';
 													}
 													return ind <= 2 ? (
-														<div className="col-md-11 pe-3 ms-auto row position-relative">
+														<div className="col-md-11	pe-2 ms-auto row position-relative">
 															<div className="mt-2 mb-2 bg-light py-2 bg-4C4D550F z-999 px-0">
 																<span className="custom-radio-input">
 																	<input
@@ -895,7 +907,7 @@ const AddFunctions = () => {
 																		}}
 																	/>
 																</span>
-																<span className="ps-2 poppins-light-20px">
+																<span className="ps-2 poppins-light-18px">
 																	{' '}
 																	{deta['name']}
 																</span>
@@ -903,7 +915,7 @@ const AddFunctions = () => {
 														</div>
 													) : (
 														ind == 3 && (
-															<div className="col-md-11 ms-auto pe-3 row position-relative">
+															<div className="col-md-11 ms-auto pe-2 row position-relative">
 																<div
 																	className="col fun-line33 mt-2 mb-2 bg-light py-1 bg-4C4D550F z-999 d-flex align-items-center ps-0"
 																	style={{ height: '48px' }}
@@ -960,7 +972,7 @@ const AddFunctions = () => {
 																				);
 																			}}
 																			isMulti={false}
-																			className="col-md-6 select_option_height"
+																			className="col-md-6 select_option_height add_function_height"
 																		/>
 																		{/* <Select
 													// name="employefunctionsall"
@@ -975,7 +987,7 @@ const AddFunctions = () => {
 												/> */}
 																	</div>
 																</div>
-																<div style={{ color: 'red' }}>
+																<div style={{ color: 'red' }} className='error_text mt-2'>
 																	{employeeobject[key].employee_list[0]['functioniderror']}
 																</div>
 															</div>
@@ -987,11 +999,13 @@ const AddFunctions = () => {
 									))}
 							</div>
 						</div>
+						</div>
+					</div>
 						<div className="row m-0 my-4">
 							<div className="text-start col-md-6 p-0 align-items-center d-flex">
 								<button
 									type="button"
-									className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline"
+									className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline poppins-light-18px text-decoration-underline shadow-none"
 									onClick={() => router.push('/planning/employees/' + router.query.p_unique_key)}
 								>
 									BACK
@@ -1000,7 +1014,7 @@ const AddFunctions = () => {
 							<div className="text-end col-md-6 p-0">
 								<button
 									type="sumit"
-									className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-light-19px-next-button"
+									className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none"
 									onClick={() => submit}
 								>
 									NEXT
