@@ -30,6 +30,7 @@ function AddFunction(props) {
 		cat_subsec_id,
 		setCat_subsec_id
 	} = useContext(PcContext);
+
 	const [ error_function_name, setError_function_name ] = useState('');
 	const [ error_min_salary, setError_min_salary ] = useState('');
 	const [ disableSave, setDisableSave ] = useState(false);
