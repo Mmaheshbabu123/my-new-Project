@@ -367,7 +367,7 @@ function AddPc(props) {
 									type="text"
 									value={data.pc_number}
 									className=
-									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1"}
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1 rounded-0"}
 
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, pc_number: e.target.value }));
@@ -382,7 +382,7 @@ function AddPc(props) {
 									type="text"
 									value={data.pc_name}
 									className=
-									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1"}
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1 rounded-0"}
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, pc_name: e.target.value }));
 									}}
@@ -396,7 +396,7 @@ function AddPc(props) {
 									type="text"
 									value={data.pc_alias_name}
 									className=
-									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1"}
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1 rounded-0"}
 									onChange={(e) => {
 										setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
 									}}
@@ -414,7 +414,7 @@ function AddPc(props) {
 										type="text"
 										value={data.buffer_timings}
 										className=
-										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none "}
+										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none rounded-0"}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, buffer_timings: e.target.value }));
 										}}
@@ -433,7 +433,7 @@ function AddPc(props) {
 										type="text"
 										value={data.min_work_timings}
 										className=
-										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none"}
+										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none rounded-0"}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
 										}}
@@ -451,7 +451,7 @@ function AddPc(props) {
 										type="text"
 										value={data.max_work_timings}
 										className=
-										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none"}
+										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none rounded-0"}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
 										}}
@@ -472,7 +472,7 @@ function AddPc(props) {
 						<div className="text-end col-md-6 p-0">
 							<button
 								type="sumit"
-								className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px shadow-none"
+								className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px-next-button shadow-none"
 								disabled={disableSave}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));

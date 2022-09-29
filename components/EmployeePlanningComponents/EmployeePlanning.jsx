@@ -80,16 +80,21 @@ function EmployeeMonthlyPlanning(props) {
 			value={currentViewName}
 			onClick={onChange}
 		>
-			<button type="button" value="Day" className="btn table-border-gray  col-md-4  poppins-regular-16px">
+			<div className='col-md-4 ps-0'>
+			<button type="button" value="Day" className="btn border w-100 poppins-medium-18px rounded-0 shadow-none">
 				Day
-			</button>
-			<button value="Week" type="button" className="btn table-border-gray  col-md-4 poppins-regular-16px">
+			</button>		
+			</div>
+			<div className='col-md-4'>
+			<button value="Week" type="button" className="btn border w-100 poppins-medium-18px rounded-0 shadow-none">
 				Week
 			</button>
-
-			<button value="Month" type="button" className="btn table-border-gray  col-md-4 poppins-regular-16px ">
+			</div>
+			<div className='col-md-4 pe-0'>
+			<button value="Month" type="button" className="btn border w-100 poppins-medium-18px rounded-0 shadow-none">
 				Month
 			</button>
+			</div>
 		</div>
 	);
 
@@ -101,21 +106,25 @@ function EmployeeMonthlyPlanning(props) {
 
 	return (
 		<div className="container-fluid p-0">
-			<div className="row m-0 p-0">
-				<p className="mt-1 mb-1 p-0 font-weight-bold   bitter-italic-normal-medium-24">My planning</p>
-				<div className="mt-3 col-md-12 p-0">
-					<p className="poppins-regular-16px">My upcoming plannings</p>
+			<div className='row position-sticky-pc'>
+				<div className='col-md-12'>
+				<p className="py-4 font-weight-bold bitter-italic-normal-medium-24">My planning</p>
+				<div className="mb-3 col-md-12 p-0">
+					<p className="poppins-light-18px">My upcoming plannings</p>
 				</div>
+				</div>
+			</div>
+			<div className="row m-0 p-0">
 				<div className=" d-flex flex-row-reverse  ">
-					<div className="mt-3 me-2 p-2  ">
-						<FcSynchronize className="" data-toggle="tooltip" title="Synchronise planning" />
+					<div className="mt-3">
+						<FcSynchronize className="color-skyblue" data-toggle="tooltip" title="Synchronise planning" />
 					</div>
-					<div className="mt-3 p-2 ">
-						<BsFillPrinterFill className="" data-toggle="tooltip" title="Print planning" />
+					<div className="mt-3 pe-3">
+						<BsFillPrinterFill className="color-skyblue" data-toggle="tooltip" title="Print planning" />
 					</div>
 				</div>
 				<div className=" mt-2 text-center col-md-12 p-0 ">
-					<table className="table border  border-info mt-3 mb-3">
+					<table className="table mt-3 mb-3">
 						<thead>
 							<tr className=" skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex  ">
@@ -136,26 +145,26 @@ function EmployeeMonthlyPlanning(props) {
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
 									Company
 								</th>
-								<th className=" text-center align-items-center justify-content-center ">Action</th>
+								<th className=" text-center  align-items-center justify-content-center ">Action</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody className='border_employee_planning_table'>
 							{data.slice(0, visible).map((result) => (
-								<tr className="border-bottom  border-info" key={result.title}>
-									<td className="table-border-gray font-poppins-light">{result.pdate}</td>
-									<td className="table-border-gray font-poppins-light">
+								<tr className="" key={result.title}>
+									<td className=" border_employee_planning poppins-light-18px">{result.pdate}</td>
+									<td className="border_employee_planning poppins-light-18px">
 										{moment(result.starttime).format('HH:mm')}
 									</td>
-									<td className="table-border-gray font-poppins-light">
+									<td className="border_employee_planning poppins-light-18px">
 										{moment(result.endtime).format('HH:mm')}
 									</td>
-									<td className="table-border-gray font-poppins-light">
+									<td className="border_employee_planning poppins-light-18px">
 										<span>{result.Employer_firstname} </span>
 										<span>{result.Employer_lastname} </span>
 									</td>
-									<td className=" table-border-gray font-poppins-light">{result.location}</td>
-									<td className="table-border-gray font-poppins-light">{result.companyname}</td>
-									<td className="d-flex justify-content-center">
+									<td className="border_employee_planning poppins-light-18px">{result.location}</td>
+									<td className="border_employee_planning poppins-light-18px">{result.companyname}</td>
+									<td className="border_employee_planning">
 										<AiFillEye
 											type="button"
 											className="mt-2 ms-3 color-skyblue"
@@ -187,7 +196,7 @@ function EmployeeMonthlyPlanning(props) {
 				<div className="text-end mb-3 p-0">
 					<button
 						type="button"
-						className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-regular-20px"
+						className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none"
 						onClick={viewMoreItems}
 					>
 						View more &nbsp;
@@ -195,12 +204,13 @@ function EmployeeMonthlyPlanning(props) {
 					</button>
 				</div>
 			</div>
+			<div className='row'>
 			<div className="planning-table col-md-12 mb-5">
 				<React.Fragment>
 					<ExternalViewSwitcher currentViewName={currentViewName} onChange={currentViewNameChange} />
 
 					<Paper>
-						<Scheduler data={data} height={660}>
+						<Scheduler data={data} height={718}>
 							<ViewState defaultCurrentDate={new Date()} currentViewName={currentViewName} />
 
 							<DayView />
@@ -215,6 +225,7 @@ function EmployeeMonthlyPlanning(props) {
 						</Scheduler>
 					</Paper>
 				</React.Fragment>
+			</div>
 			</div>
 		</div>
 	);

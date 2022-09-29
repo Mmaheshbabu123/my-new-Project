@@ -137,7 +137,7 @@ const ManagePc = (props) => {
 						<Link className="hover-white" href={'/redirect-page?src=/manage-pc&dest=addpc'}>
 							<span
 								className={
-									'ml-2 float-sm-right color-white py-2 hover-white poppins-medium-18px text-white shadow-none ' +
+									'ml-2 float-sm-right color-white py-2 hover-white poppins-medium-18px-add-button text-white shadow-none ' +
 									styles.addprojbtn +
 									styles.btncolor
 								}

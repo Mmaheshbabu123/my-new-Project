@@ -154,7 +154,7 @@ const RightPart = ( { compState, setCompState } ) => {
         <thead className="pclinking-table-thead table-second-part-thead">
           <tr className="table-second-part-thead-tr-class">{
             employeeTypeArray.map(emp => <th height="50" key={emp.id} className="table-second-part-th-class" title = {emp.name}>
-              <div className="header-div-tag"> {emp.name} </div> </th>)
+              <div className="header-div-tag poppins-medium-18px d-flex justify-content-center align-items-center"> {emp.name} </div> </th>)
           }</tr>
         </thead>
         <tbody className="pclinking-table-tbody table-second-part-tbody">
