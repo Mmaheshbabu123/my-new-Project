@@ -52,7 +52,7 @@ var Contack_key =  37;
     return(
     <div className='basic_details'>
         <div key = {val.pc_id} className={`${styles['expand-minimize-div']}`}>
-        <div>
+        <div className='mb-3'>
           <span onClick={() => expandMinimizeDiv(val.person_id)} title={expand[val.person_id] === true ? 'Close' : 'Open'} className={`${styles['expand-minimize-span']} close_open_basic_details`} > {!expand[val.person_id] ? <FaRegMinusSquare />: <FaRegPlusSquare />} </span>
           <div  onClick={() => expandMinimizeDiv(val.person_id)} className={`${styles['expand-minimize-box']} poppins-medium-18px p-1 opacity-100-basic-details`}> <span> {val.person_name} </span> </div>
           <span onClick={() => props.onDelete(val.person_id, index)} title={'Delete'} className={`${styles['expand-minimize-span']} opacity-100-basic-details`}> <TiDelete /> </span>
@@ -73,8 +73,8 @@ var Contack_key =  37;
       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
           <LabelField title={'Title'} customStyle = {{display:''}} className={'poppins-regular-18px'}/>{requiredFields['tab_3'][Title_key] && <RequiredField />}
           <div className='poppins-regular-18px'>
-           <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleRadioSelect(Title_key,1,personId)}> {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} {'Mr'}</label>
-           <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleRadioSelect(Title_key,2,personId)}> {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 2 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} {'Mrs'}</label>
+           <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px `} onClick={() => handleRadioSelect(Title_key,1,personId)}> {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 1 ? <IoMdRadioButtonOn className="radio_button"/> : <IoMdRadioButtonOff />} {'Mr'}</label>
+           <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px radio_button`} onClick={() => handleRadioSelect(Title_key,2,personId)}> {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 2 ? <IoMdRadioButtonOn className="radio_button" /> : <IoMdRadioButtonOff  />} {'Mrs'}</label>
         {/*  <RadioField   name = {Title_key} checked = {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 1} handleChange = {(e)=>handleRadioSelect(Title_key,1,personId)} label= {'Mr'} />
           <RadioField  name = {Title_key} checked = {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 2} handleChange = {(e)=>handleRadioSelect(Title_key,2,personId)} label= {'Mrs'} /> */}
           </div>
@@ -82,14 +82,16 @@ var Contack_key =  37;
            <ValidateMessage text = {'This field is required'}/>
          }
       </div>
-        <div className = 'col-md-6'>
+       <div className='row'>
+       <div className = 'col-md-6'>
 
-         {ConstructHtmlData(contactPersonsRow1,personId)}
-         </div>
-         <div className = 'col-md-6'>
-          {ConstructHtmlData(contactPersonsRow2,personId)}
+      {ConstructHtmlData(contactPersonsRow1,personId)}
+      </div>
+      <div className = 'col-md-6'>
+      {ConstructHtmlData(contactPersonsRow2,personId)}
 
-          </div>
+      </div>
+       </div>
       </div>
      </div>
     );
@@ -110,7 +112,7 @@ var Contack_key =  37;
         <InputField
         id = {data.id}
           type = {'text'}
-          className = {'col-md-8 poppins-regular-18px'}
+          className = {'col-md-12 poppins-regular-18px'}
           value={tab_3['contactPersonsDetails'][personId][data.id] }
           isDisabled= {false}
           placeholder={''}
@@ -132,8 +134,8 @@ var Contack_key =  37;
       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
           <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'}/>{requiredFields['tab_3'][data.id] && <RequiredField />}
           <div>
-           <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleRadioSelect(data.id,1,personId)}> {Number(tab_3['contactPersonsDetails'][personId][data.id]) === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} {data.option1}</label>
-           <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleRadioSelect(data.id,2,personId)}> {Number(tab_3['contactPersonsDetails'][personId][data.id]) === 2 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} {data.option2}</label>
+           <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleRadioSelect(data.id,1,personId)}> {Number(tab_3['contactPersonsDetails'][personId][data.id]) === 1 ? <IoMdRadioButtonOn className="radio_button"/> : <IoMdRadioButtonOff />} {data.option1}</label>
+           <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleRadioSelect(data.id,2,personId)}> {Number(tab_3['contactPersonsDetails'][personId][data.id]) === 2 ? <IoMdRadioButtonOn className="radio_button" /> : <IoMdRadioButtonOff />} {data.option2}</label>
           {/*<RadioField   name = {data.id} checked = {Number(tab_3['contactPersonsDetails'][personId][data.id]) === 1} handleChange = {(e)=>handleRadioSelect(data.id,1,personId)} label= {data.option1} />
           <RadioField  name = {data.id} checked = {Number(tab_3['contactPersonsDetails'][personId][data.id]) === 2} handleChange = {(e)=>handleRadioSelect(data.id,2,personId)} label= {data.option2} />*/}
           </div>
@@ -150,7 +152,7 @@ var Contack_key =  37;
         disabled={false}
         handleChange={(obj) => handleSelect(obj, data.id,personId)}
         isMulti={false}
-        className="col-md-8"
+        className="col-md-12"
       />
       {tab_3['contactPersonsDetails'][personId]['required'][data.id] !== undefined && !tab_3['contactPersonsDetails'][personId]['required'][data.id] &&
        <ValidateMessage text = {'This field is required'}/>
@@ -167,7 +169,7 @@ fieldData.push(
              isDisabled= {false}
              placeholder={'date'}
              handleChange={(e)=>handleChange(personId,e)}
-             className="col-md-8 poppins-regular-18px"
+             className="col-md-12 poppins-regular-18px"
              name = {data.id}
              value={tab_3['contactPersonsDetails'][personId][data.id] || ''}
             />

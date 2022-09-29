@@ -86,7 +86,9 @@ const CoefficientPage = (props) => {
     return (
       <>
       <p className='my-2 poppins-medium-18px'> Select paritair comite to link coefficients to employee types </p>
-      <MultiSelectField
+     <div className='row pe-3'>
+     <div className='col-md-12'>
+     <MultiSelectField
         options={pcoptions.filter(val => selectedIds.includes(val.value))}
         standards={pcoptions.filter(val => val.value === compState.selectedPc)}
         handleChange={onSelect}
@@ -94,6 +96,8 @@ const CoefficientPage = (props) => {
         className="pc-single-select"
         placeholder={'Select paritair comite'}
       />
+      </div>
+     </div>
       </>
     )
   }
@@ -108,12 +112,12 @@ const CoefficientPage = (props) => {
         </small>}
       {compState.selectedPc ? <div className="col-md-12 m-0 p-0 relative-div">
         {compState.emptyError !== true ? <>
-        <p className={`my-4 text-center ${styles['worker-servants-title']}`}> Link coefficients to employee types</p>
+        <p className={`mb-4 mt-5 text-center d-none ${styles['worker-servants-title']}`}> Link coefficients to employee types</p>
         {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
             <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
         {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
             <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>}
-        <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: `${tableWidth}`, minHeight: '150px' }}>
+        <div className="row link-emp-coeff-tableparent pt-3" id="linkempCoeffDivId" style={{ width: `${tableWidth}`, minHeight: '150px' }}>
           <div className="col-md-3 m-0 p-0 pc-linking-div firstpart">
             <LeftPart compState={compState} setCompState = {setCompState} />
           </div>

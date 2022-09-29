@@ -5,12 +5,15 @@
 
 .todo-tabs > li {
   display: inline-block;
-  width: 30%;
-}
-
-.todo-tabs > li:first-child {
   width: 20%;
 }
+/* .Todos_todo-tabs___A2Cq > li:first-child
+{
+  width: 20% !important;
+}
+.todo-tabs > li:first-child {
+  width: 20%;
+} */
 
 
 .todo-tabs > li > span {

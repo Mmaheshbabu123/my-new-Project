@@ -94,10 +94,10 @@ const loadData = async () => {
 		<div className="">
       {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields. </p> : null}
       {renderedOptions === 1 && showComponentBasedOnTabSelection()}
-     <div className='row my-3'>
+     <div className='row my-4'>
      <div className={`col-md-12`} >
-        <div className='row'>
-        <div className={`col-md-9 ${styles['tab-index-back-div']}`}>
+        <div className='row py-3'>
+        <div className={`col-md-9 ${styles['tab-index-back-div']} align-self-center`}>
             <p className={`${styles['tab-index-back-btn']} poppins-light-18px text-decoration-underline text-uppercase shadow-none`} onClick={() => router.back()}> Back </p>
           </div>
           <div className={`col-md-3 text-end`}>

@@ -131,7 +131,7 @@ const PcForWorkersServants = () => {
     let pcOptions = helpers.returnNotAddedPcOptions(pcArray, state['workersServantsCompState']);
     let allPCs = [{value: false, label: '--- Select ---'}, ...pcArray];
     pcOptions = [{value: false, label: '--- Select ---'}, ...pcOptions];
-    return <div className={`${type === 1 ? 'col-md-11' : 'col-md-11 ms-auto ' + styles['margin-auto-class']}`}>
+    return <div className={`${type === 1 ? 'col-md-12' : 'col-md-12 ms-auto ' + styles['margin-auto-class']}`}>
         <p className={styles['worker-servants-title']}> {type === 1 ? `Paritair comité for workers (arbeiders)` : `Paritair comité for servants (bedienden)`} </p>
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title={`Paritair comité (PC) ${type}`} mandotory={true} />
@@ -163,8 +163,8 @@ const PcForWorkersServants = () => {
             type="button"
             style={{marginTop: '20px'}}
             className="btn ">
-            <pre>{`Extra Paritair comité
-              ${type === workersType ? 'workers (arbeiders)' : 'servants (bedienden)'}`}</pre>
+            <>{`Extra Paritair comité 
+            ${type === workersType ? 'workers (arbeiders)' : 'servants (bedienden)'}`}</>
           </button>
         </div>
     </div>
@@ -204,7 +204,7 @@ const PcForWorkersServants = () => {
           <tbody>
             {dataObj.map((item, index) =>
               <tr key={index} id={index}>
-                <td style={{ width: '40%' }}> <span className={`${styles['newitems-span']} poppins-light-14px me-3`} >{getCommaSeparatedlabels([item.pc_id], pcArray)}</span> </td>
+                <td style={{ width: '40%' }}> <span className={`${styles['newitems-span']} poppins-light-16px me-3`} >{getCommaSeparatedlabels([item.pc_id], pcArray)}</span> </td>
                 <td style={{ width: '40%' }}> <span className={`${styles['newitems-span']} poppins-light-16px `} >{getCommaSeparatedlabels(item.employee_type_id, pcLinkedEmployeeTypes[item.pc_id])}</span></td>
                 <td style={{ width: '20%' }}> <span className={`${styles['newitems-span']} poppins-light-16px`} >{getNeededActions(item, index, type)}</span></td>
               </tr>
@@ -251,10 +251,10 @@ const PcForWorkersServants = () => {
   return(
     <div className ={`${styles['worker-servant-parent']}`}>
      <div className = {`col-md-12 row m-0`}>
-      <div className = {`col-md-6 ${styles['workers-border']}`}>
+      <div className = {`col-md-6 ${styles['workers-border']} ps-0`}>
           {workersPart()}
       </div>
-      <div className = {`col-md-6`}>
+      <div className = {`col-md-6 pe-0`}>
           {servantsPart()}
       </div>
      </div>
