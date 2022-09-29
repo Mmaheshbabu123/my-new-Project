@@ -2,7 +2,7 @@
 {
   border-bottom: none !important;
 }
-thead:after 
+thead:after
 {
   line-height: 1vh;
   content: "-";
@@ -10,7 +10,7 @@ thead:after
   display: block;
   background: transparent;
 }
-/* tbody:before 
+/* tbody:before
 {
 	line-height: 1vh;
 	content: "-";
@@ -68,13 +68,13 @@ thead:after
   line-height: var(--line-height-31px);
   height: 43px;
 }
-@media screen and (min-width:768px) and (max-width:1023px) 
+@media screen and (min-width:768px) and (max-width:1023px)
 {
-  .footer-bg-color 
+  .footer-bg-color
   {
     background-color: var(--color-label-footer-gray);
     height: 120px !important;
-  }  
+  }
 }
 .text_field_addpc
 {
@@ -150,7 +150,7 @@ input[type="checkbox"]:focus
 {
   margin:0px !important;
 }
-@media screen and (min-width:768px) and (max-width:1023px) 
+@media screen and (min-width:768px) and (max-width:1023px)
 {
   .right_arrow_align span
   {
@@ -169,11 +169,16 @@ input[type="checkbox"]:focus
 .border-color-addeditsalary-benefits:focus,
 .react-select-prefix__control,
 .react-select-prefix__control:hover,
-.salary-input-fields .css-1pahdxg-control
+.react-select-prefix__control:focus,
+.salary-input-fields .css-1pahdxg-control,
+.qr-custom-multiselect__menu:focus,
+.react-select-prefix__menu,
+.react-select-prefix__menu:focus,
+.V1Document_v1-multiselect__EVmAm__menu
 {
 	border: 1px solid #4C4D554D !important;
-	border-radius: 0px;
-	box-shadow: none;
+	border-radius: 0px !important;
+	box-shadow: none !important;
 }
 .react-select-prefix__control
 {
@@ -181,7 +186,10 @@ input[type="checkbox"]:focus
 }
 #react-select-2-listbox,
 .css-6j8wv5-Input,
-.css-qc6sy-singleValue
+.css-qc6sy-singleValue,
+.qr-custom-multiselect__menu,
+.react-select-prefix__menu,
+.V1Document_v1-multiselect__EVmAm__menu
 {
   font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-16px);
@@ -233,9 +241,9 @@ input[type="radio"]
   z-index: 999;
   background-color: var(--color-white);
 }
-@-moz-document url-prefix() 
+@-moz-document url-prefix()
 {
-  select option 
+  select option
   {
      font-family: var(--font-family-poppins-medium) !important;
      font-size: var(--font-size-18px) !important;
@@ -244,8 +252,9 @@ input[type="radio"]
      --webkit-font-size: var(--font-size-18px) !important;
      --webkit-font-family: var(--font-family-poppins-medium) !important;
   }
+  
 }
-.fst-normal 
+.fst-normal
 {
   vertical-align: middle;
 }
@@ -303,4 +312,84 @@ select option
   {
     padding-left: 1px;
   }
+}
+.my_todo_tab .Todos_underline__FTL4z
+{
+  color: var(--color-skyblue) !important;
+  border-color: var(--color-skyblue);
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+.my_todo_tab .my_todo_color
+{
+  color: var(--color-label-footer-gray);
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+.my_todo_tab .Todos_todo-icon__N2dlX svg
+{
+  width: 30px !important;
+  text-align: center;
+}
+.my_todo_tab .Todos_todo-icon__N2dlX
+{
+  text-align: center;
+}
+.Todos_todo-tabs___A2Cq > li:first-child
+{
+  width: 30% !important;
+}
+.my_todo_table thead tr th:first-child
+{
+  padding-left: 1.5rem;
+}
+.my_todo_table .Todos_span-action-icons___UbjJ img
+{
+  width: 23px;
+  color: var(--color-skyblue);
+  margin-right: 15px;
+  height: 23px;
+}
+.sign_action_icon_size
+{
+  width: 25px !important;
+}
+.my_todo_table .my_todo_action_icon
+{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.position-sticky-mytodo
+{
+  position: sticky;
+  top: 166px;
+  background-color: var(--color-white);
+  z-index: 998;
+}
+.position-sticky-co-op
+{
+  position: sticky;
+  top: 160px;
+  background-color: var(--color-white);
+  z-index: 998;
+}
+.my_todo_tab .Todos_todo-icon__N2dlX img
+{
+  width: 25px;
+  height: 25px;
+}
+.my_todo_tab .Todos_todo-icon__N2dlX
+{
+  height: 25px;
+}
+.minimun_height_v1
+{
+  min-height: 26vh;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
 }
