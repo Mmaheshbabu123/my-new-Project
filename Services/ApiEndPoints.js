@@ -239,3 +239,6 @@ export const deleteNotifications = BASE_URL + "delete-notifications";
 export const getStopPlanningDetails = BASE_URL + 'getStopPlanningDetails/';
 export const postStopPlanningDetails = BASE_URL + 'postEmployeerStopPlanningDetails';
 //-----------
+//----- Salary Flex worker---------------//
+export const manageMaxFlexWorkerSalary = BASE_URL + 'manage-max-salary-of-flex-worker';
+//-----
