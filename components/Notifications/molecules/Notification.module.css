@@ -1,0 +1,88 @@
+.notification {
+    position: "relative";
+    width: fit-content;
+    display: inline-flex;
+    margin-top: 10px;
+}
+.iconSection {
+    position: relative;
+    width: fit-content;
+    display: inline-flex;
+}
+.notificationBar {
+    display: block;
+    position: fixed;
+    width: 600px;
+    border: 0.5px solid #8080803d;
+    overflow-y: auto;
+    top: 65px;
+    right: 20%;
+    box-shadow: 2px 3px 17px -3px #8888888c;
+    padding: 15px;
+    background: #f4f4f4;
+    max-height: 450px;
+}
+
+.notification:hover .notificationBar {
+    display: block;
+}
+.lineItmes {
+    padding: 5px;
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 5px;
+}
+.iconBadge {
+    background: red;
+    width: 18px;
+    display: block;
+    text-align: center;
+    height: 18px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 12px;
+    line-height: 18px;
+    position: absolute;
+    right: 0;
+    bottom: 15px;
+    left: 15px;
+    font-weight: bolder;
+}
+.unseen:before{
+  color: black;
+  font-size: 23px;
+  color:red;
+  content: '•';
+  vertical-align: middle;
+}
+
+.seen {
+  opacity: 0.5;
+}
+
+.notification-header {
+   text-align: left;
+   width: 97%;
+   font-weight: bold;
+   margin-bottom: 10px;
+   font-size: large;
+}
+
+.time-span {
+  font-weight: 700;
+  color: #747474;
+  float: right;
+}
+
+.link-p-tags {
+  text-align: right;
+  margin: 0;
+  color: #42A5F5;
+}
+
+.date-p-tag {
+  font-size: 14px;
+  text-align: left;
+  color: #747474;
+  display: initial;
+}

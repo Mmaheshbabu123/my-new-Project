@@ -1,15 +1,14 @@
-// import employeetype from '@/components/images/manage-employee-type@2x.png';
-// import coefficient from '@/components/images/manage-co-efficients@2x.png';
-// import linkcofficientemp from '@/components/images/link-coefficients_to_employee-types@2x.png';
-// import salary from '@/components/images/salary-benefits@2x.png';
-// import coefficientperPC from '@/components/images/manage_coefficient_per_pc@2x.png';
 import employeetype from '@/components/images/e1.svg';
 import coefficient from '@/components/images/e2.svg';
 import linkcofficientemp from '@/components/images/e3.svg';
 import salary from '@/components/images/e4.svg';
 import coefficientperPC from '@/components/images/e5.svg';
 
+let urlParams = { get: (name) => '' };
+if(typeof window !== 'undefined')
+  urlParams = new URLSearchParams(window.location.search);
 
+const getParam = name => urlParams.get(name);
 export const tileJson = [
   {
     id: 1,
@@ -39,6 +38,18 @@ export const tileJson = [
     id: 5,
     name: 'Salary benefits',
     url: '/manage-salary-benefits?action=view',
+    iconPath: salary,
+  },
+  {
+    id: 6,
+    name: 'QR code scanner',
+    url: '/qr-code-scanner',
+    iconPath: salary,
+  },
+  {
+    id: 7,
+    name: 'Flex salary',
+    url: `/manage-flex-salary?entityid=${getParam('entityid')}`,
     iconPath: salary,
   }
 ];

@@ -9,6 +9,8 @@ import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import styles from './AbsAdminSv.module.css';
+import edit_svg from '../molecules/images/edit.svg';
+import pdf_icon from '../molecules/images/Pdf.svg';
 
 const itemsPerPage = 5;
 const RequestOverviewData = (props) => {
@@ -57,11 +59,15 @@ const RequestOverviewData = (props) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
+      <div className='row position-sticky-co-op'>
+      <div className='col-md-12'>
       <ul className={`${styles['employer-overview-tabs']}`}>
         <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
         <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
         <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
       </ul>
+      </div>
+      </div>
     );
   }
 
@@ -134,7 +140,7 @@ const RequestOverviewData = (props) => {
     return(
       <>
        <div className='row'>
-       {<div className='col-md-12 search_field_manage_cooperation_agreement mb-4' style={{ position: 'relative' }}>
+       {<div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{ position: 'relative' }}>
               <div className='row'>
               <div className='col-md-9'>
                 <div className='row'>
@@ -249,21 +255,21 @@ const RequestOverviewData = (props) => {
     if(Number(eachRow.signed)) {
       return(
         <div>
-          <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit/> </span>
-          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
-          <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          <span title={'Edit'} className="span-action-icons me-1" onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className='sign_action_icon_size'></img> </span>
+          <span title={'Download'} className="span-action-icons me-1" onClick={() => handleActionClick('download', eachRow)}> <img src={pdf_icon.src} alt="sign" className='sign_action_icon_size_pdf'></img></span>
+          <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className="color-skyblue delete_icon_manage_cooperation"/> </span>
         </div>
       )
     } else {
       return (
         <div className='manage-cooperation-action-icons'>
           {!savedAgentId ?
-              <span title={'Assign'}  className={`span-action-icons`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
-            : !salesObj.approved ? <span title={'Re-assign'}  className={`span-action-icons`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span> : null
+              <span title={'Assign'}  className={`span-action-icons`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd className="color-skyblue"/> </span>
+            : !salesObj.approved ? <span title={'Re-assign'}  className={`span-action-icons`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch className="color-skyblue"/> </span> : null
           }
           {salesObj.approved ? <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue' /> </span>:null}
           {salesObj.approved ? <span title={'Download'} className="span-action-icons download" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf className=' color-skyblue'/> </span>:null}
-          <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className=' color-skyblue'/> </span>
+          <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className=' color-skyblue force'/> </span>
         </div>
       )
     }

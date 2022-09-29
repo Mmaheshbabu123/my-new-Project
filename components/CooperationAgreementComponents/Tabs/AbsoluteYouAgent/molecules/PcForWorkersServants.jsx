@@ -131,7 +131,7 @@ const PcForWorkersServants = () => {
     let pcOptions = helpers.returnNotAddedPcOptions(pcArray, state['workersServantsCompState']);
     let allPCs = [{value: false, label: '--- Select ---'}, ...pcArray];
     pcOptions = [{value: false, label: '--- Select ---'}, ...pcOptions];
-    return <div className={`${type === 1 ? 'col-md-9' : 'col-md-9 ' + styles['margin-auto-class']}`}>
+    return <div className={`${type === 1 ? 'col-md-11' : 'col-md-11 ms-auto ' + styles['margin-auto-class']}`}>
         <p className={styles['worker-servants-title']}> {type === 1 ? `Paritair comité for workers (arbeiders)` : `Paritair comité for servants (bedienden)`} </p>
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title={`Paritair comité (PC) ${type}`} mandotory={true} />
@@ -157,12 +157,12 @@ const PcForWorkersServants = () => {
               />
               {employeeTyperError[type] === true && <small style={{ color:'red', display: 'block', marginTop: '10px' }}> This field is required. </small>}
         </div>
-        <div className={`managetype-save-btn ${styles['pc-worker-servant-add-btn']}`}>
+        <div className={`managetype-save-btn workers_extra_button mb-3 ${styles['pc-worker-servant-add-btn']}`}>
           <button
             onClick={() => addItemAndUpdateIndex({...compState}, type)}
             type="button"
             style={{marginTop: '20px'}}
-            className="btn btn-dark pcp_btn">
+            className="btn ">
             <pre>{`Extra Paritair comité
               ${type === workersType ? 'workers (arbeiders)' : 'servants (bedienden)'}`}</pre>
           </button>
@@ -194,19 +194,19 @@ const PcForWorkersServants = () => {
       <>
       {dataObj.length > 0 &&
         <div className={`add-item-div ${styles['workers-servants-table']}`} style={{ margin: type === servantsType ? '0 auto':''}}>
-          <table className='table-hover col-md-10 m-3 add-item-table'>
-          <thead style={{borderBottom: '1px solid', margin: '15px 0'}}>
+          <table className='table-hover col-md-11 mx-auto my-3 add-item-table'>
+          <thead style={{borderBottom: '1px solid'}}>
             <tr key={'header-row-tr'}>
               {['Paritair comité', 'Employee types', 'Actions'].map((eachHeader, index) =>
-                <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)}
+                <th key={`tablecol${index}`} scope="col" className='poppins-medium-16px'> {eachHeader} </th>)}
             </tr>
           </thead>
           <tbody>
             {dataObj.map((item, index) =>
               <tr key={index} id={index}>
-                <td style={{ width: '40%' }}> <span className={`${styles['newitems-span']}`} >{getCommaSeparatedlabels([item.pc_id], pcArray)}</span> </td>
-                <td style={{ width: '40%' }}> <span className={`${styles['newitems-span']}`} >{getCommaSeparatedlabels(item.employee_type_id, pcLinkedEmployeeTypes[item.pc_id])}</span></td>
-                <td style={{ width: '20%' }}> <span className={`${styles['newitems-span']}`} >{getNeededActions(item, index, type)}</span></td>
+                <td style={{ width: '40%' }}> <span className={`${styles['newitems-span']} poppins-light-14px me-3`} >{getCommaSeparatedlabels([item.pc_id], pcArray)}</span> </td>
+                <td style={{ width: '40%' }}> <span className={`${styles['newitems-span']} poppins-light-16px `} >{getCommaSeparatedlabels(item.employee_type_id, pcLinkedEmployeeTypes[item.pc_id])}</span></td>
+                <td style={{ width: '20%' }}> <span className={`${styles['newitems-span']} poppins-light-16px`} >{getNeededActions(item, index, type)}</span></td>
               </tr>
             )}
             </tbody>
@@ -225,8 +225,8 @@ const PcForWorkersServants = () => {
   const getNeededActions = (item, index, type) => {
     return (
       <>
-        <span className='actions-span' onClick={() => handleActionClick('edit', item, index, type)}> <MdEdit /> </span>
-        <span className='actions-span' onClick={() => handleActionClick('delete', item, index, type)}> <MdDelete /> </span>
+        <span className='actions-span' onClick={() => handleActionClick('edit', item, index, type)}> <MdEdit className='color-skyblue'/> </span>
+        <span className='actions-span' onClick={() => handleActionClick('delete', item, index, type)}> <MdDelete className='color-skyblue' /> </span>
       </>
     )
   }
@@ -250,7 +250,7 @@ const PcForWorkersServants = () => {
 
   return(
     <div className ={`${styles['worker-servant-parent']}`}>
-     <div className = {`col-md-12 row`}>
+     <div className = {`col-md-12 row m-0`}>
       <div className = {`col-md-6 ${styles['workers-border']}`}>
           {workersPart()}
       </div>

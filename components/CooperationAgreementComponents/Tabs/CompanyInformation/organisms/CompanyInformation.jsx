@@ -30,7 +30,7 @@ const CompanyInformation = (props) => {
    })
  }
     return(
-      <div className="" disabled={!filledTabs.includes(selectedTabId)}>
+      <div className="company_information_address mx-1" disabled={!filledTabs.includes(selectedTabId)}>
         <CompanyDetails />
         <LegalAddress />
       </div>

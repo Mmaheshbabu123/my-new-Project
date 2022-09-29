@@ -32,11 +32,11 @@ const SalaryDetails = (props) => {
   const showSalaryDetailsOfEachPc = (val, index) => {
     const { expand } = compState;
     return(
-      <div key = {val.pc_id} className={`${styles['expand-minimize-div']}`}>
+      <div key = {val.pc_id} className={`${styles['expand-minimize-div']} poppins-medium-18px`}>
         <div>
-          <span onClick={() => expandMinimizeDiv(val.pc_id)} title={expand[val.pc_id] === true ? 'Close' : 'Open'} className={`${styles['expand-minimize-span']}`} > {!expand[val.pc_id] ? <FaRegMinusSquare />: <FaRegPlusSquare />} </span>
+          <span onClick={() => expandMinimizeDiv(val.pc_id)} title={expand[val.pc_id] === true ? 'Close' : 'Open'} className={`${styles['expand-minimize-span']} close_open_basic_details`} > {!expand[val.pc_id] ? <FaRegMinusSquare />: <FaRegPlusSquare />} </span>
           <div  onClick={() => expandMinimizeDiv(val.pc_id)} className={`${styles['expand-minimize-box']}`}> <span> {val.pc_name} </span> </div>
-          <span onClick={() => props.onDelete(val.pc_id, index)} title={'Delete'} className={`${styles['expand-minimize-span']}`}> <TiDelete /> </span>
+          <span onClick={() => props.onDelete(val.pc_id, index)} title={'Delete'} className={`${styles['expand-minimize-span']} salary_benefit_delete`}> <TiDelete /> </span>
         </div>
         {!expand[val.pc_id] ? <div className={`${styles['salay-content-div']}`}>
               {showSalaryContent(val.pc_id)}
@@ -54,7 +54,7 @@ const SalaryDetails = (props) => {
       {salaryDataArray.map(salary => {
           return (
             <tr key = {salary.salary_id} height="75">
-                <td width="40%" className={`${styles['pc-linked-td']}`} style={{borderRight: '2px solid lightgray'}}>
+                <td width="40%" className={`${styles['pc-linked-td']} poppins-medium-18px align-middle`} style={{borderRight: '1px solid lightgray'}}>
                   <span className="custom_astrick">{ salary.salary_name }</span>
                 </td>
                 <td width="60%" className={`${styles['pc-linked-td']}`}>
@@ -77,10 +77,10 @@ const SalaryDetails = (props) => {
       let resetObj = valueObj['checked'] !== 1 ? {value: salaryObj.salary_value } : {};
       return(
         <div className = {`${styles['salary-input-field-div']}`} >
-          <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 1, 0, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
-          <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 0, 0, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
+          <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 1, 0, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
+          <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 0, 0, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
           {valueObj.checked ? <InputField type = {'text'}
-            className = {`${styles['salary-input-value']} col-md-4`}
+            className = {`${styles['salary-input-value']} col-md-4 poppins-regular-18px`}
             name={'value'}
             value={valueObj['value'] !== undefined ? valueObj['value'] : salaryObj.salary_value}
             isDisabled= {salaryObj.salary_value} placeholder={'Value'}
@@ -99,9 +99,9 @@ const SalaryDetails = (props) => {
             let resetObj = valueObj['checked'] !== 1 ? {code: 0, bedrag: '', percentage: '', soort_automatisering: ''} : {};
             return(
               <div key={'salary_' + fieldId} className={`${styles['salary-coeff-fields-premies']}`}>
-                <LabelField title={obj.name} mandotory={true} customStyle={{margin:'10px 0'}}/>
-                <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 1, 1, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
-                <label className = {`${styles['salary-input-radio-label']}`} onClick={() => handleChange('checked', pcId, fieldId, 0, 1, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
+                <LabelField title={obj.name} mandotory={true} customStyle={{margin:'10px 0'}} className={'poppins-regular-18px'}/>
+                <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 1, 1, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
+                <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 0, 1, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
                 {showPremiseAutomatischTable(pcId, fieldId, obj.rows, valueObj)}
               </div>
             );
@@ -120,10 +120,10 @@ const SalaryDetails = (props) => {
         {rowLabels.map((label, index) => {
             return (
               <tr key = {index} height="75">
-                  <td width="40%" className={`${styles['pc-linked-premies-td']}`} style={{borderRight: '2px solid lightgray'}}>
+                  <td width="40%" className={`${styles['pc-linked-premies-td']} poppins-medium-18px`} style={{borderRight: '1px solid lightgray'}}>
                     <span>{ label.label }</span>
                   </td>
-                  <td width="60%" className={`${styles['pc-linked-premies-td']}`}>
+                  <td width="60%" className={`${styles['pc-linked-premies-td']} poppins-regular-18px`}>
                     {premiseAutomatischInputFields(pcId, fieldId, label, valueObj)}
                   </td>
               </tr>
@@ -143,14 +143,14 @@ const SalaryDetails = (props) => {
       let variableType = codeDetailsObj && codeDetailsObj.variable_type ?  codeDetailsObj.variable_type : '';
       let labelKey = label.key;
       let disabled = disabledOrNot(variableType, labelKey);
-      let optionVal = label.label === 'Code' ? valueObj[label.key] : Number(valueObj[label.key]);
+      let expression = /^[0-9,]*$/;
       return <InputField type = {'text'}
         className = {`${styles['salary-coeff-input-value']}`}
         name={label.key}
-        value={optionVal}
+        value={valueObj[label.key] || ''}
         isDisabled= {disabled}
         placeholder={''}
-        handleChange={(e)=>handleChange(label.key, pcId, fieldId, '', 1, e.target)}
+        handleChange={(e)=>handleChange(label.key, pcId, fieldId, '', 1, e.target, {}, expression)}
       />
     }
   }
@@ -174,17 +174,18 @@ const SalaryDetails = (props) => {
             standards={optionsArray.filter(val => val.value === valueObj[label])}
             handleChange={(e)=>handleChange(label, pcId, fieldId, e.value, 1)}
             isMulti={false}
-            className={`${styles['salary-benefits-multiselect']}`}
-            classNamePrefix={`${styles['salary-benefits-multiselect']}`}
+            className={`${styles['salary-benefits-multiselect']} poppins-regular-18px`}
+            classNamePrefix={`${styles['salary-benefits-multiselect']}jmj`}
             placeholder={''}
         />
       </div>
     );
   }
 
-  const handleChange = (name, pcId, fieldId, val, from = 0, target = 0, mergeObj = {}) => {
+  const handleChange = (name, pcId, fieldId, val, from = 0, target = 0, mergeObj = {}, expression = '') => {
+    let value = target ? target.value : val;
+    if(expression && !value.match(expression)) return;
     let key = from ? 'cooperationBenefits' : 'cooperationSalaryLinked';
-
     let salaryLinkedData = from ? {...cooperationBenefits} : {...cooperationSalaryLinked};
     salaryLinkedData[pcId][fieldId] = {...(salaryLinkedData[pcId][fieldId] ? salaryLinkedData[pcId][fieldId] : {}),
       [name]: target ? target.value : val,

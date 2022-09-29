@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import { AiFillFilePdf } from 'react-icons/ai';
-import { FaFileSignature } from 'react-icons/fa';
 import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
+import pdf_icon from '../molecules/images/Pdf.svg';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
@@ -46,11 +46,15 @@ console.log(sign_icon);
   const showTabs = () => {
     let { selectedTabId } = compState;
     return (
-      <ul className={`${styles['employer-overview-tabs']}`}>
+      <div className='row position-sticky-co-op'>
+        <div className='col-md-12'>
+        <ul className={`${styles['employer-overview-tabs']}`}>
         <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
         <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
         <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
       </ul>
+        </div>
+      </div>
     );
   }
 
@@ -106,7 +110,7 @@ console.log(sign_icon);
     return(
       <>
      <div className='row'>
-     <div className='col-md-12 search_field_manage_cooperation_agreement mb-4' style={{position: 'relative' }}>
+     <div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{position: 'relative' }}>
            <div className='row'>
            <div className='col-md-9'>
               <input
@@ -130,7 +134,7 @@ console.log(sign_icon);
               >
                 SEARCH
               </button>
-              
+
                 </div>
                 <div className='col-md-6'>
                 <button
@@ -216,7 +220,7 @@ console.log(sign_icon);
           className="span-action-icons"
           onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id)}> <img src={sign_icon.src} alt="sign" className='action_icon_size'></img></span>
         : null}
-        {agent.approved ? <span title={'Download'} className="span-action-icons" onClick={() => handleDownload(eachRow)}> <AiFillFilePdf /> </span>:null}
+        {agent.approved ? <span title={'Download'} className="span-action-icons" onClick={() => handleDownload(eachRow)}> <img src={pdf_icon.src} alt="sign" className='sign_action_icon_size_pdf'></img> </span>:null}
       </>
     )
   }

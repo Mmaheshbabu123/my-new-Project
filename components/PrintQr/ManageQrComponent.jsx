@@ -338,7 +338,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
       </div>
      <div className='row'>
        <div className='col-md-12 px-0'>
-       <div className="max-height-420">
+       <div className=" minimun_height_v1">
         <table className="table table-hover manage-types-table manage-documents-table-header">
           <thead className="table-render-thead ">
             <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className="align-middle" width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
@@ -355,7 +355,13 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
               );
             })}
           </tbody>
-          : <p style={{paddingTop: '10px'}}> No records. </p>}
+          :  <tbody>
+          <tr>
+          <td colSpan={8} className="text-center poppins-regular-18px no-records">
+                  No records
+                </td>
+          </tr>
+          </tbody>}
         </table>
       </div>
        </div>
@@ -376,9 +382,13 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
             subContainerClassName={"pages pagination justify-content-center project-pagination"}
             activeClassName={"active"}
         />}
-        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-5">
+      <div className='row'>
+        <div className='col-md-12 px-0'>
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-5 px-0">
           {`Back`}
         </button>
+        </div>
+      </div>
       </div>
       {/*showDateSelectModal()*/}
     </>

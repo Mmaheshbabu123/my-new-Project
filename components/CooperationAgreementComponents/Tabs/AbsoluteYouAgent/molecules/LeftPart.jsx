@@ -22,7 +22,7 @@ const LeftPart = ( { compState, setCompState } ) => {
             <th height= "50" colSpan="2" className="p-0">
               <div className="firstpart-cell">
                 <span title="Employee types" className="cell--topRight poppins-regular-18px" key={`tablecolindex`} scope="col"> Employee types </span>
-                <span title="Coefficients" className="cell--bottomLeft poppins-regular-18px" key={`tablecolindex2`} scope="col"> Coefficients </span>
+                <span title="Coefficients" className="cell--bottomLeft poppins-regular-18px ms-3" key={`tablecolindex2`} scope="col"> Coefficients </span>
               </div>
             </th>
           </tr>

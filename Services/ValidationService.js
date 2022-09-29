@@ -1,6 +1,7 @@
 
 import React from "react";
 
+
 /**
  * service for validation
  */
@@ -25,7 +26,7 @@ const ValidationService = {
     if (!value.match(/^[0-9]+$/)) {
       return 'This field is invalid.';
     }
-    return true;
+    return '';
   },
   /**
    * validating a name field.
@@ -120,11 +121,17 @@ const ValidationService = {
     } else {
       return 'This field is invalid.';
     }
-  }
+  },
 
-
-
-
-};
-
+  onlyFutureDateValidationMethod:function (value) {
+    let dateObj = new Date();
+    var yesterdaydate=new Date(dateObj.valueOf() - 86400000);
+    var currentdate=new Date(value);
+    if (yesterdaydate<currentdate) {
+      return '';
+    } else {
+      return 'Date is invalid.';
+    }
+  },
+}
 export default ValidationService;

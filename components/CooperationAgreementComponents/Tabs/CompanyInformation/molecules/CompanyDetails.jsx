@@ -28,12 +28,12 @@ const CompanyFieldData = (companyRow1) => {
   let  fieldsArray = [];
   companyRow1.map(data=>{
    fieldsArray.push(
-     <div className = {data.id}>
-     <LabelField title={data.key_name}  customStyle = {{display:''}}/> {requiredFields['tab_2'][data.id] && <RequiredField />}
+     <div className = {`company_${data.id} my-2`}>
+     <LabelField title={data.key_name}  customStyle = {{display:''}} className='poppins-light-18px' /> {requiredFields['tab_2'][data.id] && <RequiredField />}
      <InputField
      id = {data.id}
        type = {'text'}
-       className = {'col-md-8'}
+       className = {'col-md-11 poppins-light-18px'}
        value={tab_2[data.id]}
        isDisabled= {false}
        placeholder={''}
@@ -127,15 +127,18 @@ const handleSelect = (obj,key) => {
   updateStateChanges({ tab_2 });
 }
 return(
-  <div className="col-md-12 row">
+ <div className='company_information'>
+   <div className='row'>
+   <div className="col-md-12">
+    <div className='row'>
     <div className = 'col-md-6'>
-    <div className = {`col-md-12 ${styles['add-div-margings']}`}>
-    <LabelField title={'VAT-number'}  customStyle = {{display:''}}/> {requiredFields['tab_2'][Vat_Number] && <RequiredField />}
+    <div className = {`col-md-12 ${styles['add-div-margings']} my-2`}>
+    <LabelField title={'VAT-number'}  customStyle = {{display:''}} className='poppins-light-18px' /> {requiredFields['tab_2'][Vat_Number] && <RequiredField  />}
     <input
     id = {Vat_Number}
       type = 'text'
       placeholder="Enter something here..."
-      className = {'atom-input-field-default ' + 'col-md-8'}
+      className = {'atom-input-field-default ' + 'col-md-11 ' + 'rounded-0 ' + 'shadow-none ' + 'poppins-light-18px '}
        value={tab_2[Vat_Number]}
       onChange={(e) => onVatnumber (e) }
         //optimizedFn(e)}
@@ -150,7 +153,7 @@ return(
      </div>
      <div className = 'col-md-6'>
      {CompanyFieldData(comapanyRow2)}
-     <LabelField title="Type of company" customStyle = {{display:''}}/> {requiredFields['tab_2'][TypeOfCompany] && <RequiredField />}
+     <LabelField title="Type of company" customStyle = {{display:''}}  className='poppins-light-18px'/> {requiredFields['tab_2'][TypeOfCompany] && <RequiredField />}
      <MultiSelectField
          id={TypeOfCompany}
          options={companyArray}
@@ -158,10 +161,13 @@ return(
          disabled={false}
          handleChange={(obj) => handleSelect(obj, TypeOfCompany)}
          isMulti={false}
-         className="col-md-6"
+         className="col-md-11 type_of_company"
        />
       </div>
+    </div>
   </div>
+   </div>
+ </div>
 );
 }
 

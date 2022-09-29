@@ -8,7 +8,8 @@ import { useRouter } from 'next/router';
 
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
-import SalaryBenefits from './SalaryBenifits';
+import AddSalaryBenefits from './AddSalaryBenefits';
+
 const PcCommon = (props) => {
 	const router = useRouter();
 	const [ current_sec, setCurrent_sec ] = useState(1); //holds value for active tab [1=addPc  2=Add caterory and function 3=Add age 4=Employee Type 5=Salary benefits]
@@ -279,7 +280,7 @@ const PcCommon = (props) => {
 									role="tabpanel"
 									aria-labelledby="pills-contact-tab"
 								>
-									{current_sec == 5 && <SalaryBenefits />}
+									{current_sec == 5 && <AddSalaryBenefits />}
 								</div>
 							</div>
 						</div>

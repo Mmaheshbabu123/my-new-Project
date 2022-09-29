@@ -73,13 +73,13 @@
   cursor: pointer !important;
 }
 
-.span-action-icons > svg {
+.span-action-icons > img {
   height: 30px;
   width: 30px;
   margin-right: 10px;
   cursor: pointer;
 }
 
-.span-action-icons > svg:hover{
+.span-action-icons > img:hover{
   opacity: 0.8;
 }

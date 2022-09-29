@@ -15,9 +15,10 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
   entityType === 2 ? headers.indexOf('Employer') > -1 ? headers.splice(headers.indexOf('Employer'), 1) : headers : [];
   const router = useRouter();
   const [state, setState] = useState({
-    searchTerm: '',
+    searchName: '',
+    searchEmployer: '',
+    searchCompany: '',
     filterRows: rows,
-    searchKey: 'name',
     currentItems: [],
     pageCount: 0,
     itemOffset: 0,
@@ -74,22 +75,33 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       .catch((error) => window.alert('Error occurred'));
   }
 
-  const handleSearch = (value) => {
-    let filterRows = rows.filter((item) => {
-      return (item[state.searchKey].toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
+  const handleSearch = (search) => {
+    let filterRows = [];
+    let { searchEmployer = '', searchCompany = '', searchName = '' } = state;
+    if(search && (searchEmployer || searchCompany || searchName)) {
+      filterRows = rows.filter((item) => {
+        let status = true;
+        if(searchName)
+          status = `${item['name']}`.toLowerCase().toString().indexOf(searchName.toLowerCase().toString()) !== -1;
+        if(status && searchEmployer)
+          status = `${item['employer_name']}`.toLowerCase().toString().indexOf(searchEmployer.toLowerCase().toString()) !== -1;
+        if(status && searchCompany)
+          status = `${item['company_name']}`.toLowerCase().toString().indexOf(searchCompany.toLowerCase().toString()) !== -1;
+       return status;
+      })
+    } else {
+      filterRows = rows;
+      searchEmployer = '';
+      searchCompany = '';
+      searchName = '';
+    }
     setState({ ...state,
-      searchTerm: value,
+      searchName, searchCompany, searchEmployer,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
       ...updatePaginationData(filterRows, 0)
     });
-  }
-
-  const handleSearchClick = (search = 0) => {
-    handleSearch(search ? state.searchTerm : '' );
   }
 
   //------------------- Pagination code -------------------------//
@@ -126,18 +138,6 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
     )
   }
 
-  const getEntityName = (eachRow, type) => {
-    let { employerId, companyId } = eachRow;
-    let { companies, employers } = props;
-    let rowObj = {};
-    if(type) {
-      rowObj = companies[employerId] ? companies[employerId].filter(val => val.id === companyId) : [];
-    } else {
-      rowObj = employers ? employers.filter(val => val.id === employerId) : [];
-    }
-    return rowObj.length ? rowObj[0]['label'] : '';
-  }
-
   return (
     < div className='row'>
       <div className='col-md-12 text-end'>
@@ -148,37 +148,42 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
         {`+Add additional document`}
       </button>}
       </div>
-      <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+      <div className='searchbox m-0 mt-4 mb-2' style={{ margin: '10px 0', position: 'relative' }}>
       <div className='row'>
       <div className='col-md-12'>
          <div className='row'>
-         <div className='col-md-9'>
-           <input
-             type="text"
-             value={state.searchTerm}
-             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-             onChange={(e) => setState({...state, searchTerm: e.target.value})}
-             placeholder={'Search'}
-             onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
-           />
-         </div>
+         {[{value:'searchName', label: 'document'}, {value:'searchEmployer', label: 'employer'},{value:'searchCompany', label: 'company'}].map((key, index) => {
+           if((entityType == 2 && key.label === 'employer') || (entityType === 3 && key.label !== 'document')) return;
+           return (
+             <div key={index} className={entityType === 3 ? 'col-md-9' : entityType === 2 ? 'col-md-4' : 'col-md-3'}>
+               <input
+                 type="text"
+                 value={state[key.value]}
+                 className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+                 onChange={(e) => setState({...state, [key.value]: e.target.value})}
+                 placeholder={`Search ${key.label}`}
+                 onKeyUp={(e) => e.key === 'Enter' ? handleSearch(1): null}
+               />
+             </div>
+           );
+         })}
          <div className='col-md-3'>
            <div className='row'>
              <div className='col-md-6'>
              <button
              type="button"
              className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
-             onClick={() => handleSearchClick(1)}
+             onClick={() => handleSearch(1)}
            >
              SEARCH
            </button>
-          
+
              </div>
              <div className='col-md-6'>
               <button
              type="button"
              className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
-             onClick={() => handleSearchClick(0)}
+             onClick={() => handleSearch(0)}
            >
              RESET
            </button>
@@ -198,8 +203,8 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
             <tbody>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
                 <td> {eachRow.name} </td>
-                {entityType !== 2 ? <td width="170px"> {getEntityName(eachRow)} </td> : null}
-                <td width="170px"> {getEntityName(eachRow, 1)} </td>
+                {entityType !== 2 ? <td width="170px"> {eachRow.employer_name} </td> : null}
+                <td width="170px"> {eachRow.company_name} </td>
                 <td> {formatDate(eachRow.startDate) || '-'} </td>
                 <td> {formatDate(eachRow.endDate) || '-'} </td>
                 <td className='text-center'> {eachRow.linkToCooperationAgreement ? 'Yes' : 'No'} </td>

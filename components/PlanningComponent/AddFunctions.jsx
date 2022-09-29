@@ -599,7 +599,7 @@ const AddFunctions = () => {
 															</div>
 															<div className='col-md-7'>
 																<div className='row'>
-																<div className="col-md-6  border-0 custom-drop-btn">
+																<div className="col-md-6  py-2 border-0 custom-drop-btn add_function_dropdown">
 																{emplist.employee_types != null ? (
 																	<MultiSelectField
 																		placeholder={'Select employee type'}
@@ -625,27 +625,27 @@ const AddFunctions = () => {
 																	''
 																)}{' '}
 																{
-																	<div style={{ color: 'red',  }}>
+																	<div style={{ color: 'red',  }} className='error_text mt-2'>
 																		{v1['employeeiderror']}
 																	</div>
 																}
 															</div>
-															<div className="col-md-3 border-0">
+															<div className="col-md-3 py-2 border-0">
 																{v1['function_salary'] != null ? (
-																	<span className="p-1 px-3 w-100 poppins-medium-20px bg-white">
+																	<div className="p-1 px-3 w-100 poppins-medium-20px bg-white function_salary_height">
 																		{'€ ' + v1['function_salary']}
-																	</span>
+																	</div>
 																) : (
-																	<span className="p-1 w-100 poppins-medium-20px bg-white d-none">
+																	<div className="p-1 w-100 poppins-medium-20px bg-white d-none">
 																		{'€ ' + v1['function_salary']}
-																	</span>
+																	</div>
 																)}
 															</div>
-															<div className="col-md-3 py-1 add_function_salary">
+															<div className="col-md-3 py-2 add_function_salary pe-4">
 																<div>
 																	{v1['function_salary'] != null && (
 																		<div className="input-group">
-																			<span className="input-group-text border-0 poppins-regular-16px">
+																			<span className="input-group-text border-0 poppins-regular-16px rounded-0 shadow-none">
 																				€
 																			</span>
 																			<input
@@ -653,6 +653,7 @@ const AddFunctions = () => {
 																				type="textfield"
 																				name="salary"
 																				placeholder="salary"
+																				
 																				//((v1['salary'] !=v1['function_salary'])||(salChanged == true))?
 																				value={
 																					v1['salary'] != null ? (
@@ -661,7 +662,7 @@ const AddFunctions = () => {
 																						''
 																					)
 																				}
-																				className="form-control bg-white border-0 poppins-regular-16px"
+																				className="form-control bg-white border-0 poppins-regular-16px rounded-0 shadow-none"
 																				onChange={(e) => {
 																					setsaalary(k1, e, key);
 																					// setSalChanged(true);
@@ -670,7 +671,7 @@ const AddFunctions = () => {
 																		</div>
 																	)}
 
-																	<p style={{ color: 'red' }}>{v1['salaryerror']}</p>
+																	<p style={{ color: 'red' }} className='error_text mt-2'>{v1['salaryerror']}</p>
 																</div>
 															</div>
 																	</div>
@@ -843,7 +844,7 @@ const AddFunctions = () => {
 																						</div>
 																					</div>
 																					<div
-																						className="error 2 ps-5 ms-5 my-2"
+																						className="error error_text 2 ps-5 ms-5 my-2"
 																						style={{ color: 'red' }}
 																					>
 																						{v1['functioniderror']}
@@ -855,7 +856,7 @@ const AddFunctions = () => {
 																})}
 															{v1['warning'] != '' && (
 																<div
-																	className="py-2"
+																	className="py-2 error_text"
 																	style={{ color: 'red', paddingLeft: '130px' }}
 																>
 																	<ExclamationTriangle /> {v1['warning']}
@@ -986,7 +987,7 @@ const AddFunctions = () => {
 												/> */}
 																	</div>
 																</div>
-																<div style={{ color: 'red' }}>
+																<div style={{ color: 'red' }} className='error_text mt-2'>
 																	{employeeobject[key].employee_list[0]['functioniderror']}
 																</div>
 															</div>
@@ -1004,7 +1005,7 @@ const AddFunctions = () => {
 							<div className="text-start col-md-6 p-0 align-items-center d-flex">
 								<button
 									type="button"
-									className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline"
+									className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline poppins-light-18px text-decoration-underline shadow-none"
 									onClick={() => router.push('/planning/employees/' + router.query.p_unique_key)}
 								>
 									BACK
@@ -1013,7 +1014,7 @@ const AddFunctions = () => {
 							<div className="text-end col-md-6 p-0">
 								<button
 									type="sumit"
-									className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-light-19px-next-button"
+									className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none"
 									onClick={() => submit}
 								>
 									NEXT

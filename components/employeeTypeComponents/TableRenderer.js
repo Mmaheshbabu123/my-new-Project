@@ -6,7 +6,6 @@ import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import ReactPaginate from 'react-paginate';
-import edit_icon from '../images/edit_color.svg'
 const itemsPerPage = 5;
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
