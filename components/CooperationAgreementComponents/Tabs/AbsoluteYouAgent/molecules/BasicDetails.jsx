@@ -153,7 +153,7 @@ const BasicDetails = (props) => {
               onCheck={(obj) => handleChange(obj, 1)}
               name={`Activate "Add project" for the employer in the planning.`}
               customStyle={{margin: '2px 0', cursor:'pointer'}}
-              className="col-md-5"
+              className="col-md-6 my-2"
             />
       </div>
       <div className={`${styles['add-div-margings']}`}>
@@ -189,7 +189,7 @@ const BasicDetails = (props) => {
                   onCheck={(e) => handleCheckboxChange(e, whoWillSign)}
                   customStyle={{margin: '2px 0', cursor:'pointer'}}
                   name={option.label}
-                  className="col-md-2"
+                  className="col-md-5"
                 />
               </div>
             )

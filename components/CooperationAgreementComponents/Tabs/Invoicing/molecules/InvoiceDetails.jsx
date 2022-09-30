@@ -55,7 +55,7 @@ const InvoiceDetails = (props) => {
          <InputField
          id = {data.id}
            type = {'text'}
-           className = {'col-md-11 poppins-regular-18px'}
+           className = {'col-md-12 poppins-regular-18px'}
            value={tab_6[data.id] }
            isDisabled= {false}
            placeholder={''}

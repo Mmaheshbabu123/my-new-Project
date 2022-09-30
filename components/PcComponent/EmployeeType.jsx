@@ -208,7 +208,7 @@ const EmployeeType = () => {
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"}
+								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"}
 							>
 								SAVE
 							</button>
@@ -230,7 +230,7 @@ const EmployeeType = () => {
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none"}
+							className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px-next-button  shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px-next-button  shadow-none"}
 						>
 							NEXT
 						</button>

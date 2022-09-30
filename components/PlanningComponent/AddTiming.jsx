@@ -13,7 +13,7 @@ import moment from "moment";
 
 
 function Addtiming(props) {
-//	const count = 0;
+	var count1 = 0;
 	const router = useRouter();
 	const [ value, setValue ] = useState([]);
 	const [ selectedDate, setSelectedDate ] = useState([]);
@@ -428,7 +428,7 @@ function Addtiming(props) {
 										key={result.id}
 										className={`row d-flex justify-content-start py-3 my-3  ${style.sec_background}`}
 									>
-										<div className="col-md-1 poppins-light-20px">{++count}.</div>
+										<div className="col-md-1 poppins-light-20px">{++count1}.</div>
 										<div className="col-md-3 poppins-light-20px">{result.employee_name}</div>
 										<div className="col-md-4 poppins-light-20px">{result.employee_type_name}</div>
 										<div className="col-md-3 poppins-light-20px">{result.function_name}</div>

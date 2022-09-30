@@ -528,7 +528,7 @@ const PcOverview = (params) => {
 					<div className="text-end col-md-6 px-0">
 						<button
 							type="sumit"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none"
 							onClick={() => {
 								next_redirection();
 							}}
