@@ -5,6 +5,7 @@ import { AiFillFilePdf } from 'react-icons/ai';
 import {MdEdit } from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
 import { HiPlusCircle} from 'react-icons/hi';
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 import { deleteSalesAgenetAgreements, downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
