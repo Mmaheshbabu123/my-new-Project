@@ -29,6 +29,10 @@ thead:after
   border-radius: 0px;
   box-shadow: none;
 }
+.react-confirm-alert-button-group > button
+{
+  margin-right: 15px !important;
+}
 .react-confirm-alert-button-group button
 {
   background-color: var(--color-purple) !important;

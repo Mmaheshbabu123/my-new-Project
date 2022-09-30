@@ -307,7 +307,7 @@ const AddEditSalaryBenefits = (props) => {
               </div>
             </div>
           <div className="col-md-12 mx-0 px-0 ">
-            <LabelField title="Occurence" className="poppins-regular-18px"/>
+            <LabelField title="Occurence" className="poppins-regular-18px px-0"/>
             <MultiSelectField
                 options={salaryBenefitOccurenceOptions}
                 standards={salaryBenefitOccurenceOptions.filter(val => val.value === state.occurence)}
@@ -321,7 +321,7 @@ const AddEditSalaryBenefits = (props) => {
        </div>
         <div className="col-md-12 row mx-0 px-0 py-2">
           <div className="col-md-6 mx-0 px-0">
-            <LabelField title="Applicable coefficient" className="poppins-regular-18px"/>
+            <LabelField title="Applicable coefficient" className="poppins-regular-18px px-0"/>
             {renderRadioButtons('Based on employee type in the cooperation agreement', 'coefficientType', 1)} <br />
             {renderRadioButtons('Other', 'coefficientType', 2)}
             {state.coefficientType === 2 && <input
@@ -336,7 +336,7 @@ const AddEditSalaryBenefits = (props) => {
             {state['coefficientValueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {'Only two decimal places allowed.'}/>}
           </div>
           <div className="col-md-12 mx-0 px-0">
-            <LabelField title="Is the benefit granted in case of absence of the employee" className="poppins-regular-18px"/>
+            <LabelField title="Is the benefit granted in case of absence of the employee" className="poppins-regular-18px px-0"/>
             {renderRadioButtons('Yes', 'granted', 1)} <br />
             {renderRadioButtons('No', 'granted', 0)}
           </div>
@@ -376,7 +376,7 @@ const AddEditSalaryBenefits = (props) => {
               onClick={() => addItemAndUpdateIndex({...state})}
               type="button"
               style={{marginTop: '0'}}
-              className="btn btn my-2 skyblue-bg-color border-0  px-5 rounded-0 shadow-none float-end">
+              className="btn btn mb-3 skyblue-bg-color border-0  rounded-0 shadow-none float-end col-md-1">
               {`+ ADD`}
             </button>
           }
@@ -432,10 +432,10 @@ const AddEditSalaryBenefits = (props) => {
           }
           </div>
           </div> */}
-          <div className='col-md-3 align-self-center'>
+          <div className='col-md-2 align-self-center'>
         <button
           type="button"
-          className="btn rounded-0  custom-btn px-5  btn-block float-end poppins-medium-18px shadow-none"
+          className="btn rounded-0 btn-block float-end poppins-medium-18px-next-button shadow-none"
           onClick={handleSubmit} >
           SAVE
         </button>
