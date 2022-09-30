@@ -11,7 +11,7 @@ import RadioField from '@/atoms/RadioField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { formatDate } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
+import { formatDate, getFutureDates } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
 import customAlert from '@/atoms/customAlert';
 const itemsPerPage = 5;
 let dateObj = new Date()
@@ -19,12 +19,7 @@ let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear();
 let dateValue = `${year}-${month < 10 ? '0' + month : month}`;
-const dateOptions = [-1, 0, 1, 2, 3, 4].map(val => { return (
-  {
-      value:`${year}${month < 10 ? '0' + month : month}${day + val}`,
-      label: `${dateValue}-${day + val}`
-  }
-)})
+const dateOptions = getFutureDates();
 
 const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, entityId }) => {
   const router = useRouter();
@@ -273,7 +268,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
              placeholder={'Search company'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
-           
+
              </div>
              <div className='col-md-6'>
              <input
@@ -297,7 +292,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
            >
              SEARCH
            </button>
-          
+
              </div>
              <div className='col-md-6'>
              <button
@@ -332,7 +327,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
             />
          </div>
        </div>
-         
+
         </div>
         </div>
       </div>
