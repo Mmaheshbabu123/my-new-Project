@@ -242,3 +242,5 @@ export const postStopPlanningDetails = BASE_URL + 'postEmployeerStopPlanningDeta
 //----- Salary Flex worker---------------//
 export const manageMaxFlexWorkerSalary = BASE_URL + 'manage-max-salary-of-flex-worker';
 //-----
+
+export const updateEmployeesubmitDetails = BASE_URL + 'update-employee-submit-details';
