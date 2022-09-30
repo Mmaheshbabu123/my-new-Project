@@ -899,7 +899,7 @@ const AddFunction = () => {
 								<button
 									type="sumit"
 									// className="btn rounded-0  custom-btn px-3  btn-block float-end"
-									className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-light-19px-next-button"
+									className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button "
 									onClick={() => submit}
 								>
 									NEXT

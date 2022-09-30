@@ -59,9 +59,15 @@ const AddSalaryBenefits = () => {
 
 		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + pc_unique_key, 'GET')
 			.then((result) => {
-				console.log(result);
-				if (result != undefined || result != null) {
-					setObj(result);
+				console.log(result.data);
+				if (result.data != undefined || result.data != null) {
+					if(typeof result.data == 'object'){
+						var propertyValues = Object.values(result.data);
+						console.log(propertyValues);
+						setObj(propertyValues);
+					}else{
+					setObj(result.data);
+					}
 				}
 			})
 			.catch((error) => {

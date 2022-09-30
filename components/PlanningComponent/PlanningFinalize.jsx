@@ -75,30 +75,35 @@ const PlanningFinalize = () => {
 	};
 	return (
 		<div className="container-fluid p-0 m-0">
-			<div className="row m-0">
-				<p className="pt-3 pb-3 font-weight-bold bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
+				<div className='row position-sticky-pc'>
+				<div className='col-md-12'>
+				<p className="py-4 font-weight-bold bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
 					Planning finalize
 				</p>
+				</div>
+			</div>
+			<div className="row m-0">
+		
 				{/* <p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p> */}
-				<div className=" mt-4 d-flex mb-3  ">
-					<select className="form-select w-25 me-2  border-0 select-bg-gray" disabled>
+				<div className="d-flex mb-3 px-0 ">
+					<select className="form-select w-25 me-2  border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px" disabled>
 						{planning.company != '' && <option value="">{planning.company}</option>}
 					</select>
-					<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
+					<select className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px" disabled>
 						{planning.location != '' && <option value="">{planning.location}</option>}
 					</select>
 					{planning.cost_center_id != null && (
-						<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
+						<select className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px" disabled>
 							<option value="">{planning.cost_center}</option>
 						</select>
 					)}
 					{planning.project_name != null && (
-						<select className="form-select w-25 me-2 border-0 select-bg-gray" disabled>
+						<select className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px" disabled>
 							<option value="">{planning.project_name}</option>
 						</select>
 					)}
 				</div>
-				<div className="mt-2 col-md-12">
+				<div className="mt-2 col-md-12 px-0">
 					<p className=" bitter-italic-normal-medium-22 col-md-12 text-center table-title-bg py-3">
 						<FaLessThan
 							className="less-grather mx-4"
@@ -121,7 +126,7 @@ const PlanningFinalize = () => {
 							}}
 						/>{' '}
 					</p>
-					<table className="table border table-border-gray ">
+					<table className="table">
 						<thead className="">
 							<tr className="skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
@@ -166,23 +171,23 @@ const PlanningFinalize = () => {
 															(val1) =>
 																val1.pdate == val ? (
 																	<div key={val1.id}>
-																		<p className="color-skyblue pt-1 poppins-regular-18px">
+																		<p className="color_skyblue pt-1 poppins-light-18px">
 																			{val1.employee_name}
 																		</p>
 																		<br />
-																		<p className="poppins-regular-16px">
+																		<p className="poppins-light-14px">
 																			{val1.employee_type_name}
 																		</p>
 																		<br />
-																		<p className="poppins-regular-16px">
+																		<p className="poppins-light-14px">
 																			{val1.function_name}
 																		</p>
 																		<br />
-																		<p className="poppins-regular-16px">
+																		<p className="poppins-light-14px">
 																			{'€ ' + val1.salary}
 																		</p>
 																		<br />
-																		<p className="poppins-regular-16px">
+																		<p className="poppins-light-14px">
 																			{moment(val1.starttime).format('HH:mm') +
 																				' to ' +
 																				moment(val1.endtime).format('HH:mm')}
@@ -205,11 +210,11 @@ const PlanningFinalize = () => {
 						</tbody>
 					</table>
 				</div>
-				<div className="col-12 mb-4">
+				<div className="col-12 mb-4 px-0">
 					<p className="poppins-regular-20px mb-3 custom_astrick">Is the planning final?</p>
 					<div className="mb-2">
 						<input
-							className="form-check-input"
+							className="form-check-input shadow-none"
 							type="radio"
 							name="radioYesLabel"
 							id="radioNoLabel1"
@@ -222,7 +227,7 @@ const PlanningFinalize = () => {
 					</div>
 					<div className="mb-2">
 						<input
-							className="form-check-input "
+							className="form-check-input shadow-none"
 							type="radio"
 							name="radioNoLabel"
 							id="radioNoLabel1"
@@ -235,11 +240,11 @@ const PlanningFinalize = () => {
 					</div>
 					<div className="error mt-2">{errorFinalize}</div>
 				</div>
-				<div className="row mt-4 mb-4 col-md-12 m-0">
-					<div className="col-md-6 p-0">
+				<div className="row mt-4 mb-4 col-md-12 m-0 px-0">
+					<div className="col-md-6 p-0 align-self-center ">
 						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/timings/' + p_unique_key}>
-								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-medium-18px  ">
+								<a className="bg-white border-0 poppins-light-18px  text-decoration-underline text-uppercase shadow-none">
 									BACK
 								</a>
 							</Link>
@@ -248,7 +253,7 @@ const PlanningFinalize = () => {
 					<div className="col-md-6 p-0">
 						<button
 							type="button"
-							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px "
+							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button text-uppercase shadow-none text-white"
 							onClick={() => submit()}
 						>
 							SUBMIT

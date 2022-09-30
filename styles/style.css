@@ -29,6 +29,10 @@ thead:after
   border-radius: 0px;
   box-shadow: none;
 }
+.react-confirm-alert-button-group > button
+{
+  margin-right: 15px !important;
+}
 .react-confirm-alert-button-group button
 {
   background-color: var(--color-purple) !important;
@@ -146,9 +150,15 @@ input[type="checkbox"]:focus
 {
   z-index: 99;
 }
-.pc-single-select .css-6j8wv5-Input
+.pc-single-select .css-6j8wv5-Input.epc_height,
+.pc-single-select .css-ackcql
 {
   margin:0px !important;
+}
+.pc-single-select .css-qc6sy-singleValue
+{
+  display: flex;
+  align-items: center;
 }
 @media screen and (min-width:768px) and (max-width:1023px)
 {
@@ -241,18 +251,29 @@ input[type="radio"]
   z-index: 999;
   background-color: var(--color-white);
 }
-@-moz-document url-prefix()
-{
+/* @-moz-document url-prefix()
+{ */
   select option
   {
      font-family: var(--font-family-poppins-medium) !important;
      font-size: var(--font-size-18px) !important;
      line-height: var(--line-height-26px) !important;
-     --webkit-line-height: var(--line-height-26px) !important;
-     --webkit-font-size: var(--font-size-18px) !important;
-     --webkit-font-family: var(--font-family-poppins-medium) !important;
+     -webkit-line-height: var(--line-height-26px) !important;
+     -webkit-font-size: var(--font-size-18px) !important;
+     -webkit-font-family: var(--font-family-poppins-medium) !important;
+     background-color:#fff;
   }
   
+/* } */
+.form-select.form-control > option
+{
+   font-family: var(--font-family-poppins-medium) !important;
+   font-size: var(--font-size-18px) !important;
+   line-height: var(--line-height-26px) !important;
+   -webkit-line-height: var(--line-height-26px) !important;
+   -webkit-font-size: var(--font-size-18px) !important;
+   -webkit-font-family: var(--font-family-poppins-medium) !important;
+   /* background-color:#fff; */
 }
 .fst-normal
 {
@@ -337,20 +358,16 @@ select option
 {
   text-align: center;
 }
-.Todos_todo-tabs___A2Cq > li:first-child
-{
-  width: 30% !important;
-}
 .my_todo_table thead tr th:first-child
 {
   padding-left: 1.5rem;
 }
 .my_todo_table .Todos_span-action-icons___UbjJ img
 {
-  width: 23px;
+  width: 20px;
   color: var(--color-skyblue);
   margin-right: 15px;
-  height: 23px;
+  height: 20px;
 }
 .sign_action_icon_size
 {
@@ -372,18 +389,18 @@ select option
 .position-sticky-co-op
 {
   position: sticky;
-  top: 160px;
+  top: 166px;
   background-color: var(--color-white);
   z-index: 998;
 }
 .my_todo_tab .Todos_todo-icon__N2dlX img
 {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 }
 .my_todo_tab .Todos_todo-icon__N2dlX
 {
-  height: 25px;
+  height: 25px !important;
 }
 .minimun_height_v1
 {
@@ -392,4 +409,13 @@ select option
 
 .cursor-pointer {
   cursor: pointer !important;
+}
+.manage-cooperation-agreement-table-header tr th:first-child ,
+.manage-documents-table-header tr th:first-child 
+{
+  padding-left: 1.5rem;
+}
+.Todos_span-action-icons___UbjJ>img:hover
+{
+  opacity: 1 !important;
 }

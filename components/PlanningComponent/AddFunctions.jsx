@@ -5,12 +5,12 @@ import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { FaRegPlusSquare, FaRegMinusSquare } from 'react-icons/fa';
 import Image from 'next/image';
+import Age15 from '../../public/images/Age_15.svg';
 import Age16 from '../../public/images/Age_16.svg';
 import Age17 from '../../public/images/Age_17.svg';
 import Age18 from '../../public/images/Age_18.svg';
 import Age19 from '../../public/images/Age_19.svg';
 import Age20 from '../../public/images/Age_20.svg';
-import Age21 from '../../public/images/Age_21.svg';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import ValidationService from '../../Services/ValidationService';
 import { ExclamationTriangle } from 'node_modules/react-bootstrap-icons/dist/index';
@@ -551,6 +551,13 @@ const AddFunctions = () => {
 																		{v1['age'] != 0 &&
 																			v1['age'] < emplist.pc_min_age &&
 																			{
+																				'15': (
+																					<Image
+																						src={Age15}
+																						width={25}
+																						height={25}
+																					/>
+																				),
 																				'16': (
 																					<Image
 																						src={Age16}
@@ -586,13 +593,6 @@ const AddFunctions = () => {
 																						height={25}
 																					/>
 																				),
-																				'21': (
-																					<Image
-																						src={Age21}
-																						width={25}
-																						height={25}
-																					/>
-																				)
 																			}[v1['age']]}
 																	</span>
 																</div>

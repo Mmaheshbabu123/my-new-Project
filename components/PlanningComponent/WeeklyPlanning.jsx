@@ -99,20 +99,24 @@ function WeeklyPlanning(props) {
 	return (
 		<div className="container-fluid p-0 m-0">
 			<div className="row">
-				<p className=" mt-3 mb-1 font-weight-bold   bitter-italic-normal-medium-24">Weekly planning</p>
+				<div className='row position-sticky-pc'>
+					<div className='col-md-12'>
+					<p className=" py-4 font-weight-bold   bitter-italic-normal-medium-24">Weekly planning</p>
 				{activeWeek &&
 				activeWeek.length > 0 && (
-					<p className=" poppins-regular-16px py-2">
+					<p className=" poppins-light-18px pb-3">
 						For the week of Monday from {activeWeek[0].split('-').reverse().join('-')} to sunday{' '}
 						{activeWeek[6].split('-').reverse().join('-')}
 					</p>
 				)}
 
+					</div>
+				</div>
 				<div className=" mt-4 d-flex justify-content-end">
 					<div className="d-inline ">
 						<button
 							type="button"
-							className="btn  btn my-2 skyblue-bg-color border-0 poppins-regular-16px  rounded-0 btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln   btn-block "
+							className="btn  btn my-2 skyblue-bg-color border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln   btn-block shadow-none rounded-0 "
 						>
 							Planning view
 						</button>
@@ -120,7 +124,7 @@ function WeeklyPlanning(props) {
 					<div className=" ">
 						<button
 							type="submit"
-							className="btn  my-2 border-0  btn-block btn-bg-gray-medium add-pln poppins-regular-16px"
+							className="btn  my-2 border-0  btn-block btn-bg-gray-medium add-pln poppins-medium-18px shadow-none rounded-0 "
 						>
 							Encodage view
 						</button>
@@ -143,8 +147,11 @@ function WeeklyPlanning(props) {
 					</div>
 				)} */}
 				<div className=" mt-4 d-flex mb-3 ">
+			<div className='col-md-12'>
+			<div className='row'>
+					<div className='col-md-3'>
 					<select
-						className="form-select w-25 me-2 rounded-0"
+						className="form-select w-100 rounded-0 poppins-light-18px shadow-none rounded-0"
 						onChange={(e) => {
 							setCompany(e.target.value);
 						}}
@@ -155,9 +162,10 @@ function WeeklyPlanning(props) {
 								{value.title}
 							</option>
 						))}
-					</select>
-
-					<select className="form-select w-25 me-2 rounded-0">
+					</select>				
+					</div>
+					<div className='col-md-3'>
+					<select className="form-select w-100 poppins-light-18px shadow-none rounded-0">
 						<option value="">Select Location</option>
 						{locationlist.map((value) => (
 							<option key={value.value} value={value.value}>
@@ -165,7 +173,9 @@ function WeeklyPlanning(props) {
 							</option>
 						))}
 					</select>
-					<select className="form-select w-25 me-2 rounded-0">
+					</div>
+					<div className='col-md-3'>
+					<select className="form-select w-100 poppins-light-18px shadow-none rounded-0">
 						<option value="">Cost center</option>
 						{costcenterlist.map((value) => (
 							<option key={value.value} value={value.value}>
@@ -173,6 +183,9 @@ function WeeklyPlanning(props) {
 							</option>
 						))}
 					</select>
+					</div>
+				</div>
+			</div>
 					{/* <select className="form-select w-25 me-2">
 						<option>Select Project</option>
 						<option value="">Project-1</option>
@@ -187,7 +200,7 @@ function WeeklyPlanning(props) {
 									<FaLessThan className="less-grather mx-4" onClick={()=>{setWeekCount(weekCount-1)}}/> <span onClick={()=>{setWeekCount(0)}}>Current week</span>{' '}
 									<FaGreaterThan className="less-grather mx-4" onClick={()=>{setWeekCount(weekCount+1)}}/>{' '}
 								</p>
-								<table className="table border table-border-gray ">
+								<table className="table">
 									<thead className="">
 										{console.log(activeWeek)}
 										{activeWeek &&
@@ -297,11 +310,11 @@ function WeeklyPlanning(props) {
 													</td>
 												))}
 											</tr>
-										)):company != ''?<tr>
-											<td colSpan={7} className="align-middle text-center" style={{height:'5rem'}}>
+										)):company != ''?<tr className='no-records'>
+											<td colSpan={7} className="align-middle text-center poppins-light-18px" style={{height:'5rem'}}>
 											No planning for this week.
 						</td></tr>:<tr>
-											<td colSpan={7} className="align-middle text-center" style={{height:'5rem'}}>						
+											<td colSpan={7} className="align-middle text-center poppins-light-18px" style={{height:'5rem'}}>						
 							Select company and location to view planning.
 							</td></tr>}
 									</tbody>

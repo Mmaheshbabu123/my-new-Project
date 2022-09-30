@@ -343,7 +343,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
             {state.currentItems.map(eachRow => {
               return (
                 <tr key={eachRow.location_id}>
-                    <td> {eachRow.company_name} </td>
+                    <td className='ps-4'> {eachRow.company_name} </td>
                     <td> {eachRow.location_name} </td>
                     <td> {getNeededActions(eachRow) } </td>
                 </tr>
