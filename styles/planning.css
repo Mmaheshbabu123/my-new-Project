@@ -89,7 +89,12 @@ input[type="checkbox"]
 {
   height: 43px !important ;
   border-color: var(--color-border-lightgrey) !important;
-  color: #4C4D5573;
+  color: #4C4D5573 !important;
+}
+.v1_doc .css-6j8wv5-Input,
+.v1_doc #react-select-2-placeholder, .css-14el2xx-placeholder
+{
+  color: #4C4D5573 !important;
 }
 .add_project input,
 .add_project input:focus,

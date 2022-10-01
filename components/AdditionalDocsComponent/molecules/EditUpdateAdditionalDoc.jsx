@@ -274,7 +274,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
     </div>
     <div className='row'>
        <div className='col-md-12 p-0'>
-       <button onClick={() => router.back()} type="button" className="btn poppins-light-18px text-decoration-underline text-uppercase text-left shadow-none">
+       <button onClick={() => router.back()} type="button" className="btn poppins-light-18px text-decoration-underline text-uppercase text-left shadow-none mb-3">
         {`Back`}
       </button>
        </div>

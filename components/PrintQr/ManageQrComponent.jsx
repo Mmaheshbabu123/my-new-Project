@@ -379,7 +379,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
         />}
       <div className='row'>
         <div className='col-md-12 px-0'>
-        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-5 px-0">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-3 px-0">
           {`Back`}
         </button>
         </div>

@@ -194,7 +194,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
         </div>
       </div>
       </div>
-      <div className="table-render-parent-div">
+      <div className="table-render-parent-div min-height-add-doc">
           <table className="table table-hover manage-types-table manage-documents-table-header">
             <thead className="table-render-thead">
               <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} className="align-middle " scope="col"> {eachHeader} </th>)} </tr>

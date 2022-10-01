@@ -680,11 +680,11 @@ const AddFunctions = () => {
 																v1['functionslist'] != undefined &&
 																v1['functionslist'].map((deta, ind) => {
 																	{
-																		var group = 'function';
+																		var group = 'function'+ind;
 																	}
 																	{
 																		!ischecked
-																			? (group = v1['emp_id'] + 'function')
+																			? (group = v1['emp_id'] + 'function'+ind)
 																			: '';
 																	}
 																	return (
@@ -882,7 +882,7 @@ const AddFunctions = () => {
 																	<input
 																		type="radio"
 																		value={deta['name']}
-																		name={group+ind}
+																		name={group+ind+deta['id']}
 																		className="p-3"
 																		onClick={() => {
 																			updatingObjectradiobutton(null, false,key);
@@ -930,7 +930,7 @@ const AddFunctions = () => {
 																			style={{
 																				display: 'inline-block !important'
 																			}}
-																			name={group+ind}
+																			name={group+ind+deta['id']}
 																			checked={isThere(
 																				0,
 																				employeeobject[key].employee_list[0]['funid'],key
