@@ -231,7 +231,7 @@ const V1DocumentsOverview = (props) => {
 
   return(
     <div>
-    <div className='searchbox m-0 mt-4 mb-2' style={{ margin: '10px 0', position: 'relative' }}>
+    <div className='searchbox m-0 mt-4 mb-2 v1_doc' style={{ margin: '10px 0', position: 'relative' }}>
     <div className='row'>
     <div className='col-md-12'>
        <div className='row'>

@@ -259,7 +259,13 @@ function WeeklyPlanning(props) {
 																	(val1) =>
 																		val1.pdate == val ? (
 																			<div key={val1.id}>
-																				<div className="text-right color-skyblue my-2 mt-1 text-end">
+																				<div className='row mb-1'>
+																					<div className='col-md-9 pe-0'>
+																					<p className="color-skyblue pt-1">
+																					{val1.employee_name}
+																				</p>
+																						</div>
+																						<div className="color-skyblue my-2 mt-1 text-end col-md-3">
 																					{new Date(val1.starttime) > new Date() ? <a>
 																						<MdEdit
 																							className="float-right"
@@ -271,23 +277,23 @@ function WeeklyPlanning(props) {
 																					</a>:<span className='invisible'>edit</span>
 																					}
 																				</div>
-																				<p className="color-skyblue pt-1">
-																					{val1.employee_name}
-																				</p>
-																				<br />
-																				<p className="poppins-regular-16px">
+																					</div>
+																				
+																				
+																				
+																				<p className="poppins-regular-16px mb-1">
 																					{val1.employee_type_name}
 																				</p>
-																				<br />
-																				<p className="poppins-regular-16px">
+																				
+																				<p className="poppins-regular-16px mb-1">
 																					{val1.function_name}
 																				</p>
-																				<br />
-																				<p className="poppins-regular-16px">
+																				
+																				<p className="poppins-regular-16px mb-1">
 																					{'€ ' + val1.salary}
 																				</p>
-																				<br />
-																				<p className="poppins-regular-16px">
+																			
+																				<p className="poppins-regular-16px mb-1">
 																					{moment(val1.starttime).format(
 																						'HH:mm'
 																					) +
@@ -297,7 +303,7 @@ function WeeklyPlanning(props) {
 																						)}
 																				</p>
 
-																				<br />
+																				
 																			</div>
 																		) : (
 																			''

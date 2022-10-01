@@ -216,9 +216,9 @@ const TodosOverview = ({ props, entityId, entityType }) => {
             </div>
           </div>
         </div>
-        <div className="table-render-parent-div">
+        <div className="table-render-parent-div min_height_todo">
           <table className="table table-hover manage-types-table table  mb-3 text-start manage-documents-table-header my_todo_table">
-            <thead className="table-render-thead bg_grey">
+            <thead className="table-render-thead bg_grey table_header_todo">
               <tr className='table-sticky-bg-gray poppins-medium-18px border-0' key={'header-row-tr'}>{state.headers.map((eachHeader, index) => <th className='' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
@@ -255,7 +255,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline text-uppercase">
+          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>

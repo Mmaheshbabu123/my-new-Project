@@ -150,7 +150,7 @@ console.log(sign_icon);
            </div>
          </div>
      </div>
-        <div className={`${styles['table-parent-div']}`}>
+        <div className={`${styles['table-parent-div']} min_height_todo`}>
           <table className="table table-hover manage-types-table manage-cooperation-agreement-table-header">
             <thead className="table-render-thead">
               <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
