@@ -133,7 +133,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
                 SEARCH
               </button>
               </div>
-              <div className='col-md-6 col-lg-6 '>
+              <div className='col-md-6 col-lg-6 pe-0'>
                 <button
                 type="button"
                 // className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn  w-100 shadow-none"
@@ -161,7 +161,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
             :
             <tbody className='no_records text-center'>
                <tr>
-               <td style={{width:'100%'}}> No records </td>
+               <td style={{width:'100%'}} colSpan={'8'} className='poppins-light-18px'> No records </td>
                </tr>
               </tbody>}
           </table>

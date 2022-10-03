@@ -155,7 +155,7 @@ const AddEmployeeType = (props) => {
             ref={inputRef}
             type="text"
             // className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 py-2"
-            className="form-control mt-2 mb-3 input-border-lightgray poppins-regular-18px mh-50 rounded-0 py-2 shadow-none"
+            className="form-control mt-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 py-2 shadow-none"
             value={state.name}
             onChange={(e) => handleInputChange(e)}
             onKeyUp={(e) => handleAdd(e)}
@@ -167,7 +167,7 @@ const AddEmployeeType = (props) => {
               onClick={() => addItemAndUpdateIndex({ ...state }, state.name)}
               type="button"
               // className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content w-100 py-2"
-              className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-3 skyblue-bg-color py-2 px-3 w-100 py-2 shadow-none"
+              className="btn btn-block float-right mt-2  border-0 rounded-0 float-right mt-2 skyblue-bg-color py-2 px-3 w-100 py-2 shadow-none"
               >
               + {`ADD`}
             </button>
@@ -176,17 +176,17 @@ const AddEmployeeType = (props) => {
         </div>
         {state.nameWarning &&
           <small
-            className="m-0 p-0 form-text text-muted col-md-5 pcp_name_warning error">
+            className="m-0 p-0 form-text text-muted col-md-5 error_text error">
             {`This field is required.`}
           </small>}
         {state.uniqueError &&
           <small
-            className="form-text text-muted col-md-5 pcp_name_warning error p-0">
+            className="form-text text-muted col-md-5 error_text error p-0 mt-2">
             {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
           </small>}
       </div>
       {state.newItems.length > 0 && !state.editFlow &&
-        <div className='col-md-12 input-border-lightgray'>
+        <div className='col-md-12 input-border-lightgray mt-3'>
           <table className='table table-hover col-md-12 mb-0 add_employee_table'>
             {state.newItems.map((item, index) =>
               // <tr className=' py-2 table-border-bottom row m-0 col-md-12' Key={index} id={index}>

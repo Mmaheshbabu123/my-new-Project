@@ -11,7 +11,7 @@ import RadioField from '@/atoms/RadioField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { formatDate } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
+import { formatDate, getFutureDates } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
 import customAlert from '@/atoms/customAlert';
 const itemsPerPage = 5;
 let dateObj = new Date()
@@ -19,13 +19,8 @@ let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear();
 let dateValue = `${year}-${month < 10 ? '0' + month : month}`;
-const dateOptions = [-1, 0, 1, 2, 3, 4].map(val => { return (
-  {
-      value:`${year}${month < 10 ? '0' + month : month}${day + val}`,
-      label: `${dateValue}-${day + val}`
-  }
-)})
-
+const dateOptions = getFutureDates();
+let updatedDay = day - 1 < 10 ? '0' + (day - 1) : day - 1;
 const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, entityId }) => {
   const router = useRouter();
   const [state, setState] = useState({
@@ -38,11 +33,11 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
     currentPage: 0,
     showPopup: false,
     selectedDateOption: 1,
-    headingDate: `${year}${month < 10 ? '0' + month : month}${day - 1}`,
-    selectedDate: `${dateValue}-${day - 1}`,
-    currentDate: `${dateValue}-${day - 1}`,
-    minDate: `${dateValue}-${day}`,
-    maxDate: `${dateValue}-${day + 4}`,
+    headingDate: `${year}${month < 10 ? '0' + month : month}${updatedDay}`,
+    selectedDate: `${dateValue}-${updatedDay}`,
+    currentDate: `${dateValue}-${updatedDay}`,
+    minDate: `${dateValue}-${updatedDay}`,
+    maxDate: `${dateValue}-${day + 4 < 10 ? '0' + (day + 4) : day + 4}`,
     selectedRow: {},
     dateError: false,
   })
@@ -273,7 +268,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
              placeholder={'Search company'}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
-           
+
              </div>
              <div className='col-md-6'>
              <input
@@ -297,7 +292,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
            >
              SEARCH
            </button>
-          
+
              </div>
              <div className='col-md-6'>
              <button
@@ -332,7 +327,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
             />
          </div>
        </div>
-         
+
         </div>
         </div>
       </div>
@@ -348,7 +343,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
             {state.currentItems.map(eachRow => {
               return (
                 <tr key={eachRow.location_id}>
-                    <td> {eachRow.company_name} </td>
+                    <td className='ps-4'> {eachRow.company_name} </td>
                     <td> {eachRow.location_name} </td>
                     <td> {getNeededActions(eachRow) } </td>
                 </tr>
@@ -384,7 +379,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
         />}
       <div className='row'>
         <div className='col-md-12 px-0'>
-        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-5 px-0">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-3 px-0">
           {`Back`}
         </button>
         </div>

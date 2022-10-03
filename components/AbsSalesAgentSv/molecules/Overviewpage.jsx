@@ -5,11 +5,13 @@ import { AiFillFilePdf } from 'react-icons/ai';
 import {MdEdit } from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
 import { HiPlusCircle} from 'react-icons/hi';
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 import { deleteSalesAgenetAgreements, downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
-
+import pdf_icon from '../molecules/images/Pdf.svg';
+import add_icon from '../molecules/images/Add.svg';
 const itemsPerPage = 5;
 const Overviewpage = (props) => {
   const { overviewData } = props;
@@ -55,7 +57,7 @@ const Overviewpage = (props) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
-      <div className='row position-sticky-co-op'>
+      <div className='row position-sticky-co-op mb-2'>
       <div className='col-md-12'>
       <ul className={`${styles['employer-overview-tabs']}`}>
         <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
@@ -146,7 +148,7 @@ const Overviewpage = (props) => {
                   <div className='col-md-6'>
                   <input
                   type="text"
-                  className='form-control mt-2 mb-2 mx-2 rounded-0 shadow-none'
+                  className='form-control mt-2 mb-2 rounded-0 shadow-none'
                   style={{margin: '10px 0'}}
                   name = {'company_name'}
                   value={state.searchTermCompany}
@@ -193,7 +195,7 @@ const Overviewpage = (props) => {
               {currentItems.map((eachRow, index) => {
                 return (
                   <tr key={index}>
-                      <td> {eachRow.employer_name} </td>
+                      <td className='ps-4'> {eachRow.employer_name} </td>
 
                       <td> {eachRow.company_name} </td>
                       <td> {formatDate(eachRow.date_of_request ? Number(eachRow.date_of_request) * 1000 : '') || '-'} </td>
@@ -216,12 +218,12 @@ const Overviewpage = (props) => {
         <div>
         {filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="Next >"
+            nextLabel={<AiOutlineArrowRight />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={pageCount}
             forcePage={currentPage}
-            previousLabel="< Previous"
+            previousLabel={<AiOutlineArrowLeft />}
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"
@@ -239,14 +241,14 @@ const Overviewpage = (props) => {
     if(Number(eachRow.root_parent_id) !== 0) {
       return(
         <div>
-          <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          {eachRow.signed ? <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span> : null}
+          <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className='color-skyblue' /> </span>
+          {eachRow.signed ? <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <img src={pdf_icon.src} alt="sign" className='sign_action_icon_size_pdf'></img> </span> : null}
         </div>
       )
     } else {
       return (
         <div>
-          <span title = {'Add'} className="actions-span text-dark" onClick={() => handleActionClick('add', eachRow)}> <HiPlusCircle /> </span>
+          <span title = {'Add'} className="actions-span text-dark" onClick={() => handleActionClick('add', eachRow)}>  <img src={add_icon.src} alt="sign" className='sign_action_icon_size_add'></img> </span>
         </div>
       )
     }

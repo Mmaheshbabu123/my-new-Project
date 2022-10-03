@@ -9,7 +9,7 @@ let dateObj = new Date()
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear();
-var today = `${year}${month < 10 ? '0' + month : month}${day - 1}`
+var today = `${year}${month < 10 ? '0' + month : month}${day - 1 < 10 ? '0' + (day - 1) : day - 1}`
 const MangeQrCodeIndex = (props) => {
   const router  = useRouter();
   const { entityid } = router.query;

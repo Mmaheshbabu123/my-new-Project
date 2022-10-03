@@ -71,7 +71,7 @@
 .manage-cooperation-agreement-table-header tbody tr td
 {
   font-family: var(--font-family-poppins-light);
-  font-size: var(--font-size-18px);
+  font-size: var(--font-size-16px);
   line-height: var(--line-height-27px);
   color: var(--color-label-footer-gray);
   padding-top: 1rem;
@@ -96,7 +96,9 @@
   width: 25px;
   height: 22px;
 }
-.buttuon_purple
+.buttuon_purple,
+.buttuon_purple:hover,
+.buttuon_purple:focus
 {
   background-color: var(--color-purple);
   border: var(--color-purple);
@@ -130,7 +132,7 @@
 .invoicing
 {
   border: 1px solid var(--color-purple);
-  padding: 1rem;
+  padding: 1rem 2rem;
 }
 .salary_benefits_co_operation_agreement .css-6j8wv5-Input
 {
@@ -205,7 +207,7 @@
 }
 .absolute_you_agent .absoluteAgent_workers-servants-table__En0_u
 {
-  width: 91.8% !important;
+  width: 100% !important;
 }
 .type_of_company .react-select-prefix__control ,
 .legal_address input[type="text"]
@@ -228,4 +230,8 @@
   font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-18px);
   line-height: var(--line-height-29px);
+}
+.radio_button
+{
+  fill: cadetblue;
 }

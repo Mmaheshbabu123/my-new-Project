@@ -30,7 +30,7 @@
 .salary_benefit_delete svg
 {
   position: relative;
-  top: -12px;
+  top: 0px;
 }
 .close_open_basic_details svg
 {
@@ -89,7 +89,12 @@ input[type="checkbox"]
 {
   height: 43px !important ;
   border-color: var(--color-border-lightgrey) !important;
-  color: #4C4D5573;
+  color: #4C4D5573 !important;
+}
+.v1_doc .css-6j8wv5-Input,
+.v1_doc #react-select-2-placeholder, .css-14el2xx-placeholder
+{
+  color: #4C4D5573 !important;
 }
 .add_project input,
 .add_project input:focus,
@@ -129,4 +134,54 @@ input[type="checkbox"]
   margin-bottom: 13px;
   height: 33px !important;
   width: 33px !important ;
+}
+.Appointment-clickableAppointment
+{
+  background-color: var(--color-purple) !important;
+  border-radius: 0px !important;
+}
+.MainLayout-stickyElement.MainLayout-leftPanel.MainLayout-dayScaleEmptyCell.MainLayout-ordinaryLeftPanelBorder
+{
+  border-right: 0px !important;
+}
+.css-xd4oto-MuiTableCell-root.TickCell-cell
+{
+  border-bottom: none !important;
+}
+.Label-label .Label-text
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-16px);
+}
+.css-1fbp63r.Label-emptyLabel
+{
+  height: 0px;
+}
+.css-1fbp63r.Label-label
+{
+  line-height: 35px;
+}
+.HorizontalAppointment-content 
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-16px);
+}
+.css-sizvqo-MuiTableCell-root.Cell-cell
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-16px);
+}
+.border_employee_planning
+{
+  border: 1px solid var(--color-border-lightgrey);
+}
+.css-1ps6pg7-MuiPaper-root
+{
+  box-shadow: none;
+  border:1px solid var(--color-border-lightgrey) ;
+  border-radius: 0px;
+}
+.css-sizvqo-MuiTableCell-root .Cell-today
+{
+  background-color: var(--color-skyblue);
 }

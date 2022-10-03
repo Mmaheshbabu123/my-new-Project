@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { APICALL } from '@/Services/ApiServices';
+import { updateEmployeesubmitDetails } from '@/Services/ApiEndPoints';
+import LabelField from '@/atoms/LabelField';
+import InputField from '@/atoms/InputTextfield';
+import ValidateMessage from '@/atoms/validationError';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import styles from './Todos.module.css';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
 import open from '../molecules/images/Open.svg';
@@ -27,7 +34,6 @@ const TodosOverview = ({ props, entityId, entityType }) => {
   }
 
   const [state, setState] = useState({
-    selectedTabId: 1,
     headers: ['Todo', 'Status', 'Actions'],
     tabs: [{
       id: 1,
@@ -53,8 +59,16 @@ const TodosOverview = ({ props, entityId, entityType }) => {
     itemOffset: 0,
     currentPage: 0,
     titleTerm: '',
+    webformId          : '',
+    submitId           : '',
+    experience_aquired : '',
+    education_aquired  : '',
+    experience_aquired_warning_error:false,
+    education_aquired_warning_error:false,
+    showPopup:false,
+    selectedObj:{},
   });
-
+  const handleClose = () => setState({...state, showPopup: false});
 
   const handleSearchClick = (search = 1) => {
     let value = search ? state.titleTerm : '';
@@ -96,7 +110,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
 
   const handlePageClick = (event) => {
     let items = [...state.filterRows];
-    const newOffset = (event.selected * itemsPerPage) % items.length;
+    const newOffset = (event.selected * itemsPerPage) % items.lexperience_warning_errorength;
     setState({ ...state, itemOffset: newOffset, currentPage: event.selected });
   };
   //------------------- Pagination code -------------------------//
@@ -116,6 +130,14 @@ const TodosOverview = ({ props, entityId, entityType }) => {
   }
 
   const handleActionClick = (type, eachRow) => {
+    if( type === 'sign' && entityType  === 3) {
+      setState({
+        ...state,
+        showPopup:true,
+        selectedObj:eachRow,
+      });
+      return;
+    }
     if(eachRow.todo_type === 1 && type === 'sign') {
       window.open(eachRow.uri, '_self');
       return;
@@ -146,7 +168,36 @@ const TodosOverview = ({ props, entityId, entityType }) => {
       ...updatePaginationData(filterRows, 0)
     });
   }
+  const handleSubmit = async () => {
+    let { webform_id, submit_id, tid, employer_id = 0 ,baseUrl} = state.selectedObj;
+    const {experience_aquired,education_aquired} = state;
+    if(experience_aquired == '' || education_aquired == '') {
+      setState({...state,
+        experience_aquired_warning_error:experience_aquired == '' ? true:false,
+        education_aquired_warning_error:education_aquired == '' ? true:false,
+      });
+      return;
+    }
 
+  const postData = {
+    webformId:webform_id,
+    submitId:submit_id,
+    experience_aquired:state.experience_aquired,
+    education_aquired:state.education_aquired
+
+  }
+        await APICALL.service(`${updateEmployeesubmitDetails}`, 'POST', postData).then(response => {
+          if(response.status === 200) {
+            let encode = btoa(window.location.href);
+            let path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
+            setTimeout(() => window.close(), 500);
+            setState({...state,showPopup:false });
+            window.open(baseUrl  + `${path}&destination_url=${encode}`,  '_blank');
+
+          }
+        }).catch(error => console.error(error))
+
+   }
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
@@ -169,10 +220,67 @@ const TodosOverview = ({ props, entityId, entityType }) => {
      </div>
     );
   }
+  const handleChange = (e) => {
+    let stateObj = {...state}
+    const {value,name} = e.target;
+    console.log({name,value})
+    setState({
+      ...state,
+      [name]:value,
+      [name+'_warning_error']:false,
+    })
 
+  }
+  const educationPopup = () => {
+    const { showPopup } = state;
+    return (
+      <>
+          <Modal size={'lg'} show={showPopup} onHide={handleClose}>
+            <Modal.Header closeButton style={{paddingLeft: '36%'}}>
+              <Modal.Title> Education Details </Modal.Title>
+            </Modal.Header>
+          <Modal.Body>
+              <div>
+              <div className = {`col-md-12`}>
+              <LabelField title="Ervaring" customStyle = {{display:''}} className={'poppins-regular-18px'}/>
+              <InputField
+                type = {'text'}
+                className = {'col-md-11 poppins-regular-18px'}
+                value={state.experience_aquired}
+                name='experience_aquired'
+                placeholder={''}
+                handleChange={(e)=>handleChange(e)}
+               />
+               {state.experience_aquired_warning_error && <ValidateMessage style={{margin: 0}} text = {'This field is required'}/>}
+              </div>
+              <div className = {`col-md-12`}>
+              <LabelField title="Verworven opleiding" customStyle = {{display:''}} className={'poppins-regular-18px'}/>
+              <InputField
+                type = {'text'}
+                className = {'col-md-11 poppins-regular-18px'}
+                value={state.education_aquired}
+                name='education_aquired'
+                placeholder={''}
+                handleChange={(e)=>handleChange(e)}
+               />
+               {state.education_aquired_warning_error && <ValidateMessage style={{margin: 0}} text = {'This field is required'}/>}
+              </div>
+              </div>
+          </Modal.Body>
+           <Modal.Footer>
+            <p className={`${styles['popup-back-btn']}`} onClick={handleClose}> Back </p>
+            <Button variant="secondary" onClick={handleSubmit}>
+              SAVE
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
   return (
     <div>
       <>
+      {state.showPopup === true && educationPopup()}
        <div className='row position-sticky-pc'>
          <div className='col-md-12'>
          <h4 className='py-4 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`My Todos`} </h4>
@@ -216,9 +324,9 @@ const TodosOverview = ({ props, entityId, entityType }) => {
             </div>
           </div>
         </div>
-        <div className="table-render-parent-div">
+        <div className="table-render-parent-div min_height_todo">
           <table className="table table-hover manage-types-table table  mb-3 text-start manage-documents-table-header my_todo_table">
-            <thead className="table-render-thead bg_grey">
+            <thead className="table-render-thead bg_grey table_header_todo">
               <tr className='table-sticky-bg-gray poppins-medium-18px border-0' key={'header-row-tr'}>{state.headers.map((eachHeader, index) => <th className='' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
@@ -255,7 +363,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline text-uppercase">
+          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>
