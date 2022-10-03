@@ -7,8 +7,11 @@ import { BsPersonFill } from 'react-icons/bs';
 import QRCode from './QRcode_popup';
 import PincodePopup from './Pincode_popup';
 import EmployerPopup from './Employer_popup';
-
+import { useRouter} from 'next/router';
 function TimeRegistration(props) {
+	const router = useRouter();
+	const { entitytype, entityid } = router.query;
+	console.log(router.query)
 	//POPUP FOR QR CODE.
 	const [ showQR, setShowQR ] = useState(false);
 	// CLOSE QRPOPUP
@@ -31,6 +34,10 @@ function TimeRegistration(props) {
 		setShowPincode(true);
 	};
 
+
+  const showEmployerStopPlanning = () => {
+    window.open(`stop-planning-employeer?entityid=${entityid}`,'_self');
+	}
 	//POPUP FOR EMPLOYER.
 	// const [ showemployer, setShowEmployer ] = useState(false);
 	//CLOSE EMPLOYER POPUP
@@ -66,12 +73,12 @@ function TimeRegistration(props) {
 						</button>
 						<p className="h3 mt-3">Pin code</p>
 					</div>
-					{/* <div className="col">
+					{<div className="col">
 						<button className="btn btn-large">
-							<BsPersonFill className="w-100 h-20 m-auto" onClick={showEmployerPopup} />
+							<BsPersonFill className="w-100 h-20 m-auto" onClick={showEmployerStopPlanning} />
 						</button>
 						<p className="h3  mt-3">Employer</p>
-					</div> */}
+					</div> }
 				</div>
 			</form>
 			{showQR == true && (
