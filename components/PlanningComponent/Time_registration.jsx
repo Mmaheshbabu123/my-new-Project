@@ -4,11 +4,13 @@ import { APICALL } from '../../Services/ApiServices';
 import { MdQrCode } from 'react-icons/md';
 import { FaLaptopCode } from 'react-icons/fa';
 import { BsPersonFill } from 'react-icons/bs';
+import { useRouter } from 'next/router';
 import QRCode from './QRcode_popup';
 import PincodePopup from './Pincode_popup';
 import EmployerPopup from './Employer_popup';
 
 function TimeRegistration(props) {
+	const router = useRouter();
 	//POPUP FOR QR CODE.
 	const [ showQR, setShowQR ] = useState(false);
 	// CLOSE QRPOPUP
@@ -28,7 +30,7 @@ function TimeRegistration(props) {
 	};
 	// SHOW pincodePOPUP //
 	const showPincodePopup = (id) => {
-		setShowPincode(true);
+		router.push('/pincode/Loading');
 	};
 
 	//POPUP FOR EMPLOYER.

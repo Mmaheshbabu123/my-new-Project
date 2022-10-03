@@ -4,7 +4,8 @@ import { QrReader } from 'react-qr-reader';
 
 const Qrscan = () => {
 
-	const [result, setResult] = useState('No result 123');
+	const [result, setResult] = useState('Please scan the qr code');
+	const [decode,setDecode]  =useState();
 
 	const handleError = (err) => {
 		console.err(err)
@@ -29,6 +30,8 @@ const Qrscan = () => {
             onResult={(result, error) => {
                 if (!!result) {
                   setResult(result?.text);
+				  var decodede=JSON.parse(result.text)
+				  setDecode(decodede);
                 }
       
                 if (!!error) {
@@ -39,7 +42,8 @@ const Qrscan = () => {
                 facingMode: { exact: "environment" }
               }}
 			/>
-			<div className="">{result}</div>		
+			<div className="">{result}</div>
+			<div> {console.log(decode)}</div>		
 		</div>
 	);
 }
