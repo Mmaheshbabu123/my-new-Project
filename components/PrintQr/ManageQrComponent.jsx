@@ -20,7 +20,7 @@ let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear();
 let dateValue = `${year}-${month < 10 ? '0' + month : month}`;
 const dateOptions = getFutureDates();
-
+let updatedDay = day - 1 < 10 ? '0' + (day - 1) : day - 1;
 const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, entityId }) => {
   const router = useRouter();
   const [state, setState] = useState({
@@ -33,11 +33,11 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
     currentPage: 0,
     showPopup: false,
     selectedDateOption: 1,
-    headingDate: `${year}${month < 10 ? '0' + month : month}${day - 1}`,
-    selectedDate: `${dateValue}-${day - 1}`,
-    currentDate: `${dateValue}-${day - 1}`,
-    minDate: `${dateValue}-${day}`,
-    maxDate: `${dateValue}-${day + 4}`,
+    headingDate: `${year}${month < 10 ? '0' + month : month}${updatedDay}`,
+    selectedDate: `${dateValue}-${updatedDay}`,
+    currentDate: `${dateValue}-${updatedDay}`,
+    minDate: `${dateValue}-${updatedDay}`,
+    maxDate: `${dateValue}-${day + 4 < 10 ? '0' + (day + 4) : day + 4}`,
     selectedRow: {},
     dateError: false,
   })
@@ -379,7 +379,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
         />}
       <div className='row'>
         <div className='col-md-12 px-0'>
-        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-5 px-0">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-3 px-0">
           {`Back`}
         </button>
         </div>

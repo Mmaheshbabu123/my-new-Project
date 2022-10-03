@@ -161,7 +161,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
             :
             <tbody className='no_records text-center'>
                <tr>
-               <td style={{width:'100%'}}> No records </td>
+               <td style={{width:'100%'}} colSpan={'8'} className='poppins-light-18px'> No records </td>
                </tr>
               </tbody>}
           </table>

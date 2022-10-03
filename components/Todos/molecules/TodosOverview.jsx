@@ -147,11 +147,11 @@ const TodosOverview = ({ props, entityId, entityType }) => {
       let encode = btoa(window.location.href);
       let path;
       if(type === 'edit')
-         path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout`;
+         path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout&todo_user_id=${entityId}`;
       if(type === 'sign')
-         path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
+         path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}&todo_user_id=${entityId}`
       if(type === 'download')
-         path = `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityType === 3 ? employer_id : entityId}?signed=${eachRow.todo_status}&type=employee`
+         path = `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityType === 3 ? employer_id : entityId}?signed=${eachRow.todo_status}&type=employee&todo_user_id=${entityId}`
       setTimeout(() => window.close(), 500);
       window.open(eachRow.baseUrl  + `${path}&destination_url=${encode}`, type === 'download' ? '_self' : '_blank');
     }
@@ -324,9 +324,9 @@ const TodosOverview = ({ props, entityId, entityType }) => {
             </div>
           </div>
         </div>
-        <div className="table-render-parent-div">
+        <div className="table-render-parent-div min_height_todo">
           <table className="table table-hover manage-types-table table  mb-3 text-start manage-documents-table-header my_todo_table">
-            <thead className="table-render-thead bg_grey">
+            <thead className="table-render-thead bg_grey table_header_todo">
               <tr className='table-sticky-bg-gray poppins-medium-18px border-0' key={'header-row-tr'}>{state.headers.map((eachHeader, index) => <th className='' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
@@ -363,7 +363,7 @@ const TodosOverview = ({ props, entityId, entityType }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline text-uppercase">
+          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>

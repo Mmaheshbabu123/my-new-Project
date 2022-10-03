@@ -361,6 +361,7 @@ select option
 .my_todo_table thead tr th:first-child
 {
   padding-left: 1.5rem;
+  width: 70%;
 }
 .my_todo_table .Todos_span-action-icons___UbjJ img
 {
@@ -404,7 +405,7 @@ select option
 }
 .minimun_height_v1
 {
-  min-height: 26vh;
+  min-height: 35vh;
 }
 
 .cursor-pointer {
@@ -418,4 +419,9 @@ select option
 .Todos_span-action-icons___UbjJ>img:hover
 {
   opacity: 1 !important;
+}
+.min_height_todo,
+.min-height-add-doc
+{
+  min-height: 17rem;
 }

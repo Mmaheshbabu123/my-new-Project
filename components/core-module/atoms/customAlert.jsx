@@ -43,7 +43,7 @@ function appendHtml(alertClass) {
   div.style.cssText = 'position: relative;';
   div.innerHTML = `<div
       style="position:absolute; top:75px; z-index:2000; width:85%; text-align:center; margin-left:8%"
-      class="alert ${alertClass}"
+      class="alert ${alertClass} rounded-0 border-0"
       role="alert"
       id="custom-alert-div-id"
     >
