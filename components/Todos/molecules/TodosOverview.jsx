@@ -147,11 +147,11 @@ const TodosOverview = ({ props, entityId, entityType }) => {
       let encode = btoa(window.location.href);
       let path;
       if(type === 'edit')
-         path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout`;
+         path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout&todo_user_id=${entityId}`;
       if(type === 'sign')
-         path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
+         path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}&todo_user_id=${entityId}`
       if(type === 'download')
-         path = `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityType === 3 ? employer_id : entityId}?signed=${eachRow.todo_status}&type=employee`
+         path = `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityType === 3 ? employer_id : entityId}?signed=${eachRow.todo_status}&type=employee&todo_user_id=${entityId}`
       setTimeout(() => window.close(), 500);
       window.open(eachRow.baseUrl  + `${path}&destination_url=${encode}`, type === 'download' ? '_self' : '_blank');
     }

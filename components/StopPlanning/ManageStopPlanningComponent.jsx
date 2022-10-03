@@ -9,9 +9,12 @@ import { APICALL } from '@/Services/ApiServices';
 import 'rc-time-picker/assets/index.css';
 import {postStopPlanningDetails} from '@/Services/ApiEndPoints';
 import customAlert from '@/atoms/customAlert';
+
 import moment from "moment";
 const StopPlanning = (props) => {
   console.log(props)
+  const router = useRouter();
+  console.log(router);
 const [state,setState] = useState({
   companyList:props.companyList,
   companyId:0,
@@ -121,6 +124,9 @@ return(
                  className="col-md-12"
                />
            </div>
+           <button onClick={() => router.back()} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline text-uppercase">
+             {`Back`}
+           </button>
         </div>
         <div className = 'col-md-6'>
             <div className="pt-2 pb-4 col-md-6">
@@ -178,6 +184,7 @@ return(
             {` STOP`}
           </button> }
       </div>
+
     </div>
   </div>
   </div>
