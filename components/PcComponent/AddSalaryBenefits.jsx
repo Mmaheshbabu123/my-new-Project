@@ -220,16 +220,14 @@ const AddSalaryBenefits = () => {
 					[ obj, uid ]
 				)
 					.then((res) => {
-						if(res==200){
+						if (res == 200) {
 							var res1 = sec_completed;
 							res1['emp_type'] = true;
 							setSec_completed(res1);
 							router.push('/manage-pc');
 						}
 					})
-					.catch((error) => {
-						
-					})
+					.catch((error) => {})
 			: console.log('false validation');
 	};
 	console.log(obj);
@@ -379,7 +377,9 @@ const AddSalaryBenefits = () => {
 									id={'date'}
 									isDisabled={false}
 									placeholder={'date'}
-									handleChange={(e)=>{updateDate(index, e.target.value)}}
+									handleChange={(e) => {
+										updateDate(index, e.target.value);
+									}}
 									className="col-md-11"
 									value={element.date}
 								/>
@@ -399,7 +399,6 @@ const AddSalaryBenefits = () => {
 								<label>Occurence</label>
 								<MultiSelectField
 									id={'select_id'}
-									
 									options={options}
 									standards={getOptionObj(element.occurence)}
 									disabled={false}
