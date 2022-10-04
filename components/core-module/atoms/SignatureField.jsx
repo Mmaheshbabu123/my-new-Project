@@ -55,8 +55,8 @@ const SignatureField = ({
     }
       </div>
       <div style={{ width:width }}>
-        <button disabled={disabled} className={`btn btn-light ${clearBtnClass}`} style={saveClearBtnWidth} onClick={clear}>Clear</button>
-        <button disabled={disabled} className={`btn btn-secondary ${saveBtnClass}`} style={saveClearBtnWidth} onClick={handleSave}>Save</button>
+        <button disabled={disabled} className={`btn bg-white border-0 poppins-regular-18px text-decoration-underline ${clearBtnClass}`} style={saveClearBtnWidth} onClick={clear}>Clear</button>
+        <button disabled={disabled} className={`btn btn-block border-0 rounded-0 float-right skyblue-bg-color ${saveBtnClass}`} style={saveClearBtnWidth} onClick={handleSave}>Save</button>
       </div>
     </div>
   );
