@@ -206,7 +206,7 @@ const RequestOverviewData = (props) => {
               {currentItems.map((eachRow, index) => {
                 return (
                   <tr key={index}>
-                      <td> {eachRow.employer_name} </td>
+                      <td className='ps-4'> {eachRow.employer_name} </td>
                       <td> {eachRow.employer_mail} </td>
                       <td> {eachRow.company_name} </td>
                       <td> {getEntityName(eachRow)} </td>

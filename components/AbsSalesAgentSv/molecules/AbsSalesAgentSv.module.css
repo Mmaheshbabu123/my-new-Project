@@ -15,7 +15,10 @@
 .emp-sv-overview-page-div {
 
 }
-
+.min_height_cooperation_sales
+{
+  min-height: 40vh;
+}
 .employer-overview-tabs {
   display: inline-block;
   width: 40%;

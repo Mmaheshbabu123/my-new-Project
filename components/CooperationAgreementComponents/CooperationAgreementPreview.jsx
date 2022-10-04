@@ -13,7 +13,7 @@ import customAlert from '@/atoms/customAlert';
 let timeOutRef;
 const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRefId, preview = 0 }) => {
   const router = useRouter();
-  let { type, approved }  = router.query;
+  let { type, approved, destination_url = '' }  = router.query;
   type = Number(type);
   approved = Number(approved);
   const [state, setState] = useState({
@@ -104,10 +104,11 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
    */
   const forwardToApproveProcess = async (from = 0, setObj = {}) => {
     let url = type === 2 ? updateEmployerSign : sendToEmployer;
+    let redirectionUrl = typeof destination_url === 'string' && destination_url.length > 10 ? atob(destination_url) : process.env.NEXT_PUBLIC_APP_URL_DRUPAL;
     await APICALL.service(url, 'POST', getDataToPost(from)).then(response => {
       if (response.status === 200) {
          setState({...state, alertSuccess: true, showPopup: false, ...setObj })
-         timeOutRef = setTimeout(() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self'), 3000);
+         timeOutRef = setTimeout(() => window.open(redirectionUrl, '_self'), 3000);
       } else {
         setState({...state, showPopup: false, ...setObj})
         customAlert('error', type !== 2 ? `Admin signature has not been added yet, please contact the admin.` : `You haven't added any signature yet, please add it.`, 2500);
