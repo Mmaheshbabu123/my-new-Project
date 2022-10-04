@@ -303,9 +303,17 @@ input[type="radio"]
 {
   min-height: 77vh;
 }
-.pc-height1, .pc-height2, .pc-height3, .pc-height4, .pc-height1
+.pc-height1, .pc-height2, .pc-height4, .pc-height1
 {
   min-height: 50vh;
+}
+.pc-height3
+{
+  min-height: 20vh !important;
+}
+.min_height_age
+{
+  min-height: 39vh;
 }
 .padding_first_col:first-child
 {
