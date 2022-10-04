@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import QRCode from './QRcode_popup';
 import PincodePopup from './Pincode_popup';
 import EmployerPopup from './Employer_popup';
-import { useRouter} from 'next/router';
+
 function TimeRegistration(props) {
 	const router = useRouter();
 	const { entitytype, entityid } = router.query;

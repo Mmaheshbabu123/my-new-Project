@@ -61,12 +61,12 @@ const AddSalaryBenefits = () => {
 			.then((result) => {
 				console.log(result.data);
 				if (result.data != undefined || result.data != null) {
-					if(typeof result.data == 'object'){
+					if (typeof result.data == 'object') {
 						var propertyValues = Object.values(result.data);
 						console.log(propertyValues);
 						setObj(propertyValues);
-					}else{
-					setObj(result.data);
+					} else {
+						setObj(result.data);
 					}
 				}
 			})
@@ -419,11 +419,25 @@ const AddSalaryBenefits = () => {
 	return (
 		<form onSubmit={Submit}>
 			{rows}
-
+			<button
+				type="button"
+				className={
+					pc_view_type == 'addpc' ? (
+						'bg-white border-0 poppins-regular-18px px-0 shadow-none text-decoration-underline'
+					) : (
+						'bg-white border-0 poppins-regular-18px px-0 shadow-none text-decoration-underline'
+					)
+				}
+				onClick={() => {
+					setCurrent_sec(4);
+				}}
+			>
+				BACK
+			</button>
 			<button
 				type="sumit"
-				// className="btn rounded-0  custom-btn px-3  btn-block float-end"
-				className="btn rounded-0  custom-btn px-3  btn-block  poppins-light-19px-next-button"
+				//  className="btn rounded-0  custom-btn px-3  btn-block "
+				className="btn rounded-0 mt-1 custom-btn px-3  btn-block float-end poppins-light-19px-next-button"
 				// onClick={() => submit}
 			>
 				Submit

@@ -45,7 +45,6 @@ const Pincode = () => {
 		() => {
 			var userid = null;
 			if (!router.isReady) return;
-
 			//get the user id from the local storage.
 			if (localStorage.getItem('uid') != null) {
 				userid = JSON.parse(localStorage.getItem('uid'));
@@ -103,6 +102,10 @@ const Pincode = () => {
 		hide ?  setEyeicon(FaEye):setEyeicon(FaEyeSlash);
 	};
 
+	const goHome=()=>{
+		router.push(homeScreen);
+	}
+
 	//fucntion to submit.
 	const Submit = (event) => {
 		event.preventDefault();
@@ -118,9 +121,11 @@ const Pincode = () => {
 						} else if (result == 2) {
 							//planning started.
 							SetResponse('Planning has been started.');
+							router.push(homeScreen);
 						} else if (result == 3) {
 							//planning ended.
 							SetResponse('Planning has been ended.');
+							router.push(homeScreen);
 						} else if (result == 4) {
 							SetResponse('There is no plannings for the day.');
 						} else if(result==6){
@@ -128,6 +133,7 @@ const Pincode = () => {
 						} else {
 							SetResponse('Something went wrong please try again later');
 						}
+						
 					})
 					.catch((error) => {
 						console.error(error);
@@ -218,11 +224,19 @@ const Pincode = () => {
 				</div>
 			</div>
 			<div className="row mt-5">
+			
 				<input
+					type="button"
+					onClick={goHome}
+					className="btn btn-secondary "
+					value="Back"
+					style={{ width: '5%',marginLeft: '25%'}}
+				/>
+					<input
 					type="submit"
 					className="btn btn-secondary"
 					value="Submit"
-					style={{ width: '5%', marginLeft: '45%' }}
+					style={{ width: '7%', marginLeft: '19%' }}
 				/>
 			</div>
 		</form>
