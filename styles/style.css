@@ -263,7 +263,7 @@ input[type="radio"]
      -webkit-font-family: var(--font-family-poppins-medium) !important;
      background-color:#fff;
   }
-  
+
 /* } */
 .form-select.form-control > option
 {
@@ -361,7 +361,7 @@ select option
 .my_todo_table thead tr th:first-child
 {
   padding-left: 1.5rem;
-  width: 70%;
+  width: 40%;
 }
 .my_todo_table .Todos_span-action-icons___UbjJ img
 {
@@ -412,7 +412,7 @@ select option
   cursor: pointer !important;
 }
 .manage-cooperation-agreement-table-header tr th:first-child ,
-.manage-documents-table-header tr th:first-child 
+.manage-documents-table-header tr th:first-child
 {
   padding-left: 1.5rem;
 }
