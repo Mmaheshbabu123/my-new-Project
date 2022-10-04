@@ -160,7 +160,7 @@ console.log(sign_icon);
               {currentItems.map(eachRow => {
                 return (
                   <tr key={eachRow.company_id}>
-                      <td> {eachRow.company_name} </td>
+                      <td className='ps-4'> {eachRow.company_name} </td>
                       <td> {formatDate(eachRow.date_of_request)} </td>
                       <td> {formatDate(eachRow.date_of_commencement) || '--'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
