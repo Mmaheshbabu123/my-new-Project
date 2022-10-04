@@ -170,7 +170,9 @@ const ManagePc = (props) => {
 						/>
 					</div>
 
-					<div className="col-md-2">
+					<div className='col-md-4 pe-0'>
+						<div className='row'>
+						<div className="col-md-6">
 						<button
 							type="button"
 							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-18px rounded-0 skyblue-bg-color add-pln shadow-none"
@@ -179,7 +181,7 @@ const ManagePc = (props) => {
 							FILTER
 						</button>
 					</div>
-					<div className="col-md-2 pe-0">
+					<div className="col-md-6">
 						{(searchPcnum != '' || searchPcname != '' || search === true) && (
 							<button
 								type="button"
@@ -189,6 +191,8 @@ const ManagePc = (props) => {
 								RESET
 							</button>
 						)}
+					</div>
+						</div>
 					</div>
 				</div>
 				<div className="row my-2 pt-2 m-0 px-0">
