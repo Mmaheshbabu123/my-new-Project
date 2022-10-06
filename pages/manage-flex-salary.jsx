@@ -81,7 +81,7 @@ const ManageFlexWorkerMinSalary = (props) => {
     return (
       <div>
         <div className='py-4 position-sticky-pc px-0'>
-          <h4 className='font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage minimum salary of flex worker`} </h4>
+          <h4 className='font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Add minimum salary of flex worker`} </h4>
         </div>
         <div className = {`col-md-12`}>
         <LabelField title="Minimum salary of flex worker" mandotory={true} customStyle = {{display:''}} className={'poppins-regular-18px'}/>
