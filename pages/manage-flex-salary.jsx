@@ -24,7 +24,8 @@ const ManageFlexWorkerMinSalary = (props) => {
       if(entityid) {
         await APICALL.service(`${manageMinFlexWorkerSalary}`, 'POST', {type: 'show'}).then(response => {
           if(response.status === 200) {
-            setState({...state, data:response.data || {id: 0, min_salary: ''} });
+            let data = response.data ? {...response.data, min_salary: response.data['min_salary'] || '' } : {id: 0, min_salary: ''}
+            setState({...state, data });
           }
         }).catch(error => console.error(error))
       }
@@ -33,9 +34,7 @@ const ManageFlexWorkerMinSalary = (props) => {
   }, [entityid])
 
   const handleSubmit = async () => {
-    if(state.warning || state.valueError) {
-      return;
-    }
+    if(validateBeforeSave()) return;
     await APICALL.service(`${manageMinFlexWorkerSalary}`, 'POST',
     {...state.data, type: state.data['id'] ? 'update' : 'create'}).then(response => {
       if(response.status === 200) {
@@ -44,15 +43,27 @@ const ManageFlexWorkerMinSalary = (props) => {
     }).catch(error => console.error(error))
   }
 
+  const validateBeforeSave = () => {
+    let status = false;
+    if(!state.data['min_salary'].trim().length) {
+      status = true;
+      setState({...state, warning: true })
+    }
+    if(state.warning || state.valueError)
+      status = true;
+    return status;
+  }
+
   const handleChange = ({ target: { value } } ) => {
+    let trimmedValue = value.trim();
     let stateObj = {...state}
-    if(checkDecimalPointError(value)) return ;
-    let inputVal = Number(value.replaceAll(',', '.'));
-    stateObj['data']['min_salary'] = value;
-    stateObj['warning'] = !value.length;
-    if (value.match(stateObj['regexp']) && inputVal <= 100 && inputVal > 0) {
-      stateObj['valueError'] = false;
-    } else if(value) stateObj['valueError'] = true;
+    if(checkDecimalPointError(trimmedValue)) return ;
+    let inputVal = Number(trimmedValue.replaceAll(',', '.'));
+    stateObj['warning'] = !trimmedValue.length;
+    if (trimmedValue.match(stateObj['regexp'])) {
+      stateObj['data']['min_salary'] = trimmedValue;
+      stateObj['valueError'] = trimmedValue.length ? (inputVal <= 100 && inputVal > 0) ? false : true : false;
+    }
     setState(stateObj);
   }
 
