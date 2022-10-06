@@ -340,7 +340,8 @@ const Addage = () => {
 			<form onSubmit={(e) => submit(e)}>
 				{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3 ":"bitter_medium_italic_18px mb-4"}>Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 bitter_medium_italic_18px mb-4">Age</h4>:'')}
 
-				<div className={pc_view_type == 'addpc'?"row p-4 border-form-sec m-0 pc-height3 scroll":"border-0"}>
+			<div className='min_height_age'>
+			<div className={pc_view_type == 'addpc'?"row p-4 border-form-sec m-0 pc-height3 scroll":"border-0"}>
 					{/* <div className={sec_width}> */}
 					<div className="col-md-12  m-0 ">
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}
@@ -488,6 +489,7 @@ const Addage = () => {
 						</div> */}
 					</div>
 				</div>
+			</div>
 				{pc_view_type == "editpc" ? (
 					<div className={pc_view_type == 'addpc'?"row m-0 my-4 back_button_position":"row m-0 my-4"}>
 						<div className="text-start col-md-6" />
@@ -504,7 +506,7 @@ const Addage = () => {
 						</div>
 					</div>
 				) : pc_view_type == 'addpc'? (
-					<div className="row m-0 my-4">
+					<div className="row m-0 mt-4 mb-3">
 						<div className="text-start col-md-6 p-0 align-self-center">
 							<button
 								type="button"

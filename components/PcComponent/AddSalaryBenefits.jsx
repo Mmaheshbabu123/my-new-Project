@@ -39,15 +39,15 @@ const AddSalaryBenefits = () => {
 	} = useContext(PcContext);
 
 	const router = useRouter();
-	const [ obj, setObj ] = useState([]);
+	const [obj, setObj] = useState([]);
 	const inputRef = useRef({});
-	const [ valuetype, setValueType ] = useState(0);
-	const [ valuev, setValuev ] = useState();
-	const [ agent, setAgent ] = useState();
-	const [ startDate, setStartDate ] = useState(new Date());
-	const [ granted, setGranted ] = useState();
-	const [ mandatory, setMandatory ] = useState();
-	const [ uid, setUid ] = useState(0);
+	const [valuetype, setValueType] = useState(0);
+	const [valuev, setValuev] = useState();
+	const [agent, setAgent] = useState();
+	const [startDate, setStartDate] = useState(new Date());
+	const [granted, setGranted] = useState();
+	const [mandatory, setMandatory] = useState();
+	const [uid, setUid] = useState(0);
 
 	useEffect(() => {
 		if (localStorage.getItem('uid') != null) {
@@ -61,12 +61,12 @@ const AddSalaryBenefits = () => {
 			.then((result) => {
 				console.log(result.data);
 				if (result.data != undefined || result.data != null) {
-					if(typeof result.data == 'object'){
+					if (typeof result.data == 'object') {
 						var propertyValues = Object.values(result.data);
 						console.log(propertyValues);
 						setObj(propertyValues);
-					}else{
-					setObj(result.data);
+					} else {
+						setObj(result.data);
 					}
 				}
 			})
@@ -99,67 +99,67 @@ const AddSalaryBenefits = () => {
 	};
 
 	const updateMandatory = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].mandatory = value;
 		setObj(object);
 	};
 
 	const updateAgent = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].sales_agent = value;
 		setObj(object);
 	};
 
 	const updateValuetype = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].value_type = value;
 		setObj(object);
 	};
 
 	const updateValue = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].value = value;
 		setObj(object);
 	};
 
 	const updateGranted = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].granted = value;
 		setObj(object);
 	};
 
 	const updateCoefficientType = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].coefficient_type = value;
 		setObj(object);
 	};
 
 	const updateCoefficientValue = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].coefficient_value = value;
 		setObj(object);
 	};
 
 	const updateDate = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].date = value;
 		setObj(object);
 	};
 
 	const updateOccurence = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].occurence = value;
 		setObj(object);
 	};
 
 	const updateOpen = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].open = value;
 		setObj(object);
 	};
 
 	const validation = () => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		var i = 0,
 			err = 0;
 		object.forEach((data) => {
@@ -215,204 +215,230 @@ const AddSalaryBenefits = () => {
 		e.preventDefault();
 		validation()
 			? APICALL.service(
-					process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/store-salary-benfits/' + pc_unique_key,
-					'POST',
-					[ obj, uid ]
-				)
-					.then((res) => {
-						if (res == 200) {
-							var res1 = sec_completed;
-							res1['emp_type'] = true;
-							setSec_completed(res1);
-							router.push('/manage-pc');
-						}
-					})
-					.catch((error) => {})
+				process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/store-salary-benfits/' + pc_unique_key,
+				'POST',
+				[obj, uid]
+			)
+				.then((res) => {
+					if (res == 200) {
+						var res1 = sec_completed;
+						res1['emp_type'] = true;
+						setSec_completed(res1);
+						router.push('/manage-pc');
+					}
+				})
+				.catch((error) => { })
 			: console.log('false validation');
 	};
 	console.log(obj);
 	const rows = [];
 	obj.forEach((element, index) => {
 		rows.push(
-			<div className="border mt-5 ">
+			<div className="mt-3">
+				
 				<div className="m-2">
-					<input
-						type="checkbox"
-						// value={true}
-						checked={element.open == true}
-						onChange={(e) => {
-							updateOpen(index, e.target.checked);
-						}}
-					/>Salary (verloning) - {element.name}
-				</div>
-				<div className={element.open ? 'col-md-12 m-3' : 'col-md-12 m-3 d-none'}>
-					<div className="row">
-						<div className="col-md-3">
-							<br />
-							<input
-								type="checkbox"
-								value={mandatory}
-								onChange={(e) => {
-									updateMandatory(index, e.target.checked);
-								}}
-							/>
-							<label>Is this mandatory?</label>
-						</div>
-						<div className="col-md-9">
-							<br />
-							<input
-								type="checkbox"
-								value={agent}
-								onChange={(e) => {
-									updateAgent(index, e.target.checked);
-								}}
-							/>
-							<label>
-								Allow sales agent to update the value during creation of cooperation agreement?
-							</label>
-						</div>
-					</div>
-					<br />
-					<div className="row">
-						<div className="col-md-4">
-							<div className="row">
-								<label>Salary benefit value</label>
-
-								<RadioGroup
-									name={'valuetype' + index}
+					<div className='row'>
+						<div className='mt-4 px-1' style={{width:"2%"}}>
+				<input
+									type="checkbox"
+									// value={true}
+									checked={element.open == true}
 									onChange={(e) => {
-										updateValuetype(index, e);
+										updateOpen(index, e.target.checked);
 									}}
-									selectedValue={element.value_type}
-								>
-									<label htmlFor="valuetype1">
-										<Radio id="valuetype1" value={1} />
-										value in €
-									</label>
-									<br />
-									<label htmlFor="valuetype2">
-										<Radio id="valuetype2" value={2} />
-										value in %
-									</label>
-								</RadioGroup>
-
-								<p style={{ color: 'red' }}>{element.vt_err}</p>
-								{/* </div> */}
-								<input
-									type="text"
-									style={{ width: '78%' }}
-									// value={valuev}
-									defaultValue={element.value}
-									onChange={(e) => {
-										updateValue(index, e.target.value);
-									}}
-									name="valuetype"
 								/>
-								<p style={{ color: 'red' }}>{element.v_err}</p>
-							</div>
-							<div className="row">
-								<label>Is the benefit granted in case of absence of the employee?</label>
-								{/* onChange={this.onChangeValue} */}
-								<RadioGroup
-									name={'granted' + index}
-									onChange={(e) => {
-										updateGranted(index, e);
-									}}
-									selectedValue={element.granted}
+								</div>
+								<div className='pe-1' style={{width:"98%"}}>
+					<div class="accordion-item rounded-0 add_salary_benefits">
+					
+						<h2 class="accordion-header" id="flush-headingOne">
+							<button class="accordion-button collapsed poppins-regular-18px rounded-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target={"#flush-collapseOne"+index} aria-expanded="false" aria-controls="flush-collapseOne">
+								Salary (verloning) - {element.name}
+							</button>
+						</h2>
+						<div id={"flush-collapseOne"+index} class="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
+							<div class="accordion-body">
+								<div 
+								// className={element.open ? 'col-md-12 m-3' : 'col-md-12 m-3 d-none'}
 								>
-									<label htmlFor="granted1">
-										<Radio id="granted1" value={0} />
-										Yes
-									</label>
+									<div className="row">
+										<div className="col-md-3">
+											
+											<input
+												type="checkbox"
+												value={mandatory}
+												onChange={(e) => {
+													updateMandatory(index, e.target.checked);
+												}}
+											/>
+											<label className='poppins-regular-18'>Is this mandatory?</label>
+										</div>
+										<div className="col-md-9">
+										
+											<input
+												type="checkbox"
+												value={agent}
+												onChange={(e) => {
+													updateAgent(index, e.target.checked);
+												}}
+											/>
+											<label className='poppins-regular-18'>
+												Allow sales agent to update the value during creation of cooperation agreement?
+											</label>
+										</div>
+									</div>
 									<br />
-									<label htmlFor="granted2">
-										<Radio id="granted2" value={1} />
-										No
-									</label>
-								</RadioGroup>
+									<div className="row">
+										<div className="col-md-4">
+											<div className="row mb-4">
+												<label className='mb-2 poppins-regular-16px'>Salary benefit value</label>
 
-								{/* <div onChange={setGranted}>
+												<RadioGroup
+													name={'valuetype' + index}
+													onChange={(e) => {
+														updateValuetype(index, e);
+													}}
+													selectedValue={element.value_type}
+												>
+													<label htmlFor="valuetype1" className='mb-2 poppins-regular-16px'>
+														<Radio id="valuetype1" value={1} />
+														value in €
+													</label>
+													<br />
+													<label htmlFor="valuetype2" className='mb-3 poppins-regular-16px'>
+														<Radio id="valuetype2" value={2} />
+														value in %
+													</label>
+												</RadioGroup>
+
+												<p style={{ color: 'red' }}>{element.vt_err}</p>
+												{/* </div> */}
+												<input
+													type="text"
+													style={{ width: '78%',marginLeft:'0.8rem' }}
+													// value={valuev}
+													defaultValue={element.value}
+													onChange={(e) => {
+														updateValue(index, e.target.value);
+													}}
+													name="valuetype"
+												/>
+												<p style={{ color: 'red' }}>{element.v_err}</p>
+											</div>
+											<div className="row">
+												<label className='mb-2 poppins-regular-16px'>Is the benefit granted in case of absence of the employee?</label>
+												{/* onChange={this.onChangeValue} */}
+												<RadioGroup
+													name={'granted' + index}
+													onChange={(e) => {
+														updateGranted(index, e);
+													}}
+													selectedValue={element.granted}
+												>
+													<label htmlFor="granted1" className='mb-2 poppins-regular-16px'>
+														<Radio id="granted1" value={0} />
+														Yes
+													</label>
+													<br />
+													<label htmlFor="granted2" className='mb-3 poppins-regular-16px'>
+														<Radio id="granted2" value={1} />
+														No
+													</label>
+												</RadioGroup>
+
+												{/* <div onChange={setGranted}>
 									<input  type="radio" value="0" name="granted" checked/> Yes<br />
 									<input checked={element.granted==1} type="radio" value="1" name="granted" /> No
 								</div> */}
-							</div>
-						</div>
-						<div className="col-md-4">
-							<div className="row">
-								<label>Applicable coefficient</label>
-								{/* onChange={this.onChangeValue} */}
-								<RadioGroup
-									name={'coefficient' + index}
-									onChange={(e) => {
-										updateCoefficientType(index, e);
-									}}
-									selectedValue={element.coefficient_type}
-								>
-									<label htmlFor="coefficient1">
-										<Radio id="coefficient1" value={1} />
-										Yes
-									</label>
-									<br />
-									<label htmlFor="coefficient2">
-										<Radio id="coefficient2" value={2} />
-										No
-									</label>
-								</RadioGroup>
-								<br />
-								<p style={{ color: 'red' }}>{element.ct_err}</p>
-								<input
-									type="text"
-									onChange={(e) => {
-										updateCoefficientValue(index, e.target.value);
-									}}
-									className="col-md-11"
-									defaultValue={element.coefficient_value}
-									name="coefficientother"
-								/>
-								<p style={{ color: 'red' }}>{element.c_err}</p>
-							</div>
-							<div className="row">
-								<label>Start date</label>
-								<DateField
-									id={'date'}
-									isDisabled={false}
-									placeholder={'date'}
-									handleChange={(e) => {
-										updateDate(index, e.target.value);
-									}}
-									className="col-md-11"
-									value={element.date}
-								/>
-								{/* <input
+											</div>
+										</div>
+										<div className="col-md-4">
+											<div className="row mb-4">
+												<label className='mb-2 poppins-regular-16px'>Applicable coefficient</label>
+												{/* onChange={this.onChangeValue} */}
+												<RadioGroup
+													name={'coefficient' + index}
+													onChange={(e) => {
+														updateCoefficientType(index, e);
+													}}
+													selectedValue={element.coefficient_type}
+												>
+													<label htmlFor="coefficient1" className='mb-2 poppins-regular-16px'>
+														<Radio id="coefficient1" value={1} />
+														Yes
+													</label>
+													<br />
+													<label htmlFor="coefficient2" className='mb-3 poppins-regular-16px'>
+														<Radio id="coefficient2" value={2} />
+														No
+													</label>
+												</RadioGroup>
+												<br />
+												<p style={{ color: 'red' }}>{element.ct_err}</p>
+												<input
+													type="text"
+													onChange={(e) => {
+														updateCoefficientValue(index, e.target.value);
+													}}
+													className="col-md-11"
+													defaultValue={element.coefficient_value}
+													name="coefficientother"
+													style={{ marginLeft:'0.8rem' }}
+												/>
+												<p style={{ color: 'red' }}>{element.c_err}</p>
+											</div>
+											<div className="row">
+												<label className='mb-3 poppins-regular-16px'>Start date</label>
+												<DateField
+													id={'date'}
+													isDisabled={false}
+													placeholder={'date'}
+													handleChange={(e) => {
+														updateDate(index, e.target.value);
+													}}
+													style={{ marginLeft:'0.8rem' }}
+													className="col-md-11 date_field_salary_benefits"
+													value={element.date}
+													
+												/>
+												{/* <input
 									type="date"
 									defaultValue={element.date}
 									onChange={(e) => {
 										updateDate(index, e.target.value);
 									}}
 								/> */}
-								<p style={{ color: 'red' }}>{element.date_err}</p>
-								{/* <DatePicker selected={date} name="startDate"  onChange={setDate}  dateFormat="MM/dd/yyyy"    locale="es"/> */}
-							</div>
-						</div>
-						<div className="col-md-4">
-							<div className="row">
-								<label>Occurence</label>
-								<MultiSelectField
-									id={'select_id'}
-									options={options}
-									standards={getOptionObj(element.occurence)}
-									disabled={false}
-									handleChange={(e) => {
-										updateOccurence(index, e.value);
-									}}
-									isMulti={false}
-									className="col-md-11"
-								/>
-								<p style={{ color: 'red' }}>{element.o_err}</p>
+												<p style={{ color: 'red' }}>{element.date_err}</p>
+												{/* <DatePicker selected={date} name="startDate"  onChange={setDate}  dateFormat="MM/dd/yyyy"    locale="es"/> */}
+											</div>
+										</div>
+										<div className="col-md-4 occurence_col">
+											<div className="row">
+												<label className='mb-3 poppins-regular-16px'>Occurence</label>
+												<MultiSelectField
+													id={'select_id'}
+													options={options}
+													standards={getOptionObj(element.occurence)}
+													disabled={false}
+													handleChange={(e) => {
+														updateOccurence(index, e.value);
+													}}
+													isMulti={false}
+													className="col-md-11"
+												/>
+												<p style={{ color: 'red' }}>{element.o_err}</p>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
+					</div>
+					</div>
+
 				</div>
+
 			</div>
 		);
 	});
@@ -420,14 +446,18 @@ const AddSalaryBenefits = () => {
 		<form onSubmit={Submit}>
 			{rows}
 
-			<button
+		<div className='row'>
+			<div className='col-md-12 my-3'>
+					<button
 				type="sumit"
 				// className="btn rounded-0  custom-btn px-3  btn-block float-end"
-				className="btn rounded-0  custom-btn px-3  btn-block  poppins-light-19px-next-button"
-				// onClick={() => submit}
+				className="btn rounded-0  custom-btn px-3  btn-block  poppins-medium-18px-next-button float-end"
+			// onClick={() => submit}
 			>
 				Submit
 			</button>
+			</div>
+		</div>
 		</form>
 	);
 };
