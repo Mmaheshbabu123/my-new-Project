@@ -131,7 +131,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
   }
 
   const handleActionClick = (type, eachRow) => {
-    let encode = btoa(window.location.href.replaceAll(`tab=${state.selectedTabId}`, 'tab=2'));
+    let encode = btoa(window.location.href.replaceAll(`tab=${state.selectedTabId}`, `tab=${type === 'edit' ? 1 : 2}`));
     if (type === 'sign' && entityType === 3) {
       setState({ ...state, showPopup: true, selectedObj: eachRow })
       return;
