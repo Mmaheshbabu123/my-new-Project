@@ -10,6 +10,7 @@ const TodosComponent = (props) => {
   const [state, setState] = useState({
     loaded: false,
     todos: [],
+    headers: [ 'Todo', 'Company name', 'Employee name', 'Status', 'Actions' ]
   })
 
 
@@ -31,7 +32,15 @@ const TodosComponent = (props) => {
   }
   return (
     <div>
-      {state.loaded === true ? <TodosOverview props={state} entityId = {Number(props.entityId) || 0} entityType = {Number(props.entityType) || 0} /> : <p> Loading... </p>}
+      {state.loaded === true ?
+        <TodosOverview
+          props={state}
+          entityId = {Number(props.entityId) || 0}
+          entityType = {Number(props.entityType) || 0}
+          tabId={props.tabId}
+        />
+        :
+        <p> Loading... </p>}
     </div>
   );
 }

@@ -160,11 +160,12 @@ const Pincode = () => {
 	var display;
 
 	var fields=<form onSubmit={Submit} style={{ alignItems: 'center' }}>
-	<div className="row mt-5">
-		<div className="col-4" />
-		<div className="mt-2 col-5">
+	<div className='min_height_pincode'>
+	<div className="row">
+		{/* <div className="col-4" /> */}
+		<div className="mt-2 col-md-5 m-auto">
 			<div>
-				<label>Pincode</label>
+				<label className='poppins-regular-18 mb-2'>Pincode</label>
 			</div>
 			<div className='d-flex'>
 			<OTPInput
@@ -181,7 +182,7 @@ const Pincode = () => {
 				// disabled={false}
 				// secure={hide}
 			/>
-			<button style={{ border:'none'}} onClick={hideShow} className='bg-white'>
+			<button style={{ border:'none'}} onClick={hideShow} className='bg-white color-skyblue'>
 					{eyeicon}
 			</button> 
 			</div>
@@ -190,11 +191,11 @@ const Pincode = () => {
 			</p>
 		</div>
 	</div>
-	<div className="row mt-5">
-		<div className="col-4" />
-		<div className="mt-2 col-5">
+	<div className="row mt-3">
+		{/* <div className="col-4" /> */}
+		<div className="mt-2 col-md-5 m-auto">
 			<div>
-				<label>Confirm pincode</label>
+				<label className='poppins-regular-18 mb-2'>Confirm pincode</label>
 			</div>
 			<div className='d-flex'>
 			{/* <div> */}
@@ -212,7 +213,7 @@ const Pincode = () => {
 				// disabled={false}
 				// secure={hide1}
 			/>
-			<button style={{ border:'none'}} onClick={hideShow1} className='bg-white'>
+			<button style={{ border:'none'}} onClick={hideShow1} className='bg-white color-skyblue'>
 					{eyeicon1}
 			</button> 
 			</div>
@@ -222,13 +223,16 @@ const Pincode = () => {
 			</p>
 		</div>
 	</div>
-	<div className="row mt-5">
+	</div>
+	<div className="row mt-5 mb-3">
+		<div className='col-md-12'>
 		<input
 			type="submit"
-			className="btn btn-secondary"
+			className="btn btn-secondary poppins-medium-18px-save-button rounded-0 shadow-none border-0 float-end"
 			value="Submit"
-			style={{ width: '5%', marginLeft: '45%' }}
+			// style={{ width: '5%', marginLeft: '45%' }}
 		/>
+		</div>
 	</div>
 </form>;
 	(uid!='')?

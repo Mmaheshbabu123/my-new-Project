@@ -56,10 +56,12 @@ const SignatureMain = ({ entityId, entityType }) => {
     <div>
     {state.loaded === true ?
       <>
-        <h4 className={`page-title-font-class text-center page-title`}> Manage signature</h4>
+        <div className='py-4 position-sticky-pc px-0'>
+          <h4 className='font-weight-bold px-0  bitter-italic-normal-medium-24'> Manage signature </h4>
+        </div>
         <SignatureDetails state = {state} setState = {setState} submitSignData={submitSignData} eraseSignature={eraseSignature}/>
-        <button onClick={() => router.back()} type="button" className="btn btn-dark pcp_btn col-1">
-          {`Back`}
+        <button onClick={() => router.back()} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-5 mb-5 ps-0 text-decoration-underline text-uppercase">
+          {`BACK`}
         </button>
       </>
     : <p>Loading...</p>}

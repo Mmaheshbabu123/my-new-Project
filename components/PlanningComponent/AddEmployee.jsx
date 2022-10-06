@@ -251,6 +251,19 @@ const AddEmployee = () => {
 
 										<div className="col-md-4 bd-highlight align-self-end">
 											<div className="bd-highlight row">
+											<div className='col-md-6 align-self-center add_project float-start'>
+												{inputlist.length < tempPcList.length &&
+												inputlist.length - 1 === i && (
+													<button
+														type="submit"
+														className="btn rounded-0 btn-block float-start shadow-none add-proj-btn"
+														onClick={handleaddanother}
+														style={{height:'43px'}}
+													>
+														+ Add
+													</button>
+												)}
+													</div>
 												<div className='col-md-6 align-self-center'>
 													{// pclist.length > 1 &&
 												inputlist.length !== 1 &&
@@ -266,19 +279,7 @@ const AddEmployee = () => {
 													</button>
 												)}
 													</div>
-												<div className='col-md-6 align-self-center add_project float-start'>
-												{inputlist.length < tempPcList.length &&
-												inputlist.length - 1 === i && (
-													<button
-														type="submit"
-														className="btn rounded-0 px-3  btn-block float-start shadow-none add-proj-btn"
-														onClick={handleaddanother}
-														style={{height:'43px'}}
-													>
-														+ Add
-													</button>
-												)}
-													</div>
+											
 											</div>
 										</div>
 											</div>

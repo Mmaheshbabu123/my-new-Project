@@ -109,6 +109,8 @@ input[type="checkbox"]
   line-height: var(--line-height-29px);
   color: var(--color-white);
   background-color: var(--color-purple);
+  padding-left: 0.7rem !important;
+  padding-right: 0.7rem !important;
 }
 .select_employee_container .css-1rhbuit-multiValue .css-12jo7m5
 {
@@ -184,4 +186,50 @@ input[type="checkbox"]
 .css-sizvqo-MuiTableCell-root .Cell-today
 {
   background-color: var(--color-skyblue);
+}
+.add_salary_benefits .accordion-button:not(.collapsed)
+{
+  background-color: transparent !important;
+  color: var(--color-label-footer-gray) !important;
+}
+.add_salary_benefits input[type="checkbox"],
+.add_salary_benefits input[type="radio"]
+{
+  margin-right: 0.5rem;
+}
+.occurence_col .react-select-prefix__single-value 
+{
+  display:flex;
+  align-items:center;
+}
+.add_salary_benefits input[type="text"],
+.add_salary_benefits input[type="text"]:focus-visible,
+.add_salary_benefits input[type="text"]:hover
+{
+  border:1px solid #4C4D554D;
+  border-radius:0px;
+  height:41px;
+  outline: #4C4D554D !important;
+}
+.add_salary_benefits .react-select-prefix__input
+{
+  border:none !important;
+  height:auto !important;
+}
+.date_field_salary_benefits
+{
+  margin-left:0.8rem;
+  height:41px;
+}
+.otp,
+.otp:focus-visible,
+.min_height_pincode input[type="tel"]
+{
+    border:1px solid #4C4D554D !important;
+    outline: #4C4D554D !important;
+    border-radius: 0px !important;
+}
+.min_height_pincode 
+{
+  min-height: 55vh;
 }

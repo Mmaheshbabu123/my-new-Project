@@ -185,7 +185,7 @@ const Overviewpage = (props) => {
               </div>
              
            </div></div>}
-        <div className={`${styles['table-parent-div']}`}>
+        <div className={`${styles['table-parent-div']} min_height_cooperation_sales`}>
           <table className="table table-hover manage-types-table manage-cooperation-agreement-table-header">
             <thead className="table-render-thead">
               <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
@@ -215,6 +215,17 @@ const Overviewpage = (props) => {
               </tbody>}
           </table>
         </div>
+        	<div className="row my-2">
+					<div className="text-start col-md-6">
+						<button
+							type="button"
+							className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
+							onClick={() =>router.back()}
+						>
+							BACK
+						</button>
+					</div>
+          </div>
         <div>
         {filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."

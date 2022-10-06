@@ -385,6 +385,15 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
+.poppins-regular-18 {
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-regular) !important;
+	font-size: var(--font-size-18px) !important;
+	font-style: normal;
+	line-height: var(--line-height-29px) !important;
+	font-weight: 400;
+	/* line-height: initial; */
+}
 .poppins-medium-16px {
 	font-size: var(--font-size-16px) !important;
 	line-height: var(--line-height-26px);
@@ -1754,7 +1763,7 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 }
 .slt-emp .css-1s2u09g-control,
 .slt-emp .css-1pahdxg-control {
-	min-height: 50px;
+	min-height: 43px;
 	background-color: rgb(76 77 85 / 5%) !important;
 	border: none !important;
 	box-shadow: none !important;

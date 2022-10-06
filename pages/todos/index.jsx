@@ -5,12 +5,12 @@ const TodosComponent = dynamic(() => import('@/components/Todos/organisms/TodosC
 
 const TodoIndex = (props) => {
   const router = useRouter();
-  const { entitytype, entityid } = router.query;
+  const { entitytype, entityid, tab = 1 } = router.query;
   return (
     <div>
       <Suspense fallback={`Loading...`}>
           {entityid !== undefined ?
-            <TodosComponent entityType={Number(entitytype)} entityId = {Number(entityid)}/>
+            <TodosComponent entityType={Number(entitytype)} entityId = {Number(entityid)} tabId={Number(tab)}/>
             :
             null
           }
