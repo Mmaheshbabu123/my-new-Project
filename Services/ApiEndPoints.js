@@ -244,3 +244,6 @@ export const manageMinFlexWorkerSalary = BASE_URL + 'manage-min-salary-of-flex-w
 //-----
 
 export const updateEmployeesubmitDetails = BASE_URL + 'update-employee-submit-details';
+
+// ----------------Encodage validations-----------------------//
+export const fetchEncodageDeatils = BASE_URL + "get-all-encodage-planning";
