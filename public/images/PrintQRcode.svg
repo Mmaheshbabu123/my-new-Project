@@ -1,0 +1,62 @@
+<svg id="Print_QR_code" data-name="Print QR code" xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68">
+  <g id="Group_26705" data-name="Group 26705">
+    <g id="Group_26704" data-name="Group 26704">
+      <path id="Path_31444" data-name="Path 31444" d="M0,0V31.043H31.043V0ZM26.609,26.609H4.435V4.435H26.609Z" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26707" data-name="Group 26707" transform="translate(8.87 8.87)">
+    <g id="Group_26706" data-name="Group 26706">
+      <rect id="Rectangle_2076" data-name="Rectangle 2076" width="13.304" height="13.304" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26709" data-name="Group 26709" transform="translate(36.957)">
+    <g id="Group_26708" data-name="Group 26708">
+      <path id="Path_31445" data-name="Path 31445" d="M278.261,0V31.043H309.3V0ZM304.87,26.609H282.7V4.435H304.87Z" transform="translate(-278.261)" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26711" data-name="Group 26711" transform="translate(45.826 8.87)">
+    <g id="Group_26710" data-name="Group 26710">
+      <rect id="Rectangle_2077" data-name="Rectangle 2077" width="13.304" height="13.304" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26713" data-name="Group 26713" transform="translate(0 36.957)">
+    <g id="Group_26712" data-name="Group 26712">
+      <path id="Path_31446" data-name="Path 31446" d="M0,278.261V309.3H31.043V278.261ZM26.609,304.87H4.435V282.7H26.609Z" transform="translate(0 -278.261)" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26715" data-name="Group 26715" transform="translate(8.87 45.826)">
+    <g id="Group_26714" data-name="Group 26714">
+      <rect id="Rectangle_2078" data-name="Rectangle 2078" width="13.304" height="13.304" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26717" data-name="Group 26717" transform="translate(36.957 36.957)">
+    <g id="Group_26716" data-name="Group 26716">
+      <path id="Path_31447" data-name="Path 31447" d="M287.13,282.7v-4.435h-8.869V309.3h8.869V304.87H282.7V296h4.435v-4.435H282.7V282.7Z" transform="translate(-278.261 -278.261)" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26719" data-name="Group 26719" transform="translate(63.565 36.957)">
+    <g id="Group_26718" data-name="Group 26718">
+      <rect id="Rectangle_2079" data-name="Rectangle 2079" width="4.435" height="4.435" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26721" data-name="Group 26721" transform="translate(59.13 47.304)">
+    <g id="Group_26720" data-name="Group 26720">
+      <path id="Path_31448" data-name="Path 31448" d="M449.652,356.174v16.261h-4.435v4.435h8.87v-20.7Z" transform="translate(-445.217 -356.174)" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26723" data-name="Group 26723" transform="translate(50.261 36.957)">
+    <g id="Group_26722" data-name="Group 26722">
+      <rect id="Rectangle_2080" data-name="Rectangle 2080" width="8.87" height="4.435" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26725" data-name="Group 26725" transform="translate(50.261 45.826)">
+    <g id="Group_26724" data-name="Group 26724">
+      <path id="Path_31449" data-name="Path 31449" d="M387.3,349.478v-4.435h-8.87v13.3h8.87v-4.435H382.87v-4.435Z" transform="translate(-378.435 -345.043)" fill="#79b1bd"/>
+    </g>
+  </g>
+  <g id="Group_26727" data-name="Group 26727" transform="translate(50.261 63.565)">
+    <g id="Group_26726" data-name="Group 26726">
+      <rect id="Rectangle_2081" data-name="Rectangle 2081" width="4.435" height="4.435" fill="#79b1bd"/>
+    </g>
+  </g>
+</svg>
