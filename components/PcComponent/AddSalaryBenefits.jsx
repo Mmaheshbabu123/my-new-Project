@@ -249,15 +249,15 @@ const AddSalaryBenefits = () => {
 								/>
 								</div>
 								<div className='pe-1' style={{width:"98%"}}>
-					<div class="accordion-item rounded-0 add_salary_benefits">
+					<div className="accordion-item rounded-0 add_salary_benefits">
 					
-						<h2 class="accordion-header" id="flush-headingOne">
-							<button class="accordion-button collapsed poppins-regular-18px rounded-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target={"#flush-collapseOne"+index} aria-expanded="false" aria-controls="flush-collapseOne">
+						<h2 className="accordion-header" id="flush-headingOne">
+							<button className="accordion-button collapsed poppins-regular-18px rounded-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target={"#flush-collapseOne"+index} aria-expanded="false" aria-controls="flush-collapseOne">
 								Salary (verloning) - {element.name}
 							</button>
 						</h2>
-						<div id={"flush-collapseOne"+index} class="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
-							<div class="accordion-body">
+						<div id={"flush-collapseOne"+index} className="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
+							<div className="accordion-body">
 								<div 
 								// className={element.open ? 'col-md-12 m-3' : 'col-md-12 m-3 d-none'}
 								>
