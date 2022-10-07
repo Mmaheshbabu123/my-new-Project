@@ -54,12 +54,12 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
   return(
     <>
         <Modal size={'lg'} show={showPopup} onHide={handleClose}>
-          <Modal.Header closeButton style={{paddingLeft: '30%'}}>
-            <Modal.Title>{savedAgentId ? 'Re-assign sales agent' : 'Assign to sales agent'}</Modal.Title>
+          <Modal.Header closeButton >
+            <Modal.Title className='bitter-italic-normal-medium-22 text-center'>{savedAgentId ? 'Re-assign sales agent' : 'Assign to sales agent'}</Modal.Title>
           </Modal.Header>
         <Modal.Body>
             <div>
-                <p style={{fontSize: 'larger'}}> Please select sales agent </p>
+                <p style={{fontSize: 'larger'}} className='poppins-medium-18px'> Please select sales agent </p>
                 <div style={{margin: '20px 0'}}>
                 {salesAgentArray.map(agent => {
                   return(
@@ -70,7 +70,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
                         disabled={false}
                         handleChange={(e) => handleRadioSelect(e, agent)}
                         label={agent.name}
-                        className="col-md-6"
+                        className="col-md-6 py-2 poppins-light-18px"
                       />
                   );
                 })}
@@ -79,9 +79,9 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
                 {/*reassign === true && <small style={{color:'red'}}> Do you want to change sales agent? </small>*/}
             </div>
         </Modal.Body>
-        <Modal.Footer>
-          <p className={`${styles['popup-back-btn']}`} onClick={handleClose}> Back </p>
-          <Button variant="secondary" onClick={handleRequest}>
+        <Modal.Footer className='justify-content-between'>
+          <p className={`${styles['popup-back-btn']} poppins-light-18px text-decoration-underline text-uppercase`} onClick={handleClose}> Back </p>
+          <Button onClick={handleRequest} className="buttuon_purple rounded-0 border-0 shadow-none">
             Assign
           </Button>
         </Modal.Footer>
