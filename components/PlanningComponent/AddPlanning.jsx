@@ -498,7 +498,7 @@ function Planning(props) {
 							</div>
 						</div>
 						</div>
-						<div className="row mt-4 mb-4 col-md-12 m-0">
+						<div className="row mt-4 mb-2 col-md-12 m-0">
 							<div className="col-md-6 p-0">
 								<button type="button" className="btn  btn-block px-0 shadow-none">
 									<Link href={'/planning/options'}>

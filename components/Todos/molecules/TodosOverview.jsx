@@ -385,7 +385,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
+          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-2 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>

@@ -236,7 +236,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
       />}
-       <div className='row my-3'>
+       <div className='row mt-3 mb-2'>
         <div className='col-md-12'>
          <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn poppins-light-18px text-decoration-underline shadow-none p-0 text-uppercase">
           {`Back`}

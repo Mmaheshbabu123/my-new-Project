@@ -300,8 +300,8 @@ function ManageProject(props) {
 						</div>
 						{/* ---------------------Manage project table-------------------------*/}
 
-						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table project_table_sticky ">
-							<table className="table mt-3 mb-3">
+						<div className="form-check p-0 tab-pane fade show min_height_table project_table_sticky ">
+							<table className="table mb-3">
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4">
@@ -403,7 +403,7 @@ function ManageProject(props) {
 				<div className="text-start col-md-6">
 					<button
 						type="button"
-						className="bg-white border-0 poppins-regular-18px float-sm-right my-4 px-0 text-decoration-underline d-inline-block"
+						className="bg-white border-0 poppins-light-18px float-sm-right mt-4 mb-2 px-0 text-decoration-underline d-inline-block"
 						onClick={() => {
 							window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 						}}

@@ -240,7 +240,7 @@ const PlanningFinalize = () => {
 					</div>
 					<div className="error mt-2">{errorFinalize}</div>
 				</div>
-				<div className="row mt-4 mb-4 col-md-12 m-0 px-0">
+				<div className="row mt-4 mb-2 col-md-12 m-0 px-0">
 					<div className="col-md-6 p-0 align-self-center ">
 						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/timings/' + p_unique_key}>

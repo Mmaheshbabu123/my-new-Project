@@ -2,6 +2,10 @@
 {
   min-height: 57vh;
 }
+.planning-height_employee
+{
+  min-height: 61vh;
+}
 .select_employee_container .css-1wy0on6
 {
   align-self: center;
@@ -130,6 +134,7 @@ input[type="checkbox"]
 .sign_action_icon_size_pdf
 {
   width: 16px;
+  margin-left: 0.5rem;
 }
 .delete_icon_manage_cooperation
 {
@@ -244,12 +249,12 @@ input[type="checkbox"]
   background-color: var(--color-white);
   z-index: 998;
 }
-.sticky-table-header
+/* .sticky-table-header
 {
   position: sticky;
   top: 334px;
   z-index: 998;
-}
+} */
 ::-webkit-scrollbar
 {
   width: 0.2em;
@@ -273,13 +278,13 @@ input[type="checkbox"]
   background: var(--color-white);
   z-index: 998;
 }
-.qr_sticky thead
+/* .qr_sticky thead
 {
   position: sticky;
   top: 299px;
-  /* background: var(--color-white); */
+  
   z-index: 998;
-}
+} */
 .project_sticky
 {
   position: sticky;
@@ -287,13 +292,13 @@ input[type="checkbox"]
   background: var(--color-white);
   z-index: 998;
 }
-.project_table_sticky thead
+/* .project_table_sticky thead
 {
   position: sticky;
-  top: 325px;
-  /* background: var(--color-white); */
+  top: 309px;
+  
   z-index: 998;
-}
+} */
 .my_documents_position_sticky
 {
   position: sticky;
@@ -301,12 +306,12 @@ input[type="checkbox"]
   background:var(--color-white);
   z-index: 998;
 }
-.my_documents_position_sticky_table thead
+/* .my_documents_position_sticky_table thead
 {
   position: sticky;
   top: 302px;
   z-index: 998;
-}
+} */
 .manage_agreement_position_sticky
 {
   position: sticky;
@@ -314,12 +319,12 @@ input[type="checkbox"]
   background: var(--color-white);
   z-index: 998;
 }
-.manage_agreement_position_sticky_table thead
+/* .manage_agreement_position_sticky_table thead
 {
   position: sticky;
   top: 296px;
   z-index: 998;
-}
+} */
 .manage_category_sticky_position
 {
   position: sticky;
@@ -327,13 +332,13 @@ input[type="checkbox"]
   background: white;
   z-index: 998;
 }
-.manage_category_table
+/* .manage_category_table
 {
   position: sticky;
   top: 233px;
   background: white;
   z-index: 998;
-}
+} */
 .position_sticky_co-op
 {
   position: sticky;
