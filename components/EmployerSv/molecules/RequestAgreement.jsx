@@ -97,8 +97,8 @@ const RequestAgreement = (props) => {
               </div>
           </Modal.Body>
           {companies && companies.length > 0 && <Modal.Footer>
-            <p className={`${styles['popup-back-btn']}`} onClick={handleClose}> Back </p>
-            <Button variant="secondary" onClick={handleRequest}>
+            <p className={`${styles['popup-back-btn']} pop_up_back_button`} onClick={handleClose}> Back </p>
+            <Button onClick={handleRequest} className="buttuon_purple rounded-0 border-0 shadow-none">
               Request agreement
             </Button>
           </Modal.Footer>}

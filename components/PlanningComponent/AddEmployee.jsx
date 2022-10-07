@@ -195,7 +195,7 @@ const AddEmployee = () => {
 					</div>
 				</div>
 				{/* Select paritair commite */}
-				<div className='planning-height'>
+				<div className='planning-height_employee'>
 					{inputlist.map((val, i) => {
 						return (
 							<div className="row" key={i}>
@@ -291,7 +291,7 @@ const AddEmployee = () => {
 					})}
 				</div>
 
-				<div className="row my-4">
+				<div className="row mt-4 mb-1">
 					<div className="text-start col-md-6 d-flex align-items-center">
 						<button type="button" className="btn  btn-block px-0 shadow-none">
 							<Link href={'/planning/add/' + p_unique_key}>

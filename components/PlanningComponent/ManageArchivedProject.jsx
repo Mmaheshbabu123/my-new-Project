@@ -220,10 +220,10 @@ function ManageArchivedProject(props) {
 		<div className="container-fluid p-0">
 			<form>
 				<div className="row m-0 ">
-					<div className="form-check p-0 mt-2  ">
+					<div className="form-check p-0">
 						{/* ----------------Search functionality--------------------------------*/}
 
-						<div className="row d-flex mt-3">
+						<div className="row d-flex project_sticky">
 							<div className="col-sm-3 field_height">
 								<input
 									type="search"
@@ -288,7 +288,7 @@ function ManageArchivedProject(props) {
 							</div>
 						</div>
 
-						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table">
+						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table project_table_sticky ">
 							{/* ---------------------Manage project table-------------------------*/}
 
 							<table className="table mt-3 mb-3">
@@ -349,7 +349,7 @@ function ManageArchivedProject(props) {
 				<div className="text-start col-md-6">
 					<button
 						type="button"
-						className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5 px-0"
+						className="bg-white border-0 poppins-light-18px  float-sm-right mt-5 mb-2 px-0 text-decoration-underline shadow-none"
 						onClick={() => {
 							window.location.assign(
 								process.env.NEXT_PUBLIC_APP_URL_DRUPAL +

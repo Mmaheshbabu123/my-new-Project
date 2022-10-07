@@ -246,6 +246,7 @@ const AddSalaryBenefits = () => {
 									onChange={(e) => {
 										updateOpen(index, e.target.checked);
 									}}
+									style={{width:'18px',height:'18px'}}
 								/>
 								</div>
 								<div className='pe-1' style={{width:"98%"}}>
@@ -446,8 +447,19 @@ const AddSalaryBenefits = () => {
 		<form onSubmit={Submit}>
 			{rows}
 
-		<div className='row'>
-			<div className='col-md-12 my-3'>
+		<div className='row mt-3 mb-2'>
+			<div className='col-md-6 align-self-center'>
+			<button
+								type="button"
+								className={pc_view_type == 'addpc'?"bg-white bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline":"bg-white bg-white  border-0 poppins-regular-18px shadow-none text-decoration-underline"}
+								onClick={() => {
+									setCurrent_sec(4);
+								}}
+							>
+								BACK
+							</button>
+			</div>
+			<div className='col-md-6 '>
 					<button
 				type="sumit"
 				// className="btn rounded-0  custom-btn px-3  btn-block float-end"

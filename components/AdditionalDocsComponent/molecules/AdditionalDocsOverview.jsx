@@ -148,7 +148,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
         {`+Add additional document`}
       </button>}
       </div>
-      <div className='searchbox m-0 mt-4 mb-2' style={{ margin: '10px 0', position: 'relative' }}>
+      <div className='my_documents_position_sticky'>
       <div className='row'>
       <div className='col-md-12'>
          <div className='row'>
@@ -167,7 +167,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
              </div>
            );
          })}
-         <div className='col-md-3'>
+         <div className='col-md-4'>
            <div className='row'>
              <div className='col-md-6'>
              <button
@@ -195,7 +195,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       </div>
       </div>
       <div className="table-render-parent-div min-height-add-doc">
-          <table className="table table-hover manage-types-table manage-documents-table-header">
+          <table className="table table-hover manage-types-table manage-documents-table-header my_documents_position_sticky_table">
             <thead className="table-render-thead">
               <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} className="align-middle " scope="col"> {eachHeader} </th>)} </tr>
             </thead>
@@ -236,7 +236,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
       />}
-       <div className='row my-3'>
+       <div className='row mt-3 mb-2'>
         <div className='col-md-12'>
          <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn poppins-light-18px text-decoration-underline shadow-none p-0 text-uppercase">
           {`Back`}

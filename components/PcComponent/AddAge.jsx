@@ -506,7 +506,7 @@ const Addage = () => {
 						</div>
 					</div>
 				) : pc_view_type == 'addpc'? (
-					<div className="row m-0 mt-4 mb-3">
+					<div className="row m-0 mt-4 mb-2">
 						<div className="text-start col-md-6 p-0 align-self-center">
 							<button
 								type="button"

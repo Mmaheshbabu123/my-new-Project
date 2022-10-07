@@ -4,6 +4,7 @@
   margin: 20px;
   padding: 25px 10px;
   border: 1px solid #000;
+  cursor: pointer;
 }
 
 .dashboard-tile-field-content {
