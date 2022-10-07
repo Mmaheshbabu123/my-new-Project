@@ -351,3 +351,9 @@ input[type="checkbox"]
 {
   width: 20%;
 }
+.start_date_edit_link .rmdp-input
+{
+  width: 191px !important;
+  border-radius: 0px;
+  padding: 1rem 10px;
+}

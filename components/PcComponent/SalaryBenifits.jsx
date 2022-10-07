@@ -250,17 +250,26 @@ const SalaryBenifits = () => {
 												</div> */}
 												{/* </div> */}
 												<div className='row '>
-													<div className="form-check d-inline-flex col-sm-3 ps-0">
-														<input className="form-check-input ms-1 me-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
+													{/* <div className="form-check d-inline-flex col-sm-3 ps-0"> */}
+													<div className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-3 ps-0' : "form-check  col-sm-12 my-2"}>
+
+
+													<input className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input me-2 rounded-0"} type="checkbox" value="" id="flexCheckDefault"/>
+
+														{/* <input className="form-check-input ms-1 me-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" /> */}
+
+
+
 														<label className="form-check-label" htmlFor="flexCheckDefault">
-															<p className={'  poppins-medium-16px '}>Is this mandatory?</p>
+															<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Is this mandatory?</p>
 														</label>
 													</div>
 
-													<div className="form-check d-inline-flex  col ps-0">
+													{/* <div className="form-check d-inline-flex  col ps-0"> */}
+													<div className={pc_view_type == 'addpc' ? 'form-check d-inline-flex  col ps-0' : "form-check col-sm-12 mb-2"}>
 														<input className="form-check-input me-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
 														<label className="form-check-label" htmlFor="flexCheckDefault">
-															<p className={'  poppins-medium-16px '}>Allow sales agent to update the value during creation of cooperation agreement</p>
+															<p  className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Allow sales agent to update the value during creation of cooperation agreement</p>
 														</label>
 													</div>
 {/*
@@ -269,44 +278,66 @@ const SalaryBenifits = () => {
 													</p> */}
 												</div>
 												<div className='row'>
-													<div className='col ps-0'><p className={'  poppins-medium-16px '}>Salary benifit value</p>
+													{/* <div className='col ps-0'><p className={'  poppins-medium-16px '}>Salary benifit value</p> */}
+
+													<div className={pc_view_type == 'addpc' ? 'col ps-0' : "col"}>
+													<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Salary benifit value</p>
+
 														<div className="form-check  ">
-															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
+															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															{/* <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
+																value in €
+															</label> */}
+															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1' : "poppins-regular-14px form-check-label"} htmlFor="flexRadioDefault1">
 																value in €
 															</label>
 														</div>
 														<div className="form-check">
-															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
+															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1' : "poppins-regular-14px form-check-label"} htmlFor="flexRadioDefault1">
 																value in %
 															</label>
+
+															{/* <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
+																value in %
+															</label> */}
 														</div>
-														<div className="input-group mb-3 col-md-3 mt-5">
-															<input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
-															<span className="input-group-text">€</span>
+														{/* <div className="input-group mb-3 col-md-3 mt-5"> */}
+															<div className={pc_view_type == 'addpc' ? 'input-group mb-3 col-md-3 mt-5' : "input-group mb-3 col-md-3 mt-2 rounded-0"}>
+															<input type="text" className="form-control rounded-0" aria-label="Amount (to the nearest dollar)" />
+															<span className="input-group-text rounded-0">€</span>
 														</div>
 													</div>
-													<div className='col'><p className={'  poppins-medium-16px '}>Applicable coefficient </p>
-														<div className="form-check ">
-															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
+													<div className='col'><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Applicable coefficient </p>
+														{/* <div className="form-check "> */}
+														<div className={pc_view_type == 'addpc' ? 'form-check' : "form-check mt-2"}>
+															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															{/* <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																Based on employee type in the cooperation agreement
+															</label> */}
+															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1' : "form-check-label poppins-regular-14px"} htmlFor="flexRadioDefault1">
+															Based on employee type in the cooperation agreement
 															</label>
 														</div>
-														<div className="form-check">
-															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
+														{/* <div className="form-check "> */}
+															<div className={pc_view_type == 'addpc' ? 'form-check' : "form-check mt-3"}>
+															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															{/* <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																Other
+															</label> */}
+															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1 shadow-none' : "form-check-label poppins-regular-14px shadow-none"} htmlFor="flexRadioDefault1">
+															Other
 															</label>
 														</div>
 														<div className="mb-3">
-															<label htmlFor="" className="form-label mt-4"></label>
-															<input type="text" className="form-control" id="" />
+															{/* <label htmlFor="" className="form-label mt-4"></label> */}
+															<label className={pc_view_type == 'addpc' ? 'form-label mt-4' : "form-label shadow-none"}>
+															</label>
+															<input type="text" className={pc_view_type == 'addpc' ? 'form-control' : "form-control rounded-0 shadow-none"} id="" />
 														</div>
 													</div>
-													<div className='col'><p className={'  poppins-medium-16px '}>Occurence</p>
-														<select className="form-select" aria-label="Default select example">
+													<div className='col'><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mb-2"}>Occurence</p>
+														<select className={pc_view_type == 'addpc' ? 'form-select shadow-none' : "form-select rounded-0 shadow-none"} aria-label="Default select example">
 															<option selected>Select..</option>
 															<option value="1">One</option>
 															<option value="2">Two</option>
@@ -315,22 +346,26 @@ const SalaryBenifits = () => {
 													</div>
 												</div>
 												<div className='row'>
-													<div className='col'><p className={'  poppins-medium-16px '}>Is the benefit granted in case of absenceof the employee?</p>
+													<div className='col'><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mt-3 mb-2"}>Is the benefit granted in case of absenceof the employee?</p>
 														<div className="form-check ">
-															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
+															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															{/* <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																Yes
-															</label>
+															</label> */}
+															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1 shadow-none' : "form-check-label  poppins-regular-14px shadow-none"} htmlFor="flexRadioDefault1">Yes</label>
 														</div>
 														<div className="form-check">
-															<input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-															<label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
+															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+															{/* <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
+																No
+															</label> */}
+															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1 shadow-none' : "form-check-label  poppins-regular-14px shadow-none"} htmlFor="flexRadioDefault1">
 																No
 															</label>
 														</div>
 
 													</div>
-													<div className='col'><p className={'  poppins-medium-16px '}>Start date</p>
+													<div className={pc_view_type == 'addpc' ? 'col' : "col start_date_edit_link"}><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mt-3 mb-2 start_date_edit_link"}>Start date</p>
 														<div className="col-md-12 p-0">
 															<DatePicker className="purple"
 																value={value}

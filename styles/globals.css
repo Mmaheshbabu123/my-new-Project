@@ -338,6 +338,7 @@ body {
 	font-size: var(--font-size-14px) !important;
 	font-style: normal;
 	font-weight: 400;
+	line-height: var(--line-height-24px);
 	/* line-height: initial; */
 }
 .poppins-light-14px {
@@ -408,6 +409,13 @@ body {
 }
 .poppins-medium-16px {
 	font-size: var(--font-size-16px) !important;
+	line-height: var(--line-height-26px);
+	font-family: var(--font-family-poppins-medium) !important;
+	color: var(--color-label-footer-gray);
+	font-weight: normal;
+}
+.poppins-medium-14px {
+	font-size: var(--font-size-14px) !important;
 	line-height: var(--line-height-26px);
 	font-family: var(--font-family-poppins-medium) !important;
 	color: var(--color-label-footer-gray);
