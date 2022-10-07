@@ -389,7 +389,7 @@ function Dashboard(props) {
 
           </div>
           <div className='text-center '>
-            <a type="button">My Todo's</a>
+            <a type="button">My Todo&apos;s</a>
           </div>
         </div>
         <div className="col  bg-light mb-2 me-3 p-4 ">

@@ -108,7 +108,7 @@ function EncodageValidation(props) {
                                 <tbody>
                                     <tr className="border poppins-regular-18px p-2" >
                                         <td className="poppins-regular-18px p-2 ps-4">
-                                            <div class="form-check">
+                                            <div className="form-check">
                                                 <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                             </div>
                                         </td>

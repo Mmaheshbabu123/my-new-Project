@@ -11,7 +11,7 @@ function AddLocation(props) {
                         <div className="p-3">
                             <div className="mb-3">
                                 <label className="form-label custom_astrick">Company</label>
-                                <select class="form-select" >
+                                <select className="form-select" >
                                     <option selected>Select</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
@@ -58,7 +58,7 @@ function AddLocation(props) {
                                 <div className="col">
 
                                     <label className="form-label custom_astrick">Company</label>
-                                    <select class="form-select" >
+                                    <select className="form-select" >
                                         <option selected>Select</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>

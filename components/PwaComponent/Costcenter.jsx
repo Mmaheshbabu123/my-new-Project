@@ -18,7 +18,7 @@ function AddCostCenter(props) {
                             </div>
                             <div className="mb-3">
                                 <label className="form-label custom_astrick">Company</label>
-                                <select class="form-select" >
+                                <select className="form-select" >
                                     <option selected>Select</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
@@ -27,7 +27,7 @@ function AddCostCenter(props) {
                             </div>
                             <div className="mb-3">
                                 <label className="form-label custom_astrick">Location</label>
-                                <select class="form-select" >
+                                <select className="form-select" >
                                     <option selected>Select</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>

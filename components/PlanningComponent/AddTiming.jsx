@@ -507,7 +507,7 @@ function Addtiming(props) {
 										</div>
 										<div className=" col-md-10 py-3">
 											{value.time.map((v1, k1) => (
-												<div className="row">
+												<div className="row" key={k1}>
 													<div className="col-md-5 py-3">
 														<div className="d-flex">
 															<div className="py-1 px-2  custom_astrick poppins-regular-20px">
@@ -627,7 +627,7 @@ function Addtiming(props) {
 																</div>
 																<div className="col-md-10">
 																	{value.time.map((v1, k1) => (
-																		<div>
+																		<div key={k1}>
 																			<div className="row">
 																				<div className="col-md-5 py-3 d-flex align-items-center">
 																					<div className="d-flex">
