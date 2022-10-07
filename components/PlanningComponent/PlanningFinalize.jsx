@@ -23,9 +23,9 @@ const PlanningFinalize = () => {
 			if (!router.isReady) return;
 			APICALL.service(planningoverview + router.query.p_unique_key, 'GET')
 				.then((result) => {
-					console.log(result.data);
 					if (result.data.length > 0) {
 						setPlanning(result.data[1][0]);
+						console.log(result.data[1][0]																						)
 						setWeek(result.data[0]);
 						setActiveWeek(result.data[0][0]);
 					}
@@ -56,7 +56,6 @@ const PlanningFinalize = () => {
 		} else {
 			APICALL.service(planningfinalize, 'POST', [ p_unique_key, finalized ])
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
 						router.push('/weekly-planning');
 					} else {
@@ -75,30 +74,41 @@ const PlanningFinalize = () => {
 	};
 	return (
 		<div className="container-fluid p-0 m-0">
-				<div className='row position-sticky-pc'>
-				<div className='col-md-12'>
-				<p className="py-4 font-weight-bold bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
-					Planning finalize
-				</p>
+			<div className="row position-sticky-pc">
+				<div className="col-md-12">
+					<p className="py-4 font-weight-bold bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
+						Planning finalize
+					</p>
 				</div>
 			</div>
 			<div className="row m-0">
-		
 				{/* <p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p> */}
 				<div className="d-flex mb-3 px-0 ">
-					<select className="form-select w-25 me-2  border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px" disabled>
+					<select
+						className="form-select w-25 me-2  border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
+						disabled
+					>
 						{planning.company != '' && <option value="">{planning.company}</option>}
 					</select>
-					<select className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px" disabled>
+					<select
+						className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
+						disabled
+					>
 						{planning.location != '' && <option value="">{planning.location}</option>}
 					</select>
 					{planning.cost_center_id != null && (
-						<select className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px" disabled>
+						<select
+							className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
+							disabled
+						>
 							<option value="">{planning.cost_center}</option>
 						</select>
 					)}
 					{planning.project_name != null && (
-						<select className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px" disabled>
+						<select
+							className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
+							disabled
+						>
 							<option value="">{planning.project_name}</option>
 						</select>
 					)}
@@ -131,36 +141,50 @@ const PlanningFinalize = () => {
 							<tr className="skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
 									Monday<br />
-									{activeWeek && activeWeek.length > 0 && activeWeek[0].split('-').reverse().join('-')}
+									{activeWeek &&
+										activeWeek.length > 0 &&
+										activeWeek[0].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
 									Tuesday <br />
-									{activeWeek && activeWeek.length > 0 && activeWeek[1].split('-').reverse().join('-')}
+									{activeWeek &&
+										activeWeek.length > 0 &&
+										activeWeek[1].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
 									Wednesday <br />
-									{activeWeek && activeWeek.length > 0 && activeWeek[2].split('-').reverse().join('-')}
+									{activeWeek &&
+										activeWeek.length > 0 &&
+										activeWeek[2].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
 									Thursday <br />
-									{activeWeek && activeWeek.length > 0 && activeWeek[3].split('-').reverse().join('-')}
+									{activeWeek &&
+										activeWeek.length > 0 &&
+										activeWeek[3].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
 									Friday<br />
-									{activeWeek && activeWeek.length > 0 && activeWeek[4].split('-').reverse().join('-')}
+									{activeWeek &&
+										activeWeek.length > 0 &&
+										activeWeek[4].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
 									Saturday<br />
-									{activeWeek && activeWeek.length > 0 && activeWeek[5].split('-').reverse().join('-')}
+									{activeWeek &&
+										activeWeek.length > 0 &&
+										activeWeek[5].split('-').reverse().join('-')}
 								</th>
 								<th className="  text-center  align-items-center justify-content-center lh-base">
 									Sunday<br />
-									{ activeWeek && activeWeek.length > 0 && activeWeek[6].split('-').reverse().join('-')}
+									{activeWeek &&
+										activeWeek.length > 0 &&
+										activeWeek[6].split('-').reverse().join('-')}
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							{planning.planning &&
+							{/* {planning.planning &&
 								Object.keys(planning.planning).map((value) => (
 									<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
 										{activeWeek.map((val, key) => (
@@ -202,6 +226,66 @@ const PlanningFinalize = () => {
 													</div>
 												) : (
 													<div />
+												)}
+											</td>
+										))}
+									</tr>
+								))} */}
+								
+							{planning.planning &&
+								Object.keys(planning.planning).map((value) => (
+									<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
+										{activeWeek.map((val, key) => (
+											<td className=" table-border-gray font-poppins-light" key={key}>
+												{console.log(planning.planning[value])}
+												{planning.planning[value].map(
+													(v2, k2) =>
+														v2.some((el) => el.pdate === val) ? (
+															<div>
+																{v2.map(
+																	(val1, key1) =>
+																		val1.pdate == val ? (
+																			<div key={val1.id}>
+																				{key1 == 0 && (
+																					<div>
+																						<p className="color_skyblue pt-1 poppins-light-18px">
+																							{val1.employee_name}
+																						</p>
+																						<br />
+																						<p className="poppins-light-14px">
+																							{val1.employee_type_name}
+																						</p>
+																						<br />
+																						<p className="poppins-light-14px">
+																							{val1.function_name}
+																						</p>
+																						<br />
+																						<p className="poppins-light-14px">
+																							{'€ ' + val1.salary}
+																						</p>
+																						<br />
+																					</div>
+																				)}
+																				<p className="poppins-light-14px">
+																					{moment(val1.starttime).format(
+																						'HH:mm'
+																					) +
+																						' to ' +
+																						moment(val1.endtime).format(
+																							'HH:mm'
+																						)}
+																				</p>
+
+																				<br />
+																			</div>
+																		) : (
+																			''
+																		)
+																)}
+															</div>
+														) : (
+															''
+														)
 												)}
 											</td>
 										))}
