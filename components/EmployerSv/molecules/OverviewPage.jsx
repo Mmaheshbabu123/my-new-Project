@@ -109,7 +109,7 @@ console.log(sign_icon);
     const { headers, currentItems, filterRows, pageCount,  currentPage} = compState;
     return(
       <>
-     <div className='row'>
+     <div className='row manage_agreement_position_sticky'>
      <div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{position: 'relative' }}>
            <div className='row'>
            <div className='col-md-9'>
@@ -151,7 +151,7 @@ console.log(sign_icon);
          </div>
      </div>
         <div className={`${styles['table-parent-div']} min_height_todo`}>
-          <table className="table table-hover manage-types-table manage-cooperation-agreement-table-header">
+          <table className="table table-hover manage-types-table manage-cooperation-agreement-table-header manage_agreement_position_sticky_table">
             <thead className="table-render-thead">
               <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
             </thead>

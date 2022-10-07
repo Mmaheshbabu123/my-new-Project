@@ -139,8 +139,8 @@ const RequestOverviewData = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
-       <div className='row'>
-       {<div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{ position: 'relative' }}>
+       <div className='row position_sticky_co-op'>
+       {<div className='col-md-12 search_field_manage_cooperation_agreement mb-2' >
               <div className='row'>
               <div className='col-md-9'>
                 <div className='row'>
