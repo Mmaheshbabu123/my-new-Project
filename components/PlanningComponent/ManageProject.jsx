@@ -232,10 +232,10 @@ function ManageProject(props) {
 		<div className="container-fluid p-0">
 			<form>
 				<div className="row m-0 ">
-					<div className="form-check p-0 mt-2  ">
+					<div className="form-check p-0">
 						{/* ----------------Search functionality--------------------------------*/}
 
-						<div className="row d-flex mt-3">
+						<div className="row d-flex project_sticky">
 							<div className="col-sm-3 field_height">
 								<input
 									type="search"
@@ -300,7 +300,7 @@ function ManageProject(props) {
 						</div>
 						{/* ---------------------Manage project table-------------------------*/}
 
-						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table">
+						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table project_table_sticky ">
 							<table className="table mt-3 mb-3">
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">

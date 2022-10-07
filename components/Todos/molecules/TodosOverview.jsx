@@ -307,7 +307,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
           </div>
         </div>
         <div className="position-sticky-mytodo">  {showTabs()} </div>
-        <div className='row searchbox m-0 mt-4 mb-2' style={{ margin: '10px 0', position: 'relative' }}>
+        <div className='row searchbox m-0 pt-4 mb-2 position-sticky-mytodo_searchbox' style={{ margin: '10px 0'}}>
           <div className='col-md-12'>
             <div className='row'>
               <div className='col-md-8 col-lg-9 ps-0'>
@@ -346,7 +346,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
         </div>
         <div className="table-render-parent-div min_height_todo">
           <table className="table table-hover manage-types-table table  mb-3 text-start manage-documents-table-header my_todo_table">
-            <thead className="table-render-thead bg_grey table_header_todo">
+            <thead className="table-render-thead bg_grey table_header_todo sticky-table-header">
               <tr className='table-sticky-bg-gray poppins-medium-18px border-0' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='' key={`tablecol_${index}`} scope="col"> {eachHeader} </th>)}</tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?

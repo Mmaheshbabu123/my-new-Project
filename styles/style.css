@@ -398,7 +398,7 @@ select option
 .position-sticky-co-op
 {
   position: sticky;
-  top: 166px;
+  top: 160px;
   background-color: var(--color-white);
   z-index: 998;
 }
@@ -432,4 +432,9 @@ select option
 .min-height-add-doc
 {
   min-height: 17rem;
+}
+.position_relative_dashboard
+{
+  position: relative;
+  height: 100% !important;
 }

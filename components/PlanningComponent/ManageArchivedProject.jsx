@@ -220,10 +220,10 @@ function ManageArchivedProject(props) {
 		<div className="container-fluid p-0">
 			<form>
 				<div className="row m-0 ">
-					<div className="form-check p-0 mt-2  ">
+					<div className="form-check p-0">
 						{/* ----------------Search functionality--------------------------------*/}
 
-						<div className="row d-flex mt-3">
+						<div className="row d-flex project_sticky">
 							<div className="col-sm-3 field_height">
 								<input
 									type="search"
@@ -288,7 +288,7 @@ function ManageArchivedProject(props) {
 							</div>
 						</div>
 
-						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table">
+						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table project_table_sticky ">
 							{/* ---------------------Manage project table-------------------------*/}
 
 							<table className="table mt-3 mb-3">

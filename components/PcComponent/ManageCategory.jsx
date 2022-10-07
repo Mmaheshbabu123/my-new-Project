@@ -187,9 +187,11 @@ const ManageCategoryComponent = () => {
 			<form>
 				<div className='minimun_height'>
 				<div className="row m-0">
-					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc">
+					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc mb-0">
 						Manage categories
 					</p>
+				<div className='col-md-12 manage_category_sticky_position pb-3'>
+				<div className='row'>
 					<div className='col-md-9'>
 						<div className='row'>
 						<div className="col-md-4 ps-0 field_height">
@@ -255,10 +257,12 @@ const ManageCategoryComponent = () => {
 					</div>
 					
 					</div>
+					</div>
+				</div>
 
-					<div className="form-check p-0 mt-2  ">
-						<table className="table mb-3 ">
-							<thead>
+					<div className="form-check p-0">
+						<table className="table mb-3">
+							<thead className='manage_category_table'>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-2 ps-4">
 										Paritair comite number
