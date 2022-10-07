@@ -4,6 +4,7 @@ import linkcofficientemp from '@/components/images/e3.svg';
 import salary from '@/components/images/e4.svg';
 import coefficientperPC from '@/components/images/e5.svg';
 
+
 let urlParams = { get: (name) => '' };
 if(typeof window !== 'undefined')
   urlParams = new URLSearchParams(window.location.search);
@@ -50,6 +51,18 @@ export const tileJson = [
     id: 7,
     name: 'Flex salary',
     url: `/manage-flex-salary?entityid=${getParam('entityid')}`,
+    iconPath: salary,
+  },
+  {
+    id: 8,
+    name: 'Indexation of salary',
+    url: `/manage-salary-indexation`,
+    iconPath: salary,
+  },
+  {
+    id: 9,
+    name: 'Indexation of benifits',
+    url: `/manage-benefit-indexation`,
     iconPath: salary,
   }
 ];
