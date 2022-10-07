@@ -60,7 +60,7 @@ const SignatureMain = ({ entityId, entityType }) => {
           <h4 className='font-weight-bold px-0  bitter-italic-normal-medium-24'> Manage signature </h4>
         </div>
         <SignatureDetails state = {state} setState = {setState} submitSignData={submitSignData} eraseSignature={eraseSignature}/>
-        <button onClick={() => router.back()} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-5 mb-5 ps-0 text-decoration-underline text-uppercase">
+        <button onClick={() => router.back()} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-5 mb-2 ps-0 text-decoration-underline text-uppercase">
           {`BACK`}
         </button>
       </>

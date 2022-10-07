@@ -19,7 +19,7 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fro
   }
 
   return(
-    <div>
+    <div className='row min-height-signature'>
         <Modal size={'lg'} show={state.showPopup} onHide={handleClose}>
           <Modal.Header closeButton style={{paddingLeft: '43%'}}>
             <Modal.Title> <h3 className='font-weight-bold px-0  bitter-italic-normal-medium-24'> Signature </h3> </Modal.Title>
@@ -34,13 +34,15 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fro
                   />
           </Modal.Body>
         </Modal>
-        {fromSvPreview === 0 && <div className='border p-2 row'>
+        {fromSvPreview === 0 && <div className='border p-2 col-md-9 col-lg-11 m-auto'>
           {state.sign !== '' ? <>
-          <span> Signature: </span>
+          <span className='poppins-regular-18px'> Signature: </span>
+          <div className='row'>
           <div className='col-md-8'> <img src={state.sign} alt="no sign" width="100%"/> </div>
           <div className='col-md-4'>
-            <button className={`btn btn-secondary mx-2 btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color col-2 m-auto shadow-none`} style={{width:'50%'}} onClick={handleEdit}> Sign again </button>
+            <button className={`btn btn-secondary mx-2 btn  btn-block border-0 rounded-0 skyblue-bg-color col-2 m-auto shadow-none float-end`} style={{width:'50%'}} onClick={handleEdit}> Sign again </button>
             {/*<button className={`btn btn-light`} style={{width:'30%'}} onClick={handleDelete}> Delete </button>*/}
+          </div>
           </div>
           </> :
           <>

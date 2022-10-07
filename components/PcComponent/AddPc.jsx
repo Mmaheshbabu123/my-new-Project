@@ -483,7 +483,7 @@ function AddPc(props) {
 						</div>
 					</div>
 				) : (
-					<div className="row m-0 my-4">
+					<div className="row m-0 mt-4 mb-2">
 						<div className="text-start col-md-6 p-0 d-flex align-items-center">
 							<button
 								type="button"

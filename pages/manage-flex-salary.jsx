@@ -83,8 +83,8 @@ const ManageFlexWorkerMinSalary = (props) => {
         <div className='py-4 position-sticky-pc px-0'>
           <h4 className='font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Add minimum salary of flex worker`} </h4>
         </div>
-        <div className = {`col-md-12`}>
-        <LabelField title="Minimum salary of flex worker" mandotory={true} customStyle = {{display:''}} className={'poppins-regular-18px'}/>
+        <div className = {`col-md-12 flex-min-height`}>
+        <LabelField title="Minimum salary of flex worker" mandotory={true} customStyle = {{display:''}} className={'poppins-regular-18px px-0'}/>
         <InputField
           type = {'text'}
           className = {'col-md-11 poppins-regular-18px'}
@@ -95,7 +95,8 @@ const ManageFlexWorkerMinSalary = (props) => {
          {state.warning && <ValidateMessage style={{margin: 0}} text = {'This field is required.'}/>}
          {state.valueError && <ValidateMessage style={{margin: 0}} text = {'Value should be greater than 0 and less than or equal to 100.'}/>}
         </div>
-        <div className='col-md-11 my-3 p-0 align-self-center'>
+       <div className='row'>
+       <div className='col-md-11 mt-3 p-0 align-self-center'>
             <button
               type="button"
               className=" col-2 bg-white border-0 poppins-light-18px text-start  float-sm-right text-left p-0 md-5 text-decoration-underline shadow-none"
@@ -109,6 +110,7 @@ const ManageFlexWorkerMinSalary = (props) => {
               SAVE
             </button>
         </div>
+       </div>
       </div>
     )
   else return (<> Loading... </>);

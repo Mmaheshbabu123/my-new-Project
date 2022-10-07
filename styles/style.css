@@ -194,6 +194,10 @@ input[type="checkbox"]:focus
 {
   height: 43px !important;
 }
+.occurence_col .react-select-prefix__control
+{
+  height: 41px !important;
+}
 #react-select-2-listbox,
 .css-6j8wv5-Input,
 .css-qc6sy-singleValue,
@@ -313,7 +317,7 @@ input[type="radio"]
 }
 .min_height_age
 {
-  min-height: 39vh;
+  min-height: 42vh;
 }
 .padding_first_col:first-child
 {
@@ -437,4 +441,20 @@ select option
 {
   position: relative;
   height: 100% !important;
+}
+.table-render-parent-div
+{
+  min-height: 45vh;
+}
+.dashboard-tile-parent
+{
+  cursor: pointer;
+}
+.flex-min-height
+{
+  min-height: 63vh;
+}
+.min-height-signature
+{
+  min-height: 59vh;
 }
