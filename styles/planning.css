@@ -13,6 +13,7 @@
 .action_icon_size
 {
   width: 25px;
+  margin-right: 0.5rem;
 }
 .css-1pahdxg-control
 {
@@ -134,7 +135,7 @@ input[type="checkbox"]
 .sign_action_icon_size_pdf
 {
   width: 16px;
-  margin-left: 0.5rem;
+  
 }
 .delete_icon_manage_cooperation
 {

@@ -68,14 +68,14 @@ const RequestAgreement = (props) => {
     const { showPopup, companies, selectedCompanies, warning } = compState;
     return (
       <>
-          <Modal size={'lg'} show={showPopup} onHide={handleClose}>
-            <Modal.Header closeButton style={{paddingLeft: '36%'}}>
-              <Modal.Title> Request agreement </Modal.Title>
+          <Modal size={'lg'} show={showPopup} onHide={handleClose} >
+            <Modal.Header closeButton >
+              <Modal.Title className='bitter-italic-normal-medium-22 text-center'> Request agreement </Modal.Title>
             </Modal.Header>
           <Modal.Body>
               <div>
                {companies && companies.length > 0 ? <>
-                  <p style={{fontSize: 'larger'}}> Please select company </p>
+                  <p style={{fontSize: 'larger'}} className='poppins-medium-18px'> Please select company </p>
                   <div style={{margin: '20px 0'}}>
                   {companies.map(company => {
                     return(
@@ -87,7 +87,7 @@ const RequestAgreement = (props) => {
                           onCheck={handleCheckBoxChange}
                           name={company.name}
                           customStyle={{ margin:'10px 0' }}
-                          className="col-md-6"
+                          className="col-md-6 poppins-light-18px d-flex align-items-center"
                         />
                     );
                   })}
@@ -96,8 +96,8 @@ const RequestAgreement = (props) => {
                 </> : <p className="text-center"> No companies found </p>}
               </div>
           </Modal.Body>
-          {companies && companies.length > 0 && <Modal.Footer>
-            <p className={`${styles['popup-back-btn']} pop_up_back_button`} onClick={handleClose}> Back </p>
+          {companies && companies.length > 0 && <Modal.Footer className="pop_up_footer justify-content-between">
+            <p className={`${styles['popup-back-btn']} pop_up_back_button poppins-light-18px text-uppercase text-decoration-underline`} onClick={handleClose}> Back </p>
             <Button onClick={handleRequest} className="buttuon_purple rounded-0 border-0 shadow-none">
               Request agreement
             </Button>

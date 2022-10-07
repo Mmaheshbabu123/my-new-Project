@@ -326,6 +326,12 @@ body {
 	font-weight: 500;
 	font-size: var(--font-size-16px);
 }
+.bitter-italic-normal-medium-18 {
+	color: var(--color-purple);
+	font-family: var(--font-family-bitter-italic-normal-medium);
+	font-weight: 500;
+	font-size: var(--font-size-16px);
+}
 .poppins-regular-14px {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular);
