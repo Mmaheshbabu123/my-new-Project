@@ -57,7 +57,7 @@ const Overviewpage = (props) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
-      <div className='row position-sticky-co-op mb-2'>
+      <div className='row position-sticky-co-op'>
       <div className='col-md-12'>
       <ul className={`${styles['employer-overview-tabs']}`}>
         <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
@@ -127,7 +127,7 @@ const Overviewpage = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
-        {<div className='row'>
+        {<div className='row manage_cooperation_agreement_position_sticky'>
         <div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{  position: 'relative' }}>
               <div className='row'>
               <div className='col-md-9'>

@@ -51,7 +51,7 @@
 {
   position: sticky;
   top: 166px;
-  z-index: 999;
+  z-index: 998;
   background: white;
 }
 .border-purple
@@ -303,7 +303,7 @@ input[type="checkbox"]
 .my_documents_position_sticky
 {
   position: sticky;
-  top: 243px;
+  top: 304px;
   background:var(--color-white);
   z-index: 998;
 }
