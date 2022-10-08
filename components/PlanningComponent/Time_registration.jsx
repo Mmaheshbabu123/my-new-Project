@@ -55,59 +55,7 @@ function TimeRegistration(props) {
 	let submit = (event) => {
 		event.preventDefault();
 	};
-	// return (
-	// <div className="container   ">
-	// 	<form onSubmit={(e) => submit(e)}>
-	// 		<div className="row text-center">
-	// 			<div className="">
-	// 				<p className="h2">Time Registration</p>
-	// 			</div>
-	// 			<div className=" col-sm-6 ">
-	// 				<span className="text-center">
-	// 					<button className="btn btn-large">
-	// 						<MdQrCode className="m-auto" onClick={showQRPopup} />
-	// 					</button>
-	// 				</span>
-	// 				<p className="h3 mt-3">QR code</p>
-	// 			</div>
-	// 			<div className="col-sm-6 ">
-	// 				<button className="btn btn-large">
-	// 					<FaLaptopCode className=" m-auto " onClick={showPincodePopup} />
-	// 				</button>
-	// 				<p className="h3 mt-3">Pin code</p>
-	// 			</div>
-	// 			{<div className="col">
-	// 				<button className="btn btn-large">
-	// 					<BsPersonFill className="w-100 h-20 m-auto" onClick={showEmployerStopPlanning} />
-	// 				</button>
-	// 				<p className="h3  mt-3">Employer</p>
-	// 			</div> }
-	// 		</div>
-	// 	</form>
-	// {showQR == true && (
-	// 	<div className="">
-	// 		<QRCode display={'block'} popupActionNo={closeQRPopup} popupActionYes={showQRPopup} />
-	// 		{/* <PinCode display={'block'} popupActionNo={closePincodePopup} popupActionYes={showPincodePopup} /> */}
-	// 	</div>
-	// )}
-	// {showpincode == true && (
-	// 	<PincodePopup
-	// 		display={'block'}
-	// 		pincodepopupActionNo={closePincodePopup}
-	// 		pincodepopupActionYes={showPincodePopup}
-	// 	/>
-	// )}
-	{/* {showemployer == true && (
-				<EmployerPopup
-					display={'block'}
-					employerpopupActionNo={closeEmployerPopup}
-					employerpopupActionYes={showEmployerPopup}
-				/>
-			)} */}
-	//  </div>
-
-
-	// );
+	
 	return (
 		<div className="container">
 			<form onSubmit={(e) => submit(e)} >
