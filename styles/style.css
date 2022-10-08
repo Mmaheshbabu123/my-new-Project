@@ -402,7 +402,7 @@ select option
 .position-sticky-co-op
 {
   position: sticky;
-  top: 160px;
+  top: 166px;
   background-color: var(--color-white);
   z-index: 998;
 }
@@ -457,4 +457,32 @@ select option
 .min-height-signature
 {
   min-height: 59vh;
+}
+.modal-content
+{
+  border: none !important;
+  border-radius: 0px;
+}
+.modal-header .btn-close
+{
+  box-shadow: none !important;
+}
+.additional_add_sticky,
+.v1_position_sticky
+{
+  position: sticky !important;
+  top: 243px;
+  background: var(--color-white);
+  z-index: 998;
+}
+.manage_cooperation_agreement_position_sticky
+{
+  position: sticky;
+  top: 235px;
+  z-index: 998;
+  background:var(--color-white);
+}
+.min_height_cooperation_sales
+{
+  min-height: 45vh;
 }
