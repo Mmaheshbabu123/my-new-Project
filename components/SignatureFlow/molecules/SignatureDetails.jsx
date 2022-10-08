@@ -46,10 +46,14 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fro
           </div>
           </> :
           <>
-          <p style={{margin: '20px 0', textAlign: 'center'}}> {`You haven't added a signature yet, please add your signature.`} </p>
-              <button onClick={handleEdit} type="button" className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color col-2 m-auto shadow-none">
+          <p className='poppins-light-18px'style={{margin: '20px 0', textAlign: 'center'}}> {`You haven't added a signature yet, please add your signature.`} </p>
+             <div className='row'>
+               <div className='col-md-12 text-center'>
+               <button onClick={handleEdit} type="button" className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color col-2 m-auto shadow-none">
                 {`Add signature`}
               </button>
+               </div>
+             </div>
          </>
         }
         </div>}
