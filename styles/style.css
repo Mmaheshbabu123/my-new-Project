@@ -490,3 +490,30 @@ select option
 {
   height: 150px;
 }
+.edit_pc_salary_benefits input[type="text"]:focus,
+.edit_pc_salary_benefits select:focus
+{
+  border: 1px solid var(--border-color-lightgray);
+}
+.edit_pc_salary_benefits .rmdp-day.rmdp-selected span:not(.highlight),
+.edit_pc_salary_benefits .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover
+{
+  width: 25px !important;
+  height: 25px !important;
+  margin: auto;
+  background-color: var(--color-skyblue) !important;
+  box-shadow: var(--color-skyblue) !important;
+}
+.purple .rmdp-day.rmdp-today span
+{
+  background-color: var(--color-purple) !important;
+  width: 25px !important;
+  height: 25px !important;
+  margin: auto !important;
+}
+@media screen and (min-width:1200px) and (max-width:1399px) 
+{
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 1180px !important;
+}
+}
