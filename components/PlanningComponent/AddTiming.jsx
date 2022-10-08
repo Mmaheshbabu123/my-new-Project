@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import { fetchPlannedTimings, storePlannedTimings } from '../../Services/ApiEndPoints';
 import { Calendar } from 'react-multi-date-picker';
@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import { FaRegPlusSquare, FaRegMinusSquare } from 'react-icons/fa';
-import { MdStarRate, MdClose } from 'react-icons/md';
+import { MdStarRate } from 'react-icons/md';
 import moment from 'moment';
 import Image from 'next/image';
 import Close from '../../public/images/Close.svg';
@@ -298,6 +298,8 @@ function Addtiming(props) {
 			.then((result) => {
 				if (result.status === 200) {
 					router.push('/planning/finalize/' + props.p_unique_key);
+				}else if(result.status === 201){
+
 				}
 			})
 			.catch((error) => {
@@ -318,6 +320,13 @@ function Addtiming(props) {
 			window.scrollTo(0, 0);
 		}
 	};
+
+	/**
+	 * Validate data before storing
+	 * @returns 
+	 * 
+	 * 
+	 */
 
 	let validateTimings = () => {
 		var count = 0;
@@ -368,6 +377,7 @@ function Addtiming(props) {
 							if (o1.pdate == moment(new Date()).format('YYYY-MM-DD')) {
 								if (moment(v2.starttime) < moment(new Date())) {
 									res[ky].timings[k1].time[k2].error = 'Employee cannot be planned for past time.';
+									res[ky].collapseOpen = true;
 									count++;
 								}
 							}
@@ -470,9 +480,9 @@ function Addtiming(props) {
 					{checked ? (
 						<div>
 							<div className=" mt-3">
-								{employee_planning.map((result) => (
+								{employee_planning.map((result,key) => (
 									<div
-										key={result.id}
+										key={key}
 										className={`row d-flex justify-content-start py-3 my-3  ${style.sec_background}`}
 									>
 										<div className="col-md-1 poppins-light-20px">{++count1}.</div>
@@ -572,7 +582,7 @@ function Addtiming(props) {
 							<div className=" mt-3">
 								<div className="">
 									{employee_planning.map((result, key) => (
-										<div key={result.id}>
+										<div key={key}>
 											<div
 												className={`row d-flex justify-content-start py-3 my-3 ${style.sec_background}`}
 											>
