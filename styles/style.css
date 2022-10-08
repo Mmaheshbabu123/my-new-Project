@@ -486,3 +486,7 @@ select option
 {
   min-height: 45vh;
 }
+.time-registartion-height
+{
+  height: 150px;
+}
