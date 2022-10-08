@@ -303,8 +303,8 @@ const SalaryBenifits = () => {
 															</label> */}
 														</div>
 														{/* <div className="input-group mb-3 col-md-3 mt-5"> */}
-															<div className={pc_view_type == 'addpc' ? 'input-group mb-3 col-md-3 mt-5' : "input-group mb-3 col-md-3 mt-2 rounded-0"}>
-															<input type="text" className="form-control rounded-0" aria-label="Amount (to the nearest dollar)" />
+															<div className={pc_view_type == 'addpc' ? 'input-group mb-3 col-md-3 mt-5' : "input-group mb-3 col-md-3 mt-2 rounded-0 shadow-none"}>
+															<input type="text" className="form-control rounded-0 shadow-none" aria-label="Amount (to the nearest dollar)" />
 															<span className="input-group-text rounded-0">€</span>
 														</div>
 													</div>
@@ -365,7 +365,7 @@ const SalaryBenifits = () => {
 														</div>
 
 													</div>
-													<div className={pc_view_type == 'addpc' ? 'col' : "col start_date_edit_link"}><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mt-3 mb-2 start_date_edit_link"}>Start date</p>
+													<div className={pc_view_type == 'addpc' ? 'col' : "col start_date_edit_link mb-2"}><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mt-3 mb-2 start_date_edit_link"}>Start date</p>
 														<div className="col-md-12 p-0">
 															<DatePicker className="purple"
 																value={value}
@@ -388,7 +388,7 @@ const SalaryBenifits = () => {
 					</div>
 				</div>
 				{pc_view_type == 'editpc' ? (
-					<div className="row my-4">
+					<div className="row mt-4">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
 							<button
