@@ -354,8 +354,8 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
                 {state.currentItems.map((eachRow, index) =>
                   <tr key={`${index}_${eachRow.tid}`} id={eachRow.tid}>
                     <td className='text-start ps-4 py-1'> {eachRow.title} </td>
-                    <td className='text-start ps-4 py-1'> {eachRow.company_name} </td>
-                    {entityType === 2 && <td className='text-start ps-4 py-1'> {eachRow.employee_name} </td>}
+                    <td className='text-start py-1'> {eachRow.company_name} </td>
+                    {entityType === 2 && <td className='text-start py-1'> {eachRow.employee_name} </td>}
                     <td> <span className={`${styles['status-icon']} ${Number(eachRow.todo_status) ? styles['status-done'] : styles['status-open']}`}> </span> </td>
                     <td className='align-self-center my_todo_action_icon'>{getNeededActions(eachRow)} </td>
                   </tr>)}

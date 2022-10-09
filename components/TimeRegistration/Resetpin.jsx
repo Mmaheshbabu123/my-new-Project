@@ -151,7 +151,7 @@ const Pincode = () => {
 						disabled={false}
 						secure
 					/>
-					<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
+					<p style={{ color: 'red', }} className="mt-2">
 						{err1}
 					</p>
 				</div>

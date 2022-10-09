@@ -68,7 +68,7 @@ const RequestAgreement = (props) => {
     const { showPopup, companies, selectedCompanies, warning } = compState;
     return (
       <>
-          <Modal size={'lg'} show={showPopup} onHide={handleClose} >
+          <Modal size={'lg'} show={showPopup} onHide={handleClose} centered>
             <Modal.Header closeButton >
               <Modal.Title className='bitter-italic-normal-medium-22 text-center'> Request agreement </Modal.Title>
             </Modal.Header>
@@ -98,7 +98,7 @@ const RequestAgreement = (props) => {
           </Modal.Body>
           {companies && companies.length > 0 && <Modal.Footer className="pop_up_footer justify-content-between">
             <p className={`${styles['popup-back-btn']} pop_up_back_button poppins-light-18px text-uppercase text-decoration-underline`} onClick={handleClose}> Back </p>
-            <Button onClick={handleRequest} className="buttuon_purple rounded-0 border-0 shadow-none">
+            <Button onClick={handleRequest} className="buttuon_purple rounded-0 border-0 shadow-none text-uppercase">
               Request agreement
             </Button>
           </Modal.Footer>}
@@ -111,7 +111,7 @@ const RequestAgreement = (props) => {
     <div className={`${styles['request-agreeemnt-comp-btn']} row `}>
      <div className='col-md-12'>
      {companyPopup()}
-      <button onClick={triggerPopup} type="button" className="btn btn-dark buttuon_purple col-1 rounded-0 col-md-3 float-end shadow-none mb-3">
+      <button onClick={triggerPopup} type="button" className="btn btn-dark buttuon_purple col-1 rounded-0 col-md-3 float-end shadow-none mb-3 text-uppercase">
         {`Request agreement`}
       </button>
      </div>
