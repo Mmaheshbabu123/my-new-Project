@@ -53,7 +53,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
 
   return(
     <>
-        <Modal size={'lg'} show={showPopup} onHide={handleClose}>
+        <Modal size={'lg'} show={showPopup} onHide={handleClose} centered>
           <Modal.Header closeButton >
             <Modal.Title className='bitter-italic-normal-medium-22 text-center'>{savedAgentId ? 'Re-assign sales agent' : 'Assign to sales agent'}</Modal.Title>
           </Modal.Header>
