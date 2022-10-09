@@ -203,7 +203,7 @@ const EmployeeType = () => {
 				</div>
 				</div>
 				{pc_view_type == 'editpc' ? (
-					<div className="row my-4">
+					<div className="row mt-4">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
 							<button

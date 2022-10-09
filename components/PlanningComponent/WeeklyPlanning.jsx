@@ -112,11 +112,11 @@ function WeeklyPlanning(props) {
 
 					</div>
 				</div>
-				<div className=" mt-4 d-flex justify-content-end">
+				<div className=" pt-3 d-flex justify-content-end">
 					<div className="d-inline ">
 						<button
 							type="button"
-							className="btn  btn my-2 skyblue-bg-color border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 ms-2 d-flex align-items-center add-pln   btn-block shadow-none rounded-0 "
+							className="btn  btn my-2 skyblue-bg-color border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln   btn-block shadow-none rounded-0 "
 						>
 							Planning view
 						</button>
@@ -317,10 +317,10 @@ function WeeklyPlanning(props) {
 												))}
 											</tr>
 										)):company != ''?<tr className='no-records'>
-											<td colSpan={7} className="align-middle text-center poppins-light-18px" style={{height:'5rem'}}>
+											<td colSpan={7} className="align-middle text-center poppins-light-18px border" style={{height:'4rem'}}>
 											No planning for this week.
 						</td></tr>:<tr>
-											<td colSpan={7} className="align-middle text-center poppins-light-18px" style={{height:'5rem'}}>						
+											<td colSpan={7} className="align-middle text-center poppins-light-18px border" style={{height:'4rem'}}>						
 							Select company and location to view planning.
 							</td></tr>}
 									</tbody>
@@ -342,7 +342,7 @@ function WeeklyPlanning(props) {
 				<div className="text-end mb-4">
 					<button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end ">
 						<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL} className="">
-							<a className="btn rounded-0  custom-btn px-3  btn-block float-end ">DASHBOARD</a>
+							<a className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none">DASHBOARD</a>
 						</Link>
 					</button>
 				</div>

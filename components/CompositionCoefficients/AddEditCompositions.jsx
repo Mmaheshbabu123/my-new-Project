@@ -167,12 +167,12 @@ const AddEditCompositions = (props) => {
           />
           {state.nameWarning &&
             <small
-              className="form-text text-muted col-md-5 pcp_name_warning ">
+              className="form-text text-danger col-md-5 pcp_name_warning poppins-regular-16px ">
               This field is required.
             </small>}
           {state.uniqueError &&
             <small
-              className="form-text text-muted col-md-5 pcp_name_warning">
+              className="form-text text-danger col-md-5 pcp_name_warning poppins-regular-16px">
               {`${state.duplicates.length > 1 ? state.duplicates.join(', ') : state.duplicates[0]} ${state.duplicates.length > 1 ? ' names' : ' name'} already exists`}
             </small>}
         </div>

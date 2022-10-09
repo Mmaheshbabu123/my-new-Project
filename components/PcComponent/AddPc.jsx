@@ -467,7 +467,7 @@ function AddPc(props) {
 					</div>
 				</div>
 				{cat_subsec_type == 3 ? (
-					<div className="row m-0 my-4">
+					<div className="row m-0 mt-4">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6 p-0">
 							<button
