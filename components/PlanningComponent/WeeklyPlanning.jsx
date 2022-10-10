@@ -116,7 +116,7 @@ function WeeklyPlanning(props) {
 					<div className="d-inline ">
 						<button
 							type="button"
-							className="btn  btn my-2 skyblue-bg-color border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln   btn-block shadow-none rounded-0 "
+							className="btn  btn my-2 skyblue-bg-color border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln  px-3 btn-block shadow-none rounded-0 "
 						>
 							Planning view
 						</button>
@@ -124,7 +124,7 @@ function WeeklyPlanning(props) {
 					<div className=" ">
 						<button
 							type="submit"
-							className="btn  my-2 border-0  btn-block btn-bg-gray-medium add-pln poppins-medium-18px shadow-none rounded-0 "
+							className="btn  my-2 border-0 px-3  btn-block btn-bg-gray-medium add-pln poppins-medium-18px shadow-none rounded-0 "
 						>
 							Encodage view
 						</button>
@@ -192,7 +192,7 @@ function WeeklyPlanning(props) {
 						<option value="">Project-2</option>
 					</select> */}
 				</div>
-				<div className={'mt-2 '}>
+				<div className={'mt-2 min-height-weekly-planning'}>
 					{(planning||company != '') ? (
 						<div className="row">
 							<div className={styleEdit}>
@@ -339,7 +339,7 @@ function WeeklyPlanning(props) {
 						</div>
 					)}
 				</div>
-				<div className="text-end mb-4">
+				<div className="text-end mb-3">
 					<button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end ">
 						<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL} className="">
 							<a className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none">DASHBOARD</a>

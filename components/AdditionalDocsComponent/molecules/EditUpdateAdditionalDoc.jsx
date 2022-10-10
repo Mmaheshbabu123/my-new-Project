@@ -157,7 +157,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
     <div className='add-edit-types border-purple p-3 mb-5'>
      <div className="">
       <div className='row'>
-      <div className='col-md-6'>
+      <div className='col-md-6 pe-0 pb-3'>
         <div>
             <LabelField title={`Document name`} className='poppins-medium-18px' mandotory={true}/>
             <InputField
@@ -187,28 +187,28 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
         </div>
       </div>
       </div>
-      <LabelField title={`Document validity`} className='poppins-medium-18px' />
+      <LabelField title={`Document validity`} className='poppins-medium-18px pb-0' />
      <div className='row'>
        <div className='col-md-12'>
          <div className='row'>
-        <div className="col-md-6">
+        <div className="col-md-12">
           <LabelField title={`Start date`} className='poppins-medium-18px'/>
           <DateField
             name={'startDate'}
             value={state.startDate}
             id={'startDate_id'}
-            className={'col-md-12 rounded-0 shadow-none'}
+            className={'col-md-6 rounded-0 shadow-none'}
             handleChange={(e) => handleChange(e, 1)}
           />
       {state.dateWarning && <ValidateMessage style={{margin:0}} text = {'Start date should be earlier than end date.'}/>}
         </div>
-        <div className="col-md-6">
+        <div className="col-md-12">
           <LabelField title={`End date`} className='poppins-medium-18px' />
           <DateField
             name={'endDate'}
             value={state.endDate}
             id={'endDate_id'}
-            className={'col-md-12 rounded-0 shadow-none'}
+            className={'col-md-6 rounded-0 shadow-none'}
             handleChange={(e) => handleChange(e, 1)}
           />
         </div>
@@ -218,26 +218,26 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
       <div className='row'>
       <div className="col-md-12">
        <div className='row'>
-       <div className="col-md-6">
+       <div className="col-md-12">
           <LabelField title={`Employer`} className='poppins-medium-18px'/>
           <MultiSelectField
             options={employers}
             standards={employers.filter(val => val.value === state.employerId)}
             handleChange={(e) => onSelect(e, 1)}
             isMulti={false}
-            className="col-md-12 rounded-0 shadow-none employer_select"
+            className="col-md-6 rounded-0 shadow-none employer_select"
             placeholder={'Select employer'}
           />
         {state.employerWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
         </div>
-        <div className="col-md-6">
+        <div className="col-md-12">
           <LabelField title={`Company`} className='poppins-medium-18px' />
           <MultiSelectField
             options={state.employerId ? companies[state.employerId] : []}
             standards={state.employerId && companies[state.employerId] ? companies[state.employerId].filter(val => val.value === state.companyId) : []}
             handleChange={(e) => onSelect(e, 2)}
             isMulti={false}
-            className="col-md-12 rounded-0 shadow-none employer_select"
+            className="col-md-6 rounded-0 shadow-none employer_select"
             placeholder={'Select company'}
           />
         {state.companyWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}

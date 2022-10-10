@@ -90,7 +90,7 @@ const NotificationView = ({
             <img alt={"close"} title={"Close"} onClick={toggleNotificationView} style={{ cursor: "pointer", width: "15px" }} src={closeIcon.src} />
           </div>
           {state.notificationCount === 0 && <p> No notifications to show. </p>}
-          <div style={{ minHeight: state.notificationCount ? "200px" : "150px", maxHeight: state.viewAllLink ? "400px" : "460px", overflowY: 'auto' }}>
+          <div className={styles["notification-scroll"]} style={{ minHeight: state.notificationCount ? "200px" : "150px", maxHeight: state.viewAllLink ? "400px" : "460px", overflowY: 'auto' }}>
           {state.allTimestamp.map((i, k) => {
             return (
               <div key={k} className="container px-3 notification_container">
@@ -107,7 +107,7 @@ const NotificationView = ({
                 {i.list.map(l => {
                   return l.map((k, _key) => {
                     const d = new Date(k.timeStamp * 1000);
-                    const min = d.getUTCMinutes();
+                    const min = d.getUTCMinutes() < 10 ? '0' + d.getUTCMinutes() : d.getUTCMinutes();
                     const hours = d.getUTCHours() % 12 || 12;
                     const amOrpm = hours >= 12 ? "pm" : "am";
                     return (

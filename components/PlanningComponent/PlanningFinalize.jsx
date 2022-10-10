@@ -85,20 +85,20 @@ const PlanningFinalize = () => {
 				{/* <p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p> */}
 				<div className="d-flex mb-3 px-0 ">
 					<select
-						className="form-select w-25 me-2  border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
+						className="form-select w-25 me-3  border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
 						disabled
 					>
 						{planning.company != '' && <option value="">{planning.company}</option>}
 					</select>
 					<select
-						className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
+						className="form-select w-25 me-3 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
 						disabled
 					>
 						{planning.location != '' && <option value="">{planning.location}</option>}
 					</select>
 					{planning.cost_center_id != null && (
 						<select
-							className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
+							className="form-select w-25 me-3 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
 							disabled
 						>
 							<option value="">{planning.cost_center}</option>
@@ -106,7 +106,7 @@ const PlanningFinalize = () => {
 					)}
 					{planning.project_name != null && (
 						<select
-							className="form-select w-25 me-2 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
+							className="form-select w-25 me-3 border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
 							disabled
 						>
 							<option value="">{planning.project_name}</option>
@@ -324,7 +324,7 @@ const PlanningFinalize = () => {
 					</div>
 					<div className="error mt-2">{errorFinalize}</div>
 				</div>
-				<div className="row mt-4 mb-2 col-md-12 m-0 px-0">
+				<div className="row mt-4 mb-3 col-md-12 m-0 px-0">
 					<div className="col-md-6 p-0 align-self-center ">
 						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/timings/' + p_unique_key}>

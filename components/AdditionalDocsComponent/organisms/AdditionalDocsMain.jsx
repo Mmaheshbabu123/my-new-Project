@@ -62,7 +62,7 @@ const AdditionalDocsMain = (props) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
-     <div className='row position-sticky-subhead py-4'>
+     <div className={`row ${Number(entityType) !== 3 ? 'position-sticky-subhead py-4' : ''}`}>
        <div className='col-md-12'>
        <ul className={`${styles['docs-overview-tabs']}  m-0`}>
         {Number(entityType) !== 3 && <li
