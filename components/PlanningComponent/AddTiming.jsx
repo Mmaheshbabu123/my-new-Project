@@ -455,15 +455,25 @@ function Addtiming(props) {
 			if (type == 'starttime') {
 				common[index].time[time_index].error = '';
 				common[index].time[time_index].error_starttime = '';
-				common[index].time[time_index].starttimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
-				common[index].time[time_index].starttime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+				common[index].time[time_index].starttimeObj = moment(date + ' ' + e.format('HH:mm') + ':00');
+				common[index].time[time_index].starttime = date + ' ' + moment(e).format('HH:mm') + ':00';
 				setCommonDatetime(common);
 			} else {
 				common[index].time[time_index].error = '';
 				common[index].time[time_index].error_endtime = '';
-				common[index].time[time_index].endtimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
-				common[index].time[time_index].endtime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+				common[index].time[time_index].endtimeObj = moment(date + ' ' + e.format('HH:mm') + ':00');
+				common[index].time[time_index].endtime = date + ' ' + moment(e).format('HH:mm') + ':00';
 				setCommonDatetime(common);
+			}
+			if (
+				common[index].time[time_index].starttime != '' &&
+				common[index].time[time_index].endtime != ''
+			) {
+				common[index].warning = maxWorkTimeVaidation(
+					common[index].time,
+					res[0].min_work_timings,
+					res[0].max_work_timings
+				);
 			}
 		} else {
 			if (e != null && res[key].timings.length > 0) {
@@ -486,7 +496,6 @@ function Addtiming(props) {
 
 					setEmployee_planning(res);
 				}
-				console.log(res[key].max_work_timings);
 				if (
 					res[key].timings[index].time[time_index].starttime != '' &&
 					res[key].timings[index].time[time_index].endtime != ''
@@ -680,6 +689,13 @@ function Addtiming(props) {
 																	/>
 																)}
 															</div>
+															{value.warning != '' &&
+																			value.warning != undefined && (
+																				<p className="error pb-2">
+																					<ExclamationTriangle />
+																					{value.warning}
+																				</p>
+																			)}
 														</div>
 													))}
 												</div>
