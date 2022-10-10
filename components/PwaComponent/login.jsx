@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
+import axios from 'axios';
 
 function Login(props) {
     const [ token, setToken ] = useState('');
@@ -13,9 +14,25 @@ function Login(props) {
 
 	const submit = (e) => {
 		e.preventDefault();
+		const config = {
+			headers:
+				{
+					'Content-Type': 'application/json',
+				        'X-CSRF-Token': token
+				}
+		}
+		let data =
+	{
+			"name": "maheshbabumanikanti.infanion@gmail.com",
+			"pass": "AY_LM@test_22$"
+		}
+		axios.post(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}user/login?_format=json`, data, config).then((response) => {
+		   })
+		 .catch((error) => {
+		})
+	}
 		
 	
-	}
     return (
         <section className="container">
             <div className="row content d-flex justify-content-center p-2">
