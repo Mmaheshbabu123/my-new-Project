@@ -489,7 +489,7 @@ const AddFunction = () => {
 					<div>
 						<div className="min-hei-addfun add_function">
 							{employeeobject.length > 1 && (
-								<div className="form-check rounded-0 my-3 align-items-center d-flex">
+								<div className="form-check rounded-0 pb-3 align-items-center d-flex mb-0 position-sticky-select-function">
 									<input
 										// className="input-h-w"
 										className="form-check-input rounded-0 mb-1 "

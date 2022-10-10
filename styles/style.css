@@ -518,7 +518,13 @@ select option
 @media screen and (min-width:1200px) and (max-width:1399px) 
 {
   .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    max-width: 1180px !important;
+    max-width: 1130px !important;
+  }
+}
+@media screen and (min-width:1024px) and (max-width:1199px) 
+{
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 950px !important;
 }
 }
 .indexation_date_field .rmdp-container,
