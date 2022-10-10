@@ -18,7 +18,7 @@ export function getFutureDates(startDate = new Date(), noOfDays = 5) {
     let dd = currentDate.getUTCDate();
     dateOptions.push({
       value: `${yyyy}${mm < 10 ? '0' + mm : mm}${dd < 10 ? '0' + dd : dd}`,
-      label: `${yyyy}-${mm < 10 ? '0' + mm : mm}-${dd < 10 ? '0' + dd : dd}`
+      label: `${dd < 10 ? '0' + dd : dd}-${mm < 10 ? '0' + mm : mm}-${yyyy}`
     })
   }
   return dateOptions;

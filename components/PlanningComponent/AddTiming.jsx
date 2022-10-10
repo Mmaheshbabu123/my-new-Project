@@ -15,7 +15,6 @@ import Close from '../../public/images/Close.svg';
 import { cloneDeep } from 'lodash';
 import { ExclamationTriangle } from 'node_modules/react-bootstrap-icons/dist/index';
 
-
 function Addtiming(props) {
 	var count1 = 0;
 	const clearIcon1 = null;
@@ -61,7 +60,7 @@ function Addtiming(props) {
 								setValue(result.data[0][0].date);
 								setCommonDatetime(result.data[0][0].timings);
 							}
-							setLoading(false)
+							setLoading(false);
 						}
 					})
 					.catch((error) => {
@@ -299,16 +298,40 @@ function Addtiming(props) {
 		data1[1] = checked;
 		data1[2] = employee_planning;
 		data1[3] = commonDatetime;
+		// checkIfPlanningExist(data1);
 		APICALL.service(storePlannedTimings, 'POST', data1)
 			.then((result) => {
 				if (result.status === 200) {
 					router.push('/planning/finalize/' + props.p_unique_key);
 				} else if (result.status === 201) {
+					result.data.map((obj, key) => {
+						obj.date.map((obj1, key1) => {
+							result.data[key].date[key1] = new Date(obj1);
+						});
+						obj.timings.map((obj1, key1) => {
+							obj1.time.map((obj2, key2) => {
+								result.data[key].timings[key1].time[key2].starttimeObj = moment(obj2.starttime);
+								result.data[key].timings[key1].time[key2].endtimeObj = moment(obj2.endtime);
+							});
+						});
+						result.data[key].timings.sort((a, b) => {
+							let da = new Date(a.pdate),
+								db = new Date(b.pdate);
+							return da - db;
+						});
+					});
+					console.log(result.data);
+					setEmployee_planning(cloneDeep(result.data));
+					window.scrollTo(0, 0);
 				}
 			})
 			.catch((error) => {
 				console.error(error);
 			});
+	};
+
+	let checkIfPlanningExist = (data) => {
+		APICALL.service(storePlannedTimings, 'POST', data1);
 	};
 
 	/**
@@ -381,10 +404,13 @@ function Addtiming(props) {
 								res[ky].timings[k1].time[k2].error_endtime = 'This field is required.';
 								res[ky].collapseOpen = true;
 							}
-							if (o1.pdate == moment(new Date()).format('YYYY-MM-DD') && moment(v2.starttime) < moment(new Date())) {
-									res[ky].timings[k1].time[k2].error = 'Employee cannot be planned for past time.';
-									res[ky].collapseOpen = true;
-									count++;
+							if (
+								o1.pdate == moment(new Date()).format('YYYY-MM-DD') &&
+								moment(v2.starttime) < moment(new Date())
+							) {
+								res[ky].timings[k1].time[k2].error = 'Employee cannot be planned for past time.';
+								res[ky].collapseOpen = true;
+								count++;
 							}
 
 							if (v2.starttime != '' && v2.endtime != '' && v2.starttime == v2.endtime) {
@@ -393,7 +419,7 @@ function Addtiming(props) {
 								res[ky].timings[k1].time[k2].error = 'Start time cannot be same as end time.';
 							}
 						});
-						
+
 						// if(res[ky].min_work_timings!= null && parseFloat(duration) < parseFloat(res[ky].min_work_timings)){
 						// 	res[ky].timings[k1].warning = 'This employee is planned lower than the allowed minimum hours.('+res[ky].min_work_timings+' hours)'
 						// }else if(o1.time[0].max_work_timings!= null && duration > o1.time[0].max_work_timings){
@@ -407,79 +433,94 @@ function Addtiming(props) {
 		return count;
 	};
 
-	let getDuration = (start,end) => {
-		var starttime = moment(start).format('HH:mm').split(":");
-		var endtime = moment(end).format('HH:mm').split(":");
-		if(parseInt(endtime[1])>= parseInt(starttime[1])){
-			var diff2 =  parseInt(endtime[1]) - parseInt(starttime[1]);
-			var diff1 =  parseInt(endtime[0]) - parseInt(starttime[0]);
-		}else{
-			starttime[0] = parseInt(starttime[0])-1;
-			var diff2 =  (60+parseInt(endtime[1])) - parseInt(starttime[1]);
-			var diff1 =  parseInt(endtime[0]) - parseInt(starttime[0]);
-
+	let getDuration = (start, end) => {
+		var starttime = moment(start).format('HH:mm').split(':');
+		var endtime = moment(end).format('HH:mm').split(':');
+		if (parseInt(endtime[1]) >= parseInt(starttime[1])) {
+			var diff2 = parseInt(endtime[1]) - parseInt(starttime[1]);
+			var diff1 = parseInt(endtime[0]) - parseInt(starttime[0]);
+		} else {
+			starttime[0] = parseInt(starttime[0]) - 1;
+			var diff2 = 60 + parseInt(endtime[1]) - parseInt(starttime[1]);
+			var diff1 = parseInt(endtime[0]) - parseInt(starttime[0]);
 		}
 
-		return diff1 + (diff2/60);
+		return diff1 + diff2 / 60;
+	};
 
-
-	}
-
-	let updatetime = (type, index, e, key, time_index,date) => {
+	let updatetime = (type, index, e, key, time_index, date) => {
 		var res = [ ...employee_planning ];
 		var common = [ ...commonDatetime ];
 		if (checked == true) {
 			if (type == 'starttime') {
 				common[index].time[time_index].error = '';
 				common[index].time[time_index].error_starttime = '';
-				common[index].time[time_index].starttimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
-				common[index].time[time_index].starttime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+				common[index].time[time_index].starttimeObj = moment(date + ' ' + e.format('HH:mm') + ':00');
+				common[index].time[time_index].starttime = date + ' ' + moment(e).format('HH:mm') + ':00';
 				setCommonDatetime(common);
 			} else {
 				common[index].time[time_index].error = '';
 				common[index].time[time_index].error_endtime = '';
-				common[index].time[time_index].endtimeObj = moment(e.format('YYYY-MM-DD HH:mm:ss'));
-				common[index].time[time_index].endtime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+				common[index].time[time_index].endtimeObj = moment(date + ' ' + e.format('HH:mm') + ':00');
+				common[index].time[time_index].endtime = date + ' ' + moment(e).format('HH:mm') + ':00';
 				setCommonDatetime(common);
+			}
+			if (
+				common[index].time[time_index].starttime != '' &&
+				common[index].time[time_index].endtime != ''
+			) {
+				common[index].warning = maxWorkTimeVaidation(
+					common[index].time,
+					res[0].min_work_timings,
+					res[0].max_work_timings
+				);
 			}
 		} else {
 			if (e != null && res[key].timings.length > 0) {
 				if (type == 'starttime') {
 					res[key].timings[index].time[time_index].error = '';
 					res[key].timings[index].time[time_index].error_starttime = '';
-					res[key].timings[index].time[time_index].starttimeObj = moment(date +' ' + e.format('HH:mm')+':00');
-					res[key].timings[index].time[time_index].starttime = date+' ' + moment(e).format('HH:mm')+':00';
+					res[key].timings[index].time[time_index].starttimeObj = moment(
+						date + ' ' + e.format('HH:mm') + ':00'
+					);
+					res[key].timings[index].time[time_index].starttime = date + ' ' + moment(e).format('HH:mm') + ':00';
 
 					setEmployee_planning(res);
 				} else {
 					res[key].timings[index].time[time_index].error = '';
 					res[key].timings[index].time[time_index].error_endtime = '';
-					res[key].timings[index].time[time_index].endtimeObj = moment(date +' ' + e.format('HH:mm')+':00');
-					res[key].timings[index].time[time_index].endtime = date+' ' + moment(e).format('HH:mm')+':00';
+					res[key].timings[index].time[time_index].endtimeObj = moment(
+						date + ' ' + e.format('HH:mm') + ':00'
+					);
+					res[key].timings[index].time[time_index].endtime = date + ' ' + moment(e).format('HH:mm') + ':00';
 
 					setEmployee_planning(res);
 				}
-				console.log(res[key].max_work_timings);
-				if(res[key].timings[index].time[time_index].starttime!= '' && res[key].timings[index].time[time_index].endtime!= ''){
-					res[key].timings[index].warning = maxWorkTimeVaidation(res[key].timings[index].time,res[key].min_work_timings,res[key].max_work_timings)
+				if (
+					res[key].timings[index].time[time_index].starttime != '' &&
+					res[key].timings[index].time[time_index].endtime != ''
+				) {
+					res[key].timings[index].warning = maxWorkTimeVaidation(
+						res[key].timings[index].time,
+						res[key].min_work_timings,
+						res[key].max_work_timings
+					);
 				}
 			}
 		}
 	};
 
-	let maxWorkTimeVaidation = (time,min_work_timings,max_work_timings) =>{
+	let maxWorkTimeVaidation = (time, min_work_timings, max_work_timings) => {
 		var duration = 0;
-		time.map((v2,k2)=>{
-			duration = duration+getDuration(v2.starttime,v2.endtime);
-
-		})
-		if(min_work_timings!= null && parseFloat(duration) < parseFloat(min_work_timings)){
-			 return 'This employee is planned lower than the allowed minimum hours('+min_work_timings+' hours).'
-		}else if(max_work_timings!= null && duration > max_work_timings){
-			return 'This employee is planned higher than the allowed maximum hours('+max_work_timings+' hours).'
+		time.map((v2, k2) => {
+			duration = duration + getDuration(v2.starttime, v2.endtime);
+		});
+		if (min_work_timings != null && parseFloat(duration) < parseFloat(min_work_timings)) {
+			return 'This employee is planned lower than the allowed minimum hours(' + min_work_timings + ' hours).';
+		} else if (max_work_timings != null && duration > max_work_timings) {
+			return 'This employee is planned higher than the allowed maximum hours(' + max_work_timings + ' hours).';
 		}
-
-	}
+	};
 
 	/**
 	 * updateCheckbox 
@@ -508,7 +549,7 @@ function Addtiming(props) {
 					<h1 className="pb-3 font-weight-bold px-0 bitter-italic-normal-medium-24">Add timing</h1>
 				</div>
 				{loading == true ? (
-					<p className='pt-2'>Loading...</p>
+					<p className="pt-2">Loading...</p>
 				) : (
 					<div>
 						<div className="row m-0 p-0">
@@ -533,8 +574,9 @@ function Addtiming(props) {
 								<div>
 									<div className=" mt-3">
 										{employee_planning.map((result, key) => (
+											<div key={key}>
 											<div
-												key={key}
+												
 												className={`row d-flex justify-content-start py-3 my-3  ${style.sec_background}`}
 											>
 												<div className="col-md-1 poppins-light-20px">{++count1}.</div>
@@ -546,6 +588,11 @@ function Addtiming(props) {
 												</div>
 												<div className="col-md-3 poppins-light-20px">
 													{result.function_name}
+												</div>
+												
+											</div>
+											<div className="error">
+												{result.error_date}
 												</div>
 											</div>
 										))}
@@ -567,25 +614,6 @@ function Addtiming(props) {
 										</div>
 									</div>
 									<div className="mt-3 pt-2">
-										{/* <div className="error mt-2 py-2 ps-2">
-											<ul>
-												<li>
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
-													risus purus. Nunc metus justo, porttitor eu massa quis, feugiat
-													pulvinar eros. I
-												</li>
-												<li>
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
-													risus purus. Nunc metus justo, porttitor eu massa quis, feugiat
-													pulvinar eros. I
-												</li>
-												<li>
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
-													risus purus. Nunc metus justo, porttitor eu massa quis, feugiat
-													pulvinar eros. I
-												</li>
-											</ul>
-										</div> */}
 										{commonDatetime.map((value, index) => (
 											<div className="row table-title-bg my-2" key={index}>
 												<div className="col-md-2 py-3  poppins-medium-22px-date-picker text-center">
@@ -608,7 +636,14 @@ function Addtiming(props) {
 																		format="HH:mm"
 																		value={v1.starttimeObj ? v1.starttimeObj : null}
 																		onChange={(e) =>
-																			updatetime('starttime', index, e, '', k1,value.pdate)}
+																			updatetime(
+																				'starttime',
+																				index,
+																				e,
+																				'',
+																				k1,
+																				value.pdate
+																			)}
 																	/>
 																</div>
 																<p className="error mt-2 px-2">{v1.error_starttime}</p>
@@ -626,7 +661,14 @@ function Addtiming(props) {
 																		format="HH:mm"
 																		value={v1.endtimeObj ? v1.endtimeObj : null}
 																		onChange={(e) =>
-																			updatetime('endtime', index, e, '', k1,value.pdate)}
+																			updatetime(
+																				'endtime',
+																				index,
+																				e,
+																				'',
+																				k1,
+																				value.pdate
+																			)}
 																	/>
 																</div>
 																<p className="error px-2 mt-2">{v1.error_endtime}</p>
@@ -647,30 +689,18 @@ function Addtiming(props) {
 																	/>
 																)}
 															</div>
+															{value.warning != '' &&
+																			value.warning != undefined && (
+																				<p className="error pb-2">
+																					<ExclamationTriangle />
+																					{value.warning}
+																				</p>
+																			)}
 														</div>
 													))}
 												</div>
 											</div>
 										))}
-										{/* <div className="error mt-2 py-2 ps-2">
-											<ul>
-												<li>
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
-													risus purus. Nunc metus justo, porttitor eu massa quis, feugiat
-													pulvinar eros. I
-												</li>
-												<li>
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
-													risus purus. Nunc metus justo, porttitor eu massa quis, feugiat
-													pulvinar eros. I
-												</li>
-												<li>
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
-													risus purus. Nunc metus justo, porttitor eu massa quis, feugiat
-													pulvinar eros. I
-												</li>
-											</ul>
-										</div> */}
 									</div>
 								</div>
 							) : (
@@ -726,6 +756,7 @@ function Addtiming(props) {
 																	</p>
 																</div>
 															</div>
+
 															{result.timings.length > 0 &&
 																result.timings.map((value, index) => (
 																	<div
@@ -736,6 +767,7 @@ function Addtiming(props) {
 																			<div className="pb-2 poppins-medium-22px-date-picker" />
 																			{value.pdate.split('-').reverse().join('/')}
 																		</div>
+
 																		<div className="col-md-10">
 																			{value.time.map((v1, k1) => (
 																				<div key={k1}>
@@ -862,10 +894,24 @@ function Addtiming(props) {
 																					</p>
 																				</div>
 																			))}
-																		{value.warning != '' &&value.warning != undefined && <p className='error pb-2'><ExclamationTriangle />{value.warning}</p>}
+																			{value.warning != '' &&
+																			value.warning != undefined && (
+																				<p className="error pb-2">
+																					<ExclamationTriangle />
+																					{value.warning}
+																				</p>
+																			)}
 																		</div>
 																	</div>
 																))}
+
+															<div className="error mt-2 py-2 ps-2">
+																<ul>
+																	<li>
+																	{result.error_date}
+																	</li>
+																</ul>
+															</div>
 														</div>
 													)}
 												</div>

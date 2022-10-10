@@ -642,7 +642,7 @@ body {
 }
 .custom-btn {
 	background-color: var(--color-purple);
-	color: var(--color-white);
+	color: var(--color-white) !important;
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m);
 }
@@ -1998,6 +1998,13 @@ input[type="search"]::-webkit-search-cancel-button {
 .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl
 {
 	max-width:1350px !important
+}
+@media screen and (min-width:992px) and (max-width:1024px)  
+{
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl
+{
+	max-width:920px !important
+}
 }
 .min-height-weekly-planning
 {

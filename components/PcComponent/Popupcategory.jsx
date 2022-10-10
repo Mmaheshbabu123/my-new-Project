@@ -3,10 +3,10 @@ import React from 'react';
 function Popup(props) {
 	return (
 		<div className="modal" id="myModal" style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}>
-			<div className="modal-dialog">
+			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
-						{/* <h4 className="modal-title">Delete function</h4> */}
+						<h4 className="modal-title bitter-italic-normal-medium-22">Delete category</h4>
 						<button
 							type="button"
 							className="btn-close"
@@ -16,14 +16,14 @@ function Popup(props) {
 					</div>
 
 					<div className="modal-body title">
-						<p className='my-1'>Are you sure you want to delete this category?</p> <p className='my-1'>Functions related to this category will also be deleted.</p>
+						<p className='my-1 poppins-regular-18px'>Are you sure you want to delete this category?</p> <p className='my-1 poppins-regular-18px'>Functions related to this category will also be deleted.</p>
 					</div>
 
 					<div className="modal-footer">
-						<button type="button" className="btn btn-danger" onClick={() => props.popupActionNo()}>
+						<button type="button" className="btn poppins-medium-18px-next-button rounded-0 shadow-none" style={{ width: '80px' }} onClick={() => props.popupActionNo()}>
 							No
 						</button>
-						<button className="btn btn-danger m-2" 
+						<button className="btn poppins-medium-18px-next-button rounded-0 shadow-none m-2" style={{ width: '80px' }} 
 						onClick={() => props.popupActionYes()}
 						>
 							Yes
