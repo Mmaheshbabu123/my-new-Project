@@ -29,29 +29,17 @@ function ManageLocation(props) {
 
                         <div className="row d-flex mt-3">
                             <div className="col field_height">
-                                <label className="form-label mb-2 mt-1 poppins-regular-16px">Company name</label>
-
-                                <input
-                                    type="search"
-                                    id="form12"
-                                    className="form-control mt-1 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-                                    placeholder="Select"
-                                />
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
+                                <span class="input-group-text">Search</span>
+                              
                             </div>
-                            <div className="col field_height">
-                                <label className="form-label mb-2 mt-1 poppins-regular-16px">Location</label>
-
-                                <input
-                                    type="search"
-                                    id="form12"
-                                    className="form-control mt-1 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-                                    placeholder="Select"
-                                />
                             </div>
+                         
 
                             {/*---------------- Search functionality---------------------- */}
 
-                            <div className="col-sm-3 field_height mt-4 p-2">
+                            {/* <div className="col-sm-3 field_height mt-4 p-2">
                                 <div className='row'>
                                     <div className="col-md-6">
                                         <button
@@ -61,10 +49,10 @@ function ManageLocation(props) {
                                         >
                                             Apply
                                         </button>
-                                    </div>
+                                    </div> */}
                                     {/*---------------- Reset functionality---------------------- */}
 
-                                    <div className="col-md-6">
+                                    {/* <div className="col-md-6">
 
                                         <button
                                             type="button"
@@ -74,7 +62,7 @@ function ManageLocation(props) {
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="form-check p-0 mt-2 tab-pane fade show min_height_table">
