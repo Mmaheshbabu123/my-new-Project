@@ -62,7 +62,7 @@ const SignatureField = ({
              <button disabled={disabled} className={`btn bg-white border-0 poppins-regular-18px text-decoration-underline w-100 text-start ps-0 shadow-none text-uppercase ${clearBtnClass}`} style={saveClearBtnWidth} onClick={clear}>Clear</button>
              </div>
              <div className='col-md-2'>
-             <button disabled={disabled} className={`btn btn-block border-0 rounded-0 float-right skyblue-bg-color w-100 shadow-none  text-uppercase ${saveBtnClass}`} style={saveClearBtnWidth} onClick={handleSave}>Save</button>
+             <button disabled={disabled} className={`btn btn-block border-0 rounded-0 float-right poppins-medium-18px-next-button w-100 shadow-none  text-uppercase ${saveBtnClass}`} style={saveClearBtnWidth} onClick={handleSave}>Save</button>
              </div>
            </div>
          </div>
