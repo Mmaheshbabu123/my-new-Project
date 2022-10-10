@@ -29,9 +29,9 @@ function ManageLocation(props) {
 
                         <div className="row d-flex mt-3">
                             <div className="col field_height">
-                            <div class="input-group">
-                                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
-                                <span class="input-group-text">Search</span>
+                            <div className="input-group">
+                                <input type="text" className="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
+                                <span className="input-group-text">Search</span>
                               
                             </div>
                             </div>
