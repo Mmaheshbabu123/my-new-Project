@@ -17,14 +17,15 @@ function formatDate(dateInput, type = 0) {
 
 
 
-async function fetchDataFromBackend(url, root_parent_id, selectedTabId,companyId = 0) {
+async function fetchDataFromBackend(url, root_parent_id, selectedTabId, companyId = 0, pcIds = []) {
   let postSubmitId = root_parent_id;
   if(!root_parent_id) {
     const urlParams = new URLSearchParams(window.location.search);
     postSubmitId = urlParams.get('root_parent_id');
   }
   let data = {};
-  await APICALL.service(`${url}/${postSubmitId}/${selectedTabId}?companyId=${companyId}`, 'GET').then(response => {
+  let finalUrl = selectedTabId === 1 ? `${url}/${postSubmitId}/${selectedTabId}?pcids=${JSON.stringify(pcIds.map(Number))}` : `${url}/${postSubmitId}/${selectedTabId}?companyId=${companyId}`;
+  await APICALL.service(finalUrl, 'GET').then(response => {
     if (response.status === 200)
           data = response.data || {};
   }).catch((error) => console.log(error) )
