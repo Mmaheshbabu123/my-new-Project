@@ -116,8 +116,8 @@ const PcCommon = (props) => {
 							)}
 						</p>
 						</div>
-						<div className="row  pt-2 m-0">
-							<ul className="nav nav-pills nav-justified mb-3 row m-0 p-0" id="pills-tab" role="tablist">
+						<div className="row m-0">
+							<ul className="nav nav-pills nav-justified pb-3 row m-0 p-0 nav-pills-position-sticky" id="pills-tab" role="tablist">
 								<li className=" border-0 rounded-0 poppins-regular-16px col ps-0" role="presentation">
 									<button
 										className={`nav-link parithair-tabs poppins-regular-16px py-3 border-0 rounded-0 w-100 btn-active px-1 ${current_sec == 1

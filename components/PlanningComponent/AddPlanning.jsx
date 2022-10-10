@@ -362,7 +362,7 @@ function Planning(props) {
 									Add Planning
 								</h1>
 							</div>
-							<div className="col-md-12 px-0 my-2">
+							<div className="col-md-12 px-0 py-2 add_project_position">
 								{(project.id == '' || project.id == undefined) && showproject == true ? (
 									<button
 										onClick={showPopup}

@@ -212,7 +212,7 @@ const ManagePc = (props) => {
 							</div>
 						</div>
 					</div>
-					<div className="col-md-2  ps-3 pe-0 ">
+					<div className="col-md-2  ps-3 pe-0 d-grid">
 						<div className={`text-center ${styles.sectioncolor} poppins-medium-18px p-4 fw-bold`}>
 							Actions
 						</div>
