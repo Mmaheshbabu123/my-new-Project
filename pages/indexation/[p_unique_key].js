@@ -1,4 +1,4 @@
-import Indexationofsal from '@/components/PcComponent/Indexationofsalary';
+import Indexationofsal from '@/components/Indexation/Indexationofsalary';
 import { useRouter } from 'next/router';
 
 
