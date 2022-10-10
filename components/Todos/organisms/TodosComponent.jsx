@@ -10,7 +10,7 @@ const TodosComponent = (props) => {
   const [state, setState] = useState({
     loaded: false,
     todos: [],
-    headers: [ 'Todo', 'Company name', 'Employee name', 'Status', 'Actions' ]
+    headers: [ 'Todo', 'Company', 'Employee', 'Status', 'Actions' ]
   })
 
 
