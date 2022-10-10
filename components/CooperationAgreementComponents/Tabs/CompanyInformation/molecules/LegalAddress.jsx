@@ -34,7 +34,7 @@ const LegalAddress = (props) => {
     // }
     // else {
       if(name === '19') {
-      updateTabFieldsData(tab_4,tab_2,tab_6)  
+      updateTabFieldsData(tab_4,tab_2,tab_6)
       updateStateChanges({tab_2 ,tab_4,tab_6,element_status })
       }
       else {
@@ -166,7 +166,11 @@ const LegalAddress = (props) => {
             <div className='d-inline-flex align-items-center'>
             <RadioField name = {Labour_regulations_share} checked = {tab_2[Labour_regulations_share] === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,2)} label= 'No' />
             </div>
+
              </div>
+             { tab_2['required'][Labour_regulations_share] !== undefined && !tab_2['required'][Labour_regulations_share] &&
+              <ValidateMessage text = {'This field is required'}/>
+            }
         </div>
         </div>
       </div>
@@ -184,6 +188,9 @@ const LegalAddress = (props) => {
          <RadioField name = {Labour_regulations} checked = {tab_2[Labour_regulations] === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations,2)} label= 'No' />
          </div>
          </div>
+         { tab_2['required'][Labour_regulations] !== undefined && !tab_2['required'][Labour_regulations] &&
+          <ValidateMessage text = {'This field is required'}/>
+        }
          </div>
         </div>
       </div>
