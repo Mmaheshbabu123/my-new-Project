@@ -81,6 +81,7 @@ const loadData = async () => {
       defaultOptions['contactList']          =  data['contactsData'] && data['contactsData']['multiselctObj'] ?  data['contactsData']['multiselctObj']: [];
       defaultOptions['contactsData']         =  data['contactsData'] ?.['personsData'];
       defaultOptions['locationObj']          =  data['contactsData'] ?.['locationObj'];
+      defaultOptions['companyLinkedPcIds']   =  data['companyLinkedPcIds'] || [];
       updateStateChanges({defaultOptions,renderedOptions:1})
     }
   }).catch((error) => console.log(error) )
@@ -106,7 +107,7 @@ const loadData = async () => {
              <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab(1)} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase">
               <span className="sv-save-btn-text_1 spinner-border-sm me-2 "></span>{'Save as draft'}
             </button>
-            
+
              </div>
              <div className='col-md-4'>
              <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab()} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase">
