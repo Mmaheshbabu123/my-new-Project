@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
-import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes } from '../../Services/ApiEndPoints';
+import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes, addIndexationOfSalary } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import MultiSelectField from '@/atoms/MultiSelectField';
@@ -18,8 +18,8 @@ const Indexationofsalary = () => {
 	// const [error_indexation_euro, setError_indexation_euro] = useState('');
 	const [error_date, setError_date] = useState('');
 	const [error_pc, setError_pc] = useState('');
-	const [error_category, setError_category] = useState('');
-	const [error_employeetype, setError_employeetype] = useState('');
+	// const [error_category, setError_category] = useState('');
+	// const [error_employeetype, setError_employeetype] = useState('');
 	const [error_indexation, setError_indexation] = useState('');
 
 	const [paritaircomites, setParitaircomites] = useState([]);
@@ -37,11 +37,18 @@ const Indexationofsalary = () => {
 		// radio: '',
 		// percentage_of_indexation: '',
 		// amount_indexation_euro: '',
+		// date: '',
+		// pc: '',
+		// category: '',
+		// employee_type: '',
+		// selection_index: ''
+		value_type: '',
+		value: '',
 		date: '',
-		pc: '',
-		category: '',
-		employee_type: '',
-		selection_index: ''
+		indexation_type: '',
+		entity_type: '',
+		entity_id: '',
+		indexation_id: '',
 	})
 
 	let validate = (res) => {
@@ -54,9 +61,9 @@ const Indexationofsalary = () => {
 		// error1['percentage_of_indexation'] = ValidationService.emptyValidationMethod(res.percentage_of_indexation);
 		// error1['amount_indexation_euro'] = ValidationService.emptyValidationMethod(res.amount_indexation_euro);
 		error1['date'] = ValidationService.emptyValidationMethod(res.date);
-		error1['pc'] = ValidationService.emptyValidationMethod(res.pc);
-		error1['category'] = ValidationService.emptyValidationMethod(res.category);
-		error1['employee_type'] = ValidationService.emptyValidationMethod(res.employee_type);
+		error1['entity_type'] = ValidationService.emptyValidationMethod(res.entity_type);
+		// error1['category'] = ValidationService.emptyValidationMethod(res.category);
+		// error1['employee_type'] = ValidationService.emptyValidationMethod(res.employee_type);
 		error1['selection_index'] = ValidationService.emptyValidationMethod(res.selection_index);
 
 		/**
@@ -67,8 +74,8 @@ const Indexationofsalary = () => {
 		// setError_indexation_euro(error1['amount_indexation_euro']);
 		setError_date(error1['date']);
 		setError_pc(error1['pc']);
-		setError_category(error1['category']);
-		setError_employeetype(error1['employee_type']);
+		// setError_category(error1['category']);
+		// setError_employeetype(error1['employee_type']);
 		setError_indexation(error1['selection_index']);
 
 		//return false if there is an error else return true
@@ -78,8 +85,8 @@ const Indexationofsalary = () => {
 			// error1['amount_indexation_euro'] == '' &&
 			error1['date'] == '' &&
 			error1['pc'] == '' &&
-			error1['category'] == '' &&
-			error1['employee_type'] == '' &&
+			// error1['category'] == '' &&
+			// error1['employee_type'] == '' &&
 			error1['selection_index'] == '' 
 
 		) {
@@ -110,12 +117,13 @@ const Indexationofsalary = () => {
 
 	let submit = async (event) => {
 		event.preventDefault();
-		var valid_res = validate(data);
-		// alert(valid_res);
-		if (valid_res) {
-			// 	 alert('1111');
-			console.log(data);
-		}
+		// var valid_res = validate(data);
+		// if (valid_res) {
+			APICALL.service(addIndexationOfSalary, 'POST', data)
+			.then((result) => {
+				console.log(result);
+			})
+		// }
 
 	}
 
@@ -198,13 +206,13 @@ const Indexationofsalary = () => {
 								isMulti={true}
 								// className="col-md-6"
 								className="col-md-6 "
-								value={data.employees}
-								onChange={(e) => {
-									setData((prev) => ({
-										...prev,
-										pc: e.target.value
-									}));
-								}}
+								// value={data.employees}
+								// onChange={(e) => {
+								// 	setData((prev) => ({
+								// 		...prev,
+								// 		pc: e.target.value
+								// 	}));
+								// }}
 							/>
 						</div>
 						<p className="error mt-2">{error_pc}</p>
