@@ -6,6 +6,7 @@ import { APICALL } from '@/Services/ApiServices';
 import { updateEmployeesubmitDetails, downloadSvAsPdf } from '@/Services/ApiEndPoints';
 import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
+import { dom } from '@/Services/domServices';
 import ValidateMessage from '@/atoms/validationError';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -31,7 +32,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
     return todos.filter(val => statusIds.includes(Number(val.todo_status)));
   }
 
-  entityType === 3 ? headers.indexOf('Employee name') > -1 ? headers.splice(headers.indexOf('Employee name'), 1) : headers : [];
+  entityType === 3 ? headers.indexOf('Employee') > -1 ? headers.splice(headers.indexOf('Employee'), 1) : headers : [];
   const [state, setState] = useState({
     selectedTabId: tabId,
     tabs: [{
@@ -111,6 +112,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
   }
 
   const handlePageClick = (event) => {
+    dom.scrollToTop();
     let items = [...state.filterRows];
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setState({ ...state, itemOffset: newOffset, currentPage: event.selected });
@@ -124,7 +126,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
       {eachRow.todo_type === 2 ?
         <>
           {eachRow.todo_status !== 1 && entityType !== 3 && <span title={'Fill werkpostfiche'} className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="fill_werkpostfiche" className=''></img> </span>}
-          {eachRow.todo_status !== 1 && <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>}
+          {eachRow.todo_status !== 1 && Number(eachRow.submitted) === 1 && <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>}
         </> : eachRow.todo_status !== 1 && <span title={'Sign'} className={styles["span-action-icons"]} hidden={eachRow.todo_status === 1} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon_1.src} alt="sign" className=''></img> </span>
       }     {eachRow.todo_status === 1 && <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="download" className=''></img> </span>}
     </>
