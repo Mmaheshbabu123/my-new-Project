@@ -219,7 +219,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
       <div className="col-md-12">
        <div className='row'>
        <div className="col-md-6">
-          <LabelField title={`Employer`} className='poppins-medium-18px'/>
+          <LabelField title={`Employer`} mandotory={true} className='poppins-medium-18px'/>
           <MultiSelectField
             options={employers}
             standards={employers.filter(val => val.value === state.employerId)}
@@ -231,7 +231,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
         {state.employerWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
         </div>
         <div className="col-md-6">
-          <LabelField title={`Company`} className='poppins-medium-18px' />
+          <LabelField title={`Company`}  mandotory={true} className='poppins-medium-18px' />
           <MultiSelectField
             options={state.employerId ? companies[state.employerId] : []}
             standards={state.employerId && companies[state.employerId] ? companies[state.employerId].filter(val => val.value === state.companyId) : []}
