@@ -33,6 +33,7 @@ const AddFunctions = () => {
 					if (result.status == 200) {
 						console.log(result.data[0]);
 						result.data[0].map((val,key)=>{
+							console.log(val.employee_list)
 							val.employee_list.map((val2,key2)=>{
 								if(val2.function_salary != null && val2.age < val.pc_min_age){
 									val.pcAge.map((val3,key3)=>{
@@ -43,7 +44,7 @@ const AddFunctions = () => {
 												sal = parseFloat(sal).toFixed(2)
 											}
 											result.data[0][key].employee_list[key2].function_salary = parseFloat(sal)
-											if(val2.salary == sal){
+											if(parseFloat(val2.salary) == parseFloat(sal)){
 												result.data[0][key].employee_list[key2].salary = null
 
 											}

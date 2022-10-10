@@ -194,6 +194,10 @@ input[type="checkbox"]:focus
 {
   height: 43px !important;
 }
+.occurence_col .react-select-prefix__control
+{
+  height: 41px !important;
+}
 #react-select-2-listbox,
 .css-6j8wv5-Input,
 .css-qc6sy-singleValue,
@@ -313,7 +317,7 @@ input[type="radio"]
 }
 .min_height_age
 {
-  min-height: 39vh;
+  min-height: 42vh;
 }
 .padding_first_col:first-child
 {
@@ -432,4 +436,84 @@ select option
 .min-height-add-doc
 {
   min-height: 17rem;
+}
+.position_relative_dashboard
+{
+  position: relative;
+  height: 100% !important;
+}
+.table-render-parent-div
+{
+  min-height: 45vh;
+}
+.dashboard-tile-parent
+{
+  cursor: pointer;
+}
+.flex-min-height
+{
+  min-height: 63vh;
+}
+.min-height-signature
+{
+  min-height: 59vh;
+}
+.modal-content
+{
+  border: none !important;
+  border-radius: 0px;
+}
+.modal-header .btn-close
+{
+  box-shadow: none !important;
+}
+.additional_add_sticky,
+.v1_position_sticky
+{
+  position: sticky !important;
+  top: 243px;
+  background: var(--color-white);
+  z-index: 998;
+}
+.manage_cooperation_agreement_position_sticky
+{
+  position: sticky;
+  top: 235px;
+  z-index: 998;
+  background:var(--color-white);
+}
+.min_height_cooperation_sales
+{
+  min-height: 45vh;
+}
+.time-registartion-height
+{
+  height: 150px;
+}
+.edit_pc_salary_benefits input[type="text"]:focus,
+.edit_pc_salary_benefits select:focus
+{
+  border: 1px solid var(--border-color-lightgray);
+}
+.edit_pc_salary_benefits .rmdp-day.rmdp-selected span:not(.highlight),
+.edit_pc_salary_benefits .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover
+{
+  width: 25px !important;
+  height: 25px !important;
+  margin: auto;
+  background-color: var(--color-skyblue) !important;
+  box-shadow: var(--color-skyblue) !important;
+}
+.purple .rmdp-day.rmdp-today span
+{
+  background-color: var(--color-purple) !important;
+  width: 25px !important;
+  height: 25px !important;
+  margin: auto !important;
+}
+@media screen and (min-width:1200px) and (max-width:1399px) 
+{
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 1180px !important;
+}
 }

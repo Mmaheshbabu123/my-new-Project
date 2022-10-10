@@ -232,9 +232,12 @@ tbody.table-body-employee-type
 }
 
 .span-action-icons > svg:hover{
-  opacity: 0.8;
+  opacity: 1;
 }
-
+.span-action-icons img
+{
+  cursor: pointer;
+}
 .popup-back-btn {
   cursor: pointer;
   margin-right: 15px;

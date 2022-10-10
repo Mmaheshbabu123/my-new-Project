@@ -11,16 +11,19 @@
 }
 .notificationBar {
     display: block;
-    position: fixed;
-    width: 600px;
-    border: 0.5px solid #8080803d;
+    position: absolute;
+    width: 350px;
+    /* border: 0.5px solid #8080803d; */
     overflow-y: auto;
-    top: 65px;
-    right: 20%;
+    top: 87px;
+    right: 7.3%;
     box-shadow: 2px 3px 17px -3px #8888888c;
-    padding: 15px;
-    background: #f4f4f4;
-    max-height: 450px;
+    /* padding: 15px; */
+    /* background: #f4f4f4; */
+    /* max-height: 450px; */
+    border-radius:0px;
+    z-index: 999;
+    background-color: var(--color-white);
 }
 
 .notification:hover .notificationBar {
@@ -28,10 +31,14 @@
 }
 .lineItmes {
     padding: 5px;
-    margin-bottom: 10px;
-    background: #fff;
+    /* margin-bottom: 10px; */
+    background:#f4f4f4;
     padding: 5px;
 }
+.lineItmes {
+border-bottom: 1px solid var(--color-input-border-lightgrey);
+}
+
 .iconBadge {
     background: red;
     width: 18px;
@@ -55,29 +62,41 @@
   content: '•';
   vertical-align: middle;
 }
-
+.seen:before{
+  color: green;
+  font-size: 23px;
+  color:green;
+  content: '•';
+  vertical-align: middle;
+}
 .seen {
   opacity: 0.5;
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-14px);
+  line-height: var(--line-height-26px);
+}
+.unseen {
+  opacity: 1;
+  font-family: var(--font-family-poppins-regular);
+  font-size: var(--font-size-14px);
+  line-height: var(--line-height-26px);
 }
 
 .notification-header {
    text-align: left;
    width: 97%;
-   font-weight: bold;
+   font-weight: normal;
    margin-bottom: 10px;
    font-size: large;
 }
 
 .time-span {
-  font-weight: 700;
-  color: #747474;
+  font-weight: normal;
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-14px);
+  line-height: var(--line-height-26px);
+  color: var(--color-label-footer-gray);
   float: right;
-}
-
-.link-p-tags {
-  text-align: right;
-  margin: 0;
-  color: #42A5F5;
 }
 
 .date-p-tag {

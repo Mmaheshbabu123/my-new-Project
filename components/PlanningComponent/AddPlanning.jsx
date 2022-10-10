@@ -50,6 +50,7 @@ function Planning(props) {
 
 	const [ countrylist, setCountrylist ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
+	const [deleteProject, setDeleteProject] = useState(false);
 
 	const [ data, setData ] = useState({
 		p_unique_key: '',
@@ -57,7 +58,7 @@ function Planning(props) {
 		comp_id: '',
 		location_id: '',
 		cost_center_id: '',
-		pcid: ''
+		pcid: '',
 	});
 
 	// PROJECT FIELD HIDE AND SHOW
@@ -150,12 +151,8 @@ function Planning(props) {
 					let obj = comp.find(o => o.id === companyid);
 					if(obj != null){
 					obj.add_project === "1" && obj.add_project!= undefined?	setShowproject(true):setShowproject(false)
-					}
-
-
-					
+					}					
 					console.log(obj)
-
 				}
 			}
 			
@@ -216,7 +213,7 @@ function Planning(props) {
 		data.comp_id = companyid;
 		data.location_id = locationid;
 		data.cost_center_id = costcenterid == null ? '' : costcenterid;
-		APICALL.service(addPlanning, 'POST', data)
+		APICALL.service(addPlanning, 'POST', [data,deleteProject])
 			.then((result) => {
 				console.log(result);
 				if (result.status === 200) {
@@ -271,10 +268,32 @@ function Planning(props) {
 
 	let updateLocation = (comp_id) => {
 		setCompanyid(comp_id);
+		
 		var compObj = company.find((obj) => {
 			return obj.nid == comp_id ? obj : '';
 		});
 		compObj!='' && compObj.add_project === "1" && compObj.add_project != undefined?	setShowproject(true):setShowproject(false);
+
+		if(compObj!='' && (compObj.add_project === "0" || compObj.add_project != undefined)){
+			setProject({
+				id: '',
+				project_name: '',
+				project_location: '',
+				hno: '',
+				bno: '',
+				city: '',
+				extra: '',
+				comp_id: '',
+				street: '',
+				postal_code: '',
+				country: '',
+				address_id: ''
+			});
+			setDeleteProject(true);
+		}else{
+			setDeleteProject(false);
+
+		}
 
 		let counter = 0;
 		location.map((loc) => {
@@ -479,7 +498,7 @@ function Planning(props) {
 							</div>
 						</div>
 						</div>
-						<div className="row mt-4 mb-4 col-md-12 m-0">
+						<div className="row mt-4 mb-2 col-md-12 m-0">
 							<div className="col-md-6 p-0">
 								<button type="button" className="btn  btn-block px-0 shadow-none">
 									<Link href={'/planning/options'}>
