@@ -1034,9 +1034,10 @@ input {
 }
 .less-grather {
 	color: var(--color-less-greater);
-	width: 18px;
-	height: 18px;
+	width: 22px;
+	height: 22px;
 	font-weight: bold;
+	cursor: pointer;
 }
 .border-4C4D554D {
 	border: 1px solid var(--color-less-greater);
@@ -1156,6 +1157,10 @@ div[disabled] {
 .timepage-calander .rmdp-day {
 	color: var(--color-label-footer-gray);
 	height: 46px !important;
+}
+.form-select:focus
+{
+	border:1px solid  var(--border-color-lightgray) !important;
 }
 .rmdp-day.rmdp-selected span:not(.highlight) {
 	width: 55px;
@@ -1993,4 +1998,8 @@ input[type="search"]::-webkit-search-cancel-button {
 .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl
 {
 	max-width:1350px !important
+}
+.min-height-weekly-planning
+{
+	min-height: 40vh;
 }

@@ -150,10 +150,10 @@ const LinkCoeffEmpComponent = (props) => {
          <h4 className={`page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4>
          </div>
           <div className='row'>
-          <div className="col-md-5 col-lg-3 p-0"> {addMultiSelectTag()}
+          <div className="col-md-5 col-lg-3 ps-0"> {addMultiSelectTag()}
             {state.pcWarning ? <small style={{ color: 'red' }} className='error_text mt-3'> Choose paritair comite </small> : null}
           </div>
-          <div className='col-md-7 col-lg-8 offset-lg-1'>
+          <div className='col-md-7 col-lg-9'>
 
           <div className='row'>
           {state.lowHighValidation.length > 0 &&
