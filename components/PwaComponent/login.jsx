@@ -1,14 +1,29 @@
-import React from "react";
+import React, { Component, useEffect, useState } from 'react';
+import { APICALL } from '../../Services/ApiServices';
 
 function Login(props) {
+    const [ token, setToken ] = useState('');
+    useEffect(() => {
+	    fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
+	          .then(res => res.json())
+		    .then((result) => {
+			setToken(result.token)
+		  })
+    }, []);
+
+	const submit = (e) => {
+		e.preventDefault();
+		
+	
+	}
     return (
         <section className="container">
             <div className="row content d-flex justify-content-center p-2">
                 <div className="col-md-5">
                     <div className=" p-4">
                         <p className="h4  px-0  bitter-italic-normal-medium-24 mb-4 text-center fs-1">Login</p>
-                        <form className="mb-5">
-                            <div className="mb-3">
+                        <form className="mb-5" onSubmit={submit}>
+                            <div className="mb-3" onS>
                                 <label className="form-label custom_astrick">Email address</label>
                                 <input type="email" className="form-control rounded-0" />
                             </div>
