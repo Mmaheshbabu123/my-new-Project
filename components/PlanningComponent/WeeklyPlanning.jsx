@@ -112,7 +112,7 @@ function WeeklyPlanning(props) {
 
 					</div>
 				</div>
-				<div className=" pt-3 d-flex justify-content-end">
+				<div className=" pt-3 d-flex justify-content-end planning_encodage_position">
 					<div className="d-inline ">
 						<button
 							type="button"
@@ -146,7 +146,7 @@ function WeeklyPlanning(props) {
 						</div>
 					</div>
 				)} */}
-				<div className=" mt-4 d-flex mb-3 ">
+				<div className=" py-4 d-flex weekly_planning_search_position">
 			<div className='col-md-12'>
 			<div className='row'>
 					<div className='col-md-3'>

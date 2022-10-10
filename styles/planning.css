@@ -47,7 +47,9 @@
 {
   opacity: 1;
 }
-.position-sticky-subhead
+.position-sticky-subhead,
+.add_project_position,
+.nav-pills-position-sticky
 {
   position: sticky;
   top: 166px;
@@ -257,11 +259,19 @@ input[type="checkbox"]
   z-index: 998;
 } */
 
-.qr_position_sticky
+.qr_position_sticky,
+.planning_encodage_position
 {
   position: sticky;
   top: 166px;
   background: var(--color-white);
+  z-index: 998;
+}
+.weekly_planning_search_position
+{
+  position: sticky;
+  top: 243px;
+  background: white;
   z-index: 998;
 }
 /* .qr_sticky thead
@@ -365,3 +375,29 @@ input[type="checkbox"]
   min-height: 63vh;
 }
 
+/* Warning icon */
+.warning-icon-solid {
+	background-image: url('/images/warning.svg');
+	background-repeat: no-repeat;
+	background-size: 25px;
+	margin: 5px;
+	padding: 14px;
+	background-position: center;
+}
+
+/* Warning icon */
+.stop-working-icon-solid {
+	background-image: url('/images/stop-icon-filled.svg');
+	background-repeat: no-repeat;
+	background-size: 25px;
+	margin: 5px;
+	padding: 14px;
+	background-position: center;
+}
+.position-sticky-select-function
+{
+  position: sticky;
+  top: 182px;
+  background: white;
+  z-index: 998;
+}

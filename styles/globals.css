@@ -1999,6 +1999,13 @@ input[type="search"]::-webkit-search-cancel-button {
 {
 	max-width:1350px !important
 }
+@media screen and (min-width:992px) and (max-width:1024px)  
+{
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl
+{
+	max-width:920px !important
+}
+}
 .min-height-weekly-planning
 {
 	min-height: 40vh;
