@@ -25,7 +25,7 @@ const CooperationAgreementStates = (props) => {
   const initialState = {
       tab_1 : { worksServantsData: {1: [], 2: []}, cooperationCoeffData: {}, validations:{} }
       //'17':{'type':1,validate:false,'text':'Only numbers will accept' },
-    , tab_2 : {'22':1,'23':1,'24':1,'10':'1',required:requiredElements['tab_2'],validations:{'19':{'type':2,validate:false},'14':{'type':3,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'},'20':{'type':4,validate:false,'text':'Only numbers will accept'},'8':{'type':5,validate:false,'text':'Only numbers will accept'}}}
+    , tab_2 : {'22':1,'10':'1',required:requiredElements['tab_2'],validations:{'19':{'type':2,validate:false},'14':{'type':3,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'},'20':{'type':4,validate:false,'text':'Only numbers will accept'},'8':{'type':5,validate:false,'text':'Only numbers will accept'}}}
     , tab_3 : {
      alredyLinkedPersons:[],
       contactSelectedDetails:[],
