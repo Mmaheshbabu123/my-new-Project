@@ -567,7 +567,7 @@ function Addtiming(props) {
 										</div>
 									</div>
 									<div className="mt-3 pt-2">
-										<div className="error mt-2 py-2 ps-2">
+										{/* <div className="error mt-2 py-2 ps-2">
 											<ul>
 												<li>
 													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
@@ -585,7 +585,7 @@ function Addtiming(props) {
 													pulvinar eros. I
 												</li>
 											</ul>
-										</div>
+										</div> */}
 										{commonDatetime.map((value, index) => (
 											<div className="row table-title-bg my-2" key={index}>
 												<div className="col-md-2 py-3  poppins-medium-22px-date-picker text-center">
@@ -652,7 +652,7 @@ function Addtiming(props) {
 												</div>
 											</div>
 										))}
-										<div className="error mt-2 py-2 ps-2">
+										{/* <div className="error mt-2 py-2 ps-2">
 											<ul>
 												<li>
 													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
@@ -670,7 +670,7 @@ function Addtiming(props) {
 													pulvinar eros. I
 												</li>
 											</ul>
-										</div>
+										</div> */}
 									</div>
 								</div>
 							) : (
