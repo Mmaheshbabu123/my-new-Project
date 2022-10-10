@@ -19,7 +19,7 @@ export const requiredFields = {
    '21':true,
    '22':true,
    '23':true,
-   '24':true,
+   //'24':true,
   },
   tab_3 : {
   '25':true,

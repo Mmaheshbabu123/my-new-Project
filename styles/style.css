@@ -88,6 +88,7 @@ thead:after
 {
   font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-16px);
+  line-height: var(--line-height-26px);
 }
 .position_relative
 {
@@ -444,7 +445,7 @@ select option
 }
 .table-render-parent-div
 {
-  min-height: 45vh;
+  min-height: 55vh;
 }
 .dashboard-tile-parent
 {
@@ -496,7 +497,9 @@ select option
   border: 1px solid var(--border-color-lightgray);
 }
 .edit_pc_salary_benefits .rmdp-day.rmdp-selected span:not(.highlight),
-.edit_pc_salary_benefits .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover
+.edit_pc_salary_benefits .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover,
+.indexation_date_field .rmdp-day.rmdp-selected span:not(.highlight),
+.indexation_date_field  .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover
 {
   width: 25px !important;
   height: 25px !important;
@@ -504,7 +507,8 @@ select option
   background-color: var(--color-skyblue) !important;
   box-shadow: var(--color-skyblue) !important;
 }
-.purple .rmdp-day.rmdp-today span
+.purple .rmdp-day.rmdp-today span,
+.indexation_date_field .purple .rmdp-day.rmdp-today span
 {
   background-color: var(--color-purple) !important;
   width: 25px !important;
@@ -516,4 +520,30 @@ select option
   .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
     max-width: 1180px !important;
 }
+}
+.indexation_date_field .rmdp-container,
+.indexation_date_field .rmdp-input
+{
+  width: 100%;
+}
+.indexation_date_field .icon-tabler-calendar-event
+{
+  right: 10.5px !important;
+}
+.indexation_date_field .rmdp-input
+{
+  padding: 18px 10px;
+  border-radius: 0px;
+  border: 1px solid #4C4D554D !important;
+}
+.rmdp-input:focus 
+{
+  border: 1px solid #4C4D554D !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.indexation_paritair_comitte .searchWrapper,
+.category_function_indexation .searchWrapper
+{
+  border-radius: 0px;
 }

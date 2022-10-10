@@ -140,15 +140,16 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
 
   return (
     < div className='row'>
-      <div className='col-md-12 text-end additional_add_sticky pb-3'>
-      {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) && <button
+      {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) && <div className='col-md-12 text-end additional_add_sticky pb-3'>
+      <button
         onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
         type="button"
-        className="btn skyblue-bg-color rounded-0 shadow-none col-3">
+        className="btn skyblue-bg-color rounded-0 shadow-none col-3 px-0">
         {`+Add additional document`}
-      </button>}
+      </button>
       </div>
-      <div className='my_documents_position_sticky'>
+      }
+      <div className={`my_documents_position_sticky ${[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) ? 'my_documents_position_sticky_admin' : 'my_documents_position_sticky_employer'}`}>
       <div className='row'>
       <div className='col-md-12'>
          <div className='row'>

@@ -199,7 +199,7 @@ const AddEmployee = () => {
 					{inputlist.map((val, i) => {
 						return (
 							<div className="row" key={i}>
-								<div className="col-md-7 m-auto mb-3 mt-5 p-0">
+								<div className="col-md-7 m-auto mb-3 p-0">
 									<div className='row'>
 									<div className="col-md-8 select-relative slt-emp p-0">
 										<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px ps-0">
@@ -253,20 +253,7 @@ const AddEmployee = () => {
 									<div className='row justify-content-end'>
 										<div className="col-md-12 bd-highlight">
 											<div className="bd-highlight row justify-content-end">
-											<div className='col-md-3 align-self-center add_project text-end pe-0'>
-												{inputlist.length < tempPcList.length &&
-												inputlist.length - 1 === i && (
-													<button
-														type="submit"
-														className="btn rounded-0 btn-block float-start shadow-none add-proj-btn w-100"
-														onClick={handleaddanother}
-														style={{height:'43px'}}
-													>
-														+ Add
-													</button>
-												)}
-													</div>
-												<div className='col-md-3 align-self-center text-end ps-0'>
+											<div className='col-md-3 align-self-center text-end ps-0'>
 													{// pclist.length > 1 &&
 												inputlist.length !== 1 &&
 												i > 0 && (
@@ -281,6 +268,20 @@ const AddEmployee = () => {
 													</button>
 												)}
 													</div>
+											<div className='col-md-3 align-self-center add_project text-end'>
+												{inputlist.length < tempPcList.length &&
+												inputlist.length - 1 === i && (
+													<button
+														type="submit"
+														className="btn rounded-0 btn-block float-start shadow-none add-proj-btn w-100"
+														onClick={handleaddanother}
+														style={{height:'43px'}}
+													>
+														+ Add
+													</button>
+												)}
+													</div>
+											
 											
 											</div>
 										</div>

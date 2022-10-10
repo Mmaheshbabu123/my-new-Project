@@ -256,22 +256,7 @@ input[type="checkbox"]
   top: 334px;
   z-index: 998;
 } */
-::-webkit-scrollbar
-{
-  width: 0.2em;
-}
-::-webkit-scrollbar-button 
-{
-  background: #ccc
-}
-::-webkit-scrollbar-track-piece 
-{
-  background: #888
-}
-::-webkit-scrollbar-thumb 
-{
-  background: #eee
-}
+
 .qr_position_sticky
 {
   position: sticky;
@@ -303,10 +288,20 @@ input[type="checkbox"]
 .my_documents_position_sticky
 {
   position: sticky;
-  top: 304px;
   background:var(--color-white);
   z-index: 998;
 }
+
+.my_documents_position_sticky_admin
+{
+  top: 304px;
+}
+
+.my_documents_position_sticky_employer
+{
+  top: 166px;
+}
+
 /* .my_documents_position_sticky_table thead
 {
   position: sticky;
@@ -369,3 +364,4 @@ input[type="checkbox"]
 {
   min-height: 63vh;
 }
+
