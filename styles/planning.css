@@ -357,3 +357,15 @@ input[type="checkbox"]
   border-radius: 0px;
   padding: 1rem 10px;
 }
+.forgot_password_pincode
+{
+  font-family: var(--font-family-poppins-light) !important;
+  color: var(--color-skyblue) !important;
+  font-size: var(--font-size-18px) !important;
+  line-height: var(--line-height-29px) !important;
+  font-weight: normal;
+}
+.minheight-verifypin
+{
+  min-height: 63vh;
+}
