@@ -178,7 +178,7 @@ const LegalAddress = (props) => {
        <div className = {`col-md-12 `}>
          {LegalaAddressFieldData(legalAdressRow2)}
         <div className='row'>
-        {tab_2[Labour_regulations_share] === 1 && <div className = {`col-md-12 my-2 ${styles['add-div-margings']} legal${Labour_regulations}`}>
+        {tab_2[Labour_regulations_share] === 2 && <div className = {`col-md-12 my-2 ${styles['add-div-margings']} legal${Labour_regulations}`}>
          <LabelField title="Labour regulations (arbeidsreglement) - sharing" mandotory = {true} customStyle = {{display:''}}/>{requiredFields['tab_2'][Labour_regulations] && <RequiredField />}
          <div>
          <div className='d-inline-flex align-items-center me-3'>
