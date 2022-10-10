@@ -46,10 +46,10 @@ function Dashboard(props) {
       
       {Object.keys(dashboardtiles).map((key, idx) => {
         return(
-        <div class="row" key={idx}>
+        <div className="row" key={idx}>
           {Object.keys(dashboardtiles[key]).map((tile, idx1)=> {
             return(
-              <div key={idx1} class={dashboardtiles[key][tile]['col_class']}>
+              <div key={idx1} className={dashboardtiles[key][tile]['col_class']}>
                  <div className="p-2 position_relative_dashboard">
                     <a href={dashboardtiles[key][tile]['menu_link']} className="m-2">
                       <img src={dashboardtiles[key][tile]['menu_icon']} layout="fill" className="dasboard_image img-fluid" />

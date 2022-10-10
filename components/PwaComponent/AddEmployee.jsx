@@ -149,31 +149,31 @@ function AddEmployee(props) {
                                     </div>
                                     <div className="mb-3 me-1 mt-1 d-flex">
                                         <input className="form-check-input ms-1 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" for="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
                                             Location manager
                                         </label>
                                     </div>
                                     <div className="mb-3 me-3 mt-1 d-flex">
                                         <input className="form-check-input ms-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" for="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
                                             Contact person
                                         </label>
                                     </div>
                                     <div className="mb-3 me-3 mt-1 d-flex">
                                         <input className="form-check-input ms-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" for="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
                                             Employee
                                         </label>
                                     </div>
                                     <div className="mb-3 me-3 mt-1 d-flex">
                                         <input className="form-check-input ms-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" for="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
                                             Sales manager
                                         </label>
                                     </div>
                                     <div className="mb-3 me-3 mt-1 d-flex">
                                         <input className="form-check-input ms-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" for="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
                                             Co-employeer
                                         </label>
                                     </div>
@@ -185,14 +185,14 @@ function AddEmployee(props) {
                                         <label className="form-label custom_astrick m-2 ">User type</label>
                                     </div>
                                     <div className="mb-3 me-1 mt-1 d-flex">
-                                        <input class="form-check-input ms-2" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                                        <label class="form-check-label ms-2 mt-1" for="flexRadioDefault1">
+                                        <input className="form-check-input ms-2" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                        <label className="form-check-label ms-2 mt-1" forHtml="flexRadioDefault1">
                                             Internal
                                         </label>
                                     </div>
                                     <div className="mb-3 me-1 mt-1 d-flex">
-                                        <input class="form-check-input ms-2" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                                        <label class="form-check-label ms-2 mt-1" for="flexRadioDefault1">
+                                        <input className="form-check-input ms-2" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                        <label className="form-check-label ms-2 mt-1" forHtml="flexRadioDefault1">
                                             External
                                         </label>
                                     </div>

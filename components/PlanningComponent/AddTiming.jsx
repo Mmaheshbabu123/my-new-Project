@@ -862,7 +862,7 @@ function Addtiming(props) {
 																					</p>
 																				</div>
 																			))}
-																		{value.warning != '' &&value.warning != undefined && <p className='error'><ExclamationTriangle />{value.warning}</p>}
+																		{value.warning != '' &&value.warning != undefined && <p className='error pb-2'><ExclamationTriangle />{value.warning}</p>}
 																		</div>
 																	</div>
 																))}
