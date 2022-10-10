@@ -4,6 +4,8 @@ export const REGEX_URL = 'api/';
 export const BASE_URL = ENV_URL + REGEX_URL;
 
 export const ENV_DRUPAL= process.env.NEXT_PUBLIC_APP_URL_DRUPAL;
+export const BASE_URL_DRUPAL = ENV_DRUPAL + REGEX_URL;
+
 
 
 // EXAMPLE : export const getUserDetails = BASE_URL + 'account/get-user-details';
@@ -247,3 +249,6 @@ export const updateEmployeesubmitDetails = BASE_URL + 'update-employee-submit-de
 
 // ----------------Encodage validations-----------------------//
 export const fetchEncodageDeatils = BASE_URL + "get-all-encodage-planning";
+
+//----------Dashboard end points ------------------//
+export const getdashboardtiles = BASE_URL_DRUPAL + "dashboard-tiles-roles";
