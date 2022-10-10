@@ -131,6 +131,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
   }
 
   const handleActionClick = (type, eachRow) => {
+    let { webform_id, submit_id, tid, employer_id = 0 } = eachRow;
     let encode = btoa(window.location.href.replaceAll(`tab=${state.selectedTabId}`, `tab=${type === 'edit' ? 1 : 2}`));
     if (type === 'sign' && entityType === 3) {
       setState({ ...state, showPopup: true, selectedObj: eachRow })
@@ -138,12 +139,11 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
     }
     if (eachRow.todo_type === 1) {
       if (type === 'sign')
-        window.open(`${eachRow.uri}&destination_url=${encode}`, '_self');
+        window.open(`/cooperation-agreement-preview?root_parent_id=${webform_id}&emp_ref=${submit_id}&type=2&preview=0&destination_url=${encode}`, '_self');
       if (type === 'download')
-        handleCooperationAgreementDownload(eachRow);
+        handleCooperationAgreementDownload({root_parent_id: webform_id});
     }
     if (eachRow.todo_type === 2) {
-      let { webform_id, submit_id, tid, employer_id = 0 } = eachRow;
       let path;
       if (type === 'edit')
         path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout`;
@@ -158,7 +158,6 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
 
   const handleCooperationAgreementDownload = async (eachRow) => {
     eachRow['type'] = 4;
-    eachRow['root_parent_id'] = eachRow.uri.split('root_parent_id=').pop().split('&')[0];
     await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
       .then((response) => {
         let result = response.data;
