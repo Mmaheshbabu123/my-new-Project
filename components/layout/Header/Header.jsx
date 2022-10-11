@@ -12,7 +12,7 @@ function Header() {
 	//    'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
 	return (
 		<div className="custom-position-sticky">
-			<div className="clip0" />
+			<div className="clip0 d-none d-md-block d-lg-block" />
 			<div className='container px-0'>
 				{/* <div className='row'> */}
 				<div className="custom-header border-bottom col-md-9 col-lg-11 m-auto border-2 pt-4 px-0">
