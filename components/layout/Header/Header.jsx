@@ -12,38 +12,38 @@ function Header() {
 	//    'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
 	return (
 		<div>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light d-sm-block d-md-none d-lg-none">
-	<div class="container px-0">
+		<nav className="navbar navbar-expand-lg navbar-light bg-light d-sm-block d-md-none d-lg-none">
+	<div className="container px-0">
 
 	<a className="navbar-brand d-flex" href="">
 			<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL}>
 				<img style={{ width: '220px' }} src="/logo.svg" className="mt-2" />
 			</Link>
 		</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-end col-md-8 p-0 align-items-center">
-        <li class="nav-item list-unstyled mx-4 align-self-center d-flex purple-color2 poppins-regular-18px p-3">
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-end col-md-8 p-0 align-items-center">
+        <li className="nav-item list-unstyled mx-4 align-self-center d-flex purple-color2 poppins-regular-18px p-3">
 			<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL} className="">
 				<a type="">DASHBOARD</a>
 			</Link>
         </li>
-        <li class="nav-item list-unstyled ms-4 me-3 align-self-center d-flex p-3">
+        <li className="nav-item list-unstyled ms-4 me-3 align-self-center d-flex p-3">
 			<Notification />
         </li>
-		<li class="nav-item list-unstyled mx-4 align-self-center d-flex p-3">
+		<li className="nav-item list-unstyled mx-4 align-self-center d-flex p-3">
 			<img style={{ width: '40px' }} src="/account.png" />
         </li>
-		<li class="nav-item list-unstyled mx-4 align-self-center d-flex p-3">
+		<li className="nav-item list-unstyled mx-4 align-self-center d-flex p-3">
 			<select type="" className="border-0 bg-white poppins-regular-18px p-1 lang-options">
 				<option className="lang">EN</option>
 				<option className="lang">NL</option>
 				<option className="lang">FR</option>
 			</select>
         </li>
-        <li class="nav-item list-unstyled mx-3 align-self-center d-flex poppins-regular-18px p-3">
+        <li className="nav-item list-unstyled mx-3 align-self-center d-flex poppins-regular-18px p-3">
 			<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL} className="">
 				<a type="">Logout</a>
 			</Link>
@@ -55,7 +55,7 @@ function Header() {
 
 		<div className="custom-position-sticky ">
 			<div className="clip0 d-none d-md-block d-lg-block" />
-			
+
 			<div className='container px-0'>
 				{/* <div className='row'> */}
 				<div className="custom-header border-bottom col-md-9 col-lg-11 m-auto border-2 pt-4 px-0">
