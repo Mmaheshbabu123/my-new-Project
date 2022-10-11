@@ -33,6 +33,7 @@ const AddFunctions = () => {
 					if (result.status == 200) {
 						console.log(result.data[0]);
 						result.data[0].map((val,key)=>{
+							console.log(val.employee_list)
 							val.employee_list.map((val2,key2)=>{
 								if(val2.function_salary != null && val2.age < val.pc_min_age){
 									val.pcAge.map((val3,key3)=>{
@@ -43,7 +44,7 @@ const AddFunctions = () => {
 												sal = parseFloat(sal).toFixed(2)
 											}
 											result.data[0][key].employee_list[key2].function_salary = parseFloat(sal)
-											if(val2.salary == sal){
+											if(parseFloat(val2.salary) == parseFloat(sal)){
 												result.data[0][key].employee_list[key2].salary = null
 
 											}
@@ -235,7 +236,7 @@ const AddFunctions = () => {
 						sal_percent = parseFloat(val.min_sal_percent)
 						sal = (sal_percent/100)*salary;
 						if((sal - Math.floor(sal)) !== 0){
-							sal = parseFloat(sal).toFixed(2)
+							sal = parseFloat(sal).toFixed(4)
 						}
 						object[parent_index].employee_list[index].function_salary = maxsal != undefined ?(parseFloat(maxsal)>parseFloat(sal)?parseFloat(maxsal):parseFloat(sal)):parseFloat(sal);
 					}
@@ -256,16 +257,16 @@ const AddFunctions = () => {
 	};
 
 	let updateRes = (event, key) => {
-		//setFuncChanged(true);
-		// var res1 = [ ...functions ];
-		// res1.map((val, k) => {
-		// 	if (k == key) {
-		// 		res1[k]['funct_checked'] = parseInt(event.target.value);
-		// 	} else {
-		// 		res1[k]['funct_checked'] = '';
-		// 	}
-		// 	setFunctions(res1);
-		// });
+	// 	setFuncChanged(true);
+	// 	var res1 = [ ...functions ];
+	// 	res1.map((val, k) => {
+	// 		if (k == key) {
+	// 			res1[k]['funct_checked'] = parseInt(event.target.value);
+	// 		} else {
+	// 			res1[k]['funct_checked'] = '';
+	// 		}
+	// 		setFunctions(res1);
+	// 	});
 	};
 
 	function updatingObjectfunctionSlary(index = null,maxsal, salary, parent_index,pc_min_age) {
@@ -544,7 +545,7 @@ const AddFunctions = () => {
 																	/>
 																)}
 															</div>
-															<div className="col-md-4 p-1 poppins-light-18px align-self-center">
+															<div className="col-md-3 p-1 poppins-light-18px align-self-center">
 																<div>
 																	{v1['employeename']}{' '}
 																	<span className="ageicon">
@@ -597,9 +598,9 @@ const AddFunctions = () => {
 																	</span>
 																</div>
 															</div>
-															<div className='col-md-7'>
+															<div className='col-md-8'>
 																<div className='row'>
-																<div className="col-md-6  py-2 border-0 custom-drop-btn add_function_dropdown">
+																<div className="col-md-6  pt-2 border-0 custom-drop-btn add_function_dropdown">
 																{emplist.employee_types != null ? (
 																	<MultiSelectField
 																		placeholder={'Select employee type'}
@@ -630,22 +631,22 @@ const AddFunctions = () => {
 																	</div>
 																}
 															</div>
-															<div className="col-md-3 py-2 border-0">
+															<div className="col-md-3 pt-2 border-0">
 																{v1['function_salary'] != null ? (
-																	<div className="p-1 px-3 w-100 poppins-medium-20px bg-white function_salary_height">
-																		{'€ ' + v1['function_salary']}
+																	<div className="poppins-medium-18px bg-white function_salary_height d-flex align-items-center">
+																	<span className='input-group-text border-0 poppins-medium-18px rounded-0 shadow-none me-2' style={{width:'38px'}}>{'€ '}</span>{v1['function_salary']}
 																	</div>
 																) : (
-																	<div className="p-1 w-100 poppins-medium-20px bg-white d-none">
-																		{'€ ' + v1['function_salary']}
+																	<div className="poppins-medium-18px bg-white d-none">
+																<span className='input-group-text border-0 poppins-medium-18px rounded-0 shadow-none'>{'€ '}</span>	{v1['function_salary']}
 																	</div>
 																)}
 															</div>
-															<div className="col-md-3 py-2 add_function_salary pe-4">
+															<div className="col-md-3 pt-2 add_function_salary pe-4">
 																<div>
 																	{v1['function_salary'] != null && (
 																		<div className="input-group">
-																			<span className="input-group-text border-0 poppins-regular-16px rounded-0 shadow-none">
+																			<span className="input-group-text border-0 poppins-medium-18px rounded-0 shadow-none">
 																				€
 																			</span>
 																			<input
@@ -662,7 +663,7 @@ const AddFunctions = () => {
 																						''
 																					)
 																				}
-																				className="form-control bg-white border-0 poppins-regular-16px rounded-0 shadow-none"
+																				className="form-control bg-white border-0 poppins-medium-18px rounded-0 shadow-none"
 																				onChange={(e) => {
 																					setsaalary(k1, e, key);
 																					// setSalChanged(true);

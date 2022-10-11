@@ -446,7 +446,7 @@ const PcOverview = (params) => {
 		</div>
 			} */}
 					{pc_view_type != 'addpc' && (
-						<div className="row my-4">
+						<div className="row mt-4 mb-1">
 							<div className="text-start col-md-6 align-items-center d-flex">
 								<button
 									type="button"
@@ -513,7 +513,7 @@ const PcOverview = (params) => {
 			{router.query.cid || router.query.fid || params.type != 'addpc' ? (
 				''
 			) : (
-				<div className="row my-4 m-0">
+				<div className="row mt-4 mb-2 m-0">
 					<div className="text-start col-md-6 d-flex align-items-center px-0">
 						<button
 							type="button"

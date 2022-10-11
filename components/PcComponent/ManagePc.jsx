@@ -212,7 +212,7 @@ const ManagePc = (props) => {
 							</div>
 						</div>
 					</div>
-					<div className="col-md-2  ps-3 pe-0 ">
+					<div className="col-md-2  ps-3 pe-0 d-grid">
 						<div className={`text-center ${styles.sectioncolor} poppins-medium-18px p-4 fw-bold`}>
 							Actions
 						</div>
@@ -266,7 +266,7 @@ const ManagePc = (props) => {
 			))}
 			{data.length == 0 && (
 				<div className="bg-light py-3 mt-3">
-					<div className="text-center poppins-regular-18px"> No paritair comitee </div>
+					<div className="text-center poppins-regular-18px no-records"> No paritair comitee </div>
 				</div>
 			)}
 			</div>
@@ -291,7 +291,7 @@ const ManagePc = (props) => {
 					/> */}
 				</div>
 			)}
-			<div className="row m-0 my-4">
+			<div className="row m-0 mt-4 mb-2">
 				<div className="col-md-6 p-0">
 					<button
 						type="button"

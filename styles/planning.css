@@ -2,6 +2,10 @@
 {
   min-height: 57vh;
 }
+.planning-height_employee
+{
+  min-height: 61vh;
+}
 .select_employee_container .css-1wy0on6
 {
   align-self: center;
@@ -9,6 +13,7 @@
 .action_icon_size
 {
   width: 25px;
+  margin-right: 0.5rem;
 }
 .css-1pahdxg-control
 {
@@ -42,11 +47,13 @@
 {
   opacity: 1;
 }
-.position-sticky-subhead
+.position-sticky-subhead,
+.add_project_position,
+.nav-pills-position-sticky
 {
   position: sticky;
   top: 166px;
-  z-index: 999;
+  z-index: 998;
   background: white;
 }
 .border-purple
@@ -129,7 +136,8 @@ input[type="checkbox"]
 }
 .sign_action_icon_size_pdf
 {
-  width: 20px;
+  width: 16px;
+  
 }
 .delete_icon_manage_cooperation
 {
@@ -186,4 +194,218 @@ input[type="checkbox"]
 .css-sizvqo-MuiTableCell-root .Cell-today
 {
   background-color: var(--color-skyblue);
+}
+.add_salary_benefits .accordion-button:not(.collapsed)
+{
+  background-color: transparent !important;
+  color: var(--color-label-footer-gray) !important;
+}
+.add_salary_benefits input[type="checkbox"],
+.add_salary_benefits input[type="radio"]
+{
+  margin-right: 0.5rem;
+}
+.occurence_col .react-select-prefix__single-value 
+{
+  display:flex;
+  align-items:center;
+}
+.add_salary_benefits input[type="text"],
+.add_salary_benefits input[type="text"]:focus-visible,
+.add_salary_benefits input[type="text"]:hover
+{
+  border:1px solid #4C4D554D;
+  border-radius:0px;
+  height:41px;
+  outline: #4C4D554D !important;
+}
+.add_salary_benefits .react-select-prefix__input
+{
+  border:none !important;
+  height:auto !important;
+}
+.date_field_salary_benefits
+{
+  margin-left:0.8rem;
+  height:41px;
+}
+.otp,
+.otp:focus-visible,
+.min_height_pincode input[type="tel"]
+{
+    border:1px solid #4C4D554D !important;
+    outline: #4C4D554D !important;
+    border-radius: 0px !important;
+}
+.min_height_pincode 
+{
+  min-height: 55vh;
+}
+.background_color
+{
+  background: #f4f4f4;
+}
+.position-sticky-mytodo_searchbox
+{
+  position:sticky;
+  top: 243px;
+  background-color: var(--color-white);
+  z-index: 998;
+}
+/* .sticky-table-header
+{
+  position: sticky;
+  top: 334px;
+  z-index: 998;
+} */
+
+.qr_position_sticky,
+.planning_encodage_position
+{
+  position: sticky;
+  top: 166px;
+  background: var(--color-white);
+  z-index: 998;
+}
+.weekly_planning_search_position
+{
+  position: sticky;
+  top: 243px;
+  background: white;
+  z-index: 998;
+}
+/* .qr_sticky thead
+{
+  position: sticky;
+  top: 299px;
+  
+  z-index: 998;
+} */
+.project_sticky
+{
+  position: sticky;
+  top: 248px;
+  background: var(--color-white);
+  z-index: 998;
+}
+/* .project_table_sticky thead
+{
+  position: sticky;
+  top: 309px;
+  
+  z-index: 998;
+} */
+.my_documents_position_sticky
+{
+  position: sticky;
+  background:var(--color-white);
+  z-index: 998;
+}
+
+.my_documents_position_sticky_admin
+{
+  top: 304px;
+}
+
+.my_documents_position_sticky_employer
+{
+  top: 243px;
+}
+
+/* .my_documents_position_sticky_table thead
+{
+  position: sticky;
+  top: 302px;
+  z-index: 998;
+} */
+.manage_agreement_position_sticky
+{
+  position: sticky;
+  top: 230px;
+  background: var(--color-white);
+  z-index: 998;
+}
+/* .manage_agreement_position_sticky_table thead
+{
+  position: sticky;
+  top: 296px;
+  z-index: 998;
+} */
+.manage_category_sticky_position
+{
+  position: sticky;
+  top: 156px;
+  background: white;
+  z-index: 998;
+}
+/* .manage_category_table
+{
+  position: sticky;
+  top: 233px;
+  background: white;
+  z-index: 998;
+} */
+.position_sticky_co-op
+{
+  position: sticky;
+  top: 249px;
+  background: white;
+  z-index: 998;
+}
+.manage_fun_table th
+{
+  width: 20%;
+}
+.start_date_edit_link .rmdp-input
+{
+  width: 191px !important;
+  border-radius: 0px;
+  padding: 1rem 10px;
+}
+.forgot_password_pincode
+{
+  font-family: var(--font-family-poppins-light) !important;
+  color: var(--color-skyblue) !important;
+  font-size: var(--font-size-18px) !important;
+  line-height: var(--line-height-29px) !important;
+  font-weight: normal;
+}
+.minheight-verifypin
+{
+  min-height: 63vh;
+}
+
+/* Warning icon */
+.warning-icon-solid {
+	background-image: url('/images/warning.svg');
+	background-repeat: no-repeat;
+	background-size: 25px;
+	margin: 5px;
+	padding: 14px;
+	background-position: center;
+}
+
+/* Warning icon */
+.stop-working-icon-solid {
+	background-image: url('/images/stop-icon-filled.svg');
+	background-repeat: no-repeat;
+	background-size: 25px;
+	margin: 5px;
+	padding: 14px;
+	background-position: center;
+}
+.position-sticky-select-function
+{
+  position: sticky;
+  top: 182px;
+  background: white;
+  z-index: 998;
+}
+.border_purple
+{
+  border:1px solid var(--color-purple);
+}
+.modal-footer
+{
+  border-top: 0px !important;
 }

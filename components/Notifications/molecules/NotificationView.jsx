@@ -83,40 +83,45 @@ const NotificationView = ({
     <div className="w-100">
       <div className={styles["notificationBar"]} >
         <div>
-          <div style={{ display: "flex" }}>
-            <p className={`${styles['notification-header']} text-center`}>
+          <div style={{ display: "flex" }} className="bg-white p-3">
+            <p className={`${styles['notification-header']} bitter-italic-normal-medium-24 pt-4`}>
               Notifications
             </p>
-            <img alt={"close"} title={"Close"} onClick={toggleNotificationView} style={{ cursor: "pointer" }} src={closeIcon.src} />
+            <img alt={"close"} title={"Close"} onClick={toggleNotificationView} style={{ cursor: "pointer", width: "15px" }} src={closeIcon.src} />
           </div>
           {state.notificationCount === 0 && <p> No notifications to show. </p>}
-          <div style={{ minHeight: state.notificationCount ? "200px" : "150px", maxHeight: state.viewAllLink ? "320px" : "450px", overflowY: 'auto' }}>
+          <div className={styles["notification-scroll"]} style={{ minHeight: state.notificationCount ? "200px" : "150px", maxHeight: state.viewAllLink ? "400px" : "460px", overflowY: 'auto' }}>
           {state.allTimestamp.map((i, k) => {
             return (
-              <div key={k}>
-                <p className={styles['date-p-tag']}  >
-                  <span style={{ display: "inline-block", width: "50%" }}>  {i.UTC.date} </span>
-                  <span style={{ display: "inline-block", width: "50%", textAlign: "right" }} >
-                  {k === 0 && (
-                    <img alt={"delete all"} title="Delete all" style={{ width: "25px", cursor: "pointer" }}
+              <div key={k} className="container px-3 notification_container">
+                <p className={`${styles['date-p-tag']} d-flex align-items-center row`}>
+                  <span style={{ display: "inline-block"}} className="poppins-medium-16px col-md-6 ps-3 py-3">  {i.UTC.date} </span>
+                  <span style={{ display: "inline-block", textAlign: "right" }} className="col-md-6 pe-3" >
+                  {/* {k === 0 && (
+                    <img alt={"delete all"} title="Delete all" style={{ width: "15px", cursor: "pointer"}}
                          onClick={() => updateNotifications('deleteAll')}
                          src={clearIcon.src} />
-                    )}
+                    )} */}
                   </span>
                 </p>
                 {i.list.map(l => {
                   return l.map((k, _key) => {
                     const d = new Date(k.timeStamp * 1000);
-                    const min = d.getUTCMinutes();
+                    const min = d.getUTCMinutes() < 10 ? '0' + d.getUTCMinutes() : d.getUTCMinutes();
                     const hours = d.getUTCHours() % 12 || 12;
                     const amOrpm = hours >= 12 ? "pm" : "am";
                     return (
-                      <div key={_key} className={styles["lineItmes"]}>
-                        <span className={styles['time-span']}> {`${hours}:${min} ${amOrpm}`} </span>
+                      <div key={_key} className={`${styles["lineItmes"]} py-3`}>
+                        
                         <div onClick={() => updateNotifications('single', k)} className="cursor-pointer">
-                          <span className={k.seen_by_user === 0 ? styles['unseen'] : ''}> </span>
-                          <span className={k.seen_by_user !== 0 ? styles['seen'] : ''}> {k.message} </span>
+                          <span className={k.seen_by_user !== 0 ? styles['seen'] : styles['unseen']}> {k.message} </span>
                         </div>
+                        <div className="row mt-2">
+                          <div className="col-md-12">
+                          <span className={`${styles['time-span']} float-start`}> {`${hours}:${min} ${amOrpm}`} </span>
+                            </div>
+                          </div>
+                          
                       </div>
                     );
                   });
@@ -126,11 +131,11 @@ const NotificationView = ({
           })}
           </div>
         </div>
-        {state.notificationCount > 0 && <div className="col-md-12 row m-0 p-0">
-          <p className={`${styles['link-p-tags']} cursor-pointer col-md-6 text-start`} onClick={() => updateNotifications('readAll', state.allTimestamp)}>
+        {state.notificationCount > 0 && <div className="col-md-12 row m-0 p-0 pt-3 pb-2 ">
+          {/* <p className={`${styles['link-p-tags']} cursor-pointer col-md-6 text-start bitter-italic-normal-medium-24`} onClick={() => updateNotifications('readAll', state.allTimestamp)}>
              Mark all as read
-          </p>
-           {state.viewAllLink === 1 && <p className={`${styles['link-p-tags']} cursor-pointer col-md-6 text-end`} onClick={loadAll}> View all </p>}
+          </p> */}
+           {state.viewAllLink === 1 && <p className={`${styles['link-p-tags']} cursor-pointer col-md-12 text-center text-uppercase text-decoration-underline  bitter-italic-normal-medium-16`} onClick={loadAll}> View all </p>}
         </div>}
       </div>
     </div>

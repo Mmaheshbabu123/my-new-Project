@@ -109,7 +109,7 @@ console.log(sign_icon);
     const { headers, currentItems, filterRows, pageCount,  currentPage} = compState;
     return(
       <>
-     <div className='row'>
+     <div className='row manage_agreement_position_sticky'>
      <div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{position: 'relative' }}>
            <div className='row'>
            <div className='col-md-9'>

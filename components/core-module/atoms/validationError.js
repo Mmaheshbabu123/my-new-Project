@@ -4,7 +4,7 @@ export default function validationError ( {text, style={} }) {
     <>
     <small
         style={style}
-        className="form-text text-muted col-md-5 pcp_name_warning">
+        className="form-text text-danger poppins-regular-16px col-md-5">
        {text}
      </small>
     </>

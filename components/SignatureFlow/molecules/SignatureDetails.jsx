@@ -8,7 +8,7 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fro
   const handleClose     = ( ) => setState({...state, showPopup: false})
   const handleEdit      = ( ) => setState({...state, showPopup: true, disabled: false })
 
-  const handleDelete = () => {
+  const handleDelete = () => {  //NOSONAR not needed as of now
     confirmAlert({
       message: 'Do you want to delete signature?',
       buttons: [
@@ -19,10 +19,10 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fro
   }
 
   return(
-    <div>
-        <Modal size={'lg'} show={state.showPopup} onHide={handleClose}>
+    <div className='row min-height-signature'>
+        <Modal size={'lg'} show={state.showPopup} onHide={handleClose} centered>
           <Modal.Header closeButton style={{paddingLeft: '43%'}}>
-            <Modal.Title> Signature </Modal.Title>
+            <Modal.Title> <h3 className='font-weight-bold px-0  bitter-italic-normal-medium-24'> Signature </h3> </Modal.Title>
           </Modal.Header>
           <Modal.Body>
                   <SignatureField
@@ -34,20 +34,26 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fro
                   />
           </Modal.Body>
         </Modal>
-        {fromSvPreview === 0 && <div className='border p-2 row'>
+        {fromSvPreview === 0 && <div className='border p-2 col-md-9 col-lg-11 m-auto'>
           {state.sign !== '' ? <>
-          <span> Signature: </span>
-          <div className='col-md-7'> <img src={state.sign} alt="no sign" width="100%"/> </div>
-          <div className='col-md-5'>
-            <button className={`btn btn-secondary mx-2`} style={{width:'30%'}} onClick={handleEdit}> Edit </button>
-            <button className={`btn btn-light`} style={{width:'30%'}} onClick={handleDelete}> Delete </button>
+          <span className='poppins-regular-18px'> Signature: </span>
+          <div className='row'>
+          <div className='col-md-8'> <img src={state.sign} alt="no sign" width="100%"/> </div>
+          <div className='col-md-4 align-self-end'>
+            <button className={`btn btn-secondary mx-2 btn  btn-block border-0 rounded-0 poppins-medium-18px-next-button col-2 m-auto shadow-none float-end text-uppercase`} style={{width:'50%'}} onClick={handleEdit}> Sign again </button>
+            {/*<button className={`btn btn-light`} style={{width:'30%'}} onClick={handleDelete}> Delete </button>*/}
+          </div>
           </div>
           </> :
           <>
-          <p style={{margin: '20px 0', textAlign: 'center'}}> {`You haven't added a signature yet, please add your signature.`} </p>
-              <button onClick={handleEdit} type="button" className="btn btn-dark pcp_btn col-2 m-auto">
+          <p className='poppins-light-18px'style={{margin: '20px 0', textAlign: 'center'}}> {`You haven't added a signature yet, please add your signature.`} </p>
+             <div className='row'>
+               <div className='col-md-12 text-center'>
+               <button onClick={handleEdit} type="button" className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color col-2 m-auto shadow-none">
                 {`Add signature`}
               </button>
+               </div>
+             </div>
          </>
         }
         </div>}

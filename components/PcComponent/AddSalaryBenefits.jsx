@@ -180,21 +180,21 @@ const AddSalaryBenefits = () => {
 				if (object[i].v_err == '' && object[i].vt_err == '') {
 					object[i].v_err =
 						data.value_type == '2' ? ValidationService.percentageValidationMethod(data.value) : '';
-					data.value_type == '1'
-						? (object[i].v_err = ValidationService.numberValidationMethod(data.value))
-						: (object[i].v_err = '');
+						object[i].v_err = data.value_type == '1'
+						? (ValidationService.numberValidationMethod(data.value))
+						: '';
 				}
-				data.date_err == ''
-					? (object[i].date_err = ValidationService.onlyFutureDateValidationMethod(data.date))
-					: '';
-				// alert(data.v_err)
+				// object[i].date_err = data.date_err == ''
+				// 	? (ValidationService.onlyFutureDateValidationMethod(data.date))
+				// 	: '';
 				if (
 					data.v_err != '' ||
 					data.vt_err != '' ||
 					data.o_err != '' ||
 					data.g_err != '' ||
 					data.ct_err != '' ||
-					data.c_err != '' ||
+					data.c_err != '' 
+					||
 					data.date_err != ''
 				) {
 					err++;
@@ -234,11 +234,11 @@ const AddSalaryBenefits = () => {
 	const rows = [];
 	obj.forEach((element, index) => {
 		rows.push(
-			<div className="border mt-5 ">
+			<div className="mt-3">
 				
 				<div className="m-2">
 					<div className='row'>
-						<div className='mt-3' style={{width:"2%"}}>
+						<div className='mt-4 px-1' style={{width:"2%"}}>
 				<input
 									type="checkbox"
 									// value={true}
@@ -246,24 +246,25 @@ const AddSalaryBenefits = () => {
 									onChange={(e) => {
 										updateOpen(index, e.target.checked);
 									}}
+									style={{width:'18px',height:'18px'}}
 								/>
 								</div>
-								<div className='' style={{width:"98%"}}>
-					<div class="accordion-item">
+								<div className='pe-1' style={{width:"98%"}}>
+					<div className="accordion-item rounded-0 add_salary_benefits">
 					
-						<h2 class="accordion-header" id="flush-headingOne">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={"#flush-collapseOne"+index} aria-expanded="false" aria-controls="flush-collapseOne">
+						<h2 className="accordion-header" id="flush-headingOne">
+							<button className="accordion-button collapsed poppins-regular-18px rounded-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target={"#flush-collapseOne"+index} aria-expanded="false" aria-controls="flush-collapseOne">
 								Salary (verloning) - {element.name}
 							</button>
 						</h2>
-						<div id={"flush-collapseOne"+index} class="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
-							<div class="accordion-body">
+						<div id={"flush-collapseOne"+index} className="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
+							<div className="accordion-body">
 								<div 
 								// className={element.open ? 'col-md-12 m-3' : 'col-md-12 m-3 d-none'}
 								>
 									<div className="row">
 										<div className="col-md-3">
-											<br />
+											
 											<input
 												type="checkbox"
 												value={mandatory}
@@ -271,10 +272,10 @@ const AddSalaryBenefits = () => {
 													updateMandatory(index, e.target.checked);
 												}}
 											/>
-											<label>Is this mandatory?</label>
+											<label className='poppins-regular-18'>Is this mandatory?</label>
 										</div>
 										<div className="col-md-9">
-											<br />
+										
 											<input
 												type="checkbox"
 												value={agent}
@@ -282,7 +283,7 @@ const AddSalaryBenefits = () => {
 													updateAgent(index, e.target.checked);
 												}}
 											/>
-											<label>
+											<label className='poppins-regular-18'>
 												Allow sales agent to update the value during creation of cooperation agreement?
 											</label>
 										</div>
@@ -290,8 +291,8 @@ const AddSalaryBenefits = () => {
 									<br />
 									<div className="row">
 										<div className="col-md-4">
-											<div className="row">
-												<label>Salary benefit value</label>
+											<div className="row mb-4">
+												<label className='mb-2 poppins-regular-16px'>Salary benefit value</label>
 
 												<RadioGroup
 													name={'valuetype' + index}
@@ -300,12 +301,12 @@ const AddSalaryBenefits = () => {
 													}}
 													selectedValue={element.value_type}
 												>
-													<label htmlFor="valuetype1">
+													<label htmlFor="valuetype1" className='mb-2 poppins-regular-16px'>
 														<Radio id="valuetype1" value={1} />
 														value in €
 													</label>
 													<br />
-													<label htmlFor="valuetype2">
+													<label htmlFor="valuetype2" className='mb-3 poppins-regular-16px'>
 														<Radio id="valuetype2" value={2} />
 														value in %
 													</label>
@@ -315,7 +316,7 @@ const AddSalaryBenefits = () => {
 												{/* </div> */}
 												<input
 													type="text"
-													style={{ width: '78%' }}
+													style={{ width: '78%',marginLeft:'0.8rem' }}
 													// value={valuev}
 													defaultValue={element.value}
 													onChange={(e) => {
@@ -326,7 +327,7 @@ const AddSalaryBenefits = () => {
 												<p style={{ color: 'red' }}>{element.v_err}</p>
 											</div>
 											<div className="row">
-												<label>Is the benefit granted in case of absence of the employee?</label>
+												<label className='mb-2 poppins-regular-16px'>Is the benefit granted in case of absence of the employee?</label>
 												{/* onChange={this.onChangeValue} */}
 												<RadioGroup
 													name={'granted' + index}
@@ -335,12 +336,12 @@ const AddSalaryBenefits = () => {
 													}}
 													selectedValue={element.granted}
 												>
-													<label htmlFor="granted1">
+													<label htmlFor="granted1" className='mb-2 poppins-regular-16px'>
 														<Radio id="granted1" value={0} />
 														Yes
 													</label>
 													<br />
-													<label htmlFor="granted2">
+													<label htmlFor="granted2" className='mb-3 poppins-regular-16px'>
 														<Radio id="granted2" value={1} />
 														No
 													</label>
@@ -353,8 +354,8 @@ const AddSalaryBenefits = () => {
 											</div>
 										</div>
 										<div className="col-md-4">
-											<div className="row">
-												<label>Applicable coefficient</label>
+											<div className="row mb-4">
+												<label className='mb-2 poppins-regular-16px'>Applicable coefficient</label>
 												{/* onChange={this.onChangeValue} */}
 												<RadioGroup
 													name={'coefficient' + index}
@@ -363,12 +364,12 @@ const AddSalaryBenefits = () => {
 													}}
 													selectedValue={element.coefficient_type}
 												>
-													<label htmlFor="coefficient1">
+													<label htmlFor="coefficient1" className='mb-2 poppins-regular-16px'>
 														<Radio id="coefficient1" value={1} />
 														Yes
 													</label>
 													<br />
-													<label htmlFor="coefficient2">
+													<label htmlFor="coefficient2" className='mb-3 poppins-regular-16px'>
 														<Radio id="coefficient2" value={2} />
 														No
 													</label>
@@ -383,20 +384,24 @@ const AddSalaryBenefits = () => {
 													className="col-md-11"
 													defaultValue={element.coefficient_value}
 													name="coefficientother"
+													style={{ marginLeft:'0.8rem' }}
 												/>
 												<p style={{ color: 'red' }}>{element.c_err}</p>
 											</div>
 											<div className="row">
-												<label>Start date</label>
+												<label className='mb-3 poppins-regular-16px'>Start date</label>
 												<DateField
 													id={'date'}
 													isDisabled={false}
 													placeholder={'date'}
 													handleChange={(e) => {
+														console.log(e.target.value)
 														updateDate(index, e.target.value);
 													}}
-													className="col-md-11"
+													style={{ marginLeft:'0.8rem' }}
+													className="col-md-11 date_field_salary_benefits"
 													value={element.date}
+													
 												/>
 												{/* <input
 									type="date"
@@ -409,9 +414,9 @@ const AddSalaryBenefits = () => {
 												{/* <DatePicker selected={date} name="startDate"  onChange={setDate}  dateFormat="MM/dd/yyyy"    locale="es"/> */}
 											</div>
 										</div>
-										<div className="col-md-4">
+										<div className="col-md-4 occurence_col">
 											<div className="row">
-												<label>Occurence</label>
+												<label className='mb-3 poppins-regular-16px'>Occurence</label>
 												<MultiSelectField
 													id={'select_id'}
 													options={options}
@@ -442,29 +447,30 @@ const AddSalaryBenefits = () => {
 	return (
 		<form onSubmit={Submit}>
 			{rows}
+
+		<div className='row mt-3 mb-2'>
+			<div className='col-md-6 align-self-center'>
 			<button
-				type="button"
-				className={
-					pc_view_type == 'addpc' ? (
-						'bg-white border-0 poppins-regular-18px px-0 shadow-none text-decoration-underline'
-					) : (
-						'bg-white border-0 poppins-regular-18px px-0 shadow-none text-decoration-underline'
-					)
-				}
-				onClick={() => {
-					setCurrent_sec(4);
-				}}
-			>
-				BACK
-			</button>
-			<button
+								type="button"
+								className={pc_view_type == 'addpc'?"bg-white bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline":"bg-white bg-white  border-0 poppins-regular-18px shadow-none text-decoration-underline"}
+								onClick={() => {
+									setCurrent_sec(4);
+								}}
+							>
+								BACK
+							</button>
+			</div>
+			<div className='col-md-6 '>
+					<button
 				type="sumit"
-				//  className="btn rounded-0  custom-btn px-3  btn-block "
-				className="btn rounded-0 mt-1 custom-btn px-3  btn-block float-end poppins-light-19px-next-button"
-				// onClick={() => submit}
+				// className="btn rounded-0  custom-btn px-3  btn-block float-end"
+				className="btn rounded-0  custom-btn px-3  btn-block  poppins-medium-18px-next-button float-end"
+			// onClick={() => submit}
 			>
 				Submit
 			</button>
+			</div>
+		</div>
 		</form>
 	);
 };

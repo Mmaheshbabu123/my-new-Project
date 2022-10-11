@@ -8,8 +8,6 @@ import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import styles from '../SalaryBenefits.module.css';
 import { soortOptions, premiesAutoArray } from '../../../Definations';
-// import CheckBoxField from '@/atoms/CheckBoxField';
-// import { helpers } from '../SalaryBenefitHelper';  //.
 
 
 const TAB_ID = 5;
@@ -74,18 +72,30 @@ const SalaryDetails = (props) => {
     const showLinkedInputFields = (pcId, salaryObj) => {
       let fieldId = salaryObj.salary_id;
       let valueObj = cooperationSalaryLinked[pcId][fieldId] || {};
-      let resetObj = valueObj['checked'] !== 1 ? {value: salaryObj.salary_value } : {};
+      let resetObj = salaryObj.mandotory !== 1 && valueObj['checked'] !== 1 ? {value: salaryObj.salary_value, granted: salaryObj.granted } : {};
       return(
         <div className = {`${styles['salary-input-field-div']}`} >
-          <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 1, 0, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
-          <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 0, 0, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
-          {valueObj.checked ? <InputField type = {'text'}
-            className = {`${styles['salary-input-value']} col-md-4 poppins-regular-18px`}
-            name={'value'}
-            value={valueObj['value'] !== undefined ? valueObj['value'] : salaryObj.salary_value}
-            isDisabled= {salaryObj.salary_value} placeholder={'Value'}
-            handleChange={(e)=>handleChange('value', pcId, fieldId, '', 0, e.target)}
-          />:null}
+          {salaryObj.mandotory !== 1 && <>
+            <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 1, 0, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
+            <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 0, 0, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
+          </>}
+          {salaryObj.mandotory === 1 || valueObj.checked ?
+           <div className={`${styles['salary-input-field-div']} position-relative`}>
+            <InputField type = {'text'}
+              className = {`${styles['salary-input-value']} col-md-8 poppins-regular-18px`}
+              name={'value'}
+              value={valueObj['value'] !== undefined ? valueObj['value'] : salaryObj.salary_value}
+              placeholder={'Value'}
+              handleChange={(e)=>handleChange('value', pcId, fieldId, '', 0, e.target)}
+            />
+            <span className="position-absolute" style = {{right: '35%', top: '-10%'}}> {salaryObj.value_type === 1 ? '€' : '%'} </span>
+            <div className="mt-3">
+              <LabelField title="Is the benefit granted in case of absence of the employee" customStyle={{marginBottom: '-25px'}} className="poppins-regular-18px px-0"/>
+              <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('granted', pcId, fieldId, 1, 0, 0, resetObj)}> {valueObj['granted'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
+              <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('granted', pcId, fieldId, 0, 0, 0, resetObj)}> {valueObj['granted'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
+            </div>
+          </div>
+          :null}
         </div>
       );
     }

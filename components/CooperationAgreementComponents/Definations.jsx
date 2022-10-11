@@ -48,9 +48,10 @@ export const whoWillSignOptions = [
     id: 1, label: 'Employer'
   },{
     id: 2, label: 'Co-employer'
-  },{
-    id: 3, label: 'Location manager'
-  }
+  },
+  /*{
+    id: 3, label: 'Location manager'   // They dont want it now
+  }*/
 ];
 
 export const languageOptions = [

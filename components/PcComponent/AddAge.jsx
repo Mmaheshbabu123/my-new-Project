@@ -491,7 +491,7 @@ const Addage = () => {
 				</div>
 			</div>
 				{pc_view_type == "editpc" ? (
-					<div className={pc_view_type == 'addpc'?"row m-0 my-4 back_button_position":"row m-0 my-4"}>
+					<div className={pc_view_type == 'addpc'?"row m-0 my-4 back_button_position":"row m-0 mt-4"}>
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6 px-0">
 							<button
@@ -506,7 +506,7 @@ const Addage = () => {
 						</div>
 					</div>
 				) : pc_view_type == 'addpc'? (
-					<div className="row m-0 mt-4 mb-3">
+					<div className="row m-0 mt-4 mb-2">
 						<div className="text-start col-md-6 p-0 align-self-center">
 							<button
 								type="button"

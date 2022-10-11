@@ -186,9 +186,9 @@ const Pincode = () => {
 
 	return (
 		<form onSubmit={Submit} style={{ alignItems: 'center' }}>
-			<div className="row mt-5">
-				<div className="col-4" />
-				<div className="col-5">
+			<div className="row minheight-verifypin">
+				{/* <div className="col-4" /> */}
+				<div className="col-5 mx-auto mt-5">
 					<div className="d-flex">
 						
                            <OTPInput
@@ -206,7 +206,7 @@ const Pincode = () => {
 							
 						/>
 						
-						<button style={{ border: 'none' }} onClick={hideShow} className="bg-white">
+						<button style={{ border: 'none' }} onClick={hideShow} className="bg-white color-skyblue">
 							{eyeicon}
 						</button>
 					</div>
@@ -216,13 +216,16 @@ const Pincode = () => {
 					<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
 						{response}
 					</p>
-					<div>
-						<button style={{ border: 'none', background: 'white', color: 'blue' }} onClick={forgotPassword}>
+					<div className='row mt-3'>
+					<div className='col-md-12 pe-0'>
+					<button style={{ border: 'none', background: 'white', color: 'blue' }} onClick={forgotPassword} className='forgot_password_pincode float-end pe-0'>
 							Forgot password?
 						</button>
 					</div>
+					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 			<div className="row mt-5">
 			
 				<input
@@ -232,12 +235,21 @@ const Pincode = () => {
 					value="Back"
 					style={{ width: '5%',marginLeft: '25%'}}
 				/>
+=======
+			<div className="row">
+					<div className='col-md-12'>
+>>>>>>> bb4ab66dbdbffb2effbe9df5a3dba0b29014f515
 					<input
 					type="submit"
-					className="btn btn-secondary"
+					className="btn poppins-medium-18px-next-button shadow-none rounded-0 float-end"
 					value="Submit"
+<<<<<<< HEAD
 					style={{ width: '7%', marginLeft: '19%' }}
+=======
+					style={{  }}
+>>>>>>> bb4ab66dbdbffb2effbe9df5a3dba0b29014f515
 				/>
+					</div>
 			</div>
 		</form>
 	);

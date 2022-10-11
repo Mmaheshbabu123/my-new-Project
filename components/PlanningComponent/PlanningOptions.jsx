@@ -52,7 +52,7 @@ function Add_manage_planning(props) {
 			<div className="">
 				<button type="button" style={{background: 'none'}} className="btn  btn-block px-0 " onClick={() => backToDashboard()}>
 					{/* <span className='bg-white  back-btn-text  back-btn-text  border-0 poppins-regular-18px'>BACK</span> */}
-					<span className='bg-white text-decoration-underline border-0 poppins-light-19px'>BACK</span>
+					<span className='bg-white text-decoration-underline border-0 poppins-light-18px'>BACK</span>
 				</button>
 			</div>
 		</div>

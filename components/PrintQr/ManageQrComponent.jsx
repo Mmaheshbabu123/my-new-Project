@@ -253,7 +253,9 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
           <h4 className='py-4 font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage QR code`} </h4>
         </div>
       </div>
-      <div className='searchbox m-0 my-2' style={{ margin: '10px 0' }}>
+      <>
+      <div className='row qr_position_sticky'>
+      <div className='col-md-12 '>
        <div className='row'>
        <div className='col-md-12 px-0'>
          <div className='row'>
@@ -330,11 +332,13 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
 
         </div>
         </div>
+       </div>
       </div>
+      </>
      <div className='row'>
        <div className='col-md-12 px-0'>
        <div className=" minimun_height_v1">
-        <table className="table table-hover manage-types-table manage-documents-table-header">
+        <table className="table table-hover manage-types-table manage-documents-table-header qr_sticky">
           <thead className="table-render-thead ">
             <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className="align-middle" width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
           </thead>
@@ -379,7 +383,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
         />}
       <div className='row'>
         <div className='col-md-12 px-0'>
-        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-3 px-0">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none float-sm-right mt-5 mb-2 px-0">
           {`Back`}
         </button>
         </div>

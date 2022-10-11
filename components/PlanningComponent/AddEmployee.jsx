@@ -195,11 +195,11 @@ const AddEmployee = () => {
 					</div>
 				</div>
 				{/* Select paritair commite */}
-				<div className='planning-height'>
+				<div className='planning-height_employee'>
 					{inputlist.map((val, i) => {
 						return (
 							<div className="row" key={i}>
-								<div className="col-md-7 m-auto mb-3 mt-5 p-0">
+								<div className="col-md-7 m-auto mb-3 p-0">
 									<div className='row'>
 									<div className="col-md-8 select-relative slt-emp p-0">
 										<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px ps-0">
@@ -237,34 +237,23 @@ const AddEmployee = () => {
 												value={val['employees']}
 												isMulti
 												name="employees"
-												className="poppins-regular-16px rounded-0 select_employee_container px-0"
+												className="poppins-regular-16px rounded-0 select_employee_container px-0 mb-2"
 												options={empList}
 												onChange={(value) => {
 													handleinputchange('employees', value, i);
 												}}
 											/>
-											<span className="mt-2" style={{ color: 'red' }}>
+											<span className="pt-2" style={{ color: 'red' }}>
 												{val['emp_error']}
 											</span>
 										</div>
 										{/* Add or remove button */}
 
-										<div className="col-md-4 bd-highlight align-self-end">
-											<div className="bd-highlight row">
-											<div className='col-md-6 align-self-center add_project float-start'>
-												{inputlist.length < tempPcList.length &&
-												inputlist.length - 1 === i && (
-													<button
-														type="submit"
-														className="btn rounded-0 btn-block float-start shadow-none add-proj-btn"
-														onClick={handleaddanother}
-														style={{height:'43px'}}
-													>
-														+ Add
-													</button>
-												)}
-													</div>
-												<div className='col-md-6 align-self-center'>
+									<div className='col-md-8 pe-0 py-3'>
+									<div className='row justify-content-end'>
+										<div className="col-md-12 bd-highlight">
+											<div className="bd-highlight row justify-content-end">
+											<div className='col-md-3 align-self-center text-end ps-0'>
 													{// pclist.length > 1 &&
 												inputlist.length !== 1 &&
 												i > 0 && (
@@ -273,13 +262,29 @@ const AddEmployee = () => {
 														className="btn  btn-block px-0 shadow-none"
 														onClick={() => handleremove(i)}
 													>
-														<p className="bg-white border-0 poppins-medium-18px poppins-medium-18px shadow-none">
+														<p className="bg-white border-0 poppins-medium-18px poppins-medium-18px shadow-none text-end text-decoration-underline">
 															Remove
 														</p>
 													</button>
 												)}
 													</div>
+											<div className='col-md-3 align-self-center add_project text-end'>
+												{inputlist.length < tempPcList.length &&
+												inputlist.length - 1 === i && (
+													<button
+														type="submit"
+														className="btn rounded-0 btn-block float-start shadow-none add-proj-btn w-100"
+														onClick={handleaddanother}
+														style={{height:'43px'}}
+													>
+														+ Add
+													</button>
+												)}
+													</div>
 											
+											
+											</div>
+										</div>
 											</div>
 										</div>
 											</div>
@@ -291,7 +296,7 @@ const AddEmployee = () => {
 					})}
 				</div>
 
-				<div className="row my-4">
+				<div className="row mt-4 mb-1">
 					<div className="text-start col-md-6 d-flex align-items-center">
 						<button type="button" className="btn  btn-block px-0 shadow-none">
 							<Link href={'/planning/add/' + p_unique_key}>

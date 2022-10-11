@@ -218,8 +218,8 @@ const AddEditSalaryBenefits = (props) => {
     if(name ==='value' || name === 'coefficientValue') {
       let numberValue = Number(value.replace(',', '.'));
       let decimals = value.split(',')[1];
-      stateObj[`${name}DecimalWarning`] = decimals && decimals.length > 2 ? true : false;
-      stateObj[`${name}Warning`] = numberValue > 100 || numberValue < 0 ? true : false;
+      stateObj[`${name}DecimalWarning`] = value.length && decimals && decimals.length > 2 ? true : false;
+      stateObj[`${name}Warning`] = value.length && (numberValue > 100 || numberValue < 0.0001) ? true : false;
     }
     stateObj[name] = value;
     stateObj['nameWarning'] = false;
@@ -302,7 +302,7 @@ const AddEditSalaryBenefits = (props) => {
                 placeholder= 'Enter value'
               />
               <span className="position-absolute" style = {{right: '3%', bottom: '30px'}}> {state.valueType === 1 ? '€' : '%'} </span>
-              {state['valueWarning'] && <ValidateMessage style={{margin:0}} text = {'Value should be between 0 to 100.'}/>} <br />
+              {state['valueWarning'] && <ValidateMessage style={{margin:0}} text = {'Value should be greater than 0 and less than 100.'}/>} <br />
               {state['valueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {'Only two decimal places allowed.'}/>}
               </div>
             </div>

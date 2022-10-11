@@ -150,10 +150,10 @@ const LinkCoeffEmpComponent = (props) => {
          <h4 className={`page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4>
          </div>
           <div className='row'>
-          <div className="col-md-5 col-lg-3 p-0"> {addMultiSelectTag()}
+          <div className="col-md-5 col-lg-3 ps-0"> {addMultiSelectTag()}
             {state.pcWarning ? <small style={{ color: 'red' }} className='error_text mt-3'> Choose paritair comite </small> : null}
           </div>
-          <div className='col-md-7 col-lg-8 offset-lg-1'>
+          <div className='col-md-7 col-lg-9'>
 
           <div className='row'>
           {state.lowHighValidation.length > 0 &&
@@ -193,14 +193,14 @@ const LinkCoeffEmpComponent = (props) => {
             </div>
           </div>
         </div>
-        <div className='col-md-12 row m-0 my-5' style={{  }}>
+        <div className='col-md-12 row m-0 mt-5 mb-2' style={{  }}>
           <div className='col-md-6 p-0 align-self-center'>
           <button onClick={() => parseInt(props.pcid) ? props.router.back() : props.router.push('/')} type="button" className=" col-2 bg-white  text-start border-0 poppins-regular-18px  float-sm-right text-left p-0 md-5 text-decoration-underline shadow-none">
             {`BACK`}
           </button>
           </div>
           <div className='col-md-6 p-0'>
-          <button onClick={() => handleSubmit()} type="button" className=" btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none">
+          <button onClick={() => handleSubmit()} type="button" className=" btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none">
             {`SAVE`}
           </button></div>
            </div>

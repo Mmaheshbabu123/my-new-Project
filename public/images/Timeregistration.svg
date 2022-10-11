@@ -1,0 +1,7 @@
+<svg id="Time_registration" data-name="Time registration" xmlns="http://www.w3.org/2000/svg" width="76.883" height="87.756" viewBox="0 0 76.883 87.756">
+  <path id="Subtraction_84" data-name="Subtraction 84" d="M76.882,87.756H0V0H76.882V87.755ZM11.26,72.408v2.33h33.2v-2.33Zm0-6.989v2.33h33.2v-2.33Zm0-6.989v2.33h33.2v-2.33Zm0-6.989v2.33h33.2V51.44Zm0-7.766V46H66.167v-2.33Zm0-6.989v2.33H66.167v-2.33Zm0-6.989v2.33H66.167V29.7Zm0-6.989v2.33H66.167v-2.33Zm0-6.989v2.33H66.167v-2.33Z" fill="#79b1bd"/>
+  <g id="time" transform="translate(48.149 52.032)">
+    <path id="Path_31485" data-name="Path 31485" d="M13.5,10.5h2.33v5.824h5.824v2.33H13.5Z" transform="translate(-5.346 -4.676)" fill="#fff"/>
+    <path id="Path_31486" data-name="Path 31486" d="M26.3,14.649A11.649,11.649,0,1,1,14.649,3,11.649,11.649,0,0,1,26.3,14.649Zm-2.33,0A9.319,9.319,0,1,1,14.649,5.33,9.319,9.319,0,0,1,23.968,14.649Z" transform="translate(-3 -3)" fill="#fff" fill-rule="evenodd"/>
+  </g>
+</svg>

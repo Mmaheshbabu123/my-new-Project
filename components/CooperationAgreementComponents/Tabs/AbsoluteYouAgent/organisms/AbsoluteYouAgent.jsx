@@ -13,7 +13,7 @@ var activateAddProject    = 4;
 var whoWillSign           = 80;
 var languageField         = 81;
 const AbsoluteYouAgent = (props) => {
-  const { state: { selectedTabId, renderTabComponents, root_parent_id, workerServentsCompLoaded, absoluteAgentTabRender,filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+  const { state: {dependecyDataStatus, selectedTabId, renderTabComponents, root_parent_id, workerServentsCompLoaded, absoluteAgentTabRender,filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   useEffect(() => {
     if(!state.loadedTabs.includes(selectedTabId))
     		loadData();
@@ -23,10 +23,11 @@ const AbsoluteYouAgent = (props) => {
   const loadData = async () => {
     let stateKey = `tab_${selectedTabId}`;
     let tab_1 = { ...state[stateKey] };
-    var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId);
+    let pcIds = state['defaultOptions'] ?.companyLinkedPcIds ?? [];
+    var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId, 0, pcIds);
     let apiData = data['tab_data'] && Object.keys(data['tab_data']).length ? data['tab_data'] : 0;
     if(apiData) {
-      let { basicDetails = {}, cooperationCoeffData = {}, worksServantsData = {} } = apiData;
+      let { basicDetails = {}, cooperationCoeffData = {}, worksServantsData = {}, newPcsAdded = 0 } = apiData;
       tab_1[startDateAgreement]     = basicDetails && basicDetails['startdateagreement'] || helpers.formatDate(new Date());
       tab_1[absoluteConsultant]     = basicDetails && Number(basicDetails['absoluteConsultant'])     || '';
       tab_1[absoluteConsultantNum]  = basicDetails && Number(basicDetails['absoluteConsultantNum'])  || '';
@@ -35,6 +36,7 @@ const AbsoluteYouAgent = (props) => {
       tab_1[languageField]          = basicDetails && basicDetails[languageField] || [];
       tab_1['worksServantsData']    = worksServantsData || {};
       data['coeffPageData']         = cooperationCoeffData || {};
+      dependecyDataStatus['worksServantsData'] = newPcsAdded ? true : false;
     } else
         tab_1[startDateAgreement]= helpers.formatDate(new Date());
     data[stateKey] = tab_1;

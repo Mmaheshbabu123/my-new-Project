@@ -55,7 +55,7 @@ const SalaryDetailsPerPC = () => {
     let dataObject = {};
     arrayOfObjects.map(obj => {
       if(objKey === 1)
-        dataObject[obj.salary_id] = { checked: obj.checked, value: obj.salary_value }
+        dataObject[obj.salary_id] = { checked: 0, value: obj.salary_value, granted: obj.granted }
       else
         dataObject[obj] = { checked: 1, code: '', bedrag: '', percentage: '', soort_automatisering: ''}
     return 1;

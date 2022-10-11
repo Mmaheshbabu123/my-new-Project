@@ -59,19 +59,19 @@ const Pincode = () => {
 	}, []);
 var res='';
   hasPin?
-   res=<div className='border'>Something went wrong please try again later</div>
+   res=<div className='border p-3  poppins-light-18px text-center'>Something went wrong please try again later</div>
   :
   res=<div className='container border'>
   <div className='row'>
-     <h1> Email Sent</h1>
+     <h1 className='p-3  poppins-light-18px text-center'> Email Sent</h1>
       </div>
-  <div className='row'>
+  <div className='row p-3  poppins-light-18px text-center'>
      You will recieve an email to the registered email.
   </div>
-  <div className='row'>
+  <div className='row p-3  poppins-light-18px text-center'>
      Please use the link to reset your pincode.
   </div>
-  <div className='row'>
+  <div className='row p-3  poppins-light-18px text-center'>
      It will be expired in 30 minutes.
   </div>
 </div>;

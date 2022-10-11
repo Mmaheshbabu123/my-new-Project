@@ -363,9 +363,11 @@ const ManageFunction = () => {
 			<form>
 				<div className='minimun_height'>
 					<div className="row">
-					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc">
+					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc mb-0">
 						Manage functions
 					</p>
+				<div className='col-md-12 manage_category_sticky_position pb-3'>
+					<div className='row'>
 					<div className='col-md-9 ps-0'>
 						<div className='row'>
 						<div className="col-md-3 field_height">
@@ -441,13 +443,15 @@ const ManageFunction = () => {
 					</div>
 						</div>
 					</div>
+					</div>
+				</div>
 
-					<div className="form-check p-0 mt-2">
-						<table className="table mt-3 mb-3">
-							<thead>
+					<div className="form-check p-0">
+						<table className="table mb-3">
+							<thead className='manage_category_table manage_fun_table'>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray h-50-mf">
 									<th className="poppins-medium-18px btn-bg-gray-medium p-2 ps-4">
-										Paritair comite number
+										PC number
 									</th>
 									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Function name</th>
 									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Minimum salary</th>
@@ -465,7 +469,7 @@ const ManageFunction = () => {
 											<td className="poppins-regular-18px p-2">{result.function_name}</td>
 											<td className="poppins-regular-18px p-2">€ {result.min_salary}</td>
 											<td className="poppins-regular-18px p-2">{result.cat_name}</td>
-											<td className=" p-2">
+											<td className=" p-2 align-middle">
 												<Link
 													href={
 														result.pc_unique_key ? (
@@ -530,7 +534,7 @@ const ManageFunction = () => {
 				)}
 				</div>
 				<div className="row">
-					<div className="text-start col-md-6 mb-4">
+					<div className="text-start col-md-6 mb-2 ps-0">
 						<button
 							type="button"
 							className="bg-white border-0 poppins-regular-18px float-sm-right md-5 px-0 text-decoration-underline"

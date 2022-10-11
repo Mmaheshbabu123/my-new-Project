@@ -88,6 +88,7 @@ thead:after
 {
   font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-16px);
+  line-height: var(--line-height-26px);
 }
 .position_relative
 {
@@ -193,6 +194,10 @@ input[type="checkbox"]:focus
 .react-select-prefix__control
 {
   height: 43px !important;
+}
+.occurence_col .react-select-prefix__control
+{
+  height: 41px !important;
 }
 #react-select-2-listbox,
 .css-6j8wv5-Input,
@@ -313,7 +318,7 @@ input[type="radio"]
 }
 .min_height_age
 {
-  min-height: 39vh;
+  min-height: 42vh;
 }
 .padding_first_col:first-child
 {
@@ -398,7 +403,7 @@ select option
 .position-sticky-co-op
 {
   position: sticky;
-  top: 166px;
+  top: 160px;
   background-color: var(--color-white);
   z-index: 998;
 }
@@ -432,4 +437,119 @@ select option
 .min-height-add-doc
 {
   min-height: 17rem;
+}
+.position_relative_dashboard
+{
+  position: relative;
+  height: 100% !important;
+}
+.table-render-parent-div
+{
+  min-height: 55vh;
+}
+.dashboard-tile-parent
+{
+  cursor: pointer;
+}
+.flex-min-height
+{
+  min-height: 63vh;
+}
+.min-height-signature
+{
+  min-height: 59vh;
+}
+.modal-content
+{
+  border: none !important;
+  border-radius: 0px;
+}
+.modal-header .btn-close
+{
+  box-shadow: none !important;
+}
+.additional_add_sticky,
+.v1_position_sticky
+{
+  position: sticky !important;
+  top: 243px;
+  background: var(--color-white);
+  z-index: 998;
+}
+.manage_cooperation_agreement_position_sticky
+{
+  position: sticky;
+  top: 235px;
+  z-index: 998;
+  background:var(--color-white);
+}
+.min_height_cooperation_sales
+{
+  min-height: 45vh;
+}
+.time-registartion-height
+{
+  height: 150px;
+}
+.edit_pc_salary_benefits input[type="text"]:focus,
+.edit_pc_salary_benefits select:focus
+{
+  border: 1px solid var(--border-color-lightgray);
+}
+.edit_pc_salary_benefits .rmdp-day.rmdp-selected span:not(.highlight),
+.edit_pc_salary_benefits .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover,
+.indexation_date_field .rmdp-day.rmdp-selected span:not(.highlight),
+.indexation_date_field  .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover
+{
+  width: 25px !important;
+  height: 25px !important;
+  margin: auto;
+  background-color: var(--color-skyblue) !important;
+  box-shadow: var(--color-skyblue) !important;
+}
+.purple .rmdp-day.rmdp-today span,
+.indexation_date_field .purple .rmdp-day.rmdp-today span
+{
+  background-color: var(--color-purple) !important;
+  width: 25px !important;
+  height: 25px !important;
+  margin: auto !important;
+}
+@media screen and (min-width:1200px) and (max-width:1399px) 
+{
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 1130px !important;
+  }
+}
+@media screen and (min-width:1024px) and (max-width:1199px) 
+{
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 950px !important;
+}
+}
+.indexation_date_field .rmdp-container,
+.indexation_date_field .rmdp-input
+{
+  width: 100%;
+}
+.indexation_date_field .icon-tabler-calendar-event
+{
+  right: 10.5px !important;
+}
+.indexation_date_field .rmdp-input
+{
+  padding: 18px 10px;
+  border-radius: 0px;
+  border: 1px solid #4C4D554D !important;
+}
+.rmdp-input:focus 
+{
+  border: 1px solid #4C4D554D !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.indexation_paritair_comitte .searchWrapper,
+.category_function_indexation .searchWrapper
+{
+  border-radius: 0px;
 }

@@ -6,6 +6,7 @@ import { APICALL } from '@/Services/ApiServices';
 import { updateEmployeesubmitDetails, downloadSvAsPdf } from '@/Services/ApiEndPoints';
 import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
+import { dom } from '@/Services/domServices';
 import ValidateMessage from '@/atoms/validationError';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -31,7 +32,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
     return todos.filter(val => statusIds.includes(Number(val.todo_status)));
   }
 
-  entityType === 3 ? headers.indexOf('Employee name') > -1 ? headers.splice(headers.indexOf('Employee name'), 1) : headers : [];
+  entityType === 3 ? headers.indexOf('Employee') > -1 ? headers.splice(headers.indexOf('Employee'), 1) : headers : [];
   const [state, setState] = useState({
     selectedTabId: tabId,
     tabs: [{
@@ -111,6 +112,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
   }
 
   const handlePageClick = (event) => {
+    dom.scrollToTop();
     let items = [...state.filterRows];
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setState({ ...state, itemOffset: newOffset, currentPage: event.selected });
@@ -123,30 +125,30 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
     return <>
       {eachRow.todo_type === 2 ?
         <>
-          {eachRow.todo_status !== 1 && <span title={'Fill werkpostfiche'} className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="fill_werkpostfiche" className=''></img> </span>}
-          {eachRow.todo_status !== 1 && <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>}
+          {eachRow.todo_status !== 1 && entityType !== 3 && <span title={'Fill werkpostfiche'} className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="fill_werkpostfiche" className=''></img> </span>}
+          {eachRow.todo_status !== 1 && Number(eachRow.submitted) === 1 && <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>}
         </> : eachRow.todo_status !== 1 && <span title={'Sign'} className={styles["span-action-icons"]} hidden={eachRow.todo_status === 1} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon_1.src} alt="sign" className=''></img> </span>
       }     {eachRow.todo_status === 1 && <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="download" className=''></img> </span>}
     </>
   }
 
   const handleActionClick = (type, eachRow) => {
-    let encode = btoa(window.location.href.replaceAll(`tab=${state.selectedTabId}`, 'tab=2'));
+    let { webform_id, submit_id, tid, employer_id = 0 } = eachRow;
+    let encode = btoa(window.location.href.replaceAll(`tab=${state.selectedTabId}`, `tab=${type === 'edit' ? 1 : 2}`));
     if (type === 'sign' && entityType === 3) {
       setState({ ...state, showPopup: true, selectedObj: eachRow })
       return;
     }
     if (eachRow.todo_type === 1) {
       if (type === 'sign')
-        window.open(`${eachRow.uri}&destination_url=${encode}`, '_self');
+        window.open(`/cooperation-agreement-preview?root_parent_id=${webform_id}&emp_ref=${submit_id}&type=2&preview=0&destination_url=${encode}`, '_self');
       if (type === 'download')
-        handleCooperationAgreementDownload(eachRow);
+        handleCooperationAgreementDownload({root_parent_id: webform_id});
     }
     if (eachRow.todo_type === 2) {
-      let { webform_id, submit_id, tid, employer_id = 0 } = eachRow;
       let path;
       if (type === 'edit')
-        path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout`;
+        path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout&rowId=${tid}`;
       if (type === 'sign')
         path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
       if (type === 'download')
@@ -158,7 +160,6 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
 
   const handleCooperationAgreementDownload = async (eachRow) => {
     eachRow['type'] = 4;
-    eachRow['root_parent_id'] = eachRow.uri.split('root_parent_id=').pop().split('&')[0];
     await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
       .then((response) => {
         let result = response.data;
@@ -307,7 +308,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
           </div>
         </div>
         <div className="position-sticky-mytodo">  {showTabs()} </div>
-        <div className='row searchbox m-0 mt-4 mb-2' style={{ margin: '10px 0', position: 'relative' }}>
+        <div className='row searchbox m-0 pt-4 mb-2 position-sticky-mytodo_searchbox' style={{ margin: '10px 0'}}>
           <div className='col-md-12'>
             <div className='row'>
               <div className='col-md-8 col-lg-9 ps-0'>
@@ -346,7 +347,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
         </div>
         <div className="table-render-parent-div min_height_todo">
           <table className="table table-hover manage-types-table table  mb-3 text-start manage-documents-table-header my_todo_table">
-            <thead className="table-render-thead bg_grey table_header_todo">
+            <thead className="table-render-thead bg_grey table_header_todo sticky-table-header">
               <tr className='table-sticky-bg-gray poppins-medium-18px border-0' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='' key={`tablecol_${index}`} scope="col"> {eachHeader} </th>)}</tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
@@ -354,8 +355,8 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
                 {state.currentItems.map((eachRow, index) =>
                   <tr key={`${index}_${eachRow.tid}`} id={eachRow.tid}>
                     <td className='text-start ps-4 py-1'> {eachRow.title} </td>
-                    <td className='text-start ps-4 py-1'> {eachRow.company_name} </td>
-                    {entityType === 2 && <td className='text-start ps-4 py-1'> {eachRow.employee_name} </td>}
+                    <td className='text-start py-1'> {eachRow.company_name} </td>
+                    {entityType === 2 && <td className='text-start py-1'> {eachRow.employee_name} </td>}
                     <td> <span className={`${styles['status-icon']} ${Number(eachRow.todo_status) ? styles['status-done'] : styles['status-open']}`}> </span> </td>
                     <td className='align-self-center my_todo_action_icon'>{getNeededActions(eachRow)} </td>
                   </tr>)}
@@ -385,7 +386,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
+         <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>
