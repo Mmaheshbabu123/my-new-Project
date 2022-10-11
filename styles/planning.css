@@ -52,7 +52,7 @@
 .nav-pills-position-sticky
 {
   position: sticky;
-  top: 163px;
+  top: 162px;
   z-index: 998;
   background: white;
 }
@@ -348,7 +348,7 @@ input[type="checkbox"]
 .position_sticky_co-op
 {
   position: sticky;
-  top: 249px;
+  top: 245px;
   background: white;
   z-index: 998;
 }

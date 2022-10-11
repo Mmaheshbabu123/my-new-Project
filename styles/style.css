@@ -252,7 +252,7 @@ input[type="radio"]
 .position-sticky-manage-pc
 {
   position: sticky;
-  top: 88px;
+  top: 84px;
   z-index: 999;
   background-color: var(--color-white);
 }
@@ -403,7 +403,7 @@ select option
 .position-sticky-co-op
 {
   position: sticky;
-  top: 160px;
+  top: 156px;
   background-color: var(--color-white);
   z-index: 998;
 }
@@ -564,4 +564,18 @@ select option
 {
   background: var(--color-less-greater) !important;
   color: var(--color-less-greater) !important;
+}
+.position-sticky-add-pc-btn
+{
+  position: sticky;
+  top: 162px;
+  background: white;
+  z-index: 998;
+}
+.position-sticky-search-manage-pc
+{
+  position: sticky;
+  top: 247px;
+  background: white;
+  z-index: 998;
 }

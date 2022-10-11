@@ -11,15 +11,9 @@ function Header() {
 	// 	let dashboard_url = server_url.includes('test')?'https://test.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1':
 	//    'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
 	return (
-<<<<<<< HEAD
-		<div>
+		<div className='custom-position-sticky'>
 		<nav className="navbar navbar-expand-lg navbar-light bg-light d-sm-block d-md-none d-lg-none">
 	<div className="container px-0">
-=======
-		<div className='custom-position-sticky'>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light d-sm-block d-md-none d-lg-none">
-	<div class="container px-0">
->>>>>>> absolute_frontend_design_oct_11
 
 	<a className="navbar-brand d-flex" href="">
 			<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL}>
