@@ -13,27 +13,37 @@ function Login(props) {
 
     const [data, setData] = useState({
         id: '',
+<<<<<<< HEAD
         username: '',
         password: '',
         
         //ADDED BY LOGUPRIYA (ahow/hide)
         showPassword: false,
 
+=======
+        email: '',
+        password: ''
+>>>>>>> ay_next_preeti_11102022_6
 
     });
     let validate = (res) => {
         var error1 = [];
-        error1['username'] = ValidationService.emptyValidationMethod(res.username);
+        error1['email'] = ValidationService.emptyValidationMethod(res.email);
         error1['password'] = ValidationService.emptyValidationMethod(res.password);
 
+
+        // error1['email'] =
+        // error1['email'] == ''
+        //     ? ValidationService.projectNameValidationMethod(res.email)
+        //     : error1['email'];
         /**
          * seterror messages
          */
-        setError_user_name(error1['username']);
+        setError_user_name(error1['email']);
         setError_password(error1['password']);
 
-        //return false if there is an error else return true
-        if (error1['username'] == '' && error1['password'] == '') {
+        // return false if there is an error else return true
+        if (error1['email'] == '' && error1['password'] == '') {
             return true;
         } else {
             return false;
@@ -46,10 +56,9 @@ function Login(props) {
     const router = useRouter();
     useEffect(() => {
         //if (localStorage.getItem('user')) {
-          //  router.push('/pwa/dashboard');
+        //  router.push('/pwa/dashboard');
         //}
-
-        fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
+        fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}get-acrf-token`)
             .then(res => res.json())
             .then((result) => {
                 setToken(result.token)
@@ -59,9 +68,9 @@ function Login(props) {
     const submit = (e) => {
         e.preventDefault();
         var valid_res = validate(data);
-	    console.log(valid_res);return;
+        // console.log(valid_res);return;
         if (!valid_res) {
-          
+
             const config = {
                 headers:
                 {
@@ -99,19 +108,20 @@ function Login(props) {
                         <form className="mb-5" onSubmit={(e) => submit(e)}>
                             <div className="mb-3" onS>
                                 <label className="form-label custom_astrick">Email address</label>
-                                <input type="email" className="form-control rounded-0" 
-                                value={data.username}
+                                <input type="email" className="form-control rounded-0"
+                                    value={data.email}
                                     onChange={(e) => {
                                         setData((prev) => ({
                                             ...prev,
-                                            username: e.target.value
+                                            email: e.target.value
                                         }));
                                     }} />
                             </div>
-	    		                                <p className="error mt-2">{error_user_name}</p>
+                            <p className="error mt-2">{error_user_name}</p>
 
                             <div className="mb-3  position-relative">
                                 <label className="form-label custom_astrick">Password</label>
+<<<<<<< HEAD
                                 <input type={data.showPassword ? "text" : "password"} className="form-control rounded-0" 
                                 value={data.password}
                                 onChange={(e) => {
@@ -121,8 +131,19 @@ function Login(props) {
                                     }));
                                 }} />
                                <span  style={passwordEyeIconStyle} className="span-action-icons" onClick={() => setData({...data, showPassword: !data.showPassword})}> {data.showPassword === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />} </span>
+=======
+                                <input type="password" className="form-control rounded-0"
+                                    value={data.password}
+                                    onChange={(e) => {
+                                        setData((prev) => ({
+                                            ...prev,
+                                            password: e.target.value
+                                        }));
+                                    }} />
+
+>>>>>>> ay_next_preeti_11102022_6
                             </div>
-	    			<p className="error mt-2">{error_password}</p>
+                            <p className="error mt-2">{error_password}</p>
                             <div>
                                 <p className="px-0 float-end text-info">Forgot password?</p>
                             </div>
@@ -144,7 +165,7 @@ function Login(props) {
                         </form>
                     </div>
                 </div>
-           </div>
+            </div>
         </section>
 
     );
