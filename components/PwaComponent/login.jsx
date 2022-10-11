@@ -7,6 +7,10 @@ function Login(props) {
     const [ token, setToken ] = useState('');
     const router = useRouter();
     useEffect(() => {
+	                if (localStorage.getItem('user')) {
+				                router.push('/pwa/dashboard');
+				            }
+
 	    fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
 	          .then(res => res.json())
 		    .then((result) => {
