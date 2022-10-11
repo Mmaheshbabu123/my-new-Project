@@ -76,7 +76,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
         setObj['nameWarning'] = true;
         proceed = false;
       }
-      if(!files.length) {
+      if(!Array.isArray(files) || files.length === 0) {
         setObj['fileWarning'] = true;
         proceed = false;
       }
