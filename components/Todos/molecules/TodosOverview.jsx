@@ -11,7 +11,7 @@ import ValidateMessage from '@/atoms/validationError';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from './Todos.module.css';
-// import sign_icon from '../molecules/images/cooperation_agreement.svg';
+import sign_icon from '../molecules/images/cooperation_agreement.svg';
 import open from '../molecules/images/Open.svg';
 import done from '../molecules/images/Done.svg';
 import all from '../molecules/images/All.svg';
@@ -126,8 +126,8 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
       {eachRow.todo_type === 2 ?
         <>
           {eachRow.todo_status !== 1 && entityType !== 3 && <span title={'Fill werkpostfiche'} className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="fill_werkpostfiche" className=''></img> </span>}
-          {eachRow.todo_status !== 1 && (entityType === 3 || Number(eachRow.submitted) === 1) && <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon_1.src} alt="sign" className='sign_action_icon_size'></img> </span>}
-        </> : eachRow.todo_status !== 1 && <span title={'Sign'} className={styles["span-action-icons"]} hidden={eachRow.todo_status === 1} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon_1.src} alt="sign" className=''></img> </span>
+          {eachRow.todo_status !== 1 && (entityType === 3 || Number(eachRow.submitted) === 1) && <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>}
+        </> : eachRow.todo_status !== 1 && <span title={'Sign'} className={styles["span-action-icons"]} hidden={eachRow.todo_status === 1} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className=''></img> </span>
       }     {eachRow.todo_status === 1 && <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="download" className=''></img> </span>}
     </>
   }
