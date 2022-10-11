@@ -25,7 +25,7 @@ thead:after
   color: var(--color-label-footer-gray);
   font-weight: normal;
   width: 500px !important;
-  text-align: center;
+  text-align: left;
   border-radius: 0px;
   box-shadow: none;
 }
@@ -418,7 +418,7 @@ select option
 }
 .minimun_height_v1
 {
-  min-height: 35vh;
+  min-height: 41vh;
 }
 
 .cursor-pointer {
@@ -472,7 +472,7 @@ select option
 .v1_position_sticky
 {
   position: sticky !important;
-  top: 243px;
+  top: 240px;
   background: var(--color-white);
   z-index: 998;
 }
@@ -552,4 +552,16 @@ select option
 .category_function_indexation .searchWrapper
 {
   border-radius: 0px;
+}
+.custom-btn_highlight
+{
+  background-color: var(--color-skyblue) !important;
+  border-color: var(--color-skyblue) !important;
+  color: var(--color-white) !important;
+}
+
+::marker
+{
+  background: var(--color-less-greater) !important;
+  color: var(--color-less-greater) !important;
 }

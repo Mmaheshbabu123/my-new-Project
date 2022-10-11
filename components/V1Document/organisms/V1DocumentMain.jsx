@@ -44,12 +44,16 @@ const V1DocumentMain = ({ entityId, entityType, companyId, preview }) => {
 
   const showLinkedCompanies = () => {
     return (
-      <>
-      <h4 className={`page-title-font-class text-center page-title`}> Companies linked to employee</h4>
+      <div>
+     <div className='row position-sticky-pc py-4  page-title bitter-italic-normal-medium-24'>
+       <div className='col-md-12'>
+       <h4 className={`text-left`}> Companies linked to employee</h4>
+       </div>
+     </div>
       <ul className={`${styles['companies-list']}`}>
-        {state.companies.map(company => <li key={company.id}> <a href={`/v1-document?entityid=${entityId}&entitytype=${entityType}&companyid=${company.id}`}> {company.name} </a> </li> )}
+        {state.companies.map(company => <li key={company.id} className='ms-3'> <a href={`/v1-document?entityid=${entityId}&entitytype=${entityType}&companyid=${company.id}`} className='poppins-regular-18px'> {company.name} </a> </li> )}
       </ul>
-      </>
+      </div>
     )
   }
 
