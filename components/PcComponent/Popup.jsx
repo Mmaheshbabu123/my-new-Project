@@ -3,7 +3,7 @@ import React from 'react';
 function Popup(props) {
 	return (
 		<div className="modal" id="myModal" style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}>
-			<div className="modal-dialog">
+			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
 						{/* <h4 className="modal-title">Delete function</h4> */}
@@ -15,15 +15,15 @@ function Popup(props) {
 						/>
 					</div>
 
-					<div className="modal-body title">
+					<div className="modal-body title poppins-light-18px">
 						<h4>Are you sure you want to delete this paritair committe?</h4>
 					</div>
 
 					<div className="modal-footer">
-						<button type="button" className="btn btn-danger" onClick={() => props.popupActionNo()}>
+						<button type="button" className="btn poppins-medium-18px-next-button rounded-0 shadow-none" onClick={() => props.popupActionNo()} style={{ width: '80px' }}>
 							No
 						</button>
-						<button className="btn btn-danger m-2" onClick={() => props.popupActionYes()}>
+						<button className="btn poppins-medium-18px-next-button rounded-0 shadow-none m-2" onClick={() => props.popupActionYes()} style={{ width: '80px' }}>
 							Yes
 						</button>
 					</div>

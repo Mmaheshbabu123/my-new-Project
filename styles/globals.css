@@ -642,7 +642,7 @@ body {
 }
 .custom-btn {
 	background-color: var(--color-purple);
-	color: var(--color-white);
+	color: var(--color-white) !important;
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m);
 }
