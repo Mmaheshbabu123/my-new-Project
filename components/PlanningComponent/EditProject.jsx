@@ -218,9 +218,9 @@ function EditProject(props) {
 				<div>
 					<div className="">
 						<div className="  ">
-							<div className=" col-md-11 m-auto px-0 py-4">
+							<div className=" col-md-12 m-auto px-0 py-4 position-sticky-pc">
 								<div className="col-md-10">
-									<p className="h1 mt-1 mb-2 ms-2 font-weight-bold   px-0  bitter-italic-normal-medium-24">
+									<p className="h1 font-weight-bold   px-0  bitter-italic-normal-medium-24">
 										Edit project
 									</p>
 								</div>
@@ -229,9 +229,9 @@ function EditProject(props) {
 							<div
 							// className="modal-body "
 							>
-								<div className="col-md-11 m-auto">
+								<div className="col-md-12 m-auto border_purple px-1 py-3">
 									<div className="row">
-										<div className=" ">
+										<div className="col-md-12 ">
 											{/* PROJECT NAME */}
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
@@ -240,7 +240,7 @@ function EditProject(props) {
 													</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2 "
+														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
 														value={project.project_name}
 														onChange={(e) => {
 															setProject((prev) => ({
@@ -257,7 +257,7 @@ function EditProject(props) {
 													<label className="custom_astrick">Company</label>
 													<select
 														value={project.comp_id}
-														className="form-select mb-2 mt-2"
+														className="form-select mb-2 mt-2 rounded-0 shadow-none border"
 														placeholder="select company"
 														disabled={props.company_id != ''}
 														onChange={(e) => {
@@ -281,7 +281,7 @@ function EditProject(props) {
 													<label className="mt-2 custom_astrick">Location</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
 														value={project.project_location}
 														onChange={(e) => {
 															setProject((prev) => ({
@@ -298,7 +298,7 @@ function EditProject(props) {
 													<label className="custom_astrick mt-2">Street</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
 														value={project.street}
 														onChange={(e) => {
 															setProject((prev) => ({ ...prev, street: e.target.value }));
@@ -312,7 +312,7 @@ function EditProject(props) {
 													<label className="custom_astrick mt-2">House number</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
 														value={project.hno}
 														onChange={(e) => {
 															setProject((prev) => ({ ...prev, hno: e.target.value }));
@@ -325,7 +325,7 @@ function EditProject(props) {
 													<label className="custom_astrick mt-2">Bus number</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
 														value={project.bno}
 														onChange={(e) => {
 															setProject((prev) => ({ ...prev, bno: e.target.value }));
@@ -340,7 +340,7 @@ function EditProject(props) {
 													<label className="custom_astrick mt-2">Postalcode</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
 														value={project.postal_code}
 														onChange={(e) => {
 															setProject((prev) => ({
@@ -355,7 +355,7 @@ function EditProject(props) {
 													<label className="custom_astrick mt-2">City</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
 														value={project.city}
 														onChange={(e) => {
 															setProject((prev) => ({ ...prev, city: e.target.value }));
@@ -368,10 +368,10 @@ function EditProject(props) {
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
 													<label className="custom_astrick mt-2">
-														Country{project.country}
+														Country
 													</label>
 													<select
-														className="form-select mt-2 mb-2 custom-select"
+														className="form-select mt-2 mb-2 custom-select rounded-0 shadow-none border"
 														value={project.country}
 														onChange={(e) => {
 															setProject((prev) => ({
@@ -396,7 +396,7 @@ function EditProject(props) {
 													<label className=" mt-2">Extra</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
 														value={project.extra}
 														onChange={(e) => {
 															setProject((prev) => ({ ...prev, extra: e.target.value }));
@@ -408,10 +408,10 @@ function EditProject(props) {
 										</div>
 									</div>
 								</div>
-								<div className="modal-footer border-0 col-md-11 m-auto px-2 ">
+								<div className="modal-footer border-0 col-md-12 m-auto px-0">
 									<button
 										type="submit"
-										className="btn btn-lg btn-block float-right add-proj-btn custom-btn px-3 rounded-0 "
+										className="btn btn-lg btn-block float-right add-proj-btn custom-btn rounded-0 m-0"
 									>
 										SAVE
 									</button>

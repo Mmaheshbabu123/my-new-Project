@@ -403,7 +403,7 @@ select option
 .position-sticky-co-op
 {
   position: sticky;
-  top: 166px;
+  top: 160px;
   background-color: var(--color-white);
   z-index: 998;
 }
