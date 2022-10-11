@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import ValidationService from '../../Services/ValidationService';
 
 function Login(props) {
 
@@ -17,7 +18,6 @@ function Login(props) {
     });
     let validate = (res) => {
         var error1 = [];
-
         error1['username'] = ValidationService.emptyValidationMethod(res.username);
         error1['password'] = ValidationService.emptyValidationMethod(res.password);
 
@@ -28,11 +28,7 @@ function Login(props) {
         setError_password(error1['password']);
 
         //return false if there is an error else return true
-        if (
-            error1['username'] == '' &&
-            error1['password'] == ''
-
-        ) {
+        if (error1['username'] == '' && error1['password'] == '') {
             return true;
         } else {
             return false;
@@ -44,9 +40,9 @@ function Login(props) {
     const [token, setToken] = useState('');
     const router = useRouter();
     useEffect(() => {
-        if (localStorage.getItem('user')) {
-            router.push('/pwa/dashboard');
-        }
+        //if (localStorage.getItem('user')) {
+          //  router.push('/pwa/dashboard');
+        //}
 
         fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
             .then(res => res.json())
@@ -57,8 +53,9 @@ function Login(props) {
 
     const submit = (e) => {
         e.preventDefault();
-        // var valid_res = validate(data);
-        // if (valid_res) {
+        var valid_res = validate(data);
+	    console.log(valid_res);return;
+        if (!valid_res) {
           
             const config = {
                 headers:
@@ -78,7 +75,7 @@ function Login(props) {
             })
                 .catch((error) => {
                 })
-        // }
+        }
     }
     return (
         <section className="container">
@@ -98,6 +95,8 @@ function Login(props) {
                                         }));
                                     }} />
                             </div>
+	    		                                <p className="error mt-2">{error_user_name}</p>
+
                             <div className="mb-3">
                                 <label className="form-label custom_astrick">Password</label>
                                 <input type="password" className="form-control rounded-0" 
@@ -110,6 +109,7 @@ function Login(props) {
                                 }} />
                                
                             </div>
+	    			<p className="error mt-2">{error_password}</p>
                             <div>
                                 <p className="px-0 float-end text-info">Forgot password?</p>
                             </div>
@@ -131,7 +131,7 @@ function Login(props) {
                         </form>
                     </div>
                 </div>
-            </div>
+           </div>
         </section>
 
     );
