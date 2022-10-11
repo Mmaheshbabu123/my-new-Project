@@ -22,7 +22,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
       employerId: documentDetails.employerId || 0,
       companyId: documentDetails.companyId || 0,
       linkToCooperationAgreement: documentDetails.linkToCooperationAgreement || 0,
-      files: documentDetails.files || [],
+      files: editId ? (documentDetails.files || []) : [],
    }
  }
 
@@ -33,6 +33,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
       fileSizeWarning: false,
       employerWarning: false,
       companyWarning: false,
+      files: [],
   })
 
   useEffect(() => {
