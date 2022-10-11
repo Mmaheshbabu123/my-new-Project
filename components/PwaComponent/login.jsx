@@ -3,6 +3,7 @@ import { APICALL } from '../../Services/ApiServices';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import ValidationService from '../../Services/ValidationService';
+import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 
 function Login(props) {
 
@@ -13,7 +14,11 @@ function Login(props) {
     const [data, setData] = useState({
         id: '',
         username: '',
-        password: ''
+        password: '',
+        
+        //ADDED BY LOGUPRIYA (ahow/hide)
+        showPassword: false,
+
 
     });
     let validate = (res) => {
@@ -77,6 +82,14 @@ function Login(props) {
                 })
         }
     }
+
+    let passwordEyeIconStyle = {
+        position: 'absolute',
+        top: '34px',
+        right: '10px',
+      }
+    
+
     return (
         <section className="container">
             <div className="row content d-flex justify-content-center p-2">
@@ -97,9 +110,9 @@ function Login(props) {
                             </div>
 	    		                                <p className="error mt-2">{error_user_name}</p>
 
-                            <div className="mb-3">
+                            <div className="mb-3  position-relative">
                                 <label className="form-label custom_astrick">Password</label>
-                                <input type="password" className="form-control rounded-0" 
+                                <input type={data.showPassword ? "text" : "password"} className="form-control rounded-0" 
                                 value={data.password}
                                 onChange={(e) => {
                                     setData((prev) => ({
@@ -107,7 +120,7 @@ function Login(props) {
                                         password: e.target.value
                                     }));
                                 }} />
-                               
+                               <span  style={passwordEyeIconStyle} className="span-action-icons" onClick={() => setData({...data, showPassword: !data.showPassword})}> {data.showPassword === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />} </span>
                             </div>
 	    			<p className="error mt-2">{error_password}</p>
                             <div>

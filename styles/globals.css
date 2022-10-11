@@ -2014,3 +2014,12 @@ input[type="search"]::-webkit-search-cancel-button {
 .rc-time-picker-clear {
 	display: none !important;
 }
+#navbarSupportedContent .nav-item {
+	border: none !important;
+	border-radius: unset !important;
+	margin: unset !important;
+}
+.custom-header
+{
+	display: none !important;
+}
