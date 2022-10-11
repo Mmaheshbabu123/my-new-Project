@@ -259,18 +259,24 @@ input[type="checkbox"]
   z-index: 998;
 } */
 
-.qr_position_sticky,
-.planning_encodage_position
+.qr_position_sticky
 {
   position: sticky;
   top: 163px;
   background: var(--color-white);
   z-index: 998;
 }
+.planning_encodage_position
+{
+  position: sticky;
+  top: 205px;
+  background: var(--color-white);
+  z-index: 998;
+}
 .weekly_planning_search_position
 {
   position: sticky;
-  top: 179px;
+  top: 221px;
   background: white;
   z-index: 998;
 }
