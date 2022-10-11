@@ -2,6 +2,11 @@ import React, { Component, useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 
 function Login(props) {
+
+    const [data, setData] = useState({
+      
+
+    });
     const [ token, setToken ] = useState('');
     useEffect(() => {
 	    fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
