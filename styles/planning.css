@@ -334,7 +334,7 @@ input[type="checkbox"]
 .manage_category_sticky_position
 {
   position: sticky;
-  top: 153px;
+  top: 152px;
   background: white;
   z-index: 998;
 }
