@@ -15,8 +15,8 @@ import { APICALL } from '@/Services/ApiServices';
 const INITIAL_COUNT = 4; //only 5 notifcations we will fetch
 const NotificationMain = ( props ) => {
     const router  = useRouter();
-    const { entityid = 0, id = 0} = router.query;
-    const entityId = entityid || id;
+    const { entityid = 0, id = 0, user_id = 0} = router.query;
+    const entityId = entityid || user_id || id ;
     const [notificationView, setNotificationView] = useState(false);
     const [state, setState] = useState({
       notificationCount: 0,
