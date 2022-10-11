@@ -304,6 +304,7 @@ const AddFunctions = () => {
 			v1.employee_list.map((value, key) => {
 				let func = '';
 				let sal = '';
+				let sal1 = '';
 				let emp = '';
 
 				if (value.emp_type == '' || value.emp_type == null) {
@@ -321,22 +322,21 @@ const AddFunctions = () => {
 						// 	value.salary = value.function_salary;
 						// }
 					} else {
-						sal =
-							emp == '' && value.salary != '' && value.salary != null && value.salary != undefined
-								? ValidationService.minSalaryValidationMethod(
+						sal1 =
+							 ValidationService.minSalaryValidationMethod(
 										value.salary.toString().replace(/\s/g, '')
 									)
-								: '';
-						if (sal != '') {
+								;
+						if (sal1 != '') {
 							count++;
 						}
 						let rsalary = String(value.salary).replace(',', '.').replace(/\s/g, '');
 						let rfsalary = String(value.function_salary).replace(',', '.').replace(/\s/g, '');
-						if (sal == '' && parseFloat(rsalary) < parseFloat(rfsalary)) {
+						if (sal1 == '' && parseFloat(rsalary) < parseFloat(rfsalary)) {
 							sal =
 								'The new salary cannot be lesser than the minimum salary. The minimum salary for the selected function is ' +
 								value.function_salary +
-								' Euro';
+								' Euro.';
 							count++;
 						}
 					}
@@ -352,7 +352,7 @@ const AddFunctions = () => {
 					// 	collapseOpen = false;
 					// }
 				}
-				if (func == '' && emp == '' && sal == '') {
+				if (func == '' && emp == '' && sal == '' && sal1 == '') {
 					if (key == 0) {
 						collapseOpen = true;
 					} else {
@@ -362,7 +362,9 @@ const AddFunctions = () => {
 
 				newstate[k1].employee_list[key].functioniderror = func;
 				newstate[k1].employee_list[key].employeeiderror = emp;
+				newstate[k1].employee_list[key].salaryinvalid = sal1;
 				newstate[k1].employee_list[key].salaryerror = sal;
+				// newstate[k1].employee_list[key].warning = sal;
 				newstate[k1].employee_list[key].collapseOpen = collapseOpen;
 				// return {
 				// 	...value,
@@ -429,6 +431,7 @@ const AddFunctions = () => {
 					object[key1].employee_list[key].employeeiderror = '';
 					object[key1].employee_list[key].functioniderror = '';
 					object[key1].employee_list[key].salaryerror = '';
+					object[key1].employee_list[key].salaryinvalid = '';
 					object[key1].employee_list[key].radioactive = false;
 					// updateEmployeeType(key,0)
 				});
@@ -672,7 +675,7 @@ const AddFunctions = () => {
 																		</div>
 																	)}
 
-																	<p style={{ color: 'red' }} className='error_text mt-2'>{v1['salaryerror']}</p>
+																	<p style={{ color: 'red' }} className='error_text mt-2'>{v1['salaryinvalid']}</p>
 																</div>
 															</div>
 																	</div>
@@ -855,12 +858,12 @@ const AddFunctions = () => {
 																		))
 																	);
 																})}
-															{v1['warning'] != '' && (
+															{(v1['warning'] != ''|| v1['salaryerror'] != '')&& (
 																<div
 																	className="py-2 error_text"
 																	style={{ color: 'red', paddingLeft: '130px' }}
 																>
-																	<ExclamationTriangle /> {v1['warning']}
+																	{v1['warning'] != ''?(v1['warning']!=''?<span><ExclamationTriangle /> {v1['warning']}</span>:''):v1['salaryerror']}
 																</div>
 															)}
 															</div>
