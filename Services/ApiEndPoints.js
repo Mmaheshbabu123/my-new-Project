@@ -255,3 +255,4 @@ export const getdashboardtiles = BASE_URL_DRUPAL + "dashboard-tiles-roles";
 
 // ----------------------- Indexation of salary --------------------//
 export const addIndexationOfSalary = BASE_URL + "add-indexation-of-salary";
+export const getIndexationOfSalary = BASE_URL + "fetch-all-indexation-salary";

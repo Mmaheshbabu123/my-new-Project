@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from 'node_modules/next/link';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import { Uniquekey } from '../../Services/GenetateUniqueKey';
+import { getIndexationOfSalary } from '../../Services/ApiEndPoints';
+import { APICALL } from '../../Services/ApiServices';
+
 
 function ManageIndexationOfSalaries(props) {
     const router = useRouter();
     const unique_key = Uniquekey.generate_unique_key();
+    const [indexation, setIndexation] = useState([]);
+    const [indexationTemp, setIndexationTemp] = useState([]);
+    const [indexationTemp2, setIndexationTemp2] = useState([]);
+
+
+    useEffect(
+        () => {
+            APICALL.service(getIndexationOfSalary, 'GET')
+                .then((result) => {
+                    console.log(result.data);
+                    setIndexation(result.data);
+                    setIndexationTemp(result.data);
+                    setIndexationTemp2(result.data);
+
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        []
+    );
 
     return (
         <div className="container-fluid p-0">
@@ -39,36 +64,39 @@ function ManageIndexationOfSalaries(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="border poppins-regular-18px p-2" >
-                                    <td className="poppins-regular-18px p-2">10-10-2022</td>
-                                    <td className="poppins-regular-18px p-2">1</td>
-                                    <td className="poppins-regular-18px p-2">PC-101</td>
-                                    <td className="poppins-regular-18px p-2">Flex worker</td>
+                                {indexationTemp2.length > 0 &&
+                                    indexationTemp2.map((result) => (
+                                        <tr className="border poppins-regular-18px p-2" key={result.id} >
+                                            <td className="poppins-regular-18px p-2">{result.date}</td>
+                                            <td className="poppins-regular-18px p-2">{result.indexation_type}</td>
+                                            <td className="poppins-regular-18px p-2">{result.indexation_pc}</td>
+                                            <td className="poppins-regular-18px p-2">{result.indexation_type}</td>
 
-                                    <td className="p-2">
-                                        <Link href='' className="">
-                                            <a type="button">
-                                                <MdEdit
-                                                    className="color-skyblue me-2"
-                                                    data-toggle="tooltip"
-                                                    title="Edit cost center"
-                                                />
-                                            </a>
-                                        </Link>
-                                        <Link href='' className="">
-                                            <a type=" p-1 m-1">
-                                                <MdDelete
-                                                    className="color-skyblue"
-                                                    data-toggle="tooltip"
-                                                    title="Delete cost center"
-                                                />
-                                            </a>
-                                        </Link>
+                                            <td className="p-2">
+                                                <Link href='' className="">
+                                                    <a type="button">
+                                                        <MdEdit
+                                                            className="color-skyblue me-2"
+                                                            data-toggle="tooltip"
+                                                            title="Edit cost center"
+                                                        />
+                                                    </a>
+                                                </Link>
+                                                <Link href='' className="">
+                                                    <a type=" p-1 m-1">
+                                                        <MdDelete
+                                                            className="color-skyblue"
+                                                            data-toggle="tooltip"
+                                                            title="Delete cost center"
+                                                        />
+                                                    </a>
+                                                </Link>
 
 
 
-                                    </td>
-                                </tr>
+                                            </td>
+                                        </tr>
+                                        ))}
                             </tbody>
                         </table>
                     </div>

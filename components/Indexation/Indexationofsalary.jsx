@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
-import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes, addIndexationOfSalary } from '../../Services/ApiEndPoints';
+import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes, addIndexationOfSalary, getIndexationOfSalary} from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import MultiSelectField from '@/atoms/MultiSelectField';
@@ -24,7 +24,10 @@ const Indexationofsalary = () => {
 	const [error_indexation, setError_indexation] = useState('');
 
 	const [paritaircomites, setParitaircomites] = useState([]);
+	const [indexation, setIndexation] = useState([]);
+	const [indexationTemp, setIndexationTemp] = useState([]);
 
+	
 	/**Show hide field based on radio button select */
 	const [status, setStatus] = useState(0);
 
@@ -43,9 +46,8 @@ const Indexationofsalary = () => {
 		pc: '',
 		category: '',
 		employee_type: '',
-		selection_index: '',
-		value_type: '',
-		value: '',
+		value_type: '1',
+		value: '1',
 		date: '',
 		indexation_type: '',
 		// pc
@@ -67,7 +69,7 @@ const Indexationofsalary = () => {
 		error1['pc'] = ValidationService.emptyValidationMethod(res.pc);
 		error1['category'] = ValidationService.emptyValidationMethod(res.category);
 		error1['employee_type'] = ValidationService.emptyValidationMethod(res.employee_type);
-		error1['selection_index'] = ValidationService.emptyValidationMethod(res.selection_index);
+		error1['indexation_type'] = ValidationService.emptyValidationMethod(res.indexation_type);
 
 		/**
 		 * seterror messages
@@ -79,7 +81,7 @@ const Indexationofsalary = () => {
 		setError_pc(error1['pc']);
 		setError_category(error1['category']);
 		setError_employeetype(error1['employee_type']);
-		setError_indexation(error1['selection_index']);
+		setError_indexation(error1['indexation_type']);
 
 		//return false if there is an error else return true
 		if (
@@ -90,7 +92,7 @@ const Indexationofsalary = () => {
 			error1['pc'] == '' &&
 			error1['category'] == '' &&
 			error1['employee_type'] == '' &&
-			error1['selection_index'] == '' 
+			error1['indexation_type'] == '' 
 
 		) {
 			return true;
@@ -129,6 +131,9 @@ const Indexationofsalary = () => {
 			.then((result) => {
 				console.log(result);
 			})
+			.catch((error) => {
+					console.log(error);
+				});
 		}
 
 	}
@@ -137,6 +142,15 @@ const Indexationofsalary = () => {
 
 	}
 
+	// Get Indexation of salary
+	// APICALL.service(getIndexationOfSalary, 'GET')
+	// 			.then((result) => {
+	// 				if (result) {
+	// 					console.log(result);
+	// 					setIndexation(result);
+	// 					setIndexationTemp(result);
+
+	
 
 	return (
 		<div className="container-fluid p-0">
@@ -304,11 +318,11 @@ const Indexationofsalary = () => {
 								// className="col-md-6"
 								className="col-md-9 "
 								/> */}
-								<select className="form-select" value={data.selection_index}
+								<select className="form-select" value={data.indexation_type}
 									onChange={(e) => {alert(e.target.value);
 										setData((prev) => ({
 											...prev,
-											selection_index: e.target.value
+											indexation_type: e.target.value
 										}));
 									}}
 									>
