@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
-import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes } from '../../Services/ApiEndPoints';
+import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes, addIndexationOfSalary } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import MultiSelectField from '@/atoms/MultiSelectField';
@@ -9,6 +9,7 @@ import Link from 'next/link';
 import get from 'node_modules/lodash/get';
 import ValidationService from '../../Services/ValidationService';
 import moment from 'moment';
+import Select from 'react-select';
 
 const Indexationofsalary = () => {
 	const router = useRouter();
@@ -37,11 +38,20 @@ const Indexationofsalary = () => {
 		// radio: '',
 		// percentage_of_indexation: '',
 		// amount_indexation_euro: '',
-		date: '',
+		// date: '',
+		id: '',
 		pc: '',
 		category: '',
 		employee_type: '',
-		selection_index: ''
+		selection_index: '',
+		value_type: '',
+		value: '',
+		date: '',
+		indexation_type: '',
+		// pc
+		// entity_type: '',
+		// entity_id: '',
+		// indexation_id: '',
 	})
 
 	let validate = (res) => {
@@ -96,6 +106,7 @@ const Indexationofsalary = () => {
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getAllPartiairComites', 'GET')
 				.then((result) => {
 					if (result) {
+						// console.log(data);
 						setParitaircomites(result);
 					}
 				})
@@ -108,14 +119,21 @@ const Indexationofsalary = () => {
 
 	// const updateradio = (value) => { };
 
-	let submit = async (event) => {
+	let submit = async (event) => {paritaircomites
 		event.preventDefault();
+
+		console.log(data);
 		var valid_res = validate(data);
-		// alert(valid_res);
 		if (valid_res) {
-			// 	 alert('1111');
-			console.log(data);
+			APICALL.service(addIndexationOfSalary, 'POST', data)
+			.then((result) => {
+				console.log(result);
+			})
 		}
+
+	}
+	let handleinputchange = (type,value)=>{
+		console.log(value);
 
 	}
 
@@ -127,7 +145,7 @@ const Indexationofsalary = () => {
 					<p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">Indexation of salary</p>
 					<div className='row mt-3 ms-1 '>
 						<div className="form-check mt-2 mb-2">
-							<input className="form-check-input" type="radio" checked={status === 1} onClick={(e) => radioHandler(1)} />
+							<input className="form-check-input" type="radio" checked={status === 1} onClick={(e) => radioHandler(1)}  />
 							<label className="form-check-label" >
 								Indexation in %
 							</label>
@@ -187,24 +205,30 @@ const Indexationofsalary = () => {
 					<div className='row'>
 						<div className="mt-2">
 							<label className='mb-2 custom_astrick '>Paritair comite</label>
-							<MultiSelectField
+							<Select
 								placeholder={'Select paritair comites'}
 								name="partaircomites"
 								id={'partaircomites'}
+								instanceId={'pc'}
 								options={paritaircomites[0]}
 								disabled={false}
-								// handleChange={(obj) =>
-								// 	updateEmployeeType(value, obj.value)}
+								onChange={(value) =>
+									setData((prev) => ({
+												...prev,
+												pc: value
+											}))
+									// {handleinputchange('pc',value)}
+								}
 								isMulti={true}
 								// className="col-md-6"
 								className="col-md-6 "
-								value={data.employees}
-								onChange={(e) => {
-									setData((prev) => ({
-										...prev,
-										pc: e.target.value
-									}));
-								}}
+								value={data.pc}
+								// onChange={(e) => {
+								// 	setData((prev) => ({
+								// 		...prev,
+								// 		pc: e.target.value
+								// 	}));
+								// }}
 							/>
 						</div>
 						<p className="error mt-2">{error_pc}</p>
@@ -214,32 +238,47 @@ const Indexationofsalary = () => {
 					<div className='row'>
 						<div className="mt-2">
 							<label className='mb-2 custom_astrick '>Category</label>
-							<MultiSelectField
+							<Select
 								placeholder={'Select paritair comites'}
 								name="partaircomites"
 								id={'partaircomites'}
+								instanceId={'category'}
 								options={paritaircomites[1]}
 								disabled={false}
-								// handleChange={(obj) =>
-									// updateEmployeeType{(value, obj.value)}
 								isMulti={true}
+								value={data.category}
 								// className="col-md-6"
+								onChange={(value) =>
+									setData((prev) => ({
+												...prev,
+												category: value
+											}))
+								}
+							
+
 								className="col-md-6"
 							/>
-							{/* <p className="error mt-2">{error_category}</p> */}
+							<p className="error mt-2">{error_category}</p>
 
 						</div>
 
 						<div className='row'>
 							<div className="mt-2">
 								<label className='mb-2 custom_astrick'>Employee type (statuut)</label>
-								<MultiSelectField
+								<Select
 									placeholder={'Select employee types'}
 									name="employeetypes"
 									id={'employeetypes'}
 									// options={paritaircomites[2]}
 									options={[{ value: 1, label: 'Flex' }]}
 									disabled={false}
+									value={data.employee_type}
+									onChange={(value) =>
+										setData((prev) => ({
+													...prev,
+													employee_type: value
+												}))
+									}
 									// handleChange={(obj) =>
 									// 	updateEmployeeType(value, obj.value)}
 									isMulti={true}
@@ -247,7 +286,7 @@ const Indexationofsalary = () => {
 									className="col-md-6 "
 								/>
 							</div>
-							{/* <p className="error mt-2">{error_employeetype}</p> */}
+							<p className="error mt-2">{error_employeetype}</p>
 						</div>
 
 						<div className='row'>
@@ -266,12 +305,13 @@ const Indexationofsalary = () => {
 								className="col-md-9 "
 								/> */}
 								<select className="form-select" value={data.selection_index}
-									onChange={(e) => {
+									onChange={(e) => {alert(e.target.value);
 										setData((prev) => ({
 											...prev,
 											selection_index: e.target.value
 										}));
-									}}>
+									}}
+									>
 
 									<option value="">Select Indexation</option>
 									<option value="1">Minimum salary</option>

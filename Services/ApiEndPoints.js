@@ -252,3 +252,6 @@ export const fetchEncodageDeatils = BASE_URL + "get-all-encodage-planning";
 
 //----------Dashboard end points ------------------//
 export const getdashboardtiles = BASE_URL_DRUPAL + "dashboard-tiles-roles";
+
+// ----------------------- Indexation of salary --------------------//
+export const addIndexationOfSalary = BASE_URL + "add-indexation-of-salary";

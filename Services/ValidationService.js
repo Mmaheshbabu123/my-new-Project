@@ -80,7 +80,7 @@ const ValidationService = {
    * @returns 
    */
   minSalaryValidationMethod: function (value) {
-    if (value.match(/(^[1-9][0-9]{0,2}(([.]|[,])\d{1,2})?)$/)) {
+    if (value.match(/(^[1-9][0-9]{0,2}(([.]|[,])\d{1,4})?)$/)) {
       return '';
     } else {
       return 'This field is invalid.';

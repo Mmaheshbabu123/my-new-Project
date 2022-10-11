@@ -2,6 +2,7 @@
 import ManageTypeIndex from "./manage/index";
 import Link from 'next/link';
 import { Layout } from "../components/layout/Layout";
+import LoginForm from "./pwa/login";
 import { useRouter } from 'next/router';
 function Myoverview(props) {
   const { pathname, asPath, locales } = useRouter();
@@ -16,7 +17,8 @@ function Myoverview(props) {
           </Link>
         </div>*/}
       {/* REMOVE THIS MANAGETYPE-INDEX COMPONENT TAG, AFTER ADDING DEVELOPMENT RELATED CODE  */}
-      <ManageTypeIndex />
+      {/* <ManageTypeIndex /> */}
+       <LoginForm/>
 
 
     </div>

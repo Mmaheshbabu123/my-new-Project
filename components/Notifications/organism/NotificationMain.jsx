@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../molecules/Notification.module.css'
-import notificationSvg from '../molecules/notificationIcon.svg';
+import notificationSvg from '../molecules/notification.svg';
 import notificationExists from '../molecules/notification.svg';
 import { useRouter } from 'next/router';
 import NotificationView from '../molecules/NotificationView';
@@ -81,7 +81,7 @@ const NotificationMain = ( props ) => {
             <img
               alt={"Notification"}
               src={Number(state.notificationCount) > 0 ? notificationExists.src : notificationSvg.src}
-              style={{ width: '20px' }}
+              style={{ width: '22px' }}
             ></img>
            {/*state.loading === true && Number(state.notificationCount) > 0 && <span className={styles["iconBadge"]}>{state.notificationCount}</span>*/}
           </div>

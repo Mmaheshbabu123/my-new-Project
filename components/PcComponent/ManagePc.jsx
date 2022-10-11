@@ -266,7 +266,7 @@ const ManagePc = (props) => {
 			))}
 			{data.length == 0 && (
 				<div className="bg-light py-3 mt-3">
-					<div className="text-center poppins-regular-18px"> No paritair comitee </div>
+					<div className="text-center poppins-regular-18px no-records"> No paritair comitee </div>
 				</div>
 			)}
 			</div>

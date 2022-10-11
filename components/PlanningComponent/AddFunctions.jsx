@@ -236,7 +236,7 @@ const AddFunctions = () => {
 						sal_percent = parseFloat(val.min_sal_percent)
 						sal = (sal_percent/100)*salary;
 						if((sal - Math.floor(sal)) !== 0){
-							sal = parseFloat(sal).toFixed(2)
+							sal = parseFloat(sal).toFixed(4)
 						}
 						object[parent_index].employee_list[index].function_salary = maxsal != undefined ?(parseFloat(maxsal)>parseFloat(sal)?parseFloat(maxsal):parseFloat(sal)):parseFloat(sal);
 					}
@@ -257,16 +257,16 @@ const AddFunctions = () => {
 	};
 
 	let updateRes = (event, key) => {
-		// setFuncChanged(true);
-		// var res1 = [ ...functions ];
-		// res1.map((val, k) => {
-		// 	if (k == key) {
-		// 		res1[k]['funct_checked'] = parseInt(event.target.value);
-		// 	} else {
-		// 		res1[k]['funct_checked'] = '';
-		// 	}
-		// 	setFunctions(res1);
-		// });
+	// 	setFuncChanged(true);
+	// 	var res1 = [ ...functions ];
+	// 	res1.map((val, k) => {
+	// 		if (k == key) {
+	// 			res1[k]['funct_checked'] = parseInt(event.target.value);
+	// 		} else {
+	// 			res1[k]['funct_checked'] = '';
+	// 		}
+	// 		setFunctions(res1);
+	// 	});
 	};
 
 	function updatingObjectfunctionSlary(index = null,maxsal, salary, parent_index,pc_min_age) {

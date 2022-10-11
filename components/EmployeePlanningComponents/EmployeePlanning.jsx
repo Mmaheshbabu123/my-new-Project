@@ -34,7 +34,7 @@ function EmployeeMonthlyPlanning(props) {
 		setVisible((prevValue) => prevValue + 3);
 	};
 	////////////////////////////////////////////////////////////////
-	const [ userid, setUserid ] = useState([]);
+	const [ userid, setUserid ] = useState('');
 	const [ data, setData ] = useState([]);
 	/**
 	 * FETCHING EMPLOYEE ID
@@ -49,6 +49,7 @@ function EmployeeMonthlyPlanning(props) {
 	}, []);
 	useEffect(
 		() => {
+			if(userid !=''){
 			APICALL.service(fetchemployeeplanning + userid, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
@@ -68,6 +69,7 @@ function EmployeeMonthlyPlanning(props) {
 				.catch((error) => {
 					console.log(error);
 				});
+			}
 		},
 		[ props, userid ]
 	);
@@ -81,17 +83,17 @@ function EmployeeMonthlyPlanning(props) {
 			onClick={onChange}
 		>
 			<div className='col-md-4 ps-0'>
-			<button type="button" value="Day" className="btn border w-100 poppins-medium-18px rounded-0 shadow-none">
+			<button type="button" value="Day" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Day'?'custom-btn':''}`} >
 				Day
 			</button>		
 			</div>
 			<div className='col-md-4'>
-			<button value="Week" type="button" className="btn border w-100 poppins-medium-18px rounded-0 shadow-none">
+			<button value="Week" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Week'?'custom-btn':''}`}>
 				Week
 			</button>
 			</div>
 			<div className='col-md-4 pe-0'>
-			<button value="Month" type="button" className="btn border w-100 poppins-medium-18px rounded-0 shadow-none">
+			<button value="Month" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Month'?'custom-btn':''}`}>
 				Month
 			</button>
 			</div>
@@ -115,14 +117,14 @@ function EmployeeMonthlyPlanning(props) {
 				</div>
 			</div>
 			<div className="row m-0 p-0">
-				<div className=" d-flex flex-row-reverse  ">
+				{/* <div className=" d-flex flex-row-reverse  ">
 					<div className="mt-3">
 						<FcSynchronize className="color-skyblue" data-toggle="tooltip" title="Synchronise planning" />
 					</div>
 					<div className="mt-3 pe-3">
 						<BsFillPrinterFill className="color-skyblue" data-toggle="tooltip" title="Print planning" />
 					</div>
-				</div>
+				</div> */}
 				<div className=" mt-2 text-center col-md-12 p-0 ">
 					<table className="table mt-3 mb-3">
 						<thead>
@@ -145,13 +147,13 @@ function EmployeeMonthlyPlanning(props) {
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
 									Company
 								</th>
-								<th className=" text-center  align-items-center justify-content-center ">Action</th>
+								{/* <th className=" text-center  align-items-center justify-content-center ">Action</th> */}
 							</tr>
 						</thead>
 						<tbody className='border_employee_planning_table'>
 							{data.slice(0, visible).map((result) => (
 								<tr className="" key={result.title}>
-									<td className=" border_employee_planning poppins-light-18px">{result.pdate}</td>
+									<td className=" border_employee_planning poppins-light-18px">{result.pdate.split('-').reverse().join('/')}</td>
 									<td className="border_employee_planning poppins-light-18px">
 										{moment(result.starttime).format('HH:mm')}
 									</td>
@@ -164,7 +166,7 @@ function EmployeeMonthlyPlanning(props) {
 									</td>
 									<td className="border_employee_planning poppins-light-18px">{result.location}</td>
 									<td className="border_employee_planning poppins-light-18px">{result.companyname}</td>
-									<td className="border_employee_planning">
+									{/* <td className="border_employee_planning">
 										<AiFillEye
 											type="button"
 											className="mt-2 ms-3 color-skyblue"
@@ -187,13 +189,14 @@ function EmployeeMonthlyPlanning(props) {
 											data-toggle="tooltip"
 											title="Remove the exclamation"
 										/>
-									</td>
+									</td> */}
 								</tr>
 							))}
 						</tbody>
 					</table>
 				</div>
 				<div className="text-end mb-3 p-0">
+				{data.length > 3 &&
 					<button
 						type="button"
 						className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none"
@@ -202,6 +205,7 @@ function EmployeeMonthlyPlanning(props) {
 						View more &nbsp;
 						<AiOutlineArrowRight className="" />
 					</button>
+}
 				</div>
 			</div>
 			<div className='row'>

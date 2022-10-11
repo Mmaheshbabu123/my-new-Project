@@ -180,21 +180,21 @@ const AddSalaryBenefits = () => {
 				if (object[i].v_err == '' && object[i].vt_err == '') {
 					object[i].v_err =
 						data.value_type == '2' ? ValidationService.percentageValidationMethod(data.value) : '';
-					data.value_type == '1'
-						? (object[i].v_err = ValidationService.numberValidationMethod(data.value))
-						: (object[i].v_err = '');
+						object[i].v_err = data.value_type == '1'
+						? (ValidationService.numberValidationMethod(data.value))
+						: '';
 				}
-				data.date_err == ''
-					? (object[i].date_err = ValidationService.onlyFutureDateValidationMethod(data.date))
-					: '';
-				// alert(data.v_err)
+				// object[i].date_err = data.date_err == ''
+				// 	? (ValidationService.onlyFutureDateValidationMethod(data.date))
+				// 	: '';
 				if (
 					data.v_err != '' ||
 					data.vt_err != '' ||
 					data.o_err != '' ||
 					data.g_err != '' ||
 					data.ct_err != '' ||
-					data.c_err != '' ||
+					data.c_err != '' 
+					||
 					data.date_err != ''
 				) {
 					err++;
@@ -395,6 +395,7 @@ const AddSalaryBenefits = () => {
 													isDisabled={false}
 													placeholder={'date'}
 													handleChange={(e) => {
+														console.log(e.target.value)
 														updateDate(index, e.target.value);
 													}}
 													style={{ marginLeft:'0.8rem' }}
