@@ -166,14 +166,15 @@ const SalaryDetails = (props) => {
   }
 
   const disabledOrNot = (variableType, labelKey) => {
-    if(variableType === '') return false;
-    if(variableType === 'amount' && labelKey === 'bedrag') {
-      return false;
-    }
-    if(variableType === 'percentage' && labelKey === 'percentage') {
-      return false;
-    }
-    return true;
+    return false;
+    // if(variableType === '') return false;
+    // if(variableType === 'amount' && labelKey === 'bedrag') {
+    //   return false;
+    // }
+    // if(variableType === 'percentage' && labelKey === 'percentage') {
+    //   return false;
+    // }
+    // return true;
   }
 
   const showDropDown = (pcId, fieldId, label, valueObj, optionsArray) => {
