@@ -1490,7 +1490,7 @@ span .firsrt-line:last-child() {
 }
 .position-sticky-pc {
 	position: sticky;
-	top: 85px;
+	top: 84px;
 	z-index: 998;
 	background: white;
 }
@@ -2018,8 +2018,4 @@ input[type="search"]::-webkit-search-cancel-button {
 	border: none !important;
 	border-radius: unset !important;
 	margin: unset !important;
-}
-.custom-header
-{
-	display: none !important;
 }
