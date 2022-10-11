@@ -24,6 +24,7 @@ const PlanningFinalize = () => {
 			APICALL.service(planningoverview + router.query.p_unique_key, 'GET')
 				.then((result) => {
 					if (result.data.length > 0) {
+						console.log(result.data[1][0]);
 						setPlanning(result.data[1][0]);
 						console.log(result.data[1][0]																						)
 						setWeek(result.data[0]);
@@ -72,6 +73,29 @@ const PlanningFinalize = () => {
 		var finalise = e.target.value === 'true' ? true : false;
 		setFinalized(finalise);
 	};
+	let dateExist = (data) =>{
+		var arr = [];
+		data.map((v1, k1) => {
+
+			v1.map((v2,k2)=>{
+				if (activeWeek.indexOf(v2.pdate)>-1) {
+					arr.push(v2.pdate);
+				}
+
+			})
+		
+					// const found = data.some(el => el.pdate == val);
+					// if (found) arr.push(val);
+		});
+
+		if(arr.length > 0){
+			return true
+		}else{
+			return false;
+		}
+
+
+	}
 	return (
 		<div className="container-fluid p-0 m-0">
 			<div className="row position-sticky-pc">
@@ -234,10 +258,10 @@ const PlanningFinalize = () => {
 								
 							{planning.planning &&
 								Object.keys(planning.planning).map((value) => (
-									<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
+									dateExist(planning.planning[value]) && <tr className="border-bottom table-border-gray equal-width-calc" key={value}>
+										{console.log(planning.planning[value])}
 										{activeWeek.map((val, key) => (
 											<td className=" table-border-gray font-poppins-light" key={key}>
-												{console.log(planning.planning[value])}
 												{planning.planning[value].map(
 													(v2, k2) =>
 														v2.some((el) => el.pdate === val) ? (
