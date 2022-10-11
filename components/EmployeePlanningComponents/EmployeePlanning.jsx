@@ -83,17 +83,17 @@ function EmployeeMonthlyPlanning(props) {
 			onClick={onChange}
 		>
 			<div className='col-md-4 ps-0'>
-			<button type="button" value="Day" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Day'?'custom-btn':''}`} >
+			<button type="button" value="Day" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Day'?'custom-btn_highlight':''}`} >
 				Day
 			</button>		
 			</div>
 			<div className='col-md-4'>
-			<button value="Week" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Week'?'custom-btn':''}`}>
+			<button value="Week" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Week'?'custom-btn_highlight':''}`}>
 				Week
 			</button>
 			</div>
 			<div className='col-md-4 pe-0'>
-			<button value="Month" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Month'?'custom-btn':''}`}>
+			<button value="Month" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Month'?'custom-btn_highlight':''}`}>
 				Month
 			</button>
 			</div>

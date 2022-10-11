@@ -240,7 +240,7 @@ const PcCommon = (props) => {
 									</button>
 								</li>
 							</ul>
-							<div className="tab-content col-md-12 p-0" id="pills-tabContent">
+							<div className="tab-content col-md-12 p-0 mt-3" id="pills-tabContent">
 								<div
 									className={`tab-pane fade ${current_sec == 1 ? 'show active' : ''}`}
 									id="pills-pc"
