@@ -53,8 +53,8 @@ function Header() {
   </div>
 </nav>
 
-		<div className="custom-position-sticky d-sm-none d-md-block d-lg-block">
-			<div className="clip0" />
+		<div className="custom-position-sticky ">
+			<div className="clip0 d-none d-md-block d-lg-block" />
 			
 			<div className='container px-0'>
 				{/* <div className='row'> */}

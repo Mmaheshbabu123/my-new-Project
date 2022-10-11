@@ -2019,3 +2019,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	border-radius: unset !important;
 	margin: unset !important;
 }
+.custom-header
+{
+	display: none !important;
+}

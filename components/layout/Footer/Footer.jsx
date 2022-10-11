@@ -58,7 +58,7 @@ function Footer() {
 				</ul>
 			</div>
 			</div>
-			<div className="clip1 d-sm-none d-md-block d-lg-block"></div>
+			<div className="clip1 d-none d-md-block d-lg-block"></div>
 			</div>
 			</div>
 		</div>
