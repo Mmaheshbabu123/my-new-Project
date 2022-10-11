@@ -1255,6 +1255,7 @@ div[disabled] {
 	color: var(--color-skyblue);
 	font-family: var(--font-family-poppins-light);
 	font-size: var(--font-size-18px);
+	margin-left: 10px;
 }
 .reset-btn {
 	background-color: var(--bg-btn-gray) !important;
@@ -1489,7 +1490,7 @@ span .firsrt-line:last-child() {
 }
 .position-sticky-pc {
 	position: sticky;
-	top: 88px;
+	top: 85px;
 	z-index: 998;
 	background: white;
 }

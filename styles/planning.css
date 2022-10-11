@@ -52,7 +52,7 @@
 .nav-pills-position-sticky
 {
   position: sticky;
-  top: 166px;
+  top: 163px;
   z-index: 998;
   background: white;
 }
@@ -304,12 +304,12 @@ input[type="checkbox"]
 
 .my_documents_position_sticky_admin
 {
-  top: 304px;
+  top: 301px;
 }
 
 .my_documents_position_sticky_employer
 {
-  top: 243px;
+  top: 163px;
 }
 
 /* .my_documents_position_sticky_table thead
@@ -334,7 +334,7 @@ input[type="checkbox"]
 .manage_category_sticky_position
 {
   position: sticky;
-  top: 156px;
+  top: 153px;
   background: white;
   z-index: 998;
 }
