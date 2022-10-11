@@ -1,9 +1,11 @@
 import React, { Component, useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 function Login(props) {
     const [ token, setToken ] = useState('');
+    const router = useRouter();
     useEffect(() => {
 	    fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
 	          .then(res => res.json())
@@ -27,12 +29,12 @@ function Login(props) {
 			"pass": "AY_LM@test_22$"
 		}
 		axios.post(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}user/login?_format=json`, data, config).then((response) => {
+			localStorage.setItem("user", JSON.stringify(response.data.current_user));
+			router.push('/pwa/dashboard');
 		   })
 		 .catch((error) => {
 		})
 	}
-		
-	
     return (
         <section className="container">
             <div className="row content d-flex justify-content-center p-2">
