@@ -13,17 +13,14 @@ function Login(props) {
 
     const [data, setData] = useState({
         id: '',
-<<<<<<< HEAD
         username: '',
         password: '',
         
         //ADDED BY LOGUPRIYA (ahow/hide)
-        showPassword: false,
+        // showPassword: false,
 
-=======
-        email: '',
-        password: ''
->>>>>>> ay_next_preeti_11102022_6
+        // email: '',
+        // password: ''
 
     });
     let validate = (res) => {
@@ -92,11 +89,11 @@ function Login(props) {
         }
     }
 
-    let passwordEyeIconStyle = {
-        position: 'absolute',
-        top: '34px',
-        right: '10px',
-      }
+    // let passwordEyeIconStyle = {
+    //     position: 'absolute',
+    //     top: '34px',
+    //     right: '10px',
+    //   }
     
 
     return (
@@ -121,17 +118,6 @@ function Login(props) {
 
                             <div className="mb-3  position-relative">
                                 <label className="form-label custom_astrick">Password</label>
-<<<<<<< HEAD
-                                <input type={data.showPassword ? "text" : "password"} className="form-control rounded-0" 
-                                value={data.password}
-                                onChange={(e) => {
-                                    setData((prev) => ({
-                                        ...prev,
-                                        password: e.target.value
-                                    }));
-                                }} />
-                               <span  style={passwordEyeIconStyle} className="span-action-icons" onClick={() => setData({...data, showPassword: !data.showPassword})}> {data.showPassword === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />} </span>
-=======
                                 <input type="password" className="form-control rounded-0"
                                     value={data.password}
                                     onChange={(e) => {
@@ -141,7 +127,6 @@ function Login(props) {
                                         }));
                                     }} />
 
->>>>>>> ay_next_preeti_11102022_6
                             </div>
                             <p className="error mt-2">{error_password}</p>
                             <div>
