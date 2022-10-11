@@ -236,7 +236,7 @@ const AddFunctions = () => {
 						sal_percent = parseFloat(val.min_sal_percent)
 						sal = (sal_percent/100)*salary;
 						if((sal - Math.floor(sal)) !== 0){
-							sal = parseFloat(sal).toFixed(2)
+							sal = parseFloat(sal).toFixed(4)
 						}
 						object[parent_index].employee_list[index].function_salary = maxsal != undefined ?(parseFloat(maxsal)>parseFloat(sal)?parseFloat(maxsal):parseFloat(sal)):parseFloat(sal);
 					}
