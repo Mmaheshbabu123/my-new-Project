@@ -134,5 +134,15 @@ const ValidationService = {
       return 'Date is invalid.';
     }
   },
+
+  /**
+   * Email validation
+   * @param {*} value
+   * @returns 
+   */
+  // emailValidationMethod: function (value) {
+  //   if((value.mat))
+  // }
+
 }
 export default ValidationService;

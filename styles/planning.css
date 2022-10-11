@@ -52,7 +52,7 @@
 .nav-pills-position-sticky
 {
   position: sticky;
-  top: 163px;
+  top: 162px;
   z-index: 998;
   background: white;
 }
@@ -259,18 +259,24 @@ input[type="checkbox"]
   z-index: 998;
 } */
 
-.qr_position_sticky,
-.planning_encodage_position
+.qr_position_sticky
 {
   position: sticky;
   top: 163px;
   background: var(--color-white);
   z-index: 998;
 }
+.planning_encodage_position
+{
+  position: sticky;
+  top: 205px;
+  background: var(--color-white);
+  z-index: 998;
+}
 .weekly_planning_search_position
 {
   position: sticky;
-  top: 243px;
+  top: 221px;
   background: white;
   z-index: 998;
 }
@@ -334,7 +340,7 @@ input[type="checkbox"]
 .manage_category_sticky_position
 {
   position: sticky;
-  top: 153px;
+  top: 152px;
   background: white;
   z-index: 998;
 }
@@ -348,7 +354,7 @@ input[type="checkbox"]
 .position_sticky_co-op
 {
   position: sticky;
-  top: 249px;
+  top: 245px;
   background: white;
   z-index: 998;
 }

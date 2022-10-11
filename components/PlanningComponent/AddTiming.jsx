@@ -936,7 +936,7 @@ function Addtiming(props) {
 							<div className="float-end">
 								<button
 									type="submit"
-									className="btn rounded-0 px-3  btn-block float-end poppins-light-19px-next-button"
+									className="btn rounded-0 px-3  btn-block float-end poppins-light-18px-next-button shadow-none"
 								>
 									NEXT
 								</button>
