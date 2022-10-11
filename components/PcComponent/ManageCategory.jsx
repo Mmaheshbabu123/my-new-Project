@@ -305,7 +305,7 @@ const ManageCategoryComponent = () => {
 									))}
 								{categories.length == 0 && (
 									<tr>
-										<td colSpan={4} className="text-center poppins-regular-18px">
+										<td colSpan={4} className="text-center poppins-regular-18px no-records">
 											No records
 										</td>
 									</tr>

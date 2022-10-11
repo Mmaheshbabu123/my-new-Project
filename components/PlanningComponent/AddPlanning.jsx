@@ -470,9 +470,9 @@ function Planning(props) {
 											<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
 											<div className=" d-flex col-md-12 d-inline position-relative">
 												<input
-													type="text mb-2 mt-2 poppins-regular-16px rounded-0"
+													type="text mb-2 mt-2 "
 													value={project.project_name}
-													className="form-control"
+													className="form-control poppins-regular-16px rounded-0"
 													disabled
 												/>
 												<span className="edit-del-planning">
