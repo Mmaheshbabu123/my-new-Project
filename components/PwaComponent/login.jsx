@@ -4,6 +4,11 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 function Login(props) {
+
+    const [data, setData] = useState({
+      
+
+    });
     const [ token, setToken ] = useState('');
     const router = useRouter();
     useEffect(() => {
