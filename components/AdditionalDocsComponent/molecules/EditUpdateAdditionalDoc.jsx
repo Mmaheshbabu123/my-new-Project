@@ -88,10 +88,9 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
         setObj['companyWarning'] = true;
         proceed = false;
       }
-      if(startDate && endDate) {
-        let status = new Date(startDate).getTime() >= new Date(endDate).getTime();
-        setObj['dateWarning'] = status;
-        proceed = !status;
+      if(startDate && endDate && new Date(startDate).getTime() >= new Date(endDate).getTime()) {
+        setObj['dateWarning'] = true;
+        proceed = false;
       }
       setState({...state, ...setObj});
       return proceed;

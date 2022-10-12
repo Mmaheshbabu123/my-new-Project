@@ -1,3 +1,4 @@
+var monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export function formatDate(dateInput) {
   if(!dateInput) return '';
@@ -20,6 +21,21 @@ export function getFutureDates(startDate = new Date(), noOfDays = 5) {
       value: `${yyyy}${mm < 10 ? '0' + mm : mm}${dd < 10 ? '0' + dd : dd}`,
       label: `${dd < 10 ? '0' + dd : dd}-${mm < 10 ? '0' + mm : mm}-${yyyy}`
     })
+  }
+  return dateOptions;
+}
+
+export function getLastTwelveMonths() {
+  let date = new Date();
+  let dateOptions = [{ value: 0, label: '--Select--' }];
+  date = new Date(date.getFullYear(), date.getMonth(), 1);
+  for (let i = 0; i <= 11; i++) {
+    dateOptions.push({
+      value: date.getTime(),
+      lastValue: new Date(date.getFullYear(), date.getMonth() + 1, 1).getTime(),
+      label: monthName[date.getMonth()] + ' ' + date.getFullYear()
+    })
+    date.setMonth(date.getMonth() - 1);
   }
   return dateOptions;
 }
