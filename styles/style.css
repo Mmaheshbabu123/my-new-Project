@@ -396,7 +396,7 @@ select option
 .position-sticky-mytodo
 {
   position: sticky;
-  top: 166px;
+  top: 162px;
   background-color: var(--color-white);
   z-index: 998;
 }
@@ -472,7 +472,7 @@ select option
 .v1_position_sticky
 {
   position: sticky !important;
-  top: 240px;
+  top: 239px;
   background: var(--color-white);
   z-index: 998;
 }
