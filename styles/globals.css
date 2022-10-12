@@ -1186,10 +1186,11 @@ div[disabled] {
 	color: var(--color-purple);
 	font-size: var(--font-size-xl);
 }
-.purple-color2 {
+.purple-color2,
+.purple-color2 a:hover {
 	color: var(--color-purple);
-	font-size: var(--font-size-m);
-	font-family: var(--font-family-poppins-regular);
+	font-size: var(--font-size-m) !important;
+	font-family: var(--font-family-poppins-regular) !important;
 }
 .color-skyblue2 {
 	background-color: var(--color-skyblue);
@@ -1205,7 +1206,7 @@ div[disabled] {
 /* .planning-table .css-1b7ni76-MuiToolbar-root.Toolbar-toolbar {
 	border: 1px solid var(--color-border-lightgrey);
 } */
-.planning-table .css-1ps6pg7-MuiPaper-root {
+.planning-table .MuiPaper-root {
 	font-family: var(--font-family-poppins-regular);
 	font-size: var(--font-size-m);
 	color: var(--color-label-footer-gray);
@@ -1233,25 +1234,25 @@ div[disabled] {
 	padding-top: 0.8rem;
 	padding-bottom: 0.5rem;
 }
-.planning-table .css-xya8j6-MuiButtonBase-root-MuiButton-root.TodayButton-button:first-of-type {
+.planning-table .TodayButton-button:first-of-type {
 	border-color:var(--color-skyblue);
 	color: var(--color-skyblue);
 	border-radius: 0px;
 	background-color: var(--color-white);
 }
-.planning-table .css-xya8j6-MuiButtonBase-root-MuiButton-root.TodayButton-button:first-of-type:hover,
-.css-71a9mb-MuiButtonBase-root-MuiIconButton-root:hover,
-.css-vnscjq-MuiButtonBase-root-MuiButton-root:hover
+.planning-table .TodayButton-button:first-of-type:hover,
+.planning-table .NavigationButton-button:hover,
+.planning-table .OpenButton-textButton:hover
 {
 	background-color: var(--color-skyblue);
 	color: var(--color-white);
 }
-.css-vnscjq-MuiButtonBase-root-MuiButton-root
+.planning-table .OpenButton-textButton
 {
 	border-radius: 0px;
 }
-.css-71a9mb-MuiButtonBase-root-MuiIconButton-root,
-.css-vnscjq-MuiButtonBase-root-MuiButton-root {
+.planning-table .NavigationButton-button,
+.planning-table .OpenButton-textButton {
 	color: var(--color-skyblue);
 	font-family: var(--font-family-poppins-light);
 	font-size: var(--font-size-18px);

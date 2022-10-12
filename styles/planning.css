@@ -185,7 +185,7 @@ input[type="checkbox"]
 {
   border: 1px solid var(--color-border-lightgrey);
 }
-.css-1ps6pg7-MuiPaper-root
+.planning-table .MuiPaper-root
 {
   box-shadow: none;
   border:1px solid var(--color-border-lightgrey) ;
@@ -248,7 +248,7 @@ input[type="checkbox"]
 .position-sticky-mytodo_searchbox
 {
   position:sticky;
-  top: 243px;
+  top: 239px;
   background-color: var(--color-white);
   z-index: 998;
 }
@@ -262,7 +262,7 @@ input[type="checkbox"]
 .qr_position_sticky
 {
   position: sticky;
-  top: 163px;
+  top: 162px;
   background: var(--color-white);
   z-index: 998;
 }
@@ -310,12 +310,12 @@ input[type="checkbox"]
 
 .my_documents_position_sticky_admin
 {
-  top: 301px;
+  top: 300px;
 }
 
 .my_documents_position_sticky_employer
 {
-  top: 163px;
+  top: 162px;
 }
 
 /* .my_documents_position_sticky_table thead
@@ -327,7 +327,7 @@ input[type="checkbox"]
 .manage_agreement_position_sticky
 {
   position: sticky;
-  top: 230px;
+  top: 231px;
   background: var(--color-white);
   z-index: 998;
 }
