@@ -218,7 +218,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
       <div className='row'>
       <div className="col-md-12">
        <div className='row'>
-       <div className="col-md-6">
+       <div className="col-md-12">
           <LabelField title={`Employer`} mandotory={true} className='poppins-medium-18px'/>
           <MultiSelectField
             options={employers}
@@ -230,7 +230,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
           />
         {state.employerWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
         </div>
-        <div className="col-md-6">
+        <div className="col-md-12">
           <LabelField title={`Company`}  mandotory={true} className='poppins-medium-18px' />
           <MultiSelectField
             options={state.employerId ? companies[state.employerId] : []}
@@ -243,7 +243,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
         {state.companyWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
         </div>
        </div>
-        <div className="col-md-6  ">
+        <div className="col-md-12  ">
           <CheckBoxField
               id={'link_to_sv'}
               tick={state.linkToCooperationAgreement}
@@ -251,7 +251,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
               onCheck={(e) => handleChange(e, 2)}
               name={`Link to cooperation agreement.`}
               customStyle={{margin: '10px 0', cursor:'pointer'}}
-              className="col-md-12 d-flex rounded-0"
+              className="col-md-6 d-flex rounded-0"
             />
         </div>
       </div>

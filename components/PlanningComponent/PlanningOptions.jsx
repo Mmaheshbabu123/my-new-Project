@@ -13,10 +13,10 @@ function Add_manage_planning(props) {
 		);
 	};
 	return (
-		<div className="col-md-12 py-3 ">
+		<div className="col-md-12">
 			{/* <div className="row mt-5 text-center planning-height "> */}
-			<div className='col-md-12 px-0'>
-					<h1 className=" mt-1 mb-1 font-weight-bold   px-0  bitter-italic-normal-medium-24">My Planning</h1>
+			<div className='col-md-12 px-0 py-4 position-sticky-pc'>
+					<h1 className="font-weight-bold   px-0  bitter-italic-normal-medium-24">My Planning</h1>
 					</div>
 			<div className={`${styles.planningheight} popup-btn col-md-12 row align-items-center justify-content-center m-0`}>
 				<div className='row'>
@@ -25,7 +25,7 @@ function Add_manage_planning(props) {
 						{/* <div className="col-md-6 d-flex justify-content-end px-5"> */}
 						<div className="col-md-6 my-1"> 
 				<Link href={'/planning/add/' + unique_key}>
-					<button style={{background: '#4C4D550F', width: '200px', height: '200px'}} type="button " className="btn-lg border-0 ">
+					<button style={{background: '#4C4D550F', width: '200px', height: '200px'}} type="button " className="btn-lg border-0 rounded-0">
 						
 						<div ><img style={{width: '100px'}} src="/addplanning.png" className="mt-2 mb-3" />
 						
