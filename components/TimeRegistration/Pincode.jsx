@@ -130,8 +130,10 @@ const Pincode = () => {
 							SetResponse('There is no plannings for the day.');
 						} else if(result==6){
 							SetResponse('No plannings created for you.');
-						} else {
-							SetResponse('Something went wrong please try again later');
+						} else if(result==999.9){
+							SetResponse('No plannings for the day');
+						}else{
+							SetResponse('No plannings are there.');
 						}
 						
 					})
@@ -225,29 +227,13 @@ const Pincode = () => {
 					</div>
 				</div>
 			</div>
-<<<<<<< HEAD
-			<div className="row mt-5">
-			
-				<input
-					type="button"
-					onClick={goHome}
-					className="btn btn-secondary "
-					value="Back"
-					style={{ width: '5%',marginLeft: '25%'}}
-				/>
-=======
 			<div className="row">
 					<div className='col-md-12'>
->>>>>>> bb4ab66dbdbffb2effbe9df5a3dba0b29014f515
 					<input
 					type="submit"
 					className="btn poppins-medium-18px-next-button shadow-none rounded-0 float-end"
 					value="Submit"
-<<<<<<< HEAD
-					style={{ width: '7%', marginLeft: '19%' }}
-=======
 					style={{  }}
->>>>>>> bb4ab66dbdbffb2effbe9df5a3dba0b29014f515
 				/>
 					</div>
 			</div>

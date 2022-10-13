@@ -230,7 +230,7 @@ const AddSalaryBenefits = () => {
 				.catch((error) => { })
 			: console.log('false validation');
 	};
-	console.log(obj);
+	
 	const rows = [];
 	obj.forEach((element, index) => {
 		rows.push(

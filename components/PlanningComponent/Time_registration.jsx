@@ -8,11 +8,8 @@ import { useRouter } from 'next/router';
 import QRCode from './QRcode_popup';
 import PincodePopup from './Pincode_popup';
 import EmployerPopup from './Employer_popup';
-<<<<<<< HEAD
-=======
 import Link from 'node_modules/next/link';
 import Image from "next/image";
->>>>>>> bb4ab66dbdbffb2effbe9df5a3dba0b29014f515
 
 function TimeRegistration(props) {
 	const router = useRouter();
