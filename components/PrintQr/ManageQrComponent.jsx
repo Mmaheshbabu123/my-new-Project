@@ -9,6 +9,7 @@ import ReactPaginate from 'react-paginate';
 import DateField from '@/atoms/DateField';
 import RadioField from '@/atoms/RadioField';
 import MultiSelectField from '@/atoms/MultiSelectField';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { formatDate, getFutureDates } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
@@ -368,12 +369,12 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
       <div>
         {state.filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="Next >"
+            nextLabel={<AiOutlineArrowRight />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={state.pageCount}
             forcePage={state.currentPage}
-            previousLabel="< Previous"
+            previousLabel={<AiOutlineArrowLeft />}
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"

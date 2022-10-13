@@ -212,14 +212,14 @@ const Pincode = () => {
 							{eyeicon}
 						</button>
 					</div>
-					<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
+					<p style={{ color: 'red'}} className="mt-2">
 						{err}
 					</p>
-					<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
+					<p style={{ color: 'red'}} className="mt-2">
 						{response}
 					</p>
 					<div className='row mt-3'>
-					<div className='col-md-12 pe-0'>
+					<div className='col-md-11 pe-2'>
 					<button style={{ border: 'none', background: 'white', color: 'blue' }} onClick={forgotPassword} className='forgot_password_pincode float-end pe-0'>
 							Forgot password?
 						</button>

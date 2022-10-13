@@ -9,8 +9,10 @@ import { GrView } from 'react-icons/gr';
 import { FiDownload } from 'react-icons/fi';
 import styles from './V1Document.module.css';
 import customAlert from '@/atoms/customAlert';
+import { getLastTwelveMonths } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
 const itemsPerPage = 8;
 
+const monthOptions = getLastTwelveMonths();
 const V1DocumentsOverview = (props) => {
   const [state, setState] = useState({
     loaded: false,
@@ -66,7 +68,7 @@ const V1DocumentsOverview = (props) => {
           status = `${item['company_name']}`.toLowerCase().toString().indexOf(companySearchTerm.toLowerCase().toString()) !== -1;
         if(status && functionSearchTerm)
           status = item['function_id'] === functionSearchTerm;
-        if(status && periodSearchTerm)
+        if(status && periodSearchTerm && periodSearchTerm.value)
           status = checkPeriod(item, periodSearchTerm)
        return status;
       })
@@ -86,7 +88,9 @@ const V1DocumentsOverview = (props) => {
   }
 
   const checkPeriod = (item, periodSearchTerm) => {
-    return true;
+    const { value, lastValue } = periodSearchTerm;
+    let dateOfSign = new Date(item['date_of_sign']).getTime();
+    return (dateOfSign > value) && (dateOfSign < lastValue);
   }
 
   const getNeededActions = (eachRow) => {
@@ -210,24 +214,22 @@ const V1DocumentsOverview = (props) => {
   }
 
   const onSelect = (e, key) => {
-    setState({...state, [key]: Number(e.value)})
+    setState({...state, [key]: key === 'periodSearchTerm' ? e : Number(e.value)})
   }
 
   const searchSelectField = (key, options, placeholder) => {
     return (
       <MultiSelectField
         options={options}
-        standards={options.filter(val => val.value === state[key])}
+        standards={key === 'periodSearchTerm' ? state[key] : options.filter(val => val.value === state[key])}
         handleChange={(e) => onSelect(e, key)}
         isMulti={false}
-        customStyle={{ menuPortal: base => ({ ...base, zIndex: 9999 }), paddingLeft: placeholder === 'Select period' ? '' : '' }}
         className={`${styles['v1-multiselect']} col-md-3 my-2 select_option_v1_doc`}
         classNamePrefix={`${styles['v1-multiselect']}`}
         placeholder={placeholder}
       />
     )
   }
-
 
   return(
     <div>
@@ -238,9 +240,9 @@ const V1DocumentsOverview = (props) => {
        <div className='col-md-9'>
          <div className='row'>
          {searchTextField('employeeSearchTerm', 'employee')}
-       {searchTextField('companySearchTerm', 'company')}
-       {searchSelectField('functionSearchTerm', state.functions, 'Select function')}
-       {searchSelectField('periodSearchTerm', state.period, 'Select period')}
+         {searchTextField('companySearchTerm', 'company')}
+         {searchSelectField('functionSearchTerm', state.functions, 'Select function')}
+         {searchSelectField('periodSearchTerm', monthOptions, 'Select period')}
          </div>
        </div>
        <div className='col-md-3'>
@@ -253,7 +255,7 @@ const V1DocumentsOverview = (props) => {
          >
            SEARCH
          </button>
-         
+
            </div>
            <div className='col-md-6'>
            <button

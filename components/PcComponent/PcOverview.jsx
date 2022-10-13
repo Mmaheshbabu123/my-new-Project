@@ -9,6 +9,8 @@ import AddFunction from '../../components/PcComponent/AddFunction';
 import AddPc from './AddPc';
 import AddAge from './AddAge';
 import EmployeeType from './EmployeeType';
+import AddSalaryBenefits from './AddSalaryBenefits';
+
 import SalaryBenefits from './SalaryBenifits';
 
 import {
@@ -506,7 +508,7 @@ const PcOverview = (params) => {
 					{cat_subsec_type == 3 && <AddPc />}
 					{cat_subsec_type == 4 && <AddAge />}
 					{cat_subsec_type == 5 && <EmployeeType />}
-					{cat_subsec_type == 6 && <SalaryBenefits />}
+					{cat_subsec_type == 6 && <AddSalaryBenefits />}
 				</div>
 			</div>
 			{console.log(router.query)}
