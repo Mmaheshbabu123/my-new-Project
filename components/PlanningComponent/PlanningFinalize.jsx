@@ -107,7 +107,7 @@ const PlanningFinalize = () => {
 			</div>
 			<div className="row m-0">
 				{/* <p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p> */}
-				<div className="d-flex mb-3 px-0 ">
+				<div className="d-flex pb-3 px-0 planning_finalize_search">
 					<select
 						className="form-select w-25 me-3  border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
 						disabled

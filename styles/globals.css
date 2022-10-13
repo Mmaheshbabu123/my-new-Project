@@ -478,9 +478,9 @@ body {
 	color: var(--color-white);
 	font-weight: normal;
 }
-.poppins-medium-22px-date-picker {
-	font-size: var(--font-size-22px) !important;
-	line-height: var(--line-height-37px) !important;
+.poppins-medium-18px-date-picker {
+	font-size: var(--font-size-18px) !important;
+	line-height: var(--line-height-29px) !important;
 	font-family: var(--font-family-poppins-medium) !important;
 	background-color: var(--color-skyblue);
 	color: var(--color-white);
