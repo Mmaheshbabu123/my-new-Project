@@ -5,15 +5,13 @@ import EmployeeTypeSecondPart from './EmployeeTypeSecondPart';
 import { helpers } from './LinkCoeffEmpHelper';
 import MultiSelect from '../SelectComponent';
 import Image from 'next/image';
-import forwardScroll from '@/components/images/right-arrow.png';
-import backwardScroll from '@/components/images/left-arrow.png';
 import { getAllEmpCoeffAndValueTypes, savePcLinkingData } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 
 var SERVER_SIDE_RENDERING = 1;
 const LinkCoeffEmpComponent = (props) => {
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
-  const { inputRef, scrollLeft, scrollRight, tableWidth } = state;
+  const { inputRef } = state;
   useEffect(() => {
     SERVER_SIDE_RENDERING ? fetchEmpCoeffValueTypesData() : SERVER_SIDE_RENDERING += 1;
   }, [])
@@ -22,11 +20,16 @@ const LinkCoeffEmpComponent = (props) => {
    * [fetchEmpCoeffValueTypesData data fetching based on pcid]
    * @return {Promise} [description]
    */
-  const fetchEmpCoeffValueTypesData = async () => {
-    await APICALL.service(`${getAllEmpCoeffAndValueTypes}?pcid=${props.pcid}`, 'GET').then(response => {
-      if (response.status === 200)
-        assignDataToStateVariables(response.data);
+  const fetchEmpCoeffValueTypesData = async (url = `${getAllEmpCoeffAndValueTypes}?pcid=${props.pcid}`, type = 0) => {
+    let res;
+    await APICALL.service(url, 'GET').then(response => {
+      if (response.status === 200) {
+        if(type)
+          res = response;
+        else assignDataToStateVariables(response.data)
+      }
     })
+    return res;
   }
 
   /**
@@ -97,9 +100,12 @@ const LinkCoeffEmpComponent = (props) => {
    * @param  {[Object]} e               [description]
    * @return {[Void]}   [description]
    */
-  const onSelect = (e) => {
+  const onSelect = async (e) => {
     removeWarningClass()
+    let response = await fetchEmpCoeffValueTypesData(`${getAllEmpCoeffAndValueTypes}?pcid=${e.value}&edit=1`, 1);
+    const { employeeTypes = [] } = response.data;
     updateStateChanges({
+      employeeTypeArray: employeeTypes,
       selectedPc: e.value,
       pcWarning: false,
       emptyDataWarning: false,
@@ -205,7 +211,7 @@ const LinkCoeffEmpComponent = (props) => {
           </button></div>
            </div>
         </div>
-        
+
       </div>
     </>
   else
