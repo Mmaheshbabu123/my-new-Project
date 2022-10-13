@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { Uniquekey } from '../../Services/GenetateUniqueKey';
 import { getIndexationOfSalary } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
+import SalaryIndexationDeletePopup from './DeleteSalaryIndexationPopup';
+import Pagination from '../PcComponent/Pagination';
 
 
 function ManageIndexationOfSalaries(props) {
@@ -14,6 +16,19 @@ function ManageIndexationOfSalaries(props) {
     const [indexationTemp, setIndexationTemp] = useState([]);
     const [indexationTemp2, setIndexationTemp2] = useState([]);
 
+    const [ indexationId, setIndexationId ] = useState('');
+
+    /**Popup  */
+	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
+
+	const closePopup = () => {
+		setShowdeletepopup(false);
+	};
+
+	const showPopup = (id) => {
+		setIndexationId(id);
+		setShowdeletepopup(true);
+	};
 
     useEffect(
         () => {
@@ -24,7 +39,6 @@ function ManageIndexationOfSalaries(props) {
                     setIndexationTemp(result.data);
                     setIndexationTemp2(result.data);
 
-
                 })
                 .catch((error) => {
                     console.log(error);
@@ -33,6 +47,30 @@ function ManageIndexationOfSalaries(props) {
         []
     );
 
+    // DELETE FUNCTIONALITY //
+	const deleteIndexation = async () => {
+		var data = {
+			id: indexationId
+		};
+    }
+// //------------------- Pagination code -------------------------//
+// const [ pageCount, setPageCount ] = useState(0);
+// const [ itemOffset, setItemOffset ] = useState(0);
+
+// useEffect(
+//     () => {
+//         const endOffset = itemOffset + itemsPerPage;
+//         setIndexationTemp2(project.slice(itemOffset, endOffset));
+//         setPageCount(Math.ceil(project.length / itemsPerPage));
+//     },
+//     [ itemOffset, itemsPerPage, project ]
+// );
+
+// const handlePageClick = (event) => {
+//     const newOffset = (event.selected * itemsPerPage) % project.length;
+//     setItemOffset(newOffset);
+// };
+// //------------------- Pagination code -------------------------//
     return (
         <div className="container-fluid p-0">
             <form>
@@ -69,7 +107,7 @@ function ManageIndexationOfSalaries(props) {
                                         <tr className="border poppins-regular-18px p-2" key={result.id} >
                                             <td className="poppins-regular-18px p-2">{result.date}</td>
                                             <td className="poppins-regular-18px p-2">{result.indexation_type}</td>
-                                            <td className="poppins-regular-18px p-2">{result.indexation_pc}</td>
+                                            <td className="poppins-regular-18px p-2">{result.entity_id}</td>
                                             <td className="poppins-regular-18px p-2">{result.indexation_type}</td>
 
                                             <td className="p-2">
@@ -82,15 +120,13 @@ function ManageIndexationOfSalaries(props) {
                                                         />
                                                     </a>
                                                 </Link>
-                                                <Link href='' className="">
-                                                    <a type=" p-1 m-1">
-                                                        <MdDelete
-                                                            className="color-skyblue"
-                                                            data-toggle="tooltip"
-                                                            title="Delete cost center"
-                                                        />
-                                                    </a>
-                                                </Link>
+                                                <span onClick={() => showPopup(result)} type="button">
+													<MdDelete
+														className=" ms-3 color-skyblue "
+														data-toggle="tooltip"
+														title="Delete Indexation of salary"
+													/>
+												</span>
 
 
 
@@ -101,6 +137,26 @@ function ManageIndexationOfSalaries(props) {
                         </table>
                     </div>
                 </div>
+                {/* -------------------------- Pagination---------------------------
+				<div className="row my-4">
+					{project.length > itemsPerPage && (
+							<Pagination itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}/>
+						// <ReactPaginate
+						// 	breakLabel="..."
+						// 	nextLabel={<AiOutlineArrowRight />}
+						// 	onPageChange={handlePageClick}
+						// 	pageRangeDisplayed={5}
+						// 	pageCount={pageCount}
+						// 	previousLabel={<AiOutlineArrowLeft />}
+						// 	renderOnZeroPageCount={null}
+						// 	containerClassName={'pagination justify-content-center project-pagination'}
+						// 	itemClass="page-item"
+						// 	linkClass="page-link"
+						// 	subContainerClassName={'pages pagination'}
+						// 	activeClassName={'active'}
+						// />
+					)}
+				</div> */}
                 <div className="col-sm-3 field_height ">
                     <div className='row'>
                         <div className="col-sm-3">
@@ -114,6 +170,9 @@ function ManageIndexationOfSalaries(props) {
                     </div>
                 </div>
             </form>
+            {showdeletepopup == true && (
+				<SalaryIndexationDeletePopup display={'block'} popupActionNo={closePopup} popupActionYes={deleteIndexation} />
+			)}
         </div>
     );
 }
