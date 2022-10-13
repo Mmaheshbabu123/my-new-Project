@@ -1826,11 +1826,11 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 	border-top: 1px solid #4C4D554D;
 }
 .first-col {
-	width: 30%;
+	width: 40%;
 	word-break: break-word;
 }
 .second-col {
-	width: 60%;
+	width: 50%;
 	word-break: break-word;
 }
 .edit-icon-color {
