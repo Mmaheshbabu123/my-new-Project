@@ -354,7 +354,7 @@ input[type="checkbox"]
 .position_sticky_co-op
 {
   position: sticky;
-  top: 245px;
+  top: 251px;
   background: white;
   z-index: 998;
 }
@@ -414,4 +414,11 @@ input[type="checkbox"]
 .modal-footer
 {
   border-top: 0px !important;
+}
+.cooperation_agreement_steps
+{
+  position: sticky;
+  top: 162px;
+  background: var(--color-white);
+  z-index: 998;
 }

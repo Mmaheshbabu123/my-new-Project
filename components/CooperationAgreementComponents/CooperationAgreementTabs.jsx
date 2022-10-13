@@ -34,8 +34,8 @@ const CooperationAgreementTabs = ({corporateAgreementId = 0, cooperTabs = [], se
   }, [selectedTabParam])
 
   return (
-    <div>
-      <ul className="nav nav-pills nav-justified mb-3 cooperation_agreement_list mt-3" id="pills-tab" role="tablist">
+    <div className='cooperation_agreement_steps pb-3'>
+      <ul className="nav nav-pills nav-justified cooperation_agreement_list" id="pills-tab" role="tablist">
       {cooperTabs.map(tab => {
         let disabled = filledTabs.includes(Number(tab.id)) ? '' : 'disabled';
         return(
