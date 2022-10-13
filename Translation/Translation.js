@@ -1,74 +1,80 @@
+import { ExitToApp } from 'node_modules/@material-ui/icons/index';
+import React, { useState, useEffect } from 'react';
 import { APICALL } from '../Services/ApiServices';
-import { DataTranslations } from '../Services/ApiEndPoints';
 
-// statics handler
 
-const lookupTranslations = (key, locale, lookup) =>{
-  let translations = JSON.parse(localStorage.getItem('translations')) || false;
-  //check first if the key exists in the json or not
-  //return false so a DB lookup can be done from backend else return the pair of key
-  try{
-  if(lookup){
-    return (translations) ? ((key in translations[locale]) ? true : false) : false;
-  }else{
-    //if lookup is not required then return the pair value of translations directly
-    return (translations) ? translations[locale][key] || false : false;
-  }}catch(e){
-    // console.error(e);
-  }
-}
-
-const updateTranslations = (key, translation) =>{
-  let translations = JSON.parse(localStorage.getItem('translations')) || false;
-  if(translations && translation!=null){
-    let target_key = get_target_key(key);
-    //updating the JSON object with new value if found in the DB
-    try{
-    Object.keys(translation).map(lang => {
-       translations[lang][target_key] = translation[lang][target_key];
-    });
-    //set the new JSON in localstorage so everytime its not calling the DB search
-    localStorage.setItem('translations', JSON.stringify(translations))
-  }catch(e){
-    console.error(e);
-  }
-  }
-}
-
-const get_target_key = (key) => {
-  return (key.split(' ').join('_').toLowerCase());
-}
-
-export const t = (key) => {
-  const LanguageState = localStorage.getItem('activeLanguage');
-  let locale = LanguageState || 'en' ;
-
-  let target_key = get_target_key(key);
-
-  let translation = lookupTranslations(target_key, locale, true);
-  //checking if the localstorage contains target_key or not
-  //if not then need to check in DB if the string exists there or not.
-  if (!translation){ 
-    let postData = {
-      "string" : key,
+const TranslationFunction = (input) => {
+  const [hydration, setHydration] = useState(false);
+  useEffect(() => { setHydration(true) }, [hydration])
+  const ISSERVER = typeof window === "undefined";
+  if (!ISSERVER && hydration) {
+    let lang = localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en';
+    let translations = localStorage['servername_' + 'translations'] !== undefined ? JSON.parse(localStorage['servername_' + 'translations']) : {};
+    if (translations[lang] !== undefined) {
+      return translations[lang][input] !== undefined ? translations[lang][input] : input;
+    } else {
+      return input;
     }
-    try {
-    APICALL.service(DataTranslations,'POST', postData, 0, 0) // if string not exists, then store that in table
-      .then(result => { 
-        //set the result in the localstorage JSON
-        updateTranslations(target_key, result);
-        // translation = lookupTranslations(target_key, locale);
-        })
-      }catch(e){ 
-        console.error(e);
-      }
-  }else{
-    translation = lookupTranslations(target_key, locale);
+  } else {
+    return input;
   }
-  //return the translations if exists or else return the development string itself
-  return (translation) ? translation : key; 
 }
 
-export default {  
-  t,
-}  
+const Translation = (Component, stringList) => {
+  const TranslatedComponent = () => {
+  const [hydration, setHydration] = useState(0);
+
+
+  useEffect(() => {
+    const  asyncFunc = async ()=>{
+      await getTranslationData();
+      setHydration(1);
+    }
+      const getTranslationData = async () => {
+        //let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/translate';
+        let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_translations';
+        let lang = localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en';
+        await APICALL.service(url, 'POST', { lang: lang, string_list: stringList })
+          .then((result) => {
+            if (result['status'] == 200) {
+              if (localStorage['servername_' + 'translations'] === undefined) {
+                localStorage.setItem('servername_' + 'translations', '{}');
+              }
+              let translations = JSON.parse(localStorage['servername_' + 'translations']);
+              if (translations[lang] !== undefined) {
+                translations[lang] = { ...translations[lang], ...result['data'] };
+              } else {
+                translations[lang] = result['data'];
+              }
+              localStorage.setItem('servername_' + 'translations', JSON.stringify(translations));
+            }
+          })
+      };
+      if (stringList.length > 0) {
+       // getTranslationData();
+       // setHydration(1);
+         asyncFunc();
+      }
+       
+    }, []);
+    
+   
+    const t = (input) =>{
+      if (hydration === 1) {
+        let lang = localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en';
+        let translations = localStorage['servername_' + 'translations'] !== undefined ? JSON.parse(localStorage['servername_' + 'translations']) : {};
+      if (translations[lang] !== undefined) {
+        return translations[lang][input] !== undefined ? translations[lang][input] : input;
+      } else {
+        return input;
+      }
+      } else {
+        return input;
+      }
+    }
+    return <Component t={t} />
+  };
+
+  return TranslatedComponent;
+};
+export default Translation;
