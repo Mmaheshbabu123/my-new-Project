@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../molecules/Notification.module.css'
 import notificationSvg from '../molecules/notification.svg';
-import notificationExists from '../molecules/notification.svg';
+import notificationExists from '../molecules/notificationExists.svg';
 import { useRouter } from 'next/router';
 import NotificationView from '../molecules/NotificationView';
 import {
@@ -17,25 +17,25 @@ const NotificationMain = ( props ) => {
     const router  = useRouter();
     const { entityid = 0, id = 0, user_id = 0} = router.query;
     const entityId = entityid || user_id || id ;
-    const [notificationView, setNotificationView] = useState(false);
     const [state, setState] = useState({
+      notificationView: false,
       notificationCount: 0,
       loading: false,
       notificationsList: [],
       refresh: 0,
     });
 
-    useEffect( () => { loadData(INITIAL_COUNT) }, [Number(entityId), notificationView])
+    useEffect( () => { loadData(INITIAL_COUNT) }, [Number(entityId)])
 
-    const loadData = async (count = 0) => {
+    const loadData = async (count = 0, viewState = state.notificationView) => {
       if(entityId) {
-        let url = notificationView ? getNotifications : getNotificationsCount;
+        let url = viewState ? getNotifications : getNotificationsCount;
         await APICALL.service(`${url}/${entityId}?fetch=${count}`, 'GET').then(res =>{
           if(res.status === 200) {
             setState({...state,
-              [notificationView ? 'notificationsList' : 'notificationCount']: res.data,
+              [viewState ? 'notificationsList' : 'notificationCount']: res.data,
               loading: true,
-              refresh: !state.refresh
+              notificationView: viewState
             })
           } else {
             console.error('error occured');
@@ -51,7 +51,7 @@ const NotificationMain = ( props ) => {
     }
 
     const toggleNotificationView = () => {
-      setNotificationView(!notificationView);
+      loadData(0, !state.notificationView);
     }
 
     const updateNotifications = async (type, obj) => {
@@ -86,7 +86,7 @@ const NotificationMain = ( props ) => {
            {/*state.loading === true && Number(state.notificationCount) > 0 && <span className={styles["iconBadge"]}>{state.notificationCount}</span>*/}
           </div>
         </div>
-        {notificationView === true &&
+        {state.notificationView === true &&
           <NotificationView
               updateNotifications={updateNotifications}
               notificationsList = {state.notificationsList}

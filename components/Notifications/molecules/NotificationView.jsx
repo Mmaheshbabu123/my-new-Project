@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from './Notification.module.css'
-import clearIcon from './clearAll.svg';
 import closeIcon from './close.svg';
 
 const NotificationView = ({
@@ -15,7 +14,7 @@ const NotificationView = ({
     allTimestamp: [],
     totalCount: 0,
     viewAllLink: 1,
-    notificationCount: 0.
+    notificationCount: -1.
   })
 
   const loadAll = () => {
@@ -89,7 +88,7 @@ const NotificationView = ({
             </p>
             <img alt={"close"} title={"Close"} onClick={toggleNotificationView} style={{ cursor: "pointer", width: "15px" }} src={closeIcon.src} />
           </div>
-          {state.notificationCount === 0 && <p className="text-center poppins-light-18px"> No notifications to show. </p>}
+          {state.notificationCount < 1 && <p className="text-center poppins-light-18px"> {state.notificationCount === 0 ? 'No notifications to show.' : 'Loading...'} </p>}
           <div className={styles["notification-scroll"]} style={{ minHeight: state.notificationCount ? "200px" : "150px", maxHeight: state.viewAllLink ? "400px" : "460px", overflowY: 'auto' }}>
           {state.allTimestamp.map((i, k) => {
             return (
@@ -97,11 +96,6 @@ const NotificationView = ({
                 <p className={`${styles['date-p-tag']} d-flex align-items-center row`}>
                   <span style={{ display: "inline-block"}} className="poppins-medium-16px col-md-6 ps-3 py-3">  {i.UTC.date} </span>
                   <span style={{ display: "inline-block", textAlign: "right" }} className="col-md-6 pe-3" >
-                  {/* {k === 0 && (
-                    <img alt={"delete all"} title="Delete all" style={{ width: "15px", cursor: "pointer"}}
-                         onClick={() => updateNotifications('deleteAll')}
-                         src={clearIcon.src} />
-                    )} */}
                   </span>
                 </p>
                 {i.list.map(l => {
@@ -112,7 +106,6 @@ const NotificationView = ({
                     const amOrpm = hours >= 12 ? "pm" : "am";
                     return (
                       <div key={_key} className={`${styles["lineItmes"]} py-3`}>
-                        
                         <div onClick={() => updateNotifications('single', k)} className="cursor-pointer">
                           <span className={k.seen_by_user !== 0 ? styles['seen'] : styles['unseen']}> {k.message} </span>
                         </div>
@@ -121,7 +114,7 @@ const NotificationView = ({
                           <span className={`${styles['time-span']} float-start`}> {`${hours}:${min} ${amOrpm}`} </span>
                             </div>
                           </div>
-                          
+
                       </div>
                     );
                   });
@@ -132,10 +125,7 @@ const NotificationView = ({
           </div>
         </div>
         {state.notificationCount > 0 && <div className="col-md-12 row m-0 p-0 pt-3 pb-2 ">
-          {/* <p className={`${styles['link-p-tags']} cursor-pointer col-md-6 text-start bitter-italic-normal-medium-24`} onClick={() => updateNotifications('readAll', state.allTimestamp)}>
-             Mark all as read
-          </p> */}
-           {state.viewAllLink === 1 && <p className={`${styles['link-p-tags']} cursor-pointer col-md-12 text-center text-uppercase text-decoration-underline  bitter-italic-normal-medium-16`} onClick={loadAll}> View all </p>}
+         {state.viewAllLink === 1 && <p className={`${styles['link-p-tags']} cursor-pointer col-md-12 text-center text-uppercase text-decoration-underline  bitter-italic-normal-medium-16`} onClick={loadAll}> View all </p>}
         </div>}
       </div>
     </div>
