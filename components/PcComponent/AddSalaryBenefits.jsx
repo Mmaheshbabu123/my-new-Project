@@ -90,6 +90,7 @@ const AddSalaryBenefits = () => {
 	const updateValuetype = (index, value) => {
 		var object = [ ...obj ];
 		object[index].value_type = value;
+		object[index].value = '';
 		setObj(object);
 	};
 
@@ -159,7 +160,7 @@ const AddSalaryBenefits = () => {
 					object[i].v_err =
 						data.value_type == '2' ? ValidationService.percentageValidationMethod(data.value) : '';
 					object[i].v_err =
-						data.value_type == '1' ? ValidationService.numberValidationMethod(data.value) : '';
+						data.value_type == '1' ? ValidationService.minSalaryValidationMethod(data.value) : '';
 				}
 				// object[i].date_err = data.date_err == ''
 				// 	? (ValidationService.onlyFutureDateValidationMethod(data.date))
@@ -262,7 +263,8 @@ const AddSalaryBenefits = () => {
 												<div  className={pc_view_type == 'addpc' ? 'col-md-9' : "col-md-12 d-flex align-items-baseline px-0"}>
 													<input
 														type="checkbox"
-														value={agent}
+														checked={element.sales_agent === true}
+														// value={agent}
 														onChange={(e) => {
 															updateAgent(index, e.target.checked);
 														}}
@@ -308,7 +310,7 @@ const AddSalaryBenefits = () => {
 														<p style={{ color: 'red' }}>{element.vt_err}</p>
 														<input
 															type="text"
-															defaultValue={element.value}
+															value={element.value}
 															onChange={(e) => {
 																updateValue(index, e.target.value);
 															}}
