@@ -214,7 +214,7 @@ const AddSalaryBenefits = () => {
 			<div className="mt-3">
 				<div className="m-2">
 					<div className="row">
-						<div className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-3 ps-0' : "mt-4 px-1"}  style={{ width: '2%' }}>
+						<div className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-3 ps-0' : "mt-4 px-0"} >
 							<input
 								type="checkbox"
 								checked={element.open == true}
@@ -224,7 +224,7 @@ const AddSalaryBenefits = () => {
 								style={{ width: '18px', height: '18px' }}
 							/>
 						</div>
-						<div className="pe-1" style={{ width: '98%' }}>
+						<div className="pe-1">
 							<div className="accordion-item rounded-0 add_salary_benefits">
 								<h2 className="accordion-header" id="flush-headingOne">
 									<button
@@ -246,7 +246,7 @@ const AddSalaryBenefits = () => {
 									<div className="accordion-body">
 										<div>
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-3' : "col-md-12 px-0"} >
+												<div className={pc_view_type == 'addpc' ? 'col-md-3' : "col-md-12"} >
 													<input
 														type="checkbox"
 														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input me-2 rounded-0"} 
@@ -260,11 +260,12 @@ const AddSalaryBenefits = () => {
 															<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Is this mandatory?</p>
 														</label>
 												</div>
-												<div  className={pc_view_type == 'addpc' ? 'col-md-9' : "col-md-12 d-flex align-items-baseline px-0"}>
+												<div  className={pc_view_type == 'addpc' ? 'col-md-9' : "col-md-12 d-flex align-items-baseline"}>
 													<input
 														type="checkbox"
+														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input w-25 rounded-0"} 
+														value={agent}
 														checked={element.sales_agent === true}
-														// value={agent}
 														onChange={(e) => {
 															updateAgent(index, e.target.checked);
 														}}
@@ -277,9 +278,9 @@ const AddSalaryBenefits = () => {
 											</div>
 											<br />
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-4' : "col-md-12 ps-3"} >
+												<div className={pc_view_type == 'addpc' ? 'col-md-4' : "col-md-12"} >
 													<div className="row mb-4">
-														<label className="mb-2 poppins-regular-16px">
+														<label className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>
 															Salary benefit value
 														</label>
 
