@@ -78,9 +78,11 @@ const Pincode = () => {
 		var valuelength = value.length;
 		if (valuelength == 0 || valuelength == undefined) {
 			setErr('Please enter the pin.');
+			SetResponse('');
 			return false;
 		} else if (valuelength < 6) {
 			setErr('Please fill up all the cells.');
+			SetResponse('');
 			return false;
 		} else {
 			setErr('');
@@ -130,12 +132,9 @@ const Pincode = () => {
 							SetResponse('There is no plannings for the day.');
 						} else if(result==6){
 							SetResponse('No plannings created for you.');
-						} else if(result==999.9){
-							SetResponse('No plannings for the day');
-						}else{
+						} else {
 							SetResponse('No plannings are there.');
 						}
-						
 					})
 					.catch((error) => {
 						console.error(error);
