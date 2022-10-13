@@ -295,7 +295,7 @@ const ManageCategoryComponent = () => {
 
 												<span onClick={() => showPopup(result.cat_id)} type="button">
 													<MdDelete
-														className=" ms-3 color-skyblue "
+														className=" ms-3 color-skyblue delete_button"
 														data-toggle="tooltip"
 														title="Delete category"
 													/>
