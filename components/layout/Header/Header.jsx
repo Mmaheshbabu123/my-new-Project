@@ -21,7 +21,7 @@ function Header() {
                   alert('Failed');
                 }
             })
-        }, []);*/
+        }, []);
   
 	 const handleLangChange = (e) => {
           localStorage.setItem('lang', e.target.value);
