@@ -1213,32 +1213,47 @@ div[disabled] {
 }
 .planning-table .Cell-dayOfWeek {
 	background-color: var(--color-skyblue);
-	color: var(--color-white);
-	height: 45px;
-	font-family: var(--font-family-poppins-regular);
-	font-size: var(--font-size-18px);
+	color: var(--color-white) !important;
+	height: 45px !important;
+	font-family: var(--font-family-poppins-regular) !important;
+	font-size: var(--font-size-18px) !important;
 	display: flex;
 	align-items: center;
 	padding-left: 1rem;
 	justify-content: center;
-	margin-top: 0.5rem;
+	/* margin-top: 0.5rem; */
+	padding-top: 0px !important;
 }
-.css-1675apn-MuiTableCell-root .Cell-dayOfMonth
+.planning_calender .btn:hover
 {
-	color: var(--color-label-footer-gray);
-	font-family: var(--font-family-poppins-light);
-	font-size: var(--font-size-18px);
+	background-color: var(--color-skyblue)!important;
+	border-color: var(--color-skyblue)!important;
+	color: var(--color-white)!important;
+}
+.planning-table .MuiTableCell-body 
+{
+	text-align: center !important;
+}
+.MuiTableCell-body .Cell-dayOfMonth
+{
+	color: var(--color-label-footer-gray) !important;
+	font-family: var(--font-family-poppins-light) !important;
+	font-size: var(--font-size-18px) !important;
 	display: flex;
 	align-items: center;
 	padding-left: 1rem;
 	padding-top: 0.8rem;
 	padding-bottom: 0.5rem;
+	justify-content: center;
 }
 .planning-table .TodayButton-button:first-of-type {
 	border-color:var(--color-skyblue);
 	color: var(--color-skyblue);
 	border-radius: 0px;
 	background-color: var(--color-white);
+	font-size: var(--font-size-18px) !important;
+	font-family: var(--font-family-poppins-light) !important;
+	line-height: var(--line-height-29px) !important;
 }
 .planning-table .TodayButton-button:first-of-type:hover,
 .planning-table .NavigationButton-button:hover,
