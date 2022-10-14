@@ -579,7 +579,7 @@ function Addtiming(props) {
 												
 												className={`row d-flex justify-content-start py-3 my-3  ${style.sec_background}`}
 											>
-												<div className="col-md-1 poppins-light-20px">{++count1}.</div>
+												<div className="col-md-1 poppins-light-20px count_col_timing">{++count1}.</div>
 												<div className="col-md-3 poppins-light-20px">
 													{result.employee_name}
 												</div>
@@ -610,20 +610,20 @@ function Addtiming(props) {
 												}}
 												minDate={new Date()}
 											/>
-											<p className="error mt-2 ">{error_selected_date}</p>
+											<p className="error">{error_selected_date}</p>
 										</div>
 									</div>
-									<div className="mt-3 pt-2">
+									<div className="">
 										{commonDatetime.map((value, index) => (
-											<div className="row table-title-bg my-2" key={index}>
-												<div className="col-md-2 py-3  poppins-medium-22px-date-picker text-center">
-													<div className="pb-2 poppins-medium-22px-date-picker" />
+											<div className="row table-title-bg my-2" key={index} style={{minHeight:'65px'}}>
+												<div className="col-md-2 py-3  poppins-medium-18px-date-picker text-center d-flex justify-content-center align-items-center" style={{minHeight:'65px'}}>
+													<div className="poppins-medium-18px-date-picker" />
 													{value.pdate.split('-').reverse().join('/')}
 												</div>
-												<div className=" col-md-10 py-3">
+												<div className=" col-md-10">
 													{value.time.map((v1, k1) => (
 														<div className="row" key={k1}>
-															<div className="col-md-5 py-3">
+															<div className="col-md-5 py-3 d-flex justify-content-center align-items-center flex-column" style={{height:'65px'}}>
 																<div className="d-flex">
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
 																		Start time
@@ -646,9 +646,9 @@ function Addtiming(props) {
 																			)}
 																	/>
 																</div>
-																<p className="error mt-2 px-2">{v1.error_starttime}</p>
+																<p className="error">{v1.error_starttime}</p>
 															</div>
-															<div className="col-md-5  py-3">
+															<div className="col-md-5  py-3 d-flex justify-content-center align-items-center flex-column" style={{height:'65px'}}>
 																<div className="d-flex">
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
 																		End time
@@ -671,9 +671,9 @@ function Addtiming(props) {
 																			)}
 																	/>
 																</div>
-																<p className="error px-2 mt-2">{v1.error_endtime}</p>
+																<p className="error px-2">{v1.error_endtime}</p>
 															</div>
-															<div className="col-md-2 py-3 d-flex align-items-center justify-content-left">
+															<div className="col-md-2 py-3 d-flex align-items-center justify-content-left star_icon_size" style={{height:'65px'}}>
 																{value.time.length == 1 && (
 																	<MdStarRate
 																		className="purple-color"
@@ -752,7 +752,7 @@ function Addtiming(props) {
 																		}}
 																		minDate={new Date()}
 																	/>
-																	<p className="error mt-2">
+																	<p className="error">
 																		{result.error_selected_date}
 																	</p>
 																</div>
@@ -763,9 +763,10 @@ function Addtiming(props) {
 																	<div
 																		className="row table-title-bg my-2"
 																		key={index}
+																		style={{minHeight:'65px'}}
 																	>
-																		<div className="col-md-2 py-3 poppins-medium-22px-date-picker text-center">
-																			<div className="pb-2 poppins-medium-22px-date-picker" />
+																		<div className="col-md-2 py-3 poppins-medium-18px-date-picker text-center d-flex align-items-center justify-content-center" style={{minHeight:'65px'}}>
+																			<div className="poppins-medium-18px-date-picker" />
 																			{value.pdate.split('-').reverse().join('/')}
 																		</div>
 
@@ -773,7 +774,7 @@ function Addtiming(props) {
 																			{value.time.map((v1, k1) => (
 																				<div key={k1}>
 																					<div className="row">
-																						<div className="col-md-5 py-3 d-flex align-items-center">
+																						<div className="col-md-5 py-3 d-flex align-items-center selected_date" style={{height:'65px'}}>
 																							<div className="d-flex">
 																								<div className="py-1 px-2  custom_astrick poppins-regular-20px">
 																									<span className="poppins-medium-18px">
@@ -809,7 +810,7 @@ function Addtiming(props) {
 																											)}
 																									/>
 
-																									<p className="error mt-2 px-2">
+																									<p className="error">
 																										{
 																											v1.error_starttime
 																										}
@@ -817,7 +818,7 @@ function Addtiming(props) {
 																								</div>
 																							</div>
 																						</div>
-																						<div className="col-md-5 py-3 d-flex align-items-center">
+																						<div className="col-md-5 py-3 d-flex align-items-center selected_date" style={{height:'65px'}}>
 																							<div className="d-flex">
 																								<div className="py-1 px-2 custom_astrick poppins-regular-18px">
 																									<span className="poppins-medium-18px">
@@ -856,7 +857,7 @@ function Addtiming(props) {
 																										}
 																									/>
 
-																									<p className="error mt-2 px-2">
+																									<p className="error">
 																										{
 																											v1.error_endtime
 																										}
@@ -864,7 +865,7 @@ function Addtiming(props) {
 																								</div>
 																							</div>
 																						</div>
-																						<div className="col-md-2 py-3 d-flex align-items-center justify-content-left">
+																						<div className="col-md-2 py-3 d-flex align-items-center justify-content-left star_icon_size">
 																							{value.time.length == 1 && (
 																								<MdStarRate
 																									className="purple-color"
@@ -890,7 +891,7 @@ function Addtiming(props) {
 																							)}
 																						</div>
 																					</div>
-																					<p className="error mb-2">
+																					<p className="error">
 																						{v1.error}
 																					</p>
 																				</div>
@@ -906,7 +907,7 @@ function Addtiming(props) {
 																	</div>
 																))}
 
-															<div className="error mt-2 py-2 ps-2">
+															<div className="error py-2 ps-2">
 																<ul>
 																	<li>
 																	{result.error_date}

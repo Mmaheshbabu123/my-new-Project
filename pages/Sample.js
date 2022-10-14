@@ -1,4 +1,4 @@
-import Translation from '@/Translation';
+import Translation from 'Translation/Translation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
@@ -11,20 +11,20 @@ const Sample = (props) => {
 	const { t } = props;
 	const [state, setState] = useState({ 'languages': [], 'lang': '' });
 	useEffect(() => {
-		let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get_languages';
-		APICALL.service(url, 'GET')
-			.then((result) => {
-				if (result['status'] == 200) {
-					setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'nl' } });
-				} else {
-					alert('Failed');
-				}
-			})
+	  let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_languages';
+	    APICALL.service(url, 'GET')
+	      .then((result) => {
+	        if (result['status'] == 200) {
+		  setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'nl' } });
+		} else {
+		  alert('Failed');
+		}
+	    })
 	}, []);
 
 	const handleLangChange = (e) => {
-		localStorage.setItem('servername_' + 'lang', e.target.value);
-		router.reload();
+	  localStorage.setItem('servername_' + 'lang', e.target.value);
+	  router.reload();
 //		setState({ ...state, ...{ lang: e.target.value } });
 	}
 	return <div>

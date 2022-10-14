@@ -1,4 +1,4 @@
-import IndexationBenifits from "../components/PcComponent/IndexationBenifits";
+import IndexationBenifits from "../components/Indexation/IndexationBenifits";
 
 const indexationbenifits = () => {
     return(

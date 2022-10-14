@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '/Services/ApiServices';
 import { header } from '/Services/ApiEndPoints';
@@ -6,7 +6,28 @@ import { FaUserAlt, FaRegUserCircle } from 'react-icons/fa';
 import { MdNotifications } from 'react-icons/md';
 import Notification from '@/components/Notifications/organism/NotificationMain'
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Translation from '../../../Translation/Translation';
 function Header() {
+	let router = useRouter();
+        const [state, setState] = useState({ 'languages': [], 'lang': '' });
+        useEffect(() => {
+          let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_languages';
+            APICALL.service(url, 'GET')
+              .then((result) => {
+                if (result['status'] == 200) {
+                  setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'nl' } });
+                } else {
+                  alert('Failed');
+                }
+            })
+        }, []);
+  
+	 const handleLangChange = (e) => {
+          localStorage.setItem('servername_' + 'lang', e.target.value);
+          router.reload();
+        }
+
 	const server_url = process.env.NEXT_PUBLIC_APP_URL;
 	// 	let dashboard_url = server_url.includes('test')?'https://test.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1':
 	//    'http://uat.absolute-you.infanion.com/dashboard?access=administrator&check_logged_in=1';
@@ -90,12 +111,16 @@ function Header() {
 								</li>
 								<li className="list-unstyled mx-4 align-self-center d-flex">
 									<select
-										type=""
 										className="border-0 bg-white poppins-regular-18px p-1 lang-options"
+										value={state['lang']} 
+										onChange={handleLangChange}
 									>
-										<option className="lang">EN</option>
-										<option className="lang">NL</option>
-										<option className="lang">FR</option>
+									{
+                                					  state['languages'].map(key => {
+                                        				    return <option key={key['code']} value={key['code']}>{key['code']}</option>
+                                					  })
+                        						}
+
 									</select>
 								</li>
 								<li className="list-unstyled mx-3 align-self-center d-flex poppins-regular-18px">
