@@ -63,7 +63,7 @@ var res='';
   :
   res=<div className='container border'>
   <div className='row'>
-     <h1 className='p-3  poppins-light-18px text-center'> Email Sent</h1>
+     <h1 className='p-3  poppins-medium-22px text-center'> Email Sent</h1>
       </div>
   <div className='row p-3  poppins-light-18px text-center'>
      You will recieve an email to the registered email.
