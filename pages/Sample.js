@@ -15,7 +15,7 @@ const Sample = (props) => {
 	    APICALL.service(url, 'GET')
 	      .then((result) => {
 	        if (result['status'] == 200) {
-		  setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'nl' } });
+		  setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['lang'] !== undefined ? localStorage['lang'] : 'en' } });
 		} else {
 		  alert('Failed');
 		}
@@ -23,7 +23,7 @@ const Sample = (props) => {
 	}, []);
 
 	const handleLangChange = (e) => {
-	  localStorage.setItem('servername_' + 'lang', e.target.value);
+	  localStorage.setItem('lang', e.target.value);
 	  router.reload();
 //		setState({ ...state, ...{ lang: e.target.value } });
 	}
