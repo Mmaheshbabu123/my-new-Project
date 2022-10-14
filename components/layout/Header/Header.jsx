@@ -110,7 +110,7 @@ function Header() {
 									<img style={{ width: '40px' }} src="/account.png" />
 								</li>
 								<li className="list-unstyled mx-4 align-self-center d-flex">
-		{/*	<select
+		{	<select
 										className="border-0 bg-white poppins-regular-18px p-1 lang-options"
 										value={state['lang']} 
 										onChange={handleLangChange}
@@ -121,7 +121,7 @@ function Header() {
                                 					  })
                         						}
 
-									</select>*/}
+									</select>}
 								</li>
 								<li className="list-unstyled mx-3 align-self-center d-flex poppins-regular-18px">
 									<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL} className="">
