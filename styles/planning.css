@@ -142,8 +142,8 @@ input[type="checkbox"]
 .delete_icon_manage_cooperation
 {
   margin-bottom: 13px;
-  height: 33px !important;
-  width: 33px !important ;
+  height: 25px !important;
+  width: 25px !important ;
 }
 .Appointment-clickableAppointment
 {
@@ -322,6 +322,11 @@ input[type="checkbox"]
 
 .my_documents_position_sticky_employer
 {
+  top: 239px;
+}
+
+.my_documents_position_sticky_employee
+{
   top: 162px;
 }
 
@@ -432,6 +437,12 @@ input[type="checkbox"]
 .selected_date .rc-time-picker,
 .selected_date .rc-time-picker:focus-visible,
 .selected_date .rc-time-picker-input:focus-visible
+{
+  top: 4px !important;
+  outline: none !important;
+  border-radius: 0px !important;
+}
+.selected_date .rc-time-picker-input
 {
   top: 4px !important;
   outline: none !important;
