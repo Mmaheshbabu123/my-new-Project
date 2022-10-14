@@ -17,6 +17,8 @@ const AddSalaryBenefits = () => {
 	const { pc_unique_key, sec_completed, setSec_completed, setCurrent_sec, pc_view_type } = useContext(PcContext);
 
 	const router = useRouter();
+	
+	
 	const [ obj, setObj ] = useState([]);
 	const inputRef = useRef({});
 	const [ valuetype, setValueType ] = useState(0);
