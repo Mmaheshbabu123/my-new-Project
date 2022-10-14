@@ -16,7 +16,7 @@ function Header() {
             APICALL.service(url, 'GET')
               .then((result) => {
                 if (result['status'] == 200) {
-                  setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['lang'] !== undefined ? localStorage['lang'] : 'nl' } });
+                  setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['lang'] !== undefined ? localStorage['lang'] : 'en' } });
                 } else {
                   alert('Failed');
                 }
