@@ -97,9 +97,17 @@ const LinkCoeffEmpComponent = (props) => {
    * @param  {[Object]} e               [description]
    * @return {[Void]}   [description]
    */
-  const onSelect = (e) => {
+  const onSelect = async (e) => {
     removeWarningClass()
-    updateStateChanges({
+ await APICALL.service(`${getAllEmpCoeffAndValueTypes}?pcid=${e.value}&edit=1`, 'GET').then(response => {
+	       if (response.status === 200) {
+		               const { employeeTypes } = response.data;
+		               updateStateChanges({
+				                 employeeTypeArray: employeeTypes
+				               });
+		             }
+	     })
+updateStateChanges({
       selectedPc: e.value,
       pcWarning: false,
       emptyDataWarning: false,
