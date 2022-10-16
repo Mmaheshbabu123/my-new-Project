@@ -8,7 +8,7 @@ import MultiSelectField from '@/atoms/MultiSelectField';
 import { FaUndoAlt,FaSave, FaCheckCircle, FaShieldAlt } from 'react-icons/fa';
 import Reset from 'pages/pincode/update/[p_unique_key]';
 
-function encodageValidation(props) {
+function EncodageValidation(props) {
 	const router = useRouter();
 	const [ fcompany, setFcompany ] = useState('');
 	const [ flocation, setFlocation ] = useState('');
@@ -243,4 +243,4 @@ function encodageValidation(props) {
 	);
 }
 
-export default encodageValidation;
+export default EncodageValidation;
