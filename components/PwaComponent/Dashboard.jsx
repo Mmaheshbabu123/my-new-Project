@@ -6,7 +6,7 @@ import { getdashboardtiles } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import { TabUnselected } from 'node_modules/@material-ui/icons/index';
-import DashboardTiles from './DashboardTiles';
+// import DashboardTiles from './DashboardTiles';
 
 function Dashboard(props) {
   const router = useRouter();
