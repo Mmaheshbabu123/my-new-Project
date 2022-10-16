@@ -17,19 +17,23 @@ function Header() {
 	});
 
 	useEffect(() => {
-		let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_languages';
-		APICALL.service(url, 'GET').then((result) => {
-			if (result && result['status'] == 200) {
-				localStorage.setItem('lang', localStorage['lang'] !== undefined ? localStorage['lang'] : 'en');
-				setState({
-					...state,
-					languages: result['data'],
-					lang: localStorage['lang'] !== undefined ? localStorage['lang'] : 'en',
-					isAuthenticated: isAuthenticated,
-				});
-			} else { console.log('error while fetching header data') }
-		}).catch(error => console.error(error))
-	}, []);
+		if(isAuthenticated) {
+			async function fetchLanguages() {
+				let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_languages';
+				let setObj = {...state};
+				await APICALL.service(url, 'GET').then((result) => {
+					if (result && result['status'] == 200) {
+						localStorage.setItem('lang', localStorage['lang'] !== undefined ? localStorage['lang'] : 'en');
+						setObj['languages'] = result['data'];
+						setObj['lang'] = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
+						setObj['isAuthenticated'] = isAuthenticated;
+					} else { console.log('error while fetching header data') }
+				}).catch(error => console.error(error))
+				setState(setObj);
+			}
+			fetchLanguages();
+		}
+	}, [isAuthenticated]);
 
 	const handleLangChange = (e) => {
 		localStorage.setItem('lang', e.target.value);
