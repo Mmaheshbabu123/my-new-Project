@@ -19,14 +19,14 @@ function Header() {
 	useEffect(() => {
 		if(isAuthenticated) {
 			async function fetchLanguages() {
-				let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_languages';
+				let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_langaauages';
 				let setObj = {...state};
+				setObj['isAuthenticated'] = isAuthenticated;
 				await APICALL.service(url, 'GET').then((result) => {
 					if (result && result['status'] == 200) {
 						localStorage.setItem('lang', localStorage['lang'] !== undefined ? localStorage['lang'] : 'en');
 						setObj['languages'] = result['data'];
 						setObj['lang'] = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
-						setObj['isAuthenticated'] = isAuthenticated;
 					} else { console.log('error while fetching header data') }
 				}).catch(error => console.error(error))
 				setState(setObj);
