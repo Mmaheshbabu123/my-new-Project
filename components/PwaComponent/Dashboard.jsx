@@ -46,10 +46,10 @@ function Dashboard(props) {
           <p> Dashboard component </p>
 
       </>
-      <div>{dashboardtiles.length}</div>
-      {dashboardtiles.length == 0 && (
-        <div>No records</div>
-      )}
+      {/* <div>{dashboardtiles.length}</div> */}
+      {/* {dashboardtiles.length == 0 && (
+        // <div>No records</div>
+      )} */}
       {/* <div className="row row-cols-sm-2 row-cols-lg-5 g-2 g-lg-2 mt-3">
         <div className="col  bg-light mb-2 me-3 p-4 ">
           <div className="p-2 position_relative_dashboard ">
