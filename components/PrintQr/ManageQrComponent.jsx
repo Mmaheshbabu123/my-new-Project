@@ -50,10 +50,10 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('regenerate', eachRow)}>   <GrRefresh className='mt-2 color-skyblue force-skyblue'/> </span>
+        <span className="span-action-icons me-2 text-dark" title="Regenerate" onClick={() => handleActionClick('regenerate', eachRow)}>   <GrRefresh className='mt-2 color-skyblue force-skyblue'/> </span>
         {eachRow.qr_path !== '' && <>
-          <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('view', eachRow)}>   <BiQrScan className='mt-2 ms-3 color-skyblue'/> </span>
-          <span className="span-action-icons me-2 text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload className='mt-2 ms-3 color-skyblue'/> </span>
+          <span className="span-action-icons me-2 text-dark" title="View" onClick={() => handleActionClick('view', eachRow)}>   <BiQrScan className='mt-2 ms-3 color-skyblue'/> </span>
+          <span className="span-action-icons me-2 text-dark" title="Download" onClick={() => handleActionClick('download', eachRow)}> <FiDownload className='mt-2 ms-3 color-skyblue'/> </span>
         </>}
       </>
     )

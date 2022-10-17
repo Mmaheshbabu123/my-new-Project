@@ -133,7 +133,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       <>
         {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) && <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>}
         {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) &&  <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>}
-        <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload/> </span>
+        {eachRow.files.length > 0 && <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload/> </span>}
       </>
     )
   }
@@ -149,7 +149,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       </button>
       </div>
       }
-      <div className={`my_documents_position_sticky ${[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) ? 'my_documents_position_sticky_admin' : 'my_documents_position_sticky_employer'}`}>
+      <div className={`my_documents_position_sticky ${[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT ].includes(entityType) ? 'my_documents_position_sticky_admin' : entityType === USER_ROLE_ENTITY_TYPE.EMPLOYER ? 'my_documents_position_sticky_employer' : 'my_documents_position_sticky_employee'}`}>
       <div className='row'>
       <div className='col-md-12'>
          <div className='row'>
