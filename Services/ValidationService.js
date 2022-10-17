@@ -140,9 +140,29 @@ const ValidationService = {
    * @param {*} value
    * @returns 
    */
-  // emailValidationMethod: function (value) {
-  //   if((value.mat))
-  // }
+  emailValidationMethod: function (value) {
+    if(value.replace(' ', '').match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)){
+      return '';
+    }else {
+      return 'Invalid email';
+    }
+  },
+
+   /**
+   * Password validation
+   * @param {*} value
+   * @returns 
+   */
+    passwordValidationMethod: function (value) {
+      if(value.replace(' ', '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)){
+        return '';
+      }else {
+        return 'Invalid email';
+      }
+    }
 
 }
 export default ValidationService;
+
+
+
