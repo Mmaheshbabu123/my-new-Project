@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Image from "next/image";
 import Link from 'node_modules/next/link';
-
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import { getdashboardtiles } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
@@ -10,8 +10,8 @@ import { TabUnselected } from 'node_modules/@material-ui/icons/index';
 
 function Dashboard(props) {
   const router = useRouter();
-  const { entitytype = localStorage.getItem('user_role') || '' } = router.query;
-
+  const { entitytype = null } = router.query;
+  const { contextState = {} } = useContext(UserAuthContext);
   /**
    * Dashboard tiles data assigned variables
    */
@@ -26,7 +26,7 @@ function Dashboard(props) {
    */
   useEffect(
     () => {
-      APICALL.service(getdashboardtiles + '/' + entitytype, 'GET')
+      APICALL.service(getdashboardtiles + '/' + (entitytype || contextState.role), 'GET')
         .then((result) => {
           setDashboardTiles(result.data);
         })

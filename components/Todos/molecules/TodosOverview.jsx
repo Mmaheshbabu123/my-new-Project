@@ -29,7 +29,7 @@ import all_1 from '../molecules/images/All_1.svg';
 import edit_svg from '../molecules/images/edit.svg';
 import download_svg from '../molecules/images/download.svg';
 import sign_icon_1 from '../molecules/images/cooperation_agreement_1.svg';
-const itemsPerPage = 6;
+const itemsPerPage = 5;
 const COOPERATION_AGREEMENT_TODO = 1;
 const WERKPOSTFICHES_TODO = 2;
 const LABOUR_COOPERATION_TODO = 3;
