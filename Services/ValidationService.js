@@ -144,7 +144,7 @@ const ValidationService = {
     if(value.replace(' ', '').match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)){
       return '';
     }else {
-      return 'Invalid email';
+      return 'This field is invalid';
     }
   },
 
@@ -157,7 +157,7 @@ const ValidationService = {
       if(value.replace(' ', '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)){
         return '';
       }else {
-        return 'Invalid email';
+        return 'This field is invalid';
       }
     }
 
