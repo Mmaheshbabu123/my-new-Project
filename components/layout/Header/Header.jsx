@@ -10,16 +10,22 @@ import { useRouter } from 'next/router';
 function Header() {
 	let router = useRouter();
 	const { contextState: { isAuthenticated = 0 } } = useContext(UserAuthContext);
+
 	const [state, setState] = useState({
-		languages: [],
+		languages: [{code: 0, language: 'Select'}],
 		lang: '',
 		isAuthenticated: 0,
 	});
 
+	// due to next.js hydration error, we added new state and new effect, dont merge this with above state and effect
+	const [authenticated, setAuthentication] = useState(0);
+	useEffect(() => setAuthentication(isAuthenticated))
+	//------------------------------------------------------------//
+
 	useEffect(() => {
 		if(isAuthenticated) {
 			async function fetchLanguages() {
-				let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_langaauages';
+				let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_languages';
 				let setObj = {...state};
 				setObj['isAuthenticated'] = isAuthenticated;
 				await APICALL.service(url, 'GET').then((result) => {
@@ -59,7 +65,7 @@ function Header() {
 								</a>
 							</div>
 							<div className="d-flex justify-content-end  col-md-8 p-0 align-items-center">
-								{state.isAuthenticated === 1 && <ul className="d-flex list-unstyled mb-0">
+								{authenticated === 1 && <ul className="d-flex list-unstyled mb-0">
 									<li className="list-unstyled mx-4 align-self-center d-flex purple-color2 poppins-regular-18px">
 										<Link href={'/'} className="">
 											<a type="">DASHBOARD</a>
