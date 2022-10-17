@@ -70,6 +70,7 @@ const AddSalaryBenefits = () => {
 		(key!=0)?uniqkey=key:uniqkey=pc_unique_key;
 		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + uniqkey , 'GET')
 			.then((result) => {
+				console.log(result.data);
 				if (result.data != undefined || result.data != null) {
 					console.log(result.data);
 					if (typeof result.data == 'object') {
@@ -83,7 +84,7 @@ const AddSalaryBenefits = () => {
 			.catch((error) => {
 				console.error(error);
 			});
-	}, []);
+	}, [router.query]);
 
 	//change the value type
 	const changeValueType = (e) => {

@@ -508,8 +508,8 @@ const PcOverview = (params) => {
 					{cat_subsec_type == 3 && <AddPc />}
 					{cat_subsec_type == 4 && <AddAge />}
 					{cat_subsec_type == 5 && <EmployeeType />}
-					{(cat_subsec_type == 6 && pc_view_type == 'editpc') && router.push('/view-salary-benfits/viewSalaryBenfits?k='+pc_unique_key)}
-					{(cat_subsec_type == 6 && pc_view_type == 'viewpc') && router.push('/salary-benefits/view?k='+pc_unique_key)}
+					{/* {(cat_subsec_type == 6 && pc_view_type == 'editpc') && router.push('/view-salary-benfits/viewSalaryBenfits?k='+pc_unique_key)}
+					{(cat_subsec_type == 6 && pc_view_type == 'viewpc') && router.push('/salary-benefits/view?k='+pc_unique_key)} */}
 					{/* {(cat_subsec_type == 6 && pc_view_type == 'viewpc') && <ViewSalaryBenefits/>} */}
 				</div>
 			</div>

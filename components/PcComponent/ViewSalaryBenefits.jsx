@@ -51,8 +51,10 @@ const ViewSalaryBenefits = ({key}) => {
 	const [ onlyview,setOnlyview]= useState(true);
 
 	useEffect(() => {
-		alert(pc_unique_key);
-		const {k=''} = router.query;
+
+		// console.log(router.query);
+		// alert(pc_unique_key);
+		const {k} = router.query.k;
 		
 		if (localStorage.getItem('uid') != null) {
 			var userid = JSON.parse(localStorage.getItem('uid'));
