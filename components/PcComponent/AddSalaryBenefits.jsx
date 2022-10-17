@@ -8,17 +8,40 @@ import { RadioGroup, Radio } from 'react-radio-input';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
 
-let dateObj = new Date();
-let month = dateObj.getUTCMonth() + 1; //months from 1-12
-let day = dateObj.getUTCDate() + 1;
-var year = dateObj.getUTCFullYear() - 1;
+// let dateObj = new Date();
+// let month = dateObj.getUTCMonth() + 1; //months from 1-12
+// let day = dateObj.getUTCDate() + 1;
+// var year = dateObj.getUTCFullYear() - 1;
 
+let newDate = new Date()
+let day = newDate.getDate();
+let month = newDate.getMonth() + 1;
+let year = newDate.getFullYear();
+
+// alert(year);
 const AddSalaryBenefits = () => {
-	const { pc_unique_key, sec_completed, setSec_completed, setCurrent_sec, pc_view_type } = useContext(PcContext);
-
+	const {
+		pc_unique_key,
+		setPc_unique_key,
+		current_sec,
+		cat_rightsec,
+		setCat_rightsec,
+		cat_leftsec,
+		setCat_leftsec,
+		cat_subsec_type,
+		setCat_subsec_type,
+		cat_fun_updated,
+		setCat_fun_updated,
+		sec_completed,
+		setSec_completed,
+		cat_subsec_id,
+		setCat_subsec_id,
+		setCurrent_sec,
+		pc_view_type
+	} = useContext(PcContext);
+	
 	const router = useRouter();
-	
-	
+    
 	const [ obj, setObj ] = useState([]);
 	const inputRef = useRef({});
 	const [ valuetype, setValueType ] = useState(0);
@@ -28,16 +51,24 @@ const AddSalaryBenefits = () => {
 	const [ granted, setGranted ] = useState();
 	const [ mandatory, setMandatory ] = useState();
 	const [ uid, setUid ] = useState(0);
+	const [ key,setKey]=useState(0);
 
 	useEffect(() => {
+		if (!router.isReady) return;
+
+		const {k=''} = router.query;
+		(k!=undefined&&k!='')?
+		setKey(k):'';
+
 		if (localStorage.getItem('uid') != null) {
 			var userid = JSON.parse(localStorage.getItem('uid'));
 			setUid(userid);
 		} else {
 			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 		}
-
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + pc_unique_key, 'GET')
+		const uniqkey=0;
+		(key!=0)?uniqkey=key:uniqkey=pc_unique_key;
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + uniqkey , 'GET')
 			.then((result) => {
 				if (result.data != undefined || result.data != null) {
 					console.log(result.data);
@@ -192,9 +223,11 @@ const AddSalaryBenefits = () => {
 
 	const Submit = (e) => {
 		e.preventDefault();
+		const uniqkey=0;
+		(key!=0)?uniqkey=key:uniqkey=pc_unique_key;
 		validation()
 			? APICALL.service(
-					process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/store-salary-benfits/' + pc_unique_key,
+					process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/store-salary-benfits/' + uniqkey,
 					'POST',
 					[ obj, uid ]
 				)
@@ -293,6 +326,7 @@ const AddSalaryBenefits = () => {
 															}}
 															selectedValue={element.value_type}
 														>
+
 															<label
 																htmlFor="valuetype1"
 																className="mb-2 poppins-regular-16px"
@@ -311,6 +345,7 @@ const AddSalaryBenefits = () => {
 														</RadioGroup>
 
 														<p style={{ color: 'red' }}>{element.vt_err}</p>
+														<div style={{display:'inherit'}}>
 														<input
 															type="text"
 															value={element.value}
@@ -319,7 +354,9 @@ const AddSalaryBenefits = () => {
 															}}
 															name="valuetype"
 														/>
-														<p style={{ color: 'red' }}>{element.v_err}</p>
+													 <span className={"input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0"} style={{ marginLeft: '-14px'}}>{element.value_type==2?'%':'€'}</span>
+													</div>
+													<p style={{ color: 'red' }}>{element.v_err}</p>
 													</div>
 													<div className="row">
 														<label className="mb-2 poppins-regular-16px">
@@ -394,14 +431,15 @@ const AddSalaryBenefits = () => {
 													</div>
 													<div className="row mb-3">
 														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>Start date</label>
+														{/* {alert(year+'-'+month+'-'+day)} */}
 														<DateField
 															id={'date'}
-															isDisabled={false}
 															placeholder={'date'}
 															handleChange={(e) => {
 																console.log(e.target.value);
 																updateDate(index, e.target.value);
 															}}
+															minDate={year+'-'+month+'-'+day}
 															style={{ marginLeft: '0.8rem' }}
 															className="col-md-11 date_field_salary_benefits"
 															value={element.date}
@@ -416,7 +454,6 @@ const AddSalaryBenefits = () => {
 															id={'select_id'}
 															options={options}
 															standards={getOptionObj(element.occurence)}
-															disabled={false}
 															handleChange={(e) => {
 																updateOccurence(index, e.value);
 															}}
@@ -450,7 +487,7 @@ const AddSalaryBenefits = () => {
 			}
 		>
 			<form onSubmit={Submit}>
-				{pc_view_type == 'editpc' ? (
+				{key!=0 ? (
 					<h4 className={pc_view_type == 'addpc' ? 'h5 mt-3' : 'bitter_medium_italic_18px mb-4'}>
 						Edit salary benefits
 					</h4>
@@ -460,7 +497,7 @@ const AddSalaryBenefits = () => {
 					''
 				)}
 				{rows}
-				{pc_view_type == 'editpc' ? (
+				{key!=0 ? (
 					<div className="row mt-4">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">

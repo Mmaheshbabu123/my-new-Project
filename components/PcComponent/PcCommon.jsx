@@ -280,7 +280,6 @@ const PcCommon = (props) => {
 									role="tabpanel"
 									aria-labelledby="pills-contact-tab"
 								>
-									hello
 									{current_sec == 5 && <AddSalaryBenefits />}
 								</div>
 							</div>

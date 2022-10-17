@@ -15,11 +15,11 @@ function Header() {
           let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_languages';
             APICALL.service(url, 'GET')
               .then((result) => {
-                if (result['status'] == 200) {
-                  setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'nl' } });
-                } else {
-                  alert('Failed');
-                }
+                // if (result['status'] == 200) {
+                //   setState({ ...state, ...{ 'languages': result['data'], 'lang': localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'nl' } });
+                // } else {
+                //   alert('Failed');
+                // }
             })
         }, []);
   
