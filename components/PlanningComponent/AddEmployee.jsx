@@ -268,9 +268,10 @@ const AddEmployee = () => {
 													</button>
 												)}
 													</div>
-											<div className='col-md-3 align-self-center add_project text-end'>
-												{inputlist.length < tempPcList.length &&
+													{inputlist.length < tempPcList.length &&
 												inputlist.length - 1 === i && (
+											<div className='col-md-3 align-self-center add_project text-end'>
+											
 													<button
 														type="submit"
 														className="btn rounded-0 btn-block float-start shadow-none add-proj-btn w-100"
@@ -279,8 +280,10 @@ const AddEmployee = () => {
 													>
 														+ Add
 													</button>
-												)}
+												
 													</div>
+
+)}
 											
 											
 											</div>

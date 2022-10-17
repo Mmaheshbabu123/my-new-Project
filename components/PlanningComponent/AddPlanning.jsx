@@ -11,6 +11,9 @@ import {
 import { APICALL } from '../../Services/ApiServices';
 import Addproject from './AddProject';
 import ValidationService from '../../Services/ValidationService';
+
+import {AuthUser} from '../../Services/AuthUser';
+
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MdEdit, MdDelete } from 'react-icons/md';
@@ -23,6 +26,7 @@ function Planning(props) {
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ projectid, setProjectid ] = useState('');
 	const [ addProject, setAddProject ] = useState(false);
+	const [uid, setUid] = useState('');
 
 
 	// For popup add project
@@ -32,7 +36,6 @@ function Planning(props) {
 	const [ company, setCompany ] = useState([]);
 	const [ location, setLocation ] = useState([]);
 	const [ costcenter, setCostcenter ] = useState([]);
-	const [ empr_id, setEmpr_id ] = useState('');
 	const [ projectname, setProjectname ] = useState('');
 
 	//FOR ASSIGNING ID VALUES TO LOCATION, COMPANY, COST-CENTER, ID,
@@ -80,20 +83,24 @@ function Planning(props) {
 	});
 
 	useEffect(() => {
-		if (localStorage.getItem('uid') != null) {
-			setEmpr_id(JSON.parse(localStorage.getItem('uid')));
+
+		var uid = AuthUser.checkAccess('planning');
+		if (uid && uid != '') {
+			setUid(uid);
 		} else {
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+			router.push('/user/login');
+
+			// window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 		}
 	}, []);
 
 	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
 	useEffect(
 		() => {
-			if (empr_id) {
-				APICALL.service(getEmployeerCompanylist + empr_id, 'GET')
+			if (uid) {
+				APICALL.service(getEmployeerCompanylist + uid, 'GET')
 					.then((result) => {
-						console.log(result.data[0])
+						console.log(result.data)
 						setCompany(result.data[0]);
 						setLocation(result.data[1]);
 						setCostcenter(result.data[2]);
@@ -118,7 +125,7 @@ function Planning(props) {
 					});
 			}
 		},
-		[ empr_id ]
+		[ uid ]
 	);
 
 	// FETCH PLANNING
@@ -211,7 +218,7 @@ function Planning(props) {
 		data.p_unique_key = uniquekey;
 		data.id = id;
 		data.comp_id = companyid;
-		data.location_id = locationid;
+		data.location_id = locationid == ''?null:locationid;
 		data.cost_center_id = costcenterid == null ? '' : costcenterid;
 		APICALL.service(addPlanning, 'POST', [data,deleteProject])
 			.then((result) => {
@@ -233,16 +240,12 @@ function Planning(props) {
 
 		//check if required fields are empty
 		error1['comp_id'] = ValidationService.emptyValidationMethod(companyid);
-		error1['location_id'] = ValidationService.emptyValidationMethod(locationid);
-		// error1['pcid'] = ValidationService.emptyValidationMethod(pcid);
 
 		//seterror messages
 		setError_comp_id(error1['comp_id']);
-		setError_location_id(error1['location_id']);
-		// setError_pcid(error1['pcid']);
 
 		//return false if there is an error else return true
-		if (error1['comp_id'] == '' && error1['location_id'] == '') {
+		if (error1['comp_id'] == '') {
 			return true;
 		} else {
 			return false;
@@ -258,7 +261,6 @@ function Planning(props) {
 	const showPopup = (id) => {
 		setShow(true);
 	};
-	error_location_id;
 
 	let updatcomp = (comp_id) => {
 		var res = data;
@@ -410,7 +412,7 @@ function Planning(props) {
 									</div>
 
 									<div className="form-group mb-3">
-										<label className="form-label mt-2 custom_astrick poppins-regular-18px ">
+										<label className="form-label mt-2 poppins-regular-18px ">
 											Location
 										</label>
 										<select
@@ -432,7 +434,7 @@ function Planning(props) {
 														)
 												)}
 										</select>
-										<p className="error mt-2">{error_location_id}</p>
+										{/* <p className="error mt-2">{error_location_id}</p> */}
 									</div>
 
 									<div className="form-group mb-3">
