@@ -38,10 +38,10 @@ const Login = (props) => {
         /**
 		 * check if password is valid
 		 */
-		error1['password'] =
-        error1['password'] == ''
-            ? ValidationService.passwordValidationMethod(res.password)
-            : error1['password'];
+		// error1['password'] =
+        // error1['password'] == ''
+        //     ? ValidationService.passwordValidationMethod(res.password)
+        //     : error1['password'];
         
         setState({
             ...state,
