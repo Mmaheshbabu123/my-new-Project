@@ -3,13 +3,21 @@ import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { APICALL } from '@/Services/ApiServices';
-import { updateEmployeesubmitDetails, downloadSvAsPdf } from '@/Services/ApiEndPoints';
+import {
+  updateEmployeesubmitDetails,
+  downloadSvAsPdf,
+  labourTodoFileUpload,
+  saveLabourTodoFile
+} from '@/Services/ApiEndPoints';
 import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
 import { dom } from '@/Services/domServices';
 import ValidateMessage from '@/atoms/validationError';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { file } from '@/atoms/handleFileUpload';
+import FileUpload from '@/atoms/FileUpload';
+import { MdDelete } from 'react-icons/md';
 import styles from './Todos.module.css';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
 import open from '../molecules/images/Open.svg';
@@ -21,8 +29,11 @@ import all_1 from '../molecules/images/All_1.svg';
 import edit_svg from '../molecules/images/edit.svg';
 import download_svg from '../molecules/images/download.svg';
 import sign_icon_1 from '../molecules/images/cooperation_agreement_1.svg';
-
 const itemsPerPage = 6;
+const COOPERATION_AGREEMENT_TODO = 1;
+const WERKPOSTFICHES_TODO = 2;
+const LABOUR_COOPERATION_TODO = 3;
+
 
 const TodosOverview = ({ props, entityId, entityType, tabId }) => {
   const router = useRouter();
@@ -67,8 +78,12 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
     education_aquired_warning_error: false,
     showPopup: false,
     selectedObj: {},
+    //----- Labour todo related---//
+    files: [],
+    fileWarning: false,
+    fileSizeWarning: false,
+    labourTodoPopUp: false,
   });
-  const handleClose = () => setState({ ...state, showPopup: false });
 
   const handleSearchClick = (search = 1) => {
     let value = search ? state.titleTerm : '';
@@ -120,32 +135,67 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
   //------------------- Pagination code -------------------------//
   //-------------------
 
+  const getSpanTag = (eachRow, title, key, src = '', hidden = 0, className='span-action-icons') => {
+    return (
+      <span
+          title={title}
+          className={styles[className]}
+          hidden={hidden}
+          onClick={() => handleActionClick(key, eachRow)}
+        >
+           <img src={src} alt={key} className = ''  />
+      </span> )
+  }
 
+  /**
+   * [getNeededActions description]
+   * @param  {[type]} eachRow               [description]
+   * @return {[type]}         [description]
+   */
   const getNeededActions = (eachRow) => {
-    return <>
-      {eachRow.todo_type === 2 ?
-        <>
-          {eachRow.todo_status !== 1 && entityType !== 3 && <span title={'Fill werkpostfiche'} className={styles["span-action-icons"]} onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="fill_werkpostfiche" className=''></img> </span>}
-          {eachRow.todo_status !== 1 && (entityType === 3 || Number(eachRow.submitted) === 1) && <span title={'Sign'} className={styles["span-action-icons"]} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className='sign_action_icon_size'></img> </span>}
-        </> : eachRow.todo_status !== 1 && <span title={'Sign'} className={styles["span-action-icons"]} hidden={eachRow.todo_status === 1} onClick={() => handleActionClick('sign', eachRow)}> <img src={sign_icon.src} alt="sign" className=''></img> </span>
-      }     {eachRow.todo_status === 1 && <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="download" className=''></img> </span>}
-    </>
+    let returnActions = [];
+    switch (eachRow.todo_type) {
+      case COOPERATION_AGREEMENT_TODO:
+        returnActions.push(  getSpanTag(
+          eachRow,
+          'Sign',
+          'sign',
+          sign_icon.src,
+          eachRow.todo_status === 1
+        ))
+        break;
+      case WERKPOSTFICHES_TODO:
+        returnActions.push( eachRow.todo_status !== 1 && <>  { entityType !== 3 &&
+          getSpanTag( eachRow, 'Fill werkpostfiche', 'edit', edit_svg.src)}{
+          (entityType === 3 || Number(eachRow.submitted) === 1) &&
+          getSpanTag(eachRow, 'Sign', 'sign', sign_icon.src)}
+          </>
+        );
+        break;
+      case LABOUR_COOPERATION_TODO:
+          returnActions.push(getSpanTag(eachRow, 'Upload', 'upload', edit_svg.src, eachRow.todo_status === 1) )
+        break;
+      default:
+        break;
+    }
+    returnActions.push(eachRow.todo_status === 1 && <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="download" className=''></img> </span>)
+    return returnActions;
   }
 
   const handleActionClick = (type, eachRow) => {
     let { webform_id, submit_id, tid, employer_id = 0 } = eachRow;
     let encode = btoa(window.location.href.replaceAll(`tab=${state.selectedTabId}`, `tab=${type === 'edit' ? 1 : 2}`));
     if (type === 'sign' && entityType === 3) {
-      setState({ ...state, showPopup: true, selectedObj: eachRow })
+      setState({ ...state, showPopup: true, labourTodoPopUp: false, selectedObj: eachRow })
       return;
     }
-    if (eachRow.todo_type === 1) {
+    if (eachRow.todo_type === COOPERATION_AGREEMENT_TODO) {
       if (type === 'sign')
         window.open(`/cooperation-agreement-preview?root_parent_id=${webform_id}&emp_ref=${submit_id}&type=2&preview=0&destination_url=${encode}`, '_self');
       if (type === 'download')
         handleCooperationAgreementDownload({root_parent_id: webform_id});
     }
-    if (eachRow.todo_type === 2) {
+    if (eachRow.todo_type === WERKPOSTFICHES_TODO) {
       let path;
       if (type === 'edit')
         path = `admin/structure/webform/manage/${webform_id}/submission/${submit_id}/edit?type=optout&rowId=${tid}`;
@@ -155,6 +205,10 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
         path = `werkpostfichespdf/pdf/${webform_id}/${submit_id}/${entityType === 3 ? employer_id : entityId}?signed=${eachRow.todo_status}&type=employee`
       setTimeout(() => window.close(), 500);
       window.open(eachRow.baseUrl + `${path}&todo_user_id=${entityId}${type === 'download' ? '' : `&destination_url=${encode}`}`, type === 'download' ? '_self' : '_blank');
+    }
+    if(eachRow.todo_type === LABOUR_COOPERATION_TODO) {
+      setState({ ...state, showPopup: true, labourTodoPopUp: true, selectedObj: eachRow })
+      return;
     }
   }
 
@@ -191,30 +245,44 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
   }
   const handleSubmit = async () => {
     let { webform_id, submit_id, tid, employer_id = 0, baseUrl } = state.selectedObj;
-    const { experience_aquired, education_aquired } = state;
-    if (experience_aquired == '' || education_aquired == '') {
-      setState({
-        ...state,
-        experience_aquired_warning_error: experience_aquired == '' ? true : false,
-        education_aquired_warning_error: education_aquired == '' ? true : false,
-      });
-      return;
-    }
-    const postData = {
-      webformId: webform_id,
-      submitId: submit_id,
-      experience_aquired: state.experience_aquired,
-      education_aquired: state.education_aquired
+    const { experience_aquired, education_aquired, files, labourTodoPopUp, selectedObj } = state;
+    let postData = {};
+    let url = '';
+    if(labourTodoPopUp) {
+      if(!files || !files.length) {
+        setState({...state, fileWarning: true})
+        return;
+      } else {
+        postData = {data: {...selectedObj, file_id: files ?.[0]?.['file_id'] ?? 0} }
+      }
+    } else {
+      if (experience_aquired == '' || education_aquired == '') {
+        setState({
+          ...state,
+          experience_aquired_warning_error: experience_aquired == '' ? true : false,
+          education_aquired_warning_error: education_aquired == '' ? true : false,
+        });
+        return;
+      }
+      postData = {
+        webformId: webform_id,
+        submitId: submit_id,
+        experience_aquired: state.experience_aquired,
+        education_aquired: state.education_aquired
 
+      }
     }
-    await APICALL.service(`${updateEmployeesubmitDetails}`, 'POST', postData).then(response => {
+    await APICALL.service(labourTodoPopUp? saveLabourTodoFile : updateEmployeesubmitDetails , 'POST', postData).then(response => {
       if (response.status === 200) {
-        let encode = btoa(window.location.href.replaceAll(`tab=${state.selectedTabId}`, 'tab=2'));
-        let path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
-        setTimeout(() => window.close(), 500);
-        setState({ ...state, showPopup: false });
-        window.open(baseUrl + `${path}&todo_user_id=${entityId}&destination_url=${encode}`, '_blank');
-
+        if(labourTodoPopUp) {
+          window.open(window.location.href.replaceAll(`tab=${state.selectedTabId}`, 'tab=2'), '_self');
+        } else {
+          let encode = btoa(window.location.href.replaceAll(`tab=${state.selectedTabId}`, 'tab=2'));
+          let path = `werkpostfichespdf/form/werkpostfiche_preview/${webform_id}/${submit_id}/${tid}/${entityType === 3 ? employer_id : entityId}?type=${entityType === 2 ? 'employeer' : 'employee'}`
+          setTimeout(() => window.close(), 500);
+          setState({ ...state, showPopup: false, labourTodoPopUp: false });
+          window.open(baseUrl + `${path}&todo_user_id=${entityId}&destination_url=${encode}`, '_blank')
+        }
       }
     }).catch(error => console.error(error))
   }
@@ -229,15 +297,31 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
 
   }
   const educationPopup = () => {
-    const { showPopup } = state;
+    const { showPopup, labourTodoPopUp = false } = state;
     return (
       <>
         <Modal size={'lg'} show={showPopup} onHide={handleClose}>
           <Modal.Header closeButton style={{ paddingLeft: '36%' }}>
-            <Modal.Title> Education Details </Modal.Title>
+            <Modal.Title> {labourTodoPopUp ? 'Upload file' : 'Education Details'} </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div>
+          {labourTodoPopUp ?
+             <div>
+                <LabelField title={`File upload`} className='poppins-medium-18px' mandotory={true}/>
+                  <FileUpload
+                    name={'file'}
+                    id='labour_todo_id'
+                    multiple={false}
+                    fileUploadText={'Choose file, maximum allowed size is 2MB.'}
+                    handleChange={handleFileChange}
+                    className=' shadow-none rounded-0 pos-rel'
+                  />
+                {state.fileSizeWarning && <ValidateMessage style={{margin:0}} text = {'This file is too large to upload, maximum allowed size is 2MB.'}/>}
+                {state.fileWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
+                {state.files.length > 0 && showUploadedFiles()}
+              </div>
+             :
+             <div>
               <div className={`col-md-12`}>
                 <LabelField title="Ervaring" customStyle={{ display: '' }} className={'poppins-regular-18px'} />
                 <InputField
@@ -262,7 +346,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
                 />
                 {state.education_aquired_warning_error && <ValidateMessage style={{ margin: 0 }} text={'This field is required'} />}
               </div>
-            </div>
+            </div>}
           </Modal.Body>
           <Modal.Footer>
             <p className={`${styles['popup-back-btn']}`} onClick={handleClose}> Back </p>
@@ -273,6 +357,46 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
         </Modal>
       </>
     );
+  }
+
+  const handleClose = () => setState({ ...state, showPopup: false, labourTodoPopUp: false, files:[], fileWarning: false,
+  fileSizeWarning: false,  });
+
+  const handleFileChange = async (e) => {
+    let files = e.target.files;
+    let size = files[0]['size'] / 1000;
+    if(size > 2000) {
+      setState({...state, fileSizeWarning: true});
+    } else {
+      let response = await file.uploadFile(e, labourTodoFileUpload);
+      if(response.status === 200){
+        setState({...state, files: response.data, fileWarning: false, fileSizeWarning: false});
+      }
+    }
+  }
+
+  /**
+   * [showUploadedFiles description]
+   * @return {[type]} [description]
+   */
+  const showUploadedFiles = () => {
+    const { files } = state;
+    return(
+      files.map((file, index) => {
+        return (
+          <div key = {index} className="my-2">
+            <span className="actions-span text-dark w-50 poppins-light-16px"> {file.file_name} </span>
+            <span title={'Delete'} className="actions-span color-skyblue" onClick={() => handleDelete('delete', index)}> <MdDelete/> </span>
+          </div>
+        );
+      })
+    )
+  }
+
+  const handleDelete = (type, index) => {
+    const { files } = state;
+    files.splice(index, 1);
+    setState({...state, files: files});
   }
 
   const showTabs = () => {
