@@ -227,6 +227,8 @@ export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
 
 //----------------- TODOS ---------------//
 export const getMyTodos = BASE_URL + 'get-mytodos';
+export const labourTodoFileUpload = BASE_URL + 'upload-labour-files';
+export const saveLabourTodoFile = BASE_URL + 'save-labour-todo-files';
 //-----------------
 //-----------------
 
