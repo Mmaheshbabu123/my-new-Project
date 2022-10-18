@@ -173,7 +173,10 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
         );
         break;
       case LABOUR_COOPERATION_TODO:
-          returnActions.push(getSpanTag(eachRow, 'Upload', 'upload', edit_svg.src, eachRow.todo_status === 1) )
+          returnActions.push( eachRow.type === 1 ?
+            getSpanTag(eachRow, 'Upload', 'upload', edit_svg.src, eachRow.todo_status === 1):
+            getSpanTag(eachRow, 'Sign', 'sign', edit_svg.src, eachRow.todo_status === 1)
+          )
         break;
       default:
         break;
@@ -207,7 +210,13 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
       window.open(eachRow.baseUrl + `${path}&todo_user_id=${entityId}${type === 'download' ? '' : `&destination_url=${encode}`}`, type === 'download' ? '_self' : '_blank');
     }
     if(eachRow.todo_type === LABOUR_COOPERATION_TODO) {
-      setState({ ...state, showPopup: true, labourTodoPopUp: true, selectedObj: eachRow })
+      if(type === 'upload') {
+        setState({ ...state, showPopup: true, labourTodoPopUp: true, selectedObj: eachRow })
+      } else if(type === 'download') {
+         downloadUsingAnchorTag(eachRow.baseUrl + eachRow.file_path);
+      } else {
+        window.open(`labour-share-doc-preview?entityid=${entityId}`, '_blank');
+      }
       return;
     }
   }
@@ -217,19 +226,26 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
     await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
       .then((response) => {
         let result = response.data;
-        if (response.status === 200 && result.url) {
-          var a = document.createElement("a");
-          a.setAttribute("type", "file");
-          a.href = result.url;
-          a.target = '_blank';
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
+        if(response.status === 200 ) {
+          downloadUsingAnchorTag(result.url);
         } else {
           window.alert('Error occurred')
         }
+        downloadUsingAnchorTag(response);
       })
       .catch((error) => window.alert('Error occurred'));
+  }
+
+  const downloadUsingAnchorTag = (url) => {
+    if(url) {
+      var a = document.createElement("a");
+      a.setAttribute("type", "file");
+      a.href = url;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
   }
 
   const handleTabClick = (id) => {
