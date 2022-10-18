@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ValidationService from '../../Services/ValidationService';
-
+import Translation from "@/Translation";
 function AddCostCenter(props) {
-
+    const {t}=props;
     const [error_cost_center_name, setError_cost_center_name] = useState('');
     const [error_unique_number, setError_unique_number] = useState('');
     const [error_company, setError_company] = useState('');
@@ -82,11 +82,11 @@ function AddCostCenter(props) {
         <div className="container-fluid p-0">
             <form onSubmit={(e) => submit(e)}>
                 <div className="row m-0 ">
-                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">Add cost center</p>
+                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Add cost center')}</p>
                     <div className="form-check p-0 mt-2  border ">
                         <div className="p-3">
                             <div className="mb-3">
-                                <label className="form-label custom_astrick">Cost center name</label>
+                                <label className="form-label custom_astrick">{t('Cost center name')}</label>
                                 <input type="select" className="form-control rounded-0"
                                     value={data.cost_center_name}
                                     onChange={(e) => {
@@ -100,7 +100,7 @@ function AddCostCenter(props) {
                             <p className="error mt-2">{error_cost_center_name}</p>
 
                             <div className="mb-3">
-                                <label className="form-label custom_astrick">Unique number for cost center</label>
+                                <label className="form-label custom_astrick">{t('Unique number for cost center')}</label>
                                 <input type="select" className="form-control rounded-0"
                                     value={data.unique_number}
                                     onChange={(e) => {
@@ -114,7 +114,7 @@ function AddCostCenter(props) {
                             <p className="error mt-2">{error_unique_number}</p>
 
                             <div className="mb-3">
-                                <label className="form-label custom_astrick">Company</label>
+                                <label className="form-label custom_astrick">{t('Company')}</label>
                                 <select className="form-select"
                                     value={data.company}
                                     onChange={(e) => {
@@ -124,7 +124,7 @@ function AddCostCenter(props) {
                                         }));
                                     }}
                                 >
-                                    <option value="Select" >Select</option>
+                                    <option value="Select" >{t('Select')}</option>
                                     <option value="1">Company one</option>
                                     <option value="2">Company two</option>
                                     <option value="3">Company three</option>
@@ -133,7 +133,7 @@ function AddCostCenter(props) {
                             <p className="error mt-2">{error_company}</p>
 
                             <div className="mb-3">
-                                <label className="form-label custom_astrick">Location</label>
+                                <label className="form-label custom_astrick">{t('Location')}</label>
                                 <select className="form-select"
                                     value={data.location}
                                     onChange={(e) => {
@@ -143,7 +143,7 @@ function AddCostCenter(props) {
                                         }));
                                     }}
                                 >
-                                    <option value="Select" >Select</option>
+                                    <option value="Select" >{t('Select')}</option>
                                     <option value="1">Location one</option>
                                     <option value="2">Location two</option>
                                     <option value="3">Location three</option>
@@ -160,7 +160,7 @@ function AddCostCenter(props) {
                             className="bg-white border-0 poppins-regular-18px float-sm-right my-4 px-0 text-decoration-underline d-inline-block"
 
                         >
-                            BACK
+                            {t('BACK')}
                         </button>
                     </div>
                     <div className="col-md-6 p-0 mt-3">
@@ -169,7 +169,7 @@ function AddCostCenter(props) {
                             // className="btn rounded-0 custom-btn px-3 btn-block float-end"
                             className="btn rounded-0 px-3 float-end poppins-medium-18px-next-button shadow-none"
                         >
-                            Save
+                            {t('Save')}
                         </button>
                     </div>
                 </div>
@@ -177,4 +177,4 @@ function AddCostCenter(props) {
         </div>
     );
 }
-export default AddCostCenter;
+export default React.memo(Translation(AddCostCenter,['Add cost center','Cost center name','Unique number for cost center','Company','Select','Location','Select','BACK','Save']));

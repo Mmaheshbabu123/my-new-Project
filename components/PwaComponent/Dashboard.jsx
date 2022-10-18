@@ -5,10 +5,11 @@ import Link from 'node_modules/next/link';
 import { getdashboardtiles } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-import { TabUnselected } from 'node_modules/@material-ui/icons/index';
+import { ImportExportTwoTone, TabUnselected } from 'node_modules/@material-ui/icons/index';
 // import DashboardTiles from './DashboardTiles';
-
+import Translation from '@/Translation';
 function Dashboard(props) {
+  const {t}=props;
   const router = useRouter();
   const { entitytype = localStorage.getItem('user_role') || '' } = router.query;
 
@@ -40,15 +41,15 @@ function Dashboard(props) {
 
   return (
     <div className="container">
-      <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">Dashboard</p>
+      <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Dashboard')}</p>
       <>
 	  {/*<DashboardTiles dashboardtiles = { dashboardtiles } /> */}
-          <p> Dashboard component </p>
+          <p> {t('Dashboard component')} </p>
 
       </>
       <div>{dashboardtiles.length}</div>
       {dashboardtiles.length == 0 && (
-        <div>No records</div>
+        <div>{t('No records')}</div>
       )}
       {/* <div className="row row-cols-sm-2 row-cols-lg-5 g-2 g-lg-2 mt-3">
         <div className="col  bg-light mb-2 me-3 p-4 ">
@@ -579,4 +580,4 @@ function Dashboard(props) {
 
   );
 }
-export default Dashboard;
+export default React.memo(Translation(Dashboard,['Dashboard','Dashboard component','No records']));

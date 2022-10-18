@@ -2,8 +2,9 @@ import React, { Component, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
 import { BsPersonFill } from 'react-icons/bs';
-
+import Translation from '@/Translation';
 function EmployerPopup(props) {
+	const { t }=props;
 	return (
 		<div>
 			<div
@@ -15,7 +16,7 @@ function EmployerPopup(props) {
 				<div className="modal-dialog modal-lg ">
 					<div className="modal-content  ">
 						<div className="modal-header">
-							<p className="modal-title h4">Start/stop by QRcode</p>
+							<p className="modal-title h4">{t('Start/stop by QRcode')}</p>
 							<button
 								type="button"
 								className="btn-close"
@@ -33,4 +34,4 @@ function EmployerPopup(props) {
 		</div>
 	);
 }
-export default EmployerPopup;
+export default React.memo(Translation(EmployerPopup,['Start/stop by QRcode']));

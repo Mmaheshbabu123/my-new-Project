@@ -6,11 +6,11 @@ import Notification from '@/components/Notifications/organism/NotificationMain'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 // import Translation from '../../../Translation/Translation';
-
-function Header() {
+import Translation from '@/Translation';
+function Header(props) {
 	let router = useRouter();
 	const { contextState: { isAuthenticated = 0 } } = useContext(UserAuthContext);
-
+	const { t } = props;
 	const [state, setState] = useState({
 		languages: [{code: 0, language: 'Select'}],
 		lang: '',
@@ -68,7 +68,7 @@ function Header() {
 								{authenticated === 1 && <ul className="d-flex list-unstyled mb-0">
 									<li className="list-unstyled mx-4 align-self-center d-flex purple-color2 poppins-regular-18px">
 										<Link href={'/'} className="">
-											<a type="">DASHBOARD</a>
+											<a type="">{t('DASHBOARD')}</a>
 										</Link>
 									</li>
 									<li className="list-unstyled ms-4 me-3 align-self-center d-flex">
@@ -88,7 +88,7 @@ function Header() {
 									</li>
 									<li className="list-unstyled mx-3 align-self-center d-flex poppins-regular-18px">
 										<a onClick={handleLogout} className="cursor-pointer">
-											Logout
+											{t('Logout')}
 										</a>
 									</li>
 								</ul>}
@@ -101,4 +101,4 @@ function Header() {
 	);
 }
 
-export default Header;
+export default React.memo(Translation(Header,['DASHBOARD','Logout']));

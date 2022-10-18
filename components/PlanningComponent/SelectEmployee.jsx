@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import Multiselect from 'multiselect-react-dropdown';
 import { APICALL } from '../../Services/ApiServices';
 import { Selectemployee } from '../../Services/ApiEndPoints';
-
+import Translation from '@/Translation';
 const SelectEmployee = () => {
+	const {t}=props;
 	return (
 		<div className="container">
-			<p className="h3 mt-3 p-3 text-left">Select Employee</p>
+			<p className="h3 mt-3 p-3 text-left">{t('Select Employee')}</p>
 			<div className="row text-center">
 				<div className="col-sm-6">
 					<Multiselect
@@ -31,7 +32,7 @@ const SelectEmployee = () => {
 					/>
 					<div className="text-right  ">
 						<button type="submit" className="btn btn-secondary   btn-block ">
-							Next
+							{t('Next')}
 						</button>
 					</div>
 				</div>
@@ -39,4 +40,4 @@ const SelectEmployee = () => {
 		</div>
 	);
 };
-export default SelectEmployee;
+export default React.memo(Translation(SelectEmployee,['Select Employee','Next']));
