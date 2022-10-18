@@ -161,10 +161,10 @@ const LegalAddress = (props) => {
             <LabelField title="Labour regulations (arbeidsreglement)" customStyle = {{display:''}}/>{requiredFields['tab_2'][Labour_regulations_share] && <RequiredField />}
              <div>
              <div className='d-inline-flex align-items-center me-3'>
-            <RadioField name = {Labour_regulations_share} checked = {tab_2[Labour_regulations_share] === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,1)} label= 'Yes' />
+            <RadioField name = {Labour_regulations_share} checked = {Number(tab_2[Labour_regulations_share]) === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,1)} label= 'Yes' />
             </div>
             <div className='d-inline-flex align-items-center'>
-            <RadioField name = {Labour_regulations_share} checked = {tab_2[Labour_regulations_share] === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,2)} label= 'No' />
+            <RadioField name = {Labour_regulations_share} checked = {Number(tab_2[Labour_regulations_share]) === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,2)} label= 'No' />
             </div>
 
              </div>
@@ -178,14 +178,14 @@ const LegalAddress = (props) => {
        <div className = {`col-md-12 `}>
          {LegalaAddressFieldData(legalAdressRow2)}
         <div className='row'>
-        {tab_2[Labour_regulations_share] === 2 && <div className = {`col-md-12 my-2 ${styles['add-div-margings']} legal${Labour_regulations}`}>
+        {Number(tab_2[Labour_regulations_share]) === 2 && <div className = {`col-md-12 my-2 ${styles['add-div-margings']} legal${Labour_regulations}`}>
          <LabelField title="Labour regulations (arbeidsreglement) - sharing" mandotory = {true} customStyle = {{display:''}}/>{requiredFields['tab_2'][Labour_regulations] && <RequiredField />}
          <div>
          <div className='d-inline-flex align-items-center me-3'>
-         <RadioField name = {Labour_regulations} checked = {tab_2[Labour_regulations] === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations,1)} label= 'Yes' />
+         <RadioField name = {Labour_regulations} checked = {Number(tab_2[Labour_regulations]) === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations,1)} label= 'Yes' />
          </div>
          <div className='d-inline-flex align-items-center'>
-         <RadioField name = {Labour_regulations} checked = {tab_2[Labour_regulations] === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations,2)} label= 'No' />
+         <RadioField name = {Labour_regulations} checked = {Number(tab_2[Labour_regulations]) === 2} handleChange = {(e)=>handleRadioSelect(Labour_regulations,2)} label= 'No' />
          </div>
          </div>
          { tab_2['required'][Labour_regulations] !== undefined && !tab_2['required'][Labour_regulations] &&
