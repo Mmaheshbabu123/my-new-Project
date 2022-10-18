@@ -20,15 +20,14 @@ import FileUpload from '@/atoms/FileUpload';
 import { MdDelete } from 'react-icons/md';
 import styles from './Todos.module.css';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
-import open from '../molecules/images/Open.svg';
-import done from '../molecules/images/Done.svg';
-import all from '../molecules/images/All.svg';
-import open_1 from '../molecules/images/Open_1.svg';
-import done_1 from '../molecules/images/Done_1.svg';
-import all_1 from '../molecules/images/All_1.svg';
 import edit_svg from '../molecules/images/edit.svg';
 import download_svg from '../molecules/images/download.svg';
-import sign_icon_1 from '../molecules/images/cooperation_agreement_1.svg';
+import { HiOutlineExternalLink, } from 'react-icons/hi';
+import { MdDone } from 'react-icons/md';
+import { CgMailOpen } from 'react-icons/cg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import envelope_svg from '../molecules/images/envelope-open-text-solid.svg';
+
 const itemsPerPage = 5;
 const COOPERATION_AGREEMENT_TODO = 1;
 const WERKPOSTFICHES_TODO = 2;
@@ -49,18 +48,15 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
     tabs: [{
       id: 1,
       name: "Open",
-      icon: open_1.src,
-      activeIcon: open.src,
+      icon: HiOutlineExternalLink
     }, {
       id: 2,
       name: "Done",
-      icon: done_1.src,
-      activeIcon: done.src
+      icon: MdDone
     }, {
       id: 3,
       name: "All",
-      icon: all_1.src,
-      activeIcon: all.src
+      icon: ''
     }],
     rows: getSelectedStatus(tabId),
     filterRows: getSelectedStatus(tabId),
@@ -422,14 +418,23 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
         <div className='col-md-12'>
           <ul className={`${styles['todo-tabs']} col-md-6 m-0`}>
             {state.tabs.map(tab => {
-              let Icon = selectedTabId === tab.id ? tab.activeIcon : tab.icon;
+              // let Icon = selectedTabId === tab.id ? tab.activeIcon : tab.icon;
+              // return (
+              //   <li key={tab.id} className='col-md-1'>
+              //     <div className={`w-auto d-inline-block my_todo_color ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
+              //       <span id={tab.id} className={`${styles['todo-icon']}`}>  <img src={Icon}></img> </span>
+              //       <span className="d-block my-1 text-center"> {tab.name} </span>
+              //     </div>
+              //   </li>
+              let Icon = tab.icon;
               return (
-                <li key={tab.id} className='col-md-1'>
-                  <div className={`w-auto d-inline-block my_todo_color ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
-                    <span id={tab.id} className={`${styles['todo-icon']}`}>  <img src={Icon}></img> </span>
-                    <span className="d-block my-1 text-center"> {tab.name} </span>
+                <li key={tab.id}>
+                  <div className={`w-50 py-2 text-center ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
+                    <span id={tab.id} className={`${styles['todo-icon']}`}> <FontAwesomeIcon icon="fa-solid fa-envelope-open-text" /> </span>
+                    <span className="d-block my-1"> {tab.name} </span>
                   </div>
                 </li>
+    
               )
             })}
           </ul>

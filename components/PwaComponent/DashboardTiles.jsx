@@ -30,7 +30,7 @@ return(
         {
             
             return (
-                <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="col-lg-6 col-md-6 col-sm-12 employee_widget_dashboard">
             <EmployeeWidget  />
             </div>
             )
@@ -39,10 +39,12 @@ return(
         else{
         return(
           <div key={idx1} className={dashboardtiles[key][tile]['col_class']}>
-             <div className="p-2 position_relative_dashboard">
-                <a href={dashboardtiles[key][tile]['menu_link']} className="m-2">
-                  <img src={dashboardtiles[key][tile]['menu_icon']} layout="fill" className="dasboard_image img-fluid" />
-                  <div className='text-center '>
+             <div className="position_relative_dashboard">
+                <a href={dashboardtiles[key][tile]['menu_link']} className="mx-0 row dashboard_menu_links py-4 dashboard-tile">
+                 <div className="col-md-3 align-self-center text-center dashboard-image-div">
+                 <img src={dashboardtiles[key][tile]['menu_icon']} layout="fill" className="dasboard_image img-fluid" />
+                 </div>
+                  <div className='col-md-9 dashboard_menu_title mx-auto'>
                   {dashboardtiles[key][tile]['menu_title']}
                   </div>
                 </a>
