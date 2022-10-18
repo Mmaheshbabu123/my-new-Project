@@ -26,7 +26,7 @@ import { HiOutlineExternalLink, } from 'react-icons/hi';
 import { MdDone } from 'react-icons/md';
 import { CgMailOpen } from 'react-icons/cg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import envelope_svg from '../molecules/images/envelope-open-text-solid.svg';
+//import envelope_svg from '../molecules/images/envelope-open-text-solid.svg';
 
 const itemsPerPage = 5;
 const COOPERATION_AGREEMENT_TODO = 1;
