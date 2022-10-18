@@ -14,7 +14,9 @@ import age_active_icon from '../images/age_Active.svg';
 import employee_type_icon from '../images/employee_type.svg';
 import employee_type_active_icon from '../images/employee_type_active.svg';
 import hand_money_icon from '../images/hand-money.svg'
-import hand_money_active_icon from '../images/hand-money-active.svg'
+import hand_money_active_icon from '../images/hand-money-active.svg';
+import { useRouter } from 'next/router';
+
 
 
 const Table = (props) => {
@@ -38,6 +40,9 @@ const Table = (props) => {
 		cat_subsec_id,
 		setCat_subsec_id
 	} = useContext(PcContext);
+
+	const router = useRouter();
+
 
 	useEffect(
 		() => {
@@ -89,8 +94,11 @@ const Table = (props) => {
 
 				break;
 		}
+
+		if(type != 'sal_benifts'){
 		setCat_leftsec('col-md-9');
 		setCat_rightsec('d-block col-md-3');
+		}
 		// setCat_subsec_id(props.secId);
 	};
 
@@ -228,6 +236,7 @@ const Table = (props) => {
 											src={cat_subsec_type == 6?hand_money_active_icon:hand_money_icon}
 											alt="edit"
 											id="editpc"
+											onClick={()=>{props.type=="editpc"?router.push('/salary-benefits/edit?k='+pc_unique_key):router.push('/salary-benefits/view?k='+pc_unique_key)}}
 											width={20}
 											height={20}
 											data-toggle="tooltip"

@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { userService } from '@/Services/UserServices';
+import Link from 'next/link';
 
 
 const getAcrfToken = async () => {
@@ -26,6 +27,22 @@ const Login = (props) => {
         var error1 = {};
         error1['email'] = ValidationService.emptyValidationMethod(res.email);
         error1['password'] = ValidationService.emptyValidationMethod(res.password);
+        /**
+		 * check if email is valid
+		 */
+		error1['email'] =
+        error1['email'] == ''
+            ? ValidationService.emailValidationMethod(res.email)
+            : error1['email'];
+        
+        /**
+		 * check if password is valid
+		 */
+		// error1['password'] =
+        // error1['password'] == ''
+        //     ? ValidationService.passwordValidationMethod(res.password)
+        //     : error1['password'];
+        
         setState({
             ...state,
             error_user_name: error1['email'],
@@ -53,7 +70,7 @@ const Login = (props) => {
                 window.open(redirect, '_self'); // It'll redirect by re-loading page
                 // router.push(redirect); //it'll just navigate, without re-loading page
             } else {
-                alert(message); //NOSONAR
+                // alert(message); //NOSONAR
             }
         }
     }
@@ -74,7 +91,7 @@ const Login = (props) => {
                             <form className="mb-5" onSubmit={submit}>
                                 <div className="mb-3" onS>
                                     <label className="form-label custom_astrick">Email address</label>
-                                    <input type="email" className="form-control rounded-0"
+                                    <input type="text" className="form-control rounded-0"
                                         value={state.email}
                                         name='email'
                                         onChange={handleOnChange}
@@ -92,7 +109,12 @@ const Login = (props) => {
                                 </div>
                                 <p className="error mt-2">{state.error_password}</p>
                                 <div>
-                                    <p className="px-0 float-end text-info">Forgot password?</p>
+                                    <Link href='' className="m-2">
+                                        <a type="" className="">
+                                            <p className="px-0 float-end text-info">Forgot password?</p>
+                                        </a>
+                                    </Link>
+
                                 </div>
                                 <div className="p-0">
                                     <button

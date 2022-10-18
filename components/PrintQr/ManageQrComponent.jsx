@@ -48,10 +48,11 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
   }, [rows.length, renderComp])
 
   const getNeededActions = (eachRow) => {
+    let generated = eachRow.qr_path !== '';
     return (
       <>
-        <span className="span-action-icons me-2 text-dark" title="Regenerate" onClick={() => handleActionClick('regenerate', eachRow)}>   <GrRefresh className='mt-2 color-skyblue force-skyblue'/> </span>
-        {eachRow.qr_path !== '' && <>
+        <span className="span-action-icons me-2 text-dark" title={generated ? "Regenerate": "Generate"} onClick={() => handleActionClick('regenerate', eachRow)}>   <GrRefresh className='mt-2 color-skyblue force-skyblue'/> </span>
+        {generated && <>
           <span className="span-action-icons me-2 text-dark" title="View" onClick={() => handleActionClick('view', eachRow)}>   <BiQrScan className='mt-2 ms-3 color-skyblue'/> </span>
           <span className="span-action-icons me-2 text-dark" title="Download" onClick={() => handleActionClick('download', eachRow)}> <FiDownload className='mt-2 ms-3 color-skyblue'/> </span>
         </>}
@@ -205,7 +206,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
               selectedDate: state.currentDate,
               ...updatePaginationData(response.data, state.itemOffset || 0)
             })
-            customAlert('success', `Regenerating successfully!`, 2000);
+            customAlert('success', eachRow.qr_path !== '' ? `QR code regenerated successfully!` : `QR code generated successfully!`, 2000);
           }
         }).catch((error) => window.alert('Error occurred'));
     } else {
