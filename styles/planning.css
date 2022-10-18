@@ -475,3 +475,30 @@ input[type="checkbox"]
   background-color: var(--color-purple) !important;
   width: 200px !important;
 }
+.dashboard_menu_links
+{
+  background-color: var(--bg-grey-medium) !important;
+}
+.dashboard_menu_title,
+.dashboard_menu_title:hover
+{
+  color: var(--color-label-footer-gray) !important;
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+.employee_widget_dashboard,
+.employer_widget_search,
+.employer_widget_search:focus
+{
+  border: 1px solid var(--color-border-lightgrey) !important;
+}
+.min_height_employee_widget
+{
+  max-height: 10rem;
+  overflow-y: auto;
+}
+.employee_widget_dashboard
+{
+  max-height: 19.3rem !important;
+}
