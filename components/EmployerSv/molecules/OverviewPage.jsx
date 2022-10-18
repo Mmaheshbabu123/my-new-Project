@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import { AiFillFilePdf } from 'react-icons/ai';
 import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
@@ -11,7 +10,7 @@ import pdf_icon from '../molecules/images/Pdf.svg';
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
   const { state: {  overviewData, salesAgentUpdates } } = props;
-console.log(sign_icon);
+
   /**
    * [getSelectedStatus description]
    * @param  {int}    selectedTabId               [description]
