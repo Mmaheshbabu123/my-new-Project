@@ -141,9 +141,9 @@ input[type="checkbox"]
 }
 .delete_icon_manage_cooperation
 {
-  margin-bottom: 13px;
-  height: 33px !important;
-  width: 33px !important ;
+  margin-bottom: 11px;
+  height: 26px !important;
+  width: 26px !important ;
 }
 .Appointment-clickableAppointment
 {
@@ -165,18 +165,18 @@ input[type="checkbox"]
 }
 .css-1fbp63r.Label-emptyLabel
 {
-  height: 0px;
+  height: 0px !important;
 }
 .css-1fbp63r.Label-label
 {
-  line-height: 35px;
+  line-height: 35px !important;
 }
 .HorizontalAppointment-content 
 {
   font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-16px);
 }
-.css-sizvqo-MuiTableCell-root.Cell-cell
+.MuiTableCell-sizeMedium.Cell-cell
 {
   font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-16px);
@@ -191,9 +191,9 @@ input[type="checkbox"]
   border:1px solid var(--color-border-lightgrey) ;
   border-radius: 0px;
 }
-.css-sizvqo-MuiTableCell-root .Cell-today
+.MuiTableCell-sizeMedium .Cell-today
 {
-  background-color: var(--color-skyblue);
+  background-color: var(--color-skyblue) !important;
 }
 .add_salary_benefits .accordion-button:not(.collapsed)
 {
@@ -269,14 +269,21 @@ input[type="checkbox"]
 .planning_encodage_position
 {
   position: sticky;
-  top: 205px;
+  top: 162px;
   background: var(--color-white);
   z-index: 998;
 }
 .weekly_planning_search_position
 {
   position: sticky;
-  top: 221px;
+  top: 239px;
+  background: white;
+  z-index: 998;
+}
+.planning_finalize_search
+{
+  position: sticky;
+  top: 176px;
   background: white;
   z-index: 998;
 }
@@ -314,6 +321,11 @@ input[type="checkbox"]
 }
 
 .my_documents_position_sticky_employer
+{
+  top: 239px;
+}
+
+.my_documents_position_sticky_employee
 {
   top: 162px;
 }
@@ -354,7 +366,7 @@ input[type="checkbox"]
 .position_sticky_co-op
 {
   position: sticky;
-  top: 245px;
+  top: 251px;
   background: white;
   z-index: 998;
 }
@@ -414,4 +426,52 @@ input[type="checkbox"]
 .modal-footer
 {
   border-top: 0px !important;
+}
+.cooperation_agreement_steps
+{
+  position: sticky;
+  top: 162px;
+  background: var(--color-white);
+  z-index: 998;
+}
+.selected_date .rc-time-picker,
+.selected_date .rc-time-picker:focus-visible,
+.selected_date .rc-time-picker-input:focus-visible
+{
+  top: 4px !important;
+  outline: none !important;
+  border-radius: 0px !important;
+}
+.selected_date .rc-time-picker-input
+{
+  top: 4px !important;
+  outline: none !important;
+  border-radius: 0px !important;
+}
+.star_icon_size svg,
+.star_icon_size img
+{
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.count_col_timing svg
+{
+  cursor: pointer;
+}
+.rmdp-month-picker .rmdp-day.rmdp-selected span:not(.highlight),
+.rmdp-month-picker .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover,
+.rmdp-year-picker .rmdp-day.rmdp-selected span:not(.highlight),
+.rmdp-year-picker .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover,
+.rmdp-month-picker .rmdp-day.rmdp-today.rmdp-selected
+{
+  width: 200px !important;
+}
+.rmdp-month-picker .rmdp-day.rmdp-today.rmdp-selected span,
+.rmdp-year-picker .rmdp-day.rmdp-today.rmdp-selected span,
+.rmdp-year-picker .rmdp-day.rmdp-today span,
+.rmdp-month-picker .rmdp-day.rmdp-today span
+{
+  background-color: var(--color-purple) !important;
+  width: 200px !important;
 }

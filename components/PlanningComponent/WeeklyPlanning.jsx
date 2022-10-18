@@ -146,7 +146,7 @@ function WeeklyPlanning(props) {
 					</div>
 				</div>
 				<div className=" pt-3 d-flex justify-content-end planning_encodage_position">
-					{/* <div className="d-inline ">
+					<div className="d-inline ">
 						<button
 							type="button"
 							className="btn  btn my-2 skyblue-bg-color border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln  px-3 btn-block shadow-none rounded-0 "
@@ -161,7 +161,7 @@ function WeeklyPlanning(props) {
 						>
 							Encodage view
 						</button>
-					</div> */}
+					</div>
 				</div>
 				{/* {showview && <p className="h6">For the week of Monday from 10/07/2022 to sunday 17/07/2022</p>}
 

@@ -1,74 +1,60 @@
+import { ExitToApp } from 'node_modules/@material-ui/icons/index';
+import React, { useState, useEffect } from 'react';
 import { APICALL } from '../Services/ApiServices';
-import { DataTranslations } from '../Services/ApiEndPoints';
 
-// statics handler
 
-const lookupTranslations = (key, locale, lookup) =>{
-  let translations = JSON.parse(localStorage.getItem('translations')) || false;
-  //check first if the key exists in the json or not
-  //return false so a DB lookup can be done from backend else return the pair of key
-  try{
-  if(lookup){
-    return (translations) ? ((key in translations[locale]) ? true : false) : false;
-  }else{
-    //if lookup is not required then return the pair value of translations directly
-    return (translations) ? translations[locale][key] || false : false;
-  }}catch(e){
-    // console.error(e);
-  }
-}
+const Translation = (Component, stringList) => {
+  const TranslatedComponent = () => {
+  const [hydration, setHydration] = useState(0);
 
-const updateTranslations = (key, translation) =>{
-  let translations = JSON.parse(localStorage.getItem('translations')) || false;
-  if(translations && translation!=null){
-    let target_key = get_target_key(key);
-    //updating the JSON object with new value if found in the DB
-    try{
-    Object.keys(translation).map(lang => {
-       translations[lang][target_key] = translation[lang][target_key];
-    });
-    //set the new JSON in localstorage so everytime its not calling the DB search
-    localStorage.setItem('translations', JSON.stringify(translations))
-  }catch(e){
-    console.error(e);
-  }
-  }
-}
-
-const get_target_key = (key) => {
-  return (key.split(' ').join('_').toLowerCase());
-}
-
-export const t = (key) => {
-  const LanguageState = localStorage.getItem('activeLanguage');
-  let locale = LanguageState || 'en' ;
-
-  let target_key = get_target_key(key);
-
-  let translation = lookupTranslations(target_key, locale, true);
-  //checking if the localstorage contains target_key or not
-  //if not then need to check in DB if the string exists there or not.
-  if (!translation){ 
-    let postData = {
-      "string" : key,
+  useEffect(() => {
+    const  asyncFunc = async ()=>{
+      await getTranslationData();
+      setHydration(1);
     }
-    try {
-    APICALL.service(DataTranslations,'POST', postData, 0, 0) // if string not exists, then store that in table
-      .then(result => { 
-        //set the result in the localstorage JSON
-        updateTranslations(target_key, result);
-        // translation = lookupTranslations(target_key, locale);
+    
+  const getTranslationData = async () => {
+      let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_translations';
+      let lang = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
+      await APICALL.service(url, 'POST', { lang: lang, string_list: stringList })
+        .then((result) => {
+          if (result['status'] == 200) {
+            if (localStorage['translations'] === undefined) {
+              localStorage.setItem('translations', '{}');
+            }
+            let translations = JSON.parse(localStorage['translations']);
+            if (translations[lang] !== undefined) {
+              translations[lang] = { ...translations[lang], ...result['data'] };
+            } else {
+              translations[lang] = result['data'];
+            }
+            localStorage.setItem('translations', JSON.stringify(translations));
+          }
         })
-      }catch(e){ 
-        console.error(e);
+    };
+    if (stringList.length > 0) {
+       asyncFunc();
+    }
+    }, []);
+    
+   
+    const t = (input) =>{
+      if (hydration === 1) {
+        let lang = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
+        let translations = localStorage['translations'] !== undefined ? JSON.parse(localStorage['translations']) : {};
+      if (translations[lang] !== undefined) {
+        return translations[lang][input] !== undefined ? translations[lang][input] : input;
+      } else {
+        return input;
       }
-  }else{
-    translation = lookupTranslations(target_key, locale);
-  }
-  //return the translations if exists or else return the development string itself
-  return (translation) ? translation : key; 
-}
+      } else {
+        return input;
+      }
+    }
 
-export default {  
-  t,
-}  
+    return <Component t={t} />
+  };
+
+  return TranslatedComponent;
+};
+export default Translation;

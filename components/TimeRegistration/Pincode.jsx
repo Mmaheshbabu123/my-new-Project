@@ -45,7 +45,6 @@ const Pincode = () => {
 		() => {
 			var userid = null;
 			if (!router.isReady) return;
-
 			//get the user id from the local storage.
 			if (localStorage.getItem('uid') != null) {
 				userid = JSON.parse(localStorage.getItem('uid'));
@@ -79,9 +78,11 @@ const Pincode = () => {
 		var valuelength = value.length;
 		if (valuelength == 0 || valuelength == undefined) {
 			setErr('Please enter the pin.');
+			SetResponse('');
 			return false;
 		} else if (valuelength < 6) {
 			setErr('Please fill up all the cells.');
+			SetResponse('');
 			return false;
 		} else {
 			setErr('');
@@ -103,6 +104,10 @@ const Pincode = () => {
 		hide ?  setEyeicon(FaEye):setEyeicon(FaEyeSlash);
 	};
 
+	const goHome=()=>{
+		router.push(homeScreen);
+	}
+
 	//fucntion to submit.
 	const Submit = (event) => {
 		event.preventDefault();
@@ -118,15 +123,17 @@ const Pincode = () => {
 						} else if (result == 2) {
 							//planning started.
 							SetResponse('Planning has been started.');
+							router.push(homeScreen);
 						} else if (result == 3) {
 							//planning ended.
 							SetResponse('Planning has been ended.');
+							router.push(homeScreen);
 						} else if (result == 4) {
 							SetResponse('There is no plannings for the day.');
 						} else if(result==6){
 							SetResponse('No plannings created for you.');
 						} else {
-							SetResponse('Something went wrong please try again later');
+							SetResponse('No plannings are there.');
 						}
 					})
 					.catch((error) => {
@@ -204,14 +211,14 @@ const Pincode = () => {
 							{eyeicon}
 						</button>
 					</div>
-					<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
+					<p style={{ color: 'red'}} className="mt-2">
 						{err}
 					</p>
-					<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
+					<p style={{ color: 'red'}} className="mt-2">
 						{response}
 					</p>
 					<div className='row mt-3'>
-					<div className='col-md-12 pe-0'>
+					<div className='col-md-11 pe-2'>
 					<button style={{ border: 'none', background: 'white', color: 'blue' }} onClick={forgotPassword} className='forgot_password_pincode float-end pe-0'>
 							Forgot password?
 						</button>

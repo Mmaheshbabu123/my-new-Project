@@ -75,7 +75,7 @@ function EmployeeMonthlyPlanning(props) {
 	);
 	const ExternalViewSwitcher = ({ currentViewName, onChange }) => (
 		<div
-			className="row mb-5 m-0"
+			className="row mb-5 m-0 planning_calender"
 			aria-label="Views"
 			style={{ flexDirection: 'row' }}
 			name="views"
@@ -214,7 +214,8 @@ function EmployeeMonthlyPlanning(props) {
 					<ExternalViewSwitcher currentViewName={currentViewName} onChange={currentViewNameChange} />
 
 					<Paper>
-						<Scheduler data={data} height={718}>
+						{/* <Scheduler data={data} height={718}> */}
+						<Scheduler data={data}>
 							<ViewState defaultCurrentDate={new Date()} currentViewName={currentViewName} />
 
 							<DayView />

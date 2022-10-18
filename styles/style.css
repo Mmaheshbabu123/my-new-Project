@@ -385,7 +385,7 @@ select option
 }
 .sign_action_icon_size
 {
-  width: 25px !important;
+  width: 20px !important;
 }
 .my_todo_table .my_todo_action_icon
 {
@@ -403,7 +403,7 @@ select option
 .position-sticky-co-op
 {
   position: sticky;
-  top: 156px;
+  top: 162px;
   background-color: var(--color-white);
   z-index: 998;
 }

@@ -13,7 +13,8 @@ let dateObj = new Date()
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear()-1;
-
+let percentageDecimals = 2;
+let valueDecimals = 4;
 const AddEditSalaryBenefits = (props) => {
   const router = useRouter();
   const inputRef = useRef({});
@@ -216,10 +217,11 @@ const AddEditSalaryBenefits = (props) => {
       return;
     }
     if(name ==='value' || name === 'coefficientValue') {
+      let valueType = stateObj['valueType'];
       let numberValue = Number(value.replace(',', '.'));
       let decimals = value.split(',')[1];
-      stateObj[`${name}DecimalWarning`] = value.length && decimals && decimals.length > 4 ? true : false;
-      stateObj[`${name}Warning`] = value.length && (numberValue > 999.9999 || numberValue < 0.00001) ? true : false;
+      stateObj[`${name}DecimalWarning`] = value.length && decimals && decimals.length > (valueType === 1 ? valueDecimals : percentageDecimals) ? true : false;
+      stateObj[`${name}Warning`] = value.length && (numberValue > (valueType === 1 ? 999.999999 : 99.999) || numberValue < 0.00001) ? true : false;
     }
     stateObj[name] = value;
     stateObj['nameWarning'] = false;
@@ -302,8 +304,8 @@ const AddEditSalaryBenefits = (props) => {
                 placeholder= 'Enter value'
               />
               <span className="position-absolute" style = {{right: '3%', bottom: '30px'}}> {state.valueType === 1 ? '€' : '%'} </span>
-              {state['valueWarning'] && <ValidateMessage style={{margin:0}} text = {'Value should be greater than 0 and less than 1000.'}/>} <br />
-              {state['valueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {'Only four decimal places allowed.'}/>}
+              {state['valueWarning'] && <ValidateMessage style={{margin:0}} text = {`Value should be greater than 0 and less then ${state.valueType === 1 ? 1000 : 100}`}/>} <br />
+              {state['valueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {`Only  decimal ${state.valueType === 1 ? valueDecimals:percentageDecimals} places allowed.`}/>}
               </div>
             </div>
           <div className="col-md-12 mx-0 px-0 ">
@@ -332,8 +334,8 @@ const AddEditSalaryBenefits = (props) => {
               onChange={(e) => handleChange(e.target)}
               placeholder= 'Enter value'
             />}
-            {state['coefficientValueWarning'] && <ValidateMessage style={{margin:0}} text = {'Value should be between 0 to 100.'}/>} <br />
-            {state['coefficientValueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {'Only two decimal places allowed.'}/>}
+            {state['coefficientValueWarning'] && <ValidateMessage style={{margin:0}} text = {`Value should be greater than 0 and less then ${state.valueType === 1 ? 1000 : 100}`}/>} <br />
+            {state['coefficientValueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {`Only  decimal ${state.valueType === 1 ? valueDecimals:percentageDecimals} places allowed.`}/>}
           </div>
           <div className="col-md-12 mx-0 px-0">
             <LabelField title="Is the benefit granted in case of absence of the employee" className="poppins-regular-18px px-0"/>

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
-import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes, addIndexationOfSalary, getIndexationOfSalary} from '../../Services/ApiEndPoints';
+import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes, addIndexationOfSalary, getIndexationOfSalary } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import MultiSelectField from '@/atoms/MultiSelectField';
@@ -14,9 +14,8 @@ import Select from 'react-select';
 const Indexationofsalary = () => {
 	const router = useRouter();
 
-	// const [error_radio, setError_radio] = useState('');
-	// const [error_indexation_percentage, setError_indexation_percentage] = useState('');
-	// const [error_indexation_euro, setError_indexation_euro] = useState('');
+	
+
 	const [error_date, setError_date] = useState('');
 	const [error_pc, setError_pc] = useState('');
 	const [error_category, setError_category] = useState('');
@@ -27,7 +26,8 @@ const Indexationofsalary = () => {
 	const [indexation, setIndexation] = useState([]);
 	const [indexationTemp, setIndexationTemp] = useState([]);
 
-	
+	const [ itemsPerPage, setItemsPerPage ] = useState(8);
+
 	/**Show hide field based on radio button select */
 	const [status, setStatus] = useState(0);
 
@@ -36,35 +36,25 @@ const Indexationofsalary = () => {
 	};
 
 
+	const [salary, setSalary] = useState({
 
-	const [data, setData] = useState({
-		// radio: '',
-		// percentage_of_indexation: '',
-		// amount_indexation_euro: '',
-		// date: '',
 		id: '',
-		pc: '',
-		category: '',
-		employee_type: '',
 		value_type: '1',
 		value: '1',
 		date: '',
+		pc: '',
+		category: '',
+		employee_type: '',
 		indexation_type: '',
-		// pc
-		// entity_type: '',
-		// entity_id: '',
-		// indexation_id: '',
+		
 	})
 
 	let validate = (res) => {
 		var error1 = [];
 
 		/**
-		* check if required fields are empty
+	* check if required fields are empty
 		*/
-		// error1['radio'] = ValidationService.emptyValidationMethod(res.radio);
-		// error1['percentage_of_indexation'] = ValidationService.emptyValidationMethod(res.percentage_of_indexation);
-		// error1['amount_indexation_euro'] = ValidationService.emptyValidationMethod(res.amount_indexation_euro);
 		error1['date'] = ValidationService.emptyValidationMethod(res.date);
 		error1['pc'] = ValidationService.emptyValidationMethod(res.pc);
 		error1['category'] = ValidationService.emptyValidationMethod(res.category);
@@ -74,9 +64,6 @@ const Indexationofsalary = () => {
 		/**
 		 * seterror messages
 		 */
-		// setError_radio(error1['radio']);
-		// setError_indexation_percentage(error1['percentage_of_indexation']);
-		// setError_indexation_euro(error1['amount_indexation_euro']);
 		setError_date(error1['date']);
 		setError_pc(error1['pc']);
 		setError_category(error1['category']);
@@ -85,14 +72,11 @@ const Indexationofsalary = () => {
 
 		//return false if there is an error else return true
 		if (
-			// error1['radio'] == '' &&
-			// error1['percentage_of_indexation'] == '' &&
-			// error1['amount_indexation_euro'] == '' &&
 			error1['date'] == '' &&
 			error1['pc'] == '' &&
 			error1['category'] == '' &&
 			error1['employee_type'] == '' &&
-			error1['indexation_type'] == '' 
+			error1['indexation_type'] == ''
 
 		) {
 			return true;
@@ -108,7 +92,7 @@ const Indexationofsalary = () => {
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getAllPartiairComites', 'GET')
 				.then((result) => {
 					if (result) {
-						// console.log(data);
+						// console.log(result);
 						setParitaircomites(result);
 					}
 				})
@@ -121,35 +105,49 @@ const Indexationofsalary = () => {
 
 	// const updateradio = (value) => { };
 
-	let submit = async (event) => {paritaircomites
+	let submit = async (event) => {
+		// paritaircomites
 		event.preventDefault();
 
-		console.log(data);
-		var valid_res = validate(data);
+		// console.log(data);
+		var valid_res = validate(salary);
 		if (valid_res) {
-			APICALL.service(addIndexationOfSalary, 'POST', data)
-			.then((result) => {
-				console.log(result);
-			})
-			.catch((error) => {
+			APICALL.service(addIndexationOfSalary, 'POST', salary)
+				.then((result) => {
+					console.log(result);
+				})
+				.catch((error) => {
 					console.log(error);
 				});
 		}
 
 	}
-	let handleinputchange = (type,value)=>{
+
+	let handleinputchange = (type, value) => {
 		console.log(value);
 
 	}
 
 	// Get Indexation of salary
-	// APICALL.service(getIndexationOfSalary, 'GET')
-	// 			.then((result) => {
-	// 				if (result) {
-	// 					console.log(result);
-	// 					setIndexation(result);
-	// 					setIndexationTemp(result);
-
+	useEffect(
+		() => {
+			APICALL.service(getIndexationOfSalary, 'GET')
+				.then((result) => {
+					
+					if(result.status == 200){
+						// var res = salary;
+						// res.id = result.data.id;
+						// console.log(res.id);
+						console.log(result.data);
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+		[]
+	);
+	
 	
 
 	return (
@@ -159,7 +157,7 @@ const Indexationofsalary = () => {
 					<p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">Indexation of salary</p>
 					<div className='row mt-3 ms-1 '>
 						<div className="form-check mt-2 mb-2">
-							<input className="form-check-input" type="radio" checked={status === 1} onClick={(e) => radioHandler(1)}  />
+							<input className="form-check-input" type="radio" checked={status === 1} onClick={(e) => radioHandler(1)} />
 							<label className="form-check-label" >
 								Indexation in %
 							</label>
@@ -203,9 +201,9 @@ const Indexationofsalary = () => {
 							<div className="input-group mb-3">
 								<label className='mb-2 input-group custom_astrick'>Date as of which indexation takes place</label>
 								<DatePicker size="lg"
-									value={data.date}
+									value={salary.date}
 									onChange={(e) => {
-										setData((prev) => ({
+										setSalary((prev) => ({
 											...prev,
 											date: moment(e).format('YYYY-MM-DD')
 										}));
@@ -227,22 +225,22 @@ const Indexationofsalary = () => {
 								options={paritaircomites[0]}
 								disabled={false}
 								onChange={(value) =>
-									setData((prev) => ({
-												...prev,
-												pc: value
-											}))
+									setSalary((prev) => ({
+										...prev,
+										pc: value
+									}))
 									// {handleinputchange('pc',value)}
 								}
 								isMulti={true}
 								// className="col-md-6"
 								className="col-md-6 "
-								value={data.pc}
-								// onChange={(e) => {
-								// 	setData((prev) => ({
-								// 		...prev,
-								// 		pc: e.target.value
-								// 	}));
-								// }}
+								value={salary.pc}
+							// onChange={(e) => {
+							// 	setData((prev) => ({
+							// 		...prev,
+							// 		pc: e.target.value
+							// 	}));
+							// }}
 							/>
 						</div>
 						<p className="error mt-2">{error_pc}</p>
@@ -260,15 +258,15 @@ const Indexationofsalary = () => {
 								options={paritaircomites[1]}
 								disabled={false}
 								isMulti={true}
-								value={data.category}
+								value={salary.category}
 								// className="col-md-6"
 								onChange={(value) =>
-									setData((prev) => ({
-												...prev,
-												category: value
-											}))
+									setSalary((prev) => ({
+										...prev,
+										category: value
+									}))
 								}
-							
+
 
 								className="col-md-6"
 							/>
@@ -286,12 +284,12 @@ const Indexationofsalary = () => {
 									// options={paritaircomites[2]}
 									options={[{ value: 1, label: 'Flex' }]}
 									disabled={false}
-									value={data.employee_type}
+									value={salary.employee_type}
 									onChange={(value) =>
-										setData((prev) => ({
-													...prev,
-													employee_type: value
-												}))
+										setSalary((prev) => ({
+											...prev,
+											employee_type: value
+										}))
 									}
 									// handleChange={(obj) =>
 									// 	updateEmployeeType(value, obj.value)}
@@ -318,14 +316,14 @@ const Indexationofsalary = () => {
 								// className="col-md-6"
 								className="col-md-9 "
 								/> */}
-								<select className="form-select" value={data.indexation_type}
-									onChange={(e) => {alert(e.target.value);
-										setData((prev) => ({
+								<select className="form-select" value={salary.indexation_type}
+									onChange={(e) => {
+										setSalary((prev) => ({
 											...prev,
 											indexation_type: e.target.value
 										}));
 									}}
-									>
+								>
 
 									<option value="">Select Indexation</option>
 									<option value="1">Minimum salary</option>

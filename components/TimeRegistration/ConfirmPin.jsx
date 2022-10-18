@@ -186,7 +186,7 @@ const Pincode = () => {
 					{eyeicon}
 			</button> 
 			</div>
-			<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
+			<p style={{ color: 'red' }} className="mt-2">
 				{err}
 			</p>
 		</div>
@@ -218,7 +218,7 @@ const Pincode = () => {
 			</button> 
 			</div>
 			{/* {/* </div> */}
-			<p style={{ color: 'red', marginLeft: '5px' }} className="mt-2">
+			<p style={{ color: 'red' }} className="mt-2">
 				{err1}
 			</p>
 		</div>
