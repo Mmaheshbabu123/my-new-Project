@@ -2,7 +2,7 @@ import {  useContext } from 'react';
 import { useRouter } from 'next/router';
 import { appRoutes } from "./appRoutes";
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
-import {isMobile} from 'react-device-detect';
+// import {isMobile} from 'react-device-detect';
 
 export { RouteGuard };
 
@@ -31,14 +31,12 @@ function RouteGuard({ children }) {
 
   if (isClientRendering() && !isAuthenticated && pathIsProtected) {
 
-    if (isMobile) {
+    // if (isMobile) {
     router.push({
         pathname: appRoutes.LOGIN_PAGE,
         query: { returnUrl: router.asPath }
     });
-  }else{
-    // window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-  }
+  // }
   }
 
   return children;

@@ -51,7 +51,6 @@ const ViewSalaryBenefits = ({key}) => {
 	const [ onlyview,setOnlyview]= useState(true);
 
 	useEffect(() => {
-		alert(pc_unique_key);
 		const {k=''} = router.query;
 		
 		if (localStorage.getItem('uid') != null) {
@@ -203,12 +202,15 @@ const ViewSalaryBenefits = ({key}) => {
 														</RadioGroup>
 
 														<p style={{ color: 'red' }}>{element.vt_err}</p>
+														<div style={{display:'flex'}}>
 														<input
 															type="text"
 															disabled={onlyview}
 															value={element.value}
 															name="valuetype"
 														/>
+														 <span className={"input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0"} style={{ marginLeft: '-14px'}}>{element.value_type==2?'%':'€'}</span>
+													</div>
 														<p style={{ color: 'red' }}>{element.v_err}</p>
 													</div>
 													<div className="row">
