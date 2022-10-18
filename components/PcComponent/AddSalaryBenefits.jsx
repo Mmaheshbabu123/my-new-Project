@@ -199,9 +199,9 @@ const AddSalaryBenefits = () => {
 					object[i].v_err =
 						data.value_type == '1' ? ValidationService.minSalaryValidationMethod(data.value) : '';
 				}
-				// object[i].date_err = data.date_err == ''
-				// 	? (ValidationService.onlyFutureDateValidationMethod(data.date))
-				// 	: '';
+				object[i].date_err = (data.date_err == '')
+					? (ValidationService.onlyFutureDateValidationMethod(data.date))
+					: '';
 				if (
 					data.v_err != '' ||
 					data.vt_err != '' ||
@@ -513,7 +513,7 @@ const AddSalaryBenefits = () => {
 																console.log(e.target.value);
 																updateDate(index, e.target.value);
 															}}
-															minDate={element.open ? year + '-' + month + '-' + day : ''}
+															// minDate={element.open ? year + '-' + month + '-' + day : ''}
 															style={{ marginLeft: '0.8rem' }}
 															className="col-md-11 date_field_salary_benefits"
 															value={element.date}
