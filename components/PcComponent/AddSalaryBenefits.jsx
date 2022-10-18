@@ -8,15 +8,40 @@ import { RadioGroup, Radio } from 'react-radio-input';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
 
-let dateObj = new Date();
-let month = dateObj.getUTCMonth() + 1; //months from 1-12
-let day = dateObj.getUTCDate() + 1;
-var year = dateObj.getUTCFullYear() - 1;
+// let dateObj = new Date();
+// let month = dateObj.getUTCMonth() + 1; //months from 1-12
+// let day = dateObj.getUTCDate() + 1;
+// var year = dateObj.getUTCFullYear() - 1;
 
+let newDate = new Date();
+let day = newDate.getDate();
+let month = newDate.getMonth() + 1;
+let year = newDate.getFullYear();
+
+// alert(year);
 const AddSalaryBenefits = () => {
-	const { pc_unique_key, sec_completed, setSec_completed, setCurrent_sec, pc_view_type } = useContext(PcContext);
+	const {
+		pc_unique_key,
+		setPc_unique_key,
+		current_sec,
+		cat_rightsec,
+		setCat_rightsec,
+		cat_leftsec,
+		setCat_leftsec,
+		cat_subsec_type,
+		setCat_subsec_type,
+		cat_fun_updated,
+		setCat_fun_updated,
+		sec_completed,
+		setSec_completed,
+		cat_subsec_id,
+		setCat_subsec_id,
+		setCurrent_sec,
+		pc_view_type
+	} = useContext(PcContext);
 
 	const router = useRouter();
+
 	const [ obj, setObj ] = useState([]);
 	const inputRef = useRef({});
 	const [ valuetype, setValueType ] = useState(0);
@@ -26,31 +51,43 @@ const AddSalaryBenefits = () => {
 	const [ granted, setGranted ] = useState();
 	const [ mandatory, setMandatory ] = useState();
 	const [ uid, setUid ] = useState(0);
+	const [ key, setKey ] = useState(0);
 
-	useEffect(() => {
-		if (localStorage.getItem('uid') != null) {
-			var userid = JSON.parse(localStorage.getItem('uid'));
-			setUid(userid);
-		} else {
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-		}
+	useEffect(
+		() => {
+			if (!router.isReady) return;
 
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + pc_unique_key, 'GET')
-			.then((result) => {
-				if (result.data != undefined || result.data != null) {
+			const { k = '' } = router.query;
+			var uniqkey = 0;
+			k != undefined && k != '' ? (uniqkey = k) : pc_unique_key != undefined ? (uniqkey = pc_unique_key) : '';
+
+			if (localStorage.getItem('uid') != null) {
+				var userid = JSON.parse(localStorage.getItem('uid'));
+				setUid(userid);
+			} else {
+				window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+			}
+
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + uniqkey, 'GET')
+				.then((result) => {
 					console.log(result.data);
-					if (typeof result.data == 'object') {
-						var propertyValues = Object.values(result.data);
-						setObj(propertyValues);
-					} else {
-						setObj(result.data);
+					if (result.data != undefined || result.data != null) {
+						setKey(uniqkey);
+						console.log(result.data);
+						if (typeof result.data == 'object') {
+							var propertyValues = Object.values(result.data);
+							setObj(propertyValues);
+						} else {
+							setObj(result.data);
+						}
 					}
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, []);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		},
+		[ router.query ]
+	);
 
 	//change the value type
 	const changeValueType = (e) => {
@@ -190,31 +227,38 @@ const AddSalaryBenefits = () => {
 
 	const Submit = (e) => {
 		e.preventDefault();
+		const uniqkey = 0;
+		key != 0 ? (uniqkey = key) : (uniqkey = pc_unique_key);
 		validation()
-			? APICALL.service(
-					process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/store-salary-benfits/' + pc_unique_key,
-					'POST',
-					[ obj, uid ]
-				)
+			? APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/store-salary-benfits/' + uniqkey, 'POST', [
+					obj,
+					uid
+				])
 					.then((res) => {
 						if (res == 200) {
-							var res1 = sec_completed;
-							res1['emp_type'] = true;
-							setSec_completed(res1);
-							router.push('/manage-pc');
+							if (key != 0 || key != undefined) {
+								router.push('/manage-pc');
+							} else {
+								var res1 = sec_completed;
+								res1['emp_type'] = true;
+								setSec_completed(res1);
+								router.push('/manage-pc');
+							}
 						}
 					})
 					.catch((error) => {})
 			: console.log('false validation');
 	};
-	
+
 	const rows = [];
 	obj.forEach((element, index) => {
 		rows.push(
 			<div className="mt-3">
 				<div className="m-2">
 					<div className="row">
-						<div className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-3 ps-0' : "mt-4 px-0"} >
+						<div
+							className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-3 ps-0' : 'mt-4 px-0'}
+						>
 							<input
 								type="checkbox"
 								checked={element.open == true}
@@ -246,31 +290,69 @@ const AddSalaryBenefits = () => {
 									<div className="accordion-body">
 										<div>
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-3' : "col-md-12"} >
+												<div className={pc_view_type == 'addpc' ? 'col-md-3' : 'col-md-12'}>
 													<input
 														type="checkbox"
-														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input me-2 rounded-0"} 
+														className={
+															pc_view_type == 'addpc' ? (
+																'form-check-input ms-1 me-2 rounded-0'
+															) : (
+																'form-check-input me-2 rounded-0'
+															)
+														}
 														checked={element.mandatory === true}
 														// value={element.mandatory === true?true:false}
 														onChange={(e) => {
 															updateMandatory(index, e.target.checked);
 														}}
 													/>
-														<label className="form-check-label" htmlFor="flexCheckDefault">
-															<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Is this mandatory?</p>
-														</label>
+													<label className="form-check-label" htmlFor="flexCheckDefault">
+														<p
+															className={
+																pc_view_type == 'addpc' ? (
+																	'poppins-medium-16px'
+																) : (
+																	'poppins-medium-14px'
+																)
+															}
+														>
+															Is this mandatory?
+														</p>
+													</label>
 												</div>
-												<div  className={pc_view_type == 'addpc' ? 'col-md-9' : "col-md-12 d-flex align-items-baseline"}>
+												<div
+													className={
+														pc_view_type == 'addpc' ? (
+															'col-md-9'
+														) : (
+															'col-md-12 d-flex align-items-baseline'
+														)
+													}
+												>
 													<input
 														type="checkbox"
-														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input w-25 rounded-0"} 
+														className={
+															pc_view_type == 'addpc' ? (
+																'form-check-input ms-1 me-2 rounded-0'
+															) : (
+																'form-check-input w-25 rounded-0'
+															)
+														}
 														value={agent}
 														checked={element.sales_agent === true}
 														onChange={(e) => {
 															updateAgent(index, e.target.checked);
 														}}
 													/>
-													<label className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>
+													<label
+														className={
+															pc_view_type == 'addpc' ? (
+																'poppins-medium-16px'
+															) : (
+																'poppins-medium-14px'
+															)
+														}
+													>
 														Allow sales agent to update the value during creation of
 														cooperation agreement?
 													</label>
@@ -278,9 +360,17 @@ const AddSalaryBenefits = () => {
 											</div>
 											<br />
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-4' : "col-md-12"} >
+												<div className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-12'}>
 													<div className="row mb-4">
-														<label className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>
+														<label
+															className={
+																pc_view_type == 'addpc' ? (
+																	'poppins-medium-16px'
+																) : (
+																	'poppins-medium-14px'
+																)
+															}
+														>
 															Salary benefit value
 														</label>
 
@@ -309,14 +399,24 @@ const AddSalaryBenefits = () => {
 														</RadioGroup>
 
 														<p style={{ color: 'red' }}>{element.vt_err}</p>
-														<input
-															type="text"
-															value={element.value}
-															onChange={(e) => {
-																updateValue(index, e.target.value);
-															}}
-															name="valuetype"
-														/>
+														<div style={{ display: 'inherit' }}>
+															<input
+																type="text"
+																value={element.value}
+																onChange={(e) => {
+																	updateValue(index, e.target.value);
+																}}
+																name="valuetype"
+															/>
+															<span
+																className={
+																	'input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0'
+																}
+																style={{ marginLeft: '-14px' }}
+															>
+																{element.value_type == 2 ? '%' : '€'}
+															</span>
+														</div>
 														<p style={{ color: 'red' }}>{element.v_err}</p>
 													</div>
 													<div className="row">
@@ -348,7 +448,9 @@ const AddSalaryBenefits = () => {
 														</RadioGroup>
 													</div>
 												</div>
-												<div className={pc_view_type == 'addpc' ? 'col-md-4' : "col-md-12 ps-3"} >
+												<div
+													className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-12 ps-3'}
+												>
 													<div className="row mb-4">
 														<label className="mb-2 poppins-regular-16px">
 															Applicable coefficient
@@ -391,15 +493,27 @@ const AddSalaryBenefits = () => {
 														<p style={{ color: 'red' }}>{element.c_err}</p>
 													</div>
 													<div className="row mb-3">
-														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>Start date</label>
+														{/* {console.log()} */}
+														<label
+															className={
+																pc_view_type == 'addpc' ? (
+																	'mb-3 poppins-regular-16px'
+																) : (
+																	'poppins-regular-16px'
+																)
+															}
+														>
+															Start date
+														</label>
+														{/* {alert(year+'-'+month+'-'+day)} */}
 														<DateField
 															id={'date'}
-															isDisabled={false}
 															placeholder={'date'}
 															handleChange={(e) => {
 																console.log(e.target.value);
 																updateDate(index, e.target.value);
 															}}
+															minDate={element.open ? year + '-' + month + '-' + day : ''}
 															style={{ marginLeft: '0.8rem' }}
 															className="col-md-11 date_field_salary_benefits"
 															value={element.date}
@@ -407,14 +521,31 @@ const AddSalaryBenefits = () => {
 														<p style={{ color: 'red' }}>{element.date_err}</p>
 													</div>
 												</div>
-												<div className={pc_view_type == 'addpc' ? 'col-md-4 occurence_col' : "col-md-12 occurence_col ps-3"} >
+												<div
+													className={
+														pc_view_type == 'addpc' ? (
+															'col-md-4 occurence_col'
+														) : (
+															'col-md-12 occurence_col ps-3'
+														)
+													}
+												>
 													<div className="row">
-														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>Occurence</label>
+														<label
+															className={
+																pc_view_type == 'addpc' ? (
+																	'mb-3 poppins-regular-16px'
+																) : (
+																	'poppins-regular-16px'
+																)
+															}
+														>
+															Occurence
+														</label>
 														<MultiSelectField
 															id={'select_id'}
 															options={options}
 															standards={getOptionObj(element.occurence)}
-															disabled={false}
 															handleChange={(e) => {
 																updateOccurence(index, e.value);
 															}}
@@ -438,17 +569,17 @@ const AddSalaryBenefits = () => {
 	return (
 		<div
 			className={
-				pc_view_type == 'addpc' ? (
-					'container-fluid p-0'
-				) : pc_view_type == 'viewpc' ? (
-					'mb-5 sectioncolor p-3'
-				) : (
-					'sectioncolor p-3 my-3'
-				)
+				// pc_view_type == 'addpc' ? (
+				'container-fluid p-0'
+				// ) : pc_view_type == 'viewpc' ? (
+				// 	'mb-5 sectioncolor p-3'
+				// ) : (
+				// 	'sectioncolor p-3 my-3'
+				// )
 			}
 		>
 			<form onSubmit={Submit}>
-				{pc_view_type == 'editpc' ? (
+				{key != 0 ? (
 					<h4 className={pc_view_type == 'addpc' ? 'h5 mt-3' : 'bitter_medium_italic_18px mb-4'}>
 						Edit salary benefits
 					</h4>
@@ -458,12 +589,13 @@ const AddSalaryBenefits = () => {
 					''
 				)}
 				{rows}
-				{pc_view_type == 'editpc' ? (
+				{key != 0 ? (
 					<div className="row mt-4">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
 							<button
-								type="sumit"
+								// onClick={()=>Submit}
+								type="submit"
 								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
 							>
 								SAVE
@@ -485,7 +617,7 @@ const AddSalaryBenefits = () => {
 						</div>
 						<div className="text-end col-md-6">
 							<button
-								type="sumit"
+								type="submit"
 								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
 							>
 								SAVE

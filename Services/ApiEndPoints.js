@@ -227,6 +227,8 @@ export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
 
 //----------------- TODOS ---------------//
 export const getMyTodos = BASE_URL + 'get-mytodos';
+export const labourTodoFileUpload = BASE_URL + 'upload-labour-files';
+export const saveLabourTodoFile = BASE_URL + 'save-labour-todo-files';
 //-----------------
 //-----------------
 
@@ -256,3 +258,6 @@ export const getdashboardtiles = BASE_URL_DRUPAL + "dashboard-tiles-roles";
 // ----------------------- Indexation of salary --------------------//
 export const addIndexationOfSalary = BASE_URL + "add-indexation-of-salary";
 export const getIndexationOfSalary = BASE_URL + "fetch-all-indexation-salary";
+
+//-------------------------Add Planning---------------------------//
+export const getPlanning = BASE_URL + "fetch-add-planning-details/";
