@@ -24,7 +24,7 @@ console.log('widget employee');
 
                         </div>
                     </div>
-                    <div className="form-check p-0 mt-2 tab-pane fade show min_height_table overflow-scroll">
+                    <div className="form-check p-0 mt-2 tab-pane fade show min_height_table">
                         <table className="table mt-3 mb-3">
                             <thead>
                                 <tr className="btn-bg-gray-medium table-sticky-bg-gray">
@@ -63,7 +63,7 @@ console.log('widget employee');
                             </tbody>
                         </table>
                     </div>
-                    <div className="text-start col-md-6">
+                    {/* <div className="text-start col-md-6">
                         <button
                             type="button"
                             className="bg-white border-0 poppins-regular-18px float-sm-right my-4 px-0 text-decoration-underline d-inline-block"
@@ -71,7 +71,7 @@ console.log('widget employee');
                         >
                             BACK
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </form>
         </div>

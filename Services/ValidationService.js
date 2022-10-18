@@ -153,13 +153,13 @@ const ValidationService = {
    * @param {*} value
    * @returns 
    */
-    passwordValidationMethod: function (value) {
-      if(value.replace(' ', '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)){
-        return '';
-      }else {
-        return 'This field is invalid';
-      }
-    }
+    // passwordValidationMethod: function (value) {
+    //   if(value.replace(' ', '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)){
+    //     return '';
+    //   }else {
+    //     return 'This field is invalid';
+    //   }
+    // }
 
 }
 export default ValidationService;
