@@ -21,7 +21,7 @@
         "Services/Constants"
       ],
       "@/Translation": [
-        "pages/Translation"
+        "Translation/Translation"
       ],
     },
     "target": "es5",

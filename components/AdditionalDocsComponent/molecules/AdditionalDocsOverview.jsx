@@ -133,7 +133,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       <>
         {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) && <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>}
         {[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT].includes(entityType) &&  <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>}
-        <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload/> </span>
+        {eachRow.files.length > 0 && <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload/> </span>}
       </>
     )
   }

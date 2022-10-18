@@ -1,4 +1,4 @@
-import Translation from 'Translation/Translation';
+import Translation from '@/Translation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 const Sample = (props) => {
 	let router = useRouter();
 	const { t } = props;
+
 	const [state, setState] = useState({ 'languages': [], 'lang': '' });
 	useEffect(() => {
 	  let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_languages';
