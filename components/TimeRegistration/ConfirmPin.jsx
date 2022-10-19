@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useContext, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import {ReactDOM} from 'react-dom';
 import { red } from 'tailwindcss/colors';
@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
 import checkPinCode, { homeScreen } from '../../Services/ApiEndPoints';
 
@@ -25,6 +26,7 @@ const ResendOTP = dynamic(
 
 const Pincode = () => {
 	const router = useRouter();
+	const { contextState = {} } = useContext(UserAuthContext);
 	const [ hasPin, setHasPin ] = useState(false);
 	const [ uid, setUid ] = useState('');
 	const [ otp, setOTP ] = useState(0);
@@ -62,19 +64,14 @@ const Pincode = () => {
 				} else {
 				    var userid=null;
 
-					if (localStorage.getItem('uid') != null) {
-						userid = JSON.parse(localStorage.getItem('uid'));
-					} else {
-						window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-					}
-
-					if (userid != undefined && userid != null) {
-					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/hasPincode/' + userid, 'GET')
+					if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '') 
+					 {
+					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/hasPincode/' + contextState.uid, 'GET')
 						.then((result) => {
 							if (result != 999) {
 								setLoad(true);
 							}
-						   	setUid(userid);
+						   	setUid(contextState.uid);
 						})
 						.catch((error) => {
 							console.error(error);
