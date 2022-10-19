@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useEffect, useState, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import {
 	addPlanning,
@@ -22,11 +22,12 @@ import Popup from './ProjectArchivePopup';
 function Planning(props) {
 	const router = useRouter();
 	const { p_unique_key } = router.query;
+	const { contextState = {} } = useContext(UserAuthContext);
+
 
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ projectid, setProjectid ] = useState('');
 	const [ addProject, setAddProject ] = useState(false);
-	const [uid, setUid] = useState('');
 
 
 	// For popup add project
@@ -82,23 +83,23 @@ function Planning(props) {
 		address_id: ''
 	});
 
-	useEffect(() => {
+	// useEffect(() => {
 
-		var uid = AuthUser.checkAccess('planning');
-		if (uid && uid != '') {
-			setUid(uid);
-		} else {
-			router.push('/user/login');
+	// 	var uid = AuthUser.checkAccess('planning');
+	// 	if (uid && uid != '') {
+	// 		setUid(uid);
+	// 	} else {
+	// 		router.push('/user/login');
 
-			// window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-		}
-	}, []);
+	// 		// window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+	// 	}
+	// }, []);
 
 	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
 	useEffect(
 		() => {
-			if (uid) {
-				APICALL.service(getEmployeerCompanylist + uid, 'GET')
+			if (contextState.uid) {
+				APICALL.service(getEmployeerCompanylist + contextState.uid, 'GET')
 					.then((result) => {
 						console.log(result.data)
 						setCompany(result.data[0]);
@@ -125,7 +126,7 @@ function Planning(props) {
 					});
 			}
 		},
-		[ uid ]
+		[ contextState.uid ]
 	);
 
 	// FETCH PLANNING
