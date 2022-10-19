@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 
 const getAcrfToken = async () => {
-    return await fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}get-acrf-token`)
+    return await fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
         .then(res => res.json())
         .then(result => result.token)
 }

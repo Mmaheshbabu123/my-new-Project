@@ -5,6 +5,7 @@ import DateField from '@/atoms/DateField';
 import { APICALL } from '../../Services/ApiServices';
 import ValidationService from '../../Services/ValidationService';
 import { RadioGroup, Radio } from 'react-radio-input';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
 
@@ -41,7 +42,7 @@ const AddSalaryBenefits = () => {
 	} = useContext(PcContext);
 
 	const router = useRouter();
-
+	const { contextState = {} } = useContext(UserAuthContext);
 	const [ obj, setObj ] = useState([]);
 	const inputRef = useRef({});
 	const [ valuetype, setValueType ] = useState(0);
@@ -61,13 +62,9 @@ const AddSalaryBenefits = () => {
 			var uniqkey = 0;
 			k != undefined && k != '' ? (uniqkey = k) : pc_unique_key != undefined ? (uniqkey = pc_unique_key) : '';
 
-			if (localStorage.getItem('uid') != null) {
-				var userid = JSON.parse(localStorage.getItem('uid'));
-				setUid(userid);
-			} else {
-				window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
+				setUid(contextState.uid);
 			}
-
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + uniqkey, 'GET')
 				.then((result) => {
 					console.log(result.data);
