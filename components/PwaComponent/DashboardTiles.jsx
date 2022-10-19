@@ -40,7 +40,7 @@ return(
         return(
           <div key={idx1} className={dashboardtiles[key][tile]['col_class']}>
              <div className="position_relative_dashboard">
-                <a href={dashboardtiles[key][tile]['menu_link']} className="mx-0 row dashboard_menu_links py-4 dashboard-tile">
+                <a href={dashboardtiles[key][tile]['menu_link']} className="mx-0 row dashboard_menu_links dashboard-tile">
                  <div className="col-md-3 align-self-center text-center dashboard-image-div">
                  <img src={dashboardtiles[key][tile]['menu_icon']} layout="fill" className="dasboard_image img-fluid" />
                  </div>

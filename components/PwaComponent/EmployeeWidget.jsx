@@ -17,19 +17,22 @@ console.log('widget employee');
                 <div className="row m-0 ">
                     <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working (2022-10-09, 09:59)</p>
 
-                   <div className="col-md-12">
-                   <Link href='' className="m-2">
-                        <a type="" className="float-end link-primary m-1">
-                            View more...
-                        </a>
-                    </Link>
+                   <div className="col-md-12 px-0">
+                   
                    <div className="row d-flex mt-3">
-                        <div className="col-md-12 px-0">
+                        <div className="col-md-9 px-0">
                         <div className="input-group">
                             <input type="text" className="form-control rounded-0 shadow-none employer_widget_search" />
                             <span className="input-group-text rounded-0 employer_widget_search">Search</span>
 
                         </div>
+                        </div>
+                        <div className="col-md-3 align-self-end">
+                        <Link href='' className="m-2">
+                        <a type="" className="float-end link-primary m-1 text-decoration-underline poppins-regular-18px">
+                            View more...
+                        </a>
+                    </Link>
                         </div>
                     </div>
                    </div>
