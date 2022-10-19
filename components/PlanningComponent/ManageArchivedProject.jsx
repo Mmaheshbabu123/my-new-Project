@@ -299,7 +299,7 @@ function ManageArchivedProject(props) {
 											{t('Project name')}
 										</th>
 										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Location')}</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Address')}</th>'Address','Location',"Project name","Location","Address",'SEARCH','RESET','Project name'
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Address')}</th>
 									</tr>
 								</thead>
 								<tbody>
