@@ -101,7 +101,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
       <div className='py-4 position-sticky-pc px-0'>
       <h4 className='font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage ${button_title.includes('employee') ? 'employee types' : 'coefficients'}`} </h4>
       </div>
-      <div className='col-md-12 text-end'>
+      <div className='col-md-12 text-end position-sticky-config-add'>
       <button
         onClick={() => router.push(`${manageType}/add?id=0`)}
         type="button"
@@ -111,7 +111,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
         {`+ ${button_title}`}
       </button>
       </div>
-      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+      <div className='row searchbox m-0 pt-2 pb-4 position-sticky-config-search' style={{ margin: '10px 0'}}>
        <div className='col-md-12 row pe-0'>
          <div className='col-md-8 col-lg-9 ps-0 pe-4'>
            <input

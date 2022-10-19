@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useQuery } from "react-query";
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { userService } from '@/Services/UserServices';
+import Translation from '@/Translation';
 import Link from 'next/link';
 
 
 const getAcrfToken = async () => {
-    return await fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}get-acrf-token`)
+    return await fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
         .then(res => res.json())
         .then(result => result.token)
 }
 
 const Login = (props) => {
+    const {t}=props;
     const router = useRouter();
     const [state, setState] = useState({
         id: '',
@@ -34,7 +37,7 @@ const Login = (props) => {
         error1['email'] == ''
             ? ValidationService.emailValidationMethod(res.email)
             : error1['email'];
-        
+
         /**
 		 * check if password is valid
 		 */
@@ -42,7 +45,7 @@ const Login = (props) => {
         // error1['password'] == ''
         //     ? ValidationService.passwordValidationMethod(res.password)
         //     : error1['password'];
-        
+
         setState({
             ...state,
             error_user_name: error1['email'],
@@ -65,12 +68,13 @@ const Login = (props) => {
 
             //check status and redirect user.
             if (status === 200) {
+               // const redirect = router.query.returnUrl || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
+                window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}&destination_url=${btoa(window.location.href)}`, '_self');
                 // get return url from query parameters or default to '/'
-                const redirect = router.query.returnUrl || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
-                window.open(redirect, '_self'); // It'll redirect by re-loading page
+                // window.open(redirect, '_self'); // It'll redirect by re-loading page
                 // router.push(redirect); //it'll just navigate, without re-loading page
             } else {
-                // alert(message); //NOSONAR
+                console.error(message); //NOSONAR
             }
         }
     }
@@ -80,17 +84,17 @@ const Login = (props) => {
     }
 
     if (isLoading) {
-        return <> Loading... </>
+        return <> {t('Loading...')} </>
     } else {
         return (
             <section className="container">
                 <div className="row content d-flex justify-content-center p-2">
                     <div className="col-md-5">
                         <div className=" p-4">
-                            <p className="h4  px-0  bitter-italic-normal-medium-24 mb-4 text-center fs-1">Login</p>
+                            <p className="h4  px-0  bitter-italic-normal-medium-24 mb-4 text-center fs-1">{t('Login')}</p>
                             <form className="mb-5" onSubmit={submit}>
                                 <div className="mb-3" onS>
-                                    <label className="form-label custom_astrick">Email address</label>
+                                    <label className="form-label custom_astrick">{t('Email address')}</label>
                                     <input type="text" className="form-control rounded-0"
                                         value={state.email}
                                         name='email'
@@ -100,18 +104,18 @@ const Login = (props) => {
                                 <p className="error mt-2">{state.error_user_name}</p>
 
                                 <div className="mb-3  position-relative">
-                                    <label className="form-label custom_astrick">Password</label>
+                                    <label className="form-label custom_astrick">{t('Password')}</label>
                                     <input type="password" className="form-control rounded-0"
                                         value={state.password}
                                         name='password'
                                         onChange={handleOnChange}
                                     />
                                 </div>
-                                <p className="error mt-2">{state.error_password}</p>
                                 <div>
+                                    <p className="px-0 float-end text-info">{t('Forgot password?')}</p>
                                     <Link href='' className="m-2">
                                         <a type="" className="">
-                                            <p className="px-0 float-end text-info">Forgot password?</p>
+                                            <p className="px-0 float-end text-info">{t('Forgot password?')}</p>
                                         </a>
                                     </Link>
 
@@ -123,7 +127,7 @@ const Login = (props) => {
                                         className="btn rounded-0 px-3 poppins-medium-18px-next-button shadow-none w-100 mt-3 "
 
                                     >
-                                        Login
+                                        {t('Login')}
                                     </button>
                                 </div>
                                 {/* <div className="d-flex p-0">
@@ -140,4 +144,4 @@ const Login = (props) => {
         );
     }
 }
-export default React.memo(Login);
+export default React.memo(Translation(Login,['Loading...','Login','Email address','Password','Forgot password?','Login']));

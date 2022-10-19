@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Paper from '@mui/material/Paper';
 import Link from 'next/link';
 import { MdReviews } from 'react-icons/md';
@@ -8,8 +8,10 @@ import { BsFillPrinterFill } from 'react-icons/bs';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-import { fetchemployeeplanning } from '../../Services/ApiEndPoints';
+import { fetchemployeeplanning, getContract } from '../../Services/ApiEndPoints';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import moment from 'moment';
+
 
 import {
 	Scheduler,
@@ -24,33 +26,27 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui';
 
 function EmployeeMonthlyPlanning(props) {
+
+	const { contextState = {} } = useContext(UserAuthContext);
+
 	/**
 	 * View more functionality
 	 */
 	const [ items, setItems ] = useState([]);
+	const [contractid, setContractid ] = useState([]);
 	const [ visible, setVisible ] = useState(3);
-
+        const router = useRouter();
 	const viewMoreItems = () => {
 		setVisible((prevValue) => prevValue + 3);
 	};
 	////////////////////////////////////////////////////////////////
-	const [ userid, setUserid ] = useState('');
 	const [ data, setData ] = useState([]);
-	/**
-	 * FETCHING EMPLOYEE ID
-	 */
 
-	useEffect(() => {
-		if (localStorage.getItem('uid') != null) {
-			setUserid(JSON.parse(localStorage.getItem('uid')));
-		} else {
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-		}
-	}, []);
 	useEffect(
 		() => {
-			if(userid !=''){
-			APICALL.service(fetchemployeeplanning + userid, 'GET')
+			
+			if(contextState.uid !=''){
+			APICALL.service(fetchemployeeplanning + contextState.uid, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
 						result.data.map((val, key) => {
@@ -71,7 +67,7 @@ function EmployeeMonthlyPlanning(props) {
 				});
 			}
 		},
-		[ props, userid ]
+		[ props, contextState.uid ]
 	);
 	const ExternalViewSwitcher = ({ currentViewName, onChange }) => (
 		<div
@@ -105,6 +101,20 @@ function EmployeeMonthlyPlanning(props) {
 	let currentViewNameChange = (e) => {
 		setCurrentViewName(e.target.value);
 	};
+
+	let downloadContract = (id) => {
+		APICALL.service(getContract + id, 'GET')
+				.then((result) => {
+					if (result.status == 200) {
+						console.log(result);
+					}
+					
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+
+	}
 
 	return (
 		<div className="container-fluid p-0">
@@ -147,7 +157,7 @@ function EmployeeMonthlyPlanning(props) {
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
 									Company
 								</th>
-								{/* <th className=" text-center  align-items-center justify-content-center ">Action</th> */}
+								<th className=" text-center  align-items-center justify-content-center ">Action</th>
 							</tr>
 						</thead>
 						<tbody className='border_employee_planning_table'>
@@ -166,16 +176,20 @@ function EmployeeMonthlyPlanning(props) {
 									</td>
 									<td className="border_employee_planning poppins-light-18px">{result.location}</td>
 									<td className="border_employee_planning poppins-light-18px">{result.companyname}</td>
-									{/* <td className="border_employee_planning">
+									 <td className="border_employee_planning">
+										{/* <Link href={'/'+ result.contract_id}> */}
 										<AiFillEye
+											onClick = {()=>{downloadContract(result.contract_id)}}
 											type="button"
 											className="mt-2 ms-3 color-skyblue"
 											data-toggle="tooltip"
 											title="View details"
 											
 										/>
+										{/* </Link> */}
+										
 
-										<span>
+										{/* <span>
 											<MdReviews
 												type="button"
 												className="mt-2 ms-3 color-skyblue"
@@ -188,8 +202,8 @@ function EmployeeMonthlyPlanning(props) {
 											className="mt-2 ms-3 color-skyblue"
 											data-toggle="tooltip"
 											title="Remove the exclamation"
-										/>
-									</td> */}
+										/> */}
+									</td> 
 								</tr>
 							))}
 						</tbody>

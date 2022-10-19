@@ -4,15 +4,16 @@ import { MdEdit } from 'react-icons/md';
 import {
     RiDeleteBin6Fill
 } from 'react-icons/ri';
-
+import Translation from "@/Translation";
 
 
 function ManageCostCenter(props) {
+    const {t}=props;
     return (
         <div className="container-fluid p-0">
             <form>
                 <div className="row m-0 ">
-                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">Manage cost center</p>
+                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Manage cost center')}</p>
                     <div className="float-end">
                         <div className="col-md-3 p-0 float-end ">
                             <button
@@ -20,7 +21,7 @@ function ManageCostCenter(props) {
                                 className="btn  btn-block border-0 rounded-0 float-right mt-2 skyblue-bg-color w-100 shadow-none"
 
                             >
-                                + Add cost center
+                               + {t('Add cost center')}
                             </button>
                         </div>
                     </div>
@@ -30,7 +31,7 @@ function ManageCostCenter(props) {
                         <div className="row d-flex mt-3">
                             <div className="input-group">
                                 <input type="text" className="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
-                                <span className="input-group-text">Search</span>
+                                <span className="input-group-text">{t('Search')}</span>
                               
                             </div>
                         </div>
@@ -66,17 +67,17 @@ function ManageCostCenter(props) {
                         <table className="table mt-3 mb-3">
                             <thead>
                                 <tr className="btn-bg-gray-medium table-sticky-bg-gray">
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4">Cost center name</th>
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Location</th>
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Action</th>
+                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4">{t('Cost center name')}</th>
+                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Location')}</th>
+                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Action')}</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <tr className="border poppins-regular-18px p-2" >
 
-                                    <td className="poppins-regular-18px p-2">Controle van overheadkosten</td>
-                                    <td className="poppins-regular-18px p-2">Aartselaar</td>
+                                    <td className="poppins-regular-18px p-2">{t('Controle van overheadkosten')}</td>
+                                    <td className="poppins-regular-18px p-2">{t('Aartselaar')}</td>
                                     <td className="p-2">
                                         <Link href='' className="">
                                             <a type="button">
@@ -114,7 +115,7 @@ function ManageCostCenter(props) {
                                 className="btn  btn-block border-0 rounded-0  mt-2 mb-2 skyblue-bg-color  shadow-none"
 
                             >
-                                back
+                                {t('back')}
                             </button>
                         </div>
                     </div>
@@ -123,4 +124,4 @@ function ManageCostCenter(props) {
         </div>
     );
 }
-export default ManageCostCenter;
+export default React.memo(Translation(ManageCostCenter,['Manage cost center','Add cost center','Search','Cost center name','Location','Action','Controle van overheadkosten','Aartselaar','back']));

@@ -4,6 +4,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { delteCofficientPerPc} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 import ReactPaginate from 'react-paginate';
 const itemsPerPage = 8;
@@ -28,7 +29,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
     return (
       <>
         <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue' /> </span>
-        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='ms-3 color-skyblue'/> </span>
+        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='ms-2 color-skyblue'/> </span>
       </>
     )
   }
@@ -109,7 +110,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
         <div className='py-4 position-sticky-pc px-0'>
         <h4 className='font-weight-bold px-0  bitter-italic-normal-medium-24'> {`Manage coefficients per PC`} </h4>
         </div>
-        <div className='searchbox m-0 my-4' style={{ margin: '10px 0' }}>
+        <div className='searchbox m-0 py-4 position-sticky-config-link' style={{ margin: '10px 0' }}>
          <div className='row'>
            <div className='col-md-7 col-lg-9'>
              <div className='row'>
@@ -179,12 +180,12 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
         <div>
         {state.filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="Next >"
+            nextLabel={<AiOutlineArrowRight />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={state.pageCount}
             forcePage={state.currentPage}
-            previousLabel="< Previous"
+            previousLabel={<AiOutlineArrowLeft />}
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"

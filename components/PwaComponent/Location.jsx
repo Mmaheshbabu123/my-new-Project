@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Multiselect from 'multiselect-react-dropdown';
 import ValidationService from '../../Services/ValidationService';
-
+import Translation from "@/Translation";
 
 function AddLocation(props) {
-
+    const {t} = props;
     const [error_company, setError_company] = useState('');
     const [error_location, setError_location] = useState('');
     const [error_street, setError_street] = useState('');
@@ -95,11 +95,11 @@ function AddLocation(props) {
         <div className="container-fluid p-0">
             <form onSubmit={(e) => submit(e)}>
                 <div className="row m-0 ">
-                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">Add location</p>
+                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Add location')}</p>
                     <div className="form-check p-0 mt-2  border ">
                         <div className="p-3">
                             <div className="mb-3">
-                                <label className="form-label custom_astrick">Company</label>
+                                <label className="form-label custom_astrick">{t('Company')}</label>
                                 <select className="form-select"
                                     value={data.company}
                                     onChange={(e) => {
@@ -109,7 +109,7 @@ function AddLocation(props) {
                                         }));
                                     }}
                                 >
-                                    <option value="select">Select</option>
+                                    <option value="select">{t('Select')}</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
@@ -119,7 +119,7 @@ function AddLocation(props) {
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label custom_astrick">Location name</label>
+                                <label className="form-label custom_astrick">{t('Location name')}</label>
                                 <input type="select" className="form-control rounded-0"
                                     value={data.location}
                                     onChange={(e) => {
@@ -134,7 +134,7 @@ function AddLocation(props) {
 
 
                             <div className="mb-3">
-                                <label className="form-label ">Location manager</label>
+                                <label className="form-label ">{t('Location manager')}</label>
                                 <Multiselect
                                     // value={data.location_manager}
                                     // options={this.state.options} // Options to display in the dropdown
@@ -146,7 +146,7 @@ function AddLocation(props) {
                             </div>
                             <div className="row">
                                 <div className="col">
-                                    <label className="form-label custom_astrick">Street</label>
+                                    <label className="form-label custom_astrick">{t('Street')}</label>
                                     <input type="select" className="form-control rounded-0"
                                     value={data.street}
                                     onChange={(e) => {
@@ -161,7 +161,7 @@ function AddLocation(props) {
                                 </div>
 
                                 <div className="col">
-                                    <label className="form-label custom_astrick">Number</label>
+                                    <label className="form-label custom_astrick">{t('Number')}</label>
                                     <input type="select" className="form-control rounded-0"
                                     value={data.number}
                                     onChange={(e) => {
@@ -175,7 +175,7 @@ function AddLocation(props) {
 
                                 </div>
                                 <div className="col">
-                                    <label className="form-label ">Box</label>
+                                    <label className="form-label ">{t('Box')}</label>
                                     <input type="select" className="form-control rounded-0"
                                     value={data.box}
                                     onChange={(e) => {
@@ -191,7 +191,7 @@ function AddLocation(props) {
                             </div>
                             <div className="row mt-5">
                                 <div className="col">
-                                    <label className="form-label custom_astrick">Postal code</label>
+                                    <label className="form-label custom_astrick">{t('Postal code')}</label>
                                     <input type="select" className="form-control rounded-0"
                                     value={data.postalcode}
                                     onChange={(e) => {
@@ -205,7 +205,7 @@ function AddLocation(props) {
                                 </div>
 
                                 <div className="col">
-                                    <label className="form-label custom_astrick">City</label>
+                                    <label className="form-label custom_astrick">{t('City')}</label>
                                     <input type="select" className="form-control rounded-0"
                                     value={data.city}
                                     onChange={(e) => {
@@ -220,7 +220,7 @@ function AddLocation(props) {
                                 </div>
                                 <div className="col">
 
-                                    <label className="form-label custom_astrick">Country</label>
+                                    <label className="form-label custom_astrick">{t('Country')}</label>
                                     <select className="form-select"
                                     value={data.country}
                                     onChange={(e) => {
@@ -230,7 +230,7 @@ function AddLocation(props) {
                                         }));
                                     }}
                                     >
-                                        <option value="select">Select</option>
+                                        <option value="select">{t('Select')}</option>
                                         <option value="1">Country 1</option>
                                         <option value="2">Country 2</option>
                                         <option value="3">Country 3</option>
@@ -247,7 +247,7 @@ function AddLocation(props) {
                             className="bg-white border-0 poppins-regular-18px float-sm-right my-4 px-0 text-decoration-underline d-inline-block"
 
                         >
-                            BACK
+                            {t('BACK')}
                         </button>
                     </div>
                     <div className="col-md-6 p-0 mt-3">
@@ -256,7 +256,7 @@ function AddLocation(props) {
                             // className="btn rounded-0 custom-btn px-3 btn-block float-end"
                             className="btn rounded-0 px-3 float-end poppins-medium-18px-next-button shadow-none"
                         >
-                            Save
+                            {t('Save')}
                         </button>
                     </div>
                 </div>
@@ -266,4 +266,6 @@ function AddLocation(props) {
         </div>
     );
 }
-export default AddLocation;
+export default  React.memo(Translation(AddLocation,['Add location','Company','Select','Location name',
+'Location manager','Street','Number','Box','Postal code','City','Country','Select','BACK','Save'
+]));

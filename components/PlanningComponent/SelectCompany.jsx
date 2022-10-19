@@ -2,9 +2,10 @@ import React, { Component, useEffect, useState } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
+import Translation from '@/Translation';
 
 function SelectCompany(props) {
+	const {t} = props;
     const router = useRouter();
 
 	const [ company, setCompany ] = useState([]);
@@ -43,16 +44,16 @@ function SelectCompany(props) {
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row mt-5 text-center ">
 					<div className="form-group">
-						<label className="form-label mb-2 custom_astrick">Select company</label>
+						<label className="form-label mb-2 custom_astrick">{t('Select company')}</label>
 						<select
 							className="form-select mb-2 mt-2"
-							placeholder="select company"
+							placeholder={t("select company")}
 							onChange={(e) => {
 								setCompany_id(e.target.value);
 								// setData((prev) => ({ ...prev, comp_id: e.target.value }));
 							}}
 						>
-							<option value="">Select</option>
+							<option value="">{t('Select')}</option>
 							{console.log(company)}
 							{company.map((options) => (
 								<option key={options.comp_id} value={options.comp_id}>
@@ -67,13 +68,13 @@ function SelectCompany(props) {
 					<div className="col-md-6">
 						<button type="button" className="btn-lg btn-secondary border  ">
 							<Link href={'/planning/options'}>
-								<a className="">Back</a>
+								<a className="">{t('Back')}</a>
 							</Link>
 						</button>
 					</div>
 					<div className="col-md-6">
 						<button type="submit" className="btn-lg btn-secondary border float-end ">
-                            Next
+                            {t('Next')}
 						</button>
 					</div>
 				</div>
@@ -81,4 +82,4 @@ function SelectCompany(props) {
 		</div>
 	);
 }
-export default SelectCompany;
+export default React.memo(Translation(SelectCompany,['Select company',"select company",'Select','Back','Next']));

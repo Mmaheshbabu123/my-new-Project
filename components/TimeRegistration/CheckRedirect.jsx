@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 
 
 const CheckRedirect = () => {
 
     const router = useRouter();
-
+	const { contextState = {} } = useContext(UserAuthContext);
+	
 	useEffect(
 		() => {
 			var userid = null;
 			if (!router.isReady) return;
-
+			
+		
 			//get the user id from the local storage.
-			if (localStorage.getItem('uid') != null) {
-				userid = JSON.parse(localStorage.getItem('uid'));
-
+			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '') {
 				//sending the api to check weather the user have pincode or not.
-				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + userid, 'GET')
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + contextState.uid, 'GET')
 					.then((result) => {
 						if (result == 999) {
 							//if the user don't have the pincode redirecting him to the generate pincode page.
@@ -27,8 +27,6 @@ const CheckRedirect = () => {
 						}else{
                             router.push('/pincode/options');
                         }
-						//setting the user id to the hook.
-						setuid(userid);
 					})
 					.catch((error) => {
 						console.error(error);

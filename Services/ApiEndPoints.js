@@ -3,7 +3,7 @@ export const ENV_URL = process.env.NEXT_PUBLIC_APP_BACKEND_URL;
 export const REGEX_URL = 'api/';
 export const BASE_URL = ENV_URL + REGEX_URL;
 
-export const ENV_DRUPAL= process.env.NEXT_PUBLIC_APP_URL_DRUPAL;
+export const ENV_DRUPAL= process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/';
 export const BASE_URL_DRUPAL = ENV_DRUPAL + REGEX_URL;
 
 
@@ -198,6 +198,7 @@ export const deleteUploadedFiles = BASE_URL + 'delete-files';
 export const uploadAdditionalDocs = BASE_URL + 'upload-additional-docs';
 export const uploadFiles = BASE_URL + 'upload-files';
 export const downloadSvAsPdf = BASE_URL + 'download-cooperation-agreement-pdf';
+export const getOtherDocuments = BASE_URL + 'get-other-documents';
 //---------------
 
 
@@ -266,3 +267,7 @@ export const getPlanning = BASE_URL + "fetch-add-planning-details/";
 export const getDraftPlanning = BASE_URL + "fetch-draft-planning/";
 export const deletePlanningDetails = BASE_URL + "delete-planning/";
 
+
+
+//---------------------------- Contract API--------------------------- //\
+export const getContract = BASE_URL + "downloadContract/";

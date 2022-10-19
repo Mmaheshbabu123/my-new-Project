@@ -5,8 +5,9 @@ import { APICALL } from '../../Services/ApiServices';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { BsCheck2 } from 'react-icons/bs';
 import { ImCross } from 'react-icons/im';
-
+import Translation from '@/Translation';
 function ResetPincode(props) {
+	const {t}=props;
 	const [ visible, setVisible ] = useState(false);
 	const [ passwordType, setPasswordType ] = useState('password');
 	const [ passwordInput, setPasswordInput ] = useState('');
@@ -27,9 +28,9 @@ function ResetPincode(props) {
 	return (
 		<div className="container">
 			<div className="row justify-content-center">
-				<p className="h2 text-center p-2 mt-5">Reset pincode</p>
+				<p className="h2 text-center p-2 mt-5">{t('Reset pincode')}</p>
 
-				<p className="h5 text-center p-2">Enter your current pincode</p>
+				<p className="h5 text-center p-2">{t('Enter your current pincode')}</p>
 
 				<div className="col-sm-3   ">
 					<div className="input-group mb-3">
@@ -39,7 +40,7 @@ function ResetPincode(props) {
 							value={passwordInput}
 							name="Enter pincode"
 							className="form-control col-xs-4"
-							placeholder="Password"
+							placeholder={t("Password")}
 						/>
 						<button className="btn btn-outline-primary" onClick={togglePassword}>
 							{passwordType === 'password' ? <AiFillEyeInvisible /> : <AiFillEye />}
@@ -47,7 +48,7 @@ function ResetPincode(props) {
 					</div>
 					{visible && (
 						<div>
-							<p className="h5 text-center p-2">Enter new pincode</p>
+							<p className="h5 text-center p-2">{t('Enter new pincode')}</p>
 							<div className="input-group mb-3">
 								<input
 									type={passwordType}
@@ -55,13 +56,13 @@ function ResetPincode(props) {
 									value={passwordInput}
 									name="Enter pincode"
 									className="form-control col-xs-4"
-									placeholder="Password"
+									placeholder={t("Password")}
 								/>
 								<button className="btn btn-outline-primary" onClick={togglePassword}>
 									{passwordType === 'password' ? <AiFillEyeInvisible /> : <AiFillEye />}
 								</button>
 							</div>
-							<p className="h5 text-center p-2">Confirm pincode</p>
+							<p className="h5 text-center p-2">{t('Confirm pincode')}</p>
 							<div className="input-group mb-3">
 								<input
 									type={passwordType}
@@ -69,7 +70,7 @@ function ResetPincode(props) {
 									value={passwordInput}
 									name="Enter pincode"
 									className="form-control col-xs-4"
-									placeholder="Password"
+									placeholder={t("Password")}
 								/>
 								<button className="btn btn-outline-primary" onClick={togglePassword}>
 									{passwordType === 'password' ? <AiFillEyeInvisible /> : <AiFillEye />}
@@ -162,4 +163,4 @@ function ResetPincode(props) {
 		</div>
 	);
 }
-export default ResetPincode;
+export default React.memo(Translation(ResetPincode,['Reset pincode','Enter your current pincode',"Password",'Enter new pincode','Confirm pincode']));

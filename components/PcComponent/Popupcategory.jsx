@@ -1,12 +1,13 @@
 import React from 'react';
-
+import Translation from '@/Translation';
 function Popup(props) {
+	const {t}=props;
 	return (
 		<div className="modal" id="myModal" style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}>
 			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h4 className="modal-title bitter-italic-normal-medium-22">Delete category</h4>
+						<h4 className="modal-title bitter-italic-normal-medium-22">{t('Delete category')}</h4>
 						<button
 							type="button"
 							className="btn-close"
@@ -16,17 +17,17 @@ function Popup(props) {
 					</div>
 
 					<div className="modal-body title">
-						<p className='my-1 poppins-regular-18px'>Are you sure you want to delete this category?</p> <p className='my-1 poppins-regular-18px'>Functions related to this category will also be deleted.</p>
+						<p className='my-1 poppins-regular-18px'>{t('Are you sure you want to delete this category?')}</p> <p className='my-1 poppins-regular-18px'>{t('Functions related to this category will also be deleted.')}</p>
 					</div>
 
 					<div className="modal-footer">
 						<button type="button" className="btn poppins-medium-18px-next-button rounded-0 shadow-none" style={{ width: '80px' }} onClick={() => props.popupActionNo()}>
-							No
+							{t('No')}
 						</button>
 						<button className="btn poppins-medium-18px-next-button rounded-0 shadow-none m-2" style={{ width: '80px' }} 
 						onClick={() => props.popupActionYes()}
 						>
-							Yes
+							{t('Yes')}
 						</button>
 					</div>
 				</div>
@@ -35,4 +36,4 @@ function Popup(props) {
 	);
 }
 
-export default Popup;
+export default React.memo(Translation(Popup,['Delete category','Are you sure you want to delete this category?','Functions related to this category will also be deleted.','No','Yes']));

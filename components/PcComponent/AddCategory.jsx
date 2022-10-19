@@ -7,8 +7,10 @@ import styles from '../../styles/Pc.module.css';
 import { PcContext } from '../../Contexts/PcContext';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Translation from '@/Translation';
 
 function AddCategory(props) {
+	const {t}=props;
 	const router = useRouter();
 	const {
 		setCurrent_sec,
@@ -153,13 +155,13 @@ function AddCategory(props) {
 			if(typeof props.categorylist == 'object'){
 			Object.keys(props.categorylist).map((element) => {
 				if (props.categorylist[element].type == '2' && props.categorylist[element].id != id && data.category_name.replaceAll(' ','').toLowerCase() == props.categorylist[element].category_name.replaceAll(' ','').toLowerCase()) {
-					error['error_category_name'] = 'Category name already exist.';
+					error['error_category_name'] = t('Category name already exist.');
 				}
 			});
 		}else{
 			props.categorylist.map((element) => {
 				if (element.type == '2' && element.id != id && data.category_name.replaceAll(' ','').toLowerCase() == element.category_name.replaceAll(' ','').toLowerCase()) {
-					error['error_category_name'] = 'Category name already exist.';
+					error['error_category_name'] = t('Category name already exist.');
 				}
 			});
 		}
@@ -171,7 +173,7 @@ function AddCategory(props) {
 					if (props.categorylist[element].type == '2' && props.categorylist[element].id == id){
 						props.categorylist[element].childObj && props.categorylist[element].childObj.map((value)=>{
 							if(parseFloat(data.min_salary.replace(',', '.')) > parseFloat(value.min_salary.replace(',', '.'))){
-								error['error_min_salary'] = 'Category minimum salary cannot be greater than function minimum salary.';
+								error['error_min_salary'] = t('Category minimum salary cannot be greater than function minimum salary.');
 							}
 						})
 					}
@@ -182,7 +184,7 @@ function AddCategory(props) {
 				if (element.type == '2' && element.id == id){
 					element.childObj && element.childObj.map((value)=>{
 						if(parseFloat(data.min_salary.replace(',', '.').trim()) > parseFloat(value.min_salary.replace(',', '.').trim())){
-							error['error_min_salary'] = 'Category minimum salary cannot be greater than function minimum salary.';
+							error['error_min_salary'] = t('Category minimum salary cannot be greater than function minimum salary.');
 						}
 					})
 				}
@@ -208,9 +210,9 @@ function AddCategory(props) {
 	return (
 		<div className="mt-3 table-title-bg p-3">
 			<form onSubmit={submit}>
-				{id != '' ? <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">Edit category</h4> : <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">Add category</h4>}
+				{id != '' ? <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">{t('Edit category')}</h4> : <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">{t('Add category')}</h4>}
 				<div className="row">
-					<label className=" custom_astrick mt-2 poppins-regular-16px">Category name</label>
+					<label className=" custom_astrick mt-2 poppins-regular-16px">{t('Category name')}</label>
 					<div className="form-group ">
 						<input
 							type="text"
@@ -226,7 +228,7 @@ function AddCategory(props) {
 
 						<p  className='error_text' style={{ color: 'red' }}>{error_category_name}</p>
 					</div>
-					<label className="custom_astrick mt-2 poppins-regular-16px">Minimum salary</label>
+					<label className="custom_astrick mt-2 poppins-regular-16px">{t('Minimum salary')}</label>
 					<div className="form-group">
 					<div className="input-group">
 					<span className="input-group-text mh-50 rounded-0 mt-2 border-0 bg-white category_currency_height poppins-medium-16px" >€</span>
@@ -273,7 +275,7 @@ function AddCategory(props) {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key }));
 							}}
 						>
-							SAVE
+							{t('SAVE')}
 						</button>
 					</div>
 				</div>
@@ -282,4 +284,5 @@ function AddCategory(props) {
 	);
 }
 
-export default AddCategory;
+export default React.memo(Translation(AddCategory,['Category name already exist.','Category minimum salary cannot be greater than function minimum salary.',
+'Category minimum salary cannot be greater than function minimum salary.','Edit category','Add category','Category name','Minimum salary','SAVE']));

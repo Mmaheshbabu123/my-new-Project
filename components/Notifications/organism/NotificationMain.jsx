@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styles from '../molecules/Notification.module.css'
 import notificationSvg from '../molecules/notification.svg';
 import notificationExists from '../molecules/notificationExists.svg';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import NotificationView from '../molecules/NotificationView';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import {
   getNotificationsCount,
   getNotifications,
@@ -14,9 +15,8 @@ import { APICALL } from '@/Services/ApiServices';
 
 const INITIAL_COUNT = 4; //only 5 notifcations we will fetch
 const NotificationMain = ( props ) => {
-    const router  = useRouter();
-    const { entityid = 0, id = 0, user_id = 0} = router.query;
-    const entityId = entityid || user_id || id ;
+  	const { contextState: { uid } } = useContext(UserAuthContext);
+    const entityId = Number(uid)
     const [state, setState] = useState({
       notificationView: false,
       notificationCount: 0,
