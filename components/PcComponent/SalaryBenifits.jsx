@@ -8,10 +8,11 @@ import DatePicker from "react-multi-date-picker";
 import InputIcon from "react-multi-date-picker/components/input_icon";
 import "react-multi-date-picker/styles/colors/purple.css"
 
-
+import Translation from '@/Translation';
 
 
 const SalaryBenifits = () => {
+	const {t}=props;
 	const router = useRouter();
 	const [disableForm, setDisableForm] = useState(false);
 	const [sec_width, setSec_width] = useState('col-6');
@@ -177,9 +178,9 @@ const SalaryBenifits = () => {
 		<div className={pc_view_type == 'addpc' ? "container-fluid p-0" : pc_view_type == 'viewpc' ? "mb-5 sectioncolor p-3" : "sectioncolor p-3 my-3"}>
 			<form onSubmit={submit}>
 				{pc_view_type == 'editpc' ? (
-					<h4 className={pc_view_type == 'addpc' ? "h5 mt-3" : "bitter_medium_italic_18px mb-4"}>Edit salary benefits</h4>
+					<h4 className={pc_view_type == 'addpc' ? "h5 mt-3" : "bitter_medium_italic_18px mb-4"}>{t('Edit salary benefits')}</h4>
 				) : pc_view_type == 'viewpc' ? (
-					<h4 className="h5 bitter_medium_italic_18px mb-4">Salary benefits</h4>
+					<h4 className="h5 bitter_medium_italic_18px mb-4">{t('Salary benefits')}</h4>
 				) : (
 					''
 				)}
@@ -261,7 +262,7 @@ const SalaryBenifits = () => {
 
 
 														<label className="form-check-label" htmlFor="flexCheckDefault">
-															<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Is this mandatory?</p>
+															<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>{t('Is this mandatory?')}</p>
 														</label>
 													</div>
 
@@ -269,7 +270,7 @@ const SalaryBenifits = () => {
 													<div className={pc_view_type == 'addpc' ? 'form-check d-inline-flex  col ps-0' : "form-check col-sm-12 mb-2"}>
 														<input className="form-check-input me-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
 														<label className="form-check-label" htmlFor="flexCheckDefault">
-															<p  className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Allow sales agent to update the value during creation of cooperation agreement</p>
+															<p  className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>{t('Allow sales agent to update the value during creation of cooperation agreement')}</p>
 														</label>
 													</div>
 {/*
@@ -281,7 +282,7 @@ const SalaryBenifits = () => {
 													{/* <div className='col ps-0'><p className={'  poppins-medium-16px '}>Salary benifit value</p> */}
 
 													<div className={pc_view_type == 'addpc' ? 'col ps-0' : "col"}>
-													<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Salary benifit value</p>
+													<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>{t('Salary benifit value')}</p>
 
 														<div className="form-check  ">
 															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
@@ -289,13 +290,13 @@ const SalaryBenifits = () => {
 																value in €
 															</label> */}
 															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1' : "poppins-regular-14px form-check-label"} htmlFor="flexRadioDefault1">
-																value in €
+																{t('value in')} €
 															</label>
 														</div>
 														<div className="form-check">
 															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
 															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1' : "poppins-regular-14px form-check-label"} htmlFor="flexRadioDefault1">
-																value in %
+																{t('value in')} %
 															</label>
 
 															{/* <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
@@ -308,7 +309,7 @@ const SalaryBenifits = () => {
 															<span className="input-group-text rounded-0">€</span>
 														</div>
 													</div>
-													<div className='col'><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Applicable coefficient </p>
+													<div className='col'><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>{t('Applicable coefficient')} </p>
 														{/* <div className="form-check "> */}
 														<div className={pc_view_type == 'addpc' ? 'form-check' : "form-check mt-2"}>
 															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
@@ -316,7 +317,7 @@ const SalaryBenifits = () => {
 																Based on employee type in the cooperation agreement
 															</label> */}
 															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1' : "form-check-label poppins-regular-14px"} htmlFor="flexRadioDefault1">
-															Based on employee type in the cooperation agreement
+															{t('Based on employee type in the cooperation agreement')}
 															</label>
 														</div>
 														{/* <div className="form-check "> */}
@@ -326,7 +327,7 @@ const SalaryBenifits = () => {
 																Other
 															</label> */}
 															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1 shadow-none' : "form-check-label poppins-regular-14px shadow-none"} htmlFor="flexRadioDefault1">
-															Other
+															{t('Other')}
 															</label>
 														</div>
 														<div className="mb-3">
@@ -336,9 +337,9 @@ const SalaryBenifits = () => {
 															<input type="text" className={pc_view_type == 'addpc' ? 'form-control' : "form-control rounded-0 shadow-none"} id="" />
 														</div>
 													</div>
-													<div className='col'><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mb-2"}>Occurence</p>
+													<div className='col'><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mb-2"}>{t('Occurence')}</p>
 														<select className={pc_view_type == 'addpc' ? 'form-select shadow-none' : "form-select rounded-0 shadow-none"} aria-label="Default select example">
-															<option selected>Select..</option>
+															<option selected>{t('Select..')}</option>
 															<option value="1">One</option>
 															<option value="2">Two</option>
 															<option value="3">Three</option>
@@ -346,13 +347,13 @@ const SalaryBenifits = () => {
 													</div>
 												</div>
 												<div className='row'>
-													<div className='col'><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mt-3 mb-2"}>Is the benefit granted in case of absenceof the employee?</p>
+													<div className='col'><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mt-3 mb-2"}>{t('Is the benefit granted in case of absenceof the employee?')}</p>
 														<div className="form-check ">
 															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
 															{/* <label className="form-check-label mt-1" htmlFor="flexRadioDefault1">
 																Yes
 															</label> */}
-															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1 shadow-none' : "form-check-label  poppins-regular-14px shadow-none"} htmlFor="flexRadioDefault1">Yes</label>
+															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1 shadow-none' : "form-check-label  poppins-regular-14px shadow-none"} htmlFor="flexRadioDefault1">{t('Yes')}</label>
 														</div>
 														<div className="form-check">
 															<input className="form-check-input shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
@@ -360,12 +361,12 @@ const SalaryBenifits = () => {
 																No
 															</label> */}
 															<label className={pc_view_type == 'addpc' ? 'form-check-label mt-1 shadow-none' : "form-check-label  poppins-regular-14px shadow-none"} htmlFor="flexRadioDefault1">
-																No
+																{t('No')}
 															</label>
 														</div>
 
 													</div>
-													<div className={pc_view_type == 'addpc' ? 'col' : "col start_date_edit_link mb-2"}><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mt-3 mb-2 start_date_edit_link"}>Start date</p>
+													<div className={pc_view_type == 'addpc' ? 'col' : "col start_date_edit_link mb-2"}><p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px mt-3 mb-2 start_date_edit_link"}>{t('Start date')}</p>
 														<div className="col-md-12 p-0">
 															<DatePicker className="purple"
 																value={value}
@@ -395,7 +396,7 @@ const SalaryBenifits = () => {
 								type="sumit"
 								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
 							>
-								SAVE
+								{t('SAVE')}
 							</button>
 						</div>
 					</div>
@@ -409,7 +410,7 @@ const SalaryBenifits = () => {
 									setCurrent_sec(4);
 								}}
 							>
-								BACK
+								{t('BACK')}
 							</button>
 						</div>
 						<div className="text-end col-md-6">
@@ -417,7 +418,7 @@ const SalaryBenifits = () => {
 								type="sumit"
 								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
 							>
-								SAVE
+								{t('SAVE')}
 							</button>
 						</div>
 					</div>
@@ -428,4 +429,7 @@ const SalaryBenifits = () => {
 		</div>
 	);
 };
-export default SalaryBenifits;
+export default React.memo(Translation(SalaryBenifits,['Edit salary benefits','Salary benefits',
+'Is this mandatory?','Allow sales agent to update the value during creation of cooperation agreement',
+'Salary benifit value','value in %','value in','Applicable coefficient','Based on employee type in the cooperation agreement','Other','Occurence',
+'Select..','Is the benefit granted in case of absenceof the employee?','Yes','No','Start date','SAVE','BACK']));

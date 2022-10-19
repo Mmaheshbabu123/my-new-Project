@@ -3,8 +3,9 @@ import { PcContext } from '../../Contexts/PcContext';
 import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-
+import Translation from '@/Translation';
 const EmployeeType = () => {
+	const {t}=props;
 	const router = useRouter();
 	const [ disableForm, setDisableForm ] = useState(false);
 	const [ sec_width, setSec_width ] = useState('col-md-6');
@@ -162,7 +163,7 @@ const EmployeeType = () => {
 	return (
 		<div className={pc_view_type == 'addpc'?"container-fluid p-0":pc_view_type == 'viewpc'?"mb-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
 			<form onSubmit={submit}>
-			{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 bitter_medium_italic_18px mb-4">Employee type</h4> :'')}
+			{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>{t('Edit employee type')}</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 bitter_medium_italic_18px mb-4">{t('Employee type')}</h4> :'')}
             <div className='pc-height4'>
 				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 px-4 ":"border-0"}>
 				<p className="mt-3 p-0 error_text mb-3" style={{ color: 'red' }}>
@@ -210,7 +211,7 @@ const EmployeeType = () => {
 								type="sumit"
 								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"}
 							>
-								SAVE
+								{t('SAVE')}
 							</button>
 						</div>
 					</div>
@@ -224,7 +225,7 @@ const EmployeeType = () => {
 								setCurrent_sec(3);
 							}}
 						>
-							BACK
+							{t('BACK')}
 						</button>
 					</div>
 					<div className="text-end col-md-6">
@@ -232,7 +233,7 @@ const EmployeeType = () => {
 							type="sumit"
 							className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px-next-button  shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px-next-button  shadow-none"}
 						>
-							NEXT
+							{t('NEXT')}
 						</button>
 					</div>
 				</div>:''
@@ -241,4 +242,4 @@ const EmployeeType = () => {
 		</div>
 	);
 };
-export default EmployeeType;
+export default React.memo(Translation(EmployeeType,['Edit employee type','Employee type','SAVE','BACK','NEXT']));

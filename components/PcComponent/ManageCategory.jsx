@@ -8,8 +8,9 @@ import Popup from './Popupcategory';
 import ReactPaginate from 'react-paginate';
 import { useRouter } from 'next/router';
 import Pagination from './Pagination';
-
+import Translation from '@/Translation';
 const ManageCategoryComponent = () => {
+	const{t}=props;
 	const [ categories, setCategories ] = useState([]);
 	const [ categoriesTemp, setCategoriesTemp ] = useState([]);
 	const [ categoriestemp2, setCategoriestemp2 ] = useState([]);
@@ -188,7 +189,7 @@ const ManageCategoryComponent = () => {
 				<div className='minimun_height'>
 				<div className="row m-0">
 					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc mb-0">
-						Manage categories
+						{t('Manage categories')}
 					</p>
 				<div className='col-md-12 manage_category_sticky_position pb-3'>
 				<div className='row'>
@@ -199,7 +200,7 @@ const ManageCategoryComponent = () => {
 							type="search"
 							id="form12"
 							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-							placeholder="PC number"
+							placeholder={t("PC number")}
 							value={searchPc}
 							onChange={(e) => setSearchPc(e.target.value)}
 						/>
@@ -210,7 +211,7 @@ const ManageCategoryComponent = () => {
 							type="search"
 							id="form12"
 							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-							placeholder="Category Name"
+							placeholder={t("Category Name")}
 							value={searchCat}
 							onChange={(e) => setSearchcat(e.target.value)}
 						/>
@@ -221,7 +222,7 @@ const ManageCategoryComponent = () => {
 							type="search"
 							id="form12"
 							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-							placeholder="Minimum salary"
+							placeholder={t("Minimum salary")}
 							value={searchSal}
 							onChange={(e) => setSearchSal(e.target.value)}
 						/>
@@ -237,7 +238,7 @@ const ManageCategoryComponent = () => {
 							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right skyblue-bg-color py-2 px-4 w-100 shadow-none text-uppercase"
 							onClick={() => handleSearch()}
 						>
-							Search
+							{t('Search')}
 						</button>
 						</div>
 						<div className='col-md-6'>
@@ -250,7 +251,7 @@ const ManageCategoryComponent = () => {
 								className="btn  btn-block float-right mt-2 mb-2 rounded-0 float-right py-2 px-4 w-100 shadow-none reset_skyblue"
 								onClick={() => handleReset()}
 							>
-								RESET
+								{t('RESET')}
 							</button>
 						)}
 						</div>
@@ -265,11 +266,11 @@ const ManageCategoryComponent = () => {
 							<thead className='manage_category_table'>
 								<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-2 ps-4">
-										Paritair comite number
+										{t('Paritair comite number')}
 									</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-2">Category name</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-2">Minimum salary</th>
-									<th className="poppins-medium-18px   btn-bg-gray-medium hi-50 p-2">Action</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-2">{t('Category name')}</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium hi-50 p-2">{t('Minimum salary')}</th>
+									<th className="poppins-medium-18px   btn-bg-gray-medium hi-50 p-2">{t('Action')}</th>
 								</tr>
 							</thead>
 							<tbody className="">
@@ -306,7 +307,7 @@ const ManageCategoryComponent = () => {
 								{categories.length == 0 && (
 									<tr>
 										<td colSpan={4} className="text-center poppins-regular-18px no-records">
-											No records
+											{t('No records')}
 										</td>
 									</tr>
 								)}
@@ -341,7 +342,7 @@ const ManageCategoryComponent = () => {
 							className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
 							onClick={() => backToDashboard()}
 						>
-							BACK
+							{t('BACK')}
 						</button>
 					</div>
 					<div className="text-end col-md-6">
@@ -372,4 +373,4 @@ const ManageCategoryComponent = () => {
 		</div>
 	);
 };
-export default ManageCategoryComponent;
+export default React.memo(Translation(ManageCategoryComponent,['Manage categories',"PC number","Category Name","Minimum salary",'Search','RESET','Paritair comite number','Category name','Minimum salary','Action','No records','BACK']));

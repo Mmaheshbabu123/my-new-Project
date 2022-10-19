@@ -7,6 +7,7 @@ import ValidationService from '../../Services/ValidationService';
 import { RadioGroup, Radio } from 'react-radio-input';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
+import Translation from '@/Translation';
 
 // let dateObj = new Date();
 // let month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -19,7 +20,8 @@ let month = newDate.getMonth() + 1;
 let year = newDate.getFullYear();
 
 // alert(year);
-const AddSalaryBenefits = () => {
+const AddSalaryBenefits = (props) => {
+	const {t}=props;
 	const {
 		pc_unique_key,
 		setPc_unique_key,
@@ -279,7 +281,7 @@ const AddSalaryBenefits = () => {
 										aria-expanded="false"
 										aria-controls="flush-collapseOne"
 									>
-										Salary (verloning) - {element.name}
+										{t('Salary')} (verloning) - {element.name}
 									</button>
 								</h2>
 								<div
@@ -316,7 +318,7 @@ const AddSalaryBenefits = () => {
 																)
 															}
 														>
-															Is this mandatory?
+															{t('Is this mandatory?')}
 														</p>
 													</label>
 												</div>
@@ -353,8 +355,8 @@ const AddSalaryBenefits = () => {
 															)
 														}
 													>
-														Allow sales agent to update the value during creation of
-														cooperation agreement?
+														{t('Allow sales agent to update the value during creation of')}
+														{t('cooperation agreement?')}
 													</label>
 												</div>
 											</div>
@@ -371,7 +373,7 @@ const AddSalaryBenefits = () => {
 																)
 															}
 														>
-															Salary benefit value
+															{t('Salary benefit value')}
 														</label>
 
 														<RadioGroup
@@ -386,7 +388,7 @@ const AddSalaryBenefits = () => {
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="valuetype1" value={1} />
-																value in €
+																{t('value in €')}
 															</label>
 															<br />
 															<label
@@ -394,7 +396,7 @@ const AddSalaryBenefits = () => {
 																className="mb-3 poppins-regular-16px"
 															>
 																<Radio id="valuetype2" value={2} />
-																value in %
+																{t('value in %')}
 															</label>
 														</RadioGroup>
 
@@ -421,7 +423,7 @@ const AddSalaryBenefits = () => {
 													</div>
 													<div className="row">
 														<label className="mb-2 poppins-regular-16px">
-															Is the benefit granted in case of absence of the employee?
+															{t('Is the benefit granted in case of absence of the employee?')}
 														</label>
 														<RadioGroup
 															name={'granted' + index}
@@ -435,7 +437,7 @@ const AddSalaryBenefits = () => {
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="granted1" value={0} />
-																Yes
+																{t('Yes')}
 															</label>
 															<br />
 															<label
@@ -443,7 +445,7 @@ const AddSalaryBenefits = () => {
 																className="mb-3 poppins-regular-16px"
 															>
 																<Radio id="granted2" value={1} />
-																No
+																{t('No')}
 															</label>
 														</RadioGroup>
 													</div>
@@ -453,7 +455,7 @@ const AddSalaryBenefits = () => {
 												>
 													<div className="row mb-4">
 														<label className="mb-2 poppins-regular-16px">
-															Applicable coefficient
+															{t('Applicable coefficient')}
 														</label>
 														<RadioGroup
 															name={'coefficient' + index}
@@ -467,7 +469,7 @@ const AddSalaryBenefits = () => {
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="coefficient1" value={1} />
-																Yes
+																{t('Yes')}
 															</label>
 															<br />
 															<label
@@ -475,7 +477,7 @@ const AddSalaryBenefits = () => {
 																className="mb-3 poppins-regular-16px"
 															>
 																<Radio id="coefficient2" value={2} />
-																No
+																{t('No')}
 															</label>
 														</RadioGroup>
 														<br />
@@ -503,7 +505,7 @@ const AddSalaryBenefits = () => {
 																)
 															}
 														>
-															Start date
+															{t('Start date')}
 														</label>
 														{/* {alert(year+'-'+month+'-'+day)} */}
 														<DateField
@@ -540,7 +542,7 @@ const AddSalaryBenefits = () => {
 																)
 															}
 														>
-															Occurence
+															{t('Occurence')}
 														</label>
 														<MultiSelectField
 															id={'select_id'}
@@ -581,10 +583,10 @@ const AddSalaryBenefits = () => {
 			<form onSubmit={Submit}>
 				{key != 0 ? (
 					<h4 className={pc_view_type == 'addpc' ? 'h5 mt-3' : 'bitter_medium_italic_18px mb-4'}>
-						Edit salary benefits
+						{t('Edit salary benefits')}
 					</h4>
 				) : pc_view_type == 'viewpc' ? (
-					<h4 className="h5 bitter_medium_italic_18px mb-4">Salary benefits</h4>
+					<h4 className="h5 bitter_medium_italic_18px mb-4">{t('Salary benefits')}</h4>
 				) : (
 					''
 				)}
@@ -598,7 +600,7 @@ const AddSalaryBenefits = () => {
 								type="submit"
 								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
 							>
-								SAVE
+								{t('SAVE')}
 							</button>
 						</div>
 					</div>
@@ -612,7 +614,7 @@ const AddSalaryBenefits = () => {
 									setCurrent_sec(4);
 								}}
 							>
-								BACK
+								{t('BACK')}
 							</button>
 						</div>
 						<div className="text-end col-md-6">
@@ -620,7 +622,7 @@ const AddSalaryBenefits = () => {
 								type="submit"
 								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
 							>
-								SAVE
+								{t('SAVE')}
 							</button>
 						</div>
 					</div>
@@ -631,4 +633,6 @@ const AddSalaryBenefits = () => {
 		</div>
 	);
 };
-export default AddSalaryBenefits;
+export default React.memo(Translation(AddSalaryBenefits,['Salary','Is this mandatory?','Allow sales agent to update the value during creation of',
+'cooperation agreement?','Salary benefit value','value in €','value in %','Is the benefit granted in case of absence of the employee?','Yes','No',
+'Applicable coefficient','Start date','Occurence','Edit salary benefits','Salary benefits','SAVE','BACK','SAVE']));

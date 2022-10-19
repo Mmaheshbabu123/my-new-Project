@@ -1,6 +1,7 @@
 import React from 'react';
-
+import Translation from '@/Translation';
 function Popup(props) {
+	const {t} =props;
 	return (
 		<div className="modal" id="myModal" style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}>
 			<div className="modal-dialog modal-dialog-centered">
@@ -16,15 +17,15 @@ function Popup(props) {
 					</div>
 
 					<div className="modal-body title poppins-light-18px">
-						<h4>Are you sure you want to delete this paritair committe?</h4>
+						<h4>{t('Are you sure you want to delete this paritair committe?')}</h4>
 					</div>
 
 					<div className="modal-footer">
 						<button type="button" className="btn poppins-medium-18px-next-button rounded-0 shadow-none" onClick={() => props.popupActionNo()} style={{ width: '80px' }}>
-							No
+							{t('No')}
 						</button>
 						<button className="btn poppins-medium-18px-next-button rounded-0 shadow-none m-2" onClick={() => props.popupActionYes()} style={{ width: '80px' }}>
-							Yes
+							{t('Yes')}
 						</button>
 					</div>
 				</div>
@@ -33,4 +34,4 @@ function Popup(props) {
 	);
 }
 
-export default Popup;
+export default React.memo(Translation(Popup,['Are you sure you want to delete this paritair committe?','No','Yes']));
