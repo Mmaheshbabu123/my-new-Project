@@ -13,7 +13,7 @@ const userLogin = async (state, token) => {
     "name": state.email,
     "pass": state.password
   }
-  await axios.post(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}user/login?_format=json`, data, config)
+  await axios.post(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/login?_format=json`, data, config)
   .then((response) => {
     let currentUserObj = setLocalStorageAndForwardToDashboard(response);
     loginStatus = {
@@ -55,7 +55,7 @@ const setLocalStorageAndForwardToDashboard = (response) => {
 
 
 const userLogout = async () => {
-  await axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}user/logout?_format=json&token=${localStorage.getItem('logout_token')}`)
+  await axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/logout?_format=json&token=${localStorage.getItem('logout_token')}`)
     .then((response) => {
       localStorage.clear();
       window.open('/user/login', '_self');
