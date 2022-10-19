@@ -10,6 +10,7 @@ import { FiDownload } from 'react-icons/fi';
 import styles from './V1Document.module.css';
 import customAlert from '@/atoms/customAlert';
 import { getLastTwelveMonths } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 const itemsPerPage = 8;
 
 const monthOptions = getLastTwelveMonths();
