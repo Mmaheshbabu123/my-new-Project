@@ -9,12 +9,13 @@ import { useRouter } from 'next/router';
 
 function Header() {
 	let router = useRouter();
-	const { contextState: { isAuthenticated = 0 } } = useContext(UserAuthContext);
+	const { contextState: { isAuthenticated = 0, uid } } = useContext(UserAuthContext);
 
 	const [state, setState] = useState({
 		languages: [{code: 0, language: 'Select'}],
 		lang: '',
 		isAuthenticated: 0,
+		profile: '',
 	});
 
 	// due to next.js hydration error, we added new state and new effect, dont merge this with above state and effect
@@ -25,13 +26,14 @@ function Header() {
 	useEffect(() => {
 		if(isAuthenticated) {
 			async function fetchLanguages() {
-				let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/api/get_languages';
+				let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/api/get_languages?entityid=' + uid;
 				let setObj = {...state};
 				setObj['isAuthenticated'] = isAuthenticated;
 				await APICALL.service(url, 'GET').then((result) => {
 					if (result && result['status'] == 200) {
 						localStorage.setItem('lang', localStorage['lang'] !== undefined ? localStorage['lang'] : 'en');
 						setObj['languages'] = result['data'];
+						setObj['profile'] = result['userData'] ? result['userData']['profile_path'] : '';
 						setObj['lang'] = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
 					} else { console.log('error while fetching header data') }
 				}).catch(error => console.error(error))
@@ -75,7 +77,7 @@ function Header() {
 										<Notification /> {/*<img style={{ width: '25px', marginTop: '8px' }} src="/notifications.svg" /> */}
 									</li>
 									<li className="list-unstyled mx-4 align-self-center d-flex">
-										<img style={{ width: '40px' }} src="/account.png" />
+										<a href={`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}user/${uid}/edit`}> <img style={{ width: '40px' }} src={state.profile || "/account.png"} /> </a>
 									</li>
 									<li className="list-unstyled mx-4 align-self-center d-flex">
 										<select

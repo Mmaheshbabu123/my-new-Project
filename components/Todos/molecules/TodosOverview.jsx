@@ -25,7 +25,7 @@ import download_svg from '../molecules/images/download.svg';
 import { HiOutlineExternalLink, } from 'react-icons/hi';
 import { MdDone } from 'react-icons/md';
 import { CgMailOpen } from 'react-icons/cg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import envelope_svg from '../molecules/images/envelope-open-text-solid.svg';
 
 const itemsPerPage = 5;
@@ -211,7 +211,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
       } else if(type === 'download') {
          downloadUsingAnchorTag(eachRow.baseUrl + eachRow.file_path);
       } else {
-        window.open(`labour-share-doc-preview?entityid=${entityId}`, '_blank');
+        window.open(`labour-share-doc-preview?entityid=${entityId}&ref_id=${eachRow.tid}`, '_blank');
       }
       return;
     }
@@ -418,23 +418,23 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
         <div className='col-md-12'>
           <ul className={`${styles['todo-tabs']} col-md-6 m-0`}>
             {state.tabs.map(tab => {
-              // let Icon = selectedTabId === tab.id ? tab.activeIcon : tab.icon;
-              // return (
-              //   <li key={tab.id} className='col-md-1'>
-              //     <div className={`w-auto d-inline-block my_todo_color ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
-              //       <span id={tab.id} className={`${styles['todo-icon']}`}>  <img src={Icon}></img> </span>
-              //       <span className="d-block my-1 text-center"> {tab.name} </span>
-              //     </div>
-              //   </li>
-              let Icon = tab.icon;
+              let Icon = selectedTabId === tab.id ? tab.activeIcon : tab.icon;
               return (
-                <li key={tab.id}>
-                  <div className={`w-50 py-2 text-center ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
-                    <span id={tab.id} className={`${styles['todo-icon']}`}> <FontAwesomeIcon icon="fa-solid fa-envelope-open-text" /> </span>
-                    <span className="d-block my-1"> {tab.name} </span>
+                <li key={tab.id} className='col-md-1'>
+                  <div className={`w-auto d-inline-block my_todo_color ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
+                    <span id={tab.id} className={`${styles['todo-icon']}`}>  <img src={Icon}></img> </span>
+                    <span className="d-block my-1 text-center"> {tab.name} </span>
                   </div>
                 </li>
-    
+              // let Icon = tab.icon;
+              // return (
+              //   <li key={tab.id}>
+              //     <div className={`w-50 py-2 text-center ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
+              //       <span id={tab.id} className={`${styles['todo-icon']}`}> <FontAwesomeIcon icon="fa-solid fa-envelope-open-text" /> </span>
+              //       <span className="d-block my-1"> {tab.name} </span>
+              //     </div>
+              //   </li>
+              //
               )
             })}
           </ul>
