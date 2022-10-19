@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { homeScreen } from '../../Services/ApiEndPoints';
 import checkPinCode from '../../Services/ApiEndPoints';
@@ -27,7 +28,7 @@ const Pincode = () => {
 	//for router
 	const router = useRouter();
         const { contextState: { uid: loggedInUserId = 0 } } = useContext(UserAuthContext);
-		
+
 	//get the otp
 	const [ otp, setOTP ] = useState(0);
 	//to catch the error
@@ -52,16 +53,16 @@ const Pincode = () => {
 			//get the user id from the local storage.
 			if (loggedInUserId) {
 				userid = Number(loggedInUserId);
-
 				//sending the api to check weather the user have pincode or not.
-				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + userid, 'GET')
+				
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + contextState.uid, 'GET')
 					.then((result) => {
 						if (result == 999) {
 							//if the user don't have the pincode redirecting him to the generate pincode page.
 							router.push('/pincode/generate/Pin');
 						}
 						//setting the user id to the hook.
-						setuid(userid);
+						setuid(contextState.uid);
 					})
 					.catch((error) => {
 						console.error(error);

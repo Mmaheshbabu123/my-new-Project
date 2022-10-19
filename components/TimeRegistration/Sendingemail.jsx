@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { red } from 'tailwindcss/colors';
 import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import checkPinCode from '../../Services/ApiEndPoints';
 
 const OTPInput = dynamic(
@@ -22,6 +23,8 @@ const ResendOTP = dynamic(
 
 const Pincode = () => {
 	const router = useRouter();
+	const { contextState = {} } = useContext(UserAuthContext);
+
 	const [ hasPin, setHasPin ] = useState(false);
 
 	useEffect(
@@ -29,17 +32,10 @@ const Pincode = () => {
 			var uid = null;
 			if (!router.isReady) return;
 
-			if (localStorage.getItem('uid') != null) {
-				uid = JSON.parse(localStorage.getItem('uid'));
-			} else {
-				window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-			}
-			
 			var p_unique_key = router.query.p_unique_key;
-			if (uid != undefined && uid != null) {
+			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
 				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/forgot-pin/' + uid, 'GET')
 					.then((result) => {
-						console.log(true);
 						if (result) {
 							setHasPin(false);
 						}else{
