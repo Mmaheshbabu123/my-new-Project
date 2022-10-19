@@ -125,10 +125,15 @@ const ValidationService = {
   },
 
   onlyFutureDateValidationMethod:function (value) {
+   
     let dateObj = new Date();
-    var yesterdaydate=new Date(dateObj.valueOf() - 86400000);
     var currentdate=new Date(value);
-    if (yesterdaydate<currentdate) {
+    //oneday
+    // var dateOffset = (24*60*60*1000) * 1;
+    // alert(dateObj.getTime());
+    // alert(currentdate.getTime());
+    var aaj=new Date(dateObj.getTime()-86400000);
+    if (aaj.getTime()< currentdate.getTime()) {
       return '';
     } else {
       return 'Date is invalid.';

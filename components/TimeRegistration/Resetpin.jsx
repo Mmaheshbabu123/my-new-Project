@@ -45,7 +45,7 @@ const Pincode = () => {
 			}
 			var p_unique_key = router.query.p_unique_key;
 			if (uid != undefined && uid != null) {
-				APICALL.service('http://absoluteyou-backend.local/api/hasPincode/' + uid, 'GET')
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/hasPincode/' + uid, 'GET')
 					.then((result) => {
 						if (result != 999) {
 							setHasPin(true);
@@ -98,10 +98,10 @@ const Pincode = () => {
 	const Submit = (event) => {
 		event.preventDefault();
 		if(validate(otp,otp1)){
-			APICALL.service('http://absoluteyou-backend.local/api/pincodegeneration/' + uid+'?pincode='+otp1, 'GET')
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/pincodegeneration/' + uid+'?pincode='+otp1, 'GET')
 					.then((result) => {
 						if (result == 200) {
-							window.location.replace(homeScreen);
+							router.push('/pincode/options');
 						}
 					})
 					.catch((error) => {
