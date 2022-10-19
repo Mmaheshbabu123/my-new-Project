@@ -9,8 +9,9 @@ import { useRouter } from 'next/router';
 import { FaCheck, FaRegCheckCircle } from 'react-icons/fa';
 import { BsCircle } from 'react-icons/bs';
 import AddSalaryBenefits from './AddSalaryBenefits';
-
+import Translation from '@/Translation';
 const PcCommon = (props) => {
+	const {t} =props;
 	const router = useRouter();
 	const [ current_sec, setCurrent_sec ] = useState(1); //holds value for active tab [1=addPc  2=Add caterory and function 3=Add age 4=Employee Type 5=Salary benefits]
 	const [ sec_completed, setSec_completed ] = useState({
@@ -139,8 +140,8 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-16px-white  btn-active">Step 1:</p>
-										<p className='poppins-regular-18px-white btn-active'>Paritair comite details</p>
+										<p className="mb-2 poppins-regular-16px-white  btn-active">{t('Step 1:')}</p>
+										<p className='poppins-regular-18px-white btn-active'>{t('Paritair comite details')}</p>
 									</button>
 								</li>
 								<li className="col border-0 rounded-0 poppins-regular-16px " role="presentation">
@@ -164,7 +165,7 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-16px-white btn-active">Step 2:</p> <p className='poppins-regular-18px-white btn-active'>Category and Function</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">{t('Step 2:')}</p> <p className='poppins-regular-18px-white btn-active'>{t('Category and Function')}</p>
 									</button>
 								</li>
 								<li className="col border-0 rounded-0 poppins-regular-16px" role="presentation">
@@ -188,7 +189,7 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-16px-white btn-active">Step 3:</p> <p className='poppins-regular-18px-white  btn-active'>Age</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">Step 3:</p> <p className='poppins-regular-18px-white  btn-active'>{t('Age')}</p>
 									</button>
 								</li>
 								<li className="col border-0 rounded-0 poppins-regular-16px" role="presentation">
@@ -212,7 +213,7 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-16px-white  btn-active">Step 4:</p> <p className='poppins-regular-18px-white btn-active'>Employee type</p>
+										<p className="mb-2 poppins-regular-16px-white  btn-active">{t('Step 4:')}</p> <p className='poppins-regular-18px-white btn-active'>{t('Employee type')}</p>
 									</button>
 								</li>
 								<li className="col border-0 rounded-0 pe-0 poppins-regular-16px" role="presentation">
@@ -236,7 +237,7 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-16px-white btn-active">Step 5:</p> <p className='poppins-regular-18px-white btn-active'>Salary benefits</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">{t('Step 5:')}</p> <p className='poppins-regular-18px-white btn-active'>{t('Salary benefits')}</p>
 									</button>
 								</li>
 							</ul>
@@ -300,4 +301,4 @@ const PcCommon = (props) => {
 	);
 };
 
-export default PcCommon;
+export default React.memo(Translation(PcCommon,['Step 1:','Paritair comite details','Step 2:','Category and Function','Age','Step 4:','Employee type','Step 5:','Salary benefits']));

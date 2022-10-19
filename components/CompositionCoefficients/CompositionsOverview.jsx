@@ -6,6 +6,7 @@ import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import SearchIcon from '../SearchIcon';
 import ReactPaginate from 'react-paginate';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 const itemsPerPage = 8;
 
 const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
@@ -107,7 +108,7 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
           {`+ Add composition coefficient`}
         </button>
       </div>
-      <div className='row searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+      <div className='row searchbox m-0 mt-2 mb-4' style={{ margin: '10px 0', position: 'relative' }}>
        <div className='col-md-12 row'>
          <div className='col-md-6 p-0'>
            <input
@@ -157,12 +158,12 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
       <div>
         {state.filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="Next >"
+            nextLabel={<AiOutlineArrowRight />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={state.pageCount}
             forcePage={state.currentPage}
-            previousLabel="< Previous"
+            previousLabel={<AiOutlineArrowLeft />}
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"

@@ -7,7 +7,7 @@ import ValidationService from '../../Services/ValidationService';
 import { RadioGroup, Radio } from 'react-radio-input';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
-
+import Translation from '@/Translation';
 
 let dateObj = new Date();
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -15,6 +15,7 @@ let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear() - 1;
 
 const ViewSalaryBenefits = ({key}) => {
+	const {t}=props;
 	const {
 		pc_unique_key,
 		setPc_unique_key,
@@ -131,7 +132,7 @@ const ViewSalaryBenefits = ({key}) => {
 										aria-expanded="false"
 										aria-controls="flush-collapseOne"
 									>
-										Salary (verloning) - {element.name}
+										{t('Salary')} (verloning) - {element.name}
 									</button>
 								</h2>
 								<div
@@ -151,7 +152,7 @@ const ViewSalaryBenefits = ({key}) => {
 														
 													/>
 														<label className="form-check-label" htmlFor="flexCheckDefault">
-															<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>Is this mandatory?</p>
+															<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>{t('Is this mandatory?')}</p>
 														</label>
 												</div>
 												<div  className={pc_view_type == 'addpc' ? 'col-md-9' : "col-md-12 d-flex align-items-baseline"}>
@@ -164,8 +165,8 @@ const ViewSalaryBenefits = ({key}) => {
 													
 													/>
 													<label className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>
-														Allow sales agent to update the value during creation of
-														cooperation agreement?
+														{t('Allow sales agent to update the value during creation of')}
+														{t('cooperation agreement?')}
 													</label>
 												</div>
 											</div>
@@ -174,7 +175,7 @@ const ViewSalaryBenefits = ({key}) => {
 												<div className={pc_view_type == 'addpc' ? 'col-md-4' : "col-md-12"} >
 													<div className="row mb-4">
 														<label className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>
-															Salary benefit value
+															{t('Salary benefit value')}
 														</label>
 
 														<RadioGroup
@@ -189,7 +190,7 @@ const ViewSalaryBenefits = ({key}) => {
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="valuetype1" value={1} />
-																value in €
+																{t('value in')} €
 															</label>
 															<br />
 															<label
@@ -197,7 +198,7 @@ const ViewSalaryBenefits = ({key}) => {
 																className="mb-3 poppins-regular-16px"
 															>
 																<Radio id="valuetype2" value={2} />
-																value in %
+																{t('value in')} %
 															</label>
 														</RadioGroup>
 
@@ -215,7 +216,7 @@ const ViewSalaryBenefits = ({key}) => {
 													</div>
 													<div className="row">
 														<label className="mb-2 poppins-regular-16px">
-															Is the benefit granted in case of absence of the employee?
+															{t('Is the benefit granted in case of absence of the employee?')}
 														</label>
 														<RadioGroup
 														disabled={onlyview}
@@ -227,7 +228,7 @@ const ViewSalaryBenefits = ({key}) => {
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="granted1" value={0} />
-																Yes
+																{t('Yes')}
 															</label>
 															<br />
 															<label
@@ -235,7 +236,7 @@ const ViewSalaryBenefits = ({key}) => {
 																className="mb-3 poppins-regular-16px"
 															>
 																<Radio id="granted2" value={1} />
-																No
+																{t('No')}
 															</label>
 														</RadioGroup>
 													</div>
@@ -243,7 +244,7 @@ const ViewSalaryBenefits = ({key}) => {
 												<div className={pc_view_type == 'addpc' ? 'col-md-4' : "col-md-12 ps-3"} >
 													<div className="row mb-4">
 														<label className="mb-2 poppins-regular-16px">
-															Applicable coefficient
+															{t('Applicable coefficient')}
 														</label>
 														<RadioGroup
 
@@ -257,7 +258,7 @@ disabled={onlyview}
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="coefficient1" value={1} />
-																Yes
+																{t('Yes')}
 															</label>
 															<br />
 															<label
@@ -265,7 +266,7 @@ disabled={onlyview}
 																className="mb-3 poppins-regular-16px"
 															>
 																<Radio id="coefficient2" value={2} />
-																No
+																{t('No')}
 															</label>
 														</RadioGroup>
 														<br />
@@ -282,7 +283,7 @@ disabled={onlyview}
 														<p style={{ color: 'red' }}>{element.c_err}</p>
 													</div>
 													<div className="row mb-3">
-														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>Start date</label>
+														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>{t('Start date')}</label>
 														<DateField
 															id={'date'}
 															isDisabled={onlyview}
@@ -297,7 +298,7 @@ disabled={onlyview}
 												</div>
 												<div className={pc_view_type == 'addpc' ? 'col-md-4 occurence_col' : "col-md-12 occurence_col ps-3"} >
 													<div className="row">
-														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>Occurence</label>
+														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>{t('Occurence')}</label>
 														<MultiSelectField
 															id={'select_id'}
 															options={options}
@@ -328,7 +329,7 @@ disabled={onlyview}
 		>
 			<form onSubmit={Submit}>
 					<h4 className='h5 mt-3' >
-					Salary benefits
+					{t('Salary benefits')}
 					</h4>
 				
 				{rows}
@@ -340,7 +341,7 @@ disabled={onlyview}
 								type="sumit"
 								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
 							>
-								SAVE
+								{t('SAVE')}
 							</button>
 						</div>
 					</div>
@@ -354,7 +355,7 @@ disabled={onlyview}
 									setCurrent_sec(4);
 								}}
 							>
-								BACK
+								{t('BACK')}
 							</button>
 						</div>
 						<div className="text-end col-md-6">
@@ -362,7 +363,7 @@ disabled={onlyview}
 								type="sumit"
 								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
 							>
-								SAVE
+								{t('SAVE')}
 							</button>
 						</div>
 					</div>
@@ -373,4 +374,5 @@ disabled={onlyview}
 		</div>
 	);
 };
-export default ViewSalaryBenefits;
+export default React.memo(transalation(ViewSalaryBenefits,['Salary','Is this mandatory?','Allow sales agent to update the value during creation of','cooperation agreement?',
+'Salary benefit value','value in','Is the benefit granted in case of absence of the employee?','Yes','No','Applicable coefficient','Start date','Occurence','Salary benefits','SAVE','BACK','SAVE']));

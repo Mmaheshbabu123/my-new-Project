@@ -5,8 +5,9 @@ import { addFunction, fetchFunction, updateFunction } from '../../Services/ApiEn
 import { PcContext } from '../../Contexts/PcContext';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-
+import Translation from '@/Translation';
 function AddFunction(props) {
+	const {t}=props;
 	const router = useRouter();
 	const [ id, setId ] = useState('');
 	const [ data, setData ] = useState({
@@ -142,13 +143,13 @@ function AddFunction(props) {
 			if(typeof props.categorylist == 'object'){
 				Object.keys(props.categorylist).map((element) => {
 				if (props.categorylist[element].type == '3' && props.categorylist[element].id != id && props.categorylist[element].function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
-					error['error_function_name'] = 'Function name already exist.';
+					error['error_function_name'] = t('Function name already exist.');
 				}
 				if(props.categorylist[element].type == '2'){
 					if(props.categorylist[element].childObj != undefined){
 						Object.keys(props.categorylist[element].childObj).map((val)=>{
 						if (props.categorylist[element].childObj[val].type == '3' && props.categorylist[element].childObj[val].id != id && props.categorylist[element].childObj[val].function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
-							error['error_function_name'] = 'Function name already exist.';
+							error['error_function_name'] = t('Function name already exist.');
 						}
 
 					})
@@ -158,13 +159,13 @@ function AddFunction(props) {
 		}else{
 			props.categorylist.forEach((val1, key) => {
 				if (val1.type == '3' && val1.id != id && val1.function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
-					error['error_function_name'] = 'Function name already exist.';
+					error['error_function_name'] = t('Function name already exist.');
 				}
 				if(val1.type == '2'){
 					if(val1.childObj != undefined){
 					val1.childObj.forEach((v, k)=>{
 						if (v.type == '3' && v.id != id && v.function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
-							error['error_function_name'] = 'Function name already exist.';
+							error['error_function_name'] = t('Function name already exist.');
 						}
 					})
 					}
@@ -209,9 +210,9 @@ function AddFunction(props) {
 		<div className="mt-3 table-title-bg p-3">
 			<form className="Search__form" onSubmit={submit}>
 				<div className="row">
-					{id != '' ? <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">Edit function</h4> : <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">Add function</h4>}
+					{id != '' ? <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">{t('Edit function')}</h4> : <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">{t('Add function')}</h4>}
 					<div className="form-group mb-2">
-						<label className="custom_astrick mt-2 poppins-regular-16px">Function name</label>
+						<label className="custom_astrick mt-2 poppins-regular-16px">{t('Function name')}</label>
 						<input
 							type="text"
 							className=" form-control my-2 border-0 poppins-medium-16px shadow-none rounded-0"
@@ -268,7 +269,7 @@ function AddFunction(props) {
 					)}
 
 					<div className="form-group mb-2">
-						<label className="custom_astrick mt-2 poppins-regular-16px">Minimum salary</label>
+						<label className="custom_astrick mt-2 poppins-regular-16px">{t('Minimum salary')}</label>
 						<div className="input-group">
 						<span className="input-group-text bg-white rounded-0 border-0 category_currency_height poppins-medium-16px my-2">€</span>
 							<input
@@ -312,7 +313,7 @@ function AddFunction(props) {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 							}}
 						>
-							SAVE
+							{t('SAVE')}
 						</button>
 					</div>
 				</div>
@@ -321,4 +322,4 @@ function AddFunction(props) {
 	);
 }
 
-export default AddFunction;
+export default React.memo(Translation(AddFunction,['Function name already exist.','Edit function','Add function','Function name','Minimum salary','SAVE']));

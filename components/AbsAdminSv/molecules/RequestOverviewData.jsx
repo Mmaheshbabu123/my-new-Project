@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import {MdEdit, MdDelete } from 'react-icons/md';
 import {  AiOutlineUserAdd, AiOutlineUserSwitch, AiFillFilePdf } from 'react-icons/ai';
 import { deleteCooperationAgreement, downloadSvAsPdf } from '@/Services/ApiEndPoints';
@@ -230,12 +231,12 @@ const RequestOverviewData = (props) => {
         <div>
         {filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="Next >"
+            nextLabel={<AiOutlineArrowRight />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={pageCount}
             forcePage={currentPage}
-            previousLabel="< Previous"
+            previousLabel={<AiOutlineArrowLeft />}
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"

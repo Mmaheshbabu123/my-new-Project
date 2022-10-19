@@ -1,8 +1,9 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-
+import Translation from "@/Translation";
 const Pagination = (props) =>{
+const {t} =props;
 return (
     <div>
         <ReactPaginate

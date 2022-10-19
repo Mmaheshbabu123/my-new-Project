@@ -2,8 +2,9 @@ import React, { Component, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
 import { MdQrCode } from 'react-icons/md';
-
+import Translation from '@/Translation';
 function QRCode(props) {
+	const {t}=props;
 	return (
 		<div>
 			<div
@@ -15,7 +16,7 @@ function QRCode(props) {
 				<div className="modal-dialog modal-lg ">
 					<div className="modal-content  ">
 						<div className="modal-header">
-							<p className="modal-title h4">Start/stop by QRcode</p>
+							<p className="modal-title h4">{t('Start/stop by QRcode')}</p>
 							<button
 								type="button"
 								className="btn-close"
@@ -33,4 +34,4 @@ function QRCode(props) {
 		</div>
 	);
 }
-export default QRCode;
+export default React.memo(Translation(QRCode,['Start/stop by QRcode']));

@@ -1112,11 +1112,22 @@ div[disabled] {
 }
 .timepage-calander .rmdp-left {
 	left: 38%;
+	top: 20px;
 	/* transform: translateY(-39%); */
+}
+.timepage-calander .rmdp-left:hover,
+.timepage-calander .rmdp-right:hover
+{
+	background-color: transparent !important;
 }
 .timepage-calander .rmdp-right {
 	right: 38%;
+	top: 20px;
 	/* transform: translateY(-39%); */
+}
+.form-check-input:focus
+{
+	border-color: var(--color-input-border-lightgrey) !important;
 }
 .timepage-calander .rmdp-week-day {
 	color: var(--color-skyblue);
@@ -2058,4 +2069,23 @@ input[type="search"]::-webkit-search-cancel-button {
 .dashboard-image-div {
 	width: 80px;
 	height: 80px;
+}
+.progress-bar
+{
+	background-color: var(--color-skyblue) !important;
+}
+.position-sticky-config-add,
+.position-sticky-config-link
+{
+	position: sticky;
+	top: 162px;
+	background: var(--color-white);
+	z-index: 998;
+}
+.position-sticky-config-search
+{
+	position: sticky;
+	top: 225px;
+	background: var(--color-white);
+	z-index: 998;	
 }

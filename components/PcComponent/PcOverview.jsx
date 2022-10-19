@@ -35,8 +35,9 @@ import {
 
 import { useRouter } from 'next/router';
 import CompanyOptions from 'pages/manage-planning/select';
-
+import Translation from '@/Translation';
 const PcOverview = (params) => {
+	const {t}=props;
 	const {
 		pc_unique_key,
 		setPc_unique_key,
@@ -153,9 +154,9 @@ const PcOverview = (params) => {
 			<div className='row position-sticky-pc'>
 				<div className='col-md-12'>
 				{params.type == 'editpc' ? (
-						<p className="py-4 font-weight-bold   px-0  bitter-italic-normal-medium-24 ">Edit paritair comite</p>
+						<p className="py-4 font-weight-bold   px-0  bitter-italic-normal-medium-24 ">{t('Edit paritair comite')}</p>
 					) : params.type == 'viewpc' ? (
-						<p className=" py-4 font-weight-bold   px-0  bitter-italic-normal-medium-24">View paritair comite</p>
+						<p className=" py-4 font-weight-bold   px-0  bitter-italic-normal-medium-24">{t('View paritair comite')}</p>
 					) : (
 						''
 					)}
@@ -194,7 +195,7 @@ const PcOverview = (params) => {
 											setCat_subsec_type(2);
 										}}
 									>
-										+ Add function
+										+ {t('Add function')}
 									</button>
 								</div>
 							)}
@@ -463,7 +464,7 @@ const PcOverview = (params) => {
 										}
 									}}
 								>
-									BACK
+									{t('BACK')}
 								</button>
 							</div>
 							<div className="text-end col-md-6" />
@@ -483,7 +484,7 @@ const PcOverview = (params) => {
 									setCat_subsec_id('');
 								}}
 							>
-								+ Add category
+								+ {t('Add category')}
 							</button>
 							<button
 								type="button"
@@ -495,7 +496,7 @@ const PcOverview = (params) => {
 									setCat_subsec_id('');
 								}}
 							>
-								+ Add function
+								+ {t('Add function')}
 							</button>
 						</div>
 					)}
@@ -526,7 +527,7 @@ const PcOverview = (params) => {
 								params.pc_type == 'edit' ? router.push('/manage-pc') : setCurrent_sec(1);
 							}}
 						>
-							BACK
+							{t('BACK')}
 						</button>
 					</div>
 					<div className="text-end col-md-6 px-0">
@@ -537,7 +538,7 @@ const PcOverview = (params) => {
 								next_redirection();
 							}}
 						>
-							NEXT
+							{t('NEXT')}
 						</button>
 					</div>
 				</div>
@@ -545,4 +546,4 @@ const PcOverview = (params) => {
 		</div>
 	);
 };
-export default PcOverview;
+export default React.memo(Translation(PcOverview,['Edit paritair comite','View paritair comite','Add function','BACK','Add category','NEXT']));

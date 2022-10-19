@@ -5,11 +5,12 @@ import { fetchallproject, fetchallarchivedprojects } from '../../Services/ApiEnd
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
-
+import Translation from '@/Translation';
 function ManageArchivedProject(props) {
 	/**
      * Initialise search filter 
      */
+	const {t}=props;
 	const [ searchArchivedProjectname, setSearchArchivedProjectname ] = useState('');
 	const [ searchArchivedlocation, setSearchArchivedlocation ] = useState('');
 	const [ searchArchivedaddress, setSearchArchivedaddress ] = useState('');
@@ -229,7 +230,7 @@ function ManageArchivedProject(props) {
 									type="search"
 									id="form12"
 									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-									placeholder="Project name"
+									placeholder={t("Project name")}
 									value={searchArchivedProjectname}
 									onChange={(e) => setSearchArchivedProjectname(e.target.value)}
 								/>
@@ -240,7 +241,7 @@ function ManageArchivedProject(props) {
 									type="search"
 									id="form12"
 									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-									placeholder="Location"
+									placeholder={t("Location")}
 									value={searchArchivedlocation}
 									onChange={(e) => setSearchArchivedlocation(e.target.value)}
 								/>
@@ -251,7 +252,7 @@ function ManageArchivedProject(props) {
 									type="search"
 									id="form12"
 									className="form-control mt-2 mb-2 text-break input-border-lightgray poppins-regular-18px mh-50 rounded-0  shadow-none"
-									placeholder="Address"
+									placeholder={t("Address")}
 									value={searchArchivedaddress}
 									onChange={(e) => setSearchArchivedaddress(e.target.value)}
 								/>
@@ -264,7 +265,7 @@ function ManageArchivedProject(props) {
 									className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 w-100 skyblue-bg-color shadow-none"
 									onClick={() => handleSearch()}
 								>
-									SEARCH
+									{t('SEARCH')}
 								</button>
 									</div>
 									<div className='col-md-6'>
@@ -279,7 +280,7 @@ function ManageArchivedProject(props) {
 										className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
 										onClick={() => handleReset()}
 									>
-										RESET
+										{t('RESET')}
 									</button>
 								)}
 									</div>
@@ -295,10 +296,10 @@ function ManageArchivedProject(props) {
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 										<th className="poppins-medium-18px btn-bg-gray-medium p-2 ps-4">
-											Project name
+											{t('Project name')}
 										</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium p-2">Location</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium p-2">Address</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Location')}</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Address')}</th>'Address','Location',"Project name","Location","Address",'SEARCH','RESET','Project name'
 									</tr>
 								</thead>
 								<tbody>
@@ -317,7 +318,7 @@ function ManageArchivedProject(props) {
 									{archivedproject.length == 0 && (
 										<tr>
 											<td colSpan={4} className="text-center">
-												No records
+												{t('No records')}
 											</td>
 										</tr>
 									)}
@@ -357,11 +358,11 @@ function ManageArchivedProject(props) {
 							);
 						}}
 					>
-						BACK
+						{t('BACK')}
 					</button>
 				</div>
 			</form>
 		</div>
 	);
 }
-export default ManageArchivedProject;
+export default React.memo(Translation(ManageArchivedProject,['Address','Location',"Project name","Location","Address",'SEARCH','RESET','Project name','No records','BACK']));

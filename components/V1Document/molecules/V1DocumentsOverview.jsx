@@ -10,6 +10,7 @@ import { FiDownload } from 'react-icons/fi';
 import styles from './V1Document.module.css';
 import customAlert from '@/atoms/customAlert';
 import { getLastTwelveMonths } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 const itemsPerPage = 8;
 
 const monthOptions = getLastTwelveMonths();
@@ -233,7 +234,7 @@ const V1DocumentsOverview = (props) => {
 
   return(
     <div>
-    <div className='searchbox m-0 v1_doc v1_position_sticky' style={{ margin: '10px 0', position: 'relative' }}>
+    <div className='searchbox m-0 v1_doc v1_position_sticky mb-4' style={{ margin: '10px 0', position: 'relative' }}>
     <div className='row '>
     <div className='col-md-12'>
        <div className='row'>
@@ -300,12 +301,12 @@ const V1DocumentsOverview = (props) => {
     <div>
     {state.filterRows.length > itemsPerPage && <ReactPaginate
         breakLabel="..."
-        nextLabel="Next >"
+        nextLabel={<AiOutlineArrowRight />}
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={state.pageCount}
         forcePage={state.currentPage}
-        previousLabel="< Previous"
+        previousLabel={<AiOutlineArrowLeft />}
         renderOnZeroPageCount={null}
         containerClassName={"pagination"}
         itemClass="page-item"

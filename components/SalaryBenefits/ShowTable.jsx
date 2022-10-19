@@ -103,7 +103,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
       <div className='py-4 position-sticky-pc'>
       <h4 className='font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage salary benefits`} </h4>
       </div>
-      <div className='col-md-12 text-end'>
+      <div className='col-md-12 text-end position-sticky-config-link'>
         <button
           onClick={() => router.push(`manage-salary-benefits?action=create&id=0`)}
           type="button"
@@ -112,7 +112,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           {`+ Add salary benefit`}
         </button>
       </div>
-      <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+      <div className='searchbox m-0 pb-4 pt-2 position-sticky-config-search' style={{ margin: '10px 0' }}>
        <div className='row'>
          <div className='col-lg-9 col-md-7 pe-4'>
            <input

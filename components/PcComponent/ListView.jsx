@@ -11,8 +11,9 @@ import {
 	FaRedo
 } from 'react-icons/fa';
 // import './/pc.css';
-
+import Translation from '@/Translation';
 const ListView = (props) => {
+	const {t}=props;
 	console.log(props)
 	const [ header, setHeader ] = useState([]);
 	const [ tval, setTval ] = useState([]);

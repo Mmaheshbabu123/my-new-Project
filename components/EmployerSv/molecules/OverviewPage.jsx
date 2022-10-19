@@ -6,6 +6,7 @@ import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
 import pdf_icon from '../molecules/images/Pdf.svg';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
@@ -180,12 +181,12 @@ const OverviewPage = (props) => {
         <div>
         {filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="Next >"
+            nextLabel={<AiOutlineArrowRight />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={pageCount}
             forcePage={currentPage}
-            previousLabel="< Previous"
+            previousLabel={<AiOutlineArrowLeft />}
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"

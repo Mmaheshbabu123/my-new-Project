@@ -3,8 +3,9 @@ import { PcContext } from '../../Contexts/PcContext';
 import ValidationService from '../../Services/ValidationService';
 import { addAge, getAge, updateAge } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
-
-const Addage = () => {
+import Translation from '@/Translation';
+const Addage = (props) => {
+	const {t} = props;
 	const [ id, setId ] = useState('');
 	const [ disableForm, setDisableForm ] = useState(false);
 	const [ sec_width, setSec_width ] = useState('col-md-6');
@@ -338,7 +339,7 @@ const Addage = () => {
 	return (
 		<div className={pc_view_type == 'addpc'?"":pc_view_type == 'viewpc'?"mb-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
 			<form onSubmit={(e) => submit(e)}>
-				{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3 ":"bitter_medium_italic_18px mb-4"}>Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 bitter_medium_italic_18px mb-4">Age</h4>:'')}
+				{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3 ":"bitter_medium_italic_18px mb-4"}>{t('Edit age')}</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 bitter_medium_italic_18px mb-4">{t('Age')}</h4>:'')}
 
 			<div className='min_height_age'>
 			<div className={pc_view_type == 'addpc'?"row p-4 border-form-sec m-0 pc-height3 scroll":"border-0"}>
@@ -347,7 +348,7 @@ const Addage = () => {
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}
 
 						<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3 "}>
-							<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>At which age full salary is paid?</label>
+							<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>{t('At which age full salary is paid?')}</label>
 							<select
 								disabled={disableForm}
 								type="text"
@@ -360,11 +361,11 @@ const Addage = () => {
 							>
 
 
-								<option value="" className='poppins-medium-16px opt_value'>Select age</option>
-								<option value="4" className='poppins-medium-16px opt_value'>21 years</option>
-								<option value="3" className='poppins-medium-16px opt_value'>20 years</option>
-								<option value="2" className='poppins-medium-16px opt_value'>19 years</option>
-								<option value="1" className='poppins-medium-16px opt_value'>18 years</option>
+								<option value="" className='poppins-medium-16px opt_value'>{t('Select age')}</option>
+								<option value="4" className='poppins-medium-16px opt_value'>21 {t('years')}</option>
+								<option value="3" className='poppins-medium-16px opt_value'>20 {t('years')}</option>
+								<option value="2" className='poppins-medium-16px opt_value'>19 {t('years')}</option>
+								<option value="1" className='poppins-medium-16px opt_value'>18 {t('years')}</option>
 							</select>
 							<p className="error">{error_age}</p>
 						</div>
@@ -372,7 +373,7 @@ const Addage = () => {
 						{/* IF AGE = 21 */}
 						{showhideage === '4' && (
 							<div className={pc_view_type == 'addpc'?"mb-4 col-md-6":pc_view_type == 'viewpc'?"col-md-12 my-3":'col-md-12 my-3'}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 20 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>{t('Minimum salary for 20 years?')}</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
@@ -391,7 +392,7 @@ const Addage = () => {
 						{/* IF AGE >= 20 */}
 						{(showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 19 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>{t('Minimum salary for 19 years?')}</label>
 								<div className="input-group">
 									<input
 									    disabled={disableForm}
@@ -410,7 +411,7 @@ const Addage = () => {
 						{/* IF AGE >= 19 */}
 						{(showhideage === '2' || showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 18 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>{t('Minimum salary for 18 years?')}</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
@@ -430,7 +431,7 @@ const Addage = () => {
 						{/* IF AGE >= 18 */}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 17 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>{t('Minimum salary for 17 years?')}</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
@@ -448,7 +449,7 @@ const Addage = () => {
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 16 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>{t('Minimum salary for 16 years?')}</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
@@ -466,7 +467,7 @@ const Addage = () => {
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
 							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
-								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 15 years?</label>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>{t('Minimum salary for 15 years?')}</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
@@ -501,7 +502,7 @@ const Addage = () => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								SAVE
+								{t('SAVE')}
 							</button>
 						</div>
 					</div>
@@ -515,7 +516,7 @@ const Addage = () => {
 									setCurrent_sec(2);
 								}}
 							>
-								BACK
+								{t('BACK')}
 							</button>
 						</div>
 						<div className="text-end col-md-6 p-0">
@@ -526,7 +527,7 @@ const Addage = () => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								NEXT
+								{t('NEXT')}
 							</button>
 						</div>
 					</div>):''
@@ -535,4 +536,4 @@ const Addage = () => {
 		</div>
 	);
 };
-export default Addage;
+export default React.memo(Translation(Addage,['Edit age','Age','At which age full salary is paid?','Select age','Minimum salary for 20 years?','Minimum salary for 19 years?','Minimum salary for 18 years?','Minimum salary for 17 years?','years','Minimum salary for 16 years?','Minimum salary for 15 years?','SAVE','BACK','NEXT']));

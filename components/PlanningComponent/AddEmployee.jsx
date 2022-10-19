@@ -5,11 +5,12 @@ import { addplanningemployee, fetchPlanningEmployee } from '../../Services/ApiEn
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { cloneDeep } from 'lodash';
+import Translation from '@/Translation';
 
-const AddEmployee = () => {
+const AddEmployee = (props) => {
 	const router = useRouter();
 	const p_unique_key = router.query.p_unique_key;
-
+	const { t } = props;
 	const [ empList, setEmpList ] = useState([]);
 	const [ tempEmpList, setTempEmpList ] = useState([]);
 	const [ pclist, setPclist ] = useState([]);
@@ -143,11 +144,11 @@ const AddEmployee = () => {
 		var data = [ ...res ];
 		data.map((val, key) => {
 			if (val.pc.length == 0) {
-				data[key].pc_error = 'This field is required.';
+				data[key].pc_error = t('This field is required.');
 				count++;
 			}
 			if (val.employees.length == 0) {
-				data[key].emp_error = 'This field is required.';
+				data[key].emp_error = t('This field is required.');
 				count++;
 			}
 		});
@@ -191,7 +192,7 @@ const AddEmployee = () => {
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row m-0  position-sticky-pc">
 					<div className="row col-md-12" style={{}}>
-						<h1 className="py-4  font-weight-bold  bitter-italic-normal-medium-24 px-0">Select employee</h1>
+						<h1 className="py-4  font-weight-bold  bitter-italic-normal-medium-24 px-0">{t('Select employee')}</h1>
 					</div>
 				</div>
 				{/* Select paritair commite */}
@@ -203,7 +204,7 @@ const AddEmployee = () => {
 									<div className='row'>
 									<div className="col-md-8 select-relative slt-emp p-0">
 										<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px ps-0">
-											Paritair commite
+											{t('Paritair commite')}
 										</label>
 										<Select
 											id={'pc-value-select' + i}
@@ -229,7 +230,7 @@ const AddEmployee = () => {
 										<div className='row'>
 										<div className="col-md-8 select-relative slt-emp p-0">
 											<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px px-0">
-												Employee
+												{t('Employee')}
 											</label>
 											<Select
 												id={'emp-value-select' + i}
@@ -263,7 +264,7 @@ const AddEmployee = () => {
 														onClick={() => handleremove(i)}
 													>
 														<p className="bg-white border-0 poppins-medium-18px poppins-medium-18px shadow-none text-end text-decoration-underline">
-															Remove
+															{t('Remove')}
 														</p>
 													</button>
 												)}
@@ -278,7 +279,7 @@ const AddEmployee = () => {
 														onClick={handleaddanother}
 														style={{height:'43px'}}
 													>
-														+ Add
+														{t("+ Add")}
 													</button>
 												
 													</div>
@@ -304,7 +305,7 @@ const AddEmployee = () => {
 						<button type="button" className="btn  btn-block px-0 shadow-none">
 							<Link href={'/planning/add/' + p_unique_key}>
 								<p className="bg-white border-0 poppins-light-18px shadow-none text-decoration-underline">
-									BACK
+									{t('BACK')}
 								</p>
 							</Link>
 						</button>
@@ -315,7 +316,7 @@ const AddEmployee = () => {
 							type="sumit"
 							className="btn poppins-medium-18px-next-button rounded-0 px-3  btn-block float-end shadow-none"
 						>
-							NEXT
+							{t('NEXT')}
 						</button>
 					</div>
 				</div>
@@ -324,4 +325,5 @@ const AddEmployee = () => {
 	);
 };
 
-export default AddEmployee;
+export default React.memo(Translation(AddEmployee,['This field is required.','Select employee','Paritair commite','Employee','Remove','+ Add','BACK','NEXT']));
+

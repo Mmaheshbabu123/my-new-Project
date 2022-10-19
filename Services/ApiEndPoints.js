@@ -264,3 +264,7 @@ export const getIndexationOfSalary = BASE_URL + "fetch-all-indexation-salary";
 
 //-------------------------Add Planning---------------------------//
 export const getPlanning = BASE_URL + "fetch-add-planning-details/";
+
+
+//---------------------------- Contract API--------------------------- //\
+export const getContract = BASE_URL + "downloadContract/";
