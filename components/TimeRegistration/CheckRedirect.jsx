@@ -25,7 +25,7 @@ const CheckRedirect = () => {
 							//if the user don't have the pincode redirecting him to the generate pincode page.
 							router.push('/pincode/generate/Pin');
 						}else{
-                            router.push('/pincode/planning/Verifypin');
+                            router.push('/pincode/options');
                         }
 						//setting the user id to the hook.
 						setuid(userid);
