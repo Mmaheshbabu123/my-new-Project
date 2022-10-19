@@ -1,5 +1,4 @@
 import React, { Component, useEffect, useState, useContext } from 'react';
-import ReactDOM from 'react-dom';
 import {
 	addPlanning,
 	fetchPlanning,
@@ -506,7 +505,7 @@ function Planning(props) {
 						<div className="row mt-4 mb-2 col-md-12 m-0">
 							<div className="col-md-6 p-0">
 								<button type="button" className="btn  btn-block px-0 shadow-none">
-									<Link href={'/planning/options'}>
+									<Link href={router.query.type != undefined && router.query.type == 'edit'?'/manage-planning/weekly?type=draft':'/planning/options'}>
 										{/* <p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px "> */}
 										<p className="bg-white border-0 poppins-light-18px text-decoration-underline shadow-none ">
 											BACK
