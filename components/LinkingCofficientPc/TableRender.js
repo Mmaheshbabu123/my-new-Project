@@ -4,6 +4,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { delteCofficientPerPc} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 import ReactPaginate from 'react-paginate';
 const itemsPerPage = 8;

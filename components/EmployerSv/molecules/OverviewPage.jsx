@@ -6,6 +6,7 @@ import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
 import pdf_icon from '../molecules/images/Pdf.svg';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {

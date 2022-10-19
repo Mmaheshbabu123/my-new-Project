@@ -6,6 +6,7 @@ import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import SearchIcon from '../SearchIcon';
 import ReactPaginate from 'react-paginate';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 const itemsPerPage = 8;
 
 const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
