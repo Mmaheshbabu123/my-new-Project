@@ -1,7 +1,8 @@
 
 import Image from "next/image";
-
+import Translation from "@/Translation";
 function Breadcrum(props) {
+    const {t}=props;
 
     const contrast = () => {
         
@@ -60,7 +61,7 @@ function Breadcrum(props) {
                         className="faq tahoma-regular-normal-gravel-24px"
                         onClick={contrast}
                     >
-                        Contrast
+                        {t('Contrast')}
                     </a>
                 </div>
                 </li>
@@ -79,7 +80,7 @@ function Breadcrum(props) {
                         className="faq tahoma-regular-normal-gravel-24px"
                         onClick={largeFont}
                     >
-                        Groter
+                        {t('Groter')}
                     </a>
                 </div>
                 </li>
@@ -96,7 +97,7 @@ function Breadcrum(props) {
                         href="#"
                         className="faq tahoma-regular-normal-gravel-24px"
                     >
-                        Lees voor
+                        {t('Lees voor')}
                     </a>
                 </div>
                 </li>
@@ -106,4 +107,4 @@ function Breadcrum(props) {
         </>
     );
 };
-export default Breadcrum;
+export default React.memo(Translation(Breadcrum,['Contrast','Groter','Lees voor']));

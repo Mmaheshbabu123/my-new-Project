@@ -12,12 +12,14 @@ import Age19 from '../../public/images/Age_19.svg';
 import Age20 from '../../public/images/Age_20.svg';
 import Age21 from '../../public/images/Age_21.svg';
 import Image from 'next/image';
+import Translation from '@/Translation';
 
 import { FaRegPlusSquare, FaRegMinusSquare, FaEuroSign } from 'react-icons/fa';
 
 import { ExclamationTriangle } from 'node_modules/react-bootstrap-icons/dist/index';
 
-const AddFunction = () => {
+const AddFunction = (props) => {
+	const { t }=props;
 	const router = useRouter();
 	const salaryref = useRef(null);
 	const [ ischecked, setIsChecked ] = useState(false);
@@ -98,12 +100,12 @@ const AddFunction = () => {
 			let emp = '';
 
 			if (value.emp_type == '' || value.emp_type == null) {
-				emp = 'This field is required.';
+				emp = t('This field is required.');
 				count++;
 			}
 
 			if (value.funid == '' || value.funid == null || value.funid == 'drop') {
-				func = 'This field is required.';
+				func = t('This field is required.');
 				count++;
 			} else {
 				func = '';
@@ -123,14 +125,15 @@ const AddFunction = () => {
 					let rfsalary = String(value.function_salary).replace(',', '.');
 					if (sal == '' && parseFloat(rsalary) < parseFloat(rfsalary)) {
 						sal =
-							'The new salary cannot be lesser than the minimum salary. The minimum salary for the selected function is ' +
+							t('The new salary cannot be lesser than the minimum salary. The minimum salary for the selected function is ') +
 							value.function_salary +
-							' Euro';
+							t(' Euro');
+							
 						count++;
 					}
 				}
 			}
-
+			
 			var collapseOpen = true;
 			if (func != '' && func != null && func != undefined) {
 				collapseOpen = true;
@@ -271,7 +274,7 @@ const AddFunction = () => {
 			if (err == '') {
 				if (parseFloat(rsalary) > parseFloat(rfsalary)) {
 					object[index].warning =
-						'We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will be considered as the minimum salary for all the future planning for this employee for the selected function. You can click on next to proceed further.';
+						t('We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will be considered as the minimum salary for all the future planning for this employee for the selected function. You can click on next to proceed further.');
 					object[index].salaryerror = '';
 				} else {
 					object[index].warning = '';
@@ -475,16 +478,18 @@ const AddFunction = () => {
 		return options;
 	}
 
+	
+	
 	return (
 		<div className="col-md-12">
 			<form onSubmit={(e) => submit(e)}>
 				<div />
 				{/* <div className="row m-0"> */}
 				<div className="col-md-12 p-0 position-sticky-pc py-4">
-					<p className="pb-3 font-weight-bold px-0 bitter-italic-normal-medium-24">Add function</p>
+					<p className="pb-3 font-weight-bold px-0 bitter-italic-normal-medium-24">{t('Add function')}</p>
 				</div>
 				{loading == true ? (
-					<div>Loading...</div>
+					<div>{t('Loading...')}</div>
 				) : (
 					<div>
 						<div className="min-hei-addfun add_function">
@@ -503,7 +508,7 @@ const AddFunction = () => {
 										className="form-check-label px-1 poppins-regular-18px "
 										htmlFor="flexCheckChecked"
 									>
-										Same functions for all employees
+										{t('Same functions for all employees')}
 									</label>
 								</div>
 							)}
@@ -561,7 +566,7 @@ const AddFunction = () => {
 													<div className="col-md-3  border-0 custom-drop-btn">
 														{emptypes != null ? (
 															<MultiSelectField
-																placeholder={'Select employee type'}
+																placeholder={t('Select employee type')}
 																id={'select_id'}
 																options={emptypes}
 																standards={
@@ -609,7 +614,7 @@ const AddFunction = () => {
 																		ref={salaryref}
 																		type="textfield"
 																		name="salary"
-																		placeholder="salary"
+																		placeholder={t("salary")}
 																		//((key['salary'] !=key['function_salary'])||(salChanged == true))?
 																		value={
 																			key['salary'] != null ? key['salary'] : ''
@@ -725,7 +730,7 @@ const AddFunction = () => {
 																					style={{ display: 'inline-block' }}
 																				>
 																					<MultiSelectField
-																						placeholder={'Select function'}
+																						placeholder={t('Select function')}
 																						name="employefunctionsall"
 																						id={'select_id'}
 																						options={getOptions(
@@ -892,7 +897,7 @@ const AddFunction = () => {
 									className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline"
 									onClick={() => router.push('/planning/employees/' + router.query.p_unique_key)}
 								>
-									BACK
+									t{('BACK')}
 								</button>
 							</div>
 							<div className="text-end col-md-6 p-0">
@@ -902,7 +907,7 @@ const AddFunction = () => {
 									className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button "
 									onClick={() => submit}
 								>
-									NEXT
+									{t('NEXT')}
 								</button>
 							</div>
 						</div>
@@ -912,4 +917,8 @@ const AddFunction = () => {
 		</div>
 	);
 };
-export default AddFunction;
+
+export default React.memo(Translation(AddFunction,['This field is required.','The new salary cannot be lesser than the minimum salary. The minimum salary for the selected function is','Euro',
+'We notice that you have added a salary which is higher than the minimum salary and therefore this new salary will be considered as the minimum salary for all the future planning for this employee for the selected function. You can click on next to proceed further.',
+'Add function','Loading...','Same functions for all employees','Select employee type','salary','Select function','BACK','NEXT'
+]));

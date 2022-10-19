@@ -6,8 +6,9 @@ import { useRouter } from 'next/router';
 import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
 import Link from 'next/link';
 import moment from 'moment';
-
+import Translation from '@/Translation';
 const PlanningFinalize = () => {
+	const {t}=props;
 	const router = useRouter();
 	const p_unique_key = router.query.p_unique_key;
 	const [ planning, setPlanning ] = useState([]);
@@ -101,7 +102,7 @@ const PlanningFinalize = () => {
 			<div className="row position-sticky-pc">
 				<div className="col-md-12">
 					<p className="py-4 font-weight-bold bitter-italic-normal-medium-24 h4 p-0 manage-sticky">
-						Planning finalize
+						{t('Planning finalize')}
 					</p>
 				</div>
 			</div>
@@ -151,7 +152,7 @@ const PlanningFinalize = () => {
 								setActiveWeek(week[0]);
 							}}
 						>
-							Current week
+							{t('Current week')}
 						</span>{' '}
 						<FaGreaterThan
 							className="less-grather mx-4"
@@ -164,43 +165,43 @@ const PlanningFinalize = () => {
 						<thead className="">
 							<tr className="skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
-									Monday<br />
+									{t('Monday')}<br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[0].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-									Tuesday <br />
+									{t('Tuesday')} <br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[1].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-									Wednesday <br />
+									{t('Wednesday')} <br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[2].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-									Thursday <br />
+									{t('Thursday')} <br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[3].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-									Friday<br />
+									{t('Friday')}<br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[4].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
-									Saturday<br />
+									{t('Saturday')}<br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[5].split('-').reverse().join('-')}
 								</th>
 								<th className="  text-center  align-items-center justify-content-center lh-base">
-									Sunday<br />
+									{t('Sunday')}<br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[6].split('-').reverse().join('-')}
@@ -319,7 +320,7 @@ const PlanningFinalize = () => {
 					</table>
 				</div>
 				<div className="col-12 mb-4 px-0">
-					<p className="poppins-regular-20px mb-3 custom_astrick">Is the planning final?</p>
+					<p className="poppins-regular-20px mb-3 custom_astrick">{t('Is the planning final?')}</p>
 					<div className="mb-2">
 						<input
 							className="form-check-input shadow-none"
@@ -331,7 +332,7 @@ const PlanningFinalize = () => {
 							onChange={(e) => handleRadio(e)}
 							aria-label="..."
 						/>
-						<label className="ms-2 poppins-regular-16px">Yes</label>
+						<label className="ms-2 poppins-regular-16px">{t('Yes')}</label>
 					</div>
 					<div className="mb-2">
 						<input
@@ -344,7 +345,7 @@ const PlanningFinalize = () => {
 							onChange={(e) => handleRadio(e)}
 							aria-label="..."
 						/>
-						<label className="ms-2 poppins-regular-16px">No</label>
+						<label className="ms-2 poppins-regular-16px">{t('No')}</label>
 					</div>
 					<div className="error mt-2">{errorFinalize}</div>
 				</div>
@@ -353,7 +354,7 @@ const PlanningFinalize = () => {
 						<button type="button" className="btn  btn-block px-0 ">
 							<Link href={'/planning/timings/' + p_unique_key}>
 								<a className="bg-white border-0 poppins-light-18px  text-decoration-underline text-uppercase shadow-none">
-									BACK
+									{t('BACK')}
 								</a>
 							</Link>
 						</button>
@@ -364,7 +365,7 @@ const PlanningFinalize = () => {
 							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button text-uppercase shadow-none text-white"
 							onClick={() => submit()}
 						>
-							SUBMIT
+							{t('SUBMIT')}
 						</button>
 					</div>
 				</div>
@@ -373,4 +374,4 @@ const PlanningFinalize = () => {
 	);
 };
 
-export default PlanningFinalize;
+export default React.memo(Translation(PlanningFinalize,['Planning finalize','Current week','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday','Is the planning final?','Yes','No','BACK','SUBMIT']));

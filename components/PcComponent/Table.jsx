@@ -16,10 +16,11 @@ import employee_type_active_icon from '../images/employee_type_active.svg';
 import hand_money_icon from '../images/hand-money.svg'
 import hand_money_active_icon from '../images/hand-money-active.svg';
 import { useRouter } from 'next/router';
-
+import Translation from '@/Translation';
 
 
 const Table = (props) => {
+	const{t}=props;
 	const [ thvalues, setThvalues ] = useState([]);
 	const [ tvalues, setTvalues ] = useState([]);
 	const [ type, setType ] = useState('');
