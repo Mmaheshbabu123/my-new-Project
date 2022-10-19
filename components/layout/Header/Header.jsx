@@ -26,7 +26,7 @@ function Header() {
 	useEffect(() => {
 		if(isAuthenticated) {
 			async function fetchLanguages() {
-				let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/api/get_languages?entityid=' + uid';
+				let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/api/get_languages?entityid=' + uid;
 				let setObj = {...state};
 				setObj['isAuthenticated'] = isAuthenticated;
 				await APICALL.service(url, 'GET').then((result) => {
