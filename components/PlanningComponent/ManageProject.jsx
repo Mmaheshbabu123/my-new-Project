@@ -11,9 +11,11 @@ import Link from 'node_modules/next/link';
 import Image from 'next/image';
 import UpdatePlanningIcon from '../images/Update-planning.svg';
 import Pagination from '../PcComponent/Pagination';
-
+import Translation from '@/Translation';
 function ManageProject(props) {
+	const {t}=props;
 	const router = useRouter();
+
 	/**
      * Initialise search filter 
      */
@@ -241,7 +243,7 @@ function ManageProject(props) {
 									type="search"
 									id="form12"
 									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-									placeholder="Project name"
+									placeholder={t("Project name")}
 									value={searchProjectname}
 									onChange={(e) => setSearchProjectname(e.target.value)}
 								/>
@@ -252,7 +254,7 @@ function ManageProject(props) {
 									type="search"
 									id="form12"
 									className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-									placeholder="Location"
+									placeholder={t("Location")}
 									value={searchlocation}
 									onChange={(e) => setSearchlocation(e.target.value)}
 								/>
@@ -263,7 +265,7 @@ function ManageProject(props) {
 									type="search"
 									id="form12"
 									className="form-control mt-2 mb-2 text-break input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none  "
-									placeholder="Address"
+									placeholder={t("Address")}
 									value={searchaddress}
 									onChange={(e) => setSearchaddress(e.target.value)}
 								/>
@@ -276,7 +278,7 @@ function ManageProject(props) {
 										className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
 										onClick={() => handleSearch()}
 									>
-										SEARCH
+										{t('SEARCH')}
 									</button>
 								</div>
 								{/*---------------- Reset functionality---------------------- */}
@@ -291,7 +293,7 @@ function ManageProject(props) {
 											className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
 											onClick={() => handleReset()}
 										>
-											RESET
+											{t('RESET')}
 										</button>
 									)}
 								</div>
@@ -305,11 +307,11 @@ function ManageProject(props) {
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4">
-											Project name
+											{t('Project name')}
 										</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Location</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Address</th>
-										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Action</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Location')}</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Address')}</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Action')}</th>
 									</tr>
 								</thead>
 								{/* <hr className="table-header-space"/> */}
@@ -369,7 +371,7 @@ function ManageProject(props) {
 									{project.length == 0 && (
 										<tr>
 											<td colSpan={4} className="text-center ">
-												No records
+												{t('No records')}
 											</td>
 										</tr>
 									)}
@@ -408,7 +410,7 @@ function ManageProject(props) {
 							window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
 						}}
 					>
-						BACK
+						{t('BACK')}
 					</button>
 				</div>
 			</form>
@@ -424,4 +426,4 @@ function ManageProject(props) {
 		</div>
 	);
 }
-export default ManageProject;
+export default React.memo(Translation(ManageProject,["Project name","Location","Address",'SEARCH','RESET','Project name','Location','Address','Action','No records','BACK']));

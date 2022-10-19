@@ -5,10 +5,14 @@ import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import { getdashboardtiles } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-import { TabUnselected } from 'node_modules/@material-ui/icons/index';
+import { ImportExportTwoTone, TabUnselected } from 'node_modules/@material-ui/icons/index';
+// import DashboardTiles from './DashboardTiles';
+import Translation from '@/Translation';
+//import { TabUnselected } from 'node_modules/@material-ui/icons/index';
 import DashboardTiles from './DashboardTiles';
 
 function Dashboard(props) {
+  const {t}=props;
   const router = useRouter();
   const { entitytype = null } = router.query;
   const { contextState = {} } = useContext(UserAuthContext);
@@ -40,16 +44,17 @@ function Dashboard(props) {
 
   return (
     <div className="container">
-      <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">Dashboard</p>
+      <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Dashboard')}</p>
       <>
 	  <DashboardTiles dashboardtiles = { dashboardtiles } />
           {/* <p> Dashboard component </p> */}
 
       </>
-      {/* <div>{dashboardtiles.length}</div> */}
-      {/* {dashboardtiles.length == 0 && (
-        // <div>No records</div>
-      )} */}
+      <div>{dashboardtiles.length}</div>
+      {dashboardtiles.length == 0 && (
+        <div>{t('No records')}</div>
+      )}
+
       {/* <div className="row row-cols-sm-2 row-cols-lg-5 g-2 g-lg-2 mt-3">
         <div className="col  bg-light mb-2 me-3 p-4 ">
           <div className="p-2 position_relative_dashboard ">
@@ -579,4 +584,4 @@ function Dashboard(props) {
 
   );
 }
-export default Dashboard;
+export default React.memo(Translation(Dashboard,['Dashboard','Dashboard component','No records']));

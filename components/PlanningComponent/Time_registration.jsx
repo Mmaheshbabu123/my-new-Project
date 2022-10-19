@@ -10,10 +10,9 @@ import PincodePopup from './Pincode_popup';
 import EmployerPopup from './Employer_popup';
 import Link from 'node_modules/next/link';
 import Image from "next/image";
-
+import Translation from '@/Translation';
 function TimeRegistration(props) {
-
-
+	const {t}=props;
 	const router = useRouter();
 	const { entitytype, entityid } = router.query;
 	console.log(router.query)
@@ -37,7 +36,7 @@ function TimeRegistration(props) {
 	return (
 		<div className="container">
 			<form onSubmit={(e) => submit(e)} >
-				<p className="h3 px-0  bitter-italic-normal-medium-24 mt-5">Time registration</p>
+				<p className="h3 px-0  bitter-italic-normal-medium-24 mt-5">{t('Time registration')}</p>
 				<div className="row row-cols-sm-2 row-cols-lg-5 g-2 g-lg-2 mt-3 d-flex justify-content-center mt-5  p-5">
 					<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height ">
 						<div className="p-2 position_relative_dashboard ">
@@ -51,7 +50,7 @@ function TimeRegistration(props) {
 
 						</div>
 						<div className='text-center '>
-							<a type="button" className='mt-1' onClick={qrCode}>QR code</a>
+							<a type="button" className='mt-1' onClick={qrCode}>{t('QR code')}</a>
 						</div>
 					</div>
 
@@ -78,4 +77,4 @@ function TimeRegistration(props) {
 
 	);
 }
-export default TimeRegistration;
+export default React.memo(Translation(TimeRegistration,['Time registration','QR code','Employer','pincode']));

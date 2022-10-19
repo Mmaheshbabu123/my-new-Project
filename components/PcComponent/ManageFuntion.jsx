@@ -8,8 +8,9 @@ import ReactPaginate from 'react-paginate';
 import Pagination from './Pagination';
 
 import Link from 'next/link';
-
-const ManageFunction = () => {
+import Translation from '@/Translation';
+const ManageFunction = (props) => {
+	const{t}=props;
 	const [ functions, setFunctions ] = useState([]);
 	const [ functionsTemp, setFunctionsTemp ] = useState([]);
 	const [ functionsTemp2, setFunctionsTemp2 ] = useState([]);
@@ -364,7 +365,7 @@ const ManageFunction = () => {
 				<div className='minimun_height'>
 					<div className="row">
 					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc mb-0">
-						Manage functions
+						{t('Manage functions')}
 					</p>
 				<div className='col-md-12 manage_category_sticky_position pb-3'>
 					<div className='row'>
@@ -377,7 +378,7 @@ const ManageFunction = () => {
 							value={searchPc}
 							onChange={(e) => setSearchPc(e.target.value)}
 							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-							placeholder="PC number"
+							placeholder={t("PC number")}
 						/>
 					</div>
 
@@ -388,7 +389,7 @@ const ManageFunction = () => {
 							value={searchFunc}
 							onChange={(e) => setSearchFunc(e.target.value)}
 							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-							placeholder="Function Name"
+							placeholder={t("Function Name")}
 						/>
 					</div>
 
@@ -399,7 +400,7 @@ const ManageFunction = () => {
 							value={searchSal}
 							onChange={(e) => setSearchSal(e.target.value)}
 							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-							placeholder="Minimum salary"
+							placeholder={t("Minimum salary")}
 						/>
 					</div>
 					<div className="col-md-3 field_height">
@@ -409,7 +410,7 @@ const ManageFunction = () => {
 							value={searchCat}
 							onChange={(e) => setSearchCat(e.target.value)}
 							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-							placeholder="Category name"
+							placeholder={t("Category name")}
 						/>
 					</div>
 						</div>
@@ -423,7 +424,7 @@ const ManageFunction = () => {
 							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 skyblue-bg-color w-100 shadow-none text-uppercase"
 							onClick={() => handleSearch()}
 						>
-							search
+							{t('search')}
 						</button>
 						</div>
 						<div className="col-md-6 field_height">
@@ -437,7 +438,7 @@ const ManageFunction = () => {
 								className="btn  btn-block float-right mt-2 mb-2 rounded-0 float-right py-2 px-4 reset_skyblue w-100 shadow-none"
 								onClick={() => handleReset()}
 							>
-								RESET
+								{t('RESET')}
 							</button>
 						)}
 					</div>
@@ -453,10 +454,10 @@ const ManageFunction = () => {
 									<th className="poppins-medium-18px btn-bg-gray-medium p-2 ps-4">
 										PC number
 									</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Function name</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Minimum salary</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Category</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-2">Action</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Function name')}</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Minimum salary')}</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Category')}</th>
+									<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Action')}</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -504,7 +505,7 @@ const ManageFunction = () => {
 								{functions.length == 0 && (
 									<tr>
 										<td colSpan={5} className="text-center poppins-regular-18px no-records">
-											No records
+											{t('No records')}
 										</td>
 									</tr>
 								)}
@@ -540,7 +541,7 @@ const ManageFunction = () => {
 							className="bg-white border-0 poppins-regular-18px float-sm-right md-5 px-0 text-decoration-underline"
 							onClick={() => backToDashboard()}
 						>
-							BACK
+							{t('BACK')}
 						</button>
 					</div>
 					<div className="col-md-6" />
@@ -552,4 +553,5 @@ const ManageFunction = () => {
 		</div>
 	);
 };
-export default ManageFunction;
+export default React.memo(Translation(ManageFunction,['Manage functions',"PC number","Function Name","Minimum salary",
+"Category name",'search','RESET','Function name','Minimum salary','Category','Action','No records','BACK']));

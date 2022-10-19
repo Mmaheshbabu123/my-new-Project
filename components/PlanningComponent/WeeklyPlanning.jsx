@@ -7,12 +7,16 @@ import Link from 'node_modules/next/link';
 import moment from 'moment';
 import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
 import EditEmployee from './EditEmployee';
+import Translation from '@/Translation';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
+import DraftPlanning from '@/components/PlanningComponent/DraftPlanning';
+import { useRouter } from 'next/router';
 
 
 function WeeklyPlanning(props) {
+	const router = useRouter();
+	const {t}=props;
 	const { contextState = {} } = useContext(UserAuthContext);
-
 	const [ showview, setShowview ] = useState(false);
 	const [ planning, setPlanning ] = useState([]);
 	const [ activeWeek, setActiveWeek ] = useState([]);
@@ -28,14 +32,17 @@ function WeeklyPlanning(props) {
 	const [ weekCount, setWeekCount ] = useState(0);
 
 	const [ styleEdit, setStyleEdit ] = useState('col-md-12');
+	const [ activeTab, setActiveTab ] = useState(1);
 
-	// useEffect(() => {
-	// 	if (localStorage.getItem('uid') != null) {
-	// 		setEmpr_id(JSON.parse(localStorage.getItem('uid')));
-	// 	} else {
-	// 		window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-	// 	}
-	// }, []);
+
+	useEffect(()=>{
+
+		if(router.query.type == 'draft'){
+			setActiveTab(2)
+			
+		}
+
+	},[router])
 
 	useEffect(
 		() => {
@@ -138,11 +145,11 @@ function WeeklyPlanning(props) {
 			<div className="row">
 				<div className="row position-sticky-pc">
 					<div className="col-md-12">
-						<p className=" py-4 font-weight-bold   bitter-italic-normal-medium-24">Weekly planning</p>
+						<p className=" py-4 font-weight-bold   bitter-italic-normal-medium-24">{t('Weekly planning')}</p>
 						{activeWeek &&
 						activeWeek.length > 0 && (
 							<p className=" poppins-light-18px pb-3">
-								For the week of Monday from {activeWeek[0].split('-').reverse().join('-')} to sunday{' '}
+								{t('For the week of Monday from')} {activeWeek[0].split('-').reverse().join('-')} {t('to sunday')}{' '}
 								{activeWeek[6].split('-').reverse().join('-')}
 							</p>
 						)}
@@ -152,17 +159,20 @@ function WeeklyPlanning(props) {
 					<div className="d-inline ">
 						<button
 							type="button"
-							className="btn  btn my-2 skyblue-bg-color border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln  px-3 btn-block shadow-none rounded-0 "
+							className={`btn  btn my-2 ${activeTab == 1?"skyblue-bg-color":"btn-bg-gray-medium"} border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln  px-3 btn-block shadow-none rounded-0 "`}
+							onClick={() =>{setActiveTab(1)}}
 						>
-							Planning view
+							{t('Planning view')}
 						</button>
 					</div>
 					<div className=" ">
 						<button
 							type="submit"
-							className="btn  my-2 border-0 px-3  btn-block btn-bg-gray-medium add-pln poppins-medium-18px shadow-none rounded-0 "
+							className={`btn  my-2 border-0 px-3  btn-block ${activeTab == 2?"skyblue-bg-color":"btn-bg-gray-medium"} add-pln poppins-medium-18px shadow-none rounded-0`}
+							onClick={() =>{setActiveTab(2)}}
+
 						>
-							Draft planning
+							{t('Draft planning')}
 						</button>
 					</div>
 				</div>
@@ -193,7 +203,7 @@ function WeeklyPlanning(props) {
 										updateLocation(e.target.value);
 									}}
 								>
-									<option value=""> Select company</option>
+									<option value=""> {t('Select company')}</option>
 									{companylist.map((value) => (
 										<option key={value.nid} value={value.nid}>
 											{value.title}
@@ -210,7 +220,7 @@ function WeeklyPlanning(props) {
 									}}
 									value={location}
 								>
-									<option value="">Select Location</option>
+									<option value="">{t('Select Location')}</option>
 									{company != '' &&
 										locationlist.map(
 											(options) =>
@@ -235,7 +245,7 @@ function WeeklyPlanning(props) {
 										setCostcenter(e.target.value);
 									}}
 								>
-									<option value="">Select cost center</option>
+									<option value="">{t('Select cost center')}</option>
 									{costcenterlist.map((value) => (
 										<option key={value.value} value={value.value}>
 											{value.title}
@@ -251,6 +261,8 @@ function WeeklyPlanning(props) {
 						<option value="">Project-2</option>
 					</select> */}
 				</div>
+				{activeTab == 1 ?<div>
+				
 				<div className={'mt-2 min-height-weekly-planning'}>
 					{planning || company != '' ? (
 						<div className="row">
@@ -267,7 +279,7 @@ function WeeklyPlanning(props) {
 											setWeekCount(0);
 										}}
 									>
-										Current week
+										{t('Current week')}
 									</span>{' '}
 									<FaGreaterThan
 										className="less-grather mx-4"
@@ -283,37 +295,37 @@ function WeeklyPlanning(props) {
 										activeWeek.length > 0 && (
 											<tr className="skyblue-bg-color">
 												<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
-													Monday<br />
+													{t('Monday')}<br />
 													{activeWeek.length > 0 &&
 														activeWeek[0].split('-').reverse().join('-')}
 												</th>
 												<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-													Tuesday <br />
+													{t('Tuesday')} <br />
 													{activeWeek.length > 0 &&
 														activeWeek[1].split('-').reverse().join('-')}
 												</th>
 												<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-													Wednesday <br />
+													{t('Wednesday')} <br />
 													{activeWeek.length > 0 &&
 														activeWeek[2].split('-').reverse().join('-')}
 												</th>
 												<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-													Thursday <br />
+													{t('Thursday')} <br />
 													{activeWeek.length > 0 &&
 														activeWeek[3].split('-').reverse().join('-')}
 												</th>
 												<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-													Friday<br />
+													{t('Friday')}<br />
 													{activeWeek.length > 0 &&
 														activeWeek[4].split('-').reverse().join('-')}
 												</th>
 												<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
-													Saturday<br />
+													{t('Saturday')}<br />
 													{activeWeek.length > 0 &&
 														activeWeek[5].split('-').reverse().join('-')}
 												</th>
 												<th className="  text-center  align-items-center justify-content-center lh-base">
-													Sunday<br />
+													{t('Sunday')}<br />
 													{activeWeek.length > 0 &&
 														activeWeek[6].split('-').reverse().join('-')}
 												</th>
@@ -414,7 +426,7 @@ function WeeklyPlanning(props) {
 													className="align-middle text-center poppins-light-18px border"
 													style={{ height: '4rem' }}
 												>
-													No planning for this week.
+													{t('No planning for this week.')}
 												</td>
 											</tr>
 										) : (
@@ -424,7 +436,7 @@ function WeeklyPlanning(props) {
 													className="align-middle text-center poppins-light-18px border"
 													style={{ height: '4rem' }}
 												>
-													Select company and location to view planning.
+													{t('Select company and location to view planning.')}
 												</td>
 											</tr>
 										)}
@@ -440,15 +452,16 @@ function WeeklyPlanning(props) {
 						</div>
 					) : (
 						<div className="col-md-12 week-height align-items-center d-flex justify-content-center mb-4">
-							Select company and location to view planning.
+							{t('Select company and location to view planning.')}
 						</div>
 					)}
 				</div>
+				</div>:<div><DraftPlanning/></div>}
 				<div className="text-end mb-3">
 					<button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end ">
 						<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL} className="">
 							<a className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none">
-								DASHBOARD
+								{t('DASHBOARD')}
 							</a>
 						</Link>
 					</button>
@@ -457,4 +470,4 @@ function WeeklyPlanning(props) {
 		</div>
 	);
 }
-export default WeeklyPlanning;
+export default React.memo(Translation(WeeklyPlanning,['Weekly planning','For the week of Monday from','to sunday','Planning view','Draft planning','Select company','Select Location','Select cost center','Current week', 'Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday','Sunday' ,'No planning for this week.','Select company and location to view planning.','DASHBOARD']));

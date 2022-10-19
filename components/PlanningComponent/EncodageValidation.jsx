@@ -3,9 +3,9 @@ import { GrValidate } from 'react-icons/gr';
 import { BiRotateRight } from 'react-icons/bi';
 import { APICALL } from '../../Services/ApiServices';
 import { fetchEncodageDeatils } from '../../Services/ApiEndPoints';
-
+import Translation from '@/Translation';
 function EncodageValidation(props) {
-
+    const {t}=props;
     useEffect(
         () => {
             APICALL.service(fetchEncodageDeatils, 'GET')
@@ -22,45 +22,45 @@ function EncodageValidation(props) {
         <div className="container-fluid p-0">
             <form>
                 <div className="row m-0 ">
-                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">Encodage validations</p>
+                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Encodage validations')}</p>
                     <div className="form-check p-0 mt-2  ">
                         {/* ----------------Search functionality--------------------------------*/}
 
                         <div className="row d-flex mt-3">
                             <div className="col-sm-2 field_height">
-                                <label>Company</label>
+                                <label>{t('Company')}</label>
                                 <select className="form-select mt-2" aria-label="Default select example">
-                                    <option selected>Select</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>{t('Select')}</option>
+                                    <option value="1">{t('One')}</option>
+                                    <option value="2">{t('Two')}</option>
+                                    <option value="3">{t('Three')}</option>
                                 </select>
                             </div>
                             <div className="col-sm-2 field_height">
-                                <label>Location</label>
+                                <label>{t('Location')}</label>
                                 <select className="form-select mt-2" aria-label="Default select example">
-                                    <option selected>Select</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>{t('Select')}</option>
+                                    <option value="1">{t('One')}</option>
+                                    <option value="2">{t('Two')}</option>
+                                    <option value="3">{t('Three')}</option>
                                 </select>
                             </div>
                             <div className="col-sm-2 field_height">
-                                <label>Cost center</label>
+                                <label>{t('Cost center')}</label>
                                 <select className="form-select mt-2" aria-label="Default select example">
-                                    <option selected>Select</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>{t('Select')}</option>
+                                    <option value="1">{t('One')}</option>
+                                    <option value="2">{t('Two')}</option>
+                                    <option value="3">{t('Three')}</option>
                                 </select>
                             </div>
                             <div className="col-sm-2 field_height">
-                                <label>Project</label>
+                                <label>{t('Project')}</label>
                                 <select className="form-select mt-2" aria-label="Default select example">
-                                    <option selected>Select</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>{t('Select')}</option>
+                                    <option value="1">{t('One')}</option>
+                                    <option value="2">{t('Two')}</option>
+                                    <option value="3">{t('Three')}</option>
                                 </select>
                             </div>
                             {/*---------------- Search functionality---------------------- */}
@@ -73,7 +73,7 @@ function EncodageValidation(props) {
                                             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
 
                                         >
-                                            SEARCH
+                                            {t('SEARCH')}
                                         </button>
                                     </div>
                                     {/*---------------- Reset functionality---------------------- */}
@@ -84,7 +84,7 @@ function EncodageValidation(props) {
                                             type="button"
                                             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
                                         >
-                                            RESET
+                                            {t('RESET')}
                                         </button>
                                     </div>
                                 </div>
@@ -95,14 +95,14 @@ function EncodageValidation(props) {
                                 <thead>
                                     <tr className="btn-bg-gray-medium table-sticky-bg-gray">
                                         <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4"></th>
-                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Date</th>
-                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">First name</th>
-                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Last name</th>
-                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Planned start time</th>
-                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Actual start time</th>
-                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Planned end time</th>
-                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Actual end time</th>
-                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Action</th>
+                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Date')}</th>
+                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('First name')}</th>
+                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Last name')}</th>
+                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Planned start time')}</th>
+                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Actual start time')}</th>
+                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Planned end time')}</th>
+                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Actual end time')}</th>
+                                        <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Action')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -133,7 +133,7 @@ function EncodageValidation(props) {
                             className="bg-white border-0 poppins-regular-18px float-sm-right my-4 px-0 text-decoration-underline d-inline-block"
 
                         >
-                            BACK
+                            {t('BACK')}
                         </button>
                     </div>
                     <div className="col-md-6 p-0">
@@ -142,7 +142,7 @@ function EncodageValidation(props) {
                             // className="btn rounded-0 custom-btn px-3 btn-block float-end"
                             className="btn rounded-0 px-3 float-end poppins-medium-18px-next-button shadow-none"
                         >
-                            Validate
+                            {t('Validate')}
                         </button>
                     </div>
                 </div>
@@ -151,4 +151,6 @@ function EncodageValidation(props) {
         </div>
     );
 }
-export default EncodageValidation;
+export default React.memo(Translation(EncodageValidation,['Company','Encodage validations','Location','Select','One','Two','Three','Cost center','Project','SEARCH','RESET',
+'Date','First name','Last name','Planned start time','Actual start time','Planned end time','Actual end time','Action','BACK','Validate'
+]));

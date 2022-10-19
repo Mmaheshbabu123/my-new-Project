@@ -14,8 +14,10 @@ import Image from 'next/image';
 import Close from '../../public/images/Close.svg';
 import { cloneDeep } from 'lodash';
 import { ExclamationTriangle } from 'node_modules/react-bootstrap-icons/dist/index';
+import Translation from '@/Translation';
 
 function Addtiming(props) {
+	const { t }=props;
 	var count1 = 0;
 	const clearIcon1 = null;
 	const router = useRouter();
@@ -367,15 +369,15 @@ function Addtiming(props) {
 					v1.time.map((v2, k2) => {
 						if (v2.starttime == '') {
 							count++;
-							datetime[k1].time[k2].error_starttime = 'This field is required.';
+							datetime[k1].time[k2].error_starttime = t('This field is required.');
 						}
 						if (v2.endtime == '') {
 							count++;
-							datetime[k1].time[k2].error_endtime = 'This field is required.';
+							datetime[k1].time[k2].error_endtime = t('This field is required.');
 						}
 						if (v2.starttime != '' && v2.endtime != '' && v2.starttime == v2.endtime) {
 							count++;
-							datetime[k1].time[k2].error_starttime = 'Start time cannot be same as end time.';
+							datetime[k1].time[k2].error_starttime = t('Start time cannot be same as end time.');
 						}
 					});
 				});
@@ -387,7 +389,7 @@ function Addtiming(props) {
 			res.map((obj, ky) => {
 				if (res[ky].timings.length == 0) {
 					count++;
-					res[ky].error_selected_date = 'Select atleast one date.';
+					res[ky].error_selected_date = t('Select atleast one date.');
 					res[ky].collapseOpen = true;
 				} else {
 					res[ky].timings.map((o1, k1) => {
@@ -396,27 +398,27 @@ function Addtiming(props) {
 							// duration = duration+getDuration(v2.starttime,v2.endtime);
 							if (v2.starttime == '') {
 								count++;
-								res[ky].timings[k1].time[k2].error_starttime = 'This field is required.';
+								res[ky].timings[k1].time[k2].error_starttime = t('This field is required.');
 								res[ky].collapseOpen = true;
 							}
 							if (v2.endtime == '') {
 								count++;
-								res[ky].timings[k1].time[k2].error_endtime = 'This field is required.';
+								res[ky].timings[k1].time[k2].error_endtime = t('This field is required.');
 								res[ky].collapseOpen = true;
 							}
 							if (
 								o1.pdate == moment(new Date()).format('YYYY-MM-DD') &&
 								moment(v2.starttime) < moment(new Date())
 							) {
-								res[ky].timings[k1].time[k2].error = 'Employee cannot be planned for past time.';
+								res[ky].timings[k1].time[k2].error = t('Employee cannot be planned for past time.');
 								res[ky].collapseOpen = true;
 								count++;
 							}
-
+							
 							if (v2.starttime != '' && v2.endtime != '' && v2.starttime == v2.endtime) {
 								count++;
 								res[ky].collapseOpen = true;
-								res[ky].timings[k1].time[k2].error = 'Start time cannot be same as end time.';
+								res[ky].timings[k1].time[k2].error = t('Start time cannot be same as end time.');
 							}
 						});
 
@@ -516,9 +518,9 @@ function Addtiming(props) {
 			duration = duration + getDuration(v2.starttime, v2.endtime);
 		});
 		if (min_work_timings != null && parseFloat(duration) < parseFloat(min_work_timings)) {
-			return 'This employee is planned lower than the allowed minimum hours(' + min_work_timings + ' hours).';
+			return t('This employee is planned lower than the allowed minimum hours')+'( '+ min_work_timings  + t('hours') + '.)';
 		} else if (max_work_timings != null && duration > max_work_timings) {
-			return 'This employee is planned higher than the allowed maximum hours(' + max_work_timings + ' hours).';
+			return t('This employee is planned higher than the allowed maximum hour')+'(' + max_work_timings + t('hours')+'.)';
 		}
 	};
 
@@ -546,10 +548,10 @@ function Addtiming(props) {
 		<div className="container-fluid px-0">
 			<form onSubmit={(e) => submitPlanningTimings(e)}>
 				<div className="col-md-12 p-0 position-sticky-pc pt-4">
-					<h1 className="pb-3 font-weight-bold px-0 bitter-italic-normal-medium-24">Add timing</h1>
+					<h1 className="pb-3 font-weight-bold px-0 bitter-italic-normal-medium-24">{t('Add timing')}</h1>
 				</div>
 				{loading == true ? (
-					<p className="pt-2">Loading...</p>
+					<p className="pt-2">{t('Loading...')}</p>
 				) : (
 					<div>
 						<div className="row m-0 p-0">
@@ -566,7 +568,7 @@ function Addtiming(props) {
 										}}
 									/>
 									<label className="form-check-label poppins-regular-18px" htmlFor="flexCheckChecked">
-										Same timing for all employees
+										{t('Same timing for all employees')}
 									</label>
 								</div>
 							)}
@@ -626,10 +628,10 @@ function Addtiming(props) {
 															<div className="col-md-5 py-3 d-flex justify-content-center align-items-center flex-column" style={{height:'65px'}}>
 																<div className="d-flex">
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
-																		Start time
+																		{t('Start time')}
 																	</div>
 																	<TimePicker
-																		placeholder="Select Time"
+																		placeholder={t("Select Time")}
 																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
@@ -651,10 +653,10 @@ function Addtiming(props) {
 															<div className="col-md-5  py-3 d-flex justify-content-center align-items-center flex-column" style={{height:'65px'}}>
 																<div className="d-flex">
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
-																		End time
+																		{t('End time')}
 																	</div>
 																	<TimePicker
-																		placeholder="Select Time"
+																		placeholder={t("Select Time")}
 																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
@@ -778,12 +780,12 @@ function Addtiming(props) {
 																							<div className="d-flex">
 																								<div className="py-1 px-2  custom_astrick poppins-regular-20px">
 																									<span className="poppins-medium-18px">
-																										Start time
+																										{t('Start time')}
 																									</span>
 																								</div>
 																								<div>
 																									<TimePicker
-																										placeholder="Select Time"
+																										placeholder={t("Select Time")}
 																										use12Hours={
 																											false
 																										}
@@ -818,11 +820,12 @@ function Addtiming(props) {
 																								</div>
 																							</div>
 																						</div>
+																						
 																						<div className="col-md-5 py-3 d-flex align-items-center selected_date" style={{height:'65px'}}>
 																							<div className="d-flex">
 																								<div className="py-1 px-2 custom_astrick poppins-regular-18px">
 																									<span className="poppins-medium-18px">
-																										End time
+																										{t('End time')}
 																									</span>
 																								</div>
 																								<div>
@@ -929,7 +932,7 @@ function Addtiming(props) {
 								<button type="button" className="btn btn-link text-dark btn-block ">
 									<Link href={'/planning/functions/' + props.p_unique_key}>
 										<p className="bg-white border-0 poppins-light-19px text-decoration-underline">
-											BACK
+											{t('BACK')}
 										</p>
 									</Link>
 								</button>
@@ -939,7 +942,7 @@ function Addtiming(props) {
 									type="submit"
 									className="btn rounded-0 px-3  btn-block float-end poppins-light-18px-next-button shadow-none"
 								>
-									NEXT
+									{t('NEXT')}
 								</button>
 							</div>
 						</div>
@@ -949,4 +952,8 @@ function Addtiming(props) {
 		</div>
 	);
 }
-export default Addtiming;
+export default React.memo(Translation(Addtiming,['This field is required.','Start time cannot be same as end time.','Select atleast one date.','Employee cannot be planned for past time.',
+'Start time','End time','Add timing','Loading...','Same timing for all employees','Start time','Select Time','NEXT','BACK',
+'This employee is planned lower than the allowed minimum hours',
+'This employee is planned higher than the allowed maximum hour'
+]));

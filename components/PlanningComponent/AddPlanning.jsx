@@ -1,5 +1,4 @@
 import React, { Component, useEffect, useState, useContext } from 'react';
-import ReactDOM from 'react-dom';
 import {
 	addPlanning,
 	fetchPlanning,
@@ -18,10 +17,12 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Popup from './ProjectArchivePopup';
+import Translation from '@/Translation';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 
 
 function Planning(props) {
+	const { t }=props;
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 	const { contextState = {} } = useContext(UserAuthContext);
@@ -357,14 +358,14 @@ function Planning(props) {
 	return (
 		<div className="col-md-12">
 			{loading == true ? (
-				<p>Loading...</p>
+				<p>{t('Loading...')}</p>
 			) : (
 				<div>
 					<form onSubmit={(e) => submit(e)}>
 						<div className="row   planning-container calc-height  m-0 col-md-12">
 							<div className="col-md-12 px-0 py-4 position-sticky-pc">
 								<h1 className="font-weight-bold   px-0  bitter-italic-normal-medium-24">
-									Add Planning
+									{t('Add Planning')}
 								</h1>
 							</div>
 							<div className="col-md-12 px-0 py-2 add_project_position">
@@ -377,7 +378,7 @@ function Planning(props) {
 										<span style={{ fontSize: '24px' }} className="">
 											+
 										</span>
-										&nbsp; ADD PROJECT
+										&nbsp; {t('ADD PROJECT')}
 									</button>
 								):<button
 								type="button"
@@ -386,7 +387,7 @@ function Planning(props) {
 								<span style={{ fontSize: '24px' }} className="">
 									+
 								</span>
-								&nbsp; ADD PROJECT
+								&nbsp; {t('ADD PROJECT')}
 							</button>}
 							</div>
 						<div className='planning-height px-0'>
@@ -394,12 +395,12 @@ function Planning(props) {
 								<div className="col-md-6">
 									<div className="form-group mb-3">
 										<label className="form-label mt-2 custom_astrick poppins-regular-18px">
-											Company
+											{t('Company')}
 										</label>
 										<select
 											value={companyid}
 											className="form-select mb-2 poppins-regular-16px rounded-0 shadow-none"
-											placeholder="select company"
+											placeholder={t("select company")}
 											onChange={(e) => {
 												updateLocation(e.target.value);
 											}}
@@ -416,7 +417,7 @@ function Planning(props) {
 
 									<div className="form-group mb-3">
 										<label className="form-label mt-2 poppins-regular-18px ">
-											Location
+											{t('Location')}
 										</label>
 										<select
 											value={locationid}
@@ -426,7 +427,7 @@ function Planning(props) {
 												updateCostCenter(e.target.value);
 											}}
 										>
-											<option value="">Select</option>
+											<option value="">{t('Select')}</option>
 											{companyid != '' &&
 												location.map(
 													(options) =>
@@ -449,7 +450,7 @@ function Planning(props) {
 												setCostcenterid(e.target.value);
 											}}
 										>
-											<option value="">Select</option>
+											<option value="">{t('Select')}</option>
 											{locationid != '' &&
 												costcenter.length > 0 &&
 												costcenter.map(
@@ -472,7 +473,7 @@ function Planning(props) {
 									{project.id != '' &&
 									project.id != undefined && (
 										<div className="form-group ">
-											<label className="form-label mb-2 mt-2 poppins-regular-16px">Project</label>
+											<label className="form-label mb-2 mt-2 poppins-regular-16px">{t('Project')}</label>
 											<div className=" d-flex col-md-12 d-inline position-relative">
 												<input
 													type="text mb-2 mt-2 "
@@ -506,10 +507,10 @@ function Planning(props) {
 						<div className="row mt-4 mb-2 col-md-12 m-0">
 							<div className="col-md-6 p-0">
 								<button type="button" className="btn  btn-block px-0 shadow-none">
-									<Link href={'/planning/options'}>
+									<Link href={router.query.type != undefined && router.query.type == 'edit'?'/manage-planning/weekly?type=draft':'/planning/options'}>
 										{/* <p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px "> */}
 										<p className="bg-white border-0 poppins-light-18px text-decoration-underline shadow-none ">
-											BACK
+											{t('BACK')}
 										</p>
 									</Link>
 								</button>
@@ -523,7 +524,7 @@ function Planning(props) {
 										setUniquekey(router.query.p_unique_key);
 									}}
 								>
-									NEXT
+									{t('NEXT')}
 								</button>
 							</div>
 						</div>
@@ -557,7 +558,7 @@ function Planning(props) {
 		</div>
 	);
 }
-export default Planning;
+export default React.memo(Translation(Planning,['Loading...','Add Planning','ADD PROJECT','Company','select company','Location','Select','Projects','BACK','NEXT']));
 
 // FETCHING COMPANY FROM DRUPAL //
 // useEffect(() => {

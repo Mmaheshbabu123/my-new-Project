@@ -9,8 +9,9 @@ import {
 	updateEditproject
 } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
-
+import Translation from '@/Translation';
 function EditProject(props) {
+	const { t }=props;
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 
@@ -221,7 +222,7 @@ function EditProject(props) {
 							<div className=" col-md-12 m-auto px-0 py-4 position-sticky-pc">
 								<div className="col-md-10">
 									<p className="h1 font-weight-bold   px-0  bitter-italic-normal-medium-24">
-										Edit project
+										{t('Edit project')}
 									</p>
 								</div>
 							</div>
@@ -236,7 +237,7 @@ function EditProject(props) {
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
 													<label className="font-weight-bold custom_astrick">
-														Project name
+													{t('Project name')}
 													</label>
 													<input
 														type="text"
@@ -254,7 +255,7 @@ function EditProject(props) {
 
 												{/* COMPANY */}
 												<div className="col-6">
-													<label className="custom_astrick">Company</label>
+													<label className="custom_astrick">{t('Company')}</label>
 													<select
 														value={project.comp_id}
 														className="form-select mb-2 mt-2 rounded-0 shadow-none border"
@@ -268,7 +269,7 @@ function EditProject(props) {
 															// updateLocation(e.target.value);
 														}}
 													>
-														<option value="">Select</option>
+														<option value="">{t('Select')}</option>
 														<option value={project.comp_id}>{project.company_name}</option>
 													</select>
 													<p className="error mt-2">{error_comp_id}</p>
@@ -278,7 +279,7 @@ function EditProject(props) {
 											{/* LOCATION */}
 											<div className="col-md-12 row m-0">
 												<div className="col-6">
-													<label className="mt-2 custom_astrick">Location</label>
+													<label className="mt-2 custom_astrick">{t('Location')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -295,7 +296,7 @@ function EditProject(props) {
 											</div>
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
-													<label className="custom_astrick mt-2">Street</label>
+													<label className="custom_astrick mt-2">{t('Street')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -309,7 +310,7 @@ function EditProject(props) {
 
 												{/* HOUSE NUMBER */}
 												<div className="col-3">
-													<label className="custom_astrick mt-2">House number</label>
+													<label className="custom_astrick mt-2">{t('House number')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -322,7 +323,7 @@ function EditProject(props) {
 												</div>
 												{/* BUS NUMBER */}
 												<div className="col-3">
-													<label className="custom_astrick mt-2">Bus number</label>
+													<label className="custom_astrick mt-2">{t('Bus number')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -337,7 +338,7 @@ function EditProject(props) {
 
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
-													<label className="custom_astrick mt-2">Postalcode</label>
+													<label className="custom_astrick mt-2">{t('Postalcode')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -352,7 +353,7 @@ function EditProject(props) {
 													<p className="error mt-2">{error_postal_code}</p>
 												</div>
 												<div className="col-6">
-													<label className="custom_astrick mt-2">City</label>
+													<label className="custom_astrick mt-2">{t('City')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -368,7 +369,7 @@ function EditProject(props) {
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
 													<label className="custom_astrick mt-2">
-														Country
+														{t('Country')}
 													</label>
 													<select
 														className="form-select mt-2 mb-2 custom-select rounded-0 shadow-none border"
@@ -380,7 +381,7 @@ function EditProject(props) {
 															}));
 														}}
 													>
-														<option value="">Select country</option>
+														<option value="">{t('Select country')}</option>
 														{countrylist.map((options) => (
 															<option key={options.id} value={options.id}>
 																{options.country}
@@ -393,7 +394,7 @@ function EditProject(props) {
 											</div>
 											<div className="row col-md-12 m-0">
 												<div className="col-12">
-													<label className=" mt-2">Extra</label>
+													<label className=" mt-2">{t('Extra')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -413,7 +414,7 @@ function EditProject(props) {
 										type="submit"
 										className="btn btn-lg btn-block float-right add-proj-btn custom-btn rounded-0 m-0"
 									>
-										SAVE
+										{t('SAVE')}
 									</button>
 								</div>
 							</div>
@@ -424,4 +425,4 @@ function EditProject(props) {
 		</div>
 	);
 }
-export default EditProject;
+export default React.memo(Translation(EditProject,['Extra','Select country','Country','City','Postalcode','Bus number','House number','Street','Location','Edit project','Project name','Company','Select','SAVE']));

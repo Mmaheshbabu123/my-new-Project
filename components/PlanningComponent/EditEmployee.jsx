@@ -7,9 +7,11 @@ import 'rc-time-picker/assets/index.css';
 import ValidationService from '../../Services/ValidationService';
 import moment from 'moment';
 import { fetchEmpDetails,updateEmployeePlanning } from '../../Services/ApiEndPoints';
+import Translation from '@/Translation';
 
 
 function EditEmployee(props) {
+	const { t }=props;
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 	// console.log(p_unique_key);
@@ -170,10 +172,10 @@ function EditEmployee(props) {
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row  m-0 ">
 				
-					<p className=" mb-2 h4 height-60 text-center align-items-center justify-content-center text-white d-flex">Edit Employee</p>
+					<p className=" mb-2 h4 height-60 text-center align-items-center justify-content-center text-white d-flex">{t('Edit Employee')}</p>
 					<div className='table-border-gray p-4'>
 					<div className="form-group ">
-						<label className="mb-2 custom_astrick poppins-regular-16px">Employee name</label>
+						<label className="mb-2 custom_astrick poppins-regular-16px">{t('Employee name')}</label>
 						<input
 							type="text"
 							className="form-control mb-2 poppins-regular-16px rounded-0 mb-4"
@@ -184,7 +186,7 @@ function EditEmployee(props) {
 						/>
 						<p className="error  mt-2 mb-2">{error_employee_name}</p>
 
-						<label className=" mb-2 custom_astrick poppins-regular-16px">Employee type</label>
+						<label className=" mb-2 custom_astrick poppins-regular-16px">{t('Employee type')}</label>
 						{/* <input
 							type="text"
 							className="form-select mb-2"
@@ -200,7 +202,7 @@ function EditEmployee(props) {
 								setData((prev) => ({ ...prev, emp_type: e.target.value }));
 							}}
 						>
-							<option>--Select--</option>
+							<option>{t('--Select--')}</option>
 							{emptypes.map((options) => (
 								<option key={options.value} value={options.value}>
 									{options.label}
@@ -209,7 +211,7 @@ function EditEmployee(props) {
 						</select>
 						<p className="error  mt-2 mb-2">{error_employee_type}</p>
 
-						<label className=" mb-2 custom_astrick poppins-regular-16px">Function</label>
+						<label className=" mb-2 custom_astrick poppins-regular-16px">{t('Function')}</label>
 						{/* <input
 							type="text"
 							className="form-select mb-2"
@@ -225,7 +227,7 @@ function EditEmployee(props) {
 								setData((prev) => ({ ...prev, function_id: e.target.value }));
 							}}
 						>
-							<option>--Select--</option>
+							<option>{t('--Select--')}</option>
 							{functions.map((options) => (
 								<option key={options.id} value={options.id}>
 									{options.name}
@@ -234,7 +236,7 @@ function EditEmployee(props) {
 						</select>
 						<p className="error  mt-2 mb-2">{error_function}</p>
 
-						<label className="mb-3 custom_astrick poppins-regular-16px">Minimum salary</label>
+						<label className="mb-3 custom_astrick poppins-regular-16px">{t('Minimum salary')}</label>
 						<div className="input-group mb-4">
 							<input
 								type="text"
@@ -250,7 +252,7 @@ function EditEmployee(props) {
 					</div>
 					<div className="d-flex col-md-12 row m-0 ">
 						<div className=" col-md-6 ps-0  ">
-							<div className="pb-2 custom_astrick poppins-regular-16px rounded-0">Start time</div>
+							<div className="pb-2 custom_astrick poppins-regular-16px rounded-0">{t('Start time')}</div>
 							<TimePicker
 								className='rounded-0'
 								placeholder="Select Time"
@@ -267,7 +269,7 @@ function EditEmployee(props) {
 							<p className="error mt-2 mb-2 ">{error_start_time}</p>
 						</div>
 						<div className="col-md-6  p-0">
-							<div className="pb-2 custom_astrick">End time</div>
+							<div className="pb-2 custom_astrick">{t('End time')}</div>
 							<TimePicker
 							    className='rounded-0'
 								placeholder="Select Time"
@@ -294,7 +296,7 @@ function EditEmployee(props) {
 							setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
 						}}
 					>
-						SAVE
+						{t('SAVE')}
 					</button>
 				</div>
 				</div>
@@ -303,4 +305,4 @@ function EditEmployee(props) {
 		</div>
 	);
 }
-export default EditEmployee;
+export default React.memo(Translation(EditEmployee,['Edit Employee','Employee name','Employee type','--Select--','Function','Minimum salary','Start time','End time','SAVE']));

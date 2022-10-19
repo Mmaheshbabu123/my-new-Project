@@ -6,9 +6,11 @@ import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { addPlanning } from '../../Services/ApiEndPoints';
 import Popup from './ProjectArchivePopup';
+import Translation from '@/Translation';
 
 // import './addproject.css';
 function Addproject(props) {
+	const { t }=props;
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 
@@ -216,7 +218,7 @@ function Addproject(props) {
 								<div className="col-md-10">
 									{/* <p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-5">Add project</p> */}
 									<p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-4">
-										Add project
+										{t('Add project')}
 									</p>
 								</div>
 								<button
@@ -235,7 +237,7 @@ function Addproject(props) {
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
 													<label className="custom_astrick poppins-light-18px">
-														Project name
+														{t('Project name')}
 													</label>
 													<input
 														type="text"
@@ -256,14 +258,14 @@ function Addproject(props) {
 													<select
 														value={data.comp_id}
 														className="form-select mb-2 mt-2 rounded-0 shadow-none"
-														placeholder="select company"
+														placeholder={t("select company")}
 														disabled={props.company_id != ''}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, comp_id: e.target.value }));
 															// updateLocation(e.target.value);
 														}}
 													>
-														<option value="">Select</option>
+														<option value="">{t('Select')}</option>
 														{props.company.map((options) => (
 															<option key={options.nid} value={options.nid}>
 																{options.title}
@@ -278,7 +280,7 @@ function Addproject(props) {
 											{/* LOCATION */}
 											<div className="col-md-12 row m-0">
 												<div className="col-6">
-													<label className="mt-2 custom_astrick poppins-light-18px">Location</label>
+													<label className="mt-2 custom_astrick poppins-light-18px">{t('Location')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none"
@@ -295,7 +297,7 @@ function Addproject(props) {
 											</div>
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
-													<label className="custom_astrick mt-2 poppins-light-18px">Street</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('Street')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none"
@@ -309,7 +311,7 @@ function Addproject(props) {
 
 												{/* HOUSE NUMBER */}
 												<div className="col-3">
-													<label className="custom_astrick mt-2 poppins-light-18px">House number</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('House number')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none"
@@ -322,7 +324,7 @@ function Addproject(props) {
 												</div>
 												{/* BUS NUMBER */}
 												<div className="col-3">
-													<label className="custom_astrick mt-2 poppins-light-18px">Bus number</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('Bus number')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none"
@@ -337,7 +339,7 @@ function Addproject(props) {
 											{/* CITY */}
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
-													<label className="custom_astrick mt-2 poppins-light-18px">Postalcode</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('Postalcode')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none"
@@ -352,7 +354,7 @@ function Addproject(props) {
 													<p className="error mt-2">{error_postal_code}</p>
 												</div>
 												<div className="col-6">
-													<label className="custom_astrick mt-2 poppins-light-18px">City</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('City')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none"
@@ -368,7 +370,7 @@ function Addproject(props) {
 											{/* EXTRA */}
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
-													<label className="custom_astrick mt-2 poppins-light-18px">Country</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('Country')}</label>
 													<select
 														className="form-select mt-2 mb-2 custom-select rounded-0 shadow-none"
 														value={data.country}
@@ -376,7 +378,7 @@ function Addproject(props) {
 															setData((prev) => ({ ...prev, country: e.target.value }));
 														}}
 													>
-														<option value="">Select country</option>
+														<option value="">{t('Select country')}</option>
 														{countrylist.map((options) => (
 															<option key={options.id} value={options.id}>
 																{options.country}
@@ -388,7 +390,7 @@ function Addproject(props) {
 											</div>
 											<div className="row col-md-12 m-0">
 												<div className="col-12">
-													<label className=" mt-2 poppins-light-18px">Extra</label>
+													<label className=" mt-2 poppins-light-18px">{t('Extra')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none"
@@ -414,7 +416,7 @@ function Addproject(props) {
 											// handletable(0);
 										}}
 									>
-										SAVE
+										{t('SAVE')}
 									</button>
 								</div>
 							</div>
@@ -426,7 +428,7 @@ function Addproject(props) {
 	);
 }
 
-export default Addproject;
+export default React.memo(Translation(Addproject,['Add project','Project name',"select company",'Select','Location','Street','House number','Bus number','Postalcode','City',"Country",'Select country','Extra','SAVE']));
 
 /**
 	 * FETCHING PROJECT

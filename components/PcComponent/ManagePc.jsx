@@ -10,13 +10,14 @@ import PcCommon from './PcCommon';
 import Popup from './Popup';
 import ReactPaginate from 'react-paginate';
 import Pagination from './Pagination';
-
+import Translation from '@/Translation';
 /**
  * this will project all the partire committee's data.
  * @returns 
  */
 
 const ManagePc = (props) => {
+	const {t}=props;
 	const [ data, setData ] = useState([]);
 	const [ temp, setTemp ] = useState([]);
 	const [ temp2, setTemp2 ] = useState([]);
@@ -123,13 +124,13 @@ const ManagePc = (props) => {
 
 	return (
 		<div className="container-fluid p-0">
-			{loading == true?<p>Loading...</p>:
+			{loading == true?<p>{t('Loading...')}</p>:
 		<div>
 			<div className="row m-0">
 				{/* <h1 className="mt-3 mb-3 font-weight-bold   px-0  bitter-italic-normal-medium-24 hover-white">Manage paritair comite</h1> */}
 			<div className='col-md-12 py-4 px-0 position-sticky-manage-pc'>
 				<h1 className="font-weight-bold   px-0  bitter-italic-normal-medium-24">
-					Manage paritair comite
+					{t('Manage paritair comite')}
 				</h1>
 			</div>
 				<div className="col-md-12 p-0 pb-4 position-sticky-add-pc-btn">
@@ -142,7 +143,7 @@ const ManagePc = (props) => {
 									styles.btncolor
 								}
 							>
-								+ ADD PARITAIR COMMITE
+								+ {t('ADD PARITAIR COMMITE')}
 							</span>
 						</Link>
 					</span>
@@ -153,7 +154,7 @@ const ManagePc = (props) => {
 							type="search"
 							id="form12"
 							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 add-pln shadow-none"
-							placeholder="Paritair comite number"
+							placeholder={t("Paritair comite number")}
 							value={searchPcnum}
 							onChange={(e) => setSearchPcnum(e.target.value)}
 						/>
@@ -164,7 +165,7 @@ const ManagePc = (props) => {
 							type="search"
 							id="form12"
 							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 add-pln shadow-none"
-							placeholder="Paritair comite name"
+							placeholder={t("Paritair comite name")}
 							value={searchPcname}
 							onChange={(e) => setSearchPcname(e.target.value)}
 						/>
@@ -178,7 +179,7 @@ const ManagePc = (props) => {
 							className="btn w-100 btn-block float-right mt-2 mb-2 border-0 poppins-medium-18px rounded-0 skyblue-bg-color add-pln shadow-none"
 							onClick={() => handleSearch()}
 						>
-							FILTER
+							{t('FILTER')}
 						</button>
 					</div>
 					<div className="col-md-6">
@@ -188,7 +189,7 @@ const ManagePc = (props) => {
 								className="btn w-100 btn-block float-right mt-2 mb-2 poppins-medium-18px  border-0 rounded-0 reset_button hover-white add-pln shadow-none"
 								onClick={() => handleReset()}
 							>
-								RESET
+								{t('RESET')}
 							</button>
 						)}
 					</div>
@@ -204,17 +205,17 @@ const ManagePc = (props) => {
 
 							<div className="row col-md-11 poppins-medium-18px">
 								<div className="col-md-2 py-2 ps-4 fw-bold align-items-center d-flex poppins-medium-18px">
-									PC number
+									{t('PC number')}
 								</div>
 								<div className="col-md-9 py-2 fw-bold align-items-center d-flex poppins-medium-18px">
-									PC name
+									{t('PC name')}
 								</div>
 							</div>
 						</div>
 					</div>
 					<div className="col-md-2  ps-3 pe-0 d-grid">
 						<div className={`text-center ${styles.sectioncolor} poppins-medium-18px p-4 fw-bold`}>
-							Actions
+							{t('Actions')}
 						</div>
 					</div>
 				</div>
@@ -266,7 +267,7 @@ const ManagePc = (props) => {
 			))}
 			{data.length == 0 && (
 				<div className="bg-light py-3 mt-3">
-					<div className="text-center poppins-regular-18px no-records"> No paritair comitee </div>
+					<div className="text-center poppins-regular-18px no-records"> {t('No paritair comitee')} </div>
 				</div>
 			)}
 			</div>
@@ -303,7 +304,7 @@ const ManagePc = (props) => {
 							);
 						}}
 					>
-						BACK
+						{t('BACK')}
 					</button>
 				</div>
 			</div>
@@ -313,4 +314,5 @@ const ManagePc = (props) => {
 	);
 };
 
-export default ManagePc;
+export default React.memo(Translation(ManagePc,['Loading...','Manage paritair comite','ADD PARITAIR COMMITE',"Paritair comite number",
+"Paritair comite name",'FILTER','RESET','PC number','PC name','Actions','No paritair comitee','BACK']));

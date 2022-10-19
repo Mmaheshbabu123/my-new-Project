@@ -138,7 +138,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
     return(
       files.map((file, index) => {
         return (
-          <div key = {index} className="my-2">
+          <div key = {index} className="mt-2">
             <span className="actions-span text-dark w-50 poppins-light-16px"> {file.file_name} </span>
             <span title={'Delete'} className="actions-span color-skyblue" onClick={() => handleActionClick('delete', index)}> <MdDelete/> </span>
           </div>
@@ -191,7 +191,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
      <div className='row'>
        <div className='col-md-12'>
          <div className='row'>
-        <div className="col-md-12">
+        <div className="col-md-12 pb-3">
           <LabelField title={`Start date`} className='poppins-medium-18px'/>
           <DateField
             name={'startDate'}
@@ -202,7 +202,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
           />
       {state.dateWarning && <ValidateMessage style={{margin:0}} text = {'Start date should be earlier than end date.'}/>}
         </div>
-        <div className="col-md-12">
+        <div className="col-md-12 pb-3">
           <LabelField title={`End date`} className='poppins-medium-18px' />
           <DateField
             name={'endDate'}
@@ -218,7 +218,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
       <div className='row'>
       <div className="col-md-12">
        <div className='row'>
-       <div className="col-md-12">
+       <div className="col-md-12 pb-3">
           <LabelField title={`Employer`} mandotory={true} className='poppins-medium-18px'/>
           <MultiSelectField
             options={employers}
@@ -230,7 +230,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
           />
         {state.employerWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
         </div>
-        <div className="col-md-12">
+        <div className="col-md-12 pb-3">
           <LabelField title={`Company`}  mandotory={true} className='poppins-medium-18px' />
           <MultiSelectField
             options={state.employerId ? companies[state.employerId] : []}
@@ -256,28 +256,38 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
         </div>
       </div>
       </div>
-      <div className="d-flex justify-content-end row">
+      {/* <div className="d-flex justify-content-end row">
       <div className='col-md-5 float-end'>
-        <div className='row'>
+        <div className='row '>
           <div className='col-md-6'>
-          <button onClick={() => handleSave(1)} type="button" className="btn skyblue-bg-color rounded-0 shadow-none w-100"> Save as draft </button>
+          <button onClick={() => handleSave(1)} type="button" className="btn skyblue-bg-color rounded-0 shadow-none float-end"> Save as draft </button>
           </div>
-          <div className='col-md-6'>
-          <button onClick={() => handleSave()} type="button" className="btn skyblue-bg-color rounded-0 shadow-none w-100"> Send to employer </button>
+          <div className='col-md-5'>
+          <button onClick={() => handleSave()} type="button" className="btn skyblue-bg-color rounded-0 shadow-none float-end"> Send to employer </button>
           </div>
         </div>
       </div>
-      </div>
+      </div> */}
      {/* back button */}
      {/* end of back button */}
       </div>
     </div>
-    <div className='row'>
-       <div className='col-md-12 p-0'>
+    <div className='row mb-2'>
+       <div className='col-md-6 p-0'>
        <button onClick={() => router.back()} type="button" className="btn poppins-light-18px text-decoration-underline text-uppercase text-left shadow-none mb-3">
         {`Back`}
       </button>
        </div>
+       <div className='col-md-6 '>
+          <div className="row justify-content-end">
+          <div className='col-md-6'>
+          <button onClick={() => handleSave(1)} type="button" className="btn poppins-medium-18px-next-button rounded-0 shadow-none float-end w-75"> Save as draft </button>
+          </div>
+          <div className='col-md-6'>
+          <button onClick={() => handleSave()} type="button" className="btn rounded-0 shadow-none float-end poppins-medium-18px-next-button w-100"> Send to employer </button>
+          </div>
+          </div>
+        </div>
      </div>
   </>
 }

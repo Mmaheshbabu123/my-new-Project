@@ -198,6 +198,7 @@ export const deleteUploadedFiles = BASE_URL + 'delete-files';
 export const uploadAdditionalDocs = BASE_URL + 'upload-additional-docs';
 export const uploadFiles = BASE_URL + 'upload-files';
 export const downloadSvAsPdf = BASE_URL + 'download-cooperation-agreement-pdf';
+export const getOtherDocuments = BASE_URL + 'get-other-documents';
 //---------------
 
 
@@ -263,3 +264,10 @@ export const getIndexationOfSalary = BASE_URL + "fetch-all-indexation-salary";
 
 //-------------------------Add Planning---------------------------//
 export const getPlanning = BASE_URL + "fetch-add-planning-details/";
+export const getDraftPlanning = BASE_URL + "fetch-draft-planning/";
+export const deletePlanningDetails = BASE_URL + "delete-planning/";
+
+
+
+//---------------------------- Contract API--------------------------- //\
+export const getContract = BASE_URL + "downloadContract/";
