@@ -18,9 +18,9 @@ const RedirectPages = (props) => {
 		if (props.hasOwnProperty('type')) {
 			localStorage.setItem('type', JSON.stringify(props.type));
 		}
-		if (props.hasOwnProperty('uid')) {
-			localStorage.setItem('uid', JSON.stringify(props.uid));
-		}
+		// if (props.hasOwnProperty('uid')) {
+		// 	localStorage.setItem('uid', JSON.stringify(props.uid));
+		// }
 		if (props.hasOwnProperty('dest')) {
 			localStorage.setItem('dest', JSON.stringify(props.dest));
 			switch (props.dest) {
