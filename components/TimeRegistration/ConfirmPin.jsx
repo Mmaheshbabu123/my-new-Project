@@ -129,7 +129,7 @@ const Pincode = () => {
 				.then((result) => {
 					
 					if (result == 200) {
-						window.location.replace(homeScreen);
+						router.push('/pincode/options');
 					}
 				})
 				.catch((error) => {
@@ -225,7 +225,7 @@ const Pincode = () => {
 	</div>
 	</div>
 	<div className="row mt-5 mb-3">
-		<div className='col-md-12'>
+		<div className='col-md-11'>
 		<input
 			type="submit"
 			className="btn btn-secondary poppins-medium-18px-save-button rounded-0 shadow-none border-0 float-end"

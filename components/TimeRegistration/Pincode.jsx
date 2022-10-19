@@ -227,7 +227,15 @@ const Pincode = () => {
 				</div>
 			</div>
 			<div className="row">
-					<div className='col-md-12'>
+			<div className='col-md-1'>
+		<input
+			type="submit"
+			className="btn btn-secondary poppins-medium-18px-save-button rounded-0 shadow-none border-0 float-end"
+			value="Back"
+			onClick={()=>router.push('/pincode/options')}
+		/>
+		</div>
+					<div className='col-md-11'>
 					<input
 					type="submit"
 					className="btn poppins-medium-18px-next-button shadow-none rounded-0 float-end"
