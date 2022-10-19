@@ -162,7 +162,7 @@ function WeeklyPlanning(props) {
 							type="submit"
 							className="btn  my-2 border-0 px-3  btn-block btn-bg-gray-medium add-pln poppins-medium-18px shadow-none rounded-0 "
 						>
-							Encodage view
+							Draft planning
 						</button>
 					</div>
 				</div>
