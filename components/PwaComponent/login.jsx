@@ -34,7 +34,7 @@ const Login = (props) => {
         error1['email'] == ''
             ? ValidationService.emailValidationMethod(res.email)
             : error1['email'];
-        
+
         /**
 		 * check if password is valid
 		 */
@@ -42,7 +42,7 @@ const Login = (props) => {
         // error1['password'] == ''
         //     ? ValidationService.passwordValidationMethod(res.password)
         //     : error1['password'];
-        
+
         setState({
             ...state,
             error_user_name: error1['email'],
@@ -70,7 +70,7 @@ const Login = (props) => {
                 window.open(redirect, '_self'); // It'll redirect by re-loading page
                 // router.push(redirect); //it'll just navigate, without re-loading page
             } else {
-                // alert(message); //NOSONAR
+                console.error(message); //NOSONAR
             }
         }
     }
