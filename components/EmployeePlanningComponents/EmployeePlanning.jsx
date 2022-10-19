@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Paper from '@mui/material/Paper';
 import Link from 'next/link';
 import { MdReviews } from 'react-icons/md';
@@ -9,6 +9,7 @@ import { ViewState } from '@devexpress/dx-react-scheduler';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import { fetchemployeeplanning } from '../../Services/ApiEndPoints';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import moment from 'moment';
 
 import {
@@ -27,9 +28,10 @@ function EmployeeMonthlyPlanning(props) {
 	/**
 	 * View more functionality
 	 */
+        const { contextState: {uid=0} } = useContext(UserAuthContext);
 	const [ items, setItems ] = useState([]);
 	const [ visible, setVisible ] = useState(3);
-
+        const router = useRouter();
 	const viewMoreItems = () => {
 		setVisible((prevValue) => prevValue + 3);
 	};
@@ -41,10 +43,10 @@ function EmployeeMonthlyPlanning(props) {
 	 */
 
 	useEffect(() => {
-		if (localStorage.getItem('uid') != null) {
-			setUserid(JSON.parse(localStorage.getItem('uid')));
+		if (uid) {
+			setUserid(Number(uid));
 		} else {
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+		   router.push('/');
 		}
 	}, []);
 	useEffect(

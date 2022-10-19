@@ -3,7 +3,7 @@ export const ENV_URL = process.env.NEXT_PUBLIC_APP_BACKEND_URL;
 export const REGEX_URL = 'api/';
 export const BASE_URL = ENV_URL + REGEX_URL;
 
-export const ENV_DRUPAL= process.env.NEXT_PUBLIC_APP_URL_DRUPAL;
+export const ENV_DRUPAL= process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/';
 export const BASE_URL_DRUPAL = ENV_DRUPAL + REGEX_URL;
 
 
@@ -229,6 +229,8 @@ export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
 export const getMyTodos = BASE_URL + 'get-mytodos';
 export const labourTodoFileUpload = BASE_URL + 'upload-labour-files';
 export const saveLabourTodoFile = BASE_URL + 'save-labour-todo-files';
+export const labourShareDocPreview = BASE_URL + 'labour-share-doc-preview';
+export const updateEmployerSignOnLabourDoc = BASE_URL + 'update-employer-sign-labour-doc';
 //-----------------
 //-----------------
 

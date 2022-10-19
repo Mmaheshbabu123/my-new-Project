@@ -5,6 +5,7 @@ import DateField from '@/atoms/DateField';
 import { APICALL } from '../../Services/ApiServices';
 import ValidationService from '../../Services/ValidationService';
 import { RadioGroup, Radio } from 'react-radio-input';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
 import Translation from '@/Translation';
@@ -43,7 +44,7 @@ const AddSalaryBenefits = (props) => {
 	} = useContext(PcContext);
 
 	const router = useRouter();
-
+	const { contextState = {} } = useContext(UserAuthContext);
 	const [ obj, setObj ] = useState([]);
 	const inputRef = useRef({});
 	const [ valuetype, setValueType ] = useState(0);
@@ -63,13 +64,9 @@ const AddSalaryBenefits = (props) => {
 			var uniqkey = 0;
 			k != undefined && k != '' ? (uniqkey = k) : pc_unique_key != undefined ? (uniqkey = pc_unique_key) : '';
 
-			if (localStorage.getItem('uid') != null) {
-				var userid = JSON.parse(localStorage.getItem('uid'));
-				setUid(userid);
-			} else {
-				window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
+				setUid(contextState.uid);
 			}
-
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + uniqkey, 'GET')
 				.then((result) => {
 					console.log(result.data);
@@ -201,9 +198,9 @@ const AddSalaryBenefits = (props) => {
 					object[i].v_err =
 						data.value_type == '1' ? ValidationService.minSalaryValidationMethod(data.value) : '';
 				}
-				// object[i].date_err = data.date_err == ''
-				// 	? (ValidationService.onlyFutureDateValidationMethod(data.date))
-				// 	: '';
+				object[i].date_err = (data.date_err == '')
+					? (ValidationService.onlyFutureDateValidationMethod(data.date))
+					: '';
 				if (
 					data.v_err != '' ||
 					data.vt_err != '' ||
@@ -515,7 +512,7 @@ const AddSalaryBenefits = (props) => {
 																console.log(e.target.value);
 																updateDate(index, e.target.value);
 															}}
-															minDate={element.open ? year + '-' + month + '-' + day : ''}
+															// minDate={element.open ? year + '-' + month + '-' + day : ''}
 															style={{ marginLeft: '0.8rem' }}
 															className="col-md-11 date_field_salary_benefits"
 															value={element.date}

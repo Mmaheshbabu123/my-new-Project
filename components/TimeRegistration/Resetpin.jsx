@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useContext, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { red } from 'tailwindcss/colors';
 import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import checkPinCode, { homeScreen } from '../../Services/ApiEndPoints';
 
 const OTPInput = dynamic(
@@ -22,6 +23,8 @@ const ResendOTP = dynamic(
 
 const Pincode = () => {
 	const router = useRouter();
+	const { contextState = {} } = useContext(UserAuthContext);
+
 	const [ hasPin, setHasPin ] = useState(false);
 	const [ uid, setUid] = useState(null);
 	const [ otp, setOTP ] = useState('');
@@ -35,18 +38,15 @@ const Pincode = () => {
 			if (!router.isReady) return;
 
 
-            if(id!=0){
-                alert(id);
-            }
-			if (localStorage.getItem('uid') != null) {
-				setUid(JSON.parse(localStorage.getItem('uid')));
-			} else {
-				window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-			}
+            // if(id!=0){
+            //     alert(id);
+            // }
 			var p_unique_key = router.query.p_unique_key;
-			if (uid != undefined && uid != null) {
-				APICALL.service('http://absoluteyou-backend.local/api/hasPincode/' + uid, 'GET')
+			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '')
+			 {
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/hasPincode/' + contextState.uid, 'GET')
 					.then((result) => {
+						setUid(contextState.uid);
 						if (result != 999) {
 							setHasPin(true);
 						}
@@ -98,10 +98,10 @@ const Pincode = () => {
 	const Submit = (event) => {
 		event.preventDefault();
 		if(validate(otp,otp1)){
-			APICALL.service('http://absoluteyou-backend.local/api/pincodegeneration/' + uid+'?pincode='+otp1, 'GET')
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/pincodegeneration/' + uid+'?pincode='+otp1, 'GET')
 					.then((result) => {
 						if (result == 200) {
-							window.location.replace(homeScreen);
+							router.push('/pincode/options');
 						}
 					})
 					.catch((error) => {

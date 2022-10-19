@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useQuery } from "react-query";
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
@@ -8,7 +9,7 @@ import Link from 'next/link';
 
 
 const getAcrfToken = async () => {
-    return await fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}get-acrf-token`)
+    return await fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
         .then(res => res.json())
         .then(result => result.token)
 }
@@ -36,7 +37,7 @@ const Login = (props) => {
         error1['email'] == ''
             ? ValidationService.emailValidationMethod(res.email)
             : error1['email'];
-        
+
         /**
 		 * check if password is valid
 		 */
@@ -44,7 +45,7 @@ const Login = (props) => {
         // error1['password'] == ''
         //     ? ValidationService.passwordValidationMethod(res.password)
         //     : error1['password'];
-        
+
         setState({
             ...state,
             error_user_name: error1['email'],
@@ -67,12 +68,14 @@ const Login = (props) => {
 
             //check status and redirect user.
             if (status === 200) {
+                  axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}`).then(res => {
+                  })
                 // get return url from query parameters or default to '/'
                 const redirect = router.query.returnUrl || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
                 window.open(redirect, '_self'); // It'll redirect by re-loading page
                 // router.push(redirect); //it'll just navigate, without re-loading page
             } else {
-                // alert(message); //NOSONAR
+                console.error(message); //NOSONAR
             }
         }
     }

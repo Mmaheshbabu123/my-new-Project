@@ -25,6 +25,7 @@ const AddFunctions = () => {
 	const [ employeeobject, setEmployeeObject ] = useState([]);
 	const [ salaries, setSalaries ] = useState();
 	const [ selectedOption, setSelectedOption ] = useState([]);
+	const [flexSalary, setFlexSalary] = useState('');
 
 	useEffect(
 		() => {
@@ -33,7 +34,7 @@ const AddFunctions = () => {
 			APICALL.service(fetchPlanningFunction + p_unique_key, 'GET')
 				.then((result) => {
 					if (result.status == 200) {
-						console.log(result.data[0]);
+						console.log(result.data);
 						result.data[0].map((val,key)=>{
 							console.log(val.employee_list)
 							val.employee_list.map((val2,key2)=>{
@@ -61,6 +62,7 @@ const AddFunctions = () => {
 						
 						setEmployeeObject(result.data[0]);
 						setIsChecked(result.data[1]);
+						setFlexSalary(result.data[2]);					
 					}
 					setLoading(false);
 				})
@@ -112,16 +114,15 @@ const AddFunctions = () => {
 		}
 	};
 
-	let updateEmployeeType = (index = null, val, parent_index) => {
+	let updateEmployeeType = (index = null, obj, parent_index) => {
 		var object = [ ...employeeobject ];
+		console.log(object);
 		if (index !== null) {
-			object[parent_index].employee_list[index].emp_type = val;
+			object[parent_index].employee_list[index].emp_type = obj.value;
+			if( [6,7].includes(obj.bbright_id)){
+			// object[parent_index].employee_list[index].function_salary = flexSalary;
+			}
 			setEmployeeObject(object);
-		} else {
-			// 	const newState = object.map((element) => {
-			// 		return { ...element, emp_type: val, emp_type: val };
-			// });
-			// 	setEmployeeObject(newState);
 		}
 	};
 
@@ -628,7 +629,7 @@ const AddFunctions = () => {
 																		}
 																		disabled={false}
 																		handleChange={(obj) =>
-																			updateEmployeeType(k1, obj.value, key)}
+																			updateEmployeeType(k1, obj, key)}
 																		isMulti={false}
 																		className="col-md-12 "
 																	/>

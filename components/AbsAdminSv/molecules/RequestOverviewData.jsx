@@ -230,12 +230,12 @@ const RequestOverviewData = (props) => {
         <div>
         {filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="Next >"
+            nextLabel={<AiOutlineArrowRight />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={pageCount}
             forcePage={currentPage}
-            previousLabel="< Previous"
+            previousLabel={<AiOutlineArrowLeft />}
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"

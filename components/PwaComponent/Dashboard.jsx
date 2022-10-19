@@ -47,7 +47,7 @@ function Dashboard(props) {
       <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Dashboard')}</p>
       <>
 	  <DashboardTiles dashboardtiles = { dashboardtiles } />
-          <p> {t('Dashboard component')} </p>
+          {/* <p> Dashboard component </p> */}
 
       </>
       <div>{dashboardtiles.length}</div>

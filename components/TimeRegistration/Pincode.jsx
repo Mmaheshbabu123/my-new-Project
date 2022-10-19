@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import dynamic from 'next/dynamic';
 import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
@@ -6,18 +6,19 @@ import { useRouter } from 'next/router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { homeScreen } from '../../Services/ApiEndPoints';
 import checkPinCode from '../../Services/ApiEndPoints';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 
 //to make the otp dynamic
 const OTPInput = dynamic(
-	() => {
-		return import('otp-input-react');
+       async () => {
+		return await import('otp-input-react');
 	},
 	{ ssr: false }
 );
 //to make the resend otp dynamic
 const ResendOTP = dynamic(
-	() => {
-		return import('otp-input-react').then((module) => module.ResendOTP);
+	async () => {
+		return await import('otp-input-react').then((module) => module.ResendOTP);
 	},
 	{ ssr: false }
 );
@@ -25,6 +26,8 @@ const ResendOTP = dynamic(
 const Pincode = () => {
 	//for router
 	const router = useRouter();
+        const { contextState: { uid: loggedInUserId = 0 } } = useContext(UserAuthContext);
+
 	//get the otp
 	const [ otp, setOTP ] = useState(0);
 	//to catch the error
@@ -38,6 +41,7 @@ const Pincode = () => {
 
 	const [ eyeicon, setEyeicon ] = useState(FaEyeSlash);
 
+
 	//if any paremeters there in the url we can get by it
 	const { root_parent_id, selectedTabId, ref_id = 0 } = router.query;
 
@@ -46,24 +50,24 @@ const Pincode = () => {
 			var userid = null;
 			if (!router.isReady) return;
 			//get the user id from the local storage.
-			if (localStorage.getItem('uid') != null) {
-				userid = JSON.parse(localStorage.getItem('uid'));
-
+			if (loggedInUserId) {
+				userid = Number(loggedInUserId);
 				//sending the api to check weather the user have pincode or not.
-				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + userid, 'GET')
+				
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + loggedInUserId, 'GET')
 					.then((result) => {
 						if (result == 999) {
 							//if the user don't have the pincode redirecting him to the generate pincode page.
 							router.push('/pincode/generate/Pin');
 						}
 						//setting the user id to the hook.
-						setuid(userid);
+						setuid(loggedInUserId);
 					})
 					.catch((error) => {
 						console.error(error);
 					});
 			} else {
-				 window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+		            router.push('/');
 			}
 		},
 		[ router.query ]
@@ -227,7 +231,15 @@ const Pincode = () => {
 				</div>
 			</div>
 			<div className="row">
-					<div className='col-md-12'>
+			<div className='col-md-1'>
+		<input
+			type="submit"
+			className="btn btn-secondary poppins-medium-18px-save-button rounded-0 shadow-none border-0 float-end"
+			value="Back"
+			onClick={()=>router.push('/pincode/options')}
+		/>
+		</div>
+					<div className='col-md-11'>
 					<input
 					type="submit"
 					className="btn poppins-medium-18px-next-button shadow-none rounded-0 float-end"

@@ -7,7 +7,6 @@ import { BiCopyright } from 'react-icons/bi';
 import { FaFacebookSquare, FaLinkedin, FaRegUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import { TiSocialFacebookCircular, TiSocialLinkedinCircular } from 'react-icons/ti';
-import PrivacyPolicy from 'components/layout/PrivacyPolicy'
 function Footer(props) {
 	const { t } = props;
 	return (
@@ -39,7 +38,7 @@ function Footer(props) {
 		// 		</div>
 		// 	</div>
 		// </div>
-		<><PrivacyPolicy/>
+		<>
 		<br></br>
 		<div className='footer  footer-bg-color  text-white py-3 position-relative '>
 			
