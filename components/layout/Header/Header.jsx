@@ -49,7 +49,7 @@ function Header() {
 	}
 
 	const handleLogout = () => {
-		userService.userLogout();
+		userService.userLogout(uid);
 	}
 
 	return (

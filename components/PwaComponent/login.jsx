@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useQuery } from "react-query";
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
@@ -65,6 +66,8 @@ const Login = (props) => {
 
             //check status and redirect user.
             if (status === 200) {
+                  axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}`).then(res => {
+                  })
                 // get return url from query parameters or default to '/'
                 const redirect = router.query.returnUrl || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
                 window.open(redirect, '_self'); // It'll redirect by re-loading page

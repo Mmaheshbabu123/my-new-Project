@@ -54,15 +54,22 @@ const setLocalStorageAndForwardToDashboard = (response) => {
 }
 
 
-const userLogout = async () => {
+const userLogout = async (uid) => {
   await axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/logout?_format=json&token=${localStorage.getItem('logout_token')}`)
-    .then((response) => {
-      localStorage.clear();
-      window.open('/user/login', '_self');
+    .then(async (response) => {
+      axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/logout?entityid=${uid}`).then(res => {
+        localStorage.clear();
+        window.open('/user/login', '_self');
+      })
     })
+}
+
+const backendLogin = () => {
+
 }
 
 export const userService = {
   userLogin,
-  userLogout
+  userLogout,
+  backendLogin,
 }
