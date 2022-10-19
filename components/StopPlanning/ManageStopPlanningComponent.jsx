@@ -31,6 +31,7 @@ const [state,setState] = useState({
   selectedPlanning:[],
   type:0,
   startTimeWarning:false,
+  startStopDisable:false,
 
 });
 const onSelect = (e,type) => {
@@ -69,12 +70,21 @@ const handleSubmit = async (type) => {
   }
   await APICALL.service(postStopPlanningDetails, 'POST', getPostData())
     .then((result) => {
-      if(result.status === 200) {
-        console.log('sucess');
-        setState({...state,startTimeWarning:false});
+      let bothSigned = result.data.bothSigned;
+      console.log(bothSigned);
+      if(bothSigned && result.status === 200) {
+
+        setState({...state,startTimeWarning:false,startStopDisable:true});
         customAlert('success', 'successfully added', 2500);
-      } else if (result.status === 205) {
+        //router.reload();
+      }else if(bothSigned  === 0 && result.status === 200){
+        customAlert('error', 'We notice you have a werkpostfiche which is not signed.', 2500);
+
+      }
+
+      else if (result.status === 205) {
           customAlert('error', 'Error while saving record', 2500);
+
       }
     })
     .catch((error) => console.error('Error occurred'));
@@ -92,6 +102,9 @@ const getPostData = () => {
       pefId        : state.selectedPlanning['pef_id'],
       paId         : state.selectedPlanning['planning_actual_id'],
       pwId         : state.selectedPlanning['planning_worked_id'],
+      planngId     : state.selectedPlanning['planning_id'],
+      pcId         : state.selectedPlanning['pc_id'],
+      functionId   : state.selectedPlanning['function_id'],
   };
 }
 console.log(state);
@@ -118,7 +131,7 @@ return(
              <MultiSelectField
                  options={state.employeeeList}
                  standards={state.employeeeList.filter(val => val.value === state.employeeId)}
-                 disabled={false}
+
                  handleChange={(obj) => onSelect(obj,'employee')}
                  isMulti={false}
                  className="col-md-12"
@@ -171,6 +184,7 @@ return(
             onClick={() => handleSubmit(1)}
             type="button"
             style={{marginTop: '0'}}
+            disabled={state.startStopDisable}
             className="btn btn my-2 skyblue-bg-color border-0  px-5 rounded-0 shadow-none float-end">
             {` START`}
           </button>}
@@ -179,6 +193,7 @@ return(
         {state.type === 2 &&  <button
             onClick={() => handleSubmit(2)}
             type="button"
+            disabled={state.startStopDisable}
             style={{marginTop: '0'}}
             className="btn btn my-2 skyblue-bg-color border-0  px-5 rounded-0 shadow-none float-end">
             {` STOP`}
