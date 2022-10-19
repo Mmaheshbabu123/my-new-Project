@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useEffect, useState,useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
 import { getEmployeerCompanylist, getWeeklyPlanning } from '../../Services/ApiEndPoints';
@@ -7,9 +7,12 @@ import Link from 'node_modules/next/link';
 import moment from 'moment';
 import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
 import EditEmployee from './EditEmployee';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
+
 
 function WeeklyPlanning(props) {
-	const [ empr_id, setEmpr_id ] = useState(143);
+	const { contextState = {} } = useContext(UserAuthContext);
+
 	const [ showview, setShowview ] = useState(false);
 	const [ planning, setPlanning ] = useState([]);
 	const [ activeWeek, setActiveWeek ] = useState([]);
@@ -26,13 +29,13 @@ function WeeklyPlanning(props) {
 
 	const [ styleEdit, setStyleEdit ] = useState('col-md-12');
 
-	useEffect(() => {
-		if (localStorage.getItem('uid') != null) {
-			setEmpr_id(JSON.parse(localStorage.getItem('uid')));
-		} else {
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (localStorage.getItem('uid') != null) {
+	// 		setEmpr_id(JSON.parse(localStorage.getItem('uid')));
+	// 	} else {
+	// 		window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+	// 	}
+	// }, []);
 
 	useEffect(
 		() => {
@@ -61,8 +64,8 @@ function WeeklyPlanning(props) {
 
 	useEffect(
 		() => {
-			if (empr_id) {
-				APICALL.service(getEmployeerCompanylist + empr_id, 'GET')
+			if (contextState.uid) {
+				APICALL.service(getEmployeerCompanylist + contextState.uid, 'GET')
 					.then((result) => {
 						if (result.status == 200) {
 							console.log(result);
@@ -78,7 +81,7 @@ function WeeklyPlanning(props) {
 					});
 			}
 		},
-		[ empr_id ]
+		[ contextState.uid ]
 	);
 	let editplanning = (data) => {
 		setEdit(true);
