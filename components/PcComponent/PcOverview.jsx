@@ -37,7 +37,7 @@ import { useRouter } from 'next/router';
 import CompanyOptions from 'pages/manage-planning/select';
 import Translation from '@/Translation';
 const PcOverview = (params) => {
-	const {t}=props;
+	const {t = (tword) => tword  } = params;
 	const {
 		pc_unique_key,
 		setPc_unique_key,

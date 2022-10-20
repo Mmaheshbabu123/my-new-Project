@@ -374,5 +374,6 @@ disabled={onlyview}
 		</div>
 	);
 };
-export default React.memo(transalation(ViewSalaryBenefits,['Salary','Is this mandatory?','Allow sales agent to update the value during creation of','cooperation agreement?',
+export default React.memo(Translation(ViewSalaryBenefits,['Salary','Is this mandatory?','Allow sales agent to update the value during creation of','cooperation agreement?',
 'Salary benefit value','value in','Is the benefit granted in case of absence of the employee?','Yes','No','Applicable coefficient','Start date','Occurence','Salary benefits','SAVE','BACK','SAVE']));
+	
