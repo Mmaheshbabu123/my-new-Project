@@ -7,7 +7,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { homeScreen } from '../../Services/ApiEndPoints';
 import checkPinCode from '../../Services/ApiEndPoints';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
-
+import Translation from '@/Translation';
 //to make the otp dynamic
 const OTPInput = dynamic(
        async () => {
@@ -23,8 +23,9 @@ const ResendOTP = dynamic(
 	{ ssr: false }
 );
 
-const Pincode = () => {
+const Pincode = (props) => {
 	//for router
+	const {t} =props;
 	const router = useRouter();
         const { contextState: { uid: loggedInUserId = 0 } } = useContext(UserAuthContext);
 
@@ -224,7 +225,7 @@ const Pincode = () => {
 					<div className='row mt-3'>
 					<div className='col-md-11 pe-2'>
 					<button style={{ border: 'none', background: 'white', color: 'blue' }} onClick={forgotPassword} className='forgot_password_pincode float-end pe-0'>
-							Forgot password?
+							{t('Reset pincode?')}
 						</button>
 					</div>
 					</div>
@@ -252,4 +253,4 @@ const Pincode = () => {
 	);
 };
 
-export default Pincode;
+export default React.memo(Translation(Pincode,['Reset pincode?']));

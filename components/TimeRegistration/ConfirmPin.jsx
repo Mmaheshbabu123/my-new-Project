@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
 import checkPinCode, { homeScreen } from '../../Services/ApiEndPoints';
-
+import Translation from '@/Translation';
 const OTPInput = dynamic(
 	() => {
 		return import('otp-input-react');
@@ -24,7 +24,8 @@ const ResendOTP = dynamic(
 	{ ssr: false }
 );
 
-const Pincode = () => {
+const Pincode = (props) => {
+	const {t}=props;
 	const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
 	const [ hasPin, setHasPin ] = useState(false);
@@ -192,7 +193,7 @@ const Pincode = () => {
 		{/* <div className="col-4" /> */}
 		<div className="mt-2 col-md-5 m-auto">
 			<div>
-				<label className='poppins-regular-18 mb-2'>Confirm pincode</label>
+				<label className='poppins-regular-18 mb-2'>{t('Confirm pincode')}</label>
 			</div>
 			<div className='d-flex'>
 			{/* <div> */}
@@ -237,9 +238,9 @@ const Pincode = () => {
 	(hasPin?
 		(display=fields):
 	(display=<div>
-			Link is expired please try again later.
+			{t('Link is expired please try again later.')}
 		</div>));
 		return (display);
 };
 
-export default Pincode;
+export default React.memo(Translation(Pincode,['Confirm pincode','Link is expired please try again later.']));

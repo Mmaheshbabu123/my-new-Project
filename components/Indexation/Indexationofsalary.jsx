@@ -10,8 +10,9 @@ import get from 'node_modules/lodash/get';
 import ValidationService from '../../Services/ValidationService';
 import moment from 'moment';
 import Select from 'react-select';
-
-const Indexationofsalary = () => {
+import Translation from '@/Translation';
+const Indexationofsalary = (props) => {
+	const {t} =props;
 	const router = useRouter();
 
 	
@@ -154,18 +155,18 @@ const Indexationofsalary = () => {
 		<div className="container-fluid p-0">
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row m-0 ">
-					<p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">Indexation of salary</p>
+					<p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Indexation of salary')}</p>
 					<div className='row mt-3 ms-1 '>
 						<div className="form-check mt-2 mb-2">
 							<input className="form-check-input" type="radio" checked={status === 1} onClick={(e) => radioHandler(1)} />
 							<label className="form-check-label" >
-								Indexation in %
+								{t('Indexation in')} %
 							</label>
 						</div>
 						<div className="form-check  mt-2 mb-2">
 							<input className="form-check-input" type="radio" checked={status === 2} onClick={(e) => radioHandler(2)} />
 							<label className="form-check-label">
-								Indexation in euro (value)
+								{t('Indexation in euro (value)')}
 							</label>
 						</div>
 					</div>
@@ -173,7 +174,7 @@ const Indexationofsalary = () => {
 
 						<div className='col-md-6'>
 							<div className="input-group mb-3">
-								<label className='mb-2 input-group custom_astrick '>Percentage of indexation</label>
+								<label className='mb-2 input-group custom_astrick '>{t('Percentage of indexation')}</label>
 								<input type="text" className="form-control  " />
 								<div className="input-group-append">
 									<span className="input-group-text">%</span>
@@ -187,7 +188,7 @@ const Indexationofsalary = () => {
 						<div className='row'>
 							<div className='col-md-6 '>
 								<div className="input-group mb-3">
-									<label className='mb-2 input-group custom_astrick '>Amount of indexation</label>
+									<label className='mb-2 input-group custom_astrick '>{t('Amount of indexation')}</label>
 									<input type="text" className="form-control " />
 									<div className="input-group-append">
 										<span className="input-group-text">€</span>
@@ -199,7 +200,7 @@ const Indexationofsalary = () => {
 					<div className='row'>
 						<div className='col-md-6 '>
 							<div className="input-group mb-3">
-								<label className='mb-2 input-group custom_astrick'>Date as of which indexation takes place</label>
+								<label className='mb-2 input-group custom_astrick'>{t('Date as of which indexation takes place')}</label>
 								<DatePicker size="lg"
 									value={salary.date}
 									onChange={(e) => {
@@ -216,9 +217,9 @@ const Indexationofsalary = () => {
 					</div>
 					<div className='row'>
 						<div className="mt-2">
-							<label className='mb-2 custom_astrick '>Paritair comite</label>
+							<label className='mb-2 custom_astrick '>{t('Paritair comite')}</label>
 							<Select
-								placeholder={'Select paritair comites'}
+								placeholder={t('Select paritair comites')}
 								name="partaircomites"
 								id={'partaircomites'}
 								instanceId={'pc'}
@@ -249,9 +250,9 @@ const Indexationofsalary = () => {
 
 					<div className='row'>
 						<div className="mt-2">
-							<label className='mb-2 custom_astrick '>Category</label>
+							<label className='mb-2 custom_astrick '>{t('Category')}</label>
 							<Select
-								placeholder={'Select paritair comites'}
+								placeholder={t('Select paritair comites')}
 								name="partaircomites"
 								id={'partaircomites'}
 								instanceId={'category'}
@@ -276,9 +277,9 @@ const Indexationofsalary = () => {
 
 						<div className='row'>
 							<div className="mt-2">
-								<label className='mb-2 custom_astrick'>Employee type (statuut)</label>
+								<label className='mb-2 custom_astrick'>{t('Employee type (statuut)')}</label>
 								<Select
-									placeholder={'Select employee types'}
+									placeholder={t('Select employee types')}
 									name="employeetypes"
 									id={'employeetypes'}
 									// options={paritaircomites[2]}
@@ -303,7 +304,7 @@ const Indexationofsalary = () => {
 
 						<div className='row'>
 							<div className="mt-2 col-md-6 ">
-								<label className='mb-2 custom_astrick'>Selection of indexation</label>
+								<label className='mb-2 custom_astrick'>{t('Selection of indexation')}</label>
 								{/* <MultiSelectField
 								placeholder={'Select paritair comites'}
 								name="partaircomites"
@@ -325,10 +326,10 @@ const Indexationofsalary = () => {
 									}}
 								>
 
-									<option value="">Select Indexation</option>
-									<option value="1">Minimum salary</option>
-									<option value="2">Actual salary</option>
-									<option value="3">Actual salary and minimum salary</option>
+									<option value="">{t('Select Indexation')}</option>
+									<option value="1">{t('Minimum salary')}</option>
+									<option value="2">{t('Actual salary')}</option>
+									<option value="3">{t('Actual salary and minimum salary')}</option>
 								</select>
 							</div>
 							<p className="error mt-2">{error_indexation}</p>
@@ -341,7 +342,7 @@ const Indexationofsalary = () => {
 							<Link href={'/planning/options'}>
 								{/* <p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px "> */}
 								<p className="bg-white border-0 poppins-light-18px text-decoration-underline shadow-none ">
-									BACK
+									{t('BACK')}
 								</p>
 							</Link>
 						</button>
@@ -353,7 +354,7 @@ const Indexationofsalary = () => {
 							className="btn rounded-0 px-3 float-end poppins-medium-18px-next-button shadow-none"
 
 						>
-							Save
+							{t('Save')}
 						</button>
 					</div>
 				</div>
@@ -361,4 +362,7 @@ const Indexationofsalary = () => {
 		</div >
 	);
 }
-export default Indexationofsalary;
+export default React.memo(Translation(Indexationofsalary,['Indexation of salary','Indexation in','Indexation in euro (value)',
+'Percentage of indexation','Amount of indexation','Date as of which indexation takes place','Paritair comite','Select paritair comites',
+'Category','Select paritair comites','Employee type (statuut)','Select employee types','Selection of indexation','Select Indexation',
+'Minimum salary','Actual salary','Actual salary and minimum salary','BACK','Save']));

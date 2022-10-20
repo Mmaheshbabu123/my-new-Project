@@ -9,6 +9,7 @@ import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
 import Translation from '@/Translation';
 
+
 let dateObj = new Date();
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
@@ -159,7 +160,7 @@ const ViewSalaryBenefits = ({key}) => {
 													<input
 														type="checkbox"
 														disabled={onlyview}
-														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input w-25 rounded-0"} 
+														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input rounded-0"} 
 														value={agent}
 														checked={element.sales_agent === true}
 													
@@ -374,5 +375,6 @@ disabled={onlyview}
 		</div>
 	);
 };
-export default React.memo(transalation(ViewSalaryBenefits,['Salary','Is this mandatory?','Allow sales agent to update the value during creation of','cooperation agreement?',
+export default React.memo(Translation(ViewSalaryBenefits,['Salary','Is this mandatory?','Allow sales agent to update the value during creation of','cooperation agreement?',
 'Salary benefit value','value in','Is the benefit granted in case of absence of the employee?','Yes','No','Applicable coefficient','Start date','Occurence','Salary benefits','SAVE','BACK','SAVE']));
+	

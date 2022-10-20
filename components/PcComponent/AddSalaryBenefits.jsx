@@ -255,7 +255,7 @@ const AddSalaryBenefits = (props) => {
 			<div className="mt-3">
 				<div className="m-2">
 					<div className="row">
-						<div
+						{/* <div
 							className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-3 ps-0' : 'mt-4 px-0'}
 						>
 							<input
@@ -266,9 +266,17 @@ const AddSalaryBenefits = (props) => {
 								}}
 								style={{ width: '18px', height: '18px' }}
 							/>
-						</div>
-						<div className="pe-1">
-							<div className="accordion-item rounded-0 add_salary_benefits">
+						</div> */}
+						<div 	className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-12 px-1' : 'd-flex px-1'}>
+						<input
+								type="checkbox"
+								checked={element.open == true}
+								onChange={(e) => {
+									updateOpen(index, e.target.checked);
+								}}
+								style={{ width: '18px', height: '18px',marginTop:'1.3rem' }}
+							/>
+							<div className="accordion-item rounded-0 add_salary_benefits w-100 ms-3">
 								<h2 className="accordion-header" id="flush-headingOne">
 									<button
 										className="accordion-button collapsed poppins-regular-18px rounded-0 shadow-none"
@@ -289,7 +297,7 @@ const AddSalaryBenefits = (props) => {
 									<div className="accordion-body">
 										<div>
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-3' : 'col-md-12'}>
+												<div className={pc_view_type == 'addpc' ? 'col-md-3' : 'col-md-3'}>
 													<input
 														type="checkbox"
 														className={
@@ -311,7 +319,7 @@ const AddSalaryBenefits = (props) => {
 																pc_view_type == 'addpc' ? (
 																	'poppins-medium-16px'
 																) : (
-																	'poppins-medium-14px'
+																	'poppins-medium-16px'
 																)
 															}
 														>
@@ -324,7 +332,7 @@ const AddSalaryBenefits = (props) => {
 														pc_view_type == 'addpc' ? (
 															'col-md-9'
 														) : (
-															'col-md-12 d-flex align-items-baseline'
+															'col-md-9 d-flex'
 														)
 													}
 												>
@@ -334,7 +342,7 @@ const AddSalaryBenefits = (props) => {
 															pc_view_type == 'addpc' ? (
 																'form-check-input ms-1 me-2 rounded-0'
 															) : (
-																'form-check-input w-25 rounded-0'
+																'form-check-input rounded-0'
 															)
 														}
 														value={agent}
@@ -348,7 +356,7 @@ const AddSalaryBenefits = (props) => {
 															pc_view_type == 'addpc' ? (
 																'poppins-medium-16px'
 															) : (
-																'poppins-medium-14px'
+																'poppins-medium-16px'
 															)
 														}
 													>
@@ -359,14 +367,14 @@ const AddSalaryBenefits = (props) => {
 											</div>
 											<br />
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-12'}>
+												<div className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-4'}>
 													<div className="row mb-4">
 														<label
 															className={
 																pc_view_type == 'addpc' ? (
-																	'poppins-medium-16px'
+																	'poppins-medium-16px mb-2'
 																) : (
-																	'poppins-medium-14px'
+																	'poppins-medium-16px mb-2'
 																)
 															}
 														>
@@ -398,7 +406,7 @@ const AddSalaryBenefits = (props) => {
 														</RadioGroup>
 
 														<p style={{ color: 'red' }}>{element.vt_err}</p>
-														<div style={{ display: 'inherit' }}>
+														<div className='col-md-11 me-auto d-flex pe-0  w-100'>
 															<input
 																type="text"
 																value={element.value}
@@ -406,12 +414,13 @@ const AddSalaryBenefits = (props) => {
 																	updateValue(index, e.target.value);
 																}}
 																name="valuetype"
+																className='w-100 ps-3'
 															/>
 															<span
 																className={
-																	'input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0'
+																	'input-group-text hi-40 border-0 bg-white rounded-0 bg-transparent px-0 pe-3'
 																}
-																style={{ marginLeft: '-14px' }}
+																style={{ marginLeft: '-25px' }}
 															>
 																{element.value_type == 2 ? '%' : '€'}
 															</span>
@@ -419,8 +428,14 @@ const AddSalaryBenefits = (props) => {
 														<p style={{ color: 'red' }}>{element.v_err}</p>
 													</div>
 													<div className="row">
-														<label className="mb-2 poppins-regular-16px">
-															{t('Is the benefit granted in case of absence of the employee?')}
+														<label className={
+																pc_view_type == 'addpc' ? (
+																	'poppins-medium-16px mb-2'
+																) : (
+																	'poppins-medium-16px mb-2'
+																)
+															}>
+															Is the benefit granted in case of absence of the employee?
 														</label>
 														<RadioGroup
 															name={'granted' + index}
@@ -448,10 +463,16 @@ const AddSalaryBenefits = (props) => {
 													</div>
 												</div>
 												<div
-													className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-12 ps-3'}
+													className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-4 ps-3'}
 												>
 													<div className="row mb-4">
-														<label className="mb-2 poppins-regular-16px">
+														<label className={
+																pc_view_type == 'addpc' ? (
+																	'poppins-medium-16px mb-2'
+																) : (
+																	'poppins-medium-16px mb-2'
+																)
+															}>
 															{t('Applicable coefficient')}
 														</label>
 														<RadioGroup
@@ -494,13 +515,13 @@ const AddSalaryBenefits = (props) => {
 													<div className="row mb-3">
 														{/* {console.log()} */}
 														<label
-															className={
-																pc_view_type == 'addpc' ? (
-																	'mb-3 poppins-regular-16px'
-																) : (
-																	'poppins-regular-16px'
-																)
-															}
+														className={
+															pc_view_type == 'addpc' ? (
+																'poppins-medium-16px mb-2'
+															) : (
+																'poppins-medium-16px mb-2'
+															)
+														}
 														>
 															{t('Start date')}
 														</label>
@@ -525,7 +546,7 @@ const AddSalaryBenefits = (props) => {
 														pc_view_type == 'addpc' ? (
 															'col-md-4 occurence_col'
 														) : (
-															'col-md-12 occurence_col ps-3'
+															'col-md-4 occurence_col ps-3'
 														)
 													}
 												>
@@ -533,9 +554,9 @@ const AddSalaryBenefits = (props) => {
 														<label
 															className={
 																pc_view_type == 'addpc' ? (
-																	'mb-3 poppins-regular-16px'
+																	'poppins-medium-16px mb-2'
 																) : (
-																	'poppins-regular-16px'
+																	'poppins-medium-16px mb-2'
 																)
 															}
 														>
@@ -579,9 +600,11 @@ const AddSalaryBenefits = (props) => {
 		>
 			<form onSubmit={Submit}>
 				{key != 0 ? (
-					<h4 className={pc_view_type == 'addpc' ? 'h5 mt-3' : 'bitter_medium_italic_18px mb-4'}>
+				pc_view_type != 'addpc' && <div className='position-sticky-pc py-4'>
+						<h4 className={pc_view_type == 'addpc' ? 'h5 mt-3' : 'font-weight-bold px-0 bitter-italic-normal-medium-24 '}>
 						{t('Edit salary benefits')}
 					</h4>
+				</div>
 				) : pc_view_type == 'viewpc' ? (
 					<h4 className="h5 bitter_medium_italic_18px mb-4">{t('Salary benefits')}</h4>
 				) : (
