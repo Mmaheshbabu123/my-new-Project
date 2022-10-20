@@ -47,4 +47,4 @@ const Sample = (props) => {
 	</div>
 }
 
-export default React.memo(Translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword', 'Contact']));
+export default Translation(Sample, ['Title', 'Username', 'Password', 'Email', 'EmailPassword', 'Contact']);
