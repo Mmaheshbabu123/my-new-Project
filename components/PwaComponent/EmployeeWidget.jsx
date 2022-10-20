@@ -12,7 +12,7 @@ export default function EmployeeWidget() {
     // }
 console.log('widget employee');
     return (
-        <div className="container-fluid p-0">
+        <div className="container-fluid p-2 employee_widget_dashboard">
             <form>
                 <div className="row m-0 ">
                     <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working (2022-10-09, 09:59)</p>
@@ -20,31 +20,25 @@ console.log('widget employee');
                    <div className="col-md-12 px-0">
                    
                    <div className="row d-flex mt-3">
-                        <div className="col-md-9">
+                        <div className="col-md-12">
                         <div className="input-group">
-                            <input type="text" className="form-control rounded-0 shadow-none employer_widget_search" />
-                            <span className="input-group-text rounded-0 employer_widget_search">Search</span>
+                            <input type="text" className="form-control rounded-0 shadow-none employer_widget_search me-3" />
+                            <span className="input-group-text rounded-0 employer_widget_search_button">Search</span>
 
                         </div>
                         </div>
-                        <div className="col-md-3 align-self-end">
-                        <Link href='' className="m-2">
-                        <a type="" className="float-end link-primary m-1 text-decoration-underline poppins-regular-18px">
-                            View more...
-                        </a>
-                    </Link>
-                        </div>
+                        
                     </div>
                    </div>
                     <div className="form-check p-0 mt-2 tab-pane fade show min_height_employee_widget">
                         <table className="table mb-0">
                             <thead>
                                 <tr className="btn-bg-gray-medium table-sticky-bg-gray">
-                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2">Name</th>
-                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2">Company</th>
-                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2">Location</th>
-                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2">Planned stop time</th>
-                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2">Action</th>
+                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Name</th>
+                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Company</th>
+                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Location</th>
+                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Planned stop time</th>
+                                    <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Action</th>
 
                                 </tr>
                             </thead>
@@ -52,9 +46,9 @@ console.log('widget employee');
                             <tbody>
                                 <tr className="border poppins-regular-18px p-2" >
 
-                                    <td className="poppins-regular-16px p-2">Preeti RK</td>
-                                    <td className="poppins-regular-16px p-2">The awkward antique store</td>
-                                    <td className="poppins-regular-16px p-2">Aartselaar</td>
+                                    <td className="poppins-regular-16px p-2 ">Preeti RK</td>
+                                    <td className="poppins-regular-16px p-2 ">The awkward antique store</td>
+                                    <td className="poppins-regular-16px p-2 ">Aartselaar</td>
                                     <td className="poppins-regular-16px p-2">2022-08-17 10:00:07</td>
                                     <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
                                         <Link href='' className="m-2">
@@ -75,6 +69,15 @@ console.log('widget employee');
                             </tbody>
                         </table>
                     </div>
+                    {/* <div className="row"> */}
+                    <div className="col-md-12 align-self-end px-0">
+                        <Link href='' className="m-2">
+                            <a type="" className="float-end link-primary mt-3 text-decoration-underline poppins-light-16px employee_widget_view_more">
+                                View more...
+                            </a>
+                        </Link>
+                        </div>
+                    {/* </div> */}
                     {/* <div className="text-start col-md-6">
                         <button
                             type="button"
