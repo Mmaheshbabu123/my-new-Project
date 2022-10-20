@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Link from 'node_modules/next/link';
 import Image from "next/image";
-
+import StopPlanning from "./StopPlanning";
 
 export default function EmployeeWidget() {
     // const [query, setquery] = useState('')
@@ -10,6 +10,13 @@ export default function EmployeeWidget() {
     // const handleChange = (e) => {
     //     setquery(e.target.value)
     // }
+    const closeDeletePopup = () => {
+		setShowdeletepopup(false);
+	};
+	const showDeletePopup = (id) => {
+		setProjectid(id);
+		setShowdeletepopup(true);
+	};
 console.log('widget employee');
     return (
         <div className="container-fluid p-0">
@@ -32,7 +39,7 @@ console.log('widget employee');
                         <a type="" className="float-end link-primary m-1 text-decoration-underline poppins-regular-18px">
                             View more...
                         </a>
-                    </Link>
+                        </Link>
                         </div>
                     </div>
                    </div>
