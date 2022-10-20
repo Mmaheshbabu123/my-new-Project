@@ -492,7 +492,8 @@ input[type="checkbox"]
 }
 .employee_widget_search,
 .employee_widget_search:focus,
-.form-control:focus
+.form-control:focus,
+.form-control
 {
   border: 1px solid var(--color-border-lightgrey) !important;
 }
@@ -516,7 +517,7 @@ input[type="checkbox"]
 }
 .min_height_employee_widget
 {
-  max-height: 10rem;
+  max-height: 9.5rem;
   overflow-y: auto;
 }
 .employee_widget_dashboard
