@@ -7,4 +7,4 @@ const AccessDenied = () => {
     </div>
   );
 }
-export default React.memo(AccessDenied);
+export default AccessDenied;
