@@ -199,6 +199,12 @@ input[type="checkbox"]:focus
 {
   height: 41px !important;
 }
+.add_salary_benefits input[type="text"],
+.add_salary_benefits input[type="date"],
+.add_salary_benefits .occurence_col .react-select-prefix__control
+{
+  width: 350px !important;
+}
 #react-select-2-listbox,
 .css-6j8wv5-Input,
 .css-qc6sy-singleValue,

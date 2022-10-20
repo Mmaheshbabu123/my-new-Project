@@ -240,7 +240,7 @@ const PcCommon = (props) => {
 									</button>
 								</li>
 							</ul>
-							<div className="tab-content col-md-12 p-0 mt-3" id="pills-tabContent">
+							<div className="tab-content col-md-12 p-0" id="pills-tabContent">
 								<div
 									className={`tab-pane fade ${current_sec == 1 ? 'show active' : ''}`}
 									id="pills-pc"
@@ -276,7 +276,7 @@ const PcCommon = (props) => {
 								</div>
 								<div
 									className={`tab-pane fade ${current_sec == 5 ? 'show active' : ''}`}
-									id="pills-salary"
+									id="pills-salary salary-benefit-pc"
 									role="tabpanel"
 									aria-labelledby="pills-contact-tab"
 								>

@@ -20,7 +20,7 @@ console.log('widget employee');
                    <div className="col-md-12 px-0">
                    
                    <div className="row d-flex mt-3">
-                        <div className="col-md-9 px-0">
+                        <div className="col-md-9">
                         <div className="input-group">
                             <input type="text" className="form-control rounded-0 shadow-none employer_widget_search" />
                             <span className="input-group-text rounded-0 employer_widget_search">Search</span>

@@ -224,7 +224,7 @@ const Pincode = () => {
 					<div className='row mt-3'>
 					<div className='col-md-11 pe-2'>
 					<button style={{ border: 'none', background: 'white', color: 'blue' }} onClick={forgotPassword} className='forgot_password_pincode float-end pe-0'>
-							Forgot password?
+							Reset pincode?
 						</button>
 					</div>
 					</div>

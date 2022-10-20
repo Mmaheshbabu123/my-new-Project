@@ -158,7 +158,7 @@ const ViewSalaryBenefits = ({key}) => {
 													<input
 														type="checkbox"
 														disabled={onlyview}
-														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input w-25 rounded-0"} 
+														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input rounded-0"} 
 														value={agent}
 														checked={element.sales_agent === true}
 													
