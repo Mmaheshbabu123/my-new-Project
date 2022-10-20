@@ -68,7 +68,7 @@ const Login = (props) => {
 
             //check status and redirect user.
             if (status === 200) {
-               // const redirect = router.query.returnUrl || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
+               // const redirect = router.query.returnUrl //; || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
                 window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}&destination_url=${btoa(window.location.href)}`, '_self');
                 // get return url from query parameters or default to '/'
                 // window.open(redirect, '_self'); // It'll redirect by re-loading page
