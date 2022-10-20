@@ -490,11 +490,29 @@ input[type="checkbox"]
   line-height: var(--line-height-29px);
   min-height: 5rem;
 }
-.employee_widget_dashboard,
-.employer_widget_search,
-.employer_widget_search:focus
+.employee_widget_search,
+.employee_widget_search:focus,
+.form-control:focus
 {
   border: 1px solid var(--color-border-lightgrey) !important;
+}
+.employee_widget_dashboard
+{
+  border: 1px solid var(--color-border-lightgrey) !important;
+}
+.employer_widget_search_button,
+.employer_widget_search_button:focus
+{
+  /* border: 1px solid var(--color-purple) !important; */
+  background: var(--color-skyblue) !important;
+  border: none;
+  font-family: var(--font-family-poppins-medium) !important;
+  color: var(--color-white) !important;
+  cursor: pointer;
+}
+.employee_widget_view_more
+{
+  color: var(--color-purple) !important;
 }
 .min_height_employee_widget
 {
@@ -503,5 +521,9 @@ input[type="checkbox"]
 }
 .employee_widget_dashboard
 {
-  max-height: 19.3rem !important;
+  height: 19.5rem !important;
+}
+.employee_width_col
+{
+  width: 20%;
 }

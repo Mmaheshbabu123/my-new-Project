@@ -7,7 +7,7 @@ import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
 import Link from 'next/link';
 import moment from 'moment';
 import Translation from '@/Translation';
-const PlanningFinalize = () => {
+const PlanningFinalize = (props) => {
 	const {t}=props;
 	const router = useRouter();
 	const p_unique_key = router.query.p_unique_key;
