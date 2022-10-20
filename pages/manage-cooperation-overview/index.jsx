@@ -7,16 +7,16 @@ const AbsSalesAgenetCooperationAgreementMain = dynamic(() => import('@/component
 
 const EMployerCooperationAgreement = (props) => {
   const router = useRouter();
-  const { type, id } = router.query;
-  if (id !== undefined) {
-    localStorage.setItem("currentLoggedInUserId", type === 'admin' ? -999 : id);
+  const { entitytype = 1, entityid = 0 } = router.query;
+  if (entityid !== undefined) {
+    localStorage.setItem("currentLoggedInUserId", entitytype == 1 ? -999 : entityid);
     return (
       <div>
         <Suspense fallback={`Loading...`}>
-          {type === 'employer' ?
-            <EmployerCooperationAgreementMain employerid={id} /> :
-           type === 'sales_agent' ? <AbsSalesAgenetCooperationAgreementMain agentId={id}/> :
-            <AdminCooperationAgreementMain adminId={id} />
+          {entitytype == 2 ?
+            <EmployerCooperationAgreementMain employerid={entityid} /> :
+           entitytype == 4 ? <AbsSalesAgenetCooperationAgreementMain agentId={entityid}/> :
+            <AdminCooperationAgreementMain adminId={entityid} />
           }
         </Suspense>
       </div>
