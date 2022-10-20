@@ -18,7 +18,7 @@ const Translation = (Component, stringList) => {
       let lang = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
       await APICALL.service(url, 'POST', { lang: lang, string_list: stringList })
         .then((result) => {
-          if (result['status'] == 200) {
+          if (result && result['status'] == 200) {
             if (localStorage['translations'] === undefined) {
               localStorage.setItem('translations', '{}');
             }
