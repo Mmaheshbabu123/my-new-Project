@@ -13,7 +13,11 @@ const nextConfig = {
   },
   cssLoaderOptions: {
     url: false
-  }
+  },
+  presets: [
+   "@babel/preset-env",
+    ["@babel/preset-react", {"runtime": "automatic"}]
+  ]
 }
 
 const withPWA = require('next-pwa')({
