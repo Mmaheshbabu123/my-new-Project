@@ -209,6 +209,8 @@ input[type="checkbox"]
 {
   display:flex;
   align-items:center;
+  font-size: var(--font-size-16px) !important;
+  padding-left: 0.8rem;
 }
 .add_salary_benefits input[type="text"],
 .add_salary_benefits input[type="text"]:focus-visible,
