@@ -16,7 +16,7 @@ import ValidationService from '../../Services/ValidationService';
 import { ExclamationTriangle } from 'node_modules/react-bootstrap-icons/dist/index';
 import Translation from '@/Translation';
 
-const AddFunctions = () => {
+const AddFunctions = (props) => {
 	const { t }=props;	
 	const router = useRouter();
 	const salaryref = useRef(null);

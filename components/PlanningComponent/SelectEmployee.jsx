@@ -4,7 +4,7 @@ import Multiselect from 'multiselect-react-dropdown';
 import { APICALL } from '../../Services/ApiServices';
 import { Selectemployee } from '../../Services/ApiEndPoints';
 import Translation from '@/Translation';
-const SelectEmployee = () => {
+const SelectEmployee = (props) => {
 	const {t}=props;
 	return (
 		<div className="container">
