@@ -9,8 +9,12 @@ import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
 import EditEmployee from './EditEmployee';
 import Translation from '@/Translation';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
+import DraftPlanning from '@/components/PlanningComponent/DraftPlanning';
+import { useRouter } from 'next/router';
+
 
 function WeeklyPlanning(props) {
+	const router = useRouter();
 	const {t}=props;
 	const { contextState = {} } = useContext(UserAuthContext);
 	const [ showview, setShowview ] = useState(false);
@@ -28,14 +32,17 @@ function WeeklyPlanning(props) {
 	const [ weekCount, setWeekCount ] = useState(0);
 
 	const [ styleEdit, setStyleEdit ] = useState('col-md-12');
+	const [ activeTab, setActiveTab ] = useState(1);
 
-	// useEffect(() => {
-	// 	if (localStorage.getItem('uid') != null) {
-	// 		setEmpr_id(JSON.parse(localStorage.getItem('uid')));
-	// 	} else {
-	// 		window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-	// 	}
-	// }, []);
+
+	useEffect(()=>{
+
+		if(router.query.type == 'draft'){
+			setActiveTab(2)
+			
+		}
+
+	},[router])
 
 	useEffect(
 		() => {
@@ -152,7 +159,8 @@ function WeeklyPlanning(props) {
 					<div className="d-inline ">
 						<button
 							type="button"
-							className="btn  btn my-2 skyblue-bg-color border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln  px-3 btn-block shadow-none rounded-0 "
+							className={`btn  btn my-2 ${activeTab == 1?"skyblue-bg-color":"btn-bg-gray-medium"} border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln  px-3 btn-block shadow-none rounded-0 "`}
+							onClick={() =>{setActiveTab(1)}}
 						>
 							{t('Planning view')}
 						</button>
@@ -160,7 +168,9 @@ function WeeklyPlanning(props) {
 					<div className=" ">
 						<button
 							type="submit"
-							className="btn  my-2 border-0 px-3  btn-block btn-bg-gray-medium add-pln poppins-medium-18px shadow-none rounded-0 "
+							className={`btn  my-2 border-0 px-3  btn-block ${activeTab == 2?"skyblue-bg-color":"btn-bg-gray-medium"} add-pln poppins-medium-18px shadow-none rounded-0`}
+							onClick={() =>{setActiveTab(2)}}
+
 						>
 							{t('Draft planning')}
 						</button>
@@ -251,6 +261,8 @@ function WeeklyPlanning(props) {
 						<option value="">Project-2</option>
 					</select> */}
 				</div>
+				{activeTab == 1 ?<div>
+				
 				<div className={'mt-2 min-height-weekly-planning'}>
 					{planning || company != '' ? (
 						<div className="row">
@@ -444,6 +456,7 @@ function WeeklyPlanning(props) {
 						</div>
 					)}
 				</div>
+				</div>:<div><DraftPlanning/></div>}
 				<div className="text-end mb-3">
 					<button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end ">
 						<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL} className="">
