@@ -9,9 +9,10 @@ import { APICALL } from '@/Services/ApiServices';
 import 'rc-time-picker/assets/index.css';
 import {postStopPlanningDetails} from '@/Services/ApiEndPoints';
 import customAlert from '@/atoms/customAlert';
-
+import Translation from '@/Translation';
 import moment from "moment";
 const StopPlanning = (props) => {
+  const {t}=props;
   console.log(props)
   const router = useRouter();
   console.log(router);
@@ -112,7 +113,7 @@ return(
   <div className='add-edit-types'>
     <div className="row m-0 p-0">
      <div className='py-4  px-0 mb-3'>
-     <h4 className="font-weight-bold  bitter-italic-normal-medium-24 px-0"> {`start/stop planning by employer`} </h4>
+     <h4 className="font-weight-bold  bitter-italic-normal-medium-24 px-0"> {t(`start/stop planning by employer`)} </h4>
      <div className="col-md-12 row">
        <div className = 'col-md-6'>
            <div className="col-md-12 mx-0 px-0 ">
@@ -155,9 +156,9 @@ return(
               </div>
               <div className="col-md-4  py-3">
               <div className='d-flex'>
-              <div className="py-1 px-2  custom_astrick poppins-regular-20px">Time</div>
+              <div className="py-1 px-2  custom_astrick poppins-regular-20px">{('Time')}</div>
               <TimePicker
-                placeholder="Select Time"
+                placeholder={t("Select Time")}
                 use12Hours={false}
                 showSecond={false}
                 focusOnOpen={true}
@@ -170,7 +171,7 @@ return(
              {state.startTimeWarning &&
                <small
                  className="form-text text-muted col-md-5 pcp_name_warning error_text mx-0 ">
-                 Time is required
+                 {t('Time is required')}
                </small>}
              </div>
              </div>
@@ -186,7 +187,7 @@ return(
             style={{marginTop: '0'}}
             disabled={state.startStopDisable}
             className="btn btn my-2 skyblue-bg-color border-0  px-5 rounded-0 shadow-none float-end">
-            {` START`}
+            {t(` START`)}
           </button>}
       </div>
       <div className='col-md-12 '>
@@ -196,7 +197,7 @@ return(
             disabled={state.startStopDisable}
             style={{marginTop: '0'}}
             className="btn btn my-2 skyblue-bg-color border-0  px-5 rounded-0 shadow-none float-end">
-            {` STOP`}
+            {t(` STOP`)}
           </button> }
       </div>
 
@@ -205,4 +206,4 @@ return(
   </div>
 )
 }
-export default React.memo(StopPlanning);
+export default React.memo(Translation(StopPlanning,['start/stop planning by employer','Time',"Select Time",'Time is required',` START`,` STOP`]));

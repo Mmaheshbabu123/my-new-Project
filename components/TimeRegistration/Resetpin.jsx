@@ -6,7 +6,7 @@ import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import checkPinCode, { homeScreen } from '../../Services/ApiEndPoints';
-
+import Translation from '@/Translation';
 const OTPInput = dynamic(
 	() => {
 		return import('otp-input-react');
@@ -21,7 +21,8 @@ const ResendOTP = dynamic(
 	{ ssr: false }
 );
 
-const Pincode = () => {
+const Pincode = (props) => {
+	const{t}=props;
 	const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
 
@@ -115,7 +116,7 @@ const Pincode = () => {
 			<div className="row mt-5">
 				<div className="col-4"></div>
 				<div className="mt-2 col-5">
-				<div><label>Pincode</label></div>
+				<div><label>{t('Pincode')}</label></div>
 					<OTPInput
 						className="otp"
 						value={otp}
@@ -137,7 +138,7 @@ const Pincode = () => {
 			<div className="row mt-5">
 			<div className="col-4"></div>
                 <div className="mt-2 col-5">
-				<div><label>Confirm pincode</label></div>
+				<div><label>{t('Confirm pincode')}</label></div>
 					<OTPInput
 						value={otp1}
 						onChange={setOTP1}
@@ -168,4 +169,4 @@ const Pincode = () => {
 	);
 };
 
-export default Pincode;
+export default React.memo(Translation(Pincode,['Pincode','Confirm pincode',]));
