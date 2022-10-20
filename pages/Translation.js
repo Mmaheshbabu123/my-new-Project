@@ -32,7 +32,7 @@ const Translation = (Component, stringList) => {
     }
       const getTranslationData = async () => {
         //let url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/translate';
-        let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_translations';
+        let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/api/get_translations';
         let lang = localStorage['servername_' + 'lang'] !== undefined ? localStorage['servername_' + 'lang'] : 'en';
         await APICALL.service(url, 'POST', { lang: lang, string_list: stringList })
           .then((result) => {

@@ -14,6 +14,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { formatDate, getFutureDates } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
 import customAlert from '@/atoms/customAlert';
+import Translation from '@/Translation';
 const itemsPerPage = 5;
 let dateObj = new Date()
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -23,6 +24,7 @@ let dateValue = `${year}-${month < 10 ? '0' + month : month}`;
 const dateOptions = getFutureDates();
 let updatedDay = day - 1 < 10 ? '0' + (day - 1) : day - 1;
 const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, entityId }) => {
+  const {t}=props;
   const router = useRouter();
   const [state, setState] = useState({
     searchTerm: '',
@@ -175,15 +177,15 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
                          minDate={minDate}
                          maxDate={maxDate}
                         />
-                       {selectedDateOption === 2 && <small className="small"> Future date only next 5 days are allowed </small>} <br />
-                       {dateError && <small className="my-3 small" style={{color:'red'}}> Date should be between {formatDate(minDate)} - {formatDate(maxDate)} </small>}
+                       {selectedDateOption === 2 && <small className="small"> {t('Future date only next 5 days are allowed')} </small>} <br />
+                       {dateError && <small className="my-3 small" style={{color:'red'}}> {t('Date should be between')} {formatDate(minDate)} - {formatDate(maxDate)} </small>}
                 </div>
               </div>
           </Modal.Body>
           <Modal.Footer>
             <p className="popup-back-btn" onClick={handleClose}> Back </p>
             <Button variant="secondary" onClick={handleRegenerateQrCode}>
-              Regenerate
+              {t('Regenerate')}
             </Button>
           </Modal.Footer>
         </Modal>
@@ -294,7 +296,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
              className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
              onClick={() => handleSearchClick(1)}
            >
-             SEARCH
+             {t('SEARCH')}
            </button>
 
              </div>
@@ -304,7 +306,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
              className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
              onClick={() => handleSearchClick(0)}
            >
-             RESET
+             {t('RESET')}
            </button>
              </div>
            </div>
@@ -316,7 +318,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
         <div className="col-md-12 m-0 p-0 py-3 ">
        <div className='row d-flex justify-content-end'>
          <div className='col-md-1 align-self-center'>
-         <span style={{fontSize: 'x-large'}} className="text-start poppins-medium-18px align-self-center"> Date: </span>
+         <span style={{fontSize: 'x-large'}} className="text-start poppins-medium-18px align-self-center"> {t('Date')}: </span>
          </div>
          <div className='col-md-3'>
          <MultiSelectField
@@ -359,7 +361,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
           :  <tbody>
           <tr>
           <td colSpan={8} className="text-center poppins-regular-18px no-records">
-                  No records
+                  {t('No records')}
                 </td>
           </tr>
           </tbody>}
@@ -396,4 +398,4 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
   );
 }
 
-export default ManageQrComponent;
+export default React.memo(Translation(ManageQrComponent,['Future date only next 5 days are allowed','Date should be between','Regenerate','SEARCH','RESET','Date','No records']));

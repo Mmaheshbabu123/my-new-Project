@@ -1,6 +1,6 @@
 
 export const ENV_URL = process.env.NEXT_PUBLIC_APP_BACKEND_URL;
-export const REGEX_URL = 'api/';
+export const REGEX_URL = '/api/';
 export const BASE_URL = ENV_URL + REGEX_URL;
 
 export const ENV_DRUPAL= process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/';

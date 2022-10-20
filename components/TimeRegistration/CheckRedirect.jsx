@@ -3,10 +3,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
+import Translation from '@/Translation';
 
-
-const CheckRedirect = () => {
-
+const CheckRedirect = (props) => {
+	const{t} =props;
     const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
 	
@@ -39,8 +39,8 @@ const CheckRedirect = () => {
 	);
 
 	return (
-		<div>loading.......</div>
+		<div>{t('loading.......')}</div>
 	);
 };
 
-export default CheckRedirect;
+export default React.memo(Translation(CheckRedirect,['loading.......']));

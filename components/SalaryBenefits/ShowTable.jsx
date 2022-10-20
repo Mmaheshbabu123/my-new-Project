@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { confirmAlert } from 'react-confirm-alert';
 import { deleteSalaryBenefits } from '@/Services/ApiEndPoints';
@@ -8,9 +8,12 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import ReactPaginate from 'react-paginate';
 import { salaryBenefitOccurenceOptions } from '@/Constants';
+import Translation from '@/Translation';
+
 const itemsPerPage = 5;
 
 const ShowTable = ({ headers, rows, manageType, ...props }) => {
+  const {t} =props;
   const router = useRouter();
   const [state, setState] = useState({
     searchTerm: '',
@@ -109,7 +112,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           type="button"
           // className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content"
           className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 shadow-none text-uppercase">
-          {`+ Add salary benefit`}
+          + {t('Add salary benefit')}
         </button>
       </div>
       <div className='searchbox m-0 pb-4 pt-2 position-sticky-config-search' style={{ margin: '10px 0' }}>
@@ -120,7 +123,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
              value={state.searchTerm}
              className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none ps-3"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
-             placeholder={'Salary benefits'}
+             placeholder={t('Salary benefits')}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
@@ -132,7 +135,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
              className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 poppins-medium-18px shadow-none"
              onClick={() => handleSearchClick(1)}
            >
-             SEARCH
+             {t('SEARCH')}
            </button>
              </div>
              <div className='col-md-6'>
@@ -144,7 +147,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
              
              onClick={() => handleSearchClick(0)}
            >
-             RESET
+             {t('RESET')}
            </button>
              </div>
            </div>
@@ -187,11 +190,11 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
             activeClassName={"active"}
         />}
         <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px text-decoration-underline text-uppercase float-sm-right mt-5 mb-2 ps-0">
-          {`Back`}
+          {t('Back')}
         </button>
       </div>
     </>
   );
 }
 
-export default ShowTable;
+export default React.memo(Translation(ShowTable,['Add salary benefit','Salary benefits','SEARCH','RESET','Back']));

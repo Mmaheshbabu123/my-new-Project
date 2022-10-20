@@ -7,9 +7,10 @@ import { getIndexationOfSalary } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import SalaryIndexationDeletePopup from './DeleteSalaryIndexationPopup';
 import Pagination from '../PcComponent/Pagination';
-
+import Translation from "@/Translation";
 
 function ManageIndexationOfSalaries(props) {
+    const {t}=props;
     const router = useRouter();
     const unique_key = Uniquekey.generate_unique_key();
     const [indexation, setIndexation] = useState([]);
@@ -75,7 +76,7 @@ function ManageIndexationOfSalaries(props) {
         <div className="container-fluid p-0">
             <form>
                 <div className="row m-0 ">
-                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2 mb-5">Manage indexation of salaries</p>
+                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2 mb-5">{t('Manage indexation of salaries')}</p>
                     <div className="float-end">
                         <div className="col-md-3 p-0 float-end ">
                             <Link href={'/indexation/' + Uniquekey.generate_unique_key()}
@@ -85,7 +86,7 @@ function ManageIndexationOfSalaries(props) {
                                     className="btn  btn-block border-0 rounded-0 float-right mt-2 skyblue-bg-color w-100 shadow-none"
 
                                 >
-                                    + Add Indexation of salary
+                                    + {t('Add Indexation of salary')}
                                 </button>
                             </Link>
                         </div>
@@ -94,11 +95,11 @@ function ManageIndexationOfSalaries(props) {
                         <table className="table mt-3 mb-3">
                             <thead>
                                 <tr className="btn-bg-gray-medium table-sticky-bg-gray">
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Date</th>
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Indexation value</th>
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">PC</th>
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Employee type</th>
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Action</th>
+                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Date')}</th>
+                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Indexation value')}</th>
+                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('PC')}</th>
+                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Employee type')}</th>
+                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Action')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -164,7 +165,7 @@ function ManageIndexationOfSalaries(props) {
                                 type="button"
                                 className="bg-white border-0 poppins-light-18px  float-sm-right mt-5 mb-2 px-0 text-decoration-underline shadow-none"
                             >
-                                back
+                                {t('back')}
                             </button>
                         </div>
                     </div>
@@ -176,4 +177,4 @@ function ManageIndexationOfSalaries(props) {
         </div>
     );
 }
-export default ManageIndexationOfSalaries;
+export default React.memo(Translation(ManageIndexationOfSalaries,['Manage indexation of salaries','Add Indexation of salary','Date','Indexation value','PC','Employee type','Action','back']));
