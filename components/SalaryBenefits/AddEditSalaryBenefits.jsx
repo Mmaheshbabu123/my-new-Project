@@ -9,6 +9,7 @@ import LabelField from '@/atoms/LabelField';
 import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import ValidateMessage from '@/atoms/validationError';
+import Translation from '@/Translation';
 let dateObj = new Date()
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
@@ -16,6 +17,7 @@ var year = dateObj.getUTCFullYear()-1;
 let percentageDecimals = 2;
 let valueDecimals = 4;
 const AddEditSalaryBenefits = (props) => {
+  const{t}=props;
   const router = useRouter();
   const inputRef = useRef({});
   const assignInitialValues = () => {
@@ -263,7 +265,7 @@ const AddEditSalaryBenefits = (props) => {
       <div className='col-md-12 border-form-sec px-4'>
         <div className='col-md-6 pb-2 pt-4'>
         <div className="">
-          <label className = "mb-2 poppins-regular-18px" htmlFor="name"> {`Salary benefit name`} <span style={{color:'red'}}> * </span></label>
+          <label className = "mb-2 poppins-regular-18px" htmlFor="name"> {t(`Salary benefit name`)} <span style={{color:'red'}}> * </span></label>
           <input
             ref={ref => inputRef.current['name'] = ref}
             type="text"
@@ -271,12 +273,12 @@ const AddEditSalaryBenefits = (props) => {
             className="form-control col-md-6 width-100 poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits mb-2"
             value={state.name}
             onChange={(e) => handleChange(e.target)}
-            placeholder='Please add salary benefit'
+            placeholder={t('Please add salary benefit')}
           />
           {state.nameWarning &&
             <small
               className="form-text text-muted col-md-5 pcp_name_warning error_text mx-0 ">
-              Salary benefit name is required
+              {t('Salary benefit name is required')}
             </small>}
           {state.uniqueError &&
             <small
@@ -301,7 +303,7 @@ const AddEditSalaryBenefits = (props) => {
                 className="form-control col-md-12 poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits"
                 value={state.value}
                 onChange={(e) => handleChange(e.target)}
-                placeholder= 'Enter value'
+                placeholder= {t('Enter value')}
               />
               <span className="position-absolute" style = {{right: '3%', bottom: '30px'}}> {state.valueType === 1 ? '€' : '%'} </span>
               {state['valueWarning'] && <ValidateMessage style={{margin:0}} text = {`Value should be greater than 0 and less then ${state.valueType === 1 ? 1000 : 100}`}/>} <br />
@@ -332,7 +334,7 @@ const AddEditSalaryBenefits = (props) => {
               className="form-control col-md-12 poppins-regular-18px border-4C4D554D rounded-0 shadow-none border-color-addeditsalary-benefits"
               value={state.coefficientValue}
               onChange={(e) => handleChange(e.target)}
-              placeholder= 'Enter value'
+              placeholder= {t('Enter value')}
             />}
             {state['coefficientValueWarning'] && <ValidateMessage style={{margin:0}} text = {`Value should be greater than 0 and less then ${state.valueType === 1 ? 1000 : 100}`}/>} <br />
             {state['coefficientValueDecimalWarning'] && <ValidateMessage style={{margin:0}} text = {`Only  decimal ${state.valueType === 1 ? valueDecimals:percentageDecimals} places allowed.`}/>}
@@ -358,7 +360,7 @@ const AddEditSalaryBenefits = (props) => {
           {state.dateWarning &&
             <small
               className="form-text text-muted col-md-5 pcp_name_warning">
-              Date should be between {formatDate(state.minDate)} - {formatDate(state.maxDate)}
+             {t(' Date should be between')} {formatDate(state.minDate)} - {formatDate(state.maxDate)}
             </small>}
         </div>
       </div>
@@ -416,7 +418,7 @@ const AddEditSalaryBenefits = (props) => {
           type="button"
           className="bg-white border-0 poppins-regular-18px text-decoration-underline px-0 shadow-none"
           onClick={() => router.back()} >
-          BACK
+          {t('BACK')}
         </button>
         </div>
         <div className='col-md-6 text-end p-0'>
@@ -439,7 +441,7 @@ const AddEditSalaryBenefits = (props) => {
           type="button"
           className="btn rounded-0 btn-block float-end poppins-medium-18px-next-button shadow-none"
           onClick={handleSubmit} >
-          SAVE
+          {t('SAVE')}
         </button>
           </div>
         </div>
@@ -448,4 +450,4 @@ const AddEditSalaryBenefits = (props) => {
     </div>
   </>
 }
-export default React.memo(AddEditSalaryBenefits);
+export default React.memo(Translation(AddEditSalaryBenefits,['Salary benefit name','Please add salary benefit','Salary benefit name is required','Enter value','Date should be between','BACK','SAVE']));

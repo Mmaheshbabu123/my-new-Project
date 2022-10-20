@@ -6,7 +6,7 @@ import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import checkPinCode from '../../Services/ApiEndPoints';
-
+import Translation from '@/Translation';
 const OTPInput = dynamic(
 	() => {
 		return import('otp-input-react');
@@ -22,6 +22,7 @@ const ResendOTP = dynamic(
 );
 
 const Pincode = () => {
+	const {t}=props;
 	const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
 
@@ -55,20 +56,20 @@ const Pincode = () => {
 	}, []);
 var res='';
   hasPin?
-   res=<div className='border p-3  poppins-light-18px text-center'>Something went wrong please try again later</div>
+   res=<div className='border p-3  poppins-light-18px text-center'>{t('Something went wrong please try again later')}</div>
   :
   res=<div className='container border'>
   <div className='row'>
-     <h1 className='p-3  poppins-medium-22px text-center'> Email Sent</h1>
+     <h1 className='p-3  poppins-medium-22px text-center'> {t('Email Sent')}</h1>
       </div>
   <div className='row p-3  poppins-light-18px text-center'>
-     You will recieve an email to the registered email.
+     {t('You will recieve an email to the registered email.')}
   </div>
   <div className='row p-3  poppins-light-18px text-center'>
-     Please use the link to reset your pincode.
+     {t('Please use the link to reset your pincode.')}
   </div>
   <div className='row p-3  poppins-light-18px text-center'>
-     It will be expired in 30 minutes.
+     {t('It will be expired in 30 minutes.')}
   </div>
 </div>;
 	return (
@@ -76,4 +77,4 @@ var res='';
     );
 };
 
-export default Pincode;
+export default React.memo(Translation(Pincode,['Something went wrong please try again later','Email Sent','You will recieve an email to the registered email.','Please use the link to reset your pincode.','It will be expired in 30 minutes.']));

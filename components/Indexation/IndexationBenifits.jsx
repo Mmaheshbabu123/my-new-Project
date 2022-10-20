@@ -7,11 +7,12 @@ import Multiselect from 'multiselect-react-dropdown';
 import Select from 'react-select';
 import ValidationService from '../../Services/ValidationService';
 import moment from 'moment';
+import Translation from '@/Translation';
 
-
-const IndexationBenifits = () => {
+const IndexationBenifits = (props) => {
 
     /** Date formate */
+    const {t} =props;
     const [value, setValue] = useState(new Date());
 
     const [data, setData] = useState({
@@ -100,22 +101,22 @@ const IndexationBenifits = () => {
             <form onSubmit={(e) => submit(e)}>
                 <div className='row  py-4 '>
                     <div className='col-md-12 px-0 position-sticky-pc'>
-                        <p className='bitter-italic-normal-medium-24 '>Indexation of benefits</p>
+                        <p className='bitter-italic-normal-medium-24 '>{t('Indexation of benefits')}</p>
                     </div>
                 </div>
                 <div className='row border-purple px-2 py-3'>
                     <div className='col-md-12'>
-                        <div className='row'><p className={'  poppins-medium-18px '}>How do you want to index the benefit?</p>
+                        <div className='row'><p className={'  poppins-medium-18px '}>{t('How do you want to index the benefit?')}</p>
                             <div className="form-check col mt-2 d-flex align-items-center" style={{ paddingLeft: '2.2rem' }}>
                                 <input className="form-check-input mb-1" type="radio" checked={status === 1} onClick={(e) => radioHandler(1)} />
                                 <label className="form-check-label poppins-regular-18px ms-2" htmlFor="flexRadioDefault1">
-                                    Indexation via selection of one or more benefits
+                                   {t('Indexation via selection of one or more benefits')}
                                 </label>
                             </div>
                             <div className="form-check col mt-2 d-flex align-items-center">
                                 <input className="form-check-input mb-1" type="radio" checked={status === 2} onClick={(e) => radioHandler(2)} />
                                 <label className="form-check-label poppins-regular-18px ms-2" htmlFor="flexRadioDefault1">
-                                    Indexation via selection of one or more benefits
+                                    {t('Indexation via selection of one or more benefits')}
                                 </label>
                             </div>
                         </div>
@@ -124,7 +125,7 @@ const IndexationBenifits = () => {
                                 <div className='col-md-6 mt-2'>
                                     <p className={' poppins-medium-18px mb-2 '}>Benefits</p>
                                     <select className="form-select shadow-none rounded-0 border" onChange={(e) => handleshowhide(e)} >
-                                        <option value=''>Select..</option>
+                                        <option value=''>{t('Select..')}</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -132,7 +133,7 @@ const IndexationBenifits = () => {
 
 
                                     <div className='mt-3 indexation_date_field'>
-                                        <p className={' poppins-medium-18px mb-2'}>Date as of which indexation takes place</p>
+                                        <p className={' poppins-medium-18px mb-2'}>{t('Date as of which indexation takes place')}</p>
                                         <DatePicker className="purple"
                                             // value={value}
                                             // onChange={setValue}
@@ -149,7 +150,7 @@ const IndexationBenifits = () => {
                                     </div>
 
                                     <div className='mt-2 indexation_paritair_comitte'>
-                                        <p className={' poppins-medium-18px mb-2 mt-3'}>Paritair comite</p>
+                                        <p className={' poppins-medium-18px mb-2 mt-3'}>{t('Paritair comite')}</p>
                                         <Select
                                             isMulti={true}
                                             options={[{ value: 1, label: 'PC-101' }]}
@@ -173,7 +174,7 @@ const IndexationBenifits = () => {
                             }
                             {status === 2 &&
                                 <div className='col-md-6 mt-2'>
-                                    <p className={' poppins-medium-18px mb-2 mt-3'}>Paritair comite</p>
+                                    <p className={' poppins-medium-18px mb-2 mt-3'}>{t('Paritair comite')}</p>
                                     <Select
                                         isMulti={true}
                                         // options={}
@@ -189,7 +190,7 @@ const IndexationBenifits = () => {
                                     <p className="error mt-2">{error_pc}</p>
 
                                     <div className='mt-3 indexation_date_field'>
-                                        <p className={' poppins-medium-18px mb-2'}>Date as of which indexation takes place</p>
+                                        <p className={' poppins-medium-18px mb-2'}>{t('Date as of which indexation takes place')}</p>
                                         <DatePicker className="purple"
                                             // value={value}
                                             // onChange={setValue}
@@ -206,9 +207,9 @@ const IndexationBenifits = () => {
                                     </div>
 
                                     <div className='mt-2 indexation_paritair_comitte'>
-                                        <p className={' poppins-medium-18px mb-2 '}>Benefits</p>
+                                        <p className={' poppins-medium-18px mb-2 '}>{t('Benefits')}</p>
                                         <select className="form-select shadow-none rounded-0 border" aria-label="Default select example" onChange={(e) => handleshowhide(e)}>
-                                            <option selected>Select..</option>
+                                            <option selected>{t('Select..')}</option>
                                             <option value="1">One</option>
                                             {/* <option value="2">Two</option>
                                         <option value="3">Three</option> */}
@@ -226,11 +227,11 @@ const IndexationBenifits = () => {
 
                                 <div className='row'>
                                     <div className='col-sm-2'></div>
-                                    <div className='col-sm-2 ms-2'><p className={'  poppins-medium-18px mb-2' }>Current value </p></div>
-                                    <div className='col-sm-2 ms-2'><p className={'  poppins-medium-18px mb-2' }>New value</p></div>
+                                    <div className='col-sm-2 ms-2'><p className={'  poppins-medium-18px mb-2' }>{t('Current value')} </p></div>
+                                    <div className='col-sm-2 ms-2'><p className={'  poppins-medium-18px mb-2' }>{t('New value')}</p></div>
                                 </div>
 
-                                <label htmlFor="" className="col-sm-2 col-form-label poppins-regular-18px">Benefit A (PC 118)</label>
+                                <label htmlFor="" className="col-sm-2 col-form-label poppins-regular-18px">{t('Benefit A (PC 118)')}</label>
                                 <div className="col-sm-2">
                                     <input type="textfield" className="form-control rounded-0 shadow-none border"
                                         // onChange={(value) =>
@@ -262,7 +263,7 @@ const IndexationBenifits = () => {
                         )}
 
                         <div className='row category_function_indexation'>
-                            <div className='col-md-6 mt-2'><p className={'  poppins-medium-18px mt-3 mb-2 '}>Category</p>
+                            <div className='col-md-6 mt-2'><p className={'  poppins-medium-18px mt-3 mb-2 '}>{t('Category')}</p>
                                 <Select
                                     isMulti={true}
                                     options={[{ value: 1, label: 'category1' }]}
@@ -278,7 +279,7 @@ const IndexationBenifits = () => {
                                 <p className="error mt-2">{error_category}</p>
 
                                 <div className='mt-2'>
-                                    <p className={'  poppins-medium-18px mt-3 mb-2 '}>Function</p>
+                                    <p className={'  poppins-medium-18px mt-3 mb-2 '}>{t('Function')}</p>
 
                                     <Select
                                         isMulti={true}
@@ -295,7 +296,7 @@ const IndexationBenifits = () => {
                                     <p className="error mt-2">{error_function}</p>
                                 </div>
                                 <div className='mt-2'>
-                                    <p className={' poppins-medium-18px mt-3 mb-2'}>Employee type (statuut)</p>
+                                    <p className={' poppins-medium-18px mt-3 mb-2'}>{t('Employee type (statuut)')}</p>
                                     <Select
                                         isMulti={true}
                                         options={[{ value: 1, label: 'category1' }]}
@@ -321,7 +322,7 @@ const IndexationBenifits = () => {
                             type="button"
                             className="bg-white border-0 poppins-light-18px shadow-none px-0 text-decoration-underline"
                         >
-                            BACK
+                            {t('BACK')}
                         </button>
                     </div>
                     <div className="text-end col-md-6 px-0">
@@ -329,7 +330,7 @@ const IndexationBenifits = () => {
                             type="sumit"
                             className="btn rounded-0 px-3  btn-block float-end poppins-medium-18px-next-button shadow-none"
                         >
-                            SAVE
+                            {t('SAVE')}
                         </button>
                     </div>
                 </div>
@@ -337,4 +338,7 @@ const IndexationBenifits = () => {
         </div>
     );
 }
-export default IndexationBenifits;
+export default React.memo(Translation(IndexationBenifits,['Indexation of benefits','How do you want to index the benefit?',
+'Indexation via selection of one or more benefits','Indexation via selection of one or more benefits','Select..',
+'Date as of which indexation takes place','Paritair comite','Paritair comite','Date as of which indexation takes place',
+'Benefits','Current value','New value','Benefit A (PC 118)','Category','Function','Employee type (statuut)','BACK','SAVE']));
