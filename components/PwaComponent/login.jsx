@@ -93,7 +93,7 @@ const Login = (props) => {
                         <div className=" p-4">
                             <p className="h4  px-0  bitter-italic-normal-medium-24 mb-4 text-center fs-1">{t('Login')}</p>
                             <form className="mb-5" onSubmit={submit}>
-                                <div className="mb-4" onS>
+                                <div className="mb-4" >
                                     <label className="form-label custom_astrick poppins-light-16px">{t('Email address')}</label>
                                     <input type="text" className="form-control rounded-0 shadow-none"
                                         value={state.email}

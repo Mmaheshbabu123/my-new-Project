@@ -223,13 +223,13 @@ function QuickActions(props) {
             </div>
             <div className="mt-5 mb-5 text-center tahoma-bold-gravel-30px">Heb je een vraag? Typ ze in de zoekbalk en we zoeken het voor je uit!</div>
             <div className="search-wrapper border-2px-silver flex pl-4 pr-2 py-3 align-items-center mt-3 container">
-                <a href="#"><Image alt="Search" calssName="search-img" src="/img/search.svg" /></a>
-                <div calssName="form-outline tahoma-regular-normal-gravel-28px col-11 px-4">
-                    <input type="search" id="form1" placeholder="Zoekopdracht" calssName="boxshadow-none border-0 form-control" />
-                    <label calssName="form-label d-none" htmlFor="form1">zoekopdracht</label>
+                <a href="#"><Image alt="Search" className="search-img" src="/img/search.svg" /></a>
+                <div className="form-outline tahoma-regular-normal-gravel-28px col-11 px-4">
+                    <input type="search" id="form1" placeholder="Zoekopdracht" className="boxshadow-none border-0 form-control" />
+                    <label className="form-label d-none" htmlFor="form1">zoekopdracht</label>
                 </div>
                 {/* <div className="tahoma-regular-normal-gravel-28px col-11 px-4"></div> */}
-                <a href="#"><Image alt="Next" calssName="icon-ionic-ios-arrow-up" src="/img/icon-ionic-ios-arrow-up-1@1x.png" /></a>
+                <a href="#"><Image alt="Next" className="icon-ionic-ios-arrow-up" src="/img/icon-ionic-ios-arrow-up-1@1x.png" /></a>
             </div>
         </>
     );
