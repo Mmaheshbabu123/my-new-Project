@@ -41,7 +41,6 @@ const ViewSalaryBenefits = (props) => {
 
 	const router = useRouter();
     const { contextState = {} } = useContext(UserAuthContext);
-	// alert(k);
 	const [ obj, setObj ] = useState([]);
 	const inputRef = useRef({});
 	const [ valuetype, setValueType ] = useState(0);

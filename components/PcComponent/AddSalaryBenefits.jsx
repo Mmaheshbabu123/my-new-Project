@@ -72,7 +72,6 @@ const AddSalaryBenefits = (props) => {
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/salary-benfits/' + uniqkey, 'GET')
 				.then((result) => {
 					console.log(result.data);
-					alert(k);
 					if (result.data != undefined || result.data != null) {
 						setKey(uniqkey);
 						console.log(result.data);
@@ -232,7 +231,7 @@ const AddSalaryBenefits = (props) => {
 		const uniqkey = 0;
 		key != 0 ? (uniqkey = key) : (uniqkey = pc_unique_key);
 		validation()
-			? APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/store-salary-benfits/' + uniqkey, 'POST', [
+			? APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/store-salary-benfits/' + uniqkey, 'POST', [
 					obj,
 					uid
 				])
