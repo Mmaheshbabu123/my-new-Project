@@ -194,7 +194,7 @@ const AddEmployeeType = (props) => {
           <table className='table table-hover col-md-12 mb-0 add_employee_table'>
             {state.newItems.map((item, index) =>
               // <tr className=' py-2 table-border-bottom row m-0 col-md-12' Key={index} id={index}>
-              <tr className='py-2 row m-0 col-md-12 poppins-light-18px border-bottom' Key={index} id={index}>
+              <tr className='py-2 row m-0 col-md-12 poppins-light-18px border-bottom' key={index} id={index}>
                 <td className='col-md-9 col-lg-11 align-items-center d-flex' style={{ width: '' }}> {item.name} </td>
                 <td className='col-md-3 col-lg-1 text-center ' style={{ width: '' }}> {getNeededActions(item, index)} </td>
               </tr>

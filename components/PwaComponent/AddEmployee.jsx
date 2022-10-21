@@ -149,31 +149,31 @@ function AddEmployee(props) {
                                     </div>
                                     <div className="mb-3 me-1 mt-1 d-flex">
                                         <input className="form-check-input ms-1 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" >
                                             {t('Location manager')}
                                         </label>
                                     </div>
                                     <div className="mb-3 me-3 mt-1 d-flex">
                                         <input className="form-check-input ms-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" >
                                             {t('Contact person')}
                                         </label>
                                     </div>
                                     <div className="mb-3 me-3 mt-1 d-flex">
                                         <input className="form-check-input ms-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" >
                                             {t('Employee')}
                                         </label>
                                     </div>
                                     <div className="mb-3 me-3 mt-1 d-flex">
                                         <input className="form-check-input ms-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" >
                                             {t('Sales manager')}
                                         </label>
                                     </div>
                                     <div className="mb-3 me-3 mt-1 d-flex">
                                         <input className="form-check-input ms-2 rounded-0" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label ms-2 mt-1" forHtml="flexCheckDefault">
+                                        <label className="form-check-label ms-2 mt-1" >
                                             {t('Co-employeer')}
                                         </label>
                                     </div>
@@ -186,13 +186,13 @@ function AddEmployee(props) {
                                     </div>
                                     <div className="mb-3 me-1 mt-1 d-flex">
                                         <input className="form-check-input ms-2" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                                        <label className="form-check-label ms-2 mt-1" forHtml="flexRadioDefault1">
+                                        <label className="form-check-label ms-2 mt-1">
                                             {t('Internal')}
                                         </label>
                                     </div>
                                     <div className="mb-3 me-1 mt-1 d-flex">
                                         <input className="form-check-input ms-2" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                                        <label className="form-check-label ms-2 mt-1" forHtml="flexRadioDefault1">
+                                        <label className="form-check-label ms-2 mt-1" >
                                             {t('External')}
                                         </label>
                                     </div>
