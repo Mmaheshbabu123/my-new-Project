@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import Translation from '@/Translation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
 import { APICALL } from '../Services/ApiServices';
 import dynamic from "next/dynamic";
 // const Translation = dynamic(() => import('@/Translation'), { ssr: false })

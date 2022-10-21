@@ -95,7 +95,7 @@ const Login = (props) => {
                     <div className="col-md-5">
                         <div className="">
                             <form className="mb-5" onSubmit={submit}>
-                                <div className="pt-4" onS>
+                                <div className="mb-4" >
                                     <label className="form-label custom_astrick poppins-light-16px">{t('Email address')}</label>
                                     <input type="text" className="form-control rounded-0 shadow-none"
                                         value={state.email}

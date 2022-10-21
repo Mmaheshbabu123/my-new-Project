@@ -173,7 +173,6 @@ const PcOverview = (params) => {
 									<button
 										type="button"
 										to="category"
-										pcid={pc_unique_key}
 										// className={'btn me-3 blue-border-bg-white' + styles.btncolor}
 										className='btn me-3 blue-border-bg-white  me-3 p-3 '
 										onClick={() => {
@@ -187,7 +186,6 @@ const PcOverview = (params) => {
 									<button
 										type="button"
 										to="function"
-										pcid={pc_unique_key}
 										className='btn blue-border-bg-white p-3 '
 										onClick={() => {
 											setCat_leftsec('col-md-9');
@@ -477,7 +475,6 @@ const PcOverview = (params) => {
 							<button
 								type="button"
 								to="category"
-								pcid={pc_unique_key}
 								className='btn  blue-border-bg-white col me-3 p-3 '
 								onClick={() => {
 									setCat_subsec_type(1);
@@ -489,7 +486,6 @@ const PcOverview = (params) => {
 							<button
 								type="button"
 								to="function"
-								pcid={pc_unique_key}
 								className= 'btn  blue-border-bg-white col p-3'
 								onClick={() => {
 									setCat_subsec_type(2);
