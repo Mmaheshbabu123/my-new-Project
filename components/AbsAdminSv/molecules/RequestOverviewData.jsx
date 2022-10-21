@@ -16,9 +16,8 @@ import Translation from '@/Translation';
 
 const itemsPerPage = 5;
 const RequestOverviewData = (props) => {
-  const { t = str => str } =props;
   const router = useRouter();
-  const { overviewData, salesAgentArray, assignedData } = props;
+  const { t, overviewData, salesAgentArray, assignedData } = props;
 
   /**
    * [getSelectedStatus description]
