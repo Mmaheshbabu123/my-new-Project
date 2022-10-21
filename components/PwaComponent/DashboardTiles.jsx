@@ -19,7 +19,7 @@ return(
         if(tile == 'children' ){
             var tileObject = Object.assign({}, dashboardtiles[key][tile]);
             return(
-                <div className="col-lg-6 col-md-6 col-sm-12 pe-0">
+                <div className="col-lg-6 col-md-6 col-sm-12 ps-0 ">
             <DashboardTiles dashboardtiles = { tileObject } />
             </div>
 
@@ -29,7 +29,7 @@ return(
         {
             
             return (
-                <div className="col-lg-6 col-md-6 col-sm-12 ">
+                <div className="col-lg-6 col-md-6 col-sm-12 pe-0">
             <EmployeeWidget  />
             </div>
             )
