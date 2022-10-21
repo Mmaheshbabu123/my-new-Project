@@ -7,6 +7,7 @@ import ValidationService from '../../Services/ValidationService';
 import { RadioGroup, Radio } from 'react-radio-input';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import Translation from '@/Translation';
 
 
@@ -15,7 +16,7 @@ let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear() - 1;
 
-const ViewSalaryBenefits = ({key}) => {
+const ViewSalaryBenefits = (props) => {
 	const {t}=props;
 	const {
 		pc_unique_key,
@@ -39,7 +40,7 @@ const ViewSalaryBenefits = ({key}) => {
 	} = useContext(PcContext);
 
 	const router = useRouter();
-    
+    const { contextState = {} } = useContext(UserAuthContext);
 	// alert(k);
 	const [ obj, setObj ] = useState([]);
 	const inputRef = useRef({});
@@ -55,14 +56,11 @@ const ViewSalaryBenefits = ({key}) => {
 	useEffect(() => {
 		const {k=''} = router.query;
 		
-		if (localStorage.getItem('uid') != null) {
-			var userid = JSON.parse(localStorage.getItem('uid'));
-			setUid(userid);
-		} else {
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+		if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
+			setUid(contextState.uid);
 		}
-		
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + k, 'GET')
+
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/salary-benfits/' + k, 'GET')
 			.then((result) => {
 				if (result.data != undefined || result.data != null) {
 					console.log(result.data);

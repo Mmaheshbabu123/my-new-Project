@@ -12,11 +12,12 @@ import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import styles from './AbsAdminSv.module.css';
 import edit_svg from '../molecules/images/edit.svg';
 import pdf_icon from '../molecules/images/Pdf.svg';
+import Translation from '@/Translation';
 
 const itemsPerPage = 5;
 const RequestOverviewData = (props) => {
   const router = useRouter();
-  const { overviewData, salesAgentArray, assignedData } = props;
+  const { t, overviewData, salesAgentArray, assignedData } = props;
 
   /**
    * [getSelectedStatus description]
@@ -154,7 +155,7 @@ const RequestOverviewData = (props) => {
                   name = {'employer_name'}
                   onChange={(e) => setState({...state, searchTermEmployer: e.target.value,searchColumn:'employer_name'})}
                   onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
-                  placeholder={'Search employer '}
+                  placeholder={t('Search employer')}
                 />
                   </div>
                   <div className='col-md-6'>
@@ -166,7 +167,7 @@ const RequestOverviewData = (props) => {
                   value={state.searchTermCompany}
                   onChange={(e) => setState({...state, searchTermCompany: e.target.value,searchColumn:'company_name'})}
                   onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
-                  placeholder={'Search company '}
+                  placeholder={t('Search company ')}
                   />
                   </div>
                 </div>
@@ -179,7 +180,7 @@ const RequestOverviewData = (props) => {
                   className="btn btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
                   onClick={() => handleSearchClick(1)}
                 >
-                  SEARCH
+                  {t('SEARCH')}
                 </button>
                    </div>
                    <div className='col-md-6'>
@@ -188,7 +189,7 @@ const RequestOverviewData = (props) => {
                   className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
                   onClick={() => handleSearchClick(0)}
                 >
-                  RESET
+                  {t('RESET')}
                 </button>
                      </div>
                  </div>
@@ -222,7 +223,7 @@ const RequestOverviewData = (props) => {
             : <tbody>
               <tr>
               <td colSpan={8} className="text-center poppins-regular-18px no-records">
-											No records
+											{t('No records')}
 										</td>
               </tr>
               </tbody>}

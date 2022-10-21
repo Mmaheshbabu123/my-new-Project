@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState,useContext } from 'react';
 import { Timeregistration } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { MdQrCode } from 'react-icons/md';
@@ -11,11 +11,15 @@ import EmployerPopup from './Employer_popup';
 import Link from 'node_modules/next/link';
 import Image from "next/image";
 import Translation from '@/Translation';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
+		
+			
 function TimeRegistration(props) {
 	const {t}=props;
 	const router = useRouter();
+	const { contextState = {} } = useContext(UserAuthContext);
 	const { entitytype, entityid } = router.query;
-	console.log(router.query)
+	
 	//POPUP FOR QR CODE.
 	const [showQR, setShowQR] = useState(false);
 	
@@ -25,9 +29,12 @@ function TimeRegistration(props) {
 	};
 
 	const qrCode=()=>{
-
+		router.push('/timeregistration');
 	}
 
+	const stopPlanning=()=>{
+		router.push('/stop-planning-employeer?entityid='+contextState.uid);
+	}
 	
 	let submit = (event) => {
 		event.preventDefault();
@@ -54,11 +61,30 @@ function TimeRegistration(props) {
 						</div>
 					</div>
 
+				{contextState.role=='employeer'&&
 					<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height">
 						<div className="p-2 position_relative_dashboard">
 							<Link href='' className="m-2">
 								<a type="button">
-									<Image src="/images/Addemployee.svg" layout="fill" className="dasboard_image " onClick={pinCode}></Image>
+									<Image src="/images/Addemployee.svg" layout="fill" className="dasboard_image " onClick={stopPlanning}></Image>
+
+								</a>
+
+							</Link>
+
+						</div>
+						
+						<div className='text-center '>
+							<a type="button" className='mt-1' onClick={stopPlanning}> employer </a>
+						</div>
+					</div>
+					
+				}
+					<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height">
+						<div className="p-2 position_relative_dashboard">
+							<Link href='' className="m-2">
+								<a type="button">
+									<Image src="/images/Pincode.svg" layout="fill" className="dasboard_image " onClick={pinCode}></Image>
 
 								</a>
 

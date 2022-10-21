@@ -6,8 +6,9 @@ import RadioField from '@/atoms/RadioField';
 import { saveSalesAgentSvData } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import styles from './AbsAdminSv.module.css';
-
-const SalesAgentPopUpComponent = ( { state, setState } ) => {
+import Translation from '@/Translation';
+const SalesAgentPopUpComponent = ( props ) => {
+  const { state, setState, t } = props;
   const router = useRouter();
   const { showPopup, salesAgentArray, warning, reassign, //NOSONAR
     selectedSalesAgent,

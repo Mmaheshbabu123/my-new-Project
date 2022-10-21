@@ -44,7 +44,11 @@ function Dashboard(props) {
 
   return (
     <div className="container">
-      <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Dashboard')}</p>
+     <div className='row py-4 position-sticky-login'>
+       <div className='col-md-12 px-0'>
+       <p className="px-0 bitter-italic-normal-medium-24 mt-2">{t('Dashboard')}</p>
+       </div>
+     </div>
       <>
 	  <DashboardTiles dashboardtiles = { dashboardtiles } />
           {/* <p> Dashboard component </p> */}

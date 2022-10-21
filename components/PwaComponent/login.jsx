@@ -88,10 +88,12 @@ const Login = (props) => {
     } else {
         return (
             <section className="container">
-                <div className="row content d-flex justify-content-center p-2">
+                <div className="row content d-flex justify-content-center">
+                    <div className='col-md-12 position-sticky-login py-4'>
+                    <p className="px-0 bitter-italic-normal-medium-24 text-center">{t('Login')}</p>
+                    </div>
                     <div className="col-md-5">
-                        <div className=" p-4">
-                            <p className="h4  px-0  bitter-italic-normal-medium-24 mb-4 text-center fs-1">{t('Login')}</p>
+                        <div className="">
                             <form className="mb-5" onSubmit={submit}>
                                 <div className="mb-4" >
                                     <label className="form-label custom_astrick poppins-light-16px">{t('Email address')}</label>
@@ -103,7 +105,7 @@ const Login = (props) => {
                                 </div>
                                 <p className="error mt-2">{state.error_user_name}</p>
 
-                                <div className="mb-4  position-relative">
+                                <div className="pt-4  position-relative">
                                     <label className="form-label custom_astrick poppins-light-16px">{t('Password')}</label>
                                     <input type="password" className="form-control rounded-0 shadow-none"
                                         value={state.password}
@@ -111,11 +113,11 @@ const Login = (props) => {
                                         onChange={handleOnChange}
                                     />
                                 </div>
-                                <div className='mb-3'>
+                                <div className='py-3'>
                                     {/* <p className="px-0 float-end text-info">{t('Forgot password?')}</p> */}
                                     <Link href='' className="m-2">
                                         <a type="" className="">
-                                            <p className="px-0 float-end text-info">{t('Forgot password?')}</p>
+                                            <p className="px-0 float-end forgot-password-link">{t('Forgot password?')}</p>
                                         </a>
                                     </Link>
 

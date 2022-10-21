@@ -61,15 +61,18 @@ const AddSalaryBenefits = (props) => {
 			if (!router.isReady) return;
 
 			const { k = '' } = router.query;
+			
 			var uniqkey = 0;
 			k != undefined && k != '' ? (uniqkey = k) : pc_unique_key != undefined ? (uniqkey = pc_unique_key) : '';
 
 			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
 				setUid(contextState.uid);
 			}
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/salary-benfits/' + uniqkey, 'GET')
+
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/salary-benfits/' + uniqkey, 'GET')
 				.then((result) => {
 					console.log(result.data);
+					alert(k);
 					if (result.data != undefined || result.data != null) {
 						setKey(uniqkey);
 						console.log(result.data);

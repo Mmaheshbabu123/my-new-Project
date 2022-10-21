@@ -4,7 +4,7 @@ import { APICALL } from '../Services/ApiServices';
 
 
 const Translation = (Component, stringList) => {
-  const TranslatedComponent = () => {
+  const TranslatedComponent = ( props ) => {
   const [hydration, setHydration] = useState(0);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Translation = (Component, stringList) => {
       let lang = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
       await APICALL.service(url, 'POST', { lang: lang, string_list: stringList })
         .then((result) => {
-          if (result['status'] == 200) {
+          if (result && result['status'] == 200) {
             if (localStorage['translations'] === undefined) {
               localStorage.setItem('translations', '{}');
             }
@@ -51,8 +51,8 @@ const Translation = (Component, stringList) => {
         return input;
       }
     }
-
-    return <Component t={t} />
+    let pageProps = {...props, t: t};
+    return <Component  {...pageProps} />
   };
 
   return TranslatedComponent;
