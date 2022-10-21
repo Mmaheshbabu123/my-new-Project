@@ -33,7 +33,7 @@ function TimeRegistration(props) {
 	}
 
 	const stopPlanning=()=>{
-		router.push('/stop-planning-employeer');
+		router.push('/stop-planning-employeer?entityid='+contextState.uid);
 	}
 	
 	let submit = (event) => {
@@ -75,7 +75,7 @@ function TimeRegistration(props) {
 						</div>
 						
 						<div className='text-center '>
-							<a type="button" className='mt-1' onClick={stopPlanning}> pincode </a>
+							<a type="button" className='mt-1' onClick={stopPlanning}> employer </a>
 						</div>
 					</div>
 					
