@@ -585,3 +585,10 @@ select option
   background: white;
   z-index: 998;
 }
+.position-sticky-login
+{
+  position: sticky;
+  top: 84px;
+  background: white;
+  z-index: 998;
+}
