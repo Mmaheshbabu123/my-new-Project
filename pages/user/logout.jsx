@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
 const UserLogout = () => {
   const [ clear, setClear ] = useState(false);
   useEffect(() => {

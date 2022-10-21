@@ -3,7 +3,9 @@ import { useRouter } from 'next/router';
 import { Uniquekey } from '../../Services/GenetateUniqueKey';
 import Link from 'node_modules/next/link';
 import { MdEdit, MdDelete } from 'react-icons/md';
-import Translation from 'pages/TranslationPage';
+//import Translation from 'pages/TranslationPage';
+import Translation from "@/Translation";
+
 function ManageIndexationBenifits(props) {
     const {t} =props;
     const router = useRouter();

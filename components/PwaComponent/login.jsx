@@ -68,7 +68,7 @@ const Login = (props) => {
 
             //check status and redirect user.
             if (status === 200) {
-               // const redirect = router.query.returnUrl || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
+               // const redirect = router.query.returnUrl //; || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
                 window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}&destination_url=${btoa(window.location.href)}`, '_self');
                 // get return url from query parameters or default to '/'
                 // window.open(redirect, '_self'); // It'll redirect by re-loading page
@@ -93,9 +93,9 @@ const Login = (props) => {
                         <div className=" p-4">
                             <p className="h4  px-0  bitter-italic-normal-medium-24 mb-4 text-center fs-1">{t('Login')}</p>
                             <form className="mb-5" onSubmit={submit}>
-                                <div className="mb-3" onS>
-                                    <label className="form-label custom_astrick">{t('Email address')}</label>
-                                    <input type="text" className="form-control rounded-0"
+                                <div className="mb-4" onS>
+                                    <label className="form-label custom_astrick poppins-light-16px">{t('Email address')}</label>
+                                    <input type="text" className="form-control rounded-0 shadow-none"
                                         value={state.email}
                                         name='email'
                                         onChange={handleOnChange}
@@ -103,16 +103,16 @@ const Login = (props) => {
                                 </div>
                                 <p className="error mt-2">{state.error_user_name}</p>
 
-                                <div className="mb-3  position-relative">
-                                    <label className="form-label custom_astrick">{t('Password')}</label>
-                                    <input type="password" className="form-control rounded-0"
+                                <div className="mb-4  position-relative">
+                                    <label className="form-label custom_astrick poppins-light-16px">{t('Password')}</label>
+                                    <input type="password" className="form-control rounded-0 shadow-none"
                                         value={state.password}
                                         name='password'
                                         onChange={handleOnChange}
                                     />
                                 </div>
-                                <div>
-                                    <p className="px-0 float-end text-info">{t('Forgot password?')}</p>
+                                <div className='mb-3'>
+                                    {/* <p className="px-0 float-end text-info">{t('Forgot password?')}</p> */}
                                     <Link href='' className="m-2">
                                         <a type="" className="">
                                             <p className="px-0 float-end text-info">{t('Forgot password?')}</p>

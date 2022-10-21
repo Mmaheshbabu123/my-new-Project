@@ -7,8 +7,10 @@ import { useRouter } from 'next/router';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { FaUndoAlt,FaSave, FaCheckCircle, FaShieldAlt } from 'react-icons/fa';
 import Reset from 'pages/pincode/update/[p_unique_key]';
+import Translation from '@/Translation';
 
 function EncodageValidation(props) {
+	const {t} =props;
 	const router = useRouter();
 	const [ fcompany, setFcompany ] = useState('');
 	const [ flocation, setFlocation ] = useState('');
@@ -166,7 +168,7 @@ function EncodageValidation(props) {
 		<div>
 			<div className="row">
 				<div className="col-md-2">
-					<label>Company</label>
+					<label>{t('Company')}</label>
 					<MultiSelectField
 						// placeholder={''}
 						id={'select_id'}
@@ -179,7 +181,7 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<label>Location</label>
+					<label>{t('Location')}</label>
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
@@ -192,7 +194,7 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<label>Cost center</label>
+					<label>{t('Cost center')}</label>
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
@@ -205,7 +207,7 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<label>Project</label>
+					<label>{t('Project')}</label>
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
@@ -219,22 +221,22 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<button onClick={() => filter()}>Filter</button>
-					<button onClick={() => reset()}>Reset</button>
+					<button onClick={() => filter()}>{t('Filter')}</button>
+					<button onClick={() => reset()}>{t('Reset')}</button>
 				</div>
 			</div>
 			<table className="table">
 				<thead>
 					<tr>
 						<th scope="col"></th>
-						<th scope="col">Date</th>
-						<th scope="col">Firstname</th>
-						<th scope="col">Lastname</th>
-						<th scope="col">Planned start time</th>
-						<th scope="col">Actual start time</th>
-						<th scope="col">Planned end time</th>
-						<th scope="col">Actual end time</th>
-						<th scope="col">Actions</th>
+						<th scope="col">{t('Date')}</th>
+						<th scope="col">{t('Firstname')}</th>
+						<th scope="col">{t('Lastname')}</th>
+						<th scope="col">{t('Planned start time')}</th>
+						<th scope="col">{t('Actual start time')}</th>
+						<th scope="col">{t('Planned end time')}</th>
+						<th scope="col">{t('Actual end time')}</th>
+						<th scope="col">{t('Actions')}</th>
 					</tr>
 				</thead>
 				<tbody>{rows}</tbody>
@@ -243,4 +245,4 @@ function EncodageValidation(props) {
 	);
 }
 
-export default EncodageValidation;
+export default React.memo(Translation(EncodageValidation,['Company','Location','Cost  center','Project','Filter','Reset','Date','Firstname','Lastname','Planned start time','Actual start time','Planned end time','Actual end time','Actions'] ));
