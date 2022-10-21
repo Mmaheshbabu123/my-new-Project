@@ -19,7 +19,7 @@ function TimeRegistration(props) {
 	const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
 	const { entitytype, entityid } = router.query;
-	console.log(contextState.roles)
+	
 	//POPUP FOR QR CODE.
 	const [showQR, setShowQR] = useState(false);
 	
@@ -29,9 +29,12 @@ function TimeRegistration(props) {
 	};
 
 	const qrCode=()=>{
-
+		router.push('/timeregistration');
 	}
 
+	const stopPlanning=()=>{
+		router.push('/stop-planning-employeer');
+	}
 	
 	let submit = (event) => {
 		event.preventDefault();
@@ -58,12 +61,12 @@ function TimeRegistration(props) {
 						</div>
 					</div>
 
-				{
+				{contextState.role=='employeer'&&
 					<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height">
 						<div className="p-2 position_relative_dashboard">
 							<Link href='' className="m-2">
 								<a type="button">
-									<Image src="/images/Addemployee.svg" layout="fill" className="dasboard_image " onClick={pinCode}></Image>
+									<Image src="/images/Addemployee.svg" layout="fill" className="dasboard_image " onClick={stopPlanning}></Image>
 
 								</a>
 
@@ -72,7 +75,7 @@ function TimeRegistration(props) {
 						</div>
 						
 						<div className='text-center '>
-							<a type="button" className='mt-1' onClick={pinCode}> pincode </a>
+							<a type="button" className='mt-1' onClick={stopPlanning}> pincode </a>
 						</div>
 					</div>
 					
@@ -81,7 +84,7 @@ function TimeRegistration(props) {
 						<div className="p-2 position_relative_dashboard">
 							<Link href='' className="m-2">
 								<a type="button">
-									<Image src="/images/Addemployee.svg" layout="fill" className="dasboard_image " onClick={pinCode}></Image>
+									<Image src="/images/Pincode.svg" layout="fill" className="dasboard_image " onClick={pinCode}></Image>
 
 								</a>
 
