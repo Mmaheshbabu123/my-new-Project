@@ -488,7 +488,7 @@ input[type="checkbox"]
   font-family: var(--font-family-poppins-medium);
   font-size: var(--font-size-18px);
   line-height: var(--line-height-29px);
-  min-height: 5rem;
+  min-height: 4rem;
 }
 .employee_widget_search,
 .employee_widget_search:focus,
@@ -517,7 +517,7 @@ input[type="checkbox"]
 }
 .min_height_employee_widget
 {
-  max-height: 9.5rem;
+  max-height: 10rem;
   overflow-y: auto;
 }
 .employee_widget_dashboard
@@ -526,5 +526,5 @@ input[type="checkbox"]
 }
 .employee_width_col
 {
-  width: 20%;
+  width: 26%;
 }
