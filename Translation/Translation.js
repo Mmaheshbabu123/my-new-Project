@@ -4,7 +4,7 @@ import { APICALL } from '../Services/ApiServices';
 
 
 const Translation = (Component, stringList) => {
-  const TranslatedComponent = () => {
+  const TranslatedComponent = ( props ) => {
   const [hydration, setHydration] = useState(0);
 
   useEffect(() => {
@@ -51,8 +51,8 @@ const Translation = (Component, stringList) => {
         return input;
       }
     }
-
-    return <Component t={t} />
+    let pageProps = {...props, t: t};
+    return <Component  {...pageProps} />
   };
 
   return TranslatedComponent;
