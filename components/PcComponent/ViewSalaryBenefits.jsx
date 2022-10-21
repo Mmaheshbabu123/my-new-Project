@@ -15,8 +15,8 @@ let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear() - 1;
 
-const ViewSalaryBenefits = ({key}) => {
-	const {t}=props;
+const ViewSalaryBenefits = ( props ) => {
+	const { key, t } = props;
 	const {
 		pc_unique_key,
 		setPc_unique_key,

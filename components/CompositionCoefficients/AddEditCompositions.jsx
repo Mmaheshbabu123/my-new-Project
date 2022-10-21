@@ -4,9 +4,11 @@ import { createCompositions, updateCompositions } from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import CheckBoxField from '@/atoms/CheckBoxField';
+import Translation from '@/Translation';
 
 
 const AddEditCompositions = (props) => {
+  const { t } = props; 
   const router = useRouter();
   const assignInitialValues = () => {
     if(props.id && props.rows.length)
@@ -163,12 +165,12 @@ const AddEditCompositions = (props) => {
             className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
             value={state.name}
             onChange={(e) => handleChange(e.target)}
-            placeholder='Enter title'
+            placeholder={t('Enter title')}
           />
           {state.nameWarning &&
             <small
               className="form-text text-danger col-md-5 pcp_name_warning poppins-regular-16px ">
-              This field is required.
+              {t('This field is required.')}
             </small>}
           {state.uniqueError &&
             <small
@@ -184,7 +186,7 @@ const AddEditCompositions = (props) => {
             className="form-control col-md-10 pcp_name poppins-regular-18px border-4C4D554D rounded-0"
             value={state.remark}
             onChange={(e) => handleChange(e.target)}
-            placeholder= 'Enter value'
+            placeholder= {t('Enter value')}
           />
         </div>
         <div className="salary-input-fields">
@@ -249,7 +251,7 @@ const AddEditCompositions = (props) => {
           type="button"
           className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px"
           onClick={() => router.back()} >
-          BACK
+          {t('BACK')}
         </button>
         </div>
         <div className='col-md-6 text-end p-0'>
@@ -257,11 +259,11 @@ const AddEditCompositions = (props) => {
           type="button"
           className="btn btn-secondary rounded-0  custom-btn px-3  btn-block float-end"
           onClick={handleSubmit} >
-          SAVE
+          {t('SAVE')}
         </button>
         </div>
       </div>
     </div>
   </>
 }
-export default React.memo(AddEditCompositions);
+export default React.memo(Translation(AddEditCompositions,['This field is required.','Enter title','Enter value','BACK','SAVE']));
