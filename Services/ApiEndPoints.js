@@ -271,3 +271,6 @@ export const deletePlanningDetails = BASE_URL + "delete-planning/";
 
 //---------------------------- Contract API--------------------------- //\
 export const getContract = BASE_URL + "downloadContract/";
+
+//-----------Employee Widget Planning---------------------//
+// export const fetchEmployeeWidgetPlanning = BASE_URL + "get-all-widget-planning/";
