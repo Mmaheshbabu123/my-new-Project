@@ -172,7 +172,7 @@ function EditEmployee(props) {
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row  m-0 ">
 				
-					<p className=" mb-2 h4 height-60 text-center align-items-center justify-content-center text-white d-flex poppins-medium-18px">{t('Edit Employee')}</p>
+					<p className=" mb-2 h4 height-60 text-center align-items-center justify-content-center text-white d-flex poppins-medium-18px skyblue-bg-color">{t('Edit Employee')}</p>
 					<div className='table-border-gray p-2'>
 					<div className="form-group ">
 						<label className="mb-2 custom_astrick poppins-regular-16px">{t('Employee name')}</label>
