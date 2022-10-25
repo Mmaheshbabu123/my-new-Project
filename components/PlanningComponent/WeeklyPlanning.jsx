@@ -11,7 +11,7 @@ import Translation from '@/Translation';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import DraftPlanning from '@/components/PlanningComponent/DraftPlanning';
 import { useRouter } from 'next/router';
-
+import BacktoDashboardButton from '../BacktoDashboardButton';
 
 function WeeklyPlanning(props) {
 	const router = useRouter();
@@ -459,11 +459,7 @@ function WeeklyPlanning(props) {
 				</div>:<div><DraftPlanning/></div>}
 				<div className="text-end">
 					<button type="submit" className="btn rounded-0 custom-btn p-0 btn-block float-end ">
-						<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL} className="">
-							<a className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none">
-								{t('DASHBOARD')}
-							</a>
-						</Link>
+						<BacktoDashboardButton />
 					</button>
 				</div>
 			</div>
