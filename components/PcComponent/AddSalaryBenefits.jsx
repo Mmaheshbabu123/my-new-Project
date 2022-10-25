@@ -9,6 +9,7 @@ import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
 import Translation from '@/Translation';
+import Collapsible from 'react-collapsible';
 
 // let dateObj = new Date();
 // let month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -173,6 +174,12 @@ const AddSalaryBenefits = (props) => {
 		setObj(object);
 	};
 
+	const setError=(index,value)=>{
+		var object = [ ...obj ];
+		object[index].error = value;
+		setObj(object);
+	}
+
 	const setEmpty=(value)=>{
 		if(value==null||value==undefined){
 			value='';
@@ -184,7 +191,7 @@ const AddSalaryBenefits = (props) => {
 
 		var i = 0,
 			err = 0;
-		object.forEach((data) => {
+		object.forEach((data,index) => {
 			
 			if (data.open == true) {
 				data.coefficient_type=setEmpty(data.coefficient_type);
@@ -233,6 +240,9 @@ const AddSalaryBenefits = (props) => {
 					data.date_err != ''
 				) {
 					err++;
+					setError(index,true);
+				}else{
+					setError(index,false);
 				}
 			}
 			i++;
@@ -290,6 +300,7 @@ const AddSalaryBenefits = (props) => {
 							/>
 						</div> */}
 						<div 	className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-12 px-1' : 'd-flex px-1'}>
+						<span>
 						<input
 								type="checkbox"
 								checked={element.open == true}
@@ -298,25 +309,27 @@ const AddSalaryBenefits = (props) => {
 								}}
 								style={{ width: '18px', height: '18px',marginTop:'1.3rem' }}
 							/>
-							<div className="accordion-item rounded-0 add_salary_benefits w-100 ms-3">
+							{console.log(element.error)}
+							<Collapsible trigger={t('Salary') + 'verloning - ' +element.name+'﹀'}   triggerWhenOpen={t('Salary') + 'verloning - ' +element.name+'︿'} open={element.error}>
+							{/* <div className="accordion-item rounded-0 add_salary_benefits w-100 ms-3">
 								<h2 className="accordion-header" id="flush-headingOne">
 									<button
 										className="accordion-button collapsed poppins-regular-18px rounded-0 shadow-none"
 										type="button"
 										data-bs-toggle="collapse"
 										data-bs-target={'#flush-collapseOne' + index}
-										aria-expanded="false"
+										aria-expanded="true"
 										aria-controls="flush-collapseOne"
-									>
-										{t('Salary')} (verloning) - {element.name}
-									</button>
+									> */}
+										
+									{/* </button>
 								</h2>
 								<div
 									id={'flush-collapseOne' + index}
 									className="accordion-collapse collapse"
 									aria-labelledby="flush-headingOne"
 								>
-									<div className="accordion-body">
+									<div className="accordion-body"> */}
 										<div>
 											<div className="row">
 												<div className={pc_view_type == 'addpc' ? 'col-md-3' : 'col-md-3'}>
@@ -598,9 +611,11 @@ const AddSalaryBenefits = (props) => {
 												</div>
 											</div>
 										</div>
-									</div>
-								</div>
-							</div>
+									{/* </div> */}
+								{/* </div>
+							</div> */}
+							</Collapsible>
+							</span>
 						</div>
 					</div>
 				</div>
