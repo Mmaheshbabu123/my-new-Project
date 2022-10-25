@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getOtherDocuments, downloadAdditionalDocuments } from '@/Services/ApiEndPoints';
-import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import ReactPaginate from 'react-paginate';
 import { APICALL } from '@/Services/ApiServices';
 import { GrView } from 'react-icons/gr';
@@ -15,7 +14,8 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
     loaded: false,
     rows: [],
     filterRows: [],
-    headers: ['Document', 'Employer', 'Company', 'Actions'],
+    headers: Number(entityType) === 2 ? ['Document', 'Company', 'Actions']
+    : ['Document', 'Employer', 'Company', 'Actions'],
     titleSearchTerm: '',
     companySearchTerm: '',
     currentItems: [],
@@ -159,7 +159,6 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
       </div>
     )
   }
-console.log(state);
 
   return(
     <div>
@@ -209,7 +208,7 @@ console.log(state);
           <tbody>
             {state.currentItems.map(eachRow => <tr key={eachRow.tid} id={eachRow.tid}>
               <td> {eachRow.title}  </td>
-              <td> {eachRow.employer_name} </td>
+              {Number(entityType) === 1 && <td> {eachRow.employer_name} </td>}
               <td> {eachRow.company_name} </td>
               <td>{ getNeededActions(eachRow) } </td>
             </tr>)}
@@ -239,17 +238,6 @@ console.log(state);
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}
     />}
-     <div className='row justify-content-end'>
-     <div className="col-md-1">
-        <button
-          type="button"
-          className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
-          onClick={() => setState({...state, showPopup: true})}
-        >
-          Export
-        </button>
-    </div>
-     </div>
      <div className='row'>
        <div className='col-md-12'>
        <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
