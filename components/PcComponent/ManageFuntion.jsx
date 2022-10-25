@@ -470,7 +470,7 @@ const ManageFunction = (props) => {
 											<td className="poppins-regular-18px p-2">{result.function_name}</td>
 											<td className="poppins-regular-18px p-2">€ {result.min_salary}</td>
 											<td className="poppins-regular-18px p-2">{result.cat_name}</td>
-											<td className=" p-2 align-middle">
+											<td className=" p-2 align-middle text-center">
 												<Link
 													href={
 														result.pc_unique_key ? (

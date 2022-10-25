@@ -453,9 +453,9 @@ const AddSalaryBenefits = (props) => {
 															/>
 															<span
 																className={
-																	'input-group-text hi-40 border-0 bg-white rounded-0 bg-transparent px-0 pe-3'
+																	'input-group-text hi-40 border-0 bg-white rounded-0 bg-transparent px-0 pe-3 bg-color-salary-benefits'
 																}
-																style={{ marginLeft: '-25px' }}
+																style={{ marginLeft: '-29px' }}
 															>
 																{element.value_type == 2 ? '%' : '€'}
 															</span>
