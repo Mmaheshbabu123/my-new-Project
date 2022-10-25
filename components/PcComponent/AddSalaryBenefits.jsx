@@ -68,7 +68,6 @@ const AddSalaryBenefits = (props) => {
 			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
 				setUid(contextState.uid);
 			}
-
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/salary-benfits/' + uniqkey, 'GET')
 				.then((result) => {
 					console.log(result.data);

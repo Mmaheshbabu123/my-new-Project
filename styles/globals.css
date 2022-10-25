@@ -1242,7 +1242,7 @@ div[disabled] {
 	border-color: var(--color-skyblue)!important;
 	color: var(--color-white)!important;
 }
-.planning-table .MuiTableCell-body 
+.planning-table .MuiTableCell-body
 {
 	text-align: center !important;
 }
@@ -2028,7 +2028,7 @@ input[type="search"]::-webkit-search-cancel-button {
 {
 	max-width:1350px !important
 }
-@media screen and (min-width:992px) and (max-width:1024px)  
+@media screen and (min-width:992px) and (max-width:1024px)
 {
   .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl
 {
@@ -2087,7 +2087,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	position: sticky;
 	top: 225px;
 	background: var(--color-white);
-	z-index: 998;	
+	z-index: 998;
 }
 .forgot-password-link
 {
@@ -2103,10 +2103,19 @@ input[type="search"]::-webkit-search-cancel-button {
 	height: 25.5rem !important;
 	padding: 5rem 0 !important;
 }
-@media screen and (min-width:1024px) and  (max-width:1399px) 
+@media screen and (min-width:1024px) and  (max-width:1399px)
 {
 	.dashboard_menu_title, .dashboard_menu_title:hover
 	{
 		overflow-wrap: break-word;
 	}
+}
+
+.todo-count-badge {
+  position: absolute;
+  bottom: 30px;
+	right: 5px;
+	padding: 8px 10px;
+  border-radius: 50%;
+  background-color: #79b1bd;
 }
