@@ -8,7 +8,7 @@ const UserLogout = () => {
   }, [])
 
   if(clear) {
-    window.open('/user/login');
+    window.open('/user/login', '_self');
   }
 
 return(

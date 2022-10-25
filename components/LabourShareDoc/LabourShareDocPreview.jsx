@@ -35,11 +35,11 @@ const LabourShareDocPreview = ({ userId, preview = 0, approved = 0, refId = 0 })
       entityId: userId,
       refId
     }).then(response => {
-        // if (response.status === 200) {
-        //   customAlert('success', 'Request sent successfully!', 2000); //no of milliseconds
-        //   router.push(`/todos?entitytype=2&entityid=${userId}&tab=2`)
-        // } else
-        //    customAlert('error', 'Error occured while requesting cooperation agreement', 2000); //no of milliseconds
+        if (response.status === 200) {
+          customAlert('success', 'Approved successfully!', 2000); //no of milliseconds
+          router.push(`/todos?entitytype=2&entityid=${userId}&tab=2`)
+        } else
+           customAlert('error', 'Error occured while requesting cooperation agreement', 2000); //no of milliseconds
     }).catch((error) => console.log(error) )
   }
 
