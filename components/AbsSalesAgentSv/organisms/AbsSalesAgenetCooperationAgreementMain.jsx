@@ -3,9 +3,9 @@ import OverviewPage  from '../molecules/Overviewpage';
 import styles from '../molecules/AbsSalesAgentSv.module.css';
 import { fetchSalesAgenetAgreements } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
-
+import Translation from '@/Translation';
 const AbsSalesAgenetCooperationAgreementMain = (props) => {
-
+  const { t }  = props;
   const [state, setState] = useState({
       companies: {}
     , overviewData: []
@@ -44,7 +44,7 @@ const AbsSalesAgenetCooperationAgreementMain = (props) => {
     {state.loaded === true ?
           <div className='row'>
             <div className="col-md-12">
-          <h4 className={`${styles['employer-sv-page-title']} py-4 font-weight-bold px-0 bitter-italic-normal-medium-24 position-sticky-pc`}> Manage cooperation agreements </h4>
+          <h4 className={`${styles['employer-sv-page-title']} py-4 font-weight-bold px-0 bitter-italic-normal-medium-24 position-sticky-pc`}> {t('Manage cooperation agreements')} </h4>
               <OverviewPage overviewData={state.overviewData} setState={setState}/>
           </div>
             </div>
@@ -53,4 +53,4 @@ const AbsSalesAgenetCooperationAgreementMain = (props) => {
   );
 }
 
-export default React.memo(AbsSalesAgenetCooperationAgreementMain);
+export default React.memo(Translation(AbsSalesAgenetCooperationAgreementMain,['Manage cooperation agreements','Loading...']));
