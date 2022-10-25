@@ -11,6 +11,7 @@ import MultiSelectField from '@/atoms/MultiSelectField';
 import { APICALL } from '@/Services/ApiServices';
 import ValidateMessage from '@/atoms/validationError';
 import { MdDelete } from 'react-icons/md';
+import Translation from '@/Translation';
 
 const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documentDetails = {}, companies, employers }) => {
   const router = useRouter();
