@@ -4,7 +4,7 @@ import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes } from '..
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import Translation from '@/Translation';
-const EmployeeType = () => {
+const EmployeeType = (props) => {
 	const {t}=props;
 	const router = useRouter();
 	const [ disableForm, setDisableForm ] = useState(false);
