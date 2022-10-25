@@ -1017,7 +1017,7 @@ const AddFunctions = (props) => {
 							<div className="text-start col-md-6 p-0 align-items-center d-flex">
 								<button
 									type="button"
-									className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline poppins-light-18px text-decoration-underline shadow-none"
+									className="bg-white border-0 poppins-light-19px btn-block float-sm-right  md-5 add-proj-btn text-decoration-underline poppins-light-18px text-decoration-underline shadow-none px-0"
 									onClick={() => router.push('/planning/employees/' + router.query.p_unique_key)}
 								>
 									{t('BACK')}

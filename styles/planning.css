@@ -271,14 +271,14 @@ input[type="checkbox"]
 .planning_encodage_position
 {
   position: sticky;
-  top: 162px;
+  top: 205px;
   background: var(--color-white);
   z-index: 998;
 }
 .weekly_planning_search_position
 {
   position: sticky;
-  top: 239px;
+  top: 282px;
   background: white;
   z-index: 998;
 }
@@ -299,7 +299,7 @@ input[type="checkbox"]
 .project_sticky
 {
   position: sticky;
-  top: 245px;
+  top: 244px;
   background: var(--color-white);
   z-index: 998;
 }

@@ -122,7 +122,7 @@ function DraftPlanning(props) {
 						{/*----------------------------No records found-------------------------- */}
 						{data.length == 0 && (
 							<tr >
-								<td colSpan={4} className="text-center">
+								<td colSpan={8} className="text-center border py-3 poppins-regular-18px">
 									No draft planning
 								</td>
 							</tr>

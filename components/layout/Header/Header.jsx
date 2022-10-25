@@ -55,7 +55,7 @@ function Header(props) {
 	return (
 		<div className="custom-position-sticky ">
 			<div className="clip0 d-none d-md-block d-lg-block" />
-			<div className='container px-0'>
+			<div className='container'>
 				<div className="custom-header border-bottom col-md-9 col-lg-11 m-auto border-2 custom-position-sticky px-0 pt-3">
 					<div className="pb-3 col-md-12 p-0">
 						<div className="d-flex row">
