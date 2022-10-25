@@ -3,8 +3,9 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import SalaryDetailsPerPC from '../molecules/SalaryDetailsPerPC';
 import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
 import { helpers } from '../../../CooperationAgreementHelper';
-
+import Translation from '@/Translation';
 const SalaryBenefitsMain = (props) => {
+  const { t } = props;
   const { state: { selectedTabId, renderTabComponents, root_parent_id, filledTabs, defaultOptions }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   useEffect(() => {
     if(defaultOptions) {
@@ -44,10 +45,10 @@ const SalaryBenefitsMain = (props) => {
     <div className="">
       {renderTabComponents === true ?
       <SalaryDetailsPerPC />
-      : <p> Loading... </p>
+      : <p> {('Loading...')} </p>
     }
     </div>
   )
 }
 
-export default React.memo(SalaryBenefitsMain)
+export default React.memo(Translation(SalaryBenefitsMain,['Loading...']));

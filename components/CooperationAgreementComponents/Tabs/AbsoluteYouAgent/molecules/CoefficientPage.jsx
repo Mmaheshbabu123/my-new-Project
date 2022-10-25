@@ -10,8 +10,10 @@ import LeftPart from './LeftPart';
 import RightPart from './RightPart';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { APICALL } from '@/Services/ApiServices';
+import Translation from '@/Translation';
 
 const CoefficientPage = (props) => {
+  const {t} = props;
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   const { pcArray = [], alreadyLinked = [], dependecyDataStatus } = state;
   const [ compState, setCompState ] = useState({
@@ -85,7 +87,7 @@ const CoefficientPage = (props) => {
     let pcoptions = [{value: false, label: '--- Select ---'}, ...pcArray];
     return (
       <>
-      <p className='my-2 poppins-medium-18px'> Select paritair comite to link coefficients to employee types </p>
+      <p className='my-2 poppins-medium-18px'> {t('Select paritair comite to link coefficients to employee types')} </p>
      <div className='row pe-3'>
      <div className='col-md-12'>
      <MultiSelectField
@@ -94,7 +96,7 @@ const CoefficientPage = (props) => {
         handleChange={onSelect}
         isMulti={false}
         className="pc-single-select"
-        placeholder={'Select paritair comite'}
+        placeholder={t('Select paritair comite')}
       />
       </div>
      </div>
@@ -104,15 +106,15 @@ const CoefficientPage = (props) => {
   return (
     <div className={`${styles['coeffcient-table-parent']}`}>
       <div className="col-md-6 mt-2 mb-3 p-0"> {addPCSelectDropDown()}
-        {compState.pcWarning ? <small style={{ color: 'red' }}> Choose paritair comite </small> : null}
+        {compState.pcWarning ? <small style={{ color: 'red' }}> {t('Choose paritair comite')} </small> : null}
       </div>
       {compState.valueErrorArray.length > 0 &&
         <small className="col-md-3 mt-3 mb-3 warning-message">
-          {`Some values are not in between low and high value.`}
+          {t(`Some values are not in between low and high value.`)}
         </small>}
       {compState.selectedPc ? <div className="col-md-12 m-0 p-0 relative-div">
         {compState.emptyError !== true ? <>
-        <p className={`mb-4 mt-5 text-center d-none ${styles['worker-servants-title']}`}> Link coefficients to employee types</p>
+        <p className={`mb-4 mt-5 text-center d-none ${styles['worker-servants-title']}`}> {t('Link coefficients to employee types')}</p>
         {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
             <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
         {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
@@ -125,10 +127,11 @@ const CoefficientPage = (props) => {
             <RightPart compState={compState} setCompState = {setCompState}/>
           </div>
         </div>
-        </>:<p className={'text-align-left poppins-light-16px'}> This PC is not linked with coefficients to employee types. </p>}
+        </>:<p className={'text-align-left poppins-light-16px'}> {t('This PC is not linked with coefficients to employee types.')} </p>}
       </div>:null}
     </div>
   );
 }
 
-export default React.memo(CoefficientPage);
+export default React.memo(Translation(CoefficientPage,['Select paritair comite to link coefficients to employee types','Select paritair comite',
+'Choose paritair comite',`Some values are not in between low and high value.`,'Link coefficients to employee types','This PC is not linked with coefficients to employee types.']));

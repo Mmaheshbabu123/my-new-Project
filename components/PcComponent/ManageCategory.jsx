@@ -9,7 +9,7 @@ import ReactPaginate from 'react-paginate';
 import { useRouter } from 'next/router';
 import Pagination from './Pagination';
 import Translation from '@/Translation';
-const ManageCategoryComponent = () => {
+const ManageCategoryComponent = (props) => {
 	const{t}=props;
 	const [ categories, setCategories ] = useState([]);
 	const [ categoriesTemp, setCategoriesTemp ] = useState([]);
@@ -157,11 +157,6 @@ const ManageCategoryComponent = () => {
 		setSearchcat('');
 		setSearchSal('');
 	}
-	let backToDashboard = () => {
-		window.location.assign(
-			process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'dashboard?access=administrator&check_logged_in=1'
-		);
-	};
 
 	//------------------- Pagination code -------------------------//
 
@@ -340,32 +335,14 @@ const ManageCategoryComponent = () => {
 						<button
 							type="button"
 							className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
-							onClick={() => backToDashboard()}
+							onClick={() => router.push('/')}
 						>
 							{t('BACK')}
 						</button>
 					</div>
 					<div className="text-end col-md-6">
-						{/* <Link href={"/redirect-page?src=/manage-category&dest=addpc"}>
-					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
-				</Link>  */}
-						{/* <button
-							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
-							onClick={() => {
-								router.push('/redirect-page?src=/manage-category&dest=addpc')
-							}}
-						>
-							Add Category
-						</button> */}
 					</div>
 				</div>
-				{/* <Link href={"/redirect-page?src=/manage-category&dest=addpc"}>
-					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
-				</Link>
-				<Link href={"/redirect-page?src=/manage-category&dest=addpc"}>
-					<a className="btn btn-secondary btn-lg btn-block float-right mt-5">Add Category</a>
-				</Link> */}
 			</form>
 			{showdeletepopup == true && (
 				<Popup display={'block'} popupActionNo={closePopup} popupActionYes={deletecat} />

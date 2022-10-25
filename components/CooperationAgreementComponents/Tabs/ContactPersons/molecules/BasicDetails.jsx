@@ -13,6 +13,7 @@ import { FaRegPlusSquare, FaRegMinusSquare } from 'react-icons/fa';
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
 import { TiDelete } from 'react-icons/ti';
 import {locationArray,contactArray,contactPersonsRow1,contactPersonsRow2,defaultFileds} from '../ContactPersonsFields';
+import Translation from '@/Translation';
 const BasicDetails= (props) => {
 var Title_key = 25;
 var Location_key = 36;
@@ -191,4 +192,4 @@ fieldData.push(
   )
 }
 
-export default React.memo(BasicDetails);
+export default React.memo(Translation(BasicDetails,[]));

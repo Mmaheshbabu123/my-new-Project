@@ -168,17 +168,18 @@ function EditEmployee(props) {
 
 	return (
 		<div className="container-fluid p-0">
-			<div className='empty-sec'></div>
+			{/* <div className='empty-sec'></div> */}
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row  m-0 ">
-				
-					<p className=" mb-2 h4 height-60 text-center align-items-center justify-content-center text-white d-flex poppins-medium-18px skyblue-bg-color">{t('Edit Employee')}</p>
-					<div className='table-border-gray p-2'>
+				<div className=" mb-1 text-center align-items-center justify-content-center text-white d-flex poppins-medium-18px skyblue-bg-color height-edit-employee py-3">
+				<p>{t('Edit Employee')}</p>
+				</div>
+					<div className='table-border-gray p-3 edit_employee_table mb-3'>
 					<div className="form-group ">
-						<label className="mb-2 custom_astrick poppins-regular-16px">{t('Employee name')}</label>
+						<label className="custom_astrick poppins-light-16px">{t('Employee name')}</label>
 						<input
 							type="text"
-							className="form-control mb-2 poppins-regular-16px rounded-0 mb-4"
+							className="form-control mb-2 mt-1 poppins-light-16px rounded-0 mb-4 shadow-none"
 							value={data.employee_name}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, employee_name: e.target.value }));
@@ -186,7 +187,7 @@ function EditEmployee(props) {
 						/>
 						<p className="error  mt-2 mb-2">{error_employee_name}</p>
 
-						<label className=" mb-2 custom_astrick poppins-regular-16px">{t('Employee type')}</label>
+						<label className="custom_astrick poppins-light-16px">{t('Employee type')}</label>
 						{/* <input
 							type="text"
 							className="form-select mb-2"
@@ -196,7 +197,7 @@ function EditEmployee(props) {
 							}}
 						/> */}
 						<select
-							className="form-select mt-2 mb-2 custom-select poppins-regular-16px rounded-0 mb-4 "
+							className="form-select mt-1 mb-2 custom-select poppins-light-16px rounded-0 mb-4 shadow-none"
 							value={data.emp_type}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, emp_type: e.target.value }));
@@ -211,7 +212,7 @@ function EditEmployee(props) {
 						</select>
 						<p className="error  mt-2 mb-2">{error_employee_type}</p>
 
-						<label className=" mb-2 custom_astrick poppins-regular-16px">{t('Function')}</label>
+						<label className="custom_astrick poppins-light-16px">{t('Function')}</label>
 						{/* <input
 							type="text"
 							className="form-select mb-2"
@@ -221,7 +222,7 @@ function EditEmployee(props) {
 							}}
 						/> */}
 						<select
-							className="form-select mt-2 mb-2 custom-select poppins-regular-16px  rounded-0 mb-4"
+							className="form-select mt-1 mb-2 custom-select poppins-light-16px  rounded-0 mb-4 shadow-none"
 							value={data.function_id}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, function_id: e.target.value }));
@@ -236,23 +237,23 @@ function EditEmployee(props) {
 						</select>
 						<p className="error  mt-2 mb-2">{error_function}</p>
 
-						<label className="mb-3 custom_astrick poppins-regular-16px">{t('Minimum salary')}</label>
-						<div className="input-group mb-4">
+						<label className="custom_astrick poppins-light-16px">{t('Minimum salary')}</label>
+						<div className="input-group mb-4 min-salary-form-control mt-1">
 							<input
 								type="text"
-								className="form-control rounded-0"
+								className="form-control rounded-0 shadow-none "
 								value={data.salary}
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, salary: e.target.value }));
 								}}
 							/>
-							<span className="input-group-text rounded-0">€</span>
+							<span className="input-group-text rounded-0 salary-edit-employee">€</span>
 						</div>
 						<p className="error mt-2 mb-2">{error_minimum_salary}</p>
 					</div>
 					<div className="d-flex col-md-12 row m-0 ">
 						<div className=" col-md-6 ps-0  ">
-							<div className="pb-2 custom_astrick poppins-regular-16px rounded-0">{t('Start time')}</div>
+							<div className="pb-1 custom_astrick poppins-light-16px rounded-0">{t('Start time')}</div>
 							<TimePicker
 								className='rounded-0'
 								placeholder="Select Time"
@@ -269,7 +270,7 @@ function EditEmployee(props) {
 							<p className="error mt-2 mb-2 ">{error_start_time}</p>
 						</div>
 						<div className="col-md-6  p-0">
-							<div className="pb-2 custom_astrick">{t('End time')}</div>
+							<div className="pb-1 custom_astrick poppins-light-16px">{t('End time')}</div>
 							<TimePicker
 							    className='rounded-0'
 								placeholder="Select Time"
@@ -288,10 +289,10 @@ function EditEmployee(props) {
 					</div>
 					
 				
-				<div className="text-end  mt-2">
+				<div className="text-end">
 					<button
 						type="submit"
-						className="btn rounded-0  custom-btn px-3  btn-block float-end "
+						className="btn rounded-0 custom-btn px-3 btn-block float-end poppins-medium-18px-next-button"
 						onClick={() => {
 							setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
 						}}

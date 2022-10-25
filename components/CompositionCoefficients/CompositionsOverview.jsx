@@ -7,9 +7,11 @@ import {MdEdit, MdDelete} from 'react-icons/md';
 import SearchIcon from '../SearchIcon';
 import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import Translation from '@/Translation';
 const itemsPerPage = 8;
 
 const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
+  const {t} = props;
   const router = useRouter();
   const [state, setState] = useState({
     searchTerm: '',
@@ -99,13 +101,13 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
 
   return (
     <>
-      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0 pt-3'> {`Manage compositions coeffcients`} </h4>
+      <h4 className='mt-3 font-weight-bold  bitter-italic-normal-medium-24 px-0 pt-3'> {t(`Manage compositions coeffcients`)} </h4>
       <div className='col-md-12 text-end'>
         <button
           onClick={() => router.push(`composition-coefficient?action=create&id=0`)}
           type="button"
           className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content">
-          {`+ Add composition coefficient`}
+          {'+' + t(`Add composition coefficient`)}
         </button>
       </div>
       <div className='row searchbox m-0 mt-2 mb-4' style={{ margin: '10px 0', position: 'relative' }}>
@@ -116,7 +118,7 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
              value={state.searchTerm}
              className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0"
              onChange={(e) => setState({...state, searchTerm: e.target.value})}
-             placeholder={'Search'}
+             placeholder={t('Search')}
              onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
            />
          </div>
@@ -126,14 +128,14 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
              className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color"
              onClick={() => handleSearchClick(1)}
            >
-             SEARCH
+             {t('SEARCH')}
            </button>
            <button
              type="button"
              className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 ms-2 reset-btn"
              onClick={() => handleSearchClick(0)}
            >
-             RESET
+             {t('RESET')}
            </button>
          </div>
         </div>
@@ -152,7 +154,7 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
               <td className='poppinns-regular-thin'> {eachRow.remark ? eachRow.remark : '-'} </td>
               <td className='poppinns-regular-thin'> { getNeededActions(eachRow) } </td>
             </tr>)}
-          </tbody>: <p className='poppins-regular-18px' style={{paddingTop: '10px'}}> No records </p>}
+          </tbody>: <p className='poppins-regular-18px' style={{paddingTop: '10px'}}> {t('No records')} </p>}
         </table>
       </div>
       <div>
@@ -172,11 +174,11 @@ const CompositionsOverview = ({ headers, rows, manageType, ...props }) => {
             activeClassName={"active"}
         />}
         <button onClick={() => router.push('/')} type="button" className="bg-white  back-btn-text  border-0 poppins-regular-20px  float-sm-right mt-5 mb-5">
-          {`Back`}
+          {t(`Back`)}
         </button>
       </div>
     </>
   );
 }
 
-export default CompositionsOverview;
+export default React.memo(Translation(CompositionsOverview,[`Manage compositions coeffcients`,'Search','SEARCH','RESET','No records',`Back`]));

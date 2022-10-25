@@ -1,4 +1,4 @@
-import React, { Component, useState,useContext } from 'react';
+import React, { Component, useState, useContext } from 'react';
 import { Timeregistration } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { MdQrCode } from 'react-icons/md';
@@ -12,34 +12,34 @@ import Link from 'node_modules/next/link';
 import Image from "next/image";
 import Translation from '@/Translation';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
-		
-			
+import BacktoDashboardButton from '../BacktoDashboardButton';
+
 function TimeRegistration(props) {
-	const {t}=props;
+	const { t } = props;
 	const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
 	const { entitytype, entityid } = router.query;
-	
+
 	//POPUP FOR QR CODE.
 	const [showQR, setShowQR] = useState(false);
-	
+
 	// SHOW pincodePOPUP //
 	const pinCode = () => {
 		router.push('/pincode/planning/Verifypin');
 	};
 
-	const qrCode=()=>{
+	const qrCode = () => {
 		router.push('/timeregistration');
 	}
 
-	const stopPlanning=()=>{
-		router.push('/stop-planning-employeer?entityid='+contextState.uid);
+	const stopPlanning = () => {
+		router.push('/stop-planning-employeer?entityid=' + contextState.uid);
 	}
-	
+
 	let submit = (event) => {
 		event.preventDefault();
 	};
-	
+
 	return (
 		<div className="container">
 			<form onSubmit={(e) => submit(e)} >
@@ -61,25 +61,25 @@ function TimeRegistration(props) {
 						</div>
 					</div>
 
-				{contextState.role=='employeer'&&
-					<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height">
-						<div className="p-2 position_relative_dashboard">
-							<Link href='' className="m-2">
-								<a type="button">
-									<Image src="/images/Addemployee.svg" layout="fill" className="dasboard_image " onClick={stopPlanning}></Image>
+					{contextState.role == 'employeer' &&
+						<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height">
+							<div className="p-2 position_relative_dashboard">
+								<Link href='' className="m-2">
+									<a type="button">
+										<Image src="/images/Addemployee.svg" layout="fill" className="dasboard_image " onClick={stopPlanning}></Image>
 
-								</a>
+									</a>
 
-							</Link>
+								</Link>
 
+							</div>
+
+							<div className='text-center '>
+								<a type="button" className='mt-1' onClick={stopPlanning}> employer </a>
+							</div>
 						</div>
-						
-						<div className='text-center '>
-							<a type="button" className='mt-1' onClick={stopPlanning}> employer </a>
-						</div>
-					</div>
-					
-				}
+
+					}
 					<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height">
 						<div className="p-2 position_relative_dashboard">
 							<Link href='' className="m-2">
@@ -91,16 +91,19 @@ function TimeRegistration(props) {
 							</Link>
 
 						</div>
-						
+
 						<div className='text-center '>
 							<a type="button" className='mt-1' onClick={pinCode}> pincode </a>
 						</div>
 					</div>
 				</div>
+				<div className="text-start col-md-6">
+					<BacktoDashboardButton />
+				</div>
 			</form>
-			
+
 		</div>
 
 	);
 }
-export default React.memo(Translation(TimeRegistration,['Time registration','QR code','Employer','pincode']));
+export default React.memo(Translation(TimeRegistration, ['Time registration', 'QR code', 'Employer', 'pincode']));
