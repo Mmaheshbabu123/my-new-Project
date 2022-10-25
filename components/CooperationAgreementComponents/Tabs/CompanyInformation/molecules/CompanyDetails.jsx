@@ -34,7 +34,7 @@ const CompanyFieldData = (companyRow1) => {
      <InputField
      id = {data.id}
        type = {'text'}
-       className = {'col-md-11 poppins-light-18px'}
+       className = {'col-md-12 poppins-light-18px'}
        value={tab_2[data.id]}
        isDisabled= {false}
        placeholder={''}
@@ -139,7 +139,7 @@ return(
     id = {Vat_Number}
       type = 'text'
       placeholder="Enter something here..."
-      className = {'atom-input-field-default ' + 'col-md-11 ' + 'rounded-0 ' + 'shadow-none ' + 'poppins-light-18px '}
+      className = {'atom-input-field-default ' + 'col-md-12 ' + 'rounded-0 ' + 'shadow-none ' + 'poppins-light-18px '}
        value={tab_2[Vat_Number]}
       onChange={(e) => onVatnumber (e) }
         //optimizedFn(e)}
@@ -162,7 +162,7 @@ return(
          disabled={false}
          handleChange={(obj) => handleSelect(obj, TypeOfCompany)}
          isMulti={false}
-         className="col-md-11 type_of_company"
+         className="col-md-12 type_of_company"
        />
       </div>
     </div>

@@ -16,15 +16,15 @@
 
 
 .expand-minimize-span, .expand-minimize-span > svg {
-  height: 35px;
-  width: 40px;
+  height: 28px;
+  width: 28px;
   cursor: pointer;
   vertical-align: text-top;
 }
 
 .expand-minimize-span {
   vertical-align: middle;
-  height: 35px;
+  height:24px;
   width: 4%;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .pc-linked-salary-div {
-  width: 95%;
+  width: 94%;
   margin-top: 20px;
   margin-left: 3%;
 }
@@ -77,7 +77,7 @@
 }
 
 .pc-linked-td {
-  line-height: 75px;
+  /* line-height: 75px; */
   padding-left: 20px;
 }
 
@@ -103,8 +103,8 @@
 }
 
 .salary-coeff-input-value{
-  width: 96%;
-  margin-left: 10px;
+  width: 97%;
+  margin-left: 0px;
   border-bottom-color: lightgray !important;
 }
 
