@@ -1,42 +1,94 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Link from 'node_modules/next/link';
 import Image from "next/image";
 import StopPlanning from "./StopPlanning";
+import { APICALL } from '../../Services/ApiServices';
+import { fetchEmployeeWidgetPlanning } from '../../Services/ApiEndPoints';
+// import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 
-export default function EmployeeWidget() {
-    // const [query, setquery] = useState('')
+function EmployeeWidget(props) {
 
-    // const handleChange = (e) => {
-    //     setquery(e.target.value)
+    /**Search filter initialisation */
+    const [searchall, setSearchall] = useState('');
+    const [widgetTemp, setwidgetTemp] = useState('');
+    /**
+     * Reset button hide and show depending on the search values
+     */
+    const [search, setSearch] = useState(false);
+
+    /**
+     * Search functionality
+     */
+
+    // function handleSearch() {
+    // 	setSearch(true);
+    // 	var res = [];
+    //     /**
+    //      * If all three values are given to filter
+    //      */
+    //      if (searchall != '') {
+    // 		widgetTemp.map((val) => {
+    // 			if (
+    // 				val['project_name'].trim().toLowerCase().includes(searchProjectname.trim().toLowerCase()) &&
+    // 				(val['project_location'] != undefined &&
+    // 					val['project_location'] != '' &&
+    // 					val['project_location'] != null &&
+    // 					val['project_location'].trim().toLowerCase().includes(searchlocation.trim().toLowerCase())) &&
+    // 				val['address'].trim().toLowerCase().includes(searchaddress.trim().toLowerCase())
+    // 			) {
+    // 				res.push(val);
+    // 			}
+    // 		});
+    // 		setWidget(res);
+    // 		setItemOffset(0);
+    // 	}
     // }
-    const closeDeletePopup = () => {
-		setShowdeletepopup(false);
-	};
-	const showDeletePopup = (id) => {
-		setProjectid(id);
-		setShowdeletepopup(true);
-	};
-console.log('widget employee');
+
+
+
+
+    const [data, setData] = useState([]);
+    // const { contextState = {} } = useContext(UserAuthContext);
+
+    // useEffect(
+    // 	() => {
+
+    // 		if (contextState.uid != '') {
+    // 			APICALL.service(fetchEmployeeWidgetPlanning + contextState.uid, 'GET')
+    // 				.then((result) => {
+    // 					if (result.status == 200) {
+    // 						
+    // console.log(result.data);
+
+    // 					setData(result.data);
+    // 				})
+    // 				.catch((error) => {
+    // 					console.log(error);
+    // 				});
+    // 		}
+    // 	},
+    // 	[props, contextState.uid]
+    // );
     return (
         <div className="container-fluid p-2 employee_widget_dashboard">
             <form>
                 <div className="row m-0 ">
                     <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working (2022-10-09, 09:59)</p>
 
-                   <div className="col-md-12 px-0">
-                   
-                   <div className="row d-flex mt-3">
-                        <div className="col-md-12">
-                        <div className="input-group">
-                            <input type="text" className="form-control rounded-0 shadow-none employer_widget_search me-3" />
-                            <span className="input-group-text rounded-0 employer_widget_search_button">Search</span>
+                    <div className="col-md-12 px-0">
+
+                        <div className="row d-flex mt-3">
+                            <div className="col-md-12">
+                                <div className="input-group">
+                                    <input type="text" className="form-control rounded-0 shadow-none employer_widget_search me-3" />
+                                    <span className="input-group-text rounded-0 employer_widget_search_button">Search</span>
+
+                                </div>
+                            </div>
 
                         </div>
-                        </div>
-                        
                     </div>
-                   </div>
                     <div className="form-check p-0 mt-2 tab-pane fade show min_height_employee_widget">
                         <table className="table mb-0">
                             <thead>
@@ -52,11 +104,10 @@ console.log('widget employee');
 
                             <tbody>
                                 <tr className="border poppins-regular-18px p-2" >
-
-                                    <td className="poppins-regular-16px p-2 ">Preeti RK</td>
-                                    <td className="poppins-regular-16px p-2 ">The awkward antique store</td>
-                                    <td className="poppins-regular-16px p-2 ">Aartselaar</td>
-                                    <td className="poppins-regular-16px p-2">2022-08-17 10:00:07</td>
+                                    <td className="poppins-regular-16px p-2"></td>
+                                    <td className="poppins-regular-16px p-2"></td>
+                                    <td className="poppins-regular-16px p-2"></td>
+                                    <td className="poppins-regular-16px p-2"></td>
                                     <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
                                         <Link href='' className="m-2">
                                             <a type="button" className="warning-icon-solid">
@@ -83,7 +134,7 @@ console.log('widget employee');
                                 View more...
                             </a>
                         </Link>
-                        </div>
+                    </div>
                     {/* </div> */}
                     {/* <div className="text-start col-md-6">
                         <button
@@ -99,4 +150,4 @@ console.log('widget employee');
         </div>
     );
 }
-// export default EmployeeWidget;
+export default EmployeeWidget;
