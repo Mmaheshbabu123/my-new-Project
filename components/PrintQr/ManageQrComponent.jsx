@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { downloadQrCode, regenerateQrCode } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
