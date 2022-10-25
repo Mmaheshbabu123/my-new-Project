@@ -13,9 +13,10 @@ import ValidateMessage from '@/atoms/validationError';
 import debounceFunCall from '@/atoms/debounceFun';
 import { fecthCompanyDetailsByVatNum } from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
-
+import Translation from '@/Translation';
 var filterTimeout;
 const CompanyDetails = (props) => {
+const { t  } = props;
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
 var { tab_2,element_status ,tab_4,tab_6} = state;
 const [companyState,setCompanyState] = useState({
@@ -171,4 +172,4 @@ return(
 );
 }
 
-export default React.memo(CompanyDetails);
+export default React.memo(Translation(CompanyDetails,[]));
