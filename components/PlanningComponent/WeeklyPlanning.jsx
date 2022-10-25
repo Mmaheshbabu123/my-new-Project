@@ -11,7 +11,7 @@ import Translation from '@/Translation';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import DraftPlanning from '@/components/PlanningComponent/DraftPlanning';
 import { useRouter } from 'next/router';
-
+import BacktoDashboardButton from '../BacktoDashboardButton';
 
 function WeeklyPlanning(props) {
 	const router = useRouter();
@@ -354,16 +354,16 @@ function WeeklyPlanning(props) {
 																					<div>
 																						<div className="row mb-1">
 																						<div className="col-md-9 pe-0">
-																							<p className="color-skyblue pt-1">
+																							<p className="employee-weekly-planning">
 																								{val1.employee_name}
 																							</p>
 																						</div>
-																						<div className="color-skyblue my-2 mt-1 text-end col-md-3">
+																						<div className="color-skyblue my-2 mt-1 text-end col-md-3 ps-0">
 																							{new Date(val1.pdate) >
 																							new Date() ? (
 																								<a>
 																									<MdEdit
-																										className="float-right"
+																										className="float-right cursor-pointer"
 																										data-toggle="tooltip"
 																										title="Edit plannig"
 																										onClick={() =>
@@ -379,19 +379,19 @@ function WeeklyPlanning(props) {
 																							)}
 																						</div>
 																					</div>
-																						<br />
+																				
 																						<p className="poppins-light-14px">
 																							{val1.employee_type_name}
 																						</p>
-																						<br />
+																					
 																						<p className="poppins-light-14px">
 																							{val1.function_name}
 																						</p>
-																						<br />
+																						
 																						<p className="poppins-light-14px">
 																							{'€ ' + val1.salary}
 																						</p>
-																						<br />
+																					
 																					</div>
 																				)}
 																				<p className="poppins-light-14px">
@@ -404,7 +404,7 @@ function WeeklyPlanning(props) {
 																						)}
 																				</p>
 
-																				<br />
+																			
 																			</div>
 																		) : (
 																			''
@@ -457,13 +457,9 @@ function WeeklyPlanning(props) {
 					)}
 				</div>
 				</div>:<div><DraftPlanning/></div>}
-				<div className="text-end mb-3">
-					<button type="submit" className="btn rounded-0  custom-btn px-3  btn-block float-end ">
-						<Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL} className="">
-							<a className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none">
-								{t('DASHBOARD')}
-							</a>
-						</Link>
+				<div className="text-end">
+					<button type="submit" className="btn rounded-0 custom-btn p-0 btn-block float-end ">
+						<BacktoDashboardButton />
 					</button>
 				</div>
 			</div>

@@ -21,10 +21,12 @@ import OnlineDetails  from './OnlineDetails/organisms/OnlineDetails';
 import ContactPersons from './ContactPersons/organisms/ContactPersons';
 import SalaryBenefitsMain  from './SalaryBenefits/organisms/SalaryBenefitsMain';
 import Invoicing from './Invoicing/organisms/Invoicing';
+import Translation from '@/Translation';
 //----
 
 
 const TabIndex = (props) => {
+  const { t } = props;
 	const { state: { selectedTabId ,renderedOptions, filledTabs,salesAgentRefId }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
 
@@ -54,7 +56,7 @@ const TabIndex = (props) => {
         component = <Invoicing />
        break;
       default:
-        component = <div> Nothing...! </div>
+        component = <div>{t(' Nothing...!')} </div>
     }
     return component || <> {`Selected tab id: ${selectedTabId}`} </>;
   }
@@ -93,19 +95,19 @@ const loadData = async () => {
 
 	return (
 		<div className="">
-      {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields. </p> : null}
+      {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> {t('Please fill all mandotory fields.')} </p> : null}
       {renderedOptions === 1 && showComponentBasedOnTabSelection()}
      <div className='row my-4'>
      <div className={`col-md-12`} >
         <div className='row py-3'>
         <div className={`col-md-9 ${styles['tab-index-back-div']} align-self-center`}>
-            <p className={`${styles['tab-index-back-btn']} poppins-light-18px text-decoration-underline text-uppercase shadow-none`} onClick={() => router.back()}> Back </p>
+            <p className={`${styles['tab-index-back-btn']} poppins-light-18px text-decoration-underline text-uppercase shadow-none`} onClick={() => router.back()}> {t('Back')} </p>
           </div>
           <div className={`col-md-3 text-end`}>
            <div className='row'>
              <div className='col-md-8'>
              <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab(1)} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase">
-              <span className="sv-save-btn-text_1 spinner-border-sm me-2 "></span>{'Save as draft'}
+              <span className="sv-save-btn-text_1 spinner-border-sm me-2 "></span>{t('Save as draft')}
             </button>
 
              </div>
@@ -123,4 +125,4 @@ const loadData = async () => {
 	);
 }
 
-export default TabIndex;
+export default React.memo(Translation(TabIndex,['Please fill all mandotory fields.',' Nothing...!','Back','Save as draft']));

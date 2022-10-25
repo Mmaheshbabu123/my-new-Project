@@ -5,10 +5,11 @@ import MultiSelectField from '@/atoms/MultiSelectField';
 import styles from '../SalaryBenefits.module.css';
 import { confirmAlert } from 'react-confirm-alert';
 import { helpers } from '../SalaryBenefitHelper';
-
+import Translation from '@/Translation';
 const TAB_ID = 5;
 const stateKey = 'tab_5';
-const SalaryDetailsPerPC = () => {
+const SalaryDetailsPerPC = (props) => {
+  const { t } = props;
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   var { tab_5: {  cooperationSalaryDetails }, salaryBenefitPcArray, dependecyDataStatus, salaryDataPerPc, filledTabs, selectedTabId } = state;
 
@@ -81,7 +82,7 @@ const SalaryDetailsPerPC = () => {
             key = {123}
             className={`${styles['salary-benefits-multiselect']}`}
             classNamePrefix={`${styles['salary-benefits-multiselect']}`}
-            placeholder={'Select paritair comite'}
+            placeholder={t('Select paritair comite')}
         />
         </div>
       </div>
@@ -92,4 +93,4 @@ const SalaryDetailsPerPC = () => {
   );
 }
 
-export default React.memo(SalaryDetailsPerPC);
+export default React.memo( Translation(SalaryDetailsPerPC,['Select paritair comite']));

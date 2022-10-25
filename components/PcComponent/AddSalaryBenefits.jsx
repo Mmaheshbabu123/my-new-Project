@@ -9,6 +9,7 @@ import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { PcContext } from '../../Contexts/PcContext';
 import Translation from '@/Translation';
+import Collapsible from 'react-collapsible';
 
 // let dateObj = new Date();
 // let month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -68,7 +69,6 @@ const AddSalaryBenefits = (props) => {
 			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
 				setUid(contextState.uid);
 			}
-
 			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/salary-benfits/' + uniqkey, 'GET')
 				.then((result) => {
 					console.log(result.data);
@@ -174,13 +174,34 @@ const AddSalaryBenefits = (props) => {
 		setObj(object);
 	};
 
+	const setError=(index,value)=>{
+		var object = [ ...obj ];
+		object[index].error = value;
+		setObj(object);
+	}
+
+	const setEmpty=(value)=>{
+		if(value==null||value==undefined){
+			value='';
+		}
+		return value;
+	}
 	const validation = () => {
 		var object = [ ...obj ];
 
 		var i = 0,
 			err = 0;
-		object.forEach((data) => {
+		object.forEach((data,index) => {
+			
 			if (data.open == true) {
+				data.coefficient_type=setEmpty(data.coefficient_type);
+				data.value_type=setEmpty(data.value_type);
+				data.value=setEmpty(data.value);
+				data.occurence=setEmpty(data.occurence);
+				data.granted=setEmpty(data.granted);
+				data.date=setEmpty(data.date);
+				data.coefficient_value=setEmpty(data.coefficient_value);
+
 				object[i].vt_err = ValidationService.emptyValidationMethod(data.value_type);
 				object[i].v_err = ValidationService.emptyValidationMethod(data.value);
 				object[i].o_err =
@@ -189,11 +210,17 @@ const AddSalaryBenefits = (props) => {
 						: ValidationService.emptyValidationMethod(data.occurence);
 				object[i].g_err = ValidationService.emptyValidationMethod(data.granted);
 				object[i].ct_err = ValidationService.emptyValidationMethod(data.coefficient_type);
-				object[i].c_err = ValidationService.emptyValidationMethod(data.coefficient_value);
 				object[i].date_err = ValidationService.emptyValidationMethod(data.date);
+				if(data.coefficient_type==2){
+					object[i].c_err = ValidationService.emptyValidationMethod(data.coefficient_value);
 				if (object[i].c_err == '' && object[i].ct_err == '') {
 					object[i].c_err = ValidationService.percentageValidationMethod(data.coefficient_value);
-				}
+			}
+		}
+			else{
+				object[i].c_err='';
+			}
+				
 				if (object[i].v_err == '' && object[i].vt_err == '') {
 					object[i].v_err =
 						data.value_type == '2' ? ValidationService.percentageValidationMethod(data.value) : '';
@@ -213,6 +240,9 @@ const AddSalaryBenefits = (props) => {
 					data.date_err != ''
 				) {
 					err++;
+					setError(index,true);
+				}else{
+					setError(index,false);
 				}
 			}
 			i++;
@@ -270,6 +300,7 @@ const AddSalaryBenefits = (props) => {
 							/>
 						</div> */}
 						<div 	className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-12 px-1' : 'd-flex px-1'}>
+						<span>
 						<input
 								type="checkbox"
 								checked={element.open == true}
@@ -278,25 +309,27 @@ const AddSalaryBenefits = (props) => {
 								}}
 								style={{ width: '18px', height: '18px',marginTop:'1.3rem' }}
 							/>
-							<div className="accordion-item rounded-0 add_salary_benefits w-100 ms-3">
+							{console.log(element.error)}
+							<Collapsible trigger={t('Salary') + 'verloning - ' +element.name+'﹀'}   triggerWhenOpen={t('Salary') + 'verloning - ' +element.name+'︿'} open={element.error}>
+							{/* <div className="accordion-item rounded-0 add_salary_benefits w-100 ms-3">
 								<h2 className="accordion-header" id="flush-headingOne">
 									<button
 										className="accordion-button collapsed poppins-regular-18px rounded-0 shadow-none"
 										type="button"
 										data-bs-toggle="collapse"
 										data-bs-target={'#flush-collapseOne' + index}
-										aria-expanded="false"
+										aria-expanded="true"
 										aria-controls="flush-collapseOne"
-									>
-										{t('Salary')} (verloning) - {element.name}
-									</button>
+									> */}
+										
+									{/* </button>
 								</h2>
 								<div
 									id={'flush-collapseOne' + index}
 									className="accordion-collapse collapse"
 									aria-labelledby="flush-headingOne"
 								>
-									<div className="accordion-body">
+									<div className="accordion-body"> */}
 										<div>
 											<div className="row">
 												<div className={pc_view_type == 'addpc' ? 'col-md-3' : 'col-md-3'}>
@@ -450,7 +483,7 @@ const AddSalaryBenefits = (props) => {
 																htmlFor="granted1"
 																className="mb-2 poppins-regular-16px"
 															>
-																<Radio id="granted1" value={0} />
+																<Radio id="granted1" value={1} />
 																{t('Yes')}
 															</label>
 															<br />
@@ -458,7 +491,7 @@ const AddSalaryBenefits = (props) => {
 																htmlFor="granted2"
 																className="mb-3 poppins-regular-16px"
 															>
-																<Radio id="granted2" value={1} />
+																<Radio id="granted2" value={0} />
 																{t('No')}
 															</label>
 														</RadioGroup>
@@ -489,7 +522,7 @@ const AddSalaryBenefits = (props) => {
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="coefficient1" value={1} />
-																{t('Yes')}
+																{t('Based on employee type in the cooperation agreement')}
 															</label>
 															<br />
 															<label
@@ -497,12 +530,12 @@ const AddSalaryBenefits = (props) => {
 																className="mb-3 poppins-regular-16px"
 															>
 																<Radio id="coefficient2" value={2} />
-																{t('No')}
+																{t('Other')}
 															</label>
 														</RadioGroup>
 														<br />
 														<p style={{ color: 'red' }}>{element.ct_err}</p>
-														<input
+														{element.coefficient_type==2 && <input
 															type="text"
 															onChange={(e) => {
 																updateCoefficientValue(index, e.target.value);
@@ -511,8 +544,8 @@ const AddSalaryBenefits = (props) => {
 															defaultValue={element.coefficient_value}
 															name="coefficientother"
 															style={{ marginLeft: '0.8rem' }}
-														/>
-														<p style={{ color: 'red' }}>{element.c_err}</p>
+														/>}
+														{element.coefficient_type==2&&<p style={{ color: 'red' }}>{element.c_err}</p>}
 													</div>
 													<div className="row mb-3">
 														{/* {console.log()} */}
@@ -532,7 +565,6 @@ const AddSalaryBenefits = (props) => {
 															id={'date'}
 															placeholder={'date'}
 															handleChange={(e) => {
-																console.log(e.target.value);
 																updateDate(index, e.target.value);
 															}}
 															// minDate={element.open ? year + '-' + month + '-' + day : ''}
@@ -579,9 +611,11 @@ const AddSalaryBenefits = (props) => {
 												</div>
 											</div>
 										</div>
-									</div>
-								</div>
-							</div>
+									{/* </div> */}
+								{/* </div>
+							</div> */}
+							</Collapsible>
+							</span>
 						</div>
 					</div>
 				</div>

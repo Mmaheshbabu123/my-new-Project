@@ -10,7 +10,9 @@ import {defaultFileds} from '../ContactPersonsFields';
 import { requiredFields } from '@/components/CooperationAgreementComponents/RequiredFields';
 import { helpers } from '../../SalaryBenefits/SalaryBenefitHelper';
 import { confirmAlert } from 'react-confirm-alert';
+import Translation from '@/Translation';
 const ContactPersonTabs = (props) => {
+  const { t }  = props;
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   const TAB_ID = 3;
   const requiredElements  = structuredClone(requiredFields);
@@ -101,7 +103,7 @@ const onDelete = (personId, index) => {
             standards={[]}
             className={`${styles['salary-benefits-multiselect']}`}
             classNamePrefix={`${styles['salary-benefits-multiselect']}`}
-            placeholder={'Select contact person'}
+            placeholder={t('Select contact person')}
         />
         </div>
       </div>
@@ -112,4 +114,4 @@ const onDelete = (personId, index) => {
   )
 }
 
-export default React.memo(ContactPersonTabs);
+export default React.memo(Translation(ContactPersonTabs,['Select contact person']));

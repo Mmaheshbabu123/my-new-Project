@@ -363,4 +363,4 @@ const RequestOverviewData = (props) => {
   );
 }
 
-export default React.memo(RequestOverviewData)
+export default React.memo(Translation(RequestOverviewData,['Search employer','Search company ','SEARCH','RESET','No records']));

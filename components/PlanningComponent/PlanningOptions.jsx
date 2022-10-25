@@ -5,19 +5,17 @@ import { Uniquekey } from '../../Services/GenetateUniqueKey';
 import styles from '../../styles/Planning.module.css'
 // import styles1 from '../../styles/fonts/OFL.txt'
 import Translation from '@/Translation';
+import { useRouter } from 'next/router';
+import { Router } from 'node_modules/next/router';
+import BackToDashboardButton from '../BacktoDashboardButton';
 function Add_manage_planning(props) {
 	const {t}=props;
 	const unique_key = Uniquekey.generate_unique_key();
-	let backToDashboard = () => {
-		window.location.assign(
-			process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'dashboard?access=employeer&check_logged_in=1'
-		);
-	};
 	return (
 		<div className="col-md-12">
 			{/* <div className="row mt-5 text-center planning-height "> */}
-			<div className='col-md-12 px-0 py-4 position-sticky-pc'>
-					<h1 className="font-weight-bold   px-0  bitter-italic-normal-medium-24">{t('My Planning')}</h1>
+			<div className='col-md-12 py-4 position-sticky-pc'>
+					<h1 className="font-weight-bold bitter-italic-normal-medium-24">{t('My Planning')}</h1>
 					</div>
 			<div className={`${styles.planningheight} popup-btn col-md-12 row align-items-center justify-content-center m-0`}>
 				<div className='row'>
@@ -51,12 +49,9 @@ function Add_manage_planning(props) {
 				</div>
 			</div>
 			<div className="">
-				<button type="button" style={{background: 'none'}} className="btn  btn-block px-0 " onClick={() => backToDashboard()}>
-					{/* <span className='bg-white  back-btn-text  back-btn-text  border-0 poppins-regular-18px'>BACK</span> */}
-					<span className='bg-white text-decoration-underline border-0 poppins-light-18px'>{t('BACK')}</span>
-				</button>
+			<BackToDashboardButton/>	
 			</div>
 		</div>
 	);
 }
-export default React.memo(Translation(Add_manage_planning,['My Planning','Add planning','Manage planning','BACK']));
+export default React.memo(Translation(Add_manage_planning,['My Planning','Add planning','Manage planning']));

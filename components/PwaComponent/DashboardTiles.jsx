@@ -4,14 +4,14 @@ import EmployeeWidget from "./EmployeeWidget";
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 
 export default function DashboardTiles({dashboardtiles}) {
-const { contextState: {uid=0, role='', roleType=0  }, contextState } = useContext(UserAuthContext);
+const { contextState: {uid = 0, role = '', roleType = 0, openTodosCount = 0  } } = useContext(UserAuthContext);
 return(
-    
-    
+
+
     <>
 
  {Object !== undefined && Object.keys(dashboardtiles).map((key, idx) => {
-   
+
     return(
     <div className="row" key={idx}>
       {Object !== undefined && Object.keys(dashboardtiles[key]).map((tile, idx1)=> {
@@ -27,7 +27,7 @@ return(
         }
         else if (tile == 'widget')
         {
-            
+
             return (
                 <div key={`key_${idx}`} className="col-lg-6 col-md-6 col-sm-12 ">
             <EmployeeWidget  />
@@ -39,7 +39,7 @@ return(
         return(
           <div key={idx1} className={dashboardtiles[key][tile]['col_class']}>
              <div className="position_relative_dashboard">
-                <a href={`${dashboardtiles[key][tile]['menu_link']}?entityid=${uid}&entitytype=${roleType}&role=${role}`} className="mx-0 row dashboard_menu_links py-4 dashboard-tile">
+                <a href={`${dashboardtiles[key][tile]['menu_link']}?entityid=${uid}&entitytype=${roleType}&role=${role}`} className="mx-0 row dashboard_menu_links py-4 dashboard-tile position-relative">
                  <div className="col-lg-3 col-md-12 align-self-center text-center dashboard-image-div">
                  <img src={dashboardtiles[key][tile]['menu_icon']} className="dasboard_image img-fluid" />
                  </div>
@@ -47,6 +47,7 @@ return(
                   {dashboardtiles[key][tile]['menu_title']}
                   </div>
                 </a>
+                {dashboardtiles[key][tile]['menu_title'] === 'My todo\'s' && <span className="todo-count-badge"> { openTodosCount } </span>}
             </div>
           </div>
         )

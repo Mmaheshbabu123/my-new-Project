@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { downloadQrCode, regenerateQrCode } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
@@ -15,6 +15,7 @@ import Button from 'react-bootstrap/Button';
 import { formatDate, getFutureDates } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
 import customAlert from '@/atoms/customAlert';
 import Translation from '@/Translation';
+
 const itemsPerPage = 5;
 let dateObj = new Date()
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -23,8 +24,10 @@ var year = dateObj.getUTCFullYear();
 let dateValue = `${year}-${month < 10 ? '0' + month : month}`;
 const dateOptions = getFutureDates();
 let updatedDay = day - 1 < 10 ? '0' + (day - 1) : day - 1;
-const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, entityId }) => {
-  const {t}=props;
+const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, entityId,t }) => {
+
+  
+  // console.log(t);
   const router = useRouter();
   const [state, setState] = useState({
     searchTerm: '',
@@ -397,5 +400,4 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
     </>
   );
 }
-
 export default React.memo(Translation(ManageQrComponent,['Future date only next 5 days are allowed','Date should be between','Regenerate','SEARCH','RESET','Date','No records']));

@@ -363,8 +363,8 @@ function Planning(props) {
 				<div>
 					<form onSubmit={(e) => submit(e)}>
 						<div className="row   planning-container calc-height  m-0 col-md-12">
-							<div className="col-md-12 px-0 py-4 position-sticky-pc">
-								<h1 className="font-weight-bold   px-0  bitter-italic-normal-medium-24">
+							<div className="col-md-12 py-4 position-sticky-pc px-0">
+								<h1 className="font-weight-bold bitter-italic-normal-medium-24">
 									{t('Add Planning')}
 								</h1>
 							</div>

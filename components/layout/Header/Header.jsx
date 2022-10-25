@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import Translation from '@/Translation';
 function Header(props) {
 	let router = useRouter();
-	const { contextState: { isAuthenticated = 0, uid } } = useContext(UserAuthContext);
+	const { contextState: { isAuthenticated = 0, uid }, updateUserContext } = useContext(UserAuthContext);
 	const { t } = props;
 	const [state, setState] = useState({
 		languages: [{code: 0, language: 'Select'}],
@@ -35,6 +35,7 @@ function Header(props) {
 						setObj['languages'] = result['data'];
 						setObj['profile'] = result['userData'] ? result['userData']['profile_path'] : '';
 						setObj['lang'] = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
+						updateUserContext({openTodosCount: result['userData'] ? result['userData']['openTodosCount'] : 0})
 					} else { console.log('error while fetching header data') }
 				}).catch(error => console.error(error))
 				setState(setObj);
@@ -55,7 +56,7 @@ function Header(props) {
 	return (
 		<div className="custom-position-sticky ">
 			<div className="clip0 d-none d-md-block d-lg-block" />
-			<div className='container px-0'>
+			<div className='container'>
 				<div className="custom-header border-bottom col-md-9 col-lg-11 m-auto border-2 custom-position-sticky px-0 pt-3">
 					<div className="pb-3 col-md-12 p-0">
 						<div className="d-flex row">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import AdditionalDocsOverview  from '../molecules/AdditionalDocsOverview';
+import OtherDocumentsOverview  from '../molecules/OtherDocumentsOverview';
 import EditUpdateAdditionalDoc  from '../molecules/EditUpdateAdditionalDoc';
 import V1DocumentsOverview  from '@/components/V1Document/molecules/V1DocumentsOverview';
 import { fetchAdditionalDocuments } from '@/Services/ApiEndPoints';
@@ -81,6 +82,14 @@ const AdditionalDocsMain = (props) => {
                 onClick={handleTabClick}> V1 documents
               </span>
             </li>}
+          {[1, 2].includes(Number(entityType)) &&
+              <li className='manage-cooperation-tabs'>
+                <span
+                  id = {3}
+                  className={`${selectedTabId === 3 ? styles['underline'] : ''}`}
+                  onClick={handleTabClick}> Other documents
+                </span>
+              </li>}
         </ul>
        </div>
      </div>
@@ -95,12 +104,14 @@ const AdditionalDocsMain = (props) => {
 
   return (
     <div>
-    {state.loaded === true || state.selectedTabId === 2 ?
+    {state.loaded === true || [2, 3].includes(state.selectedTabId) ?
           <div className="col-md-12">
               <h4 className='py-4 font-weight-bold px-0 bitter-italic-normal-medium-24 position-sticky-pc'> {`Manage my documents`} </h4>
               {action === 0 && showTabs()}
 
               {state.selectedTabId === 2  && <V1DocumentsOverview /> }
+
+              {state.selectedTabId === 3  && <OtherDocumentsOverview entityType = {entityType} entityId = {entityId}/> }
 
               {state.selectedTabId === 1 && <> {   action !== 0  ?
                     <EditUpdateAdditionalDoc

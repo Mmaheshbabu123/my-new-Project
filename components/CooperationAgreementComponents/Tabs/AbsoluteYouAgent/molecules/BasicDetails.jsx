@@ -7,6 +7,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import ValidateMessage from '@/atoms/validationError';
 import styles from '../absoluteAgent.module.css';
 import { whoWillSignOptions, languageOptions } from '../../../Definations';
+import Translation  from '@/Translation';
 // import { helpers } from '../../../CooperationAgreementHelper'; //.
 
 
@@ -21,6 +22,7 @@ var consultantArray = [];
 var consultantNumArray = [];
 
 const BasicDetails = (props) => {
+  const {t} = props;
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   var { tab_1, element_status, defaultOptions } = state;
   var { validations } = tab_1;
