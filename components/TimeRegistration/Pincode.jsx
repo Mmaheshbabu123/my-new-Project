@@ -244,7 +244,7 @@ const Pincode = (props) => {
 					<input
 					type="submit"
 					className="btn poppins-medium-18px-next-button shadow-none rounded-0 float-end"
-					value="Submit"
+					value={t("Submit")}
 					style={{  }}
 				/>
 					</div>
@@ -253,4 +253,4 @@ const Pincode = (props) => {
 	);
 };
 
-export default React.memo(Translation(Pincode,['Reset pincode?']));
+export default React.memo(Translation(Pincode,['Reset pincode?',"Submit"]));

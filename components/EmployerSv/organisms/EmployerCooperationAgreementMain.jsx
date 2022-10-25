@@ -4,9 +4,9 @@ import RequestAgreement  from '../molecules/RequestAgreement';
 import styles from '../molecules/EmployerSv.module.css';
 import { fetchCompaniesBasedOnEmployer } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
-
+import Translation from '@/Translation';
 const EmployerCooperationAgreementMain = (props) => {
-
+  const { t } = props;
   const [state, setState] = useState({
       companies: {}
     , overviewData: []
@@ -48,15 +48,15 @@ const EmployerCooperationAgreementMain = (props) => {
     {state.loaded === true ?
          <div className='row'>
             <div className="col-md-12">
-          <h1 className={`${styles['employer-sv-page-title']} page-title bitter-italic-normal-medium-24 position-sticky-pc py-4`}> Manage agreements </h1>
+          <h1 className={`${styles['employer-sv-page-title']} page-title bitter-italic-normal-medium-24 position-sticky-pc py-4`}> {t('Manage agreements')} </h1>
               <OverviewPage state={state} setState={setState} companyLength={state.companies.length}/>
               {state.companies && state.companies.length > 0 &&
                 <RequestAgreement state={state} setState={setState} employer_id = {props.employerid} />}
           </div>
           </div>
-        : <p>Loading...</p>}
+        : <p>{t('Loading...')}</p>}
     </div>
   );
 }
 
-export default React.memo(EmployerCooperationAgreementMain);
+export default React.memo(Translation(EmployerCooperationAgreementMain,['Manage agreements','Loading...']));
