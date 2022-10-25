@@ -49,7 +49,7 @@ function Add_manage_planning(props) {
 				</div>
 			</div>
 			<div className="">
-			<ackToDashboardButton/>	
+			<BackToDashboardButton/>	
 			</div>
 		</div>
 	);
