@@ -194,6 +194,7 @@ const AddSalaryBenefits = (props) => {
 						: ValidationService.emptyValidationMethod(data.occurence);
 				object[i].g_err = ValidationService.emptyValidationMethod(data.granted);
 				object[i].ct_err = ValidationService.emptyValidationMethod(data.coefficient_type);
+				(data.date==null)?data.date=='':'';
 				object[i].date_err = ValidationService.emptyValidationMethod(data.date);
 				
 				if(data.coefficient_type==2){
