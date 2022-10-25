@@ -43,9 +43,9 @@ function Dashboard(props) {
   );
 
   return (
-    <div className="container">
+    <div className="container px-0">
      <div className='row py-4 position-sticky-login'>
-       <div className='col-md-12 px-0'>
+       <div className='col-md-12'>
        <p className="px-0 bitter-italic-normal-medium-24 mt-2">{t('Dashboard')}</p>
        </div>
      </div>

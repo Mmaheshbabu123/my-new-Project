@@ -9,9 +9,11 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { FiDownload } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
+import Translation from '@/Translation';
 const itemsPerPage = 5;
 
 const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props }) => {
+  const {t} = props;
   entityType === 2 ? headers.indexOf('Employer') > -1 ? headers.splice(headers.indexOf('Employer'), 1) : headers : [];
   const router = useRouter();
   const [state, setState] = useState({
@@ -145,7 +147,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
         onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
         type="button"
         className="btn skyblue-bg-color rounded-0 shadow-none col-3 px-0">
-        {`+Add additional document`}
+        {+ t('Add additional document')}
       </button>
       </div>
       }
@@ -176,7 +178,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
              className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
              onClick={() => handleSearch(1)}
            >
-             SEARCH
+             {t('SEARCH')}
            </button>
 
              </div>
@@ -186,7 +188,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
              className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
              onClick={() => handleSearch(0)}
            >
-             RESET
+             {t('RESET')}
            </button>
              </div>
            </div>
@@ -215,7 +217,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
             :  <tbody>
             <tr>
             <td colSpan={8} className="text-center poppins-regular-18px no-records">
-                    No records
+                    {t('No records')}
                   </td>
             </tr>
             </tbody>}
@@ -240,7 +242,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
        <div className='row mt-3 mb-2'>
         <div className='col-md-12'>
          <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn poppins-light-18px text-decoration-underline shadow-none p-0 text-uppercase">
-          {`Back`}
+          {t(`Back`)}
         </button>
         </div>
        </div>
@@ -249,4 +251,4 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
   );
 }
 
-export default AdditionalDocsOverview;
+export default React.memo(Translation(AdditionalDocsOverview,['Add additional document','SEARCH','RESET','No records',`Back`]));

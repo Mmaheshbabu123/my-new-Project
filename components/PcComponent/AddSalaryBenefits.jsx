@@ -173,13 +173,28 @@ const AddSalaryBenefits = (props) => {
 		setObj(object);
 	};
 
+	const setEmpty=(value)=>{
+		if(value==null||value==undefined){
+			value='';
+		}
+		return value;
+	}
 	const validation = () => {
 		var object = [ ...obj ];
 
 		var i = 0,
 			err = 0;
 		object.forEach((data) => {
+			
 			if (data.open == true) {
+				data.coefficient_type=setEmpty(data.coefficient_type);
+				data.value_type=setEmpty(data.value_type);
+				data.value=setEmpty(data.value);
+				data.occurence=setEmpty(data.occurence);
+				data.granted=setEmpty(data.granted);
+				data.date=setEmpty(data.date);
+				data.coefficient_value=setEmpty(data.coefficient_value);
+
 				object[i].vt_err = ValidationService.emptyValidationMethod(data.value_type);
 				object[i].v_err = ValidationService.emptyValidationMethod(data.value);
 				object[i].o_err =
@@ -188,11 +203,17 @@ const AddSalaryBenefits = (props) => {
 						: ValidationService.emptyValidationMethod(data.occurence);
 				object[i].g_err = ValidationService.emptyValidationMethod(data.granted);
 				object[i].ct_err = ValidationService.emptyValidationMethod(data.coefficient_type);
-				object[i].c_err = ValidationService.emptyValidationMethod(data.coefficient_value);
 				object[i].date_err = ValidationService.emptyValidationMethod(data.date);
+				if(data.coefficient_type==2){
+					object[i].c_err = ValidationService.emptyValidationMethod(data.coefficient_value);
 				if (object[i].c_err == '' && object[i].ct_err == '') {
 					object[i].c_err = ValidationService.percentageValidationMethod(data.coefficient_value);
-				}
+			}
+		}
+			else{
+				object[i].c_err='';
+			}
+				
 				if (object[i].v_err == '' && object[i].vt_err == '') {
 					object[i].v_err =
 						data.value_type == '2' ? ValidationService.percentageValidationMethod(data.value) : '';
@@ -449,7 +470,7 @@ const AddSalaryBenefits = (props) => {
 																htmlFor="granted1"
 																className="mb-2 poppins-regular-16px"
 															>
-																<Radio id="granted1" value={0} />
+																<Radio id="granted1" value={1} />
 																{t('Yes')}
 															</label>
 															<br />
@@ -457,7 +478,7 @@ const AddSalaryBenefits = (props) => {
 																htmlFor="granted2"
 																className="mb-3 poppins-regular-16px"
 															>
-																<Radio id="granted2" value={1} />
+																<Radio id="granted2" value={0} />
 																{t('No')}
 															</label>
 														</RadioGroup>
@@ -488,7 +509,7 @@ const AddSalaryBenefits = (props) => {
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="coefficient1" value={1} />
-																{t('Yes')}
+																{t('Based on employee type in the cooperation agreement')}
 															</label>
 															<br />
 															<label
@@ -496,12 +517,12 @@ const AddSalaryBenefits = (props) => {
 																className="mb-3 poppins-regular-16px"
 															>
 																<Radio id="coefficient2" value={2} />
-																{t('No')}
+																{t('Other')}
 															</label>
 														</RadioGroup>
 														<br />
 														<p style={{ color: 'red' }}>{element.ct_err}</p>
-														<input
+														{element.coefficient_type==2 && <input
 															type="text"
 															onChange={(e) => {
 																updateCoefficientValue(index, e.target.value);
@@ -510,8 +531,8 @@ const AddSalaryBenefits = (props) => {
 															defaultValue={element.coefficient_value}
 															name="coefficientother"
 															style={{ marginLeft: '0.8rem' }}
-														/>
-														<p style={{ color: 'red' }}>{element.c_err}</p>
+														/>}
+														{element.coefficient_type==2&&<p style={{ color: 'red' }}>{element.c_err}</p>}
 													</div>
 													<div className="row mb-3">
 														{/* {console.log()} */}
@@ -531,7 +552,6 @@ const AddSalaryBenefits = (props) => {
 															id={'date'}
 															placeholder={'date'}
 															handleChange={(e) => {
-																console.log(e.target.value);
 																updateDate(index, e.target.value);
 															}}
 															// minDate={element.open ? year + '-' + month + '-' + day : ''}

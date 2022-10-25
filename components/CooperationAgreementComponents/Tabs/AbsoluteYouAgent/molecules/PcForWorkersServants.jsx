@@ -5,11 +5,12 @@ import MultiSelectField from '@/atoms/MultiSelectField';
 import {MdEdit, MdDelete} from 'react-icons/md';
 import { helpers } from '../AbsoluteAgentHelper';
 import styles from '../absoluteAgent.module.css';
-
+import Translation from '@/Translation';
 const tabStateKey = 'tab_1';
 const workersType  = 1;
 const servantsType = 2;
-const PcForWorkersServants = () => {
+const PcForWorkersServants = (props) => {
+  const { t } = props;
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
   const { pcArray = [], pcLinkedEmployeeTypes = {}, dependecyDataStatus } = state;
   const [ compState, setCompState ] = useState({
@@ -143,7 +144,7 @@ const PcForWorkersServants = () => {
                 isMulti={false}
                 className="col-md-12"
               />
-          {noPcWarning[type] === true && <small style={{ color:'red', display: 'block', marginTop: '10px' }}> This field is required. </small>}
+          {noPcWarning[type] === true && <small style={{ color:'red', display: 'block', marginTop: '10px' }}> {t('This field is required.')} </small>}
         </div>
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title="Selection of employee types (statuut) that can be used" mandotory={true} />
@@ -155,7 +156,7 @@ const PcForWorkersServants = () => {
                 isMulti={true}
                 className="col-md-12"
               />
-              {employeeTyperError[type] === true && <small style={{ color:'red', display: 'block', marginTop: '10px' }}> This field is required. </small>}
+              {employeeTyperError[type] === true && <small style={{ color:'red', display: 'block', marginTop: '10px' }}> {t('This field is required.')} </small>}
         </div>
         <div className={`managetype-save-btn workers_extra_button mb-3 ${styles['pc-worker-servant-add-btn']}`}>
           <button
@@ -262,4 +263,4 @@ const PcForWorkersServants = () => {
   )
 }
 
-export default React.memo(PcForWorkersServants);
+export default React.memo(Translation(PcForWorkersServants,['This field is required.']));

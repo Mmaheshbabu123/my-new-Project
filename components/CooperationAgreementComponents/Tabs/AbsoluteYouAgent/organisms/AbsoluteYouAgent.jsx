@@ -5,7 +5,7 @@ import PcForWorkersServants from '../molecules/PcForWorkersServants';
 import CoefficientPage from '../molecules/CoefficientPage';
 import { getCooperationAgreementsTabWise } from '@/Services/ApiEndPoints';
 import { helpers } from '../../../CooperationAgreementHelper';
-
+import Translation from '@/Translation';
 var startDateAgreement    = 1;
 var absoluteConsultant    = 2;
 var absoluteConsultantNum = 3;
@@ -13,6 +13,7 @@ var activateAddProject    = 4;
 var whoWillSign           = 80;
 var languageField         = 81;
 const AbsoluteYouAgent = (props) => {
+  const { t } = props;
   const { state: {dependecyDataStatus, selectedTabId, renderTabComponents, root_parent_id, workerServentsCompLoaded, absoluteAgentTabRender,filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   useEffect(() => {
     if(!state.loadedTabs.includes(selectedTabId))
@@ -56,9 +57,9 @@ const AbsoluteYouAgent = (props) => {
            <PcForWorkersServants />
            {workerServentsCompLoaded && workerServentsCompLoaded === true ? <CoefficientPage /> : null}
        </div>
-     : <p>Loading...</p>}
+     : <p>{t('Loading...')}</p>}
     </>
   );
 }
 
-export default React.memo(AbsoluteYouAgent);
+export default React.memo(Translation(AbsoluteYouAgent,['Loading...']));

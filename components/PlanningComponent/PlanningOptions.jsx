@@ -14,8 +14,8 @@ function Add_manage_planning(props) {
 	return (
 		<div className="col-md-12">
 			{/* <div className="row mt-5 text-center planning-height "> */}
-			<div className='col-md-12 px-0 py-4 position-sticky-pc'>
-					<h1 className="font-weight-bold   px-0  bitter-italic-normal-medium-24">{t('My Planning')}</h1>
+			<div className='col-md-12 py-4 position-sticky-pc'>
+					<h1 className="font-weight-bold bitter-italic-normal-medium-24">{t('My Planning')}</h1>
 					</div>
 			<div className={`${styles.planningheight} popup-btn col-md-12 row align-items-center justify-content-center m-0`}>
 				<div className='row'>

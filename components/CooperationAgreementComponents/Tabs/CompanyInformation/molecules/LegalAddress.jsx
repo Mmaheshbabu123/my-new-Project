@@ -12,7 +12,9 @@ import ValidateMessage from '@/atoms/validationError';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import updateTabFields from '../updateTabFields';
 import emailValidate from '@/atoms/emailValidate';
+import Translation from '@/Translation';
 const LegalAddress = (props) => {
+  const { t } = props;
   var Language = 22;
   var Labour_regulations_share = 23;
   var Labour_regulations = 24;
@@ -202,4 +204,4 @@ const LegalAddress = (props) => {
   )
 }
 
-export default React.memo(LegalAddress);
+export default React.memo(Translation(LegalAddress,[]));

@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
 	  <div className="container-fluid px-0 main-sec content">
 			<Header />
       <div className=" container-height">
-				<div className='container px-0 '>
+				<div className='container '>
 			{children}
 			</div>
       </div>
