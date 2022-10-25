@@ -33,7 +33,7 @@ const SalaryDetails = (props) => {
       <div key = {val.pc_id} className={`${styles['expand-minimize-div']} poppins-medium-18px`}>
         <div>
           <span onClick={() => expandMinimizeDiv(val.pc_id)} title={expand[val.pc_id] === true ? 'Close' : 'Open'} className={`${styles['expand-minimize-span']} close_open_basic_details`} > {!expand[val.pc_id] ? <FaRegMinusSquare />: <FaRegPlusSquare />} </span>
-          <div  onClick={() => expandMinimizeDiv(val.pc_id)} className={`${styles['expand-minimize-box']}`}> <span> {val.pc_name} </span> </div>
+          <div  onClick={() => expandMinimizeDiv(val.pc_id)} className={`${styles['expand-minimize-box']} mb-2`}> <span> {val.pc_name} </span> </div>
           <span onClick={() => props.onDelete(val.pc_id, index)} title={'Delete'} className={`${styles['expand-minimize-span']} salary_benefit_delete`}> <TiDelete /> </span>
         </div>
         {!expand[val.pc_id] ? <div className={`${styles['salay-content-div']}`}>
@@ -53,7 +53,7 @@ const SalaryDetails = (props) => {
           return (
             <tr key = {salary.salary_id} height="75">
                 <td width="40%" className={`${styles['pc-linked-td']} poppins-medium-18px align-middle`} style={{borderRight: '1px solid lightgray'}}>
-                  <span className="custom_astrick">{ salary.salary_name }</span>
+                  <span className="custom_astrick px-0">{ salary.salary_name }</span>
                 </td>
                 <td width="60%" className={`${styles['pc-linked-td']}`}>
                   {showLinkedInputFields(pcId, salary)}
@@ -74,7 +74,7 @@ const SalaryDetails = (props) => {
       let valueObj = cooperationSalaryLinked[pcId][fieldId] || {};
       let resetObj = salaryObj.mandotory !== 1 && valueObj['checked'] !== 1 ? {value: salaryObj.salary_value, granted: salaryObj.granted } : {};
       return(
-        <div className = {`${styles['salary-input-field-div']}`} >
+        <div className = {`${styles['salary-input-field-div']} px-0 py-4`} >
           {salaryObj.mandotory !== 1 && <>
             <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 1, 0, 0, resetObj)}> {valueObj['checked'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
             <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('checked', pcId, fieldId, 0, 0, 0, resetObj)}> {valueObj['checked'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
@@ -88,9 +88,9 @@ const SalaryDetails = (props) => {
               placeholder={'Value'}
               handleChange={(e)=>handleChange('value', pcId, fieldId, '', 0, e.target)}
             />
-            <span className="position-absolute" style = {{right: '35%', top: '-10%'}}> {salaryObj.value_type === 1 ? '€' : '%'} </span>
+            <span className="position-absolute input-group-text rounded-0 border-0" style = {{right: '33.5%', top: '0.2%', height:'2.6rem'}}> {salaryObj.value_type === 1 ? '€' : '%'} </span>
             <div className="mt-3">
-              <LabelField title="Is the benefit granted in case of absence of the employee" customStyle={{marginBottom: '-25px'}} className="poppins-regular-18px px-0"/>
+              <LabelField title="Is the benefit granted in case of absence of the employee" customStyle={{marginBottom: '-25px'}} className="poppins-regular-18px px-0 mb-1"/>
               <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('granted', pcId, fieldId, 1, 0, 0, resetObj)}> {valueObj['granted'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} Yes </label>
               <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('granted', pcId, fieldId, 0, 0, 0, resetObj)}> {valueObj['granted'] === 0 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} No </label>
             </div>
@@ -131,7 +131,7 @@ const SalaryDetails = (props) => {
             return (
               <tr key = {index} height="75">
                   <td width="40%" className={`${styles['pc-linked-premies-td']} poppins-medium-18px`} style={{borderRight: '1px solid lightgray'}}>
-                    <span>{ label.label }</span>
+                    <span className='px-0'>{ label.label }</span>
                   </td>
                   <td width="60%" className={`${styles['pc-linked-premies-td']} poppins-regular-18px`}>
                     {premiseAutomatischInputFields(pcId, fieldId, label, valueObj)}
@@ -179,7 +179,7 @@ const SalaryDetails = (props) => {
 
   const showDropDown = (pcId, fieldId, label, valueObj, optionsArray) => {
     return(
-      <div >
+      <div className='ps-0 pe-3'>
         <MultiSelectField
             options={optionsArray}
             standards={optionsArray.filter(val => val.value === valueObj[label])}

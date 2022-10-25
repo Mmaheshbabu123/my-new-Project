@@ -99,7 +99,7 @@ const LegalAddress = (props) => {
        <InputField
          id = {data.id}
          type = {'text'}
-         className = {'col-md-11'}
+         className = {'col-md-12'}
          value={tab_2[data.id]}
          isDisabled= {false}
          placeholder={''}
@@ -117,7 +117,7 @@ const LegalAddress = (props) => {
      )
    }else if(data.type === 8) {
      fieldsArray.push(
-       <div className='col-md-11'>
+       <div className='col-md-12'>
        <LabelField title={data.key_name} customStyle = {{display:''}}/>{requiredFields['tab_2'][data.id] && <RequiredField />}
        <MultiSelectField
            id={data.id}

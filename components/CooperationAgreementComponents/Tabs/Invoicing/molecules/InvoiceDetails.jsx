@@ -93,7 +93,7 @@ const InvoiceDetails = (props) => {
          disabled={false}
          handleChange={(obj) => handleSelect(obj, data.id)}
          isMulti={false}
-         className="col-md-6 payment_condition poppins-regular-18px align-self-center"
+         className="col-md-12 payment_condition poppins-regular-18px align-self-center"
        />
        </div>
      )
