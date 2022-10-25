@@ -197,6 +197,7 @@ const AddSalaryBenefits = (props) => {
 				object[i].date_err = ValidationService.emptyValidationMethod(data.date);
 				
 				if(data.coefficient_type==2){
+					(data.coefficient_value==null)?data.coefficient_value='':'';
 					object[i].c_err = ValidationService.emptyValidationMethod(data.coefficient_value);
 				if (object[i].c_err == '' && object[i].ct_err == '') {
 					object[i].c_err = ValidationService.percentageValidationMethod(data.coefficient_value);
