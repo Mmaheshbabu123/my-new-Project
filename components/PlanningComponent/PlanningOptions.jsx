@@ -5,9 +5,7 @@ import { Uniquekey } from '../../Services/GenetateUniqueKey';
 import styles from '../../styles/Planning.module.css'
 // import styles1 from '../../styles/fonts/OFL.txt'
 import Translation from '@/Translation';
-import { useRouter } from 'next/router';
-import { Router } from 'node_modules/next/router';
-import BackToDashboardButton from '../BacktoDashboardButton';
+import BackLink from '../BackLink';
 function Add_manage_planning(props) {
 	const {t}=props;
 	const unique_key = Uniquekey.generate_unique_key();
@@ -49,7 +47,7 @@ function Add_manage_planning(props) {
 				</div>
 			</div>
 			<div className="">
-			<BackToDashboardButton/>	
+			<BackLink path="/"/>
 			</div>
 		</div>
 	);
