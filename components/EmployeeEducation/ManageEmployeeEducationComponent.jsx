@@ -5,8 +5,9 @@ import { updateEmployeesubmitDetails } from '@/Services/ApiEndPoints';
 import LabelField from '@/atoms/LabelField';
 import InputField from '@/atoms/InputTextfield';
 import ValidateMessage from '@/atoms/validationError';
-
+import Translation from '@/Translation';
 const ManageEmployeeEducationComponent = (props) => {
+  const { t } = props;
   console.log(props);
   const router = useRouter();
   const { webformId,submitId } = router.query;
@@ -94,13 +95,13 @@ const ManageEmployeeEducationComponent = (props) => {
               type="button"
               className=" col-2 bg-white border-0 poppins-light-18px text-start  float-sm-right text-left p-0 md-5 text-decoration-underline shadow-none"
               onClick={() => router.back()} >
-              BACK
+              {t('BACK')}
             </button>
             <button
               type="button"
               className=" btn rounded-0 custom-btn px-3  btn-block float-end poppins-medium-18px-save-button shadow-none"
               onClick={handleSubmit} >
-              SAVE
+              {t('SAVE')}
             </button>
         </div>
       </div>
@@ -108,4 +109,4 @@ const ManageEmployeeEducationComponent = (props) => {
 
 }
 
-export default ManageEmployeeEducationComponent;
+export default React.memo(Translation(ManageEmployeeEducationComponent,['BACK','SAVE']));

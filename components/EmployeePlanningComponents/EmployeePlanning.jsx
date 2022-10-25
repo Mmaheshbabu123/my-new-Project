@@ -24,9 +24,9 @@ import {
 	Appointments,
 	AppointmentTooltip
 } from '@devexpress/dx-react-scheduler-material-ui';
-
+import Translation from '@/Translation';
 function EmployeeMonthlyPlanning(props) {
-
+	const { t } = props;
 	const { contextState = {} } = useContext(UserAuthContext);
 
 	/**
@@ -80,17 +80,17 @@ function EmployeeMonthlyPlanning(props) {
 		>
 			<div className='col-md-4 ps-0'>
 			<button type="button" value="Day" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Day'?'custom-btn_highlight':''}`} >
-				Day
+				{t('Day')}
 			</button>		
 			</div>
 			<div className='col-md-4'>
 			<button value="Week" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Week'?'custom-btn_highlight':''}`}>
-				Week
+				{t('Week')}
 			</button>
 			</div>
 			<div className='col-md-4 pe-0'>
 			<button value="Month" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Month'?'custom-btn_highlight':''}`}>
-				Month
+				{t('Month')}
 			</button>
 			</div>
 		</div>
@@ -120,9 +120,9 @@ function EmployeeMonthlyPlanning(props) {
 		<div className="container-fluid p-0">
 			<div className='row position-sticky-pc'>
 				<div className='col-md-12'>
-				<p className="py-4 font-weight-bold bitter-italic-normal-medium-24">My planning</p>
+				<p className="py-4 font-weight-bold bitter-italic-normal-medium-24">{t('My planning')}</p>
 				<div className="mb-3 col-md-12 p-0">
-					<p className="poppins-light-18px">My upcoming plannings</p>
+					<p className="poppins-light-18px">{t('My upcoming plannings')}</p>
 				</div>
 				</div>
 			</div>
@@ -140,24 +140,24 @@ function EmployeeMonthlyPlanning(props) {
 						<thead>
 							<tr className=" skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex  ">
-									Date
+									{t('Date')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
-									Start time
+									{t('Start time')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">
-									End time
+									{t('End time')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">
-									Employer
+									{t('Employer')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
-									Location
+									{t('Location')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
-									Company
+									{t('Company')}
 								</th>
-								<th className=" text-center  align-items-center justify-content-center ">Action</th>
+								<th className=" text-center  align-items-center justify-content-center ">{t('Action')}</th>
 							</tr>
 						</thead>
 						<tbody className='border_employee_planning_table'>
@@ -216,7 +216,7 @@ function EmployeeMonthlyPlanning(props) {
 						className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none"
 						onClick={viewMoreItems}
 					>
-						View more &nbsp;
+						{t('View more')} &nbsp;
 						<AiOutlineArrowRight className="" />
 					</button>
 }
@@ -249,7 +249,7 @@ function EmployeeMonthlyPlanning(props) {
 		</div>
 	);
 }
-export default EmployeeMonthlyPlanning;
+export default React.memo(Translation(EmployeeMonthlyPlanning,['Day','Week','Month','My planning','My upcoming plannings','Date','Start time','End time','Employer','Location','Company','Action','View more']));
 
 // const [ data, setData ] = React.useState([
 // {

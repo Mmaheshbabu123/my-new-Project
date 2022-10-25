@@ -25,6 +25,7 @@ import download_svg from '../molecules/images/download.svg';
 import { HiOutlineExternalLink, } from 'react-icons/hi';
 import { MdDone } from 'react-icons/md';
 import { CgMailOpen } from 'react-icons/cg';
+import Translation from '@/Translation';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import envelope_svg from '../molecules/images/envelope-open-text-solid.svg';
 
@@ -35,6 +36,7 @@ const LABOUR_COOPERATION_TODO = 3;
 
 
 const TodosOverview = ({ props, entityId, entityType, tabId }) => {
+  const { t } = props;
   const router = useRouter();
   const { todos = [], headers = [] } = props;
   const getSelectedStatus = (selectedTab = 1) => {
@@ -473,7 +475,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
                       type="button"
                       className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
                       onClick={() => handleSearchClick(1)}>
-                      SEARCH
+                      {t('SEARCH')}
                     </button>
                   </div>
                   <div className='col-md-6 col-lg-6 pe-0'>
@@ -482,7 +484,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
                       // className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn  w-100 shadow-none"
                       className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
                       onClick={() => handleSearchClick(0)}>
-                      RESET
+                      {t('RESET')} 
                     </button>
                   </div>
                 </div>
@@ -509,7 +511,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
               : <tbody>
                 <tr>
                   <td colSpan={8} className="text-center poppins-regular-18px no-records">
-                    No records
+                    {t('No records')}
                   </td>
                 </tr>
               </tbody>}
@@ -540,4 +542,4 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
   );
 }
 
-export default React.memo(TodosOverview);
+export default React.memo(Translation(TodosOverview,['SEARCH' ,'RESET','No records',`Back`]));
