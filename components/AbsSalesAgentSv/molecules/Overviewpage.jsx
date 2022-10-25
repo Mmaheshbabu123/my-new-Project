@@ -12,8 +12,10 @@ import { APICALL } from '@/Services/ApiServices';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import pdf_icon from '../molecules/images/Pdf.svg';
 import add_icon from '../molecules/images/Add.svg';
+import Translation from '@/Translation';
 const itemsPerPage = 5;
 const Overviewpage = (props) => {
+  const {t} = props;
   const { overviewData } = props;
   const router = useRouter();
 
@@ -60,9 +62,9 @@ const Overviewpage = (props) => {
       <div className='row position-sticky-co-op'>
       <div className='col-md-12'>
       <ul className={`${styles['employer-overview-tabs']}`}>
-        <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
-        <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
-        <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> {t('All')}      </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> {t('Pending')}  </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> {t('Signed')}   </span> </li>
       </ul>
       </div>
       </div>
@@ -141,7 +143,7 @@ const Overviewpage = (props) => {
                   name = {'employer_name'}
                   onChange={(e) => setState({...state, searchTermEmployer: e.target.value,searchColumn:'employer_name'})}
                   onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
-                  placeholder={'Search employer '}
+                  placeholder={t('Search employer ')}
                 />
                 
                   </div>
@@ -154,7 +156,7 @@ const Overviewpage = (props) => {
                   value={state.searchTermCompany}
                   onChange={(e) => setState({...state, searchTermCompany: e.target.value,searchColumn:'company_name'})}
                   onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
-                  placeholder={'Search company '}
+                  placeholder={t('Search company ')}
                   />
                   </div>
                 </div>
@@ -167,7 +169,7 @@ const Overviewpage = (props) => {
                   className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2  skyblue-bg-color w-100 shadow-none"
                   onClick={() => handleSearchClick(1)}
                 >
-                  SEARCH
+                  {t('SEARCH')}
                 </button>
                
                   </div>
@@ -177,7 +179,7 @@ const Overviewpage = (props) => {
                   className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
                   onClick={() => handleSearchClick(0)}
                 >
-                  RESET
+                  {t('RESET')}
                 </button>
                   </div>
                 </div>
@@ -209,7 +211,7 @@ const Overviewpage = (props) => {
             : <tbody>
               <tr>
               <td colSpan={8} className="text-center poppins-regular-18px no-records">
-											No records
+											{t('No records')}
 										</td>
               </tr>
               </tbody>}
@@ -222,7 +224,7 @@ const Overviewpage = (props) => {
 							className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
 							onClick={() =>router.back()}
 						>
-							BACK
+							{t('BACK')}
 						</button>
 					</div>
           </div>
@@ -328,4 +330,4 @@ const Overviewpage = (props) => {
   );
 }
 
-export default React.memo(Overviewpage)
+export default React.memo(Translation(Overviewpage,['All','Pending','Signed','Search employer ','Search company ','SEARCH','RESET','No records','BACK']));

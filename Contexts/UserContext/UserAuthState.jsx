@@ -5,6 +5,7 @@ const UserAuthState = (props) => {
 
   const [contextState, setContextState] = useState({
     hydration: false,
+    openTodosCount: 0,
   });
 
   useEffect(() => {
