@@ -7,6 +7,7 @@ import { saveSalesAgentSvData } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import styles from './AbsAdminSv.module.css';
 import Translation from '@/Translation';
+
 const SalesAgentPopUpComponent = ( props ) => {
   const { state, setState, t } = props;
   const router = useRouter();
@@ -60,7 +61,7 @@ const SalesAgentPopUpComponent = ( props ) => {
           </Modal.Header>
         <Modal.Body>
             <div>
-                <p style={{fontSize: 'larger'}} className='poppins-medium-18px'> Please select sales agent </p>
+                <p style={{fontSize: 'larger'}} className='poppins-medium-18px'> {t('Please select sales agent')} </p>
                 <div style={{margin: '20px 0'}}>
                 {salesAgentArray.map(agent => {
                   return(
@@ -76,7 +77,7 @@ const SalesAgentPopUpComponent = ( props ) => {
                   );
                 })}
                 </div>
-                {warning === true && <small style={{color:'red'}}> Select atleast one agent </small>}
+                {warning === true && <small style={{color:'red'}}> {t('Select atleast one agent ')}</small>}
                 {/*reassign === true && <small style={{color:'red'}}> Do you want to change sales agent? </small>*/}
             </div>
         </Modal.Body>
@@ -91,4 +92,4 @@ const SalesAgentPopUpComponent = ( props ) => {
   );
 }
 
-export default React.memo(SalesAgentPopUpComponent);
+export default React.memo(Translation(SalesAgentPopUpComponent,['Please select sales agent','Select atleast one agent ','Back','Assign']));
