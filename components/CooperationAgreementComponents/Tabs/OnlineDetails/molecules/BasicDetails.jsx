@@ -26,7 +26,7 @@ const BasicDetails = (props) => {
        <InputField
        id = {data.id}
          type = {'text'}
-         className = {'col-md-11 poppins-regular-18px'}
+         className = {'col-md-12 poppins-light-16px'}
          value={tab_4[data.id]}
          isDisabled= {disableFields[data.id] || false}
          placeholder={''}

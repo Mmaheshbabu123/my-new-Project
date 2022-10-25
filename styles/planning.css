@@ -32,15 +32,20 @@
 {
   fill: #4c4d55;
 }
+.basic-details-delete
+{
+  height: 33px !important;
+}
 .salary_benefit_delete svg
 {
   position: relative;
-  top: 0px;
+  top: -4px;
+  float: right;
 }
 .close_open_basic_details svg
 {
-  width: 25px !important;
-  height: 25px !important;
+  width: 20px !important;
+  height: 20px !important;
 }
 .close_open_basic_details svg path:focus,
 .close_open_basic_details svg path:hover
@@ -376,6 +381,10 @@ input[type="checkbox"]
 {
   width: 20%;
 }
+.manage_fun_table th:last-child
+{
+  text-align: center;
+}
 .start_date_edit_link .rmdp-input
 {
   width: 191px !important;
@@ -526,4 +535,16 @@ input[type="checkbox"]
 .employee_width_col
 {
   width: 26%;
+}
+/* .salary_benefits_co_operation_agreement input
+{
+  min-height: 43px;
+}
+.salary-benefits-multiselect
+{
+  height: 43px !important;
+} */
+.basic_online_details input[type="text"]
+{
+  min-height: 43px;
 }
