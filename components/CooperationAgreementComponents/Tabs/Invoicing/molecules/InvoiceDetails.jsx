@@ -9,7 +9,9 @@ import ValidateMessage from '@/atoms/validationError';
 import { invoiceRow1,invoiceRow2} from '../InvoiceFields';
 import styles from '../Invoicing.module.css';
 import { requiredFields} from '../../../RequiredFields';
+import Translation from '@/Translation';
 const InvoiceDetails = (props) => {
+  const { t } = props;
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_6 ,element_status,tab_4} = state;
   let invoiceRow1Data = structuredClone(invoiceRow1);
@@ -120,4 +122,4 @@ return (
  </div>
 )
 }
-export default React.memo(InvoiceDetails);
+export default React.memo(Translation(InvoiceDetails,[]));

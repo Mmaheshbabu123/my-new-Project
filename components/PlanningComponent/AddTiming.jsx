@@ -929,9 +929,9 @@ function Addtiming(props) {
 
 						<div className="col-md-12 mt-4  mb-4">
 							<div className="d-inline">
-								<button type="button" className="btn btn-link text-dark btn-block ">
+								<button type="button" className="btn btn-link text-dark btn-block px-0">
 									<Link href={'/planning/functions/' + props.p_unique_key}>
-										<p className="bg-white border-0 poppins-light-19px text-decoration-underline">
+										<p className="bg-white border-0 poppins-light-19px text-decoration-underline px-0">
 											{t('BACK')}
 										</p>
 									</Link>

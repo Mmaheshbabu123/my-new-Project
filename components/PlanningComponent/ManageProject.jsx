@@ -370,7 +370,7 @@ function ManageProject(props) {
 									{/*----------------------------No records found-------------------------- */}
 									{project.length == 0 && (
 										<tr>
-											<td colSpan={4} className="text-center ">
+											<td colSpan={4} className="text-center py-3 border poppins-regular-18px">
 												{t('No records')}
 											</td>
 										</tr>

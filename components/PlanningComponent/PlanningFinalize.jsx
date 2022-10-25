@@ -276,19 +276,19 @@ const PlanningFinalize = (props) => {
 																						<p className="color_skyblue pt-1 poppins-light-18px">
 																							{val1.employee_name}
 																						</p>
-																						<br />
+																					
 																						<p className="poppins-light-14px">
 																							{val1.employee_type_name}
 																						</p>
-																						<br />
+																				
 																						<p className="poppins-light-14px">
 																							{val1.function_name}
 																						</p>
-																						<br />
+																					
 																						<p className="poppins-light-14px">
 																							{'€ ' + val1.salary}
 																						</p>
-																						<br />
+																					
 																					</div>
 																				)}
 																				<p className="poppins-light-14px">

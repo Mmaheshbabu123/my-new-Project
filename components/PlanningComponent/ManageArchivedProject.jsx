@@ -317,7 +317,7 @@ function ManageArchivedProject(props) {
 									{/*----------------------------No records found-------------------------- */}
 									{archivedproject.length == 0 && (
 										<tr>
-											<td colSpan={4} className="text-center">
+											<td colSpan={5} className="text-center py-3 poppins-regular-18px border">
 												{t('No records')}
 											</td>
 										</tr>

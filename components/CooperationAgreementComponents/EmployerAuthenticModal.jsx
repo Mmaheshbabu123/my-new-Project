@@ -5,8 +5,9 @@ import { authenticateEmployer } from '@/Services/ApiEndPoints';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import customAlert from '@/atoms/customAlert';
 import ValidateMessage from '@/atoms/validationError';
-
+import Translation from '@/Translation';
 const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
+  const { t } = props;
   const [state, setState] = useState({
     password: '',
     showPassword: false,
@@ -71,17 +72,17 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
    <div>
      <Modal size={'lg'} show={props.authenticModal} onHide={handleClose} backdrop="static" keyboard={false} >
          <Modal.Header closeButton style={{paddingLeft: '30%'}}>
-           <Modal.Title> Authenticate employer </Modal.Title>
+           <Modal.Title> {t('Authenticate employer')} </Modal.Title>
          </Modal.Header>
        <Modal.Body>
          <div className=' col-md-9 m-auto'>
             <div className="mb-3">
-               <label htmlFor="inputEmail" className="form-label">Email address</label>
+               <label htmlFor="inputEmail" className="form-label">{t('Email address')}</label>
                <input type="email" disabled value={props.employerMail} className="form-control" id="inputEmail" aria-describedby="emailHelp" />
             </div>
 
             <div className="mb-3 position-relative">
-               <label htmlFor="inputPassword" className="form-label">Password</label>
+               <label htmlFor="inputPassword" className="form-label">{t('Password')}</label>
                <input onChange={passwordChange} type={state.showPassword ? "text" : "password"} className="form-control" style={{paddingBottom: '5px' }} id="inputPassword" />
                <span  style={passwordEyeIconStyle} className="span-action-icons" onClick={() => setState({...state, showPassword: !state.showPassword})}> {state.showPassword === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />} </span>
                {state.invalidUser === true && <ValidateMessage style={{margin:0}} text = {'You have entered an invalid password'}/>}
@@ -89,7 +90,7 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
             </div>
 
             <div className='text-end my-4'>
-              <p className='popup-back-btn' onClick={handleClose}> Cancel </p>
+              <p className='popup-back-btn' onClick={handleClose}> {t('Cancel')} </p>
               <button className="btn btn-secondary" type="submit" onClick={(e) => state.spinner === false ? handleAuthentic(e) : null}>
                 <span className={state.spinner === true ? "spinner-border spinner-border-sm mx-2" : ''} role="status" aria-hidden="true"></span>
                 {state.spinner === true ? 'Authenticating...' : 'Authenticate'}
@@ -104,4 +105,4 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
 
 }
 
-export default React.memo(EmployerAuthenticModal)
+export default React.memo(Translation(EmployerAuthenticModal,['Authenticate employer','Email address','Password','Cancel']));
