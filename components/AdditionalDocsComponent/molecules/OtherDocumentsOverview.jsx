@@ -16,7 +16,7 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
     rows: [],
     filterRows: [],
     headers: ['Document', 'Employer', 'Company', 'Actions'],
-    employerSearchTerm: '',
+    titleSearchTerm: '',
     companySearchTerm: '',
     currentItems: [],
     pageCount: 0,
@@ -45,13 +45,13 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
 
 
   const handleSearchClick = (search = 0) => {
-    let { rows, employerSearchTerm, companySearchTerm } = state;
+    let { rows, titleSearchTerm, companySearchTerm } = state;
     let filterRows = [];
-    if(search && (employerSearchTerm || companySearchTerm)) {
+    if(search && (titleSearchTerm || companySearchTerm)) {
       filterRows = rows.filter((item) => {
         let status = true;
-        if(employerSearchTerm)
-          status = `${item['employer_name']}`.toLowerCase().toString().indexOf(employerSearchTerm.toLowerCase().toString()) !== -1;
+        if(titleSearchTerm)
+          status = `${item['title']}`.toLowerCase().toString().indexOf(titleSearchTerm.toLowerCase().toString()) !== -1;
         if(status && companySearchTerm)
           status = `${item['company_name']}`.toLowerCase().toString().indexOf(companySearchTerm.toLowerCase().toString()) !== -1;
        return status;
@@ -59,9 +59,9 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
     } else {
       filterRows = rows;
       companySearchTerm = '';
-      employerSearchTerm = '';
+      titleSearchTerm = '';
     }
-    setState({ ...state, companySearchTerm, employerSearchTerm,
+    setState({ ...state, companySearchTerm, titleSearchTerm,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -146,7 +146,7 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
 
   const searchTextField = (key, placeholder) => {
     return(
-        <div className='col-md-3' >
+        <div className='col-md-6' >
         <input
           type="text"
           value={state[key]}
@@ -169,7 +169,7 @@ console.log(state);
        <div className='row'>
        <div className='col-md-9'>
          <div className='row'>
-         {searchTextField('employerSearchTerm', 'employee')}
+         {searchTextField('titleSearchTerm', 'title')}
          {searchTextField('companySearchTerm', 'company')}
          </div>
        </div>
