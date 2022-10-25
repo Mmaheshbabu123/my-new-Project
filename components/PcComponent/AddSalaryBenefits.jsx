@@ -173,6 +173,12 @@ const AddSalaryBenefits = (props) => {
 		setObj(object);
 	};
 
+	const setEmpty=(value)=>{
+		if(value==null||value==undefined){
+			value='';
+		}
+		return value;
+	}
 	const validation = () => {
 		var object = [ ...obj ];
 
@@ -181,12 +187,15 @@ const AddSalaryBenefits = (props) => {
 		object.forEach((data) => {
 			
 			if (data.open == true) {
-				(data.coefficient_value==null)?
-						data.coefficient_value='':'';
+				data.coefficient_type=setEmpty(data.coefficient_type);
+				data.value_type=setEmpty(data.value_type);
+				data.value=setEmpty(data.value);
+				data.occurence=setEmpty(data.occurence);
+				data.granted=setEmpty(data.granted);
+				data.date=setEmpty(data.date);
+				data.coefficient_value=setEmpty(data.coefficient_value);
+
 				object[i].vt_err = ValidationService.emptyValidationMethod(data.value_type);
-				if(data.value==null){
-					data.value='';
-				}
 				object[i].v_err = ValidationService.emptyValidationMethod(data.value);
 				object[i].o_err =
 					data.occurence == 'e'
@@ -194,11 +203,8 @@ const AddSalaryBenefits = (props) => {
 						: ValidationService.emptyValidationMethod(data.occurence);
 				object[i].g_err = ValidationService.emptyValidationMethod(data.granted);
 				object[i].ct_err = ValidationService.emptyValidationMethod(data.coefficient_type);
-				(data.date==null)?data.date=='':'';
 				object[i].date_err = ValidationService.emptyValidationMethod(data.date);
-				
 				if(data.coefficient_type==2){
-					(data.coefficient_value==null)?data.coefficient_value='':'';
 					object[i].c_err = ValidationService.emptyValidationMethod(data.coefficient_value);
 				if (object[i].c_err == '' && object[i].ct_err == '') {
 					object[i].c_err = ValidationService.percentageValidationMethod(data.coefficient_value);
