@@ -90,7 +90,7 @@ const Indexationofsalary = (props) => {
 	useEffect(
 		() => {
 			if (!router.isReady) return;
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/getAllPartiairComites', 'GET')
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getAllPartiairComites', 'GET')
 				.then((result) => {
 					if (result) {
 						// console.log(result);

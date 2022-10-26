@@ -12,6 +12,7 @@ import Image from 'next/image';
 import UpdatePlanningIcon from '../images/Update-planning.svg';
 import Pagination from '../PcComponent/Pagination';
 import Translation from '@/Translation';
+import BackLink from '../BackLink';
 function ManageProject(props) {
 	const {t}=props;
 	const router = useRouter();
@@ -403,15 +404,7 @@ function ManageProject(props) {
 				</div>
 				{/*---------------Back to dashobard redirection------------------ */}
 				<div className="text-start col-md-6">
-					<button
-						type="button"
-						className="bg-white border-0 poppins-light-18px float-sm-right mt-4 mb-2 px-0 text-decoration-underline d-inline-block"
-						onClick={() => {
-							window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-						}}
-					>
-						{t('BACK')}
-					</button>
+					<BackLink path={'/'}/>
 				</div>
 			</form>
 			{/* Delete popup */}
@@ -426,4 +419,4 @@ function ManageProject(props) {
 		</div>
 	);
 }
-export default React.memo(Translation(ManageProject,["Project name","Location","Address",'SEARCH','RESET','Project name','Location','Address','Action','No records','BACK']));
+export default React.memo(Translation(ManageProject,["Project name","Location","Address",'SEARCH','RESET','Project name','Location','Address','Action','No records']));
