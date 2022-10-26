@@ -11,6 +11,7 @@ import Popup from './Popup';
 import ReactPaginate from 'react-paginate';
 import Pagination from './Pagination';
 import Translation from '@/Translation';
+import BackLink from '../BackLink';
 /**
  * this will project all the partire committee's data.
  * @returns 
@@ -294,18 +295,7 @@ const ManagePc = (props) => {
 			)}
 			<div className="row m-0 mt-4 mb-2">
 				<div className="col-md-6 p-0">
-					<button
-						type="button"
-						className="bg-white border-0 poppins-regular-18px px-0 text-decoration-underline"
-						onClick={() => {
-							window.location.assign(
-								process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
-									'dashboard?access=administrator&check_logged_in=1'
-							);
-						}}
-					>
-						{t('BACK')}
-					</button>
+					<BackLink path="/"/>
 				</div>
 			</div>
 		</div>
