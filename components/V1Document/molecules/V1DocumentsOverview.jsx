@@ -267,7 +267,7 @@ const V1DocumentsOverview = (props) => {
            onClick={() => handleSearchClick(0)}
          >
            {t('RESET')}
-         </button>'
+         </button>
            </div>
          </div>
        </div>
@@ -330,7 +330,7 @@ const V1DocumentsOverview = (props) => {
      <div className='row'>
        <div className='col-md-12'>
        <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
-        {t(`Back`)}
+        {t('Back')}
       </button>
        </div>
      </div>
@@ -340,4 +340,4 @@ const V1DocumentsOverview = (props) => {
   );
 }
 
-export default React.memo(Translation(V1DocumentsOverview,['Export V1 document','V1 documents','Loading...','SEARCH','RESET','No records','Export',`Back`]));
+export default React.memo(Translation(V1DocumentsOverview,['Export V1 document','V1 documents','Loading...','SEARCH','RESET','No records','Export','Back']));

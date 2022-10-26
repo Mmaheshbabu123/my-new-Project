@@ -45,7 +45,7 @@ const Pincode = (props) => {
 			var p_unique_key = router.query.p_unique_key;
 			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '')
 			 {
-				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/hasPincode/' + contextState.uid, 'GET')
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/hasPincode/' + contextState.uid, 'GET')
 					.then((result) => {
 						setUid(contextState.uid);
 						if (result != 999) {
@@ -99,7 +99,7 @@ const Pincode = (props) => {
 	const Submit = (event) => {
 		event.preventDefault();
 		if(validate(otp,otp1)){
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/pincodegeneration/' + uid+'?pincode='+otp1, 'GET')
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/pincodegeneration/' + uid+'?pincode='+otp1, 'GET')
 					.then((result) => {
 						if (result == 200) {
 							router.push('/pincode/options');

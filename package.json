@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "PORT=3000 next start",
+    "start": "PORT=3001 next start",
     "lint": "next lint",
     "build:css": "postcss styles/tailwind.css -o styles/main.css",
     "build:watch": "postcss styles/tailwind.css -o styles/main.css --watch",
@@ -33,6 +33,7 @@
     "react-bootstrap": "^2.0.2",
     "react-bootstrap-icons": "^1.8.2",
     "react-calendar": "^3.5.0",
+    "react-collapsible": "^2.10.0",
     "react-confirm-alert": "^3.0.2",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.1.0",

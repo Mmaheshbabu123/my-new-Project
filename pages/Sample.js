@@ -12,7 +12,7 @@ const Sample = (props) => {
 
 	const [state, setState] = useState({ 'languages': [], 'lang': '' });
 	useEffect(() => {
-	  let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + 'api/get_languages';
+	  let url = process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/api/get_languages';
 	    APICALL.service(url, 'GET')
 	      .then((result) => {
 	        if (result['status'] == 200) {

@@ -147,7 +147,7 @@ const LinkCoeffEmpComponent = (props) => {
       </>
     )
   }
-
+  
   if (SERVER_SIDE_RENDERING)
     return <>
       <div className="row">
@@ -163,9 +163,9 @@ const LinkCoeffEmpComponent = (props) => {
           <div className='col-md-7 col-lg-9'>
 
           <div className='row'>
-          {state.lowHighValidation.length > 0 &&
+          {state.lowHighValidation !== undefined && state.lowHighValidation.length > 0 &&
             <small className="col-md-12 my-2 text-danger text-left error_text">
-              {t(`Please change the highlighted low and high values, low value should be less than high value (Low < High).`)}
+              {t('Please change the highlighted low and high values, low value should be less than high value Low < High.')}
             </small>}
           {state.emptyDataWarning === true &&
             <small className="col-md-12 my-2 text-danger text-left error_text">
@@ -220,5 +220,5 @@ const LinkCoeffEmpComponent = (props) => {
 }
 
 export default React.memo(Translation(LinkCoeffEmpComponent,['Select paritair comite','Select paritair comite','Link coefficients to employee types','Choose paritair comite',
-`Please change the highlighted low and high values, low value should be less than high value (Low < High).``Please fill all coefficient fields.`,`Value should be in between 0 to 10.`,
+'Please change the highlighted low and high values, low value should be less than high value (Low < High).',`Please fill all coefficient fields.`,`Value should be in between 0 to 10.`,
 `Default value should be in between low and high values.`,`Please enter proper values.`,`BACK`,`SAVE`]));

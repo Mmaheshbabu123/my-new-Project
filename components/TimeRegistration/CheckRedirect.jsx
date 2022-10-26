@@ -19,7 +19,7 @@ const CheckRedirect = (props) => {
 			//get the user id from the local storage.
 			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '') {
 				//sending the api to check weather the user have pincode or not.
-				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + contextState.uid, 'GET')
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/hasPincode/' + contextState.uid, 'GET')
 					.then((result) => {
 						if (result == 999) {
 							//if the user don't have the pincode redirecting him to the generate pincode page.
