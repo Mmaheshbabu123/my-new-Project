@@ -10,14 +10,14 @@ import { PcContext } from '../../Contexts/PcContext';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import Translation from '@/Translation';
 
-
 let dateObj = new Date();
 let month = dateObj.getUTCMonth() + 1; //months from 1-12
 let day = dateObj.getUTCDate() + 1;
 var year = dateObj.getUTCFullYear() - 1;
 
-const ViewSalaryBenefits = ( props ) => {
+const ViewSalaryBenefits = (props) => {
 	const { key, t } = props;
+	
 	const {
 		pc_unique_key,
 		setPc_unique_key,
@@ -40,7 +40,7 @@ const ViewSalaryBenefits = ( props ) => {
 	} = useContext(PcContext);
 
 	const router = useRouter();
-    const { contextState = {} } = useContext(UserAuthContext);
+	const { contextState = {} } = useContext(UserAuthContext);
 	const [ obj, setObj ] = useState([]);
 	const inputRef = useRef({});
 	const [ valuetype, setValueType ] = useState(0);
@@ -50,31 +50,33 @@ const ViewSalaryBenefits = ( props ) => {
 	const [ granted, setGranted ] = useState();
 	const [ mandatory, setMandatory ] = useState();
 	const [ uid, setUid ] = useState(0);
-	const [ onlyview,setOnlyview]= useState(true);
+	const [ onlyview, setOnlyview ] = useState(true);
 
-	useEffect(() => {
-		const {k=''} = router.query;
-		
-		if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
-			setUid(contextState.uid);
-		}
+	useEffect(
+		() => {
+			const { k = '' } = router.query;
 
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/salary-benfits/' + k, 'GET')
-			.then((result) => {
-				if (result.data != undefined || result.data != null) {
-					console.log(result.data);
-					if (typeof result.data == 'object') {
-						var propertyValues = Object.values(result.data);
-						setObj(propertyValues);
-					} else {
-						setObj(result.data);
+			if (contextState.uid != null && contextState.uid != undefined && contextState.uid != '') {
+				setUid(contextState.uid);
+			}
+
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/salary-benfits/' + k, 'GET')
+				.then((result) => {
+					if (result.data != undefined || result.data != null) {
+						console.log(result.data);
+						if (typeof result.data == 'object') {
+							var propertyValues = Object.values(result.data);
+							setObj(propertyValues);
+						} else {
+							setObj(result.data);
+						}
 					}
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, [ router.isReady]
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		},
+		[ router.isReady ]
 	);
 
 	//change the value type
@@ -100,18 +102,15 @@ const ViewSalaryBenefits = ( props ) => {
 		return V;
 	};
 
-	
-	const Submit = (e) => {
-		
-	};
-	
+	const Submit = (e) => {};
+
 	const rows = [];
 	obj.forEach((element, index) => {
 		rows.push(
 			<div className="mt-3">
 				<div className="m-2">
 					<div className="row">
-						<div className={"mt-4 px-0"} >
+						<div className={'mt-4 px-0'}>
 							<input
 								type="checkbox"
 								checked={element.open == true}
@@ -141,28 +140,64 @@ const ViewSalaryBenefits = ( props ) => {
 									<div className="accordion-body">
 										<div>
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-3' : "col-md-12"} >
+												<div className={pc_view_type == 'addpc' ? 'col-md-3' : 'col-md-12'}>
 													<input
 														type="checkbox"
 														disabled={onlyview}
-														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input me-2 rounded-0"} 
+														className={
+															pc_view_type == 'addpc' ? (
+																'form-check-input ms-1 me-2 rounded-0'
+															) : (
+																'form-check-input me-2 rounded-0'
+															)
+														}
 														checked={element.mandatory === true}
-														
 													/>
-														<label className="form-check-label" htmlFor="flexCheckDefault">
-															<p className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>{t('Is this mandatory?')}</p>
-														</label>
+													<label className="form-check-label" htmlFor="flexCheckDefault">
+														<p
+															className={
+																pc_view_type == 'addpc' ? (
+																	'poppins-medium-16px'
+																) : (
+																	'poppins-medium-14px'
+																)
+															}
+														>
+															{t('Is this mandatory?')}
+														</p>
+													</label>
 												</div>
-												<div  className={pc_view_type == 'addpc' ? 'col-md-9' : "col-md-12 d-flex align-items-baseline"}>
+												<div
+													className={
+														pc_view_type == 'addpc' ? (
+															'col-md-9'
+														) : (
+															'col-md-12 d-flex align-items-baseline'
+														)
+													}
+												>
 													<input
 														type="checkbox"
 														disabled={onlyview}
-														className={pc_view_type == 'addpc' ? 'form-check-input ms-1 me-2 rounded-0' : "form-check-input rounded-0"} 
+														className={
+															pc_view_type == 'addpc' ? (
+																'form-check-input ms-1 me-2 rounded-0'
+															) : (
+																'form-check-input rounded-0'
+															)
+														}
 														value={agent}
 														checked={element.sales_agent === true}
-													
 													/>
-													<label className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>
+													<label
+														className={
+															pc_view_type == 'addpc' ? (
+																'poppins-medium-16px'
+															) : (
+																'poppins-medium-14px'
+															)
+														}
+													>
 														{t('Allow sales agent to update the value during creation of')}
 														{t('cooperation agreement?')}
 													</label>
@@ -170,19 +205,25 @@ const ViewSalaryBenefits = ( props ) => {
 											</div>
 											<br />
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-4' : "col-md-12"} >
+												<div className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-12'}>
 													<div className="row mb-4">
-														<label className={pc_view_type == 'addpc' ? 'poppins-medium-16px' : "poppins-medium-14px"}>
+														<label
+															className={
+																pc_view_type == 'addpc' ? (
+																	'poppins-medium-16px'
+																) : (
+																	'poppins-medium-14px'
+																)
+															}
+														>
 															{t('Salary benefit value')}
 														</label>
 
 														<RadioGroup
-														  disabled={onlyview}
+															disabled={onlyview}
 															name={'valuetype' + index}
-															
 															selectedValue={element.value_type}
 														>
-
 															<label
 																htmlFor="valuetype1"
 																className="mb-2 poppins-regular-16px"
@@ -201,23 +242,32 @@ const ViewSalaryBenefits = ( props ) => {
 														</RadioGroup>
 
 														<p style={{ color: 'red' }}>{element.vt_err}</p>
-														<div style={{display:'flex'}}>
-														<input
-															type="text"
-															disabled={onlyview}
-															value={element.value}
-															name="valuetype"
-														/>
-														 <span className={"input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0"} style={{ marginLeft: '-14px'}}>{element.value_type==2?'%':'€'}</span>
-													</div>
+														<div style={{ display: 'flex' }}>
+															<input
+																type="text"
+																disabled={onlyview}
+																value={element.value}
+																name="valuetype"
+															/>
+															<span
+																className={
+																	'input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0'
+																}
+																style={{ marginLeft: '-14px' }}
+															>
+																{element.value_type == 2 ? '%' : '€'}
+															</span>
+														</div>
 														<p style={{ color: 'red' }}>{element.v_err}</p>
 													</div>
 													<div className="row">
 														<label className="mb-2 poppins-regular-16px">
-															{t('Is the benefit granted in case of absence of the employee?')}
+															{t(
+																'Is the benefit granted in case of absence of the employee?'
+															)}
 														</label>
 														<RadioGroup
-														disabled={onlyview}
+															disabled={onlyview}
 															name={'granted' + index}
 															selectedValue={element.granted}
 														>
@@ -239,16 +289,16 @@ const ViewSalaryBenefits = ( props ) => {
 														</RadioGroup>
 													</div>
 												</div>
-												<div className={pc_view_type == 'addpc' ? 'col-md-4' : "col-md-12 ps-3"} >
+												<div
+													className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-12 ps-3'}
+												>
 													<div className="row mb-4">
 														<label className="mb-2 poppins-regular-16px">
 															{t('Applicable coefficient')}
 														</label>
 														<RadioGroup
-
-disabled={onlyview}
+															disabled={onlyview}
 															name={'coefficient' + index}
-															
 															selectedValue={element.coefficient_type}
 														>
 															<label
@@ -256,7 +306,9 @@ disabled={onlyview}
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="coefficient1" value={1} />
-																{t('Based on employee type in the cooperation agreement')}
+																{t(
+																	'Based on employee type in the cooperation agreement'
+																)}
 															</label>
 															<br />
 															<label
@@ -270,28 +322,37 @@ disabled={onlyview}
 														<br />
 														<p style={{ color: 'red' }}>{element.ct_err}</p>
 														{element.coefficient_type == 2 && (
-														<input
-															type="text"
-															onChange={(e) => {
-																updateCoefficientValue(index, e.target.value);
-															}}
-															className="col-md-11"
-															defaultValue={element.coefficient_value}
-															name="coefficientother"
-															style={{ marginLeft: '0.8rem' }}
-														/>
-													)}
-													{element.coefficient_type == 2 && (
-														<p style={{ color: 'red' }}>{element.c_err}</p>
-													)}
+															<input
+																type="text"
+																onChange={(e) => {
+																	updateCoefficientValue(index, e.target.value);
+																}}
+																className="col-md-11"
+																defaultValue={element.coefficient_value}
+																name="coefficientother"
+																style={{ marginLeft: '0.8rem' }}
+															/>
+														)}
+														{element.coefficient_type == 2 && (
+															<p style={{ color: 'red' }}>{element.c_err}</p>
+														)}
 													</div>
 													<div className="row mb-3">
-														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>{t('Start date')}</label>
+														<label
+															className={
+																pc_view_type == 'addpc' ? (
+																	'mb-3 poppins-regular-16px'
+																) : (
+																	'poppins-regular-16px'
+																)
+															}
+														>
+															{t('Start date')}
+														</label>
 														<DateField
 															id={'date'}
 															isDisabled={onlyview}
 															placeholder={'date'}
-															
 															style={{ marginLeft: '0.8rem' }}
 															className="col-md-11 date_field_salary_benefits"
 															value={element.date}
@@ -299,15 +360,32 @@ disabled={onlyview}
 														<p style={{ color: 'red' }}>{element.date_err}</p>
 													</div>
 												</div>
-												<div className={pc_view_type == 'addpc' ? 'col-md-4 occurence_col' : "col-md-12 occurence_col ps-3"} >
+												<div
+													className={
+														pc_view_type == 'addpc' ? (
+															'col-md-4 occurence_col'
+														) : (
+															'col-md-12 occurence_col ps-3'
+														)
+													}
+												>
 													<div className="row">
-														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>{t('Occurence')}</label>
+														<label
+															className={
+																pc_view_type == 'addpc' ? (
+																	'mb-3 poppins-regular-16px'
+																) : (
+																	'poppins-regular-16px'
+																)
+															}
+														>
+															{t('Occurence')}
+														</label>
 														<MultiSelectField
 															id={'select_id'}
 															options={options}
 															standards={getOptionObj(element.occurence)}
 															disabled={onlyview}
-															
 															isMulti={false}
 															className="col-md-11"
 														/>
@@ -326,15 +404,10 @@ disabled={onlyview}
 		);
 	});
 	return (
-		<div
-			className=
-					'container-fluid p-0'
-		>
+		<div className="container-fluid p-0">
 			<form onSubmit={Submit}>
-					<h4 className='h5 mt-3' >
-					{t('Salary benefits')}
-					</h4>
-				
+				<h4 className="h5 mt-3">{t('Salary benefits')}</h4>
+
 				{rows}
 				{pc_view_type == 'editpc' ? (
 					<div className="row mt-4">
@@ -377,6 +450,23 @@ disabled={onlyview}
 		</div>
 	);
 };
-export default React.memo(Translation(ViewSalaryBenefits,['Salary','Is this mandatory?','Allow sales agent to update the value during creation of','cooperation agreement?',
-'Salary benefit value','value in','Is the benefit granted in case of absence of the employee?','Yes','No','Applicable coefficient','Start date','Occurence','Salary benefits','SAVE','BACK','SAVE']));
-	
+export default React.memo(
+	Translation(ViewSalaryBenefits, [
+		'Salary',
+		'Is this mandatory?',
+		'Allow sales agent to update the value during creation of',
+		'cooperation agreement?',
+		'Salary benefit value',
+		'value in',
+		'Is the benefit granted in case of absence of the employee?',
+		'Yes',
+		'No',
+		'Applicable coefficient',
+		'Start date',
+		'Occurence',
+		'Salary benefits',
+		'SAVE',
+		'BACK',
+		'SAVE'
+	])
+);
