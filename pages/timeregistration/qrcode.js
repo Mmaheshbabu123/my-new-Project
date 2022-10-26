@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Image from "next/image";
 
-const qrcode = () => {
+const Qrcode = () => {
     const router = useRouter();
     return (
       <div className='row'>                    
@@ -18,4 +18,4 @@ const qrcode = () => {
     );
 }
 
-export default qrcode;
+export default Qrcode;
