@@ -109,15 +109,17 @@ const ViewSalaryBenefits = (props) => {
 		rows.push(
 			<div className="mt-3 view-salary-benefits pe-2">
 				<div className="m-2">
+				<div className='row'>
+					<div className='col-md-12 d-flex ps-1'>
 					<span>
 					<input
 								type="checkbox"
 								checked={element.open == true}
 								disabled={onlyview}
-								className='me-2 rounded-0 form-check-input'
+								className='me-2 rounded-0 form-check-input mt-4'
 							/>
 						</span>
-						<div className="pe-4 col-md-12">
+						<div className="pe-2 col-md-12">
 							<div className="accordion-item rounded-0 add_salary_benefits">
 								<h2 className="accordion-header" id="flush-headingOne">
 									<button
@@ -373,10 +375,11 @@ const ViewSalaryBenefits = (props) => {
 								</div>
 							</div>
 						</div>
-						</div>
 					</div>
 				</div>
-			</div>
+						</div>
+					</div>
+
 		);
 	});
 	return (

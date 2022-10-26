@@ -297,9 +297,10 @@ const AddSalaryBenefits = (props) => {
 								style={{ width: '18px', height: '18px' }}
 							/>
 						</div> */}
-						<div className={pc_view_type == 'addpc' ? 'form-check col-md-12 px-1' : 'col-md-12 row'}>
+						<div className={pc_view_type == 'addpc' ? 'form-check col-md-12 px-1' : 'col-md-12 row pe-0'}>
 								
-							<div className='col-md-12 d-flex'>
+							<div 
+							className={pc_view_type == 'addpc' ? 'col-md-12 d-flex' : 'col-md-12 d-flex pe-0'}>
 								<span >
 								<input
 									type="checkbox"
@@ -692,7 +693,6 @@ const AddSalaryBenefits = (props) => {
 		</div>
 	);
 };
-<<<<<<< HEAD
 export default React.memo(
 	Translation(AddSalaryBenefits, [
 		'Salary',
@@ -715,8 +715,3 @@ export default React.memo(
 		'SAVE'
 	])
 );
-=======
-export default React.memo(Translation(AddSalaryBenefits, ['Salary', 'Is this mandatory?', 'Allow sales agent to update the value during creation of',
-	'cooperation agreement?', 'Salary benefit value', 'value in €', 'value in %', 'Is the benefit granted in case of absence of the employee?', 'Yes', 'No',
-	'Applicable coefficient', 'Start date', 'Occurence', 'Edit salary benefits', 'Salary benefits', 'SAVE', 'BACK', 'SAVE']));
->>>>>>> abs_pcp_frontend_design_oct_25_2
