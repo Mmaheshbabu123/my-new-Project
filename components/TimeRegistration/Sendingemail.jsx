@@ -35,7 +35,7 @@ const Pincode = () => {
 
 			var p_unique_key = router.query.p_unique_key;
 			if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
-				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/forgot-pin/' + uid, 'GET')
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/forgot-pin/' + uid, 'GET')
 					.then((result) => {
 						if (result) {
 							setHasPin(false);

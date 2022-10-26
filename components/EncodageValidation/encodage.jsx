@@ -127,7 +127,7 @@ function EncodageValidation(props) {
 						<td>{element.starttime}</td>
 						<td style={{ width: '149px' }}>
 							<input
-								type="text"
+								type="datetime-local"
 								name="name"
 								style={{ width: '50%' }}
 								value={element.wstart}
