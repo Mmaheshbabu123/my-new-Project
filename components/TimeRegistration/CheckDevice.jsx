@@ -2,13 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-import {isMobile} from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 
 
-const checkDevice = () => {
+const CheckDevice = () => {
 
     const router = useRouter();
+
 	const { contextState = {} } = useContext(UserAuthContext);
 	
     var q=<h1>Loading...........</h1>
@@ -23,4 +24,4 @@ const checkDevice = () => {
 	);
 };
 
-export default checkDevice;
+export default CheckDevice;
