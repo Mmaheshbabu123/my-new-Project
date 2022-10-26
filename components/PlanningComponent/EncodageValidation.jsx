@@ -2,12 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { GrValidate } from 'react-icons/gr';
 import { BiRotateRight } from 'react-icons/bi';
 import { APICALL } from '../../Services/ApiServices';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import { fetchEncodageDeatils } from '../../Services/ApiEndPoints';
 import Translation from '@/Translation';
 function EncodageValidation(props) {
     const {t}=props;
+    const { contextState = {} } = useContext(UserAuthContext);
+    const [ companies,setCompanies]=useState();
+    const [ locations,setLocations]=useState();
     useEffect(
         () => {
+            if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
+				setUid(contextState.uid);
+			}
             APICALL.service(fetchEncodageDeatils, 'GET')
                 .then((result) => {
                     setData(result.data);
