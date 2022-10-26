@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState,useContext } from 'react';
+import React, { Component, useEffect, useState, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { APICALL } from '../../Services/ApiServices';
 import { getEmployeerCompanylist, getWeeklyPlanning } from '../../Services/ApiEndPoints';
@@ -11,11 +11,11 @@ import Translation from '@/Translation';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import DraftPlanning from '@/components/PlanningComponent/DraftPlanning';
 import { useRouter } from 'next/router';
-import BacktoDashboardButton from '../BacktoDashboardButton';
+import BackLink from '../BackLink';
 
 function WeeklyPlanning(props) {
 	const router = useRouter();
-	const {t}=props;
+	const { t } = props;
 	const { contextState = {} } = useContext(UserAuthContext);
 	const [ showview, setShowview ] = useState(false);
 	const [ planning, setPlanning ] = useState([]);
@@ -34,15 +34,14 @@ function WeeklyPlanning(props) {
 	const [ styleEdit, setStyleEdit ] = useState('col-md-12');
 	const [ activeTab, setActiveTab ] = useState(1);
 
-
-	useEffect(()=>{
-
-		if(router.query.type == 'draft'){
-			setActiveTab(2)
-			
-		}
-
-	},[router])
+	useEffect(
+		() => {
+			if (router.query.type == 'draft') {
+				setActiveTab(2);
+			}
+		},
+		[ router ]
+	);
 
 	useEffect(
 		() => {
@@ -145,12 +144,14 @@ function WeeklyPlanning(props) {
 			<div className="row">
 				<div className="row position-sticky-pc">
 					<div className="col-md-12">
-						<p className=" py-4 font-weight-bold   bitter-italic-normal-medium-24">{t('Weekly planning')}</p>
+						<p className=" py-4 font-weight-bold   bitter-italic-normal-medium-24">
+							{t('Weekly planning')}
+						</p>
 						{activeWeek &&
 						activeWeek.length > 0 && (
 							<p className=" poppins-light-18px pb-3">
-								{t('For the week of Monday from')} {activeWeek[0].split('-').reverse().join('-')} {t('to sunday')}{' '}
-								{activeWeek[6].split('-').reverse().join('-')}
+								{t('For the week of Monday from')} {activeWeek[0].split('-').reverse().join('-')}{' '}
+								{t('to sunday')} {activeWeek[6].split('-').reverse().join('-')}
 							</p>
 						)}
 					</div>
@@ -159,8 +160,12 @@ function WeeklyPlanning(props) {
 					<div className="d-inline ">
 						<button
 							type="button"
-							className={`btn  btn my-2 ${activeTab == 1?"skyblue-bg-color":"btn-bg-gray-medium"} border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln  px-3 btn-block shadow-none rounded-0 "`}
-							onClick={() =>{setActiveTab(1)}}
+							className={`btn  btn my-2 ${activeTab == 1
+								? 'skyblue-bg-color'
+								: 'btn-bg-gray-medium'} border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln  px-3 btn-block shadow-none rounded-0 "`}
+							onClick={() => {
+								setActiveTab(1);
+							}}
 						>
 							{t('Planning view')}
 						</button>
@@ -168,9 +173,12 @@ function WeeklyPlanning(props) {
 					<div className=" ">
 						<button
 							type="submit"
-							className={`btn  my-2 border-0 px-3  btn-block ${activeTab == 2?"skyblue-bg-color":"btn-bg-gray-medium"} add-pln poppins-medium-18px shadow-none rounded-0`}
-							onClick={() =>{setActiveTab(2)}}
-
+							className={`btn  my-2 border-0 px-3  btn-block ${activeTab == 2
+								? 'skyblue-bg-color'
+								: 'btn-bg-gray-medium'} add-pln poppins-medium-18px shadow-none rounded-0`}
+							onClick={() => {
+								setActiveTab(2);
+							}}
 						>
 							{t('Draft planning')}
 						</button>
@@ -261,209 +269,271 @@ function WeeklyPlanning(props) {
 						<option value="">Project-2</option>
 					</select> */}
 				</div>
-				{activeTab == 1 ?<div>
-				
-				<div className={'mt-2 min-height-weekly-planning'}>
-					{planning || company != '' ? (
-						<div className="row">
-							<div className={styleEdit}>
-								<p className={' bitter-italic-normal-medium-22 text-center table-title-bg py-3 '}>
-									<FaLessThan
-										className="less-grather mx-4"
-										onClick={() => {
-											setWeekCount(weekCount - 1);
-										}}
-									/>{' '}
-									<span
-										onClick={() => {
-											setWeekCount(0);
-										}}
-									>
-										{t('Current week')}
-									</span>{' '}
-									<FaGreaterThan
-										className="less-grather mx-4"
-										onClick={() => {
-											setWeekCount(weekCount + 1);
-										}}
-									/>{' '}
-								</p>
-								<table className="table">
-									<thead className="">
-										{console.log(activeWeek)}
-										{activeWeek &&
-										activeWeek.length > 0 && (
-											<tr className="skyblue-bg-color">
-												<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
-													{t('Monday')}<br />
-													{activeWeek.length > 0 &&
-														activeWeek[0].split('-').reverse().join('-')}
-												</th>
-												<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-													{t('Tuesday')} <br />
-													{activeWeek.length > 0 &&
-														activeWeek[1].split('-').reverse().join('-')}
-												</th>
-												<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-													{t('Wednesday')} <br />
-													{activeWeek.length > 0 &&
-														activeWeek[2].split('-').reverse().join('-')}
-												</th>
-												<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-													{t('Thursday')} <br />
-													{activeWeek.length > 0 &&
-														activeWeek[3].split('-').reverse().join('-')}
-												</th>
-												<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-													{t('Friday')}<br />
-													{activeWeek.length > 0 &&
-														activeWeek[4].split('-').reverse().join('-')}
-												</th>
-												<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
-													{t('Saturday')}<br />
-													{activeWeek.length > 0 &&
-														activeWeek[5].split('-').reverse().join('-')}
-												</th>
-												<th className="  text-center  align-items-center justify-content-center lh-base">
-													{t('Sunday')}<br />
-													{activeWeek.length > 0 &&
-														activeWeek[6].split('-').reverse().join('-')}
-												</th>
-											</tr>
-										)}
-									</thead>
-									<tbody>
-										{Object.keys(planning).length > 0 ? (
-											Object.keys(planning).map((value) => (
-												<tr
-													className="border-bottom table-border-gray equal-width-calc"
-													key={value}
-												>
-													{console.log(planning)}
-													{activeWeek.map((val, key) => (
-														<td className=" table-border-gray font-poppins-light" key={key}>
-															{planning[value].map(
-													(v2, k2) =>
-														v2.some((el) => el.pdate === val) ? (
-															<div>
-																{v2.map(
-																	(val1, key1) =>
-																		val1.pdate == val ? (
-																			<div key={val1.id}>
-																				{key1 == 0 && (
-																					<div>
-																						<div className="row mb-1">
-																						<div className="col-md-9 pe-0">
-																							<p className="employee-weekly-planning">
-																								{val1.employee_name}
-																							</p>
-																						</div>
-																						<div className="color-skyblue my-2 mt-1 text-end col-md-3 ps-0">
-																							{new Date(val1.pdate) >
-																							new Date() ? (
-																								<a>
-																									<MdEdit
-																										className="float-right cursor-pointer"
-																										data-toggle="tooltip"
-																										title="Edit plannig"
-																										onClick={() =>
-																											editplanning(
-																												val1
-																											)}
-																									/>
-																								</a>
-																							) : (
-																								<span className="invisible">
-																									edit
-																								</span>
-																							)}
-																						</div>
-																					</div>
-																				
-																						<p className="poppins-light-14px">
-																							{val1.employee_type_name}
-																						</p>
-																					
-																						<p className="poppins-light-14px">
-																							{val1.function_name}
-																						</p>
-																						
-																						<p className="poppins-light-14px">
-																							{'€ ' + val1.salary}
-																						</p>
-																					
-																					</div>
-																				)}
-																				<p className="poppins-light-14px">
-																					{moment(val1.starttime).format(
-																						'HH:mm'
-																					) +
-																						' to ' +
-																						moment(val1.endtime).format(
-																							'HH:mm'
-																						)}
-																				</p>
-
-																			
-																			</div>
-																		) : (
-																			''
-																		)
-																)}
-															</div>
-														) : (
-															''
-														)
+				{activeTab == 1 ? (
+					<div>
+						<div className={'mt-2 min-height-weekly-planning'}>
+							{planning || company != '' ? (
+								<div className="row">
+									<div className={styleEdit}>
+										<p
+											className={
+												' bitter-italic-normal-medium-22 text-center table-title-bg py-3 '
+											}
+										>
+											<FaLessThan
+												className="less-grather mx-4"
+												onClick={() => {
+													setWeekCount(weekCount - 1);
+												}}
+											/>{' '}
+											<span
+												onClick={() => {
+													setWeekCount(0);
+												}}
+											>
+												{t('Current week')}
+											</span>{' '}
+											<FaGreaterThan
+												className="less-grather mx-4"
+												onClick={() => {
+													setWeekCount(weekCount + 1);
+												}}
+											/>{' '}
+										</p>
+										<table className="table">
+											<thead className="">
+												{console.log(activeWeek)}
+												{activeWeek &&
+												activeWeek.length > 0 && (
+													<tr className="skyblue-bg-color">
+														<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
+															{t('Monday')}
+															<br />
+															{activeWeek.length > 0 &&
+																activeWeek[0].split('-').reverse().join('-')}
+														</th>
+														<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
+															{t('Tuesday')} <br />
+															{activeWeek.length > 0 &&
+																activeWeek[1].split('-').reverse().join('-')}
+														</th>
+														<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
+															{t('Wednesday')} <br />
+															{activeWeek.length > 0 &&
+																activeWeek[2].split('-').reverse().join('-')}
+														</th>
+														<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
+															{t('Thursday')} <br />
+															{activeWeek.length > 0 &&
+																activeWeek[3].split('-').reverse().join('-')}
+														</th>
+														<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
+															{t('Friday')}
+															<br />
+															{activeWeek.length > 0 &&
+																activeWeek[4].split('-').reverse().join('-')}
+														</th>
+														<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
+															{t('Saturday')}
+															<br />
+															{activeWeek.length > 0 &&
+																activeWeek[5].split('-').reverse().join('-')}
+														</th>
+														<th className="  text-center  align-items-center justify-content-center lh-base">
+															{t('Sunday')}
+															<br />
+															{activeWeek.length > 0 &&
+																activeWeek[6].split('-').reverse().join('-')}
+														</th>
+													</tr>
 												)}
-														</td>
-													))}
-												</tr>
-											))
-										) : company != '' ? (
-											<tr className="no-records">
-												<td
-													colSpan={7}
-													className="align-middle text-center poppins-light-18px border"
-													style={{ height: '4rem' }}
-												>
-													{t('No planning for this week.')}
-												</td>
-											</tr>
-										) : (
-											<tr>
-												<td
-													colSpan={7}
-													className="align-middle text-center poppins-light-18px border"
-													style={{ height: '4rem' }}
-												>
-													{t('Select company and location to view planning.')}
-												</td>
-											</tr>
-										)}
-									</tbody>
-								</table>
-							</div>
+											</thead>
+											<tbody>
+												{Object.keys(planning).length > 0 ? (
+													Object.keys(planning).map((value) => (
+														<tr
+															className="border-bottom table-border-gray equal-width-calc"
+															key={value}
+														>
+															{console.log(planning)}
+															{activeWeek.map((val, key) => (
+																<td
+																	className=" table-border-gray font-poppins-light"
+																	key={key}
+																>
+																	{planning[value].map(
+																		(v2, k2) =>
+																			v2.some((el) => el.pdate === val) ? (
+																				<div>
+																					{v2.map(
+																						(val1, key1) =>
+																							val1.pdate == val ? (
+																								<div key={val1.id}>
+																									{key1 == 0 && (
+																										<div>
+																											<div className="row mb-1">
+																												<div className="col-md-9 pe-0">
+																													<p className="employee-weekly-planning">
+																														{
+																															val1.employee_name
+																														}
+																													</p>
+																												</div>
+																												<div className="color-skyblue my-2 mt-1 text-end col-md-3 ps-0">
+																													{new Date(
+																														val1.pdate
+																													) >
+																													new Date() ? (
+																														<a
+																														>
+																															<MdEdit
+																																className="float-right cursor-pointer"
+																																data-toggle="tooltip"
+																																title="Edit plannig"
+																																onClick={() =>
+																																	editplanning(
+																																		val1
+																																	)}
+																															/>
+																														</a>
+																													) : (
+																														<span className="invisible">
+																															edit
+																														</span>
+																													)}
+																												</div>
+																											</div>
 
-							{edit && (
-								<div className="col-md-3">
-									<EditEmployee data={editDate} childtoparent={updateParent} />
+																											<p className="poppins-light-14px">
+																												{
+																													val1.employee_type_name
+																												}
+																											</p>
+
+																											<p className="poppins-light-14px">
+																												{
+																													val1.function_name
+																												}
+																											</p>
+
+																											<p className="poppins-light-14px">
+																												{'€ ' +
+																													val1.salary}
+																											</p>
+																										</div>
+																									)}
+																									<p className="poppins-light-14px">
+																										{moment(
+																											val1.starttime
+																										).format(
+																											'HH:mm'
+																										) +
+																											' to ' +
+																											moment(
+																												val1.endtime
+																											).format(
+																												'HH:mm'
+																											)}
+																									</p>
+																								</div>
+																							) : (
+																								''
+																							)
+																					)}
+																				</div>
+																			) : (
+																				''
+																			)
+																	)}
+																</td>
+															))}
+														</tr>
+													))
+												) : company != '' ? (
+													<tr className="no-records">
+														<td
+															colSpan={7}
+															className="align-middle text-center poppins-light-18px border"
+															style={{ height: '4rem' }}
+														>
+															{t('No planning for this week.')}
+														</td>
+													</tr>
+												) : (
+													<tr>
+														<td
+															colSpan={7}
+															className="align-middle text-center poppins-light-18px border"
+															style={{ height: '4rem' }}
+														>
+															{t('Select company and location to view planning.')}
+														</td>
+													</tr>
+												)}
+											</tbody>
+										</table>
+									</div>
+
+									{edit && (
+										<div className="col-md-3">
+											<EditEmployee data={editDate} childtoparent={updateParent} />
+										</div>
+									)}
+								</div>
+							) : (
+								<div className="col-md-12 week-height align-items-center d-flex justify-content-center mb-4">
+									{t('Select company and location to view planning.')}
 								</div>
 							)}
 						</div>
-					) : (
-						<div className="col-md-12 week-height align-items-center d-flex justify-content-center mb-4">
-							{t('Select company and location to view planning.')}
-						</div>
-					)}
-				</div>
-				</div>:<div><DraftPlanning/></div>}
-				<div className="text-end">
-					<button type="submit" className="btn rounded-0 custom-btn p-0 btn-block float-end ">
-						<BacktoDashboardButton />
-					</button>
+					</div>
+				) : (
+					<div>
+						<DraftPlanning />
+					</div>
+				)}
+
+				<div className="row mt-4 mb-2 col-md-12 m-0">
+					<div className="col-md-6 p-0">
+						<BackLink path="/planning/options" />
+					</div>
+					<div className="col-md-6 p-0">
+						<button
+							type="submit"
+							// className="btn rounded-0 custom-btn px-3 btn-block float-end"
+							className="btn rounded-0 px-3 float-end poppins-medium-18px-next-button shadow-none"
+							onClick={() => {
+								router.push('/');
+							}}
+						>
+							{t('DASHBOARD')}
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	);
 }
-export default React.memo(Translation(WeeklyPlanning,['Weekly planning','For the week of Monday from','to sunday','Planning view','Draft planning','Select company','Select Location','Select cost center','Current week', 'Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday','Sunday' ,'No planning for this week.','Select company and location to view planning.','DASHBOARD']));
+export default React.memo(
+	Translation(WeeklyPlanning, [
+		'Weekly planning',
+		'For the week of Monday from',
+		'to sunday',
+		'Planning view',
+		'Draft planning',
+		'Select company',
+		'Select Location',
+		'Select cost center',
+		'Current week',
+		'Monday',
+		'Tuesday',
+		'Wednesday',
+		'Thrusday',
+		'Friday',
+		'Saturday',
+		'Sunday',
+		'No planning for this week.',
+		'Select company and location to view planning.',
+		'DASHBOARD'
+	])
+);

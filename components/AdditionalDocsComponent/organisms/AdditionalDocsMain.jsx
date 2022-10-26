@@ -82,7 +82,7 @@ const AdditionalDocsMain = (props) => {
                 onClick={handleTabClick}> V1 documents
               </span>
             </li>}
-          {Number(entityType) === 2 &&
+          {[1, 2].includes(Number(entityType)) &&
               <li className='manage-cooperation-tabs'>
                 <span
                   id = {3}

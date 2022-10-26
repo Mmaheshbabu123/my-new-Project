@@ -7,9 +7,10 @@ import MultiSelect from '../SelectComponent';
 import Image from 'next/image';
 import { getAllEmpCoeffAndValueTypes, savePcLinkingData } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
-
+import Translation from '@/Translation';
 var SERVER_SIDE_RENDERING = 1;
 const LinkCoeffEmpComponent = (props) => {
+  const { t } = props;
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
   const { inputRef } = state;
   useEffect(() => {
@@ -133,7 +134,7 @@ const LinkCoeffEmpComponent = (props) => {
   const addMultiSelectTag = () => {
     return (
       <>
-      <p className='my-2 poppins-medium-18px custom_astrick'> Select paritair comite </p>
+      <p className='my-2 poppins-medium-18px custom_astrick'> {t('Select paritair comite')} </p>
       <MultiSelect
         options={state.pcArray}
         standards={state.pcArray.filter(val => val.value === state.selectedPc)}
@@ -153,33 +154,33 @@ const LinkCoeffEmpComponent = (props) => {
         <div className="col-md-12 m-0">
          <div className='py-4 px-0 position-sticky-pc'>
          {/* <h4 className={`sv-cp-page-title  page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4> */}
-         <h4 className={`page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4>
+         <h4 className={`page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> {t('Link coefficients to employee types')}</h4>
          </div>
           <div className='row position-sticky-config-link'>
           <div className="col-md-5 col-lg-3"> {addMultiSelectTag()}
-            {state.pcWarning ? <small style={{ color: 'red' }} className='error_text mt-3'> Choose paritair comite </small> : null}
+            {state.pcWarning ? <small style={{ color: 'red' }} className='error_text mt-3'> {t('Choose paritair comite')} </small> : null}
           </div>
           <div className='col-md-7 col-lg-9'>
 
           <div className='row'>
           {state.lowHighValidation.length > 0 &&
             <small className="col-md-12 my-2 text-danger text-left error_text">
-              {`Please change the highlighted low and high values, low value should be less than high value (Low < High).`}
+              {t(`Please change the highlighted low and high values, low value should be less than high value (Low < High).`)}
             </small>}
           {state.emptyDataWarning === true &&
             <small className="col-md-12 my-2 text-danger text-left error_text">
-              {`Please fill all coefficient fields.`}
+              {t(`Please fill all coefficient fields.`)}
             </small>}
           {state.valueErrorArray.length > 0 &&
             <small className="col-md-12 my-2 text-danger text-left error_text">
-              {`Value should be in between 0 to 10.`}
+              {t(`Value should be in between 0 to 10.`)}
             </small>}
           {state.defaultValueError.length > 0 &&
             <small className="col-md-12 my-2 text-danger text-left error_text">
-              {`Default value should be in between low and high values.`}
+              {t(`Default value should be in between low and high values.`)}
             </small>}
             {state.regExpWarning === true && <small className="col-md-10 my-2 text-danger text-left error_text" id="reg-expression-div">
-              {`Please enter proper values.`}
+              {t(`Please enter proper values.`)}
             </small>}
           </div>
           </div>
@@ -202,12 +203,12 @@ const LinkCoeffEmpComponent = (props) => {
         <div className='col-md-12 row m-0 mt-5 mb-2' style={{  }}>
           <div className='col-md-6 p-0 align-self-center'>
           <button onClick={() => parseInt(props.pcid) ? props.router.back() : props.router.push('/')} type="button" className=" col-2 bg-white  text-start border-0 poppins-regular-18px  float-sm-right text-left p-0 md-5 text-decoration-underline shadow-none">
-            {`BACK`}
+            {t(`BACK`)}
           </button>
           </div>
           <div className='col-md-6 p-0'>
           <button onClick={() => handleSubmit()} type="button" className=" btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none">
-            {`SAVE`}
+            {t(`SAVE`)}
           </button></div>
            </div>
         </div>
@@ -218,4 +219,6 @@ const LinkCoeffEmpComponent = (props) => {
     return <></>
 }
 
-export default LinkCoeffEmpComponent;
+export default React.memo(Translation(LinkCoeffEmpComponent,['Select paritair comite','Select paritair comite','Link coefficients to employee types','Choose paritair comite',
+`Please change the highlighted low and high values, low value should be less than high value (Low < High).``Please fill all coefficient fields.`,`Value should be in between 0 to 10.`,
+`Default value should be in between low and high values.`,`Please enter proper values.`,`BACK`,`SAVE`]));

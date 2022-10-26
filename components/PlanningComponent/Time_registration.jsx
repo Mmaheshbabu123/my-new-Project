@@ -12,7 +12,7 @@ import Link from 'node_modules/next/link';
 import Image from "next/image";
 import Translation from '@/Translation';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
-import BacktoDashboardButton from '../BacktoDashboardButton';
+import BackLink from '../BackLink';
 
 function TimeRegistration(props) {
 	const { t } = props;
@@ -98,7 +98,7 @@ function TimeRegistration(props) {
 					</div>
 				</div>
 				<div className="text-start col-md-6">
-					<BacktoDashboardButton />
+					<BackLink path="/"/>
 				</div>
 			</form>
 

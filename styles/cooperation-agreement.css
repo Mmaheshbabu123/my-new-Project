@@ -210,15 +210,16 @@
   width: 100% !important;
 }
 .type_of_company .react-select-prefix__control ,
-.legal_address input[type="text"]
+.legal_address input[type="text"],
+.company_information .atom-input-field-default
 {
-  min-height: 41px !important;
+  min-height: 43px !important;
   height: 100% !important;
 }
 .legal_address .legal12 input,
 .legal_address .legal13 input
 {
-  width: 84% !important;
+  width: 100% !important;
 }
 .legal_address .legal12
 {

@@ -7,9 +7,11 @@ import { APICALL } from '@/Services/ApiServices';
 import sign_icon from '../molecules/images/cooperation_agreement.svg';
 import pdf_icon from '../molecules/images/Pdf.svg';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import Translation from '@/Translation';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
+  const { t } = props;
   const { state: {  overviewData, salesAgentUpdates } } = props;
 
   /**
@@ -49,9 +51,9 @@ const OverviewPage = (props) => {
       <div className='row position-sticky-co-op'>
         <div className='col-md-12'>
         <ul className={`${styles['employer-overview-tabs']}`}>
-        <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
-        <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
-        <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> {t('All')}      </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> {t('Pending')}  </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> {t('Signed')}   </span> </li>
       </ul>
         </div>
       </div>
@@ -121,7 +123,7 @@ const OverviewPage = (props) => {
                 name = {'employer_name'}
                 onChange={(e) => setCompState({...compState, searchTermCompany: e.target.value})}
                 onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
-                placeholder={'Search employer '}
+                placeholder={t('Search employer ')}
               />
             </div>
             <div className='col-md-3'>
@@ -132,7 +134,7 @@ const OverviewPage = (props) => {
                 className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
                 onClick={() => handleSearchClick(1)}
               >
-                SEARCH
+                {t('SEARCH')}
               </button>
 
                 </div>
@@ -142,7 +144,7 @@ const OverviewPage = (props) => {
                 className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
                 onClick={() => handleSearchClick(0)}
               >
-                RESET
+                {t('RESET')}
               </button>
                 </div>
               </div>
@@ -172,7 +174,7 @@ const OverviewPage = (props) => {
             : <tbody>
             <tr>
             <td colSpan={8} className="text-center poppins-regular-18px no-records">
-                    No records
+                    {t('No records')}
                   </td>
             </tr>
             </tbody>}
@@ -254,11 +256,11 @@ const OverviewPage = (props) => {
         </div>
         )
         :
-      <p style={{marginTop: '20px', textAlign: 'center'}}> {`We notice that you do not have any cooperation agreement for your company/companies,`} <br />
-	      {`please click on "Request agreement" button to request for an agreement.`} </p>}
+      <p style={{marginTop: '20px', textAlign: 'center'}}> {t(`We notice that you do not have any cooperation agreement for your company/companies,`)} <br />
+	      {t(`please click on "Request agreement" button to request for an agreement.`)} </p>}
 
      </div>
   );
 }
 
-export default React.memo(OverviewPage)
+export default React.memo(Translation(OverviewPage,['All','Pending','Signed','Search employer ','SEARCH','RESET','No records',`We notice that you do not have any cooperation agreement for your company/companies`,`please click on "Request agreement" button to request for an agreement.`]));

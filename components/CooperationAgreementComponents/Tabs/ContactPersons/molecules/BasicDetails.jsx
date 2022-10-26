@@ -56,7 +56,7 @@ var Contack_key =  37;
         <div className='mb-3'>
           <span onClick={() => expandMinimizeDiv(val.person_id)} title={expand[val.person_id] === true ? 'Close' : 'Open'} className={`${styles['expand-minimize-span']} close_open_basic_details`} > {!expand[val.person_id] ? <FaRegMinusSquare />: <FaRegPlusSquare />} </span>
           <div  onClick={() => expandMinimizeDiv(val.person_id)} className={`${styles['expand-minimize-box']} poppins-medium-18px p-1 opacity-100-basic-details`}> <span> {val.person_name} </span> </div>
-          <span onClick={() => props.onDelete(val.person_id, index)} title={'Delete'} className={`${styles['expand-minimize-span']} opacity-100-basic-details`}> <TiDelete /> </span>
+          <span onClick={() => props.onDelete(val.person_id, index)} title={'Delete'} className={`${styles['expand-minimize-span']} basic-details-delete`}> <TiDelete /> </span>
         </div>
         {!expand[val.person_id] ? <div className={`${styles['salay-content-div']}`}>
               {showContactContent(val.person_id)}
