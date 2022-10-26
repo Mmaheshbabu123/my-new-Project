@@ -174,7 +174,7 @@ const AddFunction = (props) => {
 		} else {
 			if (errcount == 0) {
 				APICALL.service(
-					process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/storeFunctionEmptypeSalary/' + p_unique_key,
+					process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/storeFunctionEmptypeSalary/' + p_unique_key,
 					'POST',
 					[ employeeobject, ischecked ]
 				)
