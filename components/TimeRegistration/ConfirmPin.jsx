@@ -163,7 +163,7 @@ const Pincode = (props) => {
 		{/* <div className="col-4" /> */}
 		<div className="mt-2 col-md-5 m-auto">
 			<div>
-				<label className='poppins-regular-18 mb-2'>Pincode</label>
+				<label className='poppins-regular-18 mb-2'>{t('Pincode')}</label>
 			</div>
 			<div className='d-flex'>
 			<OTPInput
@@ -243,4 +243,4 @@ const Pincode = (props) => {
 		return (display);
 };
 
-export default React.memo(Translation(Pincode,['Confirm pincode','Link is expired please try again later.']));
+export default React.memo(Translation(Pincode,['Confirm pincode','Pincode','Link is expired please try again later.']));

@@ -11,10 +11,12 @@ import styles from './V1Document.module.css';
 import customAlert from '@/atoms/customAlert';
 import { getLastTwelveMonths } from '@/components/SalaryBenefits/SalaryBenefitsHelpers';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import Translation from '@/Translation';
 const itemsPerPage = 8;
 
 const monthOptions = getLastTwelveMonths();
 const V1DocumentsOverview = (props) => {
+  const { t } = t;
   const [state, setState] = useState({
     loaded: false,
     rows: [],
@@ -177,10 +179,10 @@ const V1DocumentsOverview = (props) => {
     return (
       <Modal size={'lg'} show={state.showPopup} onHide={handleClose} backdrop="static" keyboard={false} >
         <Modal.Header closeButton style={{paddingLeft: '30%'}}>
-          <Modal.Title> Export V1 document </Modal.Title>
+          <Modal.Title> {t('Export V1 document')} </Modal.Title>
         </Modal.Header>
       <Modal.Body>
-        <p> Do you want to export {state.filterRows.length === state.rows.length ? 'all' : 'filtered'} V1 documents </p>
+        <p> Do you want to export {state.filterRows.length === state.rows.length ? 'all' : 'filtered'} {t('V1 documents')} </p>
       </Modal.Body>
       <Modal.Footer>
         <p className={`${styles['popup-back-btn']}`} onClick={handleClose}> Cancel </p>
@@ -195,9 +197,9 @@ const V1DocumentsOverview = (props) => {
 
 
   if(!state.loaded) {
-    return <> Loading... </>
+    return <> {t('Loading...')} </>
   }
-
+  
   const searchTextField = (key, placeholder) => {
     return(
         <div className='col-md-3' >
@@ -254,7 +256,7 @@ const V1DocumentsOverview = (props) => {
            className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color shadow-none w-100"
            onClick={() => handleSearchClick(1)}
          >
-           SEARCH
+           {t('SEARCH')}
          </button>
 
            </div>
@@ -264,8 +266,8 @@ const V1DocumentsOverview = (props) => {
            className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button shadow-none w-100"
            onClick={() => handleSearchClick(0)}
          >
-           RESET
-         </button>
+           {t('RESET')}
+         </button>'
            </div>
          </div>
        </div>
@@ -292,7 +294,7 @@ const V1DocumentsOverview = (props) => {
           : <tbody>
           <tr>
           <td colSpan={8} className="text-center poppins-regular-18px no-records">
-                  No records
+                  {t('No records')}
                 </td>
           </tr>
           </tbody>}
@@ -321,14 +323,14 @@ const V1DocumentsOverview = (props) => {
           className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
           onClick={() => setState({...state, showPopup: true})}
         >
-          Export
+          {t('Export')}
         </button>
     </div>
      </div>
      <div className='row'>
        <div className='col-md-12'>
        <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
-        {`Back`}
+        {t(`Back`)}
       </button>
        </div>
      </div>
@@ -338,4 +340,4 @@ const V1DocumentsOverview = (props) => {
   );
 }
 
-export default React.memo(V1DocumentsOverview)
+export default React.memo(Translation(V1DocumentsOverview,['Export V1 document','V1 documents','Loading...','SEARCH','RESET','No records','Export',`Back`]));

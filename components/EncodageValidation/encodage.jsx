@@ -37,7 +37,7 @@ function EncodageValidation(props) {
 	} = useContext(PcContext);
 
 	useEffect(() => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/get-encodage-data', 'GET')
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data', 'GET')
 			.then((result) => {
 				if (result[0] == 999) {
 					setData(null);
@@ -47,6 +47,7 @@ function EncodageValidation(props) {
 				setCompanies(result[1]);
 				setLocations(result[2]);
 				setConstCenters(result[3]);
+				console.log(result);
 			})
 			.catch((error) => console.error('Error occurred'));
 	}, []);
@@ -70,16 +71,16 @@ function EncodageValidation(props) {
 	};
 
 	const reset = () => {
-		window.location.reload(true);
+		window.location.reload();
 	};
 
 	const filter = () => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/filter-encodage-data', 'POST', [
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/filter-encodage-data', 'POST', 
 			fcompany != '' ? fcompany.value : 0,
 			flocation != '' ? flocation.value : 0,
 			fcostcenter != '' ? fcostcenter.value : 0,
 			fproject != '' ? fproject.value : 0
-		])
+		)
 			.then((result) => {
 				setData(result);
 			})

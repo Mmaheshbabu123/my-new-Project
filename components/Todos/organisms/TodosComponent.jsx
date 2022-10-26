@@ -3,10 +3,11 @@ import TodosOverview from '../molecules/TodosOverview';
 import { getMyTodos } from '@/Services/ApiEndPoints'
 import { APICALL } from '@/Services/ApiServices';
 import customAlert from '@/atoms/customAlert';
-
+import Translation from '@/Translation';
 const itemsPerPage = 6;
 
 const TodosComponent = (props) => {
+  const { t } = props;
   const [state, setState] = useState({
     loaded: false,
     todos: [],
@@ -40,9 +41,9 @@ const TodosComponent = (props) => {
           tabId={props.tabId}
         />
         :
-        <p> Loading... </p>}
+        <p> {t('Loading...')} </p>}
     </div>
   );
 }
 
-export default React.memo(TodosComponent);
+export default React.memo(Translation(TodosComponent,['Loading...']));

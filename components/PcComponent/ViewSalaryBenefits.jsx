@@ -256,7 +256,7 @@ disabled={onlyview}
 																className="mb-2 poppins-regular-16px"
 															>
 																<Radio id="coefficient1" value={1} />
-																{t('Yes')}
+																{t('Based on employee type in the cooperation agreement')}
 															</label>
 															<br />
 															<label
@@ -264,21 +264,26 @@ disabled={onlyview}
 																className="mb-3 poppins-regular-16px"
 															>
 																<Radio id="coefficient2" value={2} />
-																{t('No')}
+																{t('Other')}
 															</label>
 														</RadioGroup>
 														<br />
 														<p style={{ color: 'red' }}>{element.ct_err}</p>
+														{element.coefficient_type == 2 && (
 														<input
-														disabled={onlyview}
 															type="text"
-															
+															onChange={(e) => {
+																updateCoefficientValue(index, e.target.value);
+															}}
 															className="col-md-11"
 															defaultValue={element.coefficient_value}
 															name="coefficientother"
 															style={{ marginLeft: '0.8rem' }}
 														/>
+													)}
+													{element.coefficient_type == 2 && (
 														<p style={{ color: 'red' }}>{element.c_err}</p>
+													)}
 													</div>
 													<div className="row mb-3">
 														<label className={pc_view_type == 'addpc' ? 'mb-3 poppins-regular-16px' : "poppins-regular-16px"}>{t('Start date')}</label>
