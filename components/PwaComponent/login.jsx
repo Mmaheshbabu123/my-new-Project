@@ -95,7 +95,7 @@ const Login = (props) => {
                     <div className="col-md-5">
                         <div className="">
                             <form className="mb-5" onSubmit={submit}>
-                                <div className="mb-4" >
+                                <div className="mb-2" >
                                     <label className="form-label custom_astrick poppins-light-16px">{t('Email address')}</label>
                                     <input type="text" className="form-control rounded-0 shadow-none"
                                         value={state.email}
@@ -103,9 +103,9 @@ const Login = (props) => {
                                         onChange={handleOnChange}
                                     />
                                 </div>
-                                <p className="error mt-2">{state.error_user_name}</p>
+                                <p className="error">{state.error_user_name}</p>
 
-                                <div className="pt-4  position-relative">
+                                <div className="pt-4 position-relative">
                                     <label className="form-label custom_astrick poppins-light-16px">{t('Password')}</label>
                                     <input type="password" className="form-control rounded-0 shadow-none"
                                         value={state.password}
