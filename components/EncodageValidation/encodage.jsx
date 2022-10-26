@@ -88,7 +88,7 @@ function EncodageValidation(props) {
 	};
 
 	const updateValidation = (id) => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/validate-encodage/' + id, 'POST')
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/validate-encodage/' + id, 'POST')
 			.then((result) => {
 				console.log(result);
 			})
@@ -96,7 +96,7 @@ function EncodageValidation(props) {
 	};
 
 	const updateTimes = () => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/filter-encodage-data', 'POST', [
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/filter-encodage-data', 'POST', [
 			fcompany != '' ? fcompany.value : 0,
 			flocation != '' ? flocation.value : 0,
 			fcostcenter != '' ? fcostcenter.value : 0,

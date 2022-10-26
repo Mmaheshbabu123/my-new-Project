@@ -55,7 +55,7 @@ const Pincode = (props) => {
 				userid = Number(loggedInUserId);
 				//sending the api to check weather the user have pincode or not.
 				
-				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/hasPincode/' + loggedInUserId, 'GET')
+				APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/hasPincode/' + loggedInUserId, 'GET')
 					.then((result) => {
 						if (result == 999) {
 							//if the user don't have the pincode redirecting him to the generate pincode page.
@@ -119,7 +119,7 @@ const Pincode = (props) => {
 		validate(otp)
 			? //posting the pincode to the backend storing.
 				APICALL.service(
-					process.env.NEXT_PUBLIC_APP_BACKEND_URL + 'api/planing-by-pincode/' + uid + '?pincode=' + otp,
+					process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/planing-by-pincode/' + uid + '?pincode=' + otp,
 					'GET'
 				)
 					.then((result) => {
