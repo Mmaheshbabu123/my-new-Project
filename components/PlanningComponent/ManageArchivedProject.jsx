@@ -6,6 +6,7 @@ import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import Translation from '@/Translation';
+import BackLink from '../BackLink';
 function ManageArchivedProject(props) {
 	/**
      * Initialise search filter 
@@ -348,21 +349,10 @@ function ManageArchivedProject(props) {
 				</div>
 				{/*---------------Back to dashobard redirection------------------ */}
 				<div className="text-start col-md-6">
-					<button
-						type="button"
-						className="bg-white border-0 poppins-light-18px  float-sm-right mt-5 mb-2 px-0 text-decoration-underline shadow-none"
-						onClick={() => {
-							window.location.assign(
-								process.env.NEXT_PUBLIC_APP_URL_DRUPAL +
-									'dashboard?access=administrator&check_logged_in=1'
-							);
-						}}
-					>
-						{t('BACK')}
-					</button>
+				<BackLink path={'/'}/>
 				</div>
 			</form>
 		</div>
 	);
 }
-export default React.memo(Translation(ManageArchivedProject,['Address','Location',"Project name","Location","Address",'SEARCH','RESET','Project name','No records','BACK']));
+export default React.memo(Translation(ManageArchivedProject,['Address','Location',"Project name","Location","Address",'SEARCH','RESET','Project name','No records']));
