@@ -107,18 +107,17 @@ const ViewSalaryBenefits = (props) => {
 	const rows = [];
 	obj.forEach((element, index) => {
 		rows.push(
-			<div className="mt-3">
+			<div className="mt-3 view-salary-benefits pe-2">
 				<div className="m-2">
-					<div className="row">
-						<div className={'mt-4 px-0'}>
-							<input
+					<span>
+					<input
 								type="checkbox"
 								checked={element.open == true}
 								disabled={onlyview}
-								style={{ width: '18px', height: '18px' }}
+								className='me-2 rounded-0 form-check-input'
 							/>
-						</div>
-						<div className="pe-1">
+						</span>
+						<div className="pe-4 col-md-12">
 							<div className="accordion-item rounded-0 add_salary_benefits">
 								<h2 className="accordion-header" id="flush-headingOne">
 									<button
@@ -140,7 +139,7 @@ const ViewSalaryBenefits = (props) => {
 									<div className="accordion-body">
 										<div>
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-3' : 'col-md-12'}>
+												<div className={pc_view_type == 'addpc' ? "col-md-3" : pc_view_type == 'viewpc' ? "col-md-3" : "col-md-3"} >
 													<input
 														type="checkbox"
 														disabled={onlyview}
@@ -167,15 +166,7 @@ const ViewSalaryBenefits = (props) => {
 														</p>
 													</label>
 												</div>
-												<div
-													className={
-														pc_view_type == 'addpc' ? (
-															'col-md-9'
-														) : (
-															'col-md-12 d-flex align-items-baseline'
-														)
-													}
-												>
+												<div className={pc_view_type == 'addpc' ? "col-md-9" : pc_view_type == 'viewpc' ? "col-md-9" : "col-md-9"}>
 													<input
 														type="checkbox"
 														disabled={onlyview}
@@ -205,7 +196,7 @@ const ViewSalaryBenefits = (props) => {
 											</div>
 											<br />
 											<div className="row">
-												<div className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-12'}>
+												<div className={pc_view_type == 'addpc' ? "col-md-4" : pc_view_type == 'viewpc' ? "col-md-4" : "col-md-4"} >
 													<div className="row mb-4">
 														<label
 															className={
@@ -242,22 +233,16 @@ const ViewSalaryBenefits = (props) => {
 														</RadioGroup>
 
 														<p style={{ color: 'red' }}>{element.vt_err}</p>
-														<div style={{ display: 'flex' }}>
-															<input
-																type="text"
-																disabled={onlyview}
-																value={element.value}
-																name="valuetype"
-															/>
-															<span
-																className={
-																	'input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0'
-																}
-																style={{ marginLeft: '-14px' }}
-															>
-																{element.value_type == 2 ? '%' : '€'}
-															</span>
-														</div>
+														<div style={{display:'flex'}}>
+														<input
+															type="text"
+															disabled={onlyview}
+															value={element.value}
+															name="valuetype"
+															className='px-3'
+														/>
+														 <span className={"input-group-text border-0 bg-white rounded-0 bg-transparent px-0"} style={{ marginLeft: '-30px'}}>{element.value_type==2?'%':'€'}</span>
+													</div>
 														<p style={{ color: 'red' }}>{element.v_err}</p>
 													</div>
 													<div className="row">
@@ -289,9 +274,7 @@ const ViewSalaryBenefits = (props) => {
 														</RadioGroup>
 													</div>
 												</div>
-												<div
-													className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-12 ps-3'}
-												>
+												<div className={pc_view_type == 'addpc' ? "col-md-4" : pc_view_type == 'viewpc' ? "col-md-4" : "col-md-4"} >
 													<div className="row mb-4">
 														<label className="mb-2 poppins-regular-16px">
 															{t('Applicable coefficient')}
@@ -360,15 +343,7 @@ const ViewSalaryBenefits = (props) => {
 														<p style={{ color: 'red' }}>{element.date_err}</p>
 													</div>
 												</div>
-												<div
-													className={
-														pc_view_type == 'addpc' ? (
-															'col-md-4 occurence_col'
-														) : (
-															'col-md-12 occurence_col ps-3'
-														)
-													}
-												>
+												<div className={pc_view_type == 'addpc' ? "col-md-4 occurence_col" : pc_view_type == 'viewpc' ? "col-md-4 occurence_col" : "col-md-4 occurence_col"} >
 													<div className="row">
 														<label
 															className={
@@ -398,6 +373,7 @@ const ViewSalaryBenefits = (props) => {
 								</div>
 							</div>
 						</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -406,8 +382,14 @@ const ViewSalaryBenefits = (props) => {
 	return (
 		<div className="container-fluid p-0">
 			<form onSubmit={Submit}>
-				<h4 className="h5 mt-3">{t('Salary benefits')}</h4>
-
+					<div className='row position-sticky-pc pt-4 pb-2'>
+						<div className='col-md-12'>
+						<h4 className='h5 bitter-italic-normal-medium-24' >
+					{t(' View salary benefits')}
+					</h4>
+						</div>
+					</div>
+				
 				{rows}
 				{pc_view_type == 'editpc' ? (
 					<div className="row mt-4">

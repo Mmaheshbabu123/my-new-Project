@@ -46,16 +46,16 @@ const AddSalaryBenefits = (props) => {
 
 	const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
-	const [ obj, setObj ] = useState([]);
+	const [obj, setObj] = useState([]);
 	const inputRef = useRef({});
-	const [ valuetype, setValueType ] = useState(0);
-	const [ valuev, setValuev ] = useState();
-	const [ agent, setAgent ] = useState();
-	const [ startDate, setStartDate ] = useState(new Date());
-	const [ granted, setGranted ] = useState();
-	const [ mandatory, setMandatory ] = useState();
-	const [ uid, setUid ] = useState(0);
-	const [ key, setKey ] = useState(0);
+	const [valuetype, setValueType] = useState(0);
+	const [valuev, setValuev] = useState();
+	const [agent, setAgent] = useState();
+	const [startDate, setStartDate] = useState(new Date());
+	const [granted, setGranted] = useState();
+	const [mandatory, setMandatory] = useState();
+	const [uid, setUid] = useState(0);
+	const [key, setKey] = useState(0);
 
 	useEffect(
 		() => {
@@ -87,7 +87,7 @@ const AddSalaryBenefits = (props) => {
 					console.error(error);
 				});
 		},
-		[ router.query ]
+		[router.query]
 	);
 
 	//change the value type
@@ -114,62 +114,62 @@ const AddSalaryBenefits = (props) => {
 	};
 
 	const updateMandatory = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].mandatory = value;
 		setObj(object);
 	};
 
 	const updateAgent = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].sales_agent = value;
 		setObj(object);
 	};
 
 	const updateValuetype = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].value_type = value;
 		object[index].value = '';
 		setObj(object);
 	};
 
 	const updateValue = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].value = value;
 		setObj(object);
 	};
 
 	const updateGranted = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].granted = value;
 		setObj(object);
 	};
 
 	const updateCoefficientType = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].coefficient_type = value;
 		setObj(object);
 	};
 
 	const updateCoefficientValue = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].coefficient_value = value;
 		setObj(object);
 	};
 
 	const updateDate = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].date = value;
 		setObj(object);
 	};
 
 	const updateOccurence = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].occurence = value;
 		setObj(object);
 	};
 
 	const updateOpen = (index, value) => {
-		var object = [ ...obj ];
+		var object = [...obj];
 		object[index].open = value;
 		setObj(object);
 	};
@@ -187,7 +187,7 @@ const AddSalaryBenefits = (props) => {
 		return value;
 	};
 	const validation = () => {
-		var object = [ ...obj ];
+		var object = [...obj];
 
 		var i = 0,
 			err = 0;
@@ -258,32 +258,32 @@ const AddSalaryBenefits = (props) => {
 		const uniqkey = 0;
 		key != 0 ? (uniqkey = key) : (uniqkey = pc_unique_key);
 		validation()
-			? APICALL.service(
-					process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/store-salary-benfits/' + uniqkey,
-					'POST',
-					[ obj, uid ]
-				)
-					.then((res) => {
-						if (res == 200) {
-							if (key != 0 || key != undefined) {
-								router.push('/manage-pc');
-							} else {
-								var res1 = sec_completed;
-								res1['emp_type'] = true;
-								setSec_completed(res1);
-								router.push('/manage-pc');
-							}
+			? APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/store-salary-benfits/' + uniqkey, 'POST', [
+				obj,
+				uid
+			])
+				.then((res) => {
+					if (res == 200) {
+						if (key != 0 || key != undefined) {
+							router.push('/manage-pc');
+						} else {
+							var res1 = sec_completed;
+							res1['emp_type'] = true;
+							setSec_completed(res1);
+							router.push('/manage-pc');
 						}
-					})
-					.catch((error) => {})
+					}
+				})
+				.catch((error) => { })
 			: console.log('false validation');
 	};
 
 	const rows = [];
 	obj.forEach((element, index) => {
 		rows.push(
-			<div className="mt-3">
-				<div className="m-2">
+			<div className={pc_view_type == 'addpc' ? 'mt-3 edit_salary_benefits ps-3 ms-3 pe-2' : 'mt-3 edit_salary_benefits'}>
+				
+				<div className="">
 					<div className="row">
 						{/* <div
 							className={pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-3 ps-0' : 'mt-4 px-0'}
@@ -297,26 +297,23 @@ const AddSalaryBenefits = (props) => {
 								style={{ width: '18px', height: '18px' }}
 							/>
 						</div> */}
-						<div
-							className={
-								pc_view_type == 'addpc' ? 'form-check d-inline-flex col-sm-12 px-1' : 'd-flex px-1'
-							}
-						>
-							<span>
+						<div className={pc_view_type == 'addpc' ? 'form-check col-md-12 px-1' : 'col-md-12 row'}>
+								
+							<div className='col-md-12 d-flex'>
+								<span >
 								<input
 									type="checkbox"
 									checked={element.open == true}
+									className='me-2 rounded-0 form-check-input'
 									onChange={(e) => {
 										updateOpen(index, e.target.checked);
 									}}
-									style={{ width: '18px', height: '18px', marginTop: '1.3rem' }}
+									style={{ width: '18px', height: '18px', marginTop:'14px',borderRadius:'0px' }}
 								/>
+								</span>
 								{console.log(element.error)}
-								<Collapsible
-									trigger={t('Salary') + 'verloning - ' + element.name + '﹀'}
-									triggerWhenOpen={t('Salary') + 'verloning - ' + element.name + '︿'}
-									open={element.error}
-								>
+							<div className='border poppins-regular-18px'>
+							<Collapsible trigger={t('Salary') + 'verloning - ' + element.name} triggerWhenOpen={t('Salary') + 'verloning - ' + element.name} open={element.error}>
 									{/* <div className="accordion-item rounded-0 add_salary_benefits w-100 ms-3">
 								<h2 className="accordion-header" id="flush-headingOne">
 									<button
@@ -336,9 +333,9 @@ const AddSalaryBenefits = (props) => {
 									aria-labelledby="flush-headingOne"
 								>
 									<div className="accordion-body"> */}
-									<div>
+									<div className='px-3'>
 										<div className="row">
-											<div className={pc_view_type == 'addpc' ? 'col-md-3' : 'col-md-3'}>
+											<div className={pc_view_type == 'addpc' ? 'col-md-3 ps-2' : 'col-md-3'}>
 												<input
 													type="checkbox"
 													className={
@@ -368,14 +365,22 @@ const AddSalaryBenefits = (props) => {
 													</p>
 												</label>
 											</div>
-											<div className={pc_view_type == 'addpc' ? 'col-md-9' : 'col-md-9 d-flex'}>
+											<div
+												className={
+													pc_view_type == 'addpc' ? (
+														'col-md-9'
+													) : (
+														'col-md-9 d-flex'
+													)
+												}
+											>
 												<input
 													type="checkbox"
 													className={
 														pc_view_type == 'addpc' ? (
 															'form-check-input ms-1 me-2 rounded-0'
 														) : (
-															'form-check-input rounded-0'
+															'form-check-input rounded-0 me-2'
 														)
 													}
 													value={agent}
@@ -401,7 +406,7 @@ const AddSalaryBenefits = (props) => {
 										<br />
 										<div className="row">
 											<div className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-4'}>
-												<div className="row mb-4">
+												<div className="row mb-2">
 													<label
 														className={
 															pc_view_type == 'addpc' ? (
@@ -423,23 +428,22 @@ const AddSalaryBenefits = (props) => {
 													>
 														<label
 															htmlFor="valuetype1"
-															className="mb-2 poppins-regular-16px"
+															className="mb-2 poppins-regular-16px d-flex"
 														>
-															<Radio id="valuetype1" value={1} />
+															<Radio id="valuetype1" value={1} className="me-2"/>
 															{t('value in €')}
 														</label>
-														<br />
 														<label
 															htmlFor="valuetype2"
-															className="mb-3 poppins-regular-16px"
+															className="mb-3 poppins-regular-16px me-2 d-flex"
 														>
-															<Radio id="valuetype2" value={2} />
+															<Radio id="valuetype2" value={2} className="me-2"/>
 															{t('value in %')}
 														</label>
 													</RadioGroup>
 
-													<p style={{ color: 'red' }}>{element.vt_err}</p>
-													<div className="col-md-11 me-auto d-flex pe-0  w-100">
+													<p style={{ color: 'red' }} className='error'>{element.vt_err}</p>
+													<div className='col-md-11 me-auto d-flex pe-0'>
 														<input
 															type="text"
 															value={element.value}
@@ -447,29 +451,27 @@ const AddSalaryBenefits = (props) => {
 																updateValue(index, e.target.value);
 															}}
 															name="valuetype"
-															className="w-100 ps-3"
+															className='ps-3 rounded-0 shadow-none border form-control'
 														/>
 														<span
 															className={
-																'input-group-text hi-40 border-0 bg-white rounded-0 bg-transparent px-0 pe-3'
+																'input-group-text hi-40 border-0 bg-white rounded-0 bg-transparent px-0 pe-3 bg-color-salary-benefits'
 															}
-															style={{ marginLeft: '-25px' }}
+															style={{ marginLeft: '-29px' }}
 														>
 															{element.value_type == 2 ? '%' : '€'}
 														</span>
 													</div>
-													<p style={{ color: 'red' }}>{element.v_err}</p>
+													<p style={{ color: 'red' }} className='error'>{element.v_err}</p>
 												</div>
 												<div className="row">
-													<label
-														className={
-															pc_view_type == 'addpc' ? (
-																'poppins-medium-16px mb-2'
-															) : (
-																'poppins-medium-16px mb-2'
-															)
-														}
-													>
+													<label className={
+														pc_view_type == 'addpc' ? (
+															'poppins-medium-16px mb-2'
+														) : (
+															'poppins-medium-16px mb-2'
+														)
+													}>
 														Is the benefit granted in case of absence of the employee?
 													</label>
 													<RadioGroup
@@ -479,29 +481,34 @@ const AddSalaryBenefits = (props) => {
 														}}
 														selectedValue={element.granted}
 													>
-														<label htmlFor="granted1" className="mb-2 poppins-regular-16px">
-															<Radio id="granted1" value={1} />
+														<label
+															htmlFor="granted1"
+															className="mb-2 poppins-regular-16px d-flex"
+														>
+															<Radio id="granted1" value={1} className='me-2'/>
 															{t('Yes')}
 														</label>
-														<br />
-														<label htmlFor="granted2" className="mb-3 poppins-regular-16px">
-															<Radio id="granted2" value={0} />
+														<label
+															htmlFor="granted2"
+															className="mb-3 poppins-regular-16px d-flex"
+														>
+															<Radio id="granted2" value={0} className='me-2'/>
 															{t('No')}
 														</label>
 													</RadioGroup>
 												</div>
 											</div>
-											<div className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-4 ps-3'}>
-												<div className="row mb-4">
-													<label
-														className={
-															pc_view_type == 'addpc' ? (
-																'poppins-medium-16px mb-2'
-															) : (
-																'poppins-medium-16px mb-2'
-															)
-														}
-													>
+											<div
+												className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-4 ps-3'}
+											>
+												<div className="row mb-2">
+													<label className={
+														pc_view_type == 'addpc' ? (
+															'poppins-medium-16px mb-2'
+														) : (
+															'poppins-medium-16px mb-2'
+														)
+													}>
 														{t('Applicable coefficient')}
 													</label>
 													<RadioGroup
@@ -513,37 +520,34 @@ const AddSalaryBenefits = (props) => {
 													>
 														<label
 															htmlFor="coefficient1"
-															className="mb-2 poppins-regular-16px"
+															className="mb-2 poppins-regular-16px d-flex align-items-baseline"
 														>
-															<Radio id="coefficient1" value={1} />
+															<Radio id="coefficient1" value={1} className='me-2'/>
 															{t('Based on employee type in the cooperation agreement')}
 														</label>
-														<br />
 														<label
 															htmlFor="coefficient2"
-															className="mb-3 poppins-regular-16px"
+															className="mb-3 poppins-regular-16px d-flex"
 														>
-															<Radio id="coefficient2" value={2} />
+															<Radio id="coefficient2" value={2} className='me-2'/>
 															{t('Other')}
 														</label>
 													</RadioGroup>
 													<br />
-													<p style={{ color: 'red' }}>{element.ct_err}</p>
-													{element.coefficient_type == 2 && (
-														<input
-															type="text"
-															onChange={(e) => {
-																updateCoefficientValue(index, e.target.value);
-															}}
-															className="col-md-11"
-															defaultValue={element.coefficient_value}
-															name="coefficientother"
-															style={{ marginLeft: '0.8rem' }}
-														/>
-													)}
-													{element.coefficient_type == 2 && (
-														<p style={{ color: 'red' }}>{element.c_err}</p>
-													)}
+													<p style={{ color: 'red' }} className='error'>{element.ct_err}</p>
+													<div className='col-md-11'>
+													{element.coefficient_type == 2 && <input
+														type="text"
+														onChange={(e) => {
+															updateCoefficientValue(index, e.target.value);
+														}}
+														className="ps-3 rounded-0 shadow-none border form-control"
+														defaultValue={element.coefficient_value}
+														name="coefficientother"
+														// style={{ marginLeft: '0.8rem' }}
+													/>}
+													{element.coefficient_type == 2 && <p style={{ color: 'red' }} className='error'>{element.c_err}</p>}
+													</div>
 												</div>
 												<div className="row mb-3">
 													{/* {console.log()} */}
@@ -570,7 +574,7 @@ const AddSalaryBenefits = (props) => {
 														className="col-md-11 date_field_salary_benefits"
 														value={element.date}
 													/>
-													<p style={{ color: 'red' }}>{element.date_err}</p>
+													<p style={{ color: 'red' }} className='error'>{element.date_err}</p>
 												</div>
 											</div>
 											<div
@@ -604,7 +608,7 @@ const AddSalaryBenefits = (props) => {
 														isMulti={false}
 														className="col-md-11"
 													/>
-													<p style={{ color: 'red' }}>{element.o_err}</p>
+													<p style={{ color: 'red' }} className='error'>{element.o_err}</p>
 												</div>
 											</div>
 										</div>
@@ -613,7 +617,8 @@ const AddSalaryBenefits = (props) => {
 									{/* </div>
 							</div> */}
 								</Collapsible>
-							</span>
+							</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -634,21 +639,11 @@ const AddSalaryBenefits = (props) => {
 		>
 			<form onSubmit={Submit}>
 				{key != 0 ? (
-					pc_view_type != 'addpc' && (
-						<div className="position-sticky-pc py-4">
-							<h4
-								className={
-									pc_view_type == 'addpc' ? (
-										'h5 mt-3'
-									) : (
-										'font-weight-bold px-0 bitter-italic-normal-medium-24 '
-									)
-								}
-							>
-								{t('Edit salary benefits')}
-							</h4>
-						</div>
-					)
+					pc_view_type != 'addpc' && <div className='position-sticky-pc py-4'>
+						<h4 className={pc_view_type == 'addpc' ? 'h5 mt-3 ' : 'font-weight-bold px-0 bitter-italic-normal-medium-24 '}>
+							{t('Edit salary benefits')}
+						</h4>
+					</div>
 				) : pc_view_type == 'viewpc' ? (
 					<h4 className="h5 bitter_medium_italic_18px mb-4">{t('Salary benefits')}</h4>
 				) : (
@@ -697,6 +692,7 @@ const AddSalaryBenefits = (props) => {
 		</div>
 	);
 };
+<<<<<<< HEAD
 export default React.memo(
 	Translation(AddSalaryBenefits, [
 		'Salary',
@@ -719,3 +715,8 @@ export default React.memo(
 		'SAVE'
 	])
 );
+=======
+export default React.memo(Translation(AddSalaryBenefits, ['Salary', 'Is this mandatory?', 'Allow sales agent to update the value during creation of',
+	'cooperation agreement?', 'Salary benefit value', 'value in €', 'value in %', 'Is the benefit granted in case of absence of the employee?', 'Yes', 'No',
+	'Applicable coefficient', 'Start date', 'Occurence', 'Edit salary benefits', 'Salary benefits', 'SAVE', 'BACK', 'SAVE']));
+>>>>>>> abs_pcp_frontend_design_oct_25_2
