@@ -50,7 +50,7 @@ const Pincode = (props) => {
 			
 				if (id != 0) {
 					APICALL.service(
-						process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/resetpincode/' + id,
+						process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/resetpincode/' + id,
 						'GET'
 					)
 					.then((result) => {
@@ -67,7 +67,7 @@ const Pincode = (props) => {
 
 					if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '') 
 					 {
-					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/hasPincode/' + contextState.uid, 'GET')
+						APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/hasPincode/' + contextState.uid, 'GET')
 						.then((result) => {
 							if (result != 999) {
 								setLoad(true);
@@ -123,7 +123,7 @@ const Pincode = (props) => {
 		event.preventDefault();
 		
 		if (validate(otp, otp1)&&!(load)||validate(otp, otp1)&&hasPin) {
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'api/pincodegeneration/' + uid + '?pincode=' + otp1, 'GET')
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/pincodegeneration/' + uid + '?pincode=' + otp1, 'GET')
 				.then((result) => {
 					
 					if (result == 200) {
@@ -163,7 +163,7 @@ const Pincode = (props) => {
 		{/* <div className="col-4" /> */}
 		<div className="mt-2 col-md-5 m-auto">
 			<div>
-				<label className='poppins-regular-18 mb-2'>{t('Pincode')}</label>
+				<label className='poppins-regular-18 mb-2'>Pincode</label>
 			</div>
 			<div className='d-flex'>
 			<OTPInput
@@ -243,4 +243,4 @@ const Pincode = (props) => {
 		return (display);
 };
 
-export default React.memo(Translation(Pincode,['Confirm pincode','Pincode','Link is expired please try again later.']));
+export default React.memo(Translation(Pincode,['Confirm pincode','Link is expired please try again later.']));
