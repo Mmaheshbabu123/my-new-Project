@@ -92,7 +92,7 @@ const Login = (props) => {
                     <div className='col-md-12 position-sticky-login py-4'>
                     <p className="px-0 bitter-italic-normal-medium-24 text-center">{t('Login')}</p>
                     </div>
-                    <div className="col-md-5">
+                    <div className="col-md-5 login-page-container">
                         <div className="">
                             <form className="mb-5" onSubmit={submit}>
                                 <div className="mb-2" >
