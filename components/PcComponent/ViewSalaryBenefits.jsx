@@ -199,7 +199,7 @@ const ViewSalaryBenefits = (props) => {
 											<br />
 											<div className="row">
 												<div className={pc_view_type == 'addpc' ? "col-md-4" : pc_view_type == 'viewpc' ? "col-md-4" : "col-md-4"} >
-													<div className="row mb-4">
+													<div className="row" style={{marginBottom:'40px'}}>
 														<label
 															className={
 																pc_view_type == 'addpc' ? (
@@ -277,7 +277,7 @@ const ViewSalaryBenefits = (props) => {
 													</div>
 												</div>
 												<div className={pc_view_type == 'addpc' ? "col-md-4" : pc_view_type == 'viewpc' ? "col-md-4" : "col-md-4"} >
-													<div className="row mb-4">
+													<div className="row mb-2">
 														<label className="mb-2 poppins-regular-16px">
 															{t('Applicable coefficient')}
 														</label>
@@ -309,6 +309,7 @@ const ViewSalaryBenefits = (props) => {
 														{element.coefficient_type == 2 && (
 															<input
 																type="text"
+																disabled={onlyview}
 																onChange={(e) => {
 																	updateCoefficientValue(index, e.target.value);
 																}}

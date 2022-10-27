@@ -648,7 +648,7 @@ function Addtiming(props) {
 																			)}
 																	/>
 																</div>
-																<p className="error">{v1.error_starttime}</p>
+																<p className="error ms-4 ps-1">{v1.error_starttime}</p>
 															</div>
 															<div className="col-md-5  py-3 d-flex justify-content-center align-items-center flex-column" style={{height:'65px'}}>
 																<div className="d-flex">
@@ -673,7 +673,7 @@ function Addtiming(props) {
 																			)}
 																	/>
 																</div>
-																<p className="error px-2">{v1.error_endtime}</p>
+																<p className="error ms-4 ps-1">{v1.error_endtime}</p>
 															</div>
 															<div className="col-md-2 py-3 d-flex align-items-center justify-content-left star_icon_size" style={{height:'65px'}}>
 																{value.time.length == 1 && (
