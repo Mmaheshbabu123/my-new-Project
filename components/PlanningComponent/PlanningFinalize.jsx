@@ -349,9 +349,9 @@ const PlanningFinalize = (props) => {
 					</div>
 					<div className="error mt-2">{errorFinalize}</div>
 				</div>
-				<div className="row mt-4 mb-3 col-md-12 m-0 px-0">
+				<div className="row mt-4 col-md-12 m-0 px-0">
 					<div className="col-md-6 p-0 align-self-center ">
-						<button type="button" className="btn  btn-block px-0 ">
+						<button type="button" className="btn  btn-block px-0 shadow-none">
 							<Link href={'/planning/timings/' + p_unique_key}>
 								<a className="bg-white border-0 poppins-light-18px  text-decoration-underline text-uppercase shadow-none">
 									{t('BACK')}
