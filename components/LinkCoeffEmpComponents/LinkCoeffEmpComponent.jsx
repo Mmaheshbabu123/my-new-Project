@@ -103,7 +103,7 @@ const LinkCoeffEmpComponent = (props) => {
    */
   const onSelect = async (e) => {
     removeWarningClass()
-    let response = await fetchEmpCoeffValueTypesData(`${getAllEmpCoeffAndValueTypes}?pcid=${e.value}&edit=1`, 1);
+    let response = await fetchEmpCoeffValueTypesData(`${getAllEmpCoeffAndValueTypes}?pcid=${e.value || 0}&edit=1`, 1);
     const { employeeTypes = [] } = response.data;
     updateStateChanges({
       employeeTypeArray: employeeTypes,
