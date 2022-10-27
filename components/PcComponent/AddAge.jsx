@@ -337,7 +337,7 @@ const Addage = (props) => {
 		return valid;
 	};
 	return (
-		<div className={pc_view_type == 'addpc'?"":pc_view_type == 'viewpc'?"mb-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
+		<div className={pc_view_type == 'addpc'?"":pc_view_type == 'viewpc'?"mb-5 sectioncolor edit_age":"sectioncolor edit_age my-3"}>
 			<form onSubmit={(e) => submit(e)}>
 				{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3 ":"bitter_medium_italic_18px mb-4"}>{t('Edit age')}</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 bitter_medium_italic_18px mb-4">{t('Age')}</h4>:'')}
 

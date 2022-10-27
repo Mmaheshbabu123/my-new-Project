@@ -802,7 +802,7 @@ a {
 }
 .custom_astrick::after {
 	content: "*";
-	/* padding-left: 3px; */
+	margin-left: 1px !important;
 	color: red;
 }
 .custom-inactive:hover {
@@ -2204,4 +2204,8 @@ input[type="search"]::-webkit-search-cancel-button {
 .add_salary_benefits .occurence_col .react-select-prefix__control
 {
 	width: 340px !important;
+}
+.edit_age
+{
+	padding: 0.73rem !important;
 }

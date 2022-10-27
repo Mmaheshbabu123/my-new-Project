@@ -205,7 +205,7 @@ const ViewSalaryBenefits = (props) => {
 																pc_view_type == 'addpc' ? (
 																	'poppins-medium-16px'
 																) : (
-																	'poppins-medium-14px'
+																	'poppins-medium-16px custom_astrick'
 																)
 															}
 														>
@@ -248,7 +248,7 @@ const ViewSalaryBenefits = (props) => {
 														<p style={{ color: 'red' }}>{element.v_err}</p>
 													</div>
 													<div className="row">
-														<label className="mb-2 poppins-regular-16px">
+														<label className="mb-2 poppins-medium-16px">
 															{t(
 																'Is the benefit granted in case of absence of the employee?'
 															)}
@@ -278,7 +278,7 @@ const ViewSalaryBenefits = (props) => {
 												</div>
 												<div className={pc_view_type == 'addpc' ? "col-md-4" : pc_view_type == 'viewpc' ? "col-md-4" : "col-md-4"} >
 													<div className="row mb-2">
-														<label className="mb-2 poppins-regular-16px">
+														<label className="mb-2 poppins-medium-16px custom_astrick">
 															{t('Applicable coefficient')}
 														</label>
 														<RadioGroup
@@ -329,7 +329,7 @@ const ViewSalaryBenefits = (props) => {
 																pc_view_type == 'addpc' ? (
 																	'mb-3 poppins-regular-16px'
 																) : (
-																	'poppins-regular-16px'
+																	'poppins-medium-16px custom_astrick'
 																)
 															}
 														>
@@ -353,7 +353,7 @@ const ViewSalaryBenefits = (props) => {
 																pc_view_type == 'addpc' ? (
 																	'mb-3 poppins-regular-16px'
 																) : (
-																	'poppins-regular-16px'
+																	'poppins-medium-16px custom_astrick'
 																)
 															}
 														>

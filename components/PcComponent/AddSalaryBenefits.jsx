@@ -413,7 +413,7 @@ const AddSalaryBenefits = (props) => {
 															pc_view_type == 'addpc' ? (
 																'poppins-medium-16px mb-2'
 															) : (
-																'poppins-medium-16px mb-2'
+																'poppins-medium-16px mb-2 custom_astrick'
 															)
 														}
 													>
@@ -507,7 +507,7 @@ const AddSalaryBenefits = (props) => {
 														pc_view_type == 'addpc' ? (
 															'poppins-medium-16px mb-2'
 														) : (
-															'poppins-medium-16px mb-2'
+															'poppins-medium-16px mb-2 custom_astrick'
 														)
 													}>
 														{t('Applicable coefficient')}
@@ -557,7 +557,7 @@ const AddSalaryBenefits = (props) => {
 															pc_view_type == 'addpc' ? (
 																'poppins-medium-16px mb-2'
 															) : (
-																'poppins-medium-16px mb-2'
+																'poppins-medium-16px mb-2 custom_astrick'
 															)
 														}
 													>
@@ -583,7 +583,7 @@ const AddSalaryBenefits = (props) => {
 													pc_view_type == 'addpc' ? (
 														'col-md-4 occurence_col'
 													) : (
-														'col-md-4 occurence_col ps-3'
+														'col-md-4 occurence_col ps-3 '
 													)
 												}
 											>
@@ -593,7 +593,7 @@ const AddSalaryBenefits = (props) => {
 															pc_view_type == 'addpc' ? (
 																'poppins-medium-16px mb-2'
 															) : (
-																'poppins-medium-16px mb-2'
+																'poppins-medium-16px mb-2 custom_astrick'
 															)
 														}
 													>
