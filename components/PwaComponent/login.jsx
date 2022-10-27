@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useQuery } from "react-query";
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { userService } from '@/Services/UserServices';
 import Translation from '@/Translation';
 import Link from 'next/link';
+import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 
 
 const getAcrfToken = async () => {
@@ -15,14 +15,16 @@ const getAcrfToken = async () => {
 }
 
 const Login = (props) => {
-    const {t}=props;
-    const router = useRouter();
+    const { t } = props;
+    const router = useRouter(); //NEEDED NOSONAR
     const [state, setState] = useState({
         id: '',
         email: '',
         password: '',
         error_user_name: '',
         error_password: '',
+        //show hide condition
+        showPassword: false,
     })
     const { data: token, isLoading } = useQuery("arcf_token", getAcrfToken);
 
@@ -31,21 +33,15 @@ const Login = (props) => {
         error1['email'] = ValidationService.emptyValidationMethod(res.email);
         error1['password'] = ValidationService.emptyValidationMethod(res.password);
         /**
-		 * check if email is valid
-		 */
-		error1['email'] =
-        error1['email'] == ''
-            ? ValidationService.emailValidationMethod(res.email)
-            : error1['email'];
-
+         * check if email is valid
+         */
+        error1['email'] =
+            error1['email'] == ''
+                ? ValidationService.emailValidationMethod(res.email)
+                : error1['email'];
         /**
-		 * check if password is valid
-		 */
-		// error1['password'] =
-        // error1['password'] == ''
-        //     ? ValidationService.passwordValidationMethod(res.password)
-        //     : error1['password'];
-
+         * check if password is valid
+         */
         setState({
             ...state,
             error_user_name: error1['email'],
@@ -68,7 +64,7 @@ const Login = (props) => {
 
             //check status and redirect user.
             if (status === 200) {
-               // const redirect = router.query.returnUrl //; || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
+                // const redirect = router.query.returnUrl //; || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
                 window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}&destination_url=${btoa(window.location.href)}`, '_self');
                 // get return url from query parameters or default to '/'
                 // window.open(redirect, '_self'); // It'll redirect by re-loading page
@@ -83,14 +79,20 @@ const Login = (props) => {
         setState({ ...state, [name]: value })
     }
 
+    let passwordEyeIconStyle = {
+        position: 'absolute',
+        bottom: '5px',
+        right: '10px',
+    }
+
     if (isLoading) {
-        return <> {t('Loading...')} </>
+        return <>  </>
     } else {
         return (
             <section className="container">
                 <div className="row content d-flex justify-content-center">
                     <div className='col-md-12 position-sticky-login py-4'>
-                    <p className="px-0 bitter-italic-normal-medium-24 text-center">{t('Login')}</p>
+                        <p className="px-0 bitter-italic-normal-medium-24 text-center">{t('Login')}</p>
                     </div>
                     <div className="col-md-5 login-page-container">
                         <div className="">
@@ -107,11 +109,17 @@ const Login = (props) => {
 
                                 <div className="pt-4 position-relative">
                                     <label className="form-label custom_astrick poppins-light-16px">{t('Password')}</label>
-                                    <input type="password" className="form-control rounded-0 shadow-none"
+                                    <input type={state.showPassword ? "text" : "password"} className="form-control rounded-0 shadow-none"
                                         value={state.password}
                                         name='password'
                                         onChange={handleOnChange}
                                     />
+                                    <span
+                                        style={passwordEyeIconStyle}
+                                        className="span-action-icons"
+                                        onClick={() => setState({ ...state, showPassword: !state.showPassword })}
+                                    > {state.showPassword === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
+                                    </span>
                                 </div>
                                 <div className='py-3'>
                                     {/* <p className="px-0 float-end text-info">{t('Forgot password?')}</p> */}
@@ -132,11 +140,6 @@ const Login = (props) => {
                                         {t('Login')}
                                     </button>
                                 </div>
-                                {/* <div className="d-flex p-0">
-                                  <p className="p-2 text-center">Not registered yet?</p>
-                                  <p className="p-2 text-info ">Register here</p>
-
-                              </div> */}
                             </form>
                         </div>
                     </div>
@@ -146,4 +149,4 @@ const Login = (props) => {
         );
     }
 }
-export default React.memo(Translation(Login,['Loading...','Login','Email address','Password','Forgot password?','Login']));
+export default React.memo(Translation(Login, ['Loading...', 'Login', 'Email address', 'Password', 'Forgot password?', 'Login']));
