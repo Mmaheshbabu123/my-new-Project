@@ -47,7 +47,7 @@ const RedirectPages = (props) => {
 					break;
 			}
 		} else {
-			window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
+			router.push('/');
 		}
 	}, []);
 };

@@ -75,7 +75,7 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0 }) => {
  const checkSignStatusAndApprove = (data) => {
    if(data.completed === 1) {
       customAlert('success', 'Approved successfully!', 2500);
-      setTimeout(() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self'), 2700);
+      setTimeout(() => router.push('/'), 2700);
    } else {
      let message = '';
      if(!data.employerSignStatus && !data.employeeSignStatus) {

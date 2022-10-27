@@ -484,7 +484,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
                       // className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn  w-100 shadow-none"
                       className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
                       onClick={() => handleSearchClick(0)}>
-                      {t('RESET')} 
+                      {t('RESET')}
                     </button>
                   </div>
                 </div>
@@ -533,7 +533,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-         <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
+         <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>
