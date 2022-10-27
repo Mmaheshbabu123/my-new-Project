@@ -78,6 +78,7 @@ function WeeklyPlanning(props) {
 							setCompanylist(result.data[0]);
 							setLocationlist(result.data[1]);
 							setCostcenterlist(result.data[2]);
+							setActiveWeek(result.data[3]);
 							setShowview(true);
 						}
 						console.log(result);

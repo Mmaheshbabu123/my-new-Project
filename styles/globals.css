@@ -1119,6 +1119,7 @@ div[disabled] {
 .timepage-calander .rmdp-right:hover
 {
 	background-color: transparent !important;
+	box-shadow: none !important;
 }
 .timepage-calander .rmdp-right {
 	right: 38%;
@@ -1968,7 +1969,7 @@ input[type="text"]::placeholder {
 .select_option_height .css-1hb7zxy-IndicatorsContainer {
 	height: 30px;
 	min-height: 30px;
-	background-color: #fff;
+	background-color: #fff !important;
 	border: none !important;
 }
 .manage_project button.nav-link.project-active {

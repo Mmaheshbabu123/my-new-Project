@@ -205,6 +205,13 @@ input[type="checkbox"]:focus
 {
   width: 350px !important;
 }
+.add_salary_benefits input[type="text"]:disabled,
+.add_salary_benefits input[type="date"]:disabled,
+.react-select-prefix__control--is-disabled
+{
+  background-color:#fafafa !important;
+  border: none !important;
+}
 #react-select-2-listbox,
 .css-6j8wv5-Input,
 .css-qc6sy-singleValue,
@@ -591,4 +598,49 @@ select option
   top: 84px;
   background: white;
   z-index: 998;
+}
+.manage_category_table th
+{
+  width: 28% !important;
+}
+.manage_category_table th:last-child
+{
+  width: 12% !important;
+}
+.my-profile-icon
+{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+/* .rc-time-picker-panel-narrow
+{
+  top: 871px !important;
+} */
+.rc-time-picker-panel-narrow .rc-time-picker-panel-inner
+{
+  border-radius: 0px !important;
+}
+.rc-time-picker-panel-narrow .rc-time-picker-panel-select
+{
+  max-height: 125px !important;
+}
+.rc-time-picker-input
+{
+  outline: none !important;
+}
+.min-salary-form-control .form-control:focus
+{
+  border: 1px solid var(--border-color-light-gray) !important;
+  border-right: none !important;
+}
+.edit_employee_table input[type="text"],
+.edit_employee_table .form-select
+{
+  height: 40px !important;
+}
+.edit_employee_table .rc-time-picker-input 
+{
+  font-size: var(--font-size-16px) !important;
+  font-family: var(--font-family-poppins-light);
 }

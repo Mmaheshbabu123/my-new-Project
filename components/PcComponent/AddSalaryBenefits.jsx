@@ -407,7 +407,7 @@ const AddSalaryBenefits = (props) => {
 										<br />
 										<div className="row">
 											<div className={pc_view_type == 'addpc' ? 'col-md-4' : 'col-md-4'}>
-												<div className="row mb-2">
+												<div className="row" style={{marginBottom:'33px'}}>
 													<label
 														className={
 															pc_view_type == 'addpc' ? (
