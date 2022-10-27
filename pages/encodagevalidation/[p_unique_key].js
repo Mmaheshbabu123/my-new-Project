@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic'
-import Encodage from '@/components/EncodageValidation/encodage';
+import Encdage from '@/components/EncodageValidation/encodage';
 
-const encodage = () => {
+const Encodage = () => {
   return (
-  <Encodage/>
+  <Encdage/>
   );
 }
 
-export default encodage;
+export default Encodage;

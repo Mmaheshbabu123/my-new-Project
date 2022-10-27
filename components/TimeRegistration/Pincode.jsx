@@ -128,11 +128,15 @@ const Pincode = (props) => {
 						} else if (result == 2) {
 							//planning started.
 							SetResponse('Planning has been started.');
-							router.push('/');
+							setTimeout(() => {
+								router.push('/employee-planning')
+							  }, 3000);
 						} else if (result == 3) {
 							//planning ended.
 							SetResponse('Planning has been ended.');
-							router.push('/');
+							setTimeout(() => {
+								router.push('/employee-planning')
+							  }, 3000);
 						} else if (result == 4) {
 							SetResponse('There is no plannings for the day.');
 						} else if(result==6){

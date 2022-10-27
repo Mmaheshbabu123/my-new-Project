@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { FaUndoAlt,FaSave, FaCheckCircle, FaShieldAlt } from 'react-icons/fa';
 import Reset from 'pages/pincode/update/[p_unique_key]';
-import Datetime from 'react-datetime';
+// import Datetime from 'react-datetime';
 import Translation from '@/Translation';
 
 function EncodageValidation(props) {
@@ -128,9 +128,9 @@ function EncodageValidation(props) {
 						<td>{element.field_last_name_value}</td>
 						<td>{element.starttime}</td>
 						<td style={{ width: '149px' }}>
-						<Datetime 	onChange={() => {
+						{/* <Datetime 	onChange={() => {
 									(e) => saveactualstart(e.target.value)
-								}}></Datetime>;
+								}}></Datetime>; */}
 							{/* <input
 								type="datetime-local"
 								name="name"
