@@ -193,7 +193,7 @@ const RequestOverviewData = (props) => {
                 </button>
                      </div>
                  </div>
-               
+
               </div>
               </div>
            </div>}
@@ -246,6 +246,17 @@ const RequestOverviewData = (props) => {
             activeClassName={"active"}
         />}
         {<SalesAgentPopUpComponent state={state} setState={setState}/>}
+        </div>
+        <div className="row my-2">
+        <div className="text-start col-md-6">
+          <button
+            type="button"
+            className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
+            onClick={() =>router.back()}
+          >
+            {t('BACK')}
+          </button>
+        </div>
         </div>
       </>
     );

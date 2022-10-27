@@ -147,7 +147,7 @@ const LinkCoeffEmpComponent = (props) => {
       </>
     )
   }
-  
+
   if (SERVER_SIDE_RENDERING)
     return <>
       <div className="row">
@@ -202,7 +202,7 @@ const LinkCoeffEmpComponent = (props) => {
         </div>
         <div className='col-md-12 row m-0 mt-5 mb-2' style={{  }}>
           <div className='col-md-6 p-0 align-self-center'>
-          <button onClick={() => parseInt(props.pcid) ? props.router.back() : props.router.push('/')} type="button" className=" col-2 bg-white  text-start border-0 poppins-regular-18px  float-sm-right text-left p-0 md-5 text-decoration-underline shadow-none">
+          <button onClick={() => parseInt(props.pcid) ? props.router.back() : props.router.push('/manage')} type="button" className=" col-2 bg-white  text-start border-0 poppins-regular-18px  float-sm-right text-left p-0 md-5 text-decoration-underline shadow-none">
             {t(`BACK`)}
           </button>
           </div>

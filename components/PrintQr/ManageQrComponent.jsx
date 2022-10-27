@@ -24,9 +24,9 @@ var year = dateObj.getUTCFullYear();
 let dateValue = `${year}-${month < 10 ? '0' + month : month}`;
 const dateOptions = getFutureDates();
 let updatedDay = day - 1 < 10 ? '0' + (day - 1) : day - 1;
-const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, entityId,t }) => {
+const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, entityId, t }) => {
 
-  
+
   // console.log(t);
   const router = useRouter();
   const [state, setState] = useState({

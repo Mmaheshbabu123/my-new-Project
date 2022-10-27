@@ -35,8 +35,7 @@ const WERKPOSTFICHES_TODO = 2;
 const LABOUR_COOPERATION_TODO = 3;
 
 
-const TodosOverview = ({ props, entityId, entityType, tabId }) => {
-  const { t } = props;
+const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
   const router = useRouter();
   const { todos = [], headers = [] } = props;
   const getSelectedStatus = (selectedTab = 1) => {
@@ -476,6 +475,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
                       className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
                       onClick={() => handleSearchClick(1)}>
                       {t('SEARCH')}
+
                     </button>
                   </div>
                   <div className='col-md-6 col-lg-6 pe-0'>

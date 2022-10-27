@@ -194,7 +194,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
             activeClassName={"active"}
         />}
         <div className="text-start col-md-6">
-          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-5 mb-1 ps-0 text-decoration-underline text-uppercase">
+          <button onClick={() => router.push('/manage')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-5 mb-1 ps-0 text-decoration-underline text-uppercase">
             {`BACK`}
           </button>
           </div>
