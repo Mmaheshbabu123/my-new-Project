@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "PORT=3001 next start",
+    "start": "PORT=3000 next start",
     "lint": "next lint",
     "build:css": "postcss styles/tailwind.css -o styles/main.css",
     "build:watch": "postcss styles/tailwind.css -o styles/main.css --watch",
@@ -36,8 +36,8 @@
     "react-collapsible": "^2.10.0",
     "react-confirm-alert": "^3.0.2",
     "react-datepicker": "^4.8.0",
-    "react-device-detect": "^2.2.2",
     "react-datetime": "^3.1.1",
+    "react-device-detect": "^2.2.2",
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
     "react-multi-date-picker": "^3.3.0",
