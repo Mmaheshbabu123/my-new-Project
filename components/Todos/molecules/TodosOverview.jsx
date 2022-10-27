@@ -35,8 +35,7 @@ const WERKPOSTFICHES_TODO = 2;
 const LABOUR_COOPERATION_TODO = 3;
 
 
-const TodosOverview = ({ props, entityId, entityType, tabId }) => {
-  const { t } = props;
+const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
   const router = useRouter();
   const { todos = [], headers = [] } = props;
   const getSelectedStatus = (selectedTab = 1) => {

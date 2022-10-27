@@ -16,7 +16,7 @@ const itemsPerPage = 8;
 
 const monthOptions = getLastTwelveMonths();
 const V1DocumentsOverview = (props) => {
-  const { t } = t;
+  const { t } = props;
   const [state, setState] = useState({
     loaded: false,
     rows: [],

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { confirmAlert } from 'react-confirm-alert';
 import { deleteAdditionalDocuments, downloadAdditionalDocuments } from '@/Services/ApiEndPoints'
@@ -113,7 +113,6 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
      }, [state.itemOffset]);
 
      const updatePaginationData = (filterRows, offset) => {
-       console.log(filterRows)
        let items = [...filterRows];
        const endOffset = offset + itemsPerPage;
        return {
