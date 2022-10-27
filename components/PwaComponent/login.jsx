@@ -81,7 +81,7 @@ const Login = (props) => {
 
     let passwordEyeIconStyle = {
         position: 'absolute',
-        bottom: '5px',
+        bottom: '8px',
         right: '10px',
     }
 
@@ -116,9 +116,9 @@ const Login = (props) => {
                                     />
                                     <span
                                         style={passwordEyeIconStyle}
-                                        className="span-action-icons"
+                                        className="login-hide-show-span"
                                         onClick={() => setState({ ...state, showPassword: !state.showPassword })}
-                                    > {state.showPassword === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
+                                    > {state.showPassword === true ? <BsFillEyeFill className="force-skyblue" /> : <BsFillEyeSlashFill className="force-skyblue" />}
                                     </span>
                                 </div>
                                 <div className='py-3'>
@@ -135,7 +135,6 @@ const Login = (props) => {
                                         type="submit"
                                         // className="btn rounded-0 custom-btn px-3 btn-block float-end"
                                         className="btn rounded-0 px-3 poppins-medium-18px-next-button shadow-none w-100 mt-3 "
-
                                     >
                                         {t('Login')}
                                     </button>
