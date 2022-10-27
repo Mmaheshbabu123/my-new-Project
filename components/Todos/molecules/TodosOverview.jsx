@@ -475,6 +475,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
                       className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
                       onClick={() => handleSearchClick(1)}>
                       {t('SEARCH')}
+
                     </button>
                   </div>
                   <div className='col-md-6 col-lg-6 pe-0'>
