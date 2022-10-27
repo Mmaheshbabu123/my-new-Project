@@ -593,7 +593,7 @@ function Addtiming(props) {
 												</div>
 												
 											</div>
-											<div className="error">
+											<div className="error" style={{marginLeft:'-12px'}}>
 												{result.error_date}
 												</div>
 											</div>

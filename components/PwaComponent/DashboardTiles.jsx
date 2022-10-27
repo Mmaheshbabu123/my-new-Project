@@ -19,7 +19,7 @@ return(
         if(tile == 'children' ){
             var tileObject = Object.assign({}, dashboardtiles[key][tile]);
             return(
-                <div key={idx1} className="col-lg-6 col-md-6 col-sm-12 pe-0">
+                <div key={idx1} className="col-lg-6 col-md-6 col-sm-12">
             <DashboardTiles dashboardtiles = { tileObject } />
             </div>
 
