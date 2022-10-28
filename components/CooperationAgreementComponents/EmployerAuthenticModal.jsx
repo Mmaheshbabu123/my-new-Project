@@ -6,8 +6,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import customAlert from '@/atoms/customAlert';
 import ValidateMessage from '@/atoms/validationError';
 import Translation from '@/Translation';
-const EmployerAuthenticModal = ({props, close, allowEmployerSignature}) => {
-  const { t } = props;
+const EmployerAuthenticModal = ({props, close, allowEmployerSignature, t}) => {
   const [state, setState] = useState({
     password: '',
     showPassword: false,

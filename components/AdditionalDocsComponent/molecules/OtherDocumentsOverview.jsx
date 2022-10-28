@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getOtherDocuments, downloadAdditionalDocuments } from '@/Services/ApiEndPoints';
 import ReactPaginate from 'react-paginate';
+import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
 import { GrView } from 'react-icons/gr';
 import { FiDownload } from 'react-icons/fi';
@@ -10,6 +11,7 @@ const itemsPerPage = 8;
 
 const monthOptions = getLastTwelveMonths();
 const OtherDocumentsOverview = ({ entityId, entityType}) => {
+  const router = useRouter();
   const [state, setState] = useState({
     loaded: false,
     rows: [],
@@ -240,7 +242,7 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
     />}
      <div className='row'>
        <div className='col-md-12'>
-       <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
+       <button onClick={() => router.push('/')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
         {`Back`}
       </button>
        </div>

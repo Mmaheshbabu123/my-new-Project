@@ -8,7 +8,6 @@ import sign_icon from '../molecules/images/cooperation_agreement.svg';
 import pdf_icon from '../molecules/images/Pdf.svg';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Translation from '@/Translation';
-
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
   const { t } = props;

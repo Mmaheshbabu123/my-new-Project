@@ -3,6 +3,7 @@ import { getSignedV1Documents, downloadV1Documents } from '@/Services/ApiEndPoin
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import Modal from 'react-bootstrap/Modal';
 import ReactPaginate from 'react-paginate';
+import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { GrView } from 'react-icons/gr';
@@ -16,7 +17,8 @@ const itemsPerPage = 8;
 
 const monthOptions = getLastTwelveMonths();
 const V1DocumentsOverview = (props) => {
-  const { t } = t;
+  const router = useRouter();
+  const { t } = props;
   const [state, setState] = useState({
     loaded: false,
     rows: [],
@@ -26,8 +28,8 @@ const V1DocumentsOverview = (props) => {
     period: [{label: '-- Select --', value: 0}],
     employeeSearchTerm: '',
     companySearchTerm: '',
-    functionSearchTerm: [],
-    periodSearchTerm: [],
+    functionSearchTerm: '',
+    periodSearchTerm: '',
     employerArray: [],
     showPopup: false,
     spinner: false,
@@ -199,7 +201,7 @@ const V1DocumentsOverview = (props) => {
   if(!state.loaded) {
     return <> {t('Loading...')} </>
   }
-  
+
   const searchTextField = (key, placeholder) => {
     return(
         <div className='col-md-3' >
@@ -329,7 +331,7 @@ const V1DocumentsOverview = (props) => {
      </div>
      <div className='row'>
        <div className='col-md-12'>
-       <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
+       <button onClick={() => router.push('/')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
         {t('Back')}
       </button>
        </div>

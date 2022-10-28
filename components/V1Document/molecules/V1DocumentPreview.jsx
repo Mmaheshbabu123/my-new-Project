@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import CheckBoxField from '@/atoms/CheckBoxField';
+import { useRouter } from 'next/router';
 import { v1DocumentPreview, saveV1Document, getEmployerIdByCompanyId } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import styles from './V1Document.module.css';
 import customAlert from '@/atoms/customAlert';
 
 const V1DocumentPreview = ({ employeeId, companyId, preview = 0 }) => {
+  const router = useRouter();
   const [state, setState] = useState({
     employerId: 0,
     approved: 0,
@@ -75,7 +77,7 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0 }) => {
  const checkSignStatusAndApprove = (data) => {
    if(data.completed === 1) {
       customAlert('success', 'Approved successfully!', 2500);
-      setTimeout(() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self'), 2700);
+      setTimeout(() => router.push('/'), 2700);
    } else {
      let message = '';
      if(!data.employerSignStatus && !data.employeeSignStatus) {

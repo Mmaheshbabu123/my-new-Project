@@ -4,12 +4,15 @@
 }
 .link-emp-coeff-tableparent {
   max-height: 475px;
-  overflow-x: scroll;
   border: 1px solid;
   margin: 0 !important;
   scroll-behavior: smooth;
   border: 0px !important;
   min-height: 200px;
+}
+
+.table-overflow {  
+  overflow-x: scroll;
 }
 
 .sv-cp-page-title {

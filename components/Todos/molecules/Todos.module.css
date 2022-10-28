@@ -5,7 +5,8 @@
 
 .todo-tabs > li {
   display: inline-block;
-  width: 20%;
+  /* width: 20%; */
+  margin-right: 4rem;
 }
 /* .Todos_todo-tabs___A2Cq > li:first-child
 {

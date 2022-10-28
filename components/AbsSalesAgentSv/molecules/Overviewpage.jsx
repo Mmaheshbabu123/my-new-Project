@@ -145,7 +145,7 @@ const Overviewpage = (props) => {
                   onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
                   placeholder={t('Search employer ')}
                 />
-                
+
                   </div>
                   <div className='col-md-6'>
                   <input
@@ -171,7 +171,7 @@ const Overviewpage = (props) => {
                 >
                   {t('SEARCH')}
                 </button>
-               
+
                   </div>
                   <div className='col-md-6'>
                    <button
@@ -185,7 +185,7 @@ const Overviewpage = (props) => {
                 </div>
               </div>
               </div>
-             
+
            </div></div>}
         <div className={`${styles['table-parent-div']} min_height_cooperation_sales`}>
           <table className="table table-hover manage-types-table manage-cooperation-agreement-table-header">
@@ -217,17 +217,6 @@ const Overviewpage = (props) => {
               </tbody>}
           </table>
         </div>
-        	<div className="row my-2">
-					<div className="text-start col-md-6">
-						<button
-							type="button"
-							className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
-							onClick={() =>router.back()}
-						>
-							{t('BACK')}
-						</button>
-					</div>
-          </div>
         <div>
         {filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
@@ -245,6 +234,17 @@ const Overviewpage = (props) => {
             activeClassName={"active"}
         />}
 
+        </div>
+        <div className="row my-2">
+        <div className="text-start col-md-6">
+          <button
+            type="button"
+            className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
+            onClick={() =>router.back()}
+          >
+            {t('BACK')}
+          </button>
+        </div>
         </div>
       </>
     );

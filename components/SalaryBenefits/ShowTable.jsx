@@ -144,15 +144,15 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
             //  className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 poppins-medium-18px"
              className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 poppins-medium-18px shadow-none "
              style={{height:'43px'}}
-             
+
              onClick={() => handleSearchClick(0)}
            >
              {t('RESET')}
            </button>
              </div>
            </div>
-           
-          
+
+
          </div>
         </div>
       </div>
@@ -189,7 +189,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
             subContainerClassName={"pages pagination justify-content-center project-pagination"}
             activeClassName={"active"}
         />}
-        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px text-decoration-underline text-uppercase float-sm-right mt-5 mb-2 ps-0">
+        <button onClick={() => router.push('/manage')} type="button" className="bg-white border-0 poppins-regular-18px text-decoration-underline text-uppercase float-sm-right mt-5 mb-2 ps-0">
           {t('Back')}
         </button>
       </div>

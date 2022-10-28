@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Translation from '@/Translation';
 const DEFAULT = 2;
 const LeftPart = ( { compState, setCompState } ) => {
   const { coefficientTypeArray } = compState;
@@ -33,4 +33,4 @@ const LeftPart = ( { compState, setCompState } ) => {
       </table>
   )
 }
-export default React.memo(LeftPart)
+export default React.memo(Translation(LeftPart,[]));
