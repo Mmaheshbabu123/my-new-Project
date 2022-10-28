@@ -13,9 +13,9 @@ const EmployeeTypeSecondPart = () => {
     , inputRef
     , valueErrorArray
     , defaultValueError
+    , selectedPc
     , lowKey, highKey, defaultKey, minValue, maxValue
   } = state;
-
 
   /**
    * [useEffect to check scroll button is needed or not]
@@ -26,17 +26,15 @@ const EmployeeTypeSecondPart = () => {
     const current = state.inputRef.current['secondpart'];
     const trigger = () => {
       const hasOverflow = current.scrollWidth > current.clientWidth;
-      if (hasOverflow) {
-        updateStateChanges({
-          isOverflow: hasOverflow,
-          scrollRight: true, scrollLeft: false, tableWidth: '97%'
-        });
-      }
+      updateStateChanges({
+        isOverflow: hasOverflow,
+        scrollRight: true, scrollLeft: false, tableWidth: '97%'
+      });
     };
     if (current) {
       trigger();
     }
-  }, [Object.keys(state.inputRef.current).length])
+  }, [selectedPc])
 
   /**
    * [handleValueChange handling user input]
