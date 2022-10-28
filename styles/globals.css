@@ -1674,7 +1674,7 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 }
 .epc_height
 {
-	min-height: 65% !important;
+	min-height: 65vh !important;
 }
 .pc-height5 {
 	min-height: 47vh;
@@ -2067,7 +2067,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .employer-large-tile .dashboard_menu_title
 {
 	margin: 0 !important;
-	align-self: center;
+	padding-top: 1.5rem;
 }
 .dashboard-image-div {
 	width: 80px;
@@ -2136,11 +2136,12 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .todo-count-badge {
   position: absolute;
-  bottom: 30px;
 	right: 5px;
-	padding: 8px 10px;
+	padding: 7px 10px;
   border-radius: 50%;
   background-color: #79b1bd;
+	color: var(--color-white) !important;
+	top: 7px;
 }
 .Collapsible__trigger {
 	display: block;
@@ -2223,6 +2224,6 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .my-todo-all-icon 
 {
-	height: 25px;
-  margin-bottom: 7px;
+	height: 20px;
+  margin-bottom: 0px;
 }

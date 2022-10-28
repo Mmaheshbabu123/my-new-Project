@@ -489,6 +489,7 @@ input[type="checkbox"]
 .dashboard_menu_links
 {
   background-color: var(--bg-grey-medium) !important;
+  position:relative !important;
 }
 .dashboard_menu_title,
 .dashboard_menu_title:hover
@@ -497,7 +498,7 @@ input[type="checkbox"]
   font-family: var(--font-family-poppins-medium);
   font-size: var(--font-size-18px);
   line-height: var(--line-height-29px);
-  min-height: 6rem;
+  min-height: 4rem;
 }
 .employee_widget_search,
 .employee_widget_search:focus
