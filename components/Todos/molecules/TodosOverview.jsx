@@ -25,6 +25,8 @@ import download_svg from '../molecules/images/download.svg';
 import { HiOutlineExternalLink, } from 'react-icons/hi';
 import { MdDone } from 'react-icons/md';
 import { CgMailOpen } from 'react-icons/cg';
+import All from '../molecules/images/All.svg'
+import alltodos from './all_todos.svg';
 import Translation from '@/Translation';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import envelope_svg from '../molecules/images/envelope-open-text-solid.svg';
@@ -35,8 +37,7 @@ const WERKPOSTFICHES_TODO = 2;
 const LABOUR_COOPERATION_TODO = 3;
 
 
-const TodosOverview = ({ props, entityId, entityType, tabId }) => {
-  const { t } = props;
+const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
   const router = useRouter();
   const { todos = [], headers = [] } = props;
   const getSelectedStatus = (selectedTab = 1) => {
@@ -58,7 +59,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
     }, {
       id: 3,
       name: "All",
-      icon: ''
+      icon: CgMailOpen
     }],
     rows: getSelectedStatus(tabId),
     filterRows: getSelectedStatus(tabId),
@@ -420,23 +421,16 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
         <div className='col-md-12'>
           <ul className={`${styles['todo-tabs']} col-md-6 m-0`}>
             {state.tabs.map(tab => {
-              let Icon = selectedTabId === tab.id ? tab.activeIcon : tab.icon;
+              let Icon = tab.icon;
+              console.log(tab);
               return (
                 <li key={tab.id} className='col-md-1'>
                   <div className={`w-auto d-inline-block my_todo_color ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
-                    <span id={tab.id} className={`${styles['todo-icon']}`}>  <img src={Icon}></img> </span>
-                    <span className="d-block my-1 text-center"> {tab.name} </span>
+                    {tab.id !== 3 ? <span id={tab.id} className={`${styles['todo-icon']}`}> <Icon /> </span> :
+                    <img src={All.src}></img>}
+                    <span className={`${tab.id === 3 ? '' : 'my-1'}d-block text-center`}> {tab.name} </span>
                   </div>
                 </li>
-              // let Icon = tab.icon;
-              // return (
-              //   <li key={tab.id}>
-              //     <div className={`w-50 py-2 text-center ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
-              //       <span id={tab.id} className={`${styles['todo-icon']}`}> <FontAwesomeIcon icon="fa-solid fa-envelope-open-text" /> </span>
-              //       <span className="d-block my-1"> {tab.name} </span>
-              //     </div>
-              //   </li>
-              //
               )
             })}
           </ul>
@@ -476,6 +470,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
                       className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
                       onClick={() => handleSearchClick(1)}>
                       {t('SEARCH')}
+
                     </button>
                   </div>
                   <div className='col-md-6 col-lg-6 pe-0'>
@@ -484,7 +479,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
                       // className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn  w-100 shadow-none"
                       className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
                       onClick={() => handleSearchClick(0)}>
-                      {t('RESET')} 
+                      {t('RESET')}
                     </button>
                   </div>
                 </div>
@@ -533,7 +528,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-         <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
+         <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>

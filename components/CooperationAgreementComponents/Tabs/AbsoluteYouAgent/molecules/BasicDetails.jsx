@@ -202,4 +202,4 @@ const BasicDetails = (props) => {
   );
 }
 
-export default React.memo(BasicDetails);
+export default React.memo(Translation(BasicDetails,[]));

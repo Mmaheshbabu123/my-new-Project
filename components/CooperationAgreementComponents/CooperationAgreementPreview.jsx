@@ -104,7 +104,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
    */
   const forwardToApproveProcess = async (from = 0, setObj = {}) => {
     let url = type === 2 ? updateEmployerSign : sendToEmployer;
-    let redirectionUrl = typeof destination_url === 'string' && destination_url.length > 10 ? atob(destination_url) : process.env.NEXT_PUBLIC_APP_URL_DRUPAL;
+    let redirectionUrl = typeof destination_url === 'string' && destination_url.length > 10 ? atob(destination_url) : '/';
     await APICALL.service(url, 'POST', getDataToPost(from)).then(response => {
       if (response.status === 200) {
          setState({...state, alertSuccess: true, showPopup: false, ...setObj })

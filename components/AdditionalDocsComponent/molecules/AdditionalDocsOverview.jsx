@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { confirmAlert } from 'react-confirm-alert';
 import { deleteAdditionalDocuments, downloadAdditionalDocuments } from '@/Services/ApiEndPoints'
@@ -113,7 +113,6 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
      }, [state.itemOffset]);
 
      const updatePaginationData = (filterRows, offset) => {
-       console.log(filterRows)
        let items = [...filterRows];
        const endOffset = offset + itemsPerPage;
        return {
@@ -147,7 +146,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
         onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
         type="button"
         className="btn skyblue-bg-color rounded-0 shadow-none col-3 px-0">
-        {+ t('Add additional document')}
+        { t('+'+'Add additional document')}
       </button>
       </div>
       }
@@ -241,7 +240,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       />}
        <div className='row mt-3 mb-2'>
         <div className='col-md-12'>
-         <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn poppins-light-18px text-decoration-underline shadow-none p-0 text-uppercase">
+         <button onClick={() => router.push('/')} type="button" className="btn poppins-light-18px text-decoration-underline shadow-none p-0 text-uppercase">
           {t(`Back`)}
         </button>
         </div>

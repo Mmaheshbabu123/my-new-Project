@@ -13,7 +13,7 @@ import ValidateMessage from '@/atoms/validationError';
 import { MdDelete } from 'react-icons/md';
 import Translation from '@/Translation';
 
-const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documentDetails = {}, companies, employers }) => {
+const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documentDetails = {}, companies, employers,t }) => {
   const router = useRouter();
   const assignInitialValues = () => {
     return {
@@ -166,11 +166,11 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
                 className = {'col-md-12 my-1 shadow-none rounded-0'}
                 value={state.name}
                 isDisabled= {false}
-                placeholder={'Enter document name'}
+                placeholder={t('Enter document name')}
                 handleChange={(e) => handleChange(e, 1)}
                 name={'name'}
              />
-          {state.nameWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
+          {state.nameWarning && <ValidateMessage style={{margin:0}} text = {t('This field is required.')}/>}
         </div>
         <div>
             <LabelField title={`File upload`} className='poppins-medium-18px' mandotory={true}/>
@@ -182,8 +182,8 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
                 handleChange={handleFileChange}
                 className=' shadow-none rounded-0 pos-rel'
               />
-          {state.fileSizeWarning && <ValidateMessage style={{margin:0}} text = {'This file is too large to upload, maximum allowed size is 2MB.'}/>}
-          {state.fileWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
+          {state.fileSizeWarning && <ValidateMessage style={{margin:0}} text = {t('This file is too large to upload, maximum allowed size is 2MB.')}/>}
+          {state.fileWarning && <ValidateMessage style={{margin:0}} text = {t('This field is required.')}/>}
           {state.files.length > 0 && showUploadedFiles()}
         </div>
       </div>
@@ -201,7 +201,7 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
             className={'col-md-6 rounded-0 shadow-none'}
             handleChange={(e) => handleChange(e, 1)}
           />
-      {state.dateWarning && <ValidateMessage style={{margin:0}} text = {'Start date should be earlier than end date.'}/>}
+      {state.dateWarning && <ValidateMessage style={{margin:0}} text = {t('Start date should be earlier than end date.')}/>}
         </div>
         <div className="col-md-12 pb-3">
           <LabelField title={`End date`} className='poppins-medium-18px' />
@@ -227,9 +227,9 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
             handleChange={(e) => onSelect(e, 1)}
             isMulti={false}
             className="col-md-6 rounded-0 shadow-none employer_select"
-            placeholder={'Select employer'}
+            placeholder={t('Select employer')} 
           />
-        {state.employerWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
+        {state.employerWarning && <ValidateMessage style={{margin:0}} text = {t('This field is required.')}/>}
         </div>
         <div className="col-md-12 pb-3">
           <LabelField title={`Company`}  mandotory={true} className='poppins-medium-18px' />
@@ -239,9 +239,9 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
             handleChange={(e) => onSelect(e, 2)}
             isMulti={false}
             className="col-md-6 rounded-0 shadow-none employer_select"
-            placeholder={'Select company'}
+            placeholder={t('Select company')}
           />
-        {state.companyWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
+        {state.companyWarning && <ValidateMessage style={{margin:0}} text = {t('This field is required.')}/>}
         </div>
        </div>
         <div className="col-md-12  ">
@@ -276,20 +276,21 @@ const EditUpdateAdditionalDoc = ({ entityId = 0, entityType = 0, editId, documen
     <div className='row mb-2'>
        <div className='col-md-6 p-0'>
        <button onClick={() => router.back()} type="button" className="btn poppins-light-18px text-decoration-underline text-uppercase text-left shadow-none mb-3">
-        {`Back`}
+        {(`Back`)}
       </button>
        </div>
        <div className='col-md-6 '>
           <div className="row justify-content-end">
           <div className='col-md-6'>
-          <button onClick={() => handleSave(1)} type="button" className="btn poppins-medium-18px-next-button rounded-0 shadow-none float-end w-75"> Save as draft </button>
+          <button onClick={() => handleSave(1)} type="button" className="btn poppins-medium-18px-next-button rounded-0 shadow-none float-end w-75"> {t('Save as draft')} </button>
           </div>
           <div className='col-md-6'>
-          <button onClick={() => handleSave()} type="button" className="btn rounded-0 shadow-none float-end poppins-medium-18px-next-button w-100"> Send to employer </button>
+          <button onClick={() => handleSave()} type="button" className="btn rounded-0 shadow-none float-end poppins-medium-18px-next-button w-100"> {t('Send to employer')} </button>
           </div>
           </div>
         </div>
      </div>
   </>
 }
-export default React.memo(EditUpdateAdditionalDoc);
+export default React.memo(Translation(EditUpdateAdditionalDoc,['Enter document name','Select employer','Select company','This file is too large to upload, maximum allowed size is 2MB.','Save as draft','Send to employer',
+'This field is required.','Start date should be earlier than end date.',`Back`,]));

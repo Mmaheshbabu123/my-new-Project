@@ -16,7 +16,7 @@ const itemsPerPage = 8;
 
 const monthOptions = getLastTwelveMonths();
 const V1DocumentsOverview = (props) => {
-  const { t } = t;
+  const { t } = props;
   const [state, setState] = useState({
     loaded: false,
     rows: [],
@@ -199,7 +199,7 @@ const V1DocumentsOverview = (props) => {
   if(!state.loaded) {
     return <> {t('Loading...')} </>
   }
-  
+
   const searchTextField = (key, placeholder) => {
     return(
         <div className='col-md-3' >
@@ -329,7 +329,7 @@ const V1DocumentsOverview = (props) => {
      </div>
      <div className='row'>
        <div className='col-md-12'>
-       <button onClick={() => window.open(process.env.NEXT_PUBLIC_APP_URL_DRUPAL, '_self')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
+       <button onClick={() => router.push('/')} type="button" className="btn text-decoration-underline text-uppercase poppins-light-18px shadow-none px-0">
         {t('Back')}
       </button>
        </div>
