@@ -19,7 +19,7 @@ thead:after
 } */
 .react-confirm-alert-body
 {
-  font-family: var(--font-family-poppins-medium);
+  font-family: var(--font-family-poppins-light);
   font-size: var(--font-size-18px);
   line-height: var(--line-height-27px);
   color: var(--color-label-footer-gray);
@@ -50,6 +50,9 @@ thead:after
 .react-confirm-alert-button-group
 {
   justify-content: end;
+  margin-top: 10px !important;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color-gray) !important;
 }
 .position-sticky
 {
@@ -427,7 +430,7 @@ select option
 }
 .my_todo_tab .Todos_todo-icon__N2dlX
 {
-  height: 25px !important;
+  height: 40px !important;
 }
 .minimun_height_v1
 {
