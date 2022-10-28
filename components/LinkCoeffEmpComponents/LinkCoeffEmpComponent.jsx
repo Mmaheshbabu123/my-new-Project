@@ -12,7 +12,7 @@ var SERVER_SIDE_RENDERING = 1;
 const LinkCoeffEmpComponent = (props) => {
   const { t } = props;
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
-  const { inputRef } = state;
+  const { inputRef, isOverflow } = state;
   useEffect(() => {
     SERVER_SIDE_RENDERING ? fetchEmpCoeffValueTypesData() : SERVER_SIDE_RENDERING += 1;
   }, [])
@@ -191,7 +191,7 @@ const LinkCoeffEmpComponent = (props) => {
           {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
               <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>} */}
           {/* <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: `${tableWidth}` }}> */}
-          <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId">
+          <div className={`row link-emp-coeff-tableparent ${isOverflow ? 'table-overflow' : ''}`} id="linkempCoeffDivId">
             <div className="col-lg-3 col-md-6 m-0 p-0 pc-linking-div firstpart">
               <CoeffcientValuesFirstPart />
             </div>
