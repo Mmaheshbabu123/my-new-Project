@@ -78,7 +78,7 @@ function Header(props) {
 										<Notification /> {/*<img style={{ width: '25px', marginTop: '8px' }} src="/notifications.svg" /> */}
 									</li>
 									<li className="list-unstyled mx-4 align-self-center d-flex">
-										<a href={`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/profile`}> <img className='my-profile-icon' src={state.profile || "/account.png"} /> </a>
+										<a href={`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/profile`}> <img className='my-profile-icon' src={state.profile || "/profile.png"} /> </a>
 									</li>
 									<li className="list-unstyled mx-4 align-self-center d-flex">
 										<select

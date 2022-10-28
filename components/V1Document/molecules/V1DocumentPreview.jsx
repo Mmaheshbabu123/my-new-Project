@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import CheckBoxField from '@/atoms/CheckBoxField';
+import { useRouter } from 'next/router';
 import { v1DocumentPreview, saveV1Document, getEmployerIdByCompanyId } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import styles from './V1Document.module.css';
 import customAlert from '@/atoms/customAlert';
 
 const V1DocumentPreview = ({ employeeId, companyId, preview = 0 }) => {
+  const router = useRouter();
   const [state, setState] = useState({
     employerId: 0,
     approved: 0,
