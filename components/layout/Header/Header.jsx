@@ -35,6 +35,7 @@ function Header(props) {
 						setObj['languages'] = result['data'];
 						setObj['profile'] = result['userData'] ? result['userData']['profile_path'] : '';
 						setObj['lang'] = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
+						
 						updateUserContext({openTodosCount: result['userData'] ? result['userData']['openTodosCount'] : 0})
 					} else { console.log('error while fetching header data') }
 				}).catch(error => console.error(error))
@@ -82,11 +83,12 @@ function Header(props) {
 									</li>
 									<li className="list-unstyled mx-4 align-self-center d-flex">
 										<select
+										    id="lang-select"
 											className="border-0 cursor-pointer bg-white poppins-regular-18px p-1 lang-options"
 											value={state['lang']}
 											onChange={handleLangChange}
 										>
-											{state.languages.map((lang, index) => <option className="lang" value={lang.code} key={index} > {lang.language} </option>)}
+											{state.languages.map((lang, index) => <option className="lang" value={lang.code} key={index} >{lang.code!=''?lang.code.toUpperCase():lang.code} </option>)}
 										</select>
 									</li>
 									<li className="list-unstyled mx-3 align-self-center d-flex poppins-regular-18px">

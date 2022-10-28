@@ -2205,3 +2205,5 @@ input[type="search"]::-webkit-search-cancel-button {
 {
 	width: 340px !important;
 }
+
+#lang-select {text-transform:uppercase;}

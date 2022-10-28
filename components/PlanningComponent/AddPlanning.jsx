@@ -405,7 +405,7 @@ function Planning(props) {
 												updateLocation(e.target.value);
 											}}
 										>
-											<option value="">Select</option>
+											<option value="">{t('Select')}</option>
 											{company.map((options) => (
 												<option key={options.nid} value={options.nid} >
 													{options.title}
