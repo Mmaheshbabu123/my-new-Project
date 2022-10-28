@@ -1674,7 +1674,7 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 }
 .epc_height
 {
-	min-height: 62vh !important;
+	min-height: 65% !important;
 }
 .pc-height5 {
 	min-height: 47vh;
@@ -2216,4 +2216,13 @@ input[type="search"]::-webkit-search-cancel-button {
 .edit_age
 {
 	padding: 0.73rem !important;
+}
+.login-hide-show-span path
+{
+	color: var(--color-skyblue) !important;
+}
+.my-todo-all-icon 
+{
+	height: 25px;
+  margin-bottom: 7px;
 }

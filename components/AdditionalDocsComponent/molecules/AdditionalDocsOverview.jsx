@@ -146,7 +146,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
         onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
         type="button"
         className="btn skyblue-bg-color rounded-0 shadow-none col-3 px-0">
-        {+ t('Add additional document')}
+        { t('+'+'Add additional document')}
       </button>
       </div>
       }

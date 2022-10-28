@@ -182,17 +182,18 @@ const ViewSalaryBenefits = (props) => {
 														value={agent}
 														checked={element.sales_agent === true}
 													/>
-													<label
-														className={
+													<label className="form-check-label" htmlFor="flexCheckDefault">
+														<p className={
 															pc_view_type == 'addpc' ? (
 																'poppins-medium-16px'
 															) : (
 																'poppins-medium-14px'
 															)
-														}
-													>
+														}>
 														{t('Allow sales agent to update the value during creation of')}
 														{t('cooperation agreement?')}
+														</p>
+														
 													</label>
 												</div>
 											</div>
