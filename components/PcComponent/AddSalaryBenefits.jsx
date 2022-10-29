@@ -113,6 +113,7 @@ const AddSalaryBenefits = (props) => {
 		return V;
 	};
 
+
 	const updateMandatory = (index, value) => {
 		var object = [...obj];
 		object[index].mandatory = value;
@@ -651,7 +652,7 @@ const AddSalaryBenefits = (props) => {
 					''
 				)}
 				{rows}
-				{key != 0 ? (
+				{ pc_view_type!='addpc'? (
 					<div className="row mt-4">
 						<div className="text-start col-md-6">
 							<button
@@ -675,6 +676,7 @@ const AddSalaryBenefits = (props) => {
 						</div>
 					</div>
 				) : 
+			
 				// pc_view_type == 'addpc' ? (
 					<div className="row my-4">
 						<div className="text-start col-md-6">
