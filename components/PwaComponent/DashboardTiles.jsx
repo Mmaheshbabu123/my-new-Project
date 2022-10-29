@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 //import { ExitToApp } from "node_modules/@material-ui/icons/index";
-import EmployeeWidget from "./EmployeeWidget";
+// import EmployeeWidget from "./EmployeeWidget";
+import EmployeeWidgetBlock from './WidgetBlock';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 
 export default function DashboardTiles({dashboardtiles}) {
@@ -30,7 +31,8 @@ return(
 
             return (
                 <div key={`key_${idx}`} className="col-lg-6 col-md-6 col-sm-12 ">
-            <EmployeeWidget  />
+            {/* <EmployeeWidget  /> */}
+            <EmployeeWidgetBlock />
             </div>
             )
 
