@@ -402,6 +402,7 @@ select option
 .sign_action_icon_size
 {
   width: 20px !important;
+  vertical-align: middle;
 }
 .my_todo_table .my_todo_action_icon
 {

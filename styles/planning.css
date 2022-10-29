@@ -139,16 +139,23 @@ input[type="checkbox"]
 {
   border: none !important;
 }
-.sign_action_icon_size_pdf
+.sign_action_icon_size_pdf,
+.sign_action_icon_size_add
 {
   width: 16px;
-  
+  vertical-align: middle;
+}
+.manage-cooperation-agreement-table-header .sign_action_icon_size_pdf,
+.manage-cooperation-agreement-table-header .sign_action_icon_size_add
+{
+  vertical-align: middle;
 }
 .delete_icon_manage_cooperation
 {
-  margin-bottom: 11px;
+  /* margin-bottom: 11px; */
   height: 26px !important;
   width: 26px !important ;
+  vertical-align: middle;
 }
 .Appointment-clickableAppointment
 {
