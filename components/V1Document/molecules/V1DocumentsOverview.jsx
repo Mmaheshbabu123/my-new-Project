@@ -3,6 +3,7 @@ import { getSignedV1Documents, downloadV1Documents } from '@/Services/ApiEndPoin
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import Modal from 'react-bootstrap/Modal';
 import ReactPaginate from 'react-paginate';
+import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { GrView } from 'react-icons/gr';
@@ -16,6 +17,7 @@ const itemsPerPage = 8;
 
 const monthOptions = getLastTwelveMonths();
 const V1DocumentsOverview = (props) => {
+  const router = useRouter();
   const { t } = props;
   const [state, setState] = useState({
     loaded: false,
@@ -26,8 +28,8 @@ const V1DocumentsOverview = (props) => {
     period: [{label: '-- Select --', value: 0}],
     employeeSearchTerm: '',
     companySearchTerm: '',
-    functionSearchTerm: [],
-    periodSearchTerm: [],
+    functionSearchTerm: '',
+    periodSearchTerm: '',
     employerArray: [],
     showPopup: false,
     spinner: false,

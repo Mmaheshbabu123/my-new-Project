@@ -113,6 +113,7 @@ const AddSalaryBenefits = (props) => {
 		return V;
 	};
 
+
 	const updateMandatory = (index, value) => {
 		var object = [...obj];
 		object[index].mandatory = value;
@@ -651,9 +652,19 @@ const AddSalaryBenefits = (props) => {
 					''
 				)}
 				{rows}
-				{key != 0 ? (
+				{ pc_view_type!='addpc'? (
 					<div className="row mt-4">
-						<div className="text-start col-md-6" />
+						<div className="text-start col-md-6">
+							<button
+								type="button"
+								className="bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline"
+								onClick={() => {
+									router.push('/editpc/'+key);
+								}}
+							>
+								{t('BACK')}
+							</button>
+						</div>
 						<div className="text-end col-md-6">
 							<button
 								// onClick={()=>Submit}
@@ -664,7 +675,9 @@ const AddSalaryBenefits = (props) => {
 							</button>
 						</div>
 					</div>
-				) : pc_view_type == 'addpc' ? (
+				) : 
+			
+				// pc_view_type == 'addpc' ? (
 					<div className="row my-4">
 						<div className="text-start col-md-6">
 							<button
@@ -686,9 +699,10 @@ const AddSalaryBenefits = (props) => {
 							</button>
 						</div>
 					</div>
-				) : (
-					''
-				)}
+				// ) : (
+					// ''
+				// )
+				}
 			</form>
 		</div>
 	);

@@ -5,7 +5,10 @@ import styles from '../molecules/EmployerSv.module.css';
 import { fetchCompaniesBasedOnEmployer } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import Translation from '@/Translation';
+import { useRouter } from 'next/router';
+
 const EmployerCooperationAgreementMain = (props) => {
+  const router = useRouter();
   const { t } = props;
   const [state, setState] = useState({
       companies: {}
@@ -52,6 +55,17 @@ const EmployerCooperationAgreementMain = (props) => {
               <OverviewPage state={state} setState={setState} companyLength={state.companies.length}/>
               {state.companies && state.companies.length > 0 &&
                 <RequestAgreement state={state} setState={setState} employer_id = {props.employerid} />}
+                <div className="row my-2">
+                <div className="text-start col-md-6">
+                  <button
+                    type="button"
+                    className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
+                    onClick={() =>router.back()}
+                  >
+                    {t('BACK')}
+                  </button>
+                </div>
+                </div>
           </div>
           </div>
         : <p>{t('Loading...')}</p>}

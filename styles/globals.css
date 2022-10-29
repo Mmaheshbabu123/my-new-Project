@@ -2209,6 +2209,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	width: 340px !important;
 }
 
+#lang-select {text-transform:uppercase;}
 .login-hide-show-span > svg {
 	height: 22px;
   width: 22px;
