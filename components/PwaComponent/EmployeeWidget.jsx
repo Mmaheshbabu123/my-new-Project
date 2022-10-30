@@ -320,7 +320,7 @@ function EmployeeWidget(props) {
                             <tbody>
                                 {widgetTemp2.length > 0 &&
                                     widgetTemp2.map((result) => (
-                                        <tr className="border poppins-regular-18px p-2">
+                                        <tr className="border poppins-regular-18px p-2"  key={result.id}>
                                             <td className="poppins-regular-16px p-2">{result.name}</td>
                                             <td className="poppins-regular-16px p-2">{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2">{result.location_name}</td>
