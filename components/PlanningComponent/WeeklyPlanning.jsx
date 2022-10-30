@@ -1,24 +1,20 @@
-import React, { Component, useEffect, useState, useContext } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect, useState, useContext } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import { getEmployeerCompanylist, getWeeklyPlanning } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
-import Link from 'node_modules/next/link';
 import moment from 'moment';
-import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
-import EditEmployee from './EditEmployee';
 import Translation from '@/Translation';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import DraftPlanning from '@/components/PlanningComponent/DraftPlanning';
 import { useRouter } from 'next/router';
 import BackLink from '../BackLink';
+import PlanningOverview from './PlanningOverview';
 
 function WeeklyPlanning(props) {
 	const router = useRouter();
 	const { t } = props;
 	const { contextState = {} } = useContext(UserAuthContext);
 	const [ showview, setShowview ] = useState(false);
-	const [ planning, setPlanning ] = useState([]);
 	const [ activeWeek, setActiveWeek ] = useState([]);
 	const [ location, setLocation ] = useState('');
 	const [ company, setCompany ] = useState('');
@@ -28,10 +24,7 @@ function WeeklyPlanning(props) {
 	const [ locationlist, setLocationlist ] = useState([]);
 	const [ costcenterlist, setCostcenterlist ] = useState([]);
 	const [ edit, setEdit ] = useState(false);
-	const [ editDate, setEditDate ] = useState([]);
 	const [ weekCount, setWeekCount ] = useState(0);
-
-	const [ styleEdit, setStyleEdit ] = useState('col-md-12');
 	const [ activeTab, setActiveTab ] = useState(1);
 
 	useEffect(
@@ -41,31 +34,6 @@ function WeeklyPlanning(props) {
 			}
 		},
 		[ router ]
-	);
-
-	useEffect(
-		() => {
-			if (showview == true) {
-				if (company != '') {
-					var loc = location != '' ? location : 0;
-					var cc = costcenter != '' ? costcenter : 0;
-					APICALL.service(getWeeklyPlanning + company + '/' + loc + '/' + cc + '/' + weekCount, 'GET')
-						.then((result) => {
-							if (result.status == 200) {
-								console.log(result.data[0]);
-								setPlanning(result.data[1]);
-								setActiveWeek(result.data[0]);
-							}
-						})
-						.catch((error) => {
-							console.error(error);
-						});
-				} else {
-					setPlanning([]);
-				}
-			}
-		},
-		[ showview, company, location, costcenter, weekCount ]
 	);
 
 	useEffect(
@@ -90,17 +58,7 @@ function WeeklyPlanning(props) {
 		},
 		[ contextState.uid ]
 	);
-	let editplanning = (data) => {
-		setEdit(true);
-		setStyleEdit('col-md-9');
-		setEditDate(data);
-		window.scrollTo(0, 0);
-	};
-	let updateParent = () => {
-		setStyleEdit('col-md-12');
-		setEditDate([]);
-		setEdit(false);
-	};
+
 
 	let updateLocation = (comp_id) => {
 		setCompany(comp_id);
@@ -140,6 +98,15 @@ function WeeklyPlanning(props) {
 			setCostcenter('');
 		}
 	};
+	let updateTabs = (val) =>{
+		if(activeTab != val){
+		setCompany('');
+		setLocation('');
+		setCostcenter('');
+		setActiveTab(val);
+		}
+
+	}
 	return (
 		<div className="container-fluid p-0 m-0">
 			<div className="row">
@@ -148,7 +115,7 @@ function WeeklyPlanning(props) {
 						<p className=" py-4 font-weight-bold   bitter-italic-normal-medium-24">
 							{t('Weekly planning')}
 						</p>
-						{activeWeek &&
+						{activeTab == 1 && activeWeek &&
 						activeWeek.length > 0 && (
 							<p className=" poppins-light-18px pb-3">
 								{t('For the week of Monday from')} {activeWeek[0].split('-').reverse().join('-')}{' '}
@@ -164,9 +131,9 @@ function WeeklyPlanning(props) {
 							className={`btn  btn my-2 ${activeTab == 1
 								? 'skyblue-bg-color'
 								: 'btn-bg-gray-medium'} border-0 poppins-medium-18px  rounded-0 btn-block float-end mt-2 mb-2 d-flex align-items-center add-pln  px-3 btn-block shadow-none rounded-0 "`}
-							onClick={() => {
-								setActiveTab(1);
-							}}
+								onClick={() => {
+									updateTabs(1);
+								}}
 						>
 							{t('Planning view')}
 						</button>
@@ -178,29 +145,13 @@ function WeeklyPlanning(props) {
 								? 'skyblue-bg-color'
 								: 'btn-bg-gray-medium'} add-pln poppins-medium-18px shadow-none rounded-0`}
 							onClick={() => {
-								setActiveTab(2);
+								updateTabs(2);
 							}}
 						>
 							{t('Draft planning')}
 						</button>
 					</div>
 				</div>
-				{/* {showview && <p className="h6">For the week of Monday from 10/07/2022 to sunday 17/07/2022</p>}
-
-				{showview && (
-					<div className=" mt-4 d-flex justify-content-end">
-						<div className="d-inline ">
-							<button type="button" className="btn btn-dark   btn-block ">
-								Planning view
-							</button>
-						</div>
-						<div className=" ">
-							<button type="submit" className="btn btn-outline-dark ms-2   btn-block ">
-								Encodage view
-							</button>
-						</div>
-					</div>
-				)} */}
 				<div className=" py-4 d-flex weekly_planning_search_position">
 					<div className="col-md-12">
 						<div className="row">
@@ -239,11 +190,6 @@ function WeeklyPlanning(props) {
 													</option>
 												)
 										)}
-									{/* {locationlist.map((value) => (
-							<option key={value.value} value={value.value}>
-								{value.title}
-							</option>
-						))} */}
 								</select>
 							</div>
 							<div className="col-md-3">
@@ -264,233 +210,14 @@ function WeeklyPlanning(props) {
 							</div>
 						</div>
 					</div>
-					{/* <select className="form-select w-25 me-2">
-						<option>Select Project</option>
-						<option value="">Project-1</option>
-						<option value="">Project-2</option>
-					</select> */}
 				</div>
 				{activeTab == 1 ? (
 					<div>
-						<div className={'mt-2 min-height-weekly-planning'}>
-							{planning || company != '' ? (
-								<div className="row">
-									<div className={styleEdit}>
-										<p
-											className={
-												' bitter-italic-normal-medium-22 text-center table-title-bg py-3 '
-											}
-										>
-											<FaLessThan
-												className="less-grather mx-4"
-												onClick={() => {
-													setWeekCount(weekCount - 1);
-												}}
-											/>{' '}
-											<span
-												onClick={() => {
-													setWeekCount(0);
-												}}
-											>
-												{t('Current week')}
-											</span>{' '}
-											<FaGreaterThan
-												className="less-grather mx-4"
-												onClick={() => {
-													setWeekCount(weekCount + 1);
-												}}
-											/>{' '}
-										</p>
-										<table className="table">
-											<thead className="">
-												{console.log(activeWeek)}
-												{activeWeek &&
-												activeWeek.length > 0 && (
-													<tr className="skyblue-bg-color">
-														<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
-															{t('Monday')}
-															<br />
-															{activeWeek.length > 0 &&
-																activeWeek[0].split('-').reverse().join('-')}
-														</th>
-														<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-															{t('Tuesday')} <br />
-															{activeWeek.length > 0 &&
-																activeWeek[1].split('-').reverse().join('-')}
-														</th>
-														<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-															{t('Wednesday')} <br />
-															{activeWeek.length > 0 &&
-																activeWeek[2].split('-').reverse().join('-')}
-														</th>
-														<th className=" table-right-border-white   text-center align-items-center justify-content-center lh-base">
-															{t('Thursday')} <br />
-															{activeWeek.length > 0 &&
-																activeWeek[3].split('-').reverse().join('-')}
-														</th>
-														<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-															{t('Friday')}
-															<br />
-															{activeWeek.length > 0 &&
-																activeWeek[4].split('-').reverse().join('-')}
-														</th>
-														<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
-															{t('Saturday')}
-															<br />
-															{activeWeek.length > 0 &&
-																activeWeek[5].split('-').reverse().join('-')}
-														</th>
-														<th className="  text-center  align-items-center justify-content-center lh-base">
-															{t('Sunday')}
-															<br />
-															{activeWeek.length > 0 &&
-																activeWeek[6].split('-').reverse().join('-')}
-														</th>
-													</tr>
-												)}
-											</thead>
-											<tbody>
-												{Object.keys(planning).length > 0 ? (
-													Object.keys(planning).map((value) => (
-														<tr
-															className="border-bottom table-border-gray equal-width-calc"
-															key={value}
-														>
-															{console.log(planning)}
-															{activeWeek.map((val, key) => (
-																<td
-																	className=" table-border-gray font-poppins-light"
-																	key={key}
-																>
-																	{planning[value].map(
-																		(v2, k2) =>
-																			v2.some((el) => el.pdate === val) ? (
-																				<div>
-																					{v2.map(
-																						(val1, key1) =>
-																							val1.pdate == val ? (
-																								<div key={val1.id}>
-																									{key1 == 0 && (
-																										<div>
-																											<div className="row mb-1">
-																												<div className="col-md-9 pe-0">
-																													<p className="employee-weekly-planning">
-																														{
-																															val1.employee_name
-																														}
-																													</p>
-																												</div>
-																												<div className="color-skyblue my-2 mt-1 text-end col-md-3 ps-0">
-																													{new Date(
-																														val1.pdate
-																													) >
-																													new Date() ? (
-																														<a
-																														>
-																															<MdEdit
-																																className="float-right cursor-pointer"
-																																data-toggle="tooltip"
-																																title="Edit plannig"
-																																onClick={() =>
-																																	editplanning(
-																																		val1
-																																	)}
-																															/>
-																														</a>
-																													) : (
-																														<span className="invisible">
-																															edit
-																														</span>
-																													)}
-																												</div>
-																											</div>
-
-																											<p className="poppins-light-14px">
-																												{
-																													val1.employee_type_name
-																												}
-																											</p>
-
-																											<p className="poppins-light-14px">
-																												{
-																													val1.function_name
-																												}
-																											</p>
-
-																											<p className="poppins-light-14px">
-																												{'€ ' +
-																													val1.salary}
-																											</p>
-																										</div>
-																									)}
-																									<p className="poppins-light-14px">
-																										{moment(
-																											val1.starttime
-																										).format(
-																											'HH:mm'
-																										) +
-																											' to ' +
-																											moment(
-																												val1.endtime
-																											).format(
-																												'HH:mm'
-																											)}
-																									</p>
-																								</div>
-																							) : (
-																								''
-																							)
-																					)}
-																				</div>
-																			) : (
-																				''
-																			)
-																	)}
-																</td>
-															))}
-														</tr>
-													))
-												) : company != '' ? (
-													<tr className="no-records">
-														<td
-															colSpan={7}
-															className="align-middle text-center poppins-light-18px border"
-															style={{ height: '4rem' }}
-														>
-															{t('No planning for this week.')}
-														</td>
-													</tr>
-												) : (
-													<tr>
-														<td
-															colSpan={7}
-															className="align-middle text-center poppins-light-18px border"
-															style={{ height: '4rem' }}
-														>
-															{t('Select company and location to view planning.')}
-														</td>
-													</tr>
-												)}
-											</tbody>
-										</table>
-									</div>
-
-									{edit && (
-										<div className="col-md-3">
-											<EditEmployee data={editDate} childtoparent={updateParent} />
-										</div>
-									)}
-								</div>
-							) : (
-								<div className="col-md-12 week-height align-items-center d-flex justify-content-center mb-4">
-									{t('Select company and location to view planning.')}
-								</div>
-							)}
-						</div>
+						<PlanningOverview company={company} location={location} costcenter={costcenter} week={activeWeek}/>
 					</div>
 				) : (
-					<div>
-						<DraftPlanning />
+					<div className='mt-4'>
+						<DraftPlanning company={company} location={location} costcenter={costcenter} />
 					</div>
 				)}
 
@@ -501,7 +228,6 @@ function WeeklyPlanning(props) {
 					<div className="col-md-6 p-0">
 						<button
 							type="submit"
-							// className="btn rounded-0 custom-btn px-3 btn-block float-end"
 							className="btn rounded-0 px-3 float-end poppins-medium-18px-next-button shadow-none"
 							onClick={() => {
 								router.push('/');
