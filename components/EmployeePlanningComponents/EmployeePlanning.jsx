@@ -12,6 +12,7 @@ import { fetchemployeeplanning, getContract } from '../../Services/ApiEndPoints'
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import moment from 'moment';
 import Translation from '@/Translation';
+import BackLink from '../BackLink';
 
 
 import {
@@ -178,7 +179,7 @@ function EmployeeMonthlyPlanning(props) {
 									<td className="border_employee_planning poppins-light-18px">{result.location}</td>
 									<td className="border_employee_planning poppins-light-18px">{result.companyname}</td>
 									<td className="border_employee_planning">
-										{ result.contract_id != '' &&
+										{/* { result.contract_id != '' &&
 											<Link href={result.contract_id}>
 
 												<AiFillEye
@@ -190,7 +191,7 @@ function EmployeeMonthlyPlanning(props) {
 
 												/>
 											</Link>
-										}
+										} */}
 
 										{/* <span>
 											<MdReviews
@@ -209,6 +210,14 @@ function EmployeeMonthlyPlanning(props) {
 									</td>
 								</tr>
 							))}
+							{/*----------------------------No records found-------------------------- */}
+							{data.length == 0 && (
+                                    <tr>
+                                        <td colSpan={7} className="text-center py-3 border poppins-regular-18px">
+                                            No records
+                                        </td>
+                                    </tr>
+                                )}
 						</tbody>
 					</table>
 				</div>
@@ -249,162 +258,11 @@ function EmployeeMonthlyPlanning(props) {
 					</React.Fragment>
 				</div>
 			</div>
+			<div className="text-start col-md-6">
+                <BackLink path={'/'} />
+            </div>
 		</div>
 	);
 }
 export default React.memo(Translation(EmployeeMonthlyPlanning,['Day','Week','Month','My planning','My upcoming plannings','Date','Start time','End time','Employer','Location','Company','Action']));
 
-// const [ data, setData ] = React.useState([
-// {
-// 	title: 'Website Re-Design Plan',
-// 	startDate: new Date(2018, 6, 23, 9, 30),
-// 	endDate: new Date(2018, 6, 23, 11, 30),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	Date: '06 - 07 - 2018',
-// 	company: 'Infanion'
-// },
-// {
-// 	title: 'Book Flights to San Fran for Sales Trip',
-// 	startDate: new Date(2018, 6, 23, 12, 0),
-// 	endDate: new Date(2018, 6, 23, 13, 0),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	Date: '06 - 07 - 2018',
-// 	company: 'Infanion'
-// },
-// {
-// 	title: 'Install New Router in Dev Room',
-// 	startDate: new Date(2018, 6, 23, 14, 30),
-// 	endDate: new Date(2018, 6, 23, 15, 30),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	Date: '06 - 07 - 2018',
-// 	company: 'Infanion'
-// },
-// {
-// 	title: 'Approve Personal Computer Upgrade Plan',
-// 	startDate: new Date(2018, 6, 24, 10, 0),
-// 	endDate: new Date(2018, 6, 24, 11, 0),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	company: 'Infanion'
-// },
-// {
-// 	title: 'Final Budget Review',
-// 	startDate: new Date(2018, 6, 24, 12, 0),
-// 	endDate: new Date(2018, 6, 24, 13, 35),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	Date: '06 - 07 - 2018'
-// },
-// {
-// 	title: 'Brochure Design Review',
-// 	startDate: new Date(2018, 6, 26, 14, 0),
-// 	endDate: new Date(2018, 6, 26, 15, 30),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	Date: '06 - 07 - 2018'
-// },
-// // {
-// 	title: 'Create Icons for Website',
-// 	startDate: new Date(2018, 6, 27, 10, 0),
-// 	endDate: new Date(2018, 6, 27, 11, 30),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	Date: '06 - 07 - 2018'
-// },
-// {
-// 	title: 'Upgrade Server Hardware',
-// 	startDate: new Date(2018, 6, 27, 14, 30),
-// 	endDate: new Date(2018, 6, 27, 16, 0),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	Date: '06 - 07 - 2018'
-// },
-// {
-// 	title: 'Submit New Website Design',
-// 	startDate: new Date(2018, 6, 27, 16, 30),
-// 	endDate: new Date(2018, 6, 27, 18, 0),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	Date: '06 - 07 - 2018'
-// },
-// {
-// 	title: 'Launch New Website',
-// 	startDate: new Date(2018, 6, 26, 12, 20),
-// 	endDate: new Date(2018, 6, 26, 14, 0),
-// 	startTime: '1 PM',
-// 	endTime: '3PM',
-// 	employer: 'Preeti',
-// 	location: 'Bangalore',
-// 	Date: '06 - 07 - 2018'
-// }
-// {
-// 	title: 'Website Re-Design Plan',
-// 	startDate: new Date(2018, 6, 16, 9, 30),
-// 	endDate: new Date(2018, 6, 16, 15, 30),
-// 	startTime: '1 PM',
-// 	endTime: '3PM'
-// },
-// {
-// 	title: 'Book Flights to San Fran for Sales Trip',
-// 	startDate: new Date(2018, 6, 16, 12, 0),
-// 	endDate: new Date(2018, 6, 16, 13, 0),
-// 	startTime: '1 PM',
-// 	endTime: '3PM'
-// },
-// {
-// 	title: 'Install New Database',
-// 	startDate: new Date(2018, 6, 17, 15, 45),
-// 	endDate: new Date(2018, 6, 18, 12, 15)
-// },
-// {
-// 	title: 'Approve New Online Marketing Strategy',
-// 	startDate: new Date(2018, 6, 18, 12, 35),
-// 	endDate: new Date(2018, 6, 18, 14, 15)
-// },
-// {
-// 	title: 'Upgrade Personal Computers',
-// 	startDate: new Date(2018, 6, 19, 15, 15),
-// 	endDate: new Date(2018, 6, 20, 20, 30)
-// },
-// {
-// 	title: 'Prepare 2015 Marketing Plan',
-// 	startDate: new Date(2018, 6, 20, 20, 0),
-// 	endDate: new Date(2018, 6, 20, 13, 30)
-// },
-// {
-// 	title: 'Brochure Design Review',
-// 	startDate: new Date(2018, 6, 20, 14, 10),
-// 	endDate: new Date(2018, 6, 20, 15, 30)
-// },
-// {
-// 	title: 'Vacation',
-// 	startDate: new Date(2018, 5, 22),
-// 	endDate: new Date(2018, 6, 1)
-// },
-// {
-// 	title: 'Vacation',
-// 	startDate: new Date(2018, 6, 28),
-// 	endDate: new Date(2018, 7, 7)
-// }
-// ]);

@@ -236,8 +236,8 @@
 {
   fill: cadetblue;
 }
-.manage-cooperation-tabs span:hover
+/* .manage-cooperation-tabs span:hover
 {
   border-bottom: 2px solid var(--color-skyblue) !important;
   color: var(--color-skyblue) !important; 
-}
+} */

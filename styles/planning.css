@@ -139,16 +139,23 @@ input[type="checkbox"]
 {
   border: none !important;
 }
-.sign_action_icon_size_pdf
+.sign_action_icon_size_pdf,
+.sign_action_icon_size_add
 {
   width: 16px;
-  
+  vertical-align: middle;
+}
+.manage-cooperation-agreement-table-header .sign_action_icon_size_pdf,
+.manage-cooperation-agreement-table-header .sign_action_icon_size_add
+{
+  vertical-align: middle;
 }
 .delete_icon_manage_cooperation
 {
-  margin-bottom: 11px;
+  /* margin-bottom: 11px; */
   height: 26px !important;
   width: 26px !important ;
+  vertical-align: middle;
 }
 .Appointment-clickableAppointment
 {
@@ -489,6 +496,7 @@ input[type="checkbox"]
 .dashboard_menu_links
 {
   background-color: var(--bg-grey-medium) !important;
+  position:relative !important;
 }
 .dashboard_menu_title,
 .dashboard_menu_title:hover
@@ -497,7 +505,7 @@ input[type="checkbox"]
   font-family: var(--font-family-poppins-medium);
   font-size: var(--font-size-18px);
   line-height: var(--line-height-29px);
-  min-height: 6rem;
+  min-height: 4rem;
 }
 .employee_widget_search,
 .employee_widget_search:focus
@@ -506,7 +514,7 @@ input[type="checkbox"]
 }
 .employee_widget_dashboard
 {
-  border: 1px solid var(--color-border-lightgrey) !important;
+  /* border: 1px solid var(--color-border-lightgrey) !important; */
 }
 .employer_widget_search_button,
 .employer_widget_search_button:focus
@@ -529,7 +537,7 @@ input[type="checkbox"]
 }
 .employee_widget_dashboard
 {
-  height: 19.5rem !important;
+  /* height: 19.5rem !important; */
 }
 .employee_width_col
 {
