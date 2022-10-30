@@ -27,6 +27,7 @@ const Pincode = (props) => {
 	const { contextState = {} } = useContext(UserAuthContext);
 
 	const [ hasPin, setHasPin ] = useState(false);
+
 	const [ uid, setUid] = useState(null);
 	const [ otp, setOTP ] = useState('');
     const [ otp1, setOTP1 ] = useState('');
