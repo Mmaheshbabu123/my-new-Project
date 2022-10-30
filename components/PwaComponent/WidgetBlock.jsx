@@ -62,7 +62,7 @@ function EmployeeWidgetBlock(props) {
                             <tbody>
                                 {widgetTemp2.length > 0 &&
                                     widgetTemp2.slice(0, visible).map((result) => (
-                                        <tr className="border poppins-regular-18px p-2">
+                                        <tr className="border poppins-regular-18px p-2" key={result.id}>
                                             <td className="poppins-regular-16px p-2">{result.name}</td>
                                             <td className="poppins-regular-16px p-2">{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2">{result.location_name}</td>
@@ -86,6 +86,14 @@ function EmployeeWidgetBlock(props) {
 
                                         </tr>
                                     ))}
+                                    {/*----------------------------No records found-------------------------- */}
+                                {widget.length == 0 && (
+                                    <tr>
+                                        <td colSpan={5} className="text-center py-3 border poppins-regular-18px">
+                                            No records
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
