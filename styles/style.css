@@ -698,7 +698,8 @@ select option
   display: flex;
   align-items: center;
 }
-.start-stop-planning .react-select-prefix__control--is-focused
+.start-stop-planning .react-select-prefix__control--is-focused,
+.minheight-verifypin .react-select-prefix__control--is-focused
 {
   border: 1px solid #4C4D554D !important;
 }
