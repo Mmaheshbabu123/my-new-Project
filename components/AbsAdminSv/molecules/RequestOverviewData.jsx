@@ -355,7 +355,7 @@ const RequestOverviewData = (props) => {
    * @return {Promise}         [description]
    */
   const handleDelete = async (eachRow) => {
-    await APICALL.service(`${deleteCooperationAgreement}`, 'POST', { company_id: eachRow.company_id, employer_id: eachRow.employer_id })
+    await APICALL.service(`${deleteCooperationAgreement}`, 'POST', { company_id: eachRow.company_id, employer_id: eachRow.employer_id, root_parent_id: eachRow.root_parent_id || 0 })
     .then(response => {
       if(response.status === 200) {
         router.reload()
