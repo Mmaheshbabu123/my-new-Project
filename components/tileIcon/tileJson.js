@@ -3,10 +3,11 @@ import coefficient from '@/components/images/e2.svg';
 import linkcofficientemp from '@/components/images/e3.svg';
 import salary from '@/components/images/e4.svg';
 import coefficientperPC from '@/components/images/e5.svg';
+import BackLink from '../BackLink';
 
 
 let urlParams = { get: (name) => '' };
-if(typeof window !== 'undefined')
+if (typeof window !== 'undefined')
   urlParams = new URLSearchParams(window.location.search);
 
 const getParam = name => urlParams.get(name);
@@ -66,3 +67,7 @@ export const tileJson = [
     iconPath: salary,
   }
 ];
+
+<div className="text-start col-md-6">
+<BackLink path={'/'} />
+</div>

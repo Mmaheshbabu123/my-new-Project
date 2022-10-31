@@ -435,9 +435,8 @@ select option
 }
 .minimun_height_v1
 {
-  min-height: 41vh;
+  min-height: 42vh;
 }
-
 .cursor-pointer {
   cursor: pointer !important;
 }
@@ -459,6 +458,10 @@ select option
 {
   position: relative;
   height: 100% !important;
+}
+.position_relative_time_registration
+{
+  position: relative;
 }
 .table-render-parent-div
 {
@@ -506,7 +509,8 @@ select option
 }
 .time-registartion-height
 {
-  height: 150px;
+  height: 215px;
+  position: relative;
 }
 .edit_pc_salary_benefits input[type="text"]:focus,
 .edit_pc_salary_benefits select:focus
@@ -651,4 +655,50 @@ select option
 .login-page-container .form-control:focus
 {
   border: 1px solid var(--border-color-light-gray) !important;
+}
+.manage-agreements-min-height
+{
+  min-height: 48vh;
+}
+.time-registration-img-div span
+{
+  height: 80px !important;
+  top: 2.5rem !important;
+}
+.time-registration-tile,
+.time-registration-tile:hover
+{
+  position: absolute;
+  bottom: 1.5rem;
+  color: var(--color-label-footer-gray) !important;
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+.time-registration-tile a:hover
+{
+  color: var(--color-label-footer-gray) !important;
+}
+.min-height-time-registration-dashboard
+{
+  min-height: 71vh;
+}
+.start-stop-planning .rc-time-picker,
+.start-stop-planning .rc-time-picker-input
+{
+  width: 100% !important;
+  height: 43px !important;
+}
+.min-height-stop-start-planning
+{
+  min-height: 68vh;
+}
+.start-stop-planning .react-select-prefix__single-value
+{
+  display: flex;
+  align-items: center;
+}
+.start-stop-planning .react-select-prefix__control--is-focused
+{
+  border: 1px solid #4C4D554D !important;
 }

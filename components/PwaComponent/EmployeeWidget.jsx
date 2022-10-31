@@ -246,17 +246,6 @@ function EmployeeWidget(props) {
                                 type="search"
                                 id="form12"
                                 className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-                                placeholder="Employee name"
-                                value={searchname}
-                                onChange={(e) => setSearchname(e.target.value)}
-                            />
-                        </div>
-
-                        <div className="col-sm-3 field_height">
-                            <input
-                                type="search"
-                                id="form12"
-                                className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
                                 placeholder="Company"
                                 value={searchcompany}
                                 onChange={(e) => setSearchcompany(e.target.value)}
@@ -273,6 +262,18 @@ function EmployeeWidget(props) {
                                 onChange={(e) => setSearchlocation(e.target.value)}
                             />
                         </div>
+
+                        <div className="col-sm-3 field_height">
+                            <input
+                                type="search"
+                                id="form12"
+                                className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
+                                placeholder="Employee name"
+                                value={searchname}
+                                onChange={(e) => setSearchname(e.target.value)}
+                            />
+                        </div>
+
                         <div className="col-sm-3 field_height">
                             <div className='row'>
                                 <div className="col-md-6">
@@ -320,13 +321,13 @@ function EmployeeWidget(props) {
                             <tbody>
                                 {widgetTemp2.length > 0 &&
                                     widgetTemp2.map((result) => (
-                                        <tr className="border poppins-regular-18px p-2"  key={result.id}>
+                                        <tr className="border poppins-regular-18px p-2" key={result.id}>
                                             <td className="poppins-regular-16px p-2">{result.name}</td>
                                             <td className="poppins-regular-16px p-2">{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2">{result.location_name}</td>
                                             <td className="poppins-regular-16px p-2">{moment(result.actual_end_time).format('HH:mm')}</td>
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
-                                                { moment(result.actual_end_time) < current_time  &&
+                                                {moment(result.actual_end_time) < current_time &&
                                                     <Link href='' className="m-2">
                                                         <a type="button" className="warning-icon-solid">
 
@@ -340,6 +341,13 @@ function EmployeeWidget(props) {
 
                                                     </a>
                                                 </Link>
+                                                <Link href='' className="m-4">
+                                                    <a type="button" className="cross-icon-solid"
+                                                    // onClick={showPopup} 
+                                                    >
+                                                    </a>
+                                                </Link>
+
                                             </td>
 
                                         </tr>
@@ -359,7 +367,7 @@ function EmployeeWidget(props) {
 
             </form>
             <div className="">
-              
+
                 {/* <StopPlanning
 								data={widget}
 								display={'block'}
@@ -370,9 +378,9 @@ function EmployeeWidget(props) {
 								// updatecompany={updatcomp}
 								// countries={countrylist}
 							/> */}
-               
+
             </div>
-           
+
             {/*-------------------------- Pagination---------------------------*/}
             <div className="row my-4">
                 {widget.length > itemsPerPage && (
