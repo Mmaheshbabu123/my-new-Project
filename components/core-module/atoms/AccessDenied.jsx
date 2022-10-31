@@ -1,9 +1,10 @@
 import React from 'react';
 import Translation from '@/Translation';
-const AccessDenied = () => {
+const AccessDenied = (props) => {
+  const { t } = props;
   return (
     <div className='my-4'>
-      <h1 className = 'access-denied-title'> {t('Access denied')} </h1>
+      <h1 className = 'access-denied-title'> {t('Access denied')} </h1>     
       <div className="text-center fs-5">  {t('You are not authorized to access this page.')}  </div>
     </div>
   );

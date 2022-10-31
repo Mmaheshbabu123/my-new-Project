@@ -5,12 +5,12 @@ import { labourShareDocPreview, updateEmployerSignOnLabourDoc } from '@/Services
 import customAlert from '@/atoms/customAlert';
 import CheckBoxField from '@/atoms/CheckBoxField';
 
-const LabourShareDocPreview = ({ userId, preview = 0, approved = 0, refId = 0 }) => {
+const LabourShareDocPreview = ({ userId, preview = 0, approved = 0, refId = 0, root_parent_id = 0 }) => {
   const router = useRouter();
   approved = Number(approved);
   const [ state, setState ] = useState({
     approved: approved,
-    iframeUrl: `${labourShareDocPreview}/${userId}?approved=${0}&preview=${preview}`,
+    iframeUrl: `${labourShareDocPreview}/${userId}?approved=${approved}&root_parent_id=${root_parent_id}&preview=${preview}`,
   })
 
   /**
@@ -22,7 +22,7 @@ const LabourShareDocPreview = ({ userId, preview = 0, approved = 0, refId = 0 })
     let approved = checked ? 1 : 0;
     setState({...state,
       approved: approved,
-      iframeUrl: `${labourShareDocPreview}/${userId}?approved=${approved}&preview=${preview}`})
+      iframeUrl: `${labourShareDocPreview}/${userId}?approved=${approved}&root_parent_id=${root_parent_id}&preview=${preview}`})
   }
 
   /**
@@ -46,7 +46,7 @@ const LabourShareDocPreview = ({ userId, preview = 0, approved = 0, refId = 0 })
   return (
     <div>
       <div>
-        <iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 200} />
+        <iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 300} />
       </div>
       {!preview && <div className = "row" style={{margin: '15px 0'}}>
         <CheckBoxField

@@ -134,14 +134,14 @@ const LinkCoeffEmpComponent = (props) => {
   const addMultiSelectTag = () => {
     return (
       <>
-      <p className='my-2 poppins-medium-18px custom_astrick'> {t('Select paritair comite')} </p>
+      <p className='my-2 poppins-light-18px custom_astrick'> {t('Select paritair comite')} </p>
       <MultiSelect
         options={state.pcArray}
         standards={state.pcArray.filter(val => val.value === state.selectedPc)}
         disabled={parseInt(props.pcid) && state.selectedPc ? true : false}
         handleChange={onSelect}
         isMulti={false}
-        className="pc-single-select  input-border-lightgray poppins-regular-18px mh-50 rounded-0 linkcoe mb-3"
+        className="pc-single-select  input-border-lightgray poppins-regular-18px mh-50 rounded-0 linkcoe"
         placeholder={'Select paritair comite'}
       />
       </>

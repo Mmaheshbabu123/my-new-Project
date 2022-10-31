@@ -153,7 +153,7 @@ const Pincode = (props) => {
 							SetResponse(result.res);
 						if(result.res=='Planning has been ended.'||result.res=='Planning has been started.'){
 							setTimeout(() => {
-								
+								router.push('/employee-planning');
 							}, 3000);
 						}
 					})
@@ -237,8 +237,8 @@ const Pincode = (props) => {
 			<div className="row">
 				<div className="col-md-1">
 					<input
-						type="submit"
-						className="btn btn-secondary poppins-medium-18px-save-button rounded-0 shadow-none border-0 float-end"
+						type="button"
+						className="btn rounded-0 shadow-none border-0 px-0 poppins-light-18px text-uppercase text-decoration-underline"
 						value="Back"
 						onClick={() => router.push('/pincode/options')}
 					/>

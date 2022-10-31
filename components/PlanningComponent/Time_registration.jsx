@@ -43,29 +43,40 @@ function TimeRegistration(props) {
 	return (
 		<div className="container">
 			<form onSubmit={(e) => submit(e)} >
-				<p className="h3 px-0  bitter-italic-normal-medium-24 mt-5">{t('Time registration')}</p>
-				<div className="row row-cols-sm-2 row-cols-lg-5 g-2 g-lg-2 mt-3 d-flex justify-content-center mt-5  p-5">
-					<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height ">
-						<div className="p-2 position_relative_dashboard ">
+				<div className='row py-4 position-sticky-pc'>
+					<div className='col-md-12 px-0'>
+					<p className="bitter-italic-normal-medium-24">{t('Time registration')}</p>
+					</div>
+				</div>
+				<div className="row gx-5 align-items-center d-flex justify-content-center min-height-time-registration-dashboard" >
+					
+					<div className="col-md-3" onClick={qrCode}>
+					<a className='cursor-pointer'>
+					<div className="position_relative_time_registration bg-light time-registartion-height d-flex align-items-center justify-content-center" onClick={qrCode}>
+						<div >
 							<Link href='' className="m-2" >
-								<a type="button" >
-									<Image src="/images/PrintQRcode.svg" layout="fill" className="dasboard_image " onClick={qrCode} ></Image>
+								<a type="button" className='time-registration-img-div'>
+									<Image src="/images/PrintQRcode.svg" layout="fill" className="time_registration_image " onClick={qrCode} ></Image>
 
 								</a>
 
 							</Link>
 
 						</div>
-						<div className='text-center '>
+						<div className='text-center time-registration-tile'>
 							<a type="button" className='mt-1' onClick={qrCode}>{t('QR code')}</a>
 						</div>
 					</div>
-
+					</a>
+					</div>
+					
 					{contextState.role == 'employeer' &&
-						<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height">
-							<div className="p-2 position_relative_dashboard">
+						<div className="col-md-3">
+							<a className='cursor-pointer' onClick={stopPlanning}>
+							<div className="position_relative_time_registration bg-light time-registartion-height d-flex align-items-center justify-content-center">
+							<div >
 								<Link href='' className="m-2">
-									<a type="button">
+									<a type="button" className='time-registration-img-div'>
 										<Image src="/images/Addemployee.svg" layout="fill" className="dasboard_image " onClick={stopPlanning}></Image>
 
 									</a>
@@ -74,16 +85,20 @@ function TimeRegistration(props) {
 
 							</div>
 
-							<div className='text-center '>
-								<a type="button" className='mt-1' onClick={stopPlanning}> employer </a>
+							<div className='text-center time-registration-tile'>
+								<a type="button" className='mt-1' onClick={stopPlanning}>{t('Employer')}</a>
 							</div>
+								</div>
+							</a>
 						</div>
 
 					}
-					<div className="col  bg-light mb-2 me-3 p-4 time-registartion-height">
-						<div className="p-2 position_relative_dashboard">
+					<div className="col-md-3">
+				<a className='cursor-pointer' onClick={pinCode}>
+				<div className="position_relative_time_registration bg-light time-registartion-height d-flex align-items-center justify-content-center">
+						<div>
 							<Link href='' className="m-2">
-								<a type="button">
+								<a type="button" className='time-registration-img-div'>
 									<Image src="/images/Pincode.svg" layout="fill" className="dasboard_image " onClick={pinCode}></Image>
 
 								</a>
@@ -92,13 +107,17 @@ function TimeRegistration(props) {
 
 						</div>
 
-						<div className='text-center '>
-							<a type="button" className='mt-1' onClick={pinCode}> pincode </a>
+						<div className='text-center time-registration-tile'>
+							<a type="button" className='mt-1' onClick={pinCode}> {t('Pincode')} </a>
 						</div>
+						</div>
+				</a>
 					</div>
 				</div>
-				<div className="text-start col-md-6">
+				<div className='row'>
+				<div className="text-start col-md-6 px-0">
 					<BackLink path="/"/>
+				</div>
 				</div>
 			</form>
 

@@ -6,23 +6,24 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Popup from './Popupfunction';
 import ReactPaginate from 'react-paginate';
 import Pagination from './Pagination';
-
+import BackLink from '../BackLink';
 import Link from 'next/link';
 import Translation from '@/Translation';
+
 const ManageFunction = (props) => {
-	const{t}=props;
-	const [ functions, setFunctions ] = useState([]);
-	const [ functionsTemp, setFunctionsTemp ] = useState([]);
-	const [ functionsTemp2, setFunctionsTemp2 ] = useState([]);
-	const [ updated, setUpdated ] = useState(0);
-	const [ searchPc, setSearchPc ] = useState('');
-	const [ searchFunc, setSearchFunc ] = useState('');
-	const [ searchCat, setSearchCat ] = useState('');
-	const [ searchSal, setSearchSal ] = useState('');
-	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
-	const [ funcnid, setFucnid ] = useState('');
-	const [ itemsPerPage, setItemsPerPage ] = useState(8);
-	const [ search, setSearch ] = useState(false);
+	const { t } = props;
+	const [functions, setFunctions] = useState([]);
+	const [functionsTemp, setFunctionsTemp] = useState([]);
+	const [functionsTemp2, setFunctionsTemp2] = useState([]);
+	const [updated, setUpdated] = useState(0);
+	const [searchPc, setSearchPc] = useState('');
+	const [searchFunc, setSearchFunc] = useState('');
+	const [searchCat, setSearchCat] = useState('');
+	const [searchSal, setSearchSal] = useState('');
+	const [showdeletepopup, setShowdeletepopup] = useState(false);
+	const [funcnid, setFucnid] = useState('');
+	const [itemsPerPage, setItemsPerPage] = useState(8);
+	const [search, setSearch] = useState(false);
 
 	useEffect(
 		() => {
@@ -36,7 +37,7 @@ const ManageFunction = (props) => {
 					console.log(error);
 				});
 		},
-		[ updated ]
+		[updated]
 	);
 
 	const deletefuncn = async () => {
@@ -341,8 +342,8 @@ const ManageFunction = (props) => {
 	};
 
 	//------------------- Pagination code -------------------------//
-	const [ pageCount, setPageCount ] = useState(0);
-	const [ itemOffset, setItemOffset ] = useState(0);
+	const [pageCount, setPageCount] = useState(0);
+	const [itemOffset, setItemOffset] = useState(0);
 
 	useEffect(
 		() => {
@@ -350,7 +351,7 @@ const ManageFunction = (props) => {
 			setFunctionsTemp2(functions.slice(itemOffset, endOffset));
 			setPageCount(Math.ceil(functions.length / itemsPerPage));
 		},
-		[ itemOffset, itemsPerPage, functions ]
+		[itemOffset, itemsPerPage, functions]
 	);
 
 	const handlePageClick = (event) => {
@@ -364,160 +365,160 @@ const ManageFunction = (props) => {
 			<form>
 				<div className='minimun_height'>
 					<div className="row">
-					<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc mb-0">
-						{t('Manage functions')}
-					</p>
-				<div className='col-md-12 manage_category_sticky_position pb-3'>
-					<div className='row'>
-					<div className='col-md-9 ps-0'>
-						<div className='row'>
-						<div className="col-md-3 field_height">
-						<input
-							type="search"
-							id="form12"
-							value={searchPc}
-							onChange={(e) => setSearchPc(e.target.value)}
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-							placeholder={t("PC number")}
-						/>
-					</div>
+						<p className="pt-3 pb-3 font-weight-bold  bitter-italic-normal-medium-24 h4 p-0 position-sticky-pc mb-0">
+							{t('Manage functions')}
+						</p>
+						<div className='col-md-12 manage_category_sticky_position pb-3'>
+							<div className='row'>
+								<div className='col-md-9 ps-0'>
+									<div className='row'>
+										<div className="col-md-3 field_height">
+											<input
+												type="search"
+												id="form12"
+												value={searchPc}
+												onChange={(e) => setSearchPc(e.target.value)}
+												className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
+												placeholder={t("PC number")}
+											/>
+										</div>
 
-					<div className="col-md-3 field_height">
-						<input
-							type="search"
-							id="form12"
-							value={searchFunc}
-							onChange={(e) => setSearchFunc(e.target.value)}
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-							placeholder={t("Function Name")}
-						/>
-					</div>
+										<div className="col-md-3 field_height">
+											<input
+												type="search"
+												id="form12"
+												value={searchFunc}
+												onChange={(e) => setSearchFunc(e.target.value)}
+												className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+												placeholder={t("Function Name")}
+											/>
+										</div>
 
-					<div className="col-md-3 field_height">
-						<input
-							type="search"
-							id="form12"
-							value={searchSal}
-							onChange={(e) => setSearchSal(e.target.value)}
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-							placeholder={t("Minimum salary")}
-						/>
-					</div>
-					<div className="col-md-3 field_height">
-						<input
-							type="search"
-							id="form12"
-							value={searchCat}
-							onChange={(e) => setSearchCat(e.target.value)}
-							className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-							placeholder={t("Category name")}
-						/>
-					</div>
+										<div className="col-md-3 field_height">
+											<input
+												type="search"
+												id="form12"
+												value={searchSal}
+												onChange={(e) => setSearchSal(e.target.value)}
+												className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+												placeholder={t("Minimum salary")}
+											/>
+										</div>
+										<div className="col-md-3 field_height">
+											<input
+												type="search"
+												id="form12"
+												value={searchCat}
+												onChange={(e) => setSearchCat(e.target.value)}
+												className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+												placeholder={t("Category name")}
+											/>
+										</div>
+									</div>
+								</div>
+
+								<div className='col-md-3 pe-0'>
+									<div className='row'>
+										<div className="col-md-6 field_height">
+											<button
+												type="button"
+												className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 skyblue-bg-color w-100 shadow-none text-uppercase"
+												onClick={() => handleSearch()}
+											>
+												{t('search')}
+											</button>
+										</div>
+										<div className="col-md-6 field_height">
+											{(searchPc.trim() != '' ||
+												searchFunc.trim() != '' ||
+												searchCat.trim() != '' ||
+												searchSal.trim() != '' ||
+												search === true) && (
+													<button
+														type="button"
+														className="btn  btn-block float-right mt-2 mb-2 rounded-0 float-right py-2 px-4 reset_skyblue w-100 shadow-none"
+														onClick={() => handleReset()}
+													>
+														{t('RESET')}
+													</button>
+												)}
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
 
-					<div className='col-md-3 pe-0'>
-						<div className='row'>
-						<div className="col-md-6 field_height">
-						<button
-							type="button"
-							className="btn  btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right py-2 px-4 skyblue-bg-color w-100 shadow-none text-uppercase"
-							onClick={() => handleSearch()}
-						>
-							{t('search')}
-						</button>
-						</div>
-						<div className="col-md-6 field_height">
-						{(searchPc.trim() != '' ||
-							searchFunc.trim() != '' ||
-							searchCat.trim() != '' ||
-							searchSal.trim() != '' ||
-							search === true) && (
-							<button
-								type="button"
-								className="btn  btn-block float-right mt-2 mb-2 rounded-0 float-right py-2 px-4 reset_skyblue w-100 shadow-none"
-								onClick={() => handleReset()}
-							>
-								{t('RESET')}
-							</button>
-						)}
-					</div>
-						</div>
-					</div>
-					</div>
-				</div>
-
-					<div className="form-check p-0">
-						<table className="table mb-3">
-							<thead className='manage_category_table manage_fun_table'>
-								<tr className="btn-bg-gray-medium table-sticky-bg-gray h-50-mf">
-									<th className="poppins-medium-18px btn-bg-gray-medium p-2 ps-4">
-										PC number
-									</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Function name')}</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Minimum salary')}</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Category')}</th>
-									<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Action')}</th>
-								</tr>
-							</thead>
-							<tbody>
-								{functionsTemp2.length > 0 &&
-									functionsTemp2.map((result) => (
-										<tr className="border poppins-regular-18px p-2" key={result.funcn_id}>
-											<td className="poppins-regular-18px p-2 ps-4">
-												{result.pc_number ? result.pc_number : result.pc_num}
-											</td>
-											<td className="poppins-regular-18px p-2">{result.function_name}</td>
-											<td className="poppins-regular-18px p-2">€ {result.min_salary}</td>
-											<td className="poppins-regular-18px p-2">{result.cat_name}</td>
-											<td className=" p-2 align-middle text-center">
-												<Link
-													href={
-														result.pc_unique_key ? (
-															'/editpc/' +
-															result.pc_unique_key +
-															'?fid=' +
-															result.funcn_id
-														) : (
-															'/editpc/' + result.unique_key + '?fid=' + result.funcn_id
-														)
-													}
-													className=""
-												>
-													<a className="">
-														<MdEdit
-															className=" color-skyblue"
+						<div className="form-check p-0">
+							<table className="table mb-3">
+								<thead className='manage_category_table manage_fun_table'>
+									<tr className="btn-bg-gray-medium table-sticky-bg-gray h-50-mf">
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2 ps-4">
+											PC number
+										</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Function name')}</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Minimum salary')}</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Category')}</th>
+										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Action')}</th>
+									</tr>
+								</thead>
+								<tbody>
+									{functionsTemp2.length > 0 &&
+										functionsTemp2.map((result) => (
+											<tr className="border poppins-regular-18px p-2" key={result.funcn_id}>
+												<td className="poppins-regular-18px p-2 ps-4">
+													{result.pc_number ? result.pc_number : result.pc_num}
+												</td>
+												<td className="poppins-regular-18px p-2">{result.function_name}</td>
+												<td className="poppins-regular-18px p-2">€ {result.min_salary}</td>
+												<td className="poppins-regular-18px p-2">{result.cat_name}</td>
+												<td className=" p-2 align-middle text-center">
+													<Link
+														href={
+															result.pc_unique_key ? (
+																'/editpc/' +
+																result.pc_unique_key +
+																'?fid=' +
+																result.funcn_id
+															) : (
+																'/editpc/' + result.unique_key + '?fid=' + result.funcn_id
+															)
+														}
+														className=""
+													>
+														<a className="">
+															<MdEdit
+																className=" color-skyblue"
+																data-toggle="tooltip"
+																title="Edit function"
+															/>
+														</a>
+													</Link>
+													<span onClick={() => showPopup(result.funcn_id)} type="button">
+														<MdDelete
+															className=" ms-3 color-skyblue"
 															data-toggle="tooltip"
-															title="Edit function"
+															title="Delete function"
 														/>
-													</a>
-												</Link>
-												<span onClick={() => showPopup(result.funcn_id)} type="button">
-													<MdDelete
-														className=" ms-3 color-skyblue"
-														data-toggle="tooltip"
-														title="Delete function"
-													/>
-												</span>
+													</span>
+												</td>
+											</tr>
+										))}
+									{functions.length == 0 && (
+										<tr>
+											<td colSpan={5} className="text-center poppins-regular-18px no-records">
+												{t('No records')}
 											</td>
 										</tr>
-									))}
-								{functions.length == 0 && (
-									<tr>
-										<td colSpan={5} className="text-center poppins-regular-18px no-records">
-											{t('No records')}
-										</td>
-									</tr>
-								)}
-							</tbody>
-						</table>
+									)}
+								</tbody>
+							</table>
+						</div>
 					</div>
-				</div>
-				{functions.length >= itemsPerPage && (
-					<div className="row mt-1 mb-2">
-						<Pagination itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}/>
+					{functions.length >= itemsPerPage && (
+						<div className="row mt-1 mb-2">
+							<Pagination itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount} />
 
-						{/* <ReactPaginate
+							{/* <ReactPaginate
 							breakLabel="..."
 							nextLabel={<AiOutlineArrowRight />}
 							onPageChange={handlePageClick}
@@ -531,10 +532,10 @@ const ManageFunction = (props) => {
 							subContainerClassName={'pages pagination'}
 							activeClassName={'active'}
 						/> */}
-					</div>
-				)}
+						</div>
+					)}
 				</div>
-				<div className="row">
+				{/* <div className="row">
 					<div className="text-start col-md-6 mb-2 ps-0">
 						<button
 							type="button"
@@ -545,6 +546,9 @@ const ManageFunction = (props) => {
 						</button>
 					</div>
 					<div className="col-md-6" />
+				</div> */}
+				<div className="text-start col-md-6">
+					<BackLink path={'/'} />
 				</div>
 			</form>
 			{showdeletepopup == true && (
@@ -553,5 +557,5 @@ const ManageFunction = (props) => {
 		</div>
 	);
 };
-export default React.memo(Translation(ManageFunction,['Manage functions',"PC number","Function Name","Minimum salary",
-"Category name",'search','RESET','Function name','Minimum salary','Category','Action','No records','BACK']));
+export default React.memo(Translation(ManageFunction, ['Manage functions', "PC number", "Function Name", "Minimum salary",
+	"Category name", 'search', 'RESET', 'Function name', 'Minimum salary', 'Category', 'Action', 'No records', 'BACK']));

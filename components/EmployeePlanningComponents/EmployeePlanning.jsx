@@ -12,6 +12,7 @@ import { fetchemployeeplanning, getContract } from '../../Services/ApiEndPoints'
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import moment from 'moment';
 import Translation from '@/Translation';
+import BackLink from '../BackLink';
 
 
 import {
@@ -209,6 +210,14 @@ function EmployeeMonthlyPlanning(props) {
 									</td>
 								</tr>
 							))}
+							{/*----------------------------No records found-------------------------- */}
+							{data.length == 0 && (
+                                    <tr>
+                                        <td colSpan={7} className="text-center py-3 border poppins-regular-18px">
+                                            No records
+                                        </td>
+                                    </tr>
+                                )}
 						</tbody>
 					</table>
 				</div>
@@ -249,6 +258,9 @@ function EmployeeMonthlyPlanning(props) {
 					</React.Fragment>
 				</div>
 			</div>
+			<div className="text-start col-md-6">
+                <BackLink path={'/'} />
+            </div>
 		</div>
 	);
 }

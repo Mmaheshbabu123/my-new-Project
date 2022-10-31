@@ -265,7 +265,7 @@ export const getIndexationOfSalary = BASE_URL + "fetch-all-indexation-salary";
 //-------------------------Add Planning---------------------------//
 export const getPlanning = BASE_URL + "fetch-add-planning-details/";
 export const getDraftPlanning = BASE_URL + "fetch-draft-planning/";
-export const deletePlanningDetails = BASE_URL + "delete-planning/";
+export const deletePlanningDetails = BASE_URL + "delete-draft-planning/";
 
 
 

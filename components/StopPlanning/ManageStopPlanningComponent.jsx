@@ -110,14 +110,20 @@ const getPostData = () => {
 }
 console.log(state);
 return(
-  <div className='add-edit-types'>
+  <div className='add-edit-types start-stop-planning'>
     <div className="row m-0 p-0">
-     <div className='py-4  px-0 mb-3'>
-     <h4 className="font-weight-bold  bitter-italic-normal-medium-24 px-0"> {t(`start/stop planning by employer`)} </h4>
-     <div className="col-md-12 row">
-       <div className = 'col-md-6'>
+     <div className='col-md-12'>
+     <div className='row py-4 position-sticky-pc'>
+       <div className='col-md-12 px-0'>
+       <h4 className="font-weight-bold bitter-italic-normal-medium-24 px-0"> {t(`Start/Stop planning by employer`)} </h4>
+       </div>
+     </div>
+     <div className='row min-height-stop-start-planning'>
+     <div className="col-md-12">
+        <div className='row pb-4 px-2 border-purple pt-3'>
+        <div className = 'col-md-6'>
            <div className="col-md-12 mx-0 px-0 ">
-             <LabelField title="Company" className="custom_astrick poppins-regular-18px"/>
+             <LabelField title="Company" className="custom_astrick poppins-regular-18px px-0"/>
              <MultiSelectField
                  options={state.companyList}
                  standards={state.companyList.filter(val => val.value === state.companyId)}
@@ -128,7 +134,7 @@ return(
                />
            </div>
            <div className="col-md-12 mx-0 px-0 ">
-             <LabelField title="Employee" className="custom_astrick poppins-regular-18px"/>
+             <LabelField title="Employee" className="custom_astrick poppins-regular-18px px-0"/>
              <MultiSelectField
                  options={state.employeeeList}
                  standards={state.employeeeList.filter(val => val.value === state.employeeId)}
@@ -138,13 +144,12 @@ return(
                  className="col-md-12"
                />
            </div>
-           <button onClick={() => router.back()} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-5 px-0 text-decoration-underline text-uppercase">
-             {`Back`}
-           </button>
+           
         </div>
         <div className = 'col-md-6'>
-            <div className="pt-2 pb-4 col-md-6">
-              <label className = "mb-3 poppins-regular-18px" htmlFor="name"> {`Date`} </label>
+            <div className='row'>
+            <div className="col-md-12">
+              <label className = " py-2 poppins-regular-18px" htmlFor="name"> {`Date`} </label>
               <input
                 type="date"
                 name='planningDate'
@@ -154,9 +159,9 @@ return(
                 onChange={(e) => handleChange(e.target)}
               />
               </div>
-              <div className="col-md-4  py-3">
-              <div className='d-flex'>
-              <div className="py-1 px-2  custom_astrick poppins-regular-20px">{('Time')}</div>
+              <div className="col-md-12">
+              <div className=''>
+              <div className="py-2 custom_astrick poppins-regular-18px">{('Time')}</div>
               <TimePicker
                 placeholder={t("Select Time")}
                 use12Hours={false}
@@ -174,9 +179,18 @@ return(
                  {t('Time is required')}
                </small>}
              </div>
-             </div>
+            </div>
         </div>
-
+        </div>
+      </div>
+     </div>
+     <div className='row'>
+       <div className='col-md-12 px-0'>
+       <button onClick={() => router.back()} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 px-0 text-decoration-underline text-uppercase">
+             {`Back`}
+           </button>
+       </div>
+     </div>
      </div>
 
      <div className='row col-md-6'>
