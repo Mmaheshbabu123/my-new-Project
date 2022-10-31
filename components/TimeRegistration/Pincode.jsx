@@ -166,10 +166,12 @@ const Pincode = (props) => {
 	return (
 		<form onSubmit={Submit} style={{ alignItems: 'center' }}>
 			<div className="row minheight-verifypin">
-				<div className="row">
+			<div className='col-md-12'>
+			<div className="row">
 					<div className="col-md-6">
-						<label style={{ width: '100%' }}>
+						<label className='mb-2 poppins-regular-18px'>
 							Company
+							</label>
 							<MultiSelectField
 								placeholder={t('--Select---')}
 								id={'company'}
@@ -177,12 +179,13 @@ const Pincode = (props) => {
 								handleChange={(obj) => setCompany(obj.value)}
 								isMulti={false}
 							/>
-						</label>
+						
 						{compay_error&&<p style={{color:'red'}}>This field is required.</p>}
 					</div>
 					<div className="col-md-6">
-						<label style={{ width: '100%' }}>
+						<label className='mb-2 poppins-regular-18px'>
 							Location
+							</label>
 							<MultiSelectField
 								placeholder={t('--Select---')}
 								id={'location'}
@@ -190,10 +193,11 @@ const Pincode = (props) => {
 								handleChange={(obj) => setLocation(obj.value)}
 								isMulti={false}
 							/>
-						</label>
+						
 						{location_error&&<p style={{color:'red'}}>This field is required.</p>}
 					</div>
 				</div>
+			</div>
 				{/* <div className="col-4" /> */}
 				<div className="col-5 mx-auto mt-1">
 					<div className="d-flex">

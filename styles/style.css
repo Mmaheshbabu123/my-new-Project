@@ -702,3 +702,7 @@ select option
 {
   border: 1px solid #4C4D554D !important;
 }
+.qr-code-time-registration
+{
+  min-height: 75vh;
+}
