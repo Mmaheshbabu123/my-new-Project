@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { QrReader } from 'react-qr-reader';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
@@ -18,16 +18,6 @@ const Qrscan = () => {
 	}, []);
 
 
-	const handleError = (err) => {
-		console.err(err)
-	}
-
-	const handleScan = (result) => {
-		if(result){
-			setResult(result)
-		}
-	}
-
 	const previewStyle = {
 		height: 240,
 		width: 320,
@@ -46,6 +36,7 @@ const Qrscan = () => {
 					let decoded=JSON.parse(a);
 					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getPlanningActual?id='+contextState.uid+'&companyid='+decoded.company_id+'&locationid='+decoded.location_id, 'GET')
 					.then((res) => {
+						alert(res.res);
 						if(res!=null||res!=undefined){
 						setResp(res.res);
 						}
