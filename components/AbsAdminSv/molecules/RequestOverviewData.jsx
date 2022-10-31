@@ -268,7 +268,7 @@ const RequestOverviewData = (props) => {
     if(Number(eachRow.signed)) {
       return(
         <div>
-          <span title={'Edit'} className="span-action-icons me-1" onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className='sign_action_icon_size'></img> </span>
+          <span title={'Edit'} className="span-action-icons me-2" onClick={() => handleActionClick('edit', eachRow)}><img src={edit_svg.src} alt="sign" className='sign_action_icon_size'></img> </span>
           <span title={'Download'} className="span-action-icons me-1" onClick={() => handleActionClick('download', eachRow)}> <img src={pdf_icon.src} alt="sign" className='sign_action_icon_size_pdf'></img></span>
           <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className="color-skyblue delete_icon_manage_cooperation"/> </span>
         </div>
