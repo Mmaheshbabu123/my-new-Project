@@ -78,7 +78,7 @@ function DraftPlanning(props) {
 	};
 
 	return (
-		<div class="draft-container">
+		<div className="draft-container">
 			{company != undefined && company != '' ? (
 				<div className="form-check p-0 tab-pane fade show min_height_table project_table_sticky ">
 					<table className="table mb-3 pt-4 mt-4">

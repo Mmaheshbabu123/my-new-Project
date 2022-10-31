@@ -38,6 +38,7 @@ useEffect(
                 APICALL.service(getWeeklyPlanning + company + '/' + loc + '/' + cc + '/' + weekCount, 'GET')
                     .then((result) => {
                         if (result.status == 200) {
+							console.log(result.data[1]);
                             setPlanning(result.data[1]);
                             setActiveWeek(result.data[0]);
                         }
@@ -74,6 +75,16 @@ let updateParent = () => {
 	setEditDate([]);
 	setEdit(false);
 };
+
+let updateSec = (parent_key) =>{
+	var planning1 = [...planning];
+	planning1[parent_key].map((v2,k2) =>{
+		planning1[parent_key][k2][0].section_open = !planning1[parent_key][k2][0].section_open;
+	});
+	
+	setPlanning(planning1);
+
+}
 
 
 
@@ -179,7 +190,7 @@ let updateParent = () => {
 																					{v2.map(
 																						(val1, key1) =>
 																							val1.pdate == val ? (
-																								<div key={val1.id}>
+																								<div key={val1.id} onClick={()=>{updateSec(value,k2)}}>
 																									{key1 == 0 && (
 																										<div>
 																											<div className="row mb-1">
@@ -201,10 +212,10 @@ let updateParent = () => {
 																																className="float-right cursor-pointer"
 																																data-toggle="tooltip"
 																																title="Edit plannig"
-																																onClick={() =>
+																																onClick={() =>{
 																																	editplanning(
 																																		val1
-																																	)}
+																																	);}}
 																															/>
 																														</a>
 																													) : (
@@ -215,19 +226,19 @@ let updateParent = () => {
 																												</div>
 																											</div>
 
-																											<p className="poppins-light-14px">
+																											{val1.section_open == true && <p className="poppins-light-14px">
 																												{
 																													val1.employee_type_name
 																												}
-																											</p>
+																											</p>}
 
-																											<p className="poppins-light-14px">
+																											{val1.section_open == true && <p className="poppins-light-14px">
 																												{
 																													val1.function_name
 																												}
-																											</p>
+																											</p>}
 
-																											<p className="poppins-light-14px">
+																											 <p className="poppins-light-14px">
 																												{'€ ' +
 																													val1.salary}
 																											</p>
