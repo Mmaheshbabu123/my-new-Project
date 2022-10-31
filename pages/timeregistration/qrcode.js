@@ -10,10 +10,12 @@ const Qrcode = (props) => {
     }
 
     return (
-      <div className='row' style={{minHeight:'82vh'}}>                    
+      <div className='row'
+    //    style={{minHeight:'82vh'}}
+      >                    
       
             <div className='col-md-12 text-center d-flex align-items-center justify-content-center'>
-                        <Image src="/images/qrcodecommon.svg"  className="dasboard_image"
+                        <Image src="/images/commonqrcode.svg"  className="dasboard_image"
                         
                         width={500}
                         height={500}
