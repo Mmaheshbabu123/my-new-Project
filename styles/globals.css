@@ -1917,7 +1917,9 @@ input[type="text"]::placeholder {
 	width: 13%;
 }
 .field_height input,
-.field_height button {
+.field_height button,
+.field_height select
+ {
 	height: 45px;
 	border: 1px solid var(--color-input-border-lightgrey);
 }
