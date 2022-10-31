@@ -435,9 +435,8 @@ select option
 }
 .minimun_height_v1
 {
-  min-height: 41vh;
+  min-height: 42vh;
 }
-
 .cursor-pointer {
   cursor: pointer !important;
 }
@@ -651,4 +650,8 @@ select option
 .login-page-container .form-control:focus
 {
   border: 1px solid var(--border-color-light-gray) !important;
+}
+.manage-agreements-min-height
+{
+  min-height: 48vh;
 }

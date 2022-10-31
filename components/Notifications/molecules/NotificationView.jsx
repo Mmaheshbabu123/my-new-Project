@@ -89,7 +89,7 @@ const NotificationView = ({
             <img alt={"close"} title={"Close"} onClick={toggleNotificationView} style={{ cursor: "pointer", width: "15px" }} src={closeIcon.src} />
           </div>
           {state.notificationCount < 1 && <p className="text-center poppins-light-18px"> {state.notificationCount === 0 ? 'No notifications to show.' : 'Loading...'} </p>}
-          <div className={styles["notification-scroll"]} style={{ minHeight: state.notificationCount ? "200px" : "150px", maxHeight: state.viewAllLink ? "480px" : "460px", overflowY: 'auto' }}>
+          <div className={styles["notification-scroll"]} style={{ minHeight: state.notificationCount ? "200px" : "150px", maxHeight: state.viewAllLink ? "480px" : "495px", overflowY: 'auto' }}>
           {state.allTimestamp.map((i, k) => {
             return (
               <div key={k} className="container px-3 notification_container">
