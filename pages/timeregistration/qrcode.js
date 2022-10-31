@@ -4,10 +4,10 @@ import Image from "next/image";
 const Qrcode = () => {
     const router = useRouter();
     return (
-      <div className='row'>                    
+      <div className='row' style={{minHeight:'82vh'}}>                    
       
-            <div style={{marginTop:'10%',marginLeft:'23%'}} >
-                        <Image src="/images/qrcodecommon.svg"  className="dasboard_image "
+            <div className='col-md-12 text-center d-flex align-items-center justify-content-center'>
+                        <Image src="/images/qrcodecommon.svg"  className="dasboard_image"
                         
                         width={500}
                         height={500}
