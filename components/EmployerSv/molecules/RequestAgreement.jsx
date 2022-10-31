@@ -89,6 +89,7 @@ const RequestAgreement = (props) => {
                           name={company.name}
                           customStyle={{ margin:'10px 0' }}
                           className="col-md-6 poppins-light-18px d-flex align-items-center"
+
                         />
                     );
                   })}

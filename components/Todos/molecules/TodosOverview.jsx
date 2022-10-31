@@ -25,7 +25,8 @@ import download_svg from '../molecules/images/download.svg';
 import { HiOutlineExternalLink, } from 'react-icons/hi';
 import { MdDone } from 'react-icons/md';
 import { CgMailOpen } from 'react-icons/cg';
-import All from '../molecules/images/All.svg'
+import All from '../molecules/images/All.svg';
+import Allactive from '../molecules/images/All-active.svg';
 import alltodos from './all_todos.svg';
 import Translation from '@/Translation';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -417,7 +418,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
-      <div className='row my_todo_tab pt-2'>
+      <div className='row my_todo_tab pt-2 pb-2'>
         <div className='col-md-12'>
           <ul className={`${styles['todo-tabs']} col-md-6 m-0`}>
             {state.tabs.map(tab => {
@@ -528,7 +529,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-         <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
+         <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>

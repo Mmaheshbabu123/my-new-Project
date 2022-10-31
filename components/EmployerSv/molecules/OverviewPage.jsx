@@ -247,7 +247,7 @@ const OverviewPage = (props) => {
   }
 
   return(
-    <div className={`${styles['emp-sv-overview-page-div']}`}>
+    <div className={`${styles['emp-sv-overview-page-div']} manage-agreements-min-height`}>
       {overviewData.length > 0 ? (
         <div>
           {showTabs()}
