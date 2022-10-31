@@ -82,7 +82,7 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
 
   const handleActionClick = (action, eachRow) => {
     if(action === 'preview') {
-      window.open(`labour-share-doc-preview?entityid=${eachRow.uid}&ref_id=${eachRow.tid}&preview=1&approved=1`, '_blank');
+      window.open(`labour-share-doc-preview?entityid=${eachRow.uid}&root_parent_id=${eachRow.root_parent_id}&ref_id=${eachRow.tid}&preview=1&approved=1`, '_blank');
     }
     if(action === 'download') {
       handleDownload(eachRow);

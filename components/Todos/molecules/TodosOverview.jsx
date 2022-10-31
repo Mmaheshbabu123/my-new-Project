@@ -64,11 +64,12 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
     rows: getSelectedStatus(tabId),
     filterRows: getSelectedStatus(tabId),
     searchKey: 'title',
+    companySearchTerm: '',
     currentItems: [],
     pageCount: 0,
     itemOffset: 0,
     currentPage: 0,
-    titleTerm: '',
+    titleSearchTerm: '',
     webformId: '',
     submitId: '',
     experience_aquired: '',
@@ -85,20 +86,26 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
   });
 
   const handleSearchClick = (search = 1) => {
-    let value = search ? state.titleTerm : '';
+    let { titleSearchTerm, companySearchTerm } = state;
     let data = getSelectedStatus(state.selectedTabId);
     let filterRows = [];
-    if (value) {
+    if(search && (titleSearchTerm || companySearchTerm)) {
       filterRows = data.filter((item) => {
-        return (item[state.searchKey].toLowerCase().toString())
-          .indexOf(value.toLowerCase().toString()) !== -1;
+        let status = true;
+        if(titleSearchTerm)
+          status = `${item['title']}`.toLowerCase().toString().indexOf(titleSearchTerm.toLowerCase().toString()) !== -1;
+        if(status && companySearchTerm)
+          status = `${item['company_name']}`.toLowerCase().toString().indexOf(companySearchTerm.toLowerCase().toString()) !== -1;
+       return status;
       })
     } else {
       filterRows = data;
+      companySearchTerm = '';
+      titleSearchTerm = '';
     }
     setState({
       ...state,
-      titleTerm: value,
+      titleSearchTerm, companySearchTerm,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -214,7 +221,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
       } else if(type === 'download') {
          downloadUsingAnchorTag(eachRow.baseUrl + eachRow.file_path);
       } else {
-        window.open(`labour-share-doc-preview?entityid=${entityId}&ref_id=${eachRow.tid}`, '_blank');
+        window.open(`labour-share-doc-preview?entityid=${entityId}&ref_id=${eachRow.tid}&root_parent_id=${eachRow.root_parent_id}`, '_blank');
       }
       return;
     }
@@ -252,7 +259,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
     router.push(`?entitytype=${entityType}&entityid=${entityId}&tab=${selectedTabId}`, undefined, { shallow: true })
     let filterRows = getSelectedStatus(selectedTabId);
     setState({
-      ...state, selectedTabId, filterRows, status, titleTerm: '',
+      ...state, selectedTabId, filterRows, status, titleSearchTerm: '',
       currentPage: 0,
       itemOffset: 0,
       ...updatePaginationData(filterRows, 0)
@@ -439,6 +446,22 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
     );
   }
 
+  const searchTextField = (key, placeholder) => {
+    return(
+        <div className='col-md-6' >
+        <input
+          type="text"
+          value={state[key]}
+          className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+          onChange={(e) => setState({...state, [key]: e.target.value })}
+          placeholder={'Search ' + placeholder}
+          onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+        />
+
+      </div>
+    )
+  }
+
   return (
     <div>
       <>
@@ -452,15 +475,11 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
         <div className='row searchbox m-0 pt-4 mb-2 position-sticky-mytodo_searchbox' style={{ margin: '10px 0'}}>
           <div className='col-md-12'>
             <div className='row'>
-              <div className='col-md-8 col-lg-9 ps-0'>
-                <input
-                  type="text"
-                  value={state.titleTerm}
-                  className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-                  onChange={(e) => setState({ ...state, titleTerm: e.target.value })}
-                  placeholder={'Search'}
-                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1) : null}
-                />
+              <div className='col-md-9'>
+                <div className='row'>
+                {searchTextField('titleSearchTerm', 'title')}
+                {searchTextField('companySearchTerm', 'company')}
+                </div>
               </div>
               <div className='col-md-4 col-lg-3'>
                 <div className='row justify-content-end'>
