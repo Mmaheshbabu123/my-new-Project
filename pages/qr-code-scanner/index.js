@@ -10,7 +10,6 @@ const Qrscan = () => {
 	const [userid,setUserid]=useState(0);
 	const [resp,setResp]=useState('Scan the QR code here');
 	const { contextState = {} } = useContext(UserAuthContext);
-	const { k = '' } = router.query;
 
 	useEffect(() => {
 		if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '') {
@@ -23,8 +22,7 @@ const Qrscan = () => {
 		height: 240,
 		width: 320,
 	}
-
-	(k!='')?alert(k):'';
+	
 	return (
 		<div className="container">
 			<QrReader
