@@ -421,6 +421,15 @@ input[type="checkbox"]
 	background-position: center;
 }
 
+.cross-icon-solid{
+  background-image: url('/images/cross-icon.svg');
+	background-repeat: no-repeat;
+	background-size: 25px;
+	margin: 5px;
+	padding: 14px;
+	background-position: center;
+}
+
 /* Warning icon */
 .stop-working-icon-solid {
 	background-image: url('/images/stop-icon-filled.svg');
