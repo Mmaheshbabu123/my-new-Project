@@ -44,10 +44,10 @@ const Qrscan = () => {
                   if(result){
 					let a=atob(result.text);
 					let decoded=JSON.parse(a);
-					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getPlanningActual?id='+userid+'&companyid='+decoded.company_id+'&locationid='+decoded.location_id, 'GET')
+					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getPlanningActual?id='+contextState.uid+'&companyid='+decoded.company_id+'&locationid='+decoded.location_id, 'GET')
 					.then((res) => {
 						if(res!=null||res!=undefined){
-						setResp(res);
+						setResp(res.res);
 						}
 					})
 					.catch((error) => {

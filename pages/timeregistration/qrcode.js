@@ -1,8 +1,14 @@
 import { useRouter } from 'next/router';
 import Image from "next/image";
 
-const Qrcode = () => {
+const Qrcode = (props) => {
+    const { key, t } = props;
     const router = useRouter();
+
+    const redirectTab=()=>{
+        router.push('/time-registration')
+    }
+
     return (
       <div className='row'>                    
       
@@ -13,7 +19,15 @@ const Qrcode = () => {
                         height={500}
                         ></Image>
                     </div>
-                    </div>
+                
+                    <button style={{  marginLeft:'-484px'}}
+								type="button"
+								className="mt-4 bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline"
+								onClick={redirectTab}
+							>
+                                BACK
+							</button>
+    </div>
 
     );
 }
