@@ -198,7 +198,7 @@ const Pincode = (props) => {
 		<form onSubmit={Submit} style={{ alignItems: 'center' }}>
 			<div className="row minheight-verifypin">
 				{/* <div className="col-4" /> */}
-				<div className="col-5 mx-auto mt-5">
+				<div className="col-5 mx-auto mt-5 pt-5">
 					<div className="d-flex">
 						
                            <OTPInput
@@ -239,7 +239,7 @@ const Pincode = (props) => {
 			<div className='col-md-1'>
 		<input
 			type="submit"
-			className="btn btn-secondary poppins-medium-18px-save-button rounded-0 shadow-none border-0 float-end"
+			className="btn rounded-0 shadow-none border-0 px-0 poppins-light-18px text-uppercase text-decoration-underline"
 			value="Back"
 			onClick={()=>router.push('/pincode/options')}
 		/>
