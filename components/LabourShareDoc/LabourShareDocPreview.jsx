@@ -10,7 +10,7 @@ const LabourShareDocPreview = ({ userId, preview = 0, approved = 0, refId = 0 })
   approved = Number(approved);
   const [ state, setState ] = useState({
     approved: approved,
-    iframeUrl: `${labourShareDocPreview}/${userId}?approved=${0}&preview=${preview}`,
+    iframeUrl: `${labourShareDocPreview}/${userId}?approved=${approved}&preview=${preview}`,
   })
 
   /**

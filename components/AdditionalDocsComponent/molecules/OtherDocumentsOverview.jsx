@@ -74,7 +74,7 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span title={'View'} className="actions-span text-dark" onClick={() => handleActionClick('preview', eachRow)}> <GrView /> </span>
+        {eachRow.type === 2 && <span title={'View'} className="actions-span text-dark" onClick={() => handleActionClick('preview', eachRow)}> <GrView /> </span>}
         <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload/> </span>
       </>
     )
@@ -82,7 +82,7 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
 
   const handleActionClick = (action, eachRow) => {
     if(action === 'preview') {
-      window.open(`/v1-document?entityid=${eachRow.employee_id}&entitytype=${3}&companyid=${eachRow.company_id}&preview=${1}`, '_blank');
+      window.open(`labour-share-doc-preview?entityid=${eachRow.uid}&ref_id=${eachRow.tid}&preview=1&approved=1`, '_blank');
     }
     if(action === 'download') {
       handleDownload(eachRow);
