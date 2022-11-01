@@ -100,7 +100,7 @@ function EmployeeWidgetBlock(props) {
                     <div className="text-end mb-3 p-0">
                         {widget.length > 3 &&
                             <Link href='/pwa/employee-widget' className="m-2">
-                                <a type="button" className="mt-2">View more &nbsp;
+                                <a type="button" className="mt-2 view-more-employee-widget">View more &nbsp;
                                     <AiOutlineArrowRight />
                                 </a>
                             </Link>
