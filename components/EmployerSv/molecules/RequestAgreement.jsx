@@ -18,6 +18,7 @@ const RequestAgreement = (props) => {
     , companies: companies
     , selectedCompanies: []
     , warning: false
+    , spinner: false
   });
 
 
@@ -50,12 +51,14 @@ const RequestAgreement = (props) => {
       setCompState({...compState, warning: true})
       return;
     }
+    setCompState({...compState, spinner: true })
     await APICALL.service(`${saveRequestedCompanies}`, 'POST', getPostData())
     .then(response => {
       if(response.status === 200) {
         customAlert('success', 'Request sent successfully!', 2000); //no of milliseconds
         setTimeout(() => router.reload(), 2000);
       } else {
+        setCompState({...compState, spinner: false })
         customAlert('error', 'Error occured while requesting cooperation agreement', 2000); //no of milliseconds
       }
     })
@@ -100,8 +103,8 @@ const RequestAgreement = (props) => {
           </Modal.Body>
           {companies && companies.length > 0 && <Modal.Footer className="pop_up_footer justify-content-between">
             <p className={`${styles['popup-back-btn']} pop_up_back_button poppins-light-18px text-uppercase text-decoration-underline`} onClick={handleClose}> {t('Back')} </p>
-            <Button onClick={handleRequest} className="buttuon_purple rounded-0 border-0 shadow-none text-uppercase">
-              {t('Request agreement')} 
+            <Button onClick={() => compState.spinner === false ? handleRequest() : null} className="buttuon_purple rounded-0 border-0 shadow-none text-uppercase">
+              {t('Request agreement')}
             </Button>
           </Modal.Footer>}
         </Modal>
