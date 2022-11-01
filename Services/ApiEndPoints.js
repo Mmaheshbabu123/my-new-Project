@@ -55,6 +55,7 @@ export const deleteCoefficientType = BASE_URL + "delete-cofficent-type";
 export const createCofficientType = BASE_URL + "create-cofficent-types";
 export const getAllEmpCoeffAndValueTypes = BASE_URL + "get-coeff-empl-valuetypes";
 export const savePcLinkingData = BASE_URL + "save-pclinking-data";
+export const fetchEmployeeTypesList = BASE_URL + "fetch-employee-types/";
 
 
 //-----
