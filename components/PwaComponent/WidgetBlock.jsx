@@ -66,11 +66,14 @@ function EmployeeWidgetBlock(props) {
                                             <td className="poppins-regular-16px p-2">{result.name}</td>
                                             <td className="poppins-regular-16px p-2">{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2">{result.location_name}</td>
-                                            <td className="poppins-regular-16px p-2">{moment(result.actual_end_time).format('HH:mm')}</td>
+                                            <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
-                                                {moment(result.actual_end_time) < current_time &&
+                                                {moment(result.planned_endtime) < current_time &&
                                                     <Link href='' className="m-2">
-                                                        <a type="button" className="warning-icon-solid">
+                                                        <a type="button" className="warning-icon-solid"
+                                                        data-toggle="tooltip"
+                                                        title="Employee has crossed planned stop time"
+                                                        >
 
                                                         </a>
                                                     </Link>
@@ -78,6 +81,8 @@ function EmployeeWidgetBlock(props) {
                                                 <Link href='' className="m-2">
                                                     <a type="button" className="stop-working-icon-solid"
                                                     // onClick={showPopup} 
+                                                    data-toggle="tooltip"
+                                                    title="Stop planning"
                                                     >
 
                                                     </a>
