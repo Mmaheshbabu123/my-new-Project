@@ -408,12 +408,21 @@ input[type="checkbox"]
 }
 .minheight-verifypin
 {
-  min-height: 63vh;
+  min-height: 68vh;
 }
 
 /* Warning icon */
 .warning-icon-solid {
 	background-image: url('/images/warning.svg');
+	background-repeat: no-repeat;
+	background-size: 25px;
+	margin: 5px;
+	padding: 14px;
+	background-position: center;
+}
+
+.cross-icon-solid{
+  background-image: url('/images/cross-icon.svg');
 	background-repeat: no-repeat;
 	background-size: 25px;
 	margin: 5px;

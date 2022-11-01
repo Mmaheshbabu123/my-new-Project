@@ -9,16 +9,17 @@ import moment from 'moment';
 import Pagination from '../PcComponent/Pagination';
 import StopPlanning from "./StopPlanning";
 import BackLink from '../BackLink';
+import { ExitToApp } from "node_modules/@material-ui/icons/index";
 
 
 function EmployeeWidget(props) {
 
     const current_time = moment();
-    // const current_time = m.format("h:mm");
-
     const [addProject, setAddProject] = useState(false);
+
     // For popup add project
     const [show, setShow] = useState(false);
+
     // CLOSE POPUP //
     const closePopup = () => {
         setShow(false);
@@ -58,9 +59,15 @@ function EmployeeWidget(props) {
                         if (result.status == 200) {
                             // console.log(result.data);
 
-                            setWidget(result.data);
+                            if(result.data!=undefined){
+                                setWidget(result.data);
                             setWidgetTemp(result.data);
                             setWidgetTemp2(result.data);
+                            }else{
+                                setWidget('');
+                                setWidgetTemp('');
+                                setWidgetTemp2(''); 
+                            }
                         }
                     })
                     .catch((error) => {
@@ -83,8 +90,10 @@ function EmployeeWidget(props) {
     useEffect(
         () => {
             const endOffset = itemOffset + itemsPerPage;
-            setWidgetTemp2(widget.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(widget.length / itemsPerPage));
+            if (widget != undefined) {
+                setWidgetTemp2(widget.slice(itemOffset, endOffset));
+                setPageCount(Math.ceil(widget.length / itemsPerPage));
+            }
         },
         [itemOffset, itemsPerPage, widget]
     );
@@ -246,17 +255,6 @@ function EmployeeWidget(props) {
                                 type="search"
                                 id="form12"
                                 className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
-                                placeholder="Employee name"
-                                value={searchname}
-                                onChange={(e) => setSearchname(e.target.value)}
-                            />
-                        </div>
-
-                        <div className="col-sm-3 field_height">
-                            <input
-                                type="search"
-                                id="form12"
-                                className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
                                 placeholder="Company"
                                 value={searchcompany}
                                 onChange={(e) => setSearchcompany(e.target.value)}
@@ -273,6 +271,18 @@ function EmployeeWidget(props) {
                                 onChange={(e) => setSearchlocation(e.target.value)}
                             />
                         </div>
+
+                        <div className="col-sm-3 field_height">
+                            <input
+                                type="search"
+                                id="form12"
+                                className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 shadow-none"
+                                placeholder="Employee name"
+                                value={searchname}
+                                onChange={(e) => setSearchname(e.target.value)}
+                            />
+                        </div>
+
                         <div className="col-sm-3 field_height">
                             <div className='row'>
                                 <div className="col-md-6">
@@ -320,38 +330,56 @@ function EmployeeWidget(props) {
                             <tbody>
                                 {widgetTemp2.length > 0 &&
                                     widgetTemp2.map((result) => (
-                                        <tr className="border poppins-regular-18px p-2"  key={result.id}>
+                                        <tr className="border poppins-regular-18px p-2" key={result.id}>
                                             <td className="poppins-regular-16px p-2">{result.name}</td>
                                             <td className="poppins-regular-16px p-2">{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2">{result.location_name}</td>
-                                            <td className="poppins-regular-16px p-2">{moment(result.actual_end_time).format('HH:mm')}</td>
+                                            <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
+                                            {/* {moment(result.planned_endtime).format('HH:mm')} */}
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
-                                                { moment(result.actual_end_time) < current_time  &&
+                                                {moment(result.planned_endtime) < current_time &&
                                                     <Link href='' className="m-2">
-                                                        <a type="button" className="warning-icon-solid">
+                                                        <a type="button" className="warning-icon-solid"
+                                                        data-toggle="tooltip"
+                                                        title="Employee has crossed planned stop time"
+                                                        >
 
                                                         </a>
                                                     </Link>
                                                 }
                                                 <Link href='' className="m-2">
                                                     <a type="button" className="stop-working-icon-solid"
+                                                    data-toggle="tooltip"
+                                                    title="Stop planning"
                                                     // onClick={showPopup} 
                                                     >
 
                                                     </a>
                                                 </Link>
+                                                <Link href='' className="m-4">
+                                                    <a type="button" className="cross-icon-solid"
+                                                     data-toggle="tooltip"
+                                                     title="Cancel contract"
+                                                    // onClick={showPopup} 
+                                                    >
+                                                    </a>
+                                                </Link>
+
                                             </td>
 
                                         </tr>
+
                                     ))}
                                 {/*----------------------------No records found-------------------------- */}
-                                {widget.length == 0 && (
-                                    <tr>
-                                        <td colSpan={5} className="text-center py-3 border poppins-regular-18px">
-                                            No records
-                                        </td>
-                                    </tr>
-                                )}
+                               
+                                    { widget.length == 0 && (
+                                        <tr>
+                                            <td colSpan={5} className="text-center py-3 border poppins-regular-18px">
+                                                No records
+                                            </td>
+                                        </tr>
+                                    )}
+
                             </tbody>
                         </table>
                     </div>
@@ -359,20 +387,20 @@ function EmployeeWidget(props) {
 
             </form>
             <div className="">
-              
+
                 {/* <StopPlanning
 								data={widget}
 								display={'block'}
 								// company={company}
 								// company_id={companyid}
-								// popupActionNo={closePopup}
-								// popupActionYes={showPopup}
+								popupActionNo={closePopup}
+								popupActionYes={showPopup}
 								// updatecompany={updatcomp}
 								// countries={countrylist}
 							/> */}
-               
+
             </div>
-           
+
             {/*-------------------------- Pagination---------------------------*/}
             <div className="row my-4">
                 {widget.length > itemsPerPage && (
@@ -396,6 +424,7 @@ function EmployeeWidget(props) {
             <div className="text-start col-md-6">
                 <BackLink path={'/'} />
             </div>
+           
         </div>
     );
 }

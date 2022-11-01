@@ -9,6 +9,7 @@
   scroll-behavior: smooth;
   border: 0px !important;
   min-height: 200px;
+  overflow-y: scroll;
 }
 
 .table-overflow {  

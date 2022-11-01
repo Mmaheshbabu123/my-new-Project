@@ -208,6 +208,7 @@ const AddSalaryBenefits = (props) => {
 				// object[i].g_err = ValidationService.emptyValidationMethod(data.granted);
 				object[i].ct_err = ValidationService.emptyValidationMethod(data.coefficient_type);
 				object[i].date_err = ValidationService.emptyValidationMethod(data.date);
+				
 				if (data.coefficient_type == 2) {
 					object[i].c_err = ValidationService.emptyValidationMethod(data.coefficient_value);
 					if (object[i].c_err == '' && object[i].ct_err == '') {
@@ -223,8 +224,7 @@ const AddSalaryBenefits = (props) => {
 					object[i].v_err =
 						data.value_type == '1' ? ValidationService.minSalaryValidationMethod(data.value) : '';
 				}
-				object[i].date_err =
-					data.date_err == '' ? ValidationService.onlyFutureDateValidationMethod(data.date) : '';
+				data.date_err == '' ? object[i].date_err =ValidationService.onlyFutureDateValidationMethod(data.date) : '';
 				if (
 					data.v_err != '' ||
 					data.vt_err != '' ||
@@ -244,17 +244,16 @@ const AddSalaryBenefits = (props) => {
 		});
 
 		setObj(object);
-
+		
 		if (atleast_one == 0) {
 			setAtleast(true);
-			return false;
 		} else {
 			setAtleast(false);
 		}
-		if (err != 0) {
-			return false;
+		if (err == 0&&atleast_one!=0) {
+			return true;
 		}
-		return true;
+		return false;
 	};
 
 	const Submit = (e) => {
@@ -323,11 +322,10 @@ const AddSalaryBenefits = (props) => {
 										}}
 									/>
 								</span>
-								{console.log(element.error)}
 								<div className="border poppins-regular-18px">
 									<Collapsible
-										trigger={t('Salary') + 'verloning - ' + element.name}
-										triggerWhenOpen={t('Salary') + 'verloning - ' + element.name}
+										trigger={element.name}
+										triggerWhenOpen={element.name}
 										open={element.error}
 									>
 										{/* <div className="accordion-item rounded-0 add_salary_benefits w-100 ms-3">
@@ -748,7 +746,6 @@ const AddSalaryBenefits = (props) => {
 };
 export default React.memo(
 	Translation(AddSalaryBenefits, [
-		'Salary',
 		'Is this mandatory?',
 		'Allow sales agent to update the value during creation of',
 		'cooperation agreement?',

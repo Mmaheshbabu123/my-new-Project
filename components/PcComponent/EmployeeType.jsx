@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PcContext } from '../../Contexts/PcContext';
-import { fetchEmployeeTypes, storePcEmployeeTypes, getPcEmployeeTypes } from '../../Services/ApiEndPoints';
+import { fetchEmployeeTypesList, storePcEmployeeTypes, getPcEmployeeTypes } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import Translation from '@/Translation';
@@ -42,7 +42,7 @@ const EmployeeType = (props) => {
 	useEffect(
 		() => {
 			if (pc_unique_key != '') {
-				APICALL.service(fetchEmployeeTypes, 'GET')
+				APICALL.service(fetchEmployeeTypesList+pc_unique_key, 'GET')
 					.then((result) => {
 						console.log(result);
 						if (result.data.length > 0) {

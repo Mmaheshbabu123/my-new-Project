@@ -179,7 +179,7 @@ function EmployeeMonthlyPlanning(props) {
 									<td className="border_employee_planning poppins-light-18px">{result.location}</td>
 									<td className="border_employee_planning poppins-light-18px">{result.companyname}</td>
 									<td className="border_employee_planning">
-										{/* { result.contract_id != '' &&
+										{ result.contract_id != '' &&
 											<Link href={result.contract_id}>
 
 												<AiFillEye
@@ -191,7 +191,7 @@ function EmployeeMonthlyPlanning(props) {
 
 												/>
 											</Link>
-										} */}
+										}
 
 										{/* <span>
 											<MdReviews

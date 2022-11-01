@@ -29,7 +29,7 @@ function StopPlanning(props) {
                                     type="button"
                                     className="btn-close"
                                     data-bs-dismiss="modal"
-                                // onClick={() => props.popupActionNo()}
+                                onClick={() => props.popupActionNo()}
                                 />
                             </div>
                             <div className="modal-body ">
