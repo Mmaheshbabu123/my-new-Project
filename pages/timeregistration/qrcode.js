@@ -10,11 +10,9 @@ const Qrcode = (props) => {
     }
 
     return (
-      <div className='row'
-    //    style={{minHeight:'82vh'}}
-      >                    
+      <div className='row'>                    
       
-            <div className='col-md-12 text-center d-flex align-items-center justify-content-center'>
+            <div className='col-md-12 text-center d-flex align-items-center justify-content-center pt-3 qr-code-time-registration'>
                         <Image src="/images/qrcodecommon.svg"  className="dasboard_image"
                         
                         width={500}
@@ -22,13 +20,17 @@ const Qrcode = (props) => {
                         ></Image>
                     </div>
                 
-                    <button style={{  marginLeft:'-484px'}}
+                   <div className='row'>
+                     <div className='col-md-12'>
+                     <button
 								type="button"
-								className="mt-4 bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline"
+								className="mt-4 bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline mb-0"
 								onClick={redirectTab}
 							>
                                 BACK
 							</button>
+                     </div>
+                   </div>
     </div>
 
     );
