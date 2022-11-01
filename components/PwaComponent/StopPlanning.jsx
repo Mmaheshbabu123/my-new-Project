@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-
+import DatePicker from "react-multi-date-picker";
+import TimePicker from "react-multi-date-picker/plugins/time_picker";
+import { APICALL } from '../../Services/ApiServices';
+import { fetchEmployeeWidgetPlanning } from '../../Services/ApiEndPoints';
 
 function StopPlanning(props) {
     /**
@@ -8,9 +11,24 @@ function StopPlanning(props) {
      * Submit function
      */
 
+   
+    const [datetime,setDateTime]=useState();
+
+    const Save=()=>{
+        alert(props.Data[3]+'---'+props.Data[2]+'----'+datetime);
+        APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/stop-planning-by-employer/'+props.Data[3]+'?wid='+props.Data[2]+'&datetime='+datetime, 'POST')
+        .then((result) => {
+            alert(result.res);
+                console.log(result) 
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
     return (
         <div>
-            <form onSubmit={(e) => submit(e)}>
+            <form onSubmit={Save}>
                 <div
                     className="modal"
                     id="myModal"
@@ -39,15 +57,16 @@ function StopPlanning(props) {
                                             <div className="row  m-0">
                                                 <div className="col">
                                                     <label className="custom_astrick poppins-light-18px">
-                                                        First name
+                                                        Name
                                                     </label>
                                                     <input
                                                         type="text"
+                                                        value={props.Data[0]}
                                                         className="form-control mt-2 mb-2 rounded-0 shadow-none"
                                                     />
 
                                                 </div>
-                                                <div className="col">
+                                                {/* <div className="col">
                                                     <label className="custom_astrick poppins-light-18px">
                                                         Last name
                                                     </label>
@@ -55,7 +74,7 @@ function StopPlanning(props) {
                                                         type="text"
                                                         className="form-control mt-2 mb-2 rounded-0 shadow-none"
                                                     />
-                                                </div>
+                                                </div> */}
                                             </div>
                                             <div className="row  m-0">
                                                 <div className="col">
@@ -64,6 +83,7 @@ function StopPlanning(props) {
                                                     </label>
                                                     <input
                                                         type="text"
+                                                        value={props.Data[1]}
                                                         className="form-control mt-2 mb-2 rounded-0 shadow-none"
                                                     />
 
@@ -72,10 +92,15 @@ function StopPlanning(props) {
                                                     <label className="custom_astrick poppins-light-18px">
                                                         Actual stop time
                                                     </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control mt-2 mb-2 rounded-0 shadow-none"
+                                                    <DatePicker
+                                                        name="datetime" 
+                                                        format="YYYY-MM-DD HH:mm:ss"
+                                                        plugins={[
+                                                            <TimePicker position="bottom" />
+                                                        ]} 
+                                                        onChange={(e)=>setDateTime(e.format('YYYY-MM-DD HH:mm:ss'))}
                                                     />
+                                                    {console.log(datetime)}
                                                 </div>
                                             </div>
                                         </div>

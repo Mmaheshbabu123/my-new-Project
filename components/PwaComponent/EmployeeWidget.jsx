@@ -34,7 +34,7 @@ function EmployeeWidget(props) {
     const [widgetTemp, setWidgetTemp] = useState([]);
     const [widgetTemp2, setWidgetTemp2] = useState([]);
     const [updated, setUpdated] = useState(0);
-
+    const [popupdata,setPopUpData]=useState(null);
     /**
      * Initialise search filter 
      */
@@ -351,7 +351,7 @@ function EmployeeWidget(props) {
                                                     <a type="button" className="stop-working-icon-solid"
                                                     data-toggle="tooltip"
                                                     title="Stop planning"
-                                                    // onClick={showPopup} 
+                                                    onClick={()=>{showPopup();setPopUpData([result.name,result.planned_endtime,result.worked_id,contextState.uid]);}} 
                                                     >
 
                                                     </a>
@@ -388,7 +388,7 @@ function EmployeeWidget(props) {
             </form>
             <div className="">
 
-                {/* <StopPlanning
+              {show &&  <StopPlanning
 								data={widget}
 								display={'block'}
 								// company={company}
@@ -397,7 +397,9 @@ function EmployeeWidget(props) {
 								popupActionYes={showPopup}
 								// updatecompany={updatcomp}
 								// countries={countrylist}
-							/> */}
+                                Data={popupdata}
+							/>
+              }
 
             </div>
 
