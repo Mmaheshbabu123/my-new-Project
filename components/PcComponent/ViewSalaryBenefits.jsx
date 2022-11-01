@@ -125,7 +125,7 @@ const ViewSalaryBenefits = (props) => {
 										aria-expanded="false"
 										aria-controls="flush-collapseOne"
 									>
-										{t('Salary')} (verloning) - {element.name}
+										{element.name}
 									</button>
 								</h2>
 								<div
@@ -412,7 +412,6 @@ const ViewSalaryBenefits = (props) => {
 };
 export default React.memo(
 	Translation(ViewSalaryBenefits, [
-		'Salary',
 		'Is this mandatory?',
 		'Allow sales agent to update the value during creation of',
 		'cooperation agreement?',

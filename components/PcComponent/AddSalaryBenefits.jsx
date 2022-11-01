@@ -324,8 +324,8 @@ const AddSalaryBenefits = (props) => {
 								</span>
 								<div className="border poppins-regular-18px">
 									<Collapsible
-										trigger={t('Salary') + 'verloning - ' + element.name}
-										triggerWhenOpen={t('Salary') + 'verloning - ' + element.name}
+										trigger={element.name}
+										triggerWhenOpen={element.name}
 										open={element.error}
 									>
 										{/* <div className="accordion-item rounded-0 add_salary_benefits w-100 ms-3">
@@ -746,7 +746,6 @@ const AddSalaryBenefits = (props) => {
 };
 export default React.memo(
 	Translation(AddSalaryBenefits, [
-		'Salary',
 		'Is this mandatory?',
 		'Allow sales agent to update the value during creation of',
 		'cooperation agreement?',
