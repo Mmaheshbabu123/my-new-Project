@@ -243,10 +243,10 @@ function EmployeeWidget(props) {
 
 
     return (
-        <div className="container-fluid p-2 employee_widget_dashboard">
+        <div className="cemployee_widget_dashboard">
             <form>
                 <div className="row m-0 ">
-                    <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
+                    <p className="px-0  bitter-italic-normal-medium-22">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
 
 
                     <div className="row d-flex ">

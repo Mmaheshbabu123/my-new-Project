@@ -707,3 +707,10 @@ select option
 {
   min-height: 75vh;
 }
+.view-more-employee-widget
+{
+  font-family: var(--font-family-poppins-regular) !important;
+  font-size: var(--font-size-16px) !important;
+  line-height: var(--line-height-26px) !important;
+  color: var(--color-purple) !important;
+}
