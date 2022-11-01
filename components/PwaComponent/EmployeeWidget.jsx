@@ -9,17 +9,17 @@ import moment from 'moment';
 import Pagination from '../PcComponent/Pagination';
 import StopPlanning from "./StopPlanning";
 import BackLink from '../BackLink';
+import { ExitToApp } from "node_modules/@material-ui/icons/index";
 
 
 function EmployeeWidget(props) {
 
     const current_time = moment();
-
     const [addProject, setAddProject] = useState(false);
 
     // For popup add project
     const [show, setShow] = useState(false);
-    
+
     // CLOSE POPUP //
     const closePopup = () => {
         setShow(false);
@@ -59,9 +59,15 @@ function EmployeeWidget(props) {
                         if (result.status == 200) {
                             // console.log(result.data);
 
-                            setWidget(result.data);
+                            if(result.data!=undefined){
+                                setWidget(result.data);
                             setWidgetTemp(result.data);
                             setWidgetTemp2(result.data);
+                            }else{
+                                setWidget('');
+                                setWidgetTemp('');
+                                setWidgetTemp2(''); 
+                            }
                         }
                     })
                     .catch((error) => {
@@ -84,8 +90,10 @@ function EmployeeWidget(props) {
     useEffect(
         () => {
             const endOffset = itemOffset + itemsPerPage;
-            setWidgetTemp2(widget.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(widget.length / itemsPerPage));
+            if (widget != undefined) {
+                setWidgetTemp2(widget.slice(itemOffset, endOffset));
+                setPageCount(Math.ceil(widget.length / itemsPerPage));
+            }
         },
         [itemOffset, itemsPerPage, widget]
     );
@@ -327,16 +335,22 @@ function EmployeeWidget(props) {
                                             <td className="poppins-regular-16px p-2">{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2">{result.location_name}</td>
                                             <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
+                                            {/* {moment(result.planned_endtime).format('HH:mm')} */}
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
                                                 {moment(result.planned_endtime) < current_time &&
                                                     <Link href='' className="m-2">
-                                                        <a type="button" className="warning-icon-solid">
+                                                        <a type="button" className="warning-icon-solid"
+                                                        data-toggle="tooltip"
+                                                        title="Employee has crossed planned stop time"
+                                                        >
 
                                                         </a>
                                                     </Link>
                                                 }
                                                 <Link href='' className="m-2">
                                                     <a type="button" className="stop-working-icon-solid"
+                                                    data-toggle="tooltip"
+                                                    title="Stop planning"
                                                     // onClick={showPopup} 
                                                     >
 
@@ -344,6 +358,8 @@ function EmployeeWidget(props) {
                                                 </Link>
                                                 <Link href='' className="m-4">
                                                     <a type="button" className="cross-icon-solid"
+                                                     data-toggle="tooltip"
+                                                     title="Cancel contract"
                                                     // onClick={showPopup} 
                                                     >
                                                     </a>
@@ -352,15 +368,18 @@ function EmployeeWidget(props) {
                                             </td>
 
                                         </tr>
+
                                     ))}
                                 {/*----------------------------No records found-------------------------- */}
-                                {widget.length == 0 && (
-                                    <tr>
-                                        <td colSpan={5} className="text-center py-3 border poppins-regular-18px">
-                                            No records
-                                        </td>
-                                    </tr>
-                                )}
+                               
+                                    { widget.length == 0 && (
+                                        <tr>
+                                            <td colSpan={5} className="text-center py-3 border poppins-regular-18px">
+                                                No records
+                                            </td>
+                                        </tr>
+                                    )}
+
                             </tbody>
                         </table>
                     </div>
@@ -374,8 +393,8 @@ function EmployeeWidget(props) {
 								display={'block'}
 								// company={company}
 								// company_id={companyid}
-								// popupActionNo={closePopup}
-								// popupActionYes={showPopup}
+								popupActionNo={closePopup}
+								popupActionYes={showPopup}
 								// updatecompany={updatcomp}
 								// countries={countrylist}
 							/> */}
@@ -405,6 +424,7 @@ function EmployeeWidget(props) {
             <div className="text-start col-md-6">
                 <BackLink path={'/'} />
             </div>
+           
         </div>
     );
 }
