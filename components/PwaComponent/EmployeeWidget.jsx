@@ -14,11 +14,12 @@ import BackLink from '../BackLink';
 function EmployeeWidget(props) {
 
     const current_time = moment();
-    // const current_time = m.format("h:mm");
 
     const [addProject, setAddProject] = useState(false);
+
     // For popup add project
     const [show, setShow] = useState(false);
+    
     // CLOSE POPUP //
     const closePopup = () => {
         setShow(false);
@@ -325,9 +326,9 @@ function EmployeeWidget(props) {
                                             <td className="poppins-regular-16px p-2">{result.name}</td>
                                             <td className="poppins-regular-16px p-2">{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2">{result.location_name}</td>
-                                            <td className="poppins-regular-16px p-2">{moment(result.actual_end_time).format('HH:mm')}</td>
+                                            <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
-                                                {moment(result.actual_end_time) < current_time &&
+                                                {moment(result.planned_endtime) < current_time &&
                                                     <Link href='' className="m-2">
                                                         <a type="button" className="warning-icon-solid">
 
