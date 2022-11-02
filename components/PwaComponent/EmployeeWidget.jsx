@@ -12,12 +12,15 @@ import Pagination from '../PcComponent/Pagination';
 import StopPlanning from "./StopPlanning";
 import BackLink from '../BackLink';
 import { ExitToApp } from "node_modules/@material-ui/icons/index";
+import CancelContract from "./CancelContract";
 
 
 function EmployeeWidget(props) {
 
     const current_time = moment();
     const [addProject, setAddProject] = useState(false);
+    // ========= for Cancel icon usestate ======
+    const [cancel_con, setCancel_con] = useState(false);
 
     // For popup add project
     const [show, setShow] = useState(false);
@@ -243,15 +246,41 @@ function EmployeeWidget(props) {
 
     //----------------Warning icon------------------------//
 
+    //-------------Cancel icon Functions------------------//
+    
+    const cancel_contact = () => {
+        console.log('kkk');
+        setCancel_con(true);
 
+    };
 
+    const handleClosePopup = () => {
+        setCancel_con(false);
+    }
+    
     return (
         <div className="cemployee_widget_dashboard">
             <form>
+                
                 <div className="row m-0 ">
+
+                {cancel_con == true && (
+                <div
+                    className="modal"
+                    id="myModal"
+                    tabIndex="-1"
+                    style={{ display: cancel_con ? "block" : "none" ,background: 'rgb(0,0,0,0.5)'}}
+                >
+                    <CancelContract handleClosePopup={handleClosePopup}  title={'Stop Planning'} />
+
+                </div>
+            )}
+
+
                     <p className="px-0  bitter-italic-normal-medium-22">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
 
 
+                    <div className="col-md-12 px-0">
                     <div className="row d-flex ">
                         <div className="col-sm-3 field_height">
                             <input
@@ -306,7 +335,7 @@ function EmployeeWidget(props) {
                                         search === true) && (
                                             <button
                                                 type="button"
-                                                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
+                                                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_employee_widget w-100 shadow-none"
                                                 onClick={() => handleReset()}
                                             >
                                                 Reset
@@ -315,6 +344,7 @@ function EmployeeWidget(props) {
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
 
                     <div className="form-check p-0 mt-2 tab-pane fade show ">
@@ -363,7 +393,7 @@ function EmployeeWidget(props) {
                                                     <a type="button" className="cross-icon-solid"
                                                      data-toggle="tooltip"
                                                      title="Cancel contract"
-                                                    // onClick={showPopup} 
+                                                    onClick={cancel_contact} 
                                                     >
                                                     </a>
                                                 </Link>
@@ -387,7 +417,7 @@ function EmployeeWidget(props) {
                         </table>
                     </div>
                 </div>
-
+                                        
             </form>
             <div className="">
 

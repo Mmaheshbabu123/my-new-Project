@@ -75,6 +75,17 @@ thead:after
   line-height: var(--line-height-31px);
   height: 43px;
 }
+.reset_skyblue_employee_widget,
+.reset_skyblue_employee_widget:hover
+{
+  border: 1px solid var(--color-skyblue) !important;
+  background-color: var(--color-white);
+  color: var(--color-skyblue);
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-31px);
+  height: 45px;
+}
 @media screen and (min-width:768px) and (max-width:1023px)
 {
   .footer-bg-color
@@ -706,4 +717,11 @@ select option
 .qr-code-time-registration
 {
   min-height: 75vh;
+}
+.view-more-employee-widget
+{
+  color: var(--color-purple) !important;
+  font-family: var(--font-family-poppins-light) !important;
+  font-size: var(--font-size-16px) !important;
+  line-height: var(--line-height-26px) !important;
 }
