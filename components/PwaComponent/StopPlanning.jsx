@@ -91,10 +91,11 @@ function StopPlanning(props) {
                                                         Actual stop time
                                                     </label>
                                                     <DatePicker
+
                                                         name="datetime" 
-                                                        format="YYYY-MM-DD HH:mm:ss"
+                                                        format="YYYY-MM-DD HH:mm"
                                                         plugins={[
-                                                            <TimePicker position="bottom" />
+                                                            <TimePicker key={datetime} position="bottom" hideSeconds />
                                                         ]} 
                                                         onChange={(e)=>setDateTime(e.format('YYYY-MM-DD HH:mm:ss'))}
                                                     />
