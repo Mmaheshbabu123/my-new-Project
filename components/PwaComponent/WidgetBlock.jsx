@@ -5,20 +5,31 @@ import { APICALL } from '../../Services/ApiServices';
 import { fetchEmployeeWidgetPlanning } from '../../Services/ApiEndPoints';
 import moment from 'moment';
 import { AiOutlineArrowRight } from 'react-icons/ai';
+import CancelContract from "./CancelContract";
 
 function EmployeeWidgetBlock(props) {
     const current_time = moment();
-
+    var contract_id;
     const [visible, setVisible] = useState(3);
-
+    const [cancel_con, setCancel_con]=useState(false);
     const viewMoreItems = () => {
         setVisible((prevValue) => prevValue + 3);
     };
+    const cancel_contact =() => {
+        console.log('kkk');
+        setCancel_con(true);
+
+    };
+    // const storeval =(a) =>{
+    //     contract_id=a;
+    //     return contract_id;
+
+    // }
 
     const [widget, setWidget] = useState([]);
     const [widgetTemp, setWidgetTemp] = useState([]);
     const [widgetTemp2, setWidgetTemp2] = useState([]);
-
+    const [contractid,setContractId]=useState(null);
     const { contextState = {} } = useContext(UserAuthContext);
 
     useEffect(
@@ -28,8 +39,10 @@ function EmployeeWidgetBlock(props) {
                 APICALL.service(fetchEmployeeWidgetPlanning + contextState.uid, 'GET')
                     .then((result) => {
                         if (result.status == 200) {
-                            // console.log(result.data);
-
+                            console.log(result.data);
+                            // alert(result.data[0]['contract_id']);
+                            var  contract_id =result.data[0]['contract_id'];
+                            setContractId(contract_id);
                             setWidget(result.data);
                             setWidgetTemp(result.data);
                             setWidgetTemp2(result.data);
@@ -42,10 +55,33 @@ function EmployeeWidgetBlock(props) {
         },
         [props, contextState.uid]
     );
+    const handleClosePopup = () => {
+
+        setCancel_con(false);
+        
+    }
+    
+    console.log(cancel_con);
     return (
-        <div className="container-fluid p-2 employee_widget_dashboard">
+        
+        
+        <div className="container-fluid p-2 employee_widget_dashboard">   
+        {/* {cancel_con?alert('true'):alert('false')} */}
+        {cancel_con == true && (
+				<div
+                className="modal"
+                id="myModal"
+                tabIndex="-1"
+                style={{ display: cancel_con ? "block" : "none" }}
+            >
+               <CancelContract  handleClosePopup = {handleClosePopup} contract ={contractid} />    
+                
+            </div>
+			)}
+         
             <form>
                 <div className="row m-0 ">
+                
                     <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working ({moment().format('D-M-YYYY, h:mm a')})</p>
                     <div className="form-check p-0 mt-2 tab-pane fade show ">
                         <table className="table mb-0">
@@ -82,6 +118,14 @@ function EmployeeWidgetBlock(props) {
 
                                                     </a>
                                                 </Link>
+                                                <Link href='' className="m-2">
+                                                    <a type="button" className="cross-icon-solid"
+                                                    onClick={cancel_contact} 
+                                                    >
+
+                                                    </a>
+                                                </Link>
+                                                
                                             </td>
 
                                         </tr>

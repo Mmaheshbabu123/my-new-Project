@@ -73,4 +73,4 @@ const EmployerCooperationAgreementMain = (props) => {
   );
 }
 
-export default React.memo(Translation(EmployerCooperationAgreementMain,['Manage agreements','Loading...']));
+export default React.memo(Translation(EmployerCooperationAgreementMain,['Manage agreements','Loading...','BACK']));

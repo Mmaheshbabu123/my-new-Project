@@ -18,7 +18,7 @@ function EmployeeWidget(props) {
 
     const [addProject, setAddProject] = useState(false);
     // For popup add project
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     // CLOSE POPUP //
     const closePopup = () => {
         setShow(false);
@@ -40,6 +40,7 @@ function EmployeeWidget(props) {
     const [searchname, setSearchname] = useState('');
     const [searchcompany, setSearchcompany] = useState('');
     const [searchlocation, setSearchlocation] = useState('');
+
 
 
     /**
@@ -367,8 +368,8 @@ function EmployeeWidget(props) {
 
             </form>
             <div className="">
-
-                {/* <StopPlanning
+{/* 
+               {show == 1 && <StopPlanning
 								data={widget}
 								display={'block'}
 								// company={company}
@@ -377,7 +378,7 @@ function EmployeeWidget(props) {
 								// popupActionYes={showPopup}
 								// updatecompany={updatcomp}
 								// countries={countrylist}
-							/> */}
+							/>} */}
 
             </div>
 
