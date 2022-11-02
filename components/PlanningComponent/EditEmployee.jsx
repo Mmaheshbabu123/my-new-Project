@@ -292,7 +292,7 @@ function EditEmployee(props) {
 				<div className="text-end">
 					<button
 						type="submit"
-						className="btn rounded-0 custom-btn px-3 btn-block float-end poppins-medium-18px-next-button"
+						className="btn rounded-0 custom-btn px-3 btn-block float-end poppins-medium-18px-next-button shadow-none"
 						onClick={() => {
 							setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
 						}}
