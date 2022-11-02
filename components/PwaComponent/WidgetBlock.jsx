@@ -75,25 +75,23 @@ function EmployeeWidgetBlock(props) {
         [props, contextState.uid]
     );
     const handleClosePopup = () => {
-
         setCancel_con(false);
 
     }
-
     console.log(cancel_con);
     return (
 
 
         <div className="container-fluid p-2 employee_widget_dashboard">
-            {/* {cancel_con?alert('true'):alert('false')} */}
+            
             {cancel_con == true && (
                 <div
                     className="modal"
                     id="myModal"
                     tabIndex="-1"
-                    style={{ display: cancel_con ? "block" : "none" }}
+                    style={{ display: cancel_con ? "block" : "none",background: 'rgb(0,0,0,0.5)' }}
                 >
-                    <CancelContract handleClosePopup={handleClosePopup} contract={contractid} />
+                    <CancelContract handleClosePopup={handleClosePopup} contract={contractid} title={'Cancel Contract'} />
 
                 </div>
             )}
@@ -118,9 +116,9 @@ function EmployeeWidgetBlock(props) {
                                 {widgetTemp2.length > 0 &&
                                     widgetTemp2.slice(0, visible).map((result) => (
                                         <tr className="border poppins-regular-18px p-2" key={result.id}>
-                                            <td className="poppins-regular-16px p-2">{result.name}</td>
-                                            <td className="poppins-regular-16px p-2">{result.company_name}</td>
-                                            <td className="poppins-regular-16px p-2">{result.location_name}</td>
+                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.name}>{result.name}</td>
+                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.company_name}>{result.company_name}</td>
+                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.location_name}>{result.location_name}</td>
                                             <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
                                                 {moment(result.planned_endtime) < current_time &&
@@ -146,6 +144,8 @@ function EmployeeWidgetBlock(props) {
                                                 <Link href='' className="m-2">
                                                     <a type="button" className="cross-icon-solid"
                                                         onClick={cancel_contact}
+                                                        data-toggle="tooltip"
+                                                        title="Cancel Contract"
                                                     >
 
                                                     </a>
