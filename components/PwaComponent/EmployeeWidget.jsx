@@ -20,8 +20,8 @@ function EmployeeWidget(props) {
     const [addProject, setAddProject] = useState(false);
 
     // For popup add project
-    const [show, setShow] = useState(false);
-
+    const [show, setShow] = useState(true);
+    
     // CLOSE POPUP //
     const closePopup = () => {
         setShow(false);
@@ -43,6 +43,7 @@ function EmployeeWidget(props) {
     const [searchname, setSearchname] = useState('');
     const [searchcompany, setSearchcompany] = useState('');
     const [searchlocation, setSearchlocation] = useState('');
+
 
 
     /**
