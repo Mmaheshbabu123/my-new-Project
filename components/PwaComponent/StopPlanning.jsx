@@ -15,11 +15,9 @@ function StopPlanning(props) {
     const [datetime,setDateTime]=useState();
 
     const Save=()=>{
-        alert(props.Data[3]+'---'+props.Data[2]+'----'+datetime);
         APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/stop-planning-by-employer/'+props.Data[3]+'?wid='+props.Data[2]+'&datetime='+datetime, 'POST')
         .then((result) => {
-            alert(result.res);
-                console.log(result) 
+                
         })
         .catch((error) => {
             console.error(error);
@@ -100,7 +98,6 @@ function StopPlanning(props) {
                                                         ]} 
                                                         onChange={(e)=>setDateTime(e.format('YYYY-MM-DD HH:mm:ss'))}
                                                     />
-                                                    {console.log(datetime)}
                                                 </div>
                                             </div>
                                         </div>
