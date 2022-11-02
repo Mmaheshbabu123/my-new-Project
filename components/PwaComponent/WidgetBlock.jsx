@@ -11,25 +11,20 @@ function EmployeeWidgetBlock(props) {
     const current_time = moment();
     var contract_id;
     const [visible, setVisible] = useState(3);
-    const [cancel_con, setCancel_con]=useState(false);
+    const [cancel_con, setCancel_con] = useState(false);
     const viewMoreItems = () => {
         setVisible((prevValue) => prevValue + 3);
     };
-    const cancel_contact =() => {
+    const cancel_contact = () => {
         console.log('kkk');
         setCancel_con(true);
 
     };
-    // const storeval =(a) =>{
-    //     contract_id=a;
-    //     return contract_id;
-
-    // }
 
     const [widget, setWidget] = useState([]);
     const [widgetTemp, setWidgetTemp] = useState([]);
     const [widgetTemp2, setWidgetTemp2] = useState([]);
-    const [contractid,setContractId]=useState(null);
+    const [contractid, setContractId] = useState(null);
     const { contextState = {} } = useContext(UserAuthContext);
 
     useEffect(
@@ -41,7 +36,7 @@ function EmployeeWidgetBlock(props) {
                         if (result.status == 200) {
                             console.log(result.data);
                             // alert(result.data[0]['contract_id']);
-                            var  contract_id =result.data[0]['contract_id'];
+                            var contract_id = result.data[0]['contract_id'];
                             setContractId(contract_id);
                             setWidget(result.data);
                             setWidgetTemp(result.data);
@@ -56,32 +51,29 @@ function EmployeeWidgetBlock(props) {
         [props, contextState.uid]
     );
     const handleClosePopup = () => {
-
         setCancel_con(false);
-        
     }
-    
     console.log(cancel_con);
     return (
-        
-        
-        <div className="container-fluid p-2 employee_widget_dashboard">   
-        {/* {cancel_con?alert('true'):alert('false')} */}
-        {cancel_con == true && (
-				<div
-                className="modal"
-                id="myModal"
-                tabIndex="-1"
-                style={{ display: cancel_con ? "block" : "none" }}
-            >
-               <CancelContract  handleClosePopup = {handleClosePopup} contract ={contractid} />    
-                
-            </div>
-			)}
-         
+
+
+        <div className="container-fluid p-2 employee_widget_dashboard">
+            
+            {cancel_con == true && (
+                <div
+                    className="modal"
+                    id="myModal"
+                    tabIndex="-1"
+                    style={{ display: cancel_con ? "block" : "none",background: 'rgb(0,0,0,0.5)' }}
+                >
+                    <CancelContract handleClosePopup={handleClosePopup} contract={contractid} title={'Cancel Contract'} />
+
+                </div>
+            )}
+
             <form>
                 <div className="row m-0 ">
-                
+
                     <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working ({moment().format('D-M-YYYY, h:mm a')})</p>
                     <div className="form-check p-0 mt-2 tab-pane fade show ">
                         <table className="table mb-0">
@@ -107,8 +99,8 @@ function EmployeeWidgetBlock(props) {
                                                 {moment(result.planned_endtime) < current_time &&
                                                     <Link href='' className="m-2">
                                                         <a type="button" className="warning-icon-solid"
-                                                        data-toggle="tooltip"
-                                                        title="Employee has crossed planned stop time"
+                                                            data-toggle="tooltip"
+                                                            title="Employee has crossed planned stop time"
                                                         >
 
                                                         </a>
@@ -116,26 +108,26 @@ function EmployeeWidgetBlock(props) {
                                                 }
                                                 <Link href='' className="m-2">
                                                     <a type="button" className="stop-working-icon-solid"
-                                                    // onClick={showPopup} 
-                                                    data-toggle="tooltip"
-                                                    title="Stop planning"
+                                                        // onClick={showPopup} 
+                                                        data-toggle="tooltip"
+                                                        title="Stop planning"
                                                     >
 
                                                     </a>
                                                 </Link>
                                                 <Link href='' className="m-2">
                                                     <a type="button" className="cross-icon-solid"
-                                                    onClick={cancel_contact} 
+                                                        onClick={cancel_contact}
                                                     >
 
                                                     </a>
                                                 </Link>
-                                                
+
                                             </td>
 
                                         </tr>
                                     ))}
-                                    {/*----------------------------No records found-------------------------- */}
+                                {/*----------------------------No records found-------------------------- */}
                                 {widget.length == 0 && (
                                     <tr>
                                         <td colSpan={5} className="text-center py-3 border poppins-regular-18px">

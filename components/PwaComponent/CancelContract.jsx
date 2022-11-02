@@ -1,6 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import EmployeeWidgetBlock from './WidgetBlock';
+import customAlert from '@/atoms/customAlert';
+
+//-----------Calling api -------------//
+import { APICALL } from '@/Services/ApiServices';
+import { cancelContract } from '@/Services/ApiEndPoints'
+
+
 function CancelContract(props) {
     console.log(props);
 
@@ -13,12 +20,31 @@ function CancelContract(props) {
         setMessage(event.target.value);
     };
 
-    const handleClick = event => {
+    const handleClick = async (event) => {
         event.preventDefault();
-        console.log('handleClick ', message);
-        console.log('Contract id ',props.contract);
+        let data = getPostData();
+        await APICALL.service(cancelContract, 'POST', data).then(response => {
+            console.log(response);
+            if(response.status == 200){
+                console.log('Successfull');
+                customAlert('success', 'cancel contract for employee Successfull ', 2000);
+            }else{
+                customAlert('error', 'cancel contract for employee Failed', 2000);
+                console.log('Failed');
+            }
+
+            
+        })
         props.handleClosePopup();
     };
+
+    const getPostData = () => {
+        return {
+            contract_id: props.contract,
+            reason: message
+        }
+    }
+
     const popuphide = (e) => {
         props.handleClosePopup();
     };
@@ -37,7 +63,7 @@ function CancelContract(props) {
                     <div className="modal-header col-md-11 m-auto px-0">
                         <div className="col-md-10">
                             <p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-4">
-                                Stop planning
+                               {props.title}
                             </p>
                         </div>
                         <button
@@ -56,8 +82,8 @@ function CancelContract(props) {
                                             <label className="custom_astrick poppins-light-18px">
                                                 Reason
                                             </label>
-                                            <input
-                                                type="text"
+                                            <textarea
+                                                // type="text"
                                                 id="message"
                                                 name="message"
                                                 onChange={handleChange}
