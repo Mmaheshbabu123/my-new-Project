@@ -114,7 +114,7 @@ function CancelContract(props) {
                                         <div className="col-6">
                                             <button
                                                 type="submit"
-                                                className="btn btn-lg btn-block add-proj-btn  px-3 rounded-0 "
+                                                className="btn btn-lg px-3 rounded-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none"
                                             >
                                                 Back
                                             </button>
@@ -123,7 +123,7 @@ function CancelContract(props) {
                                         <div className="col-6">
                                             <button
                                                 type="submit"
-                                                className="btn btn-lg btn-block float-end add-proj-btn  px-3 rounded-0 "
+                                                className="btn float-end poppins-medium-18px-next-button shadow-none px-3 rounded-0 "
 
                                                 onClick={handleClick}
                                             >

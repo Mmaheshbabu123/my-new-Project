@@ -82,7 +82,7 @@ function EmployeeWidgetBlock(props) {
     return (
 
 
-        <div className="container-fluid p-2 employee_widget_dashboard">
+        <div className="border mb-2 p-2 employee_widget_dashboard">
             
             {cancel_con == true && (
                 <div
@@ -166,10 +166,10 @@ function EmployeeWidgetBlock(props) {
                             </tbody>
                         </table>
                     </div>
-                    <div className="text-end mb-3 p-0">
+                    <div className="text-end p-0">
                         {widget.length > 3 &&
                             <Link href='/pwa/employee-widget' className="m-2">
-                                <a type="button" className="mt-2 view-more-employee-widget">View more &nbsp;
+                                <a type="button" className="mt-2 view-more-employee-widget text-decoration-underline">View more &nbsp;
                                     <AiOutlineArrowRight />
                                 </a>
                             </Link>
