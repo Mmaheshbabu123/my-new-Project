@@ -20,7 +20,7 @@ function EmployeeWidget(props) {
     const [addProject, setAddProject] = useState(false);
 
     // For popup add project
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
     
     // CLOSE POPUP //
     const closePopup = () => {
@@ -36,7 +36,7 @@ function EmployeeWidget(props) {
     const [widgetTemp, setWidgetTemp] = useState([]);
     const [widgetTemp2, setWidgetTemp2] = useState([]);
     const [updated, setUpdated] = useState(0);
-    const [popupdata,setPopUpData]=useState(null);
+    const [popupdata,setPopUpData]=useState('');
     /**
      * Initialise search filter 
      */

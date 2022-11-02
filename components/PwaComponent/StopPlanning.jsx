@@ -11,6 +11,7 @@ function StopPlanning(props) {
      * Submit function
      */
 
+    (props.Data==null)?props.Data='':"";
    
     const [datetime,setDateTime]=useState();
 
