@@ -199,8 +199,8 @@ const Pincode = (props) => {
 				</div>
 			</div>
 				{/* <div className="col-4" /> */}
-				<div className="col-5 mx-auto mt-1">
-					<div className="d-flex">
+				<div className="col-sm-6 col-md-5 mx-auto mt-1">
+					<div className="d-flex justify-content-center">
 						<OTPInput
 							inputClassName={hide ? 'otp' : ''}
 							className="otp-container"
@@ -226,7 +226,7 @@ const Pincode = (props) => {
 						{response}
 					</p>
 					<div className="row mt-3">
-						<div className="col-md-11 pe-2">
+						<div className="col-md-9 pe-3">
 							<button
 								style={{ border: 'none', background: 'white', color: 'blue' }}
 								onClick={forgotPassword}
