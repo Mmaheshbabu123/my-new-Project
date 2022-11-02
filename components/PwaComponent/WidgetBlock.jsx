@@ -65,14 +65,14 @@ function EmployeeWidgetBlock(props) {
     return (
         
         
-        <div className="container-fluid p-2 employee_widget_dashboard">   
+        <div className="employee_widget_dashboard border p-2 mb-2">   
         {/* {cancel_con?alert('true'):alert('false')} */}
         {cancel_con == true && (
 				<div
                 className="modal"
                 id="myModal"
                 tabIndex="-1"
-                style={{ display: cancel_con ? "block" : "none" }}
+                style={{ display: cancel_con ? "block" : "none" ,background:'rgba(0, 0, 0, 0.5)'}}
             >
                <CancelContract  handleClosePopup = {handleClosePopup} contract ={contractid} />    
                 
@@ -82,7 +82,7 @@ function EmployeeWidgetBlock(props) {
             <form>
                 <div className="row m-0 ">
                 
-                    <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working ({moment().format('D-M-YYYY, h:mm a')})</p>
+                    <p className="px-0 bitter-italic-normal-medium-22">Employees currently working ({moment().format('D-M-YYYY, h:mm a')})</p>
                     <div className="form-check p-0 mt-2 tab-pane fade show ">
                         <table className="table mb-0">
                             <thead>
@@ -100,7 +100,7 @@ function EmployeeWidgetBlock(props) {
                                     widgetTemp2.slice(0, visible).map((result) => (
                                         <tr className="border poppins-regular-18px p-2" key={result.id}>
                                             <td className="poppins-regular-16px p-2">{result.name}</td>
-                                            <td className="poppins-regular-16px p-2">{result.company_name}</td>
+                                            <td className="poppins-regular-16px p-2 text-truncate d-inline-block" style={{width:'100px',verticalAlign:'middle'}}>{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2">{result.location_name}</td>
                                             <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
@@ -146,10 +146,10 @@ function EmployeeWidgetBlock(props) {
                             </tbody>
                         </table>
                     </div>
-                    <div className="text-end mb-3 p-0">
+                    <div className="text-end p-0">
                         {widget.length > 3 &&
                             <Link href='/pwa/employee-widget' className="m-2">
-                                <a type="button" className="mt-2 view-more-employee-widget">View more &nbsp;
+                                <a type="button" className="mt-2 view-more-employee-widget text-decoration-underline">View more &nbsp;
                                     <AiOutlineArrowRight />
                                 </a>
                             </Link>

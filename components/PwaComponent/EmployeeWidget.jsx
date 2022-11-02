@@ -249,9 +249,17 @@ function EmployeeWidget(props) {
         <div className="cemployee_widget_dashboard">
             <form>
                 <div className="row m-0 ">
-                    <p className="px-0  bitter-italic-normal-medium-22">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
+                   
+                   <div className="col-md-12 py-4 position-sticky-pc px-0">
+                       <div className="row">
+                           <div className="col-md-12">
+                           <p className="px-0 bitter-italic-normal-medium-24">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
+                           </div>
+                       </div>
+                   </div>
 
 
+                    <div className="col-md-12 px-0">
                     <div className="row d-flex ">
                         <div className="col-sm-3 field_height">
                             <input
@@ -306,7 +314,7 @@ function EmployeeWidget(props) {
                                         search === true) && (
                                             <button
                                                 type="button"
-                                                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
+                                                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_employee_widget w-100 shadow-none"
                                                 onClick={() => handleReset()}
                                             >
                                                 Reset
@@ -315,6 +323,7 @@ function EmployeeWidget(props) {
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
 
                     <div className="form-check p-0 mt-2 tab-pane fade show ">

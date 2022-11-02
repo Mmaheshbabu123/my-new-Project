@@ -112,7 +112,7 @@ input[type="checkbox"]
 .add_project input:focus,
 .add_project .form-select:focus
 {
-  border-color: var(--color-border-lightgrey);
+  border:1px solid #ced4da;
 }
 .add_project .add-proj-btn
 {
@@ -415,8 +415,8 @@ input[type="checkbox"]
 .warning-icon-solid {
 	background-image: url('/images/warning.svg');
 	background-repeat: no-repeat;
-	background-size: 25px;
-	margin: 5px;
+	background-size: 26px;
+	margin:0 2px;
 	padding: 14px;
 	background-position: center;
 }
@@ -425,7 +425,7 @@ input[type="checkbox"]
   background-image: url('/images/cross-icon.svg');
 	background-repeat: no-repeat;
 	background-size: 25px;
-	margin: 5px;
+	margin: 0 2px;
 	padding: 14px;
 	background-position: center;
 }
@@ -435,7 +435,7 @@ input[type="checkbox"]
 	background-image: url('/images/stop-icon-filled.svg');
 	background-repeat: no-repeat;
 	background-size: 25px;
-	margin: 5px;
+	margin: 2px;
 	padding: 14px;
 	background-position: center;
 }
@@ -568,4 +568,16 @@ input[type="checkbox"]
 .basic_online_details input[type="text"]
 {
   min-height: 43px;
+}
+.actual-stop-time .rmdp-input
+{
+  height: 38px !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  border-radius: 0px !important;
+  width: 100% !important;
+}
+.actual-stop-time .rmdp-container
+{
+   width: 100% !important;
 }
