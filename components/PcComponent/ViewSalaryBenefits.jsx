@@ -42,16 +42,10 @@ const ViewSalaryBenefits = (props) => {
 	const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
 	const [ obj, setObj ] = useState([]);
-	const inputRef = useRef({});
-	const [ valuetype, setValueType ] = useState(0);
-	const [ valuev, setValuev ] = useState();
 	const [ agent, setAgent ] = useState();
-	const [ startDate, setStartDate ] = useState(new Date());
-	const [ granted, setGranted ] = useState();
-	const [ mandatory, setMandatory ] = useState();
 	const [ uid, setUid ] = useState(0);
 	const [ onlyview, setOnlyview ] = useState(true);
-
+	const [ keey,setKeey ]=useState();
 	useEffect(
 		() => {
 			const { k = '' } = router.query;
@@ -64,6 +58,7 @@ const ViewSalaryBenefits = (props) => {
 				.then((result) => {
 					if (result.data != undefined || result.data != null) {
 						console.log(result.data);
+						setKeey(k);
 						if (typeof result.data == 'object') {
 							var propertyValues = Object.values(result.data);
 							setObj(propertyValues);
@@ -130,7 +125,7 @@ const ViewSalaryBenefits = (props) => {
 										aria-expanded="false"
 										aria-controls="flush-collapseOne"
 									>
-										{t('Salary')} (verloning) - {element.name}
+										{element.name}
 									</button>
 								</h2>
 								<div
@@ -182,17 +177,18 @@ const ViewSalaryBenefits = (props) => {
 														value={agent}
 														checked={element.sales_agent === true}
 													/>
-													<label
-														className={
+													<label className="form-check-label" htmlFor="flexCheckDefault">
+														<p className={
 															pc_view_type == 'addpc' ? (
 																'poppins-medium-16px'
 															) : (
 																'poppins-medium-14px'
 															)
-														}
-													>
+														}>
 														{t('Allow sales agent to update the value during creation of')}
 														{t('cooperation agreement?')}
+														</p>
+														
 													</label>
 												</div>
 											</div>
@@ -395,50 +391,27 @@ const ViewSalaryBenefits = (props) => {
 					</div>
 				
 				{rows}
-				{pc_view_type == 'editpc' ? (
+				
 					<div className="row mt-4">
-						<div className="text-start col-md-6" />
-						<div className="text-end col-md-6">
-							<button
-								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
-							>
-								{t('SAVE')}
-							</button>
-						</div>
-					</div>
-				) : pc_view_type == 'addpc' ? (
-					<div className="row my-4">
 						<div className="text-start col-md-6">
 							<button
 								type="button"
 								className="bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline"
 								onClick={() => {
-									setCurrent_sec(4);
+									router.push('/viewpc/'+keey);
 								}}
 							>
 								{t('BACK')}
 							</button>
 						</div>
-						<div className="text-end col-md-6">
-							<button
-								type="sumit"
-								className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button  shadow-none"
-							>
-								{t('SAVE')}
-							</button>
-						</div>
 					</div>
-				) : (
-					''
-				)}
+				
 			</form>
 		</div>
 	);
 };
 export default React.memo(
 	Translation(ViewSalaryBenefits, [
-		'Salary',
 		'Is this mandatory?',
 		'Allow sales agent to update the value during creation of',
 		'cooperation agreement?',

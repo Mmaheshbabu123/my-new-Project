@@ -146,7 +146,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
         onClick={() => router.push(`/manage-additional-docs?entitytype=${entityType}&entityid=${entityId}&action=1&id=0`)}
         type="button"
         className="btn skyblue-bg-color rounded-0 shadow-none col-3 px-0">
-        {+ t('Add additional document')}
+        { t('+'+'Add additional document')}
       </button>
       </div>
       }
@@ -204,9 +204,9 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
             {state.currentItems && state.currentItems.length > 0 ?
             <tbody>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-                <td> {eachRow.name} </td>
+                <td className='w-25 ps-4'> {eachRow.name} </td>
                 {entityType !== 2 ? <td width="170px"> {eachRow.employer_name} </td> : null}
-                <td width="170px"> {eachRow.company_name} </td>
+                <td className="w-25"> {eachRow.company_name} </td>
                 <td> {formatDate(eachRow.startDate) || '-'} </td>
                 <td> {formatDate(eachRow.endDate) || '-'} </td>
                 <td className='text-center'> {eachRow.linkToCooperationAgreement ? 'Yes' : 'No'} </td>

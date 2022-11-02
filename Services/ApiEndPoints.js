@@ -55,6 +55,7 @@ export const deleteCoefficientType = BASE_URL + "delete-cofficent-type";
 export const createCofficientType = BASE_URL + "create-cofficent-types";
 export const getAllEmpCoeffAndValueTypes = BASE_URL + "get-coeff-empl-valuetypes";
 export const savePcLinkingData = BASE_URL + "save-pclinking-data";
+export const fetchEmployeeTypesList = BASE_URL + "fetch-employee-types/";
 
 
 //-----
@@ -265,7 +266,7 @@ export const getIndexationOfSalary = BASE_URL + "fetch-all-indexation-salary";
 //-------------------------Add Planning---------------------------//
 export const getPlanning = BASE_URL + "fetch-add-planning-details/";
 export const getDraftPlanning = BASE_URL + "fetch-draft-planning/";
-export const deletePlanningDetails = BASE_URL + "delete-planning/";
+export const deletePlanningDetails = BASE_URL + "delete-draft-planning/";
 
 
 

@@ -1212,6 +1212,7 @@ div[disabled] {
 }
 .equal-width-calc td {
 	width: calc(100%/7);
+	word-break: break-word;
 }
 .table-right-border-white {
 	border-right: 1px solid var(--color-white);
@@ -1674,7 +1675,7 @@ p.mb-2.poppins-regular-16px.btn-active:focus {
 }
 .epc_height
 {
-	min-height: 62vh !important;
+	min-height: 65vh !important;
 }
 .pc-height5 {
 	min-height: 47vh;
@@ -1917,7 +1918,9 @@ input[type="text"]::placeholder {
 	width: 13%;
 }
 .field_height input,
-.field_height button {
+.field_height button,
+.field_height select
+ {
 	height: 45px;
 	border: 1px solid var(--color-input-border-lightgrey);
 }
@@ -2067,10 +2070,10 @@ input[type="search"]::-webkit-search-cancel-button {
 .employer-large-tile .dashboard_menu_title
 {
 	margin: 0 !important;
-	align-self: center;
+	padding-top: 1.5rem;
 }
 .dashboard-image-div {
-	width: 80px;
+	width: auto;
 	height: 80px;
 }
 .progress-bar
@@ -2103,7 +2106,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .employee-time-register .dashboard_menu_links {
-	height: 25.5rem !important;
+	height: 26.5rem !important;
 	padding: 5rem 0 !important;
 }
 @media screen and (min-width:1024px) and  (max-width:1399px)
@@ -2136,11 +2139,12 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .todo-count-badge {
   position: absolute;
-  bottom: 30px;
 	right: 5px;
-	padding: 8px 10px;
+	padding: 7px 10px;
   border-radius: 50%;
   background-color: #79b1bd;
+	color: var(--color-white) !important;
+	top: 7px;
 }
 .Collapsible__trigger {
 	display: block;
@@ -2208,6 +2212,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	width: 340px !important;
 }
 
+#lang-select {text-transform:uppercase;}
 .login-hide-show-span > svg {
 	height: 22px;
   width: 22px;
@@ -2216,4 +2221,17 @@ input[type="search"]::-webkit-search-cancel-button {
 .edit_age
 {
 	padding: 0.73rem !important;
+}
+.login-hide-show-span path
+{
+	color: var(--color-skyblue) !important;
+}
+.my-todo-all-icon 
+{
+	height: 20px;
+  margin-bottom: 0px;
+}
+.edit_employee_table input[type="text"]:focus
+{
+	border: 1px solid #ced4da;
 }

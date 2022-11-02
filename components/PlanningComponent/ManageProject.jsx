@@ -303,8 +303,8 @@ function ManageProject(props) {
 						</div>
 						{/* ---------------------Manage project table-------------------------*/}
 
-						<div className="form-check p-0 tab-pane fade show min_height_table project_table_sticky ">
-							<table className="table mb-3">
+						<div className="form-check p-0 mt-2 tab-pane fade show min_height_table project_table_sticky ">
+							<table className="table mb-3 mt-3">
 								<thead>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4">

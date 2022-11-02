@@ -6,11 +6,17 @@ import { useRouter } from 'next/router';
 
 const LabourShareDocIndex = () => {
   const router = useRouter();
-  const { entityid, preview = 0, approved = 0, ref_id = 0} = router.query;
+  const { entityid, preview = 0, approved = 0, ref_id = 0, root_parent_id = 0} = router.query;
   const { contextState: { uid = 0 } } = useContext(UserAuthContext);
 
   if(uid === entityid) {
-    return <LabourShareDocPreview userId = {uid} preview = {preview} approved = {approved} refId = {ref_id}/>
+    return <LabourShareDocPreview
+              userId = {uid}
+              preview = {preview}
+              approved = {approved}
+              refId = {ref_id}
+              root_parent_id = {root_parent_id}
+      />
   } else {
     return  entityid && <AccessDenied />
   }

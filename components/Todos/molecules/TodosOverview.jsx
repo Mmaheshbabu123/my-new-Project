@@ -25,6 +25,8 @@ import download_svg from '../molecules/images/download.svg';
 import { HiOutlineExternalLink, } from 'react-icons/hi';
 import { MdDone } from 'react-icons/md';
 import { CgMailOpen } from 'react-icons/cg';
+import All from '../molecules/images/All.svg';
+import Allactive from '../molecules/images/All-active.svg';
 import alltodos from './all_todos.svg';
 import Translation from '@/Translation';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -63,11 +65,12 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
     rows: getSelectedStatus(tabId),
     filterRows: getSelectedStatus(tabId),
     searchKey: 'title',
+    companySearchTerm: '',
     currentItems: [],
     pageCount: 0,
     itemOffset: 0,
     currentPage: 0,
-    titleTerm: '',
+    titleSearchTerm: '',
     webformId: '',
     submitId: '',
     experience_aquired: '',
@@ -84,20 +87,26 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
   });
 
   const handleSearchClick = (search = 1) => {
-    let value = search ? state.titleTerm : '';
+    let { titleSearchTerm, companySearchTerm } = state;
     let data = getSelectedStatus(state.selectedTabId);
     let filterRows = [];
-    if (value) {
+    if(search && (titleSearchTerm || companySearchTerm)) {
       filterRows = data.filter((item) => {
-        return (item[state.searchKey].toLowerCase().toString())
-          .indexOf(value.toLowerCase().toString()) !== -1;
+        let status = true;
+        if(titleSearchTerm)
+          status = `${item['title']}`.toLowerCase().toString().indexOf(titleSearchTerm.toLowerCase().toString()) !== -1;
+        if(status && companySearchTerm)
+          status = `${item['company_name']}`.toLowerCase().toString().indexOf(companySearchTerm.toLowerCase().toString()) !== -1;
+       return status;
       })
     } else {
       filterRows = data;
+      companySearchTerm = '';
+      titleSearchTerm = '';
     }
     setState({
       ...state,
-      titleTerm: value,
+      titleSearchTerm, companySearchTerm,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -213,7 +222,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
       } else if(type === 'download') {
          downloadUsingAnchorTag(eachRow.baseUrl + eachRow.file_path);
       } else {
-        window.open(`labour-share-doc-preview?entityid=${entityId}&ref_id=${eachRow.tid}`, '_blank');
+        window.open(`labour-share-doc-preview?entityid=${entityId}&ref_id=${eachRow.tid}&root_parent_id=${eachRow.root_parent_id}`, '_blank');
       }
       return;
     }
@@ -251,7 +260,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
     router.push(`?entitytype=${entityType}&entityid=${entityId}&tab=${selectedTabId}`, undefined, { shallow: true })
     let filterRows = getSelectedStatus(selectedTabId);
     setState({
-      ...state, selectedTabId, filterRows, status, titleTerm: '',
+      ...state, selectedTabId, filterRows, status, titleSearchTerm: '',
       currentPage: 0,
       itemOffset: 0,
       ...updatePaginationData(filterRows, 0)
@@ -416,7 +425,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
-      <div className='row my_todo_tab pt-2'>
+      <div className='row my_todo_tab pt-2 pb-2'>
         <div className='col-md-12'>
           <ul className={`${styles['todo-tabs']} col-md-6 m-0`}>
             {state.tabs.map(tab => {
@@ -426,7 +435,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
                 <li key={tab.id} className='col-md-1'>
                   <div className={`w-auto d-inline-block my_todo_color ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
                     {tab.id !== 3 ? <span id={tab.id} className={`${styles['todo-icon']}`}> <Icon /> </span> :
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M215.4 96H144 107.8 96v8.8V144v40.4 89L.2 202.5c1.6-18.1 10.9-34.9 25.7-45.8L48 140.3V96c0-26.5 21.5-48 48-48h76.6l49.9-36.9C232.2 3.9 243.9 0 256 0s23.8 3.9 33.5 11L339.4 48H416c26.5 0 48 21.5 48 48v44.3l22.1 16.4c14.8 10.9 24.1 27.7 25.7 45.8L416 273.4v-89V144 104.8 96H404.2 368 296.6 215.4zM0 448V242.1L217.6 403.3c11.1 8.2 24.6 12.7 38.4 12.7s27.3-4.4 38.4-12.7L512 242.1V448v0c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64v0zM176 160H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H176c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H176c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>}
+                    <img src={All.src}></img>}
                     <span className={`${tab.id === 3 ? '' : 'my-1'}d-block text-center`}> {tab.name} </span>
                   </div>
                 </li>
@@ -436,6 +445,22 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
         </div>
       </div>
     );
+  }
+
+  const searchTextField = (key, placeholder) => {
+    return(
+        <div className='col-md-6' >
+        <input
+          type="text"
+          value={state[key]}
+          className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+          onChange={(e) => setState({...state, [key]: e.target.value })}
+          placeholder={'Search ' + placeholder}
+          onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+        />
+
+      </div>
+    )
   }
 
   return (
@@ -451,15 +476,11 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
         <div className='row searchbox m-0 pt-4 mb-2 position-sticky-mytodo_searchbox' style={{ margin: '10px 0'}}>
           <div className='col-md-12'>
             <div className='row'>
-              <div className='col-md-8 col-lg-9 ps-0'>
-                <input
-                  type="text"
-                  value={state.titleTerm}
-                  className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
-                  onChange={(e) => setState({ ...state, titleTerm: e.target.value })}
-                  placeholder={'Search'}
-                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1) : null}
-                />
+              <div className='col-md-9'>
+                <div className='row'>
+                {searchTextField('titleSearchTerm', 'title')}
+                {searchTextField('companySearchTerm', 'company')}
+                </div>
               </div>
               <div className='col-md-4 col-lg-3'>
                 <div className='row justify-content-end'>
@@ -527,7 +548,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           /></div>}
-         <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 mb-3 px-0 text-decoration-underline text-uppercase">
+         <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-3 px-0 text-decoration-underline text-uppercase">
             {`Back`}
           </button>
         </div>

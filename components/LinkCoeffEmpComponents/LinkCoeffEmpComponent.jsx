@@ -12,7 +12,7 @@ var SERVER_SIDE_RENDERING = 1;
 const LinkCoeffEmpComponent = (props) => {
   const { t } = props;
   const { state, updateStateChanges } = useContext(LinkCoeffEmpContext);
-  const { inputRef } = state;
+  const { inputRef, isOverflow } = state;
   useEffect(() => {
     SERVER_SIDE_RENDERING ? fetchEmpCoeffValueTypesData() : SERVER_SIDE_RENDERING += 1;
   }, [])
@@ -134,14 +134,14 @@ const LinkCoeffEmpComponent = (props) => {
   const addMultiSelectTag = () => {
     return (
       <>
-      <p className='my-2 poppins-medium-18px custom_astrick'> {t('Select paritair comite')} </p>
+      <p className='my-2 poppins-light-18px custom_astrick'> {t('Select paritair comite')} </p>
       <MultiSelect
         options={state.pcArray}
         standards={state.pcArray.filter(val => val.value === state.selectedPc)}
         disabled={parseInt(props.pcid) && state.selectedPc ? true : false}
         handleChange={onSelect}
         isMulti={false}
-        className="pc-single-select  input-border-lightgray poppins-regular-18px mh-50 rounded-0 linkcoe mb-3"
+        className="pc-single-select  input-border-lightgray poppins-regular-18px mh-50 rounded-0 linkcoe"
         placeholder={'Select paritair comite'}
       />
       </>
@@ -191,7 +191,7 @@ const LinkCoeffEmpComponent = (props) => {
           {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
               <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>} */}
           {/* <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: `${tableWidth}` }}> */}
-          <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId">
+          <div className={`row link-emp-coeff-tableparent ${isOverflow ? 'table-overflow' : ''}`} id="linkempCoeffDivId">
             <div className="col-lg-3 col-md-6 m-0 p-0 pc-linking-div firstpart">
               <CoeffcientValuesFirstPart />
             </div>

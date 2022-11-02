@@ -8,10 +8,8 @@ import sign_icon from '../molecules/images/cooperation_agreement.svg';
 import pdf_icon from '../molecules/images/Pdf.svg';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Translation from '@/Translation';
-import { useRouter } from 'next/router';
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
-  const router = useRouter();
   const { t } = props;
   const { state: {  overviewData, salesAgentUpdates } } = props;
 
@@ -198,17 +196,6 @@ const OverviewPage = (props) => {
             activeClassName={"active"}
         />}
         </div>
-        <div className="row my-2">
-        <div className="text-start col-md-6">
-          <button
-            type="button"
-            className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
-            onClick={() =>router.back()}
-          >
-            {t('BACK')}
-          </button>
-        </div>
-        </div>
       </>
     );
   }
@@ -260,7 +247,7 @@ const OverviewPage = (props) => {
   }
 
   return(
-    <div className={`${styles['emp-sv-overview-page-div']}`}>
+    <div className={`${styles['emp-sv-overview-page-div']} manage-agreements-min-height`}>
       {overviewData.length > 0 ? (
         <div>
           {showTabs()}

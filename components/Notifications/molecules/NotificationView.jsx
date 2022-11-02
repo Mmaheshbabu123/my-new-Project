@@ -83,18 +83,18 @@ const NotificationView = ({
       <div className={styles["notificationBar"]} >
         <div>
           <div style={{ display: "flex" }} className="bg-white p-3">
-            <p className={`${styles['notification-header']} bitter-italic-normal-medium-24 pt-4`}>
+            <p className={`${styles['notification-header']} bitter-italic-normal-medium-24 pt-3`}>
               Notifications
             </p>
             <img alt={"close"} title={"Close"} onClick={toggleNotificationView} style={{ cursor: "pointer", width: "15px" }} src={closeIcon.src} />
           </div>
           {state.notificationCount < 1 && <p className="text-center poppins-light-18px"> {state.notificationCount === 0 ? 'No notifications to show.' : 'Loading...'} </p>}
-          <div className={styles["notification-scroll"]} style={{ minHeight: state.notificationCount ? "200px" : "150px", maxHeight: state.viewAllLink ? "400px" : "460px", overflowY: 'auto' }}>
+          <div className={styles["notification-scroll"]} style={{ minHeight: state.notificationCount ? "200px" : "150px", maxHeight: state.viewAllLink ? "480px" : "495px", overflowY: 'auto' }}>
           {state.allTimestamp.map((i, k) => {
             return (
               <div key={k} className="container px-3 notification_container">
                 <p className={`${styles['date-p-tag']} d-flex align-items-center row`}>
-                  <span style={{ display: "inline-block"}} className="poppins-medium-16px col-md-6 ps-3 py-3">  {i.UTC.date} </span>
+                  <span style={{ display: "inline-block"}} className="poppins-medium-16px col-md-6 ps-3 pt-1 pb-3">  {i.UTC.date} </span>
                   <span style={{ display: "inline-block", textAlign: "right" }} className="col-md-6 pe-3" >
                   </span>
                 </p>

@@ -405,7 +405,7 @@ function Planning(props) {
 												updateLocation(e.target.value);
 											}}
 										>
-											<option value="">Select</option>
+											<option value="">{t('Select')}</option>
 											{company.map((options) => (
 												<option key={options.nid} value={options.nid} >
 													{options.title}
@@ -487,13 +487,13 @@ function Planning(props) {
 														className="mt-2 ms-3 size-edit color-skyblue"
 														onClick={showPopup}
 														data-toggle="tooltip"
-														title="Edit project"
+														title={t("Edit project")}
 													/>
 													<span onClick={() => showDeletePopup(project.id)} type="button">
 														<MdDelete
 															className="mt-2 ms-3 color-skyblue size-del "
 															data-toggle="tooltip"
-															title="Delete project"
+															title={t("Delete project")}
 														/>
 													</span>
 												</span>
@@ -558,7 +558,7 @@ function Planning(props) {
 		</div>
 	);
 }
-export default React.memo(Translation(Planning,['Loading...','Add Planning','ADD PROJECT','Company','select company','Location','Select','Projects','BACK','NEXT']));
+export default React.memo(Translation(Planning,['Loading...','Add Planning','ADD PROJECT','Company','select company','Location','Select','Projects','BACK','NEXT', 'Edit project', 'Delete project']));
 
 // FETCHING COMPANY FROM DRUPAL //
 // useEffect(() => {
