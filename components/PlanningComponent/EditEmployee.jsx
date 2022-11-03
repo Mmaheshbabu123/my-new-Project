@@ -6,19 +6,17 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import ValidationService from '../../Services/ValidationService';
 import moment from 'moment';
-import { fetchEmpDetails,updateEmployeePlanning } from '../../Services/ApiEndPoints';
+import { fetchEmpDetails, updateEmployeePlanning } from '../../Services/ApiEndPoints';
 import Translation from '@/Translation';
-
+import MultiSelectField from '@/atoms/MultiSelectField';
 
 function EditEmployee(props) {
-	const { t }=props;
+	const { t} = props;
 	const router = useRouter();
 	const { p_unique_key } = router.query;
-	// console.log(p_unique_key);
 	const [ company, setCompany ] = useState([]);
 	const [ functions, setFunctions ] = useState([]);
 	const [ emptypes, setEmptypes ] = useState([]);
-
 
 	const [ time, setTime ] = useState('');
 	const [ error_employee_name, setError_employee_name ] = useState('');
@@ -28,31 +26,34 @@ function EditEmployee(props) {
 	const [ error_start_time, setError_start_time ] = useState('');
 	const [ error_end_time, setError_end_time ] = useState('');
 
-	const [ data, setData ] = useState({});
+	const [ data, setData ] = useState([]);
 
-	useEffect(() => {
+	useEffect(
+		() => {
+			console.log(props.data);
+			setData(props.data);
+		},
+		[ props ]
+	);
 
-		setData(props.data);
-		console.log(props)
-	}, [props]);
-
-
-	useEffect(() => {
-		
-		if(data.id != undefined){
-			APICALL.service(fetchEmpDetails + data.id, 'GET')
-				.then((result) => {
-					console.log(result.data)
-					setFunctions(result.data[0]);
-					setEmptypes(result.data[1])
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-		}
-		// 
-		// alert("check")
-	}, [data]);
+	useEffect(
+		() => {
+			if (data.length > 0 && data[0].pef_id != undefined && props) {
+				APICALL.service(fetchEmpDetails + data[0].pef_id, 'GET')
+					.then((result) => {
+						console.log(data);
+						console.log("check")
+						console.log(result.data);
+						setFunctions(result.data[0]);
+						setEmptypes(result.data[1]);
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
+		},
+		[ data ]
+	);
 	/**
 	 * Submit function
 	 * @param {*} res 
@@ -60,55 +61,25 @@ function EditEmployee(props) {
 	 */
 	let submit = async (event) => {
 		event.preventDefault();
-
-		// console.log(data);
-		// APICALL.service(addProject, 'POST', data).then((result) => {
-		// 	console.log(result);
-		// });
 		var valid_res = validate(data);
 		if (valid_res) {
 			postdata();
 		}
 	};
 
-	let postdata = ()=>{
-				APICALL.service(updateEmployeePlanning, 'POST', data)
-					.then((result) => {
-						console.log(result);
-						if (result.status === 200) {
-							props.childtoparent();
-							
-						} else if (result.status == 205) {
-						}
-					})
-					.catch((error) => {
-						console.error(error);
-					});
-
-	}
-
-	const employeetype = [
-		{
-			value: '01',
-			label: 'employee type1',
-			function: 'function1'
-		},
-		{
-			value: '02',
-			label: 'employee type2',
-			function: 'function2'
-		},
-		{
-			value: '03',
-			label: 'employee type3',
-			function: 'function3'
-		},
-		{
-			value: '04',
-			label: 'employee type4',
-			function: 'function4'
-		}
-	];
+	let postdata = () => {
+		APICALL.service(updateEmployeePlanning, 'POST', data)
+			.then((result) => {
+				console.log(result);
+				if (result.status === 200) {
+					props.childtoparent();
+				} else if (result.status == 205) {
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};
 
 	let validate = (res) => {
 		// console.log(res);
@@ -147,102 +118,86 @@ function EditEmployee(props) {
 		setError_start_time(error1['start_time']);
 		setError_end_time(error1['end_time']);
 		console.log(error1);
-		if(error1['employee_name'] =='' && error1['employee_type'] =='' && error1['function'] == '' && error1['minimum_salary'] =='' && error1['start_time'] == '' && error1['end_time'] ==''){
+		if (
+			error1['employee_name'] == '' &&
+			error1['employee_type'] == '' &&
+			error1['function'] == '' &&
+			error1['minimum_salary'] == '' &&
+			error1['start_time'] == '' &&
+			error1['end_time'] == ''
+		) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	};
 
-	let updatetime = (e,date,type) => {
+	let updatetime = (e, date, type) => {
 		var data1 = data;
-		if(type == 'starttime'){
+		if (type == 'starttime') {
 			data1.starttime = moment(e).format('YYYY-MM-DD HH:mm:ss');
 			setData(data1);
-		}else{
+		} else {
 			data1.endtime = moment(e).format('YYYY-MM-DD HH:mm:ss');
 			setData(data1);
 		}
-
-	}
+	};
 
 	return (
 		<div className="container-fluid p-0">
-			{/* <div className='empty-sec'></div> */}
 			<form onSubmit={(e) => submit(e)}>
 				<div className="row  m-0 ">
-				<div className=" mb-1 text-center align-items-center justify-content-center text-white d-flex poppins-medium-18px skyblue-bg-color height-edit-employee py-3">
-				<p>{t('Edit Employee')}</p>
-				</div>
-					<div className='table-border-gray p-3 edit_employee_table mb-3'>
-					<div className="form-group ">
-						<label className="custom_astrick poppins-light-16px">{t('Employee name')}</label>
-						<input
-							type="text"
-							className="form-control mb-2 mt-1 poppins-light-16px rounded-0 mb-4 shadow-none"
-							value={data.employee_name}
-							onChange={(e) => {
-								setData((prev) => ({ ...prev, employee_name: e.target.value }));
-							}}
-						/>
-						<p className="error  mt-2 mb-2">{error_employee_name}</p>
+					<div className=" mb-1 text-center align-items-center justify-content-center text-white d-flex poppins-medium-18px skyblue-bg-color height-edit-employee py-3">
+						<p>{t('Edit Employee')}</p>
+					</div>
+					<div className="table-border-gray p-3 edit_employee_table mb-3">
+						<div className="form-group ">
+							<label className="custom_astrick poppins-light-16px">{t('Employee name')}</label>
+							<input
+								type="text"
+								disabled
+								className="form-control mt-1 poppins-light-16px rounded-0 mb-4 shadow-none"
+								value={data.length>0 ?data[0].employee_name:''}
+								onChange={(e) => {
+									setData((prev) => ({ ...prev, employee_name: e.target.value }));
+								}}
+							/>
+						</div>
+						<div className="form-group ">
+							<label className="custom_astrick poppins-light-16px">{t('Employee type')}</label>
+							<MultiSelectField
+								placeholder={t('Select')}
+								id={'select_id'}
+								options={emptypes}
+								disabled={false}
+								standards={emptypes.filter(val => val.value === data[0].emp_type)}
+								className="mt-1 poppins-light-16px mb-4 shadow-none custom-select"
+								// handleChange={(obj) => updateEmployeeType(k1, obj, key)}
+								isMulti={false}
+							/>
+							<p className="error  mt-2 mb-2">{error_employee_type}</p>
+						</div>
+						<div className="form-group ">
+							<label className="custom_astrick poppins-light-16px">{t('Function')}</label>
+						<MultiSelectField
+								placeholder={t('Select')}
+								id={'functions_id'}
+								options={functions}
+								disabled={false}
+								standards={functions.filter(val => val.value === data[0].function_id)}
 
-						<label className="custom_astrick poppins-light-16px">{t('Employee type')}</label>
-						{/* <input
-							type="text"
-							className="form-select mb-2"
-							defaultValue=""
-							onChange={(e) => {
-								setData((prev) => ({ ...prev, employee_type: e.target.value }));
-							}}
-						/> */}
-						<select
-							className="form-select mt-1 mb-2 custom-select poppins-light-16px rounded-0 mb-4 shadow-none"
-							value={data.emp_type}
-							onChange={(e) => {
-								setData((prev) => ({ ...prev, emp_type: e.target.value }));
-							}}
-						>
-							<option>{t('--Select--')}</option>
-							{emptypes.map((options) => (
-								<option key={options.value} value={options.value}>
-									{options.label}
-								</option>
-							))}
-						</select>
-						<p className="error  mt-2 mb-2">{error_employee_type}</p>
-
-						<label className="custom_astrick poppins-light-16px">{t('Function')}</label>
-						{/* <input
-							type="text"
-							className="form-select mb-2"
-							defaultValue=""
-							onChange={(e) => {
-								setData((prev) => ({ ...prev, function: e.target.value }));
-							}}
-						/> */}
-						<select
-							className="form-select mt-1 mb-2 custom-select poppins-light-16px  rounded-0 mb-4 shadow-none"
-							value={data.function_id}
-							onChange={(e) => {
-								setData((prev) => ({ ...prev, function_id: e.target.value }));
-							}}
-						>
-							<option>{t('--Select--')}</option>
-							{functions.map((options) => (
-								<option key={options.id} value={options.id}>
-									{options.name}
-								</option>
-							))}
-						</select>
-						<p className="error  mt-2 mb-2">{error_function}</p>
-
+								// handleChange={(obj) => updateEmployeeType(k1, obj, key)}
+								isMulti={false}
+								className="mt-1 poppins-light-16px mb-4 shadow-none custom-select"
+							/>
+						</div>
+						<div className="form-group ">
 						<label className="custom_astrick poppins-light-16px">{t('Minimum salary')}</label>
 						<div className="input-group mb-4 min-salary-form-control mt-1">
 							<input
 								type="text"
 								className="form-control rounded-0 shadow-none "
-								value={data.salary}
+								value={data.length>0?data[0].salary:''}
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, salary: e.target.value }));
 								}}
@@ -250,60 +205,72 @@ function EditEmployee(props) {
 							<span className="input-group-text rounded-0 salary-edit-employee">€</span>
 						</div>
 						<p className="error mt-2 mb-2">{error_minimum_salary}</p>
-					</div>
-					<div className="d-flex col-md-12 row m-0 ">
-						<div className=" col-md-6 ps-0  ">
-							<div className="pb-1 custom_astrick poppins-light-16px rounded-0">{t('Start time')}</div>
-							<TimePicker
-								className='rounded-0'
-								placeholder="Select Time"
-								use12Hours
-								showSecond={false}
-								focusOnOpen={true}
-								format="HH:mm"
-								value={data.starttime? moment(data.starttime):null}
+						</div>
 
-								onChange={(e) => {
-									updatetime(e,data.pdate,'starttime');
-								}}
-							/>
-							<p className="error mt-2 mb-2 ">{error_start_time}</p>
+						<div className="d-flex col-md-12 row m-0 ">
+							<div className=" col-md-6 ps-0  ">
+								<div className="pb-1 custom_astrick poppins-light-16px rounded-0">
+									{t('Start time')}
+								</div>
+								<TimePicker
+									className="rounded-0"
+									placeholder="Select Time"
+									use12Hours
+									showSecond={false}
+									focusOnOpen={true}
+									format="HH:mm"
+									value={data.length>0 && data[0].starttime ? moment(data[0].starttime) : null}
+									onChange={(e) => {
+										updatetime(e, data.pdate, 'starttime');
+									}}
+								/>
+								<p className="error mt-2 mb-2 ">{error_start_time}</p>
+							</div>
+							<div className="col-md-6  p-0">
+								<div className="pb-1 custom_astrick poppins-light-16px">{t('End time')}</div>
+								<TimePicker
+									className="rounded-0"
+									placeholder="Select Time"
+									use12Hours
+									showSecond={false}
+									focusOnOpen={true}
+									format="HH:mm"
+									value={data.length>0 && data[0].endtime ? moment(data[0].endtime) : null}
+									onChange={(e) => {
+										updatetime(e, data.pdate, 'starttime');
+									}}
+								/>
+								<p className="error mt-3">{error_end_time}</p>
+							</div>
 						</div>
-						<div className="col-md-6  p-0">
-							<div className="pb-1 custom_astrick poppins-light-16px">{t('End time')}</div>
-							<TimePicker
-							    className='rounded-0'
-								placeholder="Select Time"
-								use12Hours
-								showSecond={false}
-								focusOnOpen={true}
-								format="HH:mm"
-								value={data.endtime?moment(data.endtime):null}
-								onChange={(e) => {
-									updatetime(e,data.pdate,'starttime');
+
+						<div className="text-end">
+							<button
+								type="submit"
+								className="btn rounded-0 custom-btn px-3 btn-block float-end poppins-medium-18px-next-button"
+								onClick={() => {
+									setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
 								}}
-							/>
-							<p className="error mt-3">{error_end_time}</p>
+							>
+								{t('SAVE')}
+							</button>
 						</div>
-					
 					</div>
-					
-				
-				<div className="text-end">
-					<button
-						type="submit"
-						className="btn rounded-0 custom-btn px-3 btn-block float-end poppins-medium-18px-next-button shadow-none"
-						onClick={() => {
-							setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
-						}}
-					>
-						{t('SAVE')}
-					</button>
-				</div>
-				</div>
 				</div>
 			</form>
 		</div>
 	);
 }
-export default React.memo(Translation(EditEmployee,['Edit Employee','Employee name','Employee type','--Select--','Function','Minimum salary','Start time','End time','SAVE']));
+export default React.memo(
+	Translation(EditEmployee, [
+		'Edit Employee',
+		'Employee name',
+		'Employee type',
+		'--Select--',
+		'Function',
+		'Minimum salary',
+		'Start time',
+		'End time',
+		'SAVE'
+	])
+);

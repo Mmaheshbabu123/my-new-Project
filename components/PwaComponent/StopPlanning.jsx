@@ -99,7 +99,7 @@ function StopPlanning(props) {
                         <div className="modal-content">
                             <div className="modal-header col-md-11 m-auto px-0">
                                 <div className="col-md-10">
-                                    <p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-4">
+                                    <p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 ps-3">
                                         Stop planning
                                     </p>
                                 </div>
@@ -113,7 +113,7 @@ function StopPlanning(props) {
                             <div className="modal-body ">
                                 <div className="col-md-11 m-auto add_project">
                                     <div className="row">
-                                        <div className=" ">
+                                        <div className="px-1">
                                             <div className="row  m-0">
                                                 <div className="col">
                                                     <label className="custom_astrick poppins-light-18px">
@@ -142,8 +142,9 @@ function StopPlanning(props) {
                                                     {<p style={{color:'red'}}>{date_err}</p>}
                                                 </div>
                                             </div>
+                                            <div className="col-md-12">
                                             <div className="row  m-0">
-                                                <div className="col">
+                                                <div className="col-md-6">
                                                     <label className="custom_astrick poppins-light-18px">
                                                         Planned stop time
                                                     </label>
@@ -155,8 +156,8 @@ function StopPlanning(props) {
                                                     />
 
                                                 </div>
-                                                <div className="col">
-                                                    <label className="custom_astrick poppins-light-18px">
+                                                <div className="col-md-6 actual-stop-time">
+                                                    <label className="custom_astrick poppins-light-18px ">
                                                         Actual stop time
                                                     </label>
                                                     {console.log(time)}
@@ -173,11 +174,12 @@ function StopPlanning(props) {
                                                     {<p style={{color:'red'}}>{time_err}</p>}
                                                 </div>
                                             </div>
+                                            </div>
                                         </div>
-                                        <div className="modal-footer border-0 col-md-11 m-auto px-2 add_project">
+                                        <div className="modal-footer border-0 col-md-12 m-auto add_project">
                                             <button
                                                 type="submit"
-                                                className="btn btn-lg btn-block float-right add-proj-btn  px-3 rounded-0 "
+                                                className="btn poppins-medium-18px-next-button float-right px-3 rounded-0 shadow-none"
                                             >
                                                 Save
                                             </button>
