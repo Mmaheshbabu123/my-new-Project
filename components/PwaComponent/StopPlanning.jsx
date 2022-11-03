@@ -168,7 +168,7 @@ function StopPlanning(props) {
                                                         // value={time}
                                                         onChange={(e)=>setTime(e.format('HH:mm:00'))}
                                                         plugins={[
-                                                            <TimePicker  hideSeconds/>
+                                                            <TimePicker key={time} hideSeconds/>
                                                           ]} 
                                                     />
                                                     {<p style={{color:'red'}}>{time_err}</p>}
