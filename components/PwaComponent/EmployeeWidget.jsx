@@ -56,6 +56,16 @@ function EmployeeWidget(props) {
 
     const { contextState = {} } = useContext(UserAuthContext);
 
+    /**Auto refresh */
+    const [time, setTime] = useState(Date.now());
+
+    useEffect(() => {
+        const interval = setInterval(() => setTime(Date.now()), 60000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+
     useEffect(
         () => {
 
@@ -277,7 +287,7 @@ function EmployeeWidget(props) {
             )}
 
 
-                    <p className="px-0  bitter-italic-normal-medium-22">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
+                    <p className="px-0  bitter-italic-normal-medium-22 mt-2 mb-2 p-1">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
 
 
                     <div className="col-md-12 px-0">
