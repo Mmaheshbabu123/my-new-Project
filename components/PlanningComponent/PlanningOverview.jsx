@@ -15,15 +15,16 @@ import EditEmployee from './EditEmployee';
 
 
 
+
 const PlanningOverview = (props)=>{
-	const { t ,company,location,costcenter,week} = props;
+	const { t ,company,location,costcenter,week,editEmployee} = props;
 const [ planning, setPlanning ] = useState([]);
 const [ styleEdit, setStyleEdit ] = useState('col-md-12');
 const [ showview, setShowview ] = useState(false);
 const [ weekCount, setWeekCount ] = useState(0);
 const [ activeWeek, setActiveWeek ] = useState([]);
 const [ edit, setEdit ] = useState(false);
-const [ editDate, setEditDate ] = useState([]);
+const [ editData, setEditData ] = useState([]);
 
 
 
@@ -33,8 +34,8 @@ useEffect(
     () => {
         // if (showview == true) {
             if (company != '') {
-                var loc = props.location != '' ? props.location : 0;
-                var cc = props.costcenter != '' ? props.costcenter : 0;
+                var loc = location != '' ? location : 0;
+                var cc = costcenter != '' ? costcenter : 0;
                 APICALL.service(getWeeklyPlanning + company + '/' + loc + '/' + cc + '/' + weekCount, 'GET')
                     .then((result) => {
                         if (result.status == 200) {
@@ -58,39 +59,51 @@ useEffect(
 useEffect(
     () => {
       if(activeWeek.length == 0){
-        setActiveWeek(props.week);
+        setActiveWeek(week);
       }  
     },
-    [ props.week ]
+    [ week ]
 );
+
+useEffect(()=>{
+	if(edit === true && editEmployee === false){
+	setEdit(!edit);
+	setStyleEdit('col-md-12');
+
+}
+
+},[props])
 
 let editplanning = (data) => {
 	setEdit(true);
 	setStyleEdit('col-md-9');
-	setEditDate(data);
+	setEditData(data);
 	window.scrollTo(0, 0);
 };
 let updateParent = () => {
 	setStyleEdit('col-md-12');
-	setEditDate([]);
+	setEditData([]);
 	setEdit(false);
 };
 
 let updateSec = (parent_key) =>{
 	var planning1 = [...planning];
+	// if(!edit){
+	
 	planning1[parent_key].map((v2,k2) =>{
 		planning1[parent_key][k2][0].section_open = !planning1[parent_key][k2][0].section_open;
 	});
-	
 	setPlanning(planning1);
+// }else{
+// 	planning1.map((val,key)=>{
+// 		planning1[key].map((v2,k2) =>{
+// 			planning1[key][k2][0].section_open = false;
+// 		});
+// 	})
+// 	setPlanning(planning1);
+// }
 
 }
-
-
-
-
-
-
 
     return(
         <div>
@@ -185,20 +198,21 @@ let updateSec = (parent_key) =>{
 																>
 																	{planning[value].map(
 																		(v2, k2) =>
+																		<div key={k2}>{
 																			v2.some((el) => el.pdate === val) ? (
 																				<div>
 																					{v2.map(
 																						(val1, key1) =>
 																							val1.pdate == val ? (
-																								<div key={val1.id} onClick={()=>{updateSec(value,k2)}}>
+																								<div key={val1.paid}>
 																									{key1 == 0 && (
 																										<div>
 																											<div className="row mb-1">
-																												<div className="col-md-9 pe-0">
-																													<p className="employee-weekly-planning">
+																												<div className="col-md-9 pe-0" onClick={()=>{updateSec(value,k2)}}>
+																													<p className="employee-weekly-planning user-select-none pointer">
 																														{
 																															val1.employee_name
-																														}
+																														} {console.log(value)}
 																													</p>
 																												</div>
 																												<div className="color-skyblue my-2 mt-1 text-end col-md-3 ps-0">
@@ -214,7 +228,7 @@ let updateSec = (parent_key) =>{
 																																title="Edit plannig"
 																																onClick={() =>{
 																																	editplanning(
-																																		val1
+																																		v2
 																																	);}}
 																															/>
 																														</a>
@@ -265,7 +279,7 @@ let updateSec = (parent_key) =>{
 																				</div>
 																			) : (
 																				''
-																			)
+																			)}</div>
 																	)}
 																</td>
 															))}
@@ -298,7 +312,7 @@ let updateSec = (parent_key) =>{
 
 									{edit && (
 										<div className="col-md-3">
-											<EditEmployee data={editDate} childtoparent={updateParent} />
+											<EditEmployee data={editData} childtoparent={updateParent} edit={edit} />
 										</div>
 									)}
 								</div>

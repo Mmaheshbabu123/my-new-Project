@@ -175,6 +175,7 @@ function WeeklyPlanning(props) {
 									className="form-select w-100 rounded-0 poppins-light-18px shadow-none rounded-0"
 									onChange={(e) => {
 										updateLocation(e.target.value);
+										setEdit(false);
 									}}
 								>
 									<option value=""> {t('Select company')}</option>
@@ -258,6 +259,7 @@ function WeeklyPlanning(props) {
 				{activeTab == 1 ? (
 					<div>
 						<PlanningOverview
+							editEmployee={edit}
 							company={company}
 							location={location}
 							costcenter={costcenter}

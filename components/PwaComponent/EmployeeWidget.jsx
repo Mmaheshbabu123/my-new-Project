@@ -56,6 +56,16 @@ function EmployeeWidget(props) {
 
     const { contextState = {} } = useContext(UserAuthContext);
 
+    /**Auto refresh */
+    const [time, setTime] = useState(Date.now());
+
+    useEffect(() => {
+        const interval = setInterval(() => setTime(Date.now()), 60000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+
     useEffect(
         () => {
 
@@ -277,7 +287,7 @@ function EmployeeWidget(props) {
             )}
 
 
-                    <p className="px-0  bitter-italic-normal-medium-22">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
+                    <p className="px-0  bitter-italic-normal-medium-22 mt-2 mb-2 p-1">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
 
 
                     <div className="col-md-12 px-0">
@@ -364,9 +374,9 @@ function EmployeeWidget(props) {
                                 {widgetTemp2.length > 0 &&
                                     widgetTemp2.map((result) => (
                                         <tr className="border poppins-regular-18px p-2" key={result.id}>
-                                            <td className="poppins-regular-16px p-2">{result.name}</td>
-                                            <td className="poppins-regular-16px p-2">{result.company_name}</td>
-                                            <td className="poppins-regular-16px p-2">{result.location_name}</td>
+                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.name}>{result.name}</td>
+                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.company_name}>{result.company_name}</td>
+                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.location_name}>{result.location_name}</td>
                                             <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
                                             {/* {moment(result.planned_endtime).format('HH:mm')} */}
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
@@ -384,7 +394,7 @@ function EmployeeWidget(props) {
                                                     <a type="button" className="stop-working-icon-solid"
                                                     data-toggle="tooltip"
                                                     title="Stop planning"
-                                                    onClick={()=>{showPopup();setPopUpData([result.name,result.planned_endtime,result.worked_id,contextState.uid]);}} 
+                                                    onClick={()=>{showPopup();setPopUpData([result.name,result.planned_endtime,result.worked_id,contextState.uid,result.planning_started_time]);}} 
                                                     >
 
                                                     </a>

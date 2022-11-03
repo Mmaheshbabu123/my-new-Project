@@ -17,9 +17,9 @@ function EmployeeWidgetBlock(props) {
 
     // For popup stop planning
     const [show, setShow] = useState(false);
-    const [popupdata,setPopUpData]=useState('');
+    const [popupdata, setPopUpData] = useState('');
 
-    
+
     const viewMoreItems = () => {
         setVisible((prevValue) => prevValue + 3);
     };
@@ -50,6 +50,16 @@ function EmployeeWidgetBlock(props) {
     const [widgetTemp2, setWidgetTemp2] = useState([]);
     const [contractid, setContractId] = useState(null);
     const { contextState = {} } = useContext(UserAuthContext);
+
+    /**Auto refresh */
+    const [time, setTime] = useState(Date.now());
+
+    useEffect(() => {
+        const interval = setInterval(() => setTime(Date.now()), 60000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     useEffect(
         () => {
@@ -83,13 +93,13 @@ function EmployeeWidgetBlock(props) {
 
 
         <div className="border mb-2 p-2 employee_widget_dashboard">
-            
+
             {cancel_con == true && (
                 <div
                     className="modal"
                     id="myModal"
                     tabIndex="-1"
-                    style={{ display: cancel_con ? "block" : "none",background: 'rgb(0,0,0,0.5)' }}
+                    style={{ display: cancel_con ? "block" : "none", background: 'rgb(0,0,0,0.5)' }}
                 >
                     <CancelContract handleClosePopup={handleClosePopup} contract={contractid} title={'Cancel Contract'} />
 
