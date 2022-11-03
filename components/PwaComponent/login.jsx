@@ -7,7 +7,6 @@ import Translation from '@/Translation';
 import Link from 'next/link';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 
-
 const getAcrfToken = async () => {
     return await fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
         .then(res => res.json())
@@ -25,6 +24,7 @@ const Login = (props) => {
         error_password: '',
         //show hide condition
         showPassword: false,
+        unrecognized: false,
     })
     const { data: token, isLoading } = useQuery("arcf_token", getAcrfToken);
 
@@ -58,7 +58,7 @@ const Login = (props) => {
         var validateFields = validate(state);
         if (!validateFields) {
             let { status,
-                currentUserObj: { uid, role },
+                currentUserObj: { uid },
                 message
             } = await userService.userLogin(state, token);
 
@@ -70,7 +70,8 @@ const Login = (props) => {
                 // window.open(redirect, '_self'); // It'll redirect by re-loading page
                 // router.push(redirect); //it'll just navigate, without re-loading page
             } else {
-                console.error(message); //NOSONAR
+                setState({...state, unrecognized: true });
+                console.error(message);
             }
         }
     }
@@ -105,8 +106,10 @@ const Login = (props) => {
                                         onChange={handleOnChange}
                                     />
                                 </div>
+                                {state.unrecognized === true && <div className="form-item--error-message">
+                                  <p>Unrecognized username or password.</p>
+                                </div>}
                                 <p className="error">{state.error_user_name}</p>
-
                                 <div className="pt-4 position-relative">
                                     <label className="form-label custom_astrick poppins-light-16px">{t('Password')}</label>
                                     <input type={state.showPassword ? "text" : "password"} className="form-control rounded-0 shadow-none"

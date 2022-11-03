@@ -89,7 +89,7 @@ const SalaryDetails = (props) => {
               placeholder={'Value'}
               handleChange={(e)=>handleChange('value', pcId, fieldId, '', 0, e.target)}
             />
-            <span className="position-absolute input-group-text rounded-0 border-0" style = {{right: '33.5%', top: '0.2%', height:'2.6rem'}}> {salaryObj.value_type === 1 ? '€' : '%'} </span>
+            <span className="position-absolute input-group-text rounded-0 border-0" style = {{right: '33.5%', top: '0.2%', height:'2.6rem'}}> {(salaryObj.value_type && Number(salaryObj.value_type) === 1) ? '€' : '%'} </span>
             <div className="mt-3">
               <LabelField title="Is the benefit granted in case of absence of the employee" customStyle={{marginBottom: '-25px'}} className="poppins-regular-18px px-0 mb-1"/>
               <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px`} onClick={() => handleChange('granted', pcId, fieldId, 1, 0, 0, resetObj)}> {valueObj['granted'] === 1 ? <IoMdRadioButtonOn /> : <IoMdRadioButtonOff />} {t('Yes')} </label>
