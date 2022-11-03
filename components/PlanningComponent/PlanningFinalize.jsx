@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useEffect, useState,useContext } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import { planningoverview, getweekly_planning, planningfinalize } from '../../Services/ApiEndPoints';
 import { MdEdit, MdDelete } from 'react-icons/md';
@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
 import Link from 'next/link';
 import moment from 'moment';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import Translation from '@/Translation';
 const PlanningFinalize = (props) => {
 	const {t}=props;
@@ -18,7 +19,7 @@ const PlanningFinalize = (props) => {
 	const [ finalized, setFinalized ] = useState('');
 	const [ errorFinalize, setErrorFinalize ] = useState('');
 	const [ weekCount, setWeekCount ] = useState(0);
-
+	const { contextState = {} } = useContext(UserAuthContext);
 	useEffect(
 		() => {
 			if (!router.isReady) return;
@@ -57,6 +58,17 @@ const PlanningFinalize = (props) => {
 			setErrorFinalize('This field is required.');
 		} else {
 			APICALL.service(planningfinalize, 'POST', [ p_unique_key, finalized ])
+				.then((result) => {
+					if (result.status === 200) {
+						router.push('/weekly-planning');
+					} else {
+						console.log(result);
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/sendemail_to_employee_planning/'+contextState.uid+'/'+p_unique_key, 'POST')
 				.then((result) => {
 					if (result.status === 200) {
 						router.push('/weekly-planning');
