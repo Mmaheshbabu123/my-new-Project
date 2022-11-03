@@ -23,7 +23,7 @@ const OnlineDetails = (props) => {
   let apiData = Object.keys(data['tab_4']['data']).length ? data['tab_4']['data'] : 0;
   tab_4_action = data['tab_4']['action'] ? data['tab_4']['action'] :1;
   if(apiData) {
-  tab_4 = {...apiData,...tab_4}
+    tab_4 = {...apiData,...tab_4}
   }
 
   updateStateChanges({tab_4,tab_4_action,loadedTabs:[...state.loadedTabs, selectedTabId],

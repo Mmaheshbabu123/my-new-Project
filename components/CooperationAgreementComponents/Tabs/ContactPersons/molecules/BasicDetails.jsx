@@ -26,7 +26,6 @@ var Contack_key =  37;
       expand: {},
 
   })
-  console.log(tab_3)
   let defaultOptions = [];
    defaultOptions[Location_key] = state.defaultOptions['locationObj'] || [];
    defaultOptions[Contack_key]  =  [
@@ -176,6 +175,9 @@ fieldData.push(
             />
             { tab_3['contactPersonsDetails'][personId]['required'][data.id] !== undefined && !tab_3['contactPersonsDetails'][personId]['required'][data.id] &&
              <ValidateMessage text = {'This field is required'}/>
+           }
+           {tab_3['contactPersonsDetails'][personId]['validations'][data.id] && tab_3['contactPersonsDetails'][personId]['validations'][data.id]['validate'] &&
+             <ValidateMessage text = {'This field is invalid'}/>
            }
       </div>
     )

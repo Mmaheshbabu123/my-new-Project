@@ -44,7 +44,9 @@ contactPersons   = state.defaultOptions['contactsData'] || [];
   }
   const insertDataObjects = (pcId) => {
     let dataObject = {};
-    let defaultObj = {'25':1,'30':1,'31':2,'32':2,'38':2,'39':2,required:requiredElements['tab_3'],validations:{'34':{'type':1,validate:false},'35':{'type':2,validate:false}}};
+    let defaultObj = {'25':1,'30':1,'31':2,'32':2,'38':2,'39':2,required:requiredElements['tab_3'],validations:{'34':{'type':1,validate:false},'35':{'type':2,validate:false},
+      29:{'type':7, validate:false}
+    }};
     dataObject = {...defaultObj}
     dataObject = {...dataObject,...contactPersons[pcId]};
     return dataObject;
