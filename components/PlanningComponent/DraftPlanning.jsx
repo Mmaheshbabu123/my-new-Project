@@ -10,6 +10,7 @@ import Popup from './ProjectArchivePopup';
 function DraftPlanning(props) {
 	const { contextState = {} } = useContext(UserAuthContext);
 	const { t, company, location, costcenter, week } = props;
+	// const { t } = props;
 
 	const [ loading, setLoading ] = useState(true);
 	const [ data, setData ] = useState([]);
@@ -85,13 +86,13 @@ function DraftPlanning(props) {
 						<thead>
 							<tr className="btn-bg-gray-medium table-sticky-bg-gray">
 								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4">
-									Start date
+									{t('Start date')}
 								</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Company</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Loction</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Cost center</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Project</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">Action</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Company')}</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Loction')}</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Cost center')}</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Project')}</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Action')}</th>
 							</tr>
 						</thead>
 						{/* <hr className="table-header-space"/> */}
@@ -125,7 +126,7 @@ function DraftPlanning(props) {
 													<MdEdit
 														className="color-skyblue"
 														data-toggle="tooltip"
-														title="Edit project"
+														title={t("Edit project")}
 													/>
 												</a>
 											</Link>
@@ -141,7 +142,7 @@ function DraftPlanning(props) {
 												<MdDelete
 													className="color-skyblue"
 													data-toggle="tooltip"
-													title="Edit project"
+													title={t("Archive project")}
 												/>
 											</span>
 										</td>
@@ -151,7 +152,7 @@ function DraftPlanning(props) {
 							{data.length == 0 && (
 								<tr>
 									<td colSpan={8} className="text-center border py-3 poppins-regular-18px">
-										No draft planning
+										{t('No draft planning')}
 									</td>
 								</tr>
 							)}
@@ -179,4 +180,4 @@ function DraftPlanning(props) {
 	);
 }
 
-export default React.memo(Translation(DraftPlanning, [ 'Select company and location to view draft planning.' ]));
+export default React.memo(Translation(DraftPlanning, [ 'Select company and location to view draft planning.', 'No draft planning', 'Action', 'Project', 'Cost center', 'Loction', 'Company', 'Edit project', 'Archive project' ]));

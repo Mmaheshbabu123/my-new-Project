@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-
+import DatePicker from "react-multi-date-picker";
+import TimePicker from "react-multi-date-picker/plugins/time_picker";
+import { APICALL } from '../../Services/ApiServices';
+import { fetchEmployeeWidgetPlanning } from '../../Services/ApiEndPoints';
 
 function StopPlanning(props) {
     /**
@@ -8,9 +11,23 @@ function StopPlanning(props) {
      * Submit function
      */
 
+    (props.Data==null)?props.Data='':"";
+   
+    const [datetime,setDateTime]=useState();
+
+    const Save=()=>{
+        APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/stop-planning-by-employer/'+props.Data[3]+'?wid='+props.Data[2]+'&datetime='+datetime, 'POST')
+        .then((result) => {
+                
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
     return (
         <div>
-            <form onSubmit={(e) => submit(e)}>
+            <form onSubmit={Save}>
                 <div
                     className="modal"
                     id="myModal"
@@ -21,7 +38,7 @@ function StopPlanning(props) {
                         <div className="modal-content">
                             <div className="modal-header col-md-11 m-auto px-0">
                                 <div className="col-md-10">
-                                    <p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-4">
+                                    <p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 ps-3">
                                         Stop planning
                                     </p>
                                 </div>
@@ -35,19 +52,20 @@ function StopPlanning(props) {
                             <div className="modal-body ">
                                 <div className="col-md-11 m-auto add_project">
                                     <div className="row">
-                                        <div className=" ">
+                                        <div className="px-1">
                                             <div className="row  m-0">
                                                 <div className="col">
                                                     <label className="custom_astrick poppins-light-18px">
-                                                        First name
+                                                        Name
                                                     </label>
                                                     <input
                                                         type="text"
+                                                        value={props.Data[0]}
                                                         className="form-control mt-2 mb-2 rounded-0 shadow-none"
                                                     />
 
                                                 </div>
-                                                <div className="col">
+                                                {/* <div className="col">
                                                     <label className="custom_astrick poppins-light-18px">
                                                         Last name
                                                     </label>
@@ -55,34 +73,42 @@ function StopPlanning(props) {
                                                         type="text"
                                                         className="form-control mt-2 mb-2 rounded-0 shadow-none"
                                                     />
-                                                </div>
+                                                </div> */}
                                             </div>
+                                            <div className="col-md-12">
                                             <div className="row  m-0">
-                                                <div className="col">
+                                                <div className="col-md-6">
                                                     <label className="custom_astrick poppins-light-18px">
                                                         Planned stop time
                                                     </label>
                                                     <input
                                                         type="text"
+                                                        value={props.Data[1]}
                                                         className="form-control mt-2 mb-2 rounded-0 shadow-none"
                                                     />
 
                                                 </div>
-                                                <div className="col">
-                                                    <label className="custom_astrick poppins-light-18px">
+                                                <div className="col-md-6 actual-stop-time">
+                                                    <label className="custom_astrick poppins-light-18px ">
                                                         Actual stop time
                                                     </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control mt-2 mb-2 rounded-0 shadow-none"
+                                                    <DatePicker
+
+                                                        name="datetime" 
+                                                        format="YYYY-MM-DD HH:mm"
+                                                        plugins={[
+                                                            <TimePicker key={datetime} position="bottom" hideSeconds />
+                                                        ]} 
+                                                        onChange={(e)=>setDateTime(e.format('YYYY-MM-DD HH:mm:ss'))}
                                                     />
                                                 </div>
                                             </div>
+                                            </div>
                                         </div>
-                                        <div className="modal-footer border-0 col-md-11 m-auto px-2 add_project">
+                                        <div className="modal-footer border-0 col-md-12 m-auto add_project">
                                             <button
                                                 type="submit"
-                                                className="btn btn-lg btn-block float-right add-proj-btn  px-3 rounded-0 "
+                                                className="btn poppins-medium-18px-next-button float-right px-3 rounded-0 shadow-none"
                                             >
                                                 Save
                                             </button>
