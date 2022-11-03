@@ -9,6 +9,12 @@ import moment from 'moment';
 import { fetchEmpDetails, updateEmployeePlanning } from '../../Services/ApiEndPoints';
 import Translation from '@/Translation';
 import MultiSelectField from '@/atoms/MultiSelectField';
+import Close from '../../public/images/Close.svg';
+import { MdStarRate } from 'react-icons/md';
+import Image from 'next/image';
+
+
+
 
 function EditEmployee(props) {
 	const { t} = props;
@@ -61,13 +67,14 @@ function EditEmployee(props) {
 	 */
 	let submit = async (event) => {
 		event.preventDefault();
-		var valid_res = validate(data);
-		if (valid_res) {
+		// var valid_res = validate(data);
+		// if (valid_res) {
 			postdata();
-		}
+		// }
 	};
 
 	let postdata = () => {
+		console.log(data);
 		APICALL.service(updateEmployeePlanning, 'POST', data)
 			.then((result) => {
 				console.log(result);
@@ -82,49 +89,46 @@ function EditEmployee(props) {
 	};
 
 	let validate = (res) => {
+		return true;
 		// console.log(res);
+		var count =0;
 		var error1 = [];
+		res.map((val,key)=>{
+			if(key == 0){
+				res[0].emp_type_error = ValidationService.emptyValidationMethod(res[0].emp_type);
+			// error1['function'] = ValidationService.emptyValidationMethod(res[0].function_id);
+			// error1['minimum_salary'] = ValidationService.emptyValidationMethod(res[0].salary);
+			// error1['start_time'] = ValidationService.emptyValidationMethod(res[0].starttime);
+			// error1['end_time'] = ValidationService.emptyValidationMethod(res[0].endtime);
+			}else{
+
+			}
+	
+		})
 		/**
 		 * check if required fields are empty
 		 */
-		error1['employee_name'] = ValidationService.emptyValidationMethod(res.employee_name);
-		error1['employee_type'] = ValidationService.emptyValidationMethod(res.emp_type);
-		error1['function'] = ValidationService.emptyValidationMethod(res.function_id);
-		error1['minimum_salary'] = ValidationService.emptyValidationMethod(res.salary);
-		error1['start_time'] = ValidationService.emptyValidationMethod(res.starttime);
-		error1['end_time'] = ValidationService.emptyValidationMethod(res.endtime);
+		// error1['employee_name'] = ValidationService.emptyValidationMethod(res[0].employee_name);
+		// error1['employee_type'] = ValidationService.emptyValidationMethod(res[0].emp_type);
+		// error1['function'] = ValidationService.emptyValidationMethod(res[0].function_id);
+		// error1['minimum_salary'] = ValidationService.emptyValidationMethod(res[0].salary);
+		// error1['start_time'] = ValidationService.emptyValidationMethod(res[0].starttime);
+		// error1['end_time'] = ValidationService.emptyValidationMethod(res[0].endtime);
 
-		/**
-		 * check if employee name is valid
-		 */
-		error1['employee_name'] =
-			error1['employee_name'] == ''
-				? ValidationService.projectNameValidationMethod(res.employee_name)
-				: error1['employee_name'];
 		/**
 		 * Check if minimum salary is valid
 		 */
-		error1['minimum_salary'] =
-			error1['minimum_salary'] == ''
-				? ValidationService.minSalaryValidationMethod(res.salary)
-				: error1['minimum_salary'];
-		/**
-		 * seterror messages
-		 */
-		setError_employee_name(error1['employee_name']);
-		setError_employee_type(error1['employee_type']);
-		setError_function(error1['function']);
-		setError_minimum_salary(error1['minimum_salary']);
-		setError_start_time(error1['start_time']);
-		setError_end_time(error1['end_time']);
-		console.log(error1);
+		// error1['minimum_salary'] =
+		// 	error1['minimum_salary'] == ''
+		// 		? ValidationService.minSalaryValidationMethod(res.salary)
+		// 		: error1['minimum_salary'];
+		 res.map((val,key)=>{
+			 if(val.emp_type_error == ''){
+				 count++;
+			 }
+		 })
 		if (
-			error1['employee_name'] == '' &&
-			error1['employee_type'] == '' &&
-			error1['function'] == '' &&
-			error1['minimum_salary'] == '' &&
-			error1['start_time'] == '' &&
-			error1['end_time'] == ''
+			count > 0
 		) {
 			return true;
 		} else {
@@ -132,16 +136,52 @@ function EditEmployee(props) {
 		}
 	};
 
-	let updatetime = (e, date, type) => {
-		var data1 = data;
+	let updatetime = (e, date, type,key) => {
+		var data1 = [...data];
 		if (type == 'starttime') {
-			data1.starttime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+			data1[key].starttime = date + ' ' + moment(e).format('HH:mm') + ':00';
 			setData(data1);
 		} else {
-			data1.endtime = moment(e).format('YYYY-MM-DD HH:mm:ss');
+			data1[key].endtime = date + ' ' + moment(e).format('HH:mm') + ':00';
 			setData(data1);
 		}
 	};
+
+	let addServiceCoupe = () => {
+		var res = [...data];
+			res.push({
+				starttime:'',
+				endtime:'',
+			});
+		setData(res);
+	};
+
+	let removeServiceCoupe = () => {
+		var res = [...data];
+		
+				res.splice(1,1);
+				setData(res);
+	};
+
+	let updateData = (key,obj,type) =>{
+		var res = [...data];
+		if(key == ''){
+		res.map((val,k)=>{
+			if(type == 'emp_type'){
+			res[k].emp_type = obj.value;
+			}
+			if(type == 'salary'){
+				res[k].salary = obj.target.value;
+			}
+			if(type == 'function_id'){
+				res[k].function_id = obj.value;
+			}
+
+		})
+	}
+	setData(res);
+
+	}
 
 	return (
 		<div className="container-fluid p-0">
@@ -150,6 +190,7 @@ function EditEmployee(props) {
 					<div className=" mb-1 text-center align-items-center justify-content-center text-white d-flex poppins-medium-18px skyblue-bg-color height-edit-employee py-3">
 						<p>{t('Edit Employee')}</p>
 					</div>
+					{data.length > 0 ?
 					<div className="table-border-gray p-3 edit_employee_table mb-3">
 						<div className="form-group ">
 							<label className="custom_astrick poppins-light-16px">{t('Employee name')}</label>
@@ -158,9 +199,9 @@ function EditEmployee(props) {
 								disabled
 								className="form-control mt-1 poppins-light-16px rounded-0 mb-4 shadow-none"
 								value={data.length>0 ?data[0].employee_name:''}
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, employee_name: e.target.value }));
-								}}
+								// onChange={(e) => {
+								// 	setData((prev) => ({ ...prev, employee_name: e.target.value }));
+								// }}
 							/>
 						</div>
 						<div className="form-group ">
@@ -172,10 +213,10 @@ function EditEmployee(props) {
 								disabled={false}
 								standards={emptypes.filter(val => val.value === data[0].emp_type)}
 								className="mt-1 poppins-light-16px mb-4 shadow-none custom-select"
-								// handleChange={(obj) => updateEmployeeType(k1, obj, key)}
+								handleChange={(obj) => updateData('', obj,'emp_type')}
 								isMulti={false}
 							/>
-							<p className="error  mt-2 mb-2">{error_employee_type}</p>
+							<p className="error  mt-2 mb-2">{data[0].emp_type_error}</p>
 						</div>
 						<div className="form-group ">
 							<label className="custom_astrick poppins-light-16px">{t('Function')}</label>
@@ -185,7 +226,7 @@ function EditEmployee(props) {
 								options={functions}
 								disabled={false}
 								standards={functions.filter(val => val.value === data[0].function_id)}
-
+								handleChange={(obj) => updateData('', obj,'function_id')}
 								// handleChange={(obj) => updateEmployeeType(k1, obj, key)}
 								isMulti={false}
 								className="mt-1 poppins-light-16px mb-4 shadow-none custom-select"
@@ -198,64 +239,88 @@ function EditEmployee(props) {
 								type="text"
 								className="form-control rounded-0 shadow-none "
 								value={data.length>0?data[0].salary:''}
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, salary: e.target.value }));
-								}}
+								onChange={(e) => updateData('', e,'salary')}
+								// onChange={(e) => {
+								// 	setData((prev) => ({ ...prev, salary: e.target.value }));
+								// }}
 							/>
 							<span className="input-group-text rounded-0 salary-edit-employee">€</span>
 						</div>
 						<p className="error mt-2 mb-2">{error_minimum_salary}</p>
 						</div>
+						{data.map((val,key)=>(
+						<div className="d-flex col-md-12 row m-0 " key={data.paid}>
+							
 
-						<div className="d-flex col-md-12 row m-0 ">
-							<div className=" col-md-6 ps-0  ">
+							
+							<div className=" col-md-5 ps-0  ">
 								<div className="pb-1 custom_astrick poppins-light-16px rounded-0">
 									{t('Start time')}
 								</div>
 								<TimePicker
 									className="rounded-0"
 									placeholder="Select Time"
-									use12Hours
+									use12Hours={false}
 									showSecond={false}
 									focusOnOpen={true}
 									format="HH:mm"
-									value={data.length>0 && data[0].starttime ? moment(data[0].starttime) : null}
+									value={data.length>0 && val.starttime ? moment(val.starttime) : null}
 									onChange={(e) => {
-										updatetime(e, data.pdate, 'starttime');
+										updatetime(e, val.pdate, 'starttime',key);
 									}}
 								/>
 								<p className="error mt-2 mb-2 ">{error_start_time}</p>
 							</div>
-							<div className="col-md-6  p-0">
+							<div className="col-md-5  p-0">
 								<div className="pb-1 custom_astrick poppins-light-16px">{t('End time')}</div>
 								<TimePicker
 									className="rounded-0"
 									placeholder="Select Time"
-									use12Hours
-									showSecond={false}
+									use12Hours={false}
+									showSecond={false}	
 									focusOnOpen={true}
 									format="HH:mm"
-									value={data.length>0 && data[0].endtime ? moment(data[0].endtime) : null}
+									value={data.length>0 && val.endtime ? moment(val.endtime) : null}
 									onChange={(e) => {
-										updatetime(e, data.pdate, 'starttime');
+										updatetime(e, val.pdate, 'starttime',key);
 									}}
 								/>
 								<p className="error mt-3">{error_end_time}</p>
 							</div>
+							<div className="col-md-2 py-3 d-flex align-items-center justify-content-left star_icon_size" >
+																{data.length == 1 && (
+
+																	<MdStarRate
+																		className="purple-color"
+																		onClick={() => addServiceCoupe()}
+																		data-toggle="tooltip"
+																		title="Service coupe"
+																	/>
+
+																)}
+																{key > 0 && (
+																	<Image
+																		src={Close}
+																		width={15}
+																		height={15}
+																		onClick={() => removeServiceCoupe()}
+																		data-toggle="tooltip"
+																		title="Remove service coupe"
+																	/>
+																)}
+															</div>
 						</div>
+						))}
 
 						<div className="text-end">
 							<button
 								type="submit"
 								className="btn rounded-0 custom-btn px-3 btn-block float-end poppins-medium-18px-next-button"
-								onClick={() => {
-									setData((prev) => ({ ...prev, p_unique_key: router.query.p_unique_key }));
-								}}
 							>
 								{t('SAVE')}
 							</button>
 						</div>
-					</div>
+					</div>:<div>Loading...</div>}
 				</div>
 			</form>
 		</div>
