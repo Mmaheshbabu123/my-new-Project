@@ -104,19 +104,7 @@ function EmployeeMonthlyPlanning(props) {
 		setCurrentViewName(e.target.value);
 	};
 
-	// let downloadContract = (id) => {
-	// 	APICALL.service(getContract + id, 'GET')
-	// 		.then((result) => {
-	// 			if (result.status == 200) {
-	// 				console.log(result);
-	// 			}
-
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-
-	// }
+	/** Download contract */
 	let downloadContract = ({ target }) => {
 		const { id } = target;
 		console.log(id, target)
@@ -198,11 +186,13 @@ function EmployeeMonthlyPlanning(props) {
 									<td className="border_employee_planning poppins-light-18px">{result.companyname}</td>
 									<td className="border_employee_planning">
 										{result.contract_id != '' &&
-											<Link href={result.contract_id}>
+											// <Link  href=''
+											// href={result.contract_id}
+											// >
 
-												<AiFillEye
+												// <AiFillEye
 												// onClick = {()=>{downloadContract(result.contract_id)}} 
-												/>
+												// />
 												<div
 													id={result.contract_id}
 													onClick={downloadContract}
@@ -216,7 +206,7 @@ function EmployeeMonthlyPlanning(props) {
 
 													/>
 													</div>
-											</Link>
+											//  </Link>
 										}
 
 										{/* <span>
