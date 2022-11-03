@@ -17,7 +17,7 @@ import EditEmployee from './EditEmployee';
 
 
 const PlanningOverview = (props)=>{
-	const { t ,company,location,costcenter,week} = props;
+	const { t ,company,location,costcenter,week,editEmployee} = props;
 const [ planning, setPlanning ] = useState([]);
 const [ styleEdit, setStyleEdit ] = useState('col-md-12');
 const [ showview, setShowview ] = useState(false);
@@ -59,11 +59,20 @@ useEffect(
 useEffect(
     () => {
       if(activeWeek.length == 0){
-        setActiveWeek(props.week);
+        setActiveWeek(week);
       }  
     },
-    [ props.week ]
+    [ week ]
 );
+
+useEffect(()=>{
+	if(edit === true && editEmployee === false){
+	setEdit(!edit);
+	setStyleEdit('col-md-12');
+
+}
+
+},[props])
 
 let editplanning = (data) => {
 	setEdit(true);
