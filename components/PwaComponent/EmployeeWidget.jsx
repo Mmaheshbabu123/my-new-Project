@@ -364,9 +364,9 @@ function EmployeeWidget(props) {
                                 {widgetTemp2.length > 0 &&
                                     widgetTemp2.map((result) => (
                                         <tr className="border poppins-regular-18px p-2" key={result.id}>
-                                            <td className="poppins-regular-16px p-2">{result.name}</td>
-                                            <td className="poppins-regular-16px p-2">{result.company_name}</td>
-                                            <td className="poppins-regular-16px p-2">{result.location_name}</td>
+                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.name}>{result.name}</td>
+                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.company_name}>{result.company_name}</td>
+                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.location_name}>{result.location_name}</td>
                                             <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
                                             {/* {moment(result.planned_endtime).format('HH:mm')} */}
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
@@ -384,7 +384,7 @@ function EmployeeWidget(props) {
                                                     <a type="button" className="stop-working-icon-solid"
                                                     data-toggle="tooltip"
                                                     title="Stop planning"
-                                                    onClick={()=>{showPopup();setPopUpData([result.name,result.planned_endtime,result.worked_id,contextState.uid]);}} 
+                                                    onClick={()=>{showPopup();setPopUpData([result.name,result.planned_endtime,result.worked_id,contextState.uid,result.planning_started_time]);}} 
                                                     >
 
                                                     </a>

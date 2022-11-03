@@ -4,6 +4,27 @@ import React from 'react';
  * service for validation
  */
 const ValidationService = {
+	
+	/**
+	 * format the given date to DD-MM-YYYY
+	 * @param {*} value 
+	 * @returns 
+	 */
+	timeFOrmating: function(value) {
+		let date=new Date(value);
+		const day = date.getDate().toString();
+		(day.length==1)?day='0'+day:'';
+		const month = date.getMonth() + 1;
+		month=month.toString();
+		(month.length==1)?month='0'+month:'';
+		const year = date.getFullYear();    
+		const hours = date.getHours();
+		const minutes = date.getMinutes();
+		const seconds = date.getSeconds();   
+
+		return day+'-'+month+'-'+year+' '+hours+':'+minutes+':'+seconds;
+	},
+	
 	/**
    * validating an empty field.
    * @param {*} value 
@@ -131,10 +152,6 @@ const ValidationService = {
 	onlyFutureDateValidationMethod: function(value) {
 		let dateObj = new Date();
 		var currentdate = new Date(value);
-		//oneday
-		// var dateOffset = (24*60*60*1000) * 1;
-		// alert(dateObj.getTime());
-		// alert(currentdate.getTime());
 		var oneyearpast = new Date(dateObj.getTime() - 31556952000);
 		var oneyearfuture = new Date(dateObj.getTime() + 31470552000);
 		if (oneyearpast.getTime() < currentdate.getTime() && currentdate.getTime() < oneyearfuture.getTime()) {
