@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import Translation from '@/Translation';
 function Header(props) {
 	let router = useRouter();
-	const { contextState: { isAuthenticated = 0, uid }, updateUserContext } = useContext(UserAuthContext);
+	const { contextState: { isAuthenticated = 0, uid, roleType = 1 }, updateUserContext } = useContext(UserAuthContext);
 	const { t } = props;
 	const [state, setState] = useState({
 		languages: [{code: 0, language: 'Select'}],
@@ -35,7 +35,7 @@ function Header(props) {
 						setObj['languages'] = result['data'];
 						setObj['profile'] = result['userData'] ? result['userData']['profile_path'] : '';
 						setObj['lang'] = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
-						
+
 						updateUserContext({openTodosCount: result['userData'] ? result['userData']['openTodosCount'] : 0})
 					} else { console.log('error while fetching header data') }
 				}).catch(error => console.error(error))
@@ -79,7 +79,7 @@ function Header(props) {
 										<Notification /> {/*<img style={{ width: '25px', marginTop: '8px' }} src="/notifications.svg" /> */}
 									</li>
 									<li className="list-unstyled mx-4 align-self-center d-flex">
-										<a href={`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/profile`}> <img className='my-profile-icon' src={state.profile || "/profile.png"} /> </a>
+										<a href={`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/${roleType === 3 ? 'employee_flow/form/profile' : 'profile'}`}> <img className='my-profile-icon' src={state.profile || "/profile.png"} /> </a>
 									</li>
 									<li className="list-unstyled mx-4 align-self-center d-flex">
 										<select

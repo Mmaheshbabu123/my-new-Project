@@ -14,7 +14,7 @@ const CheckDevice = () => {
 	
     var q=<h1>Loading...........</h1>
 	if(isMobile){
-        router.push('/qr-code-scanner');
+        router.push('/qr-code-scanner?');
     }else{
         router.push('/timeregistration/qrcode');
     }

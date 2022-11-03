@@ -92,7 +92,7 @@ function EmployeeMonthlyPlanning(props) {
 			</div>
 			<div className='col-md-4 pe-0'>
 				<button value="Month" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Month' ? 'custom-btn_highlight' : ''}`}>
-					{t('Month')} 
+					{t('Month')}
 				</button>
 			</div>
 		</div>
@@ -104,20 +104,26 @@ function EmployeeMonthlyPlanning(props) {
 		setCurrentViewName(e.target.value);
 	};
 
-	// let downloadContract = (id) => {
-	// 	APICALL.service(getContract + id, 'GET')
-	// 		.then((result) => {
-	// 			if (result.status == 200) {
-	// 				console.log(result);
-	// 			}
-
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-
-	// }
-
+	/** Download contract */
+	let downloadContract = ({ target }) => {
+		const { id } = target;
+		console.log(id, target)
+		console.log(getContract + id);
+		let returnPath = '';
+		APICALL.service(getContract + id, 'GET')
+			.then((result) => {
+				if (result.status == 200) {
+					console.log(result);
+					returnPath = result.data.data;
+					window.open(returnPath, '_blank');
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+				returnPath = '';
+			});
+		console.log(returnPath);
+	}
 	return (
 		<div className="container-fluid p-0">
 			<div className='row position-sticky-pc'>
@@ -148,7 +154,7 @@ function EmployeeMonthlyPlanning(props) {
 									{t('Start time')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">
-								{t('End time')}
+									{t('End time')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">
 									{t('Employer')}
@@ -179,18 +185,28 @@ function EmployeeMonthlyPlanning(props) {
 									<td className="border_employee_planning poppins-light-18px">{result.location}</td>
 									<td className="border_employee_planning poppins-light-18px">{result.companyname}</td>
 									<td className="border_employee_planning">
-										{ result.contract_id != '' &&
-											<Link href={result.contract_id}>
+										{result.contract_id != '' &&
+											// <Link  href=''
+											// href={result.contract_id}
+											// >
 
-												<AiFillEye
-													// onClick = {()=>{downloadContract(result.contract_id)}}
-													type="button"
-													className="mt-2 ms-3 color-skyblue"
-													data-toggle="tooltip"
-													title="View details"
+												// <AiFillEye
+												// onClick = {()=>{downloadContract(result.contract_id)}} 
+												// />
+												<div
+													id={result.contract_id}
+													onClick={downloadContract}
+													className="cursor-pointer">
 
-												/>
-											</Link>
+													<AiFillEye
+														type="button"
+														className="mt-2 ms-3 color-skyblue pe-none"
+														data-toggle="tooltip"
+														title="View details"
+
+													/>
+													</div>
+											//  </Link>
 										}
 
 										{/* <span>
@@ -212,12 +228,12 @@ function EmployeeMonthlyPlanning(props) {
 							))}
 							{/*----------------------------No records found-------------------------- */}
 							{data.length == 0 && (
-                                    <tr>
-                                        <td colSpan={7} className="text-center py-3 border poppins-regular-18px">
-                                           {t('No records') }
-                                        </td>
-                                    </tr>
-                                )}
+								<tr>
+									<td colSpan={7} className="text-center py-3 border poppins-regular-18px">
+										{t('No records')}
+									</td>
+								</tr>
+							)}
 						</tbody>
 					</table>
 				</div>
@@ -259,10 +275,10 @@ function EmployeeMonthlyPlanning(props) {
 				</div>
 			</div>
 			<div className="text-start col-md-6">
-                <BackLink path={'/'} />
-            </div>
+				<BackLink path={'/'} />
+			</div>
 		</div>
 	);
 }
-export default React.memo(Translation(EmployeeMonthlyPlanning,['Day','Week','Month','My planning','My upcoming plannings','Date','Start time','End time','Employer','Location','Company','Action']));
+export default React.memo(Translation(EmployeeMonthlyPlanning, ['Day', 'Week', 'Month', 'My planning', 'My upcoming plannings', 'Date', 'Start time', 'End time', 'Employer', 'Location', 'Company', 'Action']));
 

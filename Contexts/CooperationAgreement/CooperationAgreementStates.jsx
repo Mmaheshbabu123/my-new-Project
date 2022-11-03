@@ -31,7 +31,7 @@ const CooperationAgreementStates = (props) => {
       contactSelectedDetails:[],
       contactPersonsDetails:{},
     }
-    , tab_4 : {'43':1,'44':2,'48':1,'49':1,required:requiredElements['tab_4'],validations:{'40':{'type':2,validate:false},'41':{'type':2,validate:false},'42':{'type':2,validate:false},'45':{'type':2,validate:false},'46':{'type':2,validate:false},'47':{'type':2,validate:false}}}
+    , tab_4 : {'43':1,'48':1,'49':1,required:requiredElements['tab_4'],validations:{'40':{'type':2,validate:false},'41':{'type':2,validate:false},'42':{'type':2,validate:false},'45':{'type':2,validate:false},'46':{'type':2,validate:false},'47':{'type':2,validate:false}}}
     , tab_5 : {
       cooperationSalaryDetails: [],
       cooperationSalaryLinked: {},
