@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
 import Link from 'node_modules/next/link';
 import Image from "next/image";
+import DatePicker from "react-multi-date-picker";
+import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { APICALL } from '../../Services/ApiServices';
 import { fetchEmployeeWidgetPlanning } from '../../Services/ApiEndPoints';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
@@ -10,16 +12,19 @@ import Pagination from '../PcComponent/Pagination';
 import StopPlanning from "./StopPlanning";
 import BackLink from '../BackLink';
 import { ExitToApp } from "node_modules/@material-ui/icons/index";
+import CancelContract from "./CancelContract";
 
 
 function EmployeeWidget(props) {
 
     const current_time = moment();
     const [addProject, setAddProject] = useState(false);
+    // ========= for Cancel icon usestate ======
+    const [cancel_con, setCancel_con] = useState(false);
 
     // For popup add project
     const [show, setShow] = useState(false);
-
+    
     // CLOSE POPUP //
     const closePopup = () => {
         setShow(false);
@@ -34,13 +39,14 @@ function EmployeeWidget(props) {
     const [widgetTemp, setWidgetTemp] = useState([]);
     const [widgetTemp2, setWidgetTemp2] = useState([]);
     const [updated, setUpdated] = useState(0);
-
+    const [popupdata,setPopUpData]=useState('');
     /**
      * Initialise search filter 
      */
     const [searchname, setSearchname] = useState('');
     const [searchcompany, setSearchcompany] = useState('');
     const [searchlocation, setSearchlocation] = useState('');
+
 
 
     /**
@@ -240,15 +246,41 @@ function EmployeeWidget(props) {
 
     //----------------Warning icon------------------------//
 
+    //-------------Cancel icon Functions------------------//
+    
+    const cancel_contact = () => {
+        console.log('kkk');
+        setCancel_con(true);
 
+    };
 
+    const handleClosePopup = () => {
+        setCancel_con(false);
+    }
+    
     return (
-        <div className="container-fluid p-2 employee_widget_dashboard">
+        <div className="cemployee_widget_dashboard">
             <form>
+                
                 <div className="row m-0 ">
-                    <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
+
+                {cancel_con == true && (
+                <div
+                    className="modal"
+                    id="myModal"
+                    tabIndex="-1"
+                    style={{ display: cancel_con ? "block" : "none" ,background: 'rgb(0,0,0,0.5)'}}
+                >
+                    <CancelContract handleClosePopup={handleClosePopup}  title={'Stop Planning'} />
+
+                </div>
+            )}
 
 
+                    <p className="px-0  bitter-italic-normal-medium-22">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
+
+
+                    <div className="col-md-12 px-0">
                     <div className="row d-flex ">
                         <div className="col-sm-3 field_height">
                             <input
@@ -303,7 +335,7 @@ function EmployeeWidget(props) {
                                         search === true) && (
                                             <button
                                                 type="button"
-                                                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
+                                                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_employee_widget w-100 shadow-none"
                                                 onClick={() => handleReset()}
                                             >
                                                 Reset
@@ -312,6 +344,7 @@ function EmployeeWidget(props) {
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
 
                     <div className="form-check p-0 mt-2 tab-pane fade show ">
@@ -351,7 +384,7 @@ function EmployeeWidget(props) {
                                                     <a type="button" className="stop-working-icon-solid"
                                                     data-toggle="tooltip"
                                                     title="Stop planning"
-                                                    // onClick={showPopup} 
+                                                    onClick={()=>{showPopup();setPopUpData([result.name,result.planned_endtime,result.worked_id,contextState.uid]);}} 
                                                     >
 
                                                     </a>
@@ -360,7 +393,7 @@ function EmployeeWidget(props) {
                                                     <a type="button" className="cross-icon-solid"
                                                      data-toggle="tooltip"
                                                      title="Cancel contract"
-                                                    // onClick={showPopup} 
+                                                    onClick={cancel_contact} 
                                                     >
                                                     </a>
                                                 </Link>
@@ -384,11 +417,11 @@ function EmployeeWidget(props) {
                         </table>
                     </div>
                 </div>
-
+                                        
             </form>
             <div className="">
 
-                {/* <StopPlanning
+              {show &&  <StopPlanning
 								data={widget}
 								display={'block'}
 								// company={company}
@@ -397,7 +430,9 @@ function EmployeeWidget(props) {
 								popupActionYes={showPopup}
 								// updatecompany={updatcomp}
 								// countries={countrylist}
-							/> */}
+                                Data={popupdata}
+							/>
+              }
 
             </div>
 

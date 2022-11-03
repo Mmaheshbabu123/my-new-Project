@@ -24,12 +24,16 @@ const SalesAgentPopUpComponent = ( props ) => {
       setState({...state, warning: true})
       return;
     }
+    setState({...state, spinner: true })
     await APICALL.service(`${saveSalesAgentSvData}`, 'POST', getPostData())
     .then(response => {
       if(response.status === 200) {
         router.reload()
       }
-    }).catch(error => console.error(error))
+    }).catch(error => {
+      setState({...state, spinner: true })
+      console.error(error)
+    })
   }
 
   const getPostData = () => {
@@ -78,12 +82,11 @@ const SalesAgentPopUpComponent = ( props ) => {
                 })}
                 </div>
                 {warning === true && <small style={{color:'red'}}> {t('Select atleast one agent ')}</small>}
-                {/*reassign === true && <small style={{color:'red'}}> Do you want to change sales agent? </small>*/}
             </div>
         </Modal.Body>
         <Modal.Footer className='justify-content-between'>
           <p className={`${styles['popup-back-btn']} poppins-light-18px text-decoration-underline text-uppercase`} onClick={handleClose}> Back </p>
-          <Button onClick={handleRequest} className="buttuon_purple rounded-0 border-0 shadow-none">
+          <Button onClick={() => state.spinner === false ? handleRequest() : null} className="buttuon_purple rounded-0 border-0 shadow-none">
             Assign
           </Button>
         </Modal.Footer>

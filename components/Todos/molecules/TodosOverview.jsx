@@ -435,7 +435,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
                 <li key={tab.id} className='col-md-1'>
                   <div className={`w-auto d-inline-block my_todo_color ${styles['cursor-pointer']} ${selectedTabId === tab.id ? styles['underline'] : ''}`} onClick={() => handleTabClick(tab.id)}>
                     {tab.id !== 3 ? <span id={tab.id} className={`${styles['todo-icon']}`}> <Icon /> </span> :
-                    <img src={All.src}></img>}
+                    <img src={selectedTabId === tab.id ? Allactive.src : All.src}></img>}
                     <span className={`${tab.id === 3 ? '' : 'my-1'}d-block text-center`}> {tab.name} </span>
                   </div>
                 </li>

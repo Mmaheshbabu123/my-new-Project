@@ -214,7 +214,7 @@ function EmployeeMonthlyPlanning(props) {
 							{data.length == 0 && (
                                     <tr>
                                         <td colSpan={7} className="text-center py-3 border poppins-regular-18px">
-                                            No records
+                                           {t('No records') }
                                         </td>
                                     </tr>
                                 )}
@@ -228,7 +228,7 @@ function EmployeeMonthlyPlanning(props) {
 							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px-next-button shadow-none"
 							onClick={viewMoreItems}
 						>
-							View more &nbsp;
+							{t('View more')} &nbsp;
 							<AiOutlineArrowRight className="" />
 						</button>
 					}

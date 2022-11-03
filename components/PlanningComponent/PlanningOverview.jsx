@@ -224,26 +224,26 @@ let updateSec = (parent_key) =>{
 																															/>
 																														</a>
 																													) : (
-																														<span className="invisible">
+																														<span className="d-none">
 																															edit
 																														</span>
 																													)}
 																												</div>
 																											</div>
 
-																											{val1.section_open == true && <p className="poppins-light-14px">
+																											{val1.section_open == true && <p className="poppins-light-14px mb-2">
 																												{
 																													val1.employee_type_name
 																												}
 																											</p>}
 
-																											{val1.section_open == true && <p className="poppins-light-14px">
+																											{val1.section_open == true && <p className="poppins-light-14px mb-2">
 																												{
 																													val1.function_name
 																												}
 																											</p>}
 
-																											 <p className="poppins-light-14px">
+																											 <p className="poppins-light-14px mb-2">
 																												{'€ ' +
 																													val1.salary}
 																											</p>
