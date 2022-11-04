@@ -449,7 +449,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
 
   const searchTextField = (key, placeholder) => {
     return(
-        <div className='col-md-6' >
+        <div className='col-md-6 ps-0' >
         <input
           type="text"
           value={state[key]}

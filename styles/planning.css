@@ -262,7 +262,7 @@ input[type="checkbox"]
 .position-sticky-mytodo_searchbox
 {
   position:sticky;
-  top: 251px;
+  top: 252px;
   background-color: var(--color-white);
   z-index: 998;
 }
