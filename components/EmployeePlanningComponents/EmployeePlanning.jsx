@@ -186,27 +186,19 @@ function EmployeeMonthlyPlanning(props) {
 									<td className="border_employee_planning poppins-light-18px">{result.companyname}</td>
 									<td className="border_employee_planning">
 										{result.contract_id != '' &&
-											// <Link  href=''
-											// href={result.contract_id}
-											// >
+											<div
+												id={result.contract_id}
+												onClick={downloadContract}
+												className="cursor-pointer">
 
-												// <AiFillEye
-												// onClick = {()=>{downloadContract(result.contract_id)}} 
-												// />
-												<div
-													id={result.contract_id}
-													onClick={downloadContract}
-													className="cursor-pointer">
+												<AiFillEye
+													type="button"
+													className="mt-2 ms-3 color-skyblue pe-none"
+													data-toggle="tooltip"
+													title="View details"
 
-													<AiFillEye
-														type="button"
-														className="mt-2 ms-3 color-skyblue pe-none"
-														data-toggle="tooltip"
-														title="View details"
-
-													/>
-													</div>
-											//  </Link>
+												/>
+											</div>
 										}
 
 										{/* <span>

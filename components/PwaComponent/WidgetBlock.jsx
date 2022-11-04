@@ -7,6 +7,8 @@ import moment from 'moment';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import CancelContract from "./CancelContract";
 import StopPlanning from "./StopPlanning";
+import {isMobile} from 'react-device-detect';
+
 
 
 function EmployeeWidgetBlock(props) {
@@ -49,6 +51,8 @@ function EmployeeWidgetBlock(props) {
     const [widgetTemp, setWidgetTemp] = useState([]);
     const [widgetTemp2, setWidgetTemp2] = useState([]);
     const [contractid, setContractId] = useState(null);
+    const [deviceType, setDeviceType] = useState('desktop');
+
     const { contextState = {} } = useContext(UserAuthContext);
 
     /**Auto refresh */
@@ -107,6 +111,7 @@ function EmployeeWidgetBlock(props) {
             )}
 
             <form>
+                {!isMobile?
                 <div className="row m-0 ">
 
                     <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working ({moment().format('D-M-YYYY, h:mm a')})</p>
@@ -127,7 +132,7 @@ function EmployeeWidgetBlock(props) {
                                     widgetTemp2.slice(0, visible).map((result) => (
                                         <tr className="border poppins-regular-18px p-2" key={result.id}>
                                             <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.name}>{result.name}</td>
-                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.company_name}>{result.company_name}</td>
+                                            <td className="poppins-regular-16px p-2 text-truncate d-inline-block" data-toggle="tooltip" title={result.company_name} style={{width:'150px',verticalAlign:'middle'}}>{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.location_name}>{result.location_name}</td>
                                             <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
@@ -140,8 +145,8 @@ function EmployeeWidgetBlock(props) {
 
                                                         </a>
                                                     </Link>
-                                                }
-                                                <Link href='' className="m-2">
+                                                 } 
+                                                <Link href='' className="">
                                                     <a type="button" className="stop-working-icon-solid"
                                                         // onClick={showPopup} 
                                                         data-toggle="tooltip"
@@ -185,7 +190,84 @@ function EmployeeWidgetBlock(props) {
                             </Link>
                         }
                     </div>
-                </div>
+                </div>:
+                <div className="row m-0 ">
+                    <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2 ms-3">Employees currently working </p>
+                    <p className="h3 px-0  bitter-italic-normal-medium-22 mt-1 ms-3">({moment().format('D-M-YYYY, h:mm a')})</p>
+                    <div className="accordion" id="accordionExample">
+                        <div className="accordion-item  p-2">
+                            {widgetTemp2.length > 0 &&
+                                widgetTemp2.slice(0, visible).map((result) => (
+                                    <div className="m-2 " key={result.id}>
+                                        <h2 className="accordion-header" id="headingTwo">
+
+                                            <button className="accordion-button collapsed bg-light " type="button" data-bs-toggle="collapse" data-bs-target={"#collapseTwo" + result.id} aria-expanded="false" aria-controls="collapseTwo">
+                                                {result.name}
+                                            </button>
+
+                                        </h2>
+                                        <div id={"collapseTwo" + result.id} className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">                                            <div className="accordion-body ">
+
+                                            <div className="row m-2 " key={result.id}>
+                                                <div className="col-sm-4 mb-1">Company name</div>
+                                                <div className="col-sm-6 text-black-50">{result.company_name}</div>
+                                            </div>
+                                            <div className="row m-2 p-1 " key={result.id}>
+                                                <div className="col-sm-4 mb-1">Location</div>
+                                                <div className="col-sm-8 text-black-50">{result.location_name}</div>
+                                            </div>
+                                            <div className="row m-2 p-1 " key={result.id}>
+                                                <div className="col-sm-4 mb-1">Planned stop time</div>
+                                                <div className="col-sm-8 text-black-50">{moment(result.planned_endtime).format('HH:mm')}</div>
+                                            </div>
+                                            <div className="row m-2 p-1" key={result.id}>
+
+                                                <div className="col">
+                                                    {moment(result.planned_endtime) < current_time &&
+                                                        <Link href='' className="">
+                                                            <a type="button" className="warning-icon-solid ms-2"
+                                                                data-toggle="tooltip"
+                                                                title="Employee has crossed planned stop time"
+                                                            >
+                                                            </a>
+                                                        </Link>
+                                                    }
+                                                    <Link href='' className="">
+                                                        <a type="button" className="stop-working-icon-solid ms-2"
+                                                            // onClick={showPopup} 
+                                                            data-toggle="tooltip"
+                                                            title="Stop planning"
+                                                            onClick={() => { showPopup(); setPopUpData([result.name, result.planned_endtime, result.worked_id, contextState.uid]); }}
+                                                        >
+                                                        </a>
+                                                    </Link>
+                                                    <Link href='' className="m-2">
+                                                        <a type="button" className="cross-icon-solid ms-2"
+                                                            onClick={cancel_contact}
+                                                            data-toggle="tooltip"
+                                                            title="Cancel Contract"
+                                                        >
+                                                        </a>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                ))}
+                        </div>
+                    </div>
+                    <div className="text-end p-0">
+                        {widget.length > 3 &&
+                            <Link href='/pwa/employee-widget' className="m-2">
+                                <a type="button" className="mt-2 view-more-employee-widget text-decoration-underline">View more &nbsp;
+                                    <AiOutlineArrowRight />
+                                </a>
+                            </Link>
+                        }
+                    </div>
+                </div>}
             </form>
             <div className="">
 
