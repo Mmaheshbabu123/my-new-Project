@@ -2065,7 +2065,14 @@ input[type="search"]::-webkit-search-cancel-button {
 	text-align: left;
 	/* justify-content: center; */
 	margin-bottom: 1.5rem;
-	min-height: 11rem !important;
+	min-height: 12.4rem !important;
+}
+.position-sticky-employee-widget-search
+{
+	position: sticky;
+	top: 162px;
+	background: var(--color-white);
+	z-index: 998;
 }
 .employer-large-tile .dashboard_menu_title
 {

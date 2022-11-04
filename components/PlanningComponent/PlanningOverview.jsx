@@ -24,15 +24,18 @@ const [ activeWeek, setActiveWeek ] = useState([]);
 const [ edit, setEdit ] = useState(false);
 const [ editData, setEditData ] = useState([]);
 const [cancel_con, setCancel_con] = useState(false);
+const [canceldata,setCancelData]=useState(null);
 
 
 const handleClosePopup = () => {
 	setCancel_con(false);
-
+	// setCancelData(data);
+	// console.log('data == ',data);
 }
 const cancel_contact = () => {
 	console.log('kkk');
 	setCancel_con(true);
+	
 }
 
 
@@ -123,7 +126,7 @@ let updateParent = () => {
 					tabIndex="-1"
 					style={{ display: cancel_con ? "block" : "none", background: 'rgb(0,0,0,0.5)' }}
 				>
-					<PlanningCancelContract handleClosePopup={handleClosePopup} title={'Cancel Planning'} />
+					<PlanningCancelContract data={canceldata} handleClosePopup={handleClosePopup} title={'Cancel planning'} />
 
 				</div>
 			)}
@@ -265,7 +268,7 @@ let updateParent = () => {
 																											<div className='cancel_icon mt-3'>
 																												<Link href='' className="m-2">
 																													<a type="button" className="cross-icon-solid"
-																														onClick={cancel_contact}
+																														onClick={()=>{cancel_contact();setCancelData(val1);}}
 																														data-toggle="tooltip"
 																														title="Cancel Contract"
 																													>

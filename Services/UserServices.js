@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { USER_ENTITY_TYPE_ID } from '@/Constants';
+import { APICALL } from '@/Services/ApiServices';
 
 let loginStatus;
 const userLogin = async (state, token) => {
@@ -13,8 +14,8 @@ const userLogin = async (state, token) => {
     "name": state.email,
     "pass": state.password
   }
-  await axios.post(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/login?_format=json`, data, config)
-  .then((response) => {
+  await APICALL.service(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/login?_format=json`, 'POST', data, 0, 1, config)
+  .then(response => {
     let currentUserObj = setLocalStorageAndForwardToDashboard(response);
     loginStatus = {
       status: 200,
@@ -55,15 +56,12 @@ const setLocalStorageAndForwardToDashboard = (response) => {
 
 
 const userLogout = async (uid) => {
-  await axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/logout?_format=json&token=${localStorage.getItem('logout_token')}`)
-    .then(async (response) => {
-      let url = `${window.location.origin}/user/logout`
-      window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/logout?entityid=${uid}&destination_url=${btoa(url)}`, '_self');
-      // axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/logout?entityid=${uid}`).then(res => {
-      //   localStorage.clear();
-      //   window.open('/user/login', '_self');
-      // })
-    })
+  let token = localStorage.getItem('logout_token');
+  await APICALL.service(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/logout?_format=json&token=${token}`, 'GET')
+  .then(response => {
+    let url = `${window.location.origin}/user/logout`
+    window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/logout?entityid=${uid}&destination_url=${btoa(url)}`, '_self');
+  }).catch((error) => console.log(error) )
 }
 
 const backendLogin = () => {

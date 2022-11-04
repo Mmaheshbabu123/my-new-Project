@@ -56,8 +56,8 @@ function serviceForSitesJSON(urlendpoint = '', httpmethod = '', data = '') {
 *@param data=data to the API
 *@returns response from the API
 */
-function service(urlendpoint = '', httpmethod = '', data = '', file = 0, loading = 1) {
-    return fetch(urlendpoint, headers(data, httpmethod))
+function service(urlendpoint = '', httpmethod = '', data = '', file = 0, loading = 1, customHeaders = {}) {
+    return fetch(urlendpoint, headers(data, httpmethod, customHeaders))
         .then(
             result => {
               return file ? result.blob() : result.json();
@@ -73,7 +73,7 @@ function service(urlendpoint = '', httpmethod = '', data = '', file = 0, loading
 *@param httpmethod=METHOD
 *returns headers for the Ajax
 */
-function headers(data, httpmethod) {
+function headers(data, httpmethod, customHeaders) {
 
 
     var header = {
@@ -97,6 +97,7 @@ function headers(data, httpmethod) {
 
             // "Content-Type": "application/x-www-form-urlencoded",
             // 'Content-Type': 'multipart/form-data',
+            ...customHeaders
         },
         // manual, *follow, error
 //        redirect: "follow",
