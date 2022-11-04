@@ -13,8 +13,8 @@ const userLogin = async (state, token) => {
     "name": state.email,
     "pass": state.password
   }
-  await axios.post(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/login?_format=json`, data, config)
-  .then((response) => {
+  await APICALL.service(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/login?_format=json`, 'POST', data, 0, 1, config)
+  .then(response => {
     let currentUserObj = setLocalStorageAndForwardToDashboard(response);
     loginStatus = {
       status: 200,

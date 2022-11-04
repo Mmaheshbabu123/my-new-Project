@@ -64,8 +64,9 @@ const Login = (props) => {
 
             //check status and redirect user.
             if (status === 200) {
-                // const redirect = router.query.returnUrl //; || `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
-                window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}&destination_url=${btoa(window.location.href)}`, '_self');
+		    window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}&destination_url=${btoa(window.location.href)}`, '_self');
+                //redirectToApplication(uid);
+                // window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}&destination_url=${btoa(window.location.href)}`, '_self');
                 // get return url from query parameters or default to '/'
                 // window.open(redirect, '_self'); // It'll redirect by re-loading page
                 // router.push(redirect); //it'll just navigate, without re-loading page
@@ -74,6 +75,18 @@ const Login = (props) => {
                 console.error(message);
             }
         }
+    }
+
+    const redirectToApplication = (loggedInUserId) => {
+      let finalUrl = '';
+      const returnUrl = router.query.returnUrl;
+      let {url, redirectTo, uid} = returnUrl;
+      if(redirectTo === 'drupal' && uid == loggedInUserId) {
+        finalUrl = url;
+      } else {
+        finalUrl = returnUrl && returnUrl.length > 5 ? returnUrl : `/pwa/dashboard?entityid=${uid}&entityType=${role}`;
+      }
+      window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/login?entityid=${uid}&destination_url=${btoa(finalUrl)}`, '_self');
     }
 
     const handleOnChange = ({ target: { value = '', name = '' } }) => {
