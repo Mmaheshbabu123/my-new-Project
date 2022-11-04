@@ -7,7 +7,7 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 const Invoicing = (props) => {
   const {state: { selectedTabId, renderTabComponents, root_parent_id ,tab_6_action, filledTabs}, updateStateChanges, state  } = useContext(CooperationAgreementContext);
   const { tab_6,tab_2,tab_3,tab_4} = state;
- console.log(state.loadedTabs)
+ console.log(tab_6);
   const PersonId = 1;
   useEffect(()=>{
   if(!state.loadedTabs.includes(selectedTabId))
