@@ -24,13 +24,14 @@ const Invoicing = (props) => {
 
   let apiData = Object.keys(data['tab_6']['data']).length ? data['tab_6']['data'] : 0;
   tab_6_action = data['tab_6']['action'] ? data['tab_6']['action'] :1;
+  console.log(tab_6);
   if(apiData) {
-  tab_6 = {...apiData,...tab_6}
+  tab_6 = {...tab_6,...apiData}
 }else {
   prefillFieldsDefault(tab_6,tab_2,tab_3);
 
 }
-
+console.log(tab_6);
   updateStateChanges({tab_6,tab_6_action,loadedTabs:[...state.loadedTabs, selectedTabId],
     filledTabs: data.completedTabIds.length ? [...filledTabs, ...data.completedTabIds] : filledTabs
   })
