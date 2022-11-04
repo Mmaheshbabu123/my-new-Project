@@ -14,6 +14,7 @@ const InvoiceDetails = (props) => {
   const { t } = props;
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_6 ,element_status,tab_4} = state;
+  console.log(tab_6);
   let invoiceRow1Data = structuredClone(invoiceRow1);
   let invoiceRow2Data  = structuredClone(invoiceRow2);
   if(tab_6['56'] == 2) {
@@ -79,8 +80,8 @@ const InvoiceDetails = (props) => {
        <div className = {`col-md-12 ${styles['add-div-margings']} invoice${data.id}`}>
            <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'}/> {requiredFields['tab_6'][data.id] && <RequiredField />}
            <div>
-           <RadioField   name = {data.id} checked = {tab_6[data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} className={'poppins-regular-18px me-3'} />
-           <RadioField  name = {data.id} checked = {tab_6[data.id] === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2}  className={'poppins-regular-18px'}/>
+           <RadioField   name = {data.id} checked = {Number(tab_6[data.id]) === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} className={'poppins-regular-18px me-3'} />
+           <RadioField  name = {data.id} checked = {Number(tab_6[data.id]) === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2}  className={'poppins-regular-18px'}/>
           </div>
        </div>
      )

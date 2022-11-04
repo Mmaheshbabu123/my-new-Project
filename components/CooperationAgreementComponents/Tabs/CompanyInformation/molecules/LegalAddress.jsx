@@ -26,6 +26,7 @@ const LegalAddress = (props) => {
     validations:{'17':{'type':1,validate:false,'text':'Only numbers will accept' },'14':{'type':1,validate:false,'text':'Only numbers will accept'},'18':{'type':1,validate:false,'text':'Only numbers will accept'}}
   })
   var { tab_2,element_status ,tab_4,tab_6} = state;
+  console.log(tab_2);
   let countrylist = state.defaultOptions['countrylist'] || [];
   const handleChange = (event) => {
     const {name,value} = event.target;
@@ -152,10 +153,10 @@ const LegalAddress = (props) => {
             <LabelField title="Language"  customStyle = {{display:''}}/>{requiredFields['tab_2'][Language] && <RequiredField />}
             <div>
            <div className='d-inline-flex align-items-center me-3'>
-           <RadioField   name = {Language} checked = {tab_2[Language] === 1} handleChange = {(e)=>handleRadioSelect(Language,1)} label= 'Dutch' />
+           <RadioField   name = {Language} checked = {Number(tab_2[Language]) === 1} handleChange = {(e)=>handleRadioSelect(Language,1)} label= 'Dutch' />
            </div>
            <div className='d-inline-flex align-items-center'>
-            <RadioField  name = {Language} checked = {tab_2[Language] === 2} handleChange = {(e)=>handleRadioSelect(Language,2)} label= 'French' />
+            <RadioField  name = {Language} checked = {Number(tab_2[Language]) === 2} handleChange = {(e)=>handleRadioSelect(Language,2)} label= 'French' />
             </div>
            </div>
         </div>
