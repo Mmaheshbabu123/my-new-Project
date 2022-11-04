@@ -2,29 +2,40 @@ import React from "react";
 import { useState } from "react";
 import EmployeeWidgetBlock from '../PwaComponent/WidgetBlock';
 import customAlert from '@/atoms/customAlert';
+import ValidationService from "@/Services/ValidationService";
 //-----------Calling api -------------//
 import { APICALL } from '@/Services/ApiServices';
 import { cancelContract } from '@/Services/ApiEndPoints'
 
 
 function CancelContract(props) {
-    console.log(props);
-
+ 
     const [pophide, setPophide] = useState(props.popupActionNo);
     const [text, setText] = useState('');
 
     const [message, setMessage] = useState('');
+    const [message_err, setMessageErr] = useState('');
 
     const handleChange = event => {
         setMessage(event.target.value);
     };
 
+    const valiDate=()=>{
+        let err=ValidationService.emptyValidationMethod(message);
+        if(err!=''){
+            setMessageErr(err);
+            return false;
+        }
+        setMessageErr('');
+        return true;
+    }
+
     const handleClick = async (event) => {
         event.preventDefault();
-        console.log('value = ',message);
         let data = getPostData();
-        console.log(data);
-        APICALL.service(cancelContract,'POST',[data])
+        let deta=props.data;
+        if(valiDate()){
+        APICALL.service(cancelContract,'POST',[deta.emp_id,deta.employee_name,deta.comp_id,deta.location_id,message])
         .then((result) => {
             
             if (result == 200) {
@@ -34,7 +45,8 @@ function CancelContract(props) {
         .catch((error) => {
             console.error(error);
         });
-        props.handleClosePopup();
+        props.handleClosePopup();        
+    }
     };
 
     const getPostData = () => {
@@ -89,7 +101,7 @@ function CancelContract(props) {
                                                 className="form-control mt-2 mb-2 rounded-0 shadow-none"
                                                 
                                             />
-
+                                            <p style={{color:"red"}}>{message_err}</p>
                                         </div>
                                     </div>
                                 </div>
