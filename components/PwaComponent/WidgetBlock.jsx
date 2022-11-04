@@ -127,7 +127,7 @@ function EmployeeWidgetBlock(props) {
                                     widgetTemp2.slice(0, visible).map((result) => (
                                         <tr className="border poppins-regular-18px p-2" key={result.id}>
                                             <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.name}>{result.name}</td>
-                                            <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.company_name}>{result.company_name}</td>
+                                            <td className="poppins-regular-16px p-2 text-truncate d-inline-block" data-toggle="tooltip" title={result.company_name} style={{width:'150px',verticalAlign:'middle'}}>{result.company_name}</td>
                                             <td className="poppins-regular-16px p-2" data-toggle="tooltip" title={result.location_name}>{result.location_name}</td>
                                             <td className="poppins-regular-16px p-2">{moment(result.planned_endtime).format('HH:mm')}</td>
                                             <td className="poppins-regular-16px p-2 d-inline-flex align-middle">
