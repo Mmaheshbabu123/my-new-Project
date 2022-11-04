@@ -34,12 +34,11 @@ const userLogin = async (state, token) => {
 }
 
 const setLocalStorageAndForwardToDashboard = (response) => {
-    let { data: {
+    let {
         csrf_token = '',
         current_user = {},
         logout_token = '',
         current_user: { uid = 0, roles = [] }
-    }
     } = response;
     let role = roles.pop() || 'null';
     let roleType = USER_ENTITY_TYPE_ID[role] || 0;

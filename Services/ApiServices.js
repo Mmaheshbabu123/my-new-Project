@@ -97,8 +97,8 @@ function headers(data, httpmethod, customHeaders) {
 
             // "Content-Type": "application/x-www-form-urlencoded",
             // 'Content-Type': 'multipart/form-data',
-            ...customHeaders
         },
+        ...customHeaders
         // manual, *follow, error
 //        redirect: "follow",
         // no-referrer, *client
