@@ -123,7 +123,7 @@ let updateParent = () => {
 					tabIndex="-1"
 					style={{ display: cancel_con ? "block" : "none", background: 'rgb(0,0,0,0.5)' }}
 				>
-					<PlanningCancelContract handleClosePopup={handleClosePopup} title={'Cancel Planning'} />
+					<PlanningCancelContract handleClosePopup={handleClosePopup} title={'Cancel planning'} />
 
 				</div>
 			)}
