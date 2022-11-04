@@ -55,23 +55,12 @@ const setLocalStorageAndForwardToDashboard = (response) => {
 
 
 const userLogout = async (uid) => {
-	let token = localStorage.getItem('logout_token');
-const config = {
-	    headers: {
-		          'Content-Type': 'application/json',
-		          'X-CSRF-Token': token
-		        }
-	  }
-
-	await axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/logout?_format=json&token=${localStorage.getItem('logout_token')}`, config)
-    .then(async (response) => {
-      let url = `${window.location.origin}/user/logout`
-      window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/logout?entityid=${uid}&destination_url=${btoa(url)}`, '_self');
-      // axios.get(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/logout?entityid=${uid}`).then(res => {
-      //   localStorage.clear();
-      //   window.open('/user/login', '_self');
-      // })
-    })
+  let token = localStorage.getItem('logout_token');
+  await APICALL.service(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/user/logout?_format=json&token=${token}`, 'GET')
+  .then(response => {
+    let url = `${window.location.origin}/user/logout`
+    window.open(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/api/user/logout?entityid=${uid}&destination_url=${btoa(url)}`, '_self');
+  }).catch((error) => console.log(error) )
 }
 
 const backendLogin = () => {
