@@ -89,7 +89,7 @@ function EncodageValidation(props) {
 
                                         <button
                                             type="button"
-                                            className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 shadow-none"
+                                            className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_employee_widget w-100 shadow-none"
                                         >
                                             {t('RESET')}
                                         </button>

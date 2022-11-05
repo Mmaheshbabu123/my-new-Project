@@ -1922,7 +1922,7 @@ input[type="text"]::placeholder {
 .field_height select
  {
 	height: 45px;
-	border: 1px solid var(--color-input-border-lightgrey);
+	border: 1px solid #ced4da;
 }
 
 .select_option_height .css-109onse-indicatorSeparator {
