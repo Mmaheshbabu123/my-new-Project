@@ -139,7 +139,7 @@ const Login = (props) => {
                                 </div>
                                 <div className='py-3'>
                                     {/* <p className="px-0 float-end text-info">{t('Forgot password?')}</p> */}
-                                    <Link href='' className="m-2">
+                                    <Link href={process.env.NEXT_PUBLIC_APP_URL_DRUPAL+'/user/password'} className="m-2">
                                         <a type="" className="">
                                             <p className="px-0 float-end forgot-password-link">{t('Forgot password?')}</p>
                                         </a>

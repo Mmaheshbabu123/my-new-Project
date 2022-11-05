@@ -115,11 +115,14 @@ const AddFunctions = (props) => {
 
 	let updateEmployeeType = (index = null, obj, parent_index) => {
 		var object = [ ...employeeobject ];
-		console.log(object);
+		console.log(object[parent_index]);
 		if (index !== null) {
 			object[parent_index].employee_list[index].emp_type = obj.value;
-			if ([ 6, 7 ].includes(obj.bbright_id)) {
-				// object[parent_index].employee_list[index].function_salary = flexSalary;
+			if (object[parent_index].flexEmpTypes.includes(obj.value)) {
+				object[parent_index].employee_list[index].function_salary = object[parent_index].flexSalary;
+			} else if(object[parent_index].employee_list[index].funid == '')
+			{
+				object[parent_index].employee_list[index].function_salary = '';
 			}
 			setEmployeeObject(object);
 		}
@@ -261,16 +264,15 @@ const AddFunctions = (props) => {
 	};
 
 	let updateRes = (event, key) => {
-		// 	setFuncChanged(true);
-		// 	var res1 = [ ...functions ];
-		// 	res1.map((val, k) => {
-		// 		if (k == key) {
-		// 			res1[k]['funct_checked'] = parseInt(event.target.value);
-		// 		} else {
-		// 			res1[k]['funct_checked'] = '';
-		// 		}
-		// 		setFunctions(res1);
-		// 	});
+		// var res1 = [ ...functions ];
+		// res1.map((val, k) => {
+		// 	if (k == key) {
+		// 		res1[k]['funct_checked'] = parseInt(event.target.value);
+		// 	} else {
+		// 		res1[k]['funct_checked'] = '';
+		// 	}
+		// 	setFunctions(res1);
+		// });
 	};
 
 	function updatingObjectfunctionSlary(index = null, maxsal, salary, parent_index, pc_min_age) {
@@ -349,12 +351,6 @@ const AddFunctions = (props) => {
 				var collapseOpen = true;
 				if (func != '' && func != null && func != undefined) {
 					collapseOpen = true;
-				} else {
-					// if(key != 0){
-					// collapseOpen = true;
-					// }else{
-					// 	collapseOpen = false;
-					// }
 				}
 				if (func == '' && emp == '' && sal == '' && sal1 == '') {
 					if (key == 0) {
@@ -368,15 +364,7 @@ const AddFunctions = (props) => {
 				newstate[k1].employee_list[key].employeeiderror = emp;
 				newstate[k1].employee_list[key].salaryinvalid = sal1;
 				newstate[k1].employee_list[key].salaryerror = sal;
-				// newstate[k1].employee_list[key].warning = sal;
 				newstate[k1].employee_list[key].collapseOpen = collapseOpen;
-				// return {
-				// 	...value,
-				// 	functioniderror: func,
-				// 	employeeiderror: emp,
-				// 	salaryerror: sal,
-				// 	collapseOpen: collapseOpen
-				// };
 			});
 		});
 		setEmployeeObject(newstate);
@@ -423,13 +411,11 @@ const AddFunctions = (props) => {
 
 	let emptyemployeeData = () => {
 		var object = [ ...employeeobject ];
-		// console.log(object);
 
 		object.map((ele1, key1) => {
 			if (object != undefined) {
 				ele1.employee_list.map((element, key) => {
 					object[key1].employee_list[key].emp_type = null;
-					//object[key1].employee_list[key].employeetypeid = 0;
 					object[key1].employee_list[key].funid = null;
 					object[key1].employee_list[key].salary = null;
 					object[key1].employee_list[key].function_salary = null;
@@ -438,12 +424,10 @@ const AddFunctions = (props) => {
 					object[key1].employee_list[key].salaryerror = '';
 					object[key1].employee_list[key].salaryinvalid = '';
 					object[key1].employee_list[key].radioactive = false;
-					// updateEmployeeType(key,0)
 				});
 				if (object.length != 0) {
 					setEmployeeObject(object);
 					setSelectedOption({ value: 0, label: '-Select-' });
-					// setSelectedOption([]);
 				}
 			}
 		});
@@ -507,7 +491,6 @@ const AddFunctions = (props) => {
 		<div className="col-md-12">
 			<form onSubmit={(e) => submit(e)}>
 				<div />
-				{/* <div className="row m-0"> */}
 				<div className="col-md-12 p-0 position-sticky-pc py-4">
 					<p className="pb-3 font-weight-bold px-0 bitter-italic-normal-medium-24">{t('Add function')}</p>
 				</div>
