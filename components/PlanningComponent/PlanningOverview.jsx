@@ -239,7 +239,7 @@ let updateParent = () => {
 																												} {console.log(value)}
 																											</p>
 																										</div>
-																										<div className="color-skyblue my-2 mt-1 text-end col-md-3 ps-0">
+																										<div className="color-skyblue text-end col-md-3 ps-0">
 																											{new Date(
 																												val1.pdate
 																											) >
@@ -247,7 +247,7 @@ let updateParent = () => {
 																												<a
 																												>
 																													<MdEdit
-																														className="float-right cursor-pointer"
+																														className="float-right cursor-pointer w-100"
 																														data-toggle="tooltip"
 																														title="Edit plannig"
 																														onClick={() => {
@@ -260,17 +260,17 @@ let updateParent = () => {
 
 																											) : (
 																												<span className="d-none">
-																													edit
+																													{t('edit')}
 																												</span>
 
 																											)}
 
-																											<div className='cancel_icon mt-3'>
+																											<div className='cancel_icon'>
 																												<Link href='' className="m-2">
 																													<a type="button" className="cross-icon-solid"
 																														onClick={()=>{cancel_contact();setCancelData(val1);}}
 																														data-toggle="tooltip"
-																														title="Cancel Contract"
+																														title={t("Cancel Contract")}
 																													>
 
 																													</a>
@@ -387,6 +387,8 @@ export default React.memo(
 		'Sunday',
 		'No planning for this week.',
 		'Select company and location to view planning.',
-		'DASHBOARD'
+		'DASHBOARD',
+		'edit',
+		"Cancel Contract"
 	])
 );
