@@ -39,7 +39,6 @@ const Pincode = (props) => {
 		() => {
 			if (!router.isReady) return;
 
-
             // if(id!=0){
             //     alert(id);
             // }

@@ -1,46 +1,56 @@
 import React from "react";
 import { useState } from "react";
-import EmployeeWidgetBlock from './WidgetBlock';
+import EmployeeWidgetBlock from '../PwaComponent/WidgetBlock';
 import customAlert from '@/atoms/customAlert';
-
+import ValidationService from "@/Services/ValidationService";
 //-----------Calling api -------------//
 import { APICALL } from '@/Services/ApiServices';
 import { cancelContract } from '@/Services/ApiEndPoints'
 
 
 function CancelContract(props) {
-    console.log(props);
-
+ 
     const [pophide, setPophide] = useState(props.popupActionNo);
     const [text, setText] = useState('');
 
     const [message, setMessage] = useState('');
+    const [message_err, setMessageErr] = useState('');
 
     const handleChange = event => {
         setMessage(event.target.value);
     };
 
+    const valiDate=()=>{
+        let err=ValidationService.emptyValidationMethod(message);
+        if(err!=''){
+            setMessageErr(err);
+            return false;
+        }
+        setMessageErr('');
+        return true;
+    }
+
     const handleClick = async (event) => {
         event.preventDefault();
         let data = getPostData();
-        await APICALL.service(cancelContract, 'POST', data).then(response => {
-            console.log(response);
-            if(response.status == 200){
-                console.log('Successfull');
-                customAlert('success', 'cancel contract for employee Successfull ', 2000);
-            }else{
-                customAlert('error', 'cancel contract for employee Failed', 2000);
-                console.log('Failed');
-            }
-
+        let deta=props.data;
+        if(valiDate()){
+        APICALL.service(cancelContract,'POST',[deta.emp_id,deta.employee_name,deta.comp_id,deta.location_id,message])
+        .then((result) => {
             
+            if (result == 200) {
+                router.push('/pincode/options');
+            }
         })
-        props.handleClosePopup();
+        .catch((error) => {
+            console.error(error);
+        });
+        props.handleClosePopup();        
+    }
     };
 
     const getPostData = () => {
         return {
-            contract_id: props.contract,
             reason: message
         }
     }
@@ -88,10 +98,10 @@ function CancelContract(props) {
                                                 name="message"
                                                 onChange={handleChange}
                                                 value={message}
-                                                className="form-control mt-2 mb-2 rounded-0 shadow-none border"
+                                                className="form-control mt-2 mb-2 rounded-0 shadow-none"
                                                 
                                             />
-
+                                            <p style={{color:"red"}}>{message_err}</p>
                                         </div>
                                     </div>
                                 </div>

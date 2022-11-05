@@ -6,6 +6,37 @@ import React from 'react';
 const ValidationService = {
 	
 	/**
+	 * get date from timestamp
+	 * @param {*} value 
+	 * @returns 
+	 */
+	getDate:function(value){
+		let date=new Date(value);
+		const day = date.getDate().toString();
+		(day.length==1)?day='0'+day:'';
+		const month = date.getMonth() + 1;
+		month=month.toString();
+		(month.length==1)?month='0'+month:'';
+		const year = date.getFullYear();   
+
+		return day+'-'+month+'-'+year;
+	},
+
+	/**
+	 * get time from timestamp
+	 * @param {*} value 
+	 * @returns 
+	 */
+	 getTime:function(value){
+		let date=new Date(value);
+		
+		const hours = date.getHours();
+		const minutes = date.getMinutes();
+		const seconds = date.getSeconds();     
+
+		return hours+':'+minutes+':'+seconds;
+	},
+	/**
 	 * format the given date to DD-MM-YYYY
 	 * @param {*} value 
 	 * @returns 
