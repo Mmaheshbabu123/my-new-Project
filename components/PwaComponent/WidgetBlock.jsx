@@ -221,15 +221,15 @@ function EmployeeWidgetBlock(props) {
                                              <div className="accordion-body ">
 
                                                 <div className="row m-2 p-1" key={result.id}>
-                                                    <div className="col-sm-5 poppins-regular-16px">Company name</div>
+                                                    <div className="col-sm-5 poppins-regular-16px">{t('Company')}</div>
                                                     <div className="col-sm-7 poppins-light-16px">{result.company_name}</div>
                                                 </div>
                                                 <div className="row m-2 p-1 " key={result.id}>
-                                                    <div className="col-sm-5 poppins-regular-16px">Location</div>
+                                                    <div className="col-sm-5 poppins-regular-16px">{t('Location')}</div>
                                                     <div className="col-sm-7 poppins-light-16px">{result.location_name}</div>
                                                 </div>
                                                 <div className="row m-2 p-1 " key={result.id}>
-                                                    <div className="col-sm-5 poppins-regular-16px">Planned stop time</div>
+                                                    <div className="col-sm-5 poppins-regular-16px">{t('Planned stop time')}</div>
                                                     <div className="col-sm-7 poppins-light-16px">{moment(result.planned_endtime).format('HH:mm')}</div>
                                                 </div>
                                                 <div className="row m-2 p-1" key={result.id}>
