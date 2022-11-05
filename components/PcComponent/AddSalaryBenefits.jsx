@@ -486,7 +486,7 @@ const AddSalaryBenefits = (props) => {
 																)
 															}
 														>
-															Is the benefit granted in case of absence of the employee?
+															{t('Is the benefit granted in case of absence of the employee?')}
 														</label>
 														<RadioGroup
 															name={'granted' + index}
@@ -687,7 +687,7 @@ const AddSalaryBenefits = (props) => {
 				) : (
 					''
 				)}
-				{atleast && <h5 style={{ color: 'red' }}>Select atleast one salary benefit.</h5>}
+				{atleast && <h5 style={{ color: 'red' }}>{t('Select atleast one salary benefit.')}</h5>}
 				{rows}
 				{pc_view_type != 'addpc' ? (
 					<div className="row mt-4">
@@ -760,6 +760,8 @@ export default React.memo(
 		'Occurence',
 		'Edit salary benefits',
 		'Salary benefits',
+		'Is the benefit granted in case of absence of the employee',
+		'Select atleast one salary benefit.',
 		'SAVE',
 		'BACK',
 		'SAVE'

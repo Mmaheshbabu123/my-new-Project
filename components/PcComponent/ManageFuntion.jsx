@@ -453,7 +453,7 @@ const ManageFunction = (props) => {
 								<thead className='manage_category_table manage_fun_table'>
 									<tr className="btn-bg-gray-medium table-sticky-bg-gray h-50-mf">
 										<th className="poppins-medium-18px btn-bg-gray-medium p-2 ps-4">
-											PC number
+											{t('PC number')}
 										</th>
 										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Function name')}</th>
 										<th className="poppins-medium-18px btn-bg-gray-medium p-2">{t('Minimum salary')}</th>
@@ -558,4 +558,4 @@ const ManageFunction = (props) => {
 	);
 };
 export default React.memo(Translation(ManageFunction, ['Manage functions', "PC number", "Function Name", "Minimum salary",
-	"Category name", 'search', 'RESET', 'Function name', 'Minimum salary', 'Category', 'Action', 'No records', 'BACK']));
+	"Category name", 'search', 'RESET', 'Function name', 'Minimum salary', 'Category', 'Action', 'No records', 'BACK', 'PC number']));

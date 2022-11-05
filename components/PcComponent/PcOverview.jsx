@@ -181,7 +181,7 @@ const PcOverview = (params) => {
 											setCat_subsec_type(1);
 										}}
 									>
-										+ Add category
+										+ {t('Add category')}
 									</button>
 									<button
 										type="button"
@@ -542,4 +542,4 @@ const PcOverview = (params) => {
 		</div>
 	);
 };
-export default React.memo(Translation(PcOverview,['Edit paritair comite','View paritair comite','Add function','BACK','Add category','NEXT']));
+export default React.memo(Translation(PcOverview,['Edit paritair comite','View paritair comite','Add function','BACK','Add category','NEXT','Add category']));

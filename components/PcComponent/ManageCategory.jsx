@@ -286,7 +286,7 @@ const ManageCategoryComponent = (props) => {
 															<MdEdit
 																className="color-skyblue "
 																data-toggle="tooltip"
-																title="Edit category"
+																title={t("Edit category")}
 															/>
 														</a>
 													</Link>
@@ -295,7 +295,7 @@ const ManageCategoryComponent = (props) => {
 														<MdDelete
 															className=" ms-3 color-skyblue delete_button"
 															data-toggle="tooltip"
-															title="Delete category"
+															title={t("Delete category")}
 														/>
 													</span>
 												</td>
@@ -355,4 +355,4 @@ const ManageCategoryComponent = (props) => {
 		</div>
 	);
 };
-export default React.memo(Translation(ManageCategoryComponent, ['Manage categories', "PC number", "Category Name", "Minimum salary", 'Search', 'RESET', 'Paritair comite number', 'Category name', 'Minimum salary', 'Action', 'No records', 'BACK']));
+export default React.memo(Translation(ManageCategoryComponent, ['Manage categories', "PC number", "Category Name", "Minimum salary", 'Search', 'RESET', 'Paritair comite number', 'Category name', 'Minimum salary', 'Action', 'No records', 'BACK', "Edit category", "Delete category"]));
