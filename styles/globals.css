@@ -2052,6 +2052,12 @@ input[type="search"]::-webkit-search-cancel-button {
 	/* justify-content: center; */
 	margin-bottom: 1.5rem;
 	min-height: 12.4rem !important;
+	display: flex;
+	align-items: center;
+}
+.employer-large-tile .dashboard-image-div
+{
+	height: 3.3rem;
 }
 .position-sticky-employee-widget-search
 {
@@ -2063,7 +2069,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .employer-large-tile .dashboard_menu_title
 {
 	margin: 0 !important;
-	padding-top: 1.5rem;
+	padding-top: 1rem;
 }
 .dashboard-image-div {
 	width: auto;
@@ -2132,12 +2138,12 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .todo-count-badge {
   position: absolute;
-	right: 5px;
+	right: 3rem;
 	padding: 7px 10px;
   border-radius: 50%;
   background-color: #79b1bd;
 	color: var(--color-white) !important;
-	top: 7px;
+	top: 9px;
 }
 .Collapsible__trigger {
 	display: block;

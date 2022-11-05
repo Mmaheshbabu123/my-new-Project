@@ -753,3 +753,7 @@ select option
   font-size: var(--font-size-16px) !important;
   line-height: var(--line-height-26px) !important;
 }
+img.dasboard_image 
+{
+  height: 60px;
+}
