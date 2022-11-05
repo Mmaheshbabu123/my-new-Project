@@ -826,7 +826,7 @@ a {
 }
 
 .atom-input-field-default {
-	cursor: pointer;
+	/* cursor: pointer; */
 	display: block;
 	padding: .375rem .75rem;
 	font-size: 1rem;
@@ -955,20 +955,6 @@ label {
 	cursor: pointer;
 
 	left: 43%;
-}
-
-.legal12,
-.legal13,
-.invoice68,
-.invoice69 {
-	width: 50%;
-	float: left;
-}
-.legal12 input,
-.legal13 input,
-.invoice68 input,
-.invoice69 input {
-	width: 90%;
 }
 .online42{
 	margin-bottom: 108px !important;

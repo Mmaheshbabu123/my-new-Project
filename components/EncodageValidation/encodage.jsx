@@ -131,7 +131,7 @@ function EncodageValidation(props) {
                                         <td className="poppins-regular-18px p-2 align-middle">{ValidationService.getTime(element.wstart)}</td>
 										<td className="poppins-regular-18px p-2 align-middle">{ValidationService.getTime(element.endtime)}</td>
 										<td className="poppins-regular-18px p-2 align-middle">{ValidationService.getDate(element.wend)}</td>
-                                        <td className="poppins-regular-18px p-2 align-middle ">
+                                        <td className="poppins-regular-18px p-2 align-middle actual-end-time">
 										<DatePicker
                                                         disableDayPicker
                                                         name="time" 
