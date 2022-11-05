@@ -260,7 +260,7 @@ let updateParent = () => {
 
 																											) : (
 																												<span className="d-none">
-																													edit
+																													{t('edit')}
 																												</span>
 
 																											)}
@@ -270,7 +270,7 @@ let updateParent = () => {
 																													<a type="button" className="cross-icon-solid"
 																														onClick={()=>{cancel_contact();setCancelData(val1);}}
 																														data-toggle="tooltip"
-																														title="Cancel Contract"
+																														title={t("Cancel Contract")}
 																													>
 
 																													</a>
@@ -387,6 +387,8 @@ export default React.memo(
 		'Sunday',
 		'No planning for this week.',
 		'Select company and location to view planning.',
-		'DASHBOARD'
+		'DASHBOARD',
+		'edit',
+		"Cancel Contract"
 	])
 );

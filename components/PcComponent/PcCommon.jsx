@@ -189,7 +189,7 @@ const PcCommon = (props) => {
 										) : (
 											<BsCircle className="d-inline mb-2" />
 										)}
-										<p className="mb-2 poppins-regular-16px-white btn-active">Step 3:</p> <p className='poppins-regular-18px-white  btn-active'>{t('Age')}</p>
+										<p className="mb-2 poppins-regular-16px-white btn-active">{t('Step 3:')}</p> <p className='poppins-regular-18px-white  btn-active'>{t('Age')}</p>
 									</button>
 								</li>
 								<li className="col border-0 rounded-0 poppins-regular-16px" role="presentation">
@@ -301,4 +301,4 @@ const PcCommon = (props) => {
 	);
 };
 
-export default React.memo(Translation(PcCommon,['Step 1:','Paritair comite details','Step 2:','Category and Function','Age','Step 4:','Employee type','Step 5:','Salary benefits']));
+export default React.memo(Translation(PcCommon,['Step 1:','Paritair comite details','Step 2:','Category and Function','Age','Step 4:','Employee type','Step 5:','Salary benefits','Step 3:']));

@@ -11,12 +11,12 @@ const AddEmployee = (props) => {
 	const router = useRouter();
 	const p_unique_key = router.query.p_unique_key;
 	const { t } = props;
-	const [ empList, setEmpList ] = useState([]);
-	const [ tempEmpList, setTempEmpList ] = useState([]);
-	const [ pclist, setPclist ] = useState([]);
-	const [ tempPcList, setTempPcList ] = useState([]);
-	const [ inputlist, setInputlist ] = useState([ { pc: [], employees: [], pc_error: '', emp_error: '' } ]);
-	const [ previousVal, setPreviousVal ] = useState([]);
+	const [empList, setEmpList] = useState([]);
+	const [tempEmpList, setTempEmpList] = useState([]);
+	const [pclist, setPclist] = useState([]);
+	const [tempPcList, setTempPcList] = useState([]);
+	const [inputlist, setInputlist] = useState([{ pc: [], employees: [], pc_error: '', emp_error: '' }]);
+	const [previousVal, setPreviousVal] = useState([]);
 	const [buttonDisable, setButtonDisable] = useState(false);
 
 	/**
@@ -26,14 +26,14 @@ const AddEmployee = (props) => {
 	 * @param {*} index 
 	 */
 	const handleinputchange = (type, val, index) => {
-		const list = [ ...inputlist ];
+		const list = [...inputlist];
 		if (type == 'employees') {
 			list[index].employees = val;
 			list[index].emp_error = '';
 			setInputlist(list);
 			updatelist('emp', list);
 		} else {
-			list[index].pc = [ val ];
+			list[index].pc = [val];
 			list[index].pc_error = '';
 			setInputlist(list);
 			updatelist('pc', list);
@@ -46,7 +46,7 @@ const AddEmployee = (props) => {
 	 * @param {*} list 
 	 */
 	const updatelist = (type, list) => {
-		const temp = [ ...tempEmpList ];
+		const temp = [...tempEmpList];
 
 		console.log(temp);
 		if (type == 'emp') {
@@ -58,7 +58,7 @@ const AddEmployee = (props) => {
 			setEmpList(temp);
 		}
 		if (type == 'pc') {
-			var pcs = [ ...tempPcList ];
+			var pcs = [...tempPcList];
 			list.map((v1, k1) => {
 				pcs.splice(pcs.findIndex((a) => a.value == v1.pc[0].value), 1);
 			});
@@ -72,7 +72,7 @@ const AddEmployee = (props) => {
 	const handleaddanother = () => {
 		var error = validate(inputlist);
 		if (!error) {
-			setInputlist([ ...inputlist, { pc: [], employees: [], pc_error: '', emp_error: '' } ]);
+			setInputlist([...inputlist, { pc: [], employees: [], pc_error: '', emp_error: '' }]);
 		} else {
 			window.scrollTo(0, 0);
 		}
@@ -83,7 +83,7 @@ const AddEmployee = (props) => {
 	 * @param {*} index 
 	 */
 	const handleremove = (index) => {
-		const list = [ ...inputlist ];
+		const list = [...inputlist];
 		list.splice(index, 1);
 		setInputlist(list);
 		updatelist('emp', list);
@@ -111,13 +111,13 @@ const AddEmployee = (props) => {
 								v1.employees.map((v2) => {
 									temp2.splice(temp2.findIndex((a) => a.value == v2.value), 1);
 								});
-									temp3.splice(temp3.findIndex((a) => a.value == v1.pc[0].value), 1);
+								temp3.splice(temp3.findIndex((a) => a.value == v1.pc[0].value), 1);
 							});
 							setEmpList(temp2);
 							setPclist(temp3);
 
 						} else if (result.data[1].length == 1 && result.data[2].length == 0) {
-							var list = [ ...inputlist ];
+							var list = [...inputlist];
 							list[0].pc = result.data[1];
 							setInputlist(list);
 							setEmpList(result.data[0]);
@@ -132,7 +132,7 @@ const AddEmployee = (props) => {
 					console.error(error);
 				});
 		},
-		[ router.query ]
+		[router.query]
 	);
 
 	/**
@@ -142,7 +142,7 @@ const AddEmployee = (props) => {
 	 */
 	const validate = (res) => {
 		var count = 0;
-		var data = [ ...res ];
+		var data = [...res];
 		data.map((val, key) => {
 			if (val.pc.length == 0) {
 				data[key].pc_error = t('This field is required.');
@@ -172,7 +172,7 @@ const AddEmployee = (props) => {
 
 		if (!err) {
 			setButtonDisable(true);
-			let data = [ inputlist, p_unique_key, previousVal ];
+			let data = [inputlist, p_unique_key, previousVal];
 			APICALL.service(addplanningemployee, 'POST', data)
 				.then((result) => {
 					if (result.status === 200) {
@@ -203,97 +203,93 @@ const AddEmployee = (props) => {
 							<div className="row" key={i}>
 								<div className="col-md-7 m-auto mb-3 p-0">
 									<div className='row'>
-									<div className="col-md-8 select-relative slt-emp p-0">
-										<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px ps-0">
-											{t('Paritair commite')}
-										</label>
-										<Select
-											id={'pc-value-select' + i}
-											instanceId={'pc-value-select' + i}
-											value={val['pc']}
-											name="pc"
-											className="poppins-regular-16px rounded-0 select_employee_container px-0"
-											options={pclist}
-											onChange={(value) => {
-												handleinputchange('pc', value, i);
-											}}
-										/>
-									</div>
-									<div className="col-md-4" />
-									<div className="pt-2 px-0" style={{ color: 'red' }}>
-										{val['pc_error']}
-									</div>
-								</div>
-									</div>
-								<div className="col-md-12 ">
-								<div className='row'>
-								<div className="col-md-7 m-auto p-0">
-										<div className='row'>
 										<div className="col-md-8 select-relative slt-emp p-0">
-											<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px px-0">
-												{t('Employee')}
+											<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px ps-0">
+												{t('Paritair commite')}
 											</label>
 											<Select
-												id={'emp-value-select' + i}
-												instanceId={'emp-value-select' + i}
-												value={val['employees']}
-												isMulti
-												name="employees"
-												className="poppins-regular-16px rounded-0 select_employee_container px-0 mb-2"
-												options={empList}
+												id={'pc-value-select' + i}
+												instanceId={'pc-value-select' + i}
+												value={val['pc']}
+												name="pc"
+												className="poppins-regular-16px rounded-0 select_employee_container px-0"
+												options={pclist}
 												onChange={(value) => {
-													handleinputchange('employees', value, i);
+													handleinputchange('pc', value, i);
 												}}
 											/>
-											<span className="pt-2" style={{ color: 'red' }}>
-												{val['emp_error']}
-											</span>
 										</div>
-										{/* Add or remove button */}
-
-									<div className='col-md-8 pe-0 py-3'>
-									<div className='row justify-content-end'>
-										<div className="col-md-12 bd-highlight">
-											<div className="bd-highlight row justify-content-end">
-											<div className='col-md-3 align-self-center text-end ps-0'>
-													{// pclist.length > 1 &&
-												inputlist.length !== 1 &&
-												i > 0 && (
-													<button
-														type="button"
-														className="btn  btn-block px-0 shadow-none"
-														onClick={() => handleremove(i)}
-													>
-														<p className="bg-white border-0 poppins-medium-18px poppins-medium-18px shadow-none text-end text-decoration-underline">
-															{t('Remove')}
-														</p>
-													</button>
-												)}
-													</div>
-													{inputlist.length < tempPcList.length &&
-												inputlist.length - 1 === i && (
-											<div className='col-md-3 align-self-center add_project text-end'>
-											
-													<button
-														type="submit"
-														className="btn rounded-0 btn-block float-start shadow-none add-proj-btn w-100"
-														onClick={handleaddanother}
-														style={{height:'43px'}}
-													>
-														{t("+ Add")}
-													</button>
-												
-													</div>
-
-)}
-											
-											
-											</div>
+										<div className="col-md-4" />
+										<div className="pt-2 px-0" style={{ color: 'red' }}>
+											{val['pc_error']}
 										</div>
-											</div>
-										</div>
-											</div>
 									</div>
+								</div>
+								<div className="col-md-12 ">
+									<div className='row'>
+										<div className="col-md-7 m-auto p-0">
+											<div className='row'>
+												<div className="col-md-8 select-relative slt-emp p-0">
+													<label className="custom_astrick form-label mb-1 custom_astrick poppins-medium-18px px-0">
+														{t('Employee')}
+													</label>
+													<Select
+														id={'emp-value-select' + i}
+														instanceId={'emp-value-select' + i}
+														value={val['employees']}
+														isMulti
+														name="employees"
+														className="poppins-regular-16px rounded-0 select_employee_container px-0 mb-2"
+														options={empList}
+														onChange={(value) => {
+															handleinputchange('employees', value, i);
+														}}
+													/>
+													<span className="pt-2" style={{ color: 'red' }}>
+														{val['emp_error']}
+													</span>
+												</div>
+												{/* Add or remove button */}
+
+												<div className='col-md-8 pe-0 py-3'>
+													<div className='row justify-content-end'>
+														<div className="col-md-12 bd-highlight">
+															<div className="bd-highlight row justify-content-end">
+																<div className='col-md-3 align-self-center text-end ps-0'>
+																	{// pclist.length > 1 &&
+																		inputlist.length !== 1 &&
+																		i > 0 && (
+																			<button
+																				type="button"
+																				className="btn  btn-block px-0 shadow-none"
+																				onClick={() => handleremove(i)}
+																			>
+																				<p className="bg-white border-0 poppins-medium-18px poppins-medium-18px shadow-none text-end text-decoration-underline">
+																					{t('Remove')}
+																				</p>
+																			</button>
+																		)}
+																</div>
+																{inputlist.length < tempPcList.length &&
+																	inputlist.length - 1 === i && (
+																		<div className='col-md-3 align-self-center add_project text-end'>
+
+																			<button
+																				type="submit"
+																				className="btn rounded-0 btn-block float-start shadow-none add-proj-btn w-100"
+																				onClick={handleaddanother}
+																				style={{ height: '43px' }}
+																			>
+																				{t("+ Add")}
+																			</button>
+																		</div>
+																	)}
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -313,7 +309,7 @@ const AddEmployee = (props) => {
 					</div>
 					<div className="text-end col-md-6">
 						<button
-						disabled={buttonDisable}
+							disabled={buttonDisable}
 							type="sumit"
 							className="btn poppins-medium-18px-next-button rounded-0 px-3  btn-block float-end shadow-none"
 						>
@@ -326,5 +322,5 @@ const AddEmployee = (props) => {
 	);
 };
 
-export default React.memo(Translation(AddEmployee,['This field is required.','Select employee','Paritair commite','Employee','Remove','+ Add','BACK','NEXT']));
+export default React.memo(Translation(AddEmployee, ['This field is required.', 'Select employee', 'Paritair commite', 'Employee', 'Remove', '+ Add', 'BACK', 'NEXT']));
 
