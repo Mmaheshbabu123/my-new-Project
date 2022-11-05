@@ -35,7 +35,7 @@ const AddFunctions = (props) => {
 				.then((result) => {
 					if (result.status == 200) {
 						console.log(result.data);
-						updateEmployeeObject(result.data[0])
+						updateEmployeeObject(result.data[0]);
 						setIsChecked(result.data[1]);
 						setFlexSalary(result.data[2]);
 					}
@@ -48,7 +48,7 @@ const AddFunctions = (props) => {
 		[ router.query ]
 	);
 
-	const updateEmployeeObject = (data) =>{
+	const updateEmployeeObject = (data) => {
 		data.map((val, key) => {
 			val.employee_list.map((val2, key2) => {
 				if (val2.function_salary != null && val2.age < val.pc_min_age) {
@@ -70,7 +70,7 @@ const AddFunctions = (props) => {
 		});
 
 		setEmployeeObject(data);
-	}
+	};
 
 	const submit = (e) => {
 		e.preventDefault();

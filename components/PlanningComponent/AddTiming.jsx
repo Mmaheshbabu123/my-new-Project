@@ -21,6 +21,7 @@ import Age17 from '../../public/images/Age_17.svg';
 import Age18 from '../../public/images/Age_18.svg';
 import Age19 from '../../public/images/Age_19.svg';
 import Age20 from '../../public/images/Age_20.svg';
+import D18 from '../images/Age18+.svg';
 
 function Addtiming(props) {
 	const { t } = props;
@@ -563,8 +564,8 @@ function Addtiming(props) {
 														{result.employee_name}
 														<span className="ageicon" data-toggle="tooltip" title="Age">
 															{result.age != 0 &&
-																// v1['age'] <
-																// 	emplist.pc_min_age &&
+																result.age <
+																result.pc_min_age &&
 																{
 																	'15': <Image src={Age15} width={25} height={25} />,
 																	'16': <Image src={Age16} width={25} height={25} />,
@@ -742,8 +743,7 @@ function Addtiming(props) {
 															{result.employee_name}
 															<span className="ageicon" data-toggle="tooltip" title="Age">
 															{result.age != 0 &&
-																// v1['age'] <
-																// 	emplist.pc_min_age &&
+																result.age < result.pc_min_age &&
 																{
 																	'15': <Image src={Age15} width={25} height={25} />,
 																	'16': <Image src={Age16} width={25} height={25} />,
@@ -752,7 +752,12 @@ function Addtiming(props) {
 																	'19': <Image src={Age19} width={25} height={25} />,
 																	'20': <Image src={Age20} width={25} height={25} />
 																}[result.age]}
+
 														</span>
+														{result.age == result.pc_min_age-1 &&
+														<span className="ageicon" data-toggle="tooltip" title={result.dob.split('-').reverse().join('-')}>
+														<Image src={D18} width={25} height={25} />
+														</span>}
 														</div>
 														<div className="col-md-4 poppins-light-20px">
 															{result.employee_type_name}
