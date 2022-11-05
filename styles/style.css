@@ -352,9 +352,16 @@ input[type="radio"]
   padding-left: 3rem;
 }
 .border,
-.no-records
+.no-records,
+.otp-visible:focus-visible,
+.otp-visible:focus
 {
   border: 1px solid #4C4D554D !important;
+}
+.otp-visible:focus-visible,
+.otp-visible:focus
+{
+  outline: none;
 }
 select option
 {
@@ -474,9 +481,9 @@ select option
 {
   position: relative;
 }
-.table-render-parent-div
+.min-height-add-doc
 {
-  min-height: 55vh;
+  min-height: 62vh;
 }
 .dashboard-tile-parent
 {

@@ -120,18 +120,18 @@ function EncodageValidation(props) {
 				console.log(element);
 				rows.push(
 					<tr className="border poppins-regular-18px p-2" >
-                                        <td className="poppins-regular-18px p-2 ps-4">
-                                            <div className="form-check">
-                                                <input className="form-check-input" name={index+1} checked={!element.disabled} type="checkbox" onChange={()=>enabledisbale(index)}  id="flexCheckDefault" />
+                                        <td className="poppins-regular-18px p-2 ps-4 align-middle">
+                                            <div className="">
+                                                <input className="form-check-input rounded-0  align-self-center mt-2" name={index+1} checked={!element.disabled} type="checkbox" onChange={()=>enabledisbale(index)}  id="flexCheckDefault" />
                                             </div>
                                         </td>
-										<td className="poppins-regular-18px p-2">{ValidationService.getDate(element.starttime)}</td>
-                                        <td className="poppins-regular-18px p-2">{element.field_first_name_value+' '+element.field_last_name_value}</td>
-                                        <td className="poppins-regular-18px p-2">{ValidationService.getTime(element.starttime)}</td>
-                                        <td className="poppins-regular-18px p-2">{ValidationService.getTime(element.wstart)}</td>
-										<td className="poppins-regular-18px p-2">{ValidationService.getTime(element.endtime)}</td>
-										<td>{ValidationService.getDate(element.wend)}</td>
-                                        <td className="poppins-regular-18px p-2">
+										<td className="poppins-regular-18px p-2 align-middle">{ValidationService.getDate(element.starttime)}</td>
+                                        <td className="poppins-regular-18px p-2 align-middle">{element.field_first_name_value+' '+element.field_last_name_value}</td>
+                                        <td className="poppins-regular-18px p-2 align-middle">{ValidationService.getTime(element.starttime)}</td>
+                                        <td className="poppins-regular-18px p-2 align-middle">{ValidationService.getTime(element.wstart)}</td>
+										<td className="poppins-regular-18px p-2 align-middle">{ValidationService.getTime(element.endtime)}</td>
+										<td className="poppins-regular-18px p-2 align-middle">{ValidationService.getDate(element.wend)}</td>
+                                        <td className="poppins-regular-18px p-2 align-middle ">
 										<DatePicker
                                                         disableDayPicker
                                                         name="time" 
@@ -153,10 +153,10 @@ function EncodageValidation(props) {
 								}} */}
 								
 							</td>
-                            <td style={{ width: '149px' }} className="align-middle py-3 poppins-light-16px"><button onClick={() => updateValidation(element.starttime,element.wend,element.wid)}>
+                            <td style={{ width: '149px' }} className="align-middle p-2 poppins-light-16px"><button onClick={() => updateValidation(element.starttime,element.wend,element.wid)} className='border-0 bg-transparent color-skyblue'>
 								{element.validated ? <FaShieldAlt /> : <FaCheckCircle />}
 							</button>
-							<button onClick={() => console.log('clicked')}>
+							<button onClick={() => console.log('clicked')} className='border-0 bg-transparent color-skyblue'>
 								{!element.disabled?<FaSave/>:<FaUndoAlt />}
 							</button></td>
 

@@ -262,9 +262,10 @@ input[type="checkbox"]
 .position-sticky-mytodo_searchbox
 {
   position:sticky;
-  top: 252px;
+  top: 251px;
   background-color: var(--color-white);
   z-index: 998;
+  margin-top: -1px !important;
 }
 /* .sticky-table-header
 {
@@ -408,9 +409,15 @@ input[type="checkbox"]
 }
 .minheight-verifypin
 {
-  min-height: 68vh;
+  min-height: 71vh;
 }
-
+.position-sticky-pincode-verify 
+{
+  position: sticky;
+  top: 168px;
+  background: var(--color-white) !important;
+  z-index: 998;
+}
 /* Warning icon */
 .warning-icon-solid {
 	background-image: url('/images/warning.svg');
@@ -424,7 +431,7 @@ input[type="checkbox"]
 .cross-icon-solid{
   background-image: url('/images/cross-icon.svg');
 	background-repeat: no-repeat;
-	background-size: 25px;
+	background-size: 22px;
 	margin: 0 2px;
 	padding: 14px;
 	background-position: center;
@@ -571,7 +578,7 @@ input[type="checkbox"]
   min-height: 43px;
 }
 .actual-stop-time .rmdp-input,
-.actual-stop-date .rmdp-input
+.actual-end-time .rmdp-input
 {
   height: 38px !important;
   margin-top: 0.5rem !important;
@@ -579,8 +586,11 @@ input[type="checkbox"]
   border-radius: 0px !important;
   width: 100% !important;
 }
-.actual-stop-time .rmdp-container,
-.actual-stop-date .rmdp-container
+.actual-stop-time .rmdp-container
 {
    width: 100% !important;
+}
+.actual-end-time .rmdp-container
+{
+  width: 100px !important;
 }
