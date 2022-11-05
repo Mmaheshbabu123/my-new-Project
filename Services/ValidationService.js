@@ -27,14 +27,18 @@ const ValidationService = {
 	 * @param {*} value 
 	 * @returns 
 	 */
-	 getTime:function(value){
+	 getTime:function(value,s){
 		let date=new Date(value);
 		
 		const hours = date.getHours();
 		const minutes = date.getMinutes();
 		const seconds = date.getSeconds();     
 
+		if(s==1){
 		return hours+':'+minutes+':'+seconds;
+		}else{
+			return hours+':'+minutes;	
+		}
 	},
 	/**
 	 * format the given date to DD-MM-YYYY

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ValidationService from './../../Services/ValidationService';
-// import { useParams, useNavigate } from "react-router-dom";
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import DatePicker from 'react-multi-date-picker';
 import { useRouter } from 'next/router';
@@ -14,6 +14,7 @@ import Translation from '@/Translation';
 
 function EncodageValidation(props) {
 	const {t} =props;
+	const { contextState = {} } = useContext(UserAuthContext);
 	const router = useRouter();
 	const [ fcompany, setFcompany ] = useState('');
 	const [ flocation, setFlocation ] = useState('');
@@ -40,7 +41,7 @@ function EncodageValidation(props) {
 	} = useContext(PcContext);
 
 	useEffect(() => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data', 'GET')
+		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/'+contextState.uid, 'GET')
 			.then((result) => {
 				if (result[0] == 999) {
 					setData(null);
@@ -53,6 +54,7 @@ function EncodageValidation(props) {
 				console.log(result);
 			})
 			.catch((error) => console.error('Error occurred'));
+		// }
 	}, []);
 
 	const enabledisbale = (index) => {
@@ -62,7 +64,6 @@ function EncodageValidation(props) {
 	};
 
 	const saveactualstart = (index, actualstart) => {
-		console.log(actualstart);
 		var object = [ ...data ];
 		object[index].wstart = actualstart;
 		setData(object);
@@ -124,10 +125,11 @@ function EncodageValidation(props) {
                                                 <input className="form-check-input" name={index+1} checked={!element.disabled} type="checkbox" onChange={()=>enabledisbale(index)}  id="flexCheckDefault" />
                                             </div>
                                         </td>
+										<td className="poppins-regular-18px p-2">{ValidationService.getDate(element.starttime)}</td>
                                         <td className="poppins-regular-18px p-2">{element.field_first_name_value+' '+element.field_last_name_value}</td>
-                                        <td className="poppins-regular-18px p-2">{ValidationService.timeFOrmating(element.starttime)}</td>
-                                        <td className="poppins-regular-18px p-2">{ValidationService.timeFOrmating(element.wstart)}</td>
-										<td className="poppins-regular-18px p-2">{ValidationService.timeFOrmating(element.endtime)}</td>
+                                        <td className="poppins-regular-18px p-2">{ValidationService.getTime(element.starttime)}</td>
+                                        <td className="poppins-regular-18px p-2">{ValidationService.getTime(element.wstart)}</td>
+										<td className="poppins-regular-18px p-2">{ValidationService.getTime(element.endtime)}</td>
 										<td>{ValidationService.getDate(element.wend)}</td>
                                         <td className="poppins-regular-18px p-2">
 										<DatePicker
@@ -226,8 +228,6 @@ function EncodageValidation(props) {
 			})
 		: (display = 'There is no plannngs for encodage validation.');
 
-	console.log(fcompany);
-
 	return (
 		<div>
 			<div className="row py-4 position-sticky-pc encodage-validation">
@@ -299,6 +299,7 @@ function EncodageValidation(props) {
 				<thead>
 					<tr className="btn-bg-gray-medium table-sticky-bg-gray">
                                         <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4"></th>
+										<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Date')}</th>
                                         <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Name')}</th>
                                         <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Planned start time')}</th>
                                         <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Actual start time')}</th>
