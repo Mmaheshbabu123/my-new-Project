@@ -6,7 +6,8 @@ export default function FileUpload({
   disabled = false,
   handleChange = () => console.log(),
   fileUploadText = 'Choose file',
-  browseBtnText = 'Browse'
+  browseBtnText = 'Browse',
+  infoText = '',
 })
 {
   return (
@@ -24,9 +25,10 @@ export default function FileUpload({
             onClick={(e) => e.target.value = null}
             style={{display:'none'}}
         />
-        {fileUploadText}
+        <span style ={{opacity: 0.7}} >{fileUploadText}</span>
         <button style={{pointerEvents: "none"}} className="float-end"> {browseBtnText} </button>
       </label>
+      <p className="fs-6 mt-2"> {infoText} </p>
       <div className="progress" id="file_upload_progress" style={{marginTop: '10px', height: '8px', display:'none'}}>
         <div className="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" style={{width: "100%"}}></div>
       </div>
