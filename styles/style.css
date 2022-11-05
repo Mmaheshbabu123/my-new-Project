@@ -704,13 +704,15 @@ select option
 {
   min-height: 68vh;
 }
-.start-stop-planning .react-select-prefix__single-value
+.start-stop-planning .react-select-prefix__single-value,
+.encodage-validation .react-select-prefix__single-value
 {
   display: flex;
   align-items: center;
 }
 .start-stop-planning .react-select-prefix__control--is-focused,
-.minheight-verifypin .react-select-prefix__control--is-focused
+.minheight-verifypin .react-select-prefix__control--is-focused,
+.encodage-validation .react-select-prefix__control--is-focused
 {
   border: 1px solid #4C4D554D !important;
 }
