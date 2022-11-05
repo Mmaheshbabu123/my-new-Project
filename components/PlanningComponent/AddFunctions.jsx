@@ -120,8 +120,7 @@ const AddFunctions = (props) => {
 			object[parent_index].employee_list[index].emp_type = obj.value;
 			if (object[parent_index].flexEmpTypes.includes(obj.value)) {
 				object[parent_index].employee_list[index].function_salary = object[parent_index].flexSalary;
-			} else if(object[parent_index].employee_list[index].funid == '')
-			{
+			} else if (object[parent_index].employee_list[index].funid == '') {
 				object[parent_index].employee_list[index].function_salary = '';
 			}
 			setEmployeeObject(object);
@@ -213,11 +212,19 @@ const AddFunctions = (props) => {
 		var object = [ ...employeeobject ];
 		if (index !== null) {
 			object[parent_index].employee_list[index].funid = funcid;
-			object[parent_index].employee_list[index].salary = null;
 			object[parent_index].employee_list[index].warning = '';
 			object[parent_index].employee_list[index].salaryerror = '';
-			funcid == 'drop' ? (object[parent_index].employee_list[index].function_salary = null) : '';
+			if (
+				!(
+					object[parent_index].employee_list[index].emp_type != null &&
+					object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[index].emp_type)
+				)
+			) {
+				object[parent_index].employee_list[index].salary = null;
+				funcid == 'drop' ? (object[parent_index].employee_list[index].function_salary = null) : '';
+			}
 			setEmployeeObject(object);
+
 		} else {
 			object[parent_index].employee_list.map((element, key) => {
 				object[parent_index].employee_list[key].funid = index != null ? Number(funcid) : funcid;
@@ -234,10 +241,16 @@ const AddFunctions = (props) => {
 		salary = parseFloat(salary.replace(',', '.').replace(/\s/g, ''));
 		maxsal = maxsal != undefined ? parseFloat(maxsal.replace(',', '.').replace(/\s/g, '')) : maxsal;
 		var object = [ ...employeeobject ];
+		console.log(object[parent_index]);
 		var sal_percent = 100;
 		var sal = '';
 		if (index !== null) {
-			if (object[parent_index].employee_list[index].age < pc_min_age) {
+			if (
+				object[parent_index].employee_list[index].emp_type != null &&
+				object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[index].emp_type)
+			) {
+				object[parent_index].employee_list[index].function_salary = object[parent_index].flexSalary;
+			} else if (object[parent_index].employee_list[index].age < pc_min_age) {
 				object[parent_index].pcAge.map((val, key) => {
 					if (object[parent_index].employee_list[index].age == val.type + 14) {
 						sal_percent = parseFloat(val.min_sal_percent.replace(',', '.').replace(/\s/g, ''));
@@ -279,7 +292,12 @@ const AddFunctions = (props) => {
 		salary = parseFloat(salary.replace(',', '.').replace(/\s/g, ''));
 		var object = [ ...employeeobject ];
 		if (index != null) {
-			if (object[parent_index].employee_list[index].age < pc_min_age) {
+			if (
+				object[parent_index].employee_list[index].emp_type != null &&
+				object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[index].emp_type)
+			) {
+				object[parent_index].employee_list[index].function_salary = object[parent_index].flexSalary;
+			}else if (object[parent_index].employee_list[index].age < pc_min_age) {
 				object[parent_index].pcAge.map((val, key) => {
 					if (object[parent_index].employee_list[index].age == val.type + 14) {
 						var sal_percent = parseFloat(val.min_sal_percent);
