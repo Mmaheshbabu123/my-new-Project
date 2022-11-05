@@ -13,6 +13,7 @@ import UpdatePlanningIcon from '../images/Update-planning.svg';
 import Pagination from '../PcComponent/Pagination';
 import Translation from '@/Translation';
 import BackLink from '../BackLink';
+
 function ManageProject(props) {
 	const {t}=props;
 	const router = useRouter();
@@ -333,7 +334,7 @@ function ManageProject(props) {
 															<MdEdit
 																className="color-skyblue"
 																data-toggle="tooltip"
-																title="Edit project"
+																title={t("Edit project")}
 															/>
 														</a>
 													</Link>
@@ -352,7 +353,7 @@ function ManageProject(props) {
 
 																alt="update planning"
 																data-toggle="tooltip"
-																title="Update planning"
+																title={t("Update planning")}
 																id="Update_p"
 																width={20}
 																height={20}
@@ -419,4 +420,4 @@ function ManageProject(props) {
 		</div>
 	);
 }
-export default React.memo(Translation(ManageProject,["Project name","Location","Address",'SEARCH','RESET','Project name','Location','Address','Action','No records']));
+export default React.memo(Translation(ManageProject,["Project name","Location","Address",'SEARCH','RESET','Project name','Location','Address','Action','No records', "Edit project", "Update planning"]));

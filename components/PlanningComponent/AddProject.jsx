@@ -10,30 +10,30 @@ import Translation from '@/Translation';
 
 // import './addproject.css';
 function Addproject(props) {
-	const { t }=props;
+	const { t } = props;
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 
 	/**
 	 * FOR ASSIGNING COMPANY LOCATION VALUES
 	 */
-	const [ company, setCompany ] = useState([]);
-	const [ countrylist, setCountrylist ] = useState([]);
+	const [company, setCompany] = useState([]);
+	const [countrylist, setCountrylist] = useState([]);
 
-	const [ error_project_name, setError_project_name ] = useState('');
-	const [ error_project_location, setError_project_location ] = useState('');
-	const [ error_hno, setError_hno ] = useState('');
-	const [ error_city, setError_city ] = useState('');
-	const [ error_extra, setError_extra ] = useState('');
-	const [ error_comp_id, setError_comp_id ] = useState('');
-	const [ error_street, setError_street ] = useState('');
-	const [ error_postal_code, setError_postal_code ] = useState('');
-	const [ error_countrylist, setError_countrylist ] = useState('');
-	const [ error_bus_number, setError_bus_number ] = useState('');
+	const [error_project_name, setError_project_name] = useState('');
+	const [error_project_location, setError_project_location] = useState('');
+	const [error_hno, setError_hno] = useState('');
+	const [error_city, setError_city] = useState('');
+	const [error_extra, setError_extra] = useState('');
+	const [error_comp_id, setError_comp_id] = useState('');
+	const [error_street, setError_street] = useState('');
+	const [error_postal_code, setError_postal_code] = useState('');
+	const [error_countrylist, setError_countrylist] = useState('');
+	const [error_bus_number, setError_bus_number] = useState('');
 
-	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
+	const [showdeletepopup, setShowdeletepopup] = useState(false);
 
-	const [ data, setData ] = useState({
+	const [data, setData] = useState({
 		id: '',
 		project_name: '',
 		project_location: '',
@@ -60,7 +60,7 @@ function Addproject(props) {
 				setData(res);
 			}
 		},
-		[ props ]
+		[props]
 	);
 
 	useEffect(
@@ -85,7 +85,7 @@ function Addproject(props) {
 				// console.log(data);
 			}
 		},
-		[ props.data ]
+		[props.data]
 	);
 
 	/**
@@ -428,7 +428,7 @@ function Addproject(props) {
 	);
 }
 
-export default React.memo(Translation(Addproject,['Add project','Project name',"select company",'Select','Location','Street','House number','Bus number','Postalcode','City',"Country",'Select country','Extra','SAVE']));
+export default React.memo(Translation(Addproject, ['Add project', 'Project name', "select company", 'Select', 'Location', 'Street', 'House number', 'Bus number', 'Postalcode', 'City', "Country", 'Select country', 'Extra', 'SAVE']));
 
 /**
 	 * FETCHING PROJECT
