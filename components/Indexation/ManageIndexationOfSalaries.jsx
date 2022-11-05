@@ -75,9 +75,14 @@ function ManageIndexationOfSalaries(props) {
     return (
         <div className="container-fluid p-0">
             <form>
+                <div className="row py-4 position-sticky-pc">
+                    <div className="col-md-12">
+                    <p className="px-0 bitter-italic-normal-medium-24">{t('Manage indexation of salaries')}</p>
+                    </div>
+                </div>
                 <div className="row m-0 ">
-                    <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2 mb-5">{t('Manage indexation of salaries')}</p>
-                    <div className="float-end">
+                   
+                    <div className="float-end position-sticky-add-indexation">
                         <div className="col-md-3 p-0 float-end ">
                             <Link href={'/indexation/' + Uniquekey.generate_unique_key()}
                             >
@@ -91,11 +96,11 @@ function ManageIndexationOfSalaries(props) {
                             </Link>
                         </div>
                     </div>
-                    <div className="form-check p-0 mt-5 tab-pane fade show min_height_table">
+                    <div className="form-check p-0 pt-2 tab-pane fade show min_height_table">
                         <table className="table mt-3 mb-3">
                             <thead>
                                 <tr className="btn-bg-gray-medium table-sticky-bg-gray">
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Date')}</th>
+                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-3">{t('Date')}</th>
                                     <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Indexation value')}</th>
                                     <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('PC')}</th>
                                     <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Employee type')}</th>
@@ -106,7 +111,7 @@ function ManageIndexationOfSalaries(props) {
                                 {indexationTemp2.length > 0 &&
                                     indexationTemp2.map((result) => (
                                         <tr className="border poppins-regular-18px p-2" key={result.id} >
-                                            <td className="poppins-regular-18px p-2">{result.date}</td>
+                                            <td className="poppins-regular-18px p-2 ps-3">{result.date}</td>
                                             <td className="poppins-regular-18px p-2">{result.indexation_type}</td>
                                             <td className="poppins-regular-18px p-2">{result.entity_id}</td>
                                             <td className="poppins-regular-18px p-2">{result.indexation_type}</td>
@@ -163,7 +168,7 @@ function ManageIndexationOfSalaries(props) {
                         <div className="col-sm-3">
                             <button
                                 type="button"
-                                className="bg-white border-0 poppins-light-18px  float-sm-right mt-5 mb-2 px-0 text-decoration-underline shadow-none"
+                                className="bg-white border-0 poppins-light-18px  float-sm-right mt-5 mb-2 px-0 text-decoration-underline shadow-none text-uppercase"
                             >
                                 {t('back')}
                             </button>
