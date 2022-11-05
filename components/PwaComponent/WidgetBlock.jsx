@@ -195,45 +195,45 @@ function EmployeeWidgetBlock(props) {
                         <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2 ms-3">Employees currently working </p>
                         <p className="h3 px-0  bitter-italic-normal-medium-22 mt-1 ms-3">({moment().format('D-M-YYYY, h:mm a')})</p>
                         <div className="accordion" id="accordionExample">
-                            <div className="accordion-item  p-2">
+                            <div className="accordion-item p-2 shadow-none rounded-0">
                                 {widgetTemp2.length > 0 &&
                                     widgetTemp2.slice(0, visible).map((result) => (
                                         <div className="m-2 " key={result.id}>
                                             <h2 className="accordion-header" id="headingTwo">
 
-                                                <button className="accordion-button collapsed bg-light " type="button" data-bs-toggle="collapse" data-bs-target={"#collapseTwo" + result.id} aria-expanded="false" aria-controls="collapseTwo">
-                                                    {result.name}
-                                                </button>
-
-                                            </h2>
-                                            <div id={"collapseTwo" + result.id} className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">                                            <div className="accordion-body ">
-
-                                                <div className="row m-2 " key={result.id}>
-                                                    <div className="col-sm-4 mb-1">Company name</div>
-                                                    <div className="col-sm-6 text-black-50">{result.company_name}</div>
-                                                </div>
-                                                <div className="row m-2 p-1 " key={result.id}>
-                                                    <div className="col-sm-4 mb-1">Location</div>
-                                                    <div className="col-sm-8 text-black-50">{result.location_name}</div>
-                                                </div>
-                                                <div className="row m-2 p-1 " key={result.id}>
-                                                    <div className="col-sm-4 mb-1">Planned stop time</div>
-                                                    <div className="col-sm-8 text-black-50">{moment(result.planned_endtime).format('HH:mm')}</div>
-                                                </div>
-                                                <div className="row m-2 p-1" key={result.id}>
-
-                                                    <div className="col">
-                                                        {moment(result.planned_endtime) < current_time &&
+                                                <button className="accordion-button collapsed bg-light shadow-none poppins-medium-18px" type="button" data-bs-toggle="collapse" data-bs-target={"#collapseTwo" + result.id} aria-expanded="false" aria-controls="collapseTwo">
+                                                    {result.name}  {moment(result.planned_endtime) < current_time &&
                                                             <Link href='' className="">
-                                                                <a type="button" className="warning-icon-solid ms-2"
+                                                                <a type="button" className="warning-icon-solid ms-1"
                                                                     data-toggle="tooltip"
                                                                     title="Employee has crossed planned stop time"
                                                                 >
                                                                 </a>
                                                             </Link>
                                                         }
+                                                </button>
+
+                                            </h2>
+                                            <div id={"collapseTwo" + result.id} className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">                                            <div className="accordion-body ">
+
+                                                <div className="row m-2 p-1" key={result.id}>
+                                                    <div className="col-sm-5 poppins-regular-16px">Company name</div>
+                                                    <div className="col-sm-7 poppins-light-16px">{result.company_name}</div>
+                                                </div>
+                                                <div className="row m-2 p-1 " key={result.id}>
+                                                    <div className="col-sm-5 poppins-regular-16px">Location</div>
+                                                    <div className="col-sm-7 poppins-light-16px">{result.location_name}</div>
+                                                </div>
+                                                <div className="row m-2 p-1 " key={result.id}>
+                                                    <div className="col-sm-5 poppins-regular-16px">Planned stop time</div>
+                                                    <div className="col-sm-7 poppins-light-16px">{moment(result.planned_endtime).format('HH:mm')}</div>
+                                                </div>
+                                                <div className="row m-2 p-1" key={result.id}>
+
+                                                <div className="col">
+                                                     
                                                         <Link href='' className="">
-                                                            <a type="button" className="stop-working-icon-solid ms-2"
+                                                            <a type="button" className="stop-working-icon-solid m-0"
                                                                 // onClick={showPopup} 
                                                                 data-toggle="tooltip"
                                                                 title="Stop planning"
@@ -249,7 +249,8 @@ function EmployeeWidgetBlock(props) {
                                                             >
                                                             </a>
                                                         </Link>
-                                                    </div>
+                                                      </div>
+
                                                 </div>
                                             </div>
 
@@ -264,7 +265,7 @@ function EmployeeWidgetBlock(props) {
                                 )}
                             </div>
                         </div>
-                        <div className="text-end p-0">
+                        <div className="text-end p-0 view-more-employee-widget">
                             {widget.length > 3 &&
                                 <Link href='/pwa/employee-widget' className="m-2">
                                     <a type="button" className="mt-2 view-more-employee-widget text-decoration-underline">View more &nbsp;

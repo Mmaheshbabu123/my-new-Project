@@ -415,7 +415,7 @@ input[type="checkbox"]
 .warning-icon-solid {
 	background-image: url('/images/warning.svg');
 	background-repeat: no-repeat;
-	background-size: 26px;
+	background-size: 23px;
 	margin:0 2px;
 	padding: 14px;
 	background-position: center;
@@ -528,6 +528,7 @@ input[type="checkbox"]
 .employee_widget_dashboard
 {
   min-height: 26.3rem;
+  position: relative;
 }
 .employer_widget_search_button,
 .employer_widget_search_button:focus
