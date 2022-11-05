@@ -15,21 +15,27 @@ import Close from '../../public/images/Close.svg';
 import { cloneDeep } from 'lodash';
 import { ExclamationTriangle } from 'node_modules/react-bootstrap-icons/dist/index';
 import Translation from '@/Translation';
+import Age15 from '../../public/images/Age_15.svg';
+import Age16 from '../../public/images/Age_16.svg';
+import Age17 from '../../public/images/Age_17.svg';
+import Age18 from '../../public/images/Age_18.svg';
+import Age19 from '../../public/images/Age_19.svg';
+import Age20 from '../../public/images/Age_20.svg';
 
 function Addtiming(props) {
 	const { t } = props;
 	var count1 = 0;
 	const clearIcon1 = null;
 	const router = useRouter();
-	const [value, setValue] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [selectedDate, setSelectedDate] = useState([]);
-	const [commonDatetime, setCommonDatetime] = useState([]);
+	const [ value, setValue ] = useState([]);
+	const [ loading, setLoading ] = useState(true);
+	const [ selectedDate, setSelectedDate ] = useState([]);
+	const [ commonDatetime, setCommonDatetime ] = useState([]);
 
-	const [checked, setChecked] = useState(false);
-	const [error_selected_date, setError_selected_date] = useState('');
+	const [ checked, setChecked ] = useState(false);
+	const [ error_selected_date, setError_selected_date ] = useState('');
 
-	const [employee_planning, setEmployee_planning] = useState([]);
+	const [ employee_planning, setEmployee_planning ] = useState([]);
 
 	useEffect(
 		() => {
@@ -70,7 +76,7 @@ function Addtiming(props) {
 					});
 			}
 		},
-		[props]
+		[ props ]
 	);
 
 	/**
@@ -100,53 +106,14 @@ function Addtiming(props) {
 		setSelectedDate(selected);
 	};
 
-	// let handleChange2 = (value, key) => {
-	// 	var res = [ ...employee_planning ];
-	// 	if (res[key].timings.length > 0) {
-	// 		res[key].error_selected_date = '';
-	// 		value.map((obj, ky) => {
-	// 			const isFound = res[key].timings.some((element) => {
-	// 				if (element.date === obj.format()) {
-	// 					return true;
-	// 				}
-
-	// 				return false;
-	// 			});
-	// 			if (!isFound) {
-	// 				res[key].timings.push({
-	// 					date: obj.format('DD/MM/YYYY'),
-	// 					starttime: '',
-	// 					endtime: '',
-	// 					error_starttime: '',
-	// 					error_endtime: '',
-	// 					error: ''
-	// 				});
-	// 			} else {
-	// 				// res[key].timings[ky].starttime = '';
-	// 			}
-	// 		});
-	// 	} else {
-	// 		res[key].error_selected_date = '';
-	// 		res[key].timings.push({
-	// 			date: value[0].format('DD/MM/YYYY'),
-	// 			starttime: '',
-	// 			endtime: '',
-	// 			error_starttime: '',
-	// 			error_endtime: '',
-	// 			error: ''
-	// 		});
-	// 	}
-
-	// 	setEmployee_planning(res);
-	// };
 	let calenderUpdate = (value, key) => {
 		var dateObj = [];
 		var temp = [];
 		value.map((date1) => {
 			dateObj.push(date1.format('YYYY-MM-DD'));
 		});
-		var res = [...employee_planning];
-		var commondate = [...commonDatetime];
+		var res = [ ...employee_planning ];
+		var commondate = [ ...commonDatetime ];
 
 		if (checked) {
 			if (commondate.length == 0) {
@@ -248,14 +215,14 @@ function Addtiming(props) {
 	};
 
 	let dateExists = (arr, data) => {
-		return arr.some(function (el) {
+		return arr.some(function(el) {
 			return el.pdate === data;
 		});
 	};
 
 	let addServiceCoupe = (parent_index, index) => {
-		const data = [...employee_planning];
-		const commondate = [...commonDatetime];
+		const data = [ ...employee_planning ];
+		const commondate = [ ...commonDatetime ];
 
 		if (checked) {
 			commondate[index].time.push({
@@ -280,8 +247,8 @@ function Addtiming(props) {
 	};
 
 	let removeServiceCoupe = (parent_index, index, i) => {
-		const data = [...employee_planning];
-		const commondate = [...commonDatetime];
+		const data = [ ...employee_planning ];
+		const commondate = [ ...commonDatetime ];
 		if (checked) {
 			if (commondate[index].time.length > 1) {
 				commondate[index].time.splice(i, 1);
@@ -364,7 +331,7 @@ function Addtiming(props) {
 				count++;
 				setError_selected_date('Select atleast one date.');
 			} else {
-				var datetime = [...commonDatetime];
+				var datetime = [ ...commonDatetime ];
 				commonDatetime.map((v1, k1) => {
 					v1.time.map((v2, k2) => {
 						if (v2.starttime == '') {
@@ -384,7 +351,7 @@ function Addtiming(props) {
 				setCommonDatetime(datetime);
 			}
 		} else {
-			var res = [...employee_planning];
+			var res = [ ...employee_planning ];
 			console.log(res);
 			res.map((obj, ky) => {
 				if (res[ky].timings.length == 0) {
@@ -451,8 +418,8 @@ function Addtiming(props) {
 	};
 
 	let updatetime = (type, index, e, key, time_index, date) => {
-		var res = [...employee_planning];
-		var common = [...commonDatetime];
+		var res = [ ...employee_planning ];
+		var common = [ ...commonDatetime ];
 		if (checked == true) {
 			if (type == 'starttime') {
 				common[index].time[time_index].error = '';
@@ -467,10 +434,7 @@ function Addtiming(props) {
 				common[index].time[time_index].endtime = date + ' ' + moment(e).format('HH:mm') + ':00';
 				setCommonDatetime(common);
 			}
-			if (
-				common[index].time[time_index].starttime != '' &&
-				common[index].time[time_index].endtime != ''
-			) {
+			if (common[index].time[time_index].starttime != '' && common[index].time[time_index].endtime != '') {
 				common[index].warning = maxWorkTimeVaidation(
 					common[index].time,
 					res[0].min_work_timings,
@@ -518,9 +482,21 @@ function Addtiming(props) {
 			duration = duration + getDuration(v2.starttime, v2.endtime);
 		});
 		if (min_work_timings != null && parseFloat(duration) < parseFloat(min_work_timings)) {
-			return t('This employee is planned lower than the allowed minimum hours') + '( ' + min_work_timings + t('hours') + '.)';
+			return (
+				t('This employee is planned lower than the allowed minimum hours') +
+				'( ' +
+				min_work_timings +
+				t('hours') +
+				'.)'
+			);
 		} else if (max_work_timings != null && duration > max_work_timings) {
-			return t('This employee is planned higher than the allowed maximum hour') + '(' + max_work_timings + t('hours') + '.)';
+			return (
+				t('This employee is planned higher than the allowed maximum hour') +
+				'(' +
+				max_work_timings +
+				t('hours') +
+				'.)'
+			);
 		}
 	};
 
@@ -530,7 +506,7 @@ function Addtiming(props) {
 	 * 
 	 */
 	let updateCheckbox = () => {
-		var res = [...employee_planning];
+		var res = [ ...employee_planning ];
 		res.map((val, key) => {
 			res[key].timings = [];
 			res[key].date = [];
@@ -578,12 +554,26 @@ function Addtiming(props) {
 										{employee_planning.map((result, key) => (
 											<div key={key}>
 												<div
-
 													className={`row d-flex justify-content-start py-3 my-3  ${style.sec_background}`}
 												>
-													<div className="col-md-1 poppins-light-20px count_col_timing">{++count1}.</div>
+													<div className="col-md-1 poppins-light-20px count_col_timing">
+														{++count1}.
+													</div>
 													<div className="col-md-3 poppins-light-20px">
 														{result.employee_name}
+														<span className="ageicon" data-toggle="tooltip" title="Age">
+															{result.age != 0 &&
+																// v1['age'] <
+																// 	emplist.pc_min_age &&
+																{
+																	'15': <Image src={Age15} width={25} height={25} />,
+																	'16': <Image src={Age16} width={25} height={25} />,
+																	'17': <Image src={Age17} width={25} height={25} />,
+																	'18': <Image src={Age18} width={25} height={25} />,
+																	'19': <Image src={Age19} width={25} height={25} />,
+																	'20': <Image src={Age20} width={25} height={25} />
+																}[result.age]}
+														</span>
 													</div>
 													<div className="col-md-4 poppins-light-20px">
 														{result.employee_type_name}
@@ -591,7 +581,6 @@ function Addtiming(props) {
 													<div className="col-md-3 poppins-light-20px">
 														{result.function_name}
 													</div>
-
 												</div>
 												<div className="error" style={{ marginLeft: '-12px' }}>
 													{result.error_date}
@@ -607,7 +596,7 @@ function Addtiming(props) {
 												multiple={true}
 												format="DD/MM/YYYY"
 												onChange={(date) => {
-													handleChange(date);
+													// handleChange(date);
 													calenderUpdate(date);
 												}}
 												minDate={new Date()}
@@ -617,21 +606,31 @@ function Addtiming(props) {
 									</div>
 									<div className="">
 										{commonDatetime.map((value, index) => (
-											<div className="row table-title-bg my-2" key={index} style={{ minHeight: '65px' }}>
-												<div className="col-md-2 py-3  poppins-medium-18px-date-picker text-center d-flex justify-content-center align-items-center" style={{ minHeight: '65px' }}>
+											<div
+												className="row table-title-bg my-2"
+												key={index}
+												style={{ minHeight: '65px' }}
+											>
+												<div
+													className="col-md-2 py-3  poppins-medium-18px-date-picker text-center d-flex justify-content-center align-items-center"
+													style={{ minHeight: '65px' }}
+												>
 													<div className="poppins-medium-18px-date-picker" />
 													{value.pdate.split('-').reverse().join('/')}
 												</div>
 												<div className=" col-md-10">
 													{value.time.map((v1, k1) => (
 														<div className="row" key={k1}>
-															<div className="col-md-5 py-3 d-flex justify-content-center align-items-center flex-column" style={{ height: '65px' }}>
+															<div
+																className="col-md-5 py-3 d-flex justify-content-center align-items-center flex-column"
+																style={{ height: '65px' }}
+															>
 																<div className="d-flex">
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
 																		{t('Start time')}
 																	</div>
 																	<TimePicker
-																		placeholder={t("Select Time")}
+																		placeholder={t('Select Time')}
 																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
@@ -650,13 +649,16 @@ function Addtiming(props) {
 																</div>
 																<p className="error ms-4 ps-1">{v1.error_starttime}</p>
 															</div>
-															<div className="col-md-5  py-3 d-flex justify-content-center align-items-center flex-column" style={{ height: '65px' }}>
+															<div
+																className="col-md-5  py-3 d-flex justify-content-center align-items-center flex-column"
+																style={{ height: '65px' }}
+															>
 																<div className="d-flex">
 																	<div className="py-1 px-2  custom_astrick poppins-regular-20px">
 																		{t('End time')}
 																	</div>
 																	<TimePicker
-																		placeholder={t("Select Time")}
+																		placeholder={t('Select Time')}
 																		use12Hours={false}
 																		showSecond={false}
 																		focusOnOpen={true}
@@ -675,16 +677,17 @@ function Addtiming(props) {
 																</div>
 																<p className="error ms-4 ps-1">{v1.error_endtime}</p>
 															</div>
-															<div className="col-md-2 py-3 d-flex align-items-center justify-content-left star_icon_size" style={{ height: '65px' }}>
+															<div
+																className="col-md-2 py-3 d-flex align-items-center justify-content-left star_icon_size"
+																style={{ height: '65px' }}
+															>
 																{value.time.length == 1 && (
-
 																	<MdStarRate
 																		className="purple-color"
 																		onClick={() => addServiceCoupe(0, index)}
 																		data-toggle="tooltip"
 																		title="Service coupe"
 																	/>
-
 																)}
 																{k1 > 0 && (
 																	<Image
@@ -697,16 +700,15 @@ function Addtiming(props) {
 																	/>
 																)}
 															</div>
-
 														</div>
 													))}
 													{value.warning != '' &&
-														value.warning != undefined && (
-															<p className="error pb-2">
-																<ExclamationTriangle />
-																{value.warning}
-															</p>
-														)}
+													value.warning != undefined && (
+														<p className="error pb-2">
+															<ExclamationTriangle />
+															{value.warning}
+														</p>
+													)}
 												</div>
 											</div>
 										))}
@@ -738,6 +740,19 @@ function Addtiming(props) {
 														</div>
 														<div className="col-md-3 poppins-light-20px">
 															{result.employee_name}
+															<span className="ageicon" data-toggle="tooltip" title="Age">
+															{result.age != 0 &&
+																// v1['age'] <
+																// 	emplist.pc_min_age &&
+																{
+																	'15': <Image src={Age15} width={25} height={25} />,
+																	'16': <Image src={Age16} width={25} height={25} />,
+																	'17': <Image src={Age17} width={25} height={25} />,
+																	'18': <Image src={Age18} width={25} height={25} />,
+																	'19': <Image src={Age19} width={25} height={25} />,
+																	'20': <Image src={Age20} width={25} height={25} />
+																}[result.age]}
+														</span>
 														</div>
 														<div className="col-md-4 poppins-light-20px">
 															{result.employee_type_name}
@@ -773,7 +788,10 @@ function Addtiming(props) {
 																		key={index}
 																		style={{ minHeight: '65px' }}
 																	>
-																		<div className="col-md-2 py-3 poppins-medium-18px-date-picker text-center d-flex align-items-center justify-content-center" style={{ minHeight: '65px' }}>
+																		<div
+																			className="col-md-2 py-3 poppins-medium-18px-date-picker text-center d-flex align-items-center justify-content-center"
+																			style={{ minHeight: '65px' }}
+																		>
 																			<div className="poppins-medium-18px-date-picker" />
 																			{value.pdate.split('-').reverse().join('/')}
 																		</div>
@@ -782,16 +800,23 @@ function Addtiming(props) {
 																			{value.time.map((v1, k1) => (
 																				<div key={k1}>
 																					<div className="row">
-																						<div className="col-md-5 py-3 d-flex align-items-center selected_date" style={{ height: '65px' }}>
+																						<div
+																							className="col-md-5 py-3 d-flex align-items-center selected_date"
+																							style={{ height: '65px' }}
+																						>
 																							<div className="d-flex">
 																								<div className="py-1 px-2  custom_astrick poppins-regular-20px">
 																									<span className="poppins-medium-18px">
-																										{t('Start time')}
+																										{t(
+																											'Start time'
+																										)}
 																									</span>
 																								</div>
 																								<div>
 																									<TimePicker
-																										placeholder={t("Select Time")}
+																										placeholder={t(
+																											'Select Time'
+																										)}
 																										use12Hours={
 																											false
 																										}
@@ -827,7 +852,10 @@ function Addtiming(props) {
 																							</div>
 																						</div>
 
-																						<div className="col-md-5 py-3 d-flex align-items-center selected_date" style={{ height: '65px' }}>
+																						<div
+																							className="col-md-5 py-3 d-flex align-items-center selected_date"
+																							style={{ height: '65px' }}
+																						>
 																							<div className="d-flex">
 																								<div className="py-1 px-2 custom_astrick poppins-regular-18px">
 																									<span className="poppins-medium-18px">
@@ -904,27 +932,23 @@ function Addtiming(props) {
 																							)}
 																						</div>
 																					</div>
-																					<p className="error">
-																						{v1.error}
-																					</p>
+																					<p className="error">{v1.error}</p>
 																				</div>
 																			))}
 																			{value.warning != '' &&
-																				value.warning != undefined && (
-																					<p className="error pb-2">
-																						<ExclamationTriangle />
-																						{value.warning}
-																					</p>
-																				)}
+																			value.warning != undefined && (
+																				<p className="error pb-2">
+																					<ExclamationTriangle />
+																					{value.warning}
+																				</p>
+																			)}
 																		</div>
 																	</div>
 																))}
 
 															<div className="error py-2 ps-2">
 																<ul>
-																	<li>
-																		{result.error_date}
-																	</li>
+																	<li>{result.error_date}</li>
 																</ul>
 															</div>
 														</div>
@@ -962,8 +986,22 @@ function Addtiming(props) {
 		</div>
 	);
 }
-export default React.memo(Translation(Addtiming, ['This field is required.', 'Start time cannot be same as end time.', 'Select atleast one date.', 'Employee cannot be planned for past time.',
-	'Start time', 'End time', 'Add timing', 'Loading...', 'Same timing for all employees', 'Start time', 'Select Time', 'NEXT', 'BACK',
-	'This employee is planned lower than the allowed minimum hours',
-	'This employee is planned higher than the allowed maximum hour'
-]));
+export default React.memo(
+	Translation(Addtiming, [
+		'This field is required.',
+		'Start time cannot be same as end time.',
+		'Select atleast one date.',
+		'Employee cannot be planned for past time.',
+		'Start time',
+		'End time',
+		'Add timing',
+		'Loading...',
+		'Same timing for all employees',
+		'Start time',
+		'Select Time',
+		'NEXT',
+		'BACK',
+		'This employee is planned lower than the allowed minimum hours',
+		'This employee is planned higher than the allowed maximum hour'
+	])
+);
