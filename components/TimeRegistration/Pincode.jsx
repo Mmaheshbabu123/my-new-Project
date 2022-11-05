@@ -57,6 +57,7 @@ const Pincode = (props) => {
 	//if any paremeters there in the url we can get by it
 	const { root_parent_id, selectedTabId, ref_id = 0 } = router.query;
 
+
 	useEffect(
 		() => {
 			var userid = null;
@@ -81,6 +82,15 @@ const Pincode = (props) => {
 								.then((result) => {
 									setCompanies(result.companies);//company options
 									setLocations(result.locations);//location options
+									if(result.companies!=null&&result.locations!=null){
+										if((result.companies).length==1){
+											setCompany(result.companies[0]);
+											// console.log(companies[0].value);
+										}
+										if((result.locations).length==1){
+											setLocation(result.locations[0]);
+										}
+									}
 								})
 								.catch((error) => {
 									console.error(error);
@@ -95,10 +105,12 @@ const Pincode = (props) => {
 			} else {
 				router.push('/');
 			}
+		
 		},
 		[ router.query ]
 	);
 
+	
 	useEffect(() => {
 		console.log(window);
 	}, []);
@@ -146,15 +158,30 @@ const Pincode = (props) => {
 		validate(otp)
 			? //posting the pincode to the backend storing.
 				APICALL.service(
-					process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getPlanningActual?id='+ uid +'&companyid='+company+'&locationid='+location,
+					process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getPlanningActual?id='+ uid +'&companyid='+company.value+'&locationid='+location.value,
 					'GET'
 				)
 					.then((result) => {
 							SetResponse(result.res);
 						if(result.res=='Planning has been ended.'||result.res=='Planning has been started.'){
-							setTimeout(() => {
-								router.push('/employee-planning');
-							}, 3000);
+
+							//Api to check weather he signed the v1 document or not.
+							APICALL.service(
+								process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/singed-or-not?id='+uid+'&company='+company.value,
+								'GET'
+							)
+								.then((result) => {
+										if(result==999){
+											router.push('/v1-document?entityid='+uid+'&entitytype=3&companyid='+company.value);
+										}else{
+											setTimeout(() => {
+												router.push('/employee-planning');
+											}, 2000);
+										}
+								})
+								.catch((error) => {
+									console.error(error);
+								})
 						}
 					})
 					.catch((error) => {
@@ -176,7 +203,8 @@ const Pincode = (props) => {
 								placeholder={t('--Select---')}
 								id={'company'}
 								options={companies}
-								handleChange={(obj) => setCompany(obj.value)}
+								standards={company}
+								handleChange={(obj) => setCompany(obj)}
 								isMulti={false}
 							/>
 						
@@ -190,7 +218,8 @@ const Pincode = (props) => {
 								placeholder={t('--Select---')}
 								id={'location'}
 								options={locations}
-								handleChange={(obj) => setLocation(obj.value)}
+								standards={location}
+								handleChange={(obj) => setLocation(obj)}
 								isMulti={false}
 							/>
 						

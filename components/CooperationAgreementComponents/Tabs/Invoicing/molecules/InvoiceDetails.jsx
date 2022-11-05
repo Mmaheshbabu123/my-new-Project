@@ -7,6 +7,7 @@ import MultiSelectField from '@/atoms/MultiSelectField';
 import RequiredField from '@/atoms/RequiredSpanField';
 import ValidateMessage from '@/atoms/validationError';
 import { invoiceRow1,invoiceRow2} from '../InvoiceFields';
+import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
 import styles from '../Invoicing.module.css';
 import { requiredFields} from '../../../RequiredFields';
 import Translation from '@/Translation';
@@ -17,7 +18,7 @@ const InvoiceDetails = (props) => {
   let invoiceRow1Data = structuredClone(invoiceRow1);
   let invoiceRow2Data  = structuredClone(invoiceRow2);
   if(tab_6['56'] == 2) {
-    delete invoiceRow2Data['5'];
+     var removed = invoiceRow2Data.splice(4,1);
   }
   let paymentList = state.defaultOptions['payment_condtion'] || [];
   const handleChange = (event) => {
@@ -78,10 +79,16 @@ const InvoiceDetails = (props) => {
      fieldData.push(
        <div className = {`col-md-12 ${styles['add-div-margings']} invoice${data.id}`}>
            <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'}/> {requiredFields['tab_6'][data.id] && <RequiredField />}
-           <div>
-           <RadioField   name = {data.id} checked = {tab_6[data.id] === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} className={'poppins-regular-18px me-3'} />
-           <RadioField  name = {data.id} checked = {tab_6[data.id] === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2}  className={'poppins-regular-18px'}/>
-          </div>
+           <div className='poppins-regular-18px'>
+            <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px `} onClick={() => handleRadioSelect(data.id,1)}> {Number(tab_6[data.id]) === 1 ? <IoMdRadioButtonOn className="radio_button"/> : <IoMdRadioButtonOff />} {data.option1}</label>
+            <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px radio_button`} onClick={() => handleRadioSelect(data.id,2)}> {Number(tab_6[data.id]) === 2 ? <IoMdRadioButtonOn className="radio_button" /> : <IoMdRadioButtonOff  />} {data.option2}</label>
+         {/*  <RadioField   name = {Title_key} checked = {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 1} handleChange = {(e)=>handleRadioSelect(Title_key,1,personId)} label= {'Mr'} />
+           <RadioField  name = {Title_key} checked = {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 2} handleChange = {(e)=>handleRadioSelect(Title_key,2,personId)} label= {'Mrs'} /> */}
+           </div>
+           {/*<div>
+           <RadioField   name = {data.id} checked = {Number(tab_6[data.id]) === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} className={'poppins-regular-18px me-3'} />
+           <RadioField  name = {data.id} checked = {Number(tab_6[data.id]) === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2}  className={'poppins-regular-18px'}/>
+          </div>*/}
        </div>
      )
    } else if(data.type === 8) {

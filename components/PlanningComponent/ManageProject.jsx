@@ -343,7 +343,7 @@ function ManageProject(props) {
 														<a
 															type="button"
 															onClick={() =>
-																router.push('/planning/add/' + result.p_unique_key)}
+																router.push('/planning/add/' + result.p_unique_key+'?type=project')}
 																className='mt-2 align-middle'
 														>
 															<Image

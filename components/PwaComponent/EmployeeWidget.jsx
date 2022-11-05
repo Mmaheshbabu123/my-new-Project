@@ -287,10 +287,16 @@ function EmployeeWidget(props) {
             )}
 
 
-                    <p className="px-0  bitter-italic-normal-medium-22 mt-2 mb-2 p-1">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
+                   <div className="col-md-12 py-4 position-sticky-pc px-0">
+                       <div className="row">
+                           <div className="col-md-12">
+                           <p className="px-0  bitter-italic-normal-medium-24">Employees currently working  ({moment().format('D-M-YYYY, h:mm a')}) </p>
+                           </div>
+                       </div>
+                   </div>
 
 
-                    <div className="col-md-12 px-0">
+                    <div className="col-md-12 px-0 position-sticky-employee-widget-search">
                     <div className="row d-flex ">
                         <div className="col-sm-3 field_height">
                             <input

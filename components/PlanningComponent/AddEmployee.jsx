@@ -96,6 +96,7 @@ const AddEmployee = (props) => {
 			var p_unique_key = router.query.p_unique_key;
 			APICALL.service(fetchPlanningEmployee + p_unique_key, 'GET')
 				.then((result) => {
+					console.log(result)
 					if (result.status == 200) {
 						setTempEmpList(cloneDeep(result.data[0]));
 						setTempPcList(cloneDeep(result.data[1]));

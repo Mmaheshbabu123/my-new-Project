@@ -38,9 +38,27 @@ const Qrscan = () => {
 					let locationid=(decoded.location_id==null)?'':decoded.location_id;
 					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getPlanningActual?id='+contextState.uid+'&companyid='+companyid+'&locationid='+locationid, 'GET')
 					.then((res) => {
-						alert(res.res);
 						if(res!=null||res!=undefined){
 						setResp(res.res);
+						if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
+								//Api to check weather he signed the v1 document or not.
+						APICALL.service(
+							process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/singed-or-not?id='+contextState.uid+'&company='+companyid,
+							'GET'
+						)
+							.then((result) => {
+									if(result==999){
+										router.push('/v1-document?entityid='+contextState.uid+'&entitytype=3&companyid='+companyid);
+									}else{
+										setTimeout(() => {
+											router.push('/employee-planning');
+										}, 2000);
+									}
+							})
+							.catch((error) => {
+								console.error(error);
+							})
+						}
 						}
 					})
 					.catch((error) => {

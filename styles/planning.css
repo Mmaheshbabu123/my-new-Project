@@ -262,7 +262,7 @@ input[type="checkbox"]
 .position-sticky-mytodo_searchbox
 {
   position:sticky;
-  top: 251px;
+  top: 252px;
   background-color: var(--color-white);
   z-index: 998;
 }
@@ -415,7 +415,7 @@ input[type="checkbox"]
 .warning-icon-solid {
 	background-image: url('/images/warning.svg');
 	background-repeat: no-repeat;
-	background-size: 26px;
+	background-size: 23px;
 	margin:0 2px;
 	padding: 14px;
 	background-position: center;
@@ -527,7 +527,8 @@ input[type="checkbox"]
 }
 .employee_widget_dashboard
 {
-  /* border: 1px solid var(--color-border-lightgrey) !important; */
+  min-height: 26.3rem;
+  position: relative;
 }
 .employer_widget_search_button,
 .employer_widget_search_button:focus
@@ -569,7 +570,8 @@ input[type="checkbox"]
 {
   min-height: 43px;
 }
-.actual-stop-time .rmdp-input
+.actual-stop-time .rmdp-input,
+.actual-stop-date .rmdp-input
 {
   height: 38px !important;
   margin-top: 0.5rem !important;
@@ -577,7 +579,8 @@ input[type="checkbox"]
   border-radius: 0px !important;
   width: 100% !important;
 }
-.actual-stop-time .rmdp-container
+.actual-stop-time .rmdp-container,
+.actual-stop-date .rmdp-container
 {
    width: 100% !important;
 }

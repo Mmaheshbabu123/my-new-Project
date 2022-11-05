@@ -15,15 +15,16 @@ const CompanyInformation = (props) => {
  const loadData = async () => {
    let stateKey = `tab_${selectedTabId}`;
    let tab_2 = { ...state[stateKey] };
-
+  console.log(tab_2);
    var data = await helpers.fetchDataFromBackend(getCooperationAgreementsTabWise, root_parent_id, selectedTabId,companyId);
    let companyObj = data['tab_2']['data']
   // let obj2 = companyObj.map(e => [+e[0], e[1]])
 
    let apiData = Object.keys(data['tab_2']['data']).length ? data['tab_2']['data'] : 0;
+   console.log(apiData);
    tab_2_action = data['tab_2']['action'] ? data['tab_2']['action'] :1;
    if(apiData) {
-    tab_2 = {...apiData,...tab_2}
+    tab_2 = {...tab_2,...apiData}
    }
    updateStateChanges({tab_2,tab_2_action,loadedTabs:[...state.loadedTabs, selectedTabId],
      filledTabs: data.completedTabIds.length ? [...filledTabs, ...data.completedTabIds] : filledTabs,

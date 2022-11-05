@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useContext } from 'react';
 import { GrValidate } from 'react-icons/gr';
 import { BiRotateRight } from 'react-icons/bi';
 import { APICALL } from '../../Services/ApiServices';
@@ -12,9 +12,9 @@ function EncodageValidation(props) {
     const [ locations,setLocations]=useState();
     useEffect(
         () => {
-            if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
-				setUid(contextState.uid);
-			}
+            // if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != ''){
+			// 	setUid(contextState.uid);
+			// }
             APICALL.service(fetchEncodageDeatils, 'GET')
                 .then((result) => {
                     setData(result.data);
