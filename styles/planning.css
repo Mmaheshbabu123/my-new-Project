@@ -431,8 +431,8 @@ input[type="checkbox"]
 .cross-icon-solid{
   background-image: url('/images/cross-icon.svg');
 	background-repeat: no-repeat;
-	background-size: 22px;
-	margin: 0 2px;
+	background-size: 20px;
+	margin: 0 0px;
 	padding: 14px;
 	background-position: center;
 }
@@ -593,4 +593,20 @@ input[type="checkbox"]
 .actual-end-time .rmdp-container
 {
   width: 100px !important;
+}
+.actual-end-time .rmdp-time-picker
+{
+  min-width:100px !important;
+}
+.actual-end-time .rmdp-arrow-container
+{
+  align-items: center;
+}
+.actual-end-time .rmdp-down i
+{
+  margin-top: 0px !important;
+}
+.actual-end-time .rmdp-up i
+{
+  margin-top: 2px !important;
 }
