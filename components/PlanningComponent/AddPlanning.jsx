@@ -26,11 +26,8 @@ function Planning(props) {
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 	const { contextState = {} } = useContext(UserAuthContext);
-
-
 	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
 	const [ projectid, setProjectid ] = useState('');
-	const [ addProject, setAddProject ] = useState(false);
 
 
 	// For popup add project
@@ -40,20 +37,16 @@ function Planning(props) {
 	const [ company, setCompany ] = useState([]);
 	const [ location, setLocation ] = useState([]);
 	const [ costcenter, setCostcenter ] = useState([]);
-	const [ projectname, setProjectname ] = useState('');
 
 	//FOR ASSIGNING ID VALUES TO LOCATION, COMPANY, COST-CENTER, ID,
 	const [ companyid, setCompanyid ] = useState('');
 	const [ locationid, setLocationid ] = useState('');
 	const [ costcenterid, setCostcenterid ] = useState('');
-	const [ pcid, setPcid ] = useState('');
 	const [ id, setId ] = useState('');
 	const [ uniquekey, setUniquekey ] = useState('');
 
 	// Errormessage
 	const [ error_comp_id, setError_comp_id ] = useState('');
-	const [ error_location_id, setError_location_id ] = useState('');
-	const [ error_pcid, setError_pcid ] = useState('');
 
 	const [ countrylist, setCountrylist ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
@@ -86,18 +79,6 @@ function Planning(props) {
 		address_id: ''
 	});
 
-	// useEffect(() => {
-
-	// 	var uid = AuthUser.checkAccess('planning');
-	// 	if (uid && uid != '') {
-	// 		setUid(uid);
-	// 	} else {
-	// 		router.push('/user/login');
-
-	// 		// window.location.assign(process.env.NEXT_PUBLIC_APP_URL_DRUPAL);
-	// 	}
-	// }, []);
-
 	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
 	useEffect(
 		() => {
@@ -108,7 +89,6 @@ function Planning(props) {
 						setCompany(result.data[0]);
 						setLocation(result.data[1]);
 						setCostcenter(result.data[2]);
-						// setUniquekey(result.data[0].p_unique_key);
 
 						if (id == '') {
 							if (result.data[0].length == 1) {
@@ -194,10 +174,7 @@ function Planning(props) {
 							res.street = result.data.street;
 							res.postal_code = result.data.postal_code;
 							res.country = result.data.country;
-							// console.log(res.country);
 							setProject((prev) => ({ ...prev, project: res }));
-
-							// setProject(res);
 						}
 					})
 					.catch((error) => {
@@ -278,7 +255,9 @@ function Planning(props) {
 		var compObj = company.find((obj) => {
 			return obj.nid == comp_id ? obj : '';
 		});
+		if(comp_id!=''){
 		compObj!='' && compObj.add_project === "1" && compObj.add_project != undefined?	setShowproject(true):setShowproject(false);
+		
 
 		if(compObj!='' && (compObj.add_project === "0" || compObj.add_project != undefined)){
 			setProject({
@@ -295,6 +274,7 @@ function Planning(props) {
 				country: '',
 				address_id: ''
 			});
+		}
 			setDeleteProject(true);
 		}else{
 			setDeleteProject(false);
@@ -463,12 +443,6 @@ function Planning(props) {
 												)}
 										</select>
 									</div>
-									{/* <div className="form-group mb-3">
-								<label className="form-label mb-2 mt-2 poppins-regular-16px">Paritair comite</label>
-								<select className="form-select mb-2 mt-2">
-									<option value="">Select</option>
-								</select>
-							</div> */}
 
 									{project.id != '' &&
 									project.id != undefined && (
@@ -507,8 +481,7 @@ function Planning(props) {
 						<div className="row mt-4 mb-2 col-md-12 m-0">
 							<div className="col-md-6 p-0">
 								<button type="button" className="btn  btn-block px-0 shadow-none">
-									<Link href={router.query.type != undefined && router.query.type == 'edit'?'/manage-planning/weekly?type=draft':'/planning/options'}>
-										{/* <p className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px "> */}
+									<Link href={router.query.type != undefined && router.query.type == 'edit'?'/manage-planning/weekly?type=draft':(router.query.type == 'edit'?'/planning/manage-project':'/planning/options')}>
 										<p className="bg-white border-0 poppins-light-18px text-decoration-underline shadow-none ">
 											{t('BACK')}
 										</p>
@@ -518,7 +491,6 @@ function Planning(props) {
 							<div className="col-md-6 p-0">
 								<button
 									type="submit"
-									// className="btn rounded-0 custom-btn px-3 btn-block float-end"
 									className="btn rounded-0 px-3 float-end poppins-medium-18px-next-button shadow-none"
 									onClick={() => {
 										setUniquekey(router.query.p_unique_key);
