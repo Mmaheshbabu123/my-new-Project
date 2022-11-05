@@ -111,7 +111,7 @@ function EmployeeWidgetBlock(props) {
             )}
 
             <form>
-                {isMobile ?
+                {!isMobile ?
                     <div className="row m-0 ">
 
                         <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working ({moment().format('D-M-YYYY, h:mm a')})</p>
