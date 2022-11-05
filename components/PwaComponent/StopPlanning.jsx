@@ -114,8 +114,8 @@ function StopPlanning(props) {
                                 <div className="col-md-11 m-auto add_project">
                                     <div className="row">
                                         <div className="px-1">
-                                            <div className="row  m-0">
-                                                <div className="col">
+                                            <div className="row m-0">
+                                                <div className="col-md-6">
                                                     <label className="custom_astrick poppins-light-18px">
                                                         Name
                                                     </label>
@@ -127,7 +127,7 @@ function StopPlanning(props) {
                                                     />
 
                                                 </div>
-                                                <div className="col">
+                                                <div className="col-md-6 actual-stop-date">
                                                     <label className="custom_astrick poppins-light-18px">
                                                         Actual stop date
                                                     </label>

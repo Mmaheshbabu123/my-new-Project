@@ -151,7 +151,7 @@ function EncodageValidation(props) {
 								}} */}
 								
 							</td>
-                            <td className="poppins-regular-18px p-2"><button onClick={() => updateValidation(element.starttime,element.wend,element.wid)}>
+                            <td style={{ width: '149px' }} className="align-middle py-3 poppins-light-16px"><button onClick={() => updateValidation(element.starttime,element.wend,element.wid)}>
 								{element.validated ? <FaShieldAlt /> : <FaCheckCircle />}
 							</button>
 							<button onClick={() => console.log('clicked')}>
@@ -171,6 +171,19 @@ function EncodageValidation(props) {
 						<td>{element.field_last_name_value}</td>
 						<td>{element.starttime}</td>
 						<td style={{ width: '149px' }}> */}
+					{/* <tr className='border'>
+						<td scope="row" className='align-middle py-3 poppins-light-16px'>
+							<input type="checkbox" 
+										 className='form-check-input rounded-0'
+                     name={index+1}
+                     checked={!element.disabled}
+                     onChange={()=>enabledisbale(index)} />
+						</td>
+						<td className='align-middle py-3 poppins-light-16px'>{element.pdate}</td>
+						<td className='align-middle py-3 poppins-light-16px'>{element.field_first_name_value}</td>
+						<td className='align-middle py-3 poppins-light-16px'>{element.field_last_name_value}</td>
+						<td className='align-middle py-3 poppins-light-16px'>{element.starttime}</td>
+						<td style={{ width: '149px' }} className='align-middle py-3 poppins-light-16px'> */}
 						{/* <Datetime 	onChange={() => {
 									(e) => saveactualstart(e.target.value)
 								}}></Datetime>; */}
@@ -190,6 +203,7 @@ function EncodageValidation(props) {
 						<td style={{ width: '149px' }}>
 							<input
 								type="text"
+								className='border-0'
 								name="name"
 								style={{ width: '50%' }}
 								value={element.wend}
@@ -199,11 +213,11 @@ function EncodageValidation(props) {
 								disabled={element.disabled}
 							/>
 						</td>
-						<td>
-							<button onClick={() => updateValidation(element.wid)}>
+						<td className='align-middle py-3 poppins-light-16px'> 
+							<button onClick={() => updateValidation(element.wid)} className='border-0 bg-transparent color-skyblue me-2 px-0'>
 								{element.validated ? <FaShieldAlt /> : <FaCheckCircle />}
 							</button>
-							<button onClick={() => console.log('clicked')}>
+							<button onClick={() => console.log('clicked')} className='border-0 bg-transparent color-skyblue px-0'>
 								{!element.disabled?<FaSave/>:<FaUndoAlt />}
 							</button>
 						</td> */}
@@ -216,9 +230,9 @@ function EncodageValidation(props) {
 
 	return (
 		<div>
-			<div className="row">
+			<div className="row py-4 position-sticky-pc encodage-validation">
 				<div className="col-md-2">
-					<label>{t('Company')}</label>
+					<label className='mb-2 poppins-regular-18px'>{t('Company')}</label>
 					<MultiSelectField
 						// placeholder={''}
 						id={'select_id'}
@@ -231,7 +245,7 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<label>{t('Location')}</label>
+					<label className='mb-2 poppins-regular-18px'>{t('Location')}</label>
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
@@ -244,7 +258,7 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<label>{t('Cost center')}</label>
+					<label className='mb-2 poppins-regular-18px'>{t('Cost center')}</label>
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
@@ -257,7 +271,7 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<label>{t('Project')}</label>
+					<label className='mb-2 poppins-regular-18px'>{t('Project')}</label>
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
@@ -270,9 +284,15 @@ function EncodageValidation(props) {
 						className="col-md-12 "
 					/>
 				</div>
-				<div className="col-md-2">
-					<button onClick={() => filter()}>{t('Filter')}</button>
-					<button onClick={() => reset()}>{t('Reset')}</button>
+				<div className="col-md-4 align-self-end">
+					<div className='row'>
+						<div className='col-md-6'>
+						<button className="btn btn-block border-0 rounded-0 float-right skyblue-bg-color w-100 shadow-none" onClick={() => filter()}>{t('Filter')}</button>
+						</div>
+						<div className='col-md-6'>
+						<button className='btn border-0 btn-block rounded-0 float-right reset_skyblue_button w-100 shadow-none' onClick={() => reset()}>{t('Reset')}</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<table className="table">

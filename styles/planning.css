@@ -527,7 +527,7 @@ input[type="checkbox"]
 }
 .employee_widget_dashboard
 {
-  min-height: 23.5rem;
+  min-height: 26.3rem;
 }
 .employer_widget_search_button,
 .employer_widget_search_button:focus
@@ -569,7 +569,8 @@ input[type="checkbox"]
 {
   min-height: 43px;
 }
-.actual-stop-time .rmdp-input
+.actual-stop-time .rmdp-input,
+.actual-stop-date .rmdp-input
 {
   height: 38px !important;
   margin-top: 0.5rem !important;
@@ -577,7 +578,8 @@ input[type="checkbox"]
   border-radius: 0px !important;
   width: 100% !important;
 }
-.actual-stop-time .rmdp-container
+.actual-stop-time .rmdp-container,
+.actual-stop-date .rmdp-container
 {
    width: 100% !important;
 }
