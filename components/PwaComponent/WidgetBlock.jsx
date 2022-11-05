@@ -259,7 +259,7 @@ function EmployeeWidgetBlock(props) {
                                 {/*----------------------------No records found-------------------------- */}
                                 {widget.length == 0 && (
                                     <div className="row m-2 p-1 ">
-                                        <div className="col text-center">No records</div>
+                                        <div className="col text-center">Currently no employee working</div>
                                     </div>
                                 )}
                             </div>
