@@ -88,7 +88,7 @@ function CancelContract(props) {
                                                 name="message"
                                                 onChange={handleChange}
                                                 value={message}
-                                                className="form-control mt-2 mb-2 rounded-0 shadow-none"
+                                                className="form-control mt-2 mb-2 rounded-0 shadow-none border"
                                                 
                                             />
 
