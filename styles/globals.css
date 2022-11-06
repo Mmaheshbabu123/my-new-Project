@@ -2136,7 +2136,7 @@ input[type="search"]::-webkit-search-cancel-button {
 {
 	height: 53px !important;
 }
-.todo-count-badge {
+.todo-count-badge-employeer {
   position: absolute;
 	right: 3rem;
 	padding: 7px 10px;
@@ -2145,6 +2145,16 @@ input[type="search"]::-webkit-search-cancel-button {
 	color: var(--color-white) !important;
 	top: 9px;
 }
+.todo-count-badge-employee {
+  position: absolute;
+	right: 6rem;
+	padding: 7px 10px;
+  border-radius: 50%;
+  background-color: #79b1bd;
+	color: var(--color-white) !important;
+	top: 10px;
+}
+
 .Collapsible__trigger {
 	display: block;
   font-weight: 400;
