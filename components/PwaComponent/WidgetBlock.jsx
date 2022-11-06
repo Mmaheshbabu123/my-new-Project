@@ -117,7 +117,7 @@ function EmployeeWidgetBlock(props) {
                 {!isMobile ?
                     <div className="row m-0 ">
 
-                        <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">{t('Employees currently working')} ({moment().format('D-M-YYYY, h:mm a')})</p>
+                        <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">{t('Employees currently working')} ({moment().format('DD-M-YYYY, HH:mm ')})</p>
                         <div className="form-check p-0 mt-2 tab-pane fade show ">
                             <table className="table mb-0">
                                 <thead>
