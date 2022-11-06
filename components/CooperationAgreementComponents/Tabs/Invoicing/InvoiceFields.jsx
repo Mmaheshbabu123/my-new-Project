@@ -1,8 +1,8 @@
 export const invoiceRow1 = [
  {'id':50,'key_name':'Invoicing contact person first name','type':1},
  {'id':51,'key_name':'Invoicing address: street','type':1},
- {'id':52,'key_name':'Invoicing address: postal code','type':1},
- {'id':53,'key_name':'Invoicing address: country','type':1},
+ {'id':69,'key_name':'Invoicing address: box','type':1},
+ {'id':70,'key_name':'Invoicing address: city','type':1},
  {'id':54,'key_name':'Invoicing address: phone number','type':1},
  {'id':55,'key_name':'Invoicing address: email','type':1},
  {'id':56,'key_name':'VAT applicable','type':6 ,option1:'Yes',option2:'No'},
@@ -21,8 +21,8 @@ export const invoiceRow1 = [
 export const invoiceRow2 = [
  {'id':67,'key_name':'Invoicing contact person last name','type':1},
  {'id':68,'key_name':'Invoicing address: house number','type':1},
- {'id':69,'key_name':'Invoicing address: box','type':1},
- {'id':70,'key_name':'Invoicing address: city','type':1},
+ {'id':52,'key_name':'Invoicing address: postal code','type':1},
+ {'id':53,'key_name':'Invoicing address: country','type':1},
  {'id':71,'key_name':'Invoicing address: fax number','type':1},
  {'id':72,'key_name':'VAT rate','type':1},
  {'id':73,'key_name':'Payment via domiciliering','type':6 ,option1:'Yes',option2:'No'},
