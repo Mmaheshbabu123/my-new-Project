@@ -757,3 +757,10 @@ img.dasboard_image
 {
   height: 60px;
 }
+.position-sticky-add-indexation
+{
+  position: sticky;
+  top: 162px;
+  background: var(--color-white) !important;
+  z-index:998;
+}

@@ -51,6 +51,10 @@ const AddFunctions = (props) => {
 	const updateEmployeeObject = (data) => {
 		data.map((val, key) => {
 			val.employee_list.map((val2, key2) => {
+				if(val2.function_salary != null && val2.salary  == val.flexSalary){
+					data[key].employee_list[key2].function_salary = data[key].employee_list[key2].salary;
+					data[key].employee_list[key2].salary = null;
+				}
 				if (val2.function_salary != null && val2.age < val.pc_min_age) {
 					val.pcAge.map((val3, key3) => {
 						if (val2.age == val3.type + 14) {
@@ -122,6 +126,9 @@ const AddFunctions = (props) => {
 				object[parent_index].employee_list[index].function_salary = object[parent_index].flexSalary;
 			} else if (object[parent_index].employee_list[index].funid == '') {
 				object[parent_index].employee_list[index].function_salary = '';
+			}else{
+				let obj = object[parent_index].employee_list[index].functionslist.find(o => o.id === object[parent_index].employee_list[index].funid);
+				object[parent_index].employee_list[index].function_salary = obj.salary;
 			}
 			setEmployeeObject(object);
 		}
@@ -228,10 +235,17 @@ const AddFunctions = (props) => {
 		} else {
 			object[parent_index].employee_list.map((element, key) => {
 				object[parent_index].employee_list[key].funid = index != null ? Number(funcid) : funcid;
-				object[parent_index].employee_list[key].salary = null;
 				object[parent_index].employee_list[key].warning = '';
 				object[parent_index].employee_list[key].salaryerror = '';
+				if (
+					!(
+						object[parent_index].employee_list[key].emp_type != null &&
+						object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[key].emp_type)
+					)
+				) {
+					object[parent_index].employee_list[key].salary = null;
 				funcid == 'drop' ? (object[parent_index].employee_list[key].function_salary = null) : '';
+				}
 			});
 			setEmployeeObject(object);
 		}
@@ -458,7 +472,12 @@ const AddFunctions = (props) => {
 		var sal_percent = 100;
 		var sal = '';
 		object[parent_index].employee_list.map((element, key) => {
-			if (object[parent_index].employee_list[key].age < pc_min_age) {
+			if (
+				object[parent_index].employee_list[key].emp_type != null &&
+				object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[key].emp_type)
+			) {
+				object[parent_index].employee_list[key].function_salary = object[parent_index].flexSalary;
+			}else if (object[parent_index].employee_list[key].age < pc_min_age) {
 				object[parent_index].pcAge.map((val) => {
 					if (object[parent_index].employee_list[key].age == val.type + 14) {
 						sal_percent = parseFloat(val.min_sal_percent);
