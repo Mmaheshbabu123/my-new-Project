@@ -124,7 +124,7 @@ const AddFunctions = (props) => {
 			object[parent_index].employee_list[index].emp_type = obj.value;
 			if (object[parent_index].flexEmpTypes.includes(obj.value)) {
 				object[parent_index].employee_list[index].function_salary = object[parent_index].flexSalary;
-			} else if (object[parent_index].employee_list[index].funid == '') {
+			} else if (object[parent_index].employee_list[index].funid == ''||object[parent_index].employee_list[index].funid == ''||object[parent_index].employee_list[index].funid == undefined) {
 				object[parent_index].employee_list[index].function_salary = '';
 			}else{
 				let obj = object[parent_index].employee_list[index].functionslist.find(o => o.id === object[parent_index].employee_list[index].funid);
