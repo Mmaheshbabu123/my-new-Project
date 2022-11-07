@@ -25,7 +25,9 @@ const Qrscan = () => {
 	
 	return (
 		<div className="container">
-			<QrReader
+			<div className='row pt-5'>
+				<div className='col-sm-12'>
+				<QrReader
 			delay={500}
 			style={previewStyle}
             onResult={(result, error) => {
@@ -75,7 +77,9 @@ const Qrscan = () => {
                 facingMode: { exact: "environment" }
               }}
 			/>
-			<div className="" style={{color:'red'}}>{resp}</div>
+				</div>
+			</div>
+			<div className=" pt-2 text-center" style={{color:'red'}}>{resp}</div>
 			{/* <div> {decode}</div>		 */}
 		</div>
 	);
