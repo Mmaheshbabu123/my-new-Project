@@ -28,8 +28,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue' /> </span>
-        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='ms-2 color-skyblue'/> </span>
+        <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue' /> </span>
+        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='color-skyblue'/> </span>
       </>
     )
   }

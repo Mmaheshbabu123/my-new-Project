@@ -154,7 +154,7 @@ const Table = (props) => {
 										width={20}
 										height={20}
 										data-toggle="tooltip"
-											title="Edit paritair comite"/>
+										title="Edit paritair comite"/>
 									)}
 								</div>
 

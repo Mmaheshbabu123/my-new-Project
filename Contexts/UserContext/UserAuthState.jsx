@@ -21,10 +21,16 @@ const UserAuthState = (props) => {
 
   const updateUserContext = obj => setContextState({...contextState, ...obj })
 
+  const userLogout = () => {
+      localStorage.clear();
+      setContextState({  isAuthenticated: 0 })
+  }
+
   return (
     <UserAuthContext.Provider value={{
       contextState,
       updateUserContext,
+      userLogout
     }}> {contextState.hydration && props.children}
     </UserAuthContext.Provider>
   )

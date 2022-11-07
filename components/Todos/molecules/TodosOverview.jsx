@@ -335,7 +335,8 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
                     name={'file'}
                     id='labour_todo_id'
                     multiple={false}
-                    fileUploadText={'Choose file, maximum allowed size is 2MB.'}
+                    fileUploadText={'Choose file.'}
+                    infoText={'Maximum allowed size is 2MB.'}
                     handleChange={handleFileChange}
                     className=' shadow-none rounded-0 pos-rel'
                   />

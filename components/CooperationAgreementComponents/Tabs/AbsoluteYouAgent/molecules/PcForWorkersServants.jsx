@@ -137,7 +137,7 @@ const PcForWorkersServants = (props) => {
         <div className={`${styles['add-div-margings']}`}>
             <LabelField title={`Paritair comité (PC) ${type}`} mandotory={true} />
             <MultiSelectField
-                options={pcOptions.filter(val => val.value === false || !alreadyLinked.includes(val.value))}
+                options={getPcOptionsBasedOnType(pcOptions, type, alreadyLinked)}
                 standards={allPCs.filter(val => val.value === compState['selectedPc'][type])}
                 disabled={false}
                 handleChange={(obj) => onSelect(obj, type)}
@@ -164,11 +164,18 @@ const PcForWorkersServants = (props) => {
             type="button"
             style={{marginTop: '20px'}}
             className="btn ">
-            <>{`Extra Paritair comité 
+            <>{`Extra Paritair comité
             ${type === workersType ? 'workers (arbeiders)' : 'servants (bedienden)'}`}</>
           </button>
         </div>
     </div>
+  }
+
+  const getPcOptionsBasedOnType = (pcOptions, type, alreadyLinked) => {
+    let pctype = type == 1 ? servantsType : workersType;
+    return pcOptions.filter(val => {
+      return val.value === false || (val.pc_type === pctype && !alreadyLinked.includes(val.value))
+    })
   }
 
   const workersPart = () => {

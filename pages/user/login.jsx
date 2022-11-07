@@ -5,12 +5,14 @@ import Login from "@/components/PwaComponent/login";
 
 const UserLogin = () => {
   const { contextState: { isAuthenticated = 0 } } = useContext(UserAuthContext);
+  let uid = localStorage.getItem("user_id");
+
   const router = useRouter();
-  isAuthenticated === 1 ? router.push('/') : null
+  isAuthenticated === 1 && uid ? router.push('/') : null
   return (
     <div>
       {
-        isAuthenticated === 1 ? null : <Login />
+        isAuthenticated === 1 && uid ? null : <Login />
       }
     </div>
   )

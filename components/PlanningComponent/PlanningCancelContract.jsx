@@ -3,13 +3,15 @@ import { useState } from "react";
 import EmployeeWidgetBlock from '../PwaComponent/WidgetBlock';
 import customAlert from '@/atoms/customAlert';
 import ValidationService from "@/Services/ValidationService";
+import Translation from '@/Translation';
 //-----------Calling api -------------//
 import { APICALL } from '@/Services/ApiServices';
 import { cancelContract } from '@/Services/ApiEndPoints'
 
 
 function CancelContract(props) {
- 
+
+    const {t}=props;
     const [pophide, setPophide] = useState(props.popupActionNo);
     const [text, setText] = useState('');
 
@@ -90,7 +92,7 @@ function CancelContract(props) {
                                     <div className="row  m-0">
                                         <div className="col">
                                             <label className="custom_astrick poppins-light-18px">
-                                                Reason
+                                                {t('Reason')}
                                             </label>
                                             <textarea
                                                 // type="text"
@@ -98,7 +100,7 @@ function CancelContract(props) {
                                                 name="message"
                                                 onChange={handleChange}
                                                 value={message}
-                                                className="form-control mt-2 mb-2 rounded-0 shadow-none"
+                                                className="form-control mt-2 mb-2 rounded-0 shadow-none border"
                                                 
                                             />
                                             <p style={{color:"red"}}>{message_err}</p>
@@ -121,23 +123,23 @@ function CancelContract(props) {
                                     </div> */}
                                 <div className=" col-md-12 m-auto px-2 ">
                                     <div className="row mt-4">
-                                        <div className="col-6">
+                                        {/* <div className="col-6">
                                             <button
                                                 type="submit"
                                                 className="btn btn-lg px-3 rounded-0 poppins-light-18px text-decoration-underline text-uppercase shadow-none"
                                             >
-                                                Back
+                                               {t('Back')}
                                             </button>
 
-                                        </div>
-                                        <div className="col-6">
+                                        </div> */}
+                                        <div className="col">
                                             <button
                                                 type="submit"
                                                 className="btn float-end poppins-medium-18px-next-button shadow-none px-3 rounded-0 "
 
                                                 onClick={handleClick}
                                             >
-                                                Save
+                                                {t('Save')}
                                             </button>
 
                                         </div>
@@ -160,4 +162,4 @@ function CancelContract(props) {
 
     );
 }
-export default CancelContract;
+export default React.memo(Translation(CancelContract,['Save','Reason']));

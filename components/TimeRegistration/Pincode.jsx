@@ -222,10 +222,12 @@ const Pincode = (props) => {
 	return (
 		<form onSubmit={Submit} style={{ alignItems: 'center' }}>
 			<div className="row minheight-verifypin">
-				<div className="col-md-12">
-					<div className="row">
-						<div className="col-md-6">
-							<label className="mb-2 poppins-regular-18px">Company</label>
+			<div className='col-md-12'>
+			<div className="row position-sticky-pincode-verify">
+					<div className="col-md-6">
+						<label className='mb-2 poppins-regular-18px'>
+							Company
+							</label>
 							<MultiSelectField
 								placeholder={t('--Select---')}
 								id={'company'}
@@ -234,11 +236,13 @@ const Pincode = (props) => {
 								handleChange={(obj) => {setCompany(obj);getLocations(obj.value)}}
 								isMulti={false}
 							/>
-
-							{compay_error && <p style={{ color: 'red' }}>This field is required.</p>}
-						</div>
-						<div className="col-md-6">
-							<label className="mb-2 poppins-regular-18px">Location</label>
+						
+						{compay_error&&<p style={{color:'red'}} className='mt-2'>This field is required.</p>}
+					</div>
+					<div className="col-md-6">
+						<label className='mb-2 poppins-regular-18px'>
+							Location
+							</label>
 							<MultiSelectField
 								placeholder={t('--Select---')}
 								id={'location'}
@@ -247,16 +251,15 @@ const Pincode = (props) => {
 								handleChange={(obj) => setLocation(obj)}
 								isMulti={false}
 							/>
-
-							{location_error && <p style={{ color: 'red' }}>This field is required.</p>}
-						</div>
+						
+						{location_error&&<p style={{color:'red'}} className='mt-2'>This field is required.</p>}
 					</div>
 				</div>
 				{/* <div className="col-4" /> */}
 				<div className="col-sm-6 col-md-5 mx-auto mt-1">
-					<div className="d-flex justify-content-center">
+					<div className="d-flex justify-content-center ">
 						<OTPInput
-							inputClassName={hide ? 'otp' : ''}
+							inputClassName={hide ? 'otp border' : 'border otp-visible'}
 							className="otp-container"
 							value={otp}
 							onChange={setOTP}
@@ -273,14 +276,14 @@ const Pincode = (props) => {
 							{eyeicon}
 						</button>
 					</div>
-					<p style={{ color: 'red' }} className="mt-2">
+					<p style={{ color: 'red',marginLeft:'-11px' }} className="mt-2">
 						{err}
 					</p>
 					<p style={{ color: 'red' }} className="mt-2">
 						{response}
 					</p>
 					<div className="row mt-3">
-						<div className="col-md-9 pe-3">
+						<div className="col-md-11 pe-2">
 							<button
 								style={{ border: 'none', background: 'white', color: 'blue' }}
 								onClick={(e) => forgotPassword(e)}

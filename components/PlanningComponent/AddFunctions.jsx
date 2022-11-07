@@ -35,7 +35,7 @@ const AddFunctions = (props) => {
 				.then((result) => {
 					if (result.status == 200) {
 						console.log(result.data);
-						updateEmployeeObject(result.data[0])
+						updateEmployeeObject(result.data[0]);
 						setIsChecked(result.data[1]);
 						setFlexSalary(result.data[2]);
 					}
@@ -48,9 +48,13 @@ const AddFunctions = (props) => {
 		[ router.query ]
 	);
 
-	const updateEmployeeObject = (data) =>{
+	const updateEmployeeObject = (data) => {
 		data.map((val, key) => {
 			val.employee_list.map((val2, key2) => {
+				if(val2.function_salary != null && val2.salary  == val.flexSalary){
+					data[key].employee_list[key2].function_salary = data[key].employee_list[key2].salary;
+					data[key].employee_list[key2].salary = null;
+				}
 				if (val2.function_salary != null && val2.age < val.pc_min_age) {
 					val.pcAge.map((val3, key3) => {
 						if (val2.age == val3.type + 14) {
@@ -70,7 +74,7 @@ const AddFunctions = (props) => {
 		});
 
 		setEmployeeObject(data);
-	}
+	};
 
 	const submit = (e) => {
 		e.preventDefault();
@@ -115,11 +119,16 @@ const AddFunctions = (props) => {
 
 	let updateEmployeeType = (index = null, obj, parent_index) => {
 		var object = [ ...employeeobject ];
-		console.log(object);
+		console.log(object[parent_index]);
 		if (index !== null) {
 			object[parent_index].employee_list[index].emp_type = obj.value;
-			if ([ 6, 7 ].includes(obj.bbright_id)) {
-				// object[parent_index].employee_list[index].function_salary = flexSalary;
+			if (object[parent_index].flexEmpTypes.includes(obj.value)) {
+				object[parent_index].employee_list[index].function_salary = object[parent_index].flexSalary;
+			} else if (object[parent_index].employee_list[index].funid == ''||object[parent_index].employee_list[index].funid == ''||object[parent_index].employee_list[index].funid == undefined) {
+				object[parent_index].employee_list[index].function_salary = '';
+			}else{
+				let obj = object[parent_index].employee_list[index].functionslist.find(o => o.id === object[parent_index].employee_list[index].funid);
+				object[parent_index].employee_list[index].function_salary = obj.salary;
 			}
 			setEmployeeObject(object);
 		}
@@ -210,18 +219,33 @@ const AddFunctions = (props) => {
 		var object = [ ...employeeobject ];
 		if (index !== null) {
 			object[parent_index].employee_list[index].funid = funcid;
-			object[parent_index].employee_list[index].salary = null;
 			object[parent_index].employee_list[index].warning = '';
 			object[parent_index].employee_list[index].salaryerror = '';
-			funcid == 'drop' ? (object[parent_index].employee_list[index].function_salary = null) : '';
+			if (
+				!(
+					object[parent_index].employee_list[index].emp_type != null &&
+					object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[index].emp_type)
+				)
+			) {
+				object[parent_index].employee_list[index].salary = null;
+				funcid == 'drop' ? (object[parent_index].employee_list[index].function_salary = null) : '';
+			}
 			setEmployeeObject(object);
+
 		} else {
 			object[parent_index].employee_list.map((element, key) => {
 				object[parent_index].employee_list[key].funid = index != null ? Number(funcid) : funcid;
-				object[parent_index].employee_list[key].salary = null;
 				object[parent_index].employee_list[key].warning = '';
 				object[parent_index].employee_list[key].salaryerror = '';
+				if (
+					!(
+						object[parent_index].employee_list[key].emp_type != null &&
+						object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[key].emp_type)
+					)
+				) {
+					object[parent_index].employee_list[key].salary = null;
 				funcid == 'drop' ? (object[parent_index].employee_list[key].function_salary = null) : '';
+				}
 			});
 			setEmployeeObject(object);
 		}
@@ -231,10 +255,16 @@ const AddFunctions = (props) => {
 		salary = parseFloat(salary.replace(',', '.').replace(/\s/g, ''));
 		maxsal = maxsal != undefined ? parseFloat(maxsal.replace(',', '.').replace(/\s/g, '')) : maxsal;
 		var object = [ ...employeeobject ];
+		console.log(object[parent_index]);
 		var sal_percent = 100;
 		var sal = '';
 		if (index !== null) {
-			if (object[parent_index].employee_list[index].age < pc_min_age) {
+			if (
+				object[parent_index].employee_list[index].emp_type != null &&
+				object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[index].emp_type)
+			) {
+				object[parent_index].employee_list[index].function_salary = object[parent_index].flexSalary;
+			} else if (object[parent_index].employee_list[index].age < pc_min_age) {
 				object[parent_index].pcAge.map((val, key) => {
 					if (object[parent_index].employee_list[index].age == val.type + 14) {
 						sal_percent = parseFloat(val.min_sal_percent.replace(',', '.').replace(/\s/g, ''));
@@ -261,23 +291,27 @@ const AddFunctions = (props) => {
 	};
 
 	let updateRes = (event, key) => {
-		// 	setFuncChanged(true);
-		// 	var res1 = [ ...functions ];
-		// 	res1.map((val, k) => {
-		// 		if (k == key) {
-		// 			res1[k]['funct_checked'] = parseInt(event.target.value);
-		// 		} else {
-		// 			res1[k]['funct_checked'] = '';
-		// 		}
-		// 		setFunctions(res1);
-		// 	});
+		// var res1 = [ ...functions ];
+		// res1.map((val, k) => {
+		// 	if (k == key) {
+		// 		res1[k]['funct_checked'] = parseInt(event.target.value);
+		// 	} else {
+		// 		res1[k]['funct_checked'] = '';
+		// 	}
+		// 	setFunctions(res1);
+		// });
 	};
 
 	function updatingObjectfunctionSlary(index = null, maxsal, salary, parent_index, pc_min_age) {
 		salary = parseFloat(salary.replace(',', '.').replace(/\s/g, ''));
 		var object = [ ...employeeobject ];
 		if (index != null) {
-			if (object[parent_index].employee_list[index].age < pc_min_age) {
+			if (
+				object[parent_index].employee_list[index].emp_type != null &&
+				object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[index].emp_type)
+			) {
+				object[parent_index].employee_list[index].function_salary = object[parent_index].flexSalary;
+			}else if (object[parent_index].employee_list[index].age < pc_min_age) {
 				object[parent_index].pcAge.map((val, key) => {
 					if (object[parent_index].employee_list[index].age == val.type + 14) {
 						var sal_percent = parseFloat(val.min_sal_percent);
@@ -349,12 +383,6 @@ const AddFunctions = (props) => {
 				var collapseOpen = true;
 				if (func != '' && func != null && func != undefined) {
 					collapseOpen = true;
-				} else {
-					// if(key != 0){
-					// collapseOpen = true;
-					// }else{
-					// 	collapseOpen = false;
-					// }
 				}
 				if (func == '' && emp == '' && sal == '' && sal1 == '') {
 					if (key == 0) {
@@ -368,15 +396,7 @@ const AddFunctions = (props) => {
 				newstate[k1].employee_list[key].employeeiderror = emp;
 				newstate[k1].employee_list[key].salaryinvalid = sal1;
 				newstate[k1].employee_list[key].salaryerror = sal;
-				// newstate[k1].employee_list[key].warning = sal;
 				newstate[k1].employee_list[key].collapseOpen = collapseOpen;
-				// return {
-				// 	...value,
-				// 	functioniderror: func,
-				// 	employeeiderror: emp,
-				// 	salaryerror: sal,
-				// 	collapseOpen: collapseOpen
-				// };
 			});
 		});
 		setEmployeeObject(newstate);
@@ -423,13 +443,11 @@ const AddFunctions = (props) => {
 
 	let emptyemployeeData = () => {
 		var object = [ ...employeeobject ];
-		// console.log(object);
 
 		object.map((ele1, key1) => {
 			if (object != undefined) {
 				ele1.employee_list.map((element, key) => {
 					object[key1].employee_list[key].emp_type = null;
-					//object[key1].employee_list[key].employeetypeid = 0;
 					object[key1].employee_list[key].funid = null;
 					object[key1].employee_list[key].salary = null;
 					object[key1].employee_list[key].function_salary = null;
@@ -438,12 +456,10 @@ const AddFunctions = (props) => {
 					object[key1].employee_list[key].salaryerror = '';
 					object[key1].employee_list[key].salaryinvalid = '';
 					object[key1].employee_list[key].radioactive = false;
-					// updateEmployeeType(key,0)
 				});
 				if (object.length != 0) {
 					setEmployeeObject(object);
 					setSelectedOption({ value: 0, label: '-Select-' });
-					// setSelectedOption([]);
 				}
 			}
 		});
@@ -456,7 +472,12 @@ const AddFunctions = (props) => {
 		var sal_percent = 100;
 		var sal = '';
 		object[parent_index].employee_list.map((element, key) => {
-			if (object[parent_index].employee_list[key].age < pc_min_age) {
+			if (
+				object[parent_index].employee_list[key].emp_type != null &&
+				object[parent_index].flexEmpTypes.includes(object[parent_index].employee_list[key].emp_type)
+			) {
+				object[parent_index].employee_list[key].function_salary = object[parent_index].flexSalary;
+			}else if (object[parent_index].employee_list[key].age < pc_min_age) {
 				object[parent_index].pcAge.map((val) => {
 					if (object[parent_index].employee_list[key].age == val.type + 14) {
 						sal_percent = parseFloat(val.min_sal_percent);
@@ -507,7 +528,6 @@ const AddFunctions = (props) => {
 		<div className="col-md-12">
 			<form onSubmit={(e) => submit(e)}>
 				<div />
-				{/* <div className="row m-0"> */}
 				<div className="col-md-12 p-0 position-sticky-pc py-4">
 					<p className="pb-3 font-weight-bold px-0 bitter-italic-normal-medium-24">{t('Add function')}</p>
 				</div>

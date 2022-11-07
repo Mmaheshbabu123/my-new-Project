@@ -352,9 +352,16 @@ input[type="radio"]
   padding-left: 3rem;
 }
 .border,
-.no-records
+.no-records,
+.otp-visible:focus-visible,
+.otp-visible:focus
 {
   border: 1px solid #4C4D554D !important;
+}
+.otp-visible:focus-visible,
+.otp-visible:focus
+{
+  outline: none;
 }
 select option
 {
@@ -474,9 +481,9 @@ select option
 {
   position: relative;
 }
-.table-render-parent-div
+.min-height-add-doc
 {
-  min-height: 55vh;
+  min-height: 62vh;
 }
 .dashboard-tile-parent
 {
@@ -712,9 +719,28 @@ select option
 }
 .start-stop-planning .react-select-prefix__control--is-focused,
 .minheight-verifypin .react-select-prefix__control--is-focused,
-.encodage-validation .react-select-prefix__control--is-focused
+.encodage-validation .react-select-prefix__control--is-focused,
+.edit_employee_table .react-select-prefix__control--is-focused,
+.type_of_company .react-select-prefix__control--is-focused,
+.payment_condition .react-select-prefix__control--is-focused,
+.salary_benefits_co_operation_agreement .react-select-prefix__control--is-focused
 {
   border: 1px solid #4C4D554D !important;
+}
+.react-select-prefix__control
+{
+  cursor: pointer;
+}
+.edit_employee_table .react-select-prefix__single-value 
+{
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+}
+.edit_employee_table .react-select-prefix__input-container
+{
+  margin-top: 0px !important;
+  padding-top: 0px !important;
 }
 .qr-code-time-registration
 {
@@ -726,4 +752,15 @@ select option
   font-family: var(--font-family-poppins-light) !important;
   font-size: var(--font-size-16px) !important;
   line-height: var(--line-height-26px) !important;
+}
+img.dasboard_image 
+{
+  height: 60px;
+}
+.position-sticky-add-indexation
+{
+  position: sticky;
+  top: 162px;
+  background: var(--color-white) !important;
+  z-index:998;
 }

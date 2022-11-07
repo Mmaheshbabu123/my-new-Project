@@ -8,10 +8,13 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 import CancelContract from "./CancelContract";
 import StopPlanning from "./StopPlanning";
 import { isMobile } from 'react-device-detect';
-
+import Translation from '@/Translation';
 
 
 function EmployeeWidgetBlock(props) {
+
+    const { t } = props;
+
     const current_time = moment();
     var contract_id;
     const [visible, setVisible] = useState(3);
@@ -114,16 +117,16 @@ function EmployeeWidgetBlock(props) {
                 {!isMobile ?
                     <div className="row m-0 ">
 
-                        <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">Employees currently working ({moment().format('D-M-YYYY, h:mm a')})</p>
+                        <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2">{t('Employees currently working')} ({moment().format('DD-M-YYYY, HH:mm ')})</p>
                         <div className="form-check p-0 mt-2 tab-pane fade show ">
                             <table className="table mb-0">
                                 <thead>
                                     <tr className="btn-bg-gray-medium table-sticky-bg-gray">
-                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Name</th>
-                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Company</th>
-                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Location</th>
-                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Planned stop time</th>
-                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">Action</th>
+                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">{t('Name')}</th>
+                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">{t('Company')}</th>
+                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">{t('Location')}</th>
+                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">{t('Planned stop time')}</th>
+                                        <th className="poppins-medium-16px btn-bg-gray-medium align-middle p-2 employee_width_col">{t('Action')}</th>
 
                                     </tr>
                                 </thead>
@@ -140,7 +143,7 @@ function EmployeeWidgetBlock(props) {
                                                         <Link href='' className="m-2">
                                                             <a type="button" className="warning-icon-solid"
                                                                 data-toggle="tooltip"
-                                                                title="Employee has crossed planned stop time"
+                                                                title={t("Employee has crossed planned stop time")}
                                                             >
 
                                                             </a>
@@ -150,7 +153,7 @@ function EmployeeWidgetBlock(props) {
                                                         <a type="button" className="stop-working-icon-solid"
                                                             // onClick={showPopup} 
                                                             data-toggle="tooltip"
-                                                            title="Stop planning"
+                                                            title={t("Stop planning")}
                                                             onClick={() => { showPopup(); setPopUpData([result.name, result.planned_endtime, result.worked_id, contextState.uid]); }}
                                                         >
 
@@ -160,7 +163,7 @@ function EmployeeWidgetBlock(props) {
                                                         <a type="button" className="cross-icon-solid"
                                                             onClick={cancel_contact}
                                                             data-toggle="tooltip"
-                                                            title="Cancel Contract"
+                                                            title={t("Cancel Contract")}
                                                         >
 
                                                         </a>
@@ -174,7 +177,7 @@ function EmployeeWidgetBlock(props) {
                                     {widget.length == 0 && (
                                         <tr>
                                             <td colSpan={5} className="text-center py-3 border poppins-regular-18px">
-                                                No records
+                                                {t('Currently no employee working')}
                                             </td>
                                         </tr>
                                     )}
@@ -184,7 +187,7 @@ function EmployeeWidgetBlock(props) {
                         <div className="text-end p-0">
                             {widget.length > 3 &&
                                 <Link href='/pwa/employee-widget' className="m-2">
-                                    <a type="button" className="mt-2 view-more-employee-widget text-decoration-underline">View more &nbsp;
+                                    <a type="button" className="mt-2 view-more-employee-widget text-decoration-underline">{t('View more')} &nbsp;
                                         <AiOutlineArrowRight />
                                     </a>
                                 </Link>
@@ -192,7 +195,7 @@ function EmployeeWidgetBlock(props) {
                         </div>
                     </div> :
                     <div className="row m-0 ">
-                        <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2 ms-3">Employees currently working </p>
+                        <p className="h3 px-0  bitter-italic-normal-medium-22 mt-2 ms-3">{t('Employees currently working')} </p>
                         <p className="h3 px-0  bitter-italic-normal-medium-22 mt-1 ms-3">({moment().format('D-M-YYYY, h:mm a')})</p>
                         <div className="accordion" id="accordionExample">
                             <div className="accordion-item p-2 shadow-none rounded-0">
@@ -214,18 +217,19 @@ function EmployeeWidgetBlock(props) {
                                                 </button>
 
                                             </h2>
-                                            <div id={"collapseTwo" + result.id} className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">                                            <div className="accordion-body ">
+                                            <div id={"collapseTwo" + result.id} className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">                                           
+                                             <div className="accordion-body ">
 
                                                 <div className="row m-2 p-1" key={result.id}>
-                                                    <div className="col-sm-5 poppins-regular-16px">Company name</div>
+                                                    <div className="col-sm-5 poppins-regular-16px">{t('Company')}</div>
                                                     <div className="col-sm-7 poppins-light-16px">{result.company_name}</div>
                                                 </div>
                                                 <div className="row m-2 p-1 " key={result.id}>
-                                                    <div className="col-sm-5 poppins-regular-16px">Location</div>
+                                                    <div className="col-sm-5 poppins-regular-16px">{t('Location')}</div>
                                                     <div className="col-sm-7 poppins-light-16px">{result.location_name}</div>
                                                 </div>
                                                 <div className="row m-2 p-1 " key={result.id}>
-                                                    <div className="col-sm-5 poppins-regular-16px">Planned stop time</div>
+                                                    <div className="col-sm-5 poppins-regular-16px">{t('Planned stop time')}</div>
                                                     <div className="col-sm-7 poppins-light-16px">{moment(result.planned_endtime).format('HH:mm')}</div>
                                                 </div>
                                                 <div className="row m-2 p-1" key={result.id}>
@@ -236,7 +240,7 @@ function EmployeeWidgetBlock(props) {
                                                             <a type="button" className="stop-working-icon-solid m-0"
                                                                 // onClick={showPopup} 
                                                                 data-toggle="tooltip"
-                                                                title="Stop planning"
+                                                                title={t("Stop planning")}
                                                                 onClick={() => { showPopup(); setPopUpData([result.name, result.planned_endtime, result.worked_id, contextState.uid]); }}
                                                             >
                                                             </a>
@@ -245,7 +249,7 @@ function EmployeeWidgetBlock(props) {
                                                             <a type="button" className="cross-icon-solid ms-2"
                                                                 onClick={cancel_contact}
                                                                 data-toggle="tooltip"
-                                                                title="Cancel Contract"
+                                                                title={t("Cancel Contract")}
                                                             >
                                                             </a>
                                                         </Link>
@@ -260,7 +264,7 @@ function EmployeeWidgetBlock(props) {
                                 {/*----------------------------No records found-------------------------- */}
                                 {widget.length == 0 && (
                                     <div className="row m-2 p-1 ">
-                                        <div className="col text-center">Currently no employee working</div>
+                                        <div className="col text-center">{t('Currently no employee working')}</div>
                                     </div>
                                 )}
                             </div>
@@ -268,7 +272,7 @@ function EmployeeWidgetBlock(props) {
                         <div className="text-end p-0 view-more-employee-widget">
                             {widget.length > 3 &&
                                 <Link href='/pwa/employee-widget' className="m-2">
-                                    <a type="button" className="mt-2 view-more-employee-widget text-decoration-underline">View more &nbsp;
+                                    <a type="button" className="mt-2 view-more-employee-widget text-decoration-underline">{t('View more')} &nbsp;
                                         <AiOutlineArrowRight />
                                     </a>
                                 </Link>
@@ -281,12 +285,8 @@ function EmployeeWidgetBlock(props) {
                 {show && <StopPlanning
                     data={widget}
                     display={'block'}
-                    // company={company}
-                    // company_id={companyid}
                     popupActionNo={closePopup}
                     popupActionYes={showPopup}
-                    // updatecompany={updatcomp}
-                    // countries={countrylist}
                     Data={popupdata}
                 />
                 }
@@ -297,4 +297,15 @@ function EmployeeWidgetBlock(props) {
 
     );
 }
-export default EmployeeWidgetBlock;
+export default React.memo(Translation(EmployeeWidgetBlock, ['Employees currently working',
+    'Name',
+    'Company',
+    'Location',
+    'Planned stop time',
+    'Action',
+    'Employee has crossed planned stop time',
+    'Stop planning',
+    'Cancel Contract',
+    'Currently no employee working',
+    'View more'
+]));
