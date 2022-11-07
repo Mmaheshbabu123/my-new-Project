@@ -49,7 +49,7 @@ return(
                   {dashboardtiles[key][tile]['menu_title']}
                   </div>
                 </a>
-                {dashboardtiles[key][tile]['menu_title'] === 'My todo\'s' && <span className="todo-count-badge"> { openTodosCount } </span>}
+                {dashboardtiles[key][tile]['menu_title'] === 'My todo\'s' && <span className={`todo-count-badge-${role}`}> { openTodosCount } </span>}
             </div>
           </div>
         )
