@@ -33,7 +33,8 @@ const LabourShareDocPreview = ({ userId, preview = 0, approved = 0, refId = 0, r
     await APICALL.service(updateEmployerSignOnLabourDoc, 'POST', {
       approved:state.approved,
       entityId: userId,
-      refId
+      refId,
+      root_parent_id
     }).then(response => {
         if (response.status === 200) {
           customAlert('success', 'Approved successfully!', 2000); //no of milliseconds
