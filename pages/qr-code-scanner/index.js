@@ -36,7 +36,7 @@ const Qrscan = () => {
 					let decoded=JSON.parse(a);
 					let companyid=(decoded.company_id==null)?'':decoded.company_id;
 					let locationid=(decoded.location_id==null)?'':decoded.location_id;
-					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getPlanningActual?id='+contextState.uid+'&companyid='+companyid+'&locationid='+locationid, 'GET')
+					APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getPlanningActual?id='+contextState.uid+'&companyid='+companyid+'&locationid='+locationid+'&pincode='+0, 'GET')
 					.then((res) => {
 						if(res!=null||res!=undefined){
 						setResp(res.res);
