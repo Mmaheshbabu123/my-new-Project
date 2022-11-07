@@ -16,7 +16,7 @@ function ManageEmployeeAndCoefficientTypes() {
         <button
           type="button"
           className="bg-white border-0 poppins-regular-18px  float-sm-right mt-3 md-5 px-0 text-decoration-underline text-uppercase"
-          onClick={() =>router.push('/')}
+          onClick={() => router.push('/')}
         >
           {('BACK')}
         </button>
