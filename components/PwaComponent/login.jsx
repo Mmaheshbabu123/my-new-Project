@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from "react-query";
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
@@ -6,6 +6,7 @@ import { userService } from '@/Services/UserServices';
 import Translation from '@/Translation';
 import Link from 'next/link';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
+import customAlert from '@/atoms/customAlert';
 
 const getAcrfToken = async () => {
     return await fetch(`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/get-acrf-token`)
@@ -98,6 +99,13 @@ const Login = (props) => {
         bottom: '8px',
         right: '10px',
     }
+
+    useEffect(() => {
+      if(localStorage.getItem('type_register') && parseInt(localStorage.getItem('type_register'))) {
+        customAlert('success', 'registration is successfull, please login', 2500)
+        localStorage.removeItem('type_register');
+      }
+    })
 
     if (isLoading) {
         return <>  </>
