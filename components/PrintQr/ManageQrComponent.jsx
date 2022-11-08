@@ -58,7 +58,7 @@ const ManageQrComponent = ({ props: { headers, rows, renderComp }, loadData, ent
       <>
         <span className="span-action-icons me-2 text-dark" title={generated ? "Regenerate": "Generate"} onClick={() => handleActionClick('regenerate', eachRow)}>   <GrRefresh className='mt-2 color-skyblue force-skyblue'/> </span>
         {generated && <>
-          <span className="span-action-icons me-2 text-dark" title="View" onClick={() => handleActionClick('view', eachRow)}>   <BiQrScan className='mt-2 ms-3 color-skyblue'/> </span>
+          <span className="span-action-icons me-2 text-dark" title="View" onClick={() => window.open(`image-preview?url=${eachRow.qr_path.replaceAll('/', '@')}`,'_blank')}>   <BiQrScan className='mt-2 ms-3 color-skyblue'/> </span>
           <span className="span-action-icons me-2 text-dark" title="Download" onClick={() => handleActionClick('download', eachRow)}> <FiDownload className='mt-2 ms-3 color-skyblue'/> </span>
         </>}
       </>
