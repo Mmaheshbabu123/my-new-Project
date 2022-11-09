@@ -225,6 +225,7 @@ export const downloadV1Documents = BASE_URL + "download-v1-documents";
 export const getCompanyLocationByEmployerId = BASE_URL + "get-company-locations";
 export const downloadQrCode = BASE_URL + "download-qr-code";
 export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
+export const getCompnayLocationQrCode = BASE_URL + "get-qrcode-by-company-location";
 //-------------------
 
 //----------------- TODOS ---------------//
@@ -268,7 +269,7 @@ export const getPlanning = BASE_URL + "fetch-add-planning-details/";
 export const getDraftPlanning = BASE_URL + "fetch-draft-planning/";
 export const deletePlanningDetails = BASE_URL + "delete-draft-planning/";
 
- 
+
 
 //---------------------------- Contract API--------------------------- //\
 export const getContract = BASE_URL + "downloadContract/";
