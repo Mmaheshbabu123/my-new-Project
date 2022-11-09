@@ -150,7 +150,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       </button>
       </div>
       }
-      <div className={`my_documents_position_sticky ${[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT ].includes(entityType) ? 'my_documents_position_sticky_admin mb-2' : entityType === USER_ROLE_ENTITY_TYPE.EMPLOYER ? 'my_documents_position_sticky_employer mb-2' : 'my_documents_position_sticky_employee mb-4'}`}>
+      <div className={`my_documents_position_sticky ${[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT ].includes(entityType) ? 'my_documents_position_sticky_admin mb-4' : entityType === USER_ROLE_ENTITY_TYPE.EMPLOYER ? 'my_documents_position_sticky_employer mb-4' : 'my_documents_position_sticky_employee mb-4'}`}>
       <div className='row'>
       <div className='col-md-12'>
          <div className='row'>
@@ -204,13 +204,13 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
             {state.currentItems && state.currentItems.length > 0 ?
             <tbody>
               {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-                <td className='w-25 ps-4'> {eachRow.name} </td>
-                {entityType !== 2 ? <td width="170px"> {eachRow.employer_name} </td> : null}
-                <td className="w-25"> {eachRow.company_name} </td>
-                <td> {formatDate(eachRow.startDate) || '-'} </td>
-                <td> {formatDate(eachRow.endDate) || '-'} </td>
-                <td className='text-center'> {eachRow.linkToCooperationAgreement ? 'Yes' : 'No'} </td>
-                <td className='color-skyblue-icon'>{ getNeededActions(eachRow) } </td>
+                <td className='ps-4' width="200px"> {eachRow.name} </td>
+                {entityType !== 2 ? <td width="200px"> {eachRow.employer_name} </td> : null}
+                <td width="220px"> {eachRow.company_name} </td>
+                <td width="120px"> {formatDate(eachRow.startDate) || '-'} </td>
+                <td width="120px"> {formatDate(eachRow.endDate) || '-'} </td>
+                <td className='text-center' width="200px"> {eachRow.linkToCooperationAgreement ? 'Yes' : 'No'} </td>
+                <td className='color-skyblue-icon' width="170px">{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
             :  <tbody>
