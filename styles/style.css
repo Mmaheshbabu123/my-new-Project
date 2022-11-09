@@ -506,7 +506,13 @@ select option
 {
   box-shadow: none !important;
 }
-.additional_add_sticky,
+.additional_add_sticky
+{
+  position: sticky !important;
+  top: 223px;
+  background: var(--color-white);
+  z-index: 998;
+}
 .v1_position_sticky
 {
   position: sticky !important;

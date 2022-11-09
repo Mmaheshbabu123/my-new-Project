@@ -2249,3 +2249,11 @@ input[type="search"]::-webkit-search-cancel-button {
   color: red;
   text-align: left;
 }
+
+@media screen and (min-width:0px) and (max-width:767px) 
+{
+	.employer-large-tile .dashboard_menu_title
+	{
+		text-align: center;
+	}	
+}
