@@ -13,7 +13,7 @@ import {
 } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 
-const INITIAL_COUNT = 4; //only 5 notifcations we will fetch
+const INITIAL_COUNT = 2; //only 2 notifcations we will fetch
 const NotificationMain = ( props ) => {
   	const { contextState: { uid } } = useContext(UserAuthContext);
     const entityId = Number(uid)
@@ -51,7 +51,7 @@ const NotificationMain = ( props ) => {
     }
 
     const toggleNotificationView = () => {
-      loadData(0, !state.notificationView);
+      loadData(INITIAL_COUNT, !state.notificationView);
     }
 
     const updateNotifications = async (type, obj) => {
@@ -92,6 +92,7 @@ const NotificationMain = ( props ) => {
               notificationsList = {state.notificationsList}
               toggleNotificationView = {toggleNotificationView}
               loadAllNotifications = {loadData}
+              totalCount={state.notificationCount}
           />}
       </>
     );

@@ -238,7 +238,6 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
         } else {
           window.alert('Error occurred')
         }
-        downloadUsingAnchorTag(response);
       })
       .catch((error) => window.alert('Error occurred'));
   }

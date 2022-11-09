@@ -6,7 +6,8 @@ const NotificationView = ({
   notificationsList = [],
   updateNotifications,
   toggleNotificationView,
-  loadAllNotifications, ...props
+  loadAllNotifications,
+  totalCount, ...props
 }) => {
   const [state, setState] = useState({
     toggleNotification: false,
@@ -125,7 +126,8 @@ const NotificationView = ({
           </div>
         </div>
         {state.notificationCount > 0 && <div className="col-md-12 row m-0 p-0 pt-3 pb-2 ">
-         {state.viewAllLink === 1 && <p className={`${styles['link-p-tags']} cursor-pointer col-md-12 text-center text-uppercase text-decoration-underline  bitter-italic-normal-medium-16`} onClick={loadAll}> View all </p>}
+        {totalCount > 2 && state.viewAllLink === 1 && <p className={`${styles['link-p-tags']} cursor-pointer col-md-12 text-center text-uppercase text-decoration-underline  bitter-italic-normal-medium-16`}
+            onClick={loadAll} > View all </p>}
         </div>}
       </div>
     </div>
