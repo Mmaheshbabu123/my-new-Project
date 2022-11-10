@@ -3,9 +3,10 @@ import React, { useEffect, useState, useContext } from 'react';
 // import EmployeeWidget from "./EmployeeWidget";
 import EmployeeWidgetBlock from './WidgetBlock';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
+import TileCountComponent from './TileCountComponent';
 
 export default function DashboardTiles({dashboardtiles}) {
-const { contextState: {uid = 0, role = '', roleType = 0, openTodosCount = 0  } } = useContext(UserAuthContext);
+const { contextState: {uid = 0, role = '', roleType = 0 } } = useContext(UserAuthContext);
 return(
 
 
@@ -49,7 +50,12 @@ return(
                   {dashboardtiles[key][tile]['menu_title']}
                   </div>
                 </a>
-                {dashboardtiles[key][tile]['menu_title'] === 'My todo\'s' && <span className={`todo-count-badge-${role}`}> { openTodosCount } </span>}
+                <TileCountComponent
+                    tile = {dashboardtiles[key][tile]}
+                    role = {role}
+                    uid = {uid}
+                    roleType = {roleType}
+                />
             </div>
           </div>
         )

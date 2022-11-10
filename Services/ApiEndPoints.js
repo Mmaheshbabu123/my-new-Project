@@ -26,6 +26,7 @@ export const checkPinCode= BASE_URL+ "hasPincode/";
 
 //------------Drupal ------------------------------//
 export const homeScreen= ENV_DRUPAL+ "dashboard/url";
+export const dashboardTileCount= BASE_URL + "get-tile-count";
 
 //--------------CATEGORY API ROUTES ----------------//
 export const getCat = BASE_URL + "getcat/";
