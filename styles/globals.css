@@ -632,6 +632,10 @@ body {
 .border-form-sec {
 	border: 1px solid var(--color-purple);
 }
+.border-bottom-purple
+{
+	border-bottom: 1px solid var(--color-purple);
+}
 .input-border-lightgray,
 .input-border-lightgray:focus {
 	border: 1px solid var(--field-border-lightgray);
