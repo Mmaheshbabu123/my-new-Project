@@ -150,7 +150,7 @@ const AdditionalDocsOverview = ({ headers, rows, entityId, entityType, ...props 
       </button>
       </div>
       }
-      <div className={`my_documents_position_sticky ${[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT ].includes(entityType) ? 'my_documents_position_sticky_admin mb-4' : entityType === USER_ROLE_ENTITY_TYPE.EMPLOYER ? 'my_documents_position_sticky_employer mb-4' : 'my_documents_position_sticky_employee mb-4'}`}>
+      <div className={`my_documents_position_sticky ${[USER_ROLE_ENTITY_TYPE.ABSOLUTE_YOU_ADMIN, USER_ROLE_ENTITY_TYPE.SALES_AGENT ].includes(entityType) ? 'my_documents_position_sticky_admin mb-3' : entityType === USER_ROLE_ENTITY_TYPE.EMPLOYER ? 'my_documents_position_sticky_employer mb-3' : 'my_documents_position_sticky_employee mb-4'}`}>
       <div className='row'>
       <div className='col-md-12'>
          <div className='row'>
