@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { APICALL } from '../../Services/ApiServices';
 import { fetchPlannedTimings, storePlannedTimings } from '../../Services/ApiEndPoints';
+import TimeValidationService from '../../Services/Planning/TimeValidationService';
 import { Calendar } from 'react-multi-date-picker';
 import style from '../../styles/Planning.module.css';
 import Link from 'next/link';
@@ -98,15 +99,6 @@ function Addtiming(props) {
 	 * 
 	 * @param {*} value 
 	 */
-	let handleChange = (value) => {
-		setError_selected_date('');
-		var selected = [];
-		value.map((val) => {
-			selected.push(val.format('DD/MM/YYYY'));
-		});
-		setSelectedDate(selected);
-	};
-
 	let calenderUpdate = (value, key) => {
 		var dateObj = [];
 		var temp = [];
@@ -130,8 +122,6 @@ function Addtiming(props) {
 						}
 					]
 				});
-
-				// commondate = _.sortBy( commondate, 'pdate' );
 			} else {
 				var commondate2 = commondate;
 				commondate.map((data2, k2) => {
@@ -268,7 +258,6 @@ function Addtiming(props) {
 		data1[1] = checked;
 		data1[2] = employee_planning;
 		data1[3] = commonDatetime;
-		// checkIfPlanningExist(data1);
 		APICALL.service(storePlannedTimings, 'POST', data1)
 			.then((result) => {
 				if (result.status === 200) {
@@ -389,12 +378,6 @@ function Addtiming(props) {
 								res[ky].timings[k1].time[k2].error = t('Start time cannot be same as end time.');
 							}
 						});
-
-						// if(res[ky].min_work_timings!= null && parseFloat(duration) < parseFloat(res[ky].min_work_timings)){
-						// 	res[ky].timings[k1].warning = 'This employee is planned lower than the allowed minimum hours.('+res[ky].min_work_timings+' hours)'
-						// }else if(o1.time[0].max_work_timings!= null && duration > o1.time[0].max_work_timings){
-						// 	res[ky].timings[k1].warning = 'This employee is planned higher than the allowed maximum hours.('+res[ky].max_work_timings+' hours)'
-						// }
 					});
 				}
 			});
@@ -403,20 +386,22 @@ function Addtiming(props) {
 		return count;
 	};
 
-	let getDuration = (start, end) => {
-		var starttime = moment(start).format('HH:mm').split(':');
-		var endtime = moment(end).format('HH:mm').split(':');
-		if (parseInt(endtime[1]) >= parseInt(starttime[1])) {
-			var diff2 = parseInt(endtime[1]) - parseInt(starttime[1]);
-			var diff1 = parseInt(endtime[0]) - parseInt(starttime[0]);
-		} else {
-			starttime[0] = parseInt(starttime[0]) - 1;
-			var diff2 = 60 + parseInt(endtime[1]) - parseInt(starttime[1]);
-			var diff1 = parseInt(endtime[0]) - parseInt(starttime[0]);
-		}
+	// let getDuration = (start, end) => {
+	// 	var starttime = moment(start).format('HH:mm').split(':');
+	// 	var endtime = moment(end).format('HH:mm').split(':');
+	// 	if ((parseInt(endtime[0]) > parseInt(starttime[0]))||((parseInt(endtime[0]) == parseInt(starttime[0]))&&(parseInt(endtime[1]) >= parseInt(starttime[1])))) {
+	// 	if (parseInt(endtime[1]) >= parseInt(starttime[1])) {
+	// 		var diff2 = parseInt(endtime[1]) - parseInt(starttime[1]);
+	// 		var diff1 = parseInt(endtime[0]) - parseInt(starttime[0]);
+	// 	} else {
+	// 		endtime[0] = parseInt(endtime[0]) - 1;
+	// 		var diff2 = (60 + parseInt(endtime[1])) - parseInt(starttime[1]);
+	// 		var diff1 = parseInt(endtime[0]) - parseInt(starttime[0]);
+	// 	}
+	// }																																																									
 
-		return diff1 + diff2 / 60;
-	};
+	// 	return diff1 + diff2 / 60;
+	// };
 
 	let updatetime = (type, index, e, key, time_index, date) => {
 		var res = [ ...employee_planning ];
@@ -479,9 +464,11 @@ function Addtiming(props) {
 
 	let maxWorkTimeVaidation = (time, min_work_timings, max_work_timings) => {
 		var duration = 0;
-		time.map((v2, k2) => {
-			duration = duration + getDuration(v2.starttime, v2.endtime);
+		time.map((v2, k2) => {	
+			duration = duration + TimeValidationService.getDuration(v2.starttime, v2.endtime);
 		});
+		console.log(duration);
+
 		if (min_work_timings != null && parseFloat(duration) < parseFloat(min_work_timings)) {
 			return (
 				t('This employee is planned lower than the allowed minimum hours') +
