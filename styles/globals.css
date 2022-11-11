@@ -2098,6 +2098,13 @@ input[type="search"]::-webkit-search-cancel-button {
 	background: var(--color-white);
 	z-index: 998;
 }
+.position-sticky-contracts
+{
+	position: sticky;
+	top: 165px;
+	background: var(--color-white);
+	z-index: 998;
+}
 .forgot-password-link
 {
 	color: var(--color-skyblue);

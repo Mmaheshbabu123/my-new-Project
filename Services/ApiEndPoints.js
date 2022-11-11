@@ -279,3 +279,4 @@ export const getContract = BASE_URL + "downloadContract/";
 export const fetchEmployeeWidgetPlanning = BASE_URL + "get-all-widget-planning/";
 
 export const cancelContract = BASE_URL + 'cancelCantract';
+export const getContracts = BASE_URL + 'get-contracts';
