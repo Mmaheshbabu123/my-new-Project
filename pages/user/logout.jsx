@@ -1,19 +1,18 @@
 import Login from "@/components/PwaComponent/login";
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 
 const UserLogout = () => {
-  const router = useRouter()
-  const [ clear, setClear ] = useState(false);
+  // const router = useRouter()
+  const [ login ] = useState(false);
   useEffect(() => {
     localStorage.clear();
-    setClear(!clear);
-    router.push('/user/login', undefined, { shallow: true })
+    window.open('/user/login', '_self');
   }, [])
 
   return(
     <>
-      <Login />
+      {login && <Login />}
     </>
   )
 }
