@@ -156,7 +156,7 @@ const LinkCoeffEmpComponent = (props) => {
          {/* <h4 className={`sv-cp-page-title  page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4> */}
          <h4 className={`page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> {t('Link coefficients to employee types')}</h4>
          </div>
-          <div className='row position-sticky-config-link mb-2'>
+          <div className='row position-sticky-config-link pb-2'>
           <div className="col-md-5 col-lg-3"> {addMultiSelectTag()}
             {state.pcWarning ? <small style={{ color: 'red' }} className='error_text mt-3'> {t('Choose paritair comite')} </small> : null}
           </div>

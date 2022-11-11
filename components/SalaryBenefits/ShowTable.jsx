@@ -33,8 +33,8 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue '/> </span>
-        <span className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='ms-3 color-skyblue '/> </span>
+        <span className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue '/> </span>
+        <span className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='color-skyblue '/> </span>
       </>
     )
   }
@@ -115,7 +115,7 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
           + {t('Add salary benefit')}
         </button>
       </div>
-      <div className='searchbox m-0 pb-4 pt-2 position-sticky-config-search' style={{ margin: '10px 0' }}>
+      <div className='searchbox m-0 pb-3 pt-2 position-sticky-config-search' style={{ margin: '10px 0' }}>
        <div className='row'>
          <div className='col-lg-9 col-md-7 pe-4'>
            <input

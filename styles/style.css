@@ -770,3 +770,22 @@ img.dasboard_image
   background: var(--color-white) !important;
   z-index:998;
 }
+.actual-stop-date .rmdp-wrapper 
+{
+  width: 21rem !important;
+}
+.actual-stop-date .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover 
+{
+  background-color: var(--color-skyblue) !important;
+  box-shadow: var(--color-skyblue);
+  width: auto !important;
+  height: auto !important;
+  margin: auto;
+}
+.actual-stop-date .rmdp-day.rmdp-selected span:not(.highlight)
+{
+  width: auto !important;
+  height: auto !important;
+  background-color: var(--color-purple) !important;
+  box-shadow:none;
+}

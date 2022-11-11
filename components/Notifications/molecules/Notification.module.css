@@ -122,3 +122,14 @@ border-bottom: 1px solid var(--color-input-border-lightgrey);
   color: #747474;
   display: initial;
 }
+@media screen and (min-width:0px) and (max-width:767px)
+{
+  .notificationBar
+  {
+    width: 100% !important;
+  }
+  .notification-scroll
+  {
+    max-height: 450px !important;
+  }
+}
