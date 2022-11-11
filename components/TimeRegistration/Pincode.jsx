@@ -221,9 +221,7 @@ const Pincode = (props) => {
 
 	return (
 		<form onSubmit={Submit} style={{ alignItems: 'center' }}>
-			<div className="row minheight-verifypin">
-				<div className="col-md-12">
-					<div className="row position-sticky-pincode-verify">
+				<div className="row position-sticky-pincode-verify mb-5 pb-5">
 						<div className="col-md-6">
 							<label className="mb-2 poppins-regular-18px">Company</label>
 							<MultiSelectField
@@ -262,9 +260,9 @@ const Pincode = (props) => {
 							)}
 						</div>
 					</div>
-					</div>
+			<div className="row minheight-verifypin">
 					{/* <div className="col-4" /> */}
-					<div className="col-sm-6 col-md-5 mx-auto mt-1">
+					<div className="col-sm-6 col-md-6 mx-auto mt-1">
 						<div className="d-flex justify-content-center ">
 							<OTPInput
 								inputClassName={hide ? 'otp border' : 'border otp-visible'}

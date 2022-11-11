@@ -70,14 +70,18 @@
 {
   position: relative;
 }
-.pos-rel button
+.todo-modal button,
+.todo-modal button:focus
 {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  border: 1px solid var(--color-purple) !important;
+  top: 0px;
+  right: 0px;
+  border: 1px solid var(--color-purple)!important;
   background-color: var(--color-purple);
   color: var(--color-white);
+  height: 36px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .employer_select .react-select-prefix__single-value.css-qc6sy-singleValue
 {
@@ -410,7 +414,7 @@ input[type="checkbox"]
 }
 .minheight-verifypin
 {
-  min-height: 71vh;
+  min-height: 39vh;
 }
 .position-sticky-pincode-verify 
 {
@@ -423,7 +427,7 @@ input[type="checkbox"]
 .warning-icon-solid {
 	background-image: url('/images/warning.svg');
 	background-repeat: no-repeat;
-	background-size: 23px;
+	background-size: 24px;
 	margin:0 2px;
 	padding: 14px;
 	background-position: center;
@@ -432,7 +436,7 @@ input[type="checkbox"]
 .cross-icon-solid{
   background-image: url('/images/cross-icon.svg');
 	background-repeat: no-repeat;
-	background-size: 20px;
+	background-size: 25px;
 	margin: 0 0px;
 	padding: 14px;
 	background-position: center;
@@ -579,7 +583,7 @@ input[type="checkbox"]
   min-height: 43px;
 }
 .actual-stop-time .rmdp-input,
-.actual-end-time .rmdp-input
+.actual-stop-date .rmdp-input
 {
   height: 38px !important;
   margin-top: 0.5rem !important;
@@ -587,7 +591,8 @@ input[type="checkbox"]
   border-radius: 0px !important;
   width: 100% !important;
 }
-.actual-stop-time .rmdp-container
+.actual-stop-time .rmdp-container,
+.actual-stop-date .rmdp-container
 {
    width: 100% !important;
 }

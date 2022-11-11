@@ -110,7 +110,7 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
         <div className='py-4 position-sticky-pc px-0'>
         <h4 className='font-weight-bold px-0  bitter-italic-normal-medium-24'> {`Manage coefficients per PC`} </h4>
         </div>
-        <div className='searchbox m-0 py-4 position-sticky-config-link' style={{ margin: '10px 0' }}>
+        <div className='searchbox m-0 pt-4 pb-3 position-sticky-config-link' style={{ margin: '10px 0' }}>
          <div className='row'>
            <div className='col-md-7 col-lg-9'>
              <div className='row'>
