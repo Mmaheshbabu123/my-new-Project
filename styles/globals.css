@@ -1358,7 +1358,7 @@ div[disabled] {
 .error {
 	color: var(--error-message-color) !important;
 	font-family: var(--font-family-poppins-regular);
-	font-size: var(--font-size-m);
+	font-size: var(--font-size-default);
 	/* margin-bottom: 1rem !important; */
 }
 .max-height-420 {
