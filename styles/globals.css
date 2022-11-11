@@ -986,7 +986,7 @@ label {
 }
 .footer-bg-color {
 	background-color: var(--color-label-footer-gray);
-	height: 80px;
+	min-height: 80px;
 }
 input {
 	font-family: var(--font-family-poppins-light);

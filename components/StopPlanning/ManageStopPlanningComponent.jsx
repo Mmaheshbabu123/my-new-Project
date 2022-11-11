@@ -113,14 +113,14 @@ return(
   <div className='add-edit-types start-stop-planning'>
     <div className="row m-0 p-0">
      <div className='col-md-12'>
-     <div className='row py-4 position-sticky-pc'>
+     <div className='row py-4 position-sticky-pc border-bottom-purple'>
        <div className='col-md-12 px-0'>
        <h4 className="font-weight-bold bitter-italic-normal-medium-24 px-0"> {t(`Start/Stop planning by employer`)} </h4>
        </div>
      </div>
      <div className='row min-height-stop-start-planning'>
      <div className="col-md-12">
-        <div className='row pb-4 px-2 border-purple pt-3'>
+        <div className='row pb-4 px-2 border-purple pt-3 border-top-0'>
         <div className = 'col-md-6'>
            <div className="col-md-12 mx-0 px-0 ">
              <LabelField title="Company" className="custom_astrick poppins-regular-18px px-0"/>
