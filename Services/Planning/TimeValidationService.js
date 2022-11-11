@@ -39,6 +39,24 @@ const TimeValidationService = {
 		}
 
 		return diff1 + diff2 / 60;
-	}
+	},
+
+	/***
+	 * 
+	 * 
+	 */
+
+	 breakWarning: function(timeObj,age){
+		 var error = '';
+		 var duration =0;
+		 timeObj.map((val,key)=>{
+			 duration = this.getDuration(val.starttime,val.endtime);
+		 })
+		 if(duration >= 6.5){
+			 error = 'Please note that the employee is planned 6.5 hours or more, which means that a legally (not paid) mandatory break of 60 minutes for below 18 year old employees and 30 minutes for above 18 year old employees will be included.'
+		 }
+		 return error;
+
+	 }
 };
 export default TimeValidationService;

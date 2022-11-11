@@ -111,7 +111,7 @@ const button_title = manageType == 'employee-types'? `Add employee type`:`Add co
         {`+ ${button_title}`}
       </button>
       </div>
-      <div className='row searchbox m-0 pt-2 pb-4 position-sticky-config-search' style={{ margin: '10px 0'}}>
+      <div className='row searchbox m-0 pt-2 pb-3 position-sticky-config-search' style={{ margin: '10px 0'}}>
        <div className='col-md-12 row pe-0'>
          <div className='col-md-8 col-lg-9 ps-0 pe-4'>
            <input

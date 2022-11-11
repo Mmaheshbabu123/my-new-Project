@@ -82,8 +82,9 @@ function Planning(props) {
 	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
 	useEffect(
 		() => {
+			console.log(contextState)
 			if (contextState.uid) {
-				APICALL.service(getEmployeerCompanylist + contextState.uid, 'GET')
+				APICALL.service(getEmployeerCompanylist + contextState.uid+'/'+contextState.roleType, 'GET')
 					.then((result) => {
 						console.log(result.data)
 						setCompany(result.data[0]);
