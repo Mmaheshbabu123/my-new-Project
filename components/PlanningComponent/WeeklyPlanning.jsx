@@ -40,7 +40,7 @@ function WeeklyPlanning(props) {
 	useEffect(
 		() => {
 			if (contextState.uid) {
-				APICALL.service(getEmployeerCompanylist + contextState.uid, 'GET')
+				APICALL.service(getEmployeerCompanylist + contextState.uid+'/'+contextState.roleType, 'GET')
 					.then((result) => {
 						if (result.status == 200) {
 							console.log(result);
