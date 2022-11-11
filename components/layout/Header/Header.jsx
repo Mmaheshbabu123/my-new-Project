@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import Translation from '@/Translation';
 function Header(props) {
 	let router = useRouter();
-	const { contextState: { isAuthenticated = 0, uid, roleType = 1 }, updateUserContext } = useContext(UserAuthContext);
+	const { contextState: { isAuthenticated = 0, uid, roleType = 1 } } = useContext(UserAuthContext);
 	const { t } = props;
 	const [state, setState] = useState({
 		languages: [{code: 0, language: 'Select'}],
@@ -35,8 +35,6 @@ function Header(props) {
 						setObj['languages'] = result['data'];
 						setObj['profile'] = result['userData'] ? result['userData']['profile_path'] : '';
 						setObj['lang'] = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
-
-						updateUserContext({openTodosCount: result['userData'] ? result['userData']['openTodosCount'] : 0})
 					} else { console.log('error while fetching header data') }
 				}).catch(error => console.error(error))
 				setState(setObj);
