@@ -26,6 +26,7 @@ export const checkPinCode= BASE_URL+ "hasPincode/";
 
 //------------Drupal ------------------------------//
 export const homeScreen= ENV_DRUPAL+ "dashboard/url";
+export const dashboardTileCount= BASE_URL + "get-tile-count";
 
 //--------------CATEGORY API ROUTES ----------------//
 export const getCat = BASE_URL + "getcat/";
@@ -225,6 +226,7 @@ export const downloadV1Documents = BASE_URL + "download-v1-documents";
 export const getCompanyLocationByEmployerId = BASE_URL + "get-company-locations";
 export const downloadQrCode = BASE_URL + "download-qr-code";
 export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
+export const getCompnayLocationQrCode = BASE_URL + "get-qrcode-by-company-location";
 //-------------------
 
 //----------------- TODOS ---------------//
@@ -268,7 +270,7 @@ export const getPlanning = BASE_URL + "fetch-add-planning-details/";
 export const getDraftPlanning = BASE_URL + "fetch-draft-planning/";
 export const deletePlanningDetails = BASE_URL + "delete-draft-planning/";
 
- 
+
 
 //---------------------------- Contract API--------------------------- //\
 export const getContract = BASE_URL + "downloadContract/";
@@ -277,3 +279,4 @@ export const getContract = BASE_URL + "downloadContract/";
 export const fetchEmployeeWidgetPlanning = BASE_URL + "get-all-widget-planning/";
 
 export const cancelContract = BASE_URL + 'cancelCantract';
+export const getContracts = BASE_URL + 'get-contracts';

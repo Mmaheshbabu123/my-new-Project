@@ -78,7 +78,6 @@ function TimeRegistration(props) {
 								<Link href='' className="m-2">
 									<a type="button" className='time-registration-img-div'>
 										<Image src="/images/Addemployee.svg" layout="fill" className="dasboard_image " onClick={stopPlanning}></Image>
-
 									</a>
 
 								</Link>
@@ -93,8 +92,10 @@ function TimeRegistration(props) {
 						</div>
 
 					}
+					{
+					contextState.role != 'employeer'&&
 					<div className="col-md-3">
-				<a className='cursor-pointer' onClick={pinCode}>
+					<a className='cursor-pointer' onClick={pinCode}>
 				<div className="position_relative_time_registration bg-light time-registartion-height d-flex align-items-center justify-content-center">
 						<div>
 							<Link href='' className="m-2">
@@ -113,6 +114,7 @@ function TimeRegistration(props) {
 						</div>
 				</a>
 					</div>
+					}
 				</div>
 				<div className='row'>
 				<div className="text-start col-md-6 px-0">

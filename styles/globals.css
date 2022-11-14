@@ -632,6 +632,10 @@ body {
 .border-form-sec {
 	border: 1px solid var(--color-purple);
 }
+.border-bottom-purple
+{
+	border-bottom: 1px solid var(--color-purple);
+}
 .input-border-lightgray,
 .input-border-lightgray:focus {
 	border: 1px solid var(--field-border-lightgray);
@@ -982,7 +986,7 @@ label {
 }
 .footer-bg-color {
 	background-color: var(--color-label-footer-gray);
-	height: 80px;
+	min-height: 80px;
 }
 input {
 	font-family: var(--font-family-poppins-light);
@@ -1354,7 +1358,7 @@ div[disabled] {
 .error {
 	color: var(--error-message-color) !important;
 	font-family: var(--font-family-poppins-regular);
-	font-size: var(--font-size-m);
+	font-size: var(--font-size-default);
 	/* margin-bottom: 1rem !important; */
 }
 .max-height-420 {
@@ -2094,6 +2098,13 @@ input[type="search"]::-webkit-search-cancel-button {
 	background: var(--color-white);
 	z-index: 998;
 }
+.position-sticky-contracts
+{
+	position: sticky;
+	top: 165px;
+	background: var(--color-white);
+	z-index: 998;
+}
 .forgot-password-link
 {
 	color: var(--color-skyblue);
@@ -2136,22 +2147,30 @@ input[type="search"]::-webkit-search-cancel-button {
 {
 	height: 53px !important;
 }
-.todo-count-badge-employeer {
-  position: absolute;
-	right: 3rem;
+.todo-count-badge {
+	position: absolute;
 	padding: 7px 10px;
-  border-radius: 50%;
-  background-color: #79b1bd;
+	border-radius: 50%;
+	background-color: #79b1bd;
 	color: var(--color-white) !important;
+}
+
+.todo-count-badge-employeer {
+	right: 3rem;
 	top: 9px;
 }
 .todo-count-badge-employee {
-  position: absolute;
 	right: 6rem;
-	padding: 7px 10px;
-  border-radius: 50%;
-  background-color: #79b1bd;
-	color: var(--color-white) !important;
+	top: 10px;
+}
+
+.todo-count-badge-absolute_you_admin_config_user {
+	right: 1rem;
+	top: 5px;
+}
+
+.todo-count-badge-absolute_you_sales_agent {
+	right: 1rem;
 	top: 10px;
 }
 
@@ -2248,4 +2267,12 @@ input[type="search"]::-webkit-search-cancel-button {
 .form-item--error-message {
   color: red;
   text-align: left;
+}
+
+@media screen and (min-width:0px) and (max-width:767px)
+{
+	.employer-large-tile .dashboard_menu_title
+	{
+		text-align: center;
+	}
 }

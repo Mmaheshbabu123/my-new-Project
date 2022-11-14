@@ -41,7 +41,14 @@ function EncodageValidation(props) {
 	} = useContext(PcContext);
 
 	useEffect(() => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/'+contextState.uid, 'GET')
+		var  url='';
+		if(contextState.role=='administrator'||contextState.role=='absolute_you_admin_config_user'){
+			url=process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin';
+		}
+		if(contextState.role=='employeer'){
+			url=process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/'+contextState.uid;
+		}
+		APICALL.service(url, 'GET')
 			.then((result) => {
 				if (result[0] == 999) {
 					setData(null);

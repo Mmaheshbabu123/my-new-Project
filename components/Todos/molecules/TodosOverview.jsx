@@ -238,7 +238,6 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
         } else {
           window.alert('Error occurred')
         }
-        downloadUsingAnchorTag(response);
       })
       .catch((error) => window.alert('Error occurred'));
   }
@@ -323,9 +322,9 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
     const { showPopup, labourTodoPopUp = false } = state;
     return (
       <>
-        <Modal size={'lg'} show={showPopup} onHide={handleClose}>
-          <Modal.Header closeButton style={{ paddingLeft: '36%' }}>
-            <Modal.Title> {labourTodoPopUp ? 'Upload file' : 'Education Details'} </Modal.Title>
+        <Modal size={'lg'} show={showPopup} onHide={handleClose} centered >
+          <Modal.Header closeButton >
+            <Modal.Title className='bitter-italic-normal-medium-22 text-center'> {labourTodoPopUp ? 'Upload file' : 'Education Details'} </Modal.Title>
           </Modal.Header>
           <Modal.Body>
           {labourTodoPopUp ?
@@ -338,7 +337,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
                     fileUploadText={'Choose file.'}
                     infoText={'Maximum allowed size is 2MB.'}
                     handleChange={handleFileChange}
-                    className=' shadow-none rounded-0 pos-rel'
+                    className=' shadow-none rounded-0 pos-rel todo-modal'
                   />
                 {state.fileSizeWarning && <ValidateMessage style={{margin:0}} text = {'This file is too large to upload, maximum allowed size is 2MB.'}/>}
                 {state.fileWarning && <ValidateMessage style={{margin:0}} text = {'This field is required.'}/>}
@@ -372,9 +371,9 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
               </div>
             </div>}
           </Modal.Body>
-          <Modal.Footer>
-            <p className={`${styles['popup-back-btn']}`} onClick={handleClose}> Back </p>
-            <Button variant="secondary" onClick={handleSubmit}>
+          <Modal.Footer className='justify-content-between'>
+            <p className={`${styles['popup-back-btn']} text-uppercase text-decoration-underline poppins-light-18px shadow-none border-0 rounded-0`} onClick={handleClose}> Back </p>
+            <Button variant="secondary" onClick={handleSubmit} className='poppins-medium-18px-next-button  shadow-none rounded-0 border-0'>
               SAVE
             </Button>
           </Modal.Footer>

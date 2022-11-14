@@ -1,6 +1,5 @@
 // import ManagePc from '../components/PcComponent/ManagePc';
-import Reset from '@/components/TimeRegistration/Sendingemail';
-
+import Genrate from '@/components/TimeRegistration/ConfirmPin';
 
 const Sendmail = () => {
 	return (
@@ -9,7 +8,7 @@ const Sendmail = () => {
 		{/* <div className='col-4'></div> */}
 		<div className='col-md-12 display-5 bitter-italic-normal-medium-24 text-left'>Forgot pincode</div>
 	</div>
-	<Reset />
+	<Genrate />
 	</div>);
 };
 export default Sendmail;

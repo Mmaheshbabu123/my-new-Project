@@ -29,7 +29,6 @@ const Pincode = (props) => {
 	const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
 	const [ hasPin, setHasPin ] = useState(false);
-	const [ uid, setUid ] = useState('');
 	const [ otp, setOTP ] = useState(0);
 	const [ otp1, setOTP1 ] = useState(0);
 	const [ err, setErr ] = useState('');
@@ -45,39 +44,38 @@ const Pincode = (props) => {
 			if (!router.isReady) return;
 
 			const { id = 0 } = router.query;
-			
 			var p_unique_key = router.query.p_unique_key;
 			
-				if (id != 0) {
-					APICALL.service(
-						process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/resetpincode/' + id,
-						'GET'
-					)
-					.then((result) => {
-							if (result) {
-								setHasPin(true);
-								setUid(result);
-							}
-						})
-						.catch((error) => {
-							console.error(error);
-						});
-				} else {
-				    var userid=null;
+				// if (id != 0) {
+				// 	APICALL.service(
+				// 		process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/resetpincode/' + id,
+				// 		'GET'
+				// 	)
+				// 	.then((result) => {
+				// 			if (result) {
+				// 				setHasPin(true);
+				// 			}
+				// 		})
+				// 		.catch((error) => {
+				// 			console.error(error);
+				// 		});
+				// } else {
+				//     var userid=null;
 
 					if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '') 
 					 {
 						APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/hasPincode/' + contextState.uid, 'GET')
 						.then((result) => {
 							if (result != 999) {
+								setHasPin(true);
+							}else{
 								setLoad(true);
 							}
-						   	setUid(contextState.uid);
 						})
 						.catch((error) => {
 							console.error(error);
 						});
-				}
+			// 	}
 			}
 		},
 		[ router.query ]
@@ -119,13 +117,12 @@ const Pincode = (props) => {
 		return false;
 	};
 
+	
 	const Submit = (event) => {
 		event.preventDefault();
-		
-		if (validate(otp, otp1)&&!(load)||validate(otp, otp1)&&hasPin) {
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/pincodegeneration/' + uid + '?pincode=' + otp1, 'GET')
+		if (validate(otp, otp1)&&load||validate(otp, otp1)&&hasPin) {
+			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/pincodegeneration/' + contextState.uid + '?pincode=' + otp1, 'GET')
 				.then((result) => {
-					
 					if (result == 200) {
 						router.push('/pincode/options');
 					}
@@ -157,7 +154,7 @@ const Pincode = (props) => {
 
 	var display;
 
-	var fields=<form onSubmit={Submit} style={{ alignItems: 'center' }}>
+	var fields=<form onSubmit={(e)=>Submit(e)} style={{ alignItems: 'center' }}>
 	<div className='min_height_pincode'>
 	<div className="row">
 		{/* <div className="col-4" /> */}
@@ -170,7 +167,7 @@ const Pincode = (props) => {
 				value={otp}
 				inputClassName={hide?"otp":""}
 				onChange={setOTP}
-				// autoFocus
+				autoFocus
 				inputStyles={{
 					width: '60px',
 					height: '60px'
@@ -201,7 +198,6 @@ const Pincode = (props) => {
 				value={otp1}
 				inputClassName={hide1?"otp":""}
 				onChange={setOTP1}
-				autoFocus
 				inputStyles={{
 					width: '60px',
 					height: '60px'
@@ -225,15 +221,24 @@ const Pincode = (props) => {
 	<div className="row mt-5">
 		<div className='col-md-12'>
 		<input
+			type="button"
+			className="btn rounded-0 shadow-none border-0 px-0 poppins-light-18px text-uppercase text-decoration-underline"
+			value="Back"
+			onClick={() => router.push('/pincode/options')}
+			// style={{ width: '5%', marginLeft: '45%' }}
+		/>
+	
+		
+		<input
 			type="submit"
 			className="btn btn-secondary poppins-medium-18px-save-button rounded-0 shadow-none border-0 float-end"
 			value="Submit"
-			// style={{ width: '5%', marginLeft: '45%' }}
+			// onClick={(e)=>Submit(e)}
 		/>
 		</div>
 	</div>
 </form>;
-	(uid!='')?
+	(contextState.uid!='')?
 	(display=fields):
 	(hasPin?
 		(display=fields):
