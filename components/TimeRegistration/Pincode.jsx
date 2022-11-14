@@ -9,6 +9,8 @@ import checkPinCode from '../../Services/ApiEndPoints';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import Translation from '@/Translation';
+import PopUp from './PopUpWerkpostfishe';
+
 //to make the otp dynamic
 const OTPInput = dynamic(
 	async () => {
@@ -30,6 +32,9 @@ const Pincode = (props) => {
 	const router = useRouter();
 	const { contextState = {} } = useContext(UserAuthContext);
 
+	// For popup stop planning
+	const [ show, setShow ] = useState(false);
+	const [ popupdata,setPopUpData]=useState('');
 	//get the otp
 	const [ otp, setOTP ] = useState(0);
 	//to catch the error
@@ -91,7 +96,7 @@ const Pincode = (props) => {
 								});
 						}
 						//setting the user id to the hook.
-						setuid(loggedInUserId);
+						setuid(contextState.uid);
 					})
 					.catch((error) => {
 						console.error(error);
@@ -136,6 +141,11 @@ const Pincode = (props) => {
 		router.push('/pincode/forgotpin/Resetpin');
 	};
 
+	// OPEN/CLOSE POPUP //
+	const actionPopup = () => {
+		setShow(!show);
+	};
+
 	//to hide and show the pincode1.
 	const hideShow = (e) => {
 		e.preventDefault();
@@ -169,48 +179,32 @@ const Pincode = (props) => {
 	const Submit = (event) => {
 		event.preventDefault();
 		validate(otp)
-			? //posting the pincode to the backend storing.
-				APICALL.service(
+			? APICALL.service(
 					process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-						'/api/getPlanningActual?id=' +
+						'/api/singed-or-not?id=' +
 						contextState.uid +
-						'&companyid=' +
-						company.value +
-						'&locationid=' +
-						location.value +
-						'&pincode=' +
-						otp,
+						'&company=' +
+						company.value
+						+'&location='+location.value,
 					'GET'
 				)
 					.then((result) => {
-						SetResponse(result.res);
-						if (result.res == 'Planning has been ended.' || result.res == 'Planning has been started.') {
-							//Api to check weather he signed the v1 document or not.
-							APICALL.service(
-								process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-									'/api/singed-or-not?id=' +
+						var t=0;
+						if (result.res[0] == 999) {
+							(result.res[1]!==999)?t=1:t=0;
+							router.push(
+								'/v1-document?entityid=' +
 									contextState.uid +
-									'&company=' +
-									company.value,
-								'GET'
-							)
-								.then((result) => {
-									if (result == 999) {
-										router.push(
-											'/v1-document?entityid=' +
-												contextState.uid +
-												'&entitytype=3&companyid=' +
-												company.value
-										);
-									} else {
-										setTimeout(() => {
-											router.push('/employee-planning');
-										}, 2000);
-									}
-								})
-								.catch((error) => {
-									console.error(error);
-								});
+									'&entitytype=3&companyid=' +
+									company.value +
+									'&t='+location.value
+							);
+						} else if (result.res[1] != 999) {
+							setPopUpData(result.res[1]);
+						} else {
+							setTimeout(() => {
+								router.push('/employee-planning');
+							}, 2000);
 						}
 					})
 					.catch((error) => {
@@ -222,6 +216,15 @@ const Pincode = (props) => {
 	return (
 		<form onSubmit={Submit} style={{ alignItems: 'center' }}>
 			<div className="row minheight-verifypin">
+
+			{
+			show&&
+				<PopUp
+				display={'block'}
+				popupAction={actionPopup}
+				data={popupdata}
+			/>
+				}
 				<div className="col-md-12">
 					<div className="row position-sticky-pincode-verify">
 						<div className="col-md-6">
@@ -262,67 +265,66 @@ const Pincode = (props) => {
 							)}
 						</div>
 					</div>
-					</div>
-					{/* <div className="col-4" /> */}
-					<div className="col-sm-6 col-md-5 mx-auto mt-1">
-						<div className="d-flex justify-content-center ">
-							<OTPInput
-								inputClassName={hide ? 'otp border' : 'border otp-visible'}
-								className="otp-container"
-								value={otp}
-								onChange={setOTP}
-								inputStyles={{
-									width: '60px',
-									height: '60px'
-								}}
-								OTPLength={6}
-								otpType="number"
-								//secure
-							/>
+				</div>
+				{/* <div className="col-4" /> */}
+				<div className="col-sm-6 col-md-5 mx-auto mt-1">
+					<div className="d-flex justify-content-center ">
+						<OTPInput
+							inputClassName={hide ? 'otp border' : 'border otp-visible'}
+							className="otp-container"
+							value={otp}
+							onChange={setOTP}
+							inputStyles={{
+								width: '60px',
+								height: '60px'
+							}}
+							OTPLength={6}
+							otpType="number"
+							//secure
+						/>
 
-							<button style={{ border: 'none' }} onClick={hideShow} className="bg-white color-skyblue">
-								{eyeicon}
+						<button style={{ border: 'none' }} onClick={hideShow} className="bg-white color-skyblue">
+							{eyeicon}
+						</button>
+					</div>
+					<p style={{ color: 'red', marginLeft: '-11px' }} className="mt-2">
+						{err}
+					</p>
+					<p style={{ color: 'red' }} className="mt-2">
+						{response}
+					</p>
+					<div className="row mt-3">
+						<div className="col-md-11 pe-2">
+							<button
+								style={{ border: 'none', background: 'white', color: 'blue' }}
+								onClick={(e) => forgotPassword(e)}
+								className="forgot_password_pincode float-end pe-0"
+							>
+								{t('Reset pincode?')}
 							</button>
 						</div>
-						<p style={{ color: 'red', marginLeft: '-11px' }} className="mt-2">
-							{err}
-						</p>
-						<p style={{ color: 'red' }} className="mt-2">
-							{response}
-						</p>
-						<div className="row mt-3">
-							<div className="col-md-11 pe-2">
-								<button
-									style={{ border: 'none', background: 'white', color: 'blue' }}
-									onClick={(e) => forgotPassword(e)}
-									className="forgot_password_pincode float-end pe-0"
-								>
-									{t('Reset pincode?')}
-								</button>
-							</div>
-						</div>
 					</div>
 				</div>
+			</div>
 
-				<div className="row">
-					<div className="col-md-1">
-						<input
-							type="button"
-							className="btn rounded-0 shadow-none border-0 px-0 poppins-light-18px text-uppercase text-decoration-underline"
-							value="Back"
-							onClick={() => router.push('/pincode/options')}
-						/>
-					</div>
-					<div className="col-md-11">
-						<input
-							type="submit"
-							className="btn poppins-medium-18px-next-button shadow-none rounded-0 float-end"
-							value={t('Submit')}
-							style={{}}
-						/>
-					</div>
+			<div className="row">
+				<div className="col-md-1">
+					<input
+						type="button"
+						className="btn rounded-0 shadow-none border-0 px-0 poppins-light-18px text-uppercase text-decoration-underline"
+						value="Back"
+						onClick={() => router.push('/pincode/options')}
+					/>
 				</div>
-			
+				<div className="col-md-11">
+					<input
+						type="submit"
+						className="btn poppins-medium-18px-next-button shadow-none rounded-0 float-end"
+						value={t('Submit')}
+						style={{}}
+					/>
+				</div>
+			</div>
 		</form>
 	);
 };
