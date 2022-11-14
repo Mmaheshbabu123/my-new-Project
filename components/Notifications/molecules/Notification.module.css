@@ -33,15 +33,15 @@
 {
   width: 0.2em;
 }
-.notification-scroll::-webkit-scrollbar-button 
+.notification-scroll::-webkit-scrollbar-button
 {
   background: #ccc
 }
-.notification-scroll::-webkit-scrollbar-track-piece 
+.notification-scroll::-webkit-scrollbar-track-piece
 {
   background: #888
 }
-.notification-scroll::-webkit-scrollbar-thumb 
+.notification-scroll::-webkit-scrollbar-thumb
 {
   background: #eee
 }
@@ -58,10 +58,10 @@ border-bottom: 1px solid var(--color-input-border-lightgrey);
 
 .iconBadge {
     background: red;
-    width: 18px;
+    width: 24px;
     display: block;
     text-align: center;
-    height: 18px;
+    height: 21px;
     border-radius: 50%;
     color: #fff;
     font-size: 12px;
@@ -69,7 +69,7 @@ border-bottom: 1px solid var(--color-input-border-lightgrey);
     position: absolute;
     right: 0;
     bottom: 15px;
-    left: 15px;
+    left: 10px;
     font-weight: bolder;
 }
 .unseen:before{
