@@ -201,6 +201,7 @@ const Pincode = (props) => {
 							);
 						} else if (result.res[1] != 999) {
 							setPopUpData(result.res[1]);
+							actionPopup();
 						} else {
 							setTimeout(() => {
 								router.push('/employee-planning');
