@@ -26,6 +26,7 @@ export const checkPinCode= BASE_URL+ "hasPincode/";
 
 //------------Drupal ------------------------------//
 export const homeScreen= ENV_DRUPAL+ "dashboard/url";
+export const dashboardTileCount= BASE_URL + "get-tile-count";
 
 //--------------CATEGORY API ROUTES ----------------//
 export const getCat = BASE_URL + "getcat/";
@@ -278,3 +279,4 @@ export const getContract = BASE_URL + "downloadContract/";
 export const fetchEmployeeWidgetPlanning = BASE_URL + "get-all-widget-planning/";
 
 export const cancelContract = BASE_URL + 'cancelCantract';
+export const getContracts = BASE_URL + 'get-contracts';

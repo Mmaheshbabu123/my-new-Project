@@ -82,8 +82,9 @@ function Planning(props) {
 	// FETCHING COMPANY, LOCATION, COST-CENTER PER EMPLOYER
 	useEffect(
 		() => {
+			console.log(contextState)
 			if (contextState.uid) {
-				APICALL.service(getEmployeerCompanylist + contextState.uid, 'GET')
+				APICALL.service(getEmployeerCompanylist + contextState.uid+'/'+contextState.roleType, 'GET')
 					.then((result) => {
 						console.log(result.data)
 						setCompany(result.data[0]);
@@ -348,7 +349,7 @@ function Planning(props) {
 									{t('Add Planning')}
 								</h1>
 							</div>
-							<div className="col-md-12 px-0 py-2 add_project_position">
+							<div className="col-md-12 px-0 py-2 add_project_position border-bottom-purple">
 								{(project.id == '' || project.id == undefined) && showproject == true ? (
 									<button
 										onClick={showPopup}
@@ -371,7 +372,7 @@ function Planning(props) {
 							</button>}
 							</div>
 						<div className='planning-height px-0'>
-						<div className="form-sec border-form-sec p-4 mb-5">
+						<div className="form-sec border-form-sec p-4 mb-5 border-top-0">
 								<div className="col-md-6">
 									<div className="form-group mb-3">
 										<label className="form-label mt-2 custom_astrick poppins-regular-18px">
