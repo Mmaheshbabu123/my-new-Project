@@ -83,7 +83,7 @@ const NotificationMain = ( props ) => {
               src={Number(state.notificationCount) > 0 ? notificationExists.src : notificationSvg.src}
               style={{ width: '22px' }}
             ></img>
-           {/*state.loading === true && Number(state.notificationCount) > 0 && <span className={styles["iconBadge"]}>{state.notificationCount}</span>*/}
+           {state.loading === true && Number(state.notificationCount) > 0 && <span className={styles["iconBadge"]} >{state.notificationCount}</span>}
           </div>
         </div>
         {state.notificationView === true &&
