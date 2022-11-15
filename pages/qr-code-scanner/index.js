@@ -87,12 +87,14 @@ const Qrscan = () => {
 								)
 									.then((res) => {
 										if (res != null || res != undefined) {
-											setResp(res.res);
 											if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
-											setTimeout(() => {
-												router.push('/employee-planning');
-											}, 2000);
+												alert('start/stop');
+												setResp(res.res);
+												setTimeout(() => {
+													router.push('/employee-planning');
+												}, 2000);
 											}
+											setResp(res.res);
 										}
 									})
 									.catch((error) => {
