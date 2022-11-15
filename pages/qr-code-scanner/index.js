@@ -88,7 +88,6 @@ const Qrscan = () => {
 									.then((res) => {
 										if (res != null || res != undefined) {
 											if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
-												alert('start/stop');
 												setResp(res.res);
 												setTimeout(() => {
 													router.push('/employee-planning');
