@@ -5,6 +5,7 @@ import { v1DocumentPreview, saveV1Document, getEmployerIdByCompanyId } from '@/S
 import { APICALL } from '@/Services/ApiServices';
 import styles from './V1Document.module.css';
 import customAlert from '@/atoms/customAlert';
+import PopUp from '../../TimeRegistration/PopUpWerkpostfishe';
 
 const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId = '' }) => {
 	const router = useRouter();
