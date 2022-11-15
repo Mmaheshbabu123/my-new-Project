@@ -11,7 +11,7 @@ const Qrscan = () => {
 	const [userid,setUserid]=useState(0);
 	const [resp,setResp]=useState('Scan the QR code here');
 	const { contextState = {} } = useContext(UserAuthContext);
-
+	const router = useRouter();
 	// For popup stop planning
 	const [ show, setShow ] = useState(false);
 	const [ popupdata, setPopUpData ] = useState('');
