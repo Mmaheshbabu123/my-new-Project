@@ -31,7 +31,7 @@ const Qrscan = () => {
 	const actionPopup = () => {
 		setShow(!show);
 	};
-	
+
 	return (
 		<div className="container">
 			<div className='row pt-5'>
@@ -82,7 +82,7 @@ const Qrscan = () => {
 										'&locationid=' +
 										locationid +
 										'&pincode=' +
-										otp,
+										0,
 									'GET'
 								)
 									.then((res) => {
