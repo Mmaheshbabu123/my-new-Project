@@ -27,6 +27,10 @@ const Qrscan = () => {
 		height: 240,
 		width: 320,
 	}
+	// OPEN/CLOSE POPUP //
+	const actionPopup = () => {
+		setShow(!show);
+	};
 	
 	return (
 		<div className="container">
