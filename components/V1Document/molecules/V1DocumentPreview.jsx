@@ -6,9 +6,10 @@ import { APICALL } from '@/Services/ApiServices';
 import styles from './V1Document.module.css';
 import customAlert from '@/atoms/customAlert';
 
-const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to:locationId = '' }) => {
+const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId = '' }) => {
 	const router = useRouter();
-  const [ show, setShow ] = useState(false);
+	const [ show, setShow ] = useState(false);
+	const [ popupdata, setPopUpData ] = useState('');
 	const [ state, setState ] = useState({
 		employerId: 0,
 		approved: 0,
@@ -22,12 +23,11 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to:locationId =
 		document.querySelectorAll('.clip0,.clip1').forEach((el) => (el.style['display'] = 'none'));
 	}, []);
 
-  // OPEN/CLOSE POPUP //
+	// OPEN/CLOSE POPUP //
 	const actionPopup = () => {
 		setShow(!show);
 	};
 
-  
 	const getEmployerId = async () => {
 		await APICALL.service(getEmployerIdByCompanyId + '/' + companyId, 'GET').then((response) => {
 			if (response.status === 200) {
@@ -91,21 +91,20 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to:locationId =
 					? setTimeout(() => router.push('/pincode/options'), 2700)
 					: APICALL.service(
 							process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-								'/api/check-signed-or-not-wpf?id='+
+								'/api/check-signed-or-not-wpf?id=' +
 								contextState.uid +
-								'&company='+companyId+'&location='+locationId,
+								'&company=' +
+								companyId +
+								'&location=' +
+								locationId,
 							'GET'
 						)
 							.then((result) => {
 								if (result.res == 999) {
 									router.push('/pincode/options');
-								}else{
-                  return (<PopUp
-                    display={'block'}
-                    popupAction={actionPopup}
-                    data={result.res}
-                  />);
-                }
+								} else {
+									setPopUpData(result.res);
+								}
 							})
 							.catch((error) => {
 								console.error(error);
@@ -128,6 +127,7 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to:locationId =
 
 	return (
 		<div className="">
+			{popupdata != '' && <PopUp display={'block'} popupAction={actionPopup} data={result.res} />}
 			{state.loaded === true && (
 				<div>
 					<iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 175} />

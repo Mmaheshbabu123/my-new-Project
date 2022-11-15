@@ -8,8 +8,6 @@ import { da } from 'date-fns/locale';
 
 function popUpWerkPostFiche(props) {
 	
-	const router = useRouter();
-	
 	const save = () => {
         
 		let data = props.data;
