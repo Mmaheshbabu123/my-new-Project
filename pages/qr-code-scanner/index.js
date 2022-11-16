@@ -12,6 +12,7 @@ const Qrscan = () => {
 	const [resp,setResp]=useState('Scan the QR code here');
 	const { contextState = {} } = useContext(UserAuthContext);
 	const router = useRouter();
+	const [scanned,setScanned]=useState(true);
 	// For popup stop planning
 	const [ show, setShow ] = useState(false);
 	const [ popupdata, setPopUpData ] = useState('');
@@ -22,6 +23,39 @@ const Qrscan = () => {
 	// 	}
 	// }, []);
 
+
+	const updateResponse=(data)=>{
+		setResp(data);
+	}
+
+	const startstop=async(companyid,locationid)=>{
+		await APICALL.service(
+			process.env.NEXT_PUBLIC_APP_BACKEND_URL +
+				'/api/getPlanningActual?id=' +
+				contextState.uid +
+				'&companyid=' +
+				companyid +
+				'&locationid=' +
+				locationid +
+				'&pincode=' +
+				0,
+			'GET'
+		)
+			.then((res) => {
+				if (res != null || res != undefined) {
+					 if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
+						updateResponse(res.res);
+						 setTimeout(() => {
+							router.push('/employee-planning');
+						}, 2000);
+					}
+					updateResponse(res.res);
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
 
 	const previewStyle = {
 		height: 240,
@@ -41,8 +75,9 @@ const Qrscan = () => {
 			style={previewStyle}
             onResult={(result, error) => {
                 if (!!result) {
-					
-                  if(result){
+                //  if(result){
+					(scanned)?setScanned(false):'';
+					if(scanned){
 					let a=atob(result.text);
 					let decoded=JSON.parse(a);
 					let companyid=(decoded.company_id==null)?'':decoded.company_id;
@@ -73,33 +108,7 @@ const Qrscan = () => {
 								setPopUpData(result.res[1]);
 								actionPopup();
 							} else {
-							await	APICALL.service(
-									process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-										'/api/getPlanningActual?id=' +
-										contextState.uid +
-										'&companyid=' +
-										companyid +
-										'&locationid=' +
-										locationid +
-										'&pincode=' +
-										0,
-									'GET'
-								)
-									.then(async(res) => {
-										if (res != null || res != undefined) {
-
-										 	if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
-											  	setResp(res.res);
-											 	setTimeout(() => {
-													router.push('/employee-planning');
-												}, 2000);
-											}
-											setResp(res.res);
-										}
-									})
-									.catch((error) => {
-										console.error(error);
-									});
+							 await startstop(companyid,locationid);
 							}
 						})
 						.catch((error) => {
@@ -134,6 +143,7 @@ const Qrscan = () => {
 					// 	console.error(error);
 					// });
 				  }
+				// }
                 }
       
                 if (!!error) {
