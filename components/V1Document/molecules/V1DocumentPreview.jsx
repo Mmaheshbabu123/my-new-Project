@@ -90,11 +90,11 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 			if (locationId != '') {
 				locationId == 0
 					? 
-				 setTimeout(() => router.push('/pincode/options'), 2700)
+				 router.push('/pincode/options')
 					: APICALL.service(
 							process.env.NEXT_PUBLIC_APP_BACKEND_URL +
 								'/api/check-signed-or-not-wpf?id=' +
-								contextState.uid +
+								employeeId +
 								'&company=' +
 								companyId +
 								'&location=' +
@@ -128,7 +128,7 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 
 	return (
 		<div className="">
-			{popupdata != '' && <PopUp display={'block'} popupAction={actionPopup} data={result.res} />}
+			{popupdata != '' && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} />}
 
 			{state.loaded === true && (
 				<div>
