@@ -8,7 +8,7 @@ import PopUp from '@/components/TimeRegistration/PopUpWerkpostfishe';
 
 const Qrscan = () => {
 
-	const [userid,setUserid]=useState(0);
+	// const [userid,setUserid]=useState(0);
 	const [resp,setResp]=useState('Scan the QR code here');
 	const { contextState = {} } = useContext(UserAuthContext);
 	const router = useRouter();
@@ -16,11 +16,11 @@ const Qrscan = () => {
 	const [ show, setShow ] = useState(false);
 	const [ popupdata, setPopUpData ] = useState('');
 
-	useEffect(() => {
-		if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '') {
-			setUserid(contextState.uid);
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (contextState.uid != null&&contextState.uid != undefined&&contextState.uid != '') {
+	// 		setUserid(contextState.uid);
+	// 	}
+	// }, []);
 
 
 	const previewStyle = {
@@ -66,7 +66,7 @@ const Qrscan = () => {
 										contextState.uid +
 										'&entitytype=3&companyid=' +
 										companyid +
-										'&t=' +
+										'&to=' +
 										locationid
 								);
 							} else if (result.res[1] != 999) {
