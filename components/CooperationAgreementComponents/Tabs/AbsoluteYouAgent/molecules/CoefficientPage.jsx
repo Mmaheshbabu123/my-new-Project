@@ -2,8 +2,8 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import { getPcLinkedCoeffData } from '@/Services/ApiEndPoints';
 import Image from 'next/image';
-import forwardScroll from '@/components/images/right-arrow.png';
-import backwardScroll from '@/components/images/left-arrow.png';
+// import forwardScroll from '@/components/images/right-arrow.png';
+// import backwardScroll from '@/components/images/left-arrow.png';
 import { helpers } from '@/components/LinkCoeffEmpComponents/LinkCoeffEmpHelper';
 import styles from '../absoluteAgent.module.css';
 import LeftPart from './LeftPart';
@@ -40,7 +40,7 @@ const CoefficientPage = (props) => {
     , emptyError: false
   });
 
-  const { scrollLeft, scrollRight, tableWidth } = compState;
+  // const { scrollLeft, scrollRight, tableWidth } = compState;
   const onSelect = async ({ value }) => {
     if(!value) {
       dependecyDataStatus['cooperationCoeffData'] = true;
@@ -60,6 +60,7 @@ const CoefficientPage = (props) => {
       }
     })
   }
+
   /**
    * [assignDataToStateVariables updating data in state variables/ context state variables]
    * @param  {Object}     data  [response data from backend]
@@ -115,11 +116,11 @@ const CoefficientPage = (props) => {
       {compState.selectedPc ? <div className="col-md-12 m-0 p-0 relative-div">
         {compState.emptyError !== true ? <>
         <p className={`mb-4 mt-5 text-center d-none ${styles['worker-servants-title']}`}> {t('Link coefficients to employee types')}</p>
-        {scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
-            <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>}
-        {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
-            <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>}
-        <div className="row link-emp-coeff-tableparent pt-3" id="linkempCoeffDivId" style={{ width: `${tableWidth}`, minHeight: '150px' }}>
+        {/*scrollLeft && <span onClick={() => updateStateChanges(helpers.scrollContent(0))} style={{ right: scrollRight === false && scrollLeft === true ? 0 : '35px' }}>
+            <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>*/}
+        {/*scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
+            <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>*/}
+        <div className="row link-emp-coeff-tableparent pt-3" id="linkempCoeffDivId" style={{ width: '100%', minHeight: '150px' }}>
           <div className="col-md-3 m-0 p-0 pc-linking-div firstpart">
             <LeftPart compState={compState} setCompState = {setCompState} />
           </div>

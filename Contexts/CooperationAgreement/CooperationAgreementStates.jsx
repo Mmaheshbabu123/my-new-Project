@@ -58,6 +58,7 @@ const CooperationAgreementStates = (props) => {
     , dependecyDataStatus: takeElementStatus(2)
     , defaultOptions : {}
     , renderedOptions:0
+    , changedCells: {}
   };
   const [state, dispatch] = useReducer(CooperationAgreementReducer, initialState);
   const updateStateChanges = (obj) => {
