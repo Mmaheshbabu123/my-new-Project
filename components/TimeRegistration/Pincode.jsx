@@ -198,7 +198,7 @@ const Pincode = (props) => {
 									contextState.uid +
 									'&entitytype=3&companyid=' +
 									company.value +
-									'&t=' +
+									'&to=' +
 									location.value
 							);
 						} else if (result.res[1] != 999) {

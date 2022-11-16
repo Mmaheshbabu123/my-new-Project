@@ -65,30 +65,6 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 			.then((response) => {
 				if (response.status === 200) {
 					checkSignStatusAndApprove(response.data);
-					if (locationId != '') {
-						locationId == 0
-							? setTimeout(() => router.push('/pincode/options'), 2700)
-							: APICALL.service(
-									process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-										'/api/check-signed-or-not-wpf?id=' +
-										contextState.uid +
-										'&company=' +
-										companyId +
-										'&location=' +
-										locationId,
-									'GET'
-								)
-									.then((result) => {
-										if (result.res == 999) {
-											router.push('/pincode/options');
-										} else {
-											setPopUpData(result.res);
-										}
-									})
-									.catch((error) => {
-										console.error(error);
-									});
-					}
 				} else {
 					customAlert('error', 'Error while approving document', 2000);
 				}
@@ -108,9 +84,34 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 		};
 	};
 
-	const checkSignStatusAndApprove = (data) => {
+	const checkSignStatusAndApprove = async (data) => {
 		if (data.completed === 1) {
 			customAlert('success', 'Approved successfully!', 2500);
+			if (locationId != '') {
+				locationId == 0
+					? 
+				 setTimeout(() => router.push('/pincode/options'), 2700)
+					: APICALL.service(
+							process.env.NEXT_PUBLIC_APP_BACKEND_URL +
+								'/api/check-signed-or-not-wpf?id=' +
+								contextState.uid +
+								'&company=' +
+								companyId +
+								'&location=' +
+								locationId,
+							'GET'
+						)
+							.then((result) => {
+								if (result.res == 999) {
+									router.push('/pincode/options');
+								} else {
+									setPopUpData(result.res);
+								}
+							})
+							.catch((error) => {
+								console.error(error);
+							});
+			}
 		} else {
 			let message = '';
 			if (!data.employerSignStatus && !data.employeeSignStatus) {
@@ -128,6 +129,7 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 	return (
 		<div className="">
 			{popupdata != '' && <PopUp display={'block'} popupAction={actionPopup} data={result.res} />}
+
 			{state.loaded === true && (
 				<div>
 					<iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 175} />
