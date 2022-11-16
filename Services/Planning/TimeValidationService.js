@@ -46,7 +46,7 @@ const TimeValidationService = {
 	 * 
 	 */
 
-	 breakWarning: function(timeObj,age){
+	 breakWarning: function(timeObj){
 		 var error = '';
 		 var duration =0;
 		 timeObj.map((val,key)=>{
@@ -57,6 +57,28 @@ const TimeValidationService = {
 		 }
 		 return error;
 
-	 }
+	 },
+	 endTimeWarning: function(starttime,endtime,dob){
+		 var startDate = starttime!=''?moment(starttime).format('YYYY-MM-DD'):'';
+		 var endDate = endtime!=''?moment(endtime).format('YYYY-MM-DD'):'';
+		 var maxtime = moment(startDate+' '+'20:00');
+
+		 var error = '';
+		 if(moment(endDate) > moment(startDate)){
+			error = 'You are planning a below 18 year old employee after 20h00, which is legally not allowed. We suggest you to replan.'
+		 }else{
+			 if(starttime!= '' && moment(starttime)>moment(maxtime)){
+				error = 'You are planning a below 18 year old employee after 20h00, which is legally not allowed. We suggest you to replan.' 
+			 }else if(endtime!= '' && moment(endtime)>moment(maxtime)){
+			 	error = 'You are planning a below 18 year old employee after 20h00, which is legally not allowed. We suggest you to replan.' 
+
+			 }
+		 }
+
+			// error = 'You are planning a below 18 year old employee after 20h00, which is legally not allowed. We suggest you to replan.'
+		// }
+		return error;
+
+	}
 };
 export default TimeValidationService;
