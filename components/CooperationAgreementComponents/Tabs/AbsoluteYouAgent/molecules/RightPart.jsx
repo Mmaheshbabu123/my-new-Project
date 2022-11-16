@@ -57,13 +57,14 @@ const RightPart = ( { compState, setCompState } ) => {
     }
     let stateData = state[TABKEY];
     stateData['cooperationCoeffData'] = valueDataObj;
+    state['changedCells'][`${_EmpId}_${_Coeffid}`] = { employee_type_id: _EmpId, coefficient_type_id: _Coeffid, value: value };
     let dataObj = {...compState,
       pclinkingValueobj: valueDataObj,
       valueErrorArray: valueValidation(_EmpId, _Coeffid, value, lowVal, highVal),
       emptyDataWarning: false
      };
-     dependecyDataStatus['cooperationCoeffData'] = true;
-    updateStateChanges({ [TABKEY]: stateData,  coeffPageData: dataObj, dependecyDataStatus });
+    dependecyDataStatus['cooperationCoeffData'] = true;
+    updateStateChanges({ [TABKEY]: stateData,  coeffPageData: dataObj, dependecyDataStatus, changedCells: state['changedCells'] });
     setCompState(dataObj);
   }
 
