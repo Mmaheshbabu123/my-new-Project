@@ -37,7 +37,7 @@ const Qrscan = () => {
 			<div className='row pt-5'>
 				<div className='col-sm-12'>
 				<QrReader
-			delay={500}
+			delay={1000}
 			style={previewStyle}
             onResult={(result, error) => {
                 if (!!result) {
@@ -57,7 +57,7 @@ const Qrscan = () => {
 							locationid,
 						'GET'
 					)
-						.then((result) => {
+						.then(async(result) => {
 							var t = 0;
 							if (result.res[0] == 999) {
 								result.res[1] !== 999 ? (t = 1) : (t = 0);
@@ -73,7 +73,7 @@ const Qrscan = () => {
 								setPopUpData(result.res[1]);
 								actionPopup();
 							} else {
-								APICALL.service(
+							await	APICALL.service(
 									process.env.NEXT_PUBLIC_APP_BACKEND_URL +
 										'/api/getPlanningActual?id=' +
 										contextState.uid +
@@ -85,11 +85,12 @@ const Qrscan = () => {
 										0,
 									'GET'
 								)
-									.then((res) => {
+									.then(async(res) => {
 										if (res != null || res != undefined) {
-											if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
-												setResp(res.res);
-												setTimeout(() => {
+
+										 	if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
+											  	setResp(res.res);
+											 	setTimeout(() => {
 													router.push('/employee-planning');
 												}, 2000);
 											}
