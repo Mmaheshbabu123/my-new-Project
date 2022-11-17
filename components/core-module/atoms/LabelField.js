@@ -2,7 +2,7 @@ import React from 'react';
 
 const style = {
   display: 'block',
-  padding: '0.5rem 0.2rem',
+  padding: '0.5rem 0rem',
   fontSize: '1rem',
   fontWeight: '400',
   color: '#212529',
