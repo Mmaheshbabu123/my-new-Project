@@ -221,9 +221,9 @@ const Pincode = (props) => {
 									if (res != null || res != undefined) {
 										SetResponse(res.res);
 										// setResp(res.res);
-										// if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
-
-										// }
+										if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
+											router.push('/pincode/options');
+										}
 									}
 								})
 								.catch((error) => {
