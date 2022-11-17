@@ -116,6 +116,16 @@ const QrscanMessage = () => {
 			</div>
 			{show && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} />}
 			{/* <div className=" pt-2 text-center" style={{color:'red'}}>{resp}</div> */}
+            <div className="row">
+				<div className="col-md-1">
+					<input
+						type="button"
+						className="btn rounded-0 shadow-none border-0 px-0 poppins-light-18px text-uppercase text-decoration-underline"
+						value="Back"
+						onClick={() => router.push('/pincode/options')}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 }
