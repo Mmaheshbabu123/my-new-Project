@@ -103,7 +103,7 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 						)
 							.then((result) => {
 								if (result.res == 999) {
-									router.push('/pincode/options');
+									router.push('/qr-code-scanner/scanned?companyid='+companyId+'&locationid='+locationId);
 								} else {
 									setPopUpData(result.res);
 								}
@@ -128,7 +128,7 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 
 	return (
 		<div className="">
-			{popupdata != '' && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} />}
+			{popupdata != '' && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} info={[companyId,locationId]} />}
 
 			{state.loaded === true && (
 				<div>

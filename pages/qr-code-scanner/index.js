@@ -75,6 +75,7 @@ const Qrscan = () => {
 			style={previewStyle}
             onResult={(result, error) => {
                 if (!!result) {
+					window.navigator.vibrate(300);
                 //  if(result){
 					(scanned)?setScanned(false):'';
 					if(scanned){
@@ -82,38 +83,7 @@ const Qrscan = () => {
 					let decoded=JSON.parse(a);
 					let companyid=(decoded.company_id==null)?'':decoded.company_id;
 					let locationid=(decoded.location_id==null)?'':decoded.location_id;
-					APICALL.service(
-						process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-							'/api/singed-or-not?id=' +
-							contextState.uid +
-							'&company=' +
-							companyid +
-							'&location=' +
-							locationid,
-						'GET'
-					)
-						.then(async(result) => {
-							var t = 0;
-							if (result.res[0] == 999) {
-								result.res[1] !== 999 ? (t = 1) : (t = 0);
-								router.push(
-									'/v1-document?entityid=' +
-										contextState.uid +
-										'&entitytype=3&companyid=' +
-										companyid +
-										'&to=' +
-										locationid
-								);
-							} else if (result.res[1] != 999) {
-								setPopUpData(result.res[1]);
-								actionPopup();
-							} else {
-							 await startstop(companyid,locationid);
-							}
-						})
-						.catch((error) => {
-							console.error(error);
-						})
+					router.push('/qr-code-scanner/scanned?companyid='+companyid+'&locationid='+locationid);
 					// APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/getPlanningActual?id='+contextState.uid+'&companyid='+companyid+'&locationid='+locationid+'&pincode='+0, 'GET')
 					// .then((res) => {
 					// 	if(res!=null||res!=undefined){
@@ -156,7 +126,6 @@ const Qrscan = () => {
 			/>
 				</div>
 			</div>
-			{show && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} />}
 			<div className=" pt-2 text-center" style={{color:'red'}}>{resp}</div>
 			{/* <div> {decode}</div>		 */}
 		</div>

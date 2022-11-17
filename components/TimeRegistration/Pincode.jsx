@@ -240,7 +240,7 @@ const Pincode = (props) => {
 	return (
 		<form onSubmit={Submit} style={{ alignItems: 'center' }}>
 			<div className="row minheight-verifypin">
-				{show && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} />}
+				{show && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} info={[company.value,location.value]} />}
 				<div className="col-md-12">
 					<div className="row position-sticky-pincode-verify">
 						<div className="col-md-6">
