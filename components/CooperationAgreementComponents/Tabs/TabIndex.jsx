@@ -95,7 +95,7 @@ const loadData = async () => {
 
 	return (
 		<div className="">
-      {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> {t('Please fill all mandotory fields.')} </p> : null}
+      {/* {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> {t('Please fill all mandotory fields.')} </p> : null} */}
       {renderedOptions === 1 && showComponentBasedOnTabSelection()}
      <div className='row my-4'>
      <div className={`col-md-12`} >
