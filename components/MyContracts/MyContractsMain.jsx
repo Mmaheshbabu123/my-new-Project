@@ -106,7 +106,7 @@ const MyContractsMain = ( props ) => {
       APICALL.service(getContract + contract_id, 'GET')
       .then((result) => {
         if (result.status == 200) {
-            returnPath = result.data.data;
+            let returnPath = result.data.data || '';
             window.open(returnPath, '_blank');
         }
       }).catch(error => console.log(error));
