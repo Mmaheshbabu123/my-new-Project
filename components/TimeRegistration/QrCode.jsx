@@ -55,7 +55,7 @@ const QrCodeGeneration = (props) => {
 						if (result.companies != null) {
 							if (result.companies.length == 1) {
 								setCompany(result.companies[0]);
-                                getLocations(result.companies[0].value);
+                                				getLocations(result.companies[0].value);
 							}
 						}
 					})
@@ -64,7 +64,7 @@ const QrCodeGeneration = (props) => {
 					});
 			}
 		},
-		[ router.query ]
+		[]
 	);
 
 	useEffect(() => {
