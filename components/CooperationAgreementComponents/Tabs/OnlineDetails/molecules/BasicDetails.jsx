@@ -51,7 +51,7 @@ const BasicDetails = (props) => {
     fieldsArray.push(
       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
           <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'}/>{requiredFields['tab_4'][data.id] && <RequiredField />}
-          <div>
+          <div style={{margin:'0.7rem 0'}}>
           <RadioField   name = {data.id} checked = {Number(tab_4[data.id]) === 1} handleChange = {(e)=>handleRadioSelect(data.id,1)} label= {data.option1} className={'poppins-regular-18px me-3'} />
           <RadioField  name = {data.id} checked = {Number(tab_4[data.id]) === 2} handleChange = {(e)=>handleRadioSelect(data.id,2)} label= {data.option2} className={'poppins-regular-18px'}/>
           </div>

@@ -124,10 +124,14 @@ const QrCodeGeneration = (props) => {
 
 	return (
 		<form onSubmit={Submit} style={{ alignItems: 'center' }}>
-			<div className="row minheight-verifypin">
+			<div className="row min-height-view-qr-code">
 			
 				<div className="col-md-12">
-					<div className='row'> View QR code. </div>
+					<div className='row  bitter-italic-normal-medium-24 py-4 position-sticky-pc'> 
+					<div className='col-md-12'>
+					View QR code. 
+					</div>
+					</div>
 					<div className="row position-sticky-pincode-verify">
 						
 						<div className="col-md-5">
@@ -168,7 +172,7 @@ const QrCodeGeneration = (props) => {
 							)}
 						</div>
                         <div className='col-md-2'>
-                                <button onClick={Submit}>Search</button>
+                                <button onClick={Submit} className='btn btn-block border-0 rounded-0 float-right skyblue-bg-color w-100 shadow-none text-uppercase' style={{marginTop:'2.3rem'}}>Search</button>
                         </div>
 					</div>
 				</div>
