@@ -1,11 +1,6 @@
-import React, { Component, useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { addProject, fetchproject } from '../../Services/ApiEndPoints';
-import { APICALL } from '../../Services/ApiServices';
+import React, { useState, useEffect } from 'react';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
-import { addPlanning } from '../../Services/ApiEndPoints';
-import Popup from './ProjectArchivePopup';
 import Translation from '@/Translation';
 
 // import './addproject.css';
@@ -17,7 +12,6 @@ function Addproject(props) {
 	/**
 	 * FOR ASSIGNING COMPANY LOCATION VALUES
 	 */
-	const [company, setCompany] = useState([]);
 	const [countrylist, setCountrylist] = useState([]);
 
 	const [error_project_name, setError_project_name] = useState('');
@@ -30,8 +24,6 @@ function Addproject(props) {
 	const [error_postal_code, setError_postal_code] = useState('');
 	const [error_countrylist, setError_countrylist] = useState('');
 	const [error_bus_number, setError_bus_number] = useState('');
-
-	const [showdeletepopup, setShowdeletepopup] = useState(false);
 
 	const [data, setData] = useState({
 		id: '',
@@ -55,9 +47,10 @@ function Addproject(props) {
 			}
 
 			if (data.comp_id == '') {
-				var res = data;
-				res.comp_id = props.company_id;
-				setData(res);
+				setData((prev) => ({
+					...prev,
+					comp_id: props.company_id
+				}))
 			}
 		},
 		[props]
@@ -65,9 +58,8 @@ function Addproject(props) {
 
 	useEffect(
 		() => {
-			console.log(props.data);
 			var data1 = props.data;
-			if (data1) {
+			if (Object.values(data1).length > 0) {
 				setData((prev) => ({
 					...prev,
 					id: data1.id,
@@ -81,8 +73,6 @@ function Addproject(props) {
 					country: data1.country,
 					extra: data1.extra
 				}));
-				// setData(props.data);
-				// console.log(data);
 			}
 		},
 		[props.data]
@@ -97,21 +87,11 @@ function Addproject(props) {
 		event.preventDefault();
 		var valid_res = validate(data);
 		if (valid_res) {
-			console.log(data);
-			APICALL.service(addProject, 'POST', data)
-				.then((result) => {
-					console.log(result);
-					props.popupActionNo();
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+			props.save(data);
 		}
 	};
 
 	let validate = (res) => {
-		// console.log(res.bno);
-		// return;
 		var error1 = [];
 		/**
 		 * check if required fields are empty
@@ -180,8 +160,6 @@ function Addproject(props) {
 		setError_countrylist(error1['country']);
 		setError_bus_number(error1['bno']);
 
-		// console.log(error1);
-
 		//return false if there is an error else return true
 		if (
 			error1['project_name'] == '' &&
@@ -210,13 +188,9 @@ function Addproject(props) {
 					style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}
 				>
 					<div className="modal-dialog custom-modal-width-85 modal-xl ">
-						{/* <div className="modal-dialog  modal-xl "> */}
 						<div className="modal-content  ">
-							{/* <div className="modal-header mx-4 px-0"> */}
 							<div className="modal-header col-md-11 m-auto px-0">
-								{/* <div className='col-md-10 px-3'> */}
 								<div className="col-md-10">
-									{/* <p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-5">Add project</p> */}
 									<p className="modal-title  font-weight-bold  bitter-italic-normal-medium-24 px-4">
 										{t('Add project')}
 									</p>
@@ -262,11 +236,10 @@ function Addproject(props) {
 														disabled={props.company_id != ''}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, comp_id: e.target.value }));
-															// updateLocation(e.target.value);
 														}}
 													>
 														<option value="">{t('Select')}</option>
-														{props.company.map((options) => (
+														{props.companyList.map((options) => (
 															<option key={options.nid} value={options.nid}>
 																{options.title}
 															</option>
@@ -409,11 +382,8 @@ function Addproject(props) {
 									<button
 										type="submit"
 										className="btn btn-lg btn-block float-right add-proj-btn  px-3 rounded-0 "
-										// </div>data-bs-dismiss="modal"
-										// onClick={() => props.popupActionNo()}
 										onClick={(e) => {
 											setData((prev) => ({ ...prev, p_unique_key: p_unique_key }));
-											// handletable(0);
 										}}
 									>
 										{t('SAVE')}
@@ -429,55 +399,3 @@ function Addproject(props) {
 }
 
 export default React.memo(Translation(Addproject, ['Add project', 'Project name', "select company", 'Select', 'Location', 'Street', 'House number', 'Bus number', 'Postalcode', 'City', "Country", 'Select country', 'Extra', 'SAVE']));
-
-/**
-	 * FETCHING PROJECT
-	 */
-// useEffect(() => {
-// 	APICALL.service(fetchproject + p_unique_key, 'GET')
-// 		.then((result) => {
-// 			// console.log(result.data);
-// 			if (result.data.length > 0) {
-// 				var res = [];
-// 				res.project_name = result.data.project_name;
-// 				res.project_location = result.data.project_location;
-// 				res.hno = result.data.hno;
-// 				res.bno = result.data.bno;
-// 				res.city = result.data.city;
-// 				res.extra = result.data.extra;
-// 				res.comp_id = result.data.comp_id;
-// 				res.street = result.data.street;
-// 				res.postal_code = result.data.postal_code;
-// 				res.country = result.data.country;
-// 				setData(res);
-// 				console.log(data);
-// 			}
-
-// 			setCountrylist(result.data.countrylist);
-
-// 			// setData(result.data);
-// 		})
-// 		.catch((error) => {
-// 			console.log(error);
-// 		});
-// }, []);
-
-// const handletable = (e) => {
-// 	setShowtable(e);
-// };
-
-/**
-	 * FETCHING COMPANY FROM DRUPAL
-	 */
-// useEffect(() => {
-// 	APICALL.service(process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/managecompanies?_format=json', 'GET')
-// 		.then((result) => {
-// 			if (result.length > 0) {
-// 				setCompany(result);
-// 			} else {
-// 			}
-// 		})
-// 		.catch((error) => {
-// 			console.error(error);
-// 		});
-// }, []);
