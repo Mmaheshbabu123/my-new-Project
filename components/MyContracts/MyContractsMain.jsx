@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getContracts } from '@/Services/ApiEndPoints';
+import { getContracts, getContract: downloadContractById } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { GrView } from 'react-icons/gr';
 import { FiDownload } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
 import Translation from '@/Translation';
+import customAlert from '@/atoms/customAlert';
 const itemsPerPage = 5;
 
 const MyContractsMain = ( props ) => {
@@ -69,8 +70,7 @@ const MyContractsMain = ( props ) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span title={'View'} className="actions-span text-dark" onClick={() => console.log('preview', eachRow)}> <GrView /> </span>
-        <span title={'Download'} className="actions-span text-dark" onClick={() => console.log('download', eachRow)}> <FiDownload/> </span>
+        <span title={'View'} className="actions-span text-dark" onClick={() => downloadContract(eachRow)}> <GrView /> </span>
       </>
     )
   }
@@ -101,6 +101,19 @@ const MyContractsMain = ( props ) => {
   //------------------- Pagination code -------------------------//
   //-------------------
 
+  let downloadContract = ({ contract_id }) => {
+    if(contract_id) {
+      APICALL.service(downloadContractById + contract_id, 'GET')
+      .then((result) => {
+        if (result.status == 200) {
+            returnPath = result.data.data;
+            window.open(returnPath, '_blank');
+        }
+      }).catch(error => console.log(error));
+    } else {
+      customAlert('error', 'Contract id not found', 2000);
+    }
+  }
 
     return (
       <>
