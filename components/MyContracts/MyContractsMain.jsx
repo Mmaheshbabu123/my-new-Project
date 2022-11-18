@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getContracts, getContract: downloadContractById } from '@/Services/ApiEndPoints';
+import { getContracts, getContract } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { GrView } from 'react-icons/gr';
@@ -103,7 +103,7 @@ const MyContractsMain = ( props ) => {
 
   let downloadContract = ({ contract_id }) => {
     if(contract_id) {
-      APICALL.service(downloadContractById + contract_id, 'GET')
+      APICALL.service(getContract + contract_id, 'GET')
       .then((result) => {
         if (result.status == 200) {
             returnPath = result.data.data;
