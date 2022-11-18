@@ -280,3 +280,5 @@ export const fetchEmployeeWidgetPlanning = BASE_URL + "get-all-widget-planning/"
 
 export const cancelContract = BASE_URL + 'cancelCantract';
 export const getContracts = BASE_URL + 'get-contracts';
+export const manageLocation = BASE_URL + 'getloca';
+export const inactiveTab = BASE_URL + 'getinactive';
