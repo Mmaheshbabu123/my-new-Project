@@ -463,7 +463,7 @@ function Planning(props) {
 										href={
 											router.query.type != undefined && router.query.type == 'edit' ? (
 												'/manage-planning/weekly?type=draft'
-											) : router.query.type == 'edit' ? (
+											) : router.query.type == 'project' ? (
 												'/planning/manage-project'
 											) : (
 												'/planning/options'

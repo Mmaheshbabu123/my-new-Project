@@ -52,12 +52,12 @@ function WeeklyPlanning(props) {
 							if (result.data[0].length == 1) {
 								setCompany(result.data[0][0].nid);
 								// result.data[0][0].add_project === '1' && result.data[0][0].add_project!= undefined?	setShowproject(true):setShowproject(false)
-								if (result.data[1].length == 1) {
-									setLocation(result.data[1][0].value);
-									if (result.data[2].length == 1) {
-										setCostcenter(result.data[2][0].value);
-									}
-								}
+								// if (result.data[1].length == 1) {
+								// 	setLocation(result.data[1][0].value);
+								// 	if (result.data[2].length == 1) {
+								// 		setCostcenter(result.data[2][0].value);
+								// 	}
+								// }
 							}
 						}
 						console.log(result);
@@ -174,7 +174,10 @@ function WeeklyPlanning(props) {
 									value={company}
 									className="form-select w-100 rounded-0 poppins-light-18px shadow-none rounded-0"
 									onChange={(e) => {
-										updateLocation(e.target.value);
+										setCompany(e.target.value);
+										setLocation('');
+
+										// updateLocation(e.target.value);
 										setEdit(false);
 									}}
 								>
@@ -191,7 +194,8 @@ function WeeklyPlanning(props) {
 									className="form-select w-100 poppins-light-18px shadow-none rounded-0"
 									onChange={(e) => {
 										setLocation(e.target.value);
-										updateCostCenter(e.target.value);
+										setCostcenter('');
+										// updateCostCenter(e.target.value);
 									}}
 									value={location}
 									disabled={company == ''||company == undefined}
