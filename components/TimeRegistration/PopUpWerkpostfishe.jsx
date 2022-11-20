@@ -9,9 +9,9 @@ import { da } from 'date-fns/locale';
 function popUpWerkPostFiche(props) {
 	
 	const save = () => {
-        
 		let data = props.data;
-		window.location.replace(
+		let destination = btoa('/qr-code-scanner/scanned?companyid='+props.info[0]+'&locationid='+props.info[1]);
+		window.open(
 			process.env.NEXT_PUBLIC_APP_URL_DRUPAL+'/werkpostfichespdf/form/werkpostfiche_preview/' +
 				data[0].webformid +
 				'/' +
@@ -20,7 +20,9 @@ function popUpWerkPostFiche(props) {
 				data[0].id +
 				'/' +
 				data[0].employer_id +
-				'?type=employee'
+				'?type=employee' +
+				'&destination_url=' + destination,
+				'_blank'
 		);
 	};
 

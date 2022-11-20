@@ -84,16 +84,17 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 		};
 	};
 
-	const checkSignStatusAndApprove = (data) => {
+	const checkSignStatusAndApprove = async (data) => {
 		if (data.completed === 1) {
 			customAlert('success', 'Approved successfully!', 2500);
 			if (locationId != '') {
 				locationId == 0
-					? setTimeout(() => router.push('/pincode/options'), 2700)
+					? 
+				 router.push('/pincode/options')
 					: APICALL.service(
 							process.env.NEXT_PUBLIC_APP_BACKEND_URL +
 								'/api/check-signed-or-not-wpf?id=' +
-								contextState.uid +
+								employeeId +
 								'&company=' +
 								companyId +
 								'&location=' +
@@ -102,7 +103,7 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 						)
 							.then((result) => {
 								if (result.res == 999) {
-									router.push('/pincode/options');
+									router.push('/qr-code-scanner/scanned?companyid='+companyId+'&locationid='+locationId);
 								} else {
 									setPopUpData(result.res);
 								}
@@ -111,7 +112,6 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 								console.error(error);
 							});
 			}
-			setTimeout(() => router.push('/'), 2700);
 		} else {
 			let message = '';
 			if (!data.employerSignStatus && !data.employeeSignStatus) {
@@ -128,7 +128,8 @@ const V1DocumentPreview = ({ employeeId, companyId, preview = 0, to: locationId 
 
 	return (
 		<div className="">
-			{popupdata != '' && <PopUp display={'block'} popupAction={actionPopup} data={result.res} />}
+			{popupdata != '' && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} info={[companyId,locationId]} />}
+
 			{state.loaded === true && (
 				<div>
 					<iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 175} />

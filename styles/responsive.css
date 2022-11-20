@@ -5,3 +5,25 @@
     margin-left: 10px !important;
   }
 }
+@media screen and (min-width:1200px) and (max-width:1400px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 5rem !important;
+  }
+  .todo-count-badge-employeer
+  {
+    right: 2rem !important;
+  }
+}
+@media screen and (min-width:1024px) and (max-width:1199px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 4rem !important;
+  }
+  .todo-count-badge-employeer
+  {
+    right: 1rem !important;
+  }
+}

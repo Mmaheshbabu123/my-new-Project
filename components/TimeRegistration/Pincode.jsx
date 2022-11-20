@@ -34,7 +34,7 @@ const Pincode = (props) => {
 
 	// For popup stop planning
 	const [ show, setShow ] = useState(false);
-	const [ popupdata,setPopUpData]=useState('');
+	const [ popupdata, setPopUpData ] = useState('');
 	//get the otp
 	const [ otp, setOTP ] = useState(0);
 	//to catch the error
@@ -184,28 +184,51 @@ const Pincode = (props) => {
 						'/api/singed-or-not?id=' +
 						contextState.uid +
 						'&company=' +
-						company.value
-						+'&location='+location.value,
+						company.value +
+						'&location=' +
+						location.value,
 					'GET'
 				)
 					.then((result) => {
-						var t=0;
+						var t = 0;
 						if (result.res[0] == 999) {
-							(result.res[1]!==999)?t=1:t=0;
+							result.res[1] !== 999 ? (t = 1) : (t = 0);
 							router.push(
 								'/v1-document?entityid=' +
 									contextState.uid +
 									'&entitytype=3&companyid=' +
 									company.value +
-									'&t='+location.value
+									'&to=' +
+									location.value
 							);
 						} else if (result.res[1] != 999) {
 							setPopUpData(result.res[1]);
 							actionPopup();
 						} else {
-							setTimeout(() => {
-								router.push('/employee-planning');
-							}, 2000);
+							APICALL.service(
+								process.env.NEXT_PUBLIC_APP_BACKEND_URL +
+									'/api/getPlanningActual?id=' +
+									contextState.uid +
+									'&companyid=' +
+									company.value +
+									'&locationid=' +
+									location.value +
+									'&pincode=' +
+									otp,
+								'GET'
+							)
+								.then((res) => {
+									if (res != null || res != undefined) {
+										SetResponse(res.res);
+										// setResp(res.res);
+										// if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
+										// 	router.push('/pincode/options');
+										// }
+									}
+								})
+								.catch((error) => {
+									console.error(error);
+								});
 						}
 					})
 					.catch((error) => {
@@ -217,15 +240,7 @@ const Pincode = (props) => {
 	return (
 		<form onSubmit={Submit} style={{ alignItems: 'center' }}>
 			<div className="row minheight-verifypin">
-
-			{
-			show&&
-				<PopUp
-				display={'block'}
-				popupAction={actionPopup}
-				data={popupdata}
-			/>
-				}
+				{show && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} info={[company.value,location.value]} />}
 				<div className="col-md-12">
 					<div className="row position-sticky-pincode-verify">
 						<div className="col-md-6">

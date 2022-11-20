@@ -148,21 +148,11 @@ const LegalAddress = (props) => {
         <div className='row'>
         <div className = 'col-md-6'>
         {LegalaAddressFieldData(legalAdressRow1)}
-        <div className = 'row'>
-        <div className = {`col-md-12 ${styles['add-div-margings']} legal${Language} my-2` }>
-            <LabelField title="Language"  customStyle = {{display:''}}/>{requiredFields['tab_2'][Language] && <RequiredField />}
-            <div>
-           <div className='d-inline-flex align-items-center me-3'>
-           <RadioField   name = {Language} checked = {Number(tab_2[Language]) === 1} handleChange = {(e)=>handleRadioSelect(Language,1)} label= 'Dutch' />
-           </div>
-           <div className='d-inline-flex align-items-center'>
-            <RadioField  name = {Language} checked = {Number(tab_2[Language]) === 2} handleChange = {(e)=>handleRadioSelect(Language,2)} label= 'French' />
-            </div>
-           </div>
-        </div>
+
+        
         {   <div className = {`col-md-12 ${styles['add-div-margings']} legal${Labour_regulations_share} my-2`}>
             <LabelField title="Labour regulations (arbeidsreglement)" customStyle = {{display:''}}/>{requiredFields['tab_2'][Labour_regulations_share] && <RequiredField />}
-             <div>
+             <div  style={{margin:'0.5rem 0'}}>
              <div className='d-inline-flex align-items-center me-3'>
             <RadioField name = {Labour_regulations_share} checked = {Number(tab_2[Labour_regulations_share]) === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations_share,1)} label= 'Yes' />
             </div>
@@ -175,15 +165,25 @@ const LegalAddress = (props) => {
               <ValidateMessage text = {'This field is required'}/>
             }
         </div>}
-        </div>
       </div>
      <div className = "col-md-6">
        <div className = {`col-md-12 `}>
          {LegalaAddressFieldData(legalAdressRow2)}
-        <div className='row'>
+         <div className = {`col-md-12 ${styles['add-div-margings']} legal${Language} my-2` }>
+            <LabelField title="Language"  customStyle = {{display:''}}/>{requiredFields['tab_2'][Language] && <RequiredField />}
+            <div style={{margin:'0.5rem 0'}}>
+           <div className='d-inline-flex align-items-center me-3'>
+           <RadioField   name = {Language} checked = {Number(tab_2[Language]) === 1} handleChange = {(e)=>handleRadioSelect(Language,1)} label= 'Dutch' />
+           </div>
+           <div className='d-inline-flex align-items-center'>
+            <RadioField  name = {Language} checked = {Number(tab_2[Language]) === 2} handleChange = {(e)=>handleRadioSelect(Language,2)} label= 'French' />
+            </div>
+           </div>
+        </div>
+
         {Number(tab_2[Labour_regulations_share]) === 2 && <div className = {`col-md-12 my-2 ${styles['add-div-margings']} legal${Labour_regulations}`}>
          <LabelField title="Labour regulations (arbeidsreglement) - sharing" mandotory = {true} customStyle = {{display:''}}/>{requiredFields['tab_2'][Labour_regulations] && <RequiredField />}
-         <div>
+         <div  style={{margin:'0.5rem 0'}}>
          <div className='d-inline-flex align-items-center me-3'>
          <RadioField name = {Labour_regulations} checked = {Number(tab_2[Labour_regulations]) === 1} handleChange = {(e)=>handleRadioSelect(Labour_regulations,1)} label= 'Yes' />
          </div>
@@ -195,7 +195,7 @@ const LegalAddress = (props) => {
           <ValidateMessage text = {'This field is required'}/>
         }
          </div>}
-        </div>
+
       </div>
      </div>
         </div>
