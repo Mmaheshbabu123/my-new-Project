@@ -51,9 +51,9 @@ function Footer(props) {
 						<div className='col-md-9 col-lg-11 m-auto'>
 							<div className='row'>
 								<div className='col-md-3'>
-									<p className='text-white text-left mb-0 pt-2 footer-content'>{t('Copyright © 2022 Absolute YOU')}</p>
+									<p className='text-white text-left mb-0 pt-2 footer-content copyright-content'>{t('Copyright © 2022 Absolute YOU')}</p>
 								</div>
-								<div className='col-md-6 d-flex justify-content-center'>
+								<div className='col-md-6 d-flex justify-content-center disclaimer-col'>
 									<ul className='text-white d-flex list-unstyled mb-0'>
 										<li className='list-unstyled mx-3 align-self-center footer-content' onClick={() => router.push('/')}>
 											<Link href=''>
@@ -75,7 +75,7 @@ function Footer(props) {
 										</li>
 									</ul>
 								</div>
-								<div className="col-md-3 d-flex justify-content-end">
+								<div className="col-md-3 d-flex justify-content-end social-media-links">
 									<ul className='d-flex list-unstyled mb-0'>
 										<li className='list-unstyled mx-3 align-self-center'><img className='rounded-circle' style={{ width: '30px' }} src="/facebook.png" /></li>
 										<li className='list-unstyled  mr-5 align-self-center'><img className='rounded-circle' style={{ width: '30px' }} src="/linkedin.png" /></li>
