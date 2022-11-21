@@ -1,14 +1,10 @@
 import React, { useState,useContext, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import {ReactDOM} from 'react-dom';
-import { red } from 'tailwindcss/colors';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
+import { isMobile } from 'react-device-detect';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
-import checkPinCode, { homeScreen } from '../../Services/ApiEndPoints';
 import Translation from '@/Translation';
 const OTPInput = dynamic(
 	() => {
@@ -168,10 +164,7 @@ const Pincode = (props) => {
 				inputClassName={hide?"otp":""}
 				onChange={setOTP}
 				autoFocus
-				inputStyles={{
-					width: '60px',
-					height: '60px'
-				}}
+				inputStyles={(isMobile)?{width:'30px',height:'30px'}:{width:'60px',height:'60px'}}
 				OTPLength={6}
 				otpType="number"
 				// disabled={false}
@@ -198,10 +191,7 @@ const Pincode = (props) => {
 				value={otp1}
 				inputClassName={hide1?"otp":""}
 				onChange={setOTP1}
-				inputStyles={{
-					width: '60px',
-					height: '60px'
-				}}
+				inputStyles={(isMobile)?{width:'30px',height:'30px'}:{width:'60px',height:'60px'}}
 				OTPLength={6}
 				otpType="number"
 				// disabled={false}
