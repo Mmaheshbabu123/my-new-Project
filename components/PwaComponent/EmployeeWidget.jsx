@@ -337,7 +337,7 @@ function EmployeeWidget(props) {
                                     <div className="col-md-6">
                                         <button
                                             type="button"
-                                            className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
+                                            className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none text-uppercase"
                                             onClick={() => handleSearch()}
                                         >
                                             {t('Search')}
@@ -352,7 +352,7 @@ function EmployeeWidget(props) {
                                             search === true) && (
                                                 <button
                                                     type="button"
-                                                    className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_employee_widget w-100 shadow-none"
+                                                    className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_employee_widget w-100 shadow-none text-uppercase"
                                                     onClick={() => handleReset()}
                                                 >
                                                     {t('Reset')}

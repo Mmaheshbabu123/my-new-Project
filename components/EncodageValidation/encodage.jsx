@@ -16,6 +16,7 @@ function EncodageValidation(props) {
 	const { t } = props;
 	const { contextState = {} } = useContext(UserAuthContext);
 	const router = useRouter();
+	const [ editrow,setEditrow]=useState('');
 	const [ fcompany, setFcompany ] = useState('');
 	const [ flocation, setFlocation ] = useState('');
 	const [ fcostcenter, setFcostCenter ] = useState('');
@@ -69,6 +70,10 @@ function EncodageValidation(props) {
 		object[index].disabled = !object[index].disabled;
 		setData(object);
 	};
+
+	const updateEdit=(index)=>{
+		(index==-999)?setEditrow(''):setEditrow(index);
+	}
 
 	const saveactualstart = (index, actualstart) => {
 		var object = [ ...data ];
@@ -150,7 +155,7 @@ function EncodageValidation(props) {
 						<td className="poppins-regular-18px p-2 align-middle">
 							{ValidationService.getTime(element.starttime)}
 						</td>
-						<td className="poppins-regular-18px p-2 align-middle">
+						<td className="poppins-regular-18px p-2 align-middle actual-end-time">
 							<DatePicker
 								disableDayPicker
 								name="time"
@@ -177,14 +182,6 @@ function EncodageValidation(props) {
 								plugins={[ <TimePicker key={element.wend} hideSeconds /> ]}
 								disabled={element.disabled}
 							/>
-							{/* <input
-								type="text"
-								name="name"
-								style={{ width: '50%' }}
-								value={element.wend}
-								onChange={() => {
-									(e) => saveactualend(e.target.value);
-								}} */}
 						</td>
 						<td style={{ width: '149px' }} className="align-middle p-2 poppins-light-16px">
 							<button
@@ -194,7 +191,7 @@ function EncodageValidation(props) {
 								{element.validated ? <FaShieldAlt /> : <FaCheckCircle />}
 							</button>
 							<button
-								onClick={() => console.log('clicked')}
+								onClick={() => updateEdit(index)}
 								className="border-0 bg-transparent color-skyblue"
 							>
 								{!element.disabled ? <FaSave /> : <FaUndoAlt />}
@@ -329,7 +326,7 @@ function EncodageValidation(props) {
 					<div className="row">
 						<div className="col-md-6">
 							<button
-								className="btn btn-block border-0 rounded-0 float-right skyblue-bg-color w-100 shadow-none"
+								className="btn btn-block border-0 rounded-0 float-right skyblue-bg-color w-100 shadow-none text-uppercase"
 								onClick={() => filter()}
 							>
 								{t('Filter')}
@@ -337,7 +334,7 @@ function EncodageValidation(props) {
 						</div>
 						<div className="col-md-6">
 							<button
-								className="btn border-0 btn-block rounded-0 float-right reset_skyblue_button w-100 shadow-none"
+								className="btn border-0 btn-block rounded-0 float-right reset_skyblue_button w-100 shadow-none text-uppercase"
 								onClick={() => reset()}
 							>
 								{t('Reset')}

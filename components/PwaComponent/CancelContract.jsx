@@ -76,9 +76,8 @@ function CancelContract(props) {
                     <div className="modal-body ">
                         <div className="col-md-11 m-auto add_project">
                             <div className="row">
-                                <div className=" ">
-                                    <div className="row  m-0">
-                                        <div className="col">
+                                <div className="col-md-12 ">
+
                                             <label className="custom_astrick poppins-light-18px">
                                                 Reason
                                             </label>
@@ -92,8 +91,6 @@ function CancelContract(props) {
                                                 
                                             />
 
-                                        </div>
-                                    </div>
                                 </div>
                                 {/* <div className="modal-footer border-0 col-md-12 m-auto px-2 add_project">
                                         <button
@@ -109,7 +106,7 @@ function CancelContract(props) {
                                             Save
                                         </button>
                                     </div> */}
-                                <div className=" col-md-12 m-auto px-2 ">
+                                <div className=" col-md-12 m-auto">
                                     <div className="row mt-4">
                                         {/* <div className="col-6">
                                             <button

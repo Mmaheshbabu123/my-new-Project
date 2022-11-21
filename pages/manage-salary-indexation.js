@@ -4,3 +4,4 @@ const Manageindexationofsalaries = () => (
     <div><ManageIndexationOfSalaries /></div>
 )
 export default Manageindexationofsalaries;
+
