@@ -65,7 +65,6 @@ export const fetchEmployeeTypesList = BASE_URL + "fetch-employee-types/";
 //--------------PLANNING API ROUTES ----------------//
 export const add_manage_planning = BASE_URL + "/planning";
 export const addPlanning = BASE_URL + "addplanning";
-export const addProject = BASE_URL + "addproject";
 export const Selectemployee = BASE_URL + "selectemployee";
 export const Weeklyplanning = BASE_URL + "weeklyplanning";
 export const Addplanningfunction = BASE_URL + "add-planningfunction";
@@ -85,7 +84,7 @@ export const updateEditproject = BASE_URL + "updateproject"
 
 //--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details/";
-export const fetchproject = BASE_URL + "fetch-project/";
+// export const fetchproject = BASE_URL + "fetch-project/";
 export const fetchallproject = BASE_URL + "fetch-all-project";
 export const fetchallarchivedprojects = BASE_URL + "fetch-all-archived-project"
 export const fetchprojectbyid = BASE_URL + "getproject/"
@@ -280,3 +279,5 @@ export const fetchEmployeeWidgetPlanning = BASE_URL + "get-all-widget-planning/"
 
 export const cancelContract = BASE_URL + 'cancelCantract';
 export const getContracts = BASE_URL + 'get-contracts';
+export const manageLocation = BASE_URL + 'getloca';
+export const inactiveTab = BASE_URL + 'getinactive';

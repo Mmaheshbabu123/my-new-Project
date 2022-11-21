@@ -78,7 +78,7 @@ const Pincode = (props) => {
 							//if the user already generated the pincode get the options.
 							APICALL.service(
 								process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-									'/api/get-companies-by-employer/' +
+									'/api/get-employee-companies/' +
 									contextState.uid,
 								'GET'
 							)
