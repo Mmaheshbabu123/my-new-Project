@@ -63,10 +63,6 @@ const Pincode = (props) => {
 	//if any paremeters there in the url we can get by it
 	const { root_parent_id, selectedTabId, ref_id = 0 } = router.query;
 
-	const [ boxsize,setBoxSize ]=useState({
-		width: '60px',
-		height: '60px'
-	});
 	useEffect(
 		() => {
 			var userid = null;
