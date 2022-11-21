@@ -117,12 +117,19 @@ const Pincode = (props) => {
 		console.log(window);
 	}, []);
 
-	if(isMobile){
-		setBoxSize({
-			width: '30px',
-			height: '30px'
-		});
-	}
+	// if(isMobile){
+	// 	setBoxSize({
+	// 		width: '30px',
+	// 		height: '30px'
+	// 	});
+	// }else{
+	// 	setBoxSize(
+	// 		{
+	// 			width: '60px',
+	// 			height: '60px'
+	// 		}
+	// 	);
+	// }
 
 	//function to validate the pincode and drop downs.
 	const validate = (value) => {
@@ -302,7 +309,7 @@ const Pincode = (props) => {
 							className="otp-container"
 							value={otp}
 							onChange={setOTP}
-							inputStyles={boxsize}
+							inputStyles={(isMobile)?{width:'30px',height:'30px'}:{width:'60px',height:'60px'}}
 							OTPLength={6}
 							otpType="number"
 							//secure
