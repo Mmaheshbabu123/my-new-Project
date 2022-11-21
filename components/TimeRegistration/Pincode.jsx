@@ -302,11 +302,11 @@ const Pincode = (props) => {
 					</div>
 				</div>
 				{/* <div className="col-4" /> */}
-				<div className="col-sm-6 col-md-5 mx-auto mt-1">
+				<div className="col-sm-6 col-md-5 mx-auto mt-1 current-pincode">
 					<div className="d-flex justify-content-center ">
 						<OTPInput
 							inputClassName={hide ? 'otp border' : 'border otp-visible'}
-							className="otp-container"
+							className="otp-container "
 							value={otp}
 							onChange={setOTP}
 							inputStyles={(isMobile)?{width:'30px',height:'30px'}:{width:'60px',height:'60px'}}
@@ -319,21 +319,25 @@ const Pincode = (props) => {
 							{eyeicon}
 						</button>
 					</div>
-					<p style={{ color: 'red', marginLeft: '-11px' }} className="mt-2">
+					<p style={{ color: 'red', marginLeft: '-11px' }} className="mt-2 current-pincode-error">
 						{err}
 					</p>
 					<p style={{ color: 'red' }} className="mt-2">
 						{response}
 					</p>
 					<div className="row mt-3">
-						<div className="col-md-11 pe-2">
-							<button
+						<div className="col-md-12 pe-2">
+							<div className='row'>
+								<div className='col-md-5 ms-auto reset-pincode'>
+								<button
 								style={{ border: 'none', background: 'white', color: 'blue' }}
 								onClick={(e) => forgotPassword(e)}
 								className="forgot_password_pincode float-end pe-0"
 							>
 								{t('Reset pincode?')}
 							</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
