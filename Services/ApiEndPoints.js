@@ -263,7 +263,18 @@ export const getdashboardtiles = BASE_URL_DRUPAL + "dashboard-tiles-roles";
 // ----------------------- Indexation of salary --------------------//
 export const addIndexationOfSalary = BASE_URL + "add-indexation-of-salary";
 export const getIndexationOfSalary = BASE_URL + "fetch-all-indexation-salary";
+export const getIndexationOfSalaryById = BASE_URL + "get-all-indexation-salary/";
+export const getCategoriesLinkedToPc = BASE_URL + "get-all-categories";
+export const updateStatus = BASE_URL + "update-status";
 
+//--------------------Indexation of benefits -------------------------//
+export const storeIndexationOfSalary = BASE_URL + "store-indexation-of-benefits";
+export const getAllManageBenefits = BASE_URL + "get-manage-indexation-benefits";
+export const getIndexationofBenefitsById = BASE_URL + "get-all-indexation-benefits/";
+export const getCategoreisLinkedToPcForBenefits = BASE_URL + "get-all-categories-for-benefits";
+export const getAllPartiairComites = BASE_URL +"getAllPartiairComites";
+export const getAllBenefitsLinkedtoPc = BASE_URL + "get-all-benefits-linked-to-pc";
+export const UpdateStatus = BASE_URL + "update-benefits-status";
 //-------------------------Add Planning---------------------------//
 export const getPlanning = BASE_URL + "fetch-add-planning-details/";
 export const getDraftPlanning = BASE_URL + "fetch-draft-planning/";

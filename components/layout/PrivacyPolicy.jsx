@@ -63,13 +63,13 @@ function PrivacyPolicy() {
                                     <br></br>
                                     pagina’s bezoekt. Voor meer informatie over waarom en hoe persoonsgegevens in dat kader verwerkt worden, verwijzen we naar het Privacybeleid en de Cookie Policy op de website van deze platformen
                                     <br></br>
-                                    <i>cookie policy Facebook:</i><a class="sw_alink" href="https://www.facebook.com/policies/cookies/" target="" rel=""><i className="h6 fst-italic text-decoration-underline fw-bold">https://www.facebook.com/policies/cookies/</i></a>
+                                    <i>cookie policy Facebook:</i><a className="sw_alink" href="https://www.facebook.com/policies/cookies/" target="" rel=""><i className="h6 fst-italic text-decoration-underline fw-bold">https://www.facebook.com/policies/cookies/</i></a>
                                     <br></br>
-                                    <i>privacybeleid Facebook</i><a class="sw_alink" href="https://www.facebook.com/about/privacy/" target="" rel=""><i className="h6 fst-italic text-decoration-underline fw-bold">https://www.facebook.com/about/privacy/</i></a>
+                                    <i>privacybeleid Facebook</i><a className="sw_alink" href="https://www.facebook.com/about/privacy/" target="" rel=""><i className="h6 fst-italic text-decoration-underline fw-bold">https://www.facebook.com/about/privacy/</i></a>
                                     <br></br>
-                                    <i>privacybeleid Facebook</i><a class="sw_alink" href="https://www.linkedin.com/legal/cookie-policy" target="" rel=""><i className="h6 fst-italic text-decoration-underline fw-bold">https://www.linkedin.com/legal/cookie-policy</i></a>
+                                    <i>privacybeleid Facebook</i><a className="sw_alink" href="https://www.linkedin.com/legal/cookie-policy" target="" rel=""><i className="h6 fst-italic text-decoration-underline fw-bold">https://www.linkedin.com/legal/cookie-policy</i></a>
                                     <br></br>
-                                    <i>Privacy policy LinkedIn:</i><a class="sw_alink" href="https://www.linkedin.com/legal/privacy-policy?banner=accept" target="" rel=""><i className="h6 fst-italic text-decoration-underline fw-bold">https://www.linkedin.com/legal/privacy-policy?banner=accept</i></a>
+                                    <i>Privacy policy LinkedIn:</i><a className="sw_alink" href="https://www.linkedin.com/legal/privacy-policy?banner=accept" target="" rel=""><i className="h6 fst-italic text-decoration-underline fw-bold">https://www.linkedin.com/legal/privacy-policy?banner=accept</i></a>
                                 </span>
                             </div>
 
