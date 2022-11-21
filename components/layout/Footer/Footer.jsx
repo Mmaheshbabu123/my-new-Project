@@ -60,7 +60,7 @@ function Footer(props) {
 												{t('Contact Us')}
 											</Link>
 										</li>
-										<li className='list-unstyled mx-3 align-self-center footer-content' onClick={() => router.push('/')} >
+										<li className='list-unstyled mx-3 align-self-center footer-content' onClick={() => router.push('/privacy-policy')} >
 											<Link href='' >
 
 												{t('Privacy Policy')}

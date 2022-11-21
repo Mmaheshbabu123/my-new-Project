@@ -2,14 +2,15 @@ import IndexationBenifits from "../../components/Indexation/IndexationBenifits";
 import { useRouter } from 'next/router';
 
 
-const indexationbenifits = () => {
+const Indexationbenifits = () => {
     const router = useRouter();
 
-    return(
+    return (
         <div>
-        <IndexationBenifits id={router.query.iob_id} />
-    </div>
+            <IndexationBenifits id={router.query.iob_id} />
+        </div>
     );
-   
+
 }
-export default indexationbenifits;
+export default Indexationbenifits;
+
