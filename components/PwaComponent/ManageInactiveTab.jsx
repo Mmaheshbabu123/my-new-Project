@@ -116,11 +116,11 @@ import { useEffect, useState } from 'react';
                                 </thead>
                                 <tbody>
                                     {/* <tr className="border poppins-regular-18px p-2" > */}
-                                    {manageLocationCompany.map((result) => (
-                                        <tr className="border poppins-regular-18px p-2" >
+                                    {manageLocationCompany.map((result,key) => (
+                                        <tr className="border poppins-regular-18px p-2" key={key}>
                                             <td className="poppins-regular-18px p-2 ">{result.place}</td>
                                             <td className="poppins-regular-18px p-2">{result.industry}</td>
-                                            
+
                                             {/* <td className="poppins-regular-18px p-2">{t('Aartselaar')}</td>
                                         <td className="poppins-regular-18px p-2">{t('The awkward antique store')}	</td> */}
                                             <td className="p-2">

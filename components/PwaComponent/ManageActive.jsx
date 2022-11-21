@@ -11,7 +11,7 @@ import { manageLocation } from '../../Services/ApiEndPoints';
 import { useEffect, useState } from 'react';
 
 function ManageActive(props) {
-    const { t, inputvalue,valueshow } = props;
+    const { t, inputvalue='',valueshow='' } = props;
     const [manageLocationCompany, setManageLocationCompany] = useState([]);
     useEffect(
         () => {
@@ -112,8 +112,8 @@ function ManageActive(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {valueshow == 1 && manageLocationCompany.filter(person => person.place == inputvalue).map(filteredPerson => (
-                                        <tr className="border poppins-regular-18px p-2 w-100" >
+                                    {valueshow == 1 && manageLocationCompany.filter(person => person.place == inputvalue).map((filteredPerson,key) => (
+                                        <tr className="border poppins-regular-18px p-2 w-100" key={key}>
                                             <td className="poppins-regular-18px p-2 ">{filteredPerson.place}</td>
                                             <td className="poppins-regular-18px p-2">{filteredPerson.industry}</td>
                                             <td className="p-2">
@@ -149,8 +149,8 @@ function ManageActive(props) {
                                             </li>
                                         ))} */}
                                 
-                                    {valueshow == 0  && manageLocationCompany.map((result) => (
-                                        <tr className="border poppins-regular-18px p-2" >
+                                    {valueshow == 0  && manageLocationCompany.map((result,key) => (
+                                        <tr className="border poppins-regular-18px p-2" key={key}>
                                             <td className="poppins-regular-18px p-2 ">{result.place}</td>
                                             <td className="poppins-regular-18px p-2">{result.industry}</td>
 
