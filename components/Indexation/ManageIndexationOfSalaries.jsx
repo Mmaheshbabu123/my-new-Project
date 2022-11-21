@@ -3,33 +3,36 @@ import Link from 'node_modules/next/link';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import { Uniquekey } from '../../Services/GenetateUniqueKey';
-import { getIndexationOfSalary } from '../../Services/ApiEndPoints';
+import { getIndexationOfSalary, updateStatus } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import SalaryIndexationDeletePopup from './DeleteSalaryIndexationPopup';
 import Pagination from '../PcComponent/Pagination';
 import Translation from "@/Translation";
+import moment from 'moment';
+import BackLink from '../BackLink';
 
 function ManageIndexationOfSalaries(props) {
-    const {t}=props;
+    const { t } = props;
     const router = useRouter();
     const unique_key = Uniquekey.generate_unique_key();
     const [indexation, setIndexation] = useState([]);
     const [indexationTemp, setIndexationTemp] = useState([]);
     const [indexationTemp2, setIndexationTemp2] = useState([]);
+    const [salaryid, setSalaryid] = useState('');
+    const [updated, setUpdated] = useState(0);
 
-    const [ indexationId, setIndexationId ] = useState('');
 
     /**Popup  */
-	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
+    const [showdeletepopup, setShowdeletepopup] = useState(false);
 
-	const closePopup = () => {
-		setShowdeletepopup(false);
-	};
+    const closePopup = () => {
+        setShowdeletepopup(false);
+    };
 
-	const showPopup = (id) => {
-		setIndexationId(id);
-		setShowdeletepopup(true);
-	};
+    const showPopup = (id) => {
+        setSalaryid(id);
+        setShowdeletepopup(true);
+    };
 
     useEffect(
         () => {
@@ -45,46 +48,61 @@ function ManageIndexationOfSalaries(props) {
                     console.log(error);
                 });
         },
-        []
+        [updated]
     );
 
-    // DELETE FUNCTIONALITY //
-	const deleteIndexation = async () => {
-		var data = {
-			id: indexationId
-		};
-    }
-// //------------------- Pagination code -------------------------//
-// const [ pageCount, setPageCount ] = useState(0);
-// const [ itemOffset, setItemOffset ] = useState(0);
+    /**
+         * Delete functionality
+         * @param {*} res 
+         * @returns 
+         */
+    const update = async () => {
+        var data = {
+            id: salaryid,
+        };
+        APICALL.service(updateStatus, 'POST', data)
+            .then((result) => {
+                console.log(result.status);
+                setUpdated(updated + 1);
+                setShowdeletepopup(false);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+    // //------------------- Pagination code -------------------------//
+    // const [ pageCount, setPageCount ] = useState(0);
+    // const [ itemOffset, setItemOffset ] = useState(0);
 
-// useEffect(
-//     () => {
-//         const endOffset = itemOffset + itemsPerPage;
-//         setIndexationTemp2(project.slice(itemOffset, endOffset));
-//         setPageCount(Math.ceil(project.length / itemsPerPage));
-//     },
-//     [ itemOffset, itemsPerPage, project ]
-// );
+    // useEffect(
+    //     () => {
+    //         const endOffset = itemOffset + itemsPerPage;
+    //         setIndexationTemp2(project.slice(itemOffset, endOffset));
+    //         setPageCount(Math.ceil(project.length / itemsPerPage));
+    //     },
+    //     [ itemOffset, itemsPerPage, project ]
+    // );
 
-// const handlePageClick = (event) => {
-//     const newOffset = (event.selected * itemsPerPage) % project.length;
-//     setItemOffset(newOffset);
-// };
-// //------------------- Pagination code -------------------------//
+    // const handlePageClick = (event) => {
+    //     const newOffset = (event.selected * itemsPerPage) % project.length;
+    //     setItemOffset(newOffset);
+    // };
+    // //------------------- Pagination code -------------------------//
     return (
         <div className="container-fluid p-0">
             <form>
                 <div className="row py-4 position-sticky-pc">
                     <div className="col-md-12">
-                    <p className="px-0 bitter-italic-normal-medium-24">{t('Manage indexation of salaries')}</p>
+                        <p className="px-0 bitter-italic-normal-medium-24">{t('Manage indexation of salaries')}</p>
                     </div>
                 </div>
                 <div className="row m-0 ">
-                   
+
                     <div className="float-end position-sticky-add-indexation">
                         <div className="col-md-3 p-0 float-end ">
-                            <Link href={'/indexation/' + Uniquekey.generate_unique_key()}
+                            <Link
+                                // href={'/indexation/' + Uniquekey.generate_unique_key()}
+                                href={'/indexation'}
                             >
                                 <button
                                     type="button"
@@ -102,7 +120,7 @@ function ManageIndexationOfSalaries(props) {
                                 <tr className="btn-bg-gray-medium table-sticky-bg-gray">
                                     <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-3">{t('Date')}</th>
                                     <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Indexation value')}</th>
-                                    <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('PC')}</th>
+                                    {/* <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('PC')}</th> */}
                                     <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Employee type')}</th>
                                     <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Action')}</th>
                                 </tr>
@@ -111,14 +129,14 @@ function ManageIndexationOfSalaries(props) {
                                 {indexationTemp2.length > 0 &&
                                     indexationTemp2.map((result) => (
                                         <tr className="border poppins-regular-18px p-2" key={result.id} >
-                                            <td className="poppins-regular-18px p-2 ps-3">{result.date}</td>
-                                            <td className="poppins-regular-18px p-2">{result.indexation_type}</td>
-                                            <td className="poppins-regular-18px p-2">{result.entity_id}</td>
-                                            <td className="poppins-regular-18px p-2">{result.indexation_type}</td>
+                                            <td className="poppins-regular-18px p-2 ps-3">{result.date.split('-').reverse().join('/')}</td>
+                                            <td className="poppins-regular-18px p-2">{result.value_type == 1 ? result.value + '%' : result.value + '€'}</td>
+                                            <td className="poppins-regular-18px p-2">{result.flex == 1 ? "Flex" : ''}</td>
+                                            {/* <td className="poppins-regular-18px p-2">{result.indexation_type}</td> */}
 
                                             <td className="p-2">
-                                                <Link href='' className="">
-                                                    <a type="button">
+                                                <Link href={'/indexation/' + result.id} className="">
+                                                    <a type="button" >
                                                         <MdEdit
                                                             className="color-skyblue me-2"
                                                             data-toggle="tooltip"
@@ -127,18 +145,26 @@ function ManageIndexationOfSalaries(props) {
                                                     </a>
                                                 </Link>
                                                 <span onClick={() => showPopup(result)} type="button">
-													<MdDelete
-														className=" ms-3 color-skyblue "
-														data-toggle="tooltip"
-														title="Delete Indexation of salary"
-													/>
-												</span>
+                                                    <MdDelete
+                                                        className=" ms-3 color-skyblue "
+                                                        data-toggle="tooltip"
+                                                        title="Delete Indexation of salary"
+                                                    />
+                                                </span>
 
 
 
                                             </td>
                                         </tr>
-                                        ))}
+                                    ))}
+                                {/*----------------------------No records found-------------------------- */}
+                                {setIndexationTemp2.length == 0 && (
+                                    <tr>
+                                        <td colSpan={5} className="text-center py-3 border poppins-regular-18px">
+                                            {t('No records')}
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -163,23 +189,15 @@ function ManageIndexationOfSalaries(props) {
 						// />
 					)}
 				</div> */}
-                <div className="col-sm-3 field_height ">
-                    <div className='row'>
-                        <div className="col-sm-3">
-                            <button
-                                type="button"
-                                className="bg-white border-0 poppins-light-18px  float-sm-right mt-5 mb-2 px-0 text-decoration-underline shadow-none text-uppercase"
-                            >
-                                {t('back')}
-                            </button>
-                        </div>
-                    </div>
+
+                <div className="text-start col-md-6">
+                    <BackLink path={'/'} />
                 </div>
             </form>
             {showdeletepopup == true && (
-				<SalaryIndexationDeletePopup display={'block'} popupActionNo={closePopup} popupActionYes={deleteIndexation} />
-			)}
+                <SalaryIndexationDeletePopup display={'block'} popupActionNo={closePopup} popupActionYes={update} />
+            )}
         </div>
     );
 }
-export default React.memo(Translation(ManageIndexationOfSalaries,['Manage indexation of salaries','Add Indexation of salary','Date','Indexation value','PC','Employee type','Action','back']));
+export default React.memo(Translation(ManageIndexationOfSalaries, ['Manage indexation of salaries', 'Add Indexation of salary', 'Date', 'Indexation value', 'PC', 'Employee type', 'Action', 'back']));

@@ -2249,3 +2249,7 @@ input[type="search"]::-webkit-search-cancel-button {
   color: red;
   text-align: left;
 }
+.indexation-salary  .react-select-prefix__control
+{
+	height: auto !important;
+}

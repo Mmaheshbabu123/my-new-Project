@@ -611,3 +611,8 @@ input[type="checkbox"]
 {
   margin-top: 2px !important;
 }
+.table-benefits
+{
+  border-collapse: separate;
+  border-spacing: 21px 5px;
+}
