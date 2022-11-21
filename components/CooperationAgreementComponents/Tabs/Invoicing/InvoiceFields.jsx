@@ -12,10 +12,9 @@ export const invoiceRow1 = [
  {'id':60,'key_name':'Type of correction invoice','type':1},
  {'id':61,'key_name':'Separate invoicing for workers (arbeiders) and servants (bedienden)','type':6 ,option1:'Yes',option2:'No'},
  {'id':62,'key_name':'Separate invoice per employee','type':6 ,option1:'Yes',option2:'No'},
- {'id':63,'key_name':'Line with total of actuals worked hours per cost center needs to be added','type':6 ,option1:'Yes',option2:'No'},
+ {'id':78,'key_name':'Detailed lines per interim person should be added','type':6 ,option1:'Yes',option2:'No'},
  {'id':64,'key_name':'Line with total of actuals worked hours needs to be added','type':6 ,option1:'Yes',option2:'No'},
- {'id':65,'key_name':'Discount contact','type':6 ,option1:'Yes',option2:'No'},
- {'id':66,'key_name':'Customer code accounting (klantencode boekhouding)','type':1},
+
 ];
 
 export const invoiceRow2 = [
@@ -27,12 +26,15 @@ export const invoiceRow2 = [
  {'id':72,'key_name':'VAT rate','type':1},
  {'id':73,'key_name':'Payment via domiciliering','type':6 ,option1:'Yes',option2:'No'},
  {'id':74,'key_name':'Digital invoicing','type':6 ,option1:'Yes',option2:'No'},
+ {'id':76,'key_name':'Separate invoice per location','type':6 ,option1:'Yes',option2:'No'},
  {'id':75,'key_name':'Payment condition (standaard betaalconditiie)','type':8,options:[
    {value: '0', label: '--Select--'},
    //{value: '2', label: 'GooglePay'},
  ]},
- {'id':76,'key_name':'Separate invoice per location','type':6 ,option1:'Yes',option2:'No'},
+
  {'id':77,'key_name':'Subtotals per cost center','type':6 ,option1:'Yes',option2:'No'},
- {'id':78,'key_name':'Detailed lines per interim person should be added','type':6 ,option1:'Yes',option2:'No'},
+ {'id':63,'key_name':'Line with total of actuals worked hours per cost center needs to be added','type':6 ,option1:'Yes',option2:'No'},
  {'id':79,'key_name':'Invoicing of medical health checks','type':6 ,option1:'Yes',option2:'No'},
+ {'id':65,'key_name':'Discount contact','type':6 ,option1:'Yes',option2:'No'},
+ {'id':66,'key_name':'Customer code accounting (klantencode boekhouding)','type':1},
 ];
