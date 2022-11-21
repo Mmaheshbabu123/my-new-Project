@@ -19,15 +19,28 @@ function ManageLocation(props) {
     const { t } = props;
     const [toinactive, setToinactive] = useState(0);
     const [manageLocationCompany, setManageLocationCompany] = useState([]);
-    const changetoactive = () => {
-        alert('active = ',toinactive);
+    const [message, setMessage] = useState('');
+
+    const [updated, setUpdated] = useState(message);
+    const changetoactive = event => {
+        // alert('active = ', toinactive);
+
         setToinactive(0);
-        
+
     }
-    const changetoinactive = () => {
-        alert('inactive = ',toinactive)
+    const changetoinactive = event => {
+        // alert('inactive = ', toinactive)
         setToinactive(1);
     }
+    const handleChange = (event) => {
+        setMessage(event.target.value);
+      };
+    
+      const handleClick = () => {
+        // 👇 "message" stores input field value
+        setUpdated(message);
+        // alert(message)
+      };
 
     useEffect(
         () => {
@@ -46,7 +59,7 @@ function ManageLocation(props) {
 
     return (
         <div className="container-fluid p-0">
-            
+
             <form>
                 <div className="row m-0 qr_position_sticky">
                     <p className="h3 px-0  bitter-italic-normal-medium-24 mt-2">{t('Manage locations')}</p>
@@ -62,51 +75,43 @@ function ManageLocation(props) {
                             </button>
                         </div>
                     </div>
-                    {/* <div>
+                    <div className="col-md-12 row m-0 ps-0">
                         <nav className="nav">
-                            <Link href='' className="">
-                                <a className=" nav-link active" aria-current="page" onClick={changetoactive}>
-                                    Active
-                                </a>
+                            <ul className="nav nav-tabs border-0 mb-3 mt-3" id="myTab0" role="tablist">
+                                <li className=" me-5" role="presentation">
+                                    <Link href='' className="">
+                                        <a className={toinactive === 0 ? '   project-active rounded-0 p-0 ' : ' mng-proj  nav-link p-0 rounded-0 nav-link active'} aria-current="page" onClick={changetoactive}>
+                                            Active
+                                        </a>
 
-                            </Link>
-                            <Link href='' className="" >
-                            <a className="nav-link" onClick={changetoinactive} >
-                                inactive
-                            </a>
-                            </Link>
+                                    </Link>
+                                </li>
+                                <li className="" role="presentation">
+                                    <Link href='' className="" >
+                                        <a className={toinactive == 1 ? '  project-active rounded-0 p-0' : ' mng-arch nav-link p-0 rounded-0 nav-link'} onClick={changetoinactive} >
+                                            inactive
+                                        </a>
+                                    </Link>
+                                </li>
+                            </ul>
                         </nav>
-                    </div> */}
-                    <div className="col-md-12 row m-0 ps-0 ">
-                        <ul className="nav nav-tabs border-0 mb-3 mt-3" id="myTab0" role="tablist">
-                            <li className=" me-5" role="presentation">
-                                <button
-                                    className={
-                                        toinactive === 0 ? '   project-active rounded-0 p-0 ' : ' mng-proj  nav-link p-0 rounded-0'
-                                    }
-                                    onClick={changetoactive}
-                                >
-                                    {t('Active')}
-                                </button>
-                            </li>
-                            <li className="" role="presentation">
-                                <button
-                                    className={toinactive == 1 ? '  project-active rounded-0 p-0' : ' mng-arch nav-link p-0 rounded-0'}
-                                    onClick={changetoinactive}
-                                >
-                                    {t('Inactive')}
-                                </button>
-                            </li>
-                        </ul>
                     </div>
+
                     <div className="form-check p-0 mt-2  ">
 
 
                         <div className="row d-flex mt-3">
                             <div className="col field_height">
                                 <div className="input-group">
-                                    <input type="text" className="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
-                                    <span className="input-group-text">{t('Search')}</span>
+                                    <input type="text" className="form-control" aria-label="Dollar amount (with dot and two decimal places)"  onChange={handleChange}/>
+                                    <button
+                                        type="button"
+                                        className="btn  btn-block border-0 rounded-0 float-right  skyblue-bg-color  shadow-none"
+                                        onClick={handleClick}
+                                    >
+                                        + {t('Search')}
+                                    </button>
+                                    {/* <span className="input-group-text">{t('Search')}</span> */}
                                 </div>
                             </div>
 
@@ -140,7 +145,7 @@ function ManageLocation(props) {
                         </div>
                         {/* =========== hided============== */}
                         <div className="form-check p-0 mt-2 tab-pane fade show min_height_table">
-                            {toinactive == 0 && <ManageActive />}
+                            {toinactive == 0 && <ManageActive  inputvalue = {message}/>}
                             {toinactive == 1 && <ManageInactiveTab />}
                             {/* <table className="table mt-3 mb-3">
                                 <thead>

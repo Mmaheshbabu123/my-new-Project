@@ -14,7 +14,6 @@ import moment from 'moment';
 import Translation from '@/Translation';
 import BackLink from '../BackLink';
 
-
 import {
 	Scheduler,
 	WeekView,
@@ -150,11 +149,11 @@ function EmployeeMonthlyPlanning(props) {
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex  ">
 									{t('Date')}
 								</th>
-								<th className=" table-right-border-white  text-center align-items-center justify-content-center ">
+								{/* <th className=" table-right-border-white  text-center align-items-center justify-content-center ">
 									{t('Start time')}
-								</th>
+								</th> */}
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">
-									{t('End time')}
+									{t('Timings')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center  ">
 									{t('Employer')}
@@ -172,11 +171,11 @@ function EmployeeMonthlyPlanning(props) {
 							{data.slice(0, visible).map((result) => (
 								<tr className="" key={result.title}>
 									<td className=" border_employee_planning poppins-light-18px">{result.pdate.split('-').reverse().join('/')}</td>
-									<td className="border_employee_planning poppins-light-18px">
+									{/* <td className="border_employee_planning poppins-light-18px">
 										{moment(result.starttime).format('HH:mm')}
-									</td>
+									</td> */}
 									<td className="border_employee_planning poppins-light-18px">
-										{moment(result.endtime).format('HH:mm')}
+									{moment(result.starttime).format('HH:mm')}-{moment(result.endtime).format('HH:mm')}
 									</td>
 									<td className="border_employee_planning poppins-light-18px">
 										<span>{result.Employer_firstname} </span>
