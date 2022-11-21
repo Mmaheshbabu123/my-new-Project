@@ -188,7 +188,7 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
       default:
         break;
     }
-    returnActions.push(eachRow.todo_status === 1 && <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="download" className=''></img> </span>)
+    returnActions.push(eachRow.todo_status === 1 && <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="download" className='my-todo-download-icon'></img> </span>)
     return returnActions;
   }
 
