@@ -9,6 +9,7 @@ import checkPinCode from '../../Services/ApiEndPoints';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import Translation from '@/Translation';
+import { isMobile } from 'react-device-detect';
 import PopUp from './PopUpWerkpostfishe';
 
 //to make the otp dynamic
@@ -62,6 +63,10 @@ const Pincode = (props) => {
 	//if any paremeters there in the url we can get by it
 	const { root_parent_id, selectedTabId, ref_id = 0 } = router.query;
 
+	const [ boxsize,setBoxSize ]=useState({
+		width: '60px',
+		height: '60px'
+	});
 	useEffect(
 		() => {
 			var userid = null;
@@ -111,6 +116,13 @@ const Pincode = (props) => {
 	useEffect(() => {
 		console.log(window);
 	}, []);
+
+	if(isMobile){
+		setBoxSize({
+			width: '30px',
+			height: '30px'
+		});
+	}
 
 	//function to validate the pincode and drop downs.
 	const validate = (value) => {
@@ -290,10 +302,7 @@ const Pincode = (props) => {
 							className="otp-container"
 							value={otp}
 							onChange={setOTP}
-							inputStyles={{
-								width: '60px',
-								height: '60px'
-							}}
+							inputStyles={boxsize}
 							OTPLength={6}
 							otpType="number"
 							//secure
