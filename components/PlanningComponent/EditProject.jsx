@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import {
-	addProject,
-	fetchproject,
-	fetchallproject,
 	fetchprojectbyid,
 	updateEditproject
 } from '../../Services/ApiEndPoints';

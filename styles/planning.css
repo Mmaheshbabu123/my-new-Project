@@ -18,15 +18,15 @@
 }
 .css-1pahdxg-control
 {
-  border: 1px solid var(--color-label-footer-gray) !important;
-  border-color: var(--color-label-footer-gray) !important;
+  border: 1px solid #4C4D554D !important;
+  border-color: #4C4D554D !important;
   box-shadow: none !important;
   border-radius: 0px !important;
 }
 .select_contact_person .css-1pahdxg-control:focus
 {
-  border: 1px solid var(--color-label-footer-gray) !important;
-  border-color: var(--color-label-footer-gray) !important;
+  border: 1px solid#4C4D554D !important;
+  border-color: #4C4D554D !important;
 }
 .close_open_basic_details svg path,
 .opacity-100-basic-details svg path
@@ -584,6 +584,7 @@ input[type="checkbox"]
 }
 .actual-stop-time .rmdp-input,
 .actual-stop-date .rmdp-input
+
 {
   height: 38px !important;
   margin-top: 0.5rem !important;
@@ -591,12 +592,14 @@ input[type="checkbox"]
   border-radius: 0px !important;
   width: 100% !important;
 }
+
 .actual-stop-time .rmdp-container,
 .actual-stop-date .rmdp-container
 {
    width: 100% !important;
 }
-.actual-end-time .rmdp-container
+.actual-end-time .rmdp-container,
+.actual-end-time .rmdp-input
 {
   width: 100px !important;
 }
