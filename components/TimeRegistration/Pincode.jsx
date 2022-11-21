@@ -9,6 +9,7 @@ import checkPinCode from '../../Services/ApiEndPoints';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import Translation from '@/Translation';
+import { isMobile } from 'react-device-detect';
 import PopUp from './PopUpWerkpostfishe';
 
 //to make the otp dynamic
@@ -62,6 +63,10 @@ const Pincode = (props) => {
 	//if any paremeters there in the url we can get by it
 	const { root_parent_id, selectedTabId, ref_id = 0 } = router.query;
 
+	const [ boxsize,setBoxSize ]=useState({
+		width: '60px',
+		height: '60px'
+	});
 	useEffect(
 		() => {
 			var userid = null;
@@ -78,7 +83,7 @@ const Pincode = (props) => {
 							//if the user already generated the pincode get the options.
 							APICALL.service(
 								process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-									'/api/get-companies-by-employer/' +
+									'/api/get-employee-companies/' +
 									contextState.uid,
 								'GET'
 							)
@@ -111,6 +116,20 @@ const Pincode = (props) => {
 	useEffect(() => {
 		console.log(window);
 	}, []);
+
+	// if(isMobile){
+	// 	setBoxSize({
+	// 		width: '30px',
+	// 		height: '30px'
+	// 	});
+	// }else{
+	// 	setBoxSize(
+	// 		{
+	// 			width: '60px',
+	// 			height: '60px'
+	// 		}
+	// 	);
+	// }
 
 	//function to validate the pincode and drop downs.
 	const validate = (value) => {
@@ -283,17 +302,14 @@ const Pincode = (props) => {
 					</div>
 				</div>
 				{/* <div className="col-4" /> */}
-				<div className="col-sm-6 col-md-5 mx-auto mt-1">
+				<div className="col-sm-6 col-md-5 mx-auto mt-1 current-pincode">
 					<div className="d-flex justify-content-center ">
 						<OTPInput
 							inputClassName={hide ? 'otp border' : 'border otp-visible'}
-							className="otp-container"
+							className="otp-container "
 							value={otp}
 							onChange={setOTP}
-							inputStyles={{
-								width: '60px',
-								height: '60px'
-							}}
+							inputStyles={(isMobile)?{width:'30px',height:'30px'}:{width:'60px',height:'60px'}}
 							OTPLength={6}
 							otpType="number"
 							//secure
@@ -303,21 +319,25 @@ const Pincode = (props) => {
 							{eyeicon}
 						</button>
 					</div>
-					<p style={{ color: 'red', marginLeft: '-11px' }} className="mt-2">
+					<p style={{ color: 'red', marginLeft: '-11px' }} className="mt-2 current-pincode-error">
 						{err}
 					</p>
 					<p style={{ color: 'red' }} className="mt-2">
 						{response}
 					</p>
 					<div className="row mt-3">
-						<div className="col-md-11 pe-2">
-							<button
+						<div className="col-md-12 pe-2">
+							<div className='row'>
+								<div className='col-md-5 ms-auto reset-pincode'>
+								<button
 								style={{ border: 'none', background: 'white', color: 'blue' }}
 								onClick={(e) => forgotPassword(e)}
 								className="forgot_password_pincode float-end pe-0"
 							>
 								{t('Reset pincode?')}
 							</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

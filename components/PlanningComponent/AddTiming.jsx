@@ -226,6 +226,7 @@ function Addtiming(props) {
 				error_endtime: '',
 				error: ''
 			});
+			commondate[index].warning_break = '';
 		} else {
 			if (data[parent_index].timings[index].time.length == 1) {
 				data[parent_index].timings[index].time.push({
@@ -235,6 +236,7 @@ function Addtiming(props) {
 					error_endtime: '',
 					error: ''
 				});
+				data[parent_index].timings[index].warning_break = '';
 			}
 		}
 		setEmployee_planning(data);
@@ -246,10 +248,17 @@ function Addtiming(props) {
 		if (checked) {
 			if (commondate[index].time.length > 1) {
 				commondate[index].time.splice(i, 1);
+				common[index].warning_break = TimeValidationService.breakWarning(common[index].time[0].starttime, common[index].time[0].endtime);
+
+
 			}
 		} else {
 			if (data[parent_index].timings[index].time.length > 1) {
 				data[parent_index].timings[index].time.splice(i, 1);
+				data[parent_index].timings[index].warning_break = data[parent_index].timings[index].time.length == 1 ?TimeValidationService.breakWarning(
+					data[parent_index].timings[index].time[0].starttime,
+					data[parent_index].timings[index].time[0].endtime,
+				):''; // validation for break time
 			}
 			if (data[parent_index].age < 18) {
 				data[parent_index].timings[index].warning_endtime_below18 = TimeValidationService.endTimeWarning(
@@ -416,7 +425,7 @@ function Addtiming(props) {
 					res[0].min_work_timings,
 					res[0].max_work_timings
 				);
-				common[index].warning_break = TimeValidationService.breakWarning(common[index].time, common[index].age);
+				common[index].warning_break = TimeValidationService.breakWarning(common[index].time[0].starttime, common[index].time[0].endtime);
 			}
 		} else {
 			if (e != null && res[key].timings.length > 0) {
@@ -457,9 +466,10 @@ function Addtiming(props) {
 						res[key].min_work_timings,
 						res[key].max_work_timings
 					);
-					res[key].timings[index].warning_break = TimeValidationService.breakWarning(
-						res[key].timings[index].time
-					);
+					res[key].timings[index].warning_break = res[key].timings[index].time.length == 1 ?TimeValidationService.breakWarning(
+						res[key].timings[index].time[time_index].starttime,
+							res[key].timings[index].time[time_index].endtime,
+					):'';
 					if (res[key].age < 18) {
 						res[key].timings[index].warning_endtime_below18 = TimeValidationService.endTimeWarning(
 							res[key].timings[index].time[time_index].starttime,

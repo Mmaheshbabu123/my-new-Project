@@ -414,7 +414,7 @@ input[type="checkbox"]
 }
 .minheight-verifypin
 {
-  min-height: 39vh;
+  min-height: 64vh;
 }
 .position-sticky-pincode-verify 
 {
@@ -584,6 +584,7 @@ input[type="checkbox"]
 }
 .actual-stop-time .rmdp-input,
 .actual-stop-date .rmdp-input
+
 {
   height: 38px !important;
   margin-top: 0.5rem !important;
@@ -591,12 +592,14 @@ input[type="checkbox"]
   border-radius: 0px !important;
   width: 100% !important;
 }
+
 .actual-stop-time .rmdp-container,
 .actual-stop-date .rmdp-container
 {
    width: 100% !important;
 }
-.actual-end-time .rmdp-container
+.actual-end-time .rmdp-container,
+.actual-end-time .rmdp-input
 {
   width: 100px !important;
 }
@@ -615,4 +618,9 @@ input[type="checkbox"]
 .actual-end-time .rmdp-up i
 {
   margin-top: 2px !important;
+}
+.table-benefits
+{
+  border-collapse: separate;
+  border-spacing: 21px 5px;
 }

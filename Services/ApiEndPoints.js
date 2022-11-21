@@ -65,7 +65,6 @@ export const fetchEmployeeTypesList = BASE_URL + "fetch-employee-types/";
 //--------------PLANNING API ROUTES ----------------//
 export const add_manage_planning = BASE_URL + "/planning";
 export const addPlanning = BASE_URL + "addplanning";
-export const addProject = BASE_URL + "addproject";
 export const Selectemployee = BASE_URL + "selectemployee";
 export const Weeklyplanning = BASE_URL + "weeklyplanning";
 export const Addplanningfunction = BASE_URL + "add-planningfunction";
@@ -85,7 +84,7 @@ export const updateEditproject = BASE_URL + "updateproject"
 
 //--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details/";
-export const fetchproject = BASE_URL + "fetch-project/";
+// export const fetchproject = BASE_URL + "fetch-project/";
 export const fetchallproject = BASE_URL + "fetch-all-project";
 export const fetchallarchivedprojects = BASE_URL + "fetch-all-archived-project"
 export const fetchprojectbyid = BASE_URL + "getproject/"
@@ -264,7 +263,18 @@ export const getdashboardtiles = BASE_URL_DRUPAL + "dashboard-tiles-roles";
 // ----------------------- Indexation of salary --------------------//
 export const addIndexationOfSalary = BASE_URL + "add-indexation-of-salary";
 export const getIndexationOfSalary = BASE_URL + "fetch-all-indexation-salary";
+export const getIndexationOfSalaryById = BASE_URL + "get-all-indexation-salary/";
+export const getCategoriesLinkedToPc = BASE_URL + "get-all-categories";
+export const updateStatus = BASE_URL + "update-status";
 
+//--------------------Indexation of benefits -------------------------//
+export const storeIndexationOfSalary = BASE_URL + "store-indexation-of-benefits";
+export const getAllManageBenefits = BASE_URL + "get-manage-indexation-benefits";
+export const getIndexationofBenefitsById = BASE_URL + "get-all-indexation-benefits/";
+export const getCategoreisLinkedToPcForBenefits = BASE_URL + "get-all-categories-for-benefits";
+export const getAllPartiairComites = BASE_URL +"getAllPartiairComites";
+export const getAllBenefitsLinkedtoPc = BASE_URL + "get-all-benefits-linked-to-pc";
+export const UpdateStatus = BASE_URL + "update-benefits-status";
 //-------------------------Add Planning---------------------------//
 export const getPlanning = BASE_URL + "fetch-add-planning-details/";
 export const getDraftPlanning = BASE_URL + "fetch-draft-planning/";
@@ -280,3 +290,5 @@ export const fetchEmployeeWidgetPlanning = BASE_URL + "get-all-widget-planning/"
 
 export const cancelContract = BASE_URL + 'cancelCantract';
 export const getContracts = BASE_URL + 'get-contracts';
+export const manageLocation = BASE_URL + 'getloca';
+export const inactiveTab = BASE_URL + 'getinactive';
