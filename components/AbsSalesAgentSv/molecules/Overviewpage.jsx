@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import styles from './AbsSalesAgentSv.module.css';
-import { AiFillFilePdf } from 'react-icons/ai';
 import {MdEdit } from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
-import { HiPlusCircle} from 'react-icons/hi';
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 import { deleteSalesAgenetAgreements, downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { useRouter } from 'next/router';
@@ -281,13 +279,13 @@ const Overviewpage = (props) => {
         });
         break;
      case 'edit':
-        window.open(`cooperation-agreement?root_parent_id=${root_parent_id}&selectedTabId=0&ref_id=${ref_id}`, '_blank');
+        window.open(`cooperation-agreement?root_parent_id=${root_parent_id}&selectedTabId=1&ref_id=${ref_id}`, '_blank');
         break;
      case 'download':
           handleDownload(eachRow)
         break;
       case 'add':
-       window.open(`cooperation-agreement?root_parent_id=0&selectedTabId=0&ref_id=${ref_id}`, '_blank');
+       window.open(`cooperation-agreement?root_parent_id=0&selectedTabId=1&ref_id=${ref_id}`, '_blank');
        break;
       default:
     }
