@@ -389,7 +389,9 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
-.poppins-regular-18px {
+.poppins-regular-18px,
+.poppins-regular-18px:hover
+{
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-light) !important;
 	font-size: var(--font-size-18px) !important;
@@ -398,6 +400,7 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
+
 .poppins-regular-18 {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular) !important;

@@ -94,7 +94,7 @@ function Header(props) {
 											</select>
 										</li>
 										<li className="list-unstyled ps-3 align-self-center d-flex poppins-regular-18px">
-											<a onClick={handleLogout} className="cursor-pointer">
+											<a onClick={handleLogout} className="cursor-pointer poppins-regular-18px">
 												{t('Logout')}
 											</a>
 										</li>
