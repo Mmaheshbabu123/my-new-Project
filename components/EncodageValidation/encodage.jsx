@@ -14,11 +14,11 @@ import ReactPaginate from '../PcComponent/Pagination';
 import Translation from '@/Translation';
 
 function EncodageValidation(props) {
-	const { t,trigger=0 } = props;
+	const { t, trigger = 0 } = props;
 
 	const { contextState = {} } = useContext(UserAuthContext);
 	const router = useRouter();
-	const [ editrow,setEditrow]=useState(-999);
+	const [ editrow, setEditrow ] = useState(-999);
 	const [ fcompany, setFcompany ] = useState('');
 	const [ flocation, setFlocation ] = useState('');
 	const [ fcostcenter, setFcostCenter ] = useState('');
@@ -28,19 +28,18 @@ function EncodageValidation(props) {
 	const [ locations, setLocations ] = useState([]);
 	const [ costcenters, setConstCenters ] = useState([]);
 	const [ projects, setProjects ] = useState([]);
-	const [multivalidate,setMultivalidate]=useState(0);
-	const [dummydata,setDummydata]=useState([]);
+	const [ multivalidate, setMultivalidate ] = useState(0);
+	const [ dummydata, setDummydata ] = useState([]);
 
 	/**
 	 * Pagination related variables
 	 */
-	 const [ itemsPerPage, setItemsPerPage ] = useState(8);
+	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 
 	//------------------- Pagination code -------------------------//
 
 	const [ pageCount, setPageCount ] = useState(0);
 	const [ itemOffset, setItemOffset ] = useState(0);
-
 
 	const {
 		setCurrent_sec,
@@ -59,18 +58,19 @@ function EncodageValidation(props) {
 
 	useEffect(() => {
 		var url = '';
-		var pdata={
-			company:0,
-			location:0,
-			costcenter:0,
-			project:0};
+		var pdata = {
+			company: 0,
+			location: 0,
+			costcenter: 0,
+			project: 0
+		};
 		if (contextState.role == 'administrator' || contextState.role == 'absolute_you_admin_config_user') {
 			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/0';
 		}
 		if (contextState.role == 'employeer') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid+'/0';
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid + '/0';
 		}
-		APICALL.service(url, 'POST',pdata)
+		APICALL.service(url, 'POST', pdata)
 			.then((result) => {
 				if (result[0] == 999) {
 					setData(null);
@@ -88,13 +88,12 @@ function EncodageValidation(props) {
 		// }
 	}, []);
 
-
 	useEffect(
 		() => {
-			var dummy=data;
+			var dummy = data;
 			const endOffset = itemOffset + itemsPerPage;
-			(dummy!=null)?setDummydata(dummy.slice(itemOffset, endOffset)):'';
-			(dummy!=null)?setPageCount(Math.ceil(dummy.length / itemsPerPage)):'';
+			dummy != null ? setDummydata(dummy.slice(itemOffset, endOffset)) : '';
+			dummy != null ? setPageCount(Math.ceil(dummy.length / itemsPerPage)) : '';
 		},
 		[ itemOffset, itemsPerPage, data ]
 	);
@@ -107,13 +106,13 @@ function EncodageValidation(props) {
 	const enabledisbale = (index) => {
 		var object = [ ...data ];
 		object[index].disabled = !object[index].disabled;
-		object[index].disabled?setMultivalidate(multivalidate-1):setMultivalidate(multivalidate+1);
+		object[index].disabled ? setMultivalidate(multivalidate - 1) : setMultivalidate(multivalidate + 1);
 		setData(object);
 	};
 
-	const updateEdit=(index)=>{
-		(index==editrow)?setEditrow(-999):setEditrow(index);
-	}
+	const updateEdit = (index) => {
+		index == editrow ? setEditrow(-999) : setEditrow(index);
+	};
 
 	const saveactualstart = (index, actualstart) => {
 		var object = [ ...data ];
@@ -124,20 +123,36 @@ function EncodageValidation(props) {
 
 	const saveactualend = (index, actualend) => {
 		var object = [ ...data ];
-		let editdate=new Date(actualend);
-		let startdate=new Date(object[index].wstart);
-		if(ValidationService.getDate(editdate)==ValidationService.getDate(startdate)){
-		if(editdate.getTime()<startdate.getTime()){
-			object[index].wend = ValidationService.addDays(actualend,1);
-			//actualend;
-			}else{
+		console.log(actualend);
+		if(actualend!=null){
+		//taking times of start,end with a constant date
+		let ae = '2022-11-05 ' + ValidationService.getTime(actualend, 1);
+		let ws = '2022-11-05 ' + ValidationService.getTime(object[index].wstart, 1);
+
+		//creating date object for each
+		let editdate = new Date(ae);
+		let startdate = new Date(ws);
+
+		//creating date object using the dates
+		var d1 = new Date(ValidationService.getDate(object[index].wstart)); 
+		var d2 = new Date(ValidationService.getDate(actualend)); 
+
+		//validating the dates and changing according to the time
+		if (editdate.getTime() < startdate.getTime()) {
+			(d1 < d2) ?
+				object[index].wend = actualend
+			:
+				object[index].wend = ValidationService.addDays(actualend, 1);
+		} else {
+			if (d1 < d2) {
+				object[index].wend = actualend;
+				(startdate.getTime() <= editdate.getTime())? 
+					object[index].wend = ValidationService.addDays(actualend, -1):'';
+			} else {
 				object[index].wend = actualend;
 			}
-		}else{
-			object[index].wend = actualend;
 		}
-		console.log(object[index].wend);
-		setData(object);
+		setData(object);}
 	};
 
 	const reset = () => {
@@ -145,19 +160,20 @@ function EncodageValidation(props) {
 	};
 
 	const filter = () => {
-		let url='';
-		var pdata={
-			company:fcompany != '' ? fcompany.value : 0,
-			location:flocation != '' ? flocation.value : 0,
-			costcenter:fcostcenter != '' ? fcostcenter.value : 0,
-			project:fproject != '' ? fproject.value : 0};
-        if (contextState.role == 'administrator' || contextState.role == 'absolute_you_admin_config_user') {
+		let url = '';
+		var pdata = {
+			company: fcompany != '' ? fcompany.value : 0,
+			location: flocation != '' ? flocation.value : 0,
+			costcenter: fcostcenter != '' ? fcostcenter.value : 0,
+			project: fproject != '' ? fproject.value : 0
+		};
+		if (contextState.role == 'administrator' || contextState.role == 'absolute_you_admin_config_user') {
 			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/0';
 		}
 		if (contextState.role == 'employeer') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid+'/0';
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid + '/0';
 		}
-		APICALL.service(url, 'POST',pdata)
+		APICALL.service(url, 'POST', pdata)
 			.then((result) => {
 				if (result[0] == 999) {
 					setData(null);
@@ -165,31 +181,37 @@ function EncodageValidation(props) {
 					setData(result[0]);
 				}
 			})
-			.catch((error) => console.error('Error occurred'))
-		
+			.catch((error) => console.error('Error occurred'));
 	};
 
-	const updateValidation = (wid,start,stop,index) => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/validate-encodage/' + contextState.uid, 'POST',[wid,start,stop])
+	const updateValidation = async(wid, start, stop, index) => {
+		await APICALL.service(
+			process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/validate-encodage/' + contextState.uid,
+			'POST',
+			[ wid, start, stop ]
+		)
 			.then((result) => {
-				console.log(result);
+				reset();
 			})
 			.catch((error) => console.error('Error occurred'));
 
 		updateEdit(index);
-		reset();
 	};
 
-
-	const validatedMulti=()=>{
-		let postdata={data};
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/validate-encodage-multi/' + contextState.uid, 'POST',postdata)
+	const validatedMulti = () => {
+		let postdata = { data };
+		APICALL.service(
+			process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/validate-encodage-multi/' + contextState.uid,
+			'POST',
+			postdata
+		)
 			.then((result) => {
-				router.push('/encodagevalidation/encodage');
+				if(result.status==201){
+					reset();
+				}
 			})
 			.catch((error) => console.error('Error occurred'));
-		// reset();
-	}
+	};
 
 	const updateTimes = () => {
 		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/filter-encodage-data', 'POST', [
@@ -206,7 +228,7 @@ function EncodageValidation(props) {
 
 	var display = '';
 	var rows = [];
-	(data != null && data!=999)
+	data != null && data != 999
 		? data.forEach((element, index) => {
 				console.log(element);
 				rows.push(
@@ -240,7 +262,7 @@ function EncodageValidation(props) {
 								value={new Date(element.wstart)}
 								onChange={(e) => saveactualstart(index, e.format('YYYY-MM-DD HH:mm:00'))}
 								plugins={[ <TimePicker key={element.wstart} hideSeconds /> ]}
-								disabled={(editrow!=index)?true:false}
+								disabled={editrow != index ? true : false}
 							/>
 						</td>
 						<td className="poppins-regular-18px p-2 align-middle">
@@ -257,29 +279,38 @@ function EncodageValidation(props) {
 								value={new Date(element.wend)}
 								onChange={(e) => saveactualend(index, e.format('YYYY-MM-DD HH:mm:00'))}
 								plugins={[ <TimePicker key={element.wend} hideSeconds /> ]}
-								disabled={(editrow!=index)?true:false}
+								disabled={editrow != index ? true : false}
 							/>
 						</td>
 						<td style={{ width: '149px' }} className="align-middle p-2 poppins-light-16px">
 							<button
-								onClick={()=>updateValidation(element.wid, element.wstart, element.wend,index)}
+								onClick={() => updateValidation(element.wid, element.wstart, element.wend, index)}
 								className="border-0 bg-transparent color-skyblue"
 							>
 								{element.validated ? <FaShieldAlt /> : <FaCheckCircle />}
 							</button>
-							<span></span>
+							<span />
 							<button
-								onClick={() => {editrow==index?updateValidation(element.wid, element.wstart, element.wend,index):'';updateEdit(index);}}
+								onClick={() => {
+									editrow == index
+										? updateValidation(element.wid, element.wstart, element.wend, index)
+										: '';
+									updateEdit(index);
+								}}
 								className="border-0 bg-transparent color-skyblue"
 							>
-								{editrow==index ? <FaSave /> : <FaUndoAlt />}
+								{editrow == index ? <FaSave /> : <FaUndoAlt />}
 							</button>
 						</td>
 					</tr>
 				);
 			})
-		: (display=<div className='row  mt-5'><div className='col-3'></div><div className='col-9'>
-			There is no plannngs for encodage validation.</div></div>);
+		: (display = (
+				<div className="row  mt-5">
+					<div className="col-3" />
+					<div className="col-9">There is no plannngs for encodage validation.</div>
+				</div>
+			));
 
 	return (
 		<div>
@@ -358,60 +389,68 @@ function EncodageValidation(props) {
 					</div>
 				</div>
 			</div>
-			{display==''?<div><table className="table">
-				<thead>
-					<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4" />
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Date')}</th>
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Name')}</th>
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-							{t('Planned start time')}
-						</th>
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-							{t('Actual start time')}
-						</th>
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-							{t('Planned end time')}
-						</th>
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-							{t('Actual end date')}
-						</th>
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-							{t('Actual end time')}
-						</th>
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Actions')}</th>
-					</tr>
-				</thead>
-				<tbody>{rows}</tbody>
-			</table>
-			<div>
-				{data.length>8&&
-				<ReactPaginate
-				itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}
-				/>
-				}
-			</div>
-			</div>
-			:display}
-			<div className='row'>
-			<div className='col-10'>
+			{display == '' ? (
+				<div>
+					<table className="table">
+						<thead>
+							<tr className="btn-bg-gray-medium table-sticky-bg-gray">
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4" />
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Date')}</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Name')}</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+									{t('Planned start time')}
+								</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+									{t('Actual start time')}
+								</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+									{t('Planned end time')}
+								</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+									{t('Actual end date')}
+								</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+									{t('Actual end time')}
+								</th>
+								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+									{t('Actions')}
+								</th>
+							</tr>
+						</thead>
+						<tbody>{rows}</tbody>
+					</table>
+					<div>
+						{data.length > 8 && (
+							<ReactPaginate
+								itemOffset={itemOffset}
+								handlePageClick={handlePageClick}
+								pageCount={pageCount}
+							/>
+						)}
+					</div>
+				</div>
+			) : (
+				display
+			)}
+			<div className="row">
+				<div className="col-10">
 					<input
 						type="button"
 						className="btn rounded-0 shadow-none border-0 px-0 poppins-light-18px text-uppercase text-decoration-underline"
 						value="Back"
 						onClick={() => router.push('/')}
 					/>
-			</div>
-			<div className='col-2'>
-			{multivalidate>0&&
-							<button
-								className="btn border-0 btn-block rounded-0 float-right reset_skyblue_button w-100 shadow-none text-uppercase"
-								onClick={() => validatedMulti()}
-							>
-								{t('Save')}
-							</button>
-			}
-			</div>
+				</div>
+				<div className="col-2">
+					{multivalidate > 0 && (
+						<button
+							className="btn border-0 btn-block rounded-0 float-right reset_skyblue_button w-100 shadow-none text-uppercase"
+							onClick={() => validatedMulti()}
+						>
+							{t('Save')}
+						</button>
+					)}
+				</div>
 			</div>
 		</div>
 	);
