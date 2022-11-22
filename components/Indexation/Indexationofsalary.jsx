@@ -124,6 +124,7 @@ const Indexationofsalary = (props) => {
 			}
 		}, [salary.pc]
 	)
+	
 
 	let updateObj = (data) => {
 		var value_euro1 = '';
