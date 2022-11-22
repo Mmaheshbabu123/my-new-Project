@@ -187,7 +187,12 @@ const MyContractsMain = ( props ) => {
               <td className='poppins-regular-16px'> {eachRow.planning_date} </td>
               <td className='poppins-regular-16px'> { getNeededActions(eachRow) } </td>
             </tr>)}
-          </tbody>: <p className='poppins-regular-18px' style={{paddingTop: '10px'}}> No records </p>}
+          </tbody>: <tbody>
+          <tr>
+              <td colSpan={8} className="text-center poppins-regular-18px no-records">
+											{t('No records')}
+										</td>
+              </tr></tbody>}
         </table>
       </div>
       <div>
