@@ -2,11 +2,12 @@ export const onlineDetailsRow1 = [
   {id:40,key_name:'Email address legal entity'},
   //{id:41,key_name:'Email address digital invoicing'},
   {id:42,key_name:'Email address prestatieblad'},
+  {id:47,key_name:'Email address invoicing reminders "rappels"'},
 ];
 export const onlineDetailsRow2 = [
   {id:45,key_name:'Email address online prestaties'},
   {id:46,key_name:'Email address digital contracts'},
-  {id:47,key_name:'Email address invoicing reminders "rappels"'},
+ 
 ];
 
 export const onlineDetaillsRadioRow1 = [

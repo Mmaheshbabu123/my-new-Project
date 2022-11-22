@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import Translation from '@/Translation';
 function Header(props) {
 	let router = useRouter();
-	const { contextState: { isAuthenticated = 0, uid, roleType = 1 } } = useContext(UserAuthContext);
+	const { contextState: { isAuthenticated = 0, uid, roleType = 1 }, updateUserContext } = useContext(UserAuthContext);
 	const { t } = props;
 	const [state, setState] = useState({
 		languages: [{code: 0, language: 'Select'}],
@@ -35,6 +35,8 @@ function Header(props) {
 						setObj['languages'] = result['data'];
 						setObj['profile'] = result['userData'] ? result['userData']['profile_path'] : '';
 						setObj['lang'] = localStorage['lang'] !== undefined ? localStorage['lang'] : 'en';
+
+						updateUserContext({openTodosCount: result['userData'] ? result['userData']['openTodosCount'] : 0})
 					} else { console.log('error while fetching header data') }
 				}).catch(error => console.error(error))
 				setState(setObj);
@@ -56,48 +58,51 @@ function Header(props) {
 		<div className="custom-position-sticky ">
 			<div className="clip0 d-none d-md-block d-lg-block" />
 			<div className='container'>
-				<div className="custom-header border-bottom col-md-9 col-lg-11 m-auto border-2 custom-position-sticky px-0 pt-3">
-					<div className="pb-3 col-md-12 p-0">
-						<div className="d-flex row">
-							<div className="col-md-4">
-								<a className="navbar-brand d-flex" href="">
-									<Link href={'/'}>
-										<img style={{ width: '220px' }} src="/logo.svg" className="mt-2" />
-									</Link>
-								</a>
-							</div>
-							<div className="d-flex justify-content-end  col-md-8 p-0 align-items-center">
-								{authenticated === 1 && <ul className="d-flex list-unstyled mb-0">
-									<li className="list-unstyled mx-4 align-self-center d-flex purple-color2 poppins-regular-18px">
-										<Link href={'/'} className="">
-											<a type="">{t('DASHBOARD')}</a>
-										</Link>
-									</li>
-									<li className="list-unstyled ms-4 me-3 align-self-center d-flex">
-										<Notification /> {/*<img style={{ width: '25px', marginTop: '8px' }} src="/notifications.svg" /> */}
-									</li>
-									<li className="list-unstyled mx-4 align-self-center d-flex">
-										<a href={`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/${roleType === 3 ? 'employee_flow/form/profile' : 'profile'}`}> <img className='my-profile-icon' src={state.profile || "/Profile.svg"} /> </a>
-									</li>
-									<li className="list-unstyled mx-4 align-self-center d-flex">
-										<select
-										    id="lang-select"
-											className="border-0 cursor-pointer bg-white poppins-regular-18px p-1 lang-options"
-											value={state['lang']}
-											onChange={handleLangChange}
-										>
-											{state.languages.map((lang, index) => <option className="lang" value={lang.code} key={index} >{lang.code!=''?lang.code.toUpperCase():lang.code} </option>)}
-										</select>
-									</li>
-									<li className="list-unstyled mx-3 align-self-center d-flex poppins-regular-18px">
-										<a onClick={handleLogout} className="cursor-pointer">
-											{t('Logout')}
-										</a>
-									</li>
+				<div className="custom-header border-bottom col-md-9 col-lg-11 m-auto border-2 custom-position-sticky px-0 border-hide" style={{paddingTop:'0.65rem'}}>
+					<nav class="navbar navbar-expand-lg navbar-light" style={{paddingTop:'0.65rem'}}>
+						<div class="container-fluid px-0 header-bar">
+						<div className='border-bottom-mobile'>
+						<button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<Link href={'/'}>
+								<img style={{ width: '220px' }} src="/logo.svg" className="mt-2 navbar-brand" />
+							</Link>
+						</div>
+
+								<div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
+								{authenticated === 1 && <ul className="d-flex list-unstyled mb-0 menu-links">
+										<li className="list-unstyled px-3 align-self-center d-flex purple-color2 poppins-regular-18px">
+											<Link href={'/'} className="">
+												<a type="">{t('DASHBOARD')}</a>
+											</Link>
+										</li>
+										<li className="list-unstyled px-3 align-self-center d-flex">
+											<Notification /> {/*<img style={{ width: '25px', marginTop: '8px' }} src="/notifications.svg" /> */}
+										</li>
+										<li className="list-unstyled px-3 align-self-center d-flex">
+											<a href={`${process.env.NEXT_PUBLIC_APP_URL_DRUPAL}/${roleType === 3 ? 'employee_flow/form/profile' : 'profile'}`}> <img className='my-profile-icon' src={state.profile || "/Profile.svg"} /> </a>
+										</li>
+										<li className="list-unstyled px-3 align-self-center d-flex">
+											<select
+													id="lang-select"
+												className="border-0 cursor-pointer bg-white poppins-regular-18px p-1 lang-options"
+												value={state['lang']}
+												onChange={handleLangChange}
+											>
+												{state.languages.map((lang, index) => <option className="lang" value={lang.code} key={index} >{lang.code!=''?lang.code.toUpperCase():lang.code} </option>)}
+											</select>
+										</li>
+										<li className="list-unstyled ps-3 align-self-center d-flex poppins-regular-18px">
+											<a onClick={handleLogout} className="cursor-pointer poppins-regular-18px">
+												{t('Logout')}
+											</a>
+										</li>
 								</ul>}
+				
 							</div>
 						</div>
-					</div>
+					</nav>
 				</div>
 			</div>
 		</div>

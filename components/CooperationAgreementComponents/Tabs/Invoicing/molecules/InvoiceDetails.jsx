@@ -82,8 +82,8 @@ console.log(roleType);
      else if (data.type === 6) {
      fieldData.push(
        <div className = {`col-md-12 ${styles['add-div-margings']} invoice${data.id}`}>
-           <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'} mandotory = {requiredFields['tab_6'][data.id]}/> {requiredFields['tab_6'][data.id] && <RequiredField />}
-           <div className='poppins-regular-18px'>
+           <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'} mandotory = {requiredFields['tab_6'][data.id]} /> 
+           <div className='poppins-regular-18px-invoicing' style={{margin:'0.5rem 0'}}>
             <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px `} onClick={() => handleRadioSelect(data.id,1)}> {Number(tab_6[data.id]) === 1 ? <IoMdRadioButtonOn className="radio_button"/> : <IoMdRadioButtonOff />} {data.option1}</label>
             <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px radio_button`} onClick={() => handleRadioSelect(data.id,2)}> {Number(tab_6[data.id]) === 2 ? <IoMdRadioButtonOn className="radio_button" /> : <IoMdRadioButtonOff  />} {data.option2}</label>
          {/*  <RadioField   name = {Title_key} checked = {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 1} handleChange = {(e)=>handleRadioSelect(Title_key,1,personId)} label= {'Mr'} />

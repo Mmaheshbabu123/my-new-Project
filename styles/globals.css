@@ -389,7 +389,9 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
-.poppins-regular-18px {
+.poppins-regular-18px,
+.poppins-regular-18px:hover
+{
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-light) !important;
 	font-size: var(--font-size-18px) !important;
@@ -398,6 +400,7 @@ body {
 	font-weight: 400;
 	/* line-height: initial; */
 }
+
 .poppins-regular-18 {
 	color: var(--color-label-footer-gray);
 	font-family: var(--font-family-poppins-regular) !important;
@@ -406,6 +409,15 @@ body {
 	line-height: var(--line-height-29px) !important;
 	font-weight: 400;
 	/* line-height: initial; */
+}
+.poppins-regular-18px-invoicing
+{
+	color: var(--color-label-footer-gray);
+	font-family: var(--font-family-poppins-light) !important;
+	font-size: var(--font-size-18px) !important;
+	font-style: normal;
+	line-height: 32px !important;
+	font-weight: 400;
 }
 .poppins-medium-16px {
 	font-size: var(--font-size-16px) !important;
@@ -957,14 +969,7 @@ label {
 	top: 17px;
 	position: absolute;
 	cursor: pointer;
-
 	left: 43%;
-}
-.online42{
-	margin-bottom: 108px !important;
-}
-.legal24 {
-	margin-top: 160px !important;
 }
 .custom-position-sticky {
 	position: sticky;
@@ -2275,4 +2280,8 @@ input[type="search"]::-webkit-search-cancel-button {
 	{
 		text-align: center;
 	}
+}
+.indexation-salary  .react-select-prefix__control
+{
+	height: auto !important;
 }

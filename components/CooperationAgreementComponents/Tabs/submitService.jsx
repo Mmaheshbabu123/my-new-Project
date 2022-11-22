@@ -258,6 +258,7 @@ function absoluteYouPostData(state) {
   let coeffPageData = state['coeffPageData'] || {};
   let selectedPcId = coeffPageData.selectedPc || 0;
   data['coeffPageDataPc'] = selectedPcId;
+  data['changedCells'] = state['changedCells'] || {};
   return data;
 }
 function validationsObjCheckStatus (validate_data) {

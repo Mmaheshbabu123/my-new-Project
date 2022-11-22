@@ -2,38 +2,37 @@ import React, { useState, useEffect } from 'react';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import {
-	addProject,
-	fetchproject,
-	fetchallproject,
 	fetchprojectbyid,
 	updateEditproject
 } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import Translation from '@/Translation';
+import BackLink from '../BackLink';
+
 function EditProject(props) {
-	const { t }=props;
+	const { t } = props;
 	const router = useRouter();
 	const { p_unique_key } = router.query;
 
-	const [ countrylist, setCountrylist ] = useState([]);
-	const [ company, setCompany ] = useState([]);
+	const [countrylist, setCountrylist] = useState([]);
+	const [company, setCompany] = useState([]);
 
-	const [ id, setId ] = useState('');
+	const [id, setId] = useState('');
 	// const [ project, setProject ] = useState([]);
 
 	/**
-     * VALIDATION
-     */
-	const [ error_project_name, setError_project_name ] = useState('');
-	const [ error_project_location, setError_project_location ] = useState('');
-	const [ error_hno, setError_hno ] = useState('');
-	const [ error_city, setError_city ] = useState('');
-	const [ error_extra, setError_extra ] = useState('');
-	const [ error_comp_id, setError_comp_id ] = useState('');
-	const [ error_street, setError_street ] = useState('');
-	const [ error_postal_code, setError_postal_code ] = useState('');
-	const [ error_countrylist, setError_countrylist ] = useState('');
-	const [ error_bus_number, setError_bus_number ] = useState('');
+	 * VALIDATION
+	 */
+	const [error_project_name, setError_project_name] = useState('');
+	const [error_project_location, setError_project_location] = useState('');
+	const [error_hno, setError_hno] = useState('');
+	const [error_city, setError_city] = useState('');
+	const [error_extra, setError_extra] = useState('');
+	const [error_comp_id, setError_comp_id] = useState('');
+	const [error_street, setError_street] = useState('');
+	const [error_postal_code, setError_postal_code] = useState('');
+	const [error_countrylist, setError_countrylist] = useState('');
+	const [error_bus_number, setError_bus_number] = useState('');
 
 	let validate = (res) => {
 		console.log(res);
@@ -123,7 +122,7 @@ function EditProject(props) {
 		}
 	};
 
-	const [ project, setProject ] = useState({
+	const [project, setProject] = useState({
 		id: '',
 		project_name: '',
 		project_location: '',
@@ -202,7 +201,7 @@ function EditProject(props) {
 					});
 			}
 		},
-		[ props.id ]
+		[props.id]
 	);
 
 	// useEffect(
@@ -237,7 +236,7 @@ function EditProject(props) {
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
 													<label className="font-weight-bold custom_astrick">
-													{t('Project name')}
+														{t('Project name')}
 													</label>
 													<input
 														type="text"
@@ -417,6 +416,9 @@ function EditProject(props) {
 										{t('SAVE')}
 									</button>
 								</div>
+								<div className="text-start col-md-6">
+									<BackLink path={'/'} />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -425,4 +427,4 @@ function EditProject(props) {
 		</div>
 	);
 }
-export default React.memo(Translation(EditProject,['Extra','Select country','Country','City','Postalcode','Bus number','House number','Street','Location','Edit project','Project name','Company','Select','SAVE']));
+export default React.memo(Translation(EditProject, ['Extra', 'Select country', 'Country', 'City', 'Postalcode', 'Bus number', 'House number', 'Street', 'Location', 'Edit project', 'Project name', 'Company', 'Select', 'SAVE']));

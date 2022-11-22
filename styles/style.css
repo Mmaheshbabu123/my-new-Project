@@ -412,10 +412,15 @@ select option
 }
 .my_todo_table .Todos_span-action-icons___UbjJ img
 {
-  width: 20px;
+  width: 25px;
   color: var(--color-skyblue);
   margin-right: 15px;
-  height: 20px;
+  height: 25px;
+}
+.my-todo-download-icon
+{
+  width: 20px !important;
+  height: 20px !important;
 }
 .sign_action_icon_size
 {
@@ -717,19 +722,17 @@ select option
 {
   min-height: 68vh;
 }
+.min-height-view-qr-code
+{
+  min-height: 76vh;
+}
 .start-stop-planning .react-select-prefix__single-value,
 .encodage-validation .react-select-prefix__single-value
 {
   display: flex;
   align-items: center;
 }
-.start-stop-planning .react-select-prefix__control--is-focused,
-.minheight-verifypin .react-select-prefix__control--is-focused,
-.encodage-validation .react-select-prefix__control--is-focused,
-.edit_employee_table .react-select-prefix__control--is-focused,
-.type_of_company .react-select-prefix__control--is-focused,
-.payment_condition .react-select-prefix__control--is-focused,
-.salary_benefits_co_operation_agreement .react-select-prefix__control--is-focused
+.react-select-prefix__control--is-focused
 {
   border: 1px solid #4C4D554D !important;
 }

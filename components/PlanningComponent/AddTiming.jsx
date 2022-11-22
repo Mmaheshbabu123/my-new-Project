@@ -27,8 +27,6 @@ import D19 from '../images/Age19+.svg';
 import D20 from '../images/Age20+.svg';
 import D21 from '../images/Age21+.svg';
 
-
-
 function Addtiming(props) {
 	const { t } = props;
 	var count1 = 0;
@@ -228,6 +226,7 @@ function Addtiming(props) {
 				error_endtime: '',
 				error: ''
 			});
+			commondate[index].warning_break = '';
 		} else {
 			if (data[parent_index].timings[index].time.length == 1) {
 				data[parent_index].timings[index].time.push({
@@ -237,6 +236,7 @@ function Addtiming(props) {
 					error_endtime: '',
 					error: ''
 				});
+				data[parent_index].timings[index].warning_break = '';
 			}
 		}
 		setEmployee_planning(data);
@@ -248,10 +248,24 @@ function Addtiming(props) {
 		if (checked) {
 			if (commondate[index].time.length > 1) {
 				commondate[index].time.splice(i, 1);
+				common[index].warning_break = TimeValidationService.breakWarning(common[index].time[0].starttime, common[index].time[0].endtime);
+
+
 			}
 		} else {
 			if (data[parent_index].timings[index].time.length > 1) {
 				data[parent_index].timings[index].time.splice(i, 1);
+				data[parent_index].timings[index].warning_break = data[parent_index].timings[index].time.length == 1 ?TimeValidationService.breakWarning(
+					data[parent_index].timings[index].time[0].starttime,
+					data[parent_index].timings[index].time[0].endtime,
+				):''; // validation for break time
+			}
+			if (data[parent_index].age < 18) {
+				data[parent_index].timings[index].warning_endtime_below18 = TimeValidationService.endTimeWarning(
+					data[parent_index].timings[index].time[0].starttime,
+					data[parent_index].timings[index].time[0].endtime,
+					data[parent_index].dob
+				);
 			}
 		}
 		setEmployee_planning(data);
@@ -292,10 +306,6 @@ function Addtiming(props) {
 			.catch((error) => {
 				console.error(error);
 			});
-	};
-
-	let checkIfPlanningExist = (data) => {
-		APICALL.service(storePlannedTimings, 'POST', data1);
 	};
 
 	/**
@@ -393,7 +403,7 @@ function Addtiming(props) {
 
 	let updatetime = (type, index, e, key, time_index, date) => {
 		var res = [ ...employee_planning ];
-		console.log(res);
+		console.log(res[key]);
 		var common = [ ...commonDatetime ];
 		if (checked == true) {
 			if (type == 'starttime') {
@@ -415,12 +425,12 @@ function Addtiming(props) {
 					res[0].min_work_timings,
 					res[0].max_work_timings
 				);
-				common[index].warning_break = TimeValidationService.breakWarning(
-					common[index].time,common[index].age
-				);
+				common[index].warning_break = TimeValidationService.breakWarning(common[index].time[0].starttime, common[index].time[0].endtime);
 			}
 		} else {
 			if (e != null && res[key].timings.length > 0) {
+				var nextDate = new Date(date);
+				nextDate.setDate(nextDate.getDate() + 1);
 				if (type == 'starttime') {
 					res[key].timings[index].time[time_index].error = '';
 					res[key].timings[index].time[time_index].error_starttime = '';
@@ -431,13 +441,20 @@ function Addtiming(props) {
 
 					setEmployee_planning(res);
 				} else {
+					if (
+						res[key].timings[index].time[time_index].starttime != '' &&
+						e != '' &&
+						moment(date + ' ' + e.format('HH:mm') + ':00') <
+							res[key].timings[index].time[time_index].starttimeObj
+					) {
+						date = moment(nextDate).format('YYYY-MM-DD');
+					}
 					res[key].timings[index].time[time_index].error = '';
 					res[key].timings[index].time[time_index].error_endtime = '';
 					res[key].timings[index].time[time_index].endtimeObj = moment(
 						date + ' ' + e.format('HH:mm') + ':00'
 					);
 					res[key].timings[index].time[time_index].endtime = date + ' ' + moment(e).format('HH:mm') + ':00';
-
 					setEmployee_planning(res);
 				}
 				if (
@@ -449,10 +466,17 @@ function Addtiming(props) {
 						res[key].min_work_timings,
 						res[key].max_work_timings
 					);
-					res[key].timings[index].warning_break = TimeValidationService.breakWarning(
-						res[key].timings[index].time,
-						res[key].age,
-					);
+					res[key].timings[index].warning_break = res[key].timings[index].time.length == 1 ?TimeValidationService.breakWarning(
+						res[key].timings[index].time[time_index].starttime,
+							res[key].timings[index].time[time_index].endtime,
+					):'';
+					if (res[key].age < 18) {
+						res[key].timings[index].warning_endtime_below18 = TimeValidationService.endTimeWarning(
+							res[key].timings[index].time[time_index].starttime,
+							res[key].timings[index].time[time_index].endtime,
+							res[key].dob
+						);
+					}
 				}
 			}
 		}
@@ -460,7 +484,7 @@ function Addtiming(props) {
 
 	let maxWorkTimeVaidation = (time, min_work_timings, max_work_timings) => {
 		var duration = 0;
-		time.map((v2, k2) => {	
+		time.map((v2, k2) => {
 			duration = duration + TimeValidationService.getDuration(v2.starttime, v2.endtime);
 		});
 		console.log(duration);
@@ -547,8 +571,7 @@ function Addtiming(props) {
 														{result.employee_name}
 														<span className="ageicon" data-toggle="tooltip" title="Age">
 															{result.age != 0 &&
-																result.age <
-																result.pc_min_age &&
+																result.age < result.pc_min_age &&
 																{
 																	'15': <Image src={Age15} width={25} height={25} />,
 																	'16': <Image src={Age16} width={25} height={25} />,
@@ -558,15 +581,19 @@ function Addtiming(props) {
 																	'20': <Image src={Age20} width={25} height={25} />
 																}[result.age]}
 														</span>
-														<span className="ageicon" data-toggle="tooltip" title={result.dob.split('-').reverse().join('-')}>
-														{result.age == result.pc_min_age &&
-															{
-																	'18': <Image src={D18} width={25} height={25} /> ,
-																	'19': <Image src={D19} width={25} height={25} /> ,
-																	'20': <Image src={D20} width={25} height={25} /> ,
-																	'21': <Image src={D21} width={25} height={25} /> ,
-																}[result.age]
-														}</span>
+														<span
+															className="ageicon"
+															data-toggle="tooltip"
+															title={result.dob.split('-').reverse().join('-')}
+														>
+															{result.age == result.pc_min_age &&
+																{
+																	'18': <Image src={D18} width={25} height={25} />,
+																	'19': <Image src={D19} width={25} height={25} />,
+																	'20': <Image src={D20} width={25} height={25} />,
+																	'21': <Image src={D21} width={25} height={25} />
+																}[result.age]}
+														</span>
 													</div>
 													<div className="col-md-4 poppins-light-20px">
 														{result.employee_type_name}
@@ -695,6 +722,15 @@ function Addtiming(props) {
 															</div>
 														</div>
 													))}
+													{value.warning_endtime_below18 != '' &&
+													value.warning_endtime_below18 != undefined && (
+														<p className="error pb-2">
+															<span className="pe-1">
+																<ExclamationTriangle className="mb-1" />
+															</span>
+															{value.warning_endtime_below18}
+														</p>
+													)}
 													{value.warning != '' &&
 													value.warning != undefined && (
 														<p className="error pb-2">
@@ -702,6 +738,16 @@ function Addtiming(props) {
 															{value.warning}
 														</p>
 													)}
+													{value.warning_break != '' &&
+													value.warning_break != undefined && (
+														<p className="error pb-2">
+															<span className="pe-1">
+																<ExclamationTriangle className="mb-1" />
+															</span>
+															{value.warning_break}
+														</p>
+													)}
+													
 												</div>
 											</div>
 										))}
@@ -734,27 +780,48 @@ function Addtiming(props) {
 														<div className="col-md-3 poppins-light-20px">
 															{result.employee_name}
 															<span className="ageicon" data-toggle="tooltip" title="Age">
-															{result.age != 0 &&
-																result.age < result.pc_min_age &&
-																{
-																	'15': <Image src={Age15} width={25} height={25} />,
-																	'16': <Image src={Age16} width={25} height={25} />,
-																	'17': <Image src={Age17} width={25} height={25} />,
-																	'18': <Image src={Age18} width={25} height={25} />,
-																	'19': <Image src={Age19} width={25} height={25} />,
-																	'20': <Image src={Age20} width={25} height={25} />
-																}[result.age]}
-
-														</span>
-														<span className="ageicon" data-toggle="tooltip" title={result.dob.split('-').reverse().join('-')}>
-														{result.age == result.pc_min_age &&
-															{
-																	'18': <Image src={D18} width={25} height={25} /> ,
-																	'19': <Image src={D19} width={25} height={25} /> ,
-																	'20': <Image src={D20} width={25} height={25} /> ,
-																	'21': <Image src={D21} width={25} height={25} /> ,
-																}[result.age]
-														}</span>
+																{result.age != 0 &&
+																	result.age < result.pc_min_age &&
+																	{
+																		'15': (
+																			<Image src={Age15} width={25} height={25} />
+																		),
+																		'16': (
+																			<Image src={Age16} width={25} height={25} />
+																		),
+																		'17': (
+																			<Image src={Age17} width={25} height={25} />
+																		),
+																		'18': (
+																			<Image src={Age18} width={25} height={25} />
+																		),
+																		'19': (
+																			<Image src={Age19} width={25} height={25} />
+																		),
+																		'20': (
+																			<Image src={Age20} width={25} height={25} />
+																		)
+																	}[result.age]}
+															</span>
+															<span
+																className="ageicon"
+																data-toggle="tooltip"
+																title={result.dob.split('-').reverse().join('-')}
+															>
+																{result.age == result.pc_min_age &&
+																	{
+																		'18': (
+																			<Image src={D18} width={25} height={25} />
+																		),
+																		'19': (
+																			<Image src={D19} width={25} height={25} />
+																		),
+																		'20': (
+																			<Image src={D20} width={25} height={25} />
+																		),
+																		'21': <Image src={D21} width={25} height={25} />
+																	}[result.age]}
+															</span>
 														</div>
 														<div className="col-md-4 poppins-light-20px">
 															{result.employee_type_name}
@@ -937,20 +1004,35 @@ function Addtiming(props) {
 																					<p className="error">{v1.error}</p>
 																				</div>
 																			))}
+																			{value.warning_endtime_below18 != '' &&
+																			value.warning_endtime_below18 !=
+																				undefined && (
+																				<p className="error pb-2">
+																					<span className="pe-1">
+																						<ExclamationTriangle className="mb-1" />
+																					</span>
+																					{value.warning_endtime_below18}
+																				</p>
+																			)}
 																			{value.warning != '' &&
 																			value.warning != undefined && (
 																				<p className="error pb-2">
-																					<span className='pe-1'><ExclamationTriangle className='mb-1'/></span>
+																					<span className="pe-1">
+																						<ExclamationTriangle className="mb-1" />
+																					</span>
 																					{value.warning}
 																				</p>
 																			)}
 																			{value.warning_break != '' &&
 																			value.warning_break != undefined && (
 																				<p className="error pb-2">
-																					<span className='pe-1'><ExclamationTriangle className='mb-1'/></span>
+																					<span className="pe-1">
+																						<ExclamationTriangle className="mb-1" />
+																					</span>
 																					{value.warning_break}
 																				</p>
 																			)}
+																			
 																		</div>
 																	</div>
 																))}
@@ -972,7 +1054,7 @@ function Addtiming(props) {
 
 						<div className="col-md-12 mt-4  mb-4">
 							<div className="d-inline">
-								<button type="button" className="btn btn-link text-dark btn-block px-0">
+								<button type="button" className="btn btn-link text-dark btn-block px-0 shadow-none rounded-0">
 									<Link href={'/planning/functions/' + props.p_unique_key}>
 										<p className="bg-white border-0 poppins-light-19px text-decoration-underline px-0">
 											{t('BACK')}

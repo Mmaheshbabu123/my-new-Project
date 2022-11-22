@@ -1,3 +1,12 @@
+const constantsCoeffs = [
+  'coefficient ecocheques',
+  'coefficient meal voucher',
+  'coefficient transport',
+  'coef_eco',
+  'coef_meal vouchers',
+  'coef_transport',
+];
+
 export const helpers = {
     toggleWarningClass
   , checkCoefficientsFilledOrNot
@@ -26,6 +35,7 @@ function checkCoefficientsFilledOrNot(coeffData, empData, filledObj) {
   } else {
     status = checkEachCoefficient(coeffData, empData, filledObj);
   }
+  checkForBbrightConstants(coeffData);
   return {status, regExpressionStatus};
 }
 
@@ -73,7 +83,7 @@ function scrollContent(forward = 1) {
   let setObj = {};
   let scrollLeftMax = divElement.scrollWidth - divElement.clientWidth;
   let scrollLeft = divElement.scrollLeft;
-  setObj['tableWidth'] = '97%';
+  setObj['tableWidth'] = '100%';
   if(scrollLeft >= scrollLeftMax) {
     setObj['scrollRight'] = false;
     setObj['scrollLeft'] = true;
@@ -86,12 +96,12 @@ function scrollContent(forward = 1) {
     setObj['scrollRight'] = true;
     setObj['scrollLeft'] = true
   }
-  if(setObj['scrollLeft'] === false && setObj['scrollRight'] === false)
-      setObj['tableWidth'] = '100%';
-  if(setObj['scrollLeft'] === true && setObj['scrollRight'] === false)
-      setObj['tableWidth'] = '97%';
-  if(setObj['scrollLeft'] === true && setObj['scrollRight'] === true)
-      setObj['tableWidth'] = '95%';
+  // if(setObj['scrollLeft'] === false && setObj['scrollRight'] === false)
+  //     setObj['tableWidth'] = '100%';
+  // if(setObj['scrollLeft'] === true && setObj['scrollRight'] === false)
+  //     setObj['tableWidth'] = '97%';
+  // if(setObj['scrollLeft'] === true && setObj['scrollRight'] === true)
+  //     setObj['tableWidth'] = '95%';
   return setObj;
 }
 
@@ -99,4 +109,10 @@ function scrollContent(forward = 1) {
 function takeSelectedIds(alreadyLinked, stateObj) {
   if(!stateObj) return alreadyLinked;
   return [false, ...alreadyLinked, ...Object.values(stateObj['selectedPc'])]
+}
+
+
+function checkForBbrightConstants(coeffData) {
+  // let neededCoeffs = coeffData.filter(val => constantsCoeffs.includes(val.name.toLowerCase()))
+  // console.log(neededCoeffs);
 }

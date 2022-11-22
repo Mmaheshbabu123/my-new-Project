@@ -151,16 +151,16 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
        {state.approved === 1 && state.signAsEmployer !== 1 ?
          <>
              <div className="col-md-2 text-end">
-               <button onClick={() => forwardToApproveProcess()} type="button" className="btn btn-dark pcp_btn"> {type === 2 ? 'Approve' : 'Send to employer'} </button>
+               <button onClick={() => forwardToApproveProcess()} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase"> {type === 2 ? 'Approve' : 'Send to employer'} </button>
              </div>
              <div className="col-md-2 text-end">
-              {type === 1 && <button onClick={checkAuthenticateEmployer} type="button" className="btn btn-dark pcp_btn"> {'Sign as employer'} </button>}
+              {type === 1 && <button onClick={checkAuthenticateEmployer} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase"> {'Sign as employer'} </button>}
              </div>
               {type === 1 && <SignatureDetails state = {state} setState = {setState} submitSignData={submitSignData} fromSvPreview={1} />}
           </>
          :
          <div className="col-md-2 text-end">
-           {state.signAsEmployer === 1 && <button onClick={() => forwardToApproveProcess(1)} type="button" className="btn btn-dark pcp_btn"> {'Approve'} </button>}
+           {state.signAsEmployer === 1 && <button onClick={() => forwardToApproveProcess(1)} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase"> {'Approve'} </button>}
          </div>
        }
      </div>}

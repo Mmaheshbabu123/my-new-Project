@@ -15,7 +15,7 @@ const NotificationView = ({
     allTimestamp: [],
     totalCount: 0,
     viewAllLink: 1,
-    notificationCount: -1.
+    notificationCount: -1,
   })
 
   const loadAll = () => {
@@ -126,7 +126,10 @@ const NotificationView = ({
           </div>
         </div>
         {state.notificationCount > 0 && <div className="col-md-12 row m-0 p-0 pt-3 pb-2 ">
-        {totalCount > 2 && state.viewAllLink === 1 && <p className={`${styles['link-p-tags']} cursor-pointer col-md-12 text-center text-uppercase text-decoration-underline  bitter-italic-normal-medium-16`}
+        <p className={`${styles['link-p-tags']} cursor-pointer col-md-6 text-start text-uppercase text-decoration-underline  bitter-italic-normal-medium-16`} onClick={() => updateNotifications('readAll', state.allTimestamp)}>
+             Mark all as read
+          </p>
+        {props.readUnreadAllCount > 2 && state.viewAllLink === 1 && <p className={`${styles['link-p-tags']} cursor-pointer col-md-6 text-end text-uppercase text-decoration-underline  bitter-italic-normal-medium-16`}
             onClick={loadAll} > View all </p>}
         </div>}
       </div>

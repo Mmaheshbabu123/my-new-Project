@@ -19,7 +19,7 @@ import { file } from '@/atoms/handleFileUpload';
 import FileUpload from '@/atoms/FileUpload';
 import { MdDelete } from 'react-icons/md';
 import styles from './Todos.module.css';
-import sign_icon from '../molecules/images/cooperation_agreement.svg';
+import sign_icon from '../molecules/images/Sign.svg';
 import edit_svg from '../molecules/images/edit.svg';
 import download_svg from '../molecules/images/download.svg';
 import { HiOutlineExternalLink, } from 'react-icons/hi';
@@ -182,13 +182,13 @@ const TodosOverview = ({ props, entityId, entityType, tabId, t }) => {
       case LABOUR_COOPERATION_TODO:
           returnActions.push( eachRow.type === 1 ?
             getSpanTag(eachRow, 'Upload', 'upload', edit_svg.src, eachRow.todo_status === 1):
-            getSpanTag(eachRow, 'Sign', 'sign', edit_svg.src, eachRow.todo_status === 1)
+            getSpanTag(eachRow, 'Sign', 'sign', sign_icon.src, eachRow.todo_status === 1)
           )
         break;
       default:
         break;
     }
-    returnActions.push(eachRow.todo_status === 1 && <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="download" className=''></img> </span>)
+    returnActions.push(eachRow.todo_status === 1 && <span title={'Download'} className={styles["span-action-icons"]} onClick={() => handleActionClick('download', eachRow)}> <img src={download_svg.src} alt="download" className='my-todo-download-icon'></img> </span>)
     return returnActions;
   }
 

@@ -5,3 +5,115 @@
     margin-left: 10px !important;
   }
 }
+@media screen and (min-width:1200px) and (max-width:1400px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 5rem !important;
+  }
+  .todo-count-badge-employeer
+  {
+    right: 2rem !important;
+  }
+  .current-pincode .current-pincode-error
+  {
+    margin-left: -55px !important;
+  }
+}
+@media screen and (min-width:1024px) and (max-width:1199px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 4rem !important;
+  }
+  .todo-count-badge-employeer
+  {
+    right: 1rem !important;
+  }
+}
+@media screen and (min-width:1400px)
+{
+  .reset-pincode
+  {
+    margin-right: 2.9rem;
+  }
+}
+@media screen and (min-width:0px) and (max-width:767px) 
+{
+  .back-btn-mobile
+  {
+    width: 50%;
+  }
+  .disclaimer-col ul
+  {
+    flex-direction: column;
+  }   
+  .disclaimer-col ul li
+  {
+    margin-bottom: 1rem;
+  }
+  .copyright-content
+  {
+    text-align: center;
+    margin-bottom: 1rem !important;
+  }
+  .social-media-links
+  {
+    justify-content: center !important;
+  }
+  .current-pincode
+  {
+    overflow-x: hidden;
+  }
+  .position-sticky-pc,
+  .hide-position-sticky-pincode-verify
+  {
+    position: static !important;
+  }
+  .container-height
+  {
+    min-height: auto;
+  }
+  .min-height-time-registration-dashboard
+  {
+    min-height: auto !important;
+  }
+  .min-height-time-registration-dashboard .time-registartion-height
+  {
+    margin-bottom: 1rem;
+  }
+  .employee-time-register .dashboard_menu_links
+  {
+    height: auto !important;
+    padding: 0px !important;
+  }
+}
+@media screen and (min-width:0px) and (max-width:992px)
+{
+  .header-bar
+  {
+    flex-direction: row-reverse ;
+  }
+  .menu-links
+  {
+    flex-direction: column;
+    padding-top: 1rem;
+  }
+  .menu-links li
+  {
+    margin-bottom: 0.6rem;
+  }
+  .border-hide
+  {
+    border-bottom: none !important;
+  }
+  .border-bottom-mobile
+  {
+    flex-direction: row-reverse;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color-light-gray);
+    padding-bottom: 1rem;
+  }
+}

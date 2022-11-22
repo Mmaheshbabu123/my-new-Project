@@ -46,17 +46,37 @@ const TimeValidationService = {
 	 * 
 	 */
 
-	 breakWarning: function(timeObj,age){
+	 breakWarning: function(starttime,endtime){
 		 var error = '';
 		 var duration =0;
-		 timeObj.map((val,key)=>{
-			 duration = this.getDuration(val.starttime,val.endtime);
-		 })
+			 duration = this.getDuration(starttime,endtime);
 		 if(duration >= 6.5){
 			 error = 'Please note that the employee is planned 6.5 hours or more, which means that a legally (not paid) mandatory break of 60 minutes for below 18 year old employees and 30 minutes for above 18 year old employees will be included.'
 		 }
 		 return error;
 
-	 }
+	 },
+	 endTimeWarning: function(starttime,endtime,dob){
+		 var startDate = starttime!=''?moment(starttime).format('YYYY-MM-DD'):'';
+		 var endDate = endtime!=''?moment(endtime).format('YYYY-MM-DD'):'';
+		 var maxtime = moment(startDate+' '+'20:00');
+
+		 var error = '';
+		 if(moment(endDate) > moment(startDate)){
+			error = 'You are planning a below 18 year old employee after 20h00, which is legally not allowed. We suggest you to replan.'
+		 }else{
+			 if(starttime!= '' && moment(starttime)>moment(maxtime)){
+				error = 'You are planning a below 18 year old employee after 20h00, which is legally not allowed. We suggest you to replan.' 
+			 }else if(endtime!= '' && moment(endtime)>moment(maxtime)){
+			 	error = 'You are planning a below 18 year old employee after 20h00, which is legally not allowed. We suggest you to replan.' 
+
+			 }
+		 }
+
+			// error = 'You are planning a below 18 year old employee after 20h00, which is legally not allowed. We suggest you to replan.'
+		// }
+		return error;
+
+	}
 };
 export default TimeValidationService;
