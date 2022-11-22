@@ -3,22 +3,20 @@ import ValidationService from './../../Services/ValidationService';
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
-import TimePicker from 'react-multi-date-picker/plugins/time_picker';
-import DatePicker from 'react-multi-date-picker';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import MultiSelectField from '@/atoms/MultiSelectField';
-import { FaUndoAlt, FaSave, FaCheckCircle, FaShieldAlt } from 'react-icons/fa';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import ReactPaginate from 'react-paginate';
+import { FaUndoAlt, FaSave, FaCheckCircle, FaShieldAlt } from 'react-icons/fa';
 // import Datetime from 'react-datetime';
 import Translation from '@/Translation';
 
 function EncodageValidation(props) {
-	const { t,trigger=0 } = props;
+	const { t, trigger = 0 } = props;
 
 	const { contextState = {} } = useContext(UserAuthContext);
 	const router = useRouter();
-	const [ editrow,setEditrow]=useState(-999);
+	const [ editrow, setEditrow ] = useState(-999);
 	const [ fcompany, setFcompany ] = useState('');
 	const [ flocation, setFlocation ] = useState('');
 	const [ fcostcenter, setFcostCenter ] = useState('');
@@ -27,20 +25,17 @@ function EncodageValidation(props) {
 	const [ companies, setCompanies ] = useState([]);
 	const [ locations, setLocations ] = useState([]);
 	const [ costcenters, setConstCenters ] = useState([]);
-	const [ projects, setProjects ] = useState([]);
-	const [multivalidate,setMultivalidate]=useState(0);
-	const [dummydata,setDummydata]=useState([]);
+	const [ dummydata, setDummydata ] = useState([]);
 
 	/**
 	 * Pagination related variables
 	 */
-	 const [ itemsPerPage, setItemsPerPage ] = useState(8);
+	const [ itemsPerPage, setItemsPerPage ] = useState(8);
 
 	//------------------- Pagination code -------------------------//
 
 	const [ pageCount, setPageCount ] = useState(0);
 	const [ itemOffset, setItemOffset ] = useState(0);
-
 
 	const {
 		setCurrent_sec,
@@ -59,18 +54,20 @@ function EncodageValidation(props) {
 
 	useEffect(() => {
 		var url = '';
-		var pdata={
-			company:0,
-			location:0,
-			costcenter:0,
-			project:0};
+		var pdata = {
+			company: 0,
+			location: 0,
+			costcenter: 0,
+			project: 0
+		};
+
 		if (contextState.role == 'administrator' || contextState.role == 'absolute_you_admin_config_user') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/0';
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/1';
 		}
 		if (contextState.role == 'employeer') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid+'/0';
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid + '/1';
 		}
-		APICALL.service(url, 'POST',pdata)
+		APICALL.service(url, 'POST', pdata)
 			.then((result) => {
 				if (result[0] == 999) {
 					setData(null);
@@ -80,20 +77,18 @@ function EncodageValidation(props) {
 				setCompanies(result[1]);
 				setLocations(result[2]);
 				setConstCenters(result[3]);
-				setProjects(result[4]);
 				console.log(result);
 			})
 			.catch((error) => console.error('Error occurred'));
 		// }
 	}, []);
 
-
 	useEffect(
 		() => {
-			var dummy=data;
+			var dummy = data;
 			const endOffset = itemOffset + itemsPerPage;
-			(dummy!=null)?setDummydata(dummy.slice(itemOffset, endOffset)):'';
-			(dummy!=null)?setPageCount(Math.ceil(dummy.length / itemsPerPage)):'';
+			dummy != null ? setDummydata(dummy.slice(itemOffset, endOffset)) : '';
+			dummy != null ? setPageCount(Math.ceil(dummy.length / itemsPerPage)) : '';
 		},
 		[ itemOffset, itemsPerPage, data ]
 	);
@@ -103,56 +98,25 @@ function EncodageValidation(props) {
 		setItemOffset(newOffset);
 	};
 
-	const enabledisbale = (index) => {
-		var object = [ ...data ];
-		object[index].disabled = !object[index].disabled;
-		object[index].disabled?setMultivalidate(multivalidate-1):setMultivalidate(multivalidate+1);
-		setData(object);
-	};
-
-	const updateEdit=(index)=>{
-		(index==editrow)?setEditrow(-999):setEditrow(index);
-	}
-
-	const saveactualstart = (index, actualstart) => {
-		var object = [ ...data ];
-		console.log(actualstart);
-		object[index].wstart = actualstart;
-		setData(object);
-	};
-
-	const saveactualend = (index, actualend) => {
-		var object = [ ...data ];
-		let editdate=new Date(actualend);
-		let startdate=new Date(object[index].wstart);
-		if(editdate.getTime()<startdate.getTime()){
-		object[index].wend = ValidationService.addDays(actualend,1);
-		//actualend;
-		}else{
-			object[index].wend = actualend;
-		}
-		console.log(object[index].wend);
-		setData(object);
-	};
-
 	const reset = () => {
 		window.location.reload();
 	};
 
 	const filter = () => {
-		let url='';
-		var pdata={
-			company:fcompany != '' ? fcompany.value : 0,
-			location:flocation != '' ? flocation.value : 0,
-			costcenter:fcostcenter != '' ? fcostcenter.value : 0,
-			project:fproject != '' ? fproject.value : 0};
-        if (contextState.role == 'administrator' || contextState.role == 'absolute_you_admin_config_user') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/0';
+		let url = '';
+		var pdata = {
+			company: fcompany != '' ? fcompany.value : 0,
+			location: flocation != '' ? flocation.value : 0,
+			costcenter: fcostcenter != '' ? fcostcenter.value : 0,
+			project: fproject != '' ? fproject.value : 0
+		};
+		if (contextState.role == 'administrator' || contextState.role == 'absolute_you_admin_config_user') {
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/1';
 		}
 		if (contextState.role == 'employeer') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid+'/0';
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid + '/1';
 		}
-		APICALL.service(url, 'POST',pdata)
+		APICALL.service(url, 'POST', pdata)
 			.then((result) => {
 				if (result[0] == 999) {
 					setData(null);
@@ -160,53 +124,16 @@ function EncodageValidation(props) {
 					setData(result[0]);
 				}
 			})
-			.catch((error) => console.error('Error occurred'))
-		
-	};
-
-	const updateValidation = (wid,start,stop,index) => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/validate-encodage/' + contextState.uid, 'POST',[wid,start,stop])
-			.then((result) => {
-				console.log(result);
-			})
-			.catch((error) => console.error('Error occurred'));
-
-		updateEdit(index);
-		reset();
-	};
-
-
-	const validatedMulti=()=>{
-		let postdata={data};
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/validate-encodage-multi/' + contextState.uid, 'POST',postdata)
-			.then((result) => {
-				router.push('/encodagevalidation/encodage');
-			})
-			.catch((error) => console.error('Error occurred'));
-		reset();
-	}
-
-	const updateTimes = () => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/filter-encodage-data', 'POST', [
-			fcompany != '' ? fcompany.value : 0,
-			flocation != '' ? flocation.value : 0,
-			fcostcenter != '' ? fcostcenter.value : 0,
-			fproject != '' ? fproject.value : 0
-		])
-			.then((result) => {
-				setData(result);
-			})
 			.catch((error) => console.error('Error occurred'));
 	};
 
 	var display = '';
 	var rows = [];
-	(data != null && data!=999)
+	data != null
 		? data.forEach((element, index) => {
-				console.log(element);
 				rows.push(
 					<tr className="border poppins-regular-18px p-2">
-						<td className="poppins-regular-18px p-2 ps-4 align-middle">
+						{/* <td className="poppins-regular-18px p-2 ps-4 align-middle">
 							<div className="">
 								<input
 									className="form-check-input rounded-0  align-self-center mt-2"
@@ -217,7 +144,7 @@ function EncodageValidation(props) {
 									id="flexCheckDefault"
 								/>
 							</div>
-						</td>
+						</td> */}
 						<td className="poppins-regular-18px p-2 align-middle">
 							{ValidationService.getDate(element.starttime)}
 						</td>
@@ -228,15 +155,16 @@ function EncodageValidation(props) {
 							{ValidationService.getTime(element.starttime)}
 						</td>
 						<td className="poppins-regular-18px p-2 align-middle actual-end-time">
-							<DatePicker
+							{/* <DatePicker
 								disableDayPicker
 								name="time"
 								format="HH:mm"
 								value={new Date(element.wstart)}
-								onChange={(e) => saveactualstart(index, e.format('YYYY-MM-DD HH:mm:00'))}
+								onChange={(e) => saveactualstart(index, e.format('YYYY-MM-DD HH:mm'))}
 								plugins={[ <TimePicker key={element.wstart} hideSeconds /> ]}
 								disabled={(editrow!=index)?true:false}
-							/>
+							/> */}
+							{ValidationService.getTime(element.wstart)}
 						</td>
 						<td className="poppins-regular-18px p-2 align-middle">
 							{ValidationService.getTime(element.endtime)}
@@ -245,36 +173,38 @@ function EncodageValidation(props) {
 							{ValidationService.getDate(element.wend)}
 						</td>
 						<td className="poppins-regular-18px p-2 align-middle actual-end-time">
-							<DatePicker
+							{/* <DatePicker
 								disableDayPicker
 								name="time"
 								format="HH:mm"
 								value={new Date(element.wend)}
-								onChange={(e) => saveactualend(index, e.format('YYYY-MM-DD HH:mm:00'))}
+								onChange={(e) => saveactualend(index, e.format('YYYY-MM-DD HH:mm'))}
 								plugins={[ <TimePicker key={element.wend} hideSeconds /> ]}
 								disabled={(editrow!=index)?true:false}
-							/>
+							/> */}
+							{ValidationService.getTime(element.wend)}
 						</td>
 						<td style={{ width: '149px' }} className="align-middle p-2 poppins-light-16px">
-							<button
-								onClick={()=>updateValidation(element.wid, element.wstart, element.wend,index)}
-								className="border-0 bg-transparent color-skyblue"
-							>
-								{element.validated ? <FaShieldAlt /> : <FaCheckCircle />}
+							<button // onClick={()=>updateValidation(element.wid, element.wstart, element.wend,index)}
+							className="border-0 bg-transparent color-skyblue">
+								{
+									<span>
+										{ValidationService.getDate(element.validated)}
+										<FaShieldAlt />
+									</span>
+								}
 							</button>
-							<span></span>
-							<button
+							{/* <button
 								onClick={() => {editrow==index?updateValidation(element.wid, element.wstart, element.wend,index):'';updateEdit(index);}}
 								className="border-0 bg-transparent color-skyblue"
 							>
 								{editrow==index ? <FaSave /> : <FaUndoAlt />}
-							</button>
+							</button> */}
 						</td>
 					</tr>
 				);
 			})
-		: (display=<div className='row  mt-5'><div className='col-3'></div><div className='col-9'>
-			There is no plannngs for encodage validation.</div></div>);
+		: (display = 'There is no plannngs for encodage validation.');
 
 	return (
 		<div>
@@ -323,7 +253,7 @@ function EncodageValidation(props) {
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
-						options={projects}
+						// options={emptypes}
 						// standards={key['emp_type'] == 0 ? '' : employeTypeSelection(key['emp_type'])}
 						disabled={false}
 						handleChange={(obj) => setFproject(obj)}
@@ -399,25 +329,16 @@ function EncodageValidation(props) {
 			</div>
 			</div>
 			:display}
-			<div className='row'>
-			<div className='col-10'>
+			<div className="row">
+				<div className="col-10">
 					<input
 						type="button"
 						className="btn rounded-0 shadow-none border-0 px-0 poppins-light-18px text-uppercase text-decoration-underline"
 						value="Back"
 						onClick={() => router.push('/')}
 					/>
-			</div>
-			<div className='col-2'>
-			{multivalidate>0&&
-							<button
-								className="btn border-0 btn-block rounded-0 float-right reset_skyblue_button w-100 shadow-none text-uppercase"
-								onClick={() => validatedMulti()}
-							>
-								{t('Save')}
-							</button>
-			}
-			</div>
+				</div>
+				<div className="col-2" />
 			</div>
 		</div>
 	);

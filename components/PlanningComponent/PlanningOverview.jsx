@@ -357,7 +357,7 @@ const PlanningOverview = (props) => {
 								tabIndex="-1"
 								style={{ display: 'block', background: 'rgb(0,0,0,0.5)' }}
 							>
-								<div className="modal-dialog w-50 modal-xl ">
+								<div className="modal-dialog w-50 modal-xl modal-dialog-centered">
 									<div className="modal-content  ">
 										<div className="modal-header col-md-11 m-auto px-0">
 											<div className="col-md-10">

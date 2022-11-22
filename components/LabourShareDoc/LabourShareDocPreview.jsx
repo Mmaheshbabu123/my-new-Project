@@ -49,18 +49,18 @@ const LabourShareDocPreview = ({ userId, preview = 0, approved = 0, refId = 0, r
       <div>
         <iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 300} />
       </div>
-      {!preview && <div className = "row" style={{margin: '15px 0'}}>
+      {!preview && <div className = "row" style={{margin: '15px 0',justifyContent:'space-between'}}>
         <CheckBoxField
          id={'approved_check'}
          tick={state.approved}
          onCheck={handleCheckbox}
          name={`I hereby declare that I have reviewed the document and confirming that I agree with all details.`}
          customStyle={{margin: '2px 0', cursor:'pointer'}}
-         className="col-md-8 py-3"
+         className="col-md-8 py-3 "
        />
        {state.approved === 1 &&
-         <div className="col-md-2 text-end">
-           <button onClick={forwardToApproveProcess} type="button" className="btn btn-dark pcp_btn"> {'Approve'} </button>
+         <div className="col-md-2 text-end pe-0 align-self-center">
+           <button onClick={forwardToApproveProcess} type="button" className="btn m-0 poppins-medium-18px-next-button rounded-0 shadow-none"> {'Approve'} </button>
          </div>
        }
      </div>}

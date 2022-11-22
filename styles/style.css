@@ -412,10 +412,15 @@ select option
 }
 .my_todo_table .Todos_span-action-icons___UbjJ img
 {
-  width: 20px;
+  width: 25px;
   color: var(--color-skyblue);
   margin-right: 15px;
-  height: 20px;
+  height: 25px;
+}
+.my-todo-download-icon
+{
+  width: 20px !important;
+  height: 20px !important;
 }
 .sign_action_icon_size
 {

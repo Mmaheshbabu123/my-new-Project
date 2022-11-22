@@ -298,10 +298,10 @@ function EditEmployee(props) {
 								</div>
 							))}
 
-							<div className="modal-footer border-0 col-md-12 m-auto add_project">
+							<div className="modal-footer border-0 col-md-12 m-auto add_project p-0">
 								<button
 									type="submit"
-									className="btn rounded-0 custom-btn px-3 btn-block float-end poppins-medium-18px-next-button"
+									className="btn rounded-0 custom-btn px-3 btn-block float-end poppins-medium-18px-next-button m-0"
 								>
 									{t('SAVE')}
 								</button>

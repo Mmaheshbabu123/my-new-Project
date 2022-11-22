@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import ManageActive from "./ManageActive";
 import ManageInactiveTab from "./ManageInactiveTab";
 
-import PrivacyPolicy from "../layout/PrivacyPolicy";
+import PrivacyPolicy from "../layout/Footer/PrivacyPolicy";
 
 
 
