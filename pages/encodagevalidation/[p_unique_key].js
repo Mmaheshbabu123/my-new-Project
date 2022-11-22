@@ -15,7 +15,7 @@ const Encodage = () => {
     </div>
   </nav>
   <div className="tab-content" id="nav-tabContent">
-    <div className="tab-pane fade show active" id="nav-home" active="true" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
       <Encdage/>
     </div>
     <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">

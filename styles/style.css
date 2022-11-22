@@ -792,3 +792,9 @@ img.dasboard_image
   background-color: var(--color-purple) !important;
   box-shadow:none;
 }
+.browse-button
+{
+  position: relative;
+  top: -3px;
+  right: -9px;
+}

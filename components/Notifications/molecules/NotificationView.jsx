@@ -125,7 +125,7 @@ const NotificationView = ({
           })}
           </div>
         </div>
-        {state.notificationCount > 0 && <div className="col-md-12 row m-0 p-0 pt-3 pb-2 ">
+        {state.notificationCount > 0 && <div className="col-md-12 row m-0 p-0 pt-3 pb-3">
         <p className={`${styles['link-p-tags']} cursor-pointer col-md-6 text-start text-uppercase text-decoration-underline  bitter-italic-normal-medium-16`} onClick={() => updateNotifications('readAll', state.allTimestamp)}>
              Mark all as read
           </p>

@@ -26,7 +26,7 @@ export default function FileUpload({
             style={{display:'none'}}
         />
         <span style ={{opacity: 0.7}} >{fileUploadText}</span>
-        <button style={{pointerEvents: "none"}} className="float-end"> {browseBtnText} </button>
+        <button style={{pointerEvents: "none"}} className="float-end poppins-medium-18px-next-button border-0 browse-button"> {browseBtnText} </button>
       </label>
       <p className="fs-6 mt-2"> {infoText} </p>
       <div className="progress" id="file_upload_progress" style={{marginTop: '10px', height: '8px', display:'none'}}>
