@@ -53,7 +53,7 @@ const QrCodeGeneration = (props) => {
 						if (result.companies != null) {
 							if (result.companies.length == 1) {
 								setCompany(result.companies[0]);
-                                getLocations(result.companies[0].value);
+                                				getLocations(result.companies[0].value);
 							}
 						}
 					})
@@ -62,7 +62,7 @@ const QrCodeGeneration = (props) => {
 					});
 			}
 		},
-		[ router.query ]
+		[]
 	);
 
 	useEffect(() => {
@@ -142,7 +142,7 @@ const QrCodeGeneration = (props) => {
 					View QR code. 
 					</div>
 					</div>
-					<div className="row position-sticky-pincode-verify">
+					<div className="row position-sticky-pincode-verify hide-position-sticky-pincode-verify">
 						
 						<div className="col-md-5">
 							<label className="mb-2 poppins-regular-18px">Company</label>

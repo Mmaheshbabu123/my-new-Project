@@ -257,7 +257,7 @@ const Pincode = (props) => {
 			<div className="row minheight-verifypin">
 				{show && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} info={[company.value,location.value]} />}
 				<div className="col-md-12">
-					<div className="row position-sticky-pincode-verify">
+					<div className="row position-sticky-pincode-verify hide-position-sticky-pincode-verify">
 						<div className="col-md-6">
 							<label className="mb-2 poppins-regular-18px">Company</label>
 							<MultiSelectField
@@ -298,14 +298,14 @@ const Pincode = (props) => {
 					</div>
 				</div>
 				{/* <div className="col-4" /> */}
-				<div className="col-sm-6 col-md-5 mx-auto mt-1 current-pincode">
+				<div className="col-sm-7 col-md-5 mx-auto mt-1 current-pincode">
 					<div className="d-flex justify-content-center ">
 						<OTPInput
 							inputClassName={hide ? 'otp border' : 'border otp-visible'}
 							className="otp-container "
 							value={otp}
 							onChange={setOTP}
-							inputStyles={(isMobile)?{width:'30px',height:'30px'}:{width:'60px',height:'60px'}}
+							inputStyles={(isMobile)?{width:'30px',height:'30px',marginRight:'15px'}:{width:'60px',height:'60px'}}
 							OTPLength={6}
 							otpType="number"
 							//secure
@@ -340,7 +340,7 @@ const Pincode = (props) => {
 			</div>
 
 			<div className="row">
-				<div className="col-md-1">
+				<div className="col-md-1 back-btn-mobile">
 					<input
 						type="button"
 						className="btn rounded-0 shadow-none border-0 px-0 poppins-light-18px text-uppercase text-decoration-underline"
@@ -348,7 +348,7 @@ const Pincode = (props) => {
 						onClick={() => router.push('/pincode/options')}
 					/>
 				</div>
-				<div className="col-md-11">
+				<div className="col-md-11 back-btn-mobile">
 					<input
 						type="submit"
 						className="btn poppins-medium-18px-next-button shadow-none rounded-0 float-end"

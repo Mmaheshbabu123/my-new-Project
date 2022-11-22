@@ -6,6 +6,8 @@ import RadioField from '@/atoms/RadioField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import RequiredField from '@/atoms/RequiredSpanField';
 import ValidateMessage from '@/atoms/validationError';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
+
 import { invoiceRow1,invoiceRow2} from '../InvoiceFields';
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
 import styles from '../Invoicing.module.css';
@@ -13,6 +15,8 @@ import { requiredFields} from '../../../RequiredFields';
 import Translation from '@/Translation';
 const InvoiceDetails = (props) => {
   const { t } = props;
+  const { contextState: { isAuthenticated = 0, uid, roleType = 1 }, updateUserContext } = useContext(UserAuthContext);
+console.log(roleType);
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_6 ,element_status,tab_4} = state;
   let invoiceRow1Data = structuredClone(invoiceRow1);
@@ -99,7 +103,7 @@ const InvoiceDetails = (props) => {
          id={data.id}
          options={paymentList}
          standards={paymentList.filter(val => val.value === Number(tab_6[data.id]))}
-         disabled={false}
+         disabled={ checkDisabledOrNot(data.id)}
          handleChange={(obj) => handleSelect(obj, data.id)}
          isMulti={false}
          className="col-md-12 payment_condition poppins-regular-18px align-self-center"
@@ -110,7 +114,14 @@ const InvoiceDetails = (props) => {
      })
      return fieldData;
   }
-//  delete invoiceRow2Data['5']
+  function checkDisabledOrNot(id) {
+    let feildIds = [ 75 ];
+    let disabled = false;
+    if(feildIds.includes(id) && Number(roleType) !== 1)
+      disabled = true;
+    return disabled;
+  }
+
 return (
  <div className='invoicing mx-1 '>
    <div className='row'>
