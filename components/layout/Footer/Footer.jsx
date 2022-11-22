@@ -58,14 +58,15 @@ function Footer(props) {
 									<ul className='text-white d-flex list-unstyled mb-0'>
 										<li className='list-unstyled mx-3 align-self-center footer-content' >
 											<Link href={process.env.NEXT_PUBLIC_APP_WEBSITE_URL+'/'+lang+'/contact'}>
-												<a target="_blank" rel="noopener noreferrer">
+												<a target="_blank" rel="noopener noreferrer" 
+												className='text-white'>
 													{t('Contact Us')}
 												</a>
 											</Link>
 										</li>
 										<li className='list-unstyled mx-3 align-self-center footer-content'  >
 											<Link href={process.env.NEXT_PUBLIC_APP_WEBSITE_URL+'/'+lang+'/privacy-policy'+'-'+lang}  >
-												<a target="_blank" rel="noopener noreferrer">
+												<a target="_blank" rel="noopener noreferrer" className='text-white'>
 													{t('Privacy Policy')}
 												</a>
 											</Link>
@@ -74,7 +75,7 @@ function Footer(props) {
 										</li>
 										<li className='list-unstyled mx-3 align-self-center footer-content' >
 											<Link href={process.env.NEXT_PUBLIC_APP_WEBSITE_URL+'/'+lang+'/disclaimer'+'-'+lang}>
-											<a target="_blank" rel="noopener noreferrer">
+											<a target="_blank" rel="noopener noreferrer" className='text-white'>
 												{t('Disclaimer')}
 											</a>
 											</Link>
