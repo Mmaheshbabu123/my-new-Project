@@ -76,6 +76,7 @@ function EncodageValidation(props) {
 					setData(null);
 				} else {
 					setData(result[0]);
+					setDummydata(result[0]);
 				}
 				setCompanies(result[1]);
 				setLocations(result[2]);
@@ -125,9 +126,13 @@ function EncodageValidation(props) {
 		var object = [ ...data ];
 		let editdate=new Date(actualend);
 		let startdate=new Date(object[index].wstart);
+		if(ValidationService.getDate(editdate)==ValidationService.getDate(startdate)){
 		if(editdate.getTime()<startdate.getTime()){
-		object[index].wend = ValidationService.addDays(actualend,1);
-		//actualend;
+			object[index].wend = ValidationService.addDays(actualend,1);
+			//actualend;
+			}else{
+				object[index].wend = actualend;
+			}
 		}else{
 			object[index].wend = actualend;
 		}
@@ -183,7 +188,7 @@ function EncodageValidation(props) {
 				router.push('/encodagevalidation/encodage');
 			})
 			.catch((error) => console.error('Error occurred'));
-		reset();
+		// reset();
 	}
 
 	const updateTimes = () => {
