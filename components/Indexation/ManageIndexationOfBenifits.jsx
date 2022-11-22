@@ -16,6 +16,9 @@ function ManageIndexationBenifits(props) {
 
     const [benefitId, setBenefitId] = useState('');
     const [indexationBenefit, setIndexationBenefit] = useState([]);
+    const [indexationBenefitTemp, setIndexationBenefitTemp] = useState([]);
+    const [indexationBenefitTemp2, setIndexationBenefitTemp2] = useState([]);
+
     const [updated, setUpdated] = useState(0);
 
     useEffect(
