@@ -630,7 +630,7 @@ input[type="checkbox"]
   border-collapse: separate;
   border-spacing: 21px 5px;
 }
-.link-employee-coefficient-parent .pclinking-table-tbody td
+.link-employee-coefficient-parent .pclinking-table-tbody tr
 {
   height: 45px !important;
 }
