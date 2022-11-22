@@ -30,6 +30,10 @@
   {
     right: 1rem !important;
   }
+  .dashboard-tile
+  {
+    min-height: 14rem;
+  }
 }
 @media screen and (min-width:1400px)
 {

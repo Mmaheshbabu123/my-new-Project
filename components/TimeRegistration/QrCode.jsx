@@ -113,9 +113,9 @@ const QrCodeGeneration = (props) => {
 						console.log(result.data);
 
 					let data = result.data || [];
-					let qr_code_path=data.filter(val => Number(val.comp_id) === Number(company.value) && Number(val.location_id) === Number(location.value))
-					qr_code_path = qr_code_path[0] || {}
-					qr_code_path.url = qr_code_path.qr_path || ''
+					let qr_code_path=data.filter(val => Number(val.comp_id) === Number(company.value) && Number(val.location_id) === Number(location.value));
+					qr_code_path = qr_code_path[0] || {};
+					qr_code_path.url = qr_code_path.qr_path || '';
 					setFilePath(qr_code_path.url);
 					// if (result.status === 200 && result.data !== '') {
 						// 	// qrUrl = result.data;

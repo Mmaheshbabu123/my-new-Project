@@ -6,7 +6,7 @@ import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import { useRouter } from 'next/router';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from '../PcComponent/Pagination';
 import { FaUndoAlt, FaSave, FaCheckCircle, FaShieldAlt } from 'react-icons/fa';
 // import Datetime from 'react-datetime';
 import Translation from '@/Translation';
@@ -311,20 +311,9 @@ function EncodageValidation(props) {
 			</table>
 			<div>
 				{data.length>8&&
-				<ReactPaginate
-								breakLabel="..."
-								nextLabel={<AiOutlineArrowRight />}
-								onPageChange={handlePageClick}
-								pageRangeDisplayed={5}
-								pageCount={pageCount}
-								previousLabel={<AiOutlineArrowLeft />}
-								renderOnZeroPageCount={null}
-								containerClassName={'pagination justify-content-center project-pagination'}
-								itemClass="page-item"
-								linkClass="page-link"
-								subContainerClassName={'pages pagination'}
-								activeClassName={'active'}
-							/>
+			<ReactPaginate
+			itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}
+			/>
 				}
 			</div>
 			</div>
