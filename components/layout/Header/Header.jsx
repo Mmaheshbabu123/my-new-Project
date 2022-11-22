@@ -59,18 +59,18 @@ function Header(props) {
 			<div className="clip0 d-none d-md-block d-lg-block" />
 			<div className='container'>
 				<div className="custom-header border-bottom col-md-9 col-lg-11 m-auto border-2 custom-position-sticky px-0 border-hide" style={{paddingTop:'0.65rem'}}>
-					<nav class="navbar navbar-expand-lg navbar-light" style={{paddingTop:'0.65rem'}}>
-						<div class="container-fluid px-0 header-bar">
+					<nav className="navbar navbar-expand-lg navbar-light" style={{paddingTop:'0.65rem'}}>
+						<div className="container-fluid px-0 header-bar">
 						<div className='border-bottom-mobile'>
-						<button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
+						<button className="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+								<span className="navbar-toggler-icon"></span>
 							</button>
 							<Link href={'/'}>
 								<img style={{ width: '220px' }} src="/logo.svg" className="mt-2 navbar-brand" />
 							</Link>
 						</div>
 
-								<div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
+								<div className="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
 								{authenticated === 1 && <ul className="d-flex list-unstyled mb-0 menu-links">
 										<li className="list-unstyled px-3 align-self-center d-flex purple-color2 poppins-regular-18px">
 											<Link href={'/'} className="">
