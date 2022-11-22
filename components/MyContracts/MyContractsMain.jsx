@@ -21,29 +21,34 @@ const MyContractsMain = ( props ) => {
     currentPage: 0,
     searchTermCompany: '',
     searchTermEmployer: '',
+    searchTermPlanning: '',
   })
 
 
   const handleSearchClick = (search = 1) => {
     let filterRows = [];
-    let { searchTermEmployer = '', searchTermCompany = '', overviewData: data } = state;
-    if(search && (searchTermEmployer || searchTermCompany)) {
+    let { searchTermEmployer = '', searchTermCompany = '', searchTermPlanning = '',  overviewData: data } = state;
+    if(search && (searchTermEmployer || searchTermCompany || searchTermPlanning)) {
       filterRows = data.filter((item) => {
         let status = true;
         if(searchTermEmployer)
           status = `${item['employer_name']}`.toLowerCase().toString().indexOf(searchTermEmployer.toLowerCase().toString()) !== -1;
         if(status && searchTermCompany)
           status = `${item['company_name']}`.toLowerCase().toString().indexOf(searchTermCompany.toLowerCase().toString()) !== -1;
+        if(status && searchTermPlanning)
+          status = `${item['planning_date']}`.toLowerCase().toString().indexOf(searchTermPlanning.toLowerCase().toString()) !== -1;
        return status;
       })
     } else {
       filterRows = data;
       searchTermEmployer = '';
       searchTermCompany = '';
+      searchTermPlanning = '';
     }
     setState({ ...state,
-      searchTermEmployer: searchTermEmployer,
-      searchTermCompany: searchTermCompany,
+      searchTermEmployer,
+      searchTermCompany,
+      searchTermPlanning,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -124,7 +129,7 @@ const MyContractsMain = ( props ) => {
        <div className='row'>
        <div className='col-md-7 col-lg-9'>
          <div className='row'>
-           <div className='col-md-6'>
+           <div className='col-md-4'>
                  <input
                      type="text"
                      className='form-control mt-2 mb-2 rounded-0 shadow-none'
@@ -136,7 +141,7 @@ const MyContractsMain = ( props ) => {
                      placeholder={t('Search employer')}
                />
                  </div>
-                     <div className='col-md-6'>
+                     <div className='col-md-4'>
                      <input
                      type="text"
                      className='form-control mt-2 mb-2 rounded-0 shadow-none'
@@ -148,6 +153,18 @@ const MyContractsMain = ( props ) => {
                      placeholder={t('Search company ')}
                  />
            </div>
+           <div className='col-md-4'>
+                 <input
+                     type="text"
+                     className='form-control mt-2 mb-2 rounded-0 shadow-none'
+                     // style={{margin: '10px 0'}}
+                     value={state.searchTermPlanning}
+                     name = {'planning_date'}
+                     onChange={(e) => setState({...state, searchTermPlanning: e.target.value,searchColumn:'planning_date'})}
+                     onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+                     placeholder={t('Search date')}
+               />
+                 </div>
          </div>
        </div>
        <div className='col-md-5 col-lg-3'>
