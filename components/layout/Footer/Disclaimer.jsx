@@ -14,7 +14,7 @@ function Disclaimer() {
                             <div className="normal_cont text-center">
                                 <font><p className="my-2">1. Deze algemene voorwaarden zijn opgesteld overeenkomstig de van kracht zijnde wetgeving, nl.
                                     de wet van 24 juli 1987 betreffende de tijdelijke arbeid, de uitzendarbeid en het ter beschikking stellen van medewerkers ten behoeve van gebruikers,
-                                    inclusief de van toepassing zijnde CAO's van de NAR en van PC 322 uitzendarbeid.</p></font>
+                                    inclusief de van toepassing zijnde CAO&apos;s van de NAR en van PC 322 uitzendarbeid.</p></font>
                                 <font>
                                     <p className="my-2">
                                         2. De uitzendmedewerkers worden ter beschikking gesteld onder de voorwaarden bij de aanvraag overeengekomen en onder de hierna bepaalde algemene voorwaarden,
@@ -70,7 +70,7 @@ function Disclaimer() {
                                     <p className="my-2">10. De burgerlijke aansprakelijkheid,
                                         voorzien in artikel 1384 alinea 3 van het Burgerlijk Wetboek berust bij de gebruiker.
                                         Deze is bijgevolg als enige aansprakelijk voor alle door de uitzendmedewerker aan derden berokkende schade.
-                                        De voorziening van een "clausule uitzendarbeid" in de verzekering burgerlijke aansprakelijkheid van de gebruiker wordt aanbevolen.
+                                        De voorziening van een &quot;clausule uitzendarbeid&quot; in de verzekering burgerlijke aansprakelijkheid van de gebruiker wordt aanbevolen.
                                         Absoluteyou bv is evenmin aansprakelijk voor de schade die de uitzendmedewerker aan de gebruiker berokkent tijdens en naar aanleiding van zijn tewerkstelling bij de gebruiker.
                                         De aansprakelijkheid van Absoluteyou bv is eveneens niet betrokken in geval van beschadiging, verlies, diefstal of verdwijning van materiaal,
                                         geld of goederen aan de uitzendmedewerker toevertrouwd. M.b.t. de selectie kan de aansprakelijkheid van Absoluteyou bv nooit ingeroepen worden indien de gebruiker zelf de selectie van de kandidaat-uitzendmedewerkers uitvoert.
@@ -193,7 +193,7 @@ function Disclaimer() {
                                         of op hetzelfde adres zijn gevestigd of een uitbatingszetel hebben. Wordt verstaan onder uitzendmedewerker: de door het uitzendbedrijf geselecteerde uitzendmedewerker die met een arbeidsovereenkomst voor uitzendarbeid ter beschikking gesteld werd aan de gebruiker;
                                         de kandidaat-uitzendmedewerker die door het uitzendbedrijf werd voorgesteld aan de gebruiker. Wordt verstaan onder bruto-jaarloon van de uitzendmedewerker:
                                         indien de uitzendmedewerker reeds gewerkt heeft: het laatst geldende uurloon x het in de sector van de gebruiker geldende gemiddelde aantal uren per week x 4,33 x 13,92. indien de kandidaat-uitzendmedewerker nog niet gewerkt heeft:
-                                        het bij de gebruiker voor de betreffende functie geldende loon (met als minimum de barema's van het PC van de gebruiker) x het in de sector van de gebruiker geldende gemiddelde aantal uren per week x 4,33 x 13,92.</p>
+                                        het bij de gebruiker voor de betreffende functie geldende loon (met als minimum de barema&apos;s van het PC van de gebruiker) x het in de sector van de gebruiker geldende gemiddelde aantal uren per week x 4,33 x 13,92.</p>
                                 </font>
                                 <font>
                                     <p className="my-2">
@@ -307,11 +307,11 @@ function Disclaimer() {
                                     Absoluteyou bv geeft geen garanties voor de goede werking van de website en kan op geen enkele wijze aansprakelijk gehouden worden voor een slechte werking of tijdelijke
                                     (on)beschikbaarheid van de website of voor enige vorm van schade, rechtstreekse of onrechtstreekse, die zou voortvloeien uit de toegang tot of het gebruik van de website.
                                     Absoluteyou bv kan in geen geval tegenover wie dan ook, op directe of indirecte, bijzondere of andere wijze aansprakelijk worden gesteld voor schade te wijten aan het gebruik van deze website of van een andere,
-                                    inzonderheid als gevolg van links of hyperlinks, met inbegrip, zonder beperking, van alle verliezen, werkonderbrekingen, beschadiging van programma's of andere gegevens op het computersysteem,
+                                    inzonderheid als gevolg van links of hyperlinks, met inbegrip, zonder beperking, van alle verliezen, werkonderbrekingen, beschadiging van programma&apos;s of andere gegevens op het computersysteem,
                                     van apparatuur, programmatuur of andere van de gebruiker.
                                 </p>
                                 <p>
-                                    De website kan hyperlinks bevatten naar websites of pagina's van derden, of daar onrechtstreeks naar verwijzen.
+                                    De website kan hyperlinks bevatten naar websites of pagina&apos;s van derden, of daar onrechtstreeks naar verwijzen.
                                     Het plaatsen van links naar deze websites of pagina’s impliceert op geen enkele wijze een impliciete goedkeuring van de inhoud ervan.
                                     Absoluteyou bv verklaart uitdrukkelijk dat zij geen zeggenschap heeft over de inhoud of over andere kenmerken van deze websites en kan in geen geval aansprakelijk
                                     gehouden worden voor de inhoud of de kenmerken ervan of voor enige andere vorm van schade door het gebruik ervan.
