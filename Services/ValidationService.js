@@ -5,6 +5,28 @@ import React from 'react';
  */
 const ValidationService = {
 	
+
+	/**
+	 * add days to timestamp
+	 * @parms value,days
+	 * @returns timestamp
+	 */
+	 addDays:function(value,days){
+		let date=new Date(value);
+		const da=date. getDate() + days;
+		const day = da.toString();
+		(day.length==1)?day='0'+day:'';
+		const month = date.getMonth() + 1;
+		month=month.toString();
+		(month.length==1)?month='0'+month:'';
+		const year = date.getFullYear();   
+
+		const hours = date.getHours();
+		const minutes = date.getMinutes();
+
+		return day+'-'+month+'-'+year+' '+hours+':'+minutes+':00' ;
+	},
+
 	/**
 	 * get date from timestamp
 	 * @param {*} value 
