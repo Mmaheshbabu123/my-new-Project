@@ -13,18 +13,19 @@ const ValidationService = {
 	 */
 	 addDays:function(value,days){
 		let date=new Date(value);
-		const da=date. getDate() + days;
-		const day = da.toString();
+		const da=new Date(date.setDate(date. getDate() + days));
+
+		const day = da.getDate().toString();
 		(day.length==1)?day='0'+day:'';
-		const month = date.getMonth() + 1;
+		const month = da.getMonth() + 1;
 		month=month.toString();
 		(month.length==1)?month='0'+month:'';
-		const year = date.getFullYear();   
+		const year = da.getFullYear();   
 
-		const hours = date.getHours();
-		const minutes = date.getMinutes();
+		const hours = da.getHours();
+		const minutes = da.getMinutes();
 
-		return day+'-'+month+'-'+year+' '+hours+':'+minutes+':00' ;
+		return year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+'00';
 	},
 
 	/**
@@ -32,7 +33,7 @@ const ValidationService = {
 	 * @param {*} value 
 	 * @returns 
 	 */
-	getDate:function(value){
+	getDate:function(value,type=0){
 		let date=new Date(value);
 		const day = date.getDate().toString();
 		(day.length==1)?day='0'+day:'';
@@ -41,7 +42,12 @@ const ValidationService = {
 		(month.length==1)?month='0'+month:'';
 		const year = date.getFullYear();   
 
-		return day+'-'+month+'-'+year;
+		if(type!=0){
+			return day+'-'+month+'-'+year
+		};
+
+		return day+'-'+month+'-'+year
+
 	},
 
 	/**
@@ -57,7 +63,7 @@ const ValidationService = {
 		const seconds = date.getSeconds();     
 
 		if(s==1){
-		return hours+':'+minutes+':'+seconds;
+		return hours+':'+minutes+':'+'00';
 		}else{
 			return hours+':'+minutes;	
 		}
@@ -79,7 +85,7 @@ const ValidationService = {
 		const minutes = date.getMinutes();
 		const seconds = date.getSeconds();   
 
-		return day+'-'+month+'-'+year+' '+hours+':'+minutes+':'+seconds;
+		return day+'-'+month+'-'+year+' '+hours+':'+minutes+':'+'00';
 	},
 	
 	/**

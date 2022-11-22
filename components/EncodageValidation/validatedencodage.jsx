@@ -286,7 +286,7 @@ function EncodageValidation(props) {
 			{display==''?<div><table className="table">
 				<thead>
 					<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4" />
+						{/* <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4" /> */}
 						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Date')}</th>
 						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Name')}</th>
 						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
