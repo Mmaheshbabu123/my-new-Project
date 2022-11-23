@@ -30,6 +30,7 @@ function EncodageValidation(props) {
 	const [ projects, setProjects ] = useState([]);
 	const [ multivalidate, setMultivalidate ] = useState(0);
 	const [ dummydata, setDummydata ] = useState([]);
+	const [ addday, setAddday ] = useState(0);
 
 	/**
 	 * Pagination related variables
@@ -139,15 +140,23 @@ function EncodageValidation(props) {
 
 		//validating the dates and changing according to the time
 		if (editdate.getTime() < startdate.getTime()) {
-			(d1 < d2) ?
+			if(d1 < d2) {
 				object[index].wend = actualend
-			:
-				object[index].wend = ValidationService.addDays(actualend, 1);
+			}else{
+				if(addday==0){
+					object[index].wend = ValidationService.addDays(actualend, 1);
+					setAddday(1);
+				}
+			}
 		} else {
 			if (d1 < d2) {
 				object[index].wend = actualend;
-				(startdate.getTime() <= editdate.getTime())? 
-					object[index].wend = ValidationService.addDays(actualend, -1):'';
+				if(startdate.getTime() <= editdate.getTime()){
+					if(addday==1){
+						object[index].wend = ValidationService.addDays(actualend, -1);
+						setAddday(0);
+					}
+				}
 			} else {
 				object[index].wend = actualend;
 			}
