@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import SignatureField from '@/atoms/SignatureField';
 import { confirmAlert } from 'react-confirm-alert';
 
-const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fromSvPreview = 0 }) => {
+const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fromSvPreview = 0, noMinHeight = 0 }) => {
   const handleSave      = (e) => submitSignData(e);
   const handleClose     = ( ) => setState({...state, showPopup: false})
   const handleEdit      = ( ) => setState({...state, showPopup: true, disabled: false })
@@ -19,7 +19,7 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fro
   }
 
   return(
-    <div className='row min-height-signature'>
+    <div className={`row ${noMinHeight === 1 ? '' : 'min-height-signature'}`}>
         <Modal size={'lg'} show={state.showPopup} onHide={handleClose} centered>
           <Modal.Header closeButton style={{paddingLeft: '43%'}}>
             <Modal.Title> <h3 className='font-weight-bold px-0  bitter-italic-normal-medium-24'> Signature </h3> </Modal.Title>

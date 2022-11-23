@@ -528,7 +528,7 @@ select option
 .manage_cooperation_agreement_position_sticky
 {
   position: sticky;
-  top: 235px;
+  top: 231px;
   z-index: 998;
   background:var(--color-white);
 }

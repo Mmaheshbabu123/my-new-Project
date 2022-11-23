@@ -39,6 +39,15 @@
   {
     font-size: var(--font-size-15px) !important;
   }
+  .reset-pincode
+  {
+    margin-right: -2rem !important;
+  }
+  .current-pincode-error
+  {
+      color: red;
+      margin-left: -88px !important;
+  }
 }
 @media screen and (min-width:1400px)
 {
@@ -181,5 +190,13 @@
   .todo-count-badge-employee 
   {
     right: 1.2rem !important;
+  }
+  .dashboard_menu_title, .dashboard_menu_title:hover
+  {
+    font-size: var(--font-size-15px) !important;
+  }
+  .reset-pincode
+  {
+    margin-right: -2rem !important;
   }
 }
