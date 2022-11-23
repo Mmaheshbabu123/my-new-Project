@@ -126,8 +126,8 @@ function EncodageValidation(props) {
 		console.log(actualend);
 		if(actualend!=null){
 		//taking times of start,end with a constant date
-		let ae = '2022-11-05 ' + ValidationService.getTime(actualend, 1);
-		let ws = '2022-11-05 ' + ValidationService.getTime(object[index].wstart, 1);
+		let ae = '1998-08-08 ' + ValidationService.getTime(actualend, 1);
+		let ws = '1998-08-08 ' + ValidationService.getTime(object[index].wstart, 1);
 
 		//creating date object for each
 		let editdate = new Date(ae);
