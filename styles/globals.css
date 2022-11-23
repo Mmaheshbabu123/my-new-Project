@@ -257,6 +257,7 @@ body {
 	--font-size-m: 1rem;
 	--font-size-l: 1.125rem;
 	--font-size-14px: 0.875rem;
+	--font-size-15px:0.9375rem;
 	--font-size-16px: 1rem;
 	--font-size-18px: 1.125rem;
 	--font-size-20px: 1.25rem;
@@ -2121,7 +2122,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .employee-time-register .dashboard_menu_links {
-	height: 26.5rem !important;
+	height: 25.5rem !important;
 	padding: 5rem 0 !important;
 }
 @media screen and (min-width:1024px) and  (max-width:1399px)
@@ -2162,11 +2163,11 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .todo-count-badge-employeer {
 	right: 3rem;
-	top: 9px;
+	top: 25px;
 }
 .todo-count-badge-employee {
-	right: 6rem;
-	top: 10px;
+	right: 6.2rem;
+	top: 23px;
 }
 
 .todo-count-badge-absolute_you_admin_config_user {
