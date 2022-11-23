@@ -120,7 +120,7 @@ const CoefficientPage = (props) => {
             <Image src={backwardScroll} alt="backward" title="backward scroll" /> </span>*/}
         {/*scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
             <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>*/}
-        <div className="row link-emp-coeff-tableparent pt-3" id="linkempCoeffDivId" style={{ width: '100%', minHeight: '150px' }}>
+        <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: '100%', minHeight: '150px' }}>
           <div className="col-md-3 m-0 p-0 pc-linking-div firstpart">
             <LeftPart compState={compState} setCompState = {setCompState} />
           </div>

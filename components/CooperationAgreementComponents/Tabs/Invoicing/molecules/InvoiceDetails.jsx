@@ -6,6 +6,8 @@ import RadioField from '@/atoms/RadioField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import RequiredField from '@/atoms/RequiredSpanField';
 import ValidateMessage from '@/atoms/validationError';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
+
 import { invoiceRow1,invoiceRow2} from '../InvoiceFields';
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
 import styles from '../Invoicing.module.css';
@@ -13,12 +15,16 @@ import { requiredFields} from '../../../RequiredFields';
 import Translation from '@/Translation';
 const InvoiceDetails = (props) => {
   const { t } = props;
+  const { contextState: { isAuthenticated = 0, uid, roleType = 1 }, updateUserContext } = useContext(UserAuthContext);
+console.log(roleType);
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_6 ,element_status,tab_4} = state;
   let invoiceRow1Data = structuredClone(invoiceRow1);
   let invoiceRow2Data  = structuredClone(invoiceRow2);
+  console.log(invoiceRow2Data);
   if(tab_6['56'] == 2) {
-     var removed = invoiceRow2Data.splice(4,1);
+    console.log(invoiceRow2Data);
+     var removed = invoiceRow2Data.splice(5,1);
   }
   let paymentList = state.defaultOptions['payment_condtion'] || [];
   const handleChange = (event) => {
@@ -78,8 +84,8 @@ const InvoiceDetails = (props) => {
      else if (data.type === 6) {
      fieldData.push(
        <div className = {`col-md-12 ${styles['add-div-margings']} invoice${data.id}`}>
-           <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'} mandotory = {requiredFields['tab_6'][data.id]} /> 
-           <div className='poppins-regular-18px'>
+           <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'} mandotory = {requiredFields['tab_6'][data.id]} />
+           <div className='poppins-regular-18px-invoicing' style={{margin:'0.5rem 0'}}>
             <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px `} onClick={() => handleRadioSelect(data.id,1)}> {Number(tab_6[data.id]) === 1 ? <IoMdRadioButtonOn className="radio_button"/> : <IoMdRadioButtonOff />} {data.option1}</label>
             <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px radio_button`} onClick={() => handleRadioSelect(data.id,2)}> {Number(tab_6[data.id]) === 2 ? <IoMdRadioButtonOn className="radio_button" /> : <IoMdRadioButtonOff  />} {data.option2}</label>
          {/*  <RadioField   name = {Title_key} checked = {Number(tab_3['contactPersonsDetails'][personId][Title_key]) === 1} handleChange = {(e)=>handleRadioSelect(Title_key,1,personId)} label= {'Mr'} />
@@ -99,7 +105,7 @@ const InvoiceDetails = (props) => {
          id={data.id}
          options={paymentList}
          standards={paymentList.filter(val => val.value === Number(tab_6[data.id]))}
-         disabled={false}
+         disabled={ checkDisabledOrNot(data.id)}
          handleChange={(obj) => handleSelect(obj, data.id)}
          isMulti={false}
          className="col-md-12 payment_condition poppins-regular-18px align-self-center"
@@ -110,7 +116,14 @@ const InvoiceDetails = (props) => {
      })
      return fieldData;
   }
-//  delete invoiceRow2Data['5']
+  function checkDisabledOrNot(id) {
+    let feildIds = [ 75 ];
+    let disabled = false;
+    if(feildIds.includes(id) && Number(roleType) !== 1)
+      disabled = true;
+    return disabled;
+  }
+
 return (
  <div className='invoicing mx-1 '>
    <div className='row'>

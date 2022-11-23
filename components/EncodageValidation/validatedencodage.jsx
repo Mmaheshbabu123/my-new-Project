@@ -3,13 +3,11 @@ import ValidationService from './../../Services/ValidationService';
 import { APICALL } from '../../Services/ApiServices';
 import { PcContext } from '../../Contexts/PcContext';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
-import TimePicker from 'react-multi-date-picker/plugins/time_picker';
-import DatePicker from 'react-multi-date-picker';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import MultiSelectField from '@/atoms/MultiSelectField';
-import { FaUndoAlt, FaSave, FaCheckCircle, FaShieldAlt } from 'react-icons/fa';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import ReactPaginate from '../PcComponent/Pagination';
+import { FaUndoAlt, FaSave, FaCheckCircle, FaShieldAlt } from 'react-icons/fa';
 // import Datetime from 'react-datetime';
 import Translation from '@/Translation';
 
@@ -27,10 +25,7 @@ function EncodageValidation(props) {
 	const [ companies, setCompanies ] = useState([]);
 	const [ locations, setLocations ] = useState([]);
 	const [ costcenters, setConstCenters ] = useState([]);
-	const [ projects, setProjects ] = useState([]);
-	const [ multivalidate, setMultivalidate ] = useState(0);
 	const [ dummydata, setDummydata ] = useState([]);
-	const [ addday, setAddday ] = useState(0);
 
 	/**
 	 * Pagination related variables
@@ -65,11 +60,12 @@ function EncodageValidation(props) {
 			costcenter: 0,
 			project: 0
 		};
+
 		if (contextState.role == 'administrator' || contextState.role == 'absolute_you_admin_config_user') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/0';
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/1';
 		}
 		if (contextState.role == 'employeer') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid + '/0';
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid + '/1';
 		}
 		APICALL.service(url, 'POST', pdata)
 			.then((result) => {
@@ -77,12 +73,10 @@ function EncodageValidation(props) {
 					setData(null);
 				} else {
 					setData(result[0]);
-					setDummydata(result[0]);
 				}
 				setCompanies(result[1]);
 				setLocations(result[2]);
 				setConstCenters(result[3]);
-				setProjects(result[4]);
 				console.log(result);
 			})
 			.catch((error) => console.error('Error occurred'));
@@ -104,70 +98,6 @@ function EncodageValidation(props) {
 		setItemOffset(newOffset);
 	};
 
-	const enabledisbale = (index) => {
-		var object = [ ...data ];
-		object[index].disabled = !object[index].disabled;
-		object[index].disabled ? setMultivalidate(multivalidate - 1) : setMultivalidate(multivalidate + 1);
-		setData(object);
-	};
-
-	const updateEdit = (index) => {
-		index == editrow ? setEditrow(-999) : setEditrow(index);
-	};
-
-	const saveactualstart = (index, actualstart) => {
-		var object = [ ...data ];
-		console.log(actualstart);
-		object[index].wstart = actualstart;
-		setData(object);
-	};
-
-	const saveactualend = (index, actualend) => {
-		var object = [ ...data ];
-		console.log(actualend);
-		if(actualend!=null){
-		//taking times of start,end with a constant date
-		let ae = '1998-08-08 ' + ValidationService.getTime(actualend, 1);
-		let ws = '1998-08-08 ' + ValidationService.getTime(object[index].wstart, 1);
-
-		//creating date object for each
-		let editdate = new Date(ae);
-		let startdate = new Date(ws);
-
-		//creating date object using the dates
-		var d1 = new Date(ValidationService.getDate(object[index].wstart)); 
-		var d2 = new Date(ValidationService.getDate(actualend)); 
-
-		//validating the dates and changing according to the time
-		if (editdate.getTime() < startdate.getTime()) {
-			if(d1 < d2) {
-				object[index].wend = actualend
-			}else{
-				if(addday==0){
-					object[index].wend = ValidationService.addDays(actualend, 1);
-					setAddday(1);
-				}else{
-					object[index].wend = actualend
-				}
-			}
-		} else {
-			if (d1 < d2) {
-				object[index].wend = actualend;
-				// if(startdate.getTime() <= editdate.getTime()){
-					if(addday==1){
-						object[index].wend = ValidationService.addDays(actualend, -1);
-						setAddday(0);
-					}else{
-						object[index].wend = actualend;
-					}
-				// }
-			} else {
-				object[index].wend = actualend;
-			}
-		}
-		setData(object);}
-	};
-
 	const reset = () => {
 		window.location.reload();
 	};
@@ -181,10 +111,10 @@ function EncodageValidation(props) {
 			project: fproject != '' ? fproject.value : 0
 		};
 		if (contextState.role == 'administrator' || contextState.role == 'absolute_you_admin_config_user') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/0';
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/admin/1';
 		}
 		if (contextState.role == 'employeer') {
-			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid + '/0';
+			url = process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/get-encodage-data/' + contextState.uid + '/1';
 		}
 		APICALL.service(url, 'POST', pdata)
 			.then((result) => {
@@ -197,56 +127,13 @@ function EncodageValidation(props) {
 			.catch((error) => console.error('Error occurred'));
 	};
 
-	const updateValidation = async(wid, start, stop, index) => {
-		await APICALL.service(
-			process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/validate-encodage/' + contextState.uid,
-			'POST',
-			[ wid, start, stop ]
-		)
-			.then((result) => {
-				reset();
-			})
-			.catch((error) => console.error('Error occurred'));
-
-		updateEdit(index);
-	};
-
-	const validatedMulti = () => {
-		let postdata = { data };
-		APICALL.service(
-			process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/validate-encodage-multi/' + contextState.uid,
-			'POST',
-			postdata
-		)
-			.then((result) => {
-				if(result.status==201){
-					reset();
-				}
-			})
-			.catch((error) => console.error('Error occurred'));
-	};
-
-	const updateTimes = () => {
-		APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL + '/api/filter-encodage-data', 'POST', [
-			fcompany != '' ? fcompany.value : 0,
-			flocation != '' ? flocation.value : 0,
-			fcostcenter != '' ? fcostcenter.value : 0,
-			fproject != '' ? fproject.value : 0
-		])
-			.then((result) => {
-				setData(result);
-			})
-			.catch((error) => console.error('Error occurred'));
-	};
-
 	var display = '';
 	var rows = [];
-	data != null && data != 999
+	data != null
 		? data.forEach((element, index) => {
-				console.log(element);
 				rows.push(
 					<tr className="border poppins-regular-18px p-2">
-						<td className="poppins-regular-18px p-2 ps-4 align-middle">
+						{/* <td className="poppins-regular-18px p-2 ps-4 align-middle">
 							<div className="">
 								<input
 									className="form-check-input rounded-0  align-self-center mt-2"
@@ -257,7 +144,7 @@ function EncodageValidation(props) {
 									id="flexCheckDefault"
 								/>
 							</div>
-						</td>
+						</td> */}
 						<td className="poppins-regular-18px p-2 align-middle">
 							{ValidationService.getDate(element.starttime)}
 						</td>
@@ -268,15 +155,16 @@ function EncodageValidation(props) {
 							{ValidationService.getTime(element.starttime)}
 						</td>
 						<td className="poppins-regular-18px p-2 align-middle actual-end-time">
-							<DatePicker
+							{/* <DatePicker
 								disableDayPicker
 								name="time"
 								format="HH:mm"
 								value={new Date(element.wstart)}
-								onChange={(e) => saveactualstart(index, e.format('YYYY-MM-DD HH:mm:00'))}
+								onChange={(e) => saveactualstart(index, e.format('YYYY-MM-DD HH:mm'))}
 								plugins={[ <TimePicker key={element.wstart} hideSeconds /> ]}
-								disabled={editrow != index ? true : false}
-							/>
+								disabled={(editrow!=index)?true:false}
+							/> */}
+							{ValidationService.getTime(element.wstart)}
 						</td>
 						<td className="poppins-regular-18px p-2 align-middle">
 							{ValidationService.getTime(element.endtime)}
@@ -285,44 +173,42 @@ function EncodageValidation(props) {
 							{ValidationService.getDate(element.wend)}
 						</td>
 						<td className="poppins-regular-18px p-2 align-middle actual-end-time">
-							<DatePicker
+							{/* <DatePicker
 								disableDayPicker
 								name="time"
 								format="HH:mm"
 								value={new Date(element.wend)}
-								onChange={(e) => saveactualend(index, e.format('YYYY-MM-DD HH:mm:00'))}
+								onChange={(e) => saveactualend(index, e.format('YYYY-MM-DD HH:mm'))}
 								plugins={[ <TimePicker key={element.wend} hideSeconds /> ]}
-								disabled={editrow != index ? true : false}
-							/>
+								disabled={(editrow!=index)?true:false}
+							/> */}
+							{ValidationService.getTime(element.wend)}
 						</td>
 						<td style={{ width: '149px' }} className="align-middle p-2 poppins-light-16px">
-							<button
-								onClick={() => updateValidation(element.wid, element.wstart, element.wend, index)}
+							<button // onClick={()=>updateValidation(element.wid, element.wstart, element.wend,index)}
+							className="border-0 bg-transparent color-skyblue">
+								{
+									<span>
+										{ValidationService.getDate(element.validated)}
+										<FaShieldAlt />
+									</span>
+								}
+							</button>
+							{/* <button
+								onClick={() => {editrow==index?updateValidation(element.wid, element.wstart, element.wend,index):'';updateEdit(index);}}
 								className="border-0 bg-transparent color-skyblue"
 							>
-								{element.validated ? <FaShieldAlt /> : <FaCheckCircle />}
-							</button>
-							<span />
-							<button
-								onClick={() => {
-									editrow == index
-										? updateValidation(element.wid, element.wstart, element.wend, index)
-										: '';
-									updateEdit(index);
-								}}
-								className="border-0 bg-transparent color-skyblue"
-							>
-								{editrow == index ? <FaSave /> : <FaUndoAlt />}
-							</button>
+								{editrow==index ? <FaSave /> : <FaUndoAlt />}
+							</button> */}
 						</td>
 					</tr>
 				);
 			})
 		: (display = (
-				<div className="row min-height-encodage" style={{margin:'auto 1px'}}>
-					<div className="col-md-12 py-3 border text-center poppins-regular-18px">There is no plannngs for encodage validation.</div>
-				</div>
-			));
+			<div className="row min-height-encodage" style={{margin:'auto 1px'}}>
+				<div className="col-md-12 py-3 border text-center poppins-regular-18px">{t('There is no plannngs for encodage validation.')}</div>
+			</div>
+		));
 
 	return (
 		<div>
@@ -371,7 +257,7 @@ function EncodageValidation(props) {
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
-						options={projects}
+						// options={emptypes}
 						// standards={key['emp_type'] == 0 ? '' : employeTypeSelection(key['emp_type'])}
 						disabled={false}
 						handleChange={(obj) => setFproject(obj)}
@@ -401,49 +287,41 @@ function EncodageValidation(props) {
 					</div>
 				</div>
 			</div>
-			{display == '' ? (
-				<div>
-					<table className="table">
-						<thead>
-							<tr className="btn-bg-gray-medium table-sticky-bg-gray">
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4" />
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Date')}</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Name')}</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-									{t('Planned start time')}
-								</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-									{t('Actual start time')}
-								</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-									{t('Planned end time')}
-								</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-									{t('Actual end date')}
-								</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-									{t('Actual end time')}
-								</th>
-								<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
-									{t('Actions')}
-								</th>
-							</tr>
-						</thead>
-						<tbody>{rows}</tbody>
-					</table>
-					<div>
-						{data.length > 8 && (
-							<ReactPaginate
-								itemOffset={itemOffset}
-								handlePageClick={handlePageClick}
-								pageCount={pageCount}
-							/>
-						)}
-					</div>
-				</div>
-			) : (
-				display
-			)}
+			{display==''?<div><table className="table">
+				<thead>
+					<tr className="btn-bg-gray-medium table-sticky-bg-gray">
+						{/* <th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2 ps-4" /> */}
+						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Date')}</th>
+						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Name')}</th>
+						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+							{t('Planned start time')}
+						</th>
+						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+							{t('Actual start time')}
+						</th>
+						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+							{t('Planned end time')}
+						</th>
+						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+							{t('Actual end date')}
+						</th>
+						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">
+							{t('Actual end time')}
+						</th>
+						<th className="poppins-medium-18px btn-bg-gray-medium align-middle p-2">{t('Actions')}</th>
+					</tr>
+				</thead>
+				<tbody>{rows}</tbody>
+			</table>
+			<div>
+				{data.length>8&&
+			<ReactPaginate
+			itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}
+			/>
+				}
+			</div>
+			</div>
+			:display}
 			<div className="row">
 				<div className="col-10">
 					<input
@@ -453,16 +331,7 @@ function EncodageValidation(props) {
 						onClick={() => router.push('/')}
 					/>
 				</div>
-				<div className="col-2">
-					{multivalidate > 0 && (
-						<button
-							className="btn border-0 btn-block rounded-0 float-right reset_skyblue_button w-100 shadow-none text-uppercase"
-							onClick={() => validatedMulti()}
-						>
-							{t('Save')}
-						</button>
-					)}
-				</div>
+				<div className="col-2" />
 			</div>
 		</div>
 	);

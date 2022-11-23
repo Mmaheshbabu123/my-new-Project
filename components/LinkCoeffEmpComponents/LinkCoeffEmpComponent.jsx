@@ -156,7 +156,7 @@ const LinkCoeffEmpComponent = (props) => {
          {/* <h4 className={`sv-cp-page-title  page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> Link coefficients to employee types</h4> */}
          <h4 className={`page-title font-weight-bold  bitter-italic-normal-medium-24 px-0`}> {t('Link coefficients to employee types')}</h4>
          </div>
-          <div className='row position-sticky-config-link pb-2'>
+          <div className='row position-sticky-config-link pb-3'>
           <div className="col-md-5 col-lg-3"> {addMultiSelectTag()}
             {state.pcWarning ? <small style={{ color: 'red' }} className='error_text mt-3'> {t('Choose paritair comite')} </small> : null}
           </div>
@@ -191,11 +191,11 @@ const LinkCoeffEmpComponent = (props) => {
           {scrollRight && <span onClick={() => updateStateChanges(helpers.scrollContent())} style={{ right: 0 }}>
               <Image src={forwardScroll} alt="forward" title="forward scroll" /> </span>} */}
           {/* <div className="row link-emp-coeff-tableparent" id="linkempCoeffDivId" style={{ width: `${tableWidth}` }}> */}
-          <div className={`row link-emp-coeff-tableparent ${isOverflow ? 'table-overflow' : ''}`} id="linkempCoeffDivId">
-            <div className="col-lg-3 col-md-6 m-0 p-0 pc-linking-div firstpart">
+          <div className={`row link-emp-coeff-tableparent link-employee-coefficient-parent ${isOverflow ? 'table-overflow' : ''}`} id="linkempCoeffDivId">
+            <div className="col-lg-4 col-md-6 m-0 p-0 pc-linking-div firstpart">
               <CoeffcientValuesFirstPart />
             </div>
-            <div className="col-lg-9 col-md-6 m-0 p-0 pc-linking-div secondpart">
+            <div className="col-lg-8 col-md-6 m-0 p-0 pc-linking-div secondpart">
               <EmployeeTypeSecondPart />
             </div>
           </div>

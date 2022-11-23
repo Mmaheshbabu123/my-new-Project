@@ -412,10 +412,15 @@ select option
 }
 .my_todo_table .Todos_span-action-icons___UbjJ img
 {
-  width: 20px;
+  width: 25px;
   color: var(--color-skyblue);
   margin-right: 15px;
-  height: 20px;
+  height: 25px;
+}
+.my-todo-download-icon
+{
+  width: 20px !important;
+  height: 20px !important;
 }
 .sign_action_icon_size
 {
@@ -523,7 +528,7 @@ select option
 .manage_cooperation_agreement_position_sticky
 {
   position: sticky;
-  top: 235px;
+  top: 231px;
   z-index: 998;
   background:var(--color-white);
 }
@@ -786,4 +791,56 @@ img.dasboard_image
   height: auto !important;
   background-color: var(--color-purple) !important;
   box-shadow:none;
+}
+.browse-button
+{
+  position: relative;
+  top: -3px;
+  right: -9px;
+}
+.min-height-encodage
+{
+  min-height: 24rem;
+}
+.encodage-validation-tabs .nav-tabs,
+.encodage-validation-tabs .nav-tabs .nav-link:hover,
+.encodage-validation-tabs .nav-tabs .nav-link:focus
+{
+  border: none !important;
+}
+.encodage-validation-tabs .nav-tabs .nav-link.active
+{
+  border: none !important;
+  border-radius: 0px !important;
+  border-bottom: 2px solid  var(--color-skyblue) !important;
+  background-color:transparent !important;
+  color:  var(--color-skyblue) !important;
+  font-size: var(--font-size-18px);
+  font-family: var(--font-family-poppins-medium)!important;
+  line-height: var(--line-height-31px);
+}
+.encodage-validation-tabs .nav-tabs .nav-link
+{
+  border: none !important;
+  background-color:transparent !important;
+  border-radius: 0px !important;
+  height: 45px !important;
+  font-size: var(--font-size-18px);
+  font-family: var(--font-family-poppins-medium)!important;
+  line-height: var(--line-height-31px);
+  color: var(--color-label-footer-gray) !important;
+}
+.encodage-validation-tabs 
+{
+  position: sticky;
+  top: 162px;
+  z-index: 998;
+  background: var(--color-white);
+}
+.encodage-validation-position
+{
+  position: sticky;
+  top: 222px;
+  z-index: 998;
+  background: var(--color-white);
 }

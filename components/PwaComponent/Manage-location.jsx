@@ -5,6 +5,8 @@ import {  useState } from 'react';
 import ManageActive from "./ManageActive";
 import ManageInactiveTab from "./ManageInactiveTab";
 
+import PrivacyPolicy from "../layout/Footer/PrivacyPolicy";
+
 
 
 function ManageLocation(props) {

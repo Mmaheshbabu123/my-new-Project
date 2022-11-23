@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import dynamic from 'next/dynamic';
-import Button from '../core-module/atoms/Button';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { getCompnayLocationQrCode } from '../../Services/ApiEndPoints';
-import { homeScreen } from '../../Services/ApiEndPoints';
+import { regenerateQrCode  } from '../../Services/ApiEndPoints';
 import checkPinCode from '../../Services/ApiEndPoints';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
@@ -55,7 +53,7 @@ const QrCodeGeneration = (props) => {
 						if (result.companies != null) {
 							if (result.companies.length == 1) {
 								setCompany(result.companies[0]);
-                                getLocations(result.companies[0].value);
+                                				getLocations(result.companies[0].value);
 							}
 						}
 					})
@@ -64,7 +62,7 @@ const QrCodeGeneration = (props) => {
 					});
 			}
 		},
-		[ router.query ]
+		[]
 	);
 
 	useEffect(() => {
@@ -103,18 +101,30 @@ const QrCodeGeneration = (props) => {
 	//fucntion to submit.
 	const Submit = (event) => {
 		event.preventDefault();
+		let postData={
+			comp_id:company.value,
+			location_id:location.value,
+		};
 		validate()
 			? //posting the pincode to the backend storing.
-				APICALL.service(`${getCompnayLocationQrCode}/${company.value}/${location.value}`, 'GET')
+			//getCompnayLocationQrCode}/${company.value}/${location.value
+				APICALL.service(`${regenerateQrCode}`, 'POST',postData)
 					.then((result) => {
-						if (result.status === 200 && result.data !== '') {
-							// qrUrl = result.data;
-							setFileErr(false);
-                            setFilePath(result.data);
-						}else{
-							setFileErr(true);
-							setFilePath('');
-						}
+						console.log(result.data);
+
+					let data = result.data || [];
+					let qr_code_path=data.filter(val => Number(val.comp_id) === Number(company.value) && Number(val.location_id) === Number(location.value));
+					qr_code_path = qr_code_path[0] || {};
+					qr_code_path.url = qr_code_path.qr_path || '';
+					setFilePath(qr_code_path.url);
+					// if (result.status === 200 && result.data !== '') {
+						// 	// qrUrl = result.data;
+						// 	setFileErr(false);
+                        //     setFilePath(result.data);
+						// }else{
+						// 	setFileErr(true);
+						// 	setFilePath('');
+						// }
 					})
 					.catch((error) => {
 						console.error(error);
@@ -132,7 +142,7 @@ const QrCodeGeneration = (props) => {
 					View QR code. 
 					</div>
 					</div>
-					<div className="row position-sticky-pincode-verify">
+					<div className="row position-sticky-pincode-verify hide-position-sticky-pincode-verify">
 						
 						<div className="col-md-5">
 							<label className="mb-2 poppins-regular-18px">Company</label>

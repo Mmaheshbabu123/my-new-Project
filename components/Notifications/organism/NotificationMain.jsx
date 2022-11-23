@@ -14,12 +14,18 @@ import {
 import { APICALL } from '@/Services/ApiServices';
 
 const INITIAL_COUNT = 2; //only 2 notifcations we will fetch
+const urlObject = {
+  '@frontendurl_': process.env.NEXT_PUBLIC_APP_URL + '/',
+  '@backendurl_': process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/'
+}
+
 const NotificationMain = ( props ) => {
-  	const { contextState: { uid } } = useContext(UserAuthContext);
+  	const { contextState: { uid, roleType } } = useContext(UserAuthContext);
     const entityId = Number(uid)
     const [state, setState] = useState({
       notificationView: false,
       notificationCount: 0,
+      readUnreadAllCount: 0,
       loading: false,
       notificationsList: [],
       refresh: 0,
@@ -35,7 +41,8 @@ const NotificationMain = ( props ) => {
             setState({...state,
               [viewState ? 'notificationsList' : 'notificationCount']: res.data,
               loading: true,
-              notificationView: viewState
+              notificationView: viewState,
+              readUnreadAllCount: res.readUnreadAllCount || 0,
             })
           } else {
             console.error('error occured');
@@ -56,10 +63,12 @@ const NotificationMain = ( props ) => {
 
     const updateNotifications = async (type, obj) => {
       let stateObj = {...state};
-      if(type === 'single' && obj['seen_by_user'] === 0) {
-        obj['seen_by_user'] = 1;
-        await updateStatusInBackend(updateNotificationStatus, type, obj);
+      if(type === 'single') {
+        let updatedUrl = getRedirectionUrl(obj.uri || '');
         stateObj['notificationCount'] = state.notificationCount - 1;
+        obj['seen_by_user'] === 0 ? await updateStatusInBackend(updateNotificationStatus, type, obj) : null;
+        obj['seen_by_user'] = 1;
+        updatedUrl ? window.open(`${updatedUrl}?entityid=${entityId}&entitytype=${roleType}`, '_self') : null;
       } else if (type === 'readAll') {
         await updateStatusInBackend(updateNotificationStatus, type, {user_to_notify: entityId});
         stateObj['notificationsList'].map(eachItem => {  eachItem['list'].map(eachNotifn => eachNotifn['seen_by_user'] = 1) })
@@ -72,6 +81,14 @@ const NotificationMain = ( props ) => {
         setTimeout(() => toggleNotificationView(), 500) ;
       }
       setState(stateObj);
+    }
+
+    const getRedirectionUrl = (uri) => {
+      var regEx = new RegExp(Object.keys(urlObject).join("|"), "gi");
+      let updatedUrl = uri.replace(regEx, function(matched) {
+        return urlObject[matched];
+      });
+      return updatedUrl;
     }
 
     return (
@@ -93,6 +110,7 @@ const NotificationMain = ( props ) => {
               toggleNotificationView = {toggleNotificationView}
               loadAllNotifications = {loadData}
               totalCount={state.notificationCount}
+              readUnreadAllCount={state.readUnreadAllCount}
           />}
       </>
     );

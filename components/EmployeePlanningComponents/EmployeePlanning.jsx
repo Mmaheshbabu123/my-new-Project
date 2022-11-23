@@ -79,7 +79,7 @@ function EmployeeMonthlyPlanning(props) {
 			value={currentViewName}
 			onClick={onChange}
 		>
-			<div className='col-md-4 ps-0'>
+			<div className='col-md-4 ps-md-0'>
 				<button type="button" value="Day" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Day' ? 'custom-btn_highlight' : ''}`} >
 					{t('Day')}
 				</button>
@@ -89,7 +89,7 @@ function EmployeeMonthlyPlanning(props) {
 					{('Week')}
 				</button>
 			</div>
-			<div className='col-md-4 pe-0'>
+			<div className='col-md-4 pe-md-0'>
 				<button value="Month" type="button" className={`btn border w-100 poppins-medium-18px rounded-0 shadow-none ${currentViewName == 'Month' ? 'custom-btn_highlight' : ''}`}>
 					{t('Month')}
 				</button>
