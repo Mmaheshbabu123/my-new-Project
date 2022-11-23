@@ -9,7 +9,7 @@
 {
   .todo-count-badge-employee
   {
-    right: 5rem !important;
+    right:4.8rem !important;
   }
   .todo-count-badge-employeer
   {
@@ -24,15 +24,20 @@
 {
   .todo-count-badge-employee
   {
-    right: 4rem !important;
+    right: 3.5rem !important;
   }
   .todo-count-badge-employeer
   {
-    right: 1rem !important;
+    right: 1.2rem !important;
+    /* top:36px !important; */
   }
-  .dashboard-tile
+  /* .dashboard-tile
   {
     min-height: 14rem;
+  } */
+  .dashboard_menu_title, .dashboard_menu_title:hover
+  {
+    font-size: var(--font-size-15px) !important;
   }
 }
 @media screen and (min-width:1400px)
@@ -70,7 +75,8 @@
     overflow-x: hidden;
   }
   .position-sticky-pc,
-  .hide-position-sticky-pincode-verify
+  .hide-position-sticky-pincode-verify,
+  .position-sticky-login
   {
     position: static !important;
   }
@@ -119,5 +125,61 @@
     justify-content: space-between;
     border-bottom: 1px solid var(--border-color-light-gray);
     padding-bottom: 1rem;
+  }
+}
+@media screen and (min-width:0px) and (max-width:320px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 6.5rem !important;
+  }
+}
+@media screen and (min-width:321px) and (max-width:375px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 8rem !important;
+  }
+}
+@media screen and (min-width:376px) and (max-width:400px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 8.7rem !important;
+  }
+}
+@media screen and (min-width:401px) and (max-width:420px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 9.5rem !important;
+  }
+}
+@media screen and (min-width:421px) and (max-width:480px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 11.6rem !important;
+  }
+}
+@media screen and (min-width:481px) and (max-width:540px) 
+{
+  .todo-count-badge-employee
+  {
+    right: 13.6rem !important;
+  }
+}
+@media screen and (min-width:541px) and (max-width:600px) 
+{
+  .todo-count-badge-employee 
+  {
+    right: 15.2rem !important;
+  }
+}
+@media screen and (min-width:768px) and (max-width:1023px) 
+{
+  .todo-count-badge-employee 
+  {
+    right: 1.2rem !important;
   }
 }
