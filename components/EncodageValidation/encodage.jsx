@@ -153,14 +153,14 @@ function EncodageValidation(props) {
 		} else {
 			if (d1 < d2) {
 				object[index].wend = actualend;
-				if(startdate.getTime() <= editdate.getTime()){
+				// if(startdate.getTime() <= editdate.getTime()){
 					if(addday==1){
 						object[index].wend = ValidationService.addDays(actualend, -1);
 						setAddday(0);
 					}else{
 						object[index].wend = actualend;
 					}
-				}
+				// }
 			} else {
 				object[index].wend = actualend;
 			}
