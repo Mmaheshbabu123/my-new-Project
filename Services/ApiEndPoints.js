@@ -292,3 +292,7 @@ export const cancelContract = BASE_URL + 'cancelCantract';
 export const getContracts = BASE_URL + 'get-contracts';
 export const manageLocation = BASE_URL + 'getloca';
 export const inactiveTab = BASE_URL + 'getinactive';
+export const Addlocation = BASE_URL + 'Addlocation';
+export const ManagecostcenterActive = BASE_URL + 'manage-costcenter';
+export const ManagecostcenterInactive = BASE_URL + 'manage-costcenter-inactive';
+export const addcostcenter = BASE_URL + 'addcost-center';
