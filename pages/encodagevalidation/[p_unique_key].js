@@ -10,7 +10,7 @@ const Encodage = () => {
     <div>
       <div className='row py-4 position-sticky-pc'>
         <div className='col-md-12'>
-          <h1 className='bitter-italic-normal-medium-24'>{t('Encodage Validation')}</h1>
+          <h1 className='bitter-italic-normal-medium-24'>Encodage Validation</h1>
         </div>
       </div>
     <nav className='encodage-validation-tabs'>
