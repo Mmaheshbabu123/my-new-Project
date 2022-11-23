@@ -146,6 +146,8 @@ function EncodageValidation(props) {
 				if(addday==0){
 					object[index].wend = ValidationService.addDays(actualend, 1);
 					setAddday(1);
+				}else{
+					object[index].wend = actualend
 				}
 			}
 		} else {
@@ -155,6 +157,8 @@ function EncodageValidation(props) {
 					if(addday==1){
 						object[index].wend = ValidationService.addDays(actualend, -1);
 						setAddday(0);
+					}else{
+						object[index].wend = actualend;
 					}
 				}
 			} else {
