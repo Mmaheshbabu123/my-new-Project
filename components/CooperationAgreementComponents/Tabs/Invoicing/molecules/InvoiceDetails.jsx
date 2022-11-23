@@ -21,8 +21,10 @@ console.log(roleType);
   var { tab_6 ,element_status,tab_4} = state;
   let invoiceRow1Data = structuredClone(invoiceRow1);
   let invoiceRow2Data  = structuredClone(invoiceRow2);
+  console.log(invoiceRow2Data);
   if(tab_6['56'] == 2) {
-     var removed = invoiceRow2Data.splice(4,1);
+    console.log(invoiceRow2Data);
+     var removed = invoiceRow2Data.splice(5,1);
   }
   let paymentList = state.defaultOptions['payment_condtion'] || [];
   const handleChange = (event) => {
@@ -82,7 +84,7 @@ console.log(roleType);
      else if (data.type === 6) {
      fieldData.push(
        <div className = {`col-md-12 ${styles['add-div-margings']} invoice${data.id}`}>
-           <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'} mandotory = {requiredFields['tab_6'][data.id]} /> 
+           <LabelField title={data.key_name} customStyle = {{display:''}} className={'poppins-regular-18px'} mandotory = {requiredFields['tab_6'][data.id]} />
            <div className='poppins-regular-18px-invoicing' style={{margin:'0.5rem 0'}}>
             <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px `} onClick={() => handleRadioSelect(data.id,1)}> {Number(tab_6[data.id]) === 1 ? <IoMdRadioButtonOn className="radio_button"/> : <IoMdRadioButtonOff />} {data.option1}</label>
             <label className = {`${styles['salary-input-radio-label']} poppins-regular-18px radio_button`} onClick={() => handleRadioSelect(data.id,2)}> {Number(tab_6[data.id]) === 2 ? <IoMdRadioButtonOn className="radio_button" /> : <IoMdRadioButtonOff  />} {data.option2}</label>
