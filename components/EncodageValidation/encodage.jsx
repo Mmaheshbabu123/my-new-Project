@@ -306,15 +306,14 @@ function EncodageValidation(props) {
 				);
 			})
 		: (display = (
-				<div className="row  mt-5">
-					<div className="col-3" />
-					<div className="col-9">There is no plannngs for encodage validation.</div>
+				<div className="row min-height-encodage" style={{margin:'auto 1px'}}>
+					<div className="col-md-12 py-3 border text-center poppins-regular-18px">There is no plannngs for encodage validation.</div>
 				</div>
 			));
 
 	return (
 		<div>
-			<div className="row py-4 position-sticky-pc encodage-validation">
+			<div className="row pb-4 pt-2 encodage-validation encodage-validation-position">
 				<div className="col-md-2">
 					<label className="mb-2 poppins-regular-18px">{t('Company')}</label>
 					<MultiSelectField
