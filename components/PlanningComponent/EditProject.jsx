@@ -229,13 +229,13 @@ function EditProject(props) {
 							<div
 							// className="modal-body "
 							>
-								<div className="col-md-12 m-auto border_purple px-1 py-3">
+								<div className="col-md-12 m-auto border_purple px-1 py-3" style={{marginTop:'1px !important'}}>
 									<div className="row">
 										<div className="col-md-12 ">
 											{/* PROJECT NAME */}
 											<div className="row col-md-12 m-0">
-												<div className="col-6">
-													<label className="font-weight-bold custom_astrick">
+												<div className="col-md-6">
+													<label className="font-weight-bold custom_astrick poppins-light-18px">
 														{t('Project name')}
 													</label>
 													<input
@@ -253,8 +253,8 @@ function EditProject(props) {
 												</div>
 
 												{/* COMPANY */}
-												<div className="col-6">
-													<label className="custom_astrick">{t('Company')}</label>
+												<div className="col-md-6">
+													<label className="custom_astrick poppins-light-18px">{t('Company')}</label>
 													<select
 														value={project.comp_id}
 														className="form-select mb-2 mt-2 rounded-0 shadow-none border"
@@ -277,8 +277,8 @@ function EditProject(props) {
 
 											{/* LOCATION */}
 											<div className="col-md-12 row m-0">
-												<div className="col-6">
-													<label className="mt-2 custom_astrick">{t('Location')}</label>
+												<div className="col-md-6">
+													<label className="mt-2 custom_astrick poppins-light-18px">{t('Location')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -294,8 +294,8 @@ function EditProject(props) {
 												</div>
 											</div>
 											<div className="row col-md-12 m-0">
-												<div className="col-6">
-													<label className="custom_astrick mt-2">{t('Street')}</label>
+												<div className="col-md-6">
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('Street')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -308,8 +308,8 @@ function EditProject(props) {
 												</div>
 
 												{/* HOUSE NUMBER */}
-												<div className="col-3">
-													<label className="custom_astrick mt-2">{t('House number')}</label>
+												<div className="col-md-3">
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('House number')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -321,8 +321,8 @@ function EditProject(props) {
 													<p className="error mt-2">{error_hno}</p>
 												</div>
 												{/* BUS NUMBER */}
-												<div className="col-3">
-													<label className="custom_astrick mt-2">{t('Bus number')}</label>
+												<div className="col-md-3">
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('Bus number')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -336,8 +336,8 @@ function EditProject(props) {
 											</div>
 
 											<div className="row col-md-12 m-0">
-												<div className="col-6">
-													<label className="custom_astrick mt-2">{t('Postalcode')}</label>
+												<div className="col-md-6">
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('Postalcode')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -351,8 +351,8 @@ function EditProject(props) {
 													/>
 													<p className="error mt-2">{error_postal_code}</p>
 												</div>
-												<div className="col-6">
-													<label className="custom_astrick mt-2">{t('City')}</label>
+												<div className="col-md-6">
+													<label className="custom_astrick mt-2 poppins-light-18px">{t('City')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -366,8 +366,8 @@ function EditProject(props) {
 											</div>
 											{/* EXTRA */}
 											<div className="row col-md-12 m-0">
-												<div className="col-6">
-													<label className="custom_astrick mt-2">
+												<div className="col-md-6">
+													<label className="custom_astrick mt-2 poppins-light-18px">
 														{t('Country')}
 													</label>
 													<select
@@ -392,8 +392,8 @@ function EditProject(props) {
 												</div>
 											</div>
 											<div className="row col-md-12 m-0">
-												<div className="col-12">
-													<label className=" mt-2">{t('Extra')}</label>
+												<div className="col-md-12">
+													<label className=" mt-2 poppins-light-18px">{t('Extra')}</label>
 													<input
 														type="text"
 														className="form-control mt-2 mb-2 rounded-0 shadow-none border"
@@ -408,7 +408,12 @@ function EditProject(props) {
 										</div>
 									</div>
 								</div>
-								<div className="modal-footer border-0 col-md-12 m-auto px-0">
+
+								<div className='row pt-3'>
+								<div className="text-start col-md-6 align-self-center back-btn-mobile">
+									<BackLink path={'/'} />
+								</div>
+								<div className="text-end col-md-6 back-btn-mobile">
 									<button
 										type="submit"
 										className="btn btn-lg btn-block float-right add-proj-btn custom-btn rounded-0 m-0"
@@ -416,8 +421,7 @@ function EditProject(props) {
 										{t('SAVE')}
 									</button>
 								</div>
-								<div className="text-start col-md-6">
-									<BackLink path={'/'} />
+								
 								</div>
 							</div>
 						</div>
