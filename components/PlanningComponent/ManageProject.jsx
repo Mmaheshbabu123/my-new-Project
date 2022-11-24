@@ -316,8 +316,6 @@ function ManageProject(props) {
 														>
 															<Image
 																src={UpdatePlanningIcon}
-																// src={Updateplanning}
-
 																alt="update planning"
 																data-toggle="tooltip"
 																title={t("Update planning")}
@@ -325,12 +323,6 @@ function ManageProject(props) {
 																width={20}
 																height={20}
 															/>
-
-															{/* <GrUpdate
-																className="mt-2 ms-3 color-skyblue "
-																data-toggle="tooltip"
-																title="Update planning"
-															/> */}
 														</a>
 													</span>
 												</td>
@@ -354,20 +346,6 @@ function ManageProject(props) {
 				<div className="row my-4">
 					{project.length > itemsPerPage && (
 							<Pagination itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount}/>
-						// <ReactPaginate
-						// 	breakLabel="..."
-						// 	nextLabel={<AiOutlineArrowRight />}
-						// 	onPageChange={handlePageClick}
-						// 	pageRangeDisplayed={5}
-						// 	pageCount={pageCount}
-						// 	previousLabel={<AiOutlineArrowLeft />}
-						// 	renderOnZeroPageCount={null}
-						// 	containerClassName={'pagination justify-content-center project-pagination'}
-						// 	itemClass="page-item"
-						// 	linkClass="page-link"
-						// 	subContainerClassName={'pages pagination'}
-						// 	activeClassName={'active'}
-						// />
 					)}
 				</div>
 				{/*---------------Back to dashobard redirection------------------ */}
@@ -375,15 +353,6 @@ function ManageProject(props) {
 					<BackLink path={'/'}/>
 				</div>
 			</form>
-			{/* Delete popup */}
-			{/* {showdeletepopup == true && (
-				<Popup
-					display={'block'}
-					popupActionDeleteNo={closeDeletePopup}
-					popupActionDeleteYes={deleteproject}
-					body={'Are you sure you want to delete this project?'}
-				/>
-			)} */}
 		</div>
 	);
 }
