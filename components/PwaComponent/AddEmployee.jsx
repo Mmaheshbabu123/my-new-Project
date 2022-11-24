@@ -48,7 +48,6 @@ function AddEmployee(props) {
                                     <p className="fs-6 mb-3">{t('Allowed types: gif png jpg jpeg.')}</p>
 
                                 </div>
-
                             </div>
                             <div className="row ms-2">
                                 <div className="col">

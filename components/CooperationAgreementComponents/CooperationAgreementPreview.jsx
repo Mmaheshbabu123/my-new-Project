@@ -137,7 +137,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
         {type !== 2 ? `Admin signature has not been added yet, please contact the admin.` : `You haven't added any signature yet, please add it.`}
       </div>}
       <div>
-        <iframe src={state.iframeUrl} height={screen.height - 400} width={screen.width - 200} />
+        <iframe src={state.iframeUrl} height={screen.height - 400} width='100%' />
       </div>
       {!preview && <div className = {`${styles['term_and_conditions_class']} row`}>
         <CheckBoxField
@@ -146,20 +146,20 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
          onCheck={handleCheckbox}
          name={`I hereby declare that I have reviewed the document and confirming that I agree with all details.`}
          customStyle={{margin: '2px 0', cursor:'pointer'}}
-         className="col-md-8 py-3"
+         className="col-md-8 py-3 d-flex"
        />
        {state.approved === 1 && state.signAsEmployer !== 1 ?
          <>
-             <div className="col-md-2 text-end">
+             <div className="col-md-2 text-end pe-0">
                <button onClick={() => forwardToApproveProcess()} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase"> {type === 2 ? 'Approve' : 'Send to employer'} </button>
              </div>
-             <div className="col-md-2 text-end">
+             <div className="col-md-2 text-end pe-0">
               {type === 1 && <button onClick={checkAuthenticateEmployer} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase"> {'Sign as employer'} </button>}
              </div>
-              {type === 1 && <SignatureDetails state = {state} setState = {setState} submitSignData={submitSignData} fromSvPreview={1} />}
+              {type === 1 && <SignatureDetails noMinHeight={1} state = {state} setState = {setState} submitSignData={submitSignData} fromSvPreview={1} />}
           </>
          :
-         <div className="col-md-2 text-end">
+         <div className="col-md-2 text-end pe-0">
            {state.signAsEmployer === 1 && <button onClick={() => forwardToApproveProcess(1)} type="button" className="btn poppins-medium-18px-next-button shadow-none rounded-0 text-uppercase"> {'Approve'} </button>}
          </div>
        }

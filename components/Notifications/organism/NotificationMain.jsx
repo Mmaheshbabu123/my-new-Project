@@ -15,8 +15,8 @@ import { APICALL } from '@/Services/ApiServices';
 
 const INITIAL_COUNT = 2; //only 2 notifcations we will fetch
 const urlObject = {
-  '@frontendurl_': process.env.NEXT_PUBLIC_APP_URL,
-  '@backendurl_': process.env.NEXT_PUBLIC_APP_URL_DRUPAL
+  '@frontendurl_': process.env.NEXT_PUBLIC_APP_URL + '/',
+  '@backendurl_': process.env.NEXT_PUBLIC_APP_URL_DRUPAL + '/'
 }
 
 const NotificationMain = ( props ) => {

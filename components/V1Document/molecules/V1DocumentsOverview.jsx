@@ -101,7 +101,7 @@ const V1DocumentsOverview = (props) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span title={'View'} className="actions-span text-dark" onClick={() => handleActionClick('preview', eachRow)}> <GrView /> </span>
+        <span title={'View'} className="actions-span text-dark my-documents-view-icon" onClick={() => handleActionClick('preview', eachRow)}> <GrView /> </span>
         <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload/> </span>
       </>
     )
@@ -238,7 +238,7 @@ const V1DocumentsOverview = (props) => {
 
   return(
     <div>
-    <div className='searchbox m-0 v1_doc v1_position_sticky mb-4' style={{ margin: '10px 0', position: 'relative' }}>
+    <div className='searchbox m-0 v1_doc v1_position_sticky mb-3' style={{ margin: '10px 0', position: 'relative' }}>
     <div className='row '>
     <div className='col-md-12'>
        <div className='row'>
@@ -285,12 +285,12 @@ const V1DocumentsOverview = (props) => {
           {state.currentItems && state.currentItems.length > 0 ?
           <tbody>
             {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-              <td> {getEntityName(eachRow)}  </td>
+              <td className='ps-4'> {getEntityName(eachRow)}  </td>
               <td> {eachRow.company_name} </td>
               <td> {eachRow.employee_name} </td>
               <td> {eachRow.function_name} </td>
               <td> {formatDate(eachRow.date_of_sign) || '-'} </td>
-              <td>{ getNeededActions(eachRow) } </td>
+              <td className='color-skyblue-icon'>{ getNeededActions(eachRow) } </td>
             </tr>)}
           </tbody>
           : <tbody>
