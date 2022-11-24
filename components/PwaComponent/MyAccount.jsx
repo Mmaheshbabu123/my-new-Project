@@ -98,8 +98,8 @@ function MyAccount() {
                             <div className="col-md-6">
                                 <div className="mb-3 me-3">
                                     <div className="form-check">
-                                        <input class="form-check-input" type="checkbox" />
-                                        <label class="form-check-label mt-1" for="flexCheckDefault">
+                                        <input className="form-check-input" type="checkbox" />
+                                        <label className="form-check-label mt-1" forHtml="flexCheckDefault">
                                             Add plannings to my calendar
                                         </label>
                                     </div>
