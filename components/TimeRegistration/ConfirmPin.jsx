@@ -103,7 +103,8 @@ const Pincode = (props) => {
 			setErr1('');
 		}
 
-		if ((err == '' && err1 == ''&&e==0) || err1 == 'Pincodes are not matching'&&e==0) {
+		//(err == '' && err1 == ''&&e==0) || (err1 == 'Pincodes are not matching'&&e==0)
+		if (e==0) {
 			if (value != value1) {
 				setErr1('Pincodes are not matching');
 			} else {

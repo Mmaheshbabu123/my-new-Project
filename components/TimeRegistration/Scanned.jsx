@@ -38,7 +38,7 @@ const QrscanMessage = () => {
     const checkSignedDocuments=(companyid,locationid)=>{
         APICALL.service(
             process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-                '/api/singed-or-not?id=' +
+                '/api/check-employee-have-plannings?id=' +
                 contextState.uid +
                 '&company=' +
                 companyid +
@@ -47,6 +47,10 @@ const QrscanMessage = () => {
             'GET'
         )
             .then(async(result) => {
+				if(result.status==201){
+					(result.res==-998)?setResp('There is no plannings for you'):'';
+				}else{
+					setResp('');
                 var t = 0;
                 if (result.res[0] == 999) {
                     result.res[1] !== 999 ? (t = 1) : (t = 0);
@@ -64,7 +68,8 @@ const QrscanMessage = () => {
                 } else {
                  await startstop(companyid,locationid);
                 }
-            })
+            }
+		})
             .catch((error) => {
                 console.error(error);
             })

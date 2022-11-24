@@ -5,7 +5,7 @@ import { APICALL } from '@/Services/ApiServices';
 import { getCompaniesByEmployee, checkEmployeeCompV1Status } from '@/Services/ApiEndPoints';
 import styles from '../molecules/V1Document.module.css';
 
-const V1DocumentMain = ({ entityId, entityType, companyId, preview, to: locationId = ''  }) => {
+const V1DocumentMain = ({ entityId, entityType, companyId, preview, to: locationId = ''}) => {
   const [state, setState] = useState({
     selectedCompanyId: companyId,
     signed: 0,
