@@ -55,7 +55,7 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature, t}) => {
 
   let passwordEyeIconStyle = {
     position: 'absolute',
-    top: '34px',
+    top: '43px',
     right: '10px',
   }
 
@@ -69,31 +69,35 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature, t}) => {
 
  return(
    <div>
-     <Modal size={'lg'} show={props.authenticModal} onHide={handleClose} backdrop="static" keyboard={false} >
-         <Modal.Header closeButton style={{paddingLeft: '30%'}}>
-           <Modal.Title> {t('Authenticate employer')} </Modal.Title>
+     <Modal size={'lg'} show={props.authenticModal} onHide={handleClose} backdrop="static" keyboard={false} centered>
+         <Modal.Header closeButton >
+           <Modal.Title className='bitter-italic-normal-medium-24'> {t('Authenticate employer')} </Modal.Title>
          </Modal.Header>
        <Modal.Body>
-         <div className=' col-md-9 m-auto'>
+         <div className=' col-md-10 m-auto'>
             <div className="mb-3">
-               <label htmlFor="inputEmail" className="form-label">{t('Email address')}</label>
-               <input type="email" disabled value={props.employerMail} className="form-control" id="inputEmail" aria-describedby="emailHelp" />
+               <label htmlFor="inputEmail" className="form-label poppins-regular-18px">{t('Email address')}</label>
+               <input type="email" disabled value={props.employerMail} className="form-control rounded-0 shadow-none" id="inputEmail" aria-describedby="emailHelp" />
             </div>
 
             <div className="mb-3 position-relative">
-               <label htmlFor="inputPassword" className="form-label">{t('Password')}</label>
-               <input onChange={passwordChange} type={state.showPassword ? "text" : "password"} className="form-control" style={{paddingBottom: '5px' }} id="inputPassword" />
-               <span  style={passwordEyeIconStyle} className="span-action-icons" onClick={() => setState({...state, showPassword: !state.showPassword})}> {state.showPassword === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />} </span>
+               <label htmlFor="inputPassword" className="form-label poppins-regular-18px">{t('Password')}</label>
+               <input onChange={passwordChange} type={state.showPassword ? "text" : "password"} className="form-control rounded-0 shadow-none border" style={{paddingBottom: '5px' }} id="inputPassword" />
+               <span  style={passwordEyeIconStyle} className="span-action-icons color-skyblue" onClick={() => setState({...state, showPassword: !state.showPassword})}> {state.showPassword === true ? <BsFillEyeFill /> : <BsFillEyeSlashFill />} </span>
                {state.invalidUser === true && <ValidateMessage style={{margin:0}} text = {'You have entered an invalid password'}/>}
                {state.passwordWarning === true && <ValidateMessage style={{margin:0}} text = {'Please enter password'}/>}
             </div>
 
-            <div className='text-end my-4'>
-              <p className='popup-back-btn' onClick={handleClose}> {t('Cancel')} </p>
-              <button className="btn btn-secondary" type="submit" onClick={(e) => state.spinner === false ? handleAuthentic(e) : null}>
+            <div className='row my-4'>
+              <div className='col-md-6 align-self-center'>
+                <p className='poppins-regular-18px text-uppercase text-decoration-underline' onClick={handleClose}> {t('Cancel')} </p>
+              </div>
+              <div className='col-md-6'>
+              <button className="btn poppins-medium-18px-next-button float-end shadow-none rounded-0 text-uppercase" type="submit" onClick={(e) => state.spinner === false ? handleAuthentic(e) : null}>
                 <span className={state.spinner === true ? "spinner-border spinner-border-sm mx-2" : ''} role="status" aria-hidden="true"></span>
                 {state.spinner === true ? 'Authenticating...' : 'Authenticate'}
               </button>
+              </div>
             </div>
          </div>
        </Modal.Body>

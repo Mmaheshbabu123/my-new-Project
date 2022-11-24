@@ -514,21 +514,21 @@ select option
 .additional_add_sticky
 {
   position: sticky !important;
-  top: 223px;
+  top: 231px;
   background: var(--color-white);
   z-index: 998;
 }
 .v1_position_sticky
 {
   position: sticky !important;
-  top: 239px;
+  top: 231px;
   background: var(--color-white);
   z-index: 998;
 }
 .manage_cooperation_agreement_position_sticky
 {
   position: sticky;
-  top: 235px;
+  top: 231px;
   z-index: 998;
   background:var(--color-white);
 }
@@ -797,4 +797,54 @@ img.dasboard_image
   position: relative;
   top: -3px;
   right: -9px;
+}
+.min-height-encodage
+{
+  min-height: 24rem;
+}
+.encodage-validation-tabs .nav-tabs,
+.encodage-validation-tabs .nav-tabs .nav-link:hover,
+.encodage-validation-tabs .nav-tabs .nav-link:focus
+{
+  border: none !important;
+}
+.encodage-validation-tabs .nav-tabs .nav-link.active
+{
+  border: none !important;
+  border-radius: 0px !important;
+  border-bottom: 2px solid  var(--color-skyblue) !important;
+  background-color:transparent !important;
+  color:  var(--color-skyblue) !important;
+  font-size: var(--font-size-18px);
+  font-family: var(--font-family-poppins-medium)!important;
+  line-height: var(--line-height-31px);
+}
+.encodage-validation-tabs .nav-tabs .nav-link
+{
+  border: none !important;
+  background-color:transparent !important;
+  border-radius: 0px !important;
+  height: 45px !important;
+  font-size: var(--font-size-18px);
+  font-family: var(--font-family-poppins-medium)!important;
+  line-height: var(--line-height-31px);
+  color: var(--color-label-footer-gray) !important;
+}
+.encodage-validation-tabs 
+{
+  position: sticky;
+  top: 162px;
+  z-index: 998;
+  background: var(--color-white);
+}
+.encodage-validation-position
+{
+  position: sticky;
+  top: 222px;
+  z-index: 998;
+  background: var(--color-white);
+}
+.my-documents-view-icon svg path
+{
+  stroke: var(--color-skyblue) !important;
 }
