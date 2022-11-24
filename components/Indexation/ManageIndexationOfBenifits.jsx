@@ -9,6 +9,7 @@ import BenefitIndexationDelete from './DeleteBenefitsIndexation';
 import { getAllManageBenefits, UpdateStatus } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import BackLink from '../BackLink';
+import Pagination from '../PcComponent/Pagination';
 
 function ManageIndexationBenifits(props) {
     const { t } = props;
@@ -27,7 +28,8 @@ function ManageIndexationBenifits(props) {
                 .then((result) => {
                     console.log(result.data);
                     setIndexationBenefit(result.data);
-
+                    setIndexationBenefitTemp(result.data);
+                    setIndexationBenefitTemp2(result.data);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -65,6 +67,26 @@ function ManageIndexationBenifits(props) {
         });
     };
 
+    //------------------- Pagination code -------------------------//
+    const [itemsPerPage, setItemsPerPage] = useState(8);
+    const [pageCount, setPageCount] = useState(0);
+    const [itemOffset, setItemOffset] = useState(0);
+
+    useEffect(
+        () => {
+            const endOffset = itemOffset + itemsPerPage;
+            setIndexationBenefitTemp2(indexationBenefit.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(indexationBenefit.length / itemsPerPage));
+        },
+        [itemOffset, itemsPerPage, indexationBenefit]
+    );
+    const handlePageClick = (event) => {
+        const newOffset = (event.selected * itemsPerPage) % indexationBenefit.length;
+        setItemOffset(newOffset);
+    };
+    // //------------------- Pagination code -------------------------//
+
+
     return (
         <div className="container-fluid p-0">
             <form>
@@ -96,8 +118,8 @@ function ManageIndexationBenifits(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {indexationBenefit.length > 0 &&
-                                    indexationBenefit.map((result) => (
+                                {indexationBenefitTemp2.length > 0 &&
+                                    indexationBenefitTemp2.map((result) => (
                                         <tr className="border poppins-regular-18px p-2" key={result.id} >
                                             <td className="poppins-regular-18px p-2">{result.date.split('-').reverse().join('/')}</td>
                                             {/* <td className="poppins-regular-18px p-2">{result.pc}</td> */}
@@ -138,6 +160,27 @@ function ManageIndexationBenifits(props) {
                         </table>
                     </div>
                 </div>
+                {/* -------------------------- Pagination--------------------------- */}
+                <div className="row my-4">
+                    {indexationBenefit.length >= itemsPerPage && (
+                        <Pagination itemOffset={itemOffset} handlePageClick={handlePageClick} pageCount={pageCount} />
+                        // <ReactPaginate
+                        // 	breakLabel="..."
+                        // 	nextLabel={<AiOutlineArrowRight />}
+                        // 	onPageChange={handlePageClick}
+                        // 	pageRangeDisplayed={5}
+                        // 	pageCount={pageCount}
+                        // 	previousLabel={<AiOutlineArrowLeft />}
+                        // 	renderOnZeroPageCount={null}
+                        // 	containerClassName={'pagination justify-content-center project-pagination'}
+                        // 	itemClass="page-item"
+                        // 	linkClass="page-link"
+                        // 	subContainerClassName={'pages pagination'}
+                        // 	activeClassName={'active'}
+                        // />
+                    )}
+                </div>
+
                     <div className="text-start col-md-6">
                         <BackLink path={'/'} />
                     </div>

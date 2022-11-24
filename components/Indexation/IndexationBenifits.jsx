@@ -12,9 +12,6 @@ import { APICALL } from '../../Services/ApiServices';
 // import { values } from 'lodash';
 import BackLink from '../BackLink';
 
-import get from 'node_modules/lodash/get';
-
-
 const IndexationBenifits = (props) => {
 
     /** Date formate */
@@ -38,7 +35,9 @@ const IndexationBenifits = (props) => {
         category: [],
         flex: '',
         indexation_type: '',
-        benefit_id: ''
+        benefit_id: '',
+        current_value: '',
+        new_value:''
     })
 
     useEffect(
