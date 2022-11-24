@@ -39,11 +39,11 @@ const QrscanMessage = () => {
         APICALL.service(
             process.env.NEXT_PUBLIC_APP_BACKEND_URL +
                 '/api/check-employee-have-plannings?id=' +
-                contextState.uid +
-                '&company=' +
-                companyid +
-                '&location=' +
-                locationid,
+				contextState.uid +
+				'&companyid=' +
+				companyid +
+				'&locationid=' +
+				locationid,
             'GET'
         )
             .then(async(result) => {

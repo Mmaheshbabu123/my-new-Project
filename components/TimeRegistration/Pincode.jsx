@@ -207,6 +207,7 @@ const Pincode = (props) => {
 					'GET'
 				)
 					.then((result) => {
+
 						if(result.status==201){
 							(result.res==-999)?SetResponse('Pincode is invalid.'):'';
 							(result.res==-998)?SetResponse('There is no plannings for you'):'';

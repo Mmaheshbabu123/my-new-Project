@@ -10,7 +10,7 @@ function popUpWerkPostFiche(props) {
 	
 	const save = () => {
 		let data = props.data;
-		let destination = btoa('/qr-code-scanner/scanned?companyid='+props.info[0]+'&locationid='+props.info[1]);
+		let destination = btoa(process.env.NEXT_PUBLIC_APP_URL+'/qr-code-scanner/scanned?companyid='+props.info[0]+'&locationid='+props.info[1]);
 		window.open(
 			process.env.NEXT_PUBLIC_APP_URL_DRUPAL+'/werkpostfichespdf/form/werkpostfiche_preview/' +
 				data[0].webformid +
