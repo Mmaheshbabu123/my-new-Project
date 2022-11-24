@@ -74,7 +74,7 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        {eachRow.type === 2 && <span title={'View'} className="actions-span text-dark" onClick={() => handleActionClick('preview', eachRow)}> <GrView /> </span>}
+        {eachRow.type === 2 && <span title={'View'} className="actions-span text-dark my-documents-view-icon" onClick={() => handleActionClick('preview', eachRow)}> <GrView /> </span>}
         <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <FiDownload/> </span>
       </>
     )
@@ -167,7 +167,7 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
     <div className='searchbox m-0 v1_doc v1_position_sticky' style={{ margin: '10px 0', position: 'relative' }}>
     <div className='row '>
     <div className='col-md-12'>
-       <div className='row'>
+       <div className='row pb-3'>
        <div className='col-md-9'>
          <div className='row'>
          {searchTextField('titleSearchTerm', 'title')}
@@ -209,10 +209,10 @@ const OtherDocumentsOverview = ({ entityId, entityType}) => {
           {state.currentItems && state.currentItems.length > 0 ?
           <tbody>
             {state.currentItems.map(eachRow => <tr key={eachRow.tid} id={eachRow.tid}>
-              <td> {eachRow.title}  </td>
+              <td className='ps-4'> {eachRow.title}  </td>
               {Number(entityType) === 1 && <td> {eachRow.employer_name} </td>}
               <td> {eachRow.company_name} </td>
-              <td>{ getNeededActions(eachRow) } </td>
+              <td className='color-skyblue-icon'>{ getNeededActions(eachRow) } </td>
             </tr>)}
           </tbody>
           : <tbody>
