@@ -514,14 +514,14 @@ select option
 .additional_add_sticky
 {
   position: sticky !important;
-  top: 223px;
+  top: 231px;
   background: var(--color-white);
   z-index: 998;
 }
 .v1_position_sticky
 {
   position: sticky !important;
-  top: 239px;
+  top: 231px;
   background: var(--color-white);
   z-index: 998;
 }
@@ -843,4 +843,8 @@ img.dasboard_image
   top: 222px;
   z-index: 998;
   background: var(--color-white);
+}
+.my-documents-view-icon svg path
+{
+  stroke: var(--color-skyblue) !important;
 }

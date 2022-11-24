@@ -146,7 +146,7 @@ const CooperationAgreementPreview = ({ rootParentId, salesAgentRefId, employerRe
          onCheck={handleCheckbox}
          name={`I hereby declare that I have reviewed the document and confirming that I agree with all details.`}
          customStyle={{margin: '2px 0', cursor:'pointer'}}
-         className="col-md-8 py-3"
+         className="col-md-8 py-3 d-flex"
        />
        {state.approved === 1 && state.signAsEmployer !== 1 ?
          <>
