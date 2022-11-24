@@ -83,6 +83,8 @@ function Planning(props) {
 						setCompany(result.data[0]);
 						setLocation(result.data[1]);
 						setCostcenter(result.data[2]);
+					    setCountrylist(result.data[4]);
+
 
 						if (id == '') {
 							if (result.data[0].length == 1) {

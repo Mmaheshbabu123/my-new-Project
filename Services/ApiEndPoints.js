@@ -85,8 +85,8 @@ export const updateEditproject = BASE_URL + "updateproject"
 //--------------PLANNING FETCHING----------------------------------//
 export const fetchPlanning = BASE_URL + "fetch-planning-details/";
 // export const fetchproject = BASE_URL + "fetch-project/";
-export const fetchallproject = BASE_URL + "fetch-all-project";
-export const fetchallarchivedprojects = BASE_URL + "fetch-all-archived-project"
+export const fetchallproject = BASE_URL + "fetch-all-project/";
+export const fetchallarchivedprojects = BASE_URL + "fetch-all-archived-project/"
 export const fetchprojectbyid = BASE_URL + "getproject/"
 export const planningfinalize = BASE_URL + "planning-finalize"
 export const fetchEmpDetails = BASE_URL + "fetch-emp-details/"

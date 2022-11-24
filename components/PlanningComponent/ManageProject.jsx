@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect, useContext } from 'react';
 import { MdEdit } from 'react-icons/md';
-import { GrUpdate } from 'react-icons/gr';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { fetchallproject, updateProject } from '../../Services/ApiEndPoints';
+import { fetchallproject } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
 import { useRouter } from 'next/router';
-import ReactPaginate from 'react-paginate';
 import Link from 'node_modules/next/link';
 import Image from 'next/image';
 import UpdatePlanningIcon from '../images/Update-planning.svg';
 import Pagination from '../PcComponent/Pagination';
 import Translation from '@/Translation';
 import BackLink from '../BackLink';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 
 function ManageProject(props) {
 	const {t}=props;
 	const router = useRouter();
+	const { contextState = {} } = useContext(UserAuthContext);
 
 	/**
      * Initialise search filter 
@@ -32,18 +30,10 @@ function ManageProject(props) {
 	const [ project, setProject ] = useState([]);
 	const [ projectTemp, setProjectTemp ] = useState([]);
 	const [ projectTemp2, setProjectTemp2 ] = useState([]);
-	const [ updated, setUpdated ] = useState(0);
-
 	/**
 	 * Reset button hide and show depending on the search values
 	 */
 	const [ search, setSearch ] = useState(false);
-
-	/**
-	 * Delete popup functionality assigned variables
-	 */
-	const [ showdeletepopup, setShowdeletepopup ] = useState(false);
-	const [ projectid, setProjectid ] = useState('');
 
 	/**
 	 * Pagination related variables
@@ -55,7 +45,7 @@ function ManageProject(props) {
 	 */
 	useEffect(
 		() => {
-			APICALL.service(fetchallproject, 'GET')
+			APICALL.service(fetchallproject + contextState.uid + '/' + contextState.roleType, 'GET')
 				.then((result) => {
 					console.log(result.data);
 
@@ -67,31 +57,9 @@ function ManageProject(props) {
 					console.log(error);
 				});
 		},
-		[ updated ]
+		[ props.tab ]
 	);
 
-	// ------------------------Delete functionality------------------------ //
-	const deleteproject = async () => {
-		var data = {
-			id: projectid
-		};
-		APICALL.service(updateProject, 'POST', data)
-			.then((result) => {
-				console.log(result.status);
-				setUpdated(updated + 1);
-				setShowdeletepopup(false);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
-	const closeDeletePopup = () => {
-		setShowdeletepopup(false);
-	};
-	const showDeletePopup = (id) => {
-		setProjectid(id);
-		setShowdeletepopup(true);
-	};
 	//------------------- Pagination code -------------------------//
 	const [ pageCount, setPageCount ] = useState(0);
 	const [ itemOffset, setItemOffset ] = useState(0);
@@ -109,7 +77,6 @@ function ManageProject(props) {
 		const newOffset = (event.selected * itemsPerPage) % project.length;
 		setItemOffset(newOffset);
 	};
-	//------------------- Pagination code -------------------------//
 
 	// ------------------------- Search functionality----------------------------//
 
