@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import ValidationService from '../../Services/ValidationService';
 import Translation from "@/Translation";
+
+import { addcostcenter } from '../../Services/ApiEndPoints';
+import { APICALL } from '../../Services/ApiServices';
+
 function AddCostCenter(props) {
     const {t}=props;
     const [error_cost_center_name, setError_cost_center_name] = useState('');
@@ -75,6 +79,14 @@ function AddCostCenter(props) {
         if (valid_res) {
         // 	 alert('1111');
         	 console.log(data);
+
+             APICALL.service(addcostcenter, 'POST',data)
+             .then((data) => {
+                 console.log(data);
+             })
+             .catch((error) => {
+                 console.log(error);
+             });
         }
 
     }

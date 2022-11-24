@@ -1,4 +1,3 @@
-// import ManageProject from "@/components/PlanningComponent/ManageProject";
 import ProjectCommon from "@/components/PlanningComponent/ProjectCommon";
 
 const Projectcommon = () => (

@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import Multiselect from 'multiselect-react-dropdown';
 import ValidationService from '../../Services/ValidationService';
 import Translation from "@/Translation";
+
+import { Addlocation } from '../../Services/ApiEndPoints';
+import { APICALL } from '../../Services/ApiServices';
 
 function AddLocation(props) {
     const {t} = props;
@@ -87,8 +90,16 @@ function AddLocation(props) {
         if (valid_res) {
             // 	 alert('1111');
             console.log(data);
-        }
 
+            APICALL.service(Addlocation, 'POST',data)
+                    .then((data) => {
+                        console.log(data);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+
+        }
     }
 
     return (

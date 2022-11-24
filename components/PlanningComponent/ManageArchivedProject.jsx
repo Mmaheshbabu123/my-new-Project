@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect, useContext } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { fetchallproject, fetchallarchivedprojects } from '../../Services/ApiEndPoints';
 import { APICALL } from '../../Services/ApiServices';
-import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import Translation from '@/Translation';
 import BackLink from '../BackLink';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
+
 function ManageArchivedProject(props) {
 	/**
      * Initialise search filter 
      */
-	const {t}=props;
+	const {t,tab}=props;
+	const { contextState = {} } = useContext(UserAuthContext);
+
 	const [ searchArchivedProjectname, setSearchArchivedProjectname ] = useState('');
 	const [ searchArchivedlocation, setSearchArchivedlocation ] = useState('');
 	const [ searchArchivedaddress, setSearchArchivedaddress ] = useState('');
@@ -39,7 +41,7 @@ function ManageArchivedProject(props) {
 	 */
 	useEffect(
 		() => {
-			APICALL.service(fetchallarchivedprojects, 'GET')
+			APICALL.service(fetchallarchivedprojects + contextState.uid + '/' + contextState.roleType, 'GET')
 				.then((result) => {
 					console.log(result.data);
 
@@ -51,7 +53,7 @@ function ManageArchivedProject(props) {
 					console.log(error);
 				});
 		},
-		[ updated ]
+		[ props.tab ]
 	);
 	//------------------- Pagination code -------------------------//
 
