@@ -223,7 +223,7 @@ const Pincode = (props) => {
 									'&to=' +
 									location.value
 							);
-						} else if (result.res[1] != 999 && result!=-998) {
+						} else if (result.res[1] != 999 && result.res[1]!=-998) {
 							setPopUpData(result.res[1]);
 							actionPopup();
 						} else {
