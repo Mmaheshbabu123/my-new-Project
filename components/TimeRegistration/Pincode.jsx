@@ -214,8 +214,7 @@ const Pincode = (props) => {
 						}else{
 							SetResponse('');
 							var t = 0;
-						if (result.res[0] == 999) {
-							result.res[1] !== 999 ? (t = 1) : (t = 0);
+						if (result.res == -999) {
 							router.push(
 								'/v1-document?entityid=' +
 									contextState.uid +
