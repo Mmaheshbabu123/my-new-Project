@@ -133,11 +133,9 @@ function EncodageValidation(props) {
 		//creating date object for each
 		let editdate = new Date(ae);
 		let startdate = new Date(ws);
-
 		//creating date object using the dates
-		var d1 = new Date(ValidationService.getDate(object[index].wstart)); 
-		var d2 = new Date(ValidationService.getDate(actualend)); 
-
+		var d1 = new Date(ValidationService.getDate(object[index].wstart,1)); 
+		var d2 = new Date(ValidationService.getDate(actualend,1)); 
 		//validating the dates and changing according to the time
 		if (editdate.getTime() < startdate.getTime()) {
 			if(d1 < d2) {
