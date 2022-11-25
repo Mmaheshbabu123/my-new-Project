@@ -6,7 +6,7 @@ import DatePicker from 'react-multi-date-picker';
 import { useRouter } from 'next/router';
 import { da } from 'date-fns/locale';
 
-function popUpWerkPostFiche(props) {
+function PopUpWerkPostFiche(props) {
 	const router = useRouter();
 
 	const save = () => {
@@ -98,4 +98,4 @@ res=<div className="row">
 		</form>
 	);
 }
-export default popUpWerkPostFiche;
+export default PopUpWerkPostFiche;
