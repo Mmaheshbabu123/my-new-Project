@@ -43,7 +43,7 @@ const ValidationService = {
 		const year = date.getFullYear();   
 
 		if(type!=0){
-			return day+'-'+month+'-'+year
+			return year+'-'+month+'-'+day
 		};
 
 		return day+'-'+month+'-'+year
