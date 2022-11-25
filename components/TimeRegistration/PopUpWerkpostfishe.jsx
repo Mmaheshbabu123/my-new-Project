@@ -25,7 +25,8 @@ function PopUpWerkPostFiche(props) {
 				'/' +
 				data[0].employer_id +
 				'?type=employee' +
-				'&destination_url=' + destination,
+				'&destination_url=' + destination +
+				'&entityid=' + localStorage.getItem('uid'),
 				'_blank'
 		);
 	};
