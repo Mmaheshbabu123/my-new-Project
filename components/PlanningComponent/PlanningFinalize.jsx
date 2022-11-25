@@ -1,7 +1,6 @@
-import React, { Component, useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { APICALL } from '../../Services/ApiServices';
-import { planningoverview, getweekly_planning, planningfinalize } from '../../Services/ApiEndPoints';
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { planningoverview, planningfinalize } from '../../Services/ApiEndPoints';
 import { useRouter } from 'next/router';
 import { FaLessThan, FaGreaterThan } from 'react-icons/fa';
 import Link from 'next/link';
@@ -9,28 +8,35 @@ import moment from 'moment';
 import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import Translation from '@/Translation';
 const PlanningFinalize = (props) => {
-	const {t}=props;
+	const { t } = props;
 	const router = useRouter();
 	const p_unique_key = router.query.p_unique_key;
 	const [ planning, setPlanning ] = useState([]);
-	const [ enableEdit, setEnableEdit ] = useState(true);
 	const [ week, setWeek ] = useState([]);
 	const [ activeWeek, setActiveWeek ] = useState([]);
 	const [ finalized, setFinalized ] = useState('');
 	const [ errorFinalize, setErrorFinalize ] = useState('');
 	const [ weekCount, setWeekCount ] = useState(0);
 	const { contextState = {} } = useContext(UserAuthContext);
+	const [ disableRadio, setDisabledRadio ] = useState(true);
+	const [ corporationAgreement, setCorporationAgreement ] = useState(false);
+
 	useEffect(
 		() => {
 			if (!router.isReady) return;
 			APICALL.service(planningoverview + router.query.p_unique_key, 'GET')
 				.then((result) => {
 					if (result.data.length > 0) {
-						console.log(result.data[1][0]);
 						setPlanning(result.data[1][0]);
-						console.log(result.data[1][0]																						)
 						setWeek(result.data[0]);
 						setActiveWeek(result.data[0][0]);
+						setFinalized(result.data[2]);
+						setCorporationAgreement(result.data[1][0].corporationAgreement);
+						if (result.data[2] === true) {
+							setDisabledRadio(true);
+						} else {
+							setDisabledRadio(false);
+						}
 					}
 				})
 				.catch((error) => {
@@ -57,58 +63,72 @@ const PlanningFinalize = (props) => {
 		if (finalized === '') {
 			setErrorFinalize('This field is required.');
 		} else {
-			APICALL.service(planningfinalize, 'POST', [ p_unique_key, finalized ])
-				.then((result) => {
-					if (result.status === 200) {
-						router.push('/weekly-planning');
-					} else {
-						console.log(result);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			APICALL.service(process.env.NEXT_PUBLIC_APP_BACKEND_URL+'/api/sendemail_to_employee_planning/'+contextState.uid+'/'+p_unique_key, 'POST')
-				.then((result) => {
-					if (result.status === 200) {
-						router.push('/weekly-planning');
-					} else {
-						console.log(result);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+			if (corporationAgreement === false && finalized === true) {
+				setErrorFinalize('Corportation agreement has to be signed to finalize the planning.');
+			} else {
+				if (disableRadio === false) {
+					store();
+				} else {
+					router.push('/weekly-planning');
+				}
+			}
 		}
+	};
+	let store = () => {
+		APICALL.service(planningfinalize, 'POST', [ p_unique_key, finalized ])
+			.then((result) => {
+				if (result.status === 200) {
+					if (finalized === true) {
+						sendMail();
+						router.push('/weekly-planning');
+					} else {
+						router.push('/weekly-planning');
+					}
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};
+	let sendMail = () => {
+		APICALL.service(
+			process.env.NEXT_PUBLIC_APP_BACKEND_URL +
+				'/api/sendemail_to_employee_planning/' +
+				contextState.uid +
+				'/' +
+				p_unique_key,
+			'POST'
+		)
+			.then((result) => {
+				if (result.status === 200) {
+					router.push('/weekly-planning');
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	};
 	let handleRadio = (e) => {
 		setErrorFinalize('');
 		var finalise = e.target.value === 'true' ? true : false;
 		setFinalized(finalise);
 	};
-	let dateExist = (data) =>{
+	let dateExist = (data) => {
 		var arr = [];
 		data.map((v1, k1) => {
-
-			v1.map((v2,k2)=>{
-				if (activeWeek.indexOf(v2.pdate)>-1) {
+			v1.map((v2, k2) => {
+				if (activeWeek.indexOf(v2.pdate) > -1) {
 					arr.push(v2.pdate);
 				}
-
-			})
-		
-					// const found = data.some(el => el.pdate == val);
-					// if (found) arr.push(val);
+			});
 		});
 
-		if(arr.length > 0){
-			return true
-		}else{
+		if (arr.length > 0) {
+			return true;
+		} else {
 			return false;
 		}
-
-
-	}
+	};
 	return (
 		<div className="container-fluid p-0 m-0">
 			<div className="row position-sticky-pc">
@@ -119,7 +139,6 @@ const PlanningFinalize = (props) => {
 				</div>
 			</div>
 			<div className="row m-0">
-				{/* <p className=" poppins-regular-16px">For the week of Monday from 01/08/2022 to sunday 06/08/2022</p> */}
 				<div className="d-flex pb-3 px-0 planning_finalize_search">
 					<select
 						className="form-select w-25 me-3  border-0 select-bg-gray rounded-0 shadow-none poppins-light-18px"
@@ -177,7 +196,8 @@ const PlanningFinalize = (props) => {
 						<thead className="">
 							<tr className="skyblue-bg-color">
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center d-flex lh-base">
-									{t('Monday')}<br />
+									{t('Monday')}
+									<br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[0].split('-').reverse().join('-')}
@@ -201,19 +221,22 @@ const PlanningFinalize = (props) => {
 										activeWeek[3].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center align-items-center justify-content-center lh-base">
-									{t('Friday')}<br />
+									{t('Friday')}
+									<br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[4].split('-').reverse().join('-')}
 								</th>
 								<th className=" table-right-border-white  text-center  align-items-center justify-content-center lh-base">
-									{t('Saturday')}<br />
+									{t('Saturday')}
+									<br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[5].split('-').reverse().join('-')}
 								</th>
 								<th className="  text-center  align-items-center justify-content-center lh-base">
-									{t('Sunday')}<br />
+									{t('Sunday')}
+									<br />
 									{activeWeek &&
 										activeWeek.length > 0 &&
 										activeWeek[6].split('-').reverse().join('-')}
@@ -221,111 +244,64 @@ const PlanningFinalize = (props) => {
 							</tr>
 						</thead>
 						<tbody>
-							{/* {planning.planning &&
-								Object.keys(planning.planning).map((value) => (
-									<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
-										{activeWeek.map((val, key) => (
-											<td className=" table-border-gray font-poppins-light" key={key}>
-												{planning.planning[value].some((el) => el.pdate === val) ? (
-													<div>
-														{planning.planning[value].map(
-															(val1) =>
-																val1.pdate == val ? (
-																	<div key={val1.id}>
-																		<p className="color_skyblue pt-1 poppins-light-18px">
-																			{val1.employee_name}
-																		</p>
-																		<br />
-																		<p className="poppins-light-14px">
-																			{val1.employee_type_name}
-																		</p>
-																		<br />
-																		<p className="poppins-light-14px">
-																			{val1.function_name}
-																		</p>
-																		<br />
-																		<p className="poppins-light-14px">
-																			{'€ ' + val1.salary}
-																		</p>
-																		<br />
-																		<p className="poppins-light-14px">
-																			{moment(val1.starttime).format('HH:mm') +
-																				' to ' +
-																				moment(val1.endtime).format('HH:mm')}
-																		</p>
-
-																		<br />
-																	</div>
-																) : (
-																	''
-																)
-														)}
-													</div>
-												) : (
-													<div />
-												)}
-											</td>
-										))}
-									</tr>
-								))} */}
-								
 							{planning.planning &&
 								Object.keys(planning.planning).map((value) => (
-									dateExist(planning.planning[value]) && <tr className="border-bottom table-border-gray equal-width-calc" key={value}>
-										{console.log(planning.planning[value])}
-										{activeWeek.map((val, key) => (
-											<td className=" table-border-gray font-poppins-light" key={key}>
-												{planning.planning[value].map(
-													(v2, k2) =>
-														v2.some((el) => el.pdate === val) ? (
-															<div>
-																{v2.map(
-																	(val1, key1) =>
-																		val1.pdate == val ? (
-																			<div key={val1.id}>
-																				{key1 == 0 && (
-																					<div>
-																						<p className="color_skyblue pt-1 poppins-light-18px">
-																							{val1.employee_name}
-																						</p>
-																					
-																						<p className="poppins-light-14px">
-																							{val1.employee_type_name}
-																						</p>
-																				
-																						<p className="poppins-light-14px">
-																							{val1.function_name}
-																						</p>
-																					
-																						<p className="poppins-light-14px">
-																							{'€ ' + val1.salary}
-																						</p>
-																					
-																					</div>
-																				)}
-																				<p className="poppins-light-14px">
-																					{moment(val1.starttime).format(
-																						'HH:mm'
-																					) +
-																						' to ' +
-																						moment(val1.endtime).format(
-																							'HH:mm'
-																						)}
-																				</p>
+									<tr className="border-bottom table-border-gray equal-width-calc" key={value}>
+										{dateExist(planning.planning[value]) &&
+											activeWeek.map((val, key) => (
+												<td className=" table-border-gray font-poppins-light" key={key}>
+													{planning.planning[value].map(
+														(v2, k2) =>
+															v2.some((el) => el.pdate === val) ? (
+																<div>
+																	{v2.map(
+																		(val1, key1) =>
+																			val1.pdate == val ? (
+																				<div key={val1.id}>
+																					{key1 == 0 && (
+																						<div>
+																							<p className="color_skyblue pt-1 poppins-light-18px">
+																								{val1.employee_name}
+																							</p>
 
-																				<br />
-																			</div>
-																		) : (
-																			''
-																		)
-																)}
-															</div>
-														) : (
-															''
-														)
-												)}
-											</td>
-										))}
+																							<p className="poppins-light-14px">
+																								{
+																									val1.employee_type_name
+																								}
+																							</p>
+
+																							<p className="poppins-light-14px">
+																								{val1.function_name}
+																							</p>
+
+																							<p className="poppins-light-14px">
+																								{'€ ' + val1.salary}
+																							</p>
+																						</div>
+																					)}
+																					<p className="poppins-light-14px">
+																						{moment(val1.starttime).format(
+																							'HH:mm'
+																						) +
+																							' to ' +
+																							moment(val1.endtime).format(
+																								'HH:mm'
+																							)}
+																					</p>
+
+																					<br />
+																				</div>
+																			) : (
+																				''
+																			)
+																	)}
+																</div>
+															) : (
+																''
+															)
+													)}
+												</td>
+											))}
 									</tr>
 								))}
 						</tbody>
@@ -343,6 +319,7 @@ const PlanningFinalize = (props) => {
 							checked={finalized === true}
 							onChange={(e) => handleRadio(e)}
 							aria-label="..."
+							disabled={disableRadio}
 						/>
 						<label className="ms-2 poppins-regular-16px">{t('Yes')}</label>
 					</div>
@@ -356,6 +333,7 @@ const PlanningFinalize = (props) => {
 							checked={finalized === false}
 							onChange={(e) => handleRadio(e)}
 							aria-label="..."
+							disabled={disableRadio}
 						/>
 						<label className="ms-2 poppins-regular-16px">{t('No')}</label>
 					</div>
@@ -386,4 +364,20 @@ const PlanningFinalize = (props) => {
 	);
 };
 
-export default React.memo(Translation(PlanningFinalize,['Planning finalize','Current week','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday','Is the planning final?','Yes','No','BACK','SUBMIT']));
+export default React.memo(
+	Translation(PlanningFinalize, [
+		'Planning finalize',
+		'Current week',
+		'Monday',
+		'Tuesday',
+		'Wednesday',
+		'Thrusday',
+		'Friday',
+		'Saturday',
+		'Is the planning final?',
+		'Yes',
+		'No',
+		'BACK',
+		'SUBMIT'
+	])
+);

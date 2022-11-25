@@ -38,18 +38,22 @@ const QrscanMessage = () => {
     const checkSignedDocuments=(companyid,locationid)=>{
         APICALL.service(
             process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-                '/api/singed-or-not?id=' +
-                contextState.uid +
-                '&company=' +
-                companyid +
-                '&location=' +
-                locationid,
+                '/api/check-employee-have-plannings?id=' +
+				contextState.uid +
+				'&companyid=' +
+				companyid +
+				'&locationid=' +
+				locationid,
             'GET'
         )
             .then(async(result) => {
+				if(result.status==201){
+					(result.res==-998)?setResp('There is no plannings for you'):'';
+					(result.res==-888)?SetResponse('Werkpostfiche is not created or not signed by the employer.Please contact employer.'):'';
+				}else{
+					setResp('');
                 var t = 0;
                 if (result.res[0] == 999) {
-                    result.res[1] !== 999 ? (t = 1) : (t = 0);
                     router.push(
                         '/v1-document?entityid=' +
                             contextState.uid +
@@ -64,7 +68,8 @@ const QrscanMessage = () => {
                 } else {
                  await startstop(companyid,locationid);
                 }
-            })
+            }
+		})
             .catch((error) => {
                 console.error(error);
             })

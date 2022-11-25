@@ -196,18 +196,25 @@ const Pincode = (props) => {
 		validate(otp)
 			? APICALL.service(
 					process.env.NEXT_PUBLIC_APP_BACKEND_URL +
-						'/api/singed-or-not?id=' +
+						'/api/check-employee-have-plannings?id=' +
 						contextState.uid +
-						'&company=' +
+						'&companyid=' +
 						company.value +
-						'&location=' +
-						location.value,
+						'&locationid=' +
+						location.value+
+						'&pincode=' +
+						otp,
 					'GET'
 				)
 					.then((result) => {
-						var t = 0;
-						if (result.res[0] == 999) {
-							result.res[1] !== 999 ? (t = 1) : (t = 0);
+
+						if(result.status==201){
+							(result.res==-999)?SetResponse('Pincode is invalid.'):'';
+							(result.res==-998)?SetResponse('There is no plannings for you'):'';
+						}else{
+							SetResponse('');
+							var t = 0;
+						if (result.res == -999) {
 							router.push(
 								'/v1-document?entityid=' +
 									contextState.uid +
@@ -235,16 +242,13 @@ const Pincode = (props) => {
 								.then((res) => {
 									if (res != null || res != undefined) {
 										SetResponse(res.res);
-										// setResp(res.res);
-										// if(res.res=='Planning has been ended.'||res.res=='Planning has been started.'){
-										// 	router.push('/pincode/options');
-										// }
 									}
 								})
 								.catch((error) => {
 									console.error(error);
 								});
 						}
+					}
 					})
 					.catch((error) => {
 						console.error(error);

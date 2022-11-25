@@ -37,12 +37,12 @@ const ProjectCommon = (props) => {
 				<div className="tab-content text-dark p-0" id="pills-tabContent">
 					{/* Tab 1 content */}
 					<div className={showtab === 1 ? 'tab-pane fade show active' : 'tab-pane fade show'}>
-						<ManageProject />
+						<ManageProject tab = {showtab} />
 					</div>
 
 					{/* Tab2 content */}
 					<div className={showtab === 2 ? 'tab-pane fade show active' : 'tab-pane fade show'}>
-						<ManageArchivedProject />
+						<ManageArchivedProject tab = {showtab} />
 					</div>
 				</div>
 			</div>

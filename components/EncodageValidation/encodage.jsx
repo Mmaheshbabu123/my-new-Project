@@ -133,16 +133,17 @@ function EncodageValidation(props) {
 		//creating date object for each
 		let editdate = new Date(ae);
 		let startdate = new Date(ws);
-
 		//creating date object using the dates
-		var d1 = new Date(ValidationService.getDate(object[index].wstart)); 
-		var d2 = new Date(ValidationService.getDate(actualend)); 
-
+		var d1 = new Date(ValidationService.getDate(object[index].wstart,1)); 
+		var d2 = new Date(ValidationService.getDate(actualend,1)); 
 		//validating the dates and changing according to the time
 		if (editdate.getTime() < startdate.getTime()) {
 			if(d1 < d2) {
 				object[index].wend = actualend
-			}else{
+			}else if(d1>d2){
+				object[index].wend = ValidationService.addDays(actualend, -1);
+			} 
+			else{
 				if(addday==0){
 					object[index].wend = ValidationService.addDays(actualend, 1);
 					setAddday(1);
@@ -153,14 +154,16 @@ function EncodageValidation(props) {
 		} else {
 			if (d1 < d2) {
 				object[index].wend = actualend;
-				// if(startdate.getTime() <= editdate.getTime()){
+				if(startdate.getTime() <= editdate.getTime()){
 					if(addday==1){
 						object[index].wend = ValidationService.addDays(actualend, -1);
 						setAddday(0);
 					}else{
 						object[index].wend = actualend;
 					}
-				// }
+				}
+			}else if(d1>d2){
+				object[index].wend = ValidationService.addDays(actualend, -1);
 			} else {
 				object[index].wend = actualend;
 			}
@@ -328,12 +331,13 @@ function EncodageValidation(props) {
 		<div>
 			<div className="row pb-4 pt-2 encodage-validation encodage-validation-position">
 				<div className="col-md-2">
-					<label className="mb-2 poppins-regular-18px">{t('Company')}</label>
+					{/* <label className="mb-2 poppins-regular-18px">{t('Company')}</label> */}
 					<MultiSelectField
 						// placeholder={''}
 						id={'select_id'}
 						options={companies}
 						standards={fcompany}
+						placeholder={'Company'}
 						disabled={false}
 						handleChange={(obj) => setFcompany(obj)}
 						isMulti={false}
@@ -341,12 +345,13 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<label className="mb-2 poppins-regular-18px">{t('Location')}</label>
+					{/* <label className="mb-2 poppins-regular-18px">{t('Location')}</label> */}
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
 						options={locations}
 						standards={flocation}
+						placeholder={'Location'}
 						disabled={false}
 						handleChange={(obj) => setFlocation(obj)}
 						isMulti={false}
@@ -354,10 +359,11 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<label className="mb-2 poppins-regular-18px">{t('Cost center')}</label>
+					{/* <label className="mb-2 poppins-regular-18px">{t('Cost center')}</label> */}
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
+						placeholder={'Cost center'}
 						options={costcenters}
 						// standards={key['emp_type'] == 0 ? '' : employeTypeSelection(key['emp_type'])}
 						disabled={false}
@@ -367,10 +373,11 @@ function EncodageValidation(props) {
 					/>
 				</div>
 				<div className="col-md-2">
-					<label className="mb-2 poppins-regular-18px">{t('Project')}</label>
+					{/* <label className="mb-2 poppins-regular-18px">{t('Project')}</label> */}
 					<MultiSelectField
 						// placeholder={'Select employee type'}
 						id={'select_id'}
+						placeholder={'Project'}
 						options={projects}
 						// standards={key['emp_type'] == 0 ? '' : employeTypeSelection(key['emp_type'])}
 						disabled={false}

@@ -90,7 +90,7 @@ const EmployerAuthenticModal = ({props, close, allowEmployerSignature, t}) => {
 
             <div className='row my-4'>
               <div className='col-md-6 align-self-center'>
-                <p className='poppins-regular-18px text-uppercase' onClick={handleClose}> {t('Cancel')} </p>
+                <p className='poppins-regular-18px text-uppercase text-decoration-underline' onClick={handleClose}> {t('Cancel')} </p>
               </div>
               <div className='col-md-6'>
               <button className="btn poppins-medium-18px-next-button float-end shadow-none rounded-0 text-uppercase" type="submit" onClick={(e) => state.spinner === false ? handleAuthentic(e) : null}>
