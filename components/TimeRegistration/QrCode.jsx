@@ -101,13 +101,14 @@ const QrCodeGeneration = (props) => {
 	//fucntion to submit.
 	const Submit = (event) => {
 		event.preventDefault();
-		let postData={
-			comp_id:company.value,
-			location_id:location.value,
-		};
-		validate()
-			? //posting the pincode to the backend storing.
+		
+		if(validate())
+			{ //posting the pincode to the backend storing.
 			//getCompnayLocationQrCode}/${company.value}/${location.value
+			let postData={
+				comp_id:company.value,
+				location_id:location.value,
+			};
 				APICALL.service(`${regenerateQrCode}`, 'POST',postData)
 					.then((result) => {
 						console.log(result.data);
@@ -129,7 +130,7 @@ const QrCodeGeneration = (props) => {
 					.catch((error) => {
 						console.error(error);
 					})
-			: '';
+				}
 	};
 
 	return (
@@ -139,7 +140,7 @@ const QrCodeGeneration = (props) => {
 				<div className="col-md-12">
 					<div className='row  bitter-italic-normal-medium-24 py-4 position-sticky-pc'> 
 					<div className='col-md-12'>
-					View QR code. 
+					View QR code
 					</div>
 					</div>
 					<div className="row position-sticky-pincode-verify hide-position-sticky-pincode-verify">
