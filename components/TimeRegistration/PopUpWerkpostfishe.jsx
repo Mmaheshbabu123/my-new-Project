@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 import { APICALL } from '../../Services/ApiServices';
 import ValidationService from '@/Services/ValidationService';
 import DatePicker from 'react-multi-date-picker';
+import UserAuthContext from '@/Contexts/UserContext/UserAuthContext';
 import { useRouter } from 'next/router';
 import { da } from 'date-fns/locale';
 
 function PopUpWerkPostFiche(props) {
 	const router = useRouter();
-
+	const { contextState = {} } = useContext(UserAuthContext);
 	const save = () => {
 		let data = props.data;
 		let destination = btoa(process.env.NEXT_PUBLIC_APP_URL+'/qr-code-scanner/scanned?companyid='+props.info[0]+'&locationid='+props.info[1]);
@@ -26,7 +27,7 @@ function PopUpWerkPostFiche(props) {
 				data[0].employer_id +
 				'?type=employee' +
 				'&destination_url=' + destination +
-				'&entityid=' + localStorage.getItem('uid'),
+				'&entityid=' + contextState.uid,
 				'_blank'
 		);
 	};
