@@ -28,7 +28,6 @@ const SalaryDetailsPerPC = (props) => {
     dependecyDataStatus['cooperationSalaryDetails'] = true;
     updateStateChanges({tab_5, dependecyDataStatus})
   }
-
   const onDelete = (pcId, index) => {
     confirmAlert({
       message: 'Do you want to delete paritair comité?',
@@ -56,7 +55,7 @@ const SalaryDetailsPerPC = (props) => {
     let dataObject = {};
     arrayOfObjects.map(obj => {
       if(objKey === 1)
-        dataObject[obj.salary_id] = { checked: 0, value: obj.salary_value, granted: obj.granted }
+        dataObject[obj.salary_id] = { checked: obj.mandotory || 0, value: obj.salary_value, granted: obj.granted }
       else
         dataObject[obj] = { checked: 1, code: '', bedrag: '', percentage: '', soort_automatisering: ''}
     return 1;
