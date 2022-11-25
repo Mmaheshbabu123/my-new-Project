@@ -62,7 +62,7 @@ const QrscanMessage = () => {
                             '&to=' +
                             locationid
                     );
-                } else if (result.res[1] != 999) {
+                } else if (result.res[1] != 999 && result.res[1]!=-998) {
                     setPopUpData(result.res[1]);
                     actionPopup();
                 } else {
@@ -112,7 +112,7 @@ const QrscanMessage = () => {
 		setShow(!show);
 	};
 
-	console.log(popupdata);
+	
 	return (
 		<div className="container">
 			<div className='row pt-5'>
