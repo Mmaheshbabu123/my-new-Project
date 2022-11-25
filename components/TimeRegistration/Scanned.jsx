@@ -112,6 +112,7 @@ const QrscanMessage = () => {
 		setShow(!show);
 	};
 
+	console.log(popupdata);
 	return (
 		<div className="container">
 			<div className='row pt-5'>
@@ -119,7 +120,7 @@ const QrscanMessage = () => {
 				 <div className='display-4'>{resp}</div>
 				</div>
 			</div>
-			{show && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} />}
+			{show && <PopUp display={'block'} popupAction={actionPopup} data={popupdata} info={[companyid,locationid]}/>}
 			{/* <div className=" pt-2 text-center" style={{color:'red'}}>{resp}</div> */}
             <div className="row">
 				<div className="col-md-1">
