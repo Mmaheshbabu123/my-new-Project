@@ -1,5 +1,10 @@
 export default function isValidUrl (urlString) {
-  	var a  = document.createElement('a');
-   	a.href = urlString;
-   	return (a.host && a.host != window.location.host);
+  urlString  = urlString.trim();
+  var expression =/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+  var regex = new RegExp(expression);
+  if (urlString.match(regex)) {
+  return true;
+  }else {
+  return false;
+  }
   }

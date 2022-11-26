@@ -12,18 +12,21 @@ function toggleWarningClass(inputRef, refkey, add = 1) {
 }
 
 
+const regExp = /^(\d+(\,\d+)?)$/;
 let lowKey = 1;
 let defaultKey = 2;
 let highKey = 3;
+let regExpressionStatus;
 
 function checkCoefficientsFilledOrNot(coeffData, empData, filledObj) {
   let status = true;
+  regExpressionStatus = true;
   if(checkLength(filledObj, empData)) {
     status = false;
   } else {
     status = checkEachCoefficient(coeffData, empData, filledObj);
   }
-  return status;
+  return {status, regExpressionStatus};
 }
 
 function checkEachCoefficient(coeffData, empData, filledObj) {
@@ -46,7 +49,13 @@ function checkEachCoefficientValue(filledCoeffObj) {
     if(item[defaultKey] === undefined || item[defaultKey] === '') {
       if(item[lowKey] === '' || item[highKey] === '' || item[lowKey] === undefined || item[highKey] === undefined) {
         status = false;
+      } else if ((item[lowKey] && item[lowKey].length && !item[lowKey].match(regExp)) || (item[highKey] && item[highKey].length && !item[highKey].match(regExp))) {
+        console.log(item);
+        regExpressionStatus = false;
       }
+    } else if ((item[defaultKey] && item[defaultKey].length && !item[defaultKey].match(regExp)) || (item[lowKey] && item[lowKey].length && !item[lowKey].match(regExp)) || (item[highKey] && item[highKey].length && !item[highKey].match(regExp))) {
+      console.log(item);
+      regExpressionStatus = false;
     }
   });
   return status;

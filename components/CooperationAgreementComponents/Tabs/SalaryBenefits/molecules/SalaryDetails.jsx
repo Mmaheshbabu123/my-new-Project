@@ -7,33 +7,21 @@ import InputField from '@/atoms/InputTextfield';
 import LabelField from '@/atoms/LabelField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import styles from '../SalaryBenefits.module.css';
-import { codeArray, soortOptions } from '../../../Definations';
+import { soortOptions, premiesAutoArray } from '../../../Definations';
+// import CheckBoxField from '@/atoms/CheckBoxField';
 // import { helpers } from '../SalaryBenefitHelper';  //.
 
 
 const TAB_ID = 5;
 const stateKey = 'tab_5';
 const SalaryDetails = (props) => {
-  const { state, updateStateChanges } = useContext(CooperationAgreementContext);
+  const { state: { benefitCodes, salaryCodes, allCodes }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   var { tab_5: {
     cooperationSalaryDetails,
     cooperationSalaryLinked,
     cooperationBenefits
   }, salaryDataPerPc, dependecyDataStatus } = state;
-
-  const [ compState, setCompState ] = useState({
-      expand: {},
-      premiesAutoArray: [
-        {
-          type: 1,
-           name: 'Premies en vergoeding (Benefits)',
-           rows: [{key: 'code', label: 'Code'}, {key: 'bedrag', label: 'Bedrag'}, {key: 'percentage', label: 'Percentage'}]},
-        {
-          type: 2,
-          name: 'Automatisch looncodes (automatic salarycodes)',
-          rows: [{key: 'code', label: 'Code'}, {key: 'soort_automatisering', label:'Soort automatisering'}]}
-      ],
-  })
+  const [ compState, setCompState ] = useState({  expand: {} })
 
   const expandMinimizeDiv = (pcid) => {
     let expand = {...compState.expand };
@@ -105,7 +93,7 @@ const SalaryDetails = (props) => {
   const showSalaryCoeffFields = (pcId) => {
     return (
       <div className={`${styles['salary-coeff-fields-div']}`}>
-          {compState.premiesAutoArray.map(obj => {
+          {premiesAutoArray.map(obj => {
             let fieldId = obj.type;
             let valueObj = cooperationBenefits[pcId][fieldId] || {};
             let resetObj = valueObj['checked'] !== 1 ? {code: 0, bedrag: '', percentage: '', soort_automatisering: ''} : {};
@@ -148,17 +136,34 @@ const SalaryDetails = (props) => {
 
   const premiseAutomatischInputFields = (pcId, fieldId, label, valueObj) => {
     if(label.label === 'Code' || label.key === 'soort_automatisering') {
-      return showDropDown(pcId, fieldId, label.key, valueObj, label.key === 'soort_automatisering' ? soortOptions : codeArray);
+      let bBrightCodes = fieldId === 1 ? benefitCodes : salaryCodes;
+      return showDropDown(pcId, fieldId, label.key, valueObj, label.key === 'soort_automatisering' ? soortOptions : bBrightCodes);
     } else {
+      let codeDetailsObj =  valueObj.code ? allCodes[valueObj.code] : {};
+      let variableType = codeDetailsObj && codeDetailsObj.variable_type ?  codeDetailsObj.variable_type : '';
+      let labelKey = label.key;
+      let disabled = disabledOrNot(variableType, labelKey);
+      let optionVal = label.label === 'Code' ? valueObj[label.key] : Number(valueObj[label.key]);
       return <InputField type = {'text'}
         className = {`${styles['salary-coeff-input-value']}`}
         name={label.key}
-        value={valueObj[label.key]}
-        isDisabled= {false}
+        value={optionVal}
+        isDisabled= {disabled}
         placeholder={''}
         handleChange={(e)=>handleChange(label.key, pcId, fieldId, '', 1, e.target)}
       />
     }
+  }
+
+  const disabledOrNot = (variableType, labelKey) => {
+    if(variableType === '') return false;
+    if(variableType === 'amount' && labelKey === 'bedrag') {
+      return false;
+    }
+    if(variableType === 'percentage' && labelKey === 'percentage') {
+      return false;
+    }
+    return true;
   }
 
   const showDropDown = (pcId, fieldId, label, valueObj, optionsArray) => {

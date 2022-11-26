@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import SignatureField from '@/atoms/SignatureField';
 import { confirmAlert } from 'react-confirm-alert';
 
-const SignatureDetails = ({ state, setState, submitSignData, eraseSignature }) => {
+const SignatureDetails = ({ state, setState, submitSignData, eraseSignature, fromSvPreview = 0 }) => {
   const handleSave      = (e) => submitSignData(e);
   const handleClose     = ( ) => setState({...state, showPopup: false})
   const handleEdit      = ( ) => setState({...state, showPopup: true, disabled: false })
@@ -20,8 +20,8 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature }) =
 
   return(
     <div>
-        <Modal  show={state.showPopup} onHide={handleClose}>
-          <Modal.Header closeButton style={{paddingLeft: '38%'}}>
+        <Modal size={'lg'} show={state.showPopup} onHide={handleClose}>
+          <Modal.Header closeButton style={{paddingLeft: '43%'}}>
             <Modal.Title> Signature </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -30,16 +30,17 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature }) =
                     onSave={handleSave}
                     disabled={state.disabled}
                     dataUrl={state.sign}
+                    width={'100%'}
                   />
           </Modal.Body>
         </Modal>
-        <div className='border p-2 row'>
+        {fromSvPreview === 0 && <div className='border p-2 row'>
           {state.sign !== '' ? <>
-          <span> Sign: </span>
-          <div className='col-md-6'> <img src={state.sign} alt="no sign"/> </div>
-          <div className='col-md-6'>
-            <button className={`btn btn-light`} style={{width:'30%'}} onClick={handleDelete}> Delete </button>
+          <span> Signature: </span>
+          <div className='col-md-7'> <img src={state.sign} alt="no sign" width="100%"/> </div>
+          <div className='col-md-5'>
             <button className={`btn btn-secondary mx-2`} style={{width:'30%'}} onClick={handleEdit}> Edit </button>
+            <button className={`btn btn-light`} style={{width:'30%'}} onClick={handleDelete}> Delete </button>
           </div>
           </> :
           <>
@@ -49,7 +50,7 @@ const SignatureDetails = ({ state, setState, submitSignData, eraseSignature }) =
               </button>
          </>
         }
-        </div>
+        </div>}
     </div>
   );
 }

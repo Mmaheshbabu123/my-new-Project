@@ -48,34 +48,35 @@ const ListView = (props) => {
 		props.secInfoFromLst(sectype, secid);
 	};
 	return (
-		<li key={props.index} className= {`${styles.sectioncolor} list-inline-item ${styles.sectionli} ms-2 my-2`}>
+		<li key={props.index} className= {`list-inline-item ${props.level=='3'?styles.section_func_li:styles.sectionli} ${props.level=='3'?styles.section_funct:styles.section_cat} hi sectioncolor px-3`}>
 			{header && (
 				<div
-					className={`accordion accordion-flush ${styles.sectioncolor} px-4`}
+					className={`accordion accordion-flush  accordion_padding `}
 					id={`accordionFlush${props.pc_number.replace(".", "")}pc${props.index}`}
 				>
-					<div className={`accordion-item ${styles.sectioncolor}`}>
+					<div className={`accordion-item `}>
 						<h4 className="accordion-header" 
 						id={`flush-heading${props.pc_number.replace(".", "")}pc${props.index}`}>
 							<button
-								className={`accordion-button collapsed ${styles.listtitle} ${styles.sectioncolor} fw-bold`}
+								className={`accordion-button color-gray-lt shadow-none collapsed ${styles.sectioncolor} `}
 								type="button"
 								data-bs-toggle="collapse"
 								data-bs-target={`#flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
 								aria-expanded="false"
 								aria-controls={`flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
 							>
-								{props.sectype=='pc' &&<span className="w-25 "> {props.pc_number}</span>}
-								<span className={props.sectype=='pc'?'ms-4':''}>{props.title}</span>
+								{props.sectype=='pc' &&<span className="first-col poppins-medium-16px"> {props.pc_number}</span>}
+								{/* <span className={`${props.level=='3'?styles.section_funct:styles.section_cat} ${props.sectype=='pc'?'ms-4 poppins-medium-18px':''}`}>{props.title}</span> */}
+								<span className={`${props.level=='3'?styles.section_funct:styles.section_cat} ${props.sectype=='pc'?'second-col':''}`}>{props.title}</span>
 							</button>
 						</h4>
 						<div
 							id={`flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
-							className="accordion-collapse collapse border-top border-1 border-secondary"
+							className="accordion-collapse collapse border-4C4D554D poppins-regular-18px"
 							aria-labelledby={`flush-collapse${props.pc_number.replace(".", "")}pc${props.index}`}
 							data-bs-parent={`#accordionFlush${props.pc_number.replace(".", "")}pc${props.index}`}
 						>
-							<div className="accordion-body">
+							<div className="accordion-body sectioncolor">
 								<Table
 									header={header}
 									tvalue={tval}
@@ -90,6 +91,7 @@ const ListView = (props) => {
 			)}
 		</li>
 	);
+	
 };
 
 export default ListView;

@@ -25,7 +25,7 @@ import Invoicing from './Invoicing/organisms/Invoicing';
 
 
 const TabIndex = (props) => {
-	const { state: { selectedTabId ,renderedOptions, filledTabs }, updateStateChanges, state } = useContext(CooperationAgreementContext);
+	const { state: { selectedTabId ,renderedOptions, filledTabs,salesAgentRefId }, updateStateChanges, state } = useContext(CooperationAgreementContext);
   const router = useRouter();
 
 	/**
@@ -60,18 +60,27 @@ const TabIndex = (props) => {
   }
 
 useEffect(()=> {
-  if(!renderedOptions)  loadData()
-}, [])
+  if(!renderedOptions && salesAgentRefId)  loadData()
+}, [salesAgentRefId])
 
 const loadData = async () => {
  let data = [];
  let defaultOptions = {...state['defaultOptions']};
-  await APICALL.service(getDefaultOptionsData, 'GET').then(response => {
+  await APICALL.service(getDefaultOptionsData + `/${salesAgentRefId}`, 'GET').then(response => {
     if (response.status === 200) {
       data = response.data || {};
       defaultOptions['countrylist']          =  data['countrylist'];
       defaultOptions['locationslist']        =  data['locationslist'];
       defaultOptions['payment_condtion']     =  data['payment_condtion'];
+      defaultOptions['absolute_consultant']  =  data['absolute_consultant'];
+      defaultOptions['absolute_office_num']  =  data['absolute_office_num'];
+      defaultOptions['salaryCodes']          =  data['pref_codes'] && data['pref_codes']['salaryCodes'] ? data['pref_codes']['salaryCodes'] : [];
+      defaultOptions['benefitCodes']         =  data['benefitCodes'] && data['pref_codes']['benefitCodes'] ? data['pref_codes']['benefitCodes'] : [];
+      defaultOptions['agent_details']        =  data['agent_details'] || [];
+      defaultOptions['pref_codes']           =  data['pref_codes'] || [];
+      defaultOptions['contactList']          =  data['contactsData'] && data['contactsData']['multiselctObj'] ?  data['contactsData']['multiselctObj']: [];
+      defaultOptions['contactsData']         =  data['contactsData'] ?.['personsData'];
+      defaultOptions['locationObj']          =  data['contactsData'] ?.['locationObj'];
       updateStateChanges({defaultOptions,renderedOptions:1})
     }
   }).catch((error) => console.log(error) )
@@ -84,7 +93,7 @@ const loadData = async () => {
 	return (
 		<div className="">
       {state.proceedToNextTabWarning ? <p style={{color:'red', textAlign:'center'}}> Please fill all mandotory fields. </p> : null}
-      {showComponentBasedOnTabSelection()}
+      {renderedOptions === 1 && showComponentBasedOnTabSelection()}
       <div className={`col-md-12 row`} >
           <div className={`col-md-7 ${styles['tab-index-back-div']}`}>
             <p className={`${styles['tab-index-back-btn']}`} onClick={() => router.back()}> Back </p>
@@ -94,7 +103,7 @@ const loadData = async () => {
               <span className="sv-save-btn-text_1 spinner-border-sm me-2"></span>{'Save as draft'}
             </button>
             <button disabled = {!filledTabs.includes(selectedTabId)} onClick={() => forWardToNextStepTab()} type="button" className="btn btn-dark pcp_btn">
-              <span className="sv-save-btn-text_0 spinner-border-sm me-2"></span>{selectedTabId === INVOIING_TAB ? 'Save' : 'Next'}
+              <span className="sv-save-btn-text_0 spinner-border-sm me-2"></span>{selectedTabId === INVOIING_TAB ? 'Submit' : 'Next'}
             </button>
           </div>
       </div>

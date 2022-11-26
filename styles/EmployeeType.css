@@ -1,3 +1,11 @@
+:root
+{
+  --border-color-light-gray:#4C4D554D;
+}
+.bg_grey
+{
+  background-color: var(--border-color-light-gray);
+}
 .actions-span{
  cursor: pointer;
  margin: 0 5px;
@@ -5,9 +13,9 @@
 }
 
 .pcp_name{
-  width: 70% !important;  /* not needed */
-  margin: 10px;
-  height: 38px !important;
+  width: 73% !important;  /* not needed */
+  /* margin: 10px;
+  height: 38px !important; */
 }
 .pcp_btn {
   background-color: #707070 !important;
@@ -17,18 +25,36 @@
   background-color: black !important;
 }
 
-.manage-types-table {
-  /* border-collapse: collapse;
-  border: 1px solid black; */
+.manage-types-table tbody {
+  /* border-collapse: collapse;*/
+  /* border: 1px solid var(--border-color-gray);  */
 }
-
+.table-render-thead
+{
+  z-index:50;
+}
+.manage-types-table thead tr
+{
+  border-bottom: none !important;
+}
 .manage-types-table tr {
-  border-bottom: 1pt solid cadetblue;
-  height: 45px;
+  border-bottom: 1px solid var(--border-color-light-gray);
+  height: 60px;
+  vertical-align: middle !important;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
 }
-
+.manage-types-table tr td
+{
+  vertical-align: middle !important;
+}
+/* .manage-types-table tr:last-child
+{
+  border: none !important;
+} */
 .add-edit-types {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .managetype-save-btn {
@@ -42,25 +68,41 @@
 }
 
 .add-item-div{
-  border: 1px solid lightsteelblue;
-  width: 70%;
-  margin-left: 30px;
+  border: 1px solid var(--color-purple);
+
 }
 .add-item-table tr{
-  height: 30px;
+  height: 60px;
+}
+.add-item-table td{
+  vertical-align: middle;
+}
+.table-border-bottom {
+  border-bottom: 1px solid #4C4D554D;
 }
 .table-render-parent-div{
-  height: 450px;
-  border: 1px solid cadetblue;
-  overflow-y: scroll;
+  /* height: 450px; */
+  /* border: 1px solid #4C4D554D; */
+  /* overflow-y: scroll; */
 }
-
+tbody.table-body-employee-type
+{
+  border: 1px solid var(--border-color-light-gray);
+}
 .table-render-thead{
-  background-color: lightgray;
+  background-color: #4C4D550F;
   height: 50px;
   position: sticky;
   top: 0;
-  textAlign: center;
+  text-align: left;
+
+}
+.action-sec:nth-child(2) {
+  text-align: right;
+}
+.action-sec:nth-child(1) {
+  display: flex;
+  align-items: center;
 }
 
 .show-box-link:hover {
@@ -88,12 +130,31 @@
   top: 15px;
   position: absolute;
   cursor: pointer;
-  right: 30%;
+  /* right: 30%; */
+  right: 27%;
+}
+.searchIconCss2 {
+  text-align: right;
+  width: 5% !important;
+  top: 1rem;
+  position: absolute;
+  cursor: pointer;
+  /* right: 30%; */
+  right: 33rem;
+}
+.searchIconCss3 {
+  text-align: right;
+  width: 5% !important;
+  top: 7px;
+  position: absolute;
+  cursor: pointer;
+  /* right: 30%; */
+  right: 27%;
 }
 
 /* Salary benefits css  */
 .salary-input-fields{
-  margin: 30px 0;
+  margin: 1.5rem 0;
 }
 .input-label-class {
   margin-left: 12px
@@ -107,25 +168,40 @@
 
 /* PAGINATION  */
 .pagination {
-  margin: 15px auto;
+  margin: 1rem auto;
   display: flex;
   list-style: none;
   outline: none;
+  justify-content: center;
+  align-items: center;
 }
 
-.pagination > .active > a{
+.pagination > .active > a,
+.pagination > .active > a:hover{
   background-color:gray ;
   border-color: gray ;
-  color: #fff;
+  color: var(--color-purple) !important;
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-20px);
+  line-height: var(--line-height-30px);
 }
 .pagination > li > a{
-  border: 1px solid gray ;
+  /* border: 1px solid gray ;
   padding: 5px 10px;
   outline: none;
-  cursor: pointer;
+  cursor: pointer; */
+  border: none!important;
+    padding: 8px 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-family-poppins-light);
+    font-size: var(--font-size-21px);
+    line-height: var(--line-height-31px);
+    color: var(--bg-gray-dark) !important;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-  background-color: gray0 ;
+  background-color: grayz;
   border-color: gray;
   outline: none ;
 }
@@ -144,4 +220,69 @@
 .page-title-font-class {
   margin: 25px 0;
   font-size: 1.5rem;
+}
+
+
+
+/* Common for all action icon added by orion team */
+.span-action-icons > svg {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.span-action-icons > svg:hover{
+  opacity: 0.8;
+}
+
+.popup-back-btn {
+  cursor: pointer;
+  margin-right: 15px;
+  display: inline-block;
+}
+.popup-back-btn:hover{
+  text-decoration: underline;
+}
+
+.width-100 {
+  width: 100% !important;
+}
+.pagination>.disabled>a,
+.pagination>.disabled>a:hover
+{
+  background-color: var(--bg-gray-dark) !important;
+    color: var(--color-white)!important;
+}
+.pagination>.next>a, .pagination>.previous>a,
+.pagination>.next>a:hover, .pagination>.previous>a:hover
+{
+  background-color: var(--color-purple);
+  color: var(--color-white)!important;
+}
+
+.pagination > li > a:hover, .pagination > li > span:hover
+{
+  color: #000 !important;
+}
+
+.qr-custom-multiselect__control {
+  text-align: left;
+  padding-top: 8px;
+}
+
+.qr-custom-multiselect__control:hover{
+  border-color: hsl(0, 0%, 80%);
+}
+
+.qr-custom-multiselect__indicator{
+  display: none !important;
+}
+
+.qr-custom-multiselect__menu{
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.qr-custom-multiselect__input { 
+	color: transparent !important;
 }

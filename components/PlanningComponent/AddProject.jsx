@@ -5,7 +5,7 @@ import { APICALL } from '../../Services/ApiServices';
 import ValidationService from '../../Services/ValidationService';
 import { useRouter } from 'next/router';
 import { addPlanning } from '../../Services/ApiEndPoints';
-import Popup from './ProjectDeletePopup';
+import Popup from './ProjectArchivePopup';
 
 // import './addproject.css';
 function Addproject(props) {
@@ -48,14 +48,10 @@ function Addproject(props) {
 
 	useEffect(
 		() => {
-			console.log(props.countries);
 			if (props.countries) {
 				setCountrylist(props.countries);
 			}
-			if (props.data) {
-				setData(props.data);
-				console.log(data);
-			}
+
 			if (data.comp_id == '') {
 				var res = data;
 				res.comp_id = props.company_id;
@@ -63,6 +59,31 @@ function Addproject(props) {
 			}
 		},
 		[ props ]
+	);
+
+	useEffect(
+		() => {
+			console.log(props.data);
+			var data1 = props.data;
+			if (data1) {
+				setData((prev) => ({
+					...prev,
+					id: data1.id,
+					project_name: data1.project_name,
+					project_location: data1.project_location,
+					hno: data1.hno,
+					street: data1.street,
+					bno: data1.bno,
+					postal_code: data1.postal_code,
+					city: data1.city,
+					country: data1.country,
+					extra: data1.extra
+				}));
+				// setData(props.data);
+				// console.log(data);
+			}
+		},
+		[ props.data ]
 	);
 
 	/**
@@ -171,11 +192,8 @@ function Addproject(props) {
 			error1['country'] == '' &&
 			error1['bno'] == ''
 		) {
-			// alert('true');
 			return true;
 		} else {
-			// alert('false');
-
 			return false;
 		}
 	};
@@ -210,18 +228,18 @@ function Addproject(props) {
 							</div>
 
 							<div className="modal-body ">
-								<div className="col-md-11 m-auto">
+								<div className="col-md-11 m-auto add_project">
 									<div className="row">
 										<div className=" ">
 											{/* PROJECT NAME */}
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
-													<label className="font-weight-bold custom_astrick">
+													<label className="custom_astrick poppins-light-18px">
 														Project name
 													</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2 "
+														className="form-control mt-2 mb-2 rounded-0 shadow-none"
 														value={data.project_name}
 														onChange={(e) => {
 															setData((prev) => ({
@@ -234,11 +252,12 @@ function Addproject(props) {
 												</div>
 												{/* COMPANY */}
 												<div className="col-6">
-													<label className="custom_astrick">Company</label>
+													<label className="custom_astrick poppins-light-18px">Company</label>
 													<select
 														value={data.comp_id}
-														className="form-select mb-2 mt-2"
+														className="form-select mb-2 mt-2 rounded-0 shadow-none"
 														placeholder="select company"
+														disabled={props.company_id != ''}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, comp_id: e.target.value }));
 															// updateLocation(e.target.value);
@@ -259,10 +278,10 @@ function Addproject(props) {
 											{/* LOCATION */}
 											<div className="col-md-12 row m-0">
 												<div className="col-6">
-													<label className="mt-2 custom_astrick">Location</label>
+													<label className="mt-2 custom_astrick poppins-light-18px">Location</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none"
 														value={data.project_location}
 														onChange={(e) => {
 															setData((prev) => ({
@@ -276,10 +295,10 @@ function Addproject(props) {
 											</div>
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
-													<label className="custom_astrick mt-2">Street</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">Street</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none"
 														value={data.street}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, street: e.target.value }));
@@ -290,10 +309,10 @@ function Addproject(props) {
 
 												{/* HOUSE NUMBER */}
 												<div className="col-3">
-													<label className="custom_astrick mt-2">House number</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">House number</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none"
 														value={data.hno}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, hno: e.target.value }));
@@ -303,10 +322,10 @@ function Addproject(props) {
 												</div>
 												{/* BUS NUMBER */}
 												<div className="col-3">
-													<label className="custom_astrick mt-2">Bus number</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">Bus number</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none"
 														value={data.bno}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, bno: e.target.value }));
@@ -318,10 +337,10 @@ function Addproject(props) {
 											{/* CITY */}
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
-													<label className="custom_astrick mt-2">Postalcode</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">Postalcode</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none"
 														value={data.postal_code}
 														onChange={(e) => {
 															setData((prev) => ({
@@ -333,10 +352,10 @@ function Addproject(props) {
 													<p className="error mt-2">{error_postal_code}</p>
 												</div>
 												<div className="col-6">
-													<label className="custom_astrick mt-2">City</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">City</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none"
 														value={data.city}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, city: e.target.value }));
@@ -349,9 +368,9 @@ function Addproject(props) {
 											{/* EXTRA */}
 											<div className="row col-md-12 m-0">
 												<div className="col-6">
-													<label className="custom_astrick mt-2">Country</label>
+													<label className="custom_astrick mt-2 poppins-light-18px">Country</label>
 													<select
-														className="form-select mt-2 mb-2 custom-select"
+														className="form-select mt-2 mb-2 custom-select rounded-0 shadow-none"
 														value={data.country}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, country: e.target.value }));
@@ -369,10 +388,10 @@ function Addproject(props) {
 											</div>
 											<div className="row col-md-12 m-0">
 												<div className="col-12">
-													<label className=" mt-2">Extra</label>
+													<label className=" mt-2 poppins-light-18px">Extra</label>
 													<input
 														type="text"
-														className="form-control mt-2 mb-2"
+														className="form-control mt-2 mb-2 rounded-0 shadow-none"
 														value={data.extra}
 														onChange={(e) => {
 															setData((prev) => ({ ...prev, extra: e.target.value }));
@@ -384,10 +403,10 @@ function Addproject(props) {
 										</div>
 									</div>
 								</div>
-								<div className="modal-footer border-0 col-md-11 m-auto px-2 ">
+								<div className="modal-footer border-0 col-md-11 m-auto px-2 add_project">
 									<button
 										type="submit"
-										className="btn btn-lg btn-block float-right add-proj-btn custom-btn px-3 rounded-0 "
+										className="btn btn-lg btn-block float-right add-proj-btn  px-3 rounded-0 "
 										// </div>data-bs-dismiss="modal"
 										// onClick={() => props.popupActionNo()}
 										onClick={(e) => {

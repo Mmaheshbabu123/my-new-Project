@@ -40,7 +40,6 @@ function AddFunction(props) {
 			var fid = router.query.fid ? router.query.fid : '';
 			APICALL.service(addFunction, 'POST', data)
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
 						if (fid != null && fid != undefined && fid != '') {
 							router.push('/manage-function');
@@ -61,7 +60,6 @@ function AddFunction(props) {
 		} else {
 			APICALL.service(updateFunction, 'POST', data)
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
 						if (fid != null && fid != undefined && fid != '') {
 							router.push('/manage-function');
@@ -112,9 +110,9 @@ function AddFunction(props) {
 							res.function_name = result.data[0].function_name;
 							res.id = result.data[0].id;
 							res.min_salary = result.data[0].min_salary;
-							res.category_id = result.data[0].category_id;
+							res.min_salary_temp = result.data[0].min_salary;
+							res.category_id = result.data[0].category_id == null? '':result.data[0].category_id;
 							setData(res);
-							console.log(result);
 						}
 					})
 					.catch((error) => {
@@ -132,16 +130,11 @@ function AddFunction(props) {
 		}
 	};
 	let validate = () => {
-		console.log(props.categorylist);
-		// alert("2");return;
 		var error = [];
-		error['error_function_name'] = ValidationService.emptyValidationMethod(data.function_name);
-			// ValidationService.emptyValidationMethod(data.function_name) == ''
-			// 	? ValidationService.nameValidationMethod(data.function_name) == '' ? '' : 'This field is invalid.'
-			// 	: 'This field is required.';
+		error['error_function_name'] = ValidationService.emptyValidationMethod(data.function_name.trim());
 		error['error_min_salary'] =
-			ValidationService.emptyValidationMethod(data.min_salary) == ''
-				? ValidationService.minSalaryValidationMethod(data.min_salary) == '' ? '' : 'This field is invalid.'
+			ValidationService.emptyValidationMethod(data.min_salary.trim()) == ''
+				? ValidationService.minSalaryValidationMethod(data.min_salary.trim()) == '' ? '' : 'This field is invalid.'
 				: 'This field is required.';
 
 		if (error['error_function_name'] == '') {
@@ -151,7 +144,6 @@ function AddFunction(props) {
 					error['error_function_name'] = 'Function name already exist.';
 				}
 				if(props.categorylist[element].type == '2'){
-					console.log(props.categorylist[element].childObj)
 					if(props.categorylist[element].childObj != undefined){
 						Object.keys(props.categorylist[element].childObj).map((val)=>{
 						if (props.categorylist[element].childObj[val].type == '3' && props.categorylist[element].childObj[val].id != id && props.categorylist[element].childObj[val].function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
@@ -168,14 +160,11 @@ function AddFunction(props) {
 					error['error_function_name'] = 'Function name already exist.';
 				}
 				if(val1.type == '2'){
-					console.log(val1.childObj)
 					if(val1.childObj != undefined){
 					val1.childObj.forEach((v, k)=>{
 						if (v.type == '3' && v.id != id && v.function_name.replaceAll(' ','').toLowerCase() == data.function_name.replaceAll(' ','').toLowerCase()) {
 							error['error_function_name'] = 'Function name already exist.';
 						}
-						console.log(v)
-
 					})
 					}
 				}
@@ -216,28 +205,28 @@ function AddFunction(props) {
 		}
 	};
 	return (
-		<div className="mt-4">
+		<div className="mt-3 table-title-bg p-3">
 			<form className="Search__form" onSubmit={submit}>
 				<div className="row">
-					{id != '' ? <h4 className="h5 mb-3">Edit function</h4> : <h4 className="h5 mb-3">Add function</h4>}
-					<div className="form-group mb-3">
-						<label className="custom_astrick mb-2">Function name</label>
+					{id != '' ? <h4 className="h5 mb-3 bitter-italic biiter_medium_italic_20px">Edit function</h4> : <h4 className="h5 mb-4 bitter-italic biiter_medium_italic_20px">Add function</h4>}
+					<div className="form-group mb-2">
+						<label className="custom_astrick mt-2 poppins-regular-16px">Function name</label>
 						<input
 							type="text"
-							className=" form-control my-2"
+							className=" form-control my-2 border-0 poppins-medium-16px shadow-none rounded-0"
 							value={data.function_name}
 							onChange={(e) => {
 								setData((prev) => ({ ...prev, function_name: e.target.value }));
 							}}
 						/>
-						<p style={{ color: 'red' }}>{error_function_name}</p>
+						<p className='error_text' style={{ color: 'red' }}>{error_function_name}</p>
 					</div>
 
 					{Object.keys(props.categorylist).length > 0 && (
-						<div className="form-group mb-3">
-							<label className="mt-2 mb-1">Category</label>
+						<div className="form-group mb-2">
+							<label className="mt-2 poppins-regular-16px">Category</label>
 							<select
-								className="form-select my-2 form-control"
+								className="form-select my-2 form-control border-0 rounded-0 poppins-medium-16px shadow-none"
 								value={data.category_id}
 								onChange={(e) => {
 									if(e.target.value != ''){
@@ -245,7 +234,9 @@ function AddFunction(props) {
 										if(typeof props.categorylist == 'object'){
 
 											Object.keys(props.categorylist).map((element) => {
-												sal = props.categorylist[element].min_salary;
+												if(e.target.value == props.categorylist[element].id){
+												sal = data.min_salary_temp != undefined && parseFloat(data.min_salary_temp.replace(',', '.'))>parseFloat(props.categorylist[element].min_salary.replace(',', '.'))?data.min_salary_temp:props.categorylist[element].min_salary;
+												}
 											});
 											
 										}else{
@@ -255,7 +246,7 @@ function AddFunction(props) {
 										}
 									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: sal }));
 								}else{
-									setData((prev) => ({ ...prev, category_id: e.target.value,min_salary: ''}));
+									setData((prev) => ({ ...prev, category_id: '',min_salary: ''}));
 								}
 								}}
 							>
@@ -275,51 +266,52 @@ function AddFunction(props) {
 						</div>
 					)}
 
-					<div className="form-group mb-3">
-						<label className="custom_astrick mb-2">Minimum salary</label>
+					<div className="form-group mb-2">
+						<label className="custom_astrick mt-2 poppins-regular-16px">Minimum salary</label>
 						<div className="input-group">
+						<span className="input-group-text bg-white rounded-0 border-0 category_currency_height poppins-medium-16px my-2">€</span>
 							<input
-								className=" form-control"
+								className=" form-control border-0 rounded-0 poppins-medium-16px shadow-none my-2"
 								type="text"
 								value={data.min_salary}
 								onChange={(e) => {
 									setData((prev) => ({ ...prev, min_salary: e.target.value }));
 								}}
 							/>
-							<span className="input-group-text">€</span>
+							
 						</div>
-						<p className="pb-1" style={{ color: 'red' }}>
+						<p className="pb-1 error_text" style={{ color: 'red' }}>
 							{error_min_salary}
 						</p>
 					</div>
 				</div>
 				<div className="row">
 					<div className="text-start col-md-6">
-						{(router.query.fid ) && (
+						{/* {(router.query.fid ) && (
 							<Link href={'/manage-function'}>
-								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
-									Back
+								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
+									BACK
 								</a>
 							</Link>
 						)}
 						{router.query.cid && (
 							<Link href={'/manage-category'}>
-								<a className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn">
-									Back
+								<a className="bg-white  back-btn-text bg-white  back-btn-text  border-0 poppins-regular-20px">
+									BACK
 								</a>
 							</Link>
-						)}
+						)} */}
 					</div>
 					<div className="text-end col-md-6">
 						<button
 							type="submit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
 							disabled={disableSave}
 							onClick={() => {
 								setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 							}}
 						>
-							Save
+							SAVE
 						</button>
 					</div>
 				</div>

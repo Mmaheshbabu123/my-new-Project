@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import SearchIcon from '../../SearchIcon';
+import { AiFillFilePdf } from 'react-icons/ai';
+import { FaFileSignature } from 'react-icons/fa';
 import styles from './EmployerSv.module.css';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
+import { downloadSvAsPdf} from '@/Services/ApiEndPoints'
+import { APICALL } from '@/Services/ApiServices';
+import sign_icon from '../molecules/images/cooperation_agreement.svg';
 
 const itemsPerPage = 6;
 const OverviewPage = (props) => {
   const { state: {  overviewData, salesAgentUpdates } } = props;
-
+console.log(sign_icon);
   /**
    * [getSelectedStatus description]
    * @param  {int}    selectedTabId               [description]
@@ -20,7 +24,7 @@ const OverviewPage = (props) => {
   const [compState, setCompState] = useState({
       headers: ['Company', 'Date of request', 'Date of commencement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
-      searchKey: 'company_name',
+      searchTermCompany: '',
       currentItems: [],
       searchTerm: '',
       pageCount: 0,
@@ -42,23 +46,34 @@ const OverviewPage = (props) => {
   const showTabs = () => {
     let { selectedTabId } = compState;
     return (
-      <ul className={`${styles['employer-overview-tabs']}`}>
-        <li> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
-        <li> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
-        <li> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
+      <div className='row position-sticky-co-op'>
+        <div className='col-md-12'>
+        <ul className={`${styles['employer-overview-tabs']}`}>
+        <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
       </ul>
+        </div>
+      </div>
     );
   }
 
 
-  const handleSearchClick = () => {
-    let value = compState.searchTerm;
-    let filterRows = overviewData.filter((item) => {
-      return (item[compState.searchKey].toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
+  const handleSearchClick = (search = 1) => {
+    let value = search ? compState.searchTermCompany : '';
+    let status = compState.selectedTabId === 1 ? [1, 0] : compState.selectedTabId === 2 ? [0] : [1];
+    let data = getSelectedStatus(status);
+    let filterRows = [];
+    if(value) {
+      filterRows = data.filter((item) => {
+        return (item['company_name'].toLowerCase().toString())
+          .indexOf(value.toLowerCase().toString()) !== -1;
+      })
+    } else {
+      filterRows = data;
+    }
     setCompState({ ...compState,
-      searchTerm: value,
+      searchTermCompany: value,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -94,18 +109,49 @@ const OverviewPage = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = compState;
     return(
       <>
-        <div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-          <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-          <input
-            type="text"
-            className="form-control col-7 pcp_name"
-            style={{margin: '10px 0'}}
-            onChange={(e) => setCompState({...compState, searchTerm: e.target.value})}
-            placeholder={'Search'}
-          />
-        </div>
+     <div className='row'>
+     <div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{position: 'relative' }}>
+           <div className='row'>
+           <div className='col-md-9'>
+              <input
+                type="text"
+                className='form-control mt-2 mb-2 rounded-0 shadow-none'
+                style={{margin: '10px 0'}}
+                value={compState.searchTermCompany}
+                name = {'employer_name'}
+                onChange={(e) => setCompState({...compState, searchTermCompany: e.target.value})}
+                onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+                placeholder={'Search employer '}
+              />
+            </div>
+            <div className='col-md-3'>
+              <div className='row'>
+                <div className='col-md-6'>
+                <button
+                type="button"
+                className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
+                onClick={() => handleSearchClick(1)}
+              >
+                SEARCH
+              </button>
+              
+                </div>
+                <div className='col-md-6'>
+                <button
+                type="button"
+                className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
+                onClick={() => handleSearchClick(0)}
+              >
+                RESET
+              </button>
+                </div>
+              </div>
+            </div>
+           </div>
+         </div>
+     </div>
         <div className={`${styles['table-parent-div']}`}>
-          <table className="table table-hover manage-types-table">
+          <table className="table table-hover manage-types-table manage-cooperation-agreement-table-header">
             <thead className="table-render-thead">
               <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
             </thead>
@@ -123,7 +169,13 @@ const OverviewPage = (props) => {
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found. </p>}
+            : <tbody>
+            <tr>
+            <td colSpan={8} className="text-center poppins-regular-18px no-records">
+                    No records
+                  </td>
+            </tr>
+            </tbody>}
           </table>
         </div>
         <div>
@@ -154,8 +206,8 @@ const OverviewPage = (props) => {
    * @param  {int} root_parent_id               [description]
    * @return {url}                [description]
    */
-  const handleEmployerSign = (empRefId, company_id, root_parent_id) => {
-    window.open(`/cooperation-agreement-preview?root_parent_id=${root_parent_id}&emp_ref=${empRefId}&type=2`, '_blank');
+  const handleEmployerSign = (empRefId, company_id, root_parent_id, preview = 0) => {
+    window.open(`/cooperation-agreement-preview?root_parent_id=${root_parent_id}&emp_ref=${empRefId}&type=2&preview=${preview}`, '_blank');
   }
 
   const getNeededActions = (eachRow) => {
@@ -164,13 +216,33 @@ const OverviewPage = (props) => {
     let signed = Number(eachRow.signed);
     return (
       <>
-        {agent.approved ? <span title={'Sign'}
-          className="actions-span me-2 text-dark"
-          onClick={() => !signed ? handleEmployerSign(epa_id, company_id, agent.root_parent_id):null}> {signed ? 'Signed' : 'Sign'} </span>
+        {!signed && agent.approved ? <span title={signed ? 'Download' : 'Sign'}
+          className="span-action-icons"
+          onClick={() => handleEmployerSign(epa_id, company_id, agent.root_parent_id)}> <img src={sign_icon.src} alt="sign" className='action_icon_size'></img></span>
         : null}
-        {/* <span title={'View'} className="actions-span me-2 text-dark" onClick={() =>  console.log('view')}> View </span> */}
+        {agent.approved ? <span title={'Download'} className="span-action-icons" onClick={() => handleDownload(eachRow)}> <AiFillFilePdf /> </span>:null}
       </>
     )
+  }
+
+  const handleDownload = async (eachRow) => {
+    eachRow['type'] = 2;
+    await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
+      .then((response) => {
+        let result = response.data;
+        if(response.status === 200 && result.url) {
+          var a = document.createElement("a");
+          a.setAttribute("type", "file");
+          a.href     = result.url;
+          a.target   = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          window.alert('Error occurred')
+        }
+      })
+      .catch((error) => window.alert('Error occurred'));
   }
 
   return(

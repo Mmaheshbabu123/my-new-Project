@@ -34,3 +34,121 @@
 .margin-auto-class {
   margin: 0 auto;
 }
+.salary-benefits-tab-parent {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.salary-benefits-multiselect {
+  line-height: 30px !important;
+}
+
+
+.expand-minimize-div {
+  margin-bottom: 25px;
+}
+
+
+
+.expand-minimize-span, .expand-minimize-span > svg {
+  height: 35px;
+  width: 40px;
+  cursor: pointer;
+  vertical-align: text-top;
+}
+
+.expand-minimize-span {
+  vertical-align: middle;
+  height: 35px;
+  width: 4%;
+}
+
+.expand-minimize-box {
+  width: 92%;
+	border: 1px solid lightgray;
+	height: 40px;
+}
+
+.expand-minimize-span, .expand-minimize-box {
+  display: inline-block;
+}
+
+.expand-minimize-span > svg:hover{
+  opacity: 0.7;
+}
+
+.expand-minimize-box {
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+.expand-minimize-box:hover{
+  opacity: 0.7;
+}
+
+.expand-minimize-box > span {
+  margin-left: 15px;
+}
+
+.salay-content-div {
+  width: 92%;
+  margin-left: 4%;
+  border: 1px solid lightgray;
+}
+
+.pc-linked-salary-div {
+  width: 95%;
+  margin-top: 20px;
+  margin-left: 3%;
+}
+
+.pc-linked-salary-table, .pc-linked-salary-table > tr, .pc-linked-salary-table > td {
+  border: 3px solid lightgray;
+  border-collapse: collapse;
+}
+
+.salary-coeff-fields-premies, .premise-automatisch-div{
+  margin: 15px 0;
+}
+
+.pc-linked-td {
+  line-height: 75px;
+  padding-left: 20px;
+}
+
+.pc-linked-premies-td {
+  vertical-align: middle;
+  padding-left: 20px;
+}
+
+.salary-input-field-div{
+
+}
+
+.salary-input-radio-label {
+  margin-right: 25px;
+}
+
+.salary-input-radio-label > svg {
+
+}
+
+.salary-input-value {
+
+}
+
+.salary-coeff-input-value{
+  width: 96%;
+  margin-left: 10px;
+  border-bottom-color: lightgray !important;
+}
+
+.display-visible {
+  display: block;
+  transition: all 2s linear;
+}
+
+.display-hidden {
+  display: none;
+  opacity: 0;
+}

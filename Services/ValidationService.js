@@ -85,6 +85,15 @@ const ValidationService = {
       return 'This field is invalid.';
     }
   },
+
+  hoursperdayValidationMethod: function(value){
+    if (value.match(/(^[0]?\d{1}(([.]|[,])\d{1,2})?)$/)||value.match(/(^[1]{1}\d{1}(([.]|[,])\d{1,2})?)$/)||value.match(/(^[2]{1}[0-3]{1}(([.]|[,])\d{1,2})?)$/)||value.match(/(^([2][4]){1}(([.]|[,])[0]{1,2})?)$/)) {
+      return '';
+    } else {
+      return 'This field is invalid.';
+    }
+
+  },
   /**
    * Postal code validation 
    * @param {*} value 

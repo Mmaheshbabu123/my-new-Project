@@ -1,0 +1,21 @@
+.companies-list > li {
+  list-style-type: square;
+  line-height: 40px;
+  width: 10%;
+}
+
+.term_and_conditions_class {
+  margin: 15px 0;
+}
+
+.v1-multiselect {
+  line-height: 28px !important;
+}
+
+.popup-back-btn {
+  cursor: pointer;
+  margin-right: 15px;
+}
+.popup-back-btn:hover{
+  text-decoration: underline;
+}

@@ -6,7 +6,7 @@ import { getSignatureData, storeUpdateSignatureData, deleteSignatureData } from 
 
 const SignatureMain = ({ entityId, entityType }) => {
   const router = useRouter();
-  const entityTypeId = entityType === 'absolute_you_admin_config_user' ? 1 : entityType === 'employeer' ? 2 : entityType === 'employee' ? 3 : -999;
+  const entityTypeId = Number(entityType);
   const [state, setState] = useState({
     loaded: false,
     sign: '',
@@ -15,8 +15,9 @@ const SignatureMain = ({ entityId, entityType }) => {
   });
 
   useEffect(() => {  fetchData() }, [])
+
   /**
-   * [fetchEmpCoeffValueTypesData data fetching based on pcid]
+   * [fetchData description]
    * @return {Promise} [description]
    */
   const fetchData = async () => {

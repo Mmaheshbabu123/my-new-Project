@@ -34,6 +34,10 @@ function AddPc(props) {
 	const [ error_pc_number, setError_pc_number ] = useState('');
 	const [ error_pc_name, setError_pc_name ] = useState('');
 	const [ error_pc_alias_name, setError_pc_alias_name ] = useState('');
+	const [ error_min_time, setError_min_time ] = useState('');
+	const [ error_max_time, setError_max_time ] = useState('');
+	const [ error_buffer_time, setError_buffer_time ] = useState('');
+
 	const [ disableSave, setDisableSave ] = useState(false);
 
 	const [ data, setData ] = useState({
@@ -41,7 +45,10 @@ function AddPc(props) {
 		pc_unique_key: '',
 		pc_number: '',
 		pc_name: '',
-		pc_alias_name: ''
+		pc_alias_name: '',
+		buffer_timings: '',
+		min_work_timings: '',
+		max_work_timings: ''
 	});
 	const [ id, setId ] = useState('');
 
@@ -74,7 +81,7 @@ function AddPc(props) {
 										cat: true,
 										age: true,
 										pc: true,
-										emp_type: true,
+										emp_type: true
 									};
 								});
 							} else if (result.data[0].completed == 3) {
@@ -83,7 +90,7 @@ function AddPc(props) {
 										...oldState,
 										cat: true,
 										age: true,
-										pc: true,
+										pc: true
 									};
 								});
 							} else if (result.data[0].completed == 2) {
@@ -91,15 +98,14 @@ function AddPc(props) {
 									return {
 										...oldState,
 										cat: true,
-										pc: true,
+										pc: true
 									};
 								});
-
 							} else if (result.data[0].completed == 1) {
 								setSec_completed((oldState) => {
 									return {
 										...oldState,
-										pc: true,
+										pc: true
 									};
 								});
 							} // setSec_completed(res1); //updating that add pc data is filled so that next section can be enable
@@ -109,6 +115,9 @@ function AddPc(props) {
 							data1['pc_unique_key'] = result.data[0].pc_unique_key;
 							data1['pc_number'] = result.data[0].pc_number;
 							data1['pc_name'] = result.data[0].pc_name;
+							data1['min_work_timings'] = result.data[0].min_work_timings;
+							data1['max_work_timings'] = result.data[0].max_work_timings;
+							data1['buffer_timings'] = result.data[0].buffer_timings;
 							data1['pc_alias_name'] =
 								result.data[0].pc_alias_name != null ? result.data[0].pc_alias_name : '';
 							// setUpdate_sec_completed(result.data[0].completed)
@@ -261,30 +270,68 @@ function AddPc(props) {
 
 	let validate = (res) => {
 		var error1 = [];
+		var min_time = res.min_work_timings.replaceAll(' ', '');
+		var max_time = res.max_work_timings.replaceAll(' ', '');
+		var buffer_timings = res.buffer_timings.replaceAll(' ', '');
 		//check if required fields are empty
-		error1['pc_name'] = ValidationService.emptyValidationMethod(res.pc_name);
-		error1['pc_number'] = ValidationService.emptyValidationMethod(res.pc_number);
+		error1['pc_name'] = ValidationService.emptyValidationMethod(res.pc_name.trim());
+		error1['pc_number'] = ValidationService.emptyValidationMethod(res.pc_number.trim());
+		error1['min_work_timings'] = ValidationService.emptyValidationMethod(min_time.trim());
+		error1['max_work_timings'] = ValidationService.emptyValidationMethod(max_time.trim());
+		error1['buffer_timings'] = ValidationService.emptyValidationMethod(buffer_timings.trim());
+
 		//check if fields are valid
 		error1['pc_number'] =
-			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number) : error1['pc_number'];
+			error1['pc_number'] == '' ? ValidationService.pcnumberValidationMethod(res.pc_number.trim()) : error1['pc_number'];
+
+		error1['min_work_timings'] =
+			error1['min_work_timings'] == ''
+				? ValidationService.hoursperdayValidationMethod(min_time.trim())
+				: error1['min_work_timings'];
+		error1['max_work_timings'] =
+			error1['max_work_timings'] == ''
+				? ValidationService.hoursperdayValidationMethod(max_time.trim())
+				: error1['max_work_timings'];
+		error1['buffer_timings'] =
+			error1['buffer_timings'] == ''
+				? ValidationService.hoursperdayValidationMethod(buffer_timings.trim())
+				: error1['buffer_timings'];
 		// error1['pc_name'] =
 		// 	error1['pc_name'] == '' ? ValidationService.nameValidationMethod(res.pc_name) : error1['pc_name'];
 		// error1['pc_alias_name'] =
 		// 	res.pc_alias_name != '' && res.pc_alias_name != undefined
 		// 		? ValidationService.nameValidationMethod(res.pc_alias_name)
 		// 		: '';
+
+		if (error1['min_work_timings'] == '' && error1['max_work_timings'] == '') {
+			error1['max_work_timings'] =
+				parseFloat(min_time.trim()) > parseFloat(max_time.trim())
+					? 'Maximum work timing cannot be lesser than minimum work timing.'
+					: '';
+		}
 		error1['pc_alias_name'] =
 			res.pc_alias_name != '' &&
 			res.pc_alias_name != null &&
-			res.pc_name.replaceAll(' ', '').toLowerCase() == res.pc_alias_name.replaceAll(' ', '').toLowerCase()
+			res.pc_name.replaceAll(' ', '').toLowerCase().trim() == res.pc_alias_name.replaceAll(' ', '').toLowerCase().trim()
 				? 'Alias name cannot be same as paritair committe name.'
 				: '';
 		//seterror messages
 		setError_pc_number(error1['pc_number']);
 		setError_pc_name(error1['pc_name']);
 		setError_pc_alias_name(error1['pc_alias_name']);
+		setError_min_time(error1['min_work_timings']);
+		setError_max_time(error1['max_work_timings']);
+		setError_buffer_time(error1['buffer_timings']);
+
 		//return false if there is an error else return true
-		if (error1['pc_number'] == '' && error1['pc_name'] == '' && error1['pc_alias_name'] == '') {
+		if (
+			error1['pc_number'] == '' &&
+			error1['pc_name'] == '' &&
+			error1['pc_alias_name'] == '' &&
+			error1['min_work_timings'] == '' &&
+			error1['max_work_timings'] == '' &&
+			error1['buffer_timings'] == ''
+		) {
 			return true;
 		} else {
 			return false;
@@ -304,87 +351,158 @@ function AddPc(props) {
 	};
 
 	return (
-		<div className="">
+		<div className={pc_view_type == 'addpc'?"":"sectioncolor p-3 my-3"}>
 			<form onSubmit={(e) => submit(e)}>
-				{cat_subsec_type == 3 ? <h4 className="h5 mt-3">Edit paritair comite</h4> : ''}
-				<div className="row pt-4">
-					<div className={sec_width}>
-						<div className="form-group py-2">
-							<label className="custom_astrick">Paritair comite number</label>
-							<input
-								type="text"
-								value={data.pc_number}
-								className=" form-control mt-2"
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, pc_number: e.target.value }));
-								}}
-							/>
-							<p className="error mt-2">{error_pc_number}</p>
+				{/* {cat_subsec_type == 3 ? <h4 className="h5 mt-3" >Edit paritair comite</h4> : ''} */}
+				{cat_subsec_type == 3 ? <h4 className= {pc_view_type == 'addpc'?"h5 mt-3 ":"bitter_medium_italic_18px mb-4"} >Edit paritair comite</h4> : ''}
+				<div className="pc-height1 ">
+					{/* <div className="row parithair-border m-0 px-4 " > */}
+					<div className= {pc_view_type == 'addpc'?"row parithair-border m-0 px-4 ":"border-0"} >
+						{/* <div className={sec_width} > */}
+						<div className="col-md-12 row  my-4 m-0">
+
+							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px my-2"}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick "}>Paritair comite number</label>
+								<input
+									type="text"
+									value={data.pc_number}
+									className=
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1"}
+
+									onChange={(e) => {
+										setData((prev) => ({ ...prev, pc_number: e.target.value }));
+									}}
+								/>
+								<p className="error mt-2 error_text">{error_pc_number}</p>
+							</div>
+
+							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2 ":" px-0 poppins-regular-18px my-2"}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick "}>Paritair comite name</label>
+								<input
+									type="text"
+									value={data.pc_name}
+									className=
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 poppins-medium-18px shadow-none  text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1"}
+									onChange={(e) => {
+										setData((prev) => ({ ...prev, pc_name: e.target.value }));
+									}}
+								/>
+								<p className="error error_text mt-2">{error_pc_name}</p>
+							</div>
+
+							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2 ":" px-0 poppins-regular-18px my-2"}>
+								<label className={pc_view_type == 'addpc'?"poppins-regular-18px":"poppins-regular-16px"}>Paritair comite alias name </label>
+								<input
+									type="text"
+									value={data.pc_alias_name}
+									className=
+									{pc_view_type == 'addpc'?"form-control mt-2 form-control mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 poppins-medium-18px shadow-none text_field_addpc":" px-2 poppins-medium-16px border-0 form-control shadow-none mt-1"}
+									onChange={(e) => {
+										setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
+									}}
+								/>
+								<p className="error mt-2 error_text">{error_pc_alias_name}</p>
+							</div>
+
+							{/* BUFFER TIMING */}
+
+							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2":" px-0 poppins-regular-18px my-2"}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick "}>Buffer time between two plannings</label>
+
+								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
+									<input
+										type="text"
+										value={data.buffer_timings}
+										className=
+										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none "}
+										onChange={(e) => {
+											setData((prev) => ({ ...prev, buffer_timings: e.target.value }));
+										}}
+									/>
+									<span className=
+									{pc_view_type == 'addpc'?"input-group-text border-0 rounded-0 poppins-regular-18px":"input-group-text border-0 rounded-0 poppins-regular-16px"}
+									>Hours</span>
+								</div>
+								<p className="error mt-2 error_text">{error_buffer_time}</p>
+							</div>
+
+							<div className={pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 me-2":" px-0 poppins-regular-18px my-2"}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick "}>Minimum work timings per day</label>
+								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
+									<input
+										type="text"
+										value={data.min_work_timings}
+										className=
+										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none"}
+										onChange={(e) => {
+											setData((prev) => ({ ...prev, min_work_timings: e.target.value }));
+										}}
+									/>
+									<span className=
+									{pc_view_type == 'addpc'?"input-group-text border-0 rounded-0 poppins-regular-18px":"input-group-text border-0 rounded-0 poppins-regular-16px"}
+									>Hours</span>
+								</div>
+								<p className="error error_text mt-2">{error_min_time}</p>
+							</div>
+							<div className= {pc_view_type == 'addpc'?"form-group py-2 col-md-6 flex-1 ms-2":" px-0 "}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px my-2 custom_astrick "}>Maximum work timings per day</label>
+								<div className={pc_view_type == 'addpc'?" mt-2 mb-2 input-border-lightgray poppins-regular-16px mh-50 rounded-0 d-flex":'mt-1 mb-2 poppins-regular-16px mh-50 rounded-0 d-flex'}>
+									<input
+										type="text"
+										value={data.max_work_timings}
+										className=
+										{pc_view_type == 'addpc'?"form-control border-0 poppins-medium-18px shadow-none":" px-2 poppins-medium-16px border-0 form-control shadow-none"}
+										onChange={(e) => {
+											setData((prev) => ({ ...prev, max_work_timings: e.target.value }));
+										}}
+									/>
+										<span className=
+									{pc_view_type == 'addpc'?"input-group-text border-0 rounded-0 poppins-regular-18px":"input-group-text border-0 rounded-0 poppins-regular-16px"}
+									>Hours</span>
+								</div>
+								<p className="error mt-2 error_text">{error_max_time}</p>
+							</div>
 						</div>
-						<div className="form-group py-2">
-							<label className="custom_astrick">Paritair comite name </label>
-							<input
-								type="text"
-								value={data.pc_name}
-								className="form-control mt-2"
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, pc_name: e.target.value }));
-								}}
-							/>
-							<p className="error mt-2">{error_pc_name}</p>
-						</div>
-						<div className="form-group py-2">
-							<label>Paritair comite alias name </label>
-							<input
-								type="text"
-								value={data.pc_alias_name}
-								className="form-control mt-2"
-								onChange={(e) => {
-									setData((prev) => ({ ...prev, pc_alias_name: e.target.value }));
-								}}
-							/>
-							<p className="error mt-2">{error_pc_alias_name}</p>
-						</div>
+						{/* <div className="col-md-6" /> */}
 					</div>
-					{/* <div className="col-md-6" /> */}
 				</div>
 				{cat_subsec_type == 3 ? (
-					<div className="row">
+					<div className="row m-0 my-4">
 						<div className="text-start col-md-6" />
-						<div className="text-end col-md-6">
+						<div className="text-end col-md-6 p-0">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="btn rounded-0  custom-btn px-4  btn-block float-end poppins-medium-18px shadow-none"
 								disabled={disableSave}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								Save
+								SAVE
 							</button>
 						</div>
 					</div>
 				) : (
-					<div className="row">
-						<div className="text-start col-md-6">
+					<div className="row m-0 my-4">
+						<div className="text-start col-md-6 p-0 d-flex align-items-center">
 							<button
 								type="button"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="bg-white border-0 poppins-regular-18px px-0 shadow-none text-decoration-underline"
 								onClick={() => backToDashboard()}
 							>
-								Back
+								BACK
 							</button>
 						</div>
-						<div className="text-end col-md-6">
+						<div className="text-end col-md-6 px-0">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className="btn rounded-0 px-3  btn-block float-end px-0 poppins-medium-18px-next-button shadow-none"
 								disabled={disableSave}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								Next
+								NEXT
 							</button>
 						</div>
 					</div>

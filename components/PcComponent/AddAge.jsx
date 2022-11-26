@@ -336,146 +336,149 @@ const Addage = () => {
 		return valid;
 	};
 	return (
-		<div className="">
+		<div className={pc_view_type == 'addpc'?"":pc_view_type == 'viewpc'?"mb-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
 			<form onSubmit={(e) => submit(e)}>
-				{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Age</h4>:'')}
+				{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3 ":"bitter_medium_italic_18px mb-4"}>Edit age</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 bitter_medium_italic_18px mb-4">Age</h4>:'')}
 
-				<div className="row pt-4">
-					<div className={sec_width}>
+				<div className={pc_view_type == 'addpc'?"row p-5 border-form-sec m-0 pc-height3 scroll":"border-0"}>
+					{/* <div className={sec_width}> */}
+					<div className="col-md-12  m-0 ">
 						{/* <h4 className="mt-4 mb-2">Edit age</h4> */}
 
-						<div className="mb-3">
-							<label className="custom_astrick mb-2">At which age full salary is paid?</label>
+						<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3 "}>
+							<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>At which age full salary is paid?</label>
 							<select
 								disabled={disableForm}
 								type="text"
-								className="form-select mt-2 mb-2"
+								className={pc_view_type == 'addpc'?"form-select mt-2 mb-2 form-control mt-2 mb-2 input-border-lightgray poppins-medium-18px mh-50 hi-40 rounded-0 shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px form-control mt-2 rounded-0 shadow-none bg-transparent px-0":'border-0   poppins-medium-16px form-control mt-2 rounded-0 shadow-none'}
 								value={data.age}
 								onChange={(e) => {
 									handleshowhide(e);
 									setData((prev) => ({ ...prev, age: e.target.value }));
 								}}
 							>
-								<option value="">Select age</option>
-								<option value="4">21 years</option>
-								<option value="3">20 years</option>
-								<option value="2">19 years</option>
-								<option value="1">18 years</option>
+
+
+								<option value="" className='poppins-medium-16px opt_value'>Select age</option>
+								<option value="4" className='poppins-medium-16px opt_value'>21 years</option>
+								<option value="3" className='poppins-medium-16px opt_value'>20 years</option>
+								<option value="2" className='poppins-medium-16px opt_value'>19 years</option>
+								<option value="1" className='poppins-medium-16px opt_value'>18 years</option>
 							</select>
-							<p className="error mt-2">{error_age}</p>
+							<p className="error">{error_age}</p>
 						</div>
 
 						{/* IF AGE = 21 */}
 						{showhideage === '4' && (
-							<div className="mb-3">
-								<label className="custom_astrick mb-2">Minimum salary for 20 years?</label>
+							<div className={pc_view_type == 'addpc'?"mb-4 col-md-6":pc_view_type == 'viewpc'?"col-md-12 my-3":'col-md-12 my-3'}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 20 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className={pc_view_type == 'addpc'?" form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0 poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_20}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_20: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className={pc_view_type == 'addpc'?"input-group-text age-sec hi-40":pc_view_type == 'viewpc'?"input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0":"input-group-text age-sec hi-40 border-0 bg-white rounded-0"}>%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_20}</p>
+								<p className="error">{error_min_sal_20}</p>
 							</div>
 						)}
 						{/* IF AGE >= 20 */}
 						{(showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
-								<label className="custom_astrick  mb-2">Minimum salary for 19 years?</label>
+							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 19 years?</label>
 								<div className="input-group">
 									<input
 									    disabled={disableForm}
 										type="text"
-										className="form-control"
+										className= {pc_view_type == 'addpc'?" form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_19}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_19: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className={pc_view_type == 'addpc'?"input-group-text age-sec hi-40":pc_view_type == 'viewpc'?"input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0":"input-group-text age-sec hi-40 border-0 bg-white rounded-0"}>%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_19}</p>
+								<p className="error">{error_min_sal_19}</p>
 							</div>
 						)}
 						{/* IF AGE >= 19 */}
 						{(showhideage === '2' || showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
-								<label className="custom_astrick">Minimum salary for 18 years?</label>
+							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 18 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className={pc_view_type == 'addpc'?"form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_18}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_18: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className={pc_view_type == 'addpc'?"input-group-text age-sec hi-40":pc_view_type == 'viewpc'?"input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0":"input-group-text age-sec hi-40 border-0 bg-white rounded-0"}>%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_18}</p>
+								<p className="error">{error_min_sal_18}</p>
 							</div>
 						)}
 
 						{/* IF AGE >= 18 */}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
-								<label className="custom_astrick">Minimum salary for 17 years?</label>
+							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 17 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className={pc_view_type == 'addpc'?"form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40  poppins-medium-18px shadow-none ":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_17}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_17: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className={pc_view_type == 'addpc'?"input-group-text age-sec hi-40":pc_view_type == 'viewpc'?"input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0":" input-group-text age-sec hi-40 border-0 bg-white rounded-0"}>%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_17}</p>
+								<p className="error">{error_min_sal_17}</p>
 							</div>
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
-								<label className="custom_astrick">Minimum salary for 16 years?</label>
+							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 16 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className={pc_view_type == 'addpc'?"form-control mt-2 mb-2 input-border-lightgray  mh-50 rounded-0 border-end-0 hi-40 poppins-medium-18px shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_16}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_16: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className={pc_view_type == 'addpc'?"input-group-text age-sec hi-40":pc_view_type == 'viewpc'?"input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0":"input-group-text age-sec hi-40 border-0 bg-white rounded-0"}>%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_16}</p>
+								<p className="error">{error_min_sal_16}</p>
 							</div>
 						)}
 						{(showhideage === '1' || showhideage === '2' || showhideage === '3' || showhideage === '4') && (
-							<div className="mb-3">
-								<label className="custom_astrick">Minimum salary for 15 years?</label>
+							<div  className={pc_view_type == 'addpc'?"mb-4 col-md-6":"col-md-12 my-3"}>
+								<label className={pc_view_type == 'addpc'?"custom_astrick poppins-regular-18px":"poppins-regular-16px custom_astrick"}>Minimum salary for 15 years?</label>
 								<div className="input-group">
 									<input
 										disabled={disableForm}
 										type="text"
-										className="form-control"
+										className= {pc_view_type == 'addpc'? "form-control mt-2 mb-2 input-border-lightgray poppins-medium-18px mh-50 rounded-0 border-end-0 hi-40 shadow-none":pc_view_type == 'viewpc'?"border-0   poppins-medium-18px view_pc_form_width mt-2 rounded-0 shadow-none bg-transparent":"border-0 form-control mt-2  poppins-medium-16px rounded-0 shadow-none"}
 										value={data.min_sal_15}
 										onChange={(e) => {
 											setData((prev) => ({ ...prev, min_sal_15: e.target.value }));
 										}}
 									/>
-									<span className="input-group-text">%</span>
+									<span className={pc_view_type == 'addpc'?"input-group-text age-sec hi-40":pc_view_type == 'viewpc'?"input-group-text age-sec hi-40 border-0 bg-white rounded-0 bg-transparent px-0":"input-group-text age-sec hi-40 border-0 bg-white rounded-0"}>%</span>
 								</div>
-								<p className="error mt-2">{error_min_sal_15}</p>
+								<p className="error">{error_min_sal_15}</p>
 							</div>
 						)}
 						{/* <div>
@@ -486,42 +489,42 @@ const Addage = () => {
 					</div>
 				</div>
 				{pc_view_type == "editpc" ? (
-					<div className="row">
+					<div className={pc_view_type == 'addpc'?"row m-0 my-4 back_button_position":"row m-0 my-4"}>
 						<div className="text-start col-md-6" />
-						<div className="text-end col-md-6">
+						<div className="text-end col-md-6 px-0">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className={pc_view_type == 'addpc'?"btn rounded-0 custom-btn px-4 btn-block float-end poppins-medium-18px shadow-none":"btn rounded-0 custom-btn px-4 btn-block float-end poppins-medium-18px shadow-none"}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								Save
+								SAVE
 							</button>
 						</div>
 					</div>
 				) : pc_view_type == 'addpc'? (
-					<div className="row">
-						<div className="text-start col-md-6">
+					<div className="row m-0 my-4">
+						<div className="text-start col-md-6 p-0 align-self-center">
 							<button
 								type="button"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className={pc_view_type == 'addpc'?"bg-white bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline":"bg-white bg-white  border-0 poppins-regular-18px shadow-none text-decoration-underline"}
 								onClick={() => {
 									setCurrent_sec(2);
 								}}
 							>
-								Back
+								BACK
 							</button>
 						</div>
-						<div className="text-end col-md-6">
+						<div className="text-end col-md-6 p-0">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"}
 								onClick={() => {
 									setData((prev) => ({ ...prev, pc_unique_key: pc_unique_key, id: id }));
 								}}
 							>
-								Next
+								NEXT
 							</button>
 						</div>
 					</div>):''

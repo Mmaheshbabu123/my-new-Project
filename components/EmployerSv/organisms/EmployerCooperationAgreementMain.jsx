@@ -11,6 +11,7 @@ const EmployerCooperationAgreementMain = (props) => {
       companies: {}
     , overviewData: []
     , salesAgentUpdates: {}
+    , alreadyRequestedCompanies: []
     , selectedTabId: 1
     , status: [1, 0] // By default show all pending and signed
     , loaded: false
@@ -18,7 +19,7 @@ const EmployerCooperationAgreementMain = (props) => {
 
   useEffect(() => {  fetchData() }, [])
   /**
-   * [fetchEmpCoeffValueTypesData data fetching based on pcid]
+   * [fetchData data]
    * @return {Promise} [description]
    */
   const fetchData = async () => {
@@ -45,11 +46,13 @@ const EmployerCooperationAgreementMain = (props) => {
   return (
     <div>
     {state.loaded === true ?
-          <div className="col-md-12 row">
-          <h1 className={`${styles['employer-sv-page-title']} text-center page-title`}> Manage agreements </h1>
-              <OverviewPage state={state} setState={setState}/>
-              {state.companies && Object.keys(state.companies).length > 0 &&
+         <div className='row'>
+            <div className="col-md-12">
+          <h1 className={`${styles['employer-sv-page-title']} page-title bitter-italic-normal-medium-24 position-sticky-pc py-4`}> Manage agreements </h1>
+              <OverviewPage state={state} setState={setState} companyLength={state.companies.length}/>
+              {state.companies && state.companies.length > 0 &&
                 <RequestAgreement state={state} setState={setState} employer_id = {props.employerid} />}
+          </div>
           </div>
         : <p>Loading...</p>}
     </div>

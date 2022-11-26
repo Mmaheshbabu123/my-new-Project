@@ -17,6 +17,12 @@
       "@/atoms/*": [
         "components/core-module/atoms/*"
       ],
+      "@/Constants": [
+        "Services/Constants"
+      ],
+      "@/Translation": [
+        "pages/Translation"
+      ],
     },
     "target": "es5",
     "lib": [

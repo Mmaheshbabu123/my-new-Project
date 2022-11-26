@@ -1,12 +1,9 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic'
 import { APICALL } from '@/Services/ApiServices';
 import { fetchSalaryBenefits } from '@/Services/ApiEndPoints';
 import AddEditSalaryBenefits from '@/components/SalaryBenefits/AddEditSalaryBenefits';
 import ShowTable from '@/components/SalaryBenefits/ShowTable';
-// const LinkCoeffEmpStates = dynamic(() => import('../../Contexts/LinkCoeffEmp/LinkCoeffEmpStates'), { ssr: false });
-// const LinkCoeffEmpComponent = dynamic(() => import('../../components/LinkCoeffEmpComponents/LinkCoeffEmpComponent'), { ssr: false, suspense: true });
 
 const SalaryBenefits = (props) => {
   const router  = useRouter();
@@ -17,7 +14,7 @@ const SalaryBenefits = (props) => {
     , loaded: false
     , id: undefined
     , rows: []
-    , headers: ['Salary benefits', 'Date of commencement', 'Value', 'Actions'],
+    , headers: ['Salary benefits', 'Value', 'Occurence', 'Start date', 'Actions'],
   });
 
   useEffect(() => { loadData() }, [action])
@@ -43,8 +40,8 @@ const SalaryBenefits = (props) => {
 
   return (
     <>
-      <div className='container'>
-        <div className='mt-3 md-3'>
+      <div className='container-fluid px-0'>
+        <div className='md-3'>
           {state.loaded === true ?
           <> {state.editPage === true ?
               <AddEditSalaryBenefits {...state} />

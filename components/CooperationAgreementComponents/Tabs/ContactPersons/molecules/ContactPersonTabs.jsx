@@ -3,22 +3,49 @@ import CooperationAgreementContext from '@/Contexts/CooperationAgreement/Coopera
 import { personsData } from '../ContactPersonsFields';
 import styles from '../Contactperson.module.css';
 import BasicDetails from './BasicDetails';
+import SalaryDetails from '../../SalaryBenefits/molecules/SalaryDetails'
+import LabelField from '@/atoms/LabelField';
+import MultiSelectField from '@/atoms/MultiSelectField';
 import {defaultFileds} from '../ContactPersonsFields';
+import { requiredFields } from '@/components/CooperationAgreementComponents/RequiredFields';
+import { helpers } from '../../SalaryBenefits/SalaryBenefitHelper';
+import { confirmAlert } from 'react-confirm-alert';
 const ContactPersonTabs = (props) => {
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
-  var { tab_3 } = state;
-
+  const TAB_ID = 3;
+  const requiredElements  = structuredClone(requiredFields);
+  const stateKey = 'tab_3';
+  var { tab_3: {  contactSelectedDetails },contactPersonsDetails,filledTabs,selectedTabId ,tab_3} = state;
+let contactOptions = [];
+let contactPersons = [];
+contactOptions   = state.defaultOptions['contactList']  || [];
+//[{'value':1,'person_id':1,'label':'person1'},{'value':2,'person_id':2,'label':'person2'},{'value':3,'person_id':3,'label':'person3'}];
+//
+contactPersons   = state.defaultOptions['contactsData'] || [];
   const [contactstate,setState] = useState({
     id:1,
-      loaded:false,
+    selectedId: 1,
+    loaded:false,
   })
-  const handleSelect  = (selectId)=> {
-    setState({
-      ...contactstate,
-       id:selectId,
-    })
-    tab_3['selected_person_id'] = selectId;
-    updateStateChanges({tab_3});
+  const onSelect = (e) => {
+    let personDetailsObj = [...contactSelectedDetails];
+    let tab_3 = {...state[stateKey]};
+    let newObj = {
+      person_id: e.value,
+      person_name: e.label,
+      tab_id: TAB_ID,
+    }
+    personDetailsObj.push(newObj);
+    tab_3['contactSelectedDetails'] = personDetailsObj;
+    tab_3['contactPersonsDetails'][newObj.person_id] = insertDataObjects(newObj.person_id);
+    updateStateChanges({tab_3})
+  }
+  const insertDataObjects = (pcId) => {
+    let dataObject = {};
+    let defaultObj = {'25':1,'30':1,'31':2,'32':2,'38':2,'39':2,required:requiredElements['tab_3'],validations:{'34':{'type':1,validate:false},'35':{'type':2,validate:false}}};
+    dataObject = {...defaultObj}
+    dataObject = {...dataObject,...contactPersons[pcId]};
+    return dataObject;
   }
 const addDefaultValuestoPersons = (personObj) => {
   let tempObj ={};
@@ -27,41 +54,52 @@ const addDefaultValuestoPersons = (personObj) => {
  })
  return tempObj;
 }
-useEffect(()=>{
-const personObj = addDefaultValuestoPersons({1:{},2:{},loaded:true});
-personObj.loaded = true;
 
-  tab_3 = {...{1:{},2:{},loaded:true},...tab_3 }
-  updateStateChanges({tab_3});
-  setState({
-    ...contactstate,
-    loaded:true,
+const emptyFilledDetails = (tab_3) => {
+  let defaultKeys = ['36','27','37','34'];
+  defaultKeys.forEach((item)=>{
+    tab_3[item] = '' ;
   })
-},[])
-const LoadTabs = () => {
-  let tabsData = [];
-  personsData.map(data=>{
-  tabsData.push(
-    <React.Fragment>
-       <div className={styles["contactperson-tab-parent"]}onClick={(e)=>handleSelect(data.id)} >
-         <div className={styles["contactperson-tab-field-content"]}>
-             <a className={styles["anchor-tag"]}>
-               {/*<Image src={iconPath} alt={data.name} loading="lazy"  width="85%" height="75%"  />*/}
-               <div title={data.name} className = {styles["tile-title-text"]} > {data.name} </div>
-             </a>
-         </div>
-       </div>
-    </React.Fragment>
-  )
-})
-return tabsData;
+}
+const deleteAndUpdateState = (personId, index) => {
+
+  let salaryDetailsObj = [...contactSelectedDetails];
+  let tab_3 = {...state[stateKey]};
+  delete tab_3['contactPersonsDetails'][personId];
+//  delete tab_5['cooperationBenefits'][pcId];
+  salaryDetailsObj.splice(index, 1);
+
+  tab_3['contactSelectedDetails'] = salaryDetailsObj;
+  updateStateChanges({tab_3});
+}
+const onDelete = (personId, index) => {
+  confirmAlert({
+    message: 'Do you want to delete contact persons?',
+    buttons: [
+      { label: 'No' },
+      { label: 'Yes', onClick: () => deleteAndUpdateState(personId, index) }
+    ]
+  });
+
 }
 
+
   return (
-    <div className =''>
-    {/*LoadTabs()*/}
-    {/*(tab_3.loaded === true) &&*/}
-       { <BasicDetails  personId = {contactstate.id} />}
+    <div className={`${styles['salary-benefits-tab-parent']}`} disabled={!filledTabs.includes(selectedTabId)}>
+      <div>
+        {contactSelectedDetails.length > 0 ? <BasicDetails onDelete={onDelete}/> : null}
+      </div>
+      <div >
+        <MultiSelectField
+            options={helpers.getDifference(contactOptions, contactSelectedDetails, 'value', 'person_id', tab_3.alreadyLinked,2)}
+            handleChange={onSelect}
+            isMulti={false}
+            standards={[]}
+            className={`${styles['salary-benefits-multiselect']}`}
+            classNamePrefix={`${styles['salary-benefits-multiselect']}`}
+            placeholder={'Select contact person'}
+        />
+      </div>
     </div>
   )
 }

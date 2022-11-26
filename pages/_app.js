@@ -1,4 +1,7 @@
 import '../styles/globals.css';
+import '../styles/style.css';
+import '../styles/cooperation-agreement.css';
+import '../styles/planning.css';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -9,6 +12,9 @@ function MyApp({ Component, pageProps }) {
 			<Head>
 				{/* Responsive meta tag */}
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<link rel="manifest" href="/manifest.json" />
+				<link rel="apple-touch-icon" href="/icon.png"></link>
+				<meta name="theme-color" content="#fff" />
 				{/* bootstrap CDN */}
 				<link
 					href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -18,7 +24,7 @@ function MyApp({ Component, pageProps }) {
 				/>
 			</Head>
 			<Layout>
-				<div className='col-md-10 m-auto'>
+				<div className='col-md-9 col-lg-11 m-auto'>
 				<Component {...pageProps} />
 				</div>
 			</Layout>

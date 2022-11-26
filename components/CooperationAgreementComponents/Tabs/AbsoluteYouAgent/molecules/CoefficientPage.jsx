@@ -28,7 +28,7 @@ const CoefficientPage = (props) => {
     , highKey: 3
     , minValue: 0
     , maxValue: 10
-    , regexp: /^[0-9,.]*$/
+    , regexp: /^[0-9,]*$/
     , valueErrorArray: []
     , emptyDataWarning: false
     , isOverflow: false
@@ -41,20 +41,23 @@ const CoefficientPage = (props) => {
   const { scrollLeft, scrollRight, tableWidth } = compState;
   const onSelect = async ({ value }) => {
     if(!value) {
+      dependecyDataStatus['cooperationCoeffData'] = true;
       setCompState({...compState, selectedPc: value});
+      updateStateChanges({coeffPageData: {...compState, selectedPc: value}, dependecyDataStatus })
       return;
     }
     await APICALL.service(`${getPcLinkedCoeffData}/${value}`, 'GET').then(response => {
       if (response.status === 200) {
+        let tab_1 = state['tab_1'];
         let data = assignDataToStateVariables(value, response.data);
         dependecyDataStatus['cooperationCoeffData'] = true;
         data['emptyError'] = !response['data'].employeeTypeArray.length;
         setCompState(data);
-        updateStateChanges({coeffPageData: data, dependecyDataStatus})
+        tab_1['cooperationCoeffData'] = data.pclinkingValueobj || {};
+        updateStateChanges({coeffPageData: data, dependecyDataStatus, tab_1})
       }
     })
   }
-
   /**
    * [assignDataToStateVariables updating data in state variables/ context state variables]
    * @param  {Object}     data  [response data from backend]
@@ -82,7 +85,7 @@ const CoefficientPage = (props) => {
     let pcoptions = [{value: false, label: '--- Select ---'}, ...pcArray];
     return (
       <>
-      <p className='my-2'> Select paritair comite </p>
+      <p className='my-2'> Select paritair comite to link coefficients to employee types </p>
       <MultiSelectField
         options={pcoptions.filter(val => selectedIds.includes(val.value))}
         standards={pcoptions.filter(val => val.value === compState.selectedPc)}

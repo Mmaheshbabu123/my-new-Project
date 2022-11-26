@@ -21,7 +21,7 @@ const AbsSalesAgenetCooperationAgreementMain = (props) => {
    */
   const fetchData = async () => {
 
-    await APICALL.service(`${fetchSalesAgenetAgreements}`, 'GET').then(response => {
+    await APICALL.service(`${fetchSalesAgenetAgreements}/${props.agentId}`, 'GET').then(response => {
       if (response.status === 200)
         assignDataToStateVariables(response.data);
     })
@@ -38,14 +38,16 @@ const AbsSalesAgenetCooperationAgreementMain = (props) => {
       , loaded: true
     })
   }
-  console.log(state)
+
   return (
     <div>
     {state.loaded === true ?
-          <div className="col-md-12 row">
-          <h4 className={`${styles['employer-sv-page-title']} text-center page-title`}> Manage cooperation agreements </h4>
+          <div className='row'>
+            <div className="col-md-12">
+          <h4 className={`${styles['employer-sv-page-title']} page-title bitter-italic-normal-medium-24 position-sticky-pc py-4`}> Manage cooperation agreements </h4>
               <OverviewPage overviewData={state.overviewData} setState={setState}/>
           </div>
+            </div>
         : <p>Loading...</p>}
     </div>
   );

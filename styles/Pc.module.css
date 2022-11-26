@@ -1,16 +1,20 @@
 .sectioncolor {
-    background-color: lightgray !important;
+    background-color: #4C4D550F !important;
 }
-.btncolor {
+/* .btncolor {
     background-color: lightgray !important;
     color:black;
     border:none;
 
-}
+} */
 .sectionli {
-width: 94%
+width: 97%;
+margin: 0px !important
 }
-
+.color-white {
+    color: white !important;
+    
+}
 .listtitle {
     color:black !important;
 }
@@ -22,12 +26,17 @@ width: 94%
     /* box-shadow:  */
 
 }
- 
-/* .tree .lev1 li::before {
+#pills-pc-tab {
+    background-color: var(--color-skyblue);
+    color: var(--color-white);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+ }
+.tree .lev1 li::before {
     border-left: 1px solid #999;
     bottom: 50px;
     height: 100%;
-    top: -30px;
+    top: -9px;
     width: 1px;
     content: '';
     left: -33px;
@@ -38,13 +47,13 @@ width: 94%
     color:pink;
     border-top: 1px solid #999;
     height: 20px;
-    top: 25px;
+    top: 30px;
     width: 25px;
     content: '';
     left: -32px;
     position: absolute;
     right: auto;
-} */
+}
 .tree{
     position: relative;
 }
@@ -62,4 +71,39 @@ width: 94%
 }
 .salbenefitwidth {
     width: 45% !important;
+}
+/* .blue-border-bg-white {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-skyblue);
+    color: var(--color-skyblue);
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+}
+.blue-border-bg-white:focus-within {
+    background-color: var(--color-skyblue);
+    color: white;
+    font-family: var(--font-family-poppins-regular);
+    font-size: var(--font-size-m);
+} */
+
+.section_func_li {
+    width: 100%;
+    margin: 0px !important  
+}
+
+.section_cat {
+    font-size: var(--font-size-16px);
+    line-height: var(--line-height-26px);
+    font-family: var(--font-family-poppins-medium);
+    color: var(--color-label-footer-gray) !important;
+}
+
+
+.section_funct {
+    color: var(--color-label-footer-gray) !important;
+    font-family: var(--font-family-poppins-light) !important;
+    font-size: var(--font-size-16px) !important;
+    line-height: var(--line-height-26px) !important;
+    font-weight: normal;
+
 }

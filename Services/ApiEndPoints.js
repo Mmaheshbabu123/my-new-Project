@@ -3,6 +3,9 @@ export const ENV_URL = process.env.NEXT_PUBLIC_APP_BACKEND_URL;
 export const REGEX_URL = 'api/';
 export const BASE_URL = ENV_URL + REGEX_URL;
 
+export const ENV_DRUPAL= process.env.NEXT_PUBLIC_APP_URL_DRUPAL;
+
+
 // EXAMPLE : export const getUserDetails = BASE_URL + 'account/get-user-details';
 export const WithoutAppUrl = BASE_URL + "getParitairecommittes";
 export const getPcByPcnumber = BASE_URL + "getpc/"
@@ -16,7 +19,11 @@ export const fetchFunction = BASE_URL + "get-function/";
 export const updateFunction = BASE_URL + "update-function";
 
 
+//------------Time Registration--------------------------------//
+export const checkPinCode= BASE_URL+ "hasPincode/";
 
+//------------Drupal ------------------------------//
+export const homeScreen= ENV_DRUPAL+ "dashboard/url";
 
 //--------------CATEGORY API ROUTES ----------------//
 export const getCat = BASE_URL + "getcat/";
@@ -67,6 +74,7 @@ export const planningoverview = BASE_URL + "planningdetails-by-uniquekey/";
 export const fetchPlannedTimings = BASE_URL + "fetch-planned-timings/"
 export const storePlannedTimings = BASE_URL + "store-planned-timings"
 export const updateProject = BASE_URL + "updateProject";
+export const updateEditproject = BASE_URL + "updateproject"
 
 
 
@@ -75,6 +83,22 @@ export const updateProject = BASE_URL + "updateProject";
 export const fetchPlanning = BASE_URL + "fetch-planning-details/";
 export const fetchproject = BASE_URL + "fetch-project/";
 export const fetchallproject = BASE_URL + "fetch-all-project";
+export const fetchallarchivedprojects = BASE_URL + "fetch-all-archived-project"
+export const fetchprojectbyid = BASE_URL + "getproject/"
+export const planningfinalize = BASE_URL + "planning-finalize"
+export const fetchEmpDetails = BASE_URL + "fetch-emp-details/"
+export const updateEmployeePlanning = BASE_URL + "update-employee-planning"
+export const getPlanningEmployee = BASE_URL + "get-planningemployee/"
+export const fetchEmployeeList =  BASE_URL + "getEmployeeByUsingCompanyId/"
+export const fetchPlanningEmployee =  BASE_URL + "get-planning-employee/"
+export const fetchPlanningFunction =  BASE_URL + "get-planning-functions/"
+
+
+
+
+
+
+
 
 //--------------Manage Planning-----------------------------------//
 export const getWeeklyPlanning = BASE_URL + "get-weekly-planning/";
@@ -127,6 +151,7 @@ export const fetchSalaryBenefitsPerPc = BASE_URL + "get-salary-benefits-per-pc";
 export const saveCooperationDataTabWise = BASE_URL + "save-cooperationdata-tab-wise";
 export const getCooperationAgreementsTabWise = BASE_URL + "get-cooperation-agreements";
 export const getDefaultOptionsData = BASE_URL + "getDefaultOptionsData";
+export const checkAccess = BASE_URL + "check-access";
 //------------------- @
 //-------------------
 //--------EMPLOYER COOPERATION AGREEMENTS------------//
@@ -136,7 +161,7 @@ export const fetchRequestOverview = BASE_URL + "get-all-agreement-requests";
 export const deleteCooperationAgreement = BASE_URL + "delete-cooperation-agreement";
 
 //------SALES AGENT COOPERATION AGREEMENTS -------//
-export const fetchSalesAgenetAgreements = BASE_URL + "get-all-sales-agent-agreement-requests";
+export const fetchSalesAgenetAgreements = BASE_URL + "get-sales-agent-agreement-requests";
 export const saveSalesAgentSvData = BASE_URL + "save-agent-assigned-data";
 export const deleteSalesAgenetAgreements = BASE_URL + "delete-sales-agent-agreement-request";
 
@@ -153,4 +178,64 @@ export const deleteSignatureData = BASE_URL + 'delete-signature-data';
 export const cooperationAgreementPreview = BASE_URL + 'cooperation-agreement-preview';
 export const sendToEmployer = BASE_URL + 'send-to-employer';
 export const updateEmployerSign = BASE_URL + 'employer-sign-update';
+export const checkEmployerSignature = BASE_URL + 'check-employer-signature';
+export const authenticateEmployer = BASE_URL + 'authenticate-employer';
 //------
+
+
+//----- BBRIGHT_API-------------------------//
+export const fecthCompanyDetailsByVatNum = BASE_URL + 'enterprise-get-companydetails-by-vat';
+
+//---------------ADDITIONAL DOCUMENTS---------------//
+export const fetchAdditionalDocuments = BASE_URL + 'fetch-additional-docs';
+export const updateAdditionalDocuments = BASE_URL + 'update-additional-docs';
+export const deleteAdditionalDocuments = BASE_URL + 'delete-additional-docs';
+export const storeAdditionalDocuments = BASE_URL + 'store-additional-docs';
+export const downloadAdditionalDocuments = BASE_URL + 'download-additional-docs';
+export const deleteUploadedFiles = BASE_URL + 'delete-files';
+export const uploadAdditionalDocs = BASE_URL + 'upload-additional-docs';
+export const uploadFiles = BASE_URL + 'upload-files';
+export const downloadSvAsPdf = BASE_URL + 'download-cooperation-agreement-pdf';
+//---------------
+
+
+//---------------Composition coeffcients-------------//
+export const fetchCompositions = BASE_URL + "get-compositions";
+export const createCompositions = BASE_URL + "create-compositions";
+export const updateCompositions = BASE_URL + "update-compositions";
+export const deleteCompositions = BASE_URL + "delete-compositions";
+//----------------------
+
+
+//------------------ V1 Document -------------------------//
+export const getCompaniesByEmployee = BASE_URL + "get-companies-by-employee";
+export const v1DocumentPreview = BASE_URL + "v1-document-preview";
+export const saveV1Document = BASE_URL + "save-v1-document";
+export const getEmployerIdByCompanyId = BASE_URL + "get-employerid-by-company";
+export const checkEmployeeCompV1Status = BASE_URL + "check-employee-company-v1-status";
+export const getSignedV1Documents = BASE_URL + "get-signed-v1-documents";
+export const downloadV1Documents = BASE_URL + "download-v1-documents";
+//--------------------------
+
+//------------------- QR CODE--------------------//
+export const getCompanyLocationByEmployerId = BASE_URL + "get-company-locations";
+export const downloadQrCode = BASE_URL + "download-qr-code";
+export const regenerateQrCode = BASE_URL + "regenerate-qr-code";
+//-------------------
+
+//----------------- TODOS ---------------//
+export const getMyTodos = BASE_URL + 'get-mytodos';
+//-----------------
+//-----------------
+
+//------------------- Notifications --------------------//
+export const getNotificationsCount = BASE_URL + "get-notifications-count";
+export const getNotifications = BASE_URL + "get-notifications-data";
+export const updateNotifications = BASE_URL + "update-notifications";
+export const deleteNotifications = BASE_URL + "delete-notifications";
+//------------------
+
+//-------------EMPLOYEERSTOPPLANNING-------//
+export const getStopPlanningDetails = BASE_URL + 'getStopPlanningDetails/';
+export const postStopPlanningDetails = BASE_URL + 'postEmployeerStopPlanningDetails';
+//-----------

@@ -1,33 +1,58 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import LabelField from '@/atoms/LabelField';
 import DateField from '@/atoms/DateField';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import CheckBoxField from '@/atoms/CheckBoxField';
 import CooperationAgreementContext from '@/Contexts/CooperationAgreement/CooperationAgreementContext';
 import ValidateMessage from '@/atoms/validationError';
-// import { helpers } from '../../../CooperationAgreementHelper'; //.
 import styles from '../absoluteAgent.module.css';
+import { whoWillSignOptions, languageOptions } from '../../../Definations';
+// import { helpers } from '../../../CooperationAgreementHelper'; //.
 
-import { consultantArray, consultantNumArray, whoWillSignOptions } from '../../../Definations';
 
 var startDateAgreement    = 1;
 var absoluteConsultant    = 2;
 var absoluteConsultantNum = 3;
 var activateAddProject    = 4;
 var whoWillSign           = 80;
+var languageField         = 81;
 var consultNumber = [];
+var consultantArray = [];
+var consultantNumArray = [];
 
 const BasicDetails = (props) => {
   const { state, updateStateChanges } = useContext(CooperationAgreementContext);
-  var { tab_1, element_status } = state;
+  var { tab_1, element_status, defaultOptions } = state;
   var { validations } = tab_1;
-  const [ render, setRender ] = useState(false);
 
   useEffect(() => {
-    consultNumber = consultantNumArray[tab_1[absoluteConsultant]] || [];
-    tab_1[whoWillSign] = tab_1[whoWillSign] || [];
-    setRender(!render);
-  }, [])
+    if(defaultOptions) {
+      let { agent_details, absolute_consultant, absolute_office_num } = defaultOptions;
+      let bbright_id = agent_details && agent_details.bbright_id ? agent_details.bbright_id : 0;
+      consultantArray = absolute_consultant ? absolute_consultant.filter(val => Number(val.value) === Number(bbright_id)) : [];
+      consultNumber = absolute_office_num.length ? absolute_office_num : [];
+      tab_1 = getTabBasicData(consultantArray, consultNumber, bbright_id);
+      updateStateChanges({tab_1, bbright_id});
+    }
+  }, [defaultOptions])
+
+/**
+ * [getTabBasicData description]
+ * @param  {[type]} consultantArray               [description]
+ * @param  {[type]} consultNumber                 [description]
+ * @param  {[type]} bbright_id                    [description]
+ * @return {[type]}                 [description]
+ */
+    const getTabBasicData = (consultantArray, consultNumber, bbright_id) => {
+      let obj = consultantArray.length ? consultantArray[0] : {};
+      let selectedConsultNumber = consultNumber.filter(val => Number(val.value) === tab_1[absoluteConsultantNum]);
+      return {...tab_1,
+        [whoWillSign]: tab_1[whoWillSign] && tab_1[whoWillSign].map(Number) || [],
+        [languageField]: tab_1[languageField] || [],
+        [absoluteConsultant]: Number(obj.value) || 0,
+        [absoluteConsultantNum]: selectedConsultNumber.length ? selectedConsultNumber[0].value : 0,
+      }
+    }
 
   /**
    * [handleChange description]
@@ -57,27 +82,26 @@ const BasicDetails = (props) => {
    */
   const onSelect = (obj, key) => {
     if(key === absoluteConsultant) {
-      consultNumber = consultantNumArray[obj.value];
       tab_1[absoluteConsultantNum] = '';
     }
     element_status['tab_1'].push(key);
-    tab_1[key] = obj.value;
+    tab_1[key] = Number(obj.value);
     validations[key] = false;
     tab_1['validations'] = validations;
     updateStateChanges({ tab_1, element_status });
   }
 
-  const handleSignCheckChange = ({ target: { value, checked } }) => {
-    let valueId = Number(value);
-    let selectedIds = tab_1[whoWillSign];
-    element_status['tab_1'].push(whoWillSign)
+  const handleCheckboxChange = ({ target: { value, checked } }, stateKey = '') => {
+    let valueId = stateKey === languageField ? value: Number(value);
+    let selectedIds = tab_1[stateKey];
+    element_status['tab_1'].push(stateKey)
     if(checked) {
       selectedIds.push(valueId);
     } else {
       selectedIds.indexOf(valueId) > -1 ?
         selectedIds.splice(selectedIds.indexOf(valueId), 1) : null;
     }
-    tab_1[whoWillSign] = selectedIds;
+    tab_1[stateKey] = selectedIds;
     updateStateChanges({ tab_1, element_status })
   }
 
@@ -100,7 +124,7 @@ const BasicDetails = (props) => {
           <MultiSelectField
               id={absoluteConsultant}
               options={consultantArray}
-              standards={consultantArray.filter(val => val.value === tab_1[absoluteConsultant])}
+              standards={consultantArray.filter(val => Number(val.value) === tab_1[absoluteConsultant])}
               disabled={false}
               handleChange={(obj) => onSelect(obj, absoluteConsultant)}
               isMulti={false}
@@ -113,7 +137,7 @@ const BasicDetails = (props) => {
           <MultiSelectField
               id={absoluteConsultantNum}
               options={consultNumber}
-              standards={consultNumber.filter(val => val.value === tab_1[absoluteConsultantNum])}
+              standards={consultNumber.filter(val => Number(val.value) === tab_1[absoluteConsultantNum])}
               disabled={false}
               handleChange={(obj) => onSelect(obj, absoluteConsultantNum)}
               isMulti={false}
@@ -133,6 +157,26 @@ const BasicDetails = (props) => {
             />
       </div>
       <div className={`${styles['add-div-margings']}`}>
+          <LabelField title="In which language Werkpostfiche should be present?" />
+          {languageOptions.map(option => {
+            return (
+              <div key={`lang_${option.id}`}>
+              <CheckBoxField
+                  id={option.id}
+                  tick={tab_1[languageField] && tab_1[languageField].includes(option.id)}
+                  disabled={false}
+                  value={option.id}
+                  onCheck={(e) => handleCheckboxChange(e, languageField)}
+                  customStyle={{margin: '2px 0', cursor:'pointer'}}
+                  name={option.label}
+                  className="col-md-2"
+                />
+              </div>
+            )
+          })
+          }
+      </div>
+      <div className={`${styles['add-div-margings']}`}>
           <LabelField title="Who will sign the Werkpostfiche?" />
           {whoWillSignOptions.map(option => {
             return (
@@ -142,7 +186,7 @@ const BasicDetails = (props) => {
                   tick={tab_1[whoWillSign] && tab_1[whoWillSign].includes(option.id)}
                   disabled={false}
                   value={option.id}
-                  onCheck={handleSignCheckChange}
+                  onCheck={(e) => handleCheckboxChange(e, whoWillSign)}
                   customStyle={{margin: '2px 0', cursor:'pointer'}}
                   name={option.label}
                   className="col-md-2"

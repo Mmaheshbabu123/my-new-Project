@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -9,11 +9,12 @@ import styles from './AbsAdminSv.module.css';
 
 const SalesAgentPopUpComponent = ( { state, setState } ) => {
   const router = useRouter();
-  const { showPopup, salesAgentArray, warning, reassign,
+  const { showPopup, salesAgentArray, warning, reassign, //NOSONAR
     selectedSalesAgent,
     selectedCompanyId,
     selectedEmployerId,
-    savedAgentId
+    savedAgentId,
+    bbrightId
    } = state;
 
   const handleRequest = async () => {
@@ -33,7 +34,8 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
     return {
       company_id: selectedCompanyId,
       employer_id: selectedEmployerId,
-      sales_agent_id: selectedSalesAgent
+      sales_agent_id: selectedSalesAgent,
+      bbrightId: bbrightId
     };
   }
 
@@ -43,6 +45,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
     setState({...state, reassign,
       selectedSalesAgent: radioVal,
       warning: false,
+      bbrightId: agent.bbright_id || 0
     })
   }
 
@@ -52,7 +55,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
     <>
         <Modal size={'lg'} show={showPopup} onHide={handleClose}>
           <Modal.Header closeButton style={{paddingLeft: '30%'}}>
-            <Modal.Title> Assign to sales agent </Modal.Title>
+            <Modal.Title>{savedAgentId ? 'Re-assign sales agent' : 'Assign to sales agent'}</Modal.Title>
           </Modal.Header>
         <Modal.Body>
             <div>
@@ -73,7 +76,7 @@ const SalesAgentPopUpComponent = ( { state, setState } ) => {
                 })}
                 </div>
                 {warning === true && <small style={{color:'red'}}> Select atleast one agent </small>}
-                {reassign === true && <small style={{color:'red'}}> Do you want to change sales agent? </small>}
+                {/*reassign === true && <small style={{color:'red'}}> Do you want to change sales agent? </small>*/}
             </div>
         </Modal.Body>
         <Modal.Footer>

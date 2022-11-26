@@ -13,14 +13,15 @@ const ManagePc = (props)=>{
         setState({...state,
           rows: response.status === 200 ? response.data : [],
           loaded: true,
-          headers: ['PC number','PC name' , 'Actions'],
+          headers: ['Paritair comite number','Paritair comite name' , 'Actions'],
        })
      }).catch((error) => console.error('Error occurred'));
   }
   return (
     <>
-    <div className='container'>
-      <div className='mt-3 md-3'>
+    <div className='container-fluid man px-0'>
+      {/* <div className='mt-3 md-3'> */}
+      <div className=' md-3'>
       {state.loaded === true ?
        <TableRenderer {...state} />
        : <div>Loading...</div>}

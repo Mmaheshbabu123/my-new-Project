@@ -3,13 +3,12 @@ import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
 import {MdEdit, MdDelete } from 'react-icons/md';
-import { AiFillFilePdf, AiOutlineUserAdd, AiOutlineUserSwitch } from 'react-icons/ai';
-import { deleteCooperationAgreement } from '@/Services/ApiEndPoints';
+import {  AiOutlineUserAdd, AiOutlineUserSwitch, AiFillFilePdf } from 'react-icons/ai';
+import { deleteCooperationAgreement, downloadSvAsPdf } from '@/Services/ApiEndPoints';
 import { APICALL } from '@/Services/ApiServices';
 import SalesAgentPopUpComponent from './SalesAgentPopUpComponent.jsx';
 import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 import styles from './AbsAdminSv.module.css';
-// import SearchIcon from '../../SearchIcon';
 
 const itemsPerPage = 5;
 const RequestOverviewData = (props) => {
@@ -26,12 +25,12 @@ const RequestOverviewData = (props) => {
   }
 
   const [state, setState] = useState({
-      headers: ['Employer name', 'Email', 'Company', 'Date of request', 'Date of commencement', 'Status', 'Actions'],
+      headers: ['Employer name', 'Email', 'Company', 'Sales agent', 'Date of request', 'Date of commencement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
-      searchKey: 'company_name',
+      searchTermCompany: '',
+      searchTermEmployer: '',
       currentItems: [],
       status: [1, 0],
-      searchTerm: '',
       salesAgentArray: salesAgentArray,
       showPopup: false,
       selectedSalesAgent: 0,
@@ -42,6 +41,7 @@ const RequestOverviewData = (props) => {
       currentPage: 0,
       selectedTabId: 1,
       savedAgentId: 0,
+      bbrightId: 0,
   })
 
   const handleTabClick = ({ target: { id } }) => {
@@ -57,28 +57,56 @@ const RequestOverviewData = (props) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
+      <div className='row position-sticky-co-op'>
+      <div className='col-md-12'>
       <ul className={`${styles['employer-overview-tabs']}`}>
-        <li> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
-        <li> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
-        <li> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
       </ul>
+      </div>
+      </div>
     );
   }
 
 
-  const handleSearchClick = () => {
-    let value = state.searchTerm;
-    let filterRows = overviewData.filter((item) => {
-      return (item[state.searchKey].toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
+  const handleSearchClick = (search = 1) => {
+    let filterRows = [];
+    let { selectedTabId, searchTermEmployer = '', searchTermCompany = '' } = state;
+    let status = selectedTabId === 1 ? [1, 0] : selectedTabId === 2 ? [0] : [1];
+    let data = getSelectedStatus(status);
+    if(search && (searchTermEmployer || searchTermCompany)) {
+      filterRows = data.filter((item) => {
+        let status = true;
+        if(searchTermEmployer)
+          status = `${item['employer_name']}`.toLowerCase().toString().indexOf(searchTermEmployer.toLowerCase().toString()) !== -1;
+        if(status && searchTermCompany)
+          status = `${item['company_name']}`.toLowerCase().toString().indexOf(searchTermCompany.toLowerCase().toString()) !== -1;
+       return status;
+      })
+    } else {
+      filterRows = data;
+      searchTermEmployer = '';
+      searchTermCompany = '';
+    }
     setState({ ...state,
-      searchTerm: value,
+      searchTermEmployer: searchTermEmployer,
+      searchTermCompany: searchTermCompany,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
       ...updatePaginationData(filterRows, 0)
     });
+  }
+
+  const getEntityName = (eachRow) => {
+    let { employer_id, company_id } = eachRow;
+    let { salesAgentArray, assignedData } = props;
+    let data = assignedData[employer_id] ? assignedData[employer_id][company_id] ? assignedData[employer_id][company_id] : {} : {};
+    let salesAgentId = data.sales_agent_id || 0;
+    let rowObj = [];
+    rowObj = salesAgentArray ? salesAgentArray.filter(val => val.id === salesAgentId) : [];
+    return rowObj.length ? rowObj[0]['name'] : '';
   }
 
 
@@ -109,20 +137,67 @@ const RequestOverviewData = (props) => {
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
-        {/*<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-          <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-          <input
-            type="text"
-            className="form-control col-7 pcp_name"
-            style={{margin: '10px 0'}}
-            onChange={(e) => setState({...state, searchTerm: e.target.value})}
-            placeholder={'Search'}
-          />
-        </div>*/}
+       <div className='row'>
+       {<div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{ position: 'relative' }}>
+              <div className='row'>
+              <div className='col-md-9'>
+                <div className='row'>
+                  <div className='col-md-6'>
+                  <input
+                  type="text"
+                  className='form-control mt-2 mb-2 rounded-0 shadow-none'
+                  // style={{margin: '10px 0'}}
+                  value={state.searchTermEmployer}
+                  name = {'employer_name'}
+                  onChange={(e) => setState({...state, searchTermEmployer: e.target.value,searchColumn:'employer_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+                  placeholder={'Search employer '}
+                />
+                  </div>
+                  <div className='col-md-6'>
+                  <input
+                  type="text"
+                  className='form-control mt-2 mb-2 rounded-0 shadow-none'
+                  // style={{margin: '10px 0'}}
+                  name = {'company_name'}
+                  value={state.searchTermCompany}
+                  onChange={(e) => setState({...state, searchTermCompany: e.target.value,searchColumn:'company_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+                  placeholder={'Search company '}
+                  />
+                  </div>
+                </div>
+              </div>
+              <div className='col-md-3'>
+               <div className='row'>
+                 <div className='col-md-6'>
+                 <button
+                  type="button"
+                  className="btn btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
+                  onClick={() => handleSearchClick(1)}
+                >
+                  SEARCH
+                </button>
+                   </div>
+                   <div className='col-md-6'>
+                   <button
+                  type="button"
+                  className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
+                  onClick={() => handleSearchClick(0)}
+                >
+                  RESET
+                </button>
+                     </div>
+                 </div>
+               
+              </div>
+              </div>
+           </div>}
+       </div>
         <div className={`${styles['table-parent-div']}`}>
-          <table className="table table-hover manage-types-table">
+          <table className="table table-hover manage-types-table manage-cooperation-agreement-table-header">
             <thead className="table-render-thead">
-              <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
+              <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th width={30} key={`tablecol${index}`} scope="col ">{eachHeader}</th>)}</tr>
             </thead>
             {currentItems && currentItems.length > 0 ?
             <tbody>
@@ -130,17 +205,24 @@ const RequestOverviewData = (props) => {
                 return (
                   <tr key={index}>
                       <td> {eachRow.employer_name} </td>
-                      <td> {eachRow.employer_email} </td>
+                      <td> {eachRow.employer_mail} </td>
                       <td> {eachRow.company_name} </td>
+                      <td> {getEntityName(eachRow)} </td>
                       <td> {formatDate(eachRow.date_of_request)} </td>
                       <td> {formatDate(eachRow.date_of_commencement) || '--'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
-                      <td> {getNeededActions(eachRow) } </td>
+                      <td width='100'> {getNeededActions(eachRow) } </td>
                   </tr>
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found. </p>}
+            : <tbody>
+              <tr>
+              <td colSpan={8} className="text-center poppins-regular-18px no-records">
+											No records
+										</td>
+              </tr>
+              </tbody>}
           </table>
         </div>
         <div>
@@ -166,22 +248,26 @@ const RequestOverviewData = (props) => {
   }
 
   const getNeededActions = (eachRow) => {
+    let salesObj = assignedOrNot(eachRow);
+    let savedAgentId = salesObj.sales_agent_id || 0;
     if(Number(eachRow.signed)) {
       return(
         <div>
-          <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'PDF'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
-          <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+          <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit/> </span>
+          <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
+          <span title={'Delete'} className="span-action-icons" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
         </div>
       )
     } else {
-      let assigned = assignedOrNot(eachRow);
       return (
-        <div>
-          {!assigned ?
-              <span title={'Assign'} style={{width:'25%'}} className={`${styles['expand-minimize-span']}`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
-            : <span title={'Re-assign'} style={{width:'25%'}} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span>
-          }   <span title={'Delete'} className={`${styles['expand-minimize-span']}`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+        <div className='manage-cooperation-action-icons'>
+          {!savedAgentId ?
+              <span title={'Assign'}  className={`span-action-icons`}  onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserAdd /> </span>
+            : !salesObj.approved ? <span title={'Re-assign'}  className={`span-action-icons`} onClick={() => handleActionClick('assign', eachRow)}> <AiOutlineUserSwitch /> </span> : null
+          }
+          {salesObj.approved ? <span title={'Edit'} className="span-action-icons" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue' /> </span>:null}
+          {salesObj.approved ? <span title={'Download'} className="span-action-icons download" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf className=' color-skyblue'/> </span>:null}
+          <span title={'Delete'} className={`span-action-icons`} onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className=' color-skyblue'/> </span>
         </div>
       )
     }
@@ -200,13 +286,15 @@ const RequestOverviewData = (props) => {
         });
         break;
      case 'edit':
-        console.log('Edit');
+        let salesObj = assignedData[eachRow['employer_id']][eachRow['company_id']]
+        router.push(`cooperation-agreement?root_parent_id=${salesObj.root_parent_id}&selectedTabId=0&ref_id=${salesObj.sca_id}`);
         break;
      case 'download':
-          console.log('Download clicked');
+          handleDownload(eachRow);
         break;
      case 'assign':
          let savedAgentId = assignedOrNot(eachRow)
+         savedAgentId = savedAgentId.sales_agent_id || 0;
          stateObj['showPopup'] = true;
          stateObj['selectedCompanyId'] = eachRow.company_id;
          stateObj['selectedEmployerId'] = eachRow.employer_id;
@@ -218,13 +306,33 @@ const RequestOverviewData = (props) => {
     setState(stateObj);
   }
 
+  const handleDownload = async (eachRow) => {
+    eachRow['type'] = 1;
+    await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
+      .then((response) => {
+        let result = response.data;
+        if(response.status === 200 && result.url) {
+          var a = document.createElement("a");
+          a.setAttribute("type", "file");
+          a.href     = result.url;
+          a.target   = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          window.alert('Error occurred')
+        }
+      })
+      .catch((error) => window.alert('Error occurred'));
+  }
+
   /**
    * [assignedOrNot description]
    * @param  {Object} eachRow               [description]
    * @return {int}         [description]
    */
   const assignedOrNot = (eachRow) =>
-  assignedData[eachRow.employer_id] ? assignedData[eachRow.employer_id][eachRow.company_id] ?  assignedData[eachRow.employer_id][eachRow.company_id] : 0 : 0;
+  assignedData[eachRow.employer_id] ? assignedData[eachRow.employer_id][eachRow.company_id] ?  assignedData[eachRow.employer_id][eachRow.company_id] : { } : { };
 
   /**
    * [handleDelete description]

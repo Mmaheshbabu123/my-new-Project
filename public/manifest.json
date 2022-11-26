@@ -1,0 +1,27 @@
+{
+    "theme_color": "#f69435",
+    "background_color": "#f69435",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "name": "Absolute you",
+    "short_name": "Absolute you",
+    "description": "Absolute you",
+    "icons": [
+        {
+          "src": "https://backend.fan2.be/modules/contrib/pwa/assets/druplicon-512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        },
+        {
+          "src": "https://backend.fan2.be/modules/contrib/pwa/assets/druplicon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
+          "src": "https://backend.fan2.be/modules/contrib/pwa/assets/druplicon-144.png",
+          "sizes": "144x144",
+          "type": "image/png"
+        }
+      ]
+}

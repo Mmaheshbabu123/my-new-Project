@@ -1,0 +1,389 @@
+.add_employee_table tr:last-child
+{
+  border-bottom: none !important;
+}
+thead:after 
+{
+  line-height: 1vh;
+  content: "-";
+  color: transparent;
+  display: block;
+  background: transparent;
+}
+/* tbody:before 
+{
+	line-height: 1vh;
+	content: "-";
+	color: white;
+	display: block;
+} */
+.react-confirm-alert-body
+{
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-27px);
+  color: var(--color-label-footer-gray);
+  font-weight: normal;
+  width: 500px !important;
+  text-align: center;
+  border-radius: 0px;
+  box-shadow: none;
+}
+.react-confirm-alert-button-group button
+{
+  background-color: var(--color-purple) !important;
+  color: var(--color-white) !important;
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-16px);
+  text-transform: uppercase;
+  border-radius: 0px;
+}
+.react-confirm-alert-overlay
+{
+  background:rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+.react-confirm-alert-button-group
+{
+  justify-content: end;
+}
+.position-sticky
+{
+  position: sticky !important;
+  top: 66px;
+  background-color: white;
+  z-index: 990;
+  height: 60px;
+}
+.reset_skyblue_button,
+.reset_skyblue_button:hover,
+.reset_skyblue,
+.reset_skyblue:hover
+{
+  border: 1px solid var(--color-skyblue) !important;
+  background-color: var(--color-white);
+  color: var(--color-skyblue);
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-31px);
+  height: 43px;
+}
+@media screen and (min-width:768px) and (max-width:1023px) 
+{
+  .footer-bg-color 
+  {
+    background-color: var(--color-label-footer-gray);
+    height: 120px !important;
+  }  
+}
+.text_field_addpc
+{
+  height: 41px;
+}
+.error_text
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-16px);
+}
+.position_relative
+{
+  position: relative;
+  left: -1.6rem;
+  padding-left: 1.7rem !important;
+}
+input[type="checkbox"]:focus
+{
+  box-shadow: none;
+}
+.view_pc_accordion .accordion-item:last-of-type .accordion-button
+{
+  border-bottom: 1px solid var(--border-color-lightgray);
+}
+.view_pc_accordion .accordion-item:last-of-type .accordion-button.collapsed
+{
+  border-bottom: none !important;
+}
+.edit_pc_salary_benefits input[type="radio"],
+.radio[disabled]
+{
+  accent-color: cadetblue;
+  opacity: 0.8;
+  border-color: cadetblue;
+}
+.edit-icon-color img
+{
+  cursor: pointer;
+}
+.border-bottom
+{
+  border-bottom: 1px solid rgba(112, 112, 112,0.5) !important;
+}
+.link-emp-coeff-tableparent thead::after,
+.manage-types-table thead::after
+{
+  line-height: 1vh;
+  content: "-";
+  color: white !important;
+  display: block;
+  background: white !important;
+}
+/* .link-emp-coeff-tableparent tbody::before,
+.manage-types-table tbody::before
+{
+  line-height: 1vh;
+  content: "-";
+  color: white;
+  display: block;
+  background: white;
+} */
+.salary-benefits thead
+{
+  /* z-index: 999; */
+  background-color: #4C4D550F;
+  position: sticky;
+}
+.salary-benefits tbody
+{
+  z-index: 99;
+}
+.pc-single-select .css-6j8wv5-Input
+{
+  margin:0px !important;
+}
+@media screen and (min-width:768px) and (max-width:1023px) 
+{
+  .right_arrow_align span
+  {
+    right: -19px;
+  }
+  .manage_coefficient_table_body td:nth-child(2)
+  {
+    width: 50% !important;
+  }
+}
+.manage_coefficient_table_body td:nth-child(2)
+{
+  width: 60%;
+}
+.border-color-addeditsalary-benefits,
+.border-color-addeditsalary-benefits:focus,
+.react-select-prefix__control,
+.react-select-prefix__control:hover,
+.salary-input-fields .css-1pahdxg-control,
+.qr-custom-multiselect__menu:focus,
+.react-select-prefix__menu,
+.react-select-prefix__menu:focus,
+.V1Document_v1-multiselect__EVmAm__menu
+{
+	border: 1px solid #4C4D554D !important;
+	border-radius: 0px !important;
+	box-shadow: none !important;
+}
+.react-select-prefix__control
+{
+  height: 43px !important;
+}
+#react-select-2-listbox,
+.css-6j8wv5-Input,
+.css-qc6sy-singleValue,
+.qr-custom-multiselect__menu,
+.react-select-prefix__menu,
+.V1Document_v1-multiselect__EVmAm__menu
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-16px);
+  border-radius: 0px;
+  color: var(--color-label-footer-gray) !important;
+}
+.react-select-prefix__single-value,
+.react-select-prefix__input-container
+{
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-18px);
+  border-radius: 0px;
+  color: var(--color-label-footer-gray) !important;
+}
+.salary-input-fields .css-qc6sy-singleValue
+{
+  height: auto !important;
+}
+input[type="radio"]
+{
+  accent-color: cadetblue;
+  border-color: cadetblue;
+}
+.css-319lph-ValueContainer
+{
+  padding: 0px 8px !important;
+}
+.manage_cooperation_agreement
+{
+  font-family: var(--font-family-bitter-italic-normal-medium);
+  font-size: var(--font-size-30px);
+  font-weight: normal;
+  line-height: var(--line-height-44px);
+  color: var(--color-purple);
+}
+.min_height_table
+{
+  min-height: 22rem;
+}
+.line_height_archieved_project
+{
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+.position-sticky-manage-pc
+{
+  position: sticky;
+  top: 88px;
+  z-index: 999;
+  background-color: var(--color-white);
+}
+@-moz-document url-prefix() 
+{
+  select option 
+  {
+     font-family: var(--font-family-poppins-medium) !important;
+     font-size: var(--font-size-18px) !important;
+     line-height: var(--line-height-26px) !important;
+     --webkit-line-height: var(--line-height-26px) !important;
+     --webkit-font-size: var(--font-size-18px) !important;
+     --webkit-font-family: var(--font-family-poppins-medium) !important;
+  }
+}
+.fst-normal 
+{
+  vertical-align: middle;
+}
+.fst-normal thead::after
+{
+  display: none;
+}
+.fst-normal
+{
+  margin-bottom: 0px;
+}
+.epc_height .accordion-body
+{
+  padding: 0.5rem 1.25rem !important;
+}
+.table-second-part-tbody tr:last-child td
+{
+  border-bottom: 1px solid var(--border-color-gray);
+}
+.no_records
+{
+  border: 1px solid var(--border-color-light-gray);
+}
+.minimun_height
+{
+  min-height: 77vh;
+}
+.pc-height1, .pc-height2, .pc-height3, .pc-height4, .pc-height1
+{
+  min-height: 50vh;
+}
+.padding_first_col:first-child
+{
+  padding-left: 3rem;
+}
+.border,
+.no-records
+{
+  border: 1px solid #4C4D554D !important;
+}
+select option
+{
+  font-family: var(--font-family-poppins-medium) !important;
+  font-size: var(--font-size-16px) !important;
+  line-height: var(--line-height-26px) !important;
+}
+/* .epc_height .Pc_sectionli__bHrwn
+{
+  margin:0 1rem !important;
+} */
+@-moz-document url-prefix()
+{
+  .link-emp-coeff-tableparent,
+  .salary-benefit-table
+  {
+    padding-left: 1px;
+  }
+}
+.my_todo_tab .Todos_underline__FTL4z
+{
+  color: var(--color-skyblue) !important;
+  border-color: var(--color-skyblue);
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+.my_todo_tab .my_todo_color
+{
+  color: var(--color-label-footer-gray);
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+}
+.my_todo_tab .Todos_todo-icon__N2dlX svg
+{
+  width: 30px !important;
+  text-align: center;
+}
+.my_todo_tab .Todos_todo-icon__N2dlX
+{
+  text-align: center;
+}
+.Todos_todo-tabs___A2Cq > li:first-child
+{
+  width: 30% !important;
+}
+.my_todo_table thead tr th:first-child
+{
+  padding-left: 1.5rem;
+}
+.my_todo_table .Todos_span-action-icons___UbjJ img
+{
+  width: 23px;
+  color: var(--color-skyblue);
+  margin-right: 15px;
+  height: 23px;
+}
+.sign_action_icon_size
+{
+  width: 25px !important;
+}
+.my_todo_table .my_todo_action_icon
+{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.position-sticky-mytodo
+{
+  position: sticky;
+  top: 166px;
+  background-color: var(--color-white);
+  z-index: 999;
+}
+.position-sticky-co-op
+{
+  position: sticky;
+  top: 160px;
+  background-color: var(--color-white);
+  z-index: 999;
+}
+.my_todo_tab .Todos_todo-icon__N2dlX img
+{
+  width: 25px;
+  height: 25px;
+}
+.my_todo_tab .Todos_todo-icon__N2dlX 
+{
+  height: 25px;
+}
+.minimun_height_v1
+{
+  min-height: 26vh;
+}

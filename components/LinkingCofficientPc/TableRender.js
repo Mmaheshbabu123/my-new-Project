@@ -4,17 +4,17 @@ import { confirmAlert } from 'react-confirm-alert';
 import { delteCofficientPerPc} from '../../Services/ApiEndPoints'
 import { APICALL } from '../../Services/ApiServices';
 import {MdEdit, MdDelete} from 'react-icons/md';
-import SearchIcon from '../SearchIcon';
+
 import ReactPaginate from 'react-paginate';
 const itemsPerPage = 8;
 
 const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
   const [state, setState] = useState({
-    searchTerm: '',
+    searchTermNumber: '',
+    searchTermName: '',
     deleteUrl :  delteCofficientPerPc,
     filterRows: rows,
-    searchKey: 'name',
     currentItems: [],
     pageCount: 0,
     itemOffset: 0,
@@ -27,8 +27,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+        <span title={'Edit'} className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue' /> </span>
+        <span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='ms-3 color-skyblue'/> </span>
       </>
     )
   }
@@ -50,14 +50,25 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
       .then((result) => router.reload())
       .catch((error) => window.alert('Error occurred'));
   }
-  const handleSearch = (value) => {
-    let filterRows = rows.filter((item) => {
-      let rowVal = `${item['pc_number']}${item['name']}`
-      return (rowVal.toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
+
+  const handleSearch = (search = 1) => {
+    let filterRows = [];
+    let { searchTermName = '', searchTermNumber = '' } = state;
+    if(search && (searchTermName || searchTermNumber)) {
+      filterRows = rows.filter((item) => {
+        let status = true;
+        if(searchTermName)
+          status = `${item['name']}`.toLowerCase().toString().indexOf(searchTermName.toLowerCase().toString()) !== -1;
+        if(status && searchTermNumber)
+          status = `${item['pc_number']}`.toLowerCase().toString().indexOf(searchTermNumber.toLowerCase().toString()) !== -1;
+       return status;
+      })
+    } else {
+      filterRows = rows;
+    }
     setState({ ...state,
-      searchTerm: value,
+      searchTermName: searchTermName,
+      searchTermNumber: searchTermNumber,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -65,8 +76,8 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
     });
   }
 
-  const handleSearchClick = () => {
-    handleSearch(state.searchTerm);
+  const handleSearchClick = (search = 0) => {
+    handleSearch(search);
   }
 
 
@@ -94,34 +105,72 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
   //-------------------
     return (
       <>
-        <h4> {`Manage coefficients per PC`} </h4>
-        <div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-          <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-          <input
-            type="text"
-            className="form-control col-7 pcp_name"
-            onChange={(e) => setState({...state, searchTerm: e.target.value})}
-            placeholder={'Search'}
-            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
-          />
-          {/*<button
-            onClick={() => router.push(`${manageType}/add?id=0`)}
-            type="button"
-            className="btn btn-dark pcp_btn col-3">
-            {`+ ${button_title}`}
-          </button>*/}
+
+        <div className='py-4 position-sticky-pc px-0'>
+        <h4 className='font-weight-bold px-0  bitter-italic-normal-medium-24'> {`Manage coefficients per PC`} </h4>
         </div>
-        <div className="table-render-parent-div">
-          <table className="table table-hover manage-types-table">
+        <div className='searchbox m-0 my-4' style={{ margin: '10px 0' }}>
+         <div className='row'>
+           <div className='col-md-7 col-lg-9'>
+             <div className='row'>
+               <div className='col-md-6'>
+               <input
+               type="text"
+               value={state.searchTerm}
+               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+               onChange={(e) => setState({...state, searchTermNumber: e.target.value})}
+               placeholder={'Paritair comite number'}
+               onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+             />
+               </div>
+               <div className='col-md-6'>
+               <input
+               type="text"
+               value={state.searchTerm}
+               className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none"
+               onChange={(e) => setState({...state, searchTermName: e.target.value})}
+               placeholder={'Paritair comite name'}
+               onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+             />
+               </div>
+             </div>
+           </div>
+           <div className='col-md-5 col-lg-3'>
+             <div className='row'>
+               <div className='col-md-6 col-lg-6'>
+               <button
+               type="button"
+               className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 shadow-none"
+               onClick={() => handleSearchClick(1)}
+             >
+               SEARCH
+             </button>
+               </div>
+               <div className='col-md-6 col-lg-6'>
+               <button
+               type="button"
+               className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
+               onClick={() => handleSearchClick(0)}
+             >
+               RESET
+             </button>
+               </div>
+             </div>
+           </div>
+          </div>
+        </div>
+        <div className="table-render-parent-div ">
+          <table className="table table-hover manage-types-table  mb-3 ">
             <thead className="table-render-thead">
-              <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+              <tr className='btn-bg-gray-medium table-sticky-bg-gray border-bottom-0' key={'header-row-tr'}>{headers.map((eachHeader, index) =>
+              <th className='poppins-medium-18px justify-content-center align-items-center btn-bg-gray-medium ps-4' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
             </thead>
             {state.currentItems && state.currentItems.length > 0 ?
-            <tbody>
-              {state.currentItems.map(eachRow => <tr key={eachRow.id} id={eachRow.id}>
-                <td> {eachRow.pc_number} </td>
-                <td> {eachRow.name} </td>
-                <td>{ getNeededActions(eachRow) } </td>
+            <tbody className='manage_coefficient_table_body'>
+              {state.currentItems.map(eachRow => <tr className='border poppins-regular-18px p-2' key={eachRow.id} id={eachRow.id}>
+                <td className="poppins-regular-18px ps-4"> {eachRow.pc_number} </td>
+                <td className="poppins-regular-18px ps-4"> {eachRow.name} </td>
+                <td className="poppins-regular-18px ps-4">{ getNeededActions(eachRow) } </td>
               </tr>)}
             </tbody>
             : <p style={{paddingTop: '10px'}}> No records </p>}
@@ -140,12 +189,14 @@ const TableRenderer = ({ headers, rows, manageType, ...props }) => {
             containerClassName={"pagination"}
             itemClass="page-item"
             linkClass="page-link"
-            subContainerClassName={"pages pagination"}
+            subContainerClassName={"pages pagination justify-content-center project-pagination"}
             activeClassName={"active"}
         />}
-          <button onClick={() => router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
-            {`Back`}
+        <div className="text-start col-md-6">
+          <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px float-sm-right mt-5 mb-5 ps-0 text-decoration-underline text-uppercase">
+            {`BACK`}
           </button>
+          </div>
         </div>
       </>
     );

@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import SearchIcon from '../../SearchIcon';
 import styles from './AbsSalesAgentSv.module.css';
-//import SearchIcon from '../../SearchIcon';
-import {MdEdit, MdDelete, MdOutlineAddTask} from 'react-icons/md';
+import { AiFillFilePdf } from 'react-icons/ai';
+import {MdEdit } from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
-import { AiFillFilePdf, AiOutlineRedo} from 'react-icons/ai';
 import { HiPlusCircle} from 'react-icons/hi';
-import { deleteSalesAgenetAgreements} from '@/Services/ApiEndPoints'
+import { deleteSalesAgenetAgreements, downloadSvAsPdf} from '@/Services/ApiEndPoints'
 import { useRouter } from 'next/router';
 import { APICALL } from '@/Services/ApiServices';
+import { formatDate } from '../../SalaryBenefits/SalaryBenefitsHelpers';
 
 const itemsPerPage = 5;
 const Overviewpage = (props) => {
   const { overviewData } = props;
   const router = useRouter();
-  console.log(overviewData)
+
   /**
    * [getSelectedStatus description]
    * @param  {int}    selectedTabId               [description]
@@ -28,7 +27,8 @@ const Overviewpage = (props) => {
   const [state, setState] = useState({
       headers: ['Employer name',  'Company', 'Date of request', 'Start date of cooperation agreement', 'Status', 'Actions'],
       filterRows: getSelectedStatus(),
-      searchKey: 'employer_name',
+      searchTermCompany: '',
+      searchTermEmployer: '',
       currentItems: [],
       status: [1, 0],
       searchTerm: '',
@@ -55,32 +55,41 @@ const Overviewpage = (props) => {
   const showTabs = () => {
     let { selectedTabId } = state;
     return (
+      <div className='row position-sticky-co-op'>
+      <div className='col-md-12'>
       <ul className={`${styles['employer-overview-tabs']}`}>
-        <li> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
-        <li> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
-        <li> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {1} className={`${selectedTabId === 1 ? styles['underline'] : ''}`} onClick={handleTabClick}> All      </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {2} className={`${selectedTabId === 2 ? styles['underline'] : ''}`} onClick={handleTabClick}> Pending  </span> </li>
+        <li className='manage-cooperation-tabs'> <span id = {3} className={`${selectedTabId === 3 ? styles['underline'] : ''}`} onClick={handleTabClick}> Signed   </span> </li>
       </ul>
+      </div>
+      </div>
     );
   }
 
 
-  const handleSearchClick = (e) => {
-    //const { name} = e.target;
-console.log(e)
-    let value = state.searchTerm;
-    let name = state.searchColumn;
-  console.log(state);
-    let filterRows = overviewData.filter((item) => {
-      let rowVal = item[name];
-      //`${item['employer_name']}${item['company_name']}`
-      return (rowVal.toLowerCase().toString())
-        .indexOf(value.toLowerCase().toString()) !== -1;
-    })
-    //   return (item[state.searchKey].toLowerCase().toString())
-    //     .indexOf(value.toLowerCase().toString()) !== -1;
-    // })
+  const handleSearchClick = (search = 1) => {
+    let filterRows = [];
+    let { searchTermEmployer = '', searchTermCompany = '', selectedTabId } = state;
+    let status = selectedTabId === 1 ? [1, 0] : selectedTabId === 2 ? [0] : [1];
+    let data = getSelectedStatus(status);
+    if(search && (searchTermEmployer || searchTermCompany)) {
+      filterRows = data.filter((item) => {
+        let status = true;
+        if(searchTermEmployer)
+          status = `${item['employer_name']}`.toLowerCase().toString().indexOf(searchTermEmployer.toLowerCase().toString()) !== -1;
+        if(status && searchTermCompany)
+          status = `${item['company_name']}`.toLowerCase().toString().indexOf(searchTermCompany.toLowerCase().toString()) !== -1;
+       return status;
+      })
+    } else {
+      filterRows = data;
+      searchTermEmployer = '';
+      searchTermCompany = '';
+    }
     setState({ ...state,
-      searchTerm: value,
+      searchTermEmployer: searchTermEmployer,
+      searchTermCompany: searchTermCompany,
       filterRows: filterRows,
       currentPage: 0,
       itemOffset: 0,
@@ -98,7 +107,6 @@ console.log(e)
      const updatePaginationData = (filterRows, offset) => {
        let items = [...filterRows];
        const endOffset = offset + itemsPerPage;
-       console.log({items, endOffset}, items.slice(offset, endOffset));
        return {
          currentItems: items.slice(offset, endOffset),
          pageCount: Math.ceil(items.length / itemsPerPage)
@@ -117,51 +125,66 @@ console.log(e)
     const { headers, currentItems, filterRows, pageCount,  currentPage} = state;
     return(
       <>
-{<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-
-      <div className="col-sm-3 px-0">
-
-          <input
-            type="text"
-            className='form-control mt-2 mb-2'
-            style={{margin: '10px 0'}}
-            name = {'employer_name'}
-            onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'employer_name'})}
-            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
-            placeholder={'Search employer '}
-          />
-
-<span className="searchIconCss svadmin_icon"> <SearchIcon handleSearchClick={(e)=>handleSearchClick(e)} /></span>
-        </div>
-
-      <div className="col-sm-3">
-      <input
-        type="text"
-        className='form-control mt-2 mb-2'
-        style={{margin: '10px 0'}}
-        name = {'company_name'}
-        onChange={(e) => setState({...state, searchTerm: e.target.value,searchColumn:'company_name'})}
-        onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(e): null}
-        placeholder={'Search company '}
-      />
-
-<span className="searchIconCss svadmin_icon2"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-        </div>
-
-      </div>}
-        {/*<div className='row' style={{ margin: '10px 0', position: 'relative' }}>
-          <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-          <input
-            type="text"
-            className="form-control col-7 pcp_name"
-            style={{margin: '10px 0'}}
-            onChange={(e) => setState({...state, searchTerm: e.target.value})}
-            onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
-            placeholder={'Search'}
-          />
-        </div>*/}
+        {<div className='row'>
+        <div className='col-md-12 search_field_manage_cooperation_agreement mb-2' style={{  position: 'relative' }}>
+              <div className='row'>
+              <div className='col-md-9'>
+                <div className='row'>
+                  <div className='col-md-6'>
+                   <input
+                  type="text"
+                  className='form-control mt-2 mb-2 rounded-0 shadow-none'
+                  style={{margin: '10px 0'}}
+                  value={state.searchTermEmployer}
+                  name = {'employer_name'}
+                  onChange={(e) => setState({...state, searchTermEmployer: e.target.value,searchColumn:'employer_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+                  placeholder={'Search employer '}
+                />
+                
+                  </div>
+                  <div className='col-md-6'>
+                  <input
+                  type="text"
+                  className='form-control mt-2 mb-2 mx-2 rounded-0 shadow-none'
+                  style={{margin: '10px 0'}}
+                  name = {'company_name'}
+                  value={state.searchTermCompany}
+                  onChange={(e) => setState({...state, searchTermCompany: e.target.value,searchColumn:'company_name'})}
+                  onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+                  placeholder={'Search company '}
+                  />
+                  </div>
+                </div>
+              </div>
+               <div className='col-md-3'>
+                <div className='row'>
+                  <div className='col-md-6'>
+                  <button
+                  type="button"
+                  className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2  skyblue-bg-color w-100 shadow-none"
+                  onClick={() => handleSearchClick(1)}
+                >
+                  SEARCH
+                </button>
+               
+                  </div>
+                  <div className='col-md-6'>
+                   <button
+                  type="button"
+                  className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 shadow-none"
+                  onClick={() => handleSearchClick(0)}
+                >
+                  RESET
+                </button>
+                  </div>
+                </div>
+              </div>
+              </div>
+             
+           </div></div>}
         <div className={`${styles['table-parent-div']}`}>
-          <table className="table table-hover manage-types-table">
+          <table className="table table-hover manage-types-table manage-cooperation-agreement-table-header">
             <thead className="table-render-thead">
               <tr width={30} key={'header-row-tr'}>{headers.map((eachHeader, index) => <th width={30} key={`tablecol${index}`} scope="col">{eachHeader}</th>)}</tr>
             </thead>
@@ -173,15 +196,21 @@ console.log(e)
                       <td> {eachRow.employer_name} </td>
 
                       <td> {eachRow.company_name} </td>
-                      <td> {eachRow.date_of_request} </td>
-                      <td> {eachRow.startdate_agreement} </td>
+                      <td> {formatDate(eachRow.date_of_request ? Number(eachRow.date_of_request) * 1000 : '') || '-'} </td>
+                      <td> {formatDate(eachRow.startdate_agreement ? Number(eachRow.startdate_agreement) * 1000 : '') || '-'} </td>
                       <td> <span className={`${styles['signed-class']} ${Number(eachRow.signed) ? styles['sv-signed'] : styles['sv-pending']}`}> </span> </td>
                       <td> {getNeededActions(eachRow) } </td>
                   </tr>
                 );
               })}
             </tbody>
-            : <p style={{paddingTop: '10px'}}> No data found. </p>}
+            : <tbody>
+              <tr>
+              <td colSpan={8} className="text-center poppins-regular-18px no-records">
+											No records
+										</td>
+              </tr>
+              </tbody>}
           </table>
         </div>
         <div>
@@ -207,20 +236,17 @@ console.log(e)
   }
 
   const getNeededActions = (eachRow) => {
-
     if(Number(eachRow.root_parent_id) !== 0) {
       return(
         <div>
           <span title={'Edit'} className="actions-span text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-          <span title={'Download'} className="actions-span text-dark" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span>
-          {/*<span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>*/}
+          {eachRow.signed ? <span title={'Download'} className="span-action-icons" onClick={() => handleActionClick('download', eachRow)}> <AiFillFilePdf /> </span> : null}
         </div>
       )
     } else {
       return (
         <div>
           <span title = {'Add'} className="actions-span text-dark" onClick={() => handleActionClick('add', eachRow)}> <HiPlusCircle /> </span>
-          {/*<span title={'Delete'} className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>*/}
         </div>
       )
     }
@@ -240,17 +266,38 @@ console.log(e)
         });
         break;
      case 'edit':
-        router.push(`cooperation-agreement?root_parent_id=${root_parent_id}&selectedTabId=0&ref_id=${ref_id}`);
+        window.open(`cooperation-agreement?root_parent_id=${root_parent_id}&selectedTabId=0&ref_id=${ref_id}`, '_blank');
         break;
      case 'download':
-          console.log('Download clicked');
+          handleDownload(eachRow)
         break;
       case 'add':
-       router.push(`cooperation-agreement?root_parent_id=0&selectedTabId=0&ref_id=${ref_id}`);
+       window.open(`cooperation-agreement?root_parent_id=0&selectedTabId=0&ref_id=${ref_id}`, '_blank');
        break;
       default:
     }
   }
+
+  const handleDownload = async (eachRow) => {
+    eachRow['type'] = 4;
+    await APICALL.service(`${downloadSvAsPdf}`, 'POST', eachRow)
+      .then((response) => {
+        let result = response.data;
+        if(response.status === 200 && result.url) {
+          var a = document.createElement("a");
+          a.setAttribute("type", "file");
+          a.href     = result.url;
+          a.target   = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          window.alert('Error occurred')
+        }
+      })
+      .catch((error) => window.alert('Error occurred'));
+  }
+
   const handleDelete = async (id) => {
     await APICALL.service(`${deleteSalesAgenetAgreements}/${id}`, 'DELETE')
       .then((result) => router.reload())

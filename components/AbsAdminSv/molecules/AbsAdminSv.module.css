@@ -80,26 +80,3 @@
 .signed-class.sv-pending {
 	background-color: orange;
 }
-
-
-
-.expand-minimize-span > svg {
-  height: 25px;
-  width: 25px;
-  cursor: pointer;
-  vertical-align: text-top;
-}
-
-.expand-minimize-span {
-  vertical-align: middle;
-  height: 35px;
-  width: 4%;
-}
-
-.expand-minimize-span {
-  display: inline-block;
-}
-
-.expand-minimize-span > svg:hover{
-  opacity: 0.7;
-}

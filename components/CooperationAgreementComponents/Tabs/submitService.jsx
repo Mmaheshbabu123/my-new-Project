@@ -96,8 +96,6 @@ function checkAbsoluteAgentTabValidation() {
   if(!validationStatus) {
     let { employee_type_id } = stateWS;
     validationStatus = loopAndCheckLength(employee_type_id, noPcWarning);
-    // if(!validationStatus)
-      // updateStateChanges({workersServantsCompState: compStateObj, uniqueId: Math.random()});
   }
   return basicDetailsFilled && validationStatus ? true : false;
 }
@@ -151,15 +149,18 @@ function checkCompanyInformationTabValidation(tab_data,tab_key) {
       let stateData = stateObj[tab_key];
     var validateFileds = checkValidationFieldsEachTab(validationObj,tab_key,stateData);
     var requiredFields = checkRequiredKeyExistStateValue(tab_data,tab_key,stateData);
+
   return  requiredFields && validateFileds;
 
 }
 function checkContactPersonsTabValidation(tab_data,tab_key) {
+
   let validationObj  = stateObj[tab_key]['validations'];
   let contractObj = stateObj[tab_key];
   const selectPersonId = contractObj['selected_person_id'] || 0;
+
   var validateFileds = checkValidationContractPersons(tab_key,selectPersonId);
-  var requiredFields = checkRequiredContractPersons(tab_data,tab_key,selectPersonId);
+  var requiredFields = checkRequiredContractPersons(tab_data,tab_key);
   return  requiredFields && validateFileds;
 }
 function checkOnlineDetailsValidation(tab_data,tab_key) {
@@ -182,7 +183,7 @@ function checkRequiredKeyExistStateValue(tab_data,tab_key,stateData) {
   let tempSatatus = true;
 for(const key in tab_data) {
  if(stateData.hasOwnProperty(key)
- && stateData[key] != '' ) {
+ && stateData[key] != ''  && stateData[key] != null ) {
    stateData['required'][key] = true;
    tempSatatus = true;
  }
@@ -218,16 +219,20 @@ function checkValidationFields(key,value,type,tab_key,stateData) {
   else if(type === 6 && vatRateValidate(value)) {
    stateData['validations'][key]['validate'] = false;
   }
-  else {
+  else  {
      stateData['validations'][key]['validate'] = true;
   }
 }
-function checkValidationFieldsEachTab(validationObj,tab_key,stateData) {
+function checkValidationFieldsEachTab(validationObj,tab_key,stateData,type = 1) {
   Object.keys(validationObj).map((key)=>{
     var value = stateData[key] || '';
     var type  = validationObj[key]['type'];
      if(value) {
+
        checkValidationFields(key,value,type,tab_key,stateData);
+     }
+     else {
+       stateData['validations'][key]['validate'] = false;
      }
   })
 
@@ -283,15 +288,12 @@ function companyInformationPostData(state,tab_key) {
  }
  function contractPersonsPostData(state,tab_key) {
    let data = structuredClone(state[tab_key]);
-   const selecedPersonId = data['selected_person_id'] || 0;
-   data = data[selecedPersonId] || {};
+   const selectedPersonId = data['selected_person_id'] || 0;
    let obj = {};
-  for(const key in data) {
-    delete data['loaded'];
+    delete data['selected_person_id'];
       removeValidatioKeyState(data);
-  }
   obj['persons'] = data;
-  obj['selected_id'] = selecedPersonId;
+  obj['selected_id'] = selectedPersonId;
  return obj;
  }
 function removeValidatioKeyState(postData) {
@@ -302,37 +304,35 @@ function removeValidatioKeyState(postData) {
 
 function checkValidationContractPersons(tab_key,selectPersonId) {
  let tempStatus = true;
- let contractObj = stateObj[tab_key];
+ let contractObj = {...stateObj[tab_key]['contactPersonsDetails']};
 let validationObj;
-
+ let validateKeys = {};
  //delete contractObj['validations'];
- for(const key in contractObj[selectPersonId]) {
-   validationObj = contractObj[selectPersonId]['validations'] || {} ;
+ for(const key in contractObj) {
+   validationObj = contractObj[key]['validations'] || {} ;
 
-   if(validationObj)
-   if(!checkValidationFieldsEachTab(validationObj,tab_key,contractObj[selectPersonId])) {
-     tempStatus = false;
-     break;
-   };
+   if(validationObj) {
+  validateKeys[key]= checkValidationFieldsEachTab(validationObj,tab_key,contractObj[key],2);
+
+   }//break;
+
 
   }
 
+  tempStatus = Object.values(validateKeys).includes(false) ? false:true;
  return tempStatus;
 }
 
 function checkRequiredContractPersons(tab_data,tab_key,selectPersonId) {
   let tempStatus = true;
-  let contractObj = stateObj[tab_key];
+  let contractObj = stateObj[tab_key]['contactPersonsDetails'];
   let validationObj;
-  for(const key in contractObj[selectPersonId]) {
+  let validateKeys = {};
+  for(const key in contractObj) {
+    validateKeys[key] = checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj[key]);
+  }
 
-    if(!checkRequiredKeyExistStateValue(tab_data,tab_key,contractObj[selectPersonId]) && key !== 'loaded') {
-      tempStatus = false;
-      break;
-    };
-
-   }
-
+tempStatus = Object.values(validateKeys).includes(false) ? false:true;
   return tempStatus;
  }
 
@@ -356,6 +356,7 @@ async function forWardToNextStepTab(router, contextState, contextUpdate, current
   selectedTabId = currentTab;
   updateStateChanges = contextUpdate;
   let proceed = draft === 1 ? true : proceedToNextStepTab();
+
   if(proceed) {
     await saveDataTabWise(saveCooperationDataTabWise).then((response) => {
       addRemoveLoadedClass(0, draft);
@@ -372,11 +373,11 @@ async function forWardToNextStepTab(router, contextState, contextUpdate, current
           router.query.root_parent_id = obj['root_parent_id'];
         }
         if(draft === 1) {
-          router.push('/manage-cooperation-overview?type=sales_agent&id=1');
+          window.close();
         }
         if(selectedTabId === INVOIING_TAB && draft !== 1) {
           window.open(`/cooperation-agreement-preview?root_parent_id=${stateObj.root_parent_id}&sales_ref=${stateObj.salesAgentRefId}&type=1`, '_blank');
-          router.push('/manage-cooperation-overview?type=sales_agent&id=1')
+          setTimeout(() => window.close(), 500);
         } else {
           router.query.selectedTabId = nextTab;
           router.push(router, undefined, { shallow: true })

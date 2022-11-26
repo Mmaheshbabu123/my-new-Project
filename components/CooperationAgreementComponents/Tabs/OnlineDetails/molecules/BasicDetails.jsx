@@ -10,21 +10,25 @@ import { onlineDetailsRow1,onlineDetailsRow2,onlineDetaillsRadioRow1,onlineDetai
 
 import ValidateMessage from '@/atoms/validationError';
 const BasicDetails = (props) => {
+  const disableFields  = {
+    '40' : true,
+    '41' : true,
+  };
+
   const {state,updateStateChanges} = useContext(CooperationAgreementContext);
   var { tab_4,element_status} = state;
-  console.log(tab_4);
   const OnlineFieldData = (onlineRow) => {
     let  fieldsArray = [];
     onlineRow.map(data=>{
      fieldsArray.push(
-       <div className = {`col-md-12 ${styles['add-div-margings']}`}>
+       <div className = {`col-md-12 ${styles['add-div-margings']}  online${data.id}`}>
        <LabelField title={data.key_name} customStyle = {{display:''}}/> {requiredFields['tab_4'][data.id] && <RequiredField />}
        <InputField
        id = {data.id}
          type = {'text'}
          className = {'col-md-8'}
          value={tab_4[data.id]}
-         isDisabled= {false}
+         isDisabled= {disableFields[data.id] || false}
          placeholder={''}
          handleChange={handleChange}
          name={data.id}

@@ -13,14 +13,24 @@ import SalaryBenefits from './SalaryBenifits';
 
 import {
 	FaEdit,
-	FaRegPlusSquare,
-	FaMinusSquare,
+	FaPlusSquare,
 	FaAngleUp,
 	FaAngleDown,
 	FaArrowCircleRight,
 	FaRedo,
-	FaRegMinusSquare
+	FaRegMinusSquare,
+	FaMinusSquare,
 } from 'react-icons/fa';
+
+// import {
+// 	BsFillPlusSquareFill,
+// } from 'react-icons/bs';
+
+import {
+	AiFillPlusSquare,
+	AiFillMinusSquare
+} from 'react-icons/ai';
+
 import { useRouter } from 'next/router';
 import CompanyOptions from 'pages/manage-planning/select';
 
@@ -137,53 +147,60 @@ const PcOverview = (params) => {
 	};
 
 	return (
-		<div className="container">
-			<div className="row pt-4 min-vh-75">
-				<div className={`px-5 ${cat_leftsec}`}>
-					{params.type == 'editpc' ? (
-						<p className="h4">Edit paritair comite</p>
+		<div className="container-fluid p-0">
+			<div className='row position-sticky-pc'>
+				<div className='col-md-12'>
+				{params.type == 'editpc' ? (
+						<p className="py-4 font-weight-bold   px-0  bitter-italic-normal-medium-24 ">Edit paritair comite</p>
 					) : params.type == 'viewpc' ? (
-						<p className="h4">View paritair comite</p>
+						<p className=" py-4 font-weight-bold   px-0  bitter-italic-normal-medium-24">View paritair comite</p>
 					) : (
 						''
 					)}
+				</div>
+			</div>
+			<div className="row min-vh-75 pc-height2">
+				<div className={` ${cat_leftsec}`}>
+					
 					{pc && (
-						<div>
-							{cat_subsec_type == 0 &&
+						<div className='epc epc_height mt-1'>
+							{
 							params.type != 'viewpc' && (
-								<div className="text-end me-4">
+								<div className={cat_subsec_type ==0?"text-end mb-3 ":"d-none"} style={pc_view_type =='addpc'?{marginBottom:'1.5rem'}:{}}>
 									<button
 										type="button"
 										to="category"
 										pcid={pc_unique_key}
-										className={'btn me-3' + styles.btncolor}
+										// className={'btn me-3 blue-border-bg-white' + styles.btncolor}
+										className='btn me-3 blue-border-bg-white  me-3 p-3 '
 										onClick={() => {
 											setCat_leftsec('col-md-9');
 											setCat_rightsec('d-block col-md-3');
 											setCat_subsec_type(1);
 										}}
 									>
-										Add category
+										+ Add category
 									</button>
 									<button
 										type="button"
 										to="function"
 										pcid={pc_unique_key}
-										className={'btn me-2' + styles.btncolor}
+										className='btn blue-border-bg-white p-3 '
 										onClick={() => {
 											setCat_leftsec('col-md-9');
 											setCat_rightsec('d-block col-md-3');
 											setCat_subsec_type(2);
 										}}
 									>
-										Add function
+										+ Add function
 									</button>
 								</div>
 							)}
-							<ul className={`list-unstyled ${styles.tree}`}>
-								<li>
-									<ul className={`list-inline list-unstyled  pc ${styles.tree}`}>
-										<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+							<div className=''>
+							<ul className={`list-unstyled shadow-none view_pc_accordion ${styles.tree}`}>
+								<li className={styles.sectioncolor}>
+									<ul className={`list-inline my-2 list-unstyled  pc ${styles.tree} d-flex `}>
+										<li className="list-inline-item section-plus-icon align-top fs-4 mrg-lf-rt mt-3 shadow-none">
 											{/* <a
 												// data-bs-toggle="collapse"
 												// href={'#collapsepc' + pc_unique_key}
@@ -194,12 +211,12 @@ const PcOverview = (params) => {
 											> */}
 											<span>
 												{pc['collapseOpen'] == true || pc['childObj'] == undefined? (
-													<FaRegMinusSquare
+													<AiFillMinusSquare className="sky-border-white"
 														onClick={() =>
 															updateCollapseSec(1, pc['id'], pc['collapseOpen'])}
 													/>
 												) : (
-													<FaRegPlusSquare
+													<AiFillPlusSquare className="sky-border-white"
 														onClick={() =>
 															updateCollapseSec(1, pc['id'], pc['collapseOpen'])}
 													/>
@@ -231,6 +248,7 @@ const PcOverview = (params) => {
 											sectype="pc"
 											secId={pc['id']}
 											type={type}
+											level="1"
 										/>
 									</ul>
 								</li>
@@ -245,15 +263,15 @@ const PcOverview = (params) => {
 											>
 												{pc['childObj'][val]['type'] == 2 ? (
 													<li>
-														<ul className="list-inline">
-															<li>
-																<ul>
-																	<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+														<ul className="list-inline my-2 ">
+															<li className='sectioncolor'>
+																<ul className='d-flex'>
+																	<li className="list-inline-item section-plus-icon fs-4 mrg-lf-rt align-top mt-3">
 																		<span>
 																			{pc['childObj'] && console.log(pc['childObj'])}
 																			{pc['childObj'][val]['collapseOpen'] ==
 																			true|| pc['childObj'][val]['childObj'] == undefined ? (
-																				<FaRegMinusSquare
+																				<AiFillMinusSquare className="sky-border-white"
 																					onClick={(prev) =>
 																						updateCollapseSec(
 																							2,
@@ -262,12 +280,12 @@ const PcOverview = (params) => {
 																						)}
 																				/>
 																			) : (
-																				<FaRegPlusSquare
+																				<AiFillPlusSquare className="sky-border-white"
 																					onClick={() =>updateCollapseSec(2,val,pc['childObj'][val]['collapseOpen'])}
 																				/>
 																			)}
 																		</span>
-																		{/* <FaRegMinusSquare /> */}
+																		{/* <FaMinusSquare /> */}
 																	</li>
 																	<ListView
 																		pcid={pc_unique_key}
@@ -283,6 +301,7 @@ const PcOverview = (params) => {
 																		sectype="cat"
 																		secId={pc['childObj'][val]['id']}
 																		type={type}
+																		level="2"
 																	/>
 																</ul>
 															</li>
@@ -295,35 +314,16 @@ const PcOverview = (params) => {
 																			pc['childObj'][val]['childObj']
 																		).map((val2, key2) => (
 																			<li key={key2}>
-																				<ul className="list-inline">
-																					<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
-																					{/* {pc['childObj'][val][
-																								'childObj'
-																							][val2]['collapseOpen'] ==
-																			true ? ( */}
-																				<FaRegMinusSquare
-																					// onClick={(prev) =>
-																					// 	updateCollapseSec(
-																					// 		3,
-																					// 		val,
-																					// 		pc['childObj'][val][
-																					// 			'childObj'
-																					// 		][val2]['collapseOpen'],val2
-																					// 	)}
-																				/>
-																			{/* ) : (
-																				<FaRegPlusSquare
-																					onClick={() =>updateCollapseSec(3,val,pc['childObj'][val][
-																						'childObj'
-																					][val2]['collapseOpen'],val2)}
-																				/>
-																			)} */}
+																				<ul className="list-inline my-2 gggg">
+																					<li className="list-inline-item section-plus-icon  align-top mrg-lf-rt fs-4 ">
+																				{/* <FaMinusSquare className="sky-border-white"
+																				/> */}
 																					</li>
 																					<ListView
 																						pcid={pc_unique_key}
 																						key={val2}
 																						pc_number={pc_number}
-																						index={'fun1-' + val2}
+																						index={'fun1-cat'+val + val2}
 																						title={
 																							pc['childObj'][val][
 																								'childObj'
@@ -351,6 +351,7 @@ const PcOverview = (params) => {
 																						}
 																						sectype="funct"
 																						type={type}
+																						level="3"
 																					/>
 																				</ul>
 																			</li>
@@ -360,12 +361,13 @@ const PcOverview = (params) => {
 														</ul>
 													</li>
 												) : (
-													<li>
-														<ul>
-															<li className="list-inline-item section-plus-icon fs-4 align-top mt-3">
+													<li className='sectioncolor'>
+														<ul className='d-flex'>
+															<li className="list-inline-item section-plus-icon align-top mrg-lf-rt fs-4 mt-3 ">
 																{console.log(pc['childObj'][val]['childObj'])}
 																{pc['childObj'][val]['collapseOpen'] == true || pc['childObj'][val]['childObj'] == undefined ? (
-																	<FaRegMinusSquare
+																	<AiFillMinusSquare
+																	className="sky-border-white"
 																		onClick={() =>
 																			updateCollapseSec(
 																				2,
@@ -374,7 +376,7 @@ const PcOverview = (params) => {
 																			)}
 																	/>
 																) : (
-																	<FaRegPlusSquare
+																	<AiFillPlusSquare
 																		onClick={() =>
 																			updateCollapseSec(
 																				2,
@@ -397,6 +399,7 @@ const PcOverview = (params) => {
 																secId={pc['childObj'][val]['id']}
 																sectype="funct"
 																type={type}
+																level="2"
 															/>
 														</ul>
 													</li>
@@ -405,6 +408,7 @@ const PcOverview = (params) => {
 										))}
 								</li>
 							</ul>
+							</div>
 						</div>
 					)}
 					{/* {router.query.cid &&
@@ -442,11 +446,11 @@ const PcOverview = (params) => {
 		</div>
 			} */}
 					{pc_view_type != 'addpc' && (
-						<div className="row">
-							<div className="text-start col-md-6">
+						<div className="row my-4">
+							<div className="text-start col-md-6 align-items-center d-flex">
 								<button
 									type="button"
-									className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+									className="bg-white border-0 poppins-regular-18px shadow-none text-decoration-underline"
 									onClick={() => {
 										if (router.query.fid) {
 											router.push('/manage-function');
@@ -457,39 +461,39 @@ const PcOverview = (params) => {
 										}
 									}}
 								>
-									Back
+									BACK
 								</button>
 							</div>
 							<div className="text-end col-md-6" />
 						</div>
 					)}
 				</div>
-				<div className={`px-4 pt-2 border-start border-2 ${cat_rightsec}`}>
+				<div className={`col pt-2 ${cat_rightsec} ${pc_view_type == 'editpc'?'':pc_view_type == 'viewpc'?'':''}`}>
 					{pc_view_type != 'viewpc' && (
-						<div className="text-center">
+						<div className="text-center form-group row m-0 ">
 							<button
 								type="button"
 								to="category"
 								pcid={pc_unique_key}
-								className={'btn me-3' + styles.btncolor}
+								className='btn  blue-border-bg-white col me-3 p-3 '
 								onClick={() => {
 									setCat_subsec_type(1);
 									setCat_subsec_id('');
 								}}
 							>
-								Add category
+								+ Add category
 							</button>
 							<button
 								type="button"
 								to="function"
 								pcid={pc_unique_key}
-								className={'btn me-2' + styles.btncolor}
+								className= 'btn  blue-border-bg-white col p-3'
 								onClick={() => {
 									setCat_subsec_type(2);
 									setCat_subsec_id('');
 								}}
 							>
-								Add function
+								+ Add function
 							</button>
 						</div>
 					)}
@@ -509,27 +513,27 @@ const PcOverview = (params) => {
 			{router.query.cid || router.query.fid || params.type != 'addpc' ? (
 				''
 			) : (
-				<div className="row">
-					<div className="text-start col-md-6">
+				<div className="row my-4 m-0">
+					<div className="text-start col-md-6 d-flex align-items-center px-0">
 						<button
 							type="button"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="bg-white border-0 poppins-regular-18px shadow-none px-0 text-decoration-underline"
 							onClick={() => {
 								params.pc_type == 'edit' ? router.push('/manage-pc') : setCurrent_sec(1);
 							}}
 						>
-							Back
+							BACK
 						</button>
 					</div>
-					<div className="text-end col-md-6">
+					<div className="text-end col-md-6 px-0">
 						<button
 							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className="btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"
 							onClick={() => {
 								next_redirection();
 							}}
 						>
-							Next
+							NEXT
 						</button>
 					</div>
 				</div>

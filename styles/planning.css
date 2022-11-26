@@ -1,0 +1,87 @@
+.planning-height 
+{
+  min-height: 57vh;
+}
+.select_employee_container .css-1wy0on6
+{
+  align-self: center;
+}
+.action_icon_size
+{
+  width: 25px;
+}
+.css-1pahdxg-control
+{
+  border: 1px solid var(--color-label-footer-gray) !important;
+  border-color: var(--color-label-footer-gray) !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
+}
+.position-sticky-subhead
+{
+  position: sticky;
+  top: 166px;
+  z-index: 999;
+  background: white;
+}
+.border-purple
+{
+  border: 1px solid var(--color-purple);
+}
+.pos-rel
+{
+  position: relative;
+}
+.pos-rel button
+{
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  border: 1px solid var(--color-purple) !important;
+  background-color: var(--color-purple);
+  color: var(--color-white);
+}
+.employer_select .react-select-prefix__single-value.css-qc6sy-singleValue
+{
+  display: flex;
+  align-items: center;
+}
+input[type="checkbox"]
+{
+  accent-color: cadetblue;
+  opacity: 0.9;
+  border-radius: 0px;
+}
+.select_option_v1_doc .V1Document_v1-multiselect__EVmAm__control,
+.select_option_v1_doc .V1Document_v1-multiselect__EVmAm__control:focus,
+.select_option_v1_doc .css-1pahdxg-control
+{
+  height: 43px !important ;
+  border-color: var(--color-border-lightgrey) !important;
+  color: #4C4D5573;
+}
+.add_project input,
+.add_project input:focus,
+.add_project .form-select:focus
+{
+  border-color: var(--color-border-lightgrey);
+}
+.add_project .add-proj-btn
+{
+  font-family: var(--font-family-poppins-medium);
+  font-size: var(--font-size-18px);
+  line-height: var(--line-height-29px);
+  color: var(--color-white);
+  background-color: var(--color-purple);
+}
+.select_employee_container .css-1rhbuit-multiValue .css-12jo7m5
+{
+  font-size: var(--font-size-16px);
+  font-family: var(--font-family-poppins-light);
+}
+.add_function_height .react-select-prefix__control,
+.add_function_height .react-select-prefix__indicators
+{
+  height: 30px !important;
+  border: none !important;
+}

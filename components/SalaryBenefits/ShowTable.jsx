@@ -4,10 +4,11 @@ import { confirmAlert } from 'react-confirm-alert';
 import { deleteSalaryBenefits } from '@/Services/ApiEndPoints';
 import { formatDate } from './SalaryBenefitsHelpers';
 import { APICALL } from '@/Services/ApiServices';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import {MdEdit, MdDelete} from 'react-icons/md';
-import SearchIcon from '../SearchIcon';
 import ReactPaginate from 'react-paginate';
-const itemsPerPage = 8;
+import { salaryBenefitOccurenceOptions } from '@/Constants';
+const itemsPerPage = 5;
 
 const ShowTable = ({ headers, rows, manageType, ...props }) => {
   const router = useRouter();
@@ -29,8 +30,8 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
   const getNeededActions = (eachRow) => {
     return (
       <>
-        <span className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit /> </span>
-        <span className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete/> </span>
+        <span className="actions-span me-2 text-dark" onClick={() => handleActionClick('edit', eachRow)}> <MdEdit className=' color-skyblue '/> </span>
+        <span className="actions-span text-dark" onClick={() => handleActionClick('delete', eachRow)}> <MdDelete className='ms-3 color-skyblue '/> </span>
       </>
     )
   }
@@ -70,8 +71,8 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
     });
   }
 
-  const handleSearchClick = () => {
-    handleSearch(state.searchTerm);
+  const handleSearchClick = (search = 0) => {
+    handleSearch(search ? state.searchTerm : '' );
   }
 
 //------------------- Pagination code -------------------------//
@@ -99,56 +100,93 @@ const ShowTable = ({ headers, rows, manageType, ...props }) => {
 
   return (
     <>
-      <h4> {`Manage salary benefits`} </h4>
-      <div className='row searchbox' style={{ margin: '10px 0', position: 'relative' }}>
-        <span className="searchIconCss"> <SearchIcon handleSearchClick={handleSearchClick} /></span>
-        <input
-          type="text"
-          className="form-control col-7 pcp_name"
-          onChange={(e) => setState({...state, searchTerm: e.target.value})}
-          placeholder={'Search'}
-          onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(): null}
-        />
+      <div className='py-4 position-sticky-pc'>
+      <h4 className='font-weight-bold  bitter-italic-normal-medium-24 px-0'> {`Manage salary benefits`} </h4>
+      </div>
+      <div className='col-md-12 text-end'>
         <button
           onClick={() => router.push(`manage-salary-benefits?action=create&id=0`)}
           type="button"
-          className="btn btn-dark pcp_btn col-3">
+          // className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 footer-content"
+          className="btn btn-block float-right mt-2 mb-2 border-0 rounded-0 float-right mt-2 mb-2 ms-2 skyblue-bg-color py-2 px-3 shadow-none text-uppercase">
           {`+ Add salary benefit`}
         </button>
       </div>
-      <div className="table-render-parent-div">
-        <table className="table table-hover manage-types-table">
-          <thead className="table-render-thead">
-            <tr key={'header-row-tr'}>{headers.map((eachHeader, index) => <th key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
+      <div className='searchbox m-0 my-4' style={{ margin: '10px 0', position: 'relative' }}>
+       <div className='row'>
+         <div className='col-lg-9 col-md-7 pe-4'>
+           <input
+             type="text"
+             value={state.searchTerm}
+             className="form-control mt-2 mb-2 input-border-lightgray poppins-regular-18px mh-50 rounded-0 shadow-none ps-3"
+             onChange={(e) => setState({...state, searchTerm: e.target.value})}
+             placeholder={'Salary benefits'}
+             onKeyUp={(e) => e.key === 'Enter' ? handleSearchClick(1): null}
+           />
+         </div>
+         <div className='col-lg-3 col-md-5'>
+           <div className='row '>
+             <div className='col-md-6'>
+             <button
+             type="button"
+             className="btn  btn-block border-0 rounded-0 float-right mt-2 mb-2 skyblue-bg-color w-100 poppins-medium-18px shadow-none"
+             onClick={() => handleSearchClick(1)}
+           >
+             SEARCH
+           </button>
+             </div>
+             <div className='col-md-6'>
+             <button
+             type="button"
+            //  className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset-btn w-100 poppins-medium-18px"
+             className="btn border-0 btn-block rounded-0 float-right mt-2 mb-2 reset_skyblue_button w-100 poppins-medium-18px shadow-none "
+             style={{height:'43px'}}
+             
+             onClick={() => handleSearchClick(0)}
+           >
+             RESET
+           </button>
+             </div>
+           </div>
+           
+          
+         </div>
+        </div>
+      </div>
+      <div className="table-render-parent-div max-height-420 salary-benefit-table">
+        <table className="table table-hover manage-types-table salary-benefits">
+          <thead className="table-render-thead ">
+            <tr className='btn-bg-gray-medium table-sticky-bg-gray py-2' key={'header-row-tr'}>{headers.map((eachHeader, index) => <th className='poppins-medium-18px justify-content-center btn-bg-gray-medium padding_first_col' key={`tablecol${index}`} scope="col"> {eachHeader} </th>)} </tr>
           </thead>
           {state.currentItems && state.currentItems.length > 0 ?
           <tbody>
-            {state.currentItems.map(eachRow => <tr key={eachRow.sb_id} id={eachRow.sb_id}>
-              <td> {eachRow.name} </td>
-              <td> {formatDate(eachRow.date) ? formatDate(eachRow.date) : '--'} </td>
-              <td> {eachRow.value ? eachRow.value : '--'} </td>
-              <td>{ getNeededActions(eachRow) } </td>
+            {state.currentItems.map(eachRow => <tr className='border poppins-regular-16px p-2' key={eachRow.sb_id} id={eachRow.sb_id}>
+              <td className='poppins-regular-16px py-2  padding_first_col'> {eachRow.name} </td>
+              <td className='poppins-regular-16px'> {eachRow.value ? `${eachRow.value} ${eachRow.value_type === 1 ? '€' : '%'}` : ''} </td>
+              <td className='poppins-regular-16px'> {eachRow.occurence ? salaryBenefitOccurenceOptions.filter(val => val.value === eachRow.occurence)[0]['label'] : ''} </td>
+              <td className='poppins-regular-16px'> {formatDate(eachRow.date) ? formatDate(eachRow.date) : '--'} </td>
+              <td className='poppins-regular-16px'> { getNeededActions(eachRow) } </td>
             </tr>)}
-          </tbody>: <p style={{paddingTop: '10px'}}> No records </p>}
+          </tbody>: <p className='poppins-regular-18px' style={{paddingTop: '10px'}}> No records </p>}
         </table>
       </div>
       <div>
         {state.filterRows.length > itemsPerPage && <ReactPaginate
             breakLabel="..."
-            nextLabel="Next >"
+            nextLabel={<AiOutlineArrowRight />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={state.pageCount}
             forcePage={state.currentPage}
-            previousLabel="< Previous"
+            previousLabel={<AiOutlineArrowLeft />}
             renderOnZeroPageCount={null}
             containerClassName={"pagination"}
             itemClass="page-item"
             linkClass="page-link"
-            subContainerClassName={"pages pagination"}
+            subContainerClassName={"pages pagination justify-content-center project-pagination"}
             activeClassName={"active"}
         />}
-        <button onClick={() => router.push('/')} type="button" className="btn btn-dark pcp_btn col-1">
+        <button onClick={() => router.push('/')} type="button" className="bg-white border-0 poppins-regular-18px text-decoration-underline text-uppercase float-sm-right mt-5 mb-5">
           {`Back`}
         </button>
       </div>

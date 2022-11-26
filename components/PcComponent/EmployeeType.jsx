@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 const EmployeeType = () => {
 	const router = useRouter();
 	const [ disableForm, setDisableForm ] = useState(false);
-	const [ sec_width, setSec_width ] = useState('col-md-5');
+	const [ sec_width, setSec_width ] = useState('col-md-6');
 
 
 	const {
@@ -90,28 +90,30 @@ const EmployeeType = () => {
 		if (event.target.checked) {
 			if (!res1.includes(parseInt(event.target.value))) {
 				res1.push(parseInt(event.target.value));
+				var index1 = temp2.indexOf(parseInt(event.target.value));
+
+				
+					if( index2 > -1){
+						if(index1 > -1){
+						temp1.splice(index1, 1);
+						setTemp2(temp1);
+					}
+				}
 			}
-			if( index2 > -1){
-				temp1.splice(index2, 1);
-				setTemp2(temp1);
-			}
+			
 			console.log('✅ Checkbox is checked');
 		} else {
 			var index = res1.indexOf(parseInt(event.target.value));
 			if (index > -1) {
 				res1.splice(index, 1);
-				
-				// 2nd parameter means remove one item only
 			}
+			
 			if( index2 > -1){
+				if(!temp1.indexOf(parseInt(event.target.value))>-1){
 				temp1.push(parseInt(event.target.value)); 
 				setTemp2(temp1);
 			}
-		// 	var index2 = temp.indexOf(parseInt(event.target.value));
-
-		// 	if( index2 > -1){
-		// 		temp1.push(parseInt(event.target.value));
-		// }
+		}
 			
 			console.log('⛔️ Checkbox is NOT checked');
 		}
@@ -123,7 +125,6 @@ const EmployeeType = () => {
 		if (id == '') {
 			APICALL.service(storePcEmployeeTypes, 'POST', data1)
 				.then((result) => {
-					console.log(result);
 					if (result.status === 200) {
 						if(cat_subsec_type == 5){
 							setCat_fun_updated('employeetype' + result.pcid);
@@ -156,28 +157,30 @@ const EmployeeType = () => {
 		} else {
 			setError_emp_type('Select atleast one employee type.');
 		}
-		console.log(data1);
 	};
 
 	return (
-		<div className="container">
+		<div className={pc_view_type == 'addpc'?"container-fluid p-0":pc_view_type == 'viewpc'?"mb-5 sectioncolor p-3":"sectioncolor p-3 my-3"}>
 			<form onSubmit={submit}>
-			{pc_view_type == 'editpc' ? <h4 className="h5 mt-3">Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 mt-3">Employee type</h4> :'')}
-
-				<div className="row pt-4">
+			{pc_view_type == 'editpc' ? <h4 className={pc_view_type == 'addpc'?"h5 mt-3":"bitter_medium_italic_18px mb-4"}>Edit employee type</h4> : (pc_view_type == 'viewpc'?<h4 className="h5 bitter_medium_italic_18px mb-4">Employee type</h4> :'')}
+            <div className='pc-height4'>
+				<div className={pc_view_type == 'addpc'?"row border-form-sec m-0 px-4 ":"border-0"}>
+				<p className="mt-3 p-0 error_text mb-3" style={{ color: 'red' }}>
+						{error_emp_type}
+					</p>
 					{data.map((val) => (
-						<div className={"form-check mt-4 "+sec_width} key={val.id}>
+						<div className={"form-check mb-3 "+sec_width} key={val.id}>
 							<input
 								disabled={disableForm}
 								type="checkbox"
-								className="form-check-input"
+								className={pc_view_type == 'addpc'?"form-check-input rounded-0 poppins-regular-18px ":"form-check-input rounded-0 poppins-regular-18px border-0"}
 								value={val.id}
 								checked = {res.includes(val.id)?true:false} 
 								onChange={(e) => {
 									updateRes(e);
 								}}
-							/>{console.log(res)}
-							<label className="form-check-label"> {val.name}</label>
+							/>
+							<label className={pc_view_type == 'addpc'? "form-check-label poppins-regular-18px":" form-check-label poppins-regular-16px"} style={res.includes(val.id)?{opacity:'1'}:{}} > {val.name}</label>
 						</div>
 					// 	<div className="form-check mt-4">
 					// 	<input
@@ -196,41 +199,40 @@ const EmployeeType = () => {
 					// 	</label>
 					// </div>
 					))}
-					<p className="mt-2" style={{ color: 'red' }}>
-						{error_emp_type}
-					</p>
+
+				</div>
 				</div>
 				{pc_view_type == 'editpc' ? (
-					<div className="row">
+					<div className="row my-4">
 						<div className="text-start col-md-6" />
 						<div className="text-end col-md-6">
 							<button
 								type="sumit"
-								className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+								className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end poppins-medium-18px shadow-none"}
 							>
-								Save
+								SAVE
 							</button>
 						</div>
 					</div>
 				) : pc_view_type == 'addpc'?
-				<div className="row">
-					<div className="text-start col-md-6">
+				<div className="row my-4">
+					<div className="text-start col-md-6 align-self-center">
 						<button
 							type="button"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className={pc_view_type == 'addpc'?"bg-white border-0 poppins-regular-18px px-0 shadow-none text-decoration-underline":"bg-white border-0 poppins-regular-18px px-0 shadow-none text-decoration-underline"}
 							onClick={() => {
 								setCurrent_sec(3);
 							}}
 						>
-							Back
+							BACK
 						</button>
 					</div>
 					<div className="text-end col-md-6">
 						<button
 							type="sumit"
-							className="btn btn-secondary btn-lg btn-block float-sm-right mt-5 md-5 add-proj-btn"
+							className={pc_view_type == 'addpc'?"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none":"btn rounded-0  custom-btn px-3  btn-block float-end px-0 poppins-medium-18px shadow-none"}
 						>
-							Next
+							NEXT
 						</button>
 					</div>
 				</div>:''

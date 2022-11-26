@@ -6,12 +6,18 @@ import debounceFun from '@/atoms/debounceFun';
 import styles from '../companyInformation.module.css';
 import MultiSelectField from '@/atoms/MultiSelectField';
 import { companyRow1,comapanyRow2,companyArray} from '../ComapanyInformationFields';
+import updateTabFields from '../updateTabFields';
 import { requiredFields} from '../../../RequiredFields';
 import RequiredField from '@/atoms/RequiredSpanField';
 import ValidateMessage from '@/atoms/validationError';
+import debounceFunCall from '@/atoms/debounceFun';
+import { fecthCompanyDetailsByVatNum } from '@/Services/ApiEndPoints'
+import { APICALL } from '@/Services/ApiServices';
+
+var filterTimeout;
 const CompanyDetails = (props) => {
 const {state,updateStateChanges} = useContext(CooperationAgreementContext);
-var { tab_2,element_status } = state;
+var { tab_2,element_status ,tab_4,tab_6} = state;
 const [companyState,setCompanyState] = useState({
   vat_number:0,
   validations:{'17':{'type':1,validate:false },'19':{'type':2,validate:true},'14':{'type':1,validate:true},'18':{'type':1,validate:true}}
@@ -56,7 +62,46 @@ element_status['tab_2'].push(name);
 
 }
 
-const validateFields = (text) => {
+const getCompanyDetailsByvat = async() => {
+   let data = {};
+   let vatNumber = tab_2['8'] !== "" ? tab_2['8']: '';
+  await APICALL.service(`${fecthCompanyDetailsByVatNum}/${vatNumber}`, 'GET')
+    .then((result) =>{
+       data = result.data;
+      data['8'] = tab_2['8'];
+      data['10']   = '1';
+      tab_2 = {...tab_2,...data}
+
+      updateTabFields(tab_4,tab_2,tab_6,element_status)
+      updateStateChanges({ tab_2,tab_4});
+    } )
+    .catch((error) => setIntialStateObj(tab_2) );
+
+}
+const updateTabFieldsData = (tab_4,tab_2,tab_6,element_status) =>{
+  console.log(element_status)
+  let defaultKeys = ['40','41','42','45','46','47'];
+  defaultKeys.forEach((item)=>{
+    tab_4[item] =tab_2['19'];
+    element_status['tab_4'].push(item);
+  })
+  tab_6['59']  = tab_2['19'] ;
+  tab_6['55']  = tab_2 ['19'];
+ element_status['tab_6'].push('59');
+ element_status['tab_6'].push('55');
+}
+const setIntialStateObj = (tab_2) => {
+    for (let i = 5; i < 22; i++) {
+      if( i!== 8) {
+      tab_2[i] =  '';
+    }
+    }
+    for(let i = 22; i < 25;i ++) {
+      tab_2[i]  = 1;
+    }
+    updateStateChanges({ tab_2});
+
+
 }
 const handleVatChange = (event) => {
 
@@ -69,35 +114,13 @@ document.getElementById(Vat_Number).value = value;
   })
   updateStateChanges({ tab_2 });
 }
-let filterTimeout
 
-const doCityFilter = event => {
+
+const onVatnumber = event => {
   const { value, name } = event.target;
-tab_2[name] = value;
-element_status['tab_2'].push(name);
-updateStateChanges({ tab_2 ,element_status});
-  // clearTimeout(filterTimeout)
-  // if (!event) return setFilteredCities([])
-  //
-  // filterTimeout = setTimeout(() => {
-  //   setCompanyState({
-  //     ...companyState,
-  //     vat_number:value,
-  //   })
-  // //  tab_2[name] = value;
-  //
-  //   console.log('----event')
-  //
-  // }, 500)
-    //updateStateChanges({ tab_2 });
-}
-const optimizedFn = (event) => {
-    // const { value, name } = event.target;
-    //   tab_2[name] = value;
-    //   updateStateChanges({ tab_2 },()=>{
-         debounceFun(handleVatChange,100);
-    //  });
-
+  tab_2[name] = value;
+ updateStateChanges({ tab_2 ,element_status});
+ debounceFunCall(getCompanyDetailsByvat,500)
 }
 const handleSelect = (obj,key) => {
   tab_2[key]  = obj.value;
@@ -113,8 +136,8 @@ return(
       type = 'text'
       placeholder="Enter something here..."
       className = {'atom-input-field-default ' + 'col-md-8'}
-      value={tab_2[Vat_Number]}
-      onChange={(e) => doCityFilter (e) }
+       value={tab_2[Vat_Number]}
+      onChange={(e) => onVatnumber (e) }
         //optimizedFn(e)}
      name={Vat_Number}
       //{`tab_2_${data.id}`}

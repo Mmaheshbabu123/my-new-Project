@@ -209,7 +209,7 @@ const EmployeeTypeSecondPart = () => {
           employeeTypeArray.map(employeeType => {
             let _EmpId = employeeType.id, _ValId = valueType.id, _Coeffid = coefficient.id;
             let { matrixKey, value } = getPcLinkingValue(_EmpId, _Coeffid, _ValId);
-            return (<td key={matrixKey} id={matrixKey} className="pc-linking-td">
+            return (<td key={matrixKey} id={matrixKey} className="pc-linking-td poppins-regular-16px">
               <input
                 type="text"
                 className="value-input-cell"
@@ -245,7 +245,7 @@ const EmployeeTypeSecondPart = () => {
     <div className="second-part-parent-div" ref={ref => inputRef.current['secondpart'] = ref}>
       <table className="table pclinking-table table-second-part">
         <thead className="pclinking-table-thead table-second-part-thead">
-          <tr className="table-second-part-thead-tr-class">{
+          <tr className="table-second-part-thead-tr-class poppins-regular-18px">{
             employeeTypeArray.map(emp => <th height="50" key={emp.id} className="table-second-part-th-class" title = {emp.name}>
               <div className="header-div-tag"> {emp.name} </div> </th>)
           }</tr>
